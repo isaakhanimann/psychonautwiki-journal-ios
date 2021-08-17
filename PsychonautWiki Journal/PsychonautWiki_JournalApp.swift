@@ -1,20 +1,20 @@
-//
-//  PsychonautWiki_JournalApp.swift
-//  PsychonautWiki Journal
-//
-//  Created by Isaak Hanimann on 17.08.21.
-//
-
 import SwiftUI
 
+// swiftlint:disable type_name
 @main
 struct PsychonautWiki_JournalApp: App {
+
     let persistenceController = PersistenceController.shared
+    @StateObject var calendarWrapper = CalendarWrapper()
+    @StateObject var importSubstancesWrapper = SubstanceLinksWrapper()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(calendarWrapper)
+                .environmentObject(importSubstancesWrapper)
+                .accentColor(Color.orange)
         }
     }
 }

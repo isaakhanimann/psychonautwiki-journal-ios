@@ -1,0 +1,16 @@
+import Foundation
+
+extension Date {
+
+    var asDateString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM y"
+        return formatter.string(from: self)
+    }
+
+    var asTimeString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
+}

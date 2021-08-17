@@ -1,0 +1,507 @@
+{
+  "categories" : [
+    {
+      "name" : "Sample Category 3",
+      "substances" : [
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+
+          ],
+          "isFavorite" : true,
+          "name" : "Sample Substance 6",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "heavy" : 0,
+                "light" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "strong" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "threshold" : 0,
+                "units" : "mg"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 7200,
+                  "min" : 3600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Apple"
+        },
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+
+          ],
+          "isFavorite" : true,
+          "name" : "Sample Substance 7",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "heavy" : 0,
+                "light" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "strong" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "threshold" : 0,
+                "units" : "mg"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 7200,
+                  "min" : 3600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Pasta"
+        }
+      ]
+    },
+    {
+      "name" : "Sample Category 2",
+      "substances" : [
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+
+          ],
+          "isFavorite" : false,
+          "name" : "Sample Substance 4",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "heavy" : 0,
+                "light" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "strong" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "threshold" : 0,
+                "units" : "mg"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 7200,
+                  "min" : 3600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Water"
+        },
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+
+          ],
+          "isFavorite" : false,
+          "name" : "Sample Substance 5",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "heavy" : 0,
+                "light" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "strong" : {
+                  "max" : 0,
+                  "min" : 0
+                },
+                "threshold" : 0,
+                "units" : "mg"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 7200,
+                  "min" : 3600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Peach"
+        }
+      ]
+    },
+    {
+      "name" : "Sample Category 1",
+      "substances" : [
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+            "Alcohol",
+            "SSRIs"
+          ],
+          "dangerousSubstanceInteractions" : [
+            "Sample Substance 2"
+          ],
+          "isFavorite" : false,
+          "name" : "Sample Substance 1",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 80,
+                  "min" : 50
+                },
+                "heavy" : 110,
+                "light" : {
+                  "max" : 50,
+                  "min" : 20
+                },
+                "strong" : {
+                  "max" : 110,
+                  "min" : 80
+                },
+                "threshold" : 20,
+                "units" : "g"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 3600,
+                  "min" : 1800,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 7200,
+                  "min" : 3600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Broccoli"
+        },
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+            "Sample Substance 1"
+          ],
+          "isFavorite" : false,
+          "name" : "Sample Substance 2",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 30,
+                  "min" : 15
+                },
+                "heavy" : 50,
+                "light" : {
+                  "max" : 15,
+                  "min" : 5
+                },
+                "strong" : {
+                  "max" : 50,
+                  "min" : 30
+                },
+                "threshold" : 5,
+                "units" : "ml"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 1200,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 1200,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 900,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 2400,
+                  "min" : 1200,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Bread"
+        },
+        {
+          "dangerousCategoryInteractions" : [
+
+          ],
+          "dangerousGeneralInteractions" : [
+
+          ],
+          "dangerousSubstanceInteractions" : [
+
+          ],
+          "isFavorite" : false,
+          "name" : "Sample Substance 3",
+          "roas" : [
+            {
+              "dose" : {
+                "common" : {
+                  "max" : 100,
+                  "min" : 50
+                },
+                "heavy" : 200,
+                "light" : {
+                  "max" : 50,
+                  "min" : 20
+                },
+                "strong" : {
+                  "max" : 200,
+                  "min" : 100
+                },
+                "threshold" : 20,
+                "units" : "mg"
+              },
+              "duration" : {
+                "comeup" : {
+                  "max" : 4800,
+                  "min" : 2400,
+                  "units" : "seconds"
+                },
+                "offset" : {
+                  "max" : 10800,
+                  "min" : 7200,
+                  "units" : "seconds"
+                },
+                "onset" : {
+                  "max" : 1800,
+                  "min" : 600,
+                  "units" : "seconds"
+                },
+                "peak" : {
+                  "max" : 18000,
+                  "min" : 14400,
+                  "units" : "seconds"
+                }
+              },
+              "name" : "oral"
+            }
+          ],
+          "unsafeCategoryInteractions" : [
+
+          ],
+          "unsafeGeneralInteractions" : [
+
+          ],
+          "unsafeSubstanceInteractions" : [
+
+          ],
+          "url" : "https://en.wikipedia.org/wiki/Honey"
+        }
+      ]
+    }
+  ],
+  "generalInteractions" : [
+    {
+      "isEnabled" : false,
+      "name" : "Hormonal Birth Control"
+    },
+    {
+      "isEnabled" : false,
+      "name" : "SSRIs"
+    },
+    {
+      "isEnabled" : false,
+      "name" : "Heart Problems"
+    },
+    {
+      "isEnabled" : true,
+      "name" : "Alcohol"
+    }
+  ]
+}
