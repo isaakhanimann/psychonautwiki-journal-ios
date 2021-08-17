@@ -101,7 +101,7 @@ struct ContentView: View {
     private func tryToDecodeData(data: Data) {
         do {
             let json = try JSON(data: data)
-            let dataForFile = try json["data"]["substances"].rawData()
+            let dataForFile = try json["data"].rawData()
             try SubstanceDecoder.decodeAndSaveFile(from: dataForFile)
         } catch {
             DispatchQueue.main.async {

@@ -42,7 +42,6 @@
 		EAE471F426CBA664009FB0EC /* Substance+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717126CBA664009FB0EC /* Substance+CoreDataClass.swift */; };
 		EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
 		EAE471F626CBA664009FB0EC /* DoseTypes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717326CBA664009FB0EC /* DoseTypes+CoreDataClass.swift */; };
-		EAE471F726CBA664009FB0EC /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717426CBA664009FB0EC /* Category+CoreDataClass.swift */; };
 		EAE471F826CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717526CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift */; };
 		EAE471F926CBA664009FB0EC /* DurationRange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717626CBA664009FB0EC /* DurationRange+CoreDataClass.swift */; };
 		EAE471FA26CBA664009FB0EC /* GeneralInteraction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717726CBA664009FB0EC /* GeneralInteraction+CoreDataClass.swift */; };
@@ -96,6 +95,7 @@
 		EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
 		EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAE4723226CC2525009FB0EC /* SwiftyJSON */; };
 		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
+		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +138,6 @@
 		EAE4717126CBA664009FB0EC /* Substance+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Substance+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		EAE4717326CBA664009FB0EC /* DoseTypes+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DoseTypes+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EAE4717426CBA664009FB0EC /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EAE4717526CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubstancesFile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EAE4717626CBA664009FB0EC /* DurationRange+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DurationRange+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EAE4717726CBA664009FB0EC /* GeneralInteraction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneralInteraction+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextStyle.swift; sourceTree = "<group>"; };
 		EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWikiAPIController.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* InitialSubstances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InitialSubstances.json; sourceTree = "<group>"; };
+		EAE4723826CC6598009FB0EC /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,12 +320,12 @@
 		EAE4716E26CBA664009FB0EC /* Decodable */ = {
 			isa = PBXGroup;
 			children = (
+				EAE4723826CC6598009FB0EC /* Throwable.swift */,
 				EAE4716F26CBA664009FB0EC /* Roa+CoreDataClass.swift */,
 				EAE4717026CBA664009FB0EC /* DurationTypes+CoreDataClass.swift */,
 				EAE4717126CBA664009FB0EC /* Substance+CoreDataClass.swift */,
 				EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */,
 				EAE4717326CBA664009FB0EC /* DoseTypes+CoreDataClass.swift */,
-				EAE4717426CBA664009FB0EC /* Category+CoreDataClass.swift */,
 				EAE4717526CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift */,
 				EAE4717626CBA664009FB0EC /* DurationRange+CoreDataClass.swift */,
 				EAE4717726CBA664009FB0EC /* GeneralInteraction+CoreDataClass.swift */,
@@ -567,9 +567,9 @@
 				EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */,
 				EAE4721926CBA664009FB0EC /* IngestionsLineChart.swift in Sources */,
 				EAE471C626CBA664009FB0EC /* InteractionRowView.swift in Sources */,
+				EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */,
 				EAE4720826CBA664009FB0EC /* FavoritesRowView.swift in Sources */,
 				EAE471F126CBA664009FB0EC /* View-NaviationViewStyle.swift in Sources */,
-				EAE471F726CBA664009FB0EC /* Category+CoreDataClass.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* HomeView.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,

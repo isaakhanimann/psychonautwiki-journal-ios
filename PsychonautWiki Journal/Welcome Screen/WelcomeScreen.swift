@@ -81,7 +81,7 @@ struct WelcomeScreen: View {
 
         do {
             let json = try JSON(data: data)
-            let dataForFile = try json["data"]["substances"].rawData()
+            let dataForFile = try json["data"].rawData()
             try SubstanceDecoder.decodeAndSaveFile(from: dataForFile)
         } catch {
             fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")

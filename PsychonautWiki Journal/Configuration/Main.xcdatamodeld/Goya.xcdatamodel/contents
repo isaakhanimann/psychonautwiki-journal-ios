@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="category">
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="dangerousSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="dangerousCategoryInteractions" inverseEntity="Substance"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="categories" inverseEntity="SubstancesFile"/>
