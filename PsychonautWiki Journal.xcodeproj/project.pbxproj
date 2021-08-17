@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -126,6 +126,8 @@
 		EAE4722C26CBAE4B009FB0EC /* Sample Substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712126CBA663009FB0EC /* Sample Substances.json */; };
 		EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
+		EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
+		EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAE4723226CC2525009FB0EC /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +252,7 @@
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
 		EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextStyle.swift; sourceTree = "<group>"; };
+		EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWikiAPIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EAE4715A26CBA664009FB0EC /* SubstanceLinksWrapper.swift */,
 				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
+				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAE4710C26CBA582009FB0EC /* Preview Content */,
 			);
@@ -639,6 +644,9 @@
 			dependencies = (
 			);
 			name = "PsychonautWiki Journal";
+			packageProductDependencies = (
+				EAE4723226CC2525009FB0EC /* SwiftyJSON */,
+			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */;
 			productType = "com.apple.product-type.application";
@@ -666,6 +674,9 @@
 				Base,
 			);
 			mainGroup = EAE470FA26CBA57F009FB0EC;
+			packageReferences = (
+				EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -806,6 +817,7 @@
 				EAE471C926CBA664009FB0EC /* EditFileView.swift in Sources */,
 				EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */,
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
+				EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */,
 				EAE4721326CBA664009FB0EC /* AroundShape.swift in Sources */,
 				EAE471B726CBA664009FB0EC /* ImportSubstancesScreen.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
@@ -1022,6 +1034,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EAE4723226CC2525009FB0EC /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
