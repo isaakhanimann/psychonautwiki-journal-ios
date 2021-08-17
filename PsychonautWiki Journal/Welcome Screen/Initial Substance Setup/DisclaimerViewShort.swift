@@ -1,9 +1,14 @@
 import SwiftUI
 
-struct ImportDisclaimerView: View {
+struct DisclaimerViewShort: View {
 
-    let onDontImport: () -> Void
-    let understandPressed: () -> Void
+    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
+
+    @Environment(\.managedObjectContext) var moc
 
     @State private var isSheetShowing = false
 
@@ -39,10 +44,17 @@ struct ImportDisclaimerView: View {
                 Spacer()
             }
 
-            Button("I understand.", action: understandPressed)
-                .buttonStyle(PrimaryButtonStyle())
+            NavigationLink(
+                destination: ChooseGeneralInteractionsView(
+                    file: storedFile.first!,
+                    dismiss: dismiss
+                ),
+                label: {
+                    Text("I understand.")
+                        .primaryButtonText()
+                }
+            )
 
-            Button("Don't import", action: onDontImport)
         }
         .sheet(isPresented: $isSheetShowing) {
             FullDisclaimerView()
@@ -51,10 +63,16 @@ struct ImportDisclaimerView: View {
         .padding()
         .navigationBarHidden(true)
     }
+
+    private func dismiss() {
+        hasBeenSetupBefore = true
+    }
 }
 
-struct ImportDisclaimerView_Previews: PreviewProvider {
+struct ImportSubstancesScreen_Previews: PreviewProvider {
+
     static var previews: some View {
-        ImportDisclaimerView(onDontImport: {}, understandPressed: {})
+        DisclaimerViewShort()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

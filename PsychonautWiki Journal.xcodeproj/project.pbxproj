@@ -10,46 +10,16 @@
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
-		EAE471B326CBA664009FB0EC /* ImportFileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711F26CBA663009FB0EC /* ImportFileRow.swift */; };
-		EAE471B426CBA664009FB0EC /* SubstancesLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712026CBA663009FB0EC /* SubstancesLink.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
-		EAE471B726CBA664009FB0EC /* ImportSubstancesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712326CBA663009FB0EC /* ImportSubstancesScreen.swift */; };
+		EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */; };
 		EAE471B826CBA664009FB0EC /* FullDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */; };
-		EAE471B926CBA664009FB0EC /* ImportSubstancesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712526CBA663009FB0EC /* ImportSubstancesScrollView.swift */; };
-		EAE471BA26CBA664009FB0EC /* ImportDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712626CBA663009FB0EC /* ImportDisclaimerView.swift */; };
 		EAE471BC26CBA664009FB0EC /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */; };
 		EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712926CBA663009FB0EC /* ContentView.swift */; };
 		EAE471BE26CBA664009FB0EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712B26CBA663009FB0EC /* SettingsView.swift */; };
-		EAE471BF26CBA664009FB0EC /* MaybeImportSubstancesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712D26CBA663009FB0EC /* MaybeImportSubstancesScreen.swift */; };
 		EAE471C326CBA664009FB0EC /* SectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713126CBA663009FB0EC /* SectionFooter.swift */; };
 		EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713226CBA663009FB0EC /* CalendarSection.swift */; };
-		EAE471C526CBA664009FB0EC /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713326CBA663009FB0EC /* FilePickerView.swift */; };
 		EAE471C626CBA664009FB0EC /* InteractionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713426CBA663009FB0EC /* InteractionRowView.swift */; };
-		EAE471C726CBA664009FB0EC /* AddFileGeneralInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713726CBA663009FB0EC /* AddFileGeneralInteractionView.swift */; };
-		EAE471C826CBA664009FB0EC /* EditFileGeneralInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713826CBA663009FB0EC /* EditFileGeneralInteractionView.swift */; };
-		EAE471C926CBA664009FB0EC /* EditFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713926CBA663009FB0EC /* EditFileView.swift */; };
-		EAE471CA26CBA664009FB0EC /* AddFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713A26CBA663009FB0EC /* AddFileView.swift */; };
-		EAE471CB26CBA664009FB0EC /* EditDangerousSubstanceInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713E26CBA663009FB0EC /* EditDangerousSubstanceInteractionsView.swift */; };
-		EAE471CC26CBA664009FB0EC /* EditDangerousCategoryInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713F26CBA663009FB0EC /* EditDangerousCategoryInteractionsView.swift */; };
-		EAE471CD26CBA664009FB0EC /* EditDangerousGeneralInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714026CBA663009FB0EC /* EditDangerousGeneralInteractionsView.swift */; };
-		EAE471CE26CBA664009FB0EC /* DangerousInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714126CBA663009FB0EC /* DangerousInteractionsView.swift */; };
-		EAE471CF26CBA664009FB0EC /* AddDurationRangeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714226CBA663009FB0EC /* AddDurationRangeSection.swift */; };
-		EAE471D026CBA664009FB0EC /* AddSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714326CBA663009FB0EC /* AddSubstanceView.swift */; };
-		EAE471D126CBA664009FB0EC /* EditUnsafeGeneralInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714526CBA663009FB0EC /* EditUnsafeGeneralInteractionsView.swift */; };
-		EAE471D226CBA664009FB0EC /* EditUnsafeCategoryInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714626CBA663009FB0EC /* EditUnsafeCategoryInteractionsView.swift */; };
-		EAE471D326CBA664009FB0EC /* UnsafeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714726CBA663009FB0EC /* UnsafeInteractionsView.swift */; };
-		EAE471D426CBA664009FB0EC /* EditUnsafeSubstanceInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714826CBA663009FB0EC /* EditUnsafeSubstanceInteractionsView.swift */; };
-		EAE471D526CBA664009FB0EC /* EditSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714926CBA663009FB0EC /* EditSubstanceView.swift */; };
-		EAE471D626CBA664009FB0EC /* EditDurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714C26CBA663009FB0EC /* EditDurationsView.swift */; };
-		EAE471D726CBA664009FB0EC /* EditDurationRangeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714D26CBA663009FB0EC /* EditDurationRangeSection.swift */; };
-		EAE471D826CBA664009FB0EC /* EditDoseRangeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4714F26CBA663009FB0EC /* EditDoseRangeSection.swift */; };
-		EAE471D926CBA664009FB0EC /* EditDosesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715026CBA663009FB0EC /* EditDosesView.swift */; };
-		EAE471DA26CBA664009FB0EC /* EditRoaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715126CBA663009FB0EC /* EditRoaView.swift */; };
-		EAE471DB26CBA664009FB0EC /* AddRoaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715226CBA663009FB0EC /* AddRoaView.swift */; };
-		EAE471DC26CBA664009FB0EC /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715326CBA663009FB0EC /* AddCategoryView.swift */; };
-		EAE471DD26CBA664009FB0EC /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715426CBA663009FB0EC /* EditCategoryView.swift */; };
 		EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */; };
-		EAE471E026CBA664009FB0EC /* SubstanceLinksWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715A26CBA664009FB0EC /* SubstanceLinksWrapper.swift */; };
 		EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
 		EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */; };
 		EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */; };
@@ -85,8 +55,6 @@
 		EAE4720126CBA664009FB0EC /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
-		EAE4720426CBA664009FB0EC /* DownloadErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718226CBA664009FB0EC /* DownloadErrorView.swift */; };
-		EAE4720526CBA664009FB0EC /* SelectNewFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718326CBA664009FB0EC /* SelectNewFileView.swift */; };
 		EAE4720626CBA664009FB0EC /* ChooseGeneralInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718426CBA664009FB0EC /* ChooseGeneralInteractionsView.swift */; };
 		EAE4720726CBA664009FB0EC /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718526CBA664009FB0EC /* ChooseFavoritesView.swift */; };
 		EAE4720826CBA664009FB0EC /* FavoritesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */; };
@@ -123,11 +91,11 @@
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
 		EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */; };
-		EAE4722C26CBAE4B009FB0EC /* Sample Substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712126CBA663009FB0EC /* Sample Substances.json */; };
 		EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
 		EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAE4723226CC2525009FB0EC /* SwiftyJSON */; };
+		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,49 +104,18 @@
 		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
-		EAE4711F26CBA663009FB0EC /* ImportFileRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportFileRow.swift; sourceTree = "<group>"; };
-		EAE4712026CBA663009FB0EC /* SubstancesLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubstancesLink.swift; sourceTree = "<group>"; };
-		EAE4712126CBA663009FB0EC /* Sample Substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Sample Substances.json"; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
-		EAE4712326CBA663009FB0EC /* ImportSubstancesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportSubstancesScreen.swift; sourceTree = "<group>"; };
+		EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclaimerViewShort.swift; sourceTree = "<group>"; };
 		EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullDisclaimerView.swift; sourceTree = "<group>"; };
-		EAE4712526CBA663009FB0EC /* ImportSubstancesScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportSubstancesScrollView.swift; sourceTree = "<group>"; };
-		EAE4712626CBA663009FB0EC /* ImportDisclaimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportDisclaimerView.swift; sourceTree = "<group>"; };
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
 		EAE4712926CBA663009FB0EC /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EAE4712B26CBA663009FB0EC /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EAE4712D26CBA663009FB0EC /* MaybeImportSubstancesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaybeImportSubstancesScreen.swift; sourceTree = "<group>"; };
 		EAE4713126CBA663009FB0EC /* SectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionFooter.swift; sourceTree = "<group>"; };
 		EAE4713226CBA663009FB0EC /* CalendarSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSection.swift; sourceTree = "<group>"; };
-		EAE4713326CBA663009FB0EC /* FilePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		EAE4713426CBA663009FB0EC /* InteractionRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionRowView.swift; sourceTree = "<group>"; };
-		EAE4713726CBA663009FB0EC /* AddFileGeneralInteractionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileGeneralInteractionView.swift; sourceTree = "<group>"; };
-		EAE4713826CBA663009FB0EC /* EditFileGeneralInteractionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFileGeneralInteractionView.swift; sourceTree = "<group>"; };
-		EAE4713926CBA663009FB0EC /* EditFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFileView.swift; sourceTree = "<group>"; };
-		EAE4713A26CBA663009FB0EC /* AddFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileView.swift; sourceTree = "<group>"; };
-		EAE4713E26CBA663009FB0EC /* EditDangerousSubstanceInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDangerousSubstanceInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4713F26CBA663009FB0EC /* EditDangerousCategoryInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDangerousCategoryInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714026CBA663009FB0EC /* EditDangerousGeneralInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDangerousGeneralInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714126CBA663009FB0EC /* DangerousInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DangerousInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714226CBA663009FB0EC /* AddDurationRangeSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDurationRangeSection.swift; sourceTree = "<group>"; };
-		EAE4714326CBA663009FB0EC /* AddSubstanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSubstanceView.swift; sourceTree = "<group>"; };
-		EAE4714526CBA663009FB0EC /* EditUnsafeGeneralInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUnsafeGeneralInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714626CBA663009FB0EC /* EditUnsafeCategoryInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUnsafeCategoryInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714726CBA663009FB0EC /* UnsafeInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714826CBA663009FB0EC /* EditUnsafeSubstanceInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUnsafeSubstanceInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4714926CBA663009FB0EC /* EditSubstanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSubstanceView.swift; sourceTree = "<group>"; };
-		EAE4714C26CBA663009FB0EC /* EditDurationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationsView.swift; sourceTree = "<group>"; };
-		EAE4714D26CBA663009FB0EC /* EditDurationRangeSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDurationRangeSection.swift; sourceTree = "<group>"; };
-		EAE4714F26CBA663009FB0EC /* EditDoseRangeSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDoseRangeSection.swift; sourceTree = "<group>"; };
-		EAE4715026CBA663009FB0EC /* EditDosesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDosesView.swift; sourceTree = "<group>"; };
-		EAE4715126CBA663009FB0EC /* EditRoaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRoaView.swift; sourceTree = "<group>"; };
-		EAE4715226CBA663009FB0EC /* AddRoaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoaView.swift; sourceTree = "<group>"; };
-		EAE4715326CBA663009FB0EC /* AddCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
-		EAE4715426CBA663009FB0EC /* EditCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Goya.xcdatamodel; sourceTree = "<group>"; };
 		EAE4715926CBA664009FB0EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EAE4715A26CBA664009FB0EC /* SubstanceLinksWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubstanceLinksWrapper.swift; sourceTree = "<group>"; };
 		EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence-Uniqued.swift"; sourceTree = "<group>"; };
 		EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
 		EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DoseTypes-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -214,8 +151,6 @@
 		EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewHelper.swift; sourceTree = "<group>"; };
 		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		EAE4718226CBA664009FB0EC /* DownloadErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadErrorView.swift; sourceTree = "<group>"; };
-		EAE4718326CBA664009FB0EC /* SelectNewFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNewFileView.swift; sourceTree = "<group>"; };
 		EAE4718426CBA664009FB0EC /* ChooseGeneralInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGeneralInteractionsView.swift; sourceTree = "<group>"; };
 		EAE4718526CBA664009FB0EC /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesRowView.swift; sourceTree = "<group>"; };
@@ -253,6 +188,7 @@
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
 		EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextStyle.swift; sourceTree = "<group>"; };
 		EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWikiAPIController.swift; sourceTree = "<group>"; };
+		EAE4723426CC42F7009FB0EC /* InitialSubstances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InitialSubstances.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,7 +226,6 @@
 				EAE4715526CBA664009FB0EC /* Configuration */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4712A26CBA663009FB0EC /* Settings */,
-				EAE4718126CBA664009FB0EC /* Import New File */,
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4718726CBA664009FB0EC /* Home */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
@@ -298,7 +233,6 @@
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
-				EAE4715A26CBA664009FB0EC /* SubstanceLinksWrapper.swift */,
 				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
 				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
@@ -320,140 +254,20 @@
 			children = (
 				EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */,
 				EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */,
-				EAE4711E26CBA663009FB0EC /* Import Substances */,
+				EAE4712226CBA663009FB0EC /* Feature.swift */,
+				EAE4723626CC4F13009FB0EC /* Initial Substance Setup */,
 			);
 			path = "Welcome Screen";
-			sourceTree = "<group>";
-		};
-		EAE4711E26CBA663009FB0EC /* Import Substances */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4711F26CBA663009FB0EC /* ImportFileRow.swift */,
-				EAE4712026CBA663009FB0EC /* SubstancesLink.swift */,
-				EAE4712126CBA663009FB0EC /* Sample Substances.json */,
-				EAE4712226CBA663009FB0EC /* Feature.swift */,
-				EAE4712326CBA663009FB0EC /* ImportSubstancesScreen.swift */,
-				EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */,
-				EAE4712526CBA663009FB0EC /* ImportSubstancesScrollView.swift */,
-				EAE4712626CBA663009FB0EC /* ImportDisclaimerView.swift */,
-			);
-			path = "Import Substances";
 			sourceTree = "<group>";
 		};
 		EAE4712A26CBA663009FB0EC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				EAE4712B26CBA663009FB0EC /* SettingsView.swift */,
-				EAE4712C26CBA663009FB0EC /* Sharing */,
 				EAE4713126CBA663009FB0EC /* SectionFooter.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
-				EAE4713326CBA663009FB0EC /* FilePickerView.swift */,
-				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
-				EAE4713526CBA663009FB0EC /* Edit Substance Files */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		EAE4712C26CBA663009FB0EC /* Sharing */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4712D26CBA663009FB0EC /* MaybeImportSubstancesScreen.swift */,
-			);
-			path = Sharing;
-			sourceTree = "<group>";
-		};
-		EAE4713526CBA663009FB0EC /* Edit Substance Files */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4713626CBA663009FB0EC /* Edit File General Interactions */,
-				EAE4713926CBA663009FB0EC /* EditFileView.swift */,
-				EAE4713A26CBA663009FB0EC /* AddFileView.swift */,
-				EAE4713B26CBA663009FB0EC /* Edit Categories */,
-			);
-			path = "Edit Substance Files";
-			sourceTree = "<group>";
-		};
-		EAE4713626CBA663009FB0EC /* Edit File General Interactions */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4713726CBA663009FB0EC /* AddFileGeneralInteractionView.swift */,
-				EAE4713826CBA663009FB0EC /* EditFileGeneralInteractionView.swift */,
-			);
-			path = "Edit File General Interactions";
-			sourceTree = "<group>";
-		};
-		EAE4713B26CBA663009FB0EC /* Edit Categories */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4713C26CBA663009FB0EC /* Edit Substances */,
-				EAE4715326CBA663009FB0EC /* AddCategoryView.swift */,
-				EAE4715426CBA663009FB0EC /* EditCategoryView.swift */,
-			);
-			path = "Edit Categories";
-			sourceTree = "<group>";
-		};
-		EAE4713C26CBA663009FB0EC /* Edit Substances */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4713D26CBA663009FB0EC /* Edit Dangerous Interactions */,
-				EAE4714226CBA663009FB0EC /* AddDurationRangeSection.swift */,
-				EAE4714326CBA663009FB0EC /* AddSubstanceView.swift */,
-				EAE4714426CBA663009FB0EC /* Edit Unsafe Interactions */,
-				EAE4714926CBA663009FB0EC /* EditSubstanceView.swift */,
-				EAE4714A26CBA663009FB0EC /* Edit Roa */,
-			);
-			path = "Edit Substances";
-			sourceTree = "<group>";
-		};
-		EAE4713D26CBA663009FB0EC /* Edit Dangerous Interactions */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4713E26CBA663009FB0EC /* EditDangerousSubstanceInteractionsView.swift */,
-				EAE4713F26CBA663009FB0EC /* EditDangerousCategoryInteractionsView.swift */,
-				EAE4714026CBA663009FB0EC /* EditDangerousGeneralInteractionsView.swift */,
-				EAE4714126CBA663009FB0EC /* DangerousInteractionsView.swift */,
-			);
-			path = "Edit Dangerous Interactions";
-			sourceTree = "<group>";
-		};
-		EAE4714426CBA663009FB0EC /* Edit Unsafe Interactions */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4714526CBA663009FB0EC /* EditUnsafeGeneralInteractionsView.swift */,
-				EAE4714626CBA663009FB0EC /* EditUnsafeCategoryInteractionsView.swift */,
-				EAE4714726CBA663009FB0EC /* UnsafeInteractionsView.swift */,
-				EAE4714826CBA663009FB0EC /* EditUnsafeSubstanceInteractionsView.swift */,
-			);
-			path = "Edit Unsafe Interactions";
-			sourceTree = "<group>";
-		};
-		EAE4714A26CBA663009FB0EC /* Edit Roa */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4714B26CBA663009FB0EC /* Edit Durations */,
-				EAE4714E26CBA663009FB0EC /* Edit Doses */,
-				EAE4715126CBA663009FB0EC /* EditRoaView.swift */,
-				EAE4715226CBA663009FB0EC /* AddRoaView.swift */,
-			);
-			path = "Edit Roa";
-			sourceTree = "<group>";
-		};
-		EAE4714B26CBA663009FB0EC /* Edit Durations */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4714C26CBA663009FB0EC /* EditDurationsView.swift */,
-				EAE4714D26CBA663009FB0EC /* EditDurationRangeSection.swift */,
-			);
-			path = "Edit Durations";
-			sourceTree = "<group>";
-		};
-		EAE4714E26CBA663009FB0EC /* Edit Doses */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4714F26CBA663009FB0EC /* EditDoseRangeSection.swift */,
-				EAE4715026CBA663009FB0EC /* EditDosesView.swift */,
-			);
-			path = "Edit Doses";
 			sourceTree = "<group>";
 		};
 		EAE4715526CBA664009FB0EC /* Configuration */ = {
@@ -518,18 +332,6 @@
 				EAE4717826CBA664009FB0EC /* DoseRange+CoreDataClass.swift */,
 			);
 			path = Decodable;
-			sourceTree = "<group>";
-		};
-		EAE4718126CBA664009FB0EC /* Import New File */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4718226CBA664009FB0EC /* DownloadErrorView.swift */,
-				EAE4718326CBA664009FB0EC /* SelectNewFileView.swift */,
-				EAE4718426CBA664009FB0EC /* ChooseGeneralInteractionsView.swift */,
-				EAE4718526CBA664009FB0EC /* ChooseFavoritesView.swift */,
-				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
-			);
-			path = "Import New File";
 			sourceTree = "<group>";
 		};
 		EAE4718726CBA664009FB0EC /* Home */ = {
@@ -627,6 +429,20 @@
 			path = "Reused Styles";
 			sourceTree = "<group>";
 		};
+		EAE4723626CC4F13009FB0EC /* Initial Substance Setup */ = {
+			isa = PBXGroup;
+			children = (
+				EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */,
+				EAE4718426CBA664009FB0EC /* ChooseGeneralInteractionsView.swift */,
+				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
+				EAE4718526CBA664009FB0EC /* ChooseFavoritesView.swift */,
+				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
+				EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */,
+				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
+			);
+			path = "Initial Substance Setup";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -693,7 +509,7 @@
 			files = (
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
 				EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */,
-				EAE4722C26CBAE4B009FB0EC /* Sample Substances.json in Resources */,
+				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,8 +543,6 @@
 			files = (
 				EAE4720D26CBA664009FB0EC /* LineView.swift in Sources */,
 				EAE4720126CBA664009FB0EC /* PreviewHelper.swift in Sources */,
-				EAE471CD26CBA664009FB0EC /* EditDangerousGeneralInteractionsView.swift in Sources */,
-				EAE471DD26CBA664009FB0EC /* EditCategoryView.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EAE471EA26CBA664009FB0EC /* DurationRange-CoreDataHelpers.swift in Sources */,
 				EAE4720626CBA664009FB0EC /* ChooseGeneralInteractionsView.swift in Sources */,
@@ -738,26 +552,18 @@
 				EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
-				EAE471BA26CBA664009FB0EC /* ImportDisclaimerView.swift in Sources */,
-				EAE471D526CBA664009FB0EC /* EditSubstanceView.swift in Sources */,
 				EAE4720E26CBA664009FB0EC /* LineChartWithPicker.swift in Sources */,
 				EAE4721726CBA664009FB0EC /* AroundShapeModel.swift in Sources */,
-				EAE471BF26CBA664009FB0EC /* MaybeImportSubstancesScreen.swift in Sources */,
 				EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */,
 				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
-				EAE471DB26CBA664009FB0EC /* AddRoaView.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EAE471B826CBA664009FB0EC /* FullDisclaimerView.swift in Sources */,
-				EAE471CB26CBA664009FB0EC /* EditDangerousSubstanceInteractionsView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
 				EAE471FB26CBA664009FB0EC /* DoseRange+CoreDataClass.swift in Sources */,
 				EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EAE471F926CBA664009FB0EC /* DurationRange+CoreDataClass.swift in Sources */,
-				EAE471D426CBA664009FB0EC /* EditUnsafeSubstanceInteractionsView.swift in Sources */,
-				EAE471C726CBA664009FB0EC /* AddFileGeneralInteractionView.swift in Sources */,
-				EAE471D226CBA664009FB0EC /* EditUnsafeCategoryInteractionsView.swift in Sources */,
 				EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */,
 				EAE4721926CBA664009FB0EC /* IngestionsLineChart.swift in Sources */,
 				EAE471C626CBA664009FB0EC /* InteractionRowView.swift in Sources */,
@@ -765,38 +571,29 @@
 				EAE471F126CBA664009FB0EC /* View-NaviationViewStyle.swift in Sources */,
 				EAE471F726CBA664009FB0EC /* Category+CoreDataClass.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* HomeView.swift in Sources */,
-				EAE471B426CBA664009FB0EC /* SubstancesLink.swift in Sources */,
-				EAE471CA26CBA664009FB0EC /* AddFileView.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
-				EAE471B326CBA664009FB0EC /* ImportFileRow.swift in Sources */,
 				EAE471FA26CBA664009FB0EC /* GeneralInteraction+CoreDataClass.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EAE4720F26CBA664009FB0EC /* HelperMethods.swift in Sources */,
-				EAE471C526CBA664009FB0EC /* FilePickerView.swift in Sources */,
 				EAE471F426CBA664009FB0EC /* Substance+CoreDataClass.swift in Sources */,
 				EAE471E626CBA664009FB0EC /* Category-CoreDataHelpers.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
 				EAE4720C26CBA664009FB0EC /* ChartTimeStep.swift in Sources */,
-				EAE471C826CBA664009FB0EC /* EditFileGeneralInteractionView.swift in Sources */,
-				EAE4720526CBA664009FB0EC /* SelectNewFileView.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsView.swift in Sources */,
-				EAE471D726CBA664009FB0EC /* EditDurationRangeSection.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift in Sources */,
 				EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
-				EAE471DA26CBA664009FB0EC /* EditRoaView.swift in Sources */,
 				EAE471F826CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EAE471F226CBA664009FB0EC /* Roa+CoreDataClass.swift in Sources */,
 				EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */,
 				EAE471F626CBA664009FB0EC /* DoseTypes+CoreDataClass.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
 				EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */,
-				EAE471CE26CBA664009FB0EC /* DangerousInteractionsView.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE4721F26CBA664009FB0EC /* SubstanceRow.swift in Sources */,
 				EAE4721026CBA664009FB0EC /* RelativeScrollView.swift in Sources */,
@@ -804,44 +601,31 @@
 				EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */,
 				EAE471E526CBA664009FB0EC /* DoseRange-CoreDataHelpers.swift in Sources */,
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
-				EAE471CC26CBA664009FB0EC /* EditDangerousCategoryInteractionsView.swift in Sources */,
 				EAE4722426CBA664009FB0EC /* TimerView.swift in Sources */,
-				EAE471E026CBA664009FB0EC /* SubstanceLinksWrapper.swift in Sources */,
-				EAE471D626CBA664009FB0EC /* EditDurationsView.swift in Sources */,
-				EAE471D926CBA664009FB0EC /* EditDosesView.swift in Sources */,
-				EAE471B926CBA664009FB0EC /* ImportSubstancesScrollView.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
 				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */,
-				EAE471C926CBA664009FB0EC /* EditFileView.swift in Sources */,
 				EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */,
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
 				EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */,
 				EAE4721326CBA664009FB0EC /* AroundShape.swift in Sources */,
-				EAE471B726CBA664009FB0EC /* ImportSubstancesScreen.swift in Sources */,
+				EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
-				EAE471D826CBA664009FB0EC /* EditDoseRangeSection.swift in Sources */,
 				EAE471ED26CBA664009FB0EC /* DurationTypes-CoreDataHelpers.swift in Sources */,
-				EAE471D326CBA664009FB0EC /* UnsafeInteractionsView.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EAE471FF26CBA664009FB0EC /* DoseRange-Comparable.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
-				EAE471D126CBA664009FB0EC /* EditUnsafeGeneralInteractionsView.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
-				EAE471D026CBA664009FB0EC /* AddSubstanceView.swift in Sources */,
 				EAE4721D26CBA664009FB0EC /* SubstancePicker.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EAE471F326CBA664009FB0EC /* DurationTypes+CoreDataClass.swift in Sources */,
 				EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */,
-				EAE471DC26CBA664009FB0EC /* AddCategoryView.swift in Sources */,
-				EAE4720426CBA664009FB0EC /* DownloadErrorView.swift in Sources */,
-				EAE471CF26CBA664009FB0EC /* AddDurationRangeSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,32 +9,32 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentCloudKitContainer
-    static let appGroupName = "group.substanceShare"
-    static let isThereANewFileKey = "isThereANewFile"
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
-    static let hasAcceptedImportKey = "hasAcceptedImport"
+
+    static let model: NSManagedObjectModel = {
+        guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
+            fatalError("Failed to locate model file.")
+        }
+
+        guard let managedObjectModel = NSManagedObjectModel(contentsOf: url) else {
+            fatalError("Failed to load model file.")
+        }
+
+        return managedObjectModel
+    }()
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "Main")
-
-        guard let fileContainer = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: PersistenceController.appGroupName
-        ) else {
-            fatalError("Shared file container could not be created.")
-        }
-        let sharedURL = fileContainer.appendingPathComponent("Default.sqlite")
-        let sharedStoreDescription = NSPersistentStoreDescription(url: sharedURL)
-        sharedStoreDescription.configuration = "Default"
+        container = NSPersistentCloudKitContainer(name: "Main", managedObjectModel: Self.model)
 
         if inMemory {
-            sharedStoreDescription.url = URL(fileURLWithPath: "/dev/null")
+            container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.persistentStoreDescriptions = [sharedStoreDescription]
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+
+        container.loadPersistentStores { _, error in
+            if let error = error {
+                fatalError("Fatal error loading store: \(error.localizedDescription)")
             }
-        })
+        }
     }
 
     func createPreviewHelper() -> PreviewHelper {

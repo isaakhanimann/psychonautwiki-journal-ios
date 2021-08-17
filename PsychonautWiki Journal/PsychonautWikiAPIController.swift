@@ -32,10 +32,7 @@ struct PsychonautWikiAPIController {
 
     }
 
-    struct HTTPBody: Encodable {
-        var query: String
-    }
-
+    // swiftlint:disable function_body_length
     static private func getURLRequest() throws -> URLRequest {
 
         var request = URLRequest(url: url)
@@ -46,9 +43,65 @@ struct PsychonautWikiAPIController {
                         query AllSubstances {
                           substances(limit: 9999) {
                             name
+                            class {
+                              psychoactive
+                            }
+                            url
+                            roas {
+                              name
+                              dose {
+                                units
+                                threshold
+                                light {
+                                  min
+                                  max
+                                }
+                                common {
+                                  min
+                                  max
+                                }
+                                strong {
+                                  min
+                                  max
+                                }
+                                heavy
+                              }
+                              duration {
+                                onset {
+                                  min
+                                  max
+                                  units
+                                }
+                                comeup {
+                                  min
+                                  max
+                                  units
+                                }
+                                peak {
+                                  min
+                                  max
+                                  units
+                                }
+                                offset {
+                                  min
+                                  max
+                                  units
+                                }
+                              }
+                            }
+                            unsafeInteractions {
+                              name
+                            }
+                            dangerousInteractions {
+                              name
+                            }
                           }
                         }
                     """
+
+        struct HTTPBody: Encodable {
+            var query: String
+        }
 
         request.httpBody = try JSONEncoder().encode(HTTPBody(query: query))
 

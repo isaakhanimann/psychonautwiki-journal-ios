@@ -39,7 +39,7 @@ struct CalendarScreen: View {
                     calendarWrapper.requestAccess()
                 }
                 .buttonStyle(PrimaryButtonStyle())
-                NavigationLink("Skip", destination: ImportSubstancesScreen())
+                NavigationLink("Skip", destination: DisclaimerViewShort())
             } else if calendarWrapper.authorizationStatus == .authorized {
                 if calendarWrapper.psychonautWikiCalendar != nil {
                     Label("Your PsychonautWiki Calendar is All Set", systemImage: "checkmark")
@@ -47,7 +47,7 @@ struct CalendarScreen: View {
                         .foregroundColor(.green)
                     Spacer()
                     NavigationLink(
-                        destination: ImportSubstancesScreen(),
+                        destination: DisclaimerViewShort(),
                         label: {
                             Text("Continue")
                                 .primaryButtonText()
@@ -58,11 +58,11 @@ struct CalendarScreen: View {
                         isShowingActionSheet.toggle()
                     }
                     .buttonStyle(PrimaryButtonStyle())
-                    NavigationLink("Skip", destination: ImportSubstancesScreen())
+                    NavigationLink("Skip", destination: DisclaimerViewShort())
                 }
             } else {
                 Text("Please Enable Calendar Access in your iPhone Settings")
-                NavigationLink("Next", destination: ImportSubstancesScreen())
+                NavigationLink("Next", destination: DisclaimerViewShort())
             }
         }
         .padding()
@@ -96,32 +96,6 @@ struct CalendarScreen: View {
             buttons.append(button)
         }
         return buttons
-    }
-
-    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
-
-    private func addSampleSubstancesAndDismiss() {
-        let fileName = "Sample Substances"
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("Failed to locate \(fileName) in bundle.")
-        }
-
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load \(fileName) from bundle.")
-        }
-
-        do {
-            try SubstanceDecoder.decodeAndSaveFile(
-                from: data,
-                with: fileName,
-                selectFile: true,
-                markFileAsNew: false
-            )
-        } catch {
-            fatalError("Failed to decode \(fileName) from bundle")
-        }
-
-        hasBeenSetupBefore = true
     }
 }
 

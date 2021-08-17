@@ -2,10 +2,6 @@ import Foundation
 
 extension SubstancesFile {
 
-    var filenameUnwrapped: String {
-        filename ?? "Unknown"
-    }
-
     var creationDateUnwrapped: Date {
         creationDate ?? Date()
     }

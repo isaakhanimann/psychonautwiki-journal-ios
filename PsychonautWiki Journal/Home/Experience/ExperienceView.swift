@@ -17,7 +17,6 @@ struct ExperienceView: View {
     @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
     @State private var isKeyboardShowing = false
-    @State private var isShowingEmptyFileAlert = false
 
     var body: some View {
         List {
@@ -96,25 +95,10 @@ struct ExperienceView: View {
                 .environmentObject(calendarWrapper)
                 .accentColor(Color.orange)
         }
-        .alert(isPresented: $isShowingEmptyFileAlert) {
-            Alert(
-                title: Text("No Substances"),
-                message: Text(
-                    """
-                    \(selectedFile.first!.filenameUnwrapped) has no substances. \
-                    Add substances or pick different definitions in Settings to add ingestions.
-                    """),
-                dismissButton: .default(Text("Ok"))
-            )
-        }
     }
 
     private func addIngestion() {
-        if selectedFile.first!.allSubstancesUnwrapped.isEmpty {
-            isShowingEmptyFileAlert.toggle()
-        } else {
-            isShowingAddIngestionSheet.toggle()
-        }
+        isShowingAddIngestionSheet.toggle()
     }
 
     init(experience: Experience) {

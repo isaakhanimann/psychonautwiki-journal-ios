@@ -84,9 +84,6 @@
     </entity>
     <entity name="SubstancesFile" representedClassName=".SubstancesFile" syncable="YES" codeGenerationType="category">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="filename" optional="YES" attributeType="String"/>
-        <attribute name="isNew" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="file" inverseEntity="Category"/>
         <relationship name="generalInteractions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GeneralInteraction" inverseName="file" inverseEntity="GeneralInteraction"/>
         <relationship name="lastUsedSubstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Substance" inverseName="inverseLastUsed" inverseEntity="Substance"/>
@@ -102,6 +99,6 @@
         <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="119"/>
         <element name="Roa" positionX="-166.0208740234375" positionY="247.5351257324219" width="128" height="89"/>
         <element name="Substance" positionX="-383.1397705078125" positionY="120.6640625" width="128" height="239"/>
-        <element name="SubstancesFile" positionX="-664.39013671875" positionY="133.0220947265625" width="128" height="134"/>
+        <element name="SubstancesFile" positionX="-664.39013671875" positionY="133.0220947265625" width="128" height="89"/>
     </elements>
 </model>

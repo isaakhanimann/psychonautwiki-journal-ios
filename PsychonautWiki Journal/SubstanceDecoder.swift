@@ -8,11 +8,7 @@ enum SubstanceDecoder {
     }
 
     static func decodeAndSaveFile(
-        from data: Data,
-        with givenFileName: String,
-        selectFile: Bool = false,
-        markFileAsNew: Bool = true
-    ) throws {
+        from data: Data) throws {
         let moc = PersistenceController.shared.container.viewContext
         var didSaveSubstances = false
 
@@ -20,10 +16,7 @@ enum SubstanceDecoder {
             guard let substancesFile = try? decodeSubstancesFile(from: data, with: moc) else {
                 return
             }
-            substancesFile.filename = givenFileName
             substancesFile.creationDate = Date()
-            substancesFile.isNew = markFileAsNew
-            substancesFile.isSelected = selectFile
 
             buildInteractionRelationships(for: substancesFile)
 

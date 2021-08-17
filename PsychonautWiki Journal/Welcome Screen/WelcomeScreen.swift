@@ -1,8 +1,14 @@
 import SwiftUI
+import SwiftyJSON
 
 struct WelcomeScreen: View {
 
     @Environment(\.managedObjectContext) var moc
+
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
 
     var body: some View {
         NavigationView {
@@ -55,6 +61,30 @@ struct WelcomeScreen: View {
             }
             .padding()
             .navigationBarHidden(true)
+        }
+        .onAppear {
+            if storedFile.first == nil {
+                addInitialSubstances()
+            }
+        }
+    }
+
+    private func addInitialSubstances() {
+        let fileName = "InitialSubstances"
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+            fatalError("Failed to locate \(fileName) in bundle.")
+        }
+
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(fileName) from bundle.")
+        }
+
+        do {
+            let json = try JSON(data: data)
+            let dataForFile = try json["data"]["substances"].rawData()
+            try SubstanceDecoder.decodeAndSaveFile(from: dataForFile)
+        } catch {
+            fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
         }
     }
 

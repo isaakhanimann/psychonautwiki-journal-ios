@@ -23,8 +23,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                selectFileSection
-
                 if !selectedFile.first!.generalInteractionsUnwrapped.isEmpty {
                     Section(header: Text("Notify me of unsafe and dangerous interactions with:")) {
                         ForEach(selectedFile.first!.generalInteractionsUnwrappedSorted) { interaction in
@@ -56,19 +54,6 @@ struct SettingsView: View {
         // swiftlint:disable identifier_name
         var id: Int {
             hashValue
-        }
-    }
-
-    private var selectFileSection: some View {
-        Section {
-            NavigationLink(destination: FilePickerView()) {
-                HStack {
-                    Text("Substances To Use")
-                    Spacer()
-                    Text(selectedFile.first!.filenameUnwrapped)
-                        .foregroundColor(.secondary)
-                }
-            }
         }
     }
 
