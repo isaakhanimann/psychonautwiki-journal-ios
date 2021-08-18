@@ -73,6 +73,7 @@ struct ChooseTimeAndColor: View {
         ingestion.experience = experience
         ingestion.time = selectedTime
         ingestion.dose = dose
+        ingestion.usedfileCreationDate = substance.category!.file!.creationDateUnwrapped
         ingestion.administrationRoute = administrationRoute.rawValue
         ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
         ingestion.color = selectedColor.rawValue
