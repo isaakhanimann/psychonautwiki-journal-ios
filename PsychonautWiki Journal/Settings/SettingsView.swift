@@ -14,6 +14,7 @@ struct SettingsView: View {
 
     @State private var isShowingErrorAlert = false
     @State private var alertMessage = ""
+    @State private var isFetching = false
 
     var body: some View {
         NavigationView {
@@ -23,9 +24,13 @@ struct SettingsView: View {
                     VStack(spacing: 10) {
                         Text("Last Successfull Fetch: \(storedFile.first!.creationDateUnwrapped.asDateAndTime)")
                             .fixedSize(horizontal: false, vertical: true)
-                        Button(action: fetchNewSubstances, label: {
-                            Label("Fetch Now", systemImage: "arrow.clockwise")
-                        })
+                        if isFetching {
+                            Text("Fetching Substances...")
+                        } else {
+                            Button(action: fetchNewSubstances, label: {
+                                Label("Fetch Now", systemImage: "arrow.clockwise")
+                            })
+                        }
                     }
                     .alert(isPresented: $isShowingErrorAlert) {
                         Alert(
@@ -68,6 +73,7 @@ struct SettingsView: View {
     }
 
     private func fetchNewSubstances() {
+        isFetching = true
         PsychonautWikiAPIController.performRequest { result in
             switch result {
             case .failure(let error):
@@ -75,6 +81,7 @@ struct SettingsView: View {
                 DispatchQueue.main.async {
                     self.alertMessage = "Request to PsychonautWiki API failed."
                     self.isShowingErrorAlert.toggle()
+                    self.isFetching = false
                 }
             case .success(let data):
                 tryToDecodeData(data: data)
@@ -96,6 +103,9 @@ struct SettingsView: View {
                 self.alertMessage = "Not enough substances could be parsed."
                 self.isShowingErrorAlert.toggle()
             }
+        }
+        DispatchQueue.main.async {
+            self.isFetching = false
         }
     }
 }
