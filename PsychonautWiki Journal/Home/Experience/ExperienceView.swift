@@ -9,9 +9,8 @@ struct ExperienceView: View {
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "isSelected == true")
-    ) var selectedFile: FetchedResults<SubstancesFile>
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
 
     @State private var selectedTitle: String
     @State private var isShowingAddIngestionSheet = false
@@ -89,7 +88,7 @@ struct ExperienceView: View {
         .onChange(of: writtenText) { _ in update() }
         .onDisappear(perform: save)
         .sheet(isPresented: $isShowingAddIngestionSheet) {
-            ChooseSubstanceView(substancesFile: selectedFile.first!, dismiss: {isShowingAddIngestionSheet.toggle()})
+            ChooseSubstanceView(substancesFile: storedFile.first!, dismiss: {isShowingAddIngestionSheet.toggle()})
                 .environment(\.managedObjectContext, self.moc)
                 .environmentObject(experience)
                 .environmentObject(calendarWrapper)

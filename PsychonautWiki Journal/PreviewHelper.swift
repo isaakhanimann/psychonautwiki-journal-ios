@@ -211,15 +211,18 @@ class PreviewHelper {
         context: NSManagedObjectContext,
         file: SubstancesFile
     ) -> Ingestion {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
 
-            let ingestion = Ingestion(context: context)
-            ingestion.time = formatter.date(from: stringTime)
-            ingestion.administrationRoute = Roa.AdministrationRoute.oral.rawValue
-            ingestion.dose = 10
-            ingestion.color = color.rawValue
-        ingestion.substance = file.categoriesUnwrappedSorted.first!.sortedSubstancesUnwrapped.first!
-            return ingestion
-        }
+        let ingestion = Ingestion(context: context)
+        ingestion.time = formatter.date(from: stringTime)
+        ingestion.administrationRoute = Roa.AdministrationRoute.oral.rawValue
+        ingestion.dose = 10
+        ingestion.color = color.rawValue
+        ingestion.substanceCopy = SubstanceCopy(
+            basedOn: file.categoriesUnwrappedSorted.first!.sortedSubstancesUnwrapped.first!,
+            context: context
+        )
+        return ingestion
+    }
 }

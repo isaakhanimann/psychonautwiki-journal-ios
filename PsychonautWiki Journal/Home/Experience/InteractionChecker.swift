@@ -7,8 +7,9 @@ enum InteractionChecker {
         with previousIngestions: [Ingestion]
     ) -> [Ingestion] {
         previousIngestions.filter { ingestion in
-            substance.unsafeSubstanceInteractionsUnwrapped.contains(ingestion.substance!) ||
-                substance.unsafeCategoryInteractionsUnwrapped.contains(ingestion.substance!.category!)
+            substance.unsafeSubstanceInteractionsUnwrapped.contains { unsafeSubstance in
+                unsafeSubstance.nameUnwrapped == ingestion.substanceCopy!.nameUnwrapped
+            }
         }
     }
 
@@ -17,9 +18,9 @@ enum InteractionChecker {
         with previousIngestions: [Ingestion]
     ) -> [Ingestion] {
         previousIngestions.filter { ingestion in
-            let ingSubstance = ingestion.substance!
-            return substance.dangerousSubstanceInteractionsUnwrapped.contains(ingSubstance) ||
-                substance.dangerousCategoryInteractionsUnwrapped.contains(ingSubstance.category!)
+            substance.dangerousSubstanceInteractionsUnwrapped.contains { dangerousSubstance in
+                dangerousSubstance.nameUnwrapped == ingestion.substanceCopy!.nameUnwrapped
+            }
         }
     }
 

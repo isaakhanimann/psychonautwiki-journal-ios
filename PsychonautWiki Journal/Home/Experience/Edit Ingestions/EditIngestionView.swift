@@ -7,7 +7,6 @@ struct EditIngestionView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
 
-    @State private var selectedSubstance: Substance
     @State private var selectedAdministrationRoute: Roa.AdministrationRoute
     @State private var selectedDose: Double?
     @State private var selectedColor: Ingestion.IngestionColor
@@ -15,7 +14,7 @@ struct EditIngestionView: View {
     @State private var isKeyboardShowing = false
 
     var doseInfo: DoseTypes? {
-        selectedSubstance.getDose(for: selectedAdministrationRoute)
+        ingestion.substanceCopy!.getDose(for: selectedAdministrationRoute)
     }
 
     var selectedUnit: String? {
@@ -26,61 +25,12 @@ struct EditIngestionView: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-    var isSubstanceDangerous: Bool {
-        let dangerousIngestions = InteractionChecker.getDangerousIngestions(
-            of: selectedSubstance,
-            with: ingestion.experience!.sortedIngestionsUnwrapped
-        )
-        let dangerousInteractions = InteractionChecker.getDangerousInteraction(of: selectedSubstance)
-        let isDangerous = !dangerousIngestions.isEmpty
-            || !dangerousInteractions.isEmpty
-        return isDangerous
-    }
-
-    var isSubstanceUnsafe: Bool {
-        let unsafeIngestions = InteractionChecker.getUnsafeIngestions(
-            of: selectedSubstance,
-            with: ingestion.experience!.sortedIngestionsUnwrapped
-        )
-        let unsafeInteractions = InteractionChecker.getUnsafeInteraction(of: selectedSubstance)
-        let isUnsafe = !unsafeIngestions.isEmpty
-            || !unsafeInteractions.isEmpty
-        return isUnsafe
-    }
-
     var body: some View {
         Form {
-            Section(header: Text("Substance")) {
-                NavigationLink(
-                    destination: SubstancePicker(
-                        selectedSubstance: selectedSubstance,
-                        substancesFile: selectedSubstance.category!.file!,
-                        chooseSubstanceAndMoveOn: selectSubstance,
-                        goBackOnSelect: true
-                    )
-                    .environmentObject(ingestion.experience!)
-                ) {
-                    HStack {
-                        Text("Substance")
-                        Spacer()
-                        Text(selectedSubstance.nameUnwrapped)
-                            .foregroundColor(.secondary)
-                        if isSubstanceDangerous {
-                            Image(systemName: "xmark")
-                                .foregroundColor(.red)
-                        }
-                        if isSubstanceUnsafe {
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                }
-
-                if selectedSubstance.roasUnwrapped.count > 1 {
-                    Picker("Route of Administration", selection: $selectedAdministrationRoute) {
-                        ForEach(selectedSubstance.administrationRoutesUnwrapped, id: \.self) { route in
-                            Text(route.displayString).tag(route)
-                        }
+            Section(header: Text("Route of Administration")) {
+                Picker("Route", selection: $selectedAdministrationRoute) {
+                    ForEach(ingestion.substanceCopy!.administrationRoutesUnwrapped, id: \.self) { route in
+                        Text(route.displayString).tag(route)
                     }
                 }
             }
@@ -108,17 +58,14 @@ struct EditIngestionView: View {
                 .padding(.vertical)
             }
         }
-        .navigationTitle("Edit Ingestion")
+        .navigationTitle(ingestion.substanceCopy!.nameUnwrapped)
         .onChange(of: selectedTime) { _ in update() }
         .onChange(of: selectedDose) { _ in update() }
         .onChange(of: selectedAdministrationRoute) { _ in update() }
-        .onChange(of: selectedSubstance) { _ in update() }
         .onChange(of: selectedColor) { _ in update() }
         .onDisappear(perform: {
             let defaults = UserDefaults.standard
-            defaults.setValue(selectedColor.rawValue, forKey: selectedSubstance.nameUnwrapped)
-            ingestion.didChangeValue(for: \.substance)
-            selectedSubstance.lastUsedDate = Date()
+            defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy!.nameUnwrapped)
             if moc.hasChanges {
                 calendarWrapper.createOrUpdateEventBeforeMocSave(from: ingestion.experience!)
                 try? moc.save()
@@ -146,13 +93,6 @@ struct EditIngestionView: View {
                 }
             }
         }
-    }
-
-    private func selectSubstance(chosenSubstance: Substance) {
-        selectedAdministrationRoute = chosenSubstance.administrationRoutesUnwrapped.first!
-        selectedDose = chosenSubstance.roasUnwrapped.first?.doseTypes?.common?.min
-        selectedColor = getColorForSubstance(with: chosenSubstance.nameUnwrapped)
-        self.selectedSubstance = chosenSubstance
     }
 
     private func getColorForSubstance(with name: String) -> Ingestion.IngestionColor {
@@ -192,7 +132,6 @@ struct EditIngestionView: View {
 
     init(ingestion: Ingestion) {
         self.ingestion = ingestion
-        _selectedSubstance = State(wrappedValue: ingestion.substance!)
         _selectedAdministrationRoute = State(wrappedValue: ingestion.administrationRouteUnwrapped)
         _selectedDose = State(wrappedValue: ingestion.doseUnwrapped)
         _selectedColor = State(wrappedValue: ingestion.colorUnwrapped)
@@ -206,7 +145,6 @@ struct EditIngestionView: View {
             ingestion.dose = doseDouble
         }
         ingestion.administrationRoute = selectedAdministrationRoute.rawValue
-        ingestion.substance = selectedSubstance
         ingestion.color = selectedColor.rawValue
     }
 }

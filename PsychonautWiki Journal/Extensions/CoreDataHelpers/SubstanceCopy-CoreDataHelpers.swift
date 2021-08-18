@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension Substance {
+extension SubstanceCopy {
 
     var nameUnwrapped: String {
         name ?? "Unknown"
@@ -9,22 +9,6 @@ extension Substance {
 
     var roasUnwrapped: [Roa] {
         roas?.allObjects as? [Roa] ?? []
-    }
-
-    var unsafeSubstanceInteractionsUnwrapped: [Substance] {
-        unsafeSubstanceInteractions?.allObjects as? [Substance] ?? []
-    }
-
-    var unsafeGeneralInteractionsUnwrapped: [GeneralInteraction] {
-        unsafeGeneralInteractions?.allObjects as? [GeneralInteraction] ?? []
-    }
-
-    var dangerousSubstanceInteractionsUnwrapped: [Substance] {
-        dangerousSubstanceInteractions?.allObjects as? [Substance] ?? []
-    }
-
-    var dangerousGeneralInteractionsUnwrapped: [GeneralInteraction] {
-        dangerousGeneralInteractions?.allObjects as? [GeneralInteraction] ?? []
     }
 
     var administrationRoutesUnwrapped: [Roa.AdministrationRoute] {

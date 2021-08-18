@@ -136,7 +136,7 @@ class CalendarWrapper: ObservableObject {
         }
         for ingestion in experience.sortedIngestionsUnwrapped {
             result += "\(ingestion.timeUnwrappedAsString): "
-            result += "\(ingestion.doseInfoString) of \(ingestion.substance!.nameUnwrapped) "
+            result += "\(ingestion.doseInfoString) of \(ingestion.substanceCopy!.nameUnwrapped) "
             result += "\(ingestion.administrationRouteUnwrapped.displayString)\n"
         }
         result += "\n" + experience.textUnwrapped

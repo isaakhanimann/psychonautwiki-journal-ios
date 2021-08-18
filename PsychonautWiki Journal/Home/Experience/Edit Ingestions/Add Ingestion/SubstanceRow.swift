@@ -137,7 +137,7 @@ struct SubstanceRow: View {
             result.append(interaction.nameUnwrapped)
         }
         for ingestion in ingestions {
-            result.append(ingestion.substance!.nameUnwrapped)
+            result.append(ingestion.substanceCopy!.nameUnwrapped)
         }
         return result.uniqued()
     }

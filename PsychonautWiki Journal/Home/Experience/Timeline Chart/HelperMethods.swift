@@ -8,7 +8,7 @@ struct HelperMethods {
         // Initialize endOfGraphTime sensibly
         var endOfGraphTime = ingestions.first!.timeUnwrapped
         for ingestion in ingestions {
-            let substance = ingestion.substance!
+            let substance = ingestion.substanceCopy!
             let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
 
             // Choose the latest possible offset to make sure that the graph fits all ingestions
@@ -29,7 +29,7 @@ struct HelperMethods {
         return endOfGraphTime
     }
 
-    static func getLineModels( sortedIngestions: [Ingestion] ) -> [IngestionLineModel] {
+    static func getLineModels(sortedIngestions: [Ingestion]) -> [IngestionLineModel] {
         assert(!sortedIngestions.isEmpty)
 
         let timeOfFirstIngestion = sortedIngestions.first!.timeUnwrapped
@@ -38,7 +38,7 @@ struct HelperMethods {
 
         var linesData = [IngestionLineModel]()
         for (verticalWeight, ingestion) in getSortedIngestionsWithVerticalWeights(for: sortedIngestions) {
-            let substance = ingestion.substance!
+            let substance = ingestion.substanceCopy!
             let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
             let doseInfo = substance.getDose(for: ingestion.administrationRouteUnwrapped)
             let ingestionTime = ingestion.timeUnwrapped
@@ -72,7 +72,7 @@ struct HelperMethods {
         for ingestion in sortedIngestions {
             var allDoses = [Double]()
             for otherIngestion in sortedIngestions
-            where otherIngestion.substance == ingestion.substance {
+            where otherIngestion.substanceCopy == ingestion.substanceCopy {
                 allDoses.append(otherIngestion.dose)
             }
 

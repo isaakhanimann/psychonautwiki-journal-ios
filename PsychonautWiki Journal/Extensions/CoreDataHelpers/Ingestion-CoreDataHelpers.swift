@@ -32,7 +32,7 @@ extension Ingestion {
     }
 
     var doseInfoString: String {
-        guard let substanceUnwrapped = substance else { return "" }
+        guard let substanceUnwrapped = substanceCopy else { return "" }
         let info = doseUnwrapped.cleanString
         let unitsUnwrapped = substanceUnwrapped.getDose(
             for: administrationRouteUnwrapped
