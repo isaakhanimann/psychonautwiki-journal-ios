@@ -102,7 +102,11 @@ struct ContentView: View {
         do {
             let json = try JSON(data: data)
             let dataForFile = try json["data"].rawData()
-            try SubstanceDecoder.decodeAndSaveFile(from: dataForFile)
+            try SubstanceDecoder.decodeAndSaveFile(
+                from: dataForFile,
+                creationDate: Date(),
+                earlierFileToDelete: storedFile.first
+            )
         } catch {
             DispatchQueue.main.async {
                 self.errorMessage = error.localizedDescription

@@ -82,7 +82,17 @@ struct WelcomeScreen: View {
         do {
             let json = try JSON(data: data)
             let dataForFile = try json["data"].rawData()
-            try SubstanceDecoder.decodeAndSaveFile(from: dataForFile)
+
+            let dateString = "2021/08/17 10:00"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let creationDate = formatter.date(from: dateString)!
+
+            try SubstanceDecoder.decodeAndSaveFile(
+                from: dataForFile,
+                creationDate: creationDate,
+                earlierFileToDelete: nil
+            )
         } catch {
             fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
         }

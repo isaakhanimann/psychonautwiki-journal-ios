@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftyJSON
 
 struct SettingsView: View {
 
@@ -11,16 +12,27 @@ struct SettingsView: View {
         sortDescriptors: []
     ) var storedFile: FetchedResults<SubstancesFile>
 
+    @State private var isShowingErrorAlert = false
+    @State private var alertMessage = ""
+
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Substances and Interactions")) {
 
                     VStack(spacing: 10) {
-                        Text("Last Fetch: \(storedFile.first!.creationDateUnwrapped.asDateAndTime)")
-                        Button(action: fetchSubstances, label: {
+                        Text("Last Successfull Fetch: \(storedFile.first!.creationDateUnwrapped.asDateAndTime)")
+                            .fixedSize(horizontal: false, vertical: true)
+                        Button(action: fetchNewSubstances, label: {
                             Label("Fetch Now", systemImage: "arrow.clockwise")
                         })
+                    }
+                    .alert(isPresented: $isShowingErrorAlert) {
+                        Alert(
+                            title: Text("Fetch Failed"),
+                            message: Text(alertMessage),
+                            dismissButton: .default(Text("Ok"))
+                        )
                     }
 
                     NavigationLink(
@@ -55,8 +67,36 @@ struct SettingsView: View {
         .currentDeviceNavigationViewStyle()
     }
 
-    private func fetchSubstances() {
+    private func fetchNewSubstances() {
+        PsychonautWikiAPIController.performRequest { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.alertMessage = "Request to PsychonautWiki API failed."
+                    self.isShowingErrorAlert.toggle()
+                }
+            case .success(let data):
+                tryToDecodeData(data: data)
+            }
+        }
+    }
 
+    private func tryToDecodeData(data: Data) {
+        do {
+            let json = try JSON(data: data)
+            let dataForFile = try json["data"].rawData()
+            try SubstanceDecoder.decodeAndSaveFile(
+                from: dataForFile,
+                creationDate: Date(),
+                earlierFileToDelete: storedFile.first
+            )
+        } catch {
+            DispatchQueue.main.async {
+                self.alertMessage = "Not enough substances could be parsed."
+                self.isShowingErrorAlert.toggle()
+            }
+        }
     }
 }
 

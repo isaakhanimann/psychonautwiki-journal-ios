@@ -7,6 +7,10 @@ public class SubstancesFile: NSManagedObject, Decodable {
         case substances
     }
 
+    enum DecodingError: Error {
+        case notEnoughSubstancesParsed
+    }
+
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
@@ -18,6 +22,10 @@ public class SubstancesFile: NSManagedObject, Decodable {
             [Throwable<Substance>].self,
             forKey: .substances)
         let substances = throwableSubstances.compactMap { try? $0.result.get() }
+
+        if substances.count < 50 {
+            throw DecodingError.notEnoughSubstancesParsed
+        }
 
         // Create Categories and add substances
         let categories = SubstancesFile.createAndFillCategories(from: substances, context: context)

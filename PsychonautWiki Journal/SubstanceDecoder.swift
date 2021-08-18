@@ -8,22 +8,30 @@ enum SubstanceDecoder {
     }
 
     static func decodeAndSaveFile(
-        from data: Data) throws {
+        from data: Data,
+        creationDate: Date,
+        earlierFileToDelete: SubstancesFile?
+    ) throws {
         let moc = PersistenceController.shared.container.viewContext
         var didSaveSubstances = false
 
         moc.performAndWait {
             do {
                 let substancesFile = try decodeSubstancesFile(from: data, with: moc)
-                substancesFile.creationDate = Date()
+                substancesFile.creationDate = creationDate
+                if let fileToDelete = earlierFileToDelete {
+                    moc.delete(fileToDelete)
+                }
                 do {
                     try moc.save()
                     didSaveSubstances = true
                 } catch {
+                    moc.undo()
                     return
                 }
             } catch {
                 print("Failed to decode: \(error)")
+                moc.undo()
             }
         }
 
