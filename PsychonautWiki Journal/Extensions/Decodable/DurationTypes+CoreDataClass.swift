@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class DurationTypes: NSManagedObject, Codable {
+public class DurationTypes: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case onset, comeup, peak, offset, total, afterglow
@@ -18,13 +18,5 @@ public class DurationTypes: NSManagedObject, Codable {
         self.comeup = try container.decode(DurationRange.self, forKey: .comeup)
         self.peak = try container.decode(DurationRange.self, forKey: .peak)
         self.offset = try container.decode(DurationRange.self, forKey: .offset)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(onset, forKey: .onset)
-        try container.encode(comeup, forKey: .comeup)
-        try container.encode(peak, forKey: .peak)
-        try container.encode(offset, forKey: .offset)
     }
 }

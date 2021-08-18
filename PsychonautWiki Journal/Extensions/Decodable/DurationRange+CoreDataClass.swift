@@ -1,10 +1,15 @@
 import Foundation
 import CoreData
 
-public class DurationRange: NSManagedObject, Codable {
+public class DurationRange: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case min, max, units
+    }
+
+    enum DecodingError: Error {
+        case unknownDurationUnit
+        case minBiggerThanMax
     }
 
     required convenience public init(from decoder: Decoder) throws {
@@ -18,7 +23,9 @@ public class DurationRange: NSManagedObject, Codable {
         var maxValue = try container.decode(Double.self, forKey: .max)
         let unitSymbol = try container.decode(String.self, forKey: .units)
 
-        assert(minValue <= maxValue)
+        if minValue > maxValue {
+            throw DecodingError.minBiggerThanMax
+        }
 
         var unit: UnitDuration
         switch unitSymbol {
@@ -33,7 +40,7 @@ public class DurationRange: NSManagedObject, Codable {
             maxValue *= 24
             unit = UnitDuration.hours
         default:
-            fatalError("Unknown duration unit \(unitSymbol)")
+            throw DecodingError.unknownDurationUnit
         }
 
         let min = Measurement(value: minValue, unit: unit)
@@ -41,12 +48,5 @@ public class DurationRange: NSManagedObject, Codable {
 
         self.minSec = min.converted(to: .seconds).value
         self.maxSec = max.converted(to: .seconds).value
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode("seconds", forKey: .units)
-        try container.encode(minSec, forKey: .min)
-        try container.encode(maxSec, forKey: .max)
     }
 }

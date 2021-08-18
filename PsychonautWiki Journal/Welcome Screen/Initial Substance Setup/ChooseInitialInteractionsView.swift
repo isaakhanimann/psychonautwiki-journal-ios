@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChooseFavoritesView: View {
+struct ChooseInitialInteractionsView: View {
 
     @ObservedObject var file: SubstancesFile
     let dismiss: () -> Void
@@ -9,31 +9,33 @@ struct ChooseFavoritesView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "star.fill")
+            Image(systemName: "bolt.horizontal.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 80, height: 80, alignment: .center)
                 .accessibilityHidden(true)
                 .foregroundColor(.accentColor)
-            Text("Choose Favorites")
+            Text("Choose Interactions")
                 .multilineTextAlignment(.center)
                 .font(.largeTitle.bold())
+            Text("Notify me of dangerous and unsafe interactions with:")
+                .foregroundColor(.secondary)
             List {
-                ForEach(file.sortedCategoriesUnwrapped) { category in
-                    if !category.substancesUnwrapped.isEmpty {
-                        Section(header: Text(category.nameUnwrapped)) {
-                            ForEach(category.sortedSubstancesUnwrapped) { substance in
-                                FavoritesRowView(substance: substance)
-                            }
-                        }
-                    }
+                ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
+                    InteractionRowView(interaction: interaction)
                 }
             }
-            .listStyle(PlainListStyle())
+            .listStyle(InsetGroupedListStyle())
             .cornerRadius(10)
 
-            Button("Done", action: dismiss)
-                .buttonStyle(PrimaryButtonStyle())
+            NavigationLink(
+                destination: ChooseInitialFavoritesView(file: file, dismiss: dismiss),
+                label: {
+                    Text("Next")
+                        .primaryButtonText()
+                }
+            )
+            .isDetailLink(false)
         }
         .padding()
         .navigationBarHidden(true)

@@ -45,7 +45,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
     </entity>
-    <entity name="GeneralInteraction" representedClassName=".GeneralInteraction" syncable="YES" codeGenerationType="category">
+    <entity name="GeneralInteraction" representedClassName="GeneralInteraction" syncable="YES" codeGenerationType="class">
         <attribute name="isEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="dangerousSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="dangerousGeneralInteractions" inverseEntity="Substance"/>

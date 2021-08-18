@@ -1,10 +1,14 @@
 import Foundation
 import CoreData
 
-public class DoseRange: NSManagedObject, Codable {
+public class DoseRange: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case min, max
+    }
+
+    enum DecodingError: Error {
+        case minBiggerThanMax
     }
 
     required convenience public init(from decoder: Decoder) throws {
@@ -14,13 +18,14 @@ public class DoseRange: NSManagedObject, Codable {
         self.init(context: context)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.min = (try? container.decode(Double.self, forKey: .min)) ?? 0
-        self.max = (try? container.decode(Double.self, forKey: .max)) ?? 0
-    }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(min, forKey: .min)
-        try container.encode(max, forKey: .max)
+        let min = (try? container.decodeIfPresent(Double.self, forKey: .min)) ?? 0
+        let max = (try? container.decodeIfPresent(Double.self, forKey: .max)) ?? 0
+
+        if min > max {
+            throw DecodingError.minBiggerThanMax
+        }
+        self.min = min
+        self.max = max
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class Roa: NSManagedObject, Codable {
+public class Roa: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case name, dose, duration
@@ -56,19 +56,12 @@ public class Roa: NSManagedObject, Codable {
         self.init(context: context)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        if let doseTypesUnwrapped = try? container.decode(DoseTypes.self, forKey: .dose) {
+        self.name = try container.decode(AdministrationRoute.self, forKey: .name).rawValue
+        if let doseTypesUnwrapped = try? container.decodeIfPresent(DoseTypes.self, forKey: .dose) {
             self.doseTypes = doseTypesUnwrapped
         } else {
             self.doseTypes = DoseTypes.createDefault(moc: context)
         }
         self.durationTypes = try container.decode(DurationTypes.self, forKey: .duration)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(doseTypes, forKey: .dose)
-        try container.encode(durationTypes, forKey: .duration)
     }
 }

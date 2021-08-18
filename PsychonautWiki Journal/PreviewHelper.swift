@@ -15,7 +15,7 @@ class PreviewHelper {
         let moc = controller.container.viewContext
 
         // Add substance file
-        let fileName = "Sample Substances"
+        let fileName = "InitialSubstances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             fatalError("Failed to locate \(fileName) in bundle.")
         }

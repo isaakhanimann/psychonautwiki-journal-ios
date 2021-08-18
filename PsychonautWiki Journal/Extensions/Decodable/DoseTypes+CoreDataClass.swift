@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class DoseTypes: NSManagedObject, Codable {
+public class DoseTypes: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case units, threshold, light, common, strong, heavy
@@ -32,15 +32,5 @@ public class DoseTypes: NSManagedObject, Codable {
             self.strong = DoseRange.createDefault(moc: context, addTo: self)
         }
         self.heavy = (try? container.decode(Double.self, forKey: .heavy)) ?? 0
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(units, forKey: .units)
-        try container.encode(threshold, forKey: .threshold)
-        try container.encode(light, forKey: .light)
-        try container.encode(common, forKey: .common)
-        try container.encode(strong, forKey: .strong)
-        try container.encode(heavy, forKey: .heavy)
     }
 }

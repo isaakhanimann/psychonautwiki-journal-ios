@@ -45,7 +45,7 @@ struct DisclaimerViewShort: View {
             }
 
             NavigationLink(
-                destination: ChooseGeneralInteractionsView(
+                destination: ChooseInitialInteractionsView(
                     file: storedFile.first!,
                     dismiss: dismiss
                 ),

@@ -45,7 +45,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 for categoryDecoded in substance.categoriesDecoded {
 
                     let maybeFirstCategory = addedCategories.first { addedCategory in
-                        addedCategory.nameUnwrapped == categoryDecoded
+                        addedCategory.nameUnwrapped.lowercased() == categoryDecoded.lowercased()
                     }
 
                     if let existingCategory = maybeFirstCategory {
@@ -90,7 +90,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find category
                 let firstCategoryMatch = categories.first { category in
-                    interaction.name == category.nameUnwrapped
+                    interaction.name.lowercased() == category.nameUnwrapped.lowercased()
                 }
                 if let foundCategory = firstCategoryMatch {
                     substance.addToUnsafeCategoryInteractions(foundCategory)
@@ -99,7 +99,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find substance
                 let firstSubstanceMatch = allSubstances.first { substance2 in
-                    interaction.name == substance2.nameUnwrapped
+                    interaction.name.lowercased() == substance2.nameUnwrapped.lowercased()
                 }
                 if let foundSubstance = firstSubstanceMatch {
                     substance.addToUnsafeSubstanceInteractions(foundSubstance)
@@ -108,7 +108,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find general interaction
                 let firstGeneralMatch = newGeneralInteractions.first { generalInteraction in
-                    generalInteraction.name == interaction.name
+                    generalInteraction.nameUnwrapped.lowercased() == interaction.name.lowercased()
                 }
                 if let foundGeneral = firstGeneralMatch {
                     substance.addToUnsafeGeneralInteractions(foundGeneral)
@@ -124,7 +124,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find category
                 let firstCategoryMatch = categories.first { category in
-                    interaction.name == category.nameUnwrapped
+                    interaction.name.lowercased() == category.nameUnwrapped.lowercased()
                 }
                 if let foundCategory = firstCategoryMatch {
                     substance.addToDangerousCategoryInteractions(foundCategory)
@@ -133,7 +133,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find substance
                 let firstSubstanceMatch = allSubstances.first { substance2 in
-                    interaction.name == substance2.nameUnwrapped
+                    interaction.name.lowercased() == substance2.nameUnwrapped.lowercased()
                 }
                 if let foundSubstance = firstSubstanceMatch {
                     substance.addToDangerousSubstanceInteractions(foundSubstance)
@@ -142,7 +142,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
                 // Try to find general interaction
                 let firstGeneralMatch = newGeneralInteractions.first { generalInteraction in
-                    generalInteraction.name == interaction.name
+                    generalInteraction.nameUnwrapped.lowercased() == interaction.name.lowercased()
                 }
                 if let foundGeneral = firstGeneralMatch {
                     substance.addToDangerousGeneralInteractions(foundGeneral)

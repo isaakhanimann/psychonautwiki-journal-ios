@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChooseGeneralInteractionsView: View {
+struct ChooseInitialFavoritesView: View {
 
     @ObservedObject var file: SubstancesFile
     let dismiss: () -> Void
@@ -9,33 +9,31 @@ struct ChooseGeneralInteractionsView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "bolt.horizontal.fill")
+            Image(systemName: "star.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 80, height: 80, alignment: .center)
                 .accessibilityHidden(true)
                 .foregroundColor(.accentColor)
-            Text("Choose Interactions")
+            Text("Choose Favorites")
                 .multilineTextAlignment(.center)
                 .font(.largeTitle.bold())
-            Text("Notify me of dangerous and unsafe interactions with:")
-                .foregroundColor(.secondary)
             List {
-                ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
-                    InteractionRowView(interaction: interaction)
+                ForEach(file.sortedCategoriesUnwrapped) { category in
+                    if !category.substancesUnwrapped.isEmpty {
+                        Section(header: Text(category.nameUnwrapped)) {
+                            ForEach(category.sortedSubstancesUnwrapped) { substance in
+                                FavoritesRowView(substance: substance)
+                            }
+                        }
+                    }
                 }
             }
-            .listStyle(InsetGroupedListStyle())
+            .listStyle(PlainListStyle())
             .cornerRadius(10)
 
-            NavigationLink(
-                destination: ChooseFavoritesView(file: file, dismiss: dismiss),
-                label: {
-                    Text("Next")
-                        .primaryButtonText()
-                }
-            )
-            .isDetailLink(false)
+            Button("Done", action: dismiss)
+                .buttonStyle(PrimaryButtonStyle())
         }
         .padding()
         .navigationBarHidden(true)

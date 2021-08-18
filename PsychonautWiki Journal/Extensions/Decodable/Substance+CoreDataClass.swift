@@ -25,6 +25,10 @@ public class Substance: NSManagedObject, Decodable {
 
     var categoriesDecoded = [String]()
 
+    enum SubstanceDecodingError: Error {
+        case noRoaFound
+    }
+
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
@@ -34,13 +38,20 @@ public class Substance: NSManagedObject, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
-        self.roas = try container.decode(Set<Roa>.self, forKey: .roas) as NSSet
-        let decodedCategoriesNested = try container.decode(DecodedCategoriesNested.self, forKey: .category)
-        self.categoriesDecoded = decodedCategoriesNested.psychoactive
-        self.unsafeInteractionsDecoded = try container.decode([DecodedInteraction].self, forKey: .unsafeInteractions)
-        self.dangerousInteractionsDecoded = try container.decode(
+        let decodedRoas = try container.decode(Set<Roa>.self, forKey: .roas)
+        if decodedRoas.isEmpty {
+            throw SubstanceDecodingError.noRoaFound
+        }
+        self.roas = decodedRoas as NSSet
+        let decodedCategoriesNested = try container.decodeIfPresent(DecodedCategoriesNested.self, forKey: .category)
+        self.categoriesDecoded = decodedCategoriesNested?.psychoactive ?? []
+        self.unsafeInteractionsDecoded = try container.decodeIfPresent(
+            [DecodedInteraction].self,
+            forKey: .unsafeInteractions
+        ) ?? []
+        self.dangerousInteractionsDecoded = try container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
-        )
+        ) ?? []
     }
 }
