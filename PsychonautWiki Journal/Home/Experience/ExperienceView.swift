@@ -57,6 +57,7 @@ struct ExperienceView: View {
 
             }
         }
+        .listStyle(InsetGroupedListStyle())
         .navigationTitle(selectedTitle)
         .toolbar {
             ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
@@ -92,7 +93,7 @@ struct ExperienceView: View {
                 .environment(\.managedObjectContext, self.moc)
                 .environmentObject(experience)
                 .environmentObject(calendarWrapper)
-                .accentColor(Color.orange)
+                .accentColor(Color.green)
         }
     }
 

@@ -115,6 +115,6 @@ struct WelcomeScreen: View {
 struct WelcomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeScreen()
-            .accentColor(Color.orange)
+            .accentColor(Color.green)
     }
 }

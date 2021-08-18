@@ -58,7 +58,7 @@ struct DisclaimerViewShort: View {
         }
         .sheet(isPresented: $isSheetShowing) {
             FullDisclaimerView()
-                .accentColor(Color.orange)
+                .accentColor(Color.green)
         }
         .padding()
         .navigationBarHidden(true)

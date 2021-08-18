@@ -40,12 +40,12 @@ struct ContentView: View {
                     WelcomeScreen()
                         .environment(\.managedObjectContext, self.moc)
                         .environmentObject(calendarWrapper)
-                        .accentColor(Color.orange)
+                        .accentColor(Color.green)
                 case .settings:
                     SettingsView(toggleSettingsVisibility: toggleSettingsVisibility)
                         .environment(\.managedObjectContext, self.moc)
                         .environmentObject(calendarWrapper)
-                        .accentColor(Color.orange)
+                        .accentColor(Color.green)
                 }
             })
             .onChange(of: scenePhase, perform: { newPhase in
