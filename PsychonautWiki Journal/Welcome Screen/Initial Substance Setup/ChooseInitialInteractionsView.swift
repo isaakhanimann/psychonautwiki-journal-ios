@@ -9,7 +9,7 @@ struct ChooseInitialInteractionsView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "bolt.horizontal.fill")
+            Image(systemName: "burst.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 80, height: 80, alignment: .center)

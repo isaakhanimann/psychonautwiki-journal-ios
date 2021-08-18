@@ -66,7 +66,7 @@ struct EditIngestionView: View {
                         Text(selectedSubstance.nameUnwrapped)
                             .foregroundColor(.secondary)
                         if isSubstanceDangerous {
-                            Image(systemName: "exclamationmark.3")
+                            Image(systemName: "xmark")
                                 .foregroundColor(.red)
                         }
                         if isSubstanceUnsafe {

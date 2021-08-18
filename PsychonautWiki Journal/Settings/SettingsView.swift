@@ -14,19 +14,29 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(
-                    destination: ChooseInteractionsView(file: storedFile.first!),
-                    label: {
-                        Label("Choose Interactions", systemImage: "bolt.horizontal.fill")
-                    }
-                )
+                Section(header: Text("Substances and Interactions")) {
 
-                NavigationLink(
-                    destination: ChooseFavoritesView(file: storedFile.first!),
-                    label: {
-                        Label("Choose Favorites", systemImage: "star.fill")
+                    VStack(spacing: 10) {
+                        Text("Last Fetch: \(storedFile.first!.creationDateUnwrapped.asDateAndTime)")
+                        Button(action: fetchSubstances, label: {
+                            Label("Fetch Now", systemImage: "arrow.clockwise")
+                        })
                     }
-                )
+
+                    NavigationLink(
+                        destination: ChooseInteractionsView(file: storedFile.first!),
+                        label: {
+                            Label("Choose Interactions", systemImage: "burst.fill")
+                        }
+                    )
+
+                    NavigationLink(
+                        destination: ChooseFavoritesView(file: storedFile.first!),
+                        label: {
+                            Label("Choose Favorites", systemImage: "star.fill")
+                        }
+                    )
+                }
 
                 CalendarSection()
 
@@ -43,6 +53,10 @@ struct SettingsView: View {
             })
         }
         .currentDeviceNavigationViewStyle()
+    }
+
+    private func fetchSubstances() {
+
     }
 }
 

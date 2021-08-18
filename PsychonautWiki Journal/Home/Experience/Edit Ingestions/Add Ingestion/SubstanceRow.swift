@@ -52,7 +52,7 @@ struct SubstanceRow: View {
                             .foregroundColor(.green)
                     }
                     if isDangerous {
-                        Image(systemName: "exclamationmark.3")
+                        Image(systemName: "xmark")
                             .foregroundColor(.red)
                     }
                     if isUnsafe {
@@ -61,7 +61,7 @@ struct SubstanceRow: View {
                     }
                     if let urlUnwrapped = substance.url {
                         Link(destination: urlUnwrapped) {
-                            Label("\(substance.nameUnwrapped) Website", systemImage: "globe")
+                            Label("\(substance.nameUnwrapped) Website", systemImage: "safari")
                                 .labelStyle(IconOnlyLabelStyle())
                                 .font(.title2)
                         }
