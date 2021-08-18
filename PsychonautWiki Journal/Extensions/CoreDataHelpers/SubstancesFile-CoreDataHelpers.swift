@@ -100,6 +100,6 @@ extension SubstancesFile {
         for category in categories {
             allSubstances.append(contentsOf: category.substancesUnwrapped)
         }
-        return allSubstances
+        return allSubstances.uniqued()
     }
 }

@@ -22,6 +22,7 @@ enum SubstanceDecoder {
 
                 if let fileToDelete = earlierFileToDelete {
                     enableInteractionsAndFavorites(of: substancesFile, basedOn: fileToDelete)
+                    updateLastUsedSubstances(of: substancesFile, basedOn: fileToDelete)
                     moc.delete(fileToDelete)
                 }
                 do {
@@ -39,6 +40,17 @@ enum SubstanceDecoder {
 
         if !didSaveSubstances {
             throw DecodingFileError.failedToDecodeOrSave
+        }
+    }
+
+    private static func updateLastUsedSubstances(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
+            if let foundNewSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) {
+                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
+            }
         }
     }
 
