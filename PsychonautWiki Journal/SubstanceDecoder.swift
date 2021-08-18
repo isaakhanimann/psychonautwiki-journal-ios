@@ -19,7 +19,9 @@ enum SubstanceDecoder {
             do {
                 let substancesFile = try decodeSubstancesFile(from: data, with: moc)
                 substancesFile.creationDate = creationDate
+
                 if let fileToDelete = earlierFileToDelete {
+                    enableInteractionsAndFavorites(of: substancesFile, basedOn: fileToDelete)
                     moc.delete(fileToDelete)
                 }
                 do {
@@ -37,6 +39,30 @@ enum SubstanceDecoder {
 
         if !didSaveSubstances {
             throw DecodingFileError.failedToDecodeOrSave
+        }
+    }
+
+    private static func enableInteractionsAndFavorites(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        for oldSubstance in oldSubstancesFile.favoritesSorted {
+            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
+                continue
+            }
+            foundSubstance.isFavorite = true
+        }
+
+        let oldEnabledInteractions = oldSubstancesFile.generalInteractionsUnwrapped.filter { interaction in
+            interaction.isEnabled
+        }
+        for oldInteraction in oldEnabledInteractions {
+            guard let foundInteraction = newSubstancesFile.getGeneralInteraction(
+                    with: oldInteraction.nameUnwrapped
+            ) else {
+                continue
+            }
+            foundInteraction.isEnabled = true
         }
     }
 

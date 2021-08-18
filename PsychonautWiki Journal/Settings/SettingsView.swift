@@ -19,34 +19,33 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Substances and Interactions")) {
 
-                    VStack(spacing: 10) {
-                        Text("Last Successfull Fetch: \(storedFile.first!.creationDateUnwrapped.asDateAndTime)")
-                            .fixedSize(horizontal: false, vertical: true)
-                        if isFetching {
-                            Text("Fetching Substances...")
-                        } else {
-                            Button(action: fetchNewSubstances, label: {
-                                Label("Fetch Now", systemImage: "arrow.clockwise")
-                            })
-                        }
+                Section(header: Text("Last Successfull Substance Fetch")) {
+                    if isFetching {
+                        Text("Fetching Substances...")
+                    } else {
+                        Button(action: fetchNewSubstances, label: {
+                            Label(storedFile.first!.creationDateUnwrapped.asDateAndTime, systemImage: "arrow.clockwise")
+                        })
                     }
-                    .alert(isPresented: $isShowingErrorAlert) {
-                        Alert(
-                            title: Text("Fetch Failed"),
-                            message: Text(alertMessage),
-                            dismissButton: .default(Text("Ok"))
-                        )
-                    }
-
+                }
+                .alert(isPresented: $isShowingErrorAlert) {
+                    Alert(
+                        title: Text("Fetch Failed"),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("Ok"))
+                    )
+                }
+                Section(header: Text("Dangerous Interaction Notifications")) {
                     NavigationLink(
                         destination: ChooseInteractionsView(file: storedFile.first!),
                         label: {
                             Label("Choose Interactions", systemImage: "burst.fill")
                         }
                     )
+                }
 
+                Section(header: Text("Favorites")) {
                     NavigationLink(
                         destination: ChooseFavoritesView(file: storedFile.first!),
                         label: {
