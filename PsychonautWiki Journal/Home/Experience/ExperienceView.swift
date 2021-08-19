@@ -16,8 +16,6 @@ struct ExperienceView: View {
     @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
     @State private var isKeyboardShowing = false
-    @State private var isShowingAlert = false
-    @State private var alertMessage = ""
 
     var body: some View {
         List {
@@ -97,42 +95,10 @@ struct ExperienceView: View {
                 .environmentObject(calendarWrapper)
                 .accentColor(Color.blue)
         }
-        .alert(isPresented: $isShowingAlert, content: {
-            Alert(
-                title: Text("Delete Ingestion First"),
-                message: Text(alertMessage),
-                primaryButton: .destructive(
-                    Text("Delete Incompatible Ingestions"),
-                    action: deleteIncompatibleIngestions
-                ),
-                secondaryButton: .cancel()
-            )
-        })
     }
 
     private func addIngestion() {
-        let isThereIngestionWithOtherVersion = experience.sortedIngestionsUnwrapped.contains { ingestion in
-            ingestion.usedfileCreationDate != storedFile.first!.creationDateUnwrapped
-        }
-        if isThereIngestionWithOtherVersion {
-            alertMessage = "There are incompatible ingestions which prevents interactions to display properly."
-            isShowingAlert.toggle()
-        } else {
-            isShowingAddIngestionSheet.toggle()
-        }
-    }
-
-    private func deleteIncompatibleIngestions() {
-        let incompatibleIngestions = experience.sortedIngestionsUnwrapped.filter { ingestion in
-            ingestion.usedfileCreationDate != storedFile.first!.creationDateUnwrapped
-        }
-
-        for ingestion in incompatibleIngestions {
-            moc.delete(ingestion)
-        }
-        if moc.hasChanges {
-            try? moc.save()
-        }
+        isShowingAddIngestionSheet.toggle()
     }
 
     init(experience: Experience) {
