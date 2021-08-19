@@ -2,7 +2,8 @@ import SwiftUI
 
 struct IngestionLineModel {
 
-    let aroundShapeModel: AroundShapeModel
+    let aroundShapeModelUp: AroundShapeModelUp
+    let aroundShapeModelDown: AroundShapeModelDown
     let lineModel: LineModel
     let color: Color
 
@@ -15,13 +16,23 @@ struct IngestionLineModel {
         durations: DurationTypes
     ) {
         self.color = color
-        let normalizedXValuesForAroundShapeModel = AroundShapeModel.NormalizedDataPoints(
+        let normalizedXValuesForAroundShapeModelUp = AroundShapeModelUp.NormalizedDataPoints(
             verticalWeight: CGFloat(verticalWeight),
             durations: durations,
             ingestionTimeOffset: ingestionTimeOffset,
             totalGraphDuration: totalGraphDuration
         )
-        self.aroundShapeModel = AroundShapeModel(normalizedXValuesForModel: normalizedXValuesForAroundShapeModel)
+        self.aroundShapeModelUp = AroundShapeModelUp(normalizedXValuesForModel: normalizedXValuesForAroundShapeModelUp)
+
+        let normalizedXValuesForAroundShapeModelDown = AroundShapeModelDown.NormalizedDataPoints(
+            verticalWeight: CGFloat(verticalWeight),
+            durations: durations,
+            ingestionTimeOffset: ingestionTimeOffset,
+            totalGraphDuration: totalGraphDuration
+        )
+        self.aroundShapeModelDown = AroundShapeModelDown(
+            normalizedXValuesForModel: normalizedXValuesForAroundShapeModelDown
+        )
 
         let normalizedXValuesForLineModel = LineModel.NormalizedDataPoints(
             horizontalWeight: horizontalWeight,

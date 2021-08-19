@@ -11,6 +11,8 @@
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
 		EAC306A826CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A626CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift */; };
+		EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */; };
+		EAC306AD26CE32AD00C98E3E /* AroundShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
@@ -74,7 +76,7 @@
 		EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719726CBA664009FB0EC /* IngestionLineModel.swift */; };
 		EAE4721526CBA664009FB0EC /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719826CBA664009FB0EC /* Curve.swift */; };
 		EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719926CBA664009FB0EC /* LineModel.swift */; };
-		EAE4721726CBA664009FB0EC /* AroundShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719A26CBA664009FB0EC /* AroundShapeModel.swift */; };
+		EAE4721726CBA664009FB0EC /* AroundShapeModelUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719A26CBA664009FB0EC /* AroundShapeModelUp.swift */; };
 		EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719B26CBA664009FB0EC /* DataPoint.swift */; };
 		EAE4721926CBA664009FB0EC /* IngestionsLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719C26CBA664009FB0EC /* IngestionsLineChart.swift */; };
 		EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719D26CBA664009FB0EC /* TimeLabels.swift */; };
@@ -106,6 +108,8 @@
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAC306A626CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModelDown.swift; sourceTree = "<group>"; };
+		EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModel.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PsychonautWiki Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -173,7 +177,7 @@
 		EAE4719726CBA664009FB0EC /* IngestionLineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionLineModel.swift; sourceTree = "<group>"; };
 		EAE4719826CBA664009FB0EC /* Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curve.swift; sourceTree = "<group>"; };
 		EAE4719926CBA664009FB0EC /* LineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineModel.swift; sourceTree = "<group>"; };
-		EAE4719A26CBA664009FB0EC /* AroundShapeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundShapeModel.swift; sourceTree = "<group>"; };
+		EAE4719A26CBA664009FB0EC /* AroundShapeModelUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundShapeModelUp.swift; sourceTree = "<group>"; };
 		EAE4719B26CBA664009FB0EC /* DataPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		EAE4719C26CBA664009FB0EC /* IngestionsLineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionsLineChart.swift; sourceTree = "<group>"; };
 		EAE4719D26CBA664009FB0EC /* TimeLabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabels.swift; sourceTree = "<group>"; };
@@ -399,8 +403,10 @@
 				EAE4719726CBA664009FB0EC /* IngestionLineModel.swift */,
 				EAE4719826CBA664009FB0EC /* Curve.swift */,
 				EAE4719926CBA664009FB0EC /* LineModel.swift */,
-				EAE4719A26CBA664009FB0EC /* AroundShapeModel.swift */,
+				EAE4719A26CBA664009FB0EC /* AroundShapeModelUp.swift */,
+				EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */,
 				EAE4719B26CBA664009FB0EC /* DataPoint.swift */,
+				EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -565,7 +571,7 @@
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
 				EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */,
 				EAE4720E26CBA664009FB0EC /* LineChartWithPicker.swift in Sources */,
-				EAE4721726CBA664009FB0EC /* AroundShapeModel.swift in Sources */,
+				EAE4721726CBA664009FB0EC /* AroundShapeModelUp.swift in Sources */,
 				EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */,
 				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
@@ -594,6 +600,7 @@
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
 				EAE4720C26CBA664009FB0EC /* ChartTimeStep.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsView.swift in Sources */,
+				EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift in Sources */,
 				EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */,
@@ -601,6 +608,7 @@
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
 				EAE471F826CBA664009FB0EC /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EAE471F226CBA664009FB0EC /* Roa+CoreDataClass.swift in Sources */,
+				EAC306AD26CE32AD00C98E3E /* AroundShapeModel.swift in Sources */,
 				EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */,
 				EAE471F626CBA664009FB0EC /* DoseTypes+CoreDataClass.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
