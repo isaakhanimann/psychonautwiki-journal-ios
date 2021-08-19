@@ -21,7 +21,7 @@ struct ExperienceRow: View {
                 VStack(alignment: .leading) {
                     Text(experience.titleUnwrapped)
                         .font(.title2)
-                    Text(experience.usedSubstanceNames)
+                    Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
                         .foregroundColor(.gray)
                 }
                 Spacer()

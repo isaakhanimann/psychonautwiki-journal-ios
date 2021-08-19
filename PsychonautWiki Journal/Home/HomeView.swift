@@ -24,21 +24,27 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(experiencesSorted) { experience in
-                    ExperienceRow(experience: experience, timer: timer, selection: $selection)
+            ZStack(alignment: .bottom) {
+                List {
+                    ForEach(experiencesSorted) { experience in
+                        ExperienceRow(experience: experience, timer: timer, selection: $selection)
+                    }
+                    .onDelete(perform: deleteExperiencesMaybe)
+                    .alert(isPresented: $isShowingDeleteExperienceAlert) {
+                        deleteExperienceAlert
+                    }
+
                 }
-                .onDelete(perform: deleteExperiencesMaybe)
-                .alert(isPresented: $isShowingDeleteExperienceAlert) {
-                    deleteExperienceAlert
-                }
+                .listStyle(InsetGroupedListStyle())
 
                 if experiences.isEmpty {
-                    addExperienceButton
-                        .padding(.vertical)
+                    Button(action: addExperience) {
+                        Label("Add Experience", systemImage: "plus")
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+                    .padding()
                 }
             }
-            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Experiences")
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
@@ -51,7 +57,9 @@ struct HomeView: View {
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
                     if !experiences.isEmpty {
-                        addExperienceButton
+                        Button(action: addExperience) {
+                            Label("Add Experience", systemImage: "plus")
+                        }
                     }
                 }
             }
@@ -72,21 +80,17 @@ struct HomeView: View {
         )
     }
 
-    private var addExperienceButton: some View {
-        Button {
-            withAnimation {
-                let experience = Experience(context: moc)
-                let now = Date()
-                experience.creationDate = now
-                experience.title = now.asDateString
-                calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
-                try? moc.save()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    selection = experience
-                }
+    private func addExperience() {
+        withAnimation {
+            let experience = Experience(context: moc)
+            let now = Date()
+            experience.creationDate = now
+            experience.title = now.asDateString
+            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
+            try? moc.save()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                selection = experience
             }
-        } label: {
-            Label("Add Experience", systemImage: "plus")
         }
     }
 
