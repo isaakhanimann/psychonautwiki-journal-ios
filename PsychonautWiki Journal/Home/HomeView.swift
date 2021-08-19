@@ -5,7 +5,7 @@ struct HomeView: View {
     let toggleSettingsVisibility: () -> Void
 
     #if DEBUG
-    let isDoingAppStoreScreenshots = true
+    let isDoingAppStoreScreenshots = false
     #endif
 
     @Environment(\.managedObjectContext) var moc

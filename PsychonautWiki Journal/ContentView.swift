@@ -51,6 +51,7 @@ struct ContentView: View {
             .onChange(of: scenePhase, perform: { newPhase in
                 if newPhase == .active {
                     calendarWrapper.checkIfSomethingChanged()
+                    maybeFetchNewSubstances()
                 }
             })
             .alert(isPresented: $isShowingErrorAlert, content: {
@@ -79,7 +80,7 @@ struct ContentView: View {
 
         guard hasBeenSetupBefore else { return }
 
-        let oneWeek: TimeInterval = 60 * 60 * 24 * 7
+        let oneWeek: TimeInterval = 60 * 60 * 24 * 1
         guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneWeek else {
             return
         }
