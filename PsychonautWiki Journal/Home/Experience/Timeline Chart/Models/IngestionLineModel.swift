@@ -5,6 +5,7 @@ struct IngestionLineModel {
     let aroundShapeModelUp: AroundShapeModelUp
     let aroundShapeModelDown: AroundShapeModelDown
     let lineModel: LineModel
+    let insetTimes: Int
     let color: Color
 
     init(
@@ -13,7 +14,8 @@ struct IngestionLineModel {
         totalGraphDuration: TimeInterval,
         verticalWeight: Double,
         horizontalWeight: Double,
-        durations: DurationTypes
+        durations: DurationTypes,
+        insetTimes: Int
     ) {
         self.color = color
         let normalizedXValuesForAroundShapeModelUp = AroundShapeModelUp.NormalizedDataPoints(
@@ -42,6 +44,7 @@ struct IngestionLineModel {
             totalGraphDuration: totalGraphDuration
         )
         self.lineModel = LineModel(normalizedXValuesForModel: normalizedXValuesForLineModel)
+        self.insetTimes = insetTimes
     }
 
     static func getNormalizedValue(of value: TimeInterval, comparedTo maxValue: TimeInterval) -> CGFloat {

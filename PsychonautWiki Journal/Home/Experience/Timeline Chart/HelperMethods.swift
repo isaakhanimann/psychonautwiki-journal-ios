@@ -47,18 +47,57 @@ struct HelperMethods {
             let horizontalWeight = getHorizontalWeight(for: ingestion.dose, doseTypes: doseInfo)
             assert(horizontalWeight >= 0 && horizontalWeight <= 1)
 
+            let insetTimes = getInsetTimes(of: ingestion, comparedTo: sortedIngestions.prefix(while: { ing in
+                ingestion != ing
+            }))
+
             let ingestionLineModel = IngestionLineModel(
                 color: ingestion.swiftUIColorUnwrapped,
                 ingestionTimeOffset: timeOfFirstIngestion.distance(to: ingestionTime),
                 totalGraphDuration: totalGraphDuration,
                 verticalWeight: verticalWeight,
                 horizontalWeight: horizontalWeight,
-                durations: duration)
+                durations: duration,
+                insetTimes: insetTimes
+            )
 
             linesData.append(ingestionLineModel)
         }
 
         return linesData
+    }
+
+    private static func getInsetTimes(of ingestion: Ingestion, comparedTo previousIngestions: [Ingestion]) -> Int {
+        let durationOriginal = ingestion.substanceCopy!.getDuration(for: ingestion.administrationRouteUnwrapped)!
+
+        let peakStartOriginal = ingestion.timeUnwrapped
+            .addingTimeInterval(durationOriginal.onset!.minSec)
+            .addingTimeInterval(durationOriginal.comeup!.minSec)
+        let peakEndOriginal = peakStartOriginal
+            .addingTimeInterval(durationOriginal.peak!.maxSec)
+
+        var insetTimes = 0
+        for previousIngestion in previousIngestions {
+            let duration = previousIngestion.substanceCopy!.getDuration(
+                for: previousIngestion.administrationRouteUnwrapped
+            )!
+
+            let peakStart = previousIngestion.timeUnwrapped
+                .addingTimeInterval(duration.onset!.minSec)
+                .addingTimeInterval(duration.comeup!.minSec)
+            let peakEnd = peakStart.addingTimeInterval(duration.peak!.maxSec)
+
+            if areRangesOverlapping(min1: peakStartOriginal, max1: peakEndOriginal, min2: peakStart, max2: peakEnd) {
+                insetTimes += 1
+            }
+        }
+        return insetTimes
+    }
+
+    private static func areRangesOverlapping(min1: Date, max1: Date, min2: Date, max2: Date) -> Bool {
+        assert(min1 <= max1)
+        assert(min2 <= max2)
+        return min1 <= max2 && min2 <= max1
     }
 
     private static let secondsToAddAtEndOfGraph: TimeInterval = 60 * 60

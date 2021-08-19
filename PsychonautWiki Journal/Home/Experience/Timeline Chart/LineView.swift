@@ -6,12 +6,24 @@ struct LineView: View {
 
     var body: some View {
         ZStack {
-            AroundShape(aroundShapeModel: ingestionLineModel.aroundShapeModelUp)
-                .fill(ingestionLineModel.color.opacity(0.2))
-            AroundShape(aroundShapeModel: ingestionLineModel.aroundShapeModelDown)
-                .fill(ingestionLineModel.color.opacity(0.2))
-            LineShape(lineModel: ingestionLineModel.lineModel, lineWidth: lineWidth)
-                .stroke(ingestionLineModel.color, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+            AroundShape(
+                aroundShapeModel: ingestionLineModel.aroundShapeModelUp,
+                insetTimes: ingestionLineModel.insetTimes,
+                lineWidth: lineWidth
+            )
+            .fill(ingestionLineModel.color.opacity(0.2))
+            AroundShape(
+                aroundShapeModel: ingestionLineModel.aroundShapeModelDown,
+                insetTimes: ingestionLineModel.insetTimes,
+                lineWidth: lineWidth
+            )
+            .fill(ingestionLineModel.color.opacity(0.2))
+            LineShape(
+                lineModel: ingestionLineModel.lineModel,
+                lineWidth: lineWidth,
+                insetTimes: ingestionLineModel.insetTimes
+            )
+            .stroke(ingestionLineModel.color, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
         }
     }
 }

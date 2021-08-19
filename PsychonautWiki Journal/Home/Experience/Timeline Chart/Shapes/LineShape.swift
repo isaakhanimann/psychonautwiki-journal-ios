@@ -4,12 +4,20 @@ import SwiftUI
 struct LineShape: Shape {
     let lineModel: LineModel
     let lineWidth: CGFloat
+    let insetTimes: Int
 
     func path(in rect: CGRect) -> Path {
 
         var path = Path()
 
-        let drawRect = rect.insetBy(dx: lineWidth/2, dy: lineWidth/2)
+        let halfLineWidth = lineWidth/2
+        let insets = UIEdgeInsets(
+            top: CGFloat(insetTimes) * lineWidth + halfLineWidth,
+            left: halfLineWidth,
+            bottom: halfLineWidth,
+            right: halfLineWidth
+        )
+        let drawRect = rect.inset(by: insets)
 
         // Start
         var destination = getCGPoint(for: lineModel.startLineStartPoint, inside: drawRect)
