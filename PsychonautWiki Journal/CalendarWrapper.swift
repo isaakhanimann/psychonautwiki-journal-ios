@@ -44,7 +44,7 @@ class CalendarWrapper: ObservableObject {
     func createPsychonautWikiCalendar(with source: EKSource) throws {
         let calendar = EKCalendar(for: .event, eventStore: store)
         calendar.title = "PsychonautWiki"
-        calendar.cgColor = UIColor.orange.cgColor
+        calendar.cgColor = UIColor.blue.cgColor
         calendar.source = source
         try store.saveCalendar(calendar, commit: true)
         self.psychonautWikiCalendar = calendar

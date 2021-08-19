@@ -38,29 +38,22 @@ class PreviewHelper {
         experience1.title = "Day at the Lake"
         experience1.addToIngestions(
             PreviewHelper.createDefaultIngestion(
-                with: .orange,
-                stringTime: "2021/08/18 22:01",
-                context: context,
-                file: substancesFile,
-                substanceName: "Myristicin"
-            )
-        )
-        experience1.addToIngestions(
-            PreviewHelper.createDefaultIngestion(
                 with: .pink,
-                stringTime: "2021/08/18 23:01",
+                stringTime: "2021/08/18 20:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Etizolam"
+                substanceName: "Etizolam",
+                dose: 3.2
             )
         )
         experience1.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .blue,
-                stringTime: "2021/08/18 23:10",
+                stringTime: "2021/08/18 21:10",
                 context: context,
                 file: substancesFile,
-                substanceName: "Phenibut"
+                substanceName: "Phenibut",
+                dose: 1.25
             )
         )
 

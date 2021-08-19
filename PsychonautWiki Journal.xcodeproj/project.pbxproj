@@ -19,7 +19,6 @@
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
 		EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */; };
-		EAE471B826CBA664009FB0EC /* FullDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */; };
 		EAE471BC26CBA664009FB0EC /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */; };
 		EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712926CBA663009FB0EC /* ContentView.swift */; };
 		EAE471BE26CBA664009FB0EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712B26CBA663009FB0EC /* SettingsView.swift */; };
@@ -119,7 +118,6 @@
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclaimerViewShort.swift; sourceTree = "<group>"; };
-		EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullDisclaimerView.swift; sourceTree = "<group>"; };
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
 		EAE4712926CBA663009FB0EC /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -265,8 +263,8 @@
 		EAE4711B26CBA663009FB0EC /* Welcome Screen */ = {
 			isa = PBXGroup;
 			children = (
-				EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */,
 				EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */,
+				EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */,
 				EAE4712226CBA663009FB0EC /* Feature.swift */,
 				EAE4723626CC4F13009FB0EC /* Initial Substance Setup */,
 			);
@@ -455,7 +453,6 @@
 				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
 				EAE4718526CBA664009FB0EC /* ChooseInitialFavoritesView.swift */,
 				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
-				EAE4712426CBA663009FB0EC /* FullDisclaimerView.swift */,
 				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 			);
 			path = "Initial Substance Setup";
@@ -578,7 +575,6 @@
 				EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */,
 				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
-				EAE471B826CBA664009FB0EC /* FullDisclaimerView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
 				EAE471FB26CBA664009FB0EC /* DoseRange+CoreDataClass.swift in Sources */,
 				EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */,
@@ -788,7 +784,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -812,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

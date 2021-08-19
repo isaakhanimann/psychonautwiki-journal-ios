@@ -10,8 +10,6 @@ struct DisclaimerViewShort: View {
 
     @Environment(\.managedObjectContext) var moc
 
-    @State private var isSheetShowing = false
-
     var body: some View {
         VStack(spacing: 20) {
 
@@ -22,7 +20,7 @@ struct DisclaimerViewShort: View {
                     .frame(width: 80, height: 80, alignment: .center)
                     .accessibilityHidden(true)
                     .foregroundColor(.red)
-                Text("Substance Import Disclaimer")
+                Text("Disclaimer")
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .font(.largeTitle.bold())
@@ -38,10 +36,6 @@ struct DisclaimerViewShort: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(.red)
                 Spacer()
-                Button("Read More") {
-                    isSheetShowing.toggle()
-                }
-                Spacer()
             }
 
             NavigationLink(
@@ -55,10 +49,6 @@ struct DisclaimerViewShort: View {
                 }
             )
 
-        }
-        .sheet(isPresented: $isSheetShowing) {
-            FullDisclaimerView()
-                .accentColor(Color.blue)
         }
         .padding()
         .navigationBarHidden(true)
