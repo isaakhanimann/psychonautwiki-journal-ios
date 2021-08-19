@@ -80,8 +80,8 @@ struct ContentView: View {
 
         guard hasBeenSetupBefore else { return }
 
-        let oneWeek: TimeInterval = 60 * 60 * 24 * 1
-        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneWeek else {
+        let oneDay: TimeInterval = 60 * 60 * 24 * 1
+        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
             return
         }
 
