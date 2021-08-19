@@ -13,6 +13,7 @@
 		EAC306A826CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A626CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift */; };
 		EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */; };
 		EAC306AD26CE32AD00C98E3E /* AroundShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */; };
+		EAC306AF26CE532A00C98E3E /* ColorPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AE26CE532A00C98E3E /* ColorPie.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
@@ -110,6 +111,7 @@
 		EAC306A626CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModelDown.swift; sourceTree = "<group>"; };
 		EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModel.swift; sourceTree = "<group>"; };
+		EAC306AE26CE532A00C98E3E /* ColorPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPie.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PsychonautWiki Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -295,9 +297,9 @@
 		EAE4715B26CBA664009FB0EC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
 				EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */,
-				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4716A26CBA664009FB0EC /* Date-Difference.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */,
@@ -354,6 +356,7 @@
 				EAE471A926CBA664009FB0EC /* TimerView.swift */,
 				EAE471AA26CBA664009FB0EC /* HomeView.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
+				EAC306AE26CE532A00C98E3E /* ColorPie.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
+				EAC306AF26CE532A00C98E3E /* ColorPie.swift in Sources */,
 				EAE4720C26CBA664009FB0EC /* ChartTimeStep.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsView.swift in Sources */,
 				EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */,

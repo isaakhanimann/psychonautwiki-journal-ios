@@ -14,21 +14,38 @@ struct ExperienceRow: View {
             selection: $selection
         ) {
             HStack {
-                Text(experience.titleUnwrapped)
-                    .fixedSize()
+                ColorPie(colors: experience.ingestionColors)
+                    .frame(width: 40)
+                Spacer()
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text(experience.titleUnwrapped)
+                        .font(.title2)
+                    Text(experience.usedSubstanceNames)
+                        .foregroundColor(.gray)
+                }
                 Spacer()
                 if experience.isActive {
                     TimerView(experience: experience, timer: timer)
                 } else {
-                    ForEach(experience.sortedIngestionsUnwrapped) { ingestion in
-                        Image(systemName: "circle.fill")
-                            .font(.body)
-                            .foregroundColor(ingestion.swiftUIColorUnwrapped)
-                    }
+                    Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
+                        .foregroundColor(.gray)
                 }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            .clipped()
         }
+    }
+}
+
+struct ExperienceRow_Previews: PreviewProvider {
+
+    static var previews: some View {
+        let helper = PersistenceController.preview.createPreviewHelper()
+        let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+        ExperienceRow(
+            experience: helper.experiences.first!,
+            timer: timer,
+            selection: .constant(nil)
+        )
     }
 }

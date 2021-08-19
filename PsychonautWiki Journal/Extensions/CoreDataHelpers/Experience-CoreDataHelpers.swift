@@ -40,6 +40,26 @@ extension Experience {
         return colors
     }
 
+    var usedSubstanceNames: String {
+        var names = sortedIngestionsUnwrapped.map { ingestion in
+            ingestion.substanceCopy!.nameUnwrapped
+        }
+        names = names.uniqued()
+
+        guard !names.isEmpty else {return ""}
+
+        var result = names.reduce("") { intermediateResult, name in
+            intermediateResult + "\(name), "
+        }
+        result.removeLast(2)
+
+        return result
+    }
+
+    var timeOfFirstIngestion: Date? {
+        sortedIngestionsUnwrapped.first?.timeUnwrapped
+    }
+
     var isActive: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
 

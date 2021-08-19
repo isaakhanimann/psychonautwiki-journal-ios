@@ -27,7 +27,6 @@ struct HomeView: View {
             List {
                 ForEach(experiencesSorted) { experience in
                     ExperienceRow(experience: experience, timer: timer, selection: $selection)
-                        .padding(.vertical)
                 }
                 .onDelete(perform: deleteExperiencesMaybe)
                 .alert(isPresented: $isShowingDeleteExperienceAlert) {

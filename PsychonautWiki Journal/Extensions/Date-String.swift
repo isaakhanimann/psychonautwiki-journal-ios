@@ -8,6 +8,12 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    var asDateNumberString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        return formatter.string(from: self)
+    }
+
     var asTimeString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
