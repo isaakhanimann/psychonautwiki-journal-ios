@@ -12,11 +12,16 @@ struct IngestionRow: View {
                         Image(systemName: "circle.fill")
                             .font(.title2)
                             .foregroundColor(ingestion.swiftUIColorUnwrapped)
-                        Text(substanceUnwrapped.nameUnwrapped)
-                            .foregroundColor(.primary)
+                        VStack(alignment: .leading) {
+                            Text(substanceUnwrapped.nameUnwrapped)
+                                .font(.title3)
+                                .foregroundColor(.primary)
+                            Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
+                                .foregroundColor(.secondary)
+                        }
+
                         Spacer()
-                        Text(ingestion.doseInfoString)
-                            .foregroundColor(.secondary)
+
                         Text(ingestion.timeUnwrappedAsString)
                             .foregroundColor(.primary)
                     }

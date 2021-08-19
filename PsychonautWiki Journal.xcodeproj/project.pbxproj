@@ -364,9 +364,9 @@
 		EAE4718826CBA664009FB0EC /* Experience */ = {
 			isa = PBXGroup;
 			children = (
+				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
 				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
-				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EAE4718C26CBA664009FB0EC /* Timeline Chart */,
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,
 			);
