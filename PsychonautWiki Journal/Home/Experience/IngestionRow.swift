@@ -28,6 +28,5 @@ struct IngestionRow: View {
                 }
             }
         }
-
     }
 }

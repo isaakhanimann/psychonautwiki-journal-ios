@@ -111,7 +111,7 @@ struct HelperMethods {
         for ingestion in sortedIngestions {
             var allDoses = [Double]()
             for otherIngestion in sortedIngestions
-            where otherIngestion.substanceCopy == ingestion.substanceCopy {
+            where otherIngestion.substanceCopy!.nameUnwrapped == ingestion.substanceCopy!.nameUnwrapped {
                 allDoses.append(otherIngestion.dose)
             }
 
