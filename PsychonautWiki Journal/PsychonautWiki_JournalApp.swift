@@ -12,7 +12,7 @@ struct PsychonautWiki_JournalApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(calendarWrapper)
-                .accentColor(Color.green)
+                .accentColor(Color.blue)
         }
     }
 }

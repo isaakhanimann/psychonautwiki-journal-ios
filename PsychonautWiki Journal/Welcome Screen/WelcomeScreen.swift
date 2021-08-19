@@ -17,7 +17,7 @@ struct WelcomeScreen: View {
                     Image(decorative: "AppIconCopy")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 80, height: 80, alignment: .center)
+                        .frame(width: 130, height: 130, alignment: .center)
                         .cornerRadius(10)
                         .accessibilityHidden(true)
                     VStack(spacing: 20) {
@@ -115,6 +115,7 @@ struct WelcomeScreen: View {
 struct WelcomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeScreen()
-            .accentColor(Color.green)
+            .preferredColorScheme(.dark)
+            .accentColor(Color.blue)
     }
 }

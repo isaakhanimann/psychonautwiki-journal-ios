@@ -95,7 +95,7 @@ struct ExperienceView: View {
                 .environment(\.managedObjectContext, self.moc)
                 .environmentObject(experience)
                 .environmentObject(calendarWrapper)
-                .accentColor(Color.green)
+                .accentColor(Color.blue)
         }
         .alert(isPresented: $isShowingAlert, content: {
             Alert(
