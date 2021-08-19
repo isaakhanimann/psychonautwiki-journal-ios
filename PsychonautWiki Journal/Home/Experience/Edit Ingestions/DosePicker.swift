@@ -55,25 +55,7 @@ struct DosePicker: View {
                     doseMaybe = doseDouble
                 }
 
-                if let thresh = doseInfo?.thresholdUnwrapped,
-                   thresh == doseDouble {
-                    Text("threshold (\(thresh.cleanString) \(units))")
-                } else if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                          let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped,
-                          doseDouble >= lightMin && doseDouble <= lightMax {
-                    Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-                } else if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                          let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped,
-                          doseDouble >= commonMin && doseDouble <= commonMax {
-                    Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-                } else if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                          let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped,
-                          doseDouble >= strongMin && doseDouble <= strongMax {
-                    Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-                } else if let heavy = doseInfo?.heavyUnwrapped,
-                          doseDouble >= heavy {
-                    Text("heavy (\(heavy.cleanString) \(units)+)")
-                }
+                doseRangeView
             } else {
                 VStack(alignment: .leading, spacing: 7) {
                     if let thresh = doseInfo?.thresholdUnwrapped {
@@ -99,6 +81,32 @@ struct DosePicker: View {
 
         }
         .padding(.vertical)
+    }
+
+    private var doseRangeView: some View {
+        let units = doseInfo?.units ?? ""
+
+        if let thresh = doseInfo?.thresholdUnwrapped,
+           thresh == doseDouble {
+            return Text("threshold (\(thresh.cleanString) \(units))")
+        } else if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
+                  let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped,
+                  doseDouble >= lightMin && doseDouble <= lightMax {
+            return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
+        } else if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
+                  let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped,
+                  doseDouble >= commonMin && doseDouble <= commonMax {
+            return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
+        } else if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
+                  let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped,
+                  doseDouble >= strongMin && doseDouble <= strongMax {
+            return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
+        } else if let heavy = doseInfo?.heavyUnwrapped,
+                  doseDouble >= heavy {
+            return Text("heavy (\(heavy.cleanString) \(units)+)")
+        } else {
+            return Text(" ")
+        }
     }
 }
 
