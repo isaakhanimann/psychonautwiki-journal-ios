@@ -4,6 +4,10 @@ struct HomeView: View {
 
     let toggleSettingsVisibility: () -> Void
 
+    #if DEBUG
+    let isDoingAppStoreScreenshots = true
+    #endif
+
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
 
@@ -11,6 +15,13 @@ struct HomeView: View {
         entity: Experience.entity(),
         sortDescriptors: [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
     ) var experiences: FetchedResults<Experience>
+
+    #if DEBUG
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
+    #endif
 
     private var experiencesSorted: [Experience] {
         experiences.sorted { experience1, experience2 in
@@ -38,9 +49,24 @@ struct HomeView: View {
                 .listStyle(InsetGroupedListStyle())
 
                 if experiences.isEmpty {
-                    Button(action: addExperience) {
+                    Button(action: {
+                        #if DEBUG
+                        if isDoingAppStoreScreenshots {
+                            _ = PreviewHelper.createDefaultExperiences(
+                                context: moc,
+                                substancesFile: storedFile.first!
+                            )
+                            try? moc.save()
+                        } else {
+                            addExperience()
+                        }
+                        #else
+                        addExperience()
+                        #endif
+                    }, label: {
                         Label("Add Experience", systemImage: "plus")
-                    }
+
+                    })
                     .buttonStyle(PrimaryButtonStyle())
                     .padding()
                 }
