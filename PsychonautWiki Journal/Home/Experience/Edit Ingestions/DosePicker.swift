@@ -38,15 +38,15 @@ struct DosePicker: View {
                 }
             }
 
-            if let thresholdUnwrapped = doseInfo?.thresholdUnwrapped,
-               let heavyUnwrapped = doseInfo?.heavyUnwrapped,
-               thresholdUnwrapped < heavyUnwrapped {
+            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
+               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
+               min < max {
                 Slider(
                     value: $doseDouble.animation(),
-                    in: thresholdUnwrapped...heavyUnwrapped,
+                    in: min...max,
                     step: 1,
-                    minimumValueLabel: Text("\(thresholdUnwrapped.cleanString) \(units)"),
-                    maximumValueLabel: Text("\(heavyUnwrapped.cleanString) \(units)")) {
+                    minimumValueLabel: Text("\(min.cleanString) \(units)"),
+                    maximumValueLabel: Text("\(max.cleanString) \(units)")) {
                     Text("Dose")
                 }
                 .onChange(of: doseDouble) { _ in
@@ -87,7 +87,7 @@ struct DosePicker: View {
         let units = doseInfo?.units ?? ""
 
         if let thresh = doseInfo?.thresholdUnwrapped,
-           thresh == doseDouble {
+           thresh >= doseDouble {
             return Text("threshold (\(thresh.cleanString) \(units))")
         } else if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
                   let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped,
