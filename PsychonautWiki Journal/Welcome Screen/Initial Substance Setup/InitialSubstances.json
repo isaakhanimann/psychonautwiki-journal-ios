@@ -19522,7 +19522,11 @@
                 "max": 60,
                 "units": "minutes"
               },
-              "comeup": null,
+              "comeup": {
+                "min": 30,
+                "max": 60,
+                "units": "minutes"
+              },
               "peak": {
                 "min": 2,
                 "max": 6,
