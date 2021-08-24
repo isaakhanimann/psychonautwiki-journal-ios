@@ -102,12 +102,17 @@ struct WelcomeScreen: View {
         Feature(
             title: "Keep Track",
             description: "Have an overview of your substance experiences. During and after the experience.",
-            image: "eye"
+            image: "binoculars"
         ),
         Feature(
             title: "Be Safe",
             description: "Get notified of dangerous interactions. Add ingestions before you actually take them.",
             image: "checkmark.shield"
+        ),
+        Feature(
+            title: "Privacy",
+            description: "Your data belongs to you and will never be shared.",
+            image: "lock.shield"
         )
     ]
 }
