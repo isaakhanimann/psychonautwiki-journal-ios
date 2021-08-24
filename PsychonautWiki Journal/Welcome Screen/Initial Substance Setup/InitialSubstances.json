@@ -1,6 +1,32 @@
 {
   "errors": [
     {
+      "message": "Float cannot represent non numeric value: \"0.9#\"",
+      "path": [
+        "substances",
+        127,
+        "roas",
+        0,
+        "duration",
+        "comeup",
+        "min"
+      ],
+      "code": "INTERNAL_SERVER_ERROR"
+    },
+    {
+      "message": "Float cannot represent non numeric value: \"1.9#\"",
+      "path": [
+        "substances",
+        127,
+        "roas",
+        0,
+        "duration",
+        "comeup",
+        "max"
+      ],
+      "code": "INTERNAL_SERVER_ERROR"
+    },
+    {
       "message": "Float cannot represent non numeric value: [2, 10]",
       "path": [
         "substances",
@@ -8388,6 +8414,32 @@
         "url": "https://psychonautwiki.org/wiki/Cocaine",
         "roas": [
           {
+            "name": "inhaled",
+            "dose": null,
+            "duration": {
+              "onset": {
+                "min": 3,
+                "max": 5,
+                "units": "seconds"
+              },
+              "comeup": {
+                "min": null,
+                "max": null,
+                "units": "Minutes#"
+              },
+              "peak": {
+                "min": 2,
+                "max": 10,
+                "units": "minutes"
+              },
+              "offset": {
+                "min": 1,
+                "max": 5,
+                "units": "minutes"
+              }
+            }
+          },
+          {
             "name": "insufflated",
             "dose": {
               "units": "mg",
@@ -8408,13 +8460,25 @@
             },
             "duration": {
               "onset": {
-                "min": 0,
-                "max": 5,
+                "min": 1,
+                "max": 10,
                 "units": "minutes"
               },
-              "comeup": null,
-              "peak": null,
-              "offset": null
+              "comeup": {
+                "min": 5,
+                "max": 15,
+                "units": "minutes"
+              },
+              "peak": {
+                "min": 15,
+                "max": 30,
+                "units": "minutes"
+              },
+              "offset": {
+                "min": 10,
+                "max": 30,
+                "units": "minutes"
+              }
             }
           }
         ],
@@ -11422,11 +11486,15 @@
             },
             "duration": {
               "onset": {
-                "min": 10,
-                "max": 20,
+                "min": 3,
+                "max": 10,
                 "units": "minutes"
               },
-              "comeup": null,
+              "comeup": {
+                "min": 5,
+                "max": 15,
+                "units": "minutes"
+              },
               "peak": {
                 "min": 30,
                 "max": 45,
@@ -11502,7 +11570,11 @@
                 "max": 30,
                 "units": "minutes"
               },
-              "comeup": null,
+              "comeup": {
+                "min": 10,
+                "max": 20,
+                "units": "minutes"
+              },
               "peak": {
                 "min": 45,
                 "max": 90,
@@ -13396,7 +13468,7 @@
               "comeup": {
                 "min": 15,
                 "max": 30,
-                "units": null
+                "units": "minutes"
               },
               "peak": {
                 "min": 1.5,

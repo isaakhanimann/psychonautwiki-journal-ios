@@ -38,11 +38,16 @@ public class Substance: NSManagedObject, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
-        let decodedRoas = try container.decode(Set<Roa>.self, forKey: .roas)
+
+        let throwableRoas = try container.decode(
+            [Throwable<Roa>].self,
+            forKey: .roas)
+        let decodedRoas = throwableRoas.compactMap { try? $0.result.get() }
+
         if decodedRoas.isEmpty {
             throw SubstanceDecodingError.noRoaFound
         }
-        self.roas = decodedRoas as NSSet
+        self.roas = Set(decodedRoas) as NSSet
         let decodedCategoriesNested = try container.decodeIfPresent(DecodedCategoriesNested.self, forKey: .category)
         self.categoriesDecoded = decodedCategoriesNested?.psychoactive ?? []
         self.unsafeInteractionsDecoded = try container.decodeIfPresent(
