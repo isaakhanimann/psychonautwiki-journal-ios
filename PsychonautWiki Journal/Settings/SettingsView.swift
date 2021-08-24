@@ -37,16 +37,6 @@ struct SettingsView: View {
                     )
                 }
 
-                Section(header: Text("Substance Feedback")) {
-                    HStack(spacing: 15) {
-                        Image(systemName: "message.fill")
-                            .foregroundColor(.accentColor)
-                        Link(
-                            "Report Substance Improvement",
-                            destination: URL(string: "https://t.me/joinchat/HOkSQNKOeqpgd8Np")!
-                        )
-                    }
-                }
                 Section(header: Text("Dangerous Interaction Notifications")) {
                     NavigationLink(
                         destination: ChooseInteractionsView(file: storedFile.first!),
