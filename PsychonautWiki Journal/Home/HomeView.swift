@@ -10,6 +10,7 @@ struct HomeView: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
+    @EnvironmentObject var connectivity: Connectivity
 
     @FetchRequest(
         entity: Experience.entity(),
@@ -113,6 +114,8 @@ struct HomeView: View {
             experience.creationDate = now
             experience.title = now.asDateString
             calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
+            let data = ["text": "Experience created at \(now.asTimeString)"]
+            connectivity.transferUserInfo(data)
             try? moc.save()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 selection = experience

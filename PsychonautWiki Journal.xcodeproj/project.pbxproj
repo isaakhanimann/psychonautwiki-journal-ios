@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA4910AE26DFB4E0001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910AD26DFB4E0001A5316 /* Assets.xcassets */; };
+		EA4910B526DFB4E0001A5316 /* Watch Journal Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910B926DFB4E0001A5316 /* ContentView.swift */; };
+		EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */; };
+		EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */; };
+		EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910BF26DFB4E1001A5316 /* Assets.xcassets */; };
+		EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */; };
+		EA4910C726DFB4E1001A5316 /* Watch Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Watch Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
+		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -103,7 +113,60 @@
 		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EA4910B626DFB4E0001A5316 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE470FB26CBA57F009FB0EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA4910B326DFB4E0001A5316;
+			remoteInfo = "Watch Journal Extension";
+		};
+		EA4910C526DFB4E1001A5316 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE470FB26CBA57F009FB0EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA4910AA26DFB4E0001A5316;
+			remoteInfo = "Watch Journal";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EA4910C826DFB4E1001A5316 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				EA4910C726DFB4E1001A5316 /* Watch Journal.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA4910CB26DFB4E1001A5316 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EA4910B526DFB4E0001A5316 /* Watch Journal Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		EA4910AB26DFB4E0001A5316 /* Watch Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Watch Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4910AD26DFB4E0001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA4910AF26DFB4E0001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Journal Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4910B926DFB4E0001A5316 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
+		EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		EA4910BF26DFB4E1001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EA4910C426DFB4E1001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -202,6 +265,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EA4910B126DFB4E0001A5316 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAE4710026CBA57F009FB0EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,10 +283,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA4910AC26DFB4E0001A5316 /* Watch Journal */ = {
+			isa = PBXGroup;
+			children = (
+				EA4910AD26DFB4E0001A5316 /* Assets.xcassets */,
+				EA4910AF26DFB4E0001A5316 /* Info.plist */,
+			);
+			path = "Watch Journal";
+			sourceTree = "<group>";
+		};
+		EA4910B826DFB4E0001A5316 /* Watch Journal Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
+				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
+				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
+				EA4910BF26DFB4E1001A5316 /* Assets.xcassets */,
+				EA4910C426DFB4E1001A5316 /* Info.plist */,
+				EA4910C126DFB4E1001A5316 /* Preview Content */,
+			);
+			path = "Watch Journal Extension";
+			sourceTree = "<group>";
+		};
+		EA4910C126DFB4E1001A5316 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
+				EA4910AC26DFB4E0001A5316 /* Watch Journal */,
+				EA4910B826DFB4E0001A5316 /* Watch Journal Extension */,
 				EAE4710426CBA57F009FB0EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -225,6 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */,
+				EA4910AB26DFB4E0001A5316 /* Watch Journal.app */,
+				EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,6 +350,7 @@
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
 				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
+				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAE4710C26CBA582009FB0EC /* Preview Content */,
 			);
@@ -461,6 +566,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EA4910AA26DFB4E0001A5316 /* Watch Journal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA4910CF26DFB4E1001A5316 /* Build configuration list for PBXNativeTarget "Watch Journal" */;
+			buildPhases = (
+				EA4910A926DFB4E0001A5316 /* Resources */,
+				EA4910CB26DFB4E1001A5316 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA4910B726DFB4E0001A5316 /* PBXTargetDependency */,
+			);
+			name = "Watch Journal";
+			productName = "Watch Journal";
+			productReference = EA4910AB26DFB4E0001A5316 /* Watch Journal.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		EA4910B326DFB4E0001A5316 /* Watch Journal Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA4910CE26DFB4E1001A5316 /* Build configuration list for PBXNativeTarget "Watch Journal Extension" */;
+			buildPhases = (
+				EA4910B026DFB4E0001A5316 /* Sources */,
+				EA4910B126DFB4E0001A5316 /* Frameworks */,
+				EA4910B226DFB4E0001A5316 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Watch Journal Extension";
+			productName = "Watch Journal Extension";
+			productReference = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAE4711726CBA582009FB0EC /* Build configuration list for PBXNativeTarget "PsychonautWiki Journal" */;
@@ -469,10 +608,12 @@
 				EAE470FF26CBA57F009FB0EC /* Sources */,
 				EAE4710026CBA57F009FB0EC /* Frameworks */,
 				EAE4722B26CBAE31009FB0EC /* Resources */,
+				EA4910C826DFB4E1001A5316 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EA4910C626DFB4E1001A5316 /* PBXTargetDependency */,
 			);
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
@@ -491,6 +632,12 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					EA4910AA26DFB4E0001A5316 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					EA4910B326DFB4E0001A5316 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					EAE4710226CBA57F009FB0EC = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -513,11 +660,30 @@
 			projectRoot = "";
 			targets = (
 				EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */,
+				EA4910AA26DFB4E0001A5316 /* Watch Journal */,
+				EA4910B326DFB4E0001A5316 /* Watch Journal Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EA4910A926DFB4E0001A5316 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4910AE26DFB4E0001A5316 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA4910B226DFB4E0001A5316 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */,
+				EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAE4722B26CBAE31009FB0EC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,6 +718,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EA4910B026DFB4E0001A5316 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */,
+				EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */,
+				EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */,
+				EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAE470FF26CBA57F009FB0EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -590,6 +767,7 @@
 				EAE4722526CBA664009FB0EC /* HomeView.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
+				EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EAE4720F26CBA664009FB0EC /* HelperMethods.swift in Sources */,
 				EAE471F426CBA664009FB0EC /* Substance+CoreDataClass.swift in Sources */,
@@ -651,7 +829,116 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EA4910B726DFB4E0001A5316 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA4910B326DFB4E0001A5316 /* Watch Journal Extension */;
+			targetProxy = EA4910B626DFB4E0001A5316 /* PBXContainerItemProxy */;
+		};
+		EA4910C626DFB4E1001A5316 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA4910AA26DFB4E0001A5316 /* Watch Journal */;
+			targetProxy = EA4910C526DFB4E1001A5316 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		EA4910C926DFB4E1001A5316 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				IBSC_MODULE = Watch_Journal_Extension;
+				INFOPLIST_FILE = "Watch Journal/Info.plist";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		EA4910CA26DFB4E1001A5316 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				IBSC_MODULE = Watch_Journal_Extension;
+				INFOPLIST_FILE = "Watch Journal/Info.plist";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		EA4910CC26DFB4E1001A5316 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "\"Watch Journal Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Watch Journal Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		EA4910CD26DFB4E1001A5316 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "\"Watch Journal Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Watch Journal Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
 		EAE4711526CBA582009FB0EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -819,6 +1106,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EA4910CE26DFB4E1001A5316 /* Build configuration list for PBXNativeTarget "Watch Journal Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA4910CC26DFB4E1001A5316 /* Debug */,
+				EA4910CD26DFB4E1001A5316 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA4910CF26DFB4E1001A5316 /* Build configuration list for PBXNativeTarget "Watch Journal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA4910C926DFB4E1001A5316 /* Debug */,
+				EA4910CA26DFB4E1001A5316 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EAE470FE26CBA57F009FB0EC /* Build configuration list for PBXProject "PsychonautWiki Journal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
