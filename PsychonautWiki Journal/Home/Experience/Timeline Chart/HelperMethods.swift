@@ -2,38 +2,11 @@ import SwiftUI
 
 struct HelperMethods {
 
-    static func getEndOfGraphTime(ingestions: [Ingestion], shouldAddTimeAtEnd: Bool = true) -> Date {
-        assert(!ingestions.isEmpty)
-
-        // Initialize endOfGraphTime sensibly
-        var endOfGraphTime = ingestions.first!.timeUnwrapped
-        for ingestion in ingestions {
-            let substance = ingestion.substanceCopy!
-            let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
-
-            // Choose the latest possible offset to make sure that the graph fits all ingestions
-            let offsetEnd = duration.onset!.maxSec
-                + duration.comeup!.maxSec
-                + duration.peak!.maxSec
-                + duration.offset!.maxSec
-
-            let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
-            if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
-                endOfGraphTime = maybeNewEndTime
-            }
-        }
-        if shouldAddTimeAtEnd {
-            endOfGraphTime.addTimeInterval(secondsToAddAtEndOfGraph)
-        }
-
-        return endOfGraphTime
-    }
-
     static func getLineModels(sortedIngestions: [Ingestion]) -> [IngestionLineModel] {
         assert(!sortedIngestions.isEmpty)
 
         let timeOfFirstIngestion = sortedIngestions.first!.timeUnwrapped
-        let graphEndTime = getEndOfGraphTime(ingestions: sortedIngestions)
+        let graphEndTime = Experience.getEndTime(for: sortedIngestions)
         let totalGraphDuration = timeOfFirstIngestion.distance(to: graphEndTime)
 
         var linesData = [IngestionLineModel]()
@@ -99,8 +72,6 @@ struct HelperMethods {
         assert(min2 <= max2)
         return min1 <= max2 && min2 <= max1
     }
-
-    private static let secondsToAddAtEndOfGraph: TimeInterval = 60 * 60
 
     // This implementation is not ideal because it looks at each ingestion multiple times
     // A solution where we only iterate over ingestions once is also possible

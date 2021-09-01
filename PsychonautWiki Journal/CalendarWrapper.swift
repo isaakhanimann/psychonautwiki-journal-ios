@@ -122,9 +122,9 @@ class CalendarWrapper: ObservableObject {
         }
 
         let start = experience.sortedIngestionsUnwrapped.first!.timeUnwrapped
-        let end = HelperMethods.getEndOfGraphTime(
-            ingestions: experience.sortedIngestionsUnwrapped,
-            shouldAddTimeAtEnd: false
+        let end = Experience.getEndTime(
+            for: experience.sortedIngestionsUnwrapped,
+            secondsToAddAtEnd: 0
         )
         return (start, end)
     }

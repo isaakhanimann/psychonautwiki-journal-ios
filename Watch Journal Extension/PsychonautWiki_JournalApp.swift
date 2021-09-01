@@ -4,14 +4,15 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
+    let persistenceController = PersistenceController.shared
     @StateObject var connectivity = Connectivity()
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ContentView()
-                    .environmentObject(connectivity)
-            }
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(connectivity)
+                .accentColor(Color.blue)
         }
     }
 }

@@ -63,11 +63,36 @@ extension Experience {
     var isActive: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
 
-        let endOfGraph = HelperMethods.getEndOfGraphTime(
-            ingestions: sortedIngestionsUnwrapped,
-            shouldAddTimeAtEnd: true
-        )
+        let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped)
 
         return endOfGraph >= Date()
+    }
+
+    static func getEndTime(
+        for ingestions: [Ingestion],
+        secondsToAddAtEnd: TimeInterval = 60*60
+    ) -> Date {
+        assert(!ingestions.isEmpty)
+
+        // Initialize endOfGraphTime sensibly
+        var endOfGraphTime = ingestions.first!.timeUnwrapped
+        for ingestion in ingestions {
+            let substance = ingestion.substanceCopy!
+            let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
+
+            // Choose the latest possible offset to make sure that the graph fits all ingestions
+            let offsetEnd = duration.onset!.maxSec
+                + duration.comeup!.maxSec
+                + duration.peak!.maxSec
+                + duration.offset!.maxSec
+
+            let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
+            if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
+                endOfGraphTime = maybeNewEndTime
+            }
+        }
+        endOfGraphTime.addTimeInterval(secondsToAddAtEnd)
+
+        return endOfGraphTime
     }
 }
