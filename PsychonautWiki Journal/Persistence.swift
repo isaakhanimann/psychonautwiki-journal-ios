@@ -8,7 +8,7 @@ struct PersistenceController {
         PersistenceController(inMemory: true)
     }()
 
-    let container: NSPersistentCloudKitContainer
+    let container: NSPersistentContainer
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
 
     static let model: NSManagedObjectModel = {
@@ -24,7 +24,7 @@ struct PersistenceController {
     }()
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "Main", managedObjectModel: Self.model)
+        container = NSPersistentContainer(name: "Main", managedObjectModel: Self.model)
 
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
