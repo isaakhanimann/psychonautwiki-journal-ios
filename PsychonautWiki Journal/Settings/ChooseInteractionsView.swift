@@ -11,7 +11,6 @@ struct ChooseInteractionsView: View {
                 InteractionRowView(interaction: interaction)
             }
         }
-        .listStyle(InsetGroupedListStyle())
         .onDisappear {
             if moc.hasChanges {
                 try? moc.save()

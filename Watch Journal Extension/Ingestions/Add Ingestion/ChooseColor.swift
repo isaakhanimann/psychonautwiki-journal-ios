@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChooseTimeAndColor: View {
+struct ChooseColor: View {
 
     let substance: Substance
     let administrationRoute: Roa.AdministrationRoute
@@ -10,7 +10,6 @@ struct ChooseTimeAndColor: View {
 
     @Environment(\.managedObjectContext) var moc
 
-    @State private var selectedTime = Date()
     @State private var selectedColor: Ingestion.IngestionColor
 
     init(
@@ -39,10 +38,6 @@ struct ChooseTimeAndColor: View {
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Time")) {
-                    Text(selectedTime.asTimeString)
-                }
-
                 Section(header: Text("Color")) {
                     LazyVGrid(columns: colorColumns) {
                         ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
@@ -66,7 +61,7 @@ struct ChooseTimeAndColor: View {
     private func addIngestion() {
         let ingestion = Ingestion(context: moc)
         ingestion.experience = experience
-        ingestion.time = selectedTime
+        ingestion.time = Date()
         ingestion.dose = dose
         ingestion.administrationRoute = administrationRoute.rawValue
         ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
@@ -112,7 +107,7 @@ struct ChooseTimeAndColor: View {
 struct ChooseTimeAndColor_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        return ChooseTimeAndColor(
+        return ChooseColor(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,

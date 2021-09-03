@@ -20,7 +20,7 @@ struct ChooseDoseView: View {
             }
             if let doseDouble = selectedDose, doseDouble != 0 {
                 NavigationLink(
-                    destination: ChooseTimeAndColor(
+                    destination: ChooseColor(
                         substance: substance,
                         administrationRoute: administrationRoute,
                         dose: doseDouble,

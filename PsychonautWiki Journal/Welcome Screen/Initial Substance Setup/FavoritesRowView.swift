@@ -21,6 +21,7 @@ struct FavoritesRowView: View {
                         .foregroundColor(.yellow)
                 }
             }
+            .fixedSize()
         }
     }
 }

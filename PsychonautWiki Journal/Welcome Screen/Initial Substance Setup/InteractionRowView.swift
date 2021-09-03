@@ -21,6 +21,7 @@ struct InteractionRowView: View {
                         .foregroundColor(.green)
                 }
             }
+            .fixedSize()
         }
     }
 }
