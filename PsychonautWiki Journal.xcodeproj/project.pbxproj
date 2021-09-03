@@ -55,6 +55,8 @@
 		EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAA2EC6226DFCE4300B4FACF /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */; };
+		EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */; };
+		EAA2EC6A26E2064D00B4FACF /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAA2EC6926E2064D00B4FACF /* SwiftyJSON */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -208,6 +210,7 @@
 		EAA2EC3826DFC88700B4FACF /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
+		EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWelcome.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAA2EC6A26E2064D00B4FACF /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,15 +340,16 @@
 		EA4910B826DFB4E0001A5316 /* Watch Journal Extension */ = {
 			isa = PBXGroup;
 			children = (
-				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
 				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
+				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
+				EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */,
+				EAA2EC6326E2020A00B4FACF /* Home */,
+				EAA2EC6426E2021B00B4FACF /* Settings */,
+				EAA2EC6526E2022A00B4FACF /* Ingestions */,
 				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
 				EA4910BF26DFB4E1001A5316 /* Assets.xcassets */,
 				EA4910C426DFB4E1001A5316 /* Info.plist */,
 				EA4910C126DFB4E1001A5316 /* Preview Content */,
-				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
-				EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */,
-				EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */,
 			);
 			path = "Watch Journal Extension";
 			sourceTree = "<group>";
@@ -357,6 +362,37 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EAA2EC6326E2020A00B4FACF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EAA2EC6426E2021B00B4FACF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EAA2EC6526E2022A00B4FACF /* Ingestions */ = {
+			isa = PBXGroup;
+			children = (
+				EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */,
+			);
+			path = Ingestions;
+			sourceTree = "<group>";
+		};
+		EAA2EC6826E2064D00B4FACF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +400,7 @@
 				EA4910AC26DFB4E0001A5316 /* Watch Journal */,
 				EA4910B826DFB4E0001A5316 /* Watch Journal Extension */,
 				EAE4710426CBA57F009FB0EC /* Products */,
+				EAA2EC6826E2064D00B4FACF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -640,6 +677,9 @@
 			dependencies = (
 			);
 			name = "Watch Journal Extension";
+			packageProductDependencies = (
+				EAA2EC6926E2064D00B4FACF /* SwiftyJSON */,
+			);
 			productName = "Watch Journal Extension";
 			productReference = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -782,6 +822,7 @@
 				EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */,
 				EAA2EC4E26DFCBE200B4FACF /* SubstanceCopy+CoreDataClass.swift in Sources */,
+				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
 				EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */,
 				EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */,
 				EAA2EC3E26DFCB9D00B4FACF /* Persistence.swift in Sources */,
@@ -1238,6 +1279,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EAA2EC6926E2064D00B4FACF /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		EAE4723226CC2525009FB0EC /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

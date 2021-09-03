@@ -32,35 +32,38 @@ struct ContentView: View {
             set: { _ in }
         )
         HomeView(toggleSettingsVisibility: toggleSettingsVisibility)
-        .fullScreenCover(
-            item: sheetBinding,
-            content: { item in
-                switch item {
-                case .setup:
-                    WelcomeScreen()
-                        .environment(\.managedObjectContext, self.moc)
-                        .environmentObject(calendarWrapper)
-                        .accentColor(Color.blue)
-                case .settings:
-                    SettingsView(toggleSettingsVisibility: toggleSettingsVisibility)
-                        .environment(\.managedObjectContext, self.moc)
-                        .environmentObject(calendarWrapper)
-                        .accentColor(Color.blue)
+            .fullScreenCover(
+                item: sheetBinding,
+                content: { item in
+                    switch item {
+                    case .setup:
+                        WelcomeScreen()
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(calendarWrapper)
+                            .accentColor(Color.blue)
+                    case .settings:
+                        SettingsView(toggleSettingsVisibility: toggleSettingsVisibility)
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(calendarWrapper)
+                            .accentColor(Color.blue)
+                    }
                 }
-            })
+            )
             .onChange(of: scenePhase, perform: { newPhase in
                 if newPhase == .active {
                     calendarWrapper.checkIfSomethingChanged()
                     maybeFetchNewSubstances()
                 }
-            })
+            }
+            )
             .alert(isPresented: $isShowingErrorAlert, content: {
                 Alert(
                     title: Text("Failed to Fetch"),
                     message: Text(errorMessage),
                     dismissButton: .default(Text("Ok"))
                 )
-            })
+            }
+            )
     }
 
     private func toggleSettingsVisibility() {

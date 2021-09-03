@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+
     @EnvironmentObject var connectivity: Connectivity
     @Environment(\.managedObjectContext) var moc
 
@@ -29,6 +31,15 @@ struct ContentView: View {
             IngestionsTab()
                 .tag(3)
         }
+        .fullScreenCover(
+            isPresented: Binding<Bool>(
+                get: {!hasBeenSetupBefore},
+                set: {newValue in hasBeenSetupBefore = !newValue}
+            ),
+            content: {
+                WatchWelcome()
+            }
+        )
     }
 
     private func createExperience() {
