@@ -107,4 +107,59 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             }
         }
     }
+
+    func sendExperience(at date: Date) {
+        let data = ["createExperienceDate": date]
+        transferUserInfo(data)
+    }
+
+    func sendNewIngestion(
+        ingestionTime: Date,
+        substanceName: String,
+        route: String,
+        dose: Double,
+        colorName: String
+    ) {
+        let data = [
+            ingestionTimeKey: ingestionTime,
+            ingestionSubstanceKey: substanceName,
+            ingestionRouteKey: route,
+            ingestionDoseKey: dose,
+            ingestionColorKey: colorName
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    private let ingestionTimeKey = "createIngestionDate"
+    private let experienceCreationKey = "experienceCreationDate"
+    private let ingestionSubstanceKey = "substanceName"
+    private let ingestionRouteKey = "route"
+    private let ingestionDoseKey = "dose"
+    private let ingestionColorKey = "colorName"
+
+    // swiftlint:disable cyclomatic_complexity
+    func receiveIngestion(userInfo: [String: Any]) {
+        guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
+        guard let experienceCreationDate = userInfo[experienceCreationKey] as? Date else {return}
+        guard let substanceName = userInfo[ingestionSubstanceKey] as? String else {return}
+        guard let route = userInfo[ingestionRouteKey] as? String else {return}
+        guard let dose = userInfo[ingestionDoseKey] as? Double else {return}
+        guard let colorName = userInfo[ingestionColorKey] as? String else {return}
+
+        guard let foundExperience = PersistenceController.shared.findExperience(with: experienceCreationDate) else {return}
+        guard let foundSubstance = PersistenceController.shared.findSubstance(with: substanceName) else {return}
+        guard let routeUnwrapped = Roa.AdministrationRoute(rawValue: route) else {return}
+        guard foundSubstance.administrationRoutesUnwrapped.contains(routeUnwrapped) else {return}
+        guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
+
+        PersistenceController.shared.createIngestion(
+            addTo: foundExperience,
+            substance: foundSubstance,
+            ingestionTime: createIngestionDate,
+            ingestionRoute: routeUnwrapped,
+            color: colorUnwrapped,
+            dose: dose
+        )
+    }
+
 }
