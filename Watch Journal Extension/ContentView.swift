@@ -28,8 +28,14 @@ struct ContentView: View {
                 }
             }
             .tag(2)
-            IngestionsTab()
-                .tag(3)
+            Group {
+                if let activeExperienceUnwrapped = activeExperience {
+                    IngestionsTab(experience: activeExperienceUnwrapped)
+                } else {
+                    Text("No experience started yet")
+                }
+            }
+            .tag(3)
         }
         .fullScreenCover(
             isPresented: Binding<Bool>(
