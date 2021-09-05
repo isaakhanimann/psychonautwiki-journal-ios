@@ -21,7 +21,6 @@ struct DosePicker: View {
     }
 
     var body: some View {
-        let units = doseInfo?.units ?? ""
         VStack(alignment: .leading) {
             HStack {
                 TextField("Enter Dose", text: $doseText)
@@ -36,50 +35,9 @@ struct DosePicker: View {
                     doseMaybe = nil
                 }
             }
-
-            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
-               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
-               min < max {
-                Slider(
-                    value: $doseDouble.animation(),
-                    in: min...max,
-                    step: 1,
-                    minimumValueLabel: Text("\(min.cleanString) \(units)"),
-                    maximumValueLabel: Text("\(max.cleanString) \(units)")) {
-                    Text("Dose")
-                }
-                .onChange(of: doseDouble) { _ in
-                    let roundedDouble = doseDouble.rounded(toPlaces: 5)
-                    doseText = roundedDouble.cleanString
-                    doseMaybe = doseDouble
-                }
-
-                doseRangeView
-            } else {
-                VStack(alignment: .leading, spacing: 7) {
-                    if let thresh = doseInfo?.thresholdUnwrapped {
-                        Text("threshold (\(thresh.cleanString) \(units))")
-                    }
-                    if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                              let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
-                        Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-                    }
-                    if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                              let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
-                        Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-                    }
-                    if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                              let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
-                        Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-                    }
-                    if let heavy = doseInfo?.heavyUnwrapped {
-                        Text("heavy (\(heavy.cleanString) \(units)+)")
-                    }
-                }
-            }
+            doseRangeView
 
         }
-        .padding(.vertical)
     }
 
     private var doseRangeView: some View {
@@ -114,12 +72,10 @@ struct DosePicker_Previews: PreviewProvider {
         let helper = PersistenceController.preview.createPreviewHelper()
         let substance = helper.substancesFile.allSubstancesUnwrapped[2]
 
-        Form {
-            DosePicker(
-                doseInfo: substance.getDose(
-                    for: substance.administrationRoutesUnwrapped.first!),
-                doseMaybe: .constant(nil)
-            )
-        }
+        DosePicker(
+            doseInfo: substance.getDose(
+                for: substance.administrationRoutesUnwrapped.first!),
+            doseMaybe: .constant(nil)
+        )
     }
 }

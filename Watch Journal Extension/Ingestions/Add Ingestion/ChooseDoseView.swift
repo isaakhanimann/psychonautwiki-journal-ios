@@ -11,13 +11,11 @@ struct ChooseDoseView: View {
     @State private var isKeyboardShowing = false
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Form {
-                DosePicker(
-                    doseInfo: substance.getDose(for: administrationRoute),
-                    doseMaybe: $selectedDose
-                )
-            }
+        VStack {
+            DosePicker(
+                doseInfo: substance.getDose(for: administrationRoute),
+                doseMaybe: $selectedDose
+            )
             if let doseDouble = selectedDose, doseDouble != 0 {
                 NavigationLink(
                     destination: ChooseColor(
@@ -31,7 +29,6 @@ struct ChooseDoseView: View {
                         Text("Next")
                     }
                 )
-                .padding()
             }
         }
         .navigationBarTitle("Choose Dose")
