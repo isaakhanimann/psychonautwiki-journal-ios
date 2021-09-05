@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftyJSON
 
 struct WelcomeScreen: View {
 
@@ -80,16 +79,13 @@ struct WelcomeScreen: View {
         }
 
         do {
-            let json = try JSON(data: data)
-            let dataForFile = try json["data"].rawData()
-
             let dateString = "2021/08/25 00:30"
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy/MM/dd HH:mm"
             let creationDate = formatter.date(from: dateString)!
 
             try SubstanceDecoder.decodeAndSaveFile(
-                from: dataForFile,
+                from: data,
                 creationDate: creationDate,
                 earlierFileToDelete: nil
             )

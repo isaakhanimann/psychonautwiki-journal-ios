@@ -69,22 +69,22 @@ struct SubstanceRow: View {
                         getRow(isDangerous: isDangerous, isUnsafe: isUnsafe)
                     }
                 )
+                .alert(isPresented: $isShowingAlert) {
+                    Alert(
+                        title: Text("Caution")
+                            .foregroundColor(Color.red)
+                            .font(.title),
+                        message: Text(alertMessage),
+                        primaryButton: .destructive(
+                            Text("Choose Anyway"),
+                            action: {
+                                isShowingNext = true
+                            }
+                        ),
+                        secondaryButton: .cancel()
+                    )
+                }
             }
-        }
-        .alert(isPresented: $isShowingAlert) {
-            Alert(
-                title: Text("Caution")
-                    .foregroundColor(Color.red)
-                    .font(.title),
-                message: Text(alertMessage),
-                primaryButton: .destructive(
-                    Text("Choose Anyway"),
-                    action: {
-                        isShowingNext = true
-                    }
-                ),
-                secondaryButton: .cancel()
-            )
         }
     }
 

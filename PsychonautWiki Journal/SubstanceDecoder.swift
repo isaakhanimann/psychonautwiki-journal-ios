@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import SwiftyJSON
 
 enum SubstanceDecoder {
 
@@ -88,6 +89,9 @@ enum SubstanceDecoder {
         decoder.dateDecodingStrategy = .deferredToDate
         decoder.keyDecodingStrategy = .useDefaultKeys
 
-        return try decoder.decode(SubstancesFile.self, from: data)
+        let json = try JSON(data: data)
+        let dataForFile = try json["data"].rawData()
+
+        return try decoder.decode(SubstancesFile.self, from: dataForFile)
     }
 }

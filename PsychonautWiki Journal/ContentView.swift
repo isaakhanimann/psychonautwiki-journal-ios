@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftyJSON
 
 struct ContentView: View {
 
@@ -104,10 +103,8 @@ struct ContentView: View {
 
     private func tryToDecodeData(data: Data) {
         do {
-            let json = try JSON(data: data)
-            let dataForFile = try json["data"].rawData()
             try SubstanceDecoder.decodeAndSaveFile(
-                from: dataForFile,
+                from: data,
                 creationDate: Date(),
                 earlierFileToDelete: storedFile.first
             )
