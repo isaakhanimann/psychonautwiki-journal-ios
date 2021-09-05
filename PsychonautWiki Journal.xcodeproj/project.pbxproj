@@ -14,7 +14,7 @@
 		EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */; };
 		EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910BF26DFB4E1001A5316 /* Assets.xcassets */; };
 		EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */; };
-		EA4910C726DFB4E1001A5316 /* Watch Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Watch Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA6ECC9D26E264D300F32D78 /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
 		EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EA6ECCA326E265C700F32D78 /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
@@ -191,7 +191,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				EA4910C726DFB4E1001A5316 /* Watch Journal.app in Embed Watch Content */,
+				EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,7 +210,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EA4910AB26DFB4E0001A5316 /* Watch Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Watch Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4910AB26DFB4E0001A5316 /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4910AD26DFB4E0001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910AF26DFB4E0001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Journal Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,7 +239,7 @@
 		EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModelDown.swift; sourceTree = "<group>"; };
 		EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModel.swift; sourceTree = "<group>"; };
 		EAC306AE26CE532A00C98E3E /* ColorPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPie.swift; sourceTree = "<group>"; };
-		EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PsychonautWiki Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
@@ -451,8 +451,8 @@
 		EAE4710426CBA57F009FB0EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */,
-				EA4910AB26DFB4E0001A5316 /* Watch Journal.app */,
+				EAE4710326CBA57F009FB0EC /* Journal.app */,
+				EA4910AB26DFB4E0001A5316 /* Journal.app */,
 				EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */,
 			);
 			name = Products;
@@ -705,7 +705,7 @@
 			);
 			name = "Watch Journal";
 			productName = "Watch Journal";
-			productReference = EA4910AB26DFB4E0001A5316 /* Watch Journal.app */;
+			productReference = EA4910AB26DFB4E0001A5316 /* Journal.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		EA4910B326DFB4E0001A5316 /* Watch Journal Extension */ = {
@@ -748,7 +748,7 @@
 				EAE4723226CC2525009FB0EC /* SwiftyJSON */,
 			);
 			productName = "PsychonautWiki Journal";
-			productReference = EAE4710326CBA57F009FB0EC /* PsychonautWiki Journal.app */;
+			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1037,7 +1037,7 @@
 				INFOPLIST_FILE = "Watch Journal/Info.plist";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Journal;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1059,7 +1059,7 @@
 				INFOPLIST_FILE = "Watch Journal/Info.plist";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Journal;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1254,7 +1254,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Journal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1278,7 +1278,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Journal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
