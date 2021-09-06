@@ -26,7 +26,6 @@ struct DosePicker: View {
                 TextField("Enter Dose", text: $doseText)
                 Text(doseInfo?.units ?? "")
             }
-            .font(.title)
             .onChange(of: doseText) { _ in
                 if let doseUnwrapped = Double(doseText) {
                     doseDouble = doseUnwrapped
@@ -36,6 +35,7 @@ struct DosePicker: View {
                 }
             }
             doseRangeView
+                .foregroundColor(.secondary)
 
         }
     }
