@@ -6,68 +6,65 @@ struct SubstanceRow: View {
     let dismiss: () -> Void
     let experience: Experience
 
+    let dangerousIngestions: [Ingestion]
+    let dangerousInteractions: [GeneralInteraction]
+    let unsafeIngestions: [Ingestion]
+    let unsafeInteractions: [GeneralInteraction]
+
+    var isDangerous: Bool {
+        !dangerousIngestions.isEmpty
+            || !dangerousInteractions.isEmpty
+    }
+
+    var isUnsafe: Bool {
+        !unsafeIngestions.isEmpty
+            || !unsafeInteractions.isEmpty
+    }
+
     @State private var isShowingAlert = false
     @State private var alertMessage = ""
     @State private var isShowingNext = false
 
-    var body: some View {
-        let dangerousIngestions = InteractionChecker.getDangerousIngestions(
-            of: substance,
-            with: experience.sortedIngestionsUnwrapped
-        )
-        let dangerousInteractions = InteractionChecker.getDangerousInteraction(of: substance)
-        let unsafeIngestions = InteractionChecker.getUnsafeIngestions(
-            of: substance,
-            with: experience.sortedIngestionsUnwrapped
-        )
-        let unsafeInteractions = InteractionChecker.getUnsafeInteraction(of: substance)
-
-        let isDangerous = !dangerousIngestions.isEmpty
-            || !dangerousInteractions.isEmpty
-        let isUnsafe = !unsafeIngestions.isEmpty
-            || !unsafeInteractions.isEmpty
-
-        return ZStack {
-            if substance.administrationRoutesUnwrapped.count == 1 {
-                NavigationLink(
-                    destination: ChooseDoseView(
-                        substance: substance,
-                        administrationRoute: substance.administrationRoutesUnwrapped.first!,
-                        dismiss: dismiss,
-                        experience: experience
-                    ),
-                    isActive: $isShowingNext,
-                    label: {
-                        getRow(isDangerous: isDangerous, isUnsafe: isUnsafe)
-                    }
-                )
-            } else {
-                NavigationLink(
-                    destination: ChooseRouteView(
-                        substance: substance,
-                        dismiss: dismiss,
-                        experience: experience
-                    ),
-                    isActive: $isShowingNext,
-                    label: {
-                        getRow(isDangerous: isDangerous, isUnsafe: isUnsafe)
-                    }
-                )
+    private var isShowingNextBinding: Binding<Bool> {
+        Binding(
+            get: {
+                !isShowingAlert && isShowingNext
+            }, set: {
+                isShowingNext = $0
             }
+        )
+    }
+
+    init(
+        substance: Substance,
+        dismiss: @escaping () -> Void,
+        experience: Experience
+    ) {
+        self.substance = substance
+        self.dismiss = dismiss
+        self.experience = experience
+
+        self.dangerousIngestions = InteractionChecker.getDangerousIngestions(
+            of: substance,
+            with: experience.sortedIngestionsUnwrapped
+        )
+        self.dangerousInteractions = InteractionChecker.getDangerousInteraction(of: substance)
+        self.unsafeIngestions = InteractionChecker.getUnsafeIngestions(
+            of: substance,
+            with: experience.sortedIngestionsUnwrapped
+        )
+        self.unsafeInteractions = InteractionChecker.getUnsafeInteraction(of: substance)
+    }
+
+    var body: some View {
+        return ZStack {
             if isDangerous || isUnsafe {
+
+                navigationLink.hidden()
+
                 Button(
-                    action: {
-                        let message = createAlertMessage(
-                            substance: substance,
-                            dangerousInteractions: dangerousInteractions,
-                            dangerousIngestions: dangerousIngestions,
-                            unsafeInteractions: unsafeInteractions,
-                            unsafeIngestions: unsafeIngestions
-                        )
-                        showAlert(message: message)
-                    }, label: {
-                        getRow(isDangerous: isDangerous, isUnsafe: isUnsafe)
-                    }
+                    action: showAlert,
+                    label: {row}
                 )
                 .alert(isPresented: $isShowingAlert) {
                     Alert(
@@ -84,11 +81,40 @@ struct SubstanceRow: View {
                         secondaryButton: .cancel()
                     )
                 }
+            } else {
+                navigationLink
             }
         }
     }
 
-    private func getRow(isDangerous: Bool, isUnsafe: Bool) -> some View {
+    private var navigationLink: some View {
+        Group {
+            if substance.administrationRoutesUnwrapped.count == 1 {
+                NavigationLink(
+                    destination: ChooseDoseView(
+                        substance: substance,
+                        administrationRoute: substance.administrationRoutesUnwrapped.first!,
+                        dismiss: dismiss,
+                        experience: experience
+                    ),
+                    isActive: isShowingNextBinding,
+                    label: {row}
+                )
+            } else {
+                NavigationLink(
+                    destination: ChooseRouteView(
+                        substance: substance,
+                        dismiss: dismiss,
+                        experience: experience
+                    ),
+                    isActive: isShowingNextBinding,
+                    label: {row}
+                )
+            }
+        }
+    }
+
+    private var row: some View {
         HStack {
             Text(substance.nameUnwrapped)
             Spacer()
@@ -103,18 +129,12 @@ struct SubstanceRow: View {
         }
     }
 
-    private func showAlert(message: String) {
-        alertMessage = message
+    private func showAlert() {
+        alertMessage = createAlertMessage()
         isShowingAlert.toggle()
     }
 
-    private func createAlertMessage(
-        substance: Substance,
-        dangerousInteractions: [GeneralInteraction],
-        dangerousIngestions: [Ingestion],
-        unsafeInteractions: [GeneralInteraction],
-        unsafeIngestions: [Ingestion]
-    ) -> String {
+    private func createAlertMessage() -> String {
 
         let isDangerous = !dangerousIngestions.isEmpty
             || !dangerousInteractions.isEmpty
