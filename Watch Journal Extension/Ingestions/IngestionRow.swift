@@ -9,20 +9,21 @@ struct IngestionRow: View {
             if let substanceUnwrapped = ingestion.substanceCopy {
                 HStack {
                     Image(systemName: "circle.fill")
-                        .font(.title2)
+                        .font(.title3)
                         .foregroundColor(ingestion.swiftUIColorUnwrapped)
                     VStack(alignment: .leading) {
                         Text(substanceUnwrapped.nameUnwrapped)
                             .font(.title3)
                             .foregroundColor(.primary)
-                        Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
-                            .foregroundColor(.secondary)
+                        HStack(alignment: .bottom) {
+                            Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Text(ingestion.timeUnwrappedAsString)
+                                .font(.footnote)
+                                .foregroundColor(.primary)
+                        }
                     }
-
-                    Spacer()
-
-                    Text(ingestion.timeUnwrappedAsString)
-                        .foregroundColor(.primary)
                 }
             }
         }
@@ -32,6 +33,8 @@ struct IngestionRow: View {
 struct IngestionRow_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        IngestionRow(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
+        List {
+            IngestionRow(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
+        }
     }
 }
