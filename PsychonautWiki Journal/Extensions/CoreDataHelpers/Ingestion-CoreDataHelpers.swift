@@ -47,7 +47,9 @@ extension Ingestion {
     var horizontalWeight: Double {
         let defaultWeight = 0.5
 
-        guard let doseTypesUnwrapped = substanceCopy!.getDose(for: administrationRouteUnwrapped) else { return defaultWeight }
+        guard let doseTypesUnwrapped = substanceCopy!.getDose(for: administrationRouteUnwrapped) else {
+            return defaultWeight
+        }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
 
         if doseUnwrapped <= minMax.min {

@@ -5,7 +5,7 @@ struct HomeTab: View {
     @ObservedObject var activeExperience: Experience
 
     var body: some View {
-        Circle()
+        AllLayersView(ingestions: activeExperience.sortedIngestionsUnwrapped)
     }
 }
 
