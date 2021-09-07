@@ -89,9 +89,12 @@ struct ExperienceView: View {
         .onChange(of: writtenText) { _ in update() }
         .onDisappear(perform: save)
         .sheet(isPresented: $isShowingAddIngestionSheet) {
-            ChooseSubstanceView(substancesFile: storedFile.first!, dismiss: {isShowingAddIngestionSheet.toggle()})
+            ChooseSubstanceView(
+                substancesFile: storedFile.first!,
+                dismiss: {isShowingAddIngestionSheet.toggle()},
+                experience: experience
+            )
                 .environment(\.managedObjectContext, self.moc)
-                .environmentObject(experience)
                 .environmentObject(calendarWrapper)
                 .accentColor(Color.blue)
         }

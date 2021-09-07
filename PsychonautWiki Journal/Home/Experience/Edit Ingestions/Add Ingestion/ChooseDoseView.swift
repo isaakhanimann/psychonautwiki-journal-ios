@@ -5,6 +5,7 @@ struct ChooseDoseView: View {
     let substance: Substance
     let administrationRoute: Roa.AdministrationRoute
     let dismiss: () -> Void
+    let experience: Experience
 
     @State private var selectedDose: Double?
     @State private var isKeyboardShowing = false
@@ -23,7 +24,8 @@ struct ChooseDoseView: View {
                         substance: substance,
                         administrationRoute: administrationRoute,
                         dose: doseDouble,
-                        dismiss: dismiss
+                        dismiss: dismiss,
+                        experience: experience
                     ),
                     label: {
                         Text("Next")
@@ -62,7 +64,8 @@ struct ChooseDoseView_Previews: PreviewProvider {
         ChooseDoseView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
-            dismiss: {}
+            dismiss: {},
+            experience: helper.experiences.first!
         )
     }
 }

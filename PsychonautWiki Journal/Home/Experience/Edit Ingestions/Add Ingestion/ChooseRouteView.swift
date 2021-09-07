@@ -4,6 +4,7 @@ struct ChooseRouteView: View {
 
     let substance: Substance
     let dismiss: () -> Void
+    let experience: Experience
 
     var body: some View {
         List {
@@ -13,7 +14,8 @@ struct ChooseRouteView: View {
                     destination: ChooseDoseView(
                         substance: substance,
                         administrationRoute: route,
-                        dismiss: dismiss
+                        dismiss: dismiss,
+                        experience: experience
                     )
                 )
             }
@@ -30,9 +32,11 @@ struct ChooseRouteView: View {
 
 struct ChooseRouteView_Previews: PreviewProvider {
     static var previews: some View {
+        let helper = PersistenceController.preview.createPreviewHelper()
         ChooseRouteView(
-            substance: PersistenceController.preview.createPreviewHelper().substance,
-            dismiss: {}
+            substance: helper.substance,
+            dismiss: {},
+            experience: helper.experiences.first!
         )
     }
 }

@@ -6,8 +6,8 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: Roa.AdministrationRoute
     let dose: Double
     let dismiss: () -> Void
+    let experience: Experience
 
-    @EnvironmentObject var experience: Experience
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
 
@@ -18,12 +18,14 @@ struct ChooseTimeAndColor: View {
         substance: Substance,
         administrationRoute: Roa.AdministrationRoute,
         dose: Double,
-        dismiss: @escaping () -> Void
+        dismiss: @escaping () -> Void,
+        experience: Experience
     ) {
         self.substance = substance
         self.administrationRoute = administrationRoute
         self.dose = dose
         self.dismiss = dismiss
+        self.experience = experience
 
         self._selectedColor = State(wrappedValue: Ingestion.IngestionColor.allCases.randomElement()!)
         let defaults = UserDefaults.standard
@@ -132,7 +134,8 @@ struct ChooseTimeAndColor_Previews: PreviewProvider {
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,
-            dismiss: {}
+            dismiss: {},
+            experience: helper.experiences.first!
         )
     }
 }
