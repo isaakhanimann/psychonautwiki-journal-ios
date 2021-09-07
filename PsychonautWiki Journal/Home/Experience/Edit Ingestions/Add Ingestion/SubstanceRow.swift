@@ -29,8 +29,8 @@ struct SubstanceRow: View {
         Binding(
             get: {
                 !isShowingAlert && isShowingNext
-            }, set: {
-                isShowingNext = $0
+            }, set: { _ in
+                isShowingNext = false
             }
         )
     }
@@ -60,7 +60,7 @@ struct SubstanceRow: View {
         return ZStack {
             if isDangerous || isUnsafe {
 
-                navigationLink.hidden()
+                navigationLinkIndirect.hidden()
 
                 Button(
                     action: showAlert,
@@ -82,12 +82,12 @@ struct SubstanceRow: View {
                     )
                 }
             } else {
-                navigationLink
+                navigationLinkDirect
             }
         }
     }
 
-    @ViewBuilder var navigationLink: some View {
+    @ViewBuilder var navigationLinkIndirect: some View {
         if substance.administrationRoutesUnwrapped.count == 1 {
             NavigationLink(
                 destination: ChooseDoseView(
@@ -107,6 +107,31 @@ struct SubstanceRow: View {
                     experience: experience
                 ),
                 isActive: isShowingNextBinding,
+                label: {row}
+            )
+        }
+    }
+
+    @ViewBuilder var navigationLinkDirect: some View {
+        if substance.administrationRoutesUnwrapped.count == 1 {
+            NavigationLink(
+                destination: ChooseDoseView(
+                    substance: substance,
+                    administrationRoute: substance.administrationRoutesUnwrapped.first!,
+                    dismiss: dismiss,
+                    experience: experience
+                ),
+                isActive: $isShowingNext,
+                label: {row}
+            )
+        } else {
+            NavigationLink(
+                destination: ChooseRouteView(
+                    substance: substance,
+                    dismiss: dismiss,
+                    experience: experience
+                ),
+                isActive: $isShowingNext,
                 label: {row}
             )
         }
