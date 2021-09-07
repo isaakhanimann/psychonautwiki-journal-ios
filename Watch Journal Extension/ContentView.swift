@@ -19,8 +19,8 @@ struct ContentView: View {
             SettingsTab()
                 .tag(1)
             Group {
-                if activeExperience != nil {
-                    HomeTab()
+                if let activeExperienceUnwrapped = activeExperience {
+                    HomeTab(activeExperience: activeExperienceUnwrapped)
                 } else {
                     Button(action: createExperience) {
                         Label("Start Experience", systemImage: "plus")

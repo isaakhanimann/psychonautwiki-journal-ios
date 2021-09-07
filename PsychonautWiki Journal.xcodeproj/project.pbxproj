@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
+		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA4910AE26DFB4E0001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910AD26DFB4E0001A5316 /* Assets.xcassets */; };
 		EA4910B526DFB4E0001A5316 /* Watch Journal Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910B926DFB4E0001A5316 /* ContentView.swift */; };
@@ -209,6 +210,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA4910AB26DFB4E0001A5316 /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4910AD26DFB4E0001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910AF26DFB4E0001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
+				EA48B99726E7B215003BF667 /* AngleModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				EAA2EC5526DFCBE200B4FACF /* DurationRange+CoreDataClass.swift in Sources */,
 				EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */,
 				EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */,
+				EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */,
 				EAA2EC5B26DFCBFA00B4FACF /* Date-Difference.swift in Sources */,
 				EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */,
 				EAA2EC4F26DFCBE200B4FACF /* Substance+CoreDataClass.swift in Sources */,

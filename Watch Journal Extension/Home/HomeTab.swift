@@ -2,13 +2,16 @@ import SwiftUI
 
 struct HomeTab: View {
 
+    @ObservedObject var activeExperience: Experience
+
     var body: some View {
-        Text("Active Experience")
+        Circle()
     }
 }
 
 struct HomeTab_Previews: PreviewProvider {
     static var previews: some View {
-        HomeTab()
+        let helper = PersistenceController.preview.createPreviewHelper()
+        HomeTab(activeExperience: helper.experiences.first!)
     }
 }

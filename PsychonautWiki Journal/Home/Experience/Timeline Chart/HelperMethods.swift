@@ -13,11 +13,10 @@ struct HelperMethods {
         for (verticalWeight, ingestion) in getSortedIngestionsWithVerticalWeights(for: sortedIngestions) {
             let substance = ingestion.substanceCopy!
             let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
-            let doseInfo = substance.getDose(for: ingestion.administrationRouteUnwrapped)
             let ingestionTime = ingestion.timeUnwrapped
 
             // if weight 0 we take the minimum durations and if 1 we take the maximum durations
-            let horizontalWeight = getHorizontalWeight(for: ingestion.dose, doseTypes: doseInfo)
+            let horizontalWeight = ingestion.horizontalWeight
             assert(horizontalWeight >= 0 && horizontalWeight <= 1)
 
             let insetTimes = getInsetTimes(of: ingestion, comparedTo: sortedIngestions.prefix(while: { ing in
@@ -100,26 +99,4 @@ struct HelperMethods {
 
         return verticalWeights
     }
-
-    // Get value between 0 and 1
-    // 0 means that ingestion dose is threshold or below
-    // 1 means that ingestion dose is heavy or above
-    // values in between are interpolated linearly
-    private static func getHorizontalWeight(for ingestionDose: Double, doseTypes: DoseTypes?) -> Double {
-        let defaultWeight = 0.5
-
-        guard let doseTypesUnwrapped = doseTypes else { return defaultWeight }
-        guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
-
-        if ingestionDose <= minMax.min {
-            return 0
-        } else if ingestionDose >= minMax.max {
-            return 1
-        } else {
-            let doseRelative = ingestionDose - minMax.min
-            let rangeLength = minMax.max - minMax.min
-            return doseRelative / rangeLength
-        }
-    }
-
 }
