@@ -15,32 +15,11 @@ struct ChooseTimeView: View {
     @State private var day: Days
     @State private var hour: Int
     @State private var minute: Int
+    @State private var isShowingNext = false
+    @State private var selectedTime = Date()
 
     enum Days {
         case yesterday, today, tomorrow
-    }
-
-    var selectedTime: Date {
-        let calendar = Calendar.current
-
-        var components = DateComponents()
-        var dayDate: Date
-        switch day {
-        case .yesterday:
-            dayDate = yesterday
-        case .today:
-            dayDate = today
-        case .tomorrow:
-            dayDate = tomorrow
-        }
-        components.year = calendar.component(.year, from: dayDate)
-        components.month = calendar.component(.month, from: dayDate)
-        components.day = calendar.component(.day, from: dayDate)
-        components.hour = hour
-        components.minute = minute
-
-        let date = calendar.date(from: components) ?? Date()
-        return date
     }
 
     init(
@@ -92,23 +71,54 @@ struct ChooseTimeView: View {
                 }
             }
 
-            NavigationLink(
-                destination: ChooseColor(
-                    substance: substance,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    dismiss: dismiss,
-                    experience: experience,
-                    ingestionTime: selectedTime
-                ),
-                label: {
-                    Text("Next")
-                }
-            )
-            .buttonStyle(BorderedButtonStyle(tint: .accentColor))
+            ZStack {
+                NavigationLink(
+                    destination: ChooseColor(
+                        substance: substance,
+                        administrationRoute: administrationRoute,
+                        dose: dose,
+                        dismiss: dismiss,
+                        experience: experience,
+                        ingestionTime: selectedTime
+                    ),
+                    isActive: $isShowingNext,
+                    label: {
+                        Text("Next")
+                    }
+                ).hidden()
+
+                Button("Next", action: {
+                    updateSelectedTime()
+                    isShowingNext.toggle()
+                })
+                .buttonStyle(BorderedButtonStyle(tint: .accentColor))
+
+            }
             .padding(.top)
         }
         .navigationTitle("Choose Time")
+    }
+
+    private func updateSelectedTime() {
+        let calendar = Calendar.current
+
+        var components = DateComponents()
+        var dayDate: Date
+        switch day {
+        case .yesterday:
+            dayDate = yesterday
+        case .today:
+            dayDate = today
+        case .tomorrow:
+            dayDate = tomorrow
+        }
+        components.year = calendar.component(.year, from: dayDate)
+        components.month = calendar.component(.month, from: dayDate)
+        components.day = calendar.component(.day, from: dayDate)
+        components.hour = hour
+        components.minute = minute
+
+        self.selectedTime = calendar.date(from: components) ?? Date()
     }
 
     private func getWeekDay(of days: Days) -> String {
