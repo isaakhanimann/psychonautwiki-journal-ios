@@ -8,18 +8,39 @@ struct ChooseTimeView: View {
     let dismiss: () -> Void
     let experience: Experience
 
-    @State private var weekday: Int
+    let yesterday: Date
+    let today: Date
+    let tomorrow: Date
+
+    @State private var day: Days
     @State private var hour: Int
     @State private var minute: Int
 
+    enum Days {
+        case yesterday, today, tomorrow
+    }
+
     var selectedTime: Date {
+        let calendar = Calendar.current
 
         var components = DateComponents()
-        components.weekday = weekday + 1
+        var dayDate: Date
+        switch day {
+        case .yesterday:
+            dayDate = yesterday
+        case .today:
+            dayDate = today
+        case .tomorrow:
+            dayDate = tomorrow
+        }
+        components.year = calendar.component(.year, from: dayDate)
+        components.month = calendar.component(.month, from: dayDate)
+        components.day = calendar.component(.day, from: dayDate)
         components.hour = hour
         components.minute = minute
 
-        return Calendar.current.date(from: components) ?? Date()
+        let date = calendar.date(from: components) ?? Date()
+        return date
     }
 
     init(
@@ -38,21 +59,24 @@ struct ChooseTimeView: View {
         let calendar = Calendar.current
 
         let date = Date()
-        let weekday = calendar.component(.weekday, from: date) - 1
         let hour = calendar.component(.hour, from: date)
         let minute = calendar.component(.minute, from: date)
 
-        self._weekday = State(wrappedValue: weekday)
+        self._day = State(wrappedValue: .today)
         self._hour = State(wrappedValue: hour)
         self._minute = State(wrappedValue: minute)
+
+        self.yesterday = Date().addingTimeInterval(-86400)
+        self.today = Date()
+        self.tomorrow = Date().addingTimeInterval(86400)
     }
 
     var body: some View {
         VStack {
             HStack {
-                Picker("Day", selection: $weekday) {
-                    ForEach(0..<7) { option in
-                        Text("\(DateFormatter().shortWeekdaySymbols[option])").tag(option)
+                Picker("Day", selection: $day) {
+                    ForEach([Days.yesterday, .today, .tomorrow], id: \.self) { option in
+                        Text(getWeekDay(of: option)).tag(option)
                     }
                 }
                 Picker("Hour", selection: $hour) {
@@ -85,6 +109,17 @@ struct ChooseTimeView: View {
             .padding(.top)
         }
         .navigationTitle("Choose Time")
+    }
+
+    private func getWeekDay(of days: Days) -> String {
+        switch days {
+        case .yesterday:
+            return "\(DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: yesterday)-1])"
+        case .today:
+            return "\(DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: today)-1])"
+        case .tomorrow:
+            return "\(DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: tomorrow)-1])"
+        }
     }
 }
 
