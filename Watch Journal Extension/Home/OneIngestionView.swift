@@ -3,18 +3,37 @@ import SwiftUI
 struct OneIngestionView: View {
 
     let angleModel: AngleModel
-    let index: Int
     let lineWidth: CGFloat
+    let insetPerSide: CGFloat
+
+    let fixGapAngle = Angle(degrees: 1)
 
     var body: some View {
         ZStack {
-            ArcShape(
-                startAngle: angleModel.peakStart,
-                endAngle: angleModel.peakEnd,
+            ArcSection(
+                startAngle: angleModel.onsetStart,
+                endAngle: angleModel.peakStart,
+                startColor: .clear,
+                endColor: angleModel.color,
                 lineWidth: lineWidth,
-                insetTimes: index
+                insetOneSide: insetPerSide
             )
-            .stroke(angleModel.color, style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt))
+            ArcSection(
+                startAngle: angleModel.peakStart - fixGapAngle,
+                endAngle: angleModel.peakEnd,
+                startColor: angleModel.color,
+                endColor: angleModel.color,
+                lineWidth: lineWidth,
+                insetOneSide: insetPerSide
+            )
+            ArcSection(
+                startAngle: angleModel.peakEnd - fixGapAngle,
+                endAngle: angleModel.offsetEnd,
+                startColor: angleModel.color,
+                endColor: .clear,
+                lineWidth: lineWidth,
+                insetOneSide: insetPerSide
+            )
         }
     }
 }
@@ -24,8 +43,8 @@ struct OneIngestionView_Previews: PreviewProvider {
         let helper = PersistenceController.preview.createPreviewHelper()
         OneIngestionView(
             angleModel: AngleModel(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!),
-            index: 0,
-            lineWidth: 20
+            lineWidth: 20,
+            insetPerSide: 10
         )
     }
 }

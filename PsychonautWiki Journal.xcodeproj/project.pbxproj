@@ -14,6 +14,8 @@
 		EA48B9A226E802E7003BF667 /* AllLayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A126E802E6003BF667 /* AllLayersView.swift */; };
 		EA48B9A426E804CF003BF667 /* OneIngestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A326E804CF003BF667 /* OneIngestionView.swift */; };
 		EA48B9A726E80F21003BF667 /* Angle-DistanceTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A626E80F21003BF667 /* Angle-DistanceTo.swift */; };
+		EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A826E890B8003BF667 /* OneLayerView.swift */; };
+		EA48B9AB26E89B95003BF667 /* ArcSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9AA26E89B95003BF667 /* ArcSection.swift */; };
 		EA4910AE26DFB4E0001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910AD26DFB4E0001A5316 /* Assets.xcassets */; };
 		EA4910B526DFB4E0001A5316 /* Watch Journal Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910B926DFB4E0001A5316 /* ContentView.swift */; };
@@ -221,6 +223,8 @@
 		EA48B9A126E802E6003BF667 /* AllLayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLayersView.swift; sourceTree = "<group>"; };
 		EA48B9A326E804CF003BF667 /* OneIngestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneIngestionView.swift; sourceTree = "<group>"; };
 		EA48B9A626E80F21003BF667 /* Angle-DistanceTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Angle-DistanceTo.swift"; sourceTree = "<group>"; };
+		EA48B9A826E890B8003BF667 /* OneLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLayerView.swift; sourceTree = "<group>"; };
+		EA48B9AA26E89B95003BF667 /* ArcSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSection.swift; sourceTree = "<group>"; };
 		EA4910AB26DFB4E0001A5316 /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4910AD26DFB4E0001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910AF26DFB4E0001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
 				EA48B99C26E7F111003BF667 /* Shapes */,
 				EA48B99B26E7F105003BF667 /* Models */,
+				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
+				EA48B9AA26E89B95003BF667 /* ArcSection.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 				EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */,
 				EAA2EC4C26DFCBE200B4FACF /* Roa+CoreDataClass.swift in Sources */,
 				EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */,
+				EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */,
 				EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */,
 				EAA2EC5226DFCBE200B4FACF /* DurationTypes+CoreDataClass.swift in Sources */,
 				EAA2EC6C26E2113100B4FACF /* IngestionRow.swift in Sources */,
@@ -917,6 +924,7 @@
 				EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */,
 				EAA2EC3E26DFCB9D00B4FACF /* Persistence.swift in Sources */,
 				EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */,
+				EA48B9AB26E89B95003BF667 /* ArcSection.swift in Sources */,
 				EA48B9A426E804CF003BF667 /* OneIngestionView.swift in Sources */,
 				EAA2EC5726DFCBFA00B4FACF /* Double-Rounded.swift in Sources */,
 				EAA2EC4A26DFCBCF00B4FACF /* Category-CoreDataHelpers.swift in Sources */,

@@ -16,14 +16,13 @@ struct AllLayersView: View {
             ZStack {
                 ForEach(0..<watchFaceModel.layers.count) { layerIndex in
                     let layer = watchFaceModel.layers[layerIndex]
-
-                    ForEach(layer.angleModels) { model in
-                        OneIngestionView(
-                            angleModel: model,
-                            index: layerIndex,
-                            lineWidth: lineWidth
-                        )
-                    }
+                    let halfLineWidth = lineWidth/2
+                    let insetOneSide = halfLineWidth + CGFloat(layerIndex) * lineWidth
+                    OneLayerView(
+                        layer: layer,
+                        lineWidth: lineWidth,
+                        layerInsetPerSide: insetOneSide
+                    )
                 }
             }
         }

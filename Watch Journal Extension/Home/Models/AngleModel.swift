@@ -24,10 +24,11 @@ struct AngleModel: Identifiable {
         let weight = ingestion.horizontalWeight
 
         let ingestionTime = ingestion.timeUnwrapped
-        let onsetStartTime = ingestionTime.addingTimeInterval(durations.onset!.oneValue(at: 0.5))
-        let peakStartTime = onsetStartTime.addingTimeInterval(durations.comeup!.oneValue(at: 0.5))
+        let onsetStartTime = ingestionTime.addingTimeInterval(durations.onset!.minSec)
+        let averageOnsetStartTime = ingestionTime.addingTimeInterval(durations.onset!.oneValue(at: 0.5))
+        let peakStartTime = averageOnsetStartTime.addingTimeInterval(durations.comeup!.oneValue(at: 0.5))
         let peakEndTime = peakStartTime.addingTimeInterval(durations.peak!.oneValue(at: weight))
-        let offsetEndTime = peakStartTime.addingTimeInterval(durations.offset!.oneValue(at: weight))
+        let offsetEndTime = peakEndTime.addingTimeInterval(durations.offset!.maxSec)
 
         self.ingestionPoint = AngleModel.getAngle(from: ingestionTime)
         self.onsetStart = AngleModel.getAngle(from: onsetStartTime)

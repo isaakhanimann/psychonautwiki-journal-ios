@@ -4,19 +4,17 @@ struct ArcShape: Shape {
     let startAngle: Angle
     let endAngle: Angle
     let lineWidth: CGFloat
-    let insetTimes: Int
+    let insetPerSide: CGFloat
 
     func path(in rect: CGRect) -> Path {
 
         var path = Path()
 
-        let halfLineWidth = lineWidth/2
-        let insetOneSide = halfLineWidth + CGFloat(insetTimes) * lineWidth
         let drawRect = rect.inset(by: UIEdgeInsets(
-            top: insetOneSide,
-            left: insetOneSide,
-            bottom: insetOneSide,
-            right: insetOneSide
+            top: insetPerSide,
+            left: insetPerSide,
+            bottom: insetPerSide,
+            right: insetPerSide
         ))
 
         let center = CGPoint(x: drawRect.midX, y: drawRect.midY)

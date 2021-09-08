@@ -40,7 +40,7 @@ struct ArcSection: View {
                     startAngle: startAngle,
                     endAngle: endAngle
                 ),
-                style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
+                style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt)
             )
             .rotationEffect(rotateBy)
             .padding(insetOneSide)
