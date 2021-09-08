@@ -7,6 +7,7 @@ struct ChooseColor: View {
     let dose: Double
     let dismiss: () -> Void
     let experience: Experience
+    let ingestionTime: Date
 
     @Environment(\.managedObjectContext) var moc
 
@@ -27,7 +28,7 @@ struct ChooseColor: View {
     private func addIngestion(with color: Ingestion.IngestionColor) {
         let ingestion = Ingestion(context: moc)
         ingestion.experience = experience
-        ingestion.time = Date()
+        ingestion.time = ingestionTime
         ingestion.dose = dose
         ingestion.administrationRoute = administrationRoute.rawValue
         ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
@@ -63,7 +64,8 @@ struct ChooseTimeAndColor_Previews: PreviewProvider {
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,
             dismiss: {},
-            experience: helper.experiences.first!
+            experience: helper.experiences.first!,
+            ingestionTime: Date()
         )
     }
 }
