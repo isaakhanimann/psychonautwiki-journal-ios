@@ -38,7 +38,7 @@ struct AngleModel: Identifiable {
         self.color = ingestion.swiftUIColorUnwrapped
     }
 
-    private static func getAngle(from date: Date) -> Angle {
+    static func getAngle(from date: Date) -> Angle {
         let calendar = Calendar.current
 
         let hour = calendar.component(.hour, from: date)

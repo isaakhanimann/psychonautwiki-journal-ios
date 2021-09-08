@@ -9,16 +9,14 @@ struct IngestionPoint: View {
     var body: some View {
         GeometryReader { geometry in
             let radius = min(geometry.size.width, geometry.size.height) / 2
-            let degreesFromRightUpwards = -(angle - .degrees(90))
-            let ingestionAngleFloat = CGFloat(degreesFromRightUpwards.radians)
-            let xPosition = radius * cos(ingestionAngleFloat)
-            let yPosition = -radius * sin(ingestionAngleFloat)
+            let (xPosition, yPosition) = angle.getCartesianCoordinates(with: radius)
+
             Circle()
                 .fill()
                 .frame(width: circleSize, height: circleSize)
                 .position(
                     x: xPosition + radius,
-                    y: yPosition + radius
+                    y: -yPosition + radius
                 )
                 .foregroundColor(color)
         }

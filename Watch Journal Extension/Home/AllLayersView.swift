@@ -25,6 +25,7 @@ struct AllLayersView: View {
                     )
                     .padding(insetPerSide)
                 }
+                ClockHands()
             }
             .frame(width: squareLength, height: squareLength)
         }
