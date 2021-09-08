@@ -8,14 +8,22 @@ struct ExperienceRow: View {
     @Binding var selection: Experience?
 
     var body: some View {
-        NavigationLink(
+
+        return NavigationLink(
             destination: ExperienceView(experience: experience),
             tag: experience,
             selection: $selection
         ) {
             HStack {
-                ColorPie(colors: experience.ingestionColors)
-                    .frame(width: 40)
+                Circle()
+                    .fill(
+                        AngularGradient(
+                            gradient: Gradient(
+                                colors: getDoubleColors(from: experience.ingestionColors)),
+                            center: .center
+                        )
+                    )
+                    .frame(width: 40, height: 40)
                 Spacer()
                     .frame(width: 10)
                 VStack(alignment: .leading) {
@@ -33,6 +41,19 @@ struct ExperienceRow: View {
                 }
             }
         }
+    }
+
+    private func getDoubleColors(from colors: [Color]) -> [Color] {
+
+        var doubleColors = colors.flatMap { color in
+            Array(repeating: color, count: 2)
+        }
+
+        if let firstColor = experience.ingestionColors.first {
+            doubleColors.append(firstColor)
+        }
+
+        return doubleColors
     }
 }
 
