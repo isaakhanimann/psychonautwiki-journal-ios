@@ -9,6 +9,7 @@ struct ArcSection: View {
     let lineWidth: CGFloat
     let insetOneSide: CGFloat
     let delta: CGFloat
+    let rotateBy: Angle
 
     init(
         startAngle: Angle,
@@ -18,13 +19,15 @@ struct ArcSection: View {
         lineWidth: CGFloat,
         insetOneSide: CGFloat
     ) {
-        self.startAngle = startAngle
-        self.endAngle = endAngle
+        self.startAngle = .degrees(0)
+        let distanceAngle = startAngle.positiveDistanceTo(otherAngle: endAngle)
+        self.endAngle = distanceAngle
         self.startColor = startColor
         self.endColor = endColor
         self.lineWidth = lineWidth
         self.insetOneSide = insetOneSide
-        self.delta = CGFloat(startAngle.positiveDistanceTo(otherAngle: endAngle).degrees) / 360
+        self.delta = CGFloat(distanceAngle.asDoubleBetween0and360) / 360
+        self.rotateBy = .degrees(-90 + startAngle.asDoubleBetween0and360)
     }
 
     var body: some View {
@@ -39,7 +42,7 @@ struct ArcSection: View {
                 ),
                 style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
             )
-            .rotationEffect(.degrees(-90))
+            .rotationEffect(rotateBy)
             .padding(insetOneSide)
     }
 }
@@ -47,8 +50,8 @@ struct ArcSection: View {
 struct TryOut_Previews: PreviewProvider {
     static var previews: some View {
         ArcSection(
-            startAngle: .degrees(0),
-            endAngle: .degrees(180),
+            startAngle: .degrees(-20),
+            endAngle: .degrees(20),
             startColor: .blue,
             endColor: .red,
             lineWidth: 20,
