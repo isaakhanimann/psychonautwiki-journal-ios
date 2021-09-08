@@ -7,14 +7,33 @@ struct ClockHands: View {
     @State private var hourAngle = AngleModel.getAngle(from: Date())
     @State private var minuteAngle = ClockHands.getMinuteAngle(from: Date())
 
+    let circleSize: CGFloat = 6
+
     var body: some View {
-        ZStack {
-            ClockHand(angle: hourAngle, length: .hour)
-                .stroke(Color.primary, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+        GeometryReader { geometry in
+            let radius: CGFloat = min(geometry.size.width, geometry.size.height) / 2
+            let thinLength =  1/6 * radius
+            let hourLength = 2/5 * radius
+            let minuteLength = 5/7 * radius
+            ZStack {
+                ClockHand(
+                    angle: hourAngle,
+                    ringLength: circleSize/2,
+                    thinLength: thinLength,
+                    thickLength: hourLength
+                )
+                ClockHand(
+                    angle: minuteAngle,
+                    ringLength: circleSize/2,
+                    thinLength: thinLength,
+                    thickLength: minuteLength
+                )
 
-            ClockHand(angle: minuteAngle, length: .minute)
-                .stroke(Color.primary, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                Circle()
+                    .strokeBorder()
+                    .frame(width: circleSize, height: circleSize)
 
+            }
         }
         .onReceive(timer) { _ in
             hourAngle = AngleModel.getAngle(from: Date())

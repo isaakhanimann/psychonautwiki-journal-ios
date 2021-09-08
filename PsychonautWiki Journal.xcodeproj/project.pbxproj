@@ -30,7 +30,8 @@
 		EA6ECCA526E265EF00F32D78 /* FavoritesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* ClockHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* ClockHands.swift */; };
-		EA941CE626E8DC3300DBFCFF /* ClockHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE526E8DC3300DBFCFF /* ClockHand.swift */; };
+		EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE826E8EAF400DBFCFF /* ClockHand.swift */; };
+		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3926DFC88700B4FACF /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3826DFC88700B4FACF /* HomeTab.swift */; };
@@ -237,7 +238,8 @@
 		EA4910C426DFB4E1001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EA941CE326E8DA6900DBFCFF /* ClockHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHands.swift; sourceTree = "<group>"; };
-		EA941CE526E8DC3300DBFCFF /* ClockHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHand.swift; sourceTree = "<group>"; };
+		EA941CE826E8EAF400DBFCFF /* ClockHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHand.swift; sourceTree = "<group>"; };
+		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3826DFC88700B4FACF /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -416,13 +418,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EA941CE726E8EADF00DBFCFF /* Clockhands */ = {
+			isa = PBXGroup;
+			children = (
+				EA941CE326E8DA6900DBFCFF /* ClockHands.swift */,
+				EA941CE826E8EAF400DBFCFF /* ClockHand.swift */,
+				EA941CEC26E8EDD700DBFCFF /* HandShape.swift */,
+			);
+			path = Clockhands;
+			sourceTree = "<group>";
+		};
 		EAA2EC6326E2020A00B4FACF /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
 				EA48B9A126E802E6003BF667 /* AllLayersView.swift */,
-				EA941CE326E8DA6900DBFCFF /* ClockHands.swift */,
-				EA941CE526E8DC3300DBFCFF /* ClockHand.swift */,
+				EA941CE726E8EADF00DBFCFF /* Clockhands */,
 				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
 				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
 				EA48B9AA26E89B95003BF667 /* ArcSection.swift */,
@@ -892,6 +903,7 @@
 				EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */,
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
 				EAA2EC5326DFCBE200B4FACF /* Throwable.swift in Sources */,
+				EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */,
 				EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EAA2EC5926DFCBFA00B4FACF /* Data-ToFile.swift in Sources */,
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
@@ -929,7 +941,6 @@
 				EAA2EC5C26DFCBFA00B4FACF /* Binding-OnChange.swift in Sources */,
 				EAA2EC5426DFCBE200B4FACF /* DoseRange+CoreDataClass.swift in Sources */,
 				EAA2EC5526DFCBE200B4FACF /* DurationRange+CoreDataClass.swift in Sources */,
-				EA941CE626E8DC3300DBFCFF /* ClockHand.swift in Sources */,
 				EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */,
 				EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */,
 				EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */,
@@ -948,6 +959,7 @@
 				EAA2EC4026DFCBCF00B4FACF /* DoseRange-CoreDataHelpers.swift in Sources */,
 				EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */,
 				EAA2EC3926DFC88700B4FACF /* HomeTab.swift in Sources */,
+				EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */,
 				EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */,
 				EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */,
 				EA6ECCA426E265E500F32D78 /* InteractionRowView.swift in Sources */,
