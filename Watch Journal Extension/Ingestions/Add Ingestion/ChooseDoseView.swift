@@ -29,6 +29,7 @@ struct ChooseDoseView: View {
                         Text("Next")
                     }
                 )
+                .buttonStyle(BorderedButtonStyle(tint: .accentColor))
             }
         }
         .navigationBarTitle("Choose Dose")

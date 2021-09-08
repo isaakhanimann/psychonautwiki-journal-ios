@@ -10,46 +10,12 @@ struct ChooseColor: View {
 
     @Environment(\.managedObjectContext) var moc
 
-    @State private var selectedColor: Ingestion.IngestionColor
-
-    init(
-        substance: Substance,
-        administrationRoute: Roa.AdministrationRoute,
-        dose: Double,
-        dismiss: @escaping () -> Void,
-        experience: Experience
-    ) {
-        self.substance = substance
-        self.administrationRoute = administrationRoute
-        self.dose = dose
-        self.dismiss = dismiss
-        self.experience = experience
-
-        self._selectedColor = State(wrappedValue: Ingestion.IngestionColor.allCases.randomElement()!)
-        let defaults = UserDefaults.standard
-        let savedObject = defaults.object(forKey: substance.nameUnwrapped)
-        if let savedColorString = savedObject as? String {
-            if let savedColor = Ingestion.IngestionColor(rawValue: savedColorString) {
-                self._selectedColor = State(wrappedValue: savedColor)
-            }
-        }
-    }
-
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("Color")) {
-                    LazyVGrid(columns: colorColumns) {
-                        ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
-                    }
-                    .padding(.vertical)
-                }
-
+        ScrollView {
+                LazyVGrid(columns: colorColumns) {
+                ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
             }
-            Button("Add Ingestion", action: addIngestion)
-                .padding()
         }
-
         .navigationBarTitle("Choose Color")
         .toolbar {
             ToolbarItem(placement: ToolbarItemPlacement.cancellationAction) {
@@ -58,20 +24,18 @@ struct ChooseColor: View {
         }
     }
 
-    private func addIngestion() {
+    private func addIngestion(with color: Ingestion.IngestionColor) {
         let ingestion = Ingestion(context: moc)
         ingestion.experience = experience
         ingestion.time = Date()
         ingestion.dose = dose
         ingestion.administrationRoute = administrationRoute.rawValue
         ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
-        ingestion.color = selectedColor.rawValue
+        ingestion.color = color.rawValue
         substance.lastUsedDate = Date()
         substance.category!.file!.lastUsedSubstance = substance
 
         try? moc.save()
-        let defaults = UserDefaults.standard
-        defaults.setValue(selectedColor.rawValue, forKey: substance.nameUnwrapped)
         dismiss()
     }
 
@@ -80,27 +44,14 @@ struct ChooseColor: View {
     ]
 
     private func colorButton(for color: Ingestion.IngestionColor) -> some View {
-        ZStack {
+        Button(action: {
+            addIngestion(with: color)
+        }, label: {
             Color.from(ingestionColor: color)
                 .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(6)
-
-            if color == selectedColor {
-                Image(systemName: "checkmark.circle")
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-            }
-        }
-        .onTapGesture {
-            selectedColor = color
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityAddTraits(
-            color == selectedColor
-                ? [.isButton, .isSelected]
-                : .isButton
-        )
-        .accessibilityLabel(LocalizedStringKey(color.rawValue))
+        })
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
