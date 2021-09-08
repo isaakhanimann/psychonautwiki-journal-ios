@@ -10,7 +10,6 @@
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */; };
-		EA48B99E26E7F189003BF667 /* ArcShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99D26E7F189003BF667 /* ArcShape.swift */; };
 		EA48B9A226E802E7003BF667 /* AllLayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A126E802E6003BF667 /* AllLayersView.swift */; };
 		EA48B9A426E804CF003BF667 /* OneIngestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A326E804CF003BF667 /* OneIngestionView.swift */; };
 		EA48B9A726E80F21003BF667 /* Angle-DistanceTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A626E80F21003BF667 /* Angle-DistanceTo.swift */; };
@@ -29,6 +28,7 @@
 		EA6ECCA326E265C700F32D78 /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EA6ECCA426E265E500F32D78 /* InteractionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713426CBA663009FB0EC /* InteractionRowView.swift */; };
 		EA6ECCA526E265EF00F32D78 /* FavoritesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */; };
+		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3926DFC88700B4FACF /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3826DFC88700B4FACF /* HomeTab.swift */; };
@@ -219,7 +219,6 @@
 /* Begin PBXFileReference section */
 		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceModel.swift; sourceTree = "<group>"; };
-		EA48B99D26E7F189003BF667 /* ArcShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcShape.swift; sourceTree = "<group>"; };
 		EA48B9A126E802E6003BF667 /* AllLayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLayersView.swift; sourceTree = "<group>"; };
 		EA48B9A326E804CF003BF667 /* OneIngestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneIngestionView.swift; sourceTree = "<group>"; };
 		EA48B9A626E80F21003BF667 /* Angle-DistanceTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Angle-DistanceTo.swift"; sourceTree = "<group>"; };
@@ -235,6 +234,7 @@
 		EA4910BF26DFB4E1001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA4910C426DFB4E1001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3826DFC88700B4FACF /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -371,14 +371,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		EA48B99C26E7F111003BF667 /* Shapes */ = {
-			isa = PBXGroup;
-			children = (
-				EA48B99D26E7F189003BF667 /* ArcShape.swift */,
-			);
-			path = Shapes;
-			sourceTree = "<group>";
-		};
 		EA48B9A526E80ECF003BF667 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,11 +419,11 @@
 			children = (
 				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
 				EA48B9A126E802E6003BF667 /* AllLayersView.swift */,
-				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
-				EA48B99C26E7F111003BF667 /* Shapes */,
-				EA48B99B26E7F105003BF667 /* Models */,
 				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
+				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
 				EA48B9AA26E89B95003BF667 /* ArcSection.swift */,
+				EA48B99B26E7F105003BF667 /* Models */,
+				EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -935,6 +927,7 @@
 				EAA2EC5426DFCBE200B4FACF /* DoseRange+CoreDataClass.swift in Sources */,
 				EAA2EC5526DFCBE200B4FACF /* DurationRange+CoreDataClass.swift in Sources */,
 				EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */,
+				EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */,
 				EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */,
 				EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */,
 				EAA2EC5B26DFCBFA00B4FACF /* Date-Difference.swift in Sources */,
@@ -942,7 +935,6 @@
 				EAA2EC4F26DFCBE200B4FACF /* Substance+CoreDataClass.swift in Sources */,
 				EA6ECCA326E265C700F32D78 /* ChooseFavoritesView.swift in Sources */,
 				EAA2EC6226DFCE4300B4FACF /* SubstanceDecoder.swift in Sources */,
-				EA48B99E26E7F189003BF667 /* ArcShape.swift in Sources */,
 				EAA2EC4D26DFCBE200B4FACF /* DoseTypes+CoreDataClass.swift in Sources */,
 				EAA2EC4B26DFCBCF00B4FACF /* DoseTypes-CoreDataHelpers.swift in Sources */,
 				EA48B9A726E80F21003BF667 /* Angle-DistanceTo.swift in Sources */,

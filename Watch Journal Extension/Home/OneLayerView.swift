@@ -4,15 +4,13 @@ struct OneLayerView: View {
 
     let layer: WatchFaceModel.Layer
     let lineWidth: CGFloat
-    let layerInsetPerSide: CGFloat
 
     var body: some View {
         ZStack {
             ForEach(layer.angleModels) { model in
                 OneIngestionView(
                     angleModel: model,
-                    lineWidth: lineWidth,
-                    insetPerSide: layerInsetPerSide
+                    lineWidth: lineWidth
                 )
             }
         }
@@ -24,8 +22,8 @@ struct OneLayerView_Previews: PreviewProvider {
         let helper = PersistenceController.preview.createPreviewHelper()
         OneLayerView(
             layer: WatchFaceModel(ingestions: helper.experiences.first!.sortedIngestionsUnwrapped).layers.first!,
-            lineWidth: 20,
-            layerInsetPerSide: 10
+            lineWidth: 20
         )
+        .padding(10)
     }
 }
