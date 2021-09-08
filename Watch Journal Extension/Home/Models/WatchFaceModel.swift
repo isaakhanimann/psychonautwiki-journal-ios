@@ -4,7 +4,12 @@ struct WatchFaceModel {
 
     let layers: [Layer]
 
-    struct Layer {
+    struct Layer: Identifiable {
+        // swiftlint:disable identifier_name
+        var id: Int {
+            index
+        }
+        let index: Int
         var angleModels: [AngleModel]
     }
 
@@ -24,7 +29,7 @@ struct WatchFaceModel {
                 return
             }
         }
-        intoLayers.append(Layer(angleModels: [model]))
+        intoLayers.append(Layer(index: intoLayers.count, angleModels: [model]))
     }
 
     private static func doesModelFitIntoLayer(model: AngleModel, layer: Layer) -> Bool {

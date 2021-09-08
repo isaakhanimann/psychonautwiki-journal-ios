@@ -10,7 +10,7 @@
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */; };
-		EA48B9A226E802E7003BF667 /* AllLayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A126E802E6003BF667 /* AllLayersView.swift */; };
+		EA48B9A226E802E7003BF667 /* WatchFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A126E802E6003BF667 /* WatchFaceView.swift */; };
 		EA48B9A426E804CF003BF667 /* OneIngestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A326E804CF003BF667 /* OneIngestionView.swift */; };
 		EA48B9A726E80F21003BF667 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A626E80F21003BF667 /* Angle.swift */; };
 		EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B9A826E890B8003BF667 /* OneLayerView.swift */; };
@@ -34,7 +34,6 @@
 		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
-		EAA2EC3926DFC88700B4FACF /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3826DFC88700B4FACF /* HomeTab.swift */; };
 		EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */; };
 		EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */; };
 		EAA2EC3E26DFCB9D00B4FACF /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
@@ -221,7 +220,7 @@
 /* Begin PBXFileReference section */
 		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceModel.swift; sourceTree = "<group>"; };
-		EA48B9A126E802E6003BF667 /* AllLayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLayersView.swift; sourceTree = "<group>"; };
+		EA48B9A126E802E6003BF667 /* WatchFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceView.swift; sourceTree = "<group>"; };
 		EA48B9A326E804CF003BF667 /* OneIngestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneIngestionView.swift; sourceTree = "<group>"; };
 		EA48B9A626E80F21003BF667 /* Angle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		EA48B9A826E890B8003BF667 /* OneLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLayerView.swift; sourceTree = "<group>"; };
@@ -241,7 +240,6 @@
 		EA941CE826E8EAF400DBFCFF /* ClockHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHand.swift; sourceTree = "<group>"; };
 		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
-		EAA2EC3826DFC88700B4FACF /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
 		EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWelcome.swift; sourceTree = "<group>"; };
@@ -431,8 +429,7 @@
 		EAA2EC6326E2020A00B4FACF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				EAA2EC3826DFC88700B4FACF /* HomeTab.swift */,
-				EA48B9A126E802E6003BF667 /* AllLayersView.swift */,
+				EA48B9A126E802E6003BF667 /* WatchFaceView.swift */,
 				EA941CE726E8EADF00DBFCFF /* Clockhands */,
 				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
 				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
@@ -907,7 +904,7 @@
 				EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EAA2EC5926DFCBFA00B4FACF /* Data-ToFile.swift in Sources */,
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
-				EA48B9A226E802E7003BF667 /* AllLayersView.swift in Sources */,
+				EA48B9A226E802E7003BF667 /* WatchFaceView.swift in Sources */,
 				EAA2EC4426DFCBCF00B4FACF /* GeneralInteraction-CoreDataHelpers.swift in Sources */,
 				EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */,
 				EAA2EC4C26DFCBE200B4FACF /* Roa+CoreDataClass.swift in Sources */,
@@ -958,7 +955,6 @@
 				EA6ECCA526E265EF00F32D78 /* FavoritesRowView.swift in Sources */,
 				EAA2EC4026DFCBCF00B4FACF /* DoseRange-CoreDataHelpers.swift in Sources */,
 				EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */,
-				EAA2EC3926DFC88700B4FACF /* HomeTab.swift in Sources */,
 				EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */,
 				EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */,
 				EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */,

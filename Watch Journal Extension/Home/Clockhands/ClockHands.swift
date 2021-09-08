@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ClockHands: View {
 
-    private let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     @State private var hourAngle = AngleModel.getAngle(from: Date())
     @State private var minuteAngle = ClockHands.getMinuteAngle(from: Date())
@@ -36,8 +36,10 @@ struct ClockHands: View {
             }
         }
         .onReceive(timer) { _ in
-            hourAngle = AngleModel.getAngle(from: Date())
-            minuteAngle = ClockHands.getMinuteAngle(from: Date())
+            withAnimation {
+                hourAngle = AngleModel.getAngle(from: Date())
+                minuteAngle = ClockHands.getMinuteAngle(from: Date())
+            }
         }
     }
 

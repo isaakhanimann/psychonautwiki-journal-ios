@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tag(1)
             Group {
                 if let activeExperienceUnwrapped = activeExperience {
-                    HomeTab(activeExperience: activeExperienceUnwrapped)
+                    WatchFaceView(ingestions: activeExperienceUnwrapped.sortedIngestionsUnwrapped)
                 } else {
                     Button(action: createExperience) {
                         Label("Start Experience", systemImage: "plus")
