@@ -17,20 +17,16 @@ struct IngestionsTab: View {
             List {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
-
-                if experience.sortedIngestionsUnwrapped.isEmpty {
-                    Button(action: addIngestion) {
-                        Label("Add Ingestion", systemImage: "plus")
-                            .foregroundColor(.accentColor)
-                    }
-                }
             }
             .navigationTitle("Ingestions")
             .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+                ToolbarItemGroup(placement: ToolbarItemPlacement.primaryAction) {
+                    Button(action: addIngestion) {
+                        Label("Add Ingestion", systemImage: "plus")
+                    }
                     if !experience.sortedIngestionsUnwrapped.isEmpty {
-                        Button(action: addIngestion) {
-                            Label("Add Ingestion", systemImage: "plus")
+                        Button(action: deleteAllIngestions) {
+                            Label("Restart", systemImage: "restart")
                         }
                     }
                 }
@@ -51,13 +47,26 @@ struct IngestionsTab: View {
         isShowingAddIngestionSheet.toggle()
     }
 
-    private func deleteIngestions(at offsets: IndexSet) {
-        moc.perform {
-            for offset in offsets {
-                let ingestion = experience.sortedIngestionsUnwrapped[offset]
-                moc.delete(ingestion)
+    private func deleteAllIngestions() {
+        withAnimation {
+            moc.perform {
+                for ingestion in experience.sortedIngestionsUnwrapped {
+                    moc.delete(ingestion)
+                }
+                try? moc.save()
             }
-            try? moc.save()
+        }
+    }
+
+    private func deleteIngestions(at offsets: IndexSet) {
+        withAnimation {
+            moc.perform {
+                for offset in offsets {
+                    let ingestion = experience.sortedIngestionsUnwrapped[offset]
+                    moc.delete(ingestion)
+                }
+                try? moc.save()
+            }
         }
     }
 

@@ -399,7 +399,7 @@
 				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
 				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
 				EAA2EC7F26E21D5600B4FACF /* Welcome */,
-				EAA2EC6326E2020A00B4FACF /* Home */,
+				EAA2EC6326E2020A00B4FACF /* Watch Face */,
 				EAA2EC6426E2021B00B4FACF /* Settings */,
 				EAA2EC6526E2022A00B4FACF /* Ingestions */,
 				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
@@ -428,7 +428,7 @@
 			path = Clockhands;
 			sourceTree = "<group>";
 		};
-		EAA2EC6326E2020A00B4FACF /* Home */ = {
+		EAA2EC6326E2020A00B4FACF /* Watch Face */ = {
 			isa = PBXGroup;
 			children = (
 				EA48B9A126E802E6003BF667 /* WatchFaceView.swift */,
@@ -439,7 +439,7 @@
 				EA941CE726E8EADF00DBFCFF /* Clockhands */,
 				EA48B99B26E7F105003BF667 /* Models */,
 			);
-			path = Home;
+			path = "Watch Face";
 			sourceTree = "<group>";
 		};
 		EAA2EC6426E2021B00B4FACF /* Settings */ = {

@@ -4,13 +4,12 @@ struct ContentView: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
 
-    @EnvironmentObject var connectivity: Connectivity
-    @Environment(\.managedObjectContext) var moc
-
     @FetchRequest(
         entity: Experience.entity(),
         sortDescriptors: [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
     ) var experiences: FetchedResults<Experience>
+
+    @Environment(\.managedObjectContext) var moc
 
     @State private var selection = 2
 
@@ -18,24 +17,12 @@ struct ContentView: View {
         TabView(selection: $selection) {
             SettingsTab()
                 .tag(1)
-            Group {
-                if let activeExperienceUnwrapped = activeExperience {
-                    WatchFaceView(ingestions: activeExperienceUnwrapped.sortedIngestionsUnwrapped)
-                } else {
-                    Button(action: createExperience) {
-                        Label("Start Experience", systemImage: "plus")
-                    }
-                }
+            WatchFaceView(ingestions: experiences.first?.sortedIngestionsUnwrapped ?? [])
+                .tag(2)
+            if let firstExperience = experiences.first {
+                IngestionsTab(experience: firstExperience)
+                    .tag(3)
             }
-            .tag(2)
-            Group {
-                if let activeExperienceUnwrapped = activeExperience {
-                    IngestionsTab(experience: activeExperienceUnwrapped)
-                } else {
-                    Text("No experience started yet")
-                }
-            }
-            .tag(3)
         }
         .fullScreenCover(
             isPresented: Binding<Bool>(
@@ -44,21 +31,10 @@ struct ContentView: View {
             ),
             content: {
                 WatchWelcome()
+                    .environment(\.managedObjectContext, moc)
+                    .accentColor(Color.blue)
             }
         )
-    }
-
-    private func createExperience() {
-        withAnimation {
-            let experience = Experience(context: moc)
-            let now = Date()
-            experience.creationDate = now
-            experience.title = now.asDateString
-            let data = ["text": "Experience created at \(now.asTimeString)"]
-            connectivity.transferUserInfo(data)
-            try? moc.save()
-            selection = 3
-        }
     }
 
     var activeExperience: Experience? {
@@ -90,5 +66,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(Connectivity())
+            .accentColor(Color.blue)
     }
 }

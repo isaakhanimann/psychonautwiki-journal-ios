@@ -4,6 +4,8 @@ struct WatchWelcome: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
 
+    @Environment(\.managedObjectContext) var moc
+
     var body: some View {
         ScrollView {
             VStack {
@@ -14,10 +16,15 @@ struct WatchWelcome: View {
                     .cornerRadius(10)
                     .accessibilityHidden(true)
 
-                (Text("Welcome to ") + Text("PsychonautWiki Journal").foregroundColor(.accentColor))
+                (Text("Welcome to ") + Text("PsychonautWiki").foregroundColor(.accentColor))
                     .font(.title3.bold())
 
-                Button("Continue", action: addInitialSubstances)
+                Button("Continue") {
+                    addInitialSubstances()
+                    createExperience()
+                    hasBeenSetupBefore = true
+                }
+                .buttonStyle(BorderedButtonStyle(tint: .accentColor))
             }
         }
         .navigationBarHidden(true)
@@ -48,9 +55,16 @@ struct WatchWelcome: View {
         } catch {
             fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
         }
-
-        hasBeenSetupBefore = true
     }
+
+    private func createExperience() {
+        let experience = Experience(context: moc)
+        let now = Date()
+        experience.creationDate = now
+        experience.title = now.asDateString
+        try? moc.save()
+    }
+
 }
 
 struct WatchWelcome_Previews: PreviewProvider {
