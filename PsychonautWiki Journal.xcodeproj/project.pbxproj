@@ -472,10 +472,10 @@
 			isa = PBXGroup;
 			children = (
 				EAA2EC7226E2151900B4FACF /* ChooseSubstanceView.swift */,
-				EAA2EC7626E21A7700B4FACF /* ChooseDoseView.swift */,
 				EAA2EC7826E21A8D00B4FACF /* ChooseRouteView.swift */,
-				EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */,
+				EAA2EC7626E21A7700B4FACF /* ChooseDoseView.swift */,
 				EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */,
+				EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */,
 			);
 			path = "Add Ingestion";
 			sourceTree = "<group>";

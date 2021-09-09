@@ -10,6 +10,7 @@ struct ChooseTimeAndColor: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
+    @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedTime = Date()
     @State private var selectedColor: Ingestion.IngestionColor
@@ -80,6 +81,16 @@ struct ChooseTimeAndColor: View {
         ingestion.color = selectedColor.rawValue
         substance.lastUsedDate = Date()
         substance.category!.file!.lastUsedSubstance = substance
+
+        if selectedTime.distance(to: Date()) < 24*60*60 {
+            connectivity.sendNewIngestion(
+                ingestionTime: selectedTime,
+                substanceName: substance.nameUnwrapped,
+                route: administrationRoute.rawValue,
+                dose: dose,
+                colorName: selectedColor.rawValue
+            )
+        }
 
         save()
         let defaults = UserDefaults.standard

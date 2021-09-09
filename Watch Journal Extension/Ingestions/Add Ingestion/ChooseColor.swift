@@ -10,6 +10,7 @@ struct ChooseColor: View {
     let ingestionTime: Date
 
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var connectivity: Connectivity
 
     var body: some View {
         ScrollView {
@@ -35,6 +36,14 @@ struct ChooseColor: View {
         ingestion.color = color.rawValue
         substance.lastUsedDate = Date()
         substance.category!.file!.lastUsedSubstance = substance
+
+        connectivity.sendNewIngestion(
+            ingestionTime: ingestionTime,
+            substanceName: substance.nameUnwrapped,
+            route: administrationRoute.rawValue,
+            dose: dose,
+            colorName: color.rawValue
+        )
 
         try? moc.save()
         dismiss()

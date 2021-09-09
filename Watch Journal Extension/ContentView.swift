@@ -36,31 +36,6 @@ struct ContentView: View {
             }
         )
     }
-
-    var activeExperience: Experience? {
-        guard !experiences.isEmpty else {
-            return nil
-        }
-        let activeExperiences = experiences.filter { experience in
-            experience.isActive && !experience.sortedIngestionsUnwrapped.isEmpty
-        }
-
-        let sortedExperiences = activeExperiences.sorted { experience1, experience2 in
-            experience1.sortedIngestionsUnwrapped.first!.timeUnwrapped
-                <
-                experience2.sortedIngestionsUnwrapped.first!.timeUnwrapped
-        }
-        if let latestExperience = sortedExperiences.first {
-            return latestExperience
-        }
-
-        if experiences.first!.creationDateUnwrapped.distance(to: Date()) < 60 * 60 * 5 {
-            return experiences.first!
-        } else {
-            return nil
-        }
-    }
-
 }
 
 struct ContentView_Previews: PreviewProvider {

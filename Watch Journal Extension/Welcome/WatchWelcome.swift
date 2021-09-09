@@ -21,7 +21,7 @@ struct WatchWelcome: View {
 
                 Button("Continue") {
                     addInitialSubstances()
-                    createExperience()
+                    _ = PersistenceController.shared.createNewExperienceNow()
                     hasBeenSetupBefore = true
                 }
                 .buttonStyle(BorderedButtonStyle(tint: .accentColor))
@@ -55,14 +55,6 @@ struct WatchWelcome: View {
         } catch {
             fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
         }
-    }
-
-    private func createExperience() {
-        let experience = Experience(context: moc)
-        let now = Date()
-        experience.creationDate = now
-        experience.title = now.asDateString
-        try? moc.save()
     }
 
 }

@@ -65,24 +65,25 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        DispatchQueue.main.async {
-            if let text = userInfo["text"] as? String {
-                self.receivedText = text
-            } else {
-                #if os(watchOS)
-                if let number = userInfo["number"] as? String {
-                    UserDefaults.standard.set(number, forKey: "complication_number")
-
-                    let server = CLKComplicationServer.sharedInstance()
-                    guard let complications = server.activeComplications else { return }
-
-                    for complication in complications {
-                        server.reloadTimeline(for: complication)
-                    }
-                }
-                #endif
-            }
-        }
+        receiveIngestion(userInfo: userInfo)
+//        DispatchQueue.main.async {
+//            if let text = userInfo["text"] as? String {
+//                self.receivedText = text
+//            } else {
+//                #if os(watchOS)
+//                if let number = userInfo["number"] as? String {
+//                    UserDefaults.standard.set(number, forKey: "complication_number")
+//
+//                    let server = CLKComplicationServer.sharedInstance()
+//                    guard let complications = server.activeComplications else { return }
+//
+//                    for complication in complications {
+//                        server.reloadTimeline(for: complication)
+//                    }
+//                }
+//                #endif
+//            }
+//        }
     }
 
     func sendMessage(_ data: [String: Any]) {
@@ -108,11 +109,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         }
     }
 
-    func sendExperience(at date: Date) {
-        let data = ["createExperienceDate": date]
-        transferUserInfo(data)
-    }
-
     func sendNewIngestion(
         ingestionTime: Date,
         substanceName: String,
@@ -131,7 +127,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     private let ingestionTimeKey = "createIngestionDate"
-    private let experienceCreationKey = "experienceCreationDate"
     private let ingestionSubstanceKey = "substanceName"
     private let ingestionRouteKey = "route"
     private let ingestionDoseKey = "dose"
@@ -140,20 +135,29 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     // swiftlint:disable cyclomatic_complexity
     func receiveIngestion(userInfo: [String: Any]) {
         guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
-        guard let experienceCreationDate = userInfo[experienceCreationKey] as? Date else {return}
         guard let substanceName = userInfo[ingestionSubstanceKey] as? String else {return}
         guard let route = userInfo[ingestionRouteKey] as? String else {return}
         guard let dose = userInfo[ingestionDoseKey] as? Double else {return}
         guard let colorName = userInfo[ingestionColorKey] as? String else {return}
 
-        guard let foundExperience = PersistenceController.shared.findExperience(with: experienceCreationDate) else {return}
+        #if os(iOS)
+        var experienceToAddTo = PersistenceController.shared.getLatestExperience()
+        if !(experienceToAddTo?.isActive ?? false) {
+            guard let newExperience = PersistenceController.shared.createNewExperienceNow() else {return}
+            experienceToAddTo = newExperience
+        }
+        #else
+        let experienceToAddTo = PersistenceController.shared.getLatestExperience()
+        #endif
+
         guard let foundSubstance = PersistenceController.shared.findSubstance(with: substanceName) else {return}
         guard let routeUnwrapped = Roa.AdministrationRoute(rawValue: route) else {return}
         guard foundSubstance.administrationRoutesUnwrapped.contains(routeUnwrapped) else {return}
         guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
+        guard let experienceUnwrapped = experienceToAddTo else {return}
 
         PersistenceController.shared.createIngestion(
-            addTo: foundExperience,
+            addTo: experienceUnwrapped,
             substance: foundSubstance,
             ingestionTime: createIngestionDate,
             ingestionRoute: routeUnwrapped,

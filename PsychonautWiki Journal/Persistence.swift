@@ -47,12 +47,25 @@ struct PersistenceController {
         return file.getSubstance(with: name)
     }
 
-    func findExperience(with creationDate: Date) -> Experience? {
+    func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
         guard let experiences = try? container.viewContext.fetch(fetchRequest) else {return nil}
-        let result = experiences.first { experience in
-            experience.creationDateUnwrapped == creationDate
+        return experiences.first
+    }
+
+    func createNewExperienceNow() -> Experience? {
+        let moc = container.viewContext
+        var result: Experience?
+        moc.performAndWait {
+            let experience = Experience(context: moc)
+            let now = Date()
+            experience.creationDate = now
+            experience.title = now.asDateString
+            try? moc.save()
+            result = experience
         }
+
         return result
     }
 
@@ -65,7 +78,7 @@ struct PersistenceController {
         color: Ingestion.IngestionColor,
         dose: Double
     ) {
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = container.viewContext
         moc.performAndWait {
             let ingestion = Ingestion(context: moc)
             ingestion.experience = experience
