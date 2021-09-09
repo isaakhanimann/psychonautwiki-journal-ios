@@ -65,75 +65,114 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        receiveIngestion(userInfo: userInfo)
-//        DispatchQueue.main.async {
-//            if let text = userInfo["text"] as? String {
-//                self.receivedText = text
-//            } else {
-//                #if os(watchOS)
-//                if let number = userInfo["number"] as? String {
-//                    UserDefaults.standard.set(number, forKey: "complication_number")
-//
-//                    let server = CLKComplicationServer.sharedInstance()
-//                    guard let complications = server.activeComplications else { return }
-//
-//                    for complication in complications {
-//                        server.reloadTimeline(for: complication)
-//                    }
-//                }
-//                #endif
-//            }
-//        }
-    }
-
-    func sendMessage(_ data: [String: Any]) {
-        let session = WCSession.default
-
-        if session.isReachable {
-            session.sendMessage(data) { response in
-                DispatchQueue.main.async {
-                    self.receivedText = "Received response: \(response)"
-                }
-            }
-        }
-    }
-
-    func session(
-        _ session: WCSession,
-        didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         DispatchQueue.main.async {
-            if let text = message["text"] as? String {
-                self.receivedText = text
-                replyHandler(["response": "Be excellent to each other"])
+            if let isUpdate = userInfo[self.isUpdateKey] as? Bool, isUpdate {
+                #if os(watchOS)
+                self.receiveIngestionUpdate(userInfo: userInfo)
+                #endif
+            } else {
+                self.receiveNewIngestion(userInfo: userInfo)
             }
         }
+        //        DispatchQueue.main.async {
+        //            if let text = userInfo["text"] as? String {
+        //                self.receivedText = text
+        //            } else {
+        //                #if os(watchOS)
+        //                if let number = userInfo["number"] as? String {
+        //                    UserDefaults.standard.set(number, forKey: "complication_number")
+        //
+        //                    let server = CLKComplicationServer.sharedInstance()
+        //                    guard let complications = server.activeComplications else { return }
+        //
+        //                    for complication in complications {
+        //                        server.reloadTimeline(for: complication)
+        //                    }
+        //                }
+        //                #endif
+        //            }
+        //        }
     }
 
-    func sendNewIngestion(
-        ingestionTime: Date,
-        substanceName: String,
-        route: String,
-        dose: Double,
-        colorName: String
-    ) {
+    func sendIngestionUpdate(for ingestion: Ingestion) {
         let data = [
-            ingestionTimeKey: ingestionTime,
-            ingestionSubstanceKey: substanceName,
-            ingestionRouteKey: route,
-            ingestionDoseKey: dose,
-            ingestionColorKey: colorName
+            isUpdateKey: true,
+            ingestionIdKey: ingestion.identifier?.uuidString ?? "Unknown",
+            ingestionTimeKey: ingestion.timeUnwrapped,
+            ingestionSubstanceKey: ingestion.substanceCopy?.name ?? "Unknown",
+            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
+            ingestionDoseKey: ingestion.dose,
+            ingestionColorKey: ingestion.colorUnwrapped.rawValue
         ] as [String: Any]
         transferUserInfo(data)
     }
 
+    func receiveIngestionUpdate(userInfo: [String: Any]) {
+        guard let identifier = userInfo[ingestionIdKey] as? String else {return}
+        guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
+        guard let route = userInfo[ingestionRouteKey] as? String else {return}
+        guard let dose = userInfo[ingestionDoseKey] as? Double else {return}
+        guard let colorName = userInfo[ingestionColorKey] as? String else {return}
+
+        guard let routeUnwrapped = Roa.AdministrationRoute(rawValue: route) else {return}
+        guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
+        guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
+
+        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
+        guard let ingestionToUpdate = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifierUnwrapped}) else {return}
+
+        PersistenceController.shared.updateIngestion(
+            ingestionToUpdate: ingestionToUpdate,
+            time: createIngestionDate,
+            route: routeUnwrapped,
+            color: colorUnwrapped,
+            dose: dose
+        )
+    }
+
+    //        func receiveIngestionUpdate(userInfo: [String: Any]) {
+    //            guard let identifier = userInfo[ingestionIdKey] as? UUID else {return}
+    //            guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
+//            guard let route = userInfo[ingestionRouteKey] as? Roa.AdministrationRoute else {return}
+//            guard let dose = userInfo[ingestionDoseKey] as? Double else {return}
+//            guard let color = userInfo[ingestionColorKey] as? Ingestion.IngestionColor else {return}
+//
+//            guard let experience = PersistenceController.shared.getLatestExperience() else {return}
+//            guard let ingestionToUpdate = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifier}) else {return}
+//
+//            PersistenceController.shared.updateIngestion(
+//                ingestionToUpdate: ingestionToUpdate,
+//                time: createIngestionDate,
+//                route: route,
+//                color: color,
+//                dose: dose
+//            )
+//        }
+
+    func sendNewIngestion(ingestion: Ingestion) {
+        let data = [
+            isUpdateKey: false,
+            ingestionIdKey: ingestion.identifier?.uuidString ?? "Unknown",
+            ingestionTimeKey: ingestion.timeUnwrapped,
+            ingestionSubstanceKey: ingestion.substanceCopy?.name ?? "Unknown",
+            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
+            ingestionDoseKey: ingestion.dose,
+            ingestionColorKey: ingestion.colorUnwrapped.rawValue
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    private let isUpdateKey = "isUpdate"
+    private let ingestionIdKey = "ingestionId"
     private let ingestionTimeKey = "createIngestionDate"
     private let ingestionSubstanceKey = "substanceName"
     private let ingestionRouteKey = "route"
     private let ingestionDoseKey = "dose"
-    private let ingestionColorKey = "colorName"
+    private let ingestionColorKey = "color"
 
     // swiftlint:disable cyclomatic_complexity
-    func receiveIngestion(userInfo: [String: Any]) {
+    func receiveNewIngestion(userInfo: [String: Any]) {
+        guard let identifier = userInfo[ingestionIdKey] as? String else {return}
         guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
         guard let substanceName = userInfo[ingestionSubstanceKey] as? String else {return}
         guard let route = userInfo[ingestionRouteKey] as? String else {return}
@@ -155,8 +194,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard foundSubstance.administrationRoutesUnwrapped.contains(routeUnwrapped) else {return}
         guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
         guard let experienceUnwrapped = experienceToAddTo else {return}
+        guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
 
         PersistenceController.shared.createIngestion(
+            identifier: identifierUnwrapped,
             addTo: experienceUnwrapped,
             substance: foundSubstance,
             ingestionTime: createIngestionDate,

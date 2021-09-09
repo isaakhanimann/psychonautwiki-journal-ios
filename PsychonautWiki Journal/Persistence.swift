@@ -69,8 +69,27 @@ struct PersistenceController {
         return result
     }
 
+    func updateIngestion(
+        ingestionToUpdate: Ingestion,
+        time: Date,
+        route: Roa.AdministrationRoute,
+        color: Ingestion.IngestionColor,
+        dose: Double
+    ) {
+        let moc = container.viewContext
+        moc.perform {
+            ingestionToUpdate.time = time
+            ingestionToUpdate.administrationRoute = route.rawValue
+            ingestionToUpdate.color = color.rawValue
+            ingestionToUpdate.dose = dose
+
+            try? moc.save()
+        }
+    }
+
     // swiftlint:disable function_parameter_count
     func createIngestion(
+        identifier: UUID,
         addTo experience: Experience,
         substance: Substance,
         ingestionTime: Date,
@@ -81,6 +100,7 @@ struct PersistenceController {
         let moc = container.viewContext
         moc.performAndWait {
             let ingestion = Ingestion(context: moc)
+            ingestion.identifier = identifier
             ingestion.experience = experience
             ingestion.time = ingestionTime
             ingestion.administrationRoute = ingestionRoute.rawValue

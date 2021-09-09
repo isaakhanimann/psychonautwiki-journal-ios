@@ -6,6 +6,7 @@ struct EditIngestionView: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
+    @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedAdministrationRoute: Roa.AdministrationRoute
     @State private var selectedDose: Double?
@@ -67,6 +68,7 @@ struct EditIngestionView: View {
             let defaults = UserDefaults.standard
             defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy!.nameUnwrapped)
             if moc.hasChanges {
+                connectivity.sendIngestionUpdate(for: ingestion)
                 calendarWrapper.createOrUpdateEventBeforeMocSave(from: ingestion.experience!)
                 try? moc.save()
             }

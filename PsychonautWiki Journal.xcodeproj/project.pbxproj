@@ -695,8 +695,8 @@
 		EAE4719F26CBA664009FB0EC /* Edit Ingestions */ = {
 			isa = PBXGroup;
 			children = (
-				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
 				EAE471A226CBA664009FB0EC /* EditIngestionView.swift */,
+				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 			);
 			path = "Edit Ingestions";

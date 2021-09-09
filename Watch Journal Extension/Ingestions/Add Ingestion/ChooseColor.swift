@@ -28,6 +28,7 @@ struct ChooseColor: View {
 
     private func addIngestion(with color: Ingestion.IngestionColor) {
         let ingestion = Ingestion(context: moc)
+        ingestion.identifier = UUID()
         ingestion.experience = experience
         ingestion.time = ingestionTime
         ingestion.dose = dose
@@ -37,13 +38,7 @@ struct ChooseColor: View {
         substance.lastUsedDate = Date()
         substance.category!.file!.lastUsedSubstance = substance
 
-        connectivity.sendNewIngestion(
-            ingestionTime: ingestionTime,
-            substanceName: substance.nameUnwrapped,
-            route: administrationRoute.rawValue,
-            dose: dose,
-            colorName: color.rawValue
-        )
+        connectivity.sendNewIngestion(ingestion: ingestion)
 
         try? moc.save()
         dismiss()

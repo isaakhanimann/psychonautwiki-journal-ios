@@ -74,6 +74,7 @@ struct ChooseTimeAndColor: View {
     private func addIngestion() {
         let ingestion = Ingestion(context: moc)
         ingestion.experience = experience
+        ingestion.identifier = UUID()
         ingestion.time = selectedTime
         ingestion.dose = dose
         ingestion.administrationRoute = administrationRoute.rawValue
@@ -83,13 +84,7 @@ struct ChooseTimeAndColor: View {
         substance.category!.file!.lastUsedSubstance = substance
 
         if selectedTime.distance(to: Date()) < 24*60*60 {
-            connectivity.sendNewIngestion(
-                ingestionTime: selectedTime,
-                substanceName: substance.nameUnwrapped,
-                route: administrationRoute.rawValue,
-                dose: dose,
-                colorName: selectedColor.rawValue
-            )
+            connectivity.sendNewIngestion(ingestion: ingestion)
         }
 
         save()
