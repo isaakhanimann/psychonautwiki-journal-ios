@@ -381,14 +381,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		EA48B9A526E80ECF003BF667 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				EA48B9A626E80F21003BF667 /* Angle.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		EA4910AC26DFB4E0001A5316 /* Watch Journal */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,14 +393,13 @@
 		EA4910B826DFB4E0001A5316 /* Watch Journal Extension */ = {
 			isa = PBXGroup;
 			children = (
-				EA48B9A526E80ECF003BF667 /* Extensions */,
 				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
 				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
+				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
 				EAA2EC7F26E21D5600B4FACF /* Welcome */,
 				EAA2EC6326E2020A00B4FACF /* Watch Face */,
 				EAA2EC6426E2021B00B4FACF /* Settings */,
 				EAA2EC6526E2022A00B4FACF /* Ingestions */,
-				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
 				EA4910BF26DFB4E1001A5316 /* Assets.xcassets */,
 				EA4910C426DFB4E1001A5316 /* Info.plist */,
 				EA4910C126DFB4E1001A5316 /* Preview Content */,
@@ -498,6 +489,14 @@
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
+				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
+				EAE4718026CBA664009FB0EC /* Persistence.swift */,
+				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
+				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
+				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
+				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
+				EAE4715B26CBA664009FB0EC /* Extensions */,
+				EAE4716E26CBA664009FB0EC /* CoreData Classes */,
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EA4910AC26DFB4E0001A5316 /* Watch Journal */,
 				EA4910B826DFB4E0001A5316 /* Watch Journal Extension */,
@@ -520,21 +519,14 @@
 			isa = PBXGroup;
 			children = (
 				EAE471AC26CBA664009FB0EC /* Reused Styles */,
-				EAE4715526CBA664009FB0EC /* Configuration */,
-				EAE4715B26CBA664009FB0EC /* Extensions */,
-				EAE4716E26CBA664009FB0EC /* CoreData Classes */,
 				EAE4712A26CBA663009FB0EC /* Settings */,
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4718726CBA664009FB0EC /* Home */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
-				EAE4718026CBA664009FB0EC /* Persistence.swift */,
-				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
-				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
-				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
-				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
+				EAE4715926CBA664009FB0EC /* Info.plist */,
 				EAE4710C26CBA582009FB0EC /* Preview Content */,
 			);
 			path = "PsychonautWiki Journal";
@@ -574,19 +566,9 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		EAE4715526CBA664009FB0EC /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
-				EAE4715926CBA664009FB0EC /* Info.plist */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
 		EAE4715B26CBA664009FB0EC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
 				EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */,
 				EAE4716A26CBA664009FB0EC /* Date-Difference.swift */,
@@ -598,6 +580,7 @@
 				EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */,
 				EAE4717C26CBA664009FB0EC /* DoseRange-Comparable.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
+				EA48B9A626E80F21003BF667 /* Angle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -624,6 +607,7 @@
 		EAE4716E26CBA664009FB0EC /* CoreData Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4723826CC6598009FB0EC /* Throwable.swift */,
 				EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */,
 				EAC306A626CDAD3500C98E3E /* SubstanceCopy+CoreDataClass.swift */,
@@ -1316,7 +1300,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "PsychonautWiki Journal/Configuration/Info.plist";
+				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1340,7 +1324,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "PsychonautWiki Journal/Configuration/Info.plist";
+				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
