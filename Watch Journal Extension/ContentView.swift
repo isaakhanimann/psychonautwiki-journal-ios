@@ -3,11 +3,16 @@ import SwiftUI
 struct ContentView: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @Environment(\.scenePhase) var scenePhase
 
     @FetchRequest(
         entity: Experience.entity(),
         sortDescriptors: [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
     ) var experiences: FetchedResults<Experience>
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
 
     @Environment(\.managedObjectContext) var moc
 
@@ -22,6 +27,9 @@ struct ContentView: View {
                     .tag(2)
                 IngestionsTab(experience: firstExperience)
                     .tag(3)
+            } else {
+                WatchFaceView(ingestions: [])
+                    .tag(2)
             }
         }
         .fullScreenCover(
@@ -35,6 +43,27 @@ struct ContentView: View {
                     .accentColor(Color.blue)
             }
         )
+        .onChange(
+            of: scenePhase,
+            perform: { newPhase in
+                if newPhase == .active {
+                    if shouldFetchAgain {
+                        PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
+                            oldFile: storedFile.first!
+                        )
+                    }
+                }
+            }
+        )
+    }
+
+    var shouldFetchAgain: Bool {
+        guard !hasBeenSetupBefore else { return false }
+        let oneDay: TimeInterval = 60 * 60 * 24 * 1
+        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
+            return false
+        }
+        return true
     }
 }
 

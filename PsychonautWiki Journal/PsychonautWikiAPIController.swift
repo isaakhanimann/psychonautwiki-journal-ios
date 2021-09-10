@@ -2,6 +2,21 @@ import Foundation
 
 struct PsychonautWikiAPIController {
 
+    static func fetchAndSaveNewSubstancesAndDeleteOldOnes(oldFile: SubstancesFile) {
+        PsychonautWikiAPIController.performRequest { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let data):
+                try? SubstanceDecoder.decodeAndSaveFile(
+                    from: data,
+                    creationDate: Date(),
+                    earlierFileToDelete: oldFile
+                )
+            }
+        }
+    }
+
     static private let url = URL(string: "https://api.psychonautwiki.org/")!
 
     enum RequestError: Error {

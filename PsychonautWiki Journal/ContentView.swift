@@ -14,8 +14,6 @@ struct ContentView: View {
     ) var storedFile: FetchedResults<SubstancesFile>
 
     @State private var areSettingsShowing = false
-    @State private var isShowingErrorAlert = false
-    @State private var errorMessage = ""
 
     var body: some View {
         let sheetBinding = Binding<ActiveSheet?>(
@@ -48,21 +46,28 @@ struct ContentView: View {
                     }
                 }
             )
-            .onChange(of: scenePhase, perform: { newPhase in
-                if newPhase == .active {
-                    calendarWrapper.checkIfSomethingChanged()
-                    maybeFetchNewSubstances()
+            .onChange(
+                of: scenePhase,
+                perform: { newPhase in
+                    if newPhase == .active {
+                        calendarWrapper.checkIfSomethingChanged()
+                        if shouldFetchAgain {
+                            PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
+                                oldFile: storedFile.first!
+                            )
+                        }
+                    }
                 }
-            }
             )
-            .alert(isPresented: $isShowingErrorAlert, content: {
-                Alert(
-                    title: Text("Failed to Fetch"),
-                    message: Text(errorMessage),
-                    dismissButton: .default(Text("Ok"))
-                )
-            }
-            )
+    }
+
+    var shouldFetchAgain: Bool {
+        guard !hasBeenSetupBefore else { return false }
+        let oneDay: TimeInterval = 60 * 60 * 24 * 1
+        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
+            return false
+        }
+        return true
     }
 
     private func toggleSettingsVisibility() {
@@ -75,44 +80,6 @@ struct ContentView: View {
         // swiftlint:disable identifier_name
         var id: Int {
             hashValue
-        }
-    }
-
-    private func maybeFetchNewSubstances() {
-
-        guard hasBeenSetupBefore else { return }
-
-        let oneDay: TimeInterval = 60 * 60 * 24 * 1
-        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
-            return
-        }
-
-        fetchNewSubstances()
-    }
-
-    private func fetchNewSubstances() {
-        PsychonautWikiAPIController.performRequest { result in
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let data):
-                tryToDecodeData(data: data)
-            }
-        }
-    }
-
-    private func tryToDecodeData(data: Data) {
-        do {
-            try SubstanceDecoder.decodeAndSaveFile(
-                from: data,
-                creationDate: Date(),
-                earlierFileToDelete: storedFile.first
-            )
-        } catch {
-            DispatchQueue.main.async {
-                self.errorMessage = error.localizedDescription
-                self.isShowingErrorAlert.toggle()
-            }
         }
     }
 }
