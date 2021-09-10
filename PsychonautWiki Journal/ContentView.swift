@@ -31,6 +31,7 @@ struct ContentView: View {
         HomeView(toggleSettingsVisibility: toggleSettingsVisibility)
             .fullScreenCover(
                 item: sheetBinding,
+                onDismiss: maybeFetchAgain,
                 content: { item in
                     switch item {
                     case .setup:
@@ -51,18 +52,23 @@ struct ContentView: View {
                 perform: { newPhase in
                     if newPhase == .active {
                         calendarWrapper.checkIfSomethingChanged()
-                        if shouldFetchAgain {
-                            PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
-                                oldFile: storedFile.first!
-                            )
-                        }
+                        maybeFetchAgain()
                     }
                 }
             )
+            .onAppear(perform: maybeFetchAgain)
+    }
+
+    func maybeFetchAgain() {
+        if shouldFetchAgain {
+            PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
+                oldFile: storedFile.first!
+            )
+        }
     }
 
     var shouldFetchAgain: Bool {
-        guard !hasBeenSetupBefore else { return false }
+        guard hasBeenSetupBefore else { return false }
         let oneDay: TimeInterval = 60 * 60 * 24 * 1
         guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
             return false
