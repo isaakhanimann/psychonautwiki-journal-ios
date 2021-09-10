@@ -22,7 +22,9 @@ enum SubstanceDecoder {
                 substancesFile.creationDate = creationDate
 
                 if let fileToDelete = earlierFileToDelete {
-                    enableInteractionsAndFavorites(of: substancesFile, basedOn: fileToDelete)
+                    enableInteractions(of: substancesFile, basedOn: fileToDelete)
+                    enableFavorites(of: substancesFile, basedOn: fileToDelete)
+                    enableSubstances(of: substancesFile, basedOn: fileToDelete)
                     updateLastUsedSubstances(of: substancesFile, basedOn: fileToDelete)
                     moc.delete(fileToDelete)
                 }
@@ -44,41 +46,6 @@ enum SubstanceDecoder {
         }
     }
 
-    private static func updateLastUsedSubstances(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
-            if let foundNewSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) {
-                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
-            }
-        }
-    }
-
-    private static func enableInteractionsAndFavorites(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        for oldSubstance in oldSubstancesFile.favoritesSorted {
-            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
-                continue
-            }
-            foundSubstance.isFavorite = true
-        }
-
-        let oldEnabledInteractions = oldSubstancesFile.generalInteractionsUnwrapped.filter { interaction in
-            interaction.isEnabled
-        }
-        for oldInteraction in oldEnabledInteractions {
-            guard let foundInteraction = newSubstancesFile.getGeneralInteraction(
-                    with: oldInteraction.nameUnwrapped
-            ) else {
-                continue
-            }
-            foundInteraction.isEnabled = true
-        }
-    }
-
     static func decodeSubstancesFile(
         from data: Data,
         with context: NSManagedObjectContext
@@ -93,5 +60,57 @@ enum SubstanceDecoder {
         let dataForFile = try json["data"].rawData()
 
         return try decoder.decode(SubstancesFile.self, from: dataForFile)
+    }
+
+    private static func updateLastUsedSubstances(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
+            if let foundNewSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) {
+                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
+            }
+        }
+    }
+
+    private static func enableInteractions(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        let oldEnabledInteractions = oldSubstancesFile.generalInteractionsUnwrapped.filter { interaction in
+            interaction.isEnabled
+        }
+        for oldInteraction in oldEnabledInteractions {
+            guard let foundInteraction = newSubstancesFile.getGeneralInteraction(
+                    with: oldInteraction.nameUnwrapped
+            ) else {
+                continue
+            }
+            foundInteraction.isEnabled = true
+        }
+    }
+
+    private static func enableFavorites(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        for oldSubstance in oldSubstancesFile.favoritesSorted {
+            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
+                continue
+            }
+            foundSubstance.isFavorite = true
+        }
+    }
+
+    private static func enableSubstances(
+        of newSubstancesFile: SubstancesFile,
+        basedOn oldSubstancesFile: SubstancesFile
+    ) {
+        for oldSubstance in oldSubstancesFile.allEnabledSubstancesUnwrapped {
+            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
+                continue
+            }
+            foundSubstance.isEnabled = true
+        }
     }
 }

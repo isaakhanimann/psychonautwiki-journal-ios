@@ -122,4 +122,50 @@ struct PersistenceController {
             try? moc.save()
         }
     }
+
+    func addInitialSubstances() {
+        let fileName = "InitialSubstances"
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+            fatalError("Failed to locate \(fileName) in bundle.")
+        }
+
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(fileName) from bundle.")
+        }
+
+        let moc = container.viewContext
+
+        moc.perform {
+            do {
+                let dateString = "2021/08/25 00:30"
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                let creationDate = formatter.date(from: dateString)!
+
+                let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: moc)
+                substancesFile.creationDate = creationDate
+                enableUncontrolledSubstances(in: substancesFile)
+
+                try moc.save()
+            } catch {
+                fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func enableUncontrolledSubstances(in file: SubstancesFile) {
+        let namesOfUncontrolledSubstances = [
+            "Caffeine",
+            "Nicotine",
+            "Myristicin",
+            "Dextromethorphan",
+            "Choline bitartrate",
+            "Citicoline",
+            "Propylhexedrine"
+        ]
+        for name in namesOfUncontrolledSubstances {
+            guard let foundSubstance = file.getSubstance(with: name) else {continue}
+            foundSubstance.isEnabled = true
+        }
+    }
 }

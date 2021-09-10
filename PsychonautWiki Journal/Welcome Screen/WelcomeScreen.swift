@@ -63,34 +63,8 @@ struct WelcomeScreen: View {
         }
         .onAppear {
             if storedFile.first == nil {
-                addInitialSubstances()
+                PersistenceController.shared.addInitialSubstances()
             }
-        }
-    }
-
-    private func addInitialSubstances() {
-        let fileName = "InitialSubstances"
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("Failed to locate \(fileName) in bundle.")
-        }
-
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load \(fileName) from bundle.")
-        }
-
-        do {
-            let dateString = "2021/08/25 00:30"
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd HH:mm"
-            let creationDate = formatter.date(from: dateString)!
-
-            try SubstanceDecoder.decodeAndSaveFile(
-                from: data,
-                creationDate: creationDate,
-                earlierFileToDelete: nil
-            )
-        } catch {
-            fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
         }
     }
 
