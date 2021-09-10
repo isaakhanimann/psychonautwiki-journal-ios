@@ -17,6 +17,18 @@ extension Category {
         }
     }
 
+    var enabledSubstancesUnwrapped: [Substance] {
+        substancesUnwrapped.filter { substance in
+            substance.isEnabled
+        }
+    }
+
+    var sortedEnabledSubstancesUnwrapped: [Substance] {
+        enabledSubstancesUnwrapped.sorted { (substance1, substance2) -> Bool in
+            substance1.nameUnwrapped < substance2.nameUnwrapped
+        }
+    }
+
     func getSubstance(with name: String) -> Substance? {
         substancesUnwrapped.first { substance in
             substance.nameUnwrapped == name

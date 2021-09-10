@@ -36,6 +36,15 @@ struct SettingsView: View {
                     )
                 }
 
+                Section(header: Text("Enabled Substances")) {
+                    NavigationLink(
+                        destination: ChooseEnabledSubstancesView(file: storedFile.first!),
+                        label: {
+                            Label("Choose Substances", systemImage: "checkmark.circle.fill")
+                        }
+                    )
+                }
+
                 Section(header: Text("Dangerous Interaction Notifications")) {
                     NavigationLink(
                         destination: ChooseInteractionsView(file: storedFile.first!),

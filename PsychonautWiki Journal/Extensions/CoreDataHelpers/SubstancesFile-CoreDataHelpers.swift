@@ -27,7 +27,7 @@ extension SubstancesFile {
     }
 
     var favoritesSorted: [Substance] {
-        let favorites = allSubstancesUnwrapped.filter { substance in
+        let favorites = allEnabledSubstancesUnwrapped.filter { substance in
             substance.isFavorite
         }
         return favorites.sorted { sub1, sub2 in
@@ -36,7 +36,7 @@ extension SubstancesFile {
     }
 
     func getRecentlyUsedSubstancesInOrder(maxSubstancesToGet: Int) -> [Substance] {
-        let substancesSortedByUse = allSubstancesUnwrapped.sorted { sub1, sub2 in
+        let substancesSortedByUse = allEnabledSubstancesUnwrapped.sorted { sub1, sub2 in
             guard let sub1DateUnwrapped = sub1.lastUsedDate else { return false }
             guard let sub2DateUnwrapped = sub2.lastUsedDate else { return true }
 
@@ -52,6 +52,12 @@ extension SubstancesFile {
 
     var allSubstancesUnwrapped: [Substance] {
         SubstancesFile.getAllSubstances(of: categoriesUnwrapped)
+    }
+
+    var allEnabledSubstancesUnwrapped: [Substance] {
+        SubstancesFile.getAllSubstances(of: categoriesUnwrapped).filter { substance in
+            substance.isEnabled
+        }
     }
 
     func getGeneralInteraction(with name: String) -> GeneralInteraction? {
@@ -92,7 +98,7 @@ extension SubstancesFile {
         let nonEmptyCategory = categoriesUnwrappedSorted.first { category in
             !category.substancesUnwrapped.isEmpty
         }
-        return nonEmptyCategory?.sortedSubstancesUnwrapped.first
+        return nonEmptyCategory?.sortedEnabledSubstancesUnwrapped.first
     }
 
     static func getAllSubstances(of categories: [Category]) -> [Substance] {

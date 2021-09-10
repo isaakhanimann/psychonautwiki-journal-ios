@@ -55,13 +55,16 @@ struct ChooseSubstanceView: View {
                     }
                 }
                 ForEach(substancesFile.categoriesUnwrappedSorted) { category in
-                    Section(header: Text(category.nameUnwrapped)) {
-                        ForEach(category.sortedSubstancesUnwrapped) { substance in
-                            SubstanceRow(
-                                substance: substance,
-                                dismiss: dismiss,
-                                experience: experience
-                            )
+                    let enabledSubstances = category.sortedEnabledSubstancesUnwrapped
+                    if !enabledSubstances.isEmpty {
+                        Section(header: Text(category.nameUnwrapped)) {
+                            ForEach(category.sortedEnabledSubstancesUnwrapped) { substance in
+                                SubstanceRow(
+                                    substance: substance,
+                                    dismiss: dismiss,
+                                    experience: experience
+                                )
+                            }
                         }
                     }
                 }

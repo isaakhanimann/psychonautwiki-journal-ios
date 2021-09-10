@@ -34,6 +34,8 @@
 		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EA941CEF26E94D4500DBFCFF /* ChooseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */; };
 		EA9D22A626EB374D00BCF893 /* WatchFaceIngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */; };
+		EA9D22A826EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */; };
+		EA9D22AA26EB4B6900BCF893 /* EnabledSubstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */; };
@@ -243,6 +245,8 @@
 		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTimeView.swift; sourceTree = "<group>"; };
 		EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceIngestionObserverView.swift; sourceTree = "<group>"; };
+		EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEnabledSubstancesView.swift; sourceTree = "<group>"; };
+		EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledSubstanceRowView.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
+				EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */,
+				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -649,6 +655,7 @@
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
 				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4718C26CBA664009FB0EC /* Timeline Chart */,
+				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,
 			);
 			path = Experience;
@@ -700,7 +707,6 @@
 			children = (
 				EAE471A226CBA664009FB0EC /* EditIngestionView.swift */,
 				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
-				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 			);
 			path = "Edit Ingestions";
 			sourceTree = "<group>";
@@ -997,6 +1003,7 @@
 				EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */,
 				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
+				EA9D22AA26EB4B6900BCF893 /* EnabledSubstanceRowView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
 				EAE471FB26CBA664009FB0EC /* DoseRange+CoreDataClass.swift in Sources */,
 				EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */,
@@ -1034,6 +1041,7 @@
 				EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */,
 				EAE471F626CBA664009FB0EC /* DoseTypes+CoreDataClass.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
+				EA9D22A826EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift in Sources */,
 				EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE4721F26CBA664009FB0EC /* SubstanceRow.swift in Sources */,

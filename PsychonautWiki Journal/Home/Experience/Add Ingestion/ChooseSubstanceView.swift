@@ -10,7 +10,7 @@ struct ChooseSubstanceView: View {
     @State private var searchText = ""
     @State private var recentsFiltered: [Substance]
     @State private var favoritesFiltered: [Substance]
-    @State private var categoriesFiltered: [CategorySearchResult]
+    @State private var categoriesSearchResults: [CategorySearchResult]
 
     init(
         substancesFile: SubstancesFile,
@@ -24,11 +24,15 @@ struct ChooseSubstanceView: View {
             maxSubstancesToGet: 5
         )
         self.favoritesFiltered = substancesFile.favoritesSorted
-        self.categoriesFiltered = substancesFile.sortedCategoriesUnwrapped.map { category in
-            CategorySearchResult(
-                categoryName: category.nameUnwrapped,
-                filteredSubstances: category.sortedSubstancesUnwrapped
-            )
+        self.categoriesSearchResults = substancesFile.sortedCategoriesUnwrapped.compactMap { category in
+            if category.sortedEnabledSubstancesUnwrapped.isEmpty {
+                return nil
+            } else {
+                return CategorySearchResult(
+                    categoryName: category.nameUnwrapped,
+                    filteredSubstances: category.sortedEnabledSubstancesUnwrapped
+                )
+            }
         }
     }
 
@@ -61,9 +65,9 @@ struct ChooseSubstanceView: View {
                             }
                         }
                     }
-                    ForEach(categoriesFiltered) { category in
-                        Section(header: Text(category.categoryName)) {
-                            ForEach(category.filteredSubstances) { substance in
+                    ForEach(categoriesSearchResults) { categoriesSearchResult in
+                        Section(header: Text(categoriesSearchResult.categoryName)) {
+                            ForEach(categoriesSearchResult.filteredSubstances) { substance in
                                 SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
                             }
                         }
@@ -71,8 +75,8 @@ struct ChooseSubstanceView: View {
 
                     if recentsFiltered.isEmpty
                         && favoritesFiltered.isEmpty
-                        && categoriesFiltered.isEmpty {
-                        Text("No substances match your search")
+                        && categoriesSearchResults.isEmpty {
+                        Text("No substances found")
                             .foregroundColor(.secondary)
                     }
 
@@ -123,8 +127,8 @@ struct ChooseSubstanceView: View {
         self.favoritesFiltered = substancesFile.favoritesSorted.filter { substance in
             substance.nameUnwrapped.hasPrefix(searchText)
         }
-        self.categoriesFiltered = substancesFile.sortedCategoriesUnwrapped.compactMap { category in
-            let filteredSubstancesInCategory = category.substancesUnwrapped.filter(doesSearchTermInclude)
+        self.categoriesSearchResults = substancesFile.sortedCategoriesUnwrapped.compactMap { category in
+            let filteredSubstancesInCategory = category.enabledSubstancesUnwrapped.filter(doesSearchTermInclude)
             if filteredSubstancesInCategory.isEmpty {
                 return nil
             } else {
