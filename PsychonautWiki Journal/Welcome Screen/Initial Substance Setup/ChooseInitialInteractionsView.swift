@@ -18,31 +18,32 @@ struct ChooseInitialInteractionsView: View {
             Text("Choose Interactions")
                 .multilineTextAlignment(.center)
                 .font(.largeTitle.bold())
-            Text("Notify me of dangerous and unsafe interactions with:")
+            Text("Get notified of dangerous interactions with:")
+                .font(.headline)
                 .foregroundColor(.secondary)
             List {
                 ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
                     InteractionRowView(interaction: interaction)
                 }
             }
-            .listStyle(InsetGroupedListStyle())
-            .cornerRadius(10)
-
-            NavigationLink(
-                destination: ChooseInitialFavoritesView(file: file, dismiss: dismiss),
-                label: {
-                    Text("Next")
-                        .primaryButtonText()
-                }
-            )
-            .isDetailLink(false)
+            Button("Done", action: dismiss)
+                .buttonStyle(PrimaryButtonStyle())
         }
-        .padding()
+        .padding(.horizontal)
         .navigationBarHidden(true)
         .onDisappear {
             if moc.hasChanges {
                 try? moc.save()
             }
         }
+    }
+}
+
+struct ChooseInitialInteractionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        let helper = PersistenceController.preview.createPreviewHelper()
+        ChooseInitialInteractionsView(file: helper.substancesFile, dismiss: {})
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .accentColor(Color.blue)
     }
 }

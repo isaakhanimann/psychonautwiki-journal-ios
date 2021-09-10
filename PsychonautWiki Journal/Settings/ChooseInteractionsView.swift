@@ -6,15 +6,9 @@ struct ChooseInteractionsView: View {
     @Environment(\.managedObjectContext) var moc
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Get notified of dangerous interactions with:")
-                .font(.headline)
-                .foregroundColor(.secondary)
-                .padding(.horizontal)
-            List {
-                ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
-                    InteractionRowView(interaction: interaction)
-                }
+        List {
+            ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
+                InteractionRowView(interaction: interaction)
             }
         }
         .onDisappear {

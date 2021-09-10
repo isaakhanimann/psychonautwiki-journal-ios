@@ -23,6 +23,8 @@
 		EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910BF26DFB4E1001A5316 /* Assets.xcassets */; };
 		EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */; };
 		EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EA5968F126EB940900F8F6D3 /* ChooseEnabledSubstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */; };
+		EA5968F226EB941500F8F6D3 /* EnabledSubstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */; };
 		EA6ECC9D26E264D300F32D78 /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
 		EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EA6ECCA326E265C700F32D78 /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
@@ -137,7 +139,6 @@
 		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
 		EAE4720626CBA664009FB0EC /* ChooseInitialInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */; };
-		EAE4720726CBA664009FB0EC /* ChooseInitialFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718526CBA664009FB0EC /* ChooseInitialFavoritesView.swift */; };
 		EAE4720826CBA664009FB0EC /* FavoritesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
 		EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
@@ -313,7 +314,6 @@
 		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInitialInteractionsView.swift; sourceTree = "<group>"; };
-		EAE4718526CBA664009FB0EC /* ChooseInitialFavoritesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInitialFavoritesView.swift; sourceTree = "<group>"; };
 		EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesRowView.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
 		EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
@@ -567,6 +567,7 @@
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
+				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
 				EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */,
 				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 			);
@@ -739,8 +740,6 @@
 				EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */,
 				EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */,
 				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
-				EAE4718526CBA664009FB0EC /* ChooseInitialFavoritesView.swift */,
-				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
 				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 			);
 			path = "Initial Substance Setup";
@@ -934,6 +933,7 @@
 				EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */,
 				EAA2EC4E26DFCBE200B4FACF /* SubstanceCopy+CoreDataClass.swift in Sources */,
+				EA5968F126EB940900F8F6D3 /* ChooseEnabledSubstancesView.swift in Sources */,
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
 				EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */,
@@ -968,6 +968,7 @@
 				EA6ECCA526E265EF00F32D78 /* FavoritesRowView.swift in Sources */,
 				EAA2EC4026DFCBCF00B4FACF /* DoseRange-CoreDataHelpers.swift in Sources */,
 				EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */,
+				EA5968F226EB941500F8F6D3 /* EnabledSubstanceRowView.swift in Sources */,
 				EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */,
 				EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */,
 				EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */,
@@ -992,7 +993,6 @@
 				EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAE471C326CBA664009FB0EC /* SectionFooter.swift in Sources */,
 				EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */,
-				EAE4720726CBA664009FB0EC /* ChooseInitialFavoritesView.swift in Sources */,
 				EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */,
 				EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
