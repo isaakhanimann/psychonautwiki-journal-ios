@@ -6,26 +6,6 @@ struct ChooseSubstanceView: View {
     let dismiss: () -> Void
     let experience: Experience
 
-    @State private var selectedSubstance: Substance
-    @State private var isNavigatedToDose = false
-    @State private var isNavigatedToRoute = false
-    @State private var administrationRoute: Roa.AdministrationRoute
-    @State private var isKeyboardShowing = false
-
-    init(
-        substancesFile: SubstancesFile,
-        dismiss: @escaping () -> Void,
-        experience: Experience
-    ) {
-        self.substancesFile = substancesFile
-        self.dismiss = dismiss
-        self.experience = experience
-        self._selectedSubstance = State(wrappedValue: substancesFile.newIngestionDefaultSubstance!)
-        self._administrationRoute = State(
-            wrappedValue: substancesFile.newIngestionDefaultSubstance!.administrationRoutesUnwrapped.first!
-        )
-    }
-
     var body: some View {
         NavigationView {
             let recentSubstances = substancesFile.getRecentlyUsedSubstancesInOrder(
@@ -75,20 +55,6 @@ struct ChooseSubstanceView: View {
                 }
             }
         }
-    }
-
-    private func moveToNextScreen(chosenSubstance: Substance) {
-        self.selectedSubstance = chosenSubstance
-        if selectedSubstance.administrationRoutesUnwrapped.count > 1 {
-            isNavigatedToRoute.toggle()
-        } else {
-            navigateToDose(route: selectedSubstance.administrationRoutesUnwrapped.first!)
-        }
-    }
-
-    private func navigateToDose(route: Roa.AdministrationRoute) {
-        administrationRoute = route
-        isNavigatedToDose.toggle()
     }
 }
 

@@ -87,20 +87,6 @@ extension SubstancesFile {
         }
     }
 
-    var newIngestionDefaultSubstance: Substance? {
-        let recents = getRecentlyUsedSubstancesInOrder(maxSubstancesToGet: 1)
-        if let substance = recents.first {
-            return substance
-        }
-        if let favoriteFirst = favoritesSorted.first {
-            return favoriteFirst
-        }
-        let nonEmptyCategory = categoriesUnwrappedSorted.first { category in
-            !category.substancesUnwrapped.isEmpty
-        }
-        return nonEmptyCategory?.sortedEnabledSubstancesUnwrapped.first
-    }
-
     static func getAllSubstances(of categories: [Category]) -> [Substance] {
         var allSubstances = [Substance]()
         for category in categories {
