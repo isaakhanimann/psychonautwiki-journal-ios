@@ -145,6 +145,7 @@ struct PersistenceController {
                 let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: moc)
                 substancesFile.creationDate = creationDate
                 enableUncontrolledSubstances(in: substancesFile)
+                enableSomeInteractions(in: substancesFile)
 
                 try moc.save()
             } catch {
@@ -166,6 +167,18 @@ struct PersistenceController {
         for name in namesOfUncontrolledSubstances {
             guard let foundSubstance = file.getSubstance(with: name) else {continue}
             foundSubstance.isEnabled = true
+        }
+    }
+
+    private func enableSomeInteractions(in file: SubstancesFile) {
+        let namesOfDefaultInteractions = [
+            "Alcohol",
+            "Hormonal birth control",
+            "Antihistamine"
+        ]
+        for name in namesOfDefaultInteractions {
+            guard let foundInteraction = file.getGeneralInteraction(with: name) else {continue}
+            foundInteraction.isEnabled = true
         }
     }
 }
