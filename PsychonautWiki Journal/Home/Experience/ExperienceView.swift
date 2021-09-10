@@ -6,6 +6,7 @@ struct ExperienceView: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
+    @EnvironmentObject var connectivity: Connectivity
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
@@ -116,6 +117,7 @@ struct ExperienceView: View {
     private func deleteIngestions(at offsets: IndexSet) {
         for offset in offsets {
             let ingestion = experience.sortedIngestionsUnwrapped[offset]
+            connectivity.sendIngestionDelete(for: ingestion.identifier)
             moc.delete(ingestion)
         }
         save()

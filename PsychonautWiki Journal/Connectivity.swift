@@ -66,12 +66,20 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
         DispatchQueue.main.async {
-            if let isUpdate = userInfo[self.isUpdateKey] as? Bool, isUpdate {
+            guard let messageType = userInfo[self.messageTypeKey] as? String else {return}
+            guard let messageTypeUnwrapped = MessageType(rawValue: messageType) else {return}
+
+            switch messageTypeUnwrapped {
+            case .create:
+                self.receiveNewIngestion(userInfo: userInfo)
+            case .update:
                 #if os(watchOS)
                 self.receiveIngestionUpdate(userInfo: userInfo)
                 #endif
-            } else {
-                self.receiveNewIngestion(userInfo: userInfo)
+            case .delete:
+                #if os(watchOS)
+                self.receiveIngestionDelete(userInfo: userInfo)
+                #endif
             }
         }
         //        DispatchQueue.main.async {
@@ -94,12 +102,33 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         //        }
     }
 
-    func sendIngestionUpdate(for ingestion: Ingestion) {
+    func sendIngestionDelete(for ingestionIdentifier: UUID?) {
+        guard let identifierUnwrapped = ingestionIdentifier else {return}
         let data = [
-            isUpdateKey: true,
-            ingestionIdKey: ingestion.identifier?.uuidString ?? "Unknown",
+            messageTypeKey: MessageType.delete.rawValue,
+            ingestionIdKey: identifierUnwrapped.uuidString
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    func receiveIngestionDelete(userInfo: [String: Any]) {
+        guard let identifier = userInfo[ingestionIdKey] as? String else {return}
+        guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
+
+        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
+        guard let ingestionToDelete = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifierUnwrapped}) else {return}
+
+        PersistenceController.shared.delete(ingestion: ingestionToDelete)
+    }
+
+    func sendIngestionUpdate(for ingestion: Ingestion) {
+        guard let identifier = ingestion.identifier else {return}
+        guard let substanceName = ingestion.substanceCopy?.name else {return}
+        let data = [
+            messageTypeKey: MessageType.update.rawValue,
+            ingestionIdKey: identifier.uuidString,
             ingestionTimeKey: ingestion.timeUnwrapped,
-            ingestionSubstanceKey: ingestion.substanceCopy?.name ?? "Unknown",
+            ingestionSubstanceKey: substanceName,
             ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
             ingestionDoseKey: ingestion.dose,
             ingestionColorKey: ingestion.colorUnwrapped.rawValue
@@ -130,31 +159,14 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         )
     }
 
-    //        func receiveIngestionUpdate(userInfo: [String: Any]) {
-    //            guard let identifier = userInfo[ingestionIdKey] as? UUID else {return}
-    //            guard let createIngestionDate = userInfo[ingestionTimeKey] as? Date else {return}
-//            guard let route = userInfo[ingestionRouteKey] as? Roa.AdministrationRoute else {return}
-//            guard let dose = userInfo[ingestionDoseKey] as? Double else {return}
-//            guard let color = userInfo[ingestionColorKey] as? Ingestion.IngestionColor else {return}
-//
-//            guard let experience = PersistenceController.shared.getLatestExperience() else {return}
-//            guard let ingestionToUpdate = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifier}) else {return}
-//
-//            PersistenceController.shared.updateIngestion(
-//                ingestionToUpdate: ingestionToUpdate,
-//                time: createIngestionDate,
-//                route: route,
-//                color: color,
-//                dose: dose
-//            )
-//        }
-
     func sendNewIngestion(ingestion: Ingestion) {
+        guard let identifier = ingestion.identifier else {return}
+        guard let substanceName = ingestion.substanceCopy?.name else {return}
         let data = [
-            isUpdateKey: false,
-            ingestionIdKey: ingestion.identifier?.uuidString ?? "Unknown",
+            messageTypeKey: MessageType.create.rawValue,
+            ingestionIdKey: identifier.uuidString,
             ingestionTimeKey: ingestion.timeUnwrapped,
-            ingestionSubstanceKey: ingestion.substanceCopy?.name ?? "Unknown",
+            ingestionSubstanceKey: substanceName,
             ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
             ingestionDoseKey: ingestion.dose,
             ingestionColorKey: ingestion.colorUnwrapped.rawValue
@@ -162,7 +174,11 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         transferUserInfo(data)
     }
 
-    private let isUpdateKey = "isUpdate"
+    enum MessageType: String {
+        case create, update, delete
+    }
+
+    private let messageTypeKey = "messageType"
     private let ingestionIdKey = "ingestionId"
     private let ingestionTimeKey = "createIngestionDate"
     private let ingestionSubstanceKey = "substanceName"

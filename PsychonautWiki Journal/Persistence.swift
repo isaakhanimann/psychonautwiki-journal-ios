@@ -87,6 +87,15 @@ struct PersistenceController {
         }
     }
 
+    func delete(ingestion: Ingestion) {
+        let moc = container.viewContext
+        moc.perform {
+            moc.delete(ingestion)
+
+            try? moc.save()
+        }
+    }
+
     // swiftlint:disable function_parameter_count
     func createIngestion(
         identifier: UUID,
