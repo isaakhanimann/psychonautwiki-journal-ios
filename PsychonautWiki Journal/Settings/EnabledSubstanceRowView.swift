@@ -3,9 +3,17 @@ import SwiftUI
 struct EnabledSubstanceRowView: View {
 
     @ObservedObject var substance: Substance
+    let updateAllToggle: () -> Void
 
     var body: some View {
-        Toggle(substance.nameUnwrapped, isOn: $substance.isEnabled)
+        let toggleBinding = Binding<Bool>(
+            get: {self.substance.isEnabled},
+            set: {
+                self.substance.isEnabled = $0
+                updateAllToggle()
+            }
+        )
+        Toggle(substance.nameUnwrapped, isOn: toggleBinding)
             .toggleStyle(SwitchToggleStyle(tint: .accentColor))
     }
 }
@@ -13,6 +21,6 @@ struct EnabledSubstanceRowView: View {
 struct EnabledSubstanceRowView_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        EnabledSubstanceRowView(substance: helper.substance)
+        EnabledSubstanceRowView(substance: helper.substance, updateAllToggle: {})
     }
 }

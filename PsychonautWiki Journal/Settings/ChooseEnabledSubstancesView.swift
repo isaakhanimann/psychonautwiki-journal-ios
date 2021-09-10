@@ -4,7 +4,14 @@ struct ChooseEnabledSubstancesView: View {
 
     @ObservedObject var file: SubstancesFile
 
+    @State private var areAllSubstancesEnabled: Bool = false
+
     @Environment(\.managedObjectContext) var moc
+
+    init(file: SubstancesFile) {
+        self.file = file
+        self._areAllSubstancesEnabled = State(wrappedValue: file.allSubstancesUnwrapped.allSatisfy {$0.isEnabled})
+    }
 
     var body: some View {
         List {
@@ -12,10 +19,24 @@ struct ChooseEnabledSubstancesView: View {
                 if !category.substancesUnwrapped.isEmpty {
                     Section(header: Text(category.nameUnwrapped)) {
                         ForEach(category.sortedSubstancesUnwrapped) { substance in
-                            EnabledSubstanceRowView(substance: substance)
+                            EnabledSubstanceRowView(substance: substance, updateAllToggle: updateAllToggle)
                         }
                     }
                 }
+            }
+        }
+        .toolbar {
+            let toggleBinding = Binding<Bool>(
+                get: {self.areAllSubstancesEnabled},
+                set: {
+                    self.areAllSubstancesEnabled = $0
+                    toggleAllSubstances(to: $0)
+                }
+            )
+            ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+                Toggle("Enable All", isOn: toggleBinding.animation())
+                    .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                    .labelsHidden()
             }
         }
         .listStyle(PlainListStyle())
@@ -25,6 +46,19 @@ struct ChooseEnabledSubstancesView: View {
                 try? moc.save()
             }
         }
+    }
+
+    private func toggleAllSubstances(to isEnabled: Bool) {
+        file.allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = isEnabled
+        }
+        if moc.hasChanges {
+            try? moc.save()
+        }
+    }
+
+    private func updateAllToggle() {
+        self.areAllSubstancesEnabled = file.allSubstancesUnwrapped.allSatisfy {$0.isEnabled}
     }
 }
 

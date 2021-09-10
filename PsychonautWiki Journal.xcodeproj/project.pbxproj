@@ -565,11 +565,11 @@
 				EAE4712B26CBA663009FB0EC /* SettingsView.swift */,
 				EAE4713126CBA663009FB0EC /* SectionFooter.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
+				EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */,
+				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 				EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
 				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
-				EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */,
-				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
