@@ -17,9 +17,9 @@ struct ContentView: View {
         TabView(selection: $selection) {
             SettingsTab()
                 .tag(1)
-            WatchFaceView(ingestions: experiences.first?.sortedIngestionsUnwrapped ?? [])
-                .tag(2)
             if let firstExperience = experiences.first {
+                WatchFaceIngestionObserverView(experience: firstExperience)
+                    .tag(2)
                 IngestionsTab(experience: firstExperience)
                     .tag(3)
             }

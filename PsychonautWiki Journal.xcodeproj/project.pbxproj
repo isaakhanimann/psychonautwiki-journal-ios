@@ -33,6 +33,7 @@
 		EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE826E8EAF400DBFCFF /* ClockHand.swift */; };
 		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EA941CEF26E94D4500DBFCFF /* ChooseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */; };
+		EA9D22A626EB374D00BCF893 /* WatchFaceIngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */; };
@@ -241,6 +242,7 @@
 		EA941CE826E8EAF400DBFCFF /* ClockHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHand.swift; sourceTree = "<group>"; };
 		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTimeView.swift; sourceTree = "<group>"; };
+		EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceIngestionObserverView.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		EAA2EC3C26DFC8F300B4FACF /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 		EAA2EC6326E2020A00B4FACF /* Watch Face */ = {
 			isa = PBXGroup;
 			children = (
+				EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */,
 				EA48B9A126E802E6003BF667 /* WatchFaceView.swift */,
 				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
 				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
@@ -915,6 +918,7 @@
 				EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */,
 				EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */,
 				EAA2EC5226DFCBE200B4FACF /* DurationTypes+CoreDataClass.swift in Sources */,
+				EA9D22A626EB374D00BCF893 /* WatchFaceIngestionObserverView.swift in Sources */,
 				EAA2EC6C26E2113100B4FACF /* IngestionRow.swift in Sources */,
 				EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */,
 				EAA2EC4226DFCBCF00B4FACF /* DurationTypes-CoreDataHelpers.swift in Sources */,
