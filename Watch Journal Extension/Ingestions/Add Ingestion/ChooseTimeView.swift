@@ -117,6 +117,7 @@ struct ChooseTimeView: View {
         components.day = calendar.component(.day, from: dayDate)
         components.hour = hour
         components.minute = minute
+        components.second = calendar.component(.second, from: Date())
 
         self.selectedTime = calendar.date(from: components) ?? Date()
     }
