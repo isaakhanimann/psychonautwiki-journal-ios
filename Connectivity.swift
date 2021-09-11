@@ -3,7 +3,8 @@ import WatchConnectivity
 import ClockKit
 
 class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
-    @Published var receivedText = ""
+
+    @Published var activationState = WCSessionActivationState.notActivated
 
     override init() {
         super.init()
@@ -22,20 +23,20 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         error: Error?
     ) {
         DispatchQueue.main.async {
-            if activationState == .activated {
-                if session.isWatchAppInstalled {
-                    self.receivedText = "Watch app is installed!"
-                }
-            }
+            self.activationState = session.activationState
         }
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {
-
+        DispatchQueue.main.async {
+            self.activationState = session.activationState
+        }
     }
 
     func sessionDidDeactivate(_ session: WCSession) {
-
+        DispatchQueue.main.async {
+            self.activationState = session.activationState
+        }
     }
 
     func updateComplication(with data: [String: Any]) {
@@ -44,7 +45,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         if session.activationState == .activated && session.isComplicationEnabled {
             session.transferCurrentComplicationUserInfo(data)
             // swiftlint:disable line_length
-            receivedText = "Attempted to send complication data. Remaining transfers: \(session.remainingComplicationUserInfoTransfers)"
+            print("Attempted to send complication data. Remaining transfers: \(session.remainingComplicationUserInfoTransfers)")
         }
     }
     #else
@@ -53,6 +54,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
     ) {
+        DispatchQueue.main.async {
+            self.activationState = session.activationState
+        }
     }
     #endif
 
