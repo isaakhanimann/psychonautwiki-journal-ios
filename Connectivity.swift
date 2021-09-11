@@ -2,9 +2,14 @@ import Foundation
 import WatchConnectivity
 import ClockKit
 
+// swiftlint:disable type_body_length
 class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     @Published var activationState = WCSessionActivationState.notActivated
+
+    #if os(iOS)
+    @Published var isWatchAppInstalled = false
+    #endif
 
     // MARK: General Methods
 
@@ -26,6 +31,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     ) {
         DispatchQueue.main.async {
             self.activationState = activationState
+            if activationState == .activated {
+                self.isWatchAppInstalled = session.isWatchAppInstalled
+            }
         }
     }
 
@@ -90,6 +98,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 self.receiveEnabledSubstances(userInfo: userInfo)
             case .updateFavoriteSubstances:
                 self.receiveFavoriteSubstances(userInfo: userInfo)
+            case .deleteAllIngestions:
+                #if os(watchOS)
+                self.receiveDeleteAll()
+                #endif
             }
         }
         //        DispatchQueue.main.async {
@@ -115,7 +127,12 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     // MARK: Constants
 
     enum MessageType: String {
-        case createIngestion, updateIngestion, deleteIngestion, updateEnabledSubstances, updateFavoriteSubstances
+        case createIngestion
+        case updateIngestion
+        case deleteIngestion
+        case updateEnabledSubstances
+        case updateFavoriteSubstances
+        case deleteAllIngestions
     }
 
     private let messageTypeKey = "messageType"
@@ -152,6 +169,20 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
             ingestionDoseKey: ingestion.dose,
             ingestionColorKey: ingestion.colorUnwrapped.rawValue
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    func sendReplaceIngestions(ingestions: [Ingestion]) {
+        sendDeleteAllIngestions()
+        for ingestion in ingestions {
+            sendNewIngestion(ingestion: ingestion)
+        }
+    }
+
+    private func sendDeleteAllIngestions() {
+        let data = [
+            messageTypeKey: MessageType.deleteAllIngestions.rawValue
         ] as [String: Any]
         transferUserInfo(data)
     }
@@ -289,6 +320,19 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             for name in namesOfFavoriteSubstances {
                 guard let foundSubstance = PersistenceController.shared.findSubstance(with: name) else {continue}
                 foundSubstance.isFavorite = true
+            }
+            if moc.hasChanges {
+                try? moc.save()
+            }
+        }
+    }
+
+    func receiveDeleteAll() {
+        let moc = PersistenceController.shared.container.viewContext
+        moc.perform {
+            guard let currentExperience = PersistenceController.shared.getLatestExperience() else {return}
+            for ingestion in currentExperience.sortedIngestionsUnwrapped {
+                moc.delete(ingestion)
             }
             if moc.hasChanges {
                 try? moc.save()

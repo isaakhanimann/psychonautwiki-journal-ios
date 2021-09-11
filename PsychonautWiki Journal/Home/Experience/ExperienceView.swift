@@ -57,6 +57,14 @@ struct ExperienceView: View {
                 }
 
             }
+
+            if connectivity.activationState == .activated && connectivity.isWatchAppInstalled {
+                Button(action: {
+                    connectivity.sendReplaceIngestions(ingestions: experience.sortedIngestionsUnwrapped)
+                }, label: {
+                    Label("Sync to Apple Watch", systemImage: "applewatch")
+                })
+            }
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(selectedTitle)
@@ -153,5 +161,16 @@ struct ExperienceView: View {
         if writtenText != placeholderString {
             experience.text = writtenText
         }
+    }
+}
+
+struct ExperienceView_Previews: PreviewProvider {
+    static var previews: some View {
+        let helper = PersistenceController.preview.createPreviewHelper()
+        ExperienceView(experience: helper.experiences.first!)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(Connectivity())
+            .environmentObject(CalendarWrapper())
+            .accentColor(Color.blue)
     }
 }

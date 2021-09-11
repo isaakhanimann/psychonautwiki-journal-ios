@@ -494,6 +494,7 @@
 				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
 				EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */,
 				EAE4712826CBA663009FB0EC /* SubstanceDecoder.swift */,
+				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4716E26CBA664009FB0EC /* CoreData Classes */,
@@ -638,7 +639,6 @@
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
-				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4718C26CBA664009FB0EC /* Timeline Chart */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,
