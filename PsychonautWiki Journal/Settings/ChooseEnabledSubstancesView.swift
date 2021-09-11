@@ -7,6 +7,7 @@ struct ChooseEnabledSubstancesView: View {
     @State private var areAllSubstancesEnabled: Bool = false
 
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var connectivity: Connectivity
 
     init(file: SubstancesFile) {
         self.file = file
@@ -43,6 +44,7 @@ struct ChooseEnabledSubstancesView: View {
         .navigationTitle("Choose Substances")
         .onDisappear {
             if moc.hasChanges {
+                connectivity.sendEnabledSubstances(from: file)
                 try? moc.save()
             }
         }

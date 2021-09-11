@@ -5,6 +5,7 @@ struct ChooseFavoritesView: View {
     @ObservedObject var file: SubstancesFile
 
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var connectivity: Connectivity
 
     var areThereAnyEnabledSubstances: Bool {
         !file.allEnabledSubstancesUnwrapped.isEmpty
@@ -32,6 +33,7 @@ struct ChooseFavoritesView: View {
         .navigationTitle("Choose Favorites")
         .onDisappear {
             if moc.hasChanges {
+                connectivity.sendFavoriteSubstances(from: file)
                 try? moc.save()
             }
         }

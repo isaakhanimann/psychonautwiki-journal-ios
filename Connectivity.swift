@@ -6,6 +6,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     @Published var activationState = WCSessionActivationState.notActivated
 
+    // MARK: General Methods
+
     override init() {
         super.init()
 
@@ -23,7 +25,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         error: Error?
     ) {
         DispatchQueue.main.async {
-            self.activationState = session.activationState
+            self.activationState = activationState
         }
     }
 
@@ -55,7 +57,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         error: Error?
     ) {
         DispatchQueue.main.async {
-            self.activationState = session.activationState
+            self.activationState = activationState
         }
     }
     #endif
@@ -74,16 +76,20 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             guard let messageTypeUnwrapped = MessageType(rawValue: messageType) else {return}
 
             switch messageTypeUnwrapped {
-            case .create:
+            case .createIngestion:
                 self.receiveNewIngestion(userInfo: userInfo)
-            case .update:
+            case .updateIngestion:
                 #if os(watchOS)
                 self.receiveIngestionUpdate(userInfo: userInfo)
                 #endif
-            case .delete:
+            case .deleteIngestion:
                 #if os(watchOS)
                 self.receiveIngestionDelete(userInfo: userInfo)
                 #endif
+            case .updateEnabledSubstances:
+                self.receiveEnabledSubstances(userInfo: userInfo)
+            case .updateFavoriteSubstances:
+                self.receiveFavoriteSubstances(userInfo: userInfo)
             }
         }
         //        DispatchQueue.main.async {
@@ -106,14 +112,87 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         //        }
     }
 
+    // MARK: Constants
+
+    enum MessageType: String {
+        case createIngestion, updateIngestion, deleteIngestion, updateEnabledSubstances, updateFavoriteSubstances
+    }
+
+    private let messageTypeKey = "messageType"
+    private let ingestionIdKey = "ingestionId"
+    private let ingestionTimeKey = "createIngestionDate"
+    private let ingestionSubstanceKey = "substanceName"
+    private let ingestionRouteKey = "route"
+    private let ingestionDoseKey = "dose"
+    private let ingestionColorKey = "color"
+    private let substanceNamesKey = "listOfNames"
+
+    private let substanceNameSeparator = "#"
+
+    // MARK: Send Methods
+
+    #if os(iOS)
     func sendIngestionDelete(for ingestionIdentifier: UUID?) {
         guard let identifierUnwrapped = ingestionIdentifier else {return}
         let data = [
-            messageTypeKey: MessageType.delete.rawValue,
+            messageTypeKey: MessageType.deleteIngestion.rawValue,
             ingestionIdKey: identifierUnwrapped.uuidString
         ] as [String: Any]
         transferUserInfo(data)
     }
+
+    func sendIngestionUpdate(for ingestion: Ingestion) {
+        guard let identifier = ingestion.identifier else {return}
+        guard let substanceName = ingestion.substanceCopy?.name else {return}
+        let data = [
+            messageTypeKey: MessageType.updateIngestion.rawValue,
+            ingestionIdKey: identifier.uuidString,
+            ingestionTimeKey: ingestion.timeUnwrapped,
+            ingestionSubstanceKey: substanceName,
+            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
+            ingestionDoseKey: ingestion.dose,
+            ingestionColorKey: ingestion.colorUnwrapped.rawValue
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+    #endif
+
+    func sendNewIngestion(ingestion: Ingestion) {
+        guard let identifier = ingestion.identifier else {return}
+        guard let substanceName = ingestion.substanceCopy?.name else {return}
+        let data = [
+            messageTypeKey: MessageType.createIngestion.rawValue,
+            ingestionIdKey: identifier.uuidString,
+            ingestionTimeKey: ingestion.timeUnwrapped,
+            ingestionSubstanceKey: substanceName,
+            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
+            ingestionDoseKey: ingestion.dose,
+            ingestionColorKey: ingestion.colorUnwrapped.rawValue
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    func sendEnabledSubstances(from file: SubstancesFile) {
+        let namesOfEnabledSubstances = file.allEnabledSubstancesUnwrapped.map({$0.nameUnwrapped}).joined(separator: substanceNameSeparator)
+
+        let data = [
+            messageTypeKey: MessageType.updateEnabledSubstances.rawValue,
+            substanceNamesKey: namesOfEnabledSubstances
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    func sendFavoriteSubstances(from file: SubstancesFile) {
+        let namesOfFavoriteSubstances = file.favoritesSorted.map({$0.nameUnwrapped}).joined(separator: substanceNameSeparator)
+
+        let data = [
+            messageTypeKey: MessageType.updateFavoriteSubstances.rawValue,
+            substanceNamesKey: namesOfFavoriteSubstances
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    // MARK: Receive Methods
 
     func receiveIngestionDelete(userInfo: [String: Any]) {
         guard let identifier = userInfo[ingestionIdKey] as? String else {return}
@@ -123,21 +202,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let ingestionToDelete = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifierUnwrapped}) else {return}
 
         PersistenceController.shared.delete(ingestion: ingestionToDelete)
-    }
-
-    func sendIngestionUpdate(for ingestion: Ingestion) {
-        guard let identifier = ingestion.identifier else {return}
-        guard let substanceName = ingestion.substanceCopy?.name else {return}
-        let data = [
-            messageTypeKey: MessageType.update.rawValue,
-            ingestionIdKey: identifier.uuidString,
-            ingestionTimeKey: ingestion.timeUnwrapped,
-            ingestionSubstanceKey: substanceName,
-            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
-            ingestionDoseKey: ingestion.dose,
-            ingestionColorKey: ingestion.colorUnwrapped.rawValue
-        ] as [String: Any]
-        transferUserInfo(data)
     }
 
     func receiveIngestionUpdate(userInfo: [String: Any]) {
@@ -162,33 +226,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             dose: dose
         )
     }
-
-    func sendNewIngestion(ingestion: Ingestion) {
-        guard let identifier = ingestion.identifier else {return}
-        guard let substanceName = ingestion.substanceCopy?.name else {return}
-        let data = [
-            messageTypeKey: MessageType.create.rawValue,
-            ingestionIdKey: identifier.uuidString,
-            ingestionTimeKey: ingestion.timeUnwrapped,
-            ingestionSubstanceKey: substanceName,
-            ingestionRouteKey: ingestion.administrationRouteUnwrapped.rawValue,
-            ingestionDoseKey: ingestion.dose,
-            ingestionColorKey: ingestion.colorUnwrapped.rawValue
-        ] as [String: Any]
-        transferUserInfo(data)
-    }
-
-    enum MessageType: String {
-        case create, update, delete
-    }
-
-    private let messageTypeKey = "messageType"
-    private let ingestionIdKey = "ingestionId"
-    private let ingestionTimeKey = "createIngestionDate"
-    private let ingestionSubstanceKey = "substanceName"
-    private let ingestionRouteKey = "route"
-    private let ingestionDoseKey = "dose"
-    private let ingestionColorKey = "color"
 
     // swiftlint:disable cyclomatic_complexity
     func receiveNewIngestion(userInfo: [String: Any]) {
@@ -225,6 +262,38 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             color: colorUnwrapped,
             dose: dose
         )
+    }
+
+    func receiveEnabledSubstances(userInfo: [String: Any]) {
+        guard let namesOfEnabledSubstancesString = userInfo[substanceNamesKey] as? String else {return}
+        let namesOfEnabledSubstances = namesOfEnabledSubstancesString.components(separatedBy: substanceNameSeparator)
+
+        let moc = PersistenceController.shared.container.viewContext
+        moc.perform {
+            for name in namesOfEnabledSubstances {
+                guard let foundSubstance = PersistenceController.shared.findSubstance(with: name) else {continue}
+                foundSubstance.isEnabled = true
+            }
+            if moc.hasChanges {
+                try? moc.save()
+            }
+        }
+    }
+
+    func receiveFavoriteSubstances(userInfo: [String: Any]) {
+        guard let namesOfFavoriteSubstancesString = userInfo[substanceNamesKey] as? String else {return}
+        let namesOfFavoriteSubstances = namesOfFavoriteSubstancesString.components(separatedBy: substanceNameSeparator)
+
+        let moc = PersistenceController.shared.container.viewContext
+        moc.perform {
+            for name in namesOfFavoriteSubstances {
+                guard let foundSubstance = PersistenceController.shared.findSubstance(with: name) else {continue}
+                foundSubstance.isFavorite = true
+            }
+            if moc.hasChanges {
+                try? moc.save()
+            }
+        }
     }
 
 }

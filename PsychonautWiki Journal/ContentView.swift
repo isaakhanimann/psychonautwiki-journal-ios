@@ -6,6 +6,7 @@ struct ContentView: View {
 
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var calendarWrapper: CalendarWrapper
+    @EnvironmentObject var connectivity: Connectivity
     @Environment(\.managedObjectContext) var moc
 
     @FetchRequest(
@@ -43,6 +44,7 @@ struct ContentView: View {
                         SettingsView(toggleSettingsVisibility: toggleSettingsVisibility)
                             .environment(\.managedObjectContext, self.moc)
                             .environmentObject(calendarWrapper)
+                            .environmentObject(connectivity)
                             .accentColor(Color.blue)
                     }
                 }
