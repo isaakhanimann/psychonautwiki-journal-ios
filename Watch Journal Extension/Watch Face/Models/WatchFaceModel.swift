@@ -41,45 +41,28 @@ struct WatchFaceModel {
         return true
     }
 
-    private static func areModelsOverlapping(model1: AngleModel, model2: AngleModel) -> Bool {
+private static func areModelsOverlapping(model1: AngleModel, model2: AngleModel) -> Bool {
 
-        let min1 = model1.min.asDoubleBetween0and360
-        let max1 = model1.max.asDoubleBetween0and360
-        let min2 = model2.min.asDoubleBetween0and360
-        let max2 = model2.max.asDoubleBetween0and360
+    let min1 = model1.min.asDoubleBetween0and360
+    let max1 = model1.max.asDoubleBetween0and360
+    let min2 = model2.min.asDoubleBetween0and360
+    let max2 = model2.max.asDoubleBetween0and360
 
-        let isRange1OverZero = min1 > max1
-        let isRange2OverZero = min2 > max2
+    let isRange1OverZero = min1 > max1
+    let isRange2OverZero = min2 > max2
 
-        if !isRange1OverZero && !isRange2OverZero {
-            let range1 = min1...max1
-            let range2 = min2...max2
-            return range1.overlaps(range2)
-        } else if isRange1OverZero && !isRange2OverZero {
-            return max2 > min1 || max1 > min2
-        } else if isRange2OverZero && !isRange1OverZero {
-            return max1 > min2 || max2 > min1
-        } else {
-            let range1 = min1...(max1 + 360)
-            let range2 = min2...(max2 + 360)
-            return range1.overlaps(range2)
-        }
-    }
-
-    func areRangesOverlapping(min1: Angle, max1: Angle, min2: Angle, max2: Angle) -> Bool {
-        let min1 = min1.asDoubleBetween0and360
-        var max1 = max1.asDoubleBetween0and360
-        if min1 > max1 {
-            max1 += 360
-        }
-        let min2 = min2.asDoubleBetween0and360
-        var max2 = max2.asDoubleBetween0and360
-        if min2 > max2 {
-            max2 += 360
-        }
+    if !isRange1OverZero && !isRange2OverZero {
         let range1 = min1...max1
         let range2 = min2...max2
-
+        return range1.overlaps(range2)
+    } else if isRange1OverZero && !isRange2OverZero {
+        return max2 > min1 || max1 > min2
+    } else if isRange2OverZero && !isRange1OverZero {
+        return max1 > min2 || max2 > min1
+    } else {
+        let range1 = min1...(max1 + 360)
+        let range2 = min2...(max2 + 360)
         return range1.overlaps(range2)
     }
+}
 }
