@@ -14,51 +14,27 @@ struct ContentView: View {
         sortDescriptors: []
     ) var storedFile: FetchedResults<SubstancesFile>
 
-    @State private var areSettingsShowing = false
-
     var body: some View {
-        let sheetBinding = Binding<ActiveSheet?>(
-            get: {
-                if !hasBeenSetupBefore {
-                    return ActiveSheet.setup
-                } else if areSettingsShowing {
-                    return ActiveSheet.settings
-                } else {
-                    return nil
-                }
-            },
-            set: { _ in }
-        )
-        HomeView(toggleSettingsVisibility: toggleSettingsVisibility)
-            .fullScreenCover(
-                item: sheetBinding,
-                onDismiss: maybeFetchAgain,
-                content: { item in
-                    switch item {
-                    case .setup:
-                        WelcomeScreen()
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(calendarWrapper)
-                            .accentColor(Color.blue)
-                    case .settings:
-                        SettingsView(toggleSettingsVisibility: toggleSettingsVisibility)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(calendarWrapper)
-                            .environmentObject(connectivity)
-                            .accentColor(Color.blue)
-                    }
-                }
-            )
-            .onChange(
-                of: scenePhase,
-                perform: { newPhase in
-                    if newPhase == .active {
-                        calendarWrapper.checkIfSomethingChanged()
-                        maybeFetchAgain()
-                    }
-                }
-            )
-            .onAppear(perform: maybeFetchAgain)
+        Group {
+            if hasBeenSetupBefore {
+                HomeView()
+                    .onChange(
+                        of: scenePhase,
+                        perform: { newPhase in
+                            if newPhase == .active {
+                                calendarWrapper.checkIfSomethingChanged()
+                                maybeFetchAgain()
+                            }
+                        }
+                    )
+                    .onAppear(perform: maybeFetchAgain)
+            } else {
+                WelcomeScreen()
+                    .environment(\.managedObjectContext, self.moc)
+                    .environmentObject(calendarWrapper)
+                    .accentColor(Color.blue)
+            }
+        }
     }
 
     func maybeFetchAgain() {
@@ -76,10 +52,6 @@ struct ContentView: View {
             return false
         }
         return true
-    }
-
-    private func toggleSettingsVisibility() {
-        areSettingsShowing.toggle()
     }
 
     enum ActiveSheet: Identifiable {

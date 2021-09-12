@@ -2,8 +2,6 @@ import SwiftUI
 
 struct HomeView: View {
 
-    let toggleSettingsVisibility: () -> Void
-
     #if DEBUG
     let isDoingAppStoreScreenshots = false
     #endif
@@ -30,6 +28,7 @@ struct HomeView: View {
         }
     }
 
+    @State private var areSettingsShowing = false
     @State private var selection: Experience?
     @State private var isShowingDeleteExperienceAlert = false
     @State private var offsets: IndexSet?
@@ -72,11 +71,18 @@ struct HomeView: View {
                     .padding()
                 }
             }
+            .fullScreenCover(isPresented: $areSettingsShowing, content: {
+                SettingsView(toggleSettingsVisibility: {areSettingsShowing.toggle()})
+                    .environment(\.managedObjectContext, self.moc)
+                    .environmentObject(calendarWrapper)
+                    .environmentObject(connectivity)
+                    .accentColor(Color.blue)
+            })
             .navigationTitle("Experiences")
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     Button(
-                        action: toggleSettingsVisibility,
+                        action: {areSettingsShowing.toggle()},
                         label: {
                             Label("Settings", systemImage: "gearshape")
                         }
@@ -141,7 +147,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(toggleSettingsVisibility: {})
+        HomeView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
