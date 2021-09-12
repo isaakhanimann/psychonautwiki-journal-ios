@@ -25,7 +25,7 @@ struct ContentView: View {
                     SettingsTab()
                         .tag(1)
                     if let firstExperience = experiences.first {
-                        WatchFaceIngestionObserverView(experience: firstExperience)
+                        IngestionObserverView(experience: firstExperience)
                             .tag(2)
                         IngestionsTab(experience: firstExperience)
                             .tag(3)

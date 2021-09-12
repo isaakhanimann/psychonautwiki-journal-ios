@@ -4,6 +4,8 @@ struct SettingsTab: View {
 
     @Environment(\.managedObjectContext) var moc
 
+    @AppStorage(PersistenceController.isShowingWatchFaceKey) var isShowingWatchFace: Bool = true
+
     @FetchRequest(
         entity: SubstancesFile.entity(),
         sortDescriptors: []
@@ -16,6 +18,11 @@ struct SettingsTab: View {
     var body: some View {
         NavigationView {
             List {
+
+                Picker("Style", selection: $isShowingWatchFace) {
+                    Text("Watch Face").tag(true)
+                    Text("Gauges").tag(false)
+                }
 
                 Section(header: Text("Last Fetch")) {
                     if isFetching {
@@ -111,5 +118,8 @@ struct SettingsTab: View {
 struct SettingsTab_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTab()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(Connectivity())
+            .accentColor(Color.blue)
     }
 }

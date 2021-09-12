@@ -35,7 +35,7 @@
 		EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE826E8EAF400DBFCFF /* ClockHand.swift */; };
 		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EA941CEF26E94D4500DBFCFF /* ChooseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */; };
-		EA9D22A626EB374D00BCF893 /* WatchFaceIngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */; };
+		EA9D22A626EB374D00BCF893 /* IngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */; };
 		EA9D22A826EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */; };
 		EA9D22AA26EB4B6900BCF893 /* EnabledSubstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
@@ -87,6 +87,8 @@
 		EAA2EC7B26E21AB000B4FACF /* ChooseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */; };
 		EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
 		EAA2EC8026E21D9200B4FACF /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
+		EAB2EDD526EE24C00020C554 /* GaugesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDD426EE24C00020C554 /* GaugesView.swift */; };
+		EAB2EDD926EE25FA0020C554 /* GaugeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDD826EE25FA0020C554 /* GaugeRow.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -245,7 +247,7 @@
 		EA941CE826E8EAF400DBFCFF /* ClockHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHand.swift; sourceTree = "<group>"; };
 		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTimeView.swift; sourceTree = "<group>"; };
-		EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceIngestionObserverView.swift; sourceTree = "<group>"; };
+		EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionObserverView.swift; sourceTree = "<group>"; };
 		EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEnabledSubstancesView.swift; sourceTree = "<group>"; };
 		EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledSubstanceRowView.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
@@ -258,6 +260,8 @@
 		EAA2EC7626E21A7700B4FACF /* ChooseDoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDoseView.swift; sourceTree = "<group>"; };
 		EAA2EC7826E21A8D00B4FACF /* ChooseRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRouteView.swift; sourceTree = "<group>"; };
 		EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseColor.swift; sourceTree = "<group>"; };
+		EAB2EDD426EE24C00020C554 /* GaugesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugesView.swift; sourceTree = "<group>"; };
+		EAB2EDD826EE25FA0020C554 /* GaugeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeRow.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -397,7 +401,7 @@
 				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
 				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
 				EAA2EC7F26E21D5600B4FACF /* Welcome */,
-				EAA2EC6326E2020A00B4FACF /* Watch Face */,
+				EAB2EDD226EE24080020C554 /* Home */,
 				EAA2EC6426E2021B00B4FACF /* Settings */,
 				EAA2EC6526E2022A00B4FACF /* Ingestions */,
 				EA4910BF26DFB4E1001A5316 /* Assets.xcassets */,
@@ -428,7 +432,6 @@
 		EAA2EC6326E2020A00B4FACF /* Watch Face */ = {
 			isa = PBXGroup;
 			children = (
-				EA9D22A526EB374D00BCF893 /* WatchFaceIngestionObserverView.swift */,
 				EA48B9A126E802E6003BF667 /* WatchFaceView.swift */,
 				EA48B9A826E890B8003BF667 /* OneLayerView.swift */,
 				EA48B9A326E804CF003BF667 /* OneIngestionView.swift */,
@@ -484,6 +487,25 @@
 				EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		EAB2EDD226EE24080020C554 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */,
+				EAB2EDD326EE24920020C554 /* Gauges */,
+				EAA2EC6326E2020A00B4FACF /* Watch Face */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EAB2EDD326EE24920020C554 /* Gauges */ = {
+			isa = PBXGroup;
+			children = (
+				EAB2EDD426EE24C00020C554 /* GaugesView.swift */,
+				EAB2EDD826EE25FA0020C554 /* GaugeRow.swift */,
+			);
+			path = Gauges;
 			sourceTree = "<group>";
 		};
 		EAE470FA26CBA57F009FB0EC = {
@@ -903,11 +925,12 @@
 				EAA2EC4426DFCBCF00B4FACF /* GeneralInteraction-CoreDataHelpers.swift in Sources */,
 				EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */,
 				EAA2EC4C26DFCBE200B4FACF /* Roa+CoreDataClass.swift in Sources */,
+				EAB2EDD526EE24C00020C554 /* GaugesView.swift in Sources */,
 				EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */,
 				EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */,
 				EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */,
 				EAA2EC5226DFCBE200B4FACF /* DurationTypes+CoreDataClass.swift in Sources */,
-				EA9D22A626EB374D00BCF893 /* WatchFaceIngestionObserverView.swift in Sources */,
+				EA9D22A626EB374D00BCF893 /* IngestionObserverView.swift in Sources */,
 				EAA2EC6C26E2113100B4FACF /* IngestionRow.swift in Sources */,
 				EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */,
 				EAA2EC4226DFCBCF00B4FACF /* DurationTypes-CoreDataHelpers.swift in Sources */,
@@ -933,6 +956,7 @@
 				EAA2EC7326E2151900B4FACF /* ChooseSubstanceView.swift in Sources */,
 				EAA2EC4126DFCBCF00B4FACF /* Experience-CoreDataHelpers.swift in Sources */,
 				EAA2EC5C26DFCBFA00B4FACF /* Binding-OnChange.swift in Sources */,
+				EAB2EDD926EE25FA0020C554 /* GaugeRow.swift in Sources */,
 				EAA2EC5426DFCBE200B4FACF /* DoseRange+CoreDataClass.swift in Sources */,
 				EAA2EC5526DFCBE200B4FACF /* DurationRange+CoreDataClass.swift in Sources */,
 				EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */,

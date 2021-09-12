@@ -1,9 +1,12 @@
 import SwiftUI
 
-struct WatchFaceIngestionObserverView: View {
+struct IngestionObserverView: View {
 
     @ObservedObject var experience: Experience
-    @FetchRequest var ingestions: FetchedResults<Ingestion>
+
+    @FetchRequest private var ingestions: FetchedResults<Ingestion>
+
+    @AppStorage(PersistenceController.isShowingWatchFaceKey) var isShowingWatchFace: Bool = true
 
     init(experience: Experience) {
         self.experience = experience
@@ -17,6 +20,12 @@ struct WatchFaceIngestionObserverView: View {
     }
 
     var body: some View {
-        WatchFaceView(ingestions: ingestions.reversed())
+        Group {
+            if isShowingWatchFace {
+                WatchFaceView(ingestions: ingestions.reversed())
+            } else {
+                GaugesView(ingestions: ingestions.reversed())
+            }
+        }
     }
 }

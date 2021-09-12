@@ -369,6 +369,4 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             }
         }
     }
-
-
 }
