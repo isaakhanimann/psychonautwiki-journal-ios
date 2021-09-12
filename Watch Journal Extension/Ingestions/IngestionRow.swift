@@ -40,10 +40,10 @@ struct IngestionRow: View {
 
         self.gradientStops = Gradient(
             stops: [
-                .init(color: .white, location: onsetStartLocation),
+                .init(color: .white.opacity(0.2), location: onsetStartLocation),
                 .init(color: ingestion.swiftUIColorUnwrapped, location: peakStartLocation),
                 .init(color: ingestion.swiftUIColorUnwrapped, location: peakEndLocation),
-                .init(color: .white, location: 1)
+                .init(color: .white.opacity(0.2), location: 1)
         ])
 
         self._currentTime = State(wrappedValue: Date())
@@ -51,10 +51,17 @@ struct IngestionRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(ingestion.substanceCopy!.nameUnwrapped).font(.headline)
-                Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
-                .foregroundColor(.secondary)
-                .font(.footnote)
+            HStack {
+                Image(systemName: "circle.fill")
+                    .font(.headline)
+                    .foregroundColor(ingestion.swiftUIColorUnwrapped)
+                VStack(alignment: .leading) {
+                    Text(ingestion.substanceCopy!.nameUnwrapped).font(.headline)
+                    Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+                }
+            }
             Gauge(value: currentValue, in: minValue...maxValue) {
                 Text(ingestion.substanceCopy!.nameUnwrapped)
             } currentValueLabel: {
