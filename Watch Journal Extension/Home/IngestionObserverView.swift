@@ -6,8 +6,6 @@ struct IngestionObserverView: View {
 
     @FetchRequest private var ingestions: FetchedResults<Ingestion>
 
-    @AppStorage(PersistenceController.isShowingWatchFaceKey) var isShowingWatchFace: Bool = true
-
     init(experience: Experience) {
         self.experience = experience
         _ingestions = FetchRequest(
@@ -20,12 +18,6 @@ struct IngestionObserverView: View {
     }
 
     var body: some View {
-        Group {
-            if isShowingWatchFace {
-                WatchFaceView(ingestions: ingestions.reversed())
-            } else {
-                GaugesView(ingestions: ingestions.reversed())
-            }
-        }
+        WatchFaceView(ingestions: ingestions.reversed())
     }
 }

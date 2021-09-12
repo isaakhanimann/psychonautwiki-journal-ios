@@ -10,7 +10,6 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
-    static let isShowingWatchFaceKey = "isShowingWatchFace"
 
     static let model: NSManagedObjectModel = {
         guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
