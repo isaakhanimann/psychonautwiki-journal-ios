@@ -62,4 +62,13 @@ extension Ingestion {
             return doseRelative / rangeLength
         }
     }
+
+    var endTime: Date {
+        let durations = substanceCopy!.getDuration(for: administrationRouteUnwrapped)!
+        let totalDuration = durations.onset!.oneValue(at: 0.5)
+            + durations.comeup!.oneValue(at: 0.5)
+            + durations.peak!.oneValue(at: horizontalWeight)
+            + durations.offset!.oneValue(at: horizontalWeight)
+        return timeUnwrapped.addingTimeInterval(totalDuration)
+    }
 }

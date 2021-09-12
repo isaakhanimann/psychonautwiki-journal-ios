@@ -87,6 +87,8 @@
 		EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
 		EAA2EC8026E21D9200B4FACF /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 		EAB2EDD926EE25FA0020C554 /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDD826EE25FA0020C554 /* IngestionRow.swift */; };
+		EAB2EDDE26EE8AD20020C554 /* ComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDD26EE8AD20020C554 /* ComplicationView.swift */; };
+		EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -258,6 +260,8 @@
 		EAA2EC7826E21A8D00B4FACF /* ChooseRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRouteView.swift; sourceTree = "<group>"; };
 		EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseColor.swift; sourceTree = "<group>"; };
 		EAB2EDD826EE25FA0020C554 /* IngestionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
+		EAB2EDDD26EE8AD20020C554 /* ComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationView.swift; sourceTree = "<group>"; };
+		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -395,7 +399,7 @@
 			children = (
 				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
 				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
-				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
+				EAB2EDDC26EE8A9E0020C554 /* Complications */,
 				EAA2EC7F26E21D5600B4FACF /* Welcome */,
 				EAB2EDD226EE24080020C554 /* Home */,
 				EAA2EC6426E2021B00B4FACF /* Settings */,
@@ -494,6 +498,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		EAB2EDDC26EE8A9E0020C554 /* Complications */ = {
+			isa = PBXGroup;
+			children = (
+				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
+				EAB2EDDD26EE8AD20020C554 /* ComplicationView.swift */,
+			);
+			path = Complications;
+			sourceTree = "<group>";
+		};
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +603,7 @@
 				EAE4717C26CBA664009FB0EC /* DoseRange-Comparable.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
+				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -926,6 +940,7 @@
 				EAA2EC4E26DFCBE200B4FACF /* SubstanceCopy+CoreDataClass.swift in Sources */,
 				EA5968F126EB940900F8F6D3 /* ChooseEnabledSubstancesView.swift in Sources */,
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
+				EAB2EDDE26EE8AD20020C554 /* ComplicationView.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
 				EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */,
 				EAA2EC7B26E21AB000B4FACF /* ChooseColor.swift in Sources */,
@@ -947,6 +962,7 @@
 				EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */,
 				EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */,
 				EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */,
+				EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */,
 				EAA2EC5B26DFCBFA00B4FACF /* Date-Difference.swift in Sources */,
 				EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */,
 				EAA2EC4F26DFCBE200B4FACF /* Substance+CoreDataClass.swift in Sources */,
