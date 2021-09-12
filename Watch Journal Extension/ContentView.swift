@@ -30,8 +30,12 @@ struct ContentView: View {
                         IngestionsTab(experience: firstExperience)
                             .tag(3)
                     } else {
-                        WatchFaceView(ingestions: [])
-                            .tag(2)
+                        WatchFaceView(
+                            ingestions: [],
+                            clockHandStyle: .hourAndMinute,
+                            timeStyle: .currentTime
+                        )
+                        .tag(2)
                     }
                 }
                 .onChange(

@@ -2,12 +2,21 @@ import SwiftUI
 
 struct ClockHands: View {
 
-    private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+    let style: ClockHandStyle
 
-    @State private var hourAngle = AngleModel.getAngle(from: Date())
-    @State private var minuteAngle = ClockHands.getMinuteAngle(from: Date())
-
+    let hourAngle: Angle
+    let minuteAngle: Angle
     let circleSize: CGFloat = 6
+
+    init(timeToDisplay: Date, style: ClockHandStyle) {
+        self.style = style
+        self.hourAngle = AngleModel.getAngle(from: timeToDisplay)
+        self.minuteAngle = ClockHands.getMinuteAngle(from: timeToDisplay)
+    }
+
+    enum ClockHandStyle {
+        case hourAndMinute, justHour
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -22,23 +31,20 @@ struct ClockHands: View {
                     thinLength: thinLength,
                     thickLength: hourLength
                 )
-                ClockHand(
-                    angle: minuteAngle,
-                    ringLength: circleSize/2,
-                    thinLength: thinLength,
-                    thickLength: minuteLength
-                )
+
+                if style == .hourAndMinute {
+                    ClockHand(
+                        angle: minuteAngle,
+                        ringLength: circleSize/2,
+                        thinLength: thinLength,
+                        thickLength: minuteLength
+                    )
+                }
 
                 Circle()
                     .strokeBorder()
                     .frame(width: circleSize, height: circleSize)
 
-            }
-        }
-        .onReceive(timer) { _ in
-            withAnimation {
-                hourAngle = AngleModel.getAngle(from: Date())
-                minuteAngle = ClockHands.getMinuteAngle(from: Date())
             }
         }
     }
@@ -56,14 +62,12 @@ struct ClockHands: View {
     }
 }
 
-struct HourClockHand_Previews: PreviewProvider {
+struct ClockHandsTime_Previews: PreviewProvider {
     static var previews: some View {
-        GeometryReader { geometry in
-            let squareSize = min(geometry.size.width, geometry.size.height)
-            ClockHands()
-                .frame(width: squareSize, height: squareSize)
-                .padding(10)
-        }
-
+        var components = DateComponents()
+        components.hour = 10
+        components.minute = 10
+        let sampleDate = Calendar.current.date(from: components) ?? Date()
+        return ClockHands(timeToDisplay: sampleDate, style: .hourAndMinute)
     }
 }

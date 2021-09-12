@@ -7,7 +7,11 @@ struct ComplicationView: View {
     let timeToDisplay: Date
 
     var body: some View {
-        WatchFaceView(ingestions: ingestions)
+        WatchFaceView(
+            ingestions: ingestions,
+            clockHandStyle: .justHour,
+            timeStyle: .providedTime(time: timeToDisplay)
+        )
     }
 }
 

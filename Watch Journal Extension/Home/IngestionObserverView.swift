@@ -18,6 +18,10 @@ struct IngestionObserverView: View {
     }
 
     var body: some View {
-        WatchFaceView(ingestions: ingestions.reversed())
+        WatchFaceView(
+            ingestions: ingestions.reversed(),
+            clockHandStyle: .hourAndMinute,
+            timeStyle: .currentTime
+        )
     }
 }
