@@ -4,6 +4,11 @@ struct WatchWelcome: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
 
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: []
+    ) var storedFile: FetchedResults<SubstancesFile>
+
     @Environment(\.managedObjectContext) var moc
 
     var body: some View {
@@ -20,17 +25,18 @@ struct WatchWelcome: View {
                     .font(.title3.bold())
 
                 Button("Continue") {
-                    PersistenceController.shared.addInitialSubstances()
-                    _ = PersistenceController.shared.createNewExperienceNow()
                     hasBeenSetupBefore = true
                 }
                 .buttonStyle(BorderedButtonStyle(tint: .accentColor))
             }
         }
-        .navigationBarHidden(true)
-
+        .onAppear {
+            if storedFile.first == nil {
+                PersistenceController.shared.addInitialSubstances()
+                _ = PersistenceController.shared.createNewExperienceNow()
+            }
+        }
     }
-
 }
 
 struct WatchWelcome_Previews: PreviewProvider {

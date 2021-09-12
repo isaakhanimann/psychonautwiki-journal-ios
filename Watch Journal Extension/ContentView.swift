@@ -19,40 +19,34 @@ struct ContentView: View {
     @State private var selection = 2
 
     var body: some View {
-        TabView(selection: $selection) {
-            SettingsTab()
-                .tag(1)
-            if let firstExperience = experiences.first {
-                WatchFaceIngestionObserverView(experience: firstExperience)
-                    .tag(2)
-                IngestionsTab(experience: firstExperience)
-                    .tag(3)
+        Group {
+            if hasBeenSetupBefore {
+                TabView(selection: $selection) {
+                    SettingsTab()
+                        .tag(1)
+                    if let firstExperience = experiences.first {
+                        WatchFaceIngestionObserverView(experience: firstExperience)
+                            .tag(2)
+                        IngestionsTab(experience: firstExperience)
+                            .tag(3)
+                    } else {
+                        WatchFaceView(ingestions: [])
+                            .tag(2)
+                    }
+                }
+                .onChange(
+                    of: scenePhase,
+                    perform: { newPhase in
+                        if newPhase == .active {
+                            maybeFetchAgain()
+                        }
+                    }
+                )
+                .onAppear(perform: maybeFetchAgain)
             } else {
-                WatchFaceView(ingestions: [])
-                    .tag(2)
+                WatchWelcome()
             }
         }
-        .fullScreenCover(
-            isPresented: Binding<Bool>(
-                get: {!hasBeenSetupBefore},
-                set: {newValue in hasBeenSetupBefore = !newValue}
-            ),
-            onDismiss: maybeFetchAgain,
-            content: {
-                WatchWelcome()
-                    .environment(\.managedObjectContext, moc)
-                    .accentColor(Color.blue)
-            }
-        )
-        .onChange(
-            of: scenePhase,
-            perform: { newPhase in
-                if newPhase == .active {
-                    maybeFetchAgain()
-                }
-            }
-        )
-        .onAppear(perform: maybeFetchAgain)
     }
 
     func maybeFetchAgain() {
