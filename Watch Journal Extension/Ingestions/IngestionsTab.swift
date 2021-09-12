@@ -18,16 +18,12 @@ struct IngestionsTab: View {
             List {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
-            }
-            .navigationTitle("Ingestions")
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
-                    Button(action: addIngestion) {
-                        Label("Add Ingestion", systemImage: "plus")
-                    }
-
+                Button(action: addIngestion) {
+                    Label("Add Ingestion", systemImage: "plus")
+                        .font(experience.sortedIngestionsUnwrapped.isEmpty ? .body : .footnote)
                 }
             }
+            .navigationTitle("Ingestions")
             .sheet(isPresented: $isShowingAddIngestionSheet) {
                 ChooseSubstanceView(
                     substancesFile: storedFile.first!,

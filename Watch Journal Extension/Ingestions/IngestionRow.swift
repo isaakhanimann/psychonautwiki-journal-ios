@@ -50,31 +50,35 @@ struct IngestionRow: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "circle.fill")
-                    .font(.headline)
-                    .foregroundColor(ingestion.swiftUIColorUnwrapped)
+        Group {
+            if let substanceCopyUnwrapped = ingestion.substanceCopy {
                 VStack(alignment: .leading) {
-                    Text(ingestion.substanceCopy!.nameUnwrapped).font(.headline)
-                    Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
-                        .foregroundColor(.secondary)
-                        .font(.footnote)
-                }
-            }
-            Gauge(value: currentValue, in: minValue...maxValue) {
-                Text(ingestion.substanceCopy!.nameUnwrapped)
-            } currentValueLabel: {
-                Text(currentTime.asTimeString)
-            } minimumValueLabel: {
-                Text(startTime.asTimeString)
-            } maximumValueLabel: {
-                Text(endTime.asTimeString)
-            }
-            .gaugeStyle(LinearGaugeStyle(tint: gradientStops))
-            .onReceive(timer) { _ in
-                withAnimation {
-                    currentTime = Date()
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .font(.headline)
+                            .foregroundColor(ingestion.swiftUIColorUnwrapped)
+                        VStack(alignment: .leading) {
+                            Text(substanceCopyUnwrapped.nameUnwrapped).font(.headline)
+                            Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
+                        }
+                    }
+                    Gauge(value: currentValue, in: minValue...maxValue) {
+                        Text(substanceCopyUnwrapped.nameUnwrapped)
+                    } currentValueLabel: {
+                        Text(currentTime.asTimeString)
+                    } minimumValueLabel: {
+                        Text(startTime.asTimeString)
+                    } maximumValueLabel: {
+                        Text(endTime.asTimeString)
+                    }
+                    .gaugeStyle(LinearGaugeStyle(tint: gradientStops))
+                    .onReceive(timer) { _ in
+                        withAnimation {
+                            currentTime = Date()
+                        }
+                    }
                 }
             }
         }
