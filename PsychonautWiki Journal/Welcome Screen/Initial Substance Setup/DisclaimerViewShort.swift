@@ -64,5 +64,6 @@ struct ImportSubstancesScreen_Previews: PreviewProvider {
     static var previews: some View {
         DisclaimerViewShort()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(CalendarWrapper())
     }
 }

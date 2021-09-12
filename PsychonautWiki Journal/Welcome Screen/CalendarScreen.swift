@@ -102,5 +102,7 @@ struct CalendarScreen: View {
 struct CalendarScreen_Previews: PreviewProvider {
     static var previews: some View {
         CalendarScreen()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(CalendarWrapper())
     }
 }

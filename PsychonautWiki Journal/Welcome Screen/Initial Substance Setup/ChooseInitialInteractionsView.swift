@@ -18,9 +18,12 @@ struct ChooseInitialInteractionsView: View {
             Text("Choose Interactions")
                 .multilineTextAlignment(.center)
                 .font(.largeTitle.bold())
+                .padding(.horizontal)
             Text("Get notified of dangerous interactions with:")
                 .font(.headline)
                 .foregroundColor(.secondary)
+                .padding(.horizontal)
+
             List {
                 ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
                     InteractionRowView(interaction: interaction)
@@ -28,8 +31,9 @@ struct ChooseInitialInteractionsView: View {
             }
             Button("Done", action: dismiss)
                 .buttonStyle(PrimaryButtonStyle())
+
         }
-        .padding(.horizontal)
+        .padding(.vertical)
         .navigationBarHidden(true)
         .onDisappear {
             if moc.hasChanges {
