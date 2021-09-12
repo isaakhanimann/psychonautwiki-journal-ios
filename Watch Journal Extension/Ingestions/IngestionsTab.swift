@@ -21,15 +21,11 @@ struct IngestionsTab: View {
             }
             .navigationTitle("Ingestions")
             .toolbar {
-                ToolbarItemGroup(placement: ToolbarItemPlacement.primaryAction) {
+                ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button(action: addIngestion) {
                         Label("Add Ingestion", systemImage: "plus")
                     }
-                    if !experience.sortedIngestionsUnwrapped.isEmpty {
-                        Button(action: deleteAllIngestions) {
-                            Label("Restart", systemImage: "restart")
-                        }
-                    }
+
                 }
             }
             .sheet(isPresented: $isShowingAddIngestionSheet) {
@@ -47,17 +43,6 @@ struct IngestionsTab: View {
 
     private func addIngestion() {
         isShowingAddIngestionSheet.toggle()
-    }
-
-    private func deleteAllIngestions() {
-        withAnimation {
-            moc.perform {
-                for ingestion in experience.sortedIngestionsUnwrapped {
-                    moc.delete(ingestion)
-                }
-                try? moc.save()
-            }
-        }
     }
 
     private func deleteIngestions(at offsets: IndexSet) {
