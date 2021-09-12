@@ -18,9 +18,23 @@ struct IngestionsTab: View {
             List {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
-                Button(action: addIngestion) {
-                    Label("Add Ingestion", systemImage: "plus")
-                        .font(experience.sortedIngestionsUnwrapped.isEmpty ? .body : .footnote)
+
+                if experience.sortedIngestionsUnwrapped.isEmpty {
+                    Button(action: addIngestion) {
+                        Label("Add Ingestion", systemImage: "plus")
+                            .font(.body)
+                    }
+                } else {
+                    Group {
+                        Button(action: addIngestion) {
+                            Label("Add Ingestion", systemImage: "plus")
+                                .font(experience.sortedIngestionsUnwrapped.isEmpty ? .body : .footnote)
+                        }
+                        Button(action: deleteAllIngestions) {
+                            Label("Restart", systemImage: "restart")
+                        }
+                    }
+                    .font(.footnote)
                 }
             }
             .navigationTitle("Ingestions")
@@ -46,6 +60,17 @@ struct IngestionsTab: View {
             moc.perform {
                 for offset in offsets {
                     let ingestion = experience.sortedIngestionsUnwrapped[offset]
+                    moc.delete(ingestion)
+                }
+                try? moc.save()
+            }
+        }
+    }
+
+    private func deleteAllIngestions() {
+        withAnimation {
+            moc.perform {
+                for ingestion in experience.sortedIngestionsUnwrapped {
                     moc.delete(ingestion)
                 }
                 try? moc.save()
