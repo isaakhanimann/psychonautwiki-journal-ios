@@ -18,15 +18,6 @@ struct ContentView: View {
         Group {
             if hasBeenSetupBefore {
                 HomeView()
-                    .onChange(
-                        of: scenePhase,
-                        perform: { newPhase in
-                            if newPhase == .active {
-                                calendarWrapper.checkIfSomethingChanged()
-                                maybeFetchAgain()
-                            }
-                        }
-                    )
                     .onAppear(perform: maybeFetchAgain)
             } else {
                 WelcomeScreen()
@@ -35,6 +26,15 @@ struct ContentView: View {
                     .accentColor(Color.blue)
             }
         }
+        .onChange(
+            of: scenePhase,
+            perform: { newPhase in
+                if newPhase == .active {
+                    calendarWrapper.checkIfSomethingChanged()
+                    maybeFetchAgain()
+                }
+            }
+        )
     }
 
     func maybeFetchAgain() {
