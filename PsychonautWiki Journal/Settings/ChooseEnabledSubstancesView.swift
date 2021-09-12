@@ -37,7 +37,6 @@ struct ChooseEnabledSubstancesView: View {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Toggle("Enable All", isOn: toggleBinding.animation())
                     .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                    .labelsHidden()
             }
         }
         .listStyle(PlainListStyle())

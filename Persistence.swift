@@ -47,6 +47,12 @@ struct PersistenceController {
         return file.getSubstance(with: name)
     }
 
+    func findGeneralInteraction(with name: String) -> GeneralInteraction? {
+        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
+        guard let file = try? container.viewContext.fetch(fetchRequest).first else {return nil}
+        return file.getGeneralInteraction(with: name)
+    }
+
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]

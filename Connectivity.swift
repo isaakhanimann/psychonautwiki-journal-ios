@@ -102,6 +102,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 #if os(watchOS)
                 self.receiveDeleteAll()
                 #endif
+            case .enableInteractions:
+                self.receiveInteractions(userInfo: userInfo)
             }
         }
         //        DispatchQueue.main.async {
@@ -133,6 +135,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         case updateEnabledSubstances
         case updateFavoriteSubstances
         case deleteAllIngestions
+        case enableInteractions
     }
 
     private let messageTypeKey = "messageType"
@@ -142,7 +145,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     private let ingestionRouteKey = "route"
     private let ingestionDoseKey = "dose"
     private let ingestionColorKey = "color"
-    private let substanceNamesKey = "listOfNames"
+    private let substanceNamesKey = "listOfSubstanceNames"
+    private let interactionNamesKey = "listOfInteractionNames"
 
     private let substanceNameSeparator = "#"
 
@@ -219,6 +223,16 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         let data = [
             messageTypeKey: MessageType.updateFavoriteSubstances.rawValue,
             substanceNamesKey: namesOfFavoriteSubstances
+        ] as [String: Any]
+        transferUserInfo(data)
+    }
+
+    func sendInteractions(from file: SubstancesFile) {
+        let namesOfInteractions = file.generalInteractionsUnwrapped.filter({$0.isEnabled}).map({$0.nameUnwrapped}).joined(separator: substanceNameSeparator)
+
+        let data = [
+            messageTypeKey: MessageType.enableInteractions.rawValue,
+            interactionNamesKey: namesOfInteractions
         ] as [String: Any]
         transferUserInfo(data)
     }
@@ -339,5 +353,22 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             }
         }
     }
+
+    func receiveInteractions(userInfo: [String: Any]) {
+        guard let namesOfInteractionsString = userInfo[interactionNamesKey] as? String else {return}
+        let namesOfInteractions = namesOfInteractionsString.components(separatedBy: substanceNameSeparator)
+
+        let moc = PersistenceController.shared.container.viewContext
+        moc.perform {
+            for name in namesOfInteractions {
+                guard let foundInteraction = PersistenceController.shared.findGeneralInteraction(with: name) else {continue}
+                foundInteraction.isEnabled = true
+            }
+            if moc.hasChanges {
+                try? moc.save()
+            }
+        }
+    }
+
 
 }

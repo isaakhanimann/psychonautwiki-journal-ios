@@ -4,6 +4,7 @@ struct ChooseInteractionsView: View {
     @ObservedObject var file: SubstancesFile
 
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var connectivity: Connectivity
 
     var body: some View {
         List {
@@ -13,6 +14,7 @@ struct ChooseInteractionsView: View {
         }
         .onDisappear {
             if moc.hasChanges {
+                connectivity.sendInteractions(from: file)
                 try? moc.save()
             }
         }
