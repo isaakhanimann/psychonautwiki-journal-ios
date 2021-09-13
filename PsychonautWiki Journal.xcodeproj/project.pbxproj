@@ -91,6 +91,7 @@
 		EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAB2EDE226EEAAFB0020C554 /* IngestionGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */; };
 		EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE526EEB8F30020C554 /* ClockHands.swift */; };
+		EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -266,6 +267,7 @@
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionGauge.swift; sourceTree = "<group>"; };
 		EAB2EDE526EEB8F30020C554 /* ClockHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHands.swift; sourceTree = "<group>"; };
+		EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationUpdater.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 			children = (
 				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
 				EAB2EDDD26EE8AD20020C554 /* ComplicationView.swift */,
+				EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */,
 			);
 			path = Complications;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */,
 				EAA2EC4226DFCBCF00B4FACF /* DurationTypes-CoreDataHelpers.swift in Sources */,
 				EAA2EC3F26DFCBB400B4FACF /* Main.xcdatamodeld in Sources */,
+				EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */,
 				EAA2EC4826DFCBCF00B4FACF /* Substance-CoreDataHelpers.swift in Sources */,
 				EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */,
 				EAA2EC5A26DFCBFA00B4FACF /* DoseRange-Comparable.swift in Sources */,

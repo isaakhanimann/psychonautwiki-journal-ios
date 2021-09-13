@@ -41,6 +41,7 @@ struct ChooseColor: View {
         connectivity.sendNewIngestion(ingestion: ingestion)
 
         try? moc.save()
+        ComplicationUpdater.updateActiveComplications()
         dismiss()
     }
 

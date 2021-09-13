@@ -65,6 +65,8 @@ struct IngestionsTab: View {
                 try? moc.save()
             }
         }
+        ComplicationUpdater.updateActiveComplications()
+
     }
 
     private func deleteAllIngestions() {
@@ -76,6 +78,7 @@ struct IngestionsTab: View {
                 try? moc.save()
             }
         }
+        ComplicationUpdater.updateActiveComplications()
     }
 
 }
