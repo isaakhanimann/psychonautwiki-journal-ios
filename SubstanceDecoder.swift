@@ -8,6 +8,8 @@ enum SubstanceDecoder {
         case failedToDecodeOrSave
     }
 
+    static var isDefaultEnabled = false
+
     static func decodeAndSaveFile(
         from data: Data,
         creationDate: Date,
@@ -24,7 +26,7 @@ enum SubstanceDecoder {
                 if let fileToDelete = earlierFileToDelete {
                     enableInteractions(of: substancesFile, basedOn: fileToDelete)
                     enableFavorites(of: substancesFile, basedOn: fileToDelete)
-                    enableSubstances(of: substancesFile, basedOn: fileToDelete)
+                    enableSubstances(of: substancesFile)
                     updateLastUsedSubstances(of: substancesFile, basedOn: fileToDelete)
                     moc.delete(fileToDelete)
                 }
@@ -102,15 +104,13 @@ enum SubstanceDecoder {
         }
     }
 
-    private static func enableSubstances(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        for oldSubstance in oldSubstancesFile.allEnabledSubstancesUnwrapped {
-            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
-                continue
-            }
-            foundSubstance.isEnabled = true
+    private static func enableSubstances(of newSubstancesFile: SubstancesFile) {
+        newSubstancesFile.allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = isDefaultEnabled
+        }
+
+        if !isDefaultEnabled {
+            PersistenceController.shared.enableUncontrolledSubstances(in: newSubstancesFile)
         }
     }
 }

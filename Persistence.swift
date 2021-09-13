@@ -10,6 +10,7 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
+    static let isEyeOpenKey = "isEyeOpen"
 
     static let model: NSManagedObjectModel = {
         guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
@@ -58,6 +59,13 @@ struct PersistenceController {
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
         guard let experiences = try? container.viewContext.fetch(fetchRequest) else {return nil}
         return experiences.first
+    }
+
+    func getCurrentFile() -> SubstancesFile? {
+        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
+        guard let file = try? container.viewContext.fetch(fetchRequest).first else {return nil}
+        return file
+
     }
 
     func createNewExperienceNow() -> Experience? {
@@ -160,7 +168,40 @@ struct PersistenceController {
         }
     }
 
-    private func enableUncontrolledSubstances(in file: SubstancesFile) {
+    func toggleEye(to isOpen: Bool, modifyFile: SubstancesFile) {
+        let moc = container.viewContext
+
+        moc.perform {
+            if isOpen {
+                toggleAllOn(file: modifyFile)
+            } else {
+                toggleAllControlledOff(file: modifyFile)
+            }
+            if moc.hasChanges {
+                try? moc.save()
+            }
+        }
+        makeAllFutureDownloadsEnabledByDefault(isEnabled: isOpen)
+    }
+
+    private func toggleAllOn(file: SubstancesFile) {
+        file.allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = true
+        }
+    }
+
+    private func toggleAllControlledOff(file: SubstancesFile) {
+        file.allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = false
+        }
+        enableUncontrolledSubstances(in: file)
+    }
+
+    private func makeAllFutureDownloadsEnabledByDefault(isEnabled: Bool) {
+        SubstanceDecoder.isDefaultEnabled = isEnabled
+    }
+
+    func enableUncontrolledSubstances(in file: SubstancesFile) {
         let namesOfUncontrolledSubstances = [
             "Caffeine",
             "Myristicin",

@@ -5,6 +5,7 @@ struct SettingsView: View {
     let toggleSettingsVisibility: () -> Void
 
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var connectivity: Connectivity
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
@@ -14,6 +15,8 @@ struct SettingsView: View {
     @State private var isShowingErrorAlert = false
     @State private var alertMessage = ""
     @State private var isFetching = false
+
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
         NavigationView {
@@ -36,15 +39,6 @@ struct SettingsView: View {
                     )
                 }
 
-                Section(header: Text("Enabled Substances")) {
-                    NavigationLink(
-                        destination: ChooseEnabledSubstancesView(file: storedFile.first!),
-                        label: {
-                            Label("Choose Substances", systemImage: "checkmark.circle.fill")
-                        }
-                    )
-                }
-
                 Section(header: Text("Dangerous Interaction Notifications")) {
                     NavigationLink(
                         destination: ChooseInteractionsView(file: storedFile.first!),
@@ -64,6 +58,26 @@ struct SettingsView: View {
                 }
 
                 CalendarSection()
+
+                Section(
+                    footer: HStack {
+                        Spacer()
+                        Button(action: {
+                            isEyeOpen.toggle()
+                            PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
+                            connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+                        }, label: {
+                            (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.secondary)
+                                .frame(width: 30, height: 30, alignment: .center)
+                        })
+                        .buttonStyle(PlainButtonStyle())
+                        Spacer()
+                    }
+                ) { }
 
             }
             .listStyle(InsetGroupedListStyle())
@@ -119,5 +133,9 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(toggleSettingsVisibility: {})
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(Connectivity())
+            .environmentObject(CalendarWrapper())
+            .accentColor(Color.blue)
     }
 }

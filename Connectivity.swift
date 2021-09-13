@@ -94,8 +94,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 #if os(watchOS)
                 self.receiveIngestionDelete(userInfo: userInfo)
                 #endif
-            case .updateEnabledSubstances:
-                self.receiveEnabledSubstances(userInfo: userInfo)
+            case .eyeState:
+                self.receiveEyeState(userInfo: userInfo)
             case .updateFavoriteSubstances:
                 self.receiveFavoriteSubstances(userInfo: userInfo)
             case .deleteAllIngestions:
@@ -132,7 +132,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         case createIngestion
         case updateIngestion
         case deleteIngestion
-        case updateEnabledSubstances
+        case eyeState
         case updateFavoriteSubstances
         case deleteAllIngestions
         case enableInteractions
@@ -147,6 +147,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     private let ingestionColorKey = "color"
     private let substanceNamesKey = "listOfSubstanceNames"
     private let interactionNamesKey = "listOfInteractionNames"
+    private let eyeStateKey = "isEyeOpen"
 
     private let substanceNameSeparator = "#"
 
@@ -207,12 +208,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         transferUserInfo(data)
     }
 
-    func sendEnabledSubstances(from file: SubstancesFile) {
-        let namesOfEnabledSubstances = file.allEnabledSubstancesUnwrapped.map({$0.nameUnwrapped}).joined(separator: substanceNameSeparator)
-
+    func sendEyeState(isEyeOpen: Bool) {
         let data = [
-            messageTypeKey: MessageType.updateEnabledSubstances.rawValue,
-            substanceNamesKey: namesOfEnabledSubstances
+            messageTypeKey: MessageType.eyeState.rawValue,
+            eyeStateKey: isEyeOpen
         ] as [String: Any]
         transferUserInfo(data)
     }
@@ -321,20 +320,13 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         #endif
     }
 
-    func receiveEnabledSubstances(userInfo: [String: Any]) {
-        guard let namesOfEnabledSubstancesString = userInfo[substanceNamesKey] as? String else {return}
-        let namesOfEnabledSubstances = namesOfEnabledSubstancesString.components(separatedBy: substanceNameSeparator)
+    func receiveEyeState(userInfo: [String: Any]) {
+        guard let isEyeOpen = userInfo[eyeStateKey] as? Bool else {return}
+        guard let file = PersistenceController.shared.getCurrentFile() else {return}
 
-        let moc = PersistenceController.shared.container.viewContext
-        moc.perform {
-            for name in namesOfEnabledSubstances {
-                guard let foundSubstance = PersistenceController.shared.findSubstance(with: name) else {continue}
-                foundSubstance.isEnabled = true
-            }
-            if moc.hasChanges {
-                try? moc.save()
-            }
-        }
+        PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: file)
+        UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey)
+
     }
 
     func receiveFavoriteSubstances(userInfo: [String: Any]) {

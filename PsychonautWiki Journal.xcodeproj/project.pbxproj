@@ -23,7 +23,6 @@
 		EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910BF26DFB4E1001A5316 /* Assets.xcassets */; };
 		EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */; };
 		EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EA5968F126EB940900F8F6D3 /* ChooseEnabledSubstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */; };
 		EA5968F226EB941500F8F6D3 /* EnabledSubstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */; };
 		EA6ECC9D26E264D300F32D78 /* PsychonautWikiAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */; };
 		EA6ECCA226E265BC00F32D78 /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
@@ -36,7 +35,6 @@
 		EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEC26E8EDD700DBFCFF /* HandShape.swift */; };
 		EA941CEF26E94D4500DBFCFF /* ChooseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */; };
 		EA9D22A626EB374D00BCF893 /* IngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */; };
-		EA9D22A826EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */; };
 		EA9D22AA26EB4B6900BCF893 /* EnabledSubstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
@@ -251,7 +249,6 @@
 		EA941CEC26E8EDD700DBFCFF /* HandShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandShape.swift; sourceTree = "<group>"; };
 		EA941CEE26E94D4500DBFCFF /* ChooseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTimeView.swift; sourceTree = "<group>"; };
 		EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionObserverView.swift; sourceTree = "<group>"; };
-		EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEnabledSubstancesView.swift; sourceTree = "<group>"; };
 		EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledSubstanceRowView.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -588,7 +585,6 @@
 				EAE4712B26CBA663009FB0EC /* SettingsView.swift */,
 				EAE4713126CBA663009FB0EC /* SectionFooter.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
-				EA9D22A726EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift */,
 				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 				EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
@@ -949,7 +945,6 @@
 				EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */,
 				EAA2EC4E26DFCBE200B4FACF /* SubstanceCopy+CoreDataClass.swift in Sources */,
-				EA5968F126EB940900F8F6D3 /* ChooseEnabledSubstancesView.swift in Sources */,
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
 				EAB2EDDE26EE8AD20020C554 /* ComplicationView.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
@@ -1061,7 +1056,6 @@
 				EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */,
 				EAE471F626CBA664009FB0EC /* DoseTypes+CoreDataClass.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
-				EA9D22A826EB4AC900BCF893 /* ChooseEnabledSubstancesView.swift in Sources */,
 				EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE4721F26CBA664009FB0EC /* SubstanceRow.swift in Sources */,
