@@ -163,12 +163,9 @@ struct PersistenceController {
     private func enableUncontrolledSubstances(in file: SubstancesFile) {
         let namesOfUncontrolledSubstances = [
             "Caffeine",
-            "Nicotine",
             "Myristicin",
-            "Dextromethorphan",
             "Choline bitartrate",
-            "Citicoline",
-            "Propylhexedrine"
+            "Citicoline"
         ]
         for name in namesOfUncontrolledSubstances {
             guard let foundSubstance = file.getSubstance(with: name) else {continue}
