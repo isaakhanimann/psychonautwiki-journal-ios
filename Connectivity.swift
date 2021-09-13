@@ -247,6 +247,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let ingestionToDelete = experience.sortedIngestionsUnwrapped.first(where: {$0.identifier == identifierUnwrapped}) else {return}
 
         PersistenceController.shared.delete(ingestion: ingestionToDelete)
+
+        #if os(watchOS)
+        ComplicationUpdater.updateActiveComplications()
+        #endif
     }
 
     func receiveIngestionUpdate(userInfo: [String: Any]) {
@@ -270,6 +274,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             color: colorUnwrapped,
             dose: dose
         )
+
+        #if os(watchOS)
+        ComplicationUpdater.updateActiveComplications()
+        #endif
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -307,6 +315,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             color: colorUnwrapped,
             dose: dose
         )
+
+        #if os(watchOS)
+        ComplicationUpdater.updateActiveComplications()
+        #endif
     }
 
     func receiveEnabledSubstances(userInfo: [String: Any]) {
@@ -352,6 +364,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 try? moc.save()
             }
         }
+        #if os(watchOS)
+        ComplicationUpdater.updateActiveComplications()
+        #endif
     }
 
     func receiveInteractions(userInfo: [String: Any]) {
@@ -368,5 +383,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 try? moc.save()
             }
         }
+        #if os(watchOS)
+        ComplicationUpdater.updateActiveComplications()
+        #endif
     }
 }
