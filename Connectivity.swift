@@ -128,20 +128,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     #if os(iOS)
 
     func sendSyncMessageToWatch(with ingestions: [Ingestion]) {
-        let session = WCSession.default
-
-        let data = createSyncData(for: ingestions)
-
-        if session.activationState == .activated {
-            if session.isComplicationEnabled {
-                session.transferCurrentComplicationUserInfo(data)
-            } else {
-                session.transferUserInfo(data)
-            }
-        }
-    }
-
-    private func createSyncData(for ingestions: [Ingestion]) -> [String: Any] {
         let ids = ingestions
             .map({$0.identifier?.uuidString ?? "Unknown"})
             .joined(separator: stringSeparator)
@@ -160,6 +146,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         let colors = ingestions
             .map({$0.colorUnwrapped.rawValue})
             .joined(separator: stringSeparator)
+
         let data = [
             messageTypeKey: MessageType.syncMessageToWatch.rawValue,
             idKey: ids,
@@ -169,7 +156,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             doseKey: dosesString,
             colorKey: colors
         ] as [String: Any]
-        return data
+
+        transferUserInfo(data)
     }
 
     func sendIngestionDelete(for ingestionIdentifier: UUID?) {

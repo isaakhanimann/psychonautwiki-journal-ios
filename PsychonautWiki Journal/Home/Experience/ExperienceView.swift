@@ -103,9 +103,11 @@ struct ExperienceView: View {
                 dismiss: {isShowingAddIngestionSheet.toggle()},
                 experience: experience
             )
-                .environment(\.managedObjectContext, self.moc)
-                .environmentObject(calendarWrapper)
-                .accentColor(Color.blue)
+            .environment(\.managedObjectContext, self.moc)
+            .environmentObject(calendarWrapper)
+            .environmentObject(connectivity)
+
+            .accentColor(Color.blue)
         }
     }
 
