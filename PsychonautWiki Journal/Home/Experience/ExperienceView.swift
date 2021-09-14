@@ -59,11 +59,7 @@ struct ExperienceView: View {
             }
 
             if connectivity.activationState == .activated && connectivity.isWatchAppInstalled {
-                Button(action: {
-                    connectivity.sendSyncMessageToWatch(with: experience.sortedIngestionsUnwrapped)
-                }, label: {
-                    Label("Sync to Apple Watch", systemImage: "applewatch")
-                })
+                SyncSection(experience: experience)
             }
         }
         .listStyle(InsetGroupedListStyle())

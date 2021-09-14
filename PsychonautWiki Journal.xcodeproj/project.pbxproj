@@ -91,6 +91,7 @@
 		EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE526EEB8F30020C554 /* ClockHands.swift */; };
 		EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
+		EAB2EDF226F140AC0020C554 /* SyncSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDF126F140AC0020C554 /* SyncSection.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -266,6 +267,7 @@
 		EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionGauge.swift; sourceTree = "<group>"; };
 		EAB2EDE526EEB8F30020C554 /* ClockHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHands.swift; sourceTree = "<group>"; };
 		EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationUpdater.swift; sourceTree = "<group>"; };
+		EAB2EDF126F140AC0020C554 /* SyncSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSection.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
+				EAB2EDF126F140AC0020C554 /* SyncSection.swift */,
 				EAE4718C26CBA664009FB0EC /* Timeline Chart */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,
@@ -1075,6 +1078,7 @@
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
 				EAE4723026CBDDE7009FB0EC /* PsychonautWikiAPIController.swift in Sources */,
 				EAE4721326CBA664009FB0EC /* AroundShape.swift in Sources */,
+				EAB2EDF226F140AC0020C554 /* SyncSection.swift in Sources */,
 				EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,

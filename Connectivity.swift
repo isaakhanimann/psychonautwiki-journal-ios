@@ -10,6 +10,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     #if os(iOS)
     @Published var isWatchAppInstalled = false
+    @Published var isComplicationEnabled = false
     #endif
 
     // MARK: General Methods
@@ -34,6 +35,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             self.activationState = activationState
             if activationState == .activated {
                 self.isWatchAppInstalled = session.isWatchAppInstalled
+                self.isComplicationEnabled = session.isComplicationEnabled
             }
         }
     }
@@ -237,7 +239,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     #if os(watchOS)
 
     // swiftlint:disable cyclomatic_complexity
-    // swiftlint:disable function_body_length
     func receiveSyncMessage(userInfo: [String: Any]) {
         guard let idsString = userInfo[idKey] as? String else {return}
         let idStrings = idsString.components(separatedBy: stringSeparator)
@@ -291,12 +292,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             }
         }
 
-        let server = CLKComplicationServer.sharedInstance()
-        guard let complications = server.activeComplications else { return }
-
-        for complication in complications {
-            server.reloadTimeline(for: complication)
-        }
+        ComplicationUpdater.updateActiveComplications()
     }
     #endif
 
