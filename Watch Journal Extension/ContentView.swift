@@ -42,6 +42,7 @@ struct ContentView: View {
                     of: scenePhase,
                     perform: { newPhase in
                         if newPhase == .active {
+                            ComplicationUpdater.updateActiveComplications()
                             maybeFetchAgain()
                         }
                     }

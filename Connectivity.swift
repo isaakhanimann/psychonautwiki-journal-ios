@@ -125,6 +125,11 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     private let stringSeparator = "#"
 
+    // MARK: Variables
+
+    // This is needed such that the same ingestion is not added twice when 2 messages are queued
+    private var createdIngestionUIDs = Set<UUID>()
+
     // MARK: Send Methods
 
     #if os(iOS)
@@ -159,7 +164,14 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             colorKey: colors
         ] as [String: Any]
 
-        transferUserInfo(data)
+        let session = WCSession.default
+        if session.activationState == .activated {
+            if session.isComplicationEnabled {
+                session.transferCurrentComplicationUserInfo(data)
+            } else {
+                session.transferUserInfo(data)
+            }
+        }
     }
 
     func sendIngestionDelete(for ingestionIdentifier: UUID?) {
@@ -239,6 +251,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     #if os(watchOS)
 
     // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
     func receiveSyncMessage(userInfo: [String: Any]) {
         guard let idsString = userInfo[idKey] as? String else {return}
         let idStrings = idsString.components(separatedBy: stringSeparator)
@@ -261,7 +274,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         let moc = PersistenceController.shared.container.viewContext
         moc.performAndWait {
             guard let experienceToUpdate = PersistenceController.shared.getLatestExperience() else {return}
-            experienceToUpdate.sortedIngestionsUnwrapped.forEach({moc.delete($0)})
+            experienceToUpdate.sortedIngestionsUnwrapped.forEach { ingestion in
+                createdIngestionUIDs.remove(ingestion.identifier ?? UUID())
+                moc.delete(ingestion)
+            }
 
             for index in 0..<idStrings.count {
                 guard let identifier = UUID(uuidString: idStrings[safe: index] ?? "") else {continue}
@@ -275,6 +291,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 ) else {continue}
                 guard let color = Ingestion.IngestionColor(rawValue: colors[safe: index] ?? "") else {continue}
                 guard let dose = Double(doseStrings[safe: index] ?? "") else {continue}
+
+                guard !createdIngestionUIDs.contains(identifier) else {continue}
+                createdIngestionUIDs.insert(identifier)
 
                 PersistenceController.shared.createIngestionWithoutSave(
                     context: moc,
@@ -292,7 +311,12 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             }
         }
 
-        ComplicationUpdater.updateActiveComplications()
+        let server = CLKComplicationServer.sharedInstance()
+        guard let complications = server.activeComplications else { return }
+
+        for complication in complications {
+            server.reloadTimeline(for: complication)
+        }
     }
     #endif
 
@@ -336,6 +360,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
         guard let experienceUnwrapped = experienceToAddTo else {return}
         guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
+
+        guard !createdIngestionUIDs.contains(identifierUnwrapped) else {return}
+        createdIngestionUIDs.insert(identifierUnwrapped)
 
         let moc = PersistenceController.shared.container.viewContext
         moc.perform {

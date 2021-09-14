@@ -12,7 +12,7 @@ struct SyncSection: View {
             VStack(alignment: .leading, spacing: 5) {
                 Label("Sync Successfull", systemImage: "checkmark.circle")
                 if connectivity.isComplicationEnabled {
-                    Text("Tap the complication to reload it")
+                    Text("If necessary reload the complication by tapping on it")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
@@ -21,7 +21,7 @@ struct SyncSection: View {
             Button(action: {
                 connectivity.sendSyncMessageToWatch(with: experience.sortedIngestionsUnwrapped)
                 isShowingSyncingMessageSuccess = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     isShowingSyncingMessageSuccess = false
                 }
             }, label: {
