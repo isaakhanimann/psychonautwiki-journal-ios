@@ -6,8 +6,6 @@ extension Color {
         switch ingestionColor {
         case .blue:
             return Color.blue
-        case .gray:
-            return Color.gray
         case .green:
             return Color.green
         case .orange:

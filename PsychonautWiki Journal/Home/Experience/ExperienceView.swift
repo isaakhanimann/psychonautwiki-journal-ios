@@ -47,7 +47,7 @@ struct ExperienceView: View {
                 ZStack {
                     TextEditor(text: $writtenText)
                         .frame(minHeight: 200, alignment: .leading)
-                        .foregroundColor(self.writtenText == placeholderString ? .gray : .primary)
+                        .foregroundColor(self.writtenText == placeholderString ? .secondary : .primary)
                         .onTapGesture {
                             if self.writtenText == placeholderString {
                                 self.writtenText = ""

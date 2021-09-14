@@ -30,14 +30,14 @@ struct ExperienceRow: View {
                     Text(experience.titleUnwrapped)
                         .font(.title2)
                     Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
                 Spacer()
                 if experience.isActive {
                     TimerView(experience: experience, timer: timer)
                 } else {
                     Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
             }
         }

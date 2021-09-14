@@ -4,7 +4,7 @@ import SwiftUI
 extension Ingestion {
 
     enum IngestionColor: String, CaseIterable {
-        case blue, gray, green, orange, pink, purple, red, yellow
+        case blue, green, orange, pink, purple, red, yellow
     }
 
     var timeUnwrapped: Date {
