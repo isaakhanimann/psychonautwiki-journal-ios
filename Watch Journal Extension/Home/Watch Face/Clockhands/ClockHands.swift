@@ -6,7 +6,6 @@ struct ClockHands: View {
 
     let hourAngle: Angle
     let minuteAngle: Angle
-    let circleSize: CGFloat = 6
 
     init(timeToDisplay: Date, style: ClockHandStyle) {
         self.style = style
@@ -22,12 +21,13 @@ struct ClockHands: View {
         GeometryReader { geometry in
             let radius: CGFloat = min(geometry.size.width, geometry.size.height) / 2
             let thinLength =  1/6 * radius
-            let hourLength = 2/5 * radius
+            let hourLength = 1/3 * radius
             let minuteLength = 5/7 * radius
+            let circleWidth = 1/11 * radius
             ZStack {
                 ClockHand(
                     angle: hourAngle,
-                    ringLength: circleSize/2,
+                    ringLength: circleWidth/2,
                     thinLength: thinLength,
                     thickLength: hourLength
                 )
@@ -35,15 +35,15 @@ struct ClockHands: View {
                 if style == .hourAndMinute {
                     ClockHand(
                         angle: minuteAngle,
-                        ringLength: circleSize/2,
+                        ringLength: circleWidth/2,
                         thinLength: thinLength,
                         thickLength: minuteLength
                     )
                 }
 
                 Circle()
-                    .strokeBorder()
-                    .frame(width: circleSize, height: circleSize)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 2, lineCap: .round))
+                    .frame(width: circleWidth, height: circleWidth)
 
             }
         }
