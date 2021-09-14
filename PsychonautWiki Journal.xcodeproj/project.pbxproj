@@ -90,6 +90,7 @@
 		EAB2EDE226EEAAFB0020C554 /* IngestionGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */; };
 		EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE526EEB8F30020C554 /* ClockHands.swift */; };
 		EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */; };
+		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -1012,6 +1013,7 @@
 				EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
+				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
 				EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */,
 				EAE4720E26CBA664009FB0EC /* LineChartWithPicker.swift in Sources */,
 				EAE4721726CBA664009FB0EC /* AroundShapeModelUp.swift in Sources */,

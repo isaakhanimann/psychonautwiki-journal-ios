@@ -60,7 +60,7 @@ struct ExperienceView: View {
 
             if connectivity.activationState == .activated && connectivity.isWatchAppInstalled {
                 Button(action: {
-                    connectivity.sendReplaceIngestions(ingestions: experience.sortedIngestionsUnwrapped)
+                    connectivity.sendSyncMessageToWatch(with: experience.sortedIngestionsUnwrapped)
                 }, label: {
                     Label("Sync to Apple Watch", systemImage: "applewatch")
                 })

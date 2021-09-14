@@ -111,7 +111,8 @@ struct PersistenceController {
     }
 
     // swiftlint:disable function_parameter_count
-    func createIngestion(
+    func createIngestionWithoutSave(
+        context: NSManagedObjectContext,
         identifier: UUID,
         addTo experience: Experience,
         substance: Substance,
@@ -120,21 +121,16 @@ struct PersistenceController {
         color: Ingestion.IngestionColor,
         dose: Double
     ) {
-        let moc = container.viewContext
-        moc.performAndWait {
-            let ingestion = Ingestion(context: moc)
-            ingestion.identifier = identifier
-            ingestion.experience = experience
-            ingestion.time = ingestionTime
-            ingestion.administrationRoute = ingestionRoute.rawValue
-            ingestion.color = color.rawValue
-            ingestion.dose = dose
-            ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
-            substance.lastUsedDate = Date()
-            substance.category!.file!.lastUsedSubstance = substance
-
-            try? moc.save()
-        }
+        let ingestion = Ingestion(context: context)
+        ingestion.identifier = identifier
+        ingestion.experience = experience
+        ingestion.time = ingestionTime
+        ingestion.administrationRoute = ingestionRoute.rawValue
+        ingestion.color = color.rawValue
+        ingestion.dose = dose
+        ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: context)
+        substance.lastUsedDate = Date()
+        substance.category!.file!.lastUsedSubstance = substance
     }
 
     func addInitialSubstances() {

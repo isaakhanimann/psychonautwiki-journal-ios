@@ -72,38 +72,31 @@ struct ChooseTimeAndColor: View {
     }
 
     private func addIngestion() {
-        let ingestion = Ingestion(context: moc)
-        ingestion.experience = experience
-        ingestion.identifier = UUID()
-        ingestion.time = selectedTime
-        ingestion.dose = dose
-        ingestion.administrationRoute = administrationRoute.rawValue
-        ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
-        ingestion.color = selectedColor.rawValue
-        substance.lastUsedDate = Date()
-        substance.category!.file!.lastUsedSubstance = substance
 
-        if selectedTime.distance(to: Date()) < 24*60*60 {
-            connectivity.sendNewIngestion(ingestion: ingestion)
+        moc.performAndWait {
+            let ingestion = Ingestion(context: moc)
+            ingestion.experience = experience
+            ingestion.identifier = UUID()
+            ingestion.time = selectedTime
+            ingestion.dose = dose
+            ingestion.administrationRoute = administrationRoute.rawValue
+            ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
+            ingestion.color = selectedColor.rawValue
+            substance.lastUsedDate = Date()
+            substance.category!.file!.lastUsedSubstance = substance
+
+            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
+
+            if selectedTime.distance(to: Date()) < 24*60*60 {
+                connectivity.sendNewIngestion(ingestion: ingestion)
+            }
+            try? moc.save()
         }
 
-        save()
         let defaults = UserDefaults.standard
         defaults.setValue(selectedColor.rawValue, forKey: substance.nameUnwrapped)
         dismiss()
     }
-
-    private func save() {
-        if moc.hasChanges {
-            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
-            do {
-                try moc.save()
-            } catch {
-                assertionFailure(error.localizedDescription)
-            }
-        }
-    }
-
     let colorColumns = [
         GridItem(.adaptive(minimum: 44))
     ]
