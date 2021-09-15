@@ -10,7 +10,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             CLKComplicationDescriptor(
                 identifier: "complication",
                 displayName: "PsychonautWiki Journal",
-                supportedFamilies: [.extraLarge, .modularLarge, .graphicExtraLarge]
+                supportedFamilies: [
+                    .graphicCircular,
+                    .graphicRectangular,
+                    .extraLarge,
+                    .modularLarge,
+                    .graphicExtraLarge
+                ]
             )
             // Multiple complication support can be added here with more descriptors
         ]
@@ -129,7 +135,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 row3Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 2])
             )
             return template
-        case .graphicExtraLarge:
+        case .graphicExtraLarge, .graphicCircular, .graphicRectangular:
             let template = CLKComplicationTemplateGraphicExtraLargeCircularView(
                 ComplicationView(ingestions: ingestions, timeToDisplay: date)
             )

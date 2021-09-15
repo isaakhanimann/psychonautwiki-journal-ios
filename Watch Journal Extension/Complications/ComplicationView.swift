@@ -25,6 +25,20 @@ struct ComplicationView_Previews: PreviewProvider {
                     timeToDisplay: Date()
                 )
             ).previewContext()
+
+            CLKComplicationTemplateGraphicCircularView(
+                ComplicationView(
+                    ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
+                    timeToDisplay: Date()
+                )
+            ).previewContext()
+
+            CLKComplicationTemplateGraphicRectangularFullView(
+                ComplicationView(
+                    ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
+                    timeToDisplay: Date()
+                )
+            ).previewContext()
         }
     }
 }
