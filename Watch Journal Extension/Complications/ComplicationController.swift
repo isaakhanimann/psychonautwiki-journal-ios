@@ -49,7 +49,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the current timeline entry
         let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
         let now = Date()
-        let predictionTemplate = createTemplate(for: complication.family, date: now, ingestions: ingestions)
+        guard let predictionTemplate = createTemplate(for: complication.family, date: now, ingestions: ingestions) else {handler(nil); return}
         let entry = CLKComplicationTimelineEntry(date: now, complicationTemplate: predictionTemplate)
         handler(entry)
     }
@@ -67,7 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         for index in 0 ..< limit {
             let predictionDate = date.addingTimeInterval(Double(60 * 5 * index))
 
-            let predictionTemplate = createTemplate(for: complication.family, date: predictionDate, ingestions: ingestions)
+            guard let predictionTemplate = createTemplate(for: complication.family, date: predictionDate, ingestions: ingestions) else {handler(nil); return}
 
             let entry = CLKComplicationTimelineEntry(date: predictionDate, complicationTemplate: predictionTemplate)
 
@@ -94,7 +94,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         components.minute = 10
         let sampleDate = Calendar.current.date(from: components) ?? Date()
 
-        let template = createTemplate(for: complication.family, date: sampleDate, ingestions: helper.experiences.first!.sortedIngestionsUnwrapped)
+        guard let template = createTemplate(for: complication.family, date: sampleDate, ingestions: helper.experiences.first!.sortedIngestionsUnwrapped) else {handler(nil); return}
         handler(template)
     }
 
@@ -102,7 +102,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         for family: CLKComplicationFamily,
         date: Date,
         ingestions: [Ingestion]
-    ) -> CLKComplicationTemplate {
+    ) -> CLKComplicationTemplate? {
 
         switch family {
         case .extraLarge:
@@ -129,11 +129,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 row3Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 2])
             )
             return template
-        default: // .graphicExtraLarge
+        case .graphicExtraLarge:
             let template = CLKComplicationTemplateGraphicExtraLargeCircularView(
                 ComplicationView(ingestions: ingestions, timeToDisplay: date)
             )
             return template
+        default:
+            return nil
         }
     }
 
