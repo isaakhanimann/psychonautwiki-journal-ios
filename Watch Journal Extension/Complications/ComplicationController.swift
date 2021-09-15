@@ -47,8 +47,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void
     ) {
         // Call the handler with the current timeline entry
+        let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
         let now = Date()
-        let predictionTemplate = createTemplate(for: complication.family, date: now)
+        let predictionTemplate = createTemplate(for: complication.family, date: now, ingestions: ingestions)
         let entry = CLKComplicationTimelineEntry(date: now, complicationTemplate: predictionTemplate)
         handler(entry)
     }
@@ -61,11 +62,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     ) {
         // Call the handler with the timeline entries after the given date
         var entries = [CLKComplicationTimelineEntry]()
+        let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
 
         for index in 0 ..< limit {
             let predictionDate = date.addingTimeInterval(Double(60 * 5 * index))
 
-            let predictionTemplate = createTemplate(for: complication.family, date: predictionDate)
+            let predictionTemplate = createTemplate(for: complication.family, date: predictionDate, ingestions: ingestions)
 
             let entry = CLKComplicationTimelineEntry(date: predictionDate, complicationTemplate: predictionTemplate)
 
@@ -82,40 +84,25 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         withHandler handler: @escaping (CLKComplicationTemplate?) -> Void
     ) {
         // This method will be called once per supported complication, and the results will be cached
-        switch complication.family {
-        case .extraLarge:
-            let template = CLKComplicationTemplateExtraLargeStackText(
-                line1TextProvider: CLKSimpleTextProvider(text: "Caffeine", shortText: "Caf"),
-                line2TextProvider: CLKRelativeDateTextProvider(date: Date().addingTimeInterval(2*60*60), style: CLKRelativeDateStyle.timer, units: [.hour, .minute, .second])
-            )
-            handler(template)
-        case .modularLarge:
-            let template = CLKComplicationTemplateModularLargeColumns(
-                row1Column1TextProvider: getSubstanceTitle(substanceName: "Caffeine"),
-                row1Column2TextProvider: CLKTimeIntervalTextProvider(start: Date().addingTimeInterval(-2*60*60), end: Date().addingTimeInterval(2*60*60)),
-                row2Column1TextProvider: getSubstanceTitle(substanceName: "Myristicin"),
-                row2Column2TextProvider: CLKTimeIntervalTextProvider(start: Date().addingTimeInterval(-7*60*60), end: Date().addingTimeInterval(8*60*60)),
-                row3Column1TextProvider: getSubstanceTitle(substanceName: "Propylhexedrine"),
-                row3Column2TextProvider: CLKTimeIntervalTextProvider(start: Date().addingTimeInterval(-3*60*60), end: Date().addingTimeInterval(3*60*60))
-            )
-            handler(template)
-        case .graphicExtraLarge:
-            let helper = PersistenceController.preview.createPreviewHelper()
-            var components = DateComponents()
-            components.hour = 10
-            components.minute = 10
-            let sampleDate = Calendar.current.date(from: components) ?? Date()
-            let template = CLKComplicationTemplateGraphicExtraLargeCircularView(
-                ComplicationView(ingestions: helper.experiences.first!.sortedIngestionsUnwrapped, timeToDisplay: sampleDate)
-            )
-            handler(template)
-        default:
-            handler(nil)
-        }
+
+        let helper = PersistenceController.preview.createPreviewHelper()
+        var components = DateComponents()
+        components.year = 2021
+        components.month = 8
+        components.day = 18
+        components.hour = 10
+        components.minute = 10
+        let sampleDate = Calendar.current.date(from: components) ?? Date()
+
+        let template = createTemplate(for: complication.family, date: sampleDate, ingestions: helper.experiences.first!.sortedIngestionsUnwrapped)
+        handler(template)
     }
 
-    func createTemplate(for family: CLKComplicationFamily, date: Date) -> CLKComplicationTemplate {
-        let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
+    func createTemplate(
+        for family: CLKComplicationFamily,
+        date: Date,
+        ingestions: [Ingestion]
+    ) -> CLKComplicationTemplate {
 
         switch family {
         case .extraLarge:

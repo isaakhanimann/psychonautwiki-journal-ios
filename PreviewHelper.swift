@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+// swiftlint:disable type_body_length
 class PreviewHelper {
 
     let substancesFile: SubstancesFile
@@ -35,25 +36,35 @@ class PreviewHelper {
         substancesFile: SubstancesFile
     ) -> [Experience] {
         let experience1 = Experience(context: context)
-        experience1.title = "Day at the Lake"
+        experience1.title = "18 Aug 2021"
         experience1.addToIngestions(
             PreviewHelper.createDefaultIngestion(
-                with: .pink,
-                stringTime: "2021/08/18 20:01",
+                with: .red,
+                stringTime: "2021/08/18 08:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Etizolam",
-                dose: 3.2
+                substanceName: "Caffeine",
+                dose: 100
             )
         )
         experience1.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .blue,
-                stringTime: "2021/08/18 21:10",
+                stringTime: "2021/08/18 09:10",
                 context: context,
                 file: substancesFile,
-                substanceName: "Phenibut",
-                dose: 1.25
+                substanceName: "Caffeine",
+                dose: 200
+            )
+        )
+        experience1.addToIngestions(
+            PreviewHelper.createDefaultIngestion(
+                with: .green,
+                stringTime: "2021/08/18 11:10",
+                context: context,
+                file: substancesFile,
+                substanceName: "Caffeine",
+                dose: 150
             )
         )
 
@@ -65,7 +76,7 @@ class PreviewHelper {
                 stringTime: "2021/08/10 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Dextromethorphan"
+                substanceName: "Caffeine"
             )
         )
         experience2.addToIngestions(
@@ -74,7 +85,7 @@ class PreviewHelper {
                 stringTime: "2021/08/10 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Memantine"
+                substanceName: "Myristicin"
             )
         )
         experience2.addToIngestions(
@@ -83,7 +94,7 @@ class PreviewHelper {
                 stringTime: "2021/08/10 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Adrafinil"
+                substanceName: "Caffeine"
             )
         )
 
@@ -95,7 +106,7 @@ class PreviewHelper {
                 stringTime: "2021/07/20 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Methoxetamine"
+                substanceName: "Caffeine"
             )
         )
         experience3.addToIngestions(
@@ -104,7 +115,7 @@ class PreviewHelper {
                 stringTime: "2021/07/20 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Dextromethorphan"
+                substanceName: "Caffeine"
             )
         )
 
@@ -116,7 +127,7 @@ class PreviewHelper {
                 stringTime: "2021/02/11 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "Methoxetamine"
+                substanceName: "Caffeine"
             )
         )
         experience4.addToIngestions(
@@ -125,19 +136,19 @@ class PreviewHelper {
                 stringTime: "2021/02/11 22:01",
                 context: context,
                 file: substancesFile,
-                substanceName: "PCE"
+                substanceName: "Caffeine"
             )
         )
 
         let experience5 = Experience(context: context)
-        experience5.title = "New Years Eve 2020"
+        experience5.title = "31 Dec 2020"
         experience5.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .pink,
                 stringTime: "2020/12/31 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "2C-C"
+                substanceName: "Caffeine"
             )
         )
         experience5.addToIngestions(
@@ -146,31 +157,31 @@ class PreviewHelper {
                 stringTime: "2020/12/31 22:13",
                 context: context,
                 file: substancesFile,
-                substanceName: "2C-I"
+                substanceName: "Caffeine"
             )
         )
 
         let experience6 = Experience(context: context)
-        experience6.title = "Holiday in Lisbon"
+        experience6.title = "10 Oct 2020"
         experience6.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .orange,
                 stringTime: "2020/10/10 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "Mescaline"
+                substanceName: "Caffeine"
             )
         )
 
         let experience7 = Experience(context: context)
-        experience7.title = "Patrick's Birthday"
+        experience7.title = "5 Jun 2020"
         experience7.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .blue,
                 stringTime: "2020/06/05 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "LSD"
+                substanceName: "Caffeine"
             )
         )
         experience7.addToIngestions(
@@ -179,7 +190,7 @@ class PreviewHelper {
                 stringTime: "2020/06/05 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "Prolintane"
+                substanceName: "Caffeine"
             )
         )
         experience7.addToIngestions(
@@ -188,7 +199,7 @@ class PreviewHelper {
                 stringTime: "2020/06/05 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "DMT"
+                substanceName: "Caffeine"
             )
         )
 
@@ -200,7 +211,7 @@ class PreviewHelper {
                 stringTime: "2020/06/03 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "Methoxetamine"
+                substanceName: "Caffeine"
             )
         )
 
@@ -212,7 +223,7 @@ class PreviewHelper {
                 stringTime: "2020/03/11 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "Memantine"
+                substanceName: "Citicoline"
             )
         )
         experience9.addToIngestions(
@@ -221,7 +232,7 @@ class PreviewHelper {
                 stringTime: "2020/03/11 22:03",
                 context: context,
                 file: substancesFile,
-                substanceName: "MDA"
+                substanceName: "Caffeine"
             )
         )
 
