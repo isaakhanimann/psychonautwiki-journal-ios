@@ -34,8 +34,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         // swiftlint:disable line_length
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
-        let endDate = Date().addingTimeInterval(86400)
-        handler(endDate)
+        handler(Date.distantFuture)
     }
 
     func getPrivacyBehavior(
