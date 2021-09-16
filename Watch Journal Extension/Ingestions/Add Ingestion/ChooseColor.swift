@@ -27,20 +27,22 @@ struct ChooseColor: View {
     }
 
     private func addIngestion(with color: Ingestion.IngestionColor) {
-        let ingestion = Ingestion(context: moc)
-        ingestion.identifier = UUID()
-        ingestion.experience = experience
-        ingestion.time = ingestionTime
-        ingestion.dose = dose
-        ingestion.administrationRoute = administrationRoute.rawValue
-        ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
-        ingestion.color = color.rawValue
-        substance.lastUsedDate = Date()
-        substance.category!.file!.lastUsedSubstance = substance
+        moc.performAndWait {
+            let ingestion = Ingestion(context: moc)
+            ingestion.identifier = UUID()
+            ingestion.experience = experience
+            ingestion.time = ingestionTime
+            ingestion.dose = dose
+            ingestion.administrationRoute = administrationRoute.rawValue
+            ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
+            ingestion.color = color.rawValue
+            substance.lastUsedDate = Date()
+            substance.category!.file!.lastUsedSubstance = substance
 
-        connectivity.sendNewIngestion(ingestion: ingestion)
+            connectivity.sendNewIngestion(ingestion: ingestion)
+            try? moc.save()
+        }
 
-        try? moc.save()
         ComplicationUpdater.updateActiveComplications()
         dismiss()
     }
