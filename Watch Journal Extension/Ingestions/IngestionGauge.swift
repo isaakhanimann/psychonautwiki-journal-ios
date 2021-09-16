@@ -23,14 +23,17 @@ struct IngestionGauge: View {
     init(ingestion: Ingestion) {
         self.name = ingestion.substanceCopy?.nameUnwrapped ?? "Unknown"
         self.startTime = ingestion.timeUnwrapped
-        let durations = ingestion.substanceCopy!.getDuration(for: ingestion.administrationRouteUnwrapped)!
+        let durations = ingestion.substanceCopy?.getDuration(for: ingestion.administrationRouteUnwrapped)
 
-        let onsetDuration = durations.onset!.oneValue(at: 0.5)
-        let comeupDuration = durations.comeup!.oneValue(at: 0.5)
-        let peakDuration = durations.peak!.oneValue(at: ingestion.horizontalWeight)
-        let offsetDuration = durations.offset!.oneValue(at: ingestion.horizontalWeight)
+        let onsetDuration = durations?.onset?.oneValue(at: 0.5) ?? 0
+        let comeupDuration = durations?.comeup?.oneValue(at: 0.5) ?? 0
+        let peakDuration = durations?.peak?.oneValue(at: ingestion.horizontalWeight) ?? 0
+        let offsetDuration = durations?.offset?.oneValue(at: ingestion.horizontalWeight) ?? 0
 
-        let totalTime = onsetDuration + comeupDuration + peakDuration + offsetDuration
+        var totalTime = onsetDuration + comeupDuration + peakDuration + offsetDuration
+        if totalTime == 0 {
+            totalTime = 5*60*60
+        }
 
         self.endTime = ingestion.timeUnwrapped.addingTimeInterval(totalTime)
 

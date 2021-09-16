@@ -34,10 +34,11 @@ struct ChooseColor: View {
             ingestion.time = ingestionTime
             ingestion.dose = dose
             ingestion.administrationRoute = administrationRoute.rawValue
-            ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
+            guard let substanceCopy = SubstanceCopy(basedOn: substance, context: moc) else {return}
+            ingestion.substanceCopy = substanceCopy
             ingestion.color = color.rawValue
             substance.lastUsedDate = Date()
-            substance.category!.file!.lastUsedSubstance = substance
+            substance.category?.file?.lastUsedSubstance = substance
 
             connectivity.sendNewIngestion(ingestion: ingestion)
             try? moc.save()

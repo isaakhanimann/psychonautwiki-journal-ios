@@ -42,7 +42,7 @@ extension Experience {
 
     var usedSubstanceNames: String {
         var names = sortedIngestionsUnwrapped.map { ingestion in
-            ingestion.substanceCopy!.nameUnwrapped
+            ingestion.substanceCopy?.nameUnwrapped ?? "Unknown"
         }
         names = names.uniqued()
 
@@ -63,7 +63,7 @@ extension Experience {
     var isActive: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
 
-        let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped)
+        guard let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped) else {return false}
 
         return endOfGraph >= Date()
     }
@@ -71,20 +71,25 @@ extension Experience {
     static func getEndTime(
         for ingestions: [Ingestion],
         secondsToAddAtEnd: TimeInterval = 60*60
-    ) -> Date {
-        assert(!ingestions.isEmpty)
+    ) -> Date? {
+
+        guard let firstIngestion = ingestions.first else {return nil}
 
         // Initialize endOfGraphTime sensibly
-        var endOfGraphTime = ingestions.first!.timeUnwrapped
+        var endOfGraphTime = firstIngestion.timeUnwrapped
         for ingestion in ingestions {
-            let substance = ingestion.substanceCopy!
-            let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
+            guard let duration = ingestion.substanceCopy?
+                    .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
+            guard let onset = duration.onset?.maxSec else {return nil}
+            guard let comeup = duration.comeup?.maxSec else {return nil}
+            guard let peak = duration.peak?.maxSec else {return nil}
+            guard let offset = duration.offset?.maxSec else {return nil}
 
             // Choose the latest possible offset to make sure that the graph fits all ingestions
-            let offsetEnd = duration.onset!.maxSec
-                + duration.comeup!.maxSec
-                + duration.peak!.maxSec
-                + duration.offset!.maxSec
+            let offsetEnd = onset
+                + comeup
+                + peak
+                + offset
 
             let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
             if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {

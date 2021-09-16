@@ -38,17 +38,21 @@ struct DisclaimerViewShort: View {
                 Spacer()
             }
 
-            NavigationLink(
-                destination: ChooseInitialInteractionsView(
-                    file: storedFile.first!,
-                    dismiss: dismiss
-                ),
-                label: {
-                    Text("I understand.")
-                        .primaryButtonText()
-                }
-            )
-
+            if let file = storedFile.first {
+                NavigationLink(
+                    destination: ChooseInitialInteractionsView(
+                        file: file,
+                        dismiss: dismiss
+                    ),
+                    label: {
+                        Text("I understand.")
+                            .primaryButtonText()
+                    }
+                )
+            } else {
+                Button("I understand.", action: dismiss)
+                    .buttonStyle(PrimaryButtonStyle())
+            }
         }
         .padding()
         .navigationBarHidden(true)

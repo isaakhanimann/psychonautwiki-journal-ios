@@ -47,7 +47,7 @@ extension Ingestion {
     var horizontalWeight: Double {
         let defaultWeight = 0.5
 
-        guard let doseTypesUnwrapped = substanceCopy!.getDose(for: administrationRouteUnwrapped) else {
+        guard let doseTypesUnwrapped = substanceCopy?.getDose(for: administrationRouteUnwrapped) else {
             return defaultWeight
         }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
@@ -64,11 +64,16 @@ extension Ingestion {
     }
 
     var endTime: Date {
-        let durations = substanceCopy!.getDuration(for: administrationRouteUnwrapped)!
-        let totalDuration = durations.onset!.oneValue(at: 0.5)
-            + durations.comeup!.oneValue(at: 0.5)
-            + durations.peak!.oneValue(at: horizontalWeight)
-            + durations.offset!.oneValue(at: horizontalWeight)
+        let defaultEnd = timeUnwrapped.addingTimeInterval(5*60*60)
+        guard let durations = substanceCopy?.getDuration(for: administrationRouteUnwrapped) else {return defaultEnd}
+        guard let onset = durations.onset?.oneValue(at: 0.5) else {return defaultEnd}
+        guard let comeup = durations.comeup?.oneValue(at: 0.5) else {return defaultEnd}
+        guard let peak = durations.peak?.oneValue(at: horizontalWeight) else {return defaultEnd}
+        guard let offset = durations.offset?.oneValue(at: horizontalWeight) else {return defaultEnd}
+        let totalDuration = onset
+            + comeup
+            + peak
+            + offset
         return timeUnwrapped.addingTimeInterval(totalDuration)
     }
 }

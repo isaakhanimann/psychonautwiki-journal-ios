@@ -45,7 +45,7 @@ struct OneIngestionView_Previews: PreviewProvider {
         GeometryReader { geometry in
             let squareSize = min(geometry.size.width, geometry.size.height)
             OneIngestionView(
-                angleModel: AngleModel(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!),
+                angleModel: AngleModel(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)!,
                 lineWidth: 20
             )
             .frame(width: squareSize, height: squareSize)

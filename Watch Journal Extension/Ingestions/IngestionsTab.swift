@@ -39,14 +39,18 @@ struct IngestionsTab: View {
             }
             .navigationTitle("Ingestions")
             .sheet(isPresented: $isShowingAddIngestionSheet) {
-                ChooseSubstanceView(
-                    substancesFile: storedFile.first!,
-                    dismiss: {isShowingAddIngestionSheet.toggle()},
-                    experience: experience
-                )
-                .environment(\.managedObjectContext, self.moc)
-                .environmentObject(connectivity)
-                .accentColor(Color.blue)
+                if let file = storedFile.first {
+                    ChooseSubstanceView(
+                        substancesFile: file,
+                        dismiss: {isShowingAddIngestionSheet.toggle()},
+                        experience: experience
+                    )
+                    .environment(\.managedObjectContext, self.moc)
+                    .environmentObject(connectivity)
+                    .accentColor(Color.blue)
+                } else {
+                    Text("No Substances")
+                }
             }
         }
     }

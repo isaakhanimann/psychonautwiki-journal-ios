@@ -3,16 +3,14 @@ import SwiftUI
 struct HelperMethods {
 
     static func getLineModels(sortedIngestions: [Ingestion]) -> [IngestionLineModel] {
-        assert(!sortedIngestions.isEmpty)
-
-        let timeOfFirstIngestion = sortedIngestions.first!.timeUnwrapped
-        let graphEndTime = Experience.getEndTime(for: sortedIngestions)
+        guard let timeOfFirstIngestion = sortedIngestions.first?.timeUnwrapped else {return []}
+        guard let graphEndTime = Experience.getEndTime(for: sortedIngestions) else {return []}
         let totalGraphDuration = timeOfFirstIngestion.distance(to: graphEndTime)
 
         var linesData = [IngestionLineModel]()
         for (verticalWeight, ingestion) in getSortedIngestionsWithVerticalWeights(for: sortedIngestions) {
-            let substance = ingestion.substanceCopy!
-            let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped)!
+            guard let substance = ingestion.substanceCopy else {continue}
+            guard let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped) else {continue}
             let ingestionTime = ingestion.timeUnwrapped
 
             // if weight 0 we take the minimum durations and if 1 we take the maximum durations
@@ -23,7 +21,7 @@ struct HelperMethods {
                 ingestion != ing
             }))
 
-            let ingestionLineModel = IngestionLineModel(
+            guard let ingestionLineModel = IngestionLineModel(
                 color: ingestion.swiftUIColorUnwrapped,
                 ingestionTimeOffset: timeOfFirstIngestion.distance(to: ingestionTime),
                 totalGraphDuration: totalGraphDuration,
@@ -31,7 +29,7 @@ struct HelperMethods {
                 horizontalWeight: horizontalWeight,
                 durations: duration,
                 insetTimes: insetTimes
-            )
+            ) else {continue}
 
             linesData.append(ingestionLineModel)
         }
@@ -40,24 +38,30 @@ struct HelperMethods {
     }
 
     private static func getInsetTimes(of ingestion: Ingestion, comparedTo previousIngestions: [Ingestion]) -> Int {
-        let durationOriginal = ingestion.substanceCopy!.getDuration(for: ingestion.administrationRouteUnwrapped)!
+        let defaultInset = 0
+        guard let durationOriginal = ingestion.substanceCopy?.getDuration(
+                for: ingestion.administrationRouteUnwrapped
+        ) else {return defaultInset}
 
-        let peakStartOriginal = ingestion.timeUnwrapped
-            .addingTimeInterval(durationOriginal.onset!.minSec)
-            .addingTimeInterval(durationOriginal.comeup!.minSec)
-        let peakEndOriginal = peakStartOriginal
-            .addingTimeInterval(durationOriginal.peak!.maxSec)
+        guard let onset = durationOriginal.onset?.oneValue(at: 0.5) else {return defaultInset}
+        guard let comeup = durationOriginal.comeup?.oneValue(at: 0.5) else {return defaultInset}
+        guard let peak = durationOriginal.peak?.oneValue(at: ingestion.horizontalWeight) else {return defaultInset}
+
+        let peakStartOriginal = ingestion.timeUnwrapped.addingTimeInterval(onset + comeup)
+        let peakEndOriginal = peakStartOriginal.addingTimeInterval(peak)
 
         var insetTimes = 0
         for previousIngestion in previousIngestions {
-            let duration = previousIngestion.substanceCopy!.getDuration(
+            guard let duration = previousIngestion.substanceCopy?.getDuration(
                 for: previousIngestion.administrationRouteUnwrapped
-            )!
+            ) else {continue}
 
-            let peakStart = previousIngestion.timeUnwrapped
-                .addingTimeInterval(duration.onset!.minSec)
-                .addingTimeInterval(duration.comeup!.minSec)
-            let peakEnd = peakStart.addingTimeInterval(duration.peak!.maxSec)
+            guard let onset = duration.onset?.oneValue(at: 0.5) else {continue}
+            guard let comeup = duration.comeup?.oneValue(at: 0.5) else {continue}
+            guard let peak = duration.peak?.oneValue(at: ingestion.horizontalWeight) else {continue}
+
+            let peakStart = previousIngestion.timeUnwrapped.addingTimeInterval(onset + comeup)
+            let peakEnd = peakStart.addingTimeInterval(peak)
 
             if areRangesOverlapping(min1: peakStartOriginal, max1: peakEndOriginal, min2: peakStart, max2: peakEnd) {
                 insetTimes += 1
@@ -81,11 +85,11 @@ struct HelperMethods {
         for ingestion in sortedIngestions {
             var allDoses = [Double]()
             for otherIngestion in sortedIngestions
-            where otherIngestion.substanceCopy!.nameUnwrapped == ingestion.substanceCopy!.nameUnwrapped {
+            where otherIngestion.substanceCopy?.name == ingestion.substanceCopy?.name {
                 allDoses.append(otherIngestion.dose)
             }
 
-            let maxDose = allDoses.max()!
+            let maxDose = allDoses.max() ?? 0
 
             var verticalWeight = 1.0
             if maxDose == 0 {

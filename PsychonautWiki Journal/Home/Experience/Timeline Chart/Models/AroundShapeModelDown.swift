@@ -27,7 +27,8 @@ struct AroundShapeModelDown: AroundShapeModel {
         let topRight: DataPoint
         let topLeft: DataPoint
 
-        init(
+        // swiftlint:disable function_body_length
+        init?(
             verticalWeight: CGFloat,
             durations: DurationTypes,
             ingestionTimeOffset: TimeInterval,
@@ -36,38 +37,47 @@ struct AroundShapeModelDown: AroundShapeModel {
             let minY: CGFloat = 0
             let maxY: CGFloat = verticalWeight
 
+            guard let onsetMin = durations.onset?.minSec else {return nil}
+            guard let onsetMax = durations.onset?.maxSec else {return nil}
+            guard let comeupMin = durations.comeup?.minSec else {return nil}
+            guard let comeupMax = durations.comeup?.maxSec else {return nil}
+            guard let peakMin = durations.peak?.minSec else {return nil}
+            guard let peakMax = durations.peak?.maxSec else {return nil}
+            guard let offsetMin = durations.offset?.minSec else {return nil}
+            guard let offsetMax = durations.offset?.maxSec else {return nil}
+
             self.bottomLeft = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        + durations.onset!.minSec
-                        + durations.comeup!.minSec
-                        + durations.peak!.minSec
-                        + durations.offset!.minSec,
+                        + onsetMin
+                        + comeupMin
+                        + peakMin
+                        + offsetMin,
                     comparedTo: totalGraphDuration),
                 yValue: minY)
             self.bottomRight = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        + durations.onset!.maxSec
-                        + durations.comeup!.maxSec
-                        + durations.peak!.maxSec
-                        + durations.offset!.maxSec,
+                        + onsetMax
+                        + comeupMax
+                        + peakMax
+                        + offsetMax,
                     comparedTo: totalGraphDuration),
                 yValue: minY)
             self.topRight = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        + durations.onset!.maxSec
-                        + durations.comeup!.maxSec
-                        + durations.peak!.maxSec,
+                        + onsetMax
+                        + comeupMax
+                        + peakMax,
                     comparedTo: totalGraphDuration),
                 yValue: maxY)
             self.topLeft = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        + durations.onset!.minSec
-                        + durations.comeup!.minSec
-                        + durations.peak!.minSec,
+                        + onsetMin
+                        + comeupMin
+                        + peakMin,
                     comparedTo: totalGraphDuration),
                 yValue: maxY)
         }

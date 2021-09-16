@@ -116,17 +116,17 @@ class CalendarWrapper: ObservableObject {
     }
 
     private func getStartAndEnd(for experience: Experience) -> (start: Date, end: Date) {
-        if experience.sortedIngestionsUnwrapped.isEmpty {
+
+        if let start = experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
+           let end = Experience.getEndTime(
+            for: experience.sortedIngestionsUnwrapped,
+            secondsToAddAtEnd: 0
+        ) {
+            return (start, end)
+        } else {
             let fiveHours: TimeInterval = 5*60*60
             return (experience.creationDateUnwrapped, experience.creationDateUnwrapped.addingTimeInterval(fiveHours))
         }
-
-        let start = experience.sortedIngestionsUnwrapped.first!.timeUnwrapped
-        let end = Experience.getEndTime(
-            for: experience.sortedIngestionsUnwrapped,
-            secondsToAddAtEnd: 0
-        )
-        return (start, end)
     }
 
     private func getNotes(from experience: Experience) -> String {
@@ -136,7 +136,7 @@ class CalendarWrapper: ObservableObject {
         }
         for ingestion in experience.sortedIngestionsUnwrapped {
             result += "\(ingestion.timeUnwrappedAsString): "
-            result += "\(ingestion.doseInfoString) of \(ingestion.substanceCopy!.nameUnwrapped) "
+            result += "\(ingestion.doseInfoString) of \(ingestion.substanceCopy?.name ?? "Unknown") "
             result += "\(ingestion.administrationRouteUnwrapped.displayString)\n"
         }
         result += "\n" + experience.textUnwrapped

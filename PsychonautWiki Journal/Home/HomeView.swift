@@ -135,7 +135,8 @@ struct HomeView: View {
     }
 
     private func deleteExperiences() {
-        for offset in self.offsets! {
+        guard let offsetsUnwrapped = self.offsets else {return}
+        for offset in offsetsUnwrapped {
             let experience = experiencesSorted[offset]
             moc.delete(experience)
         }

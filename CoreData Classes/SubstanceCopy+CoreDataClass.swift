@@ -3,7 +3,7 @@ import CoreData
 
 public class SubstanceCopy: NSManagedObject {
 
-    convenience init(basedOn substance: Substance, context: NSManagedObjectContext) {
+    convenience init?(basedOn substance: Substance, context: NSManagedObjectContext) {
         self.init(context: context)
         self.name = substance.name
         self.url = substance.url
@@ -25,21 +25,26 @@ public class SubstanceCopy: NSManagedObject {
             roaCopy.doseTypes = doseTypesCopy
 
             let durationTypesCopy = DurationTypes(context: context)
-            let durationTypes = roa.durationTypes!
+            guard let durationTypes = roa.durationTypes else {return nil}
+            guard let onset = durationTypes.onset else {return nil}
+            guard let comeup = durationTypes.comeup else {return nil}
+            guard let peak = durationTypes.peak else {return nil}
+            guard let offset = durationTypes.offset else {return nil}
+
             durationTypesCopy.onset = SubstanceCopy.getDurationRangeCopy(
-                basedOn: durationTypes.onset!,
+                basedOn: onset,
                 context: context
             )
             durationTypesCopy.comeup = SubstanceCopy.getDurationRangeCopy(
-                basedOn: durationTypes.comeup!,
+                basedOn: comeup,
                 context: context
             )
             durationTypesCopy.peak = SubstanceCopy.getDurationRangeCopy(
-                basedOn: durationTypes.peak!,
+                basedOn: peak,
                 context: context
             )
             durationTypesCopy.offset = SubstanceCopy.getDurationRangeCopy(
-                basedOn: durationTypes.offset!,
+                basedOn: offset,
                 context: context
             )
             roaCopy.durationTypes = durationTypesCopy
@@ -59,7 +64,7 @@ public class SubstanceCopy: NSManagedObject {
     private static func getDurationRangeCopy(
         basedOn durationRange: DurationRange,
         context: NSManagedObjectContext
-    ) -> DurationRange? {
+    ) -> DurationRange {
         let newRange = DurationRange(context: context)
         newRange.minSec = durationRange.minSec
         newRange.maxSec = durationRange.maxSec

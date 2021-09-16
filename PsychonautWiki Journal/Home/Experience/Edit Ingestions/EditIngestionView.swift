@@ -15,7 +15,7 @@ struct EditIngestionView: View {
     @State private var isKeyboardShowing = false
 
     var doseInfo: DoseTypes? {
-        ingestion.substanceCopy!.getDose(for: selectedAdministrationRoute)
+        ingestion.substanceCopy?.getDose(for: selectedAdministrationRoute)
     }
 
     var selectedUnit: String? {
@@ -28,10 +28,13 @@ struct EditIngestionView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Route of Administration")) {
-                Picker("Route", selection: $selectedAdministrationRoute) {
-                    ForEach(ingestion.substanceCopy!.administrationRoutesUnwrapped, id: \.self) { route in
-                        Text(route.displayString).tag(route)
+            if let administrationRoutesUnwrapped = ingestion.substanceCopy?.administrationRoutesUnwrapped,
+               administrationRoutesUnwrapped.count > 1 {
+                Section(header: Text("Route of Administration")) {
+                    Picker("Route", selection: $selectedAdministrationRoute) {
+                        ForEach(administrationRoutesUnwrapped, id: \.self) { route in
+                            Text(route.displayString).tag(route)
+                        }
                     }
                 }
             }
@@ -59,17 +62,19 @@ struct EditIngestionView: View {
                 .padding(.vertical)
             }
         }
-        .navigationTitle(ingestion.substanceCopy!.nameUnwrapped)
+        .navigationTitle(ingestion.substanceCopy?.name ?? "Unknown")
         .onChange(of: selectedTime) { _ in update() }
         .onChange(of: selectedDose) { _ in update() }
         .onChange(of: selectedAdministrationRoute) { _ in update() }
         .onChange(of: selectedColor) { _ in update() }
         .onDisappear(perform: {
             let defaults = UserDefaults.standard
-            defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy!.nameUnwrapped)
+            defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy?.name ?? "Unknown")
             if moc.hasChanges {
                 connectivity.sendIngestionUpdate(for: ingestion)
-                calendarWrapper.createOrUpdateEventBeforeMocSave(from: ingestion.experience!)
+                if let experienceUnwrapped = ingestion.experience {
+                    calendarWrapper.createOrUpdateEventBeforeMocSave(from: experienceUnwrapped)
+                }
                 try? moc.save()
             }
         })

@@ -16,7 +16,7 @@ struct WatchFaceModel {
     init(ingestions: [Ingestion]) {
         var setupLayers = [Layer]()
         for ingestion in ingestions {
-            let newModel = AngleModel(ingestion: ingestion)
+            guard let newModel = AngleModel(ingestion: ingestion) else {continue}
             WatchFaceModel.put(model: newModel, intoLayers: &setupLayers)
         }
         self.layers = setupLayers

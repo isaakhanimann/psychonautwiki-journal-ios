@@ -8,7 +8,7 @@ struct IngestionLineModel {
     let insetTimes: Int
     let color: Color
 
-    init(
+    init?(
         color: Color,
         ingestionTimeOffset: TimeInterval,
         totalGraphDuration: TimeInterval,
@@ -18,31 +18,31 @@ struct IngestionLineModel {
         insetTimes: Int
     ) {
         self.color = color
-        let normalizedXValuesForAroundShapeModelUp = AroundShapeModelUp.NormalizedDataPoints(
+        guard let normalizedXValuesForAroundShapeModelUp = AroundShapeModelUp.NormalizedDataPoints(
             verticalWeight: CGFloat(verticalWeight),
             durations: durations,
             ingestionTimeOffset: ingestionTimeOffset,
             totalGraphDuration: totalGraphDuration
-        )
+        ) else {return nil}
         self.aroundShapeModelUp = AroundShapeModelUp(normalizedXValuesForModel: normalizedXValuesForAroundShapeModelUp)
 
-        let normalizedXValuesForAroundShapeModelDown = AroundShapeModelDown.NormalizedDataPoints(
+        guard let normalizedXValuesForAroundShapeModelDown = AroundShapeModelDown.NormalizedDataPoints(
             verticalWeight: CGFloat(verticalWeight),
             durations: durations,
             ingestionTimeOffset: ingestionTimeOffset,
             totalGraphDuration: totalGraphDuration
-        )
+        ) else {return nil}
         self.aroundShapeModelDown = AroundShapeModelDown(
             normalizedXValuesForModel: normalizedXValuesForAroundShapeModelDown
         )
 
-        let normalizedXValuesForLineModel = LineModel.NormalizedDataPoints(
+        guard let normalizedXValuesForLineModel = LineModel.NormalizedDataPoints(
             horizontalWeight: horizontalWeight,
             verticalWeight: CGFloat(verticalWeight),
             durations: durations,
             ingestionTimeOffset: ingestionTimeOffset,
             totalGraphDuration: totalGraphDuration
-        )
+        ) else {return nil}
         self.lineModel = LineModel(normalizedXValuesForModel: normalizedXValuesForLineModel)
         self.insetTimes = insetTimes
     }

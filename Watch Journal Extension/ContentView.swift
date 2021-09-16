@@ -56,16 +56,19 @@ struct ContentView: View {
 
     func maybeFetchAgain() {
         if shouldFetchAgain {
-            PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
-                oldFile: storedFile.first!
-            )
+            if let file = storedFile.first {
+                PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
+                    oldFile: file
+                )
+            }
         }
     }
 
     var shouldFetchAgain: Bool {
-        guard hasBeenSetupBefore else { return false }
+        guard hasBeenSetupBefore else {return false}
         let oneDay: TimeInterval = 60 * 60 * 24 * 1
-        guard storedFile.first!.creationDateUnwrapped.distance(to: Date()) > oneDay else {
+        guard let file = storedFile.first else {return true}
+        guard file.creationDateUnwrapped.distance(to: Date()) > oneDay else {
             return false
         }
         return true

@@ -26,7 +26,7 @@ struct SettingsTab: View {
                     } else {
                         Button(action: fetchNewSubstances, label: {
                             Label(
-                                storedFile.first!.creationDateUnwrapped.asDateAndTime,
+                                storedFile.first?.creationDateUnwrapped.asDateAndTime ?? "No Substances",
                                 systemImage: "arrow.clockwise"
                             )
                         })
@@ -40,46 +40,48 @@ struct SettingsTab: View {
                     )
                 }
 
-                Section(header: Text("Choose Interactions")) {
-                    NavigationLink(
-                        destination: ChooseInteractionsView(file: storedFile.first!),
-                        label: {
-                            Label(
-                                "Interactions",
-                                systemImage: "burst.fill"
-                            )
-                        }
-                    )
-                }
-
-                Section(header: Text("Choose Favorites")) {
-                    NavigationLink(
-                        destination: ChooseFavoritesView(file: storedFile.first!),
-                        label: {
-                            Label("Favorites", systemImage: "star.fill")
-                        }
-                    )
-                }
-
-                Section(
-                    footer: HStack {
-                        Spacer()
-                        Button(action: {
-                            isEyeOpen.toggle()
-                            PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
-                            connectivity.sendEyeState(isEyeOpen: isEyeOpen)
-                        }, label: {
-                            (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
-                                .renderingMode(.template)
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(.secondary)
-                                .frame(width: 30, height: 30, alignment: .center)
-                        })
-                        .buttonStyle(PlainButtonStyle())
-                        Spacer()
+                if let file = storedFile.first {
+                    Section(header: Text("Choose Interactions")) {
+                        NavigationLink(
+                            destination: ChooseInteractionsView(file: file),
+                            label: {
+                                Label(
+                                    "Interactions",
+                                    systemImage: "burst.fill"
+                                )
+                            }
+                        )
                     }
-                ) { }
+
+                    Section(header: Text("Choose Favorites")) {
+                        NavigationLink(
+                            destination: ChooseFavoritesView(file: file),
+                            label: {
+                                Label("Favorites", systemImage: "star.fill")
+                            }
+                        )
+                    }
+
+                    Section(
+                        footer: HStack {
+                            Spacer()
+                            Button(action: {
+                                isEyeOpen.toggle()
+                                PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: file)
+                                connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+                            }, label: {
+                                (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 30, height: 30, alignment: .center)
+                            })
+                            .buttonStyle(PlainButtonStyle())
+                            Spacer()
+                        }
+                    ) { }
+                }
             }
             .navigationTitle("Settings")
         }

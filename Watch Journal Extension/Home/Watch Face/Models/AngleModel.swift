@@ -19,16 +19,23 @@ struct AngleModel: Identifiable {
         offsetEnd
     }
 
-    init(ingestion: Ingestion) {
-        let durations = ingestion.substanceCopy!.getDuration(for: ingestion.administrationRouteUnwrapped)!
+    init?(ingestion: Ingestion) {
+        guard let durations = ingestion.substanceCopy?
+                .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
         let weight = ingestion.horizontalWeight
 
+        guard let onsetMin = durations.onset?.minSec else {return nil}
+        guard let onsetMiddle = durations.onset?.oneValue(at: 0.5) else {return nil}
+        guard let comeupMiddle = durations.comeup?.oneValue(at: 0.5) else {return nil}
+        guard let peakMiddle = durations.peak?.oneValue(at: weight) else {return nil}
+        guard let offsetMax = durations.offset?.maxSec else {return nil}
+
         let ingestionTime = ingestion.timeUnwrapped
-        let onsetStartTime = ingestionTime.addingTimeInterval(durations.onset!.minSec)
-        let averageOnsetStartTime = ingestionTime.addingTimeInterval(durations.onset!.oneValue(at: 0.5))
-        let peakStartTime = averageOnsetStartTime.addingTimeInterval(durations.comeup!.oneValue(at: 0.5))
-        let peakEndTime = peakStartTime.addingTimeInterval(durations.peak!.oneValue(at: weight))
-        let offsetEndTime = peakEndTime.addingTimeInterval(durations.offset!.maxSec)
+        let onsetStartTime = ingestionTime.addingTimeInterval(onsetMin)
+        let averageOnsetStartTime = ingestionTime.addingTimeInterval(onsetMiddle)
+        let peakStartTime = averageOnsetStartTime.addingTimeInterval(comeupMiddle)
+        let peakEndTime = peakStartTime.addingTimeInterval(peakMiddle)
+        let offsetEndTime = peakEndTime.addingTimeInterval(offsetMax)
 
         self.ingestionPoint = AngleModel.getAngle(from: ingestionTime)
         self.onsetStart = AngleModel.getAngle(from: onsetStartTime)

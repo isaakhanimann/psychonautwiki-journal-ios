@@ -80,10 +80,11 @@ struct ChooseTimeAndColor: View {
             ingestion.time = selectedTime
             ingestion.dose = dose
             ingestion.administrationRoute = administrationRoute.rawValue
-            ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: moc)
+            guard let substanceCopy = SubstanceCopy(basedOn: substance, context: moc) else {return}
+            ingestion.substanceCopy = substanceCopy
             ingestion.color = selectedColor.rawValue
             substance.lastUsedDate = Date()
-            substance.category!.file!.lastUsedSubstance = substance
+            substance.category?.file?.lastUsedSubstance = substance
 
             calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
 

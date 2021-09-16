@@ -26,17 +26,22 @@ struct LineModel {
         let peakEnd: DataPoint
         let offsetEnd: DataPoint
 
-        init(
+        init?(
             horizontalWeight: Double,
             verticalWeight: CGFloat,
             durations: DurationTypes,
             ingestionTimeOffset: TimeInterval,
             totalGraphDuration: TimeInterval
         ) {
-            let onsetStartX = ingestionTimeOffset + durations.onset!.oneValue(at: 0.5)
-            let peakStartX = onsetStartX + durations.comeup!.oneValue(at: 0.5)
-            let peakEndX = peakStartX + durations.peak!.oneValue(at: horizontalWeight)
-            let offsetEndX = peakEndX + durations.offset!.oneValue(at: horizontalWeight)
+            guard let onset = durations.onset?.oneValue(at: 0.5) else {return nil}
+            guard let comeup = durations.comeup?.oneValue(at: 0.5) else {return nil}
+            guard let peak = durations.peak?.oneValue(at: horizontalWeight) else {return nil}
+            guard let offset = durations.offset?.oneValue(at: horizontalWeight) else {return nil}
+
+            let onsetStartX = ingestionTimeOffset + onset
+            let peakStartX = onsetStartX + comeup
+            let peakEndX = peakStartX + peak
+            let offsetEndX = peakEndX + offset
 
             let minY: CGFloat = 0
             let maxY = verticalWeight

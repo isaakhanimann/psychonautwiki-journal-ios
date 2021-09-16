@@ -111,15 +111,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
         switch family {
         case .extraLarge:
-            let ingestion = ingestions.first
-            let line1Long = ingestion?.substanceCopy?.nameUnwrapped ?? "No ingestion"
-            let line1Short = ingestion?.substanceCopy?.nameUnwrapped.prefix(3) ?? "-"
+            let defaultTemplate = CLKComplicationTemplateExtraLargeStackText(
+                line1TextProvider: CLKSimpleTextProvider(text: "No ingestion", shortText: String("-")),
+                line2TextProvider: CLKSimpleTextProvider(text: "-")
+            )
+            guard let firstIngestion = ingestions.first else {return defaultTemplate}
+            guard let line1Long = firstIngestion.substanceCopy?.nameUnwrapped else {return defaultTemplate}
+            guard let line1Short = firstIngestion.substanceCopy?.nameUnwrapped.prefix(3) else {return defaultTemplate}
 
             let template = CLKComplicationTemplateExtraLargeStackText(
                 line1TextProvider: CLKSimpleTextProvider(text: line1Long, shortText: String(line1Short)),
-                line2TextProvider: ingestion == nil ?
-                    CLKSimpleTextProvider(text: "-") :
-                    CLKRelativeDateTextProvider(date: ingestion!.timeUnwrapped, style: CLKRelativeDateStyle.timer, units: [.hour, .minute, .second])
+                line2TextProvider: CLKRelativeDateTextProvider(date: firstIngestion.timeUnwrapped, style: CLKRelativeDateStyle.timer, units: [.hour, .minute, .second])
             )
             return template
         case .modularLarge:

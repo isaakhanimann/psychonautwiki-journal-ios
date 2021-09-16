@@ -74,11 +74,20 @@ struct IngestionsLineChart: View {
         sortedIngestions: [Ingestion],
         timeStep: ChartTimeStep = ChartTimeStep.halfHour
     ) {
-        assert(!sortedIngestions.isEmpty)
 
         self.timeStep = timeStep
-        self.graphStartTime = sortedIngestions.first!.timeUnwrapped
-        self.graphEndTime = Experience.getEndTime(for: sortedIngestions)
+
+        if let firstIngestionTime = sortedIngestions.first?.timeUnwrapped {
+            self.graphStartTime = firstIngestionTime
+        } else {
+            self.graphStartTime = Date()
+        }
+
+        if let endTime = Experience.getEndTime(for: sortedIngestions) {
+            self.graphEndTime = endTime
+        } else {
+            self.graphEndTime = Date().addingTimeInterval(5*60*60)
+        }
 
         let lengthOfGraphInSec = graphStartTime.distance(to: graphEndTime)
         self.numberOfSteps = lengthOfGraphInSec / timeStep.inSeconds()

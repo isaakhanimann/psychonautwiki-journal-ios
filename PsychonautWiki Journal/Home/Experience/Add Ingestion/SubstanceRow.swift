@@ -88,11 +88,12 @@ struct SubstanceRow: View {
     }
 
     @ViewBuilder var navigationLinkIndirect: some View {
-        if substance.administrationRoutesUnwrapped.count == 1 {
+        if let route = substance.administrationRoutesUnwrapped.first,
+           substance.administrationRoutesUnwrapped.count == 1 {
             NavigationLink(
                 destination: ChooseDoseView(
                     substance: substance,
-                    administrationRoute: substance.administrationRoutesUnwrapped.first!,
+                    administrationRoute: route,
                     dismiss: dismiss,
                     experience: experience
                 ),
@@ -113,11 +114,12 @@ struct SubstanceRow: View {
     }
 
     @ViewBuilder var navigationLinkDirect: some View {
-        if substance.administrationRoutesUnwrapped.count == 1 {
+        if let route = substance.administrationRoutesUnwrapped.first,
+           substance.administrationRoutesUnwrapped.count == 1 {
             NavigationLink(
                 destination: ChooseDoseView(
                     substance: substance,
-                    administrationRoute: substance.administrationRoutesUnwrapped.first!,
+                    administrationRoute: route,
                     dismiss: dismiss,
                     experience: experience
                 ),
@@ -207,7 +209,8 @@ struct SubstanceRow: View {
             result.append(interaction.nameUnwrapped)
         }
         for ingestion in ingestions {
-            result.append(ingestion.substanceCopy!.nameUnwrapped)
+            guard let nameUnwrapped = ingestion.substanceCopy?.name else {continue}
+            result.append(nameUnwrapped)
         }
         return result.uniqued()
     }

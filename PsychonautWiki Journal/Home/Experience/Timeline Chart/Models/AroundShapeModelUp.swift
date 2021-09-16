@@ -27,7 +27,7 @@ struct AroundShapeModelUp: AroundShapeModel {
         let topRight: DataPoint
         let topLeft: DataPoint
 
-        init(
+        init?(
             verticalWeight: CGFloat,
             durations: DurationTypes,
             ingestionTimeOffset: TimeInterval,
@@ -36,30 +36,33 @@ struct AroundShapeModelUp: AroundShapeModel {
             let minY: CGFloat = 0
             let maxY: CGFloat = verticalWeight
 
+            guard let onsetMin = durations.onset?.minSec else {return nil}
+            guard let onsetMax = durations.onset?.maxSec else {return nil}
+            guard let comeupMin = durations.comeup?.minSec else {return nil}
+            guard let comeupMax = durations.comeup?.maxSec else {return nil}
+
             self.bottomLeft = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
-                    of: ingestionTimeOffset
-                        + durations.onset!.minSec,
+                    of: ingestionTimeOffset + onsetMin,
                     comparedTo: totalGraphDuration),
                 yValue: minY)
             self.bottomRight = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
-                    of: ingestionTimeOffset
-                        + durations.onset!.maxSec,
+                    of: ingestionTimeOffset + onsetMax,
                     comparedTo: totalGraphDuration),
                 yValue: minY)
             self.topRight = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        + durations.onset!.maxSec
-                        + durations.comeup!.maxSec,
+                        + onsetMax
+                        + comeupMax,
                     comparedTo: totalGraphDuration),
                 yValue: maxY)
             self.topLeft = DataPoint(
                 xValue: IngestionLineModel.getNormalizedValue(
                     of: ingestionTimeOffset
-                        +  durations.onset!.minSec
-                        + durations.comeup!.minSec,
+                        +  onsetMin
+                        + comeupMin,
                     comparedTo: totalGraphDuration),
                 yValue: maxY)
         }
