@@ -31,6 +31,7 @@ struct ChooseInitialInteractionsView: View {
             }
             Button("Done", action: dismiss)
                 .buttonStyle(PrimaryButtonStyle())
+                .padding(.horizontal)
 
         }
         .padding(.vertical)
