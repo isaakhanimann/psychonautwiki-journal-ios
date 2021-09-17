@@ -25,7 +25,7 @@ struct WatchFaceView: View {
         GeometryReader { geometry in
             let squareLength = min(geometry.size.width, geometry.size.height)
             let radius = squareLength / 2
-            let lineWidth = min(radius / CGFloat(watchFaceModel.layers.count), 20)
+            let lineWidth = 4/5 * radius / CGFloat(watchFaceModel.layers.count)
 
             ZStack {
                 ForEach(watchFaceModel.layers) { layer in
