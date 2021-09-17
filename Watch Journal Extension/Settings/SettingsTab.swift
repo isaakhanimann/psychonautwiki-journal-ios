@@ -65,19 +65,13 @@ struct SettingsTab: View {
                     Section(
                         footer: HStack {
                             Spacer()
-                            Button(action: {
-                                isEyeOpen.toggle()
-                                PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: file)
-                                connectivity.sendEyeState(isEyeOpen: isEyeOpen)
-                            }, label: {
-                                (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(.secondary)
-                                    .frame(width: 30, height: 30, alignment: .center)
-                            })
-                            .buttonStyle(PlainButtonStyle())
+                            (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.secondary)
+                                .frame(width: 30, height: 30, alignment: .center)
+                                .onTapGesture(count: 3, perform: toggleEye)
                             Spacer()
                         }
                     ) { }
@@ -85,6 +79,12 @@ struct SettingsTab: View {
             }
             .navigationTitle("Settings")
         }
+    }
+
+    private func toggleEye() {
+        isEyeOpen.toggle()
+        PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
+        connectivity.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private func fetchNewSubstances() {
