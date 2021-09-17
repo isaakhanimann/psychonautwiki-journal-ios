@@ -136,8 +136,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 row3Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 2])
             )
             return template
-        case .graphicExtraLarge, .graphicCircular, .graphicRectangular:
+        case .graphicExtraLarge:
             let template = CLKComplicationTemplateGraphicExtraLargeCircularView(
+                ComplicationView(ingestions: ingestions, timeToDisplay: date)
+            )
+            return template
+        case .graphicCircular:
+            let template = CLKComplicationTemplateGraphicCircularView(
+                ComplicationView(ingestions: ingestions, timeToDisplay: date)
+            )
+            return template
+        case .graphicRectangular:
+            let template = CLKComplicationTemplateGraphicRectangularFullView(
                 ComplicationView(ingestions: ingestions, timeToDisplay: date)
             )
             return template
