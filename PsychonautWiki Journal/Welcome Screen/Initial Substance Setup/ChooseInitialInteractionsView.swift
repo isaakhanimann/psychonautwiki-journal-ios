@@ -7,38 +7,50 @@ struct ChooseInitialInteractionsView: View {
 
     @Environment(\.managedObjectContext) var moc
 
-    var body: some View {
-        VStack {
-            Image(systemName: "burst.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 80, height: 80, alignment: .center)
-                .accessibilityHidden(true)
-                .foregroundColor(.accentColor)
-            Text("Choose Interactions")
-                .multilineTextAlignment(.center)
-                .font(.largeTitle.bold())
-                .padding(.horizontal)
-            Text("Get notified of dangerous interactions with:")
-                .font(.headline)
-                .foregroundColor(.secondary)
-                .padding(.horizontal)
+    @State private var isLoading = false
 
-            List {
-                ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
-                    InteractionRowView(interaction: interaction)
+    var body: some View {
+        if isLoading {
+            ProgressView()
+        } else {
+            VStack {
+                Image(systemName: "burst.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80, height: 80, alignment: .center)
+                    .accessibilityHidden(true)
+                    .foregroundColor(.accentColor)
+                Text("Choose Interactions")
+                    .multilineTextAlignment(.center)
+                    .font(.largeTitle.bold())
+                    .padding(.horizontal)
+                Text("Get notified of dangerous interactions with:")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
+
+                List {
+                    ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
+                        InteractionRowView(interaction: interaction)
+                    }
                 }
-            }
-            Button("Done", action: dismiss)
+                Button("Done", action: {
+                    isLoading = true
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                        dismiss()
+                    }
+                })
                 .buttonStyle(PrimaryButtonStyle())
                 .padding(.horizontal)
 
-        }
-        .padding(.vertical)
-        .navigationBarHidden(true)
-        .onDisappear {
-            if moc.hasChanges {
-                try? moc.save()
+            }
+            .padding(.vertical)
+            .navigationBarHidden(true)
+            .onDisappear {
+                if moc.hasChanges {
+                    try? moc.save()
+                }
             }
         }
     }
