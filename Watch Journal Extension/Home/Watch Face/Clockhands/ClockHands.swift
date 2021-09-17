@@ -22,7 +22,7 @@ struct ClockHands: View {
             let radius: CGFloat = min(geometry.size.width, geometry.size.height) / 2
             let thinLength =  1/7 * radius
             let hourLength = 1/3 * radius
-            let minuteLength = 7/9 * radius
+            let minuteLength = 3/4 * radius
             let circleWidth = 1/11 * radius
             let thinThickness = 1/36 * radius
             let thickThickness = 1/12 * radius
