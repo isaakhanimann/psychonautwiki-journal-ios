@@ -67,7 +67,6 @@ struct IngestionsTab: View {
                     moc.delete(ingestion)
                 }
                 try? moc.save()
-                ComplicationUpdater.updateActiveComplications()
             }
         }
     }
@@ -79,7 +78,6 @@ struct IngestionsTab: View {
                     moc.delete(ingestion)
                 }
                 try? moc.save()
-                ComplicationUpdater.updateActiveComplications()
             }
         }
     }

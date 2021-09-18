@@ -44,7 +44,6 @@ struct ChooseColor: View {
             try? moc.save()
         }
 
-        ComplicationUpdater.updateActiveComplications()
         dismiss()
     }
 
