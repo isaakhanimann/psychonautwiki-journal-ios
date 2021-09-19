@@ -36,7 +36,7 @@ struct ChooseSubstanceView: View {
                     }
                 }
 
-                Text(Constants.substancesDisclaimer).font(.footnote)
+                Text(Constants.substancesDisclaimerWatch).font(.footnote)
 
                 ForEach(substancesFile.categoriesUnwrappedSorted) { category in
                     let enabledSubstances = category.sortedEnabledSubstancesUnwrapped

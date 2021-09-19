@@ -51,7 +51,7 @@ struct ChooseSubstanceView: View {
                     .autocapitalization(.words)
                     .padding(.horizontal)
                 List {
-                    Text(Constants.substancesDisclaimer)
+                    Text(Constants.substancesDisclaimerIOS)
                         .font(.footnote)
 
                     if !recentsFiltered.isEmpty {
