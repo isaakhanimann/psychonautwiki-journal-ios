@@ -154,7 +154,7 @@ struct SubstanceRow: View {
             Text(substance.nameUnwrapped)
             Spacer()
             if isDangerous {
-                Image(systemName: "xmark")
+                Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.red)
             }
             if isUnsafe {
