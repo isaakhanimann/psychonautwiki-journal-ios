@@ -27,12 +27,8 @@ struct DisclaimerViewShort: View {
                     .foregroundColor(.red)
                     .padding(.bottom)
 
-                Text("""
-                There is no guarantee that the substance \
-                information is correct or complete. \
-                Any reliance you place on the app is strictly at your own risk. \
-                Consult a doctor before making medical decisions.
-                """)
+                // swiftlint:disable line_length
+                Text("Any reliance you place on the PsychonautWiki Journal is strictly at your own risk. Consult a doctor before making medical decisions.")
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(.red)
                 Spacer()
