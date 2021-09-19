@@ -11,25 +11,31 @@ struct ChooseDoseView: View {
     @State private var isKeyboardShowing = false
 
     var body: some View {
-        VStack {
-            DosePicker(
-                doseInfo: substance.getDose(for: administrationRoute),
-                doseMaybe: $selectedDose
-            )
-            if let doseDouble = selectedDose, doseDouble != 0 {
-                NavigationLink(
-                    destination: ChooseTimeView(
-                        substance: substance,
-                        administrationRoute: administrationRoute,
-                        dose: doseDouble,
-                        dismiss: dismiss,
-                        experience: experience
-                    ),
-                    label: {
-                        Text("Next")
-                    }
+        ScrollView {
+            VStack(spacing: 10) {
+                DosePicker(
+                    doseInfo: substance.getDose(for: administrationRoute),
+                    doseMaybe: $selectedDose
                 )
-                .buttonStyle(BorderedButtonStyle(tint: .accentColor))
+
+                if let doseDouble = selectedDose, doseDouble != 0 {
+                    NavigationLink(
+                        destination: ChooseTimeView(
+                            substance: substance,
+                            administrationRoute: administrationRoute,
+                            dose: doseDouble,
+                            dismiss: dismiss,
+                            experience: experience
+                        ),
+                        label: {
+                            Text("Next")
+                        }
+                    )
+                    .buttonStyle(BorderedButtonStyle(tint: .accentColor))
+                }
+
+                Text(Constants.doseDisclaimer)
+                    .font(.footnote)
             }
         }
         .navigationBarTitle("Choose Dose")

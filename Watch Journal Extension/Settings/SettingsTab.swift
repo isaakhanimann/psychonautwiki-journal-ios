@@ -20,7 +20,10 @@ struct SettingsTab: View {
         NavigationView {
             List {
 
-                Section(header: Text("Last Fetch")) {
+                Section(
+                    header: Text("Last Fetch"),
+                    footer: Text("Source: PsychonautWiki").font(.system(size: 11))
+                ) {
                     if isFetching {
                         Text("Fetching...")
                     } else {

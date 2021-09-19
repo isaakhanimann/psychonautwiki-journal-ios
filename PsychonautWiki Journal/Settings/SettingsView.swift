@@ -22,7 +22,10 @@ struct SettingsView: View {
         NavigationView {
             List {
 
-                Section(header: Text("Last Successfull Substance Fetch")) {
+                Section(
+                    header: Text("Last Successfull Substance Fetch"),
+                    footer: Text("Source: PsychonautWiki")
+                ) {
                     if isFetching {
                         Text("Fetching Substances...")
                     } else {
@@ -36,6 +39,13 @@ struct SettingsView: View {
                         title: Text("Fetch Failed"),
                         message: Text(alertMessage),
                         dismissButton: .default(Text("Ok"))
+                    )
+                }
+
+                Section(header: Text("Safety")) {
+                    Link(
+                        "Responsible Use",
+                        destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
                     )
                 }
 

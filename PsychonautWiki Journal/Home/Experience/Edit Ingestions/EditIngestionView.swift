@@ -39,7 +39,10 @@ struct EditIngestionView: View {
                 }
             }
 
-            Section(header: Text("Dose")) {
+            Section(
+                header: Text("Dose"),
+                footer: Text(Constants.doseDisclaimer)
+            ) {
                 DosePicker(
                     doseInfo: doseInfo,
                     doseMaybe: $selectedDose

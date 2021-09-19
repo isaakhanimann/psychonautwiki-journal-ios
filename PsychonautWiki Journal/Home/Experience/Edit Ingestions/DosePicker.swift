@@ -62,15 +62,15 @@ struct DosePicker: View {
                         Text("threshold (\(thresh.cleanString) \(units))")
                     }
                     if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                              let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
+                       let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
                         Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
                     }
                     if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                              let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
+                       let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
                         Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
                     }
                     if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                              let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
+                       let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
                         Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
                     }
                     if let heavy = doseInfo?.heavyUnwrapped {

@@ -12,6 +12,7 @@ struct ChooseSubstanceView: View {
                 maxSubstancesToGet: 5
             )
             List {
+
                 if !recentSubstances.isEmpty {
                     Section(header: Text("Recently Used")) {
                         ForEach(recentSubstances) { substance in
@@ -34,6 +35,9 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
+
+                Text(Constants.substancesDisclaimer).font(.footnote)
+
                 ForEach(substancesFile.categoriesUnwrappedSorted) { category in
                     let enabledSubstances = category.sortedEnabledSubstancesUnwrapped
                     if !enabledSubstances.isEmpty {
