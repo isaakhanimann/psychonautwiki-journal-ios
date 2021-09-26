@@ -204,7 +204,7 @@ class PreviewHelper {
         )
 
         let experience8 = Experience(context: context)
-        experience8.title = "3 June 2021"
+        experience8.title = "3 Jun 2020"
         experience8.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .green,
@@ -216,7 +216,7 @@ class PreviewHelper {
         )
 
         let experience9 = Experience(context: context)
-        experience9.title = "Night in Lagos"
+        experience9.title = "11 Mar 2020"
         experience9.addToIngestions(
             PreviewHelper.createDefaultIngestion(
                 with: .yellow,
