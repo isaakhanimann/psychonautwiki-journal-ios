@@ -214,7 +214,7 @@ struct PersistenceController {
     private func enableSomeInteractions(in file: SubstancesFile) {
         let namesOfDefaultInteractions = [
             "Alcohol",
-            "Hormonal birth control",
+            "Hormonal Birth Control",
             "Antihistamine"
         ]
         for name in namesOfDefaultInteractions {
