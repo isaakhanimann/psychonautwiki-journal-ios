@@ -36,8 +36,6 @@ struct ChooseSubstanceView: View {
                     }
                 }
 
-                Text(Constants.substancesDisclaimerWatch).font(.footnote)
-
                 ForEach(substancesFile.categoriesUnwrappedSorted) { category in
                     let enabledSubstances = category.sortedEnabledSubstancesUnwrapped
                     if !enabledSubstances.isEmpty {
@@ -52,6 +50,9 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
+
+                Text(Constants.substancesDisclaimerWatch).font(.footnote)
+
             }
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.cancellationAction) {

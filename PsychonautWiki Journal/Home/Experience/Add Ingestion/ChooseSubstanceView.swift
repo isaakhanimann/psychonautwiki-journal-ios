@@ -51,9 +51,6 @@ struct ChooseSubstanceView: View {
                     .autocapitalization(.words)
                     .padding(.horizontal)
                 List {
-                    Text(Constants.substancesDisclaimerIOS)
-                        .font(.footnote)
-
                     if !recentsFiltered.isEmpty {
                         Section(header: Text("Recently Used")) {
                             ForEach(recentsFiltered) { substance in
@@ -82,6 +79,9 @@ struct ChooseSubstanceView: View {
                         Text("No substances found")
                             .foregroundColor(.secondary)
                     }
+
+                    Text(Constants.substancesDisclaimerIOS)
+                        .font(.footnote)
 
                 }
                 .listStyle(PlainListStyle())
