@@ -329,6 +329,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
                 .first(where: {$0.identifier == identifierUnwrapped}) else {return}
 
         PersistenceController.shared.delete(ingestion: ingestionToDelete)
+#if os(watchOS)
+        UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
+#endif
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -374,6 +377,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             )
             try? moc.save()
         }
+#if os(watchOS)
+        UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
+#endif
     }
 
     func receiveIngestionUpdate(userInfo: [String: Any]) {
@@ -398,6 +404,10 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             color: colorUnwrapped,
             dose: dose
         )
+
+#if os(watchOS)
+        UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
+#endif
     }
 
     func receiveEyeState(userInfo: [String: Any]) {

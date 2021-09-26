@@ -42,6 +42,8 @@ struct ChooseColor: View {
 
             connectivity.sendNewIngestion(ingestion: ingestion)
             try? moc.save()
+
+            UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
         }
 
         dismiss()

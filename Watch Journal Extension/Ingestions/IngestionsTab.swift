@@ -69,6 +69,8 @@ struct IngestionsTab: View {
                 try? moc.save()
             }
         }
+        UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
+
     }
 
     private func deleteAllIngestions() {
@@ -80,6 +82,7 @@ struct IngestionsTab: View {
                 try? moc.save()
             }
         }
+        UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
     }
 
 }
