@@ -4,7 +4,7 @@
       "message": "Float cannot represent non numeric value: \"0.9#\"",
       "path": [
         "substances",
-        127,
+        125,
         "roas",
         0,
         "duration",
@@ -17,7 +17,7 @@
       "message": "Float cannot represent non numeric value: \"1.9#\"",
       "path": [
         "substances",
-        127,
+        125,
         "roas",
         0,
         "duration",
@@ -30,7 +30,7 @@
       "message": "Float cannot represent non numeric value: [2, 10]",
       "path": [
         "substances",
-        136,
+        134,
         "roas",
         1,
         "duration",
@@ -43,7 +43,7 @@
       "message": "Float cannot represent non numeric value: [3, 12, 30]",
       "path": [
         "substances",
-        136,
+        134,
         "roas",
         1,
         "duration",
@@ -56,7 +56,7 @@
       "message": "String cannot represent value: [\"hours\", \"minutes\"]",
       "path": [
         "substances",
-        136,
+        134,
         "roas",
         1,
         "duration",
@@ -69,7 +69,7 @@
       "message": "Float cannot represent non numeric value: [20, 60]",
       "path": [
         "substances",
-        153,
+        152,
         "roas",
         0,
         "duration",
@@ -82,7 +82,7 @@
       "message": "Float cannot represent non numeric value: [40, 90]",
       "path": [
         "substances",
-        153,
+        152,
         "roas",
         0,
         "duration",
@@ -95,7 +95,7 @@
       "message": "Float cannot represent non numeric value: \"0#\"",
       "path": [
         "substances",
-        189,
+        188,
         "roas",
         1,
         "duration",
@@ -108,7 +108,7 @@
       "message": "Float cannot represent non numeric value: \"5#\"",
       "path": [
         "substances",
-        189,
+        188,
         "roas",
         1,
         "duration",
@@ -121,7 +121,7 @@
       "message": "Float cannot represent non numeric value: \"30#\"",
       "path": [
         "substances",
-        189,
+        188,
         "roas",
         1,
         "duration",
@@ -134,7 +134,7 @@
       "message": "Float cannot represent non numeric value: \"60#\"",
       "path": [
         "substances",
-        189,
+        188,
         "roas",
         1,
         "duration",
@@ -147,7 +147,7 @@
       "message": "Float cannot represent non numeric value: [3, 5]",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         0,
         "duration",
@@ -160,7 +160,7 @@
       "message": "Float cannot represent non numeric value: [3, 5]",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         0,
         "duration",
@@ -173,7 +173,7 @@
       "message": "Float cannot represent non numeric value: \"1#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         1,
         "duration",
@@ -186,7 +186,7 @@
       "message": "Float cannot represent non numeric value: \"2#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         1,
         "duration",
@@ -199,7 +199,7 @@
       "message": "Float cannot represent non numeric value: \"3#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         1,
         "duration",
@@ -212,7 +212,7 @@
       "message": "Float cannot represent non numeric value: \"4#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         1,
         "duration",
@@ -225,7 +225,7 @@
       "message": "Float cannot represent non numeric value: \"3#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         3,
         "duration",
@@ -238,7 +238,7 @@
       "message": "Float cannot represent non numeric value: \"5#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         3,
         "duration",
@@ -251,7 +251,7 @@
       "message": "Float cannot represent non numeric value: \"3#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         3,
         "duration",
@@ -264,7 +264,7 @@
       "message": "Float cannot represent non numeric value: \"5#\"",
       "path": [
         "substances",
-        227,
+        225,
         "roas",
         3,
         "duration",
@@ -277,7 +277,7 @@
       "message": "Float cannot represent non numeric value: { max: \"200#\", min: \"75#\" }",
       "path": [
         "substances",
-        238,
+        236,
         "roas",
         0,
         "dose",
@@ -289,7 +289,7 @@
       "message": "Float cannot represent non numeric value: \"0.2#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -301,7 +301,7 @@
       "message": "Float cannot represent non numeric value: \"0.5#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -314,7 +314,7 @@
       "message": "Float cannot represent non numeric value: \"2#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -327,7 +327,7 @@
       "message": "Float cannot represent non numeric value: \"2#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -340,7 +340,7 @@
       "message": "Float cannot represent non numeric value: \"4#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -353,7 +353,7 @@
       "message": "Float cannot represent non numeric value: \"4#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -366,7 +366,7 @@
       "message": "Float cannot represent non numeric value: \"6#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -379,7 +379,7 @@
       "message": "Float cannot represent non numeric value: \"6#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "dose",
@@ -391,7 +391,7 @@
       "message": "Float cannot represent non numeric value: \"3#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -404,7 +404,7 @@
       "message": "Float cannot represent non numeric value: [\"15#\", \"20#\"]",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -417,7 +417,7 @@
       "message": "Float cannot represent non numeric value: \"3#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -430,7 +430,7 @@
       "message": "Float cannot represent non numeric value: \"15#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -443,7 +443,7 @@
       "message": "Float cannot represent non numeric value: \"5#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -456,7 +456,7 @@
       "message": "Float cannot represent non numeric value: \"1#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -469,7 +469,7 @@
       "message": "Float cannot represent non numeric value: \"2#\"",
       "path": [
         "substances",
-        251,
+        249,
         "roas",
         0,
         "duration",
@@ -482,7 +482,7 @@
       "message": "Float cannot represent non numeric value: \"4#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -494,7 +494,7 @@
       "message": "Float cannot represent non numeric value: \"4#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -507,7 +507,7 @@
       "message": "Float cannot represent non numeric value: \"8#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -520,7 +520,7 @@
       "message": "Float cannot represent non numeric value: \"8#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -533,7 +533,7 @@
       "message": "Float cannot represent non numeric value: \"16#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -546,7 +546,7 @@
       "message": "Float cannot represent non numeric value: \"16#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -559,7 +559,7 @@
       "message": "Float cannot represent non numeric value: \"40#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -572,7 +572,7 @@
       "message": "Float cannot represent non numeric value: \"40#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "dose",
@@ -584,7 +584,7 @@
       "message": "Float cannot represent non numeric value: \"5#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "duration",
@@ -597,7 +597,7 @@
       "message": "Float cannot represent non numeric value: \"10#\"",
       "path": [
         "substances",
-        253,
+        251,
         "roas",
         0,
         "duration",
@@ -610,7 +610,7 @@
       "message": "String cannot represent value: [\"minutes\", \"hour\"]",
       "path": [
         "substances",
-        322,
+        319,
         "roas",
         0,
         "duration",
@@ -6762,92 +6762,6 @@
         "dangerousInteractions": null
       },
       {
-        "name": "Alcohol",
-        "class": {
-          "psychoactive": [
-            "Depressant"
-          ]
-        },
-        "url": "https://psychonautwiki.org/wiki/Alcohol",
-        "roas": [
-          {
-            "name": "oral",
-            "dose": {
-              "units": "unit",
-              "threshold": 1,
-              "light": {
-                "min": 2,
-                "max": 3
-              },
-              "common": {
-                "min": 3,
-                "max": 5
-              },
-              "strong": {
-                "min": 5,
-                "max": 6
-              },
-              "heavy": 6
-            },
-            "duration": {
-              "onset": {
-                "min": 2,
-                "max": 5,
-                "units": "minutes"
-              },
-              "comeup": null,
-              "peak": {
-                "min": 30,
-                "max": 90,
-                "units": "minutes"
-              },
-              "offset": {
-                "min": 45,
-                "max": 60,
-                "units": "minutes"
-              }
-            }
-          }
-        ],
-        "unsafeInteractions": [
-          {
-            "name": "Cocaine"
-          },
-          {
-            "name": "MAOI"
-          },
-          {
-            "name": "PCP"
-          },
-          {
-            "name": "Antibiotics"
-          }
-        ],
-        "dangerousInteractions": [
-          {
-            "name": "Benzodiazepines"
-          },
-          {
-            "name": "Dextromethorphan"
-          },
-          {
-            "name": "GHB/GBL"
-          },
-          {
-            "name": "Ketamine"
-          },
-          {
-            "name": "Methoxetamine"
-          },
-          {
-            "name": "Opioids"
-          },
-          {
-            "name": "Tramadol"
-          }
-        ]
-      },
-      {
         "name": "Alimemazine",
         "class": {
           "psychoactive": [
@@ -7493,58 +7407,6 @@
         "class": null,
         "url": "https://psychonautwiki.org/wiki/Benzodiazepines",
         "roas": [],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
-      },
-      {
-        "name": "Benzydamine",
-        "class": {
-          "psychoactive": [
-            "Deliriant",
-            "Stimulants"
-          ]
-        },
-        "url": "https://psychonautwiki.org/wiki/Benzydamine",
-        "roas": [
-          {
-            "name": "oral",
-            "dose": {
-              "units": "g",
-              "threshold": 0.25,
-              "light": {
-                "min": 0.5,
-                "max": 1
-              },
-              "common": {
-                "min": 1,
-                "max": 1.5
-              },
-              "strong": {
-                "min": 1.5,
-                "max": 2
-              },
-              "heavy": 2
-            },
-            "duration": {
-              "onset": {
-                "min": 20,
-                "max": 60,
-                "units": "minutes"
-              },
-              "comeup": null,
-              "peak": {
-                "min": 3,
-                "max": 6,
-                "units": "hours"
-              },
-              "offset": {
-                "min": 3,
-                "max": 8,
-                "units": "hours"
-              }
-            }
-          }
-        ],
         "unsafeInteractions": null,
         "dangerousInteractions": null
       },
@@ -9645,6 +9507,14 @@
             "name": "MAOI"
           }
         ]
+      },
+      {
+        "name": "Dexamphetamine",
+        "class": null,
+        "url": "https://psychonautwiki.org/wiki/Dexamphetamine",
+        "roas": [],
+        "unsafeInteractions": null,
+        "dangerousInteractions": null
       },
       {
         "name": "Dextromethorphan",
@@ -13017,14 +12887,6 @@
             }
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
-      },
-      {
-        "name": "Lysergamides",
-        "class": null,
-        "url": "https://psychonautwiki.org/wiki/Lysergamides",
-        "roas": [],
         "unsafeInteractions": null,
         "dangerousInteractions": null
       },
@@ -17895,57 +17757,6 @@
               "comeup": null,
               "peak": null,
               "offset": null
-            }
-          }
-        ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
-      },
-      {
-        "name": "Pregabalin",
-        "class": {
-          "psychoactive": [
-            "Depressant"
-          ]
-        },
-        "url": "https://psychonautwiki.org/wiki/Pregabalin",
-        "roas": [
-          {
-            "name": "oral",
-            "dose": {
-              "units": "mg",
-              "threshold": 50,
-              "light": {
-                "min": 75,
-                "max": 225
-              },
-              "common": {
-                "min": 225,
-                "max": 600
-              },
-              "strong": {
-                "min": 600,
-                "max": 900
-              },
-              "heavy": 900
-            },
-            "duration": {
-              "onset": {
-                "min": 40,
-                "max": 120,
-                "units": "minutes"
-              },
-              "comeup": null,
-              "peak": {
-                "min": 4,
-                "max": 6,
-                "units": "hours"
-              },
-              "offset": {
-                "min": 4,
-                "max": 8,
-                "units": "hours"
-              }
             }
           }
         ],

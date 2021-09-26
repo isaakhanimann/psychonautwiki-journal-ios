@@ -147,7 +147,7 @@ struct PersistenceController {
 
         moc.perform {
             do {
-                let dateString = "2021/08/25 00:30"
+                let dateString = "2021/09/26 15:00"
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
                 let creationDate = formatter.date(from: dateString)!
