@@ -12,7 +12,7 @@ struct IngestionGauge: View {
         let distanceFromStart = startTime.distance(to: currentTime)
         return distanceFromStart / total
     }
-    private let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     let startTime: Date
     let endTime: Date
