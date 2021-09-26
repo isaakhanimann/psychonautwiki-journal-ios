@@ -1131,7 +1131,7 @@
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				IBSC_MODULE = Watch_Journal_Extension;
 				INFOPLIST_FILE = "Watch Journal/Info.plist";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
 				PRODUCT_NAME = Journal;
 				SDKROOT = watchos;
@@ -1153,7 +1153,7 @@
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				IBSC_MODULE = Watch_Journal_Extension;
 				INFOPLIST_FILE = "Watch Journal/Info.plist";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
 				PRODUCT_NAME = Journal;
 				SDKROOT = watchos;
@@ -1179,7 +1179,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1205,7 +1205,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1348,7 +1348,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = Journal;
 				SWIFT_VERSION = 5.0;
@@ -1372,7 +1372,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = Journal;
 				SWIFT_VERSION = 5.0;
