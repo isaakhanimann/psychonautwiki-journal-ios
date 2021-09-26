@@ -20,7 +20,7 @@ struct DisclaimerViewShort: View {
                     .frame(width: 80, height: 80, alignment: .center)
                     .accessibilityHidden(true)
                     .foregroundColor(.red)
-                Text("Disclaimer")
+                Text("Caution")
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .font(.largeTitle.bold())
@@ -28,7 +28,7 @@ struct DisclaimerViewShort: View {
                     .padding(.bottom)
 
                 // swiftlint:disable line_length
-                Text("Any reliance you place on the PsychonautWiki Journal is strictly at your own risk. Consult a doctor before making medical decisions.")
+                Text("Any reliance you place on PsychonautWiki Journal is strictly at your own risk. Consult a doctor before making medical decisions.")
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(.red)
                 Spacer()
