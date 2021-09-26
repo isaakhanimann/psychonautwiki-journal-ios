@@ -31,7 +31,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         let categories = SubstancesFile.createAndFillCategories(from: substances, context: context)
 
         // Create Interactions
-        let generalInteractions = SubstancesFile.addSubstanceAndReturnNewGeneralInteractions(
+        let generalInteractions = SubstancesFile.createGeneralInteractionsAndAddThemToSubstances(
             from: categories,
             context: context
         )
@@ -81,7 +81,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
     }
 
     // Each substance has a string array of the names of the interactions
-    static private func addSubstanceAndReturnNewGeneralInteractions(
+    static private func createGeneralInteractionsAndAddThemToSubstances(
         from categories: Set<Category>,
         context: NSManagedObjectContext
         ) -> Set<GeneralInteraction> {
@@ -126,6 +126,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_parameter_count
+    // swiftlint:disable function_body_length
     static private func findAndAddMatchOrAddToGeneralInteractions(
         unsafeOrDangerous: UnsafeOrDangerous,
         substanceToAdd: Substance,
@@ -150,7 +151,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
             return
         }
 
-        // Try to match substance
+        // Try to match substance exact
         var allSubstances = Set<Substance>()
         for category in categories {
             allSubstances = allSubstances.union(category.substancesUnwrapped)
@@ -166,6 +167,26 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 foundSubstance.addToDangerousSubstanceInteractions(substanceToAdd)
             }
             return
+        }
+
+        // Try to match substance with x wildcard
+        let regexString = decodedInteraction.name.lowercased().replacingOccurrences(of: "x", with: "*")
+        if let regex = try? NSRegularExpression(pattern: regexString, options: [.caseInsensitive]) {
+            let matchingSubstances = allSubstances.filter { substance in
+                let range = NSRange(location: 0, length: substance.nameUnwrapped.utf16.count)
+                return regex.firstMatch(in: substance.nameUnwrapped, options: [], range: range) != nil
+            }
+            if !matchingSubstances.isEmpty {
+                for matchingSubstance in matchingSubstances {
+                    switch unsafeOrDangerous {
+                    case .unsafe:
+                        matchingSubstance.addToUnsafeSubstanceInteractions(substanceToAdd)
+                    case .dangerous:
+                        matchingSubstance.addToDangerousSubstanceInteractions(substanceToAdd)
+                    }
+                }
+                return
+            }
         }
 
         // Try to match general interaction
