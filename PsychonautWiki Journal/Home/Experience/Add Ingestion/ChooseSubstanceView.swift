@@ -78,11 +78,11 @@ struct ChooseSubstanceView: View {
                         && categoriesSearchResults.isEmpty {
                         Text("No substances found")
                             .foregroundColor(.secondary)
+                    } else {
+                        Text(Constants.substancesDisclaimerIOS)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
                     }
-
-                    Text(Constants.substancesDisclaimerIOS)
-                        .font(.footnote)
-
                 }
                 .listStyle(PlainListStyle())
                 .cornerRadius(10)

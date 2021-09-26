@@ -51,7 +51,9 @@ struct ChooseSubstanceView: View {
                     }
                 }
 
-                Text(Constants.substancesDisclaimerWatch).font(.footnote)
+                Text(Constants.substancesDisclaimerWatch)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
 
             }
             .toolbar {
