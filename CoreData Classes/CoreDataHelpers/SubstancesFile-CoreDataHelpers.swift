@@ -61,24 +61,24 @@ extension SubstancesFile {
     }
 
     func getGeneralInteraction(with name: String) -> GeneralInteraction? {
-        let filteredInteractions = generalInteractionsUnwrapped.filter { interaction in
-            interaction.nameUnwrapped == name
+        let lowerCaseName = name.lowercased()
+        return generalInteractionsUnwrapped.first { interaction in
+            interaction.nameUnwrapped.lowercased() == lowerCaseName
         }
-        return filteredInteractions.first
     }
 
     func getCategory(with name: String) -> Category? {
-        let filteredCategories = categoriesUnwrapped.filter { category in
-            category.nameUnwrapped == name
+        let lowerCaseName = name.lowercased()
+        return categoriesUnwrapped.first { category in
+            category.nameUnwrapped.lowercased() == lowerCaseName
         }
-        return filteredCategories.first
     }
 
     func getSubstance(with name: String) -> Substance? {
-        let filteredSubstances = allSubstancesUnwrapped.filter { substance in
-            substance.nameUnwrapped == name
+        let lowerCaseName = name.lowercased()
+        return allSubstancesUnwrapped.first { substance in
+            substance.nameUnwrapped.lowercased() == lowerCaseName
         }
-        return filteredSubstances.first
     }
 
     var sortedCategoriesUnwrapped: [Category] {
