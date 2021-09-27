@@ -203,6 +203,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         } else {
             let newGeneralInteraction = GeneralInteraction(context: context)
             newGeneralInteraction.name = decodedInteraction.name
+            newGeneralInteraction.isEnabled = true
             switch unsafeOrDangerous {
             case .unsafe:
                 newGeneralInteraction.addToUnsafeSubstanceInteractions(substanceToAdd)

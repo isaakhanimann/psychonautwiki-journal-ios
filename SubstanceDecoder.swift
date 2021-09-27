@@ -79,16 +79,14 @@ enum SubstanceDecoder {
         of newSubstancesFile: SubstancesFile,
         basedOn oldSubstancesFile: SubstancesFile
     ) {
-        let oldEnabledInteractions = oldSubstancesFile.generalInteractionsUnwrapped.filter { interaction in
-            interaction.isEnabled
-        }
-        for oldInteraction in oldEnabledInteractions {
-            guard let foundInteraction = newSubstancesFile.getGeneralInteraction(
-                    with: oldInteraction.nameUnwrapped
-            ) else {
-                continue
+        newSubstancesFile.generalInteractionsUnwrapped.forEach { newInteraction in
+            if let foundInteraction = oldSubstancesFile.getGeneralInteraction(
+                    with: newInteraction.nameUnwrapped
+            ) {
+                newInteraction.isEnabled = foundInteraction.isEnabled
+            } else {
+                newInteraction.isEnabled = true
             }
-            foundInteraction.isEnabled = true
         }
     }
 
