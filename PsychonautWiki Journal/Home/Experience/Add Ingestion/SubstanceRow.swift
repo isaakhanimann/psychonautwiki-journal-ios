@@ -217,11 +217,14 @@ struct SubstanceRow: View {
 
     private func getString(from names: [String]) -> String {
         var result = ""
-        for name in names {
-            result += "\(name), "
-        }
-        if result.hasSuffix(", ") {
-            result.removeLast(2)
+        for (index, name) in names.enumerated() {
+            if index < names.count-2 {
+                result += "\(name), "
+            } else if index == names.count-2 {
+                result += "\(name) & "
+            } else {
+                result += name
+            }
         }
         return result
     }
