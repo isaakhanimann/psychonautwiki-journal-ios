@@ -9,10 +9,9 @@ struct ChooseInteractionsView: View {
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             #if os(iOS)
             Text("Get notified of dangerous interactions with:")
-                .font(.headline)
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
             #endif

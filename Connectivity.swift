@@ -122,6 +122,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     private let doseKey = "dose"
     private let colorKey = "color"
     private let eyeStateKey = "isEyeOpen"
+    private let namesOfEnabledInteractionsKey = "namesOfEnabledInteractions"
+    private let namesOfDisabledInteractionsKey = "namesOfDisabledInteractions"
 
     private let stringSeparator = "#"
 
@@ -234,14 +236,20 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func sendInteractions(from file: SubstancesFile) {
-        let namesOfInteractions = file.generalInteractionsUnwrapped
+        let namesOfEnabled = file.generalInteractionsUnwrapped
             .filter({$0.isEnabled})
+            .map({$0.nameUnwrapped})
+            .joined(separator: stringSeparator)
+
+        let namesOfDisabled = file.generalInteractionsUnwrapped
+            .filter({!$0.isEnabled})
             .map({$0.nameUnwrapped})
             .joined(separator: stringSeparator)
 
         let data = [
             messageTypeKey: MessageType.enableInteractions.rawValue,
-            substanceNameKey: namesOfInteractions
+            namesOfEnabledInteractionsKey: namesOfEnabled,
+            namesOfDisabledInteractionsKey: namesOfDisabled
         ] as [String: Any]
         transferUserInfo(data)
     }
@@ -436,16 +444,25 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func receiveInteractions(userInfo: [String: Any]) {
-        guard let namesOfInteractionsString = userInfo[substanceNameKey] as? String else {return}
-        let namesOfInteractions = namesOfInteractionsString.components(separatedBy: stringSeparator)
+        guard let enabledString = userInfo[namesOfEnabledInteractionsKey] as? String else {return}
+        let namesOfEnabled = enabledString.components(separatedBy: stringSeparator)
+
+        guard let disabledString = userInfo[namesOfDisabledInteractionsKey] as? String else {return}
+        let namesOfDisabled = disabledString.components(separatedBy: stringSeparator)
 
         let moc = PersistenceController.shared.container.viewContext
         moc.perform {
-            for name in namesOfInteractions {
+            for name in namesOfEnabled {
                 guard let foundInteraction = PersistenceController.shared.findGeneralInteraction(
                     with: name
                 ) else {continue}
                 foundInteraction.isEnabled = true
+            }
+            for name in namesOfDisabled {
+                guard let foundInteraction = PersistenceController.shared.findGeneralInteraction(
+                    with: name
+                ) else {continue}
+                foundInteraction.isEnabled = false
             }
             if moc.hasChanges {
                 try? moc.save()
