@@ -50,6 +50,28 @@ extension SubstancesFile {
         return recentlyUsed
     }
 
+    func getAllOkInteractionsSorted(showAllInteractions: Bool) -> [GeneralInteraction] {
+        let okInteractionNames: Set = [
+            "alcohol",
+            "antihistamine",
+            "diphenhydramine",
+            "grapefruit",
+            "hormonal birth control",
+            "snris",
+            "serotonin",
+            "selective serotonin reuptake inhibitor",
+            "tricyclic antidepressants"
+        ]
+
+        if showAllInteractions {
+            return generalInteractionsUnwrappedSorted
+        } else {
+            return generalInteractionsUnwrappedSorted.filter { interaction in
+                okInteractionNames.contains(interaction.nameUnwrapped.lowercased())
+            }
+        }
+    }
+
     var allSubstancesUnwrapped: [Substance] {
         SubstancesFile.getAllSubstances(of: categoriesUnwrapped)
     }

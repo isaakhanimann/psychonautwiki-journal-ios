@@ -6,10 +6,20 @@ struct ChooseInteractionsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var connectivity: Connectivity
 
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+
     var body: some View {
-        List {
-            ForEach(file.generalInteractionsUnwrappedSorted) { interaction in
-                InteractionRowView(interaction: interaction)
+        VStack {
+            #if os(iOS)
+            Text("Get notified of dangerous interactions with:")
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .padding(.horizontal)
+            #endif
+            List {
+                ForEach(file.getAllOkInteractionsSorted(showAllInteractions: isEyeOpen)) { interaction in
+                    InteractionRowView(interaction: interaction)
+                }
             }
         }
         .onDisappear {

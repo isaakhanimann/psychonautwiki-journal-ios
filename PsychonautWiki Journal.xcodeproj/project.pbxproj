@@ -145,7 +145,6 @@
 		EAE4720126CBA664009FB0EC /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
-		EAE4720626CBA664009FB0EC /* ChooseInitialInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */; };
 		EAE4720826CBA664009FB0EC /* FavoritesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
 		EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
@@ -326,7 +325,6 @@
 		EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewHelper.swift; sourceTree = "<group>"; };
 		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInitialInteractionsView.swift; sourceTree = "<group>"; };
 		EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesRowView.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
 		EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
@@ -581,7 +579,8 @@
 				EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */,
 				EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */,
 				EAE4712226CBA663009FB0EC /* Feature.swift */,
-				EAE4723626CC4F13009FB0EC /* Initial Substance Setup */,
+				EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */,
+				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 			);
 			path = "Welcome Screen";
 			sourceTree = "<group>";
@@ -594,6 +593,7 @@
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EA9D22A926EB4B6900BCF893 /* EnabledSubstanceRowView.swift */,
 				EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */,
+				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
 				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
 			);
@@ -751,17 +751,6 @@
 				EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */,
 			);
 			path = "Reused Styles";
-			sourceTree = "<group>";
-		};
-		EAE4723626CC4F13009FB0EC /* Initial Substance Setup */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */,
-				EAE4718426CBA664009FB0EC /* ChooseInitialInteractionsView.swift */,
-				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
-				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
-			);
-			path = "Initial Substance Setup";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1013,7 +1002,6 @@
 				EAE4720126CBA664009FB0EC /* PreviewHelper.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EAE471EA26CBA664009FB0EC /* DurationRange-CoreDataHelpers.swift in Sources */,
-				EAE4720626CBA664009FB0EC /* ChooseInitialInteractionsView.swift in Sources */,
 				EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAE471C326CBA664009FB0EC /* SectionFooter.swift in Sources */,
 				EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */,
