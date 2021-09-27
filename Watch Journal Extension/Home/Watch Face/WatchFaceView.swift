@@ -26,27 +26,34 @@ struct WatchFaceView: View {
             let squareLength = min(geometry.size.width, geometry.size.height)
             let radius = squareLength / 2
             let lineWidth = 4/5 * radius / CGFloat(watchFaceModel.layers.count)
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    ZStack {
+                        ForEach(watchFaceModel.layers) { layer in
+                            let halfLineWidth = lineWidth/2
+                            let insetPerSide = halfLineWidth + CGFloat(layer.index) * lineWidth
+                            OneLayerView(
+                                layer: layer,
+                                lineWidth: lineWidth
+                            )
+                                .padding(insetPerSide)
+                        }
 
-            ZStack {
-                ForEach(watchFaceModel.layers) { layer in
-                    let halfLineWidth = lineWidth/2
-                    let insetPerSide = halfLineWidth + CGFloat(layer.index) * lineWidth
-                    OneLayerView(
-                        layer: layer,
-                        lineWidth: lineWidth
-                    )
-                    .padding(insetPerSide)
+                        switch timeStyle {
+                        case .currentTime:
+                            TimeObserverView(style: clockHandStyle)
+                        case .providedTime(let time):
+                            ClockHands(timeToDisplay: time, style: clockHandStyle)
+                        }
+
+                    }
+                    .frame(width: squareLength, height: squareLength)
+                    Spacer()
                 }
-
-                switch timeStyle {
-                case .currentTime:
-                    TimeObserverView(style: clockHandStyle)
-                case .providedTime(let time):
-                    ClockHands(timeToDisplay: time, style: clockHandStyle)
-                }
-
+                Spacer()
             }
-            .frame(width: squareLength, height: squareLength)
         }
     }
 }
