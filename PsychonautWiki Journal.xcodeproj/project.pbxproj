@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA1285462703CFF70085C3F6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */; };
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */; };
@@ -229,6 +230,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceModel.swift; sourceTree = "<group>"; };
 		EA48B9A126E802E6003BF667 /* WatchFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceView.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4718726CBA664009FB0EC /* Home */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
@@ -884,6 +887,7 @@
 			files = (
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
 				EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */,
+				EA1285462703CFF70085C3F6 /* Launch Screen.storyboard in Resources */,
 				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
