@@ -34,12 +34,12 @@ enum SubstanceDecoder {
                     try moc.save()
                     didSaveSubstances = true
                 } catch {
-                    moc.undo()
+                    moc.rollback()
                     return
                 }
             } catch {
                 print("Failed to decode: \(error)")
-                moc.undo()
+                moc.rollback()
             }
         }
 
