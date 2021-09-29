@@ -64,6 +64,13 @@ struct ExperienceView: View {
             if connectivity.activationState == .activated && connectivity.isWatchAppInstalled {
                 SyncSection(experience: experience)
             }
+
+            if connectivity.isPaired && !connectivity.isComplicationEnabled {
+                NavigationLink(destination: AddFaceView()) {
+                    Label("Add Watch Face", systemImage: "applewatch.watchface")
+                        .foregroundColor(.accentColor)
+                }
+            }
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(selectedTitle)

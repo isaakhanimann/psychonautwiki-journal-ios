@@ -11,6 +11,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     #if os(iOS)
     @Published var isWatchAppInstalled = false
     @Published var isComplicationEnabled = false
+    @Published var isPaired = false
     #endif
 
     // MARK: General Methods
@@ -36,6 +37,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             if activationState == .activated {
                 self.isWatchAppInstalled = session.isWatchAppInstalled
                 self.isComplicationEnabled = session.isComplicationEnabled
+                self.isPaired = session.isPaired
             }
         }
     }

@@ -9,14 +9,7 @@ struct SyncSection: View {
 
     var body: some View {
         if isShowingSyncingMessageSuccess {
-            VStack(alignment: .leading, spacing: 5) {
-                Label("Sync Successfull", systemImage: "checkmark.circle")
-                if connectivity.isComplicationEnabled {
-                    Text("If necessary reload the complication by tapping on it")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
-            }
+            Label("Sync Successfull", systemImage: "checkmark.circle")
         } else {
             Button(action: {
                 connectivity.sendSyncMessageToWatch(with: experience.sortedIngestionsUnwrapped)
