@@ -6,6 +6,8 @@ struct SubstanceRow: View {
     let dismiss: () -> Void
     let experience: Experience
 
+    @Environment(\.openURL) private  var openURL
+
     let dangerousIngestions: [Ingestion]
     let dangerousInteractions: [GeneralInteraction]
     let unsafeIngestions: [Ingestion]
@@ -143,12 +145,13 @@ struct SubstanceRow: View {
         HStack {
             #if os(iOS)
             if let urlUnwrapped = substance.url {
-                Link(destination: urlUnwrapped) {
-                    Label("\(substance.nameUnwrapped) Website", systemImage: "safari")
-                        .labelStyle(IconOnlyLabelStyle())
-                        .font(.title2)
-                        .foregroundColor(.accentColor)
-                }
+                Label("\(substance.nameUnwrapped) Website", systemImage: "safari")
+                    .labelStyle(IconOnlyLabelStyle())
+                    .font(.title2)
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        openURL(urlUnwrapped)
+                    }
             }
             #endif
             Text(substance.nameUnwrapped)

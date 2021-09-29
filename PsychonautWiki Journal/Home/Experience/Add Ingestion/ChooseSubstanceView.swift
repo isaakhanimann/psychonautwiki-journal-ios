@@ -85,7 +85,6 @@ struct ChooseSubstanceView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
-                .cornerRadius(10)
 
                 Spacer().frame(maxHeight: 1) // fix SwiftUI bug, make the last element in the list show
             }
