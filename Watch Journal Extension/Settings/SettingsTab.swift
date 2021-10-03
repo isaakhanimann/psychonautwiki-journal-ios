@@ -44,27 +44,28 @@ struct SettingsTab: View {
                 }
 
                 if let file = storedFile.first {
-                    Section(header: Text("Choose Interactions")) {
-                        NavigationLink(
-                            destination: ChooseInteractionsView(file: file),
-                            label: {
-                                Label(
-                                    "Interactions",
-                                    systemImage: "burst.fill"
-                                )
-                            }
-                        )
-                    }
+                    if isEyeOpen {
+                        Section(header: Text("Choose Interactions")) {
+                            NavigationLink(
+                                destination: ChooseInteractionsView(file: file),
+                                label: {
+                                    Label(
+                                        "Interactions",
+                                        systemImage: "burst.fill"
+                                    )
+                                }
+                            )
+                        }
 
-                    Section(header: Text("Choose Favorites")) {
-                        NavigationLink(
-                            destination: ChooseFavoritesView(file: file),
-                            label: {
-                                Label("Favorites", systemImage: "star.fill")
-                            }
-                        )
+                        Section(header: Text("Choose Favorites")) {
+                            NavigationLink(
+                                destination: ChooseFavoritesView(file: file),
+                                label: {
+                                    Label("Favorites", systemImage: "star.fill")
+                                }
+                            )
+                        }
                     }
-
                     Section(
                         footer: HStack {
                             Spacer()

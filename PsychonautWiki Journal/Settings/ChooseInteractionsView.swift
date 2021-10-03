@@ -20,6 +20,7 @@ struct ChooseInteractionsView: View {
                     InteractionRowView(interaction: interaction)
                 }
             }
+            .listStyle(PlainListStyle())
         }
         .onDisappear {
             if moc.hasChanges {

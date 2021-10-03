@@ -156,7 +156,7 @@ struct PersistenceController {
                 let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: moc)
                 substancesFile.creationDate = creationDate
                 enableUncontrolledSubstances(in: substancesFile)
-                substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = true})
+                substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = false})
 
                 try moc.save()
             } catch {
@@ -185,11 +185,17 @@ struct PersistenceController {
         file.allSubstancesUnwrapped.forEach { substance in
             substance.isEnabled = true
         }
+        file.generalInteractionsUnwrapped.forEach { interaction in
+            interaction.isEnabled = true
+        }
     }
 
     private func toggleAllControlledOff(file: SubstancesFile) {
         file.allSubstancesUnwrapped.forEach { substance in
             substance.isEnabled = false
+        }
+        file.generalInteractionsUnwrapped.forEach { interaction in
+            interaction.isEnabled = false
         }
         enableUncontrolledSubstances(in: file)
     }

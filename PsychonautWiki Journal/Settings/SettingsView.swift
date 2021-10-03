@@ -42,29 +42,31 @@ struct SettingsView: View {
                     )
                 }
 
-                Section(header: Text("Safety")) {
-                    Link(
-                        "Responsible Use",
-                        destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
-                    )
-                }
+                if isEyeOpen {
+                    Section(header: Text("Safety")) {
+                        Link(
+                            "Responsible Use",
+                            destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
+                        )
+                    }
 
-                Section(header: Text("Dangerous Interaction Notifications")) {
-                    NavigationLink(
-                        destination: ChooseInteractionsView(file: storedFile.first!),
-                        label: {
-                            Label("Choose Interactions", systemImage: "burst.fill")
-                        }
-                    )
-                }
+                    Section(header: Text("Dangerous Interaction Notifications")) {
+                        NavigationLink(
+                            destination: ChooseInteractionsView(file: storedFile.first!),
+                            label: {
+                                Label("Choose Interactions", systemImage: "burst.fill")
+                            }
+                        )
+                    }
 
-                Section(header: Text("Favorites")) {
-                    NavigationLink(
-                        destination: ChooseFavoritesView(file: storedFile.first!),
-                        label: {
-                            Label("Choose Favorites", systemImage: "star.fill")
-                        }
-                    )
+                    Section(header: Text("Favorites")) {
+                        NavigationLink(
+                            destination: ChooseFavoritesView(file: storedFile.first!),
+                            label: {
+                                Label("Choose Favorites", systemImage: "star.fill")
+                            }
+                        )
+                    }
                 }
 
                 CalendarSection()

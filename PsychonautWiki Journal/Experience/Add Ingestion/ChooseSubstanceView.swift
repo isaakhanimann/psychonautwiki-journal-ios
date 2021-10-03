@@ -12,6 +12,8 @@ struct ChooseSubstanceView: View {
     @State private var favoritesFiltered: [Substance]
     @State private var categoriesSearchResults: [CategorySearchResult]
 
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+
     init(
         substancesFile: SubstancesFile,
         dismiss: @escaping () -> Void,
@@ -78,7 +80,7 @@ struct ChooseSubstanceView: View {
                         && categoriesSearchResults.isEmpty {
                         Text("No substances found")
                             .foregroundColor(.secondary)
-                    } else {
+                    } else if isEyeOpen {
                         Text(Constants.substancesDisclaimerIOS)
                             .font(.footnote)
                             .foregroundColor(.secondary)
