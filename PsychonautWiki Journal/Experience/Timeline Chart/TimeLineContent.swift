@@ -30,20 +30,14 @@ struct TimeLineContent: View {
                 }
                 .frame(width: geo.size.width, height: geo.size.height)
 
-//                if isCurrentTimeInChart {
-//                    CurrentTimeView(
-//                        currentTime: currentTime,
-//                        graphStartTime: graphStartTime,
-//                        graphEndTime: graphEndTime
-//                    )
-//                    .frame(width: chartWidth, height: 235)
-//                    .onAppear {
-//                        scrollToCurrentTime()
-//                    }
-//                    .onChange(of: timeStep) { _ in
-//                        scrollToCurrentTime()
-//                    }
-//                }
+                if isCurrentTimeInChart {
+                    CurrentTimeView(
+                        currentTime: currentTime,
+                        graphStartTime: startTime,
+                        graphEndTime: endTime
+                    )
+                        .frame(width: geo.size.width, height: geo.size.height)
+                }
             }
         }
         .onReceive(timer) { newTime in
