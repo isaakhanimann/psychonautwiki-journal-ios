@@ -37,7 +37,7 @@ struct IngestionTimeLineView: View {
                     startTime: startTime,
                     endTime: endTime,
                     totalWidth: geoOut.size.width,
-                    timeStepInSec: isComplication ? 2*60*60 : 60*60
+                    allowedNumberOfLabels: isComplication ? 6 : 13
                 )
                     .position(x: 0, y: 0)
                     .frame(width: geoOut.size.width)
