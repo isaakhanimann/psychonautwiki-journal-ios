@@ -6,6 +6,8 @@ struct ChooseSubstanceView: View {
     let dismiss: () -> Void
     let experience: Experience
 
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+
     var body: some View {
         NavigationView {
             let recentSubstances = substancesFile.getRecentlyUsedSubstancesInOrder(
@@ -51,10 +53,11 @@ struct ChooseSubstanceView: View {
                     }
                 }
 
-                Text(Constants.substancesDisclaimerWatch)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-
+                if isEyeOpen {
+                    Text(Constants.substancesDisclaimerWatch)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.cancellationAction) {
