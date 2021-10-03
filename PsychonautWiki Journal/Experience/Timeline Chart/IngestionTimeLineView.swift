@@ -36,8 +36,7 @@ struct IngestionTimeLineView: View {
                 TimeLabels(
                     startTime: startTime,
                     endTime: endTime,
-                    totalWidth: geoOut.size.width,
-                    allowedNumberOfLabels: isComplication ? 6 : 13
+                    totalWidth: geoOut.size.width
                 )
                     .position(x: 0, y: 0)
                     .frame(width: geoOut.size.width)

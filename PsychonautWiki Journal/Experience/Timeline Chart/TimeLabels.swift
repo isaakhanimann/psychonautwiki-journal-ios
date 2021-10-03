@@ -5,7 +5,6 @@ struct TimeLabels: View {
     let startTime: Date
     let endTime: Date
     let totalWidth: CGFloat
-    var allowedNumberOfLabels = 13
 
     var body: some View {
         ZStack {
@@ -36,8 +35,8 @@ struct TimeLabels: View {
         let rangeInHours = startTime.distance(to: endTime) / (60*60)
 
         let pixelsPerLabel: CGFloat = 20
-        let numLabelsMaybe = totalWidth / pixelsPerLabel
-        let timeStepInHours = (rangeInHours / numLabelsMaybe).rounded(.up)
+        let numLabels = totalWidth / pixelsPerLabel
+        let timeStepInHours = (rangeInHours / numLabels).rounded(.up)
         let timeStepInSec: TimeInterval = timeStepInHours*60*60
 
         var checkTime = startTime.addingTimeInterval(timeStepInSec)
