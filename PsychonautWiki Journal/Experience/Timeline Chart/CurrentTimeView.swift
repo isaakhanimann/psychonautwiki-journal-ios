@@ -18,7 +18,7 @@ struct CurrentTimeView: View {
                 Color.primary,
                 style: StrokeStyle(
                     lineWidth: 3,
-                    lineCap: .butt,
+                    lineCap: .round,
                     lineJoin: .miter,
                     miterLimit: 0,
                     dash: [7, 10],

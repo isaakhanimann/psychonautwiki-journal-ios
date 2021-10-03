@@ -38,12 +38,13 @@ struct ExperienceView: View {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section(
                     header: Text("Timeline"),
-                    footer: Text("Source: PsychonautWiki onset, comeup, peak and offset")
+                    footer: Text("Source: PsychonautWiki onset, comeup, peak & offset")
                 ) {
                     HorizontalScaleView {
                         TimeLineContent(sortedIngestions: experience.sortedIngestionsUnwrapped)
                     }
-                    .frame(height: 300)
+                    .frame(height: 270)
+                    .padding(.bottom, 5)
                     .listRowInsets(EdgeInsets())
                 }
             }

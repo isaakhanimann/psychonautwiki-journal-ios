@@ -23,27 +23,30 @@ struct TimeLineContent: View {
     }
 
     var body: some View {
-        GeometryReader { geo in
+        GeometryReader { geoOut in
             VStack {
-                ZStack(alignment: .bottom) {
-                    ForEach(0..<lineModels.count, id: \.self) { index in
-                        LineView(ingestionLineModel: lineModels[index])
-                    }
-                    .frame(width: geo.size.width, height: geo.size.height)
+                GeometryReader { geoIn in
+                    ZStack(alignment: .bottom) {
+                        ForEach(0..<lineModels.count, id: \.self) { index in
+                            LineView(ingestionLineModel: lineModels[index])
+                        }
+                        .frame(width: geoOut.size.width, height: geoIn.size.height)
 
-                    if isCurrentTimeInChart {
-                        CurrentTimeView(
-                            currentTime: currentTime,
-                            graphStartTime: startTime,
-                            graphEndTime: endTime
-                        )
-                            .frame(width: geo.size.width, height: geo.size.height)
+                        if isCurrentTimeInChart {
+                            CurrentTimeView(
+                                currentTime: currentTime,
+                                graphStartTime: startTime,
+                                graphEndTime: endTime
+                            )
+                                .frame(width: geoOut.size.width, height: geoIn.size.height)
+                        }
                     }
                 }
-                TimeLabels(startTime: startTime, endTime: endTime, totalWidth: geo.size.width)
+                TimeLabels(startTime: startTime, endTime: endTime, totalWidth: geoOut.size.width)
                     .position(x: 0, y: 0)
-                    .frame(width: geo.size.width)
+                    .frame(width: geoOut.size.width)
                     .padding(.top, 5)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .onReceive(timer) { newTime in
