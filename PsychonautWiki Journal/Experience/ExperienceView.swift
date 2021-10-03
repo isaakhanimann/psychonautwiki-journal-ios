@@ -23,15 +23,13 @@ struct ExperienceView: View {
             Section(header: Text("Title")) {
                 TextField("Title", text: $selectedTitle)
             }
-            Section(header: ingestionHeader) {
+            Section(header: Text("Ingestions")) {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
 
-                if experience.sortedIngestionsUnwrapped.isEmpty {
-                    Button(action: addIngestion) {
-                        Label("Add Ingestion", systemImage: "plus")
-                            .foregroundColor(.accentColor)
-                    }
+                Button(action: addIngestion) {
+                    Label("Add Ingestion", systemImage: "plus")
+                        .foregroundColor(.accentColor)
                 }
             }
 
@@ -140,19 +138,6 @@ struct ExperienceView: View {
             moc.delete(ingestion)
         }
         save()
-    }
-
-    var ingestionHeader: some View {
-        HStack {
-            Text("Ingestions")
-            Spacer()
-            if !experience.sortedIngestionsUnwrapped.isEmpty {
-                Button(action: addIngestion) {
-                    Label("Add Ingestion", systemImage: "plus")
-                        .labelStyle(IconOnlyLabelStyle())
-                }
-            }
-        }
     }
 
     private func save() {
