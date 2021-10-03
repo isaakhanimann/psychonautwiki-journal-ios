@@ -2,49 +2,62 @@ import SwiftUI
 
 struct TimeLabels: View {
 
-    let timeStep: ChartTimeStep
-    let numberOfSteps: Double
     let startTime: Date
-    let stepSize: CGFloat
-
-    func getTimeLabel(for stepIndex: Int) -> some View {
-        let xOffset = CGFloat(stepIndex) * stepSize
-
-        var timeLabel = ""
-        switch timeStep {
-        case .halfHour:
-            let isEven = stepIndex.isMultiple(of: 2)
-            timeLabel = String(format: "%.\(isEven ? "0" : "1")fh", Double(stepIndex)*0.5)
-        case .oneHour:
-            timeLabel = "\(stepIndex)h"
-        case .twoHours:
-            timeLabel = "\(stepIndex*2)h"
-        case .threeHours:
-            timeLabel = "\(stepIndex*3)h"
-        }
-
-        return VStack {
-            Text(timeLabel)
-            Text(getTimeString(for: stepIndex))
-        }
-        .offset(x: xOffset, y: 0)
-        .animation(nil)
-    }
-
-    func getTimeString(for labelNumber: Int) -> String {
-        let secondsToPosition: TimeInterval = Double(labelNumber) * timeStep.inSeconds()
-        let time: Date = startTime.addingTimeInterval(secondsToPosition)
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter.string(from: time)
-    }
+    let endTime: Date
+    let totalWidth: CGFloat
 
     var body: some View {
         ZStack {
-            ForEach(0...Int(numberOfSteps), id: \.self) { stepIndex in
-                getTimeLabel(for: stepIndex)
+            ForEach(getFullHoursBetweenStartAndEnd(), id: \.self) { date in
+                getLabel(for: date)
             }
         }
+    }
+
+    func getLabel(for date: Date) -> some View {
+        let fraction = startTime.distance(to: date) / startTime.distance(to: endTime)
+        assert(fraction >= 0 && fraction <= 1)
+
+        let xOffset = fraction * totalWidth
+
+        let hour = Calendar.current.component(.hour, from: date)
+        return Text("\(hour)")
+            .offset(x: xOffset, y: 0)
+            .foregroundColor(.secondary)
+            .font(.footnote)
+    }
+
+    func getFullHoursBetweenStartAndEnd() -> [Date] {
+        var fullHours = [Date]()
+
+        let calendar = Calendar.current
+
+        let oneHour: TimeInterval = 60 * 60
+
+        var checkTime = startTime.addingTimeInterval(oneHour)
+
+        while checkTime < endTime {
+            var components = DateComponents()
+
+            components.year = calendar.component(.year, from: checkTime)
+            components.month = calendar.component(.month, from: checkTime)
+            components.day = calendar.component(.day, from: checkTime)
+            components.hour = calendar.component(.hour, from: checkTime)
+            components.minute = 0
+            components.second = 0
+
+            let newTime = calendar.date(from: components) ?? Date()
+            fullHours.append(newTime)
+
+            checkTime.addTimeInterval(oneHour)
+        }
+
+        return fullHours
+    }
+}
+
+struct TimeLabels_Previews: PreviewProvider {
+    static var previews: some View {
+        TimeLabels(startTime: Date(), endTime: Date().addingTimeInterval(5*60*60), totalWidth: 300)
     }
 }
