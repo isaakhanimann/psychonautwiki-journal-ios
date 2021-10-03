@@ -68,10 +68,7 @@ extension Experience {
         return endOfGraph >= Date()
     }
 
-    static func getEndTime(
-        for ingestions: [Ingestion],
-        secondsToAddAtEnd: TimeInterval = 60*60
-    ) -> Date? {
+    static func getEndTime(for ingestions: [Ingestion]) -> Date? {
 
         guard let firstIngestion = ingestions.first else {return nil}
 
@@ -96,7 +93,6 @@ extension Experience {
                 endOfGraphTime = maybeNewEndTime
             }
         }
-        endOfGraphTime.addTimeInterval(secondsToAddAtEnd)
 
         return endOfGraphTime
     }
