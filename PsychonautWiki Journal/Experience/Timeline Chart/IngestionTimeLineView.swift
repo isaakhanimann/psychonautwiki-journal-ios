@@ -1,25 +1,17 @@
 import SwiftUI
 
-struct TimeLineContent: View {
+struct IngestionTimeLineView: View {
 
     let startTime: Date
     let endTime: Date
+    let isComplication: Bool
     let lineModels: [IngestionLineModel]
 
-    private let innerHorizontalPadding: CGFloat = 30
-    private let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
-
-    @State private var currentTime = Date()
-
-    var isCurrentTimeInChart: Bool {
-        currentTime > startTime && currentTime < endTime
-    }
-
-    init(sortedIngestions: [Ingestion]) {
+    init(sortedIngestions: [Ingestion], isComplication: Bool = false) {
         self.startTime = sortedIngestions.first?.timeUnwrapped ?? Date()
         self.endTime = Experience.getEndTime(for: sortedIngestions) ?? Date().addingTimeInterval(5*60*60)
+        self.isComplication = isComplication
         self.lineModels = HelperMethods.getLineModels(sortedIngestions: sortedIngestions)
-
     }
 
     var body: some View {
@@ -32,25 +24,26 @@ struct TimeLineContent: View {
                         }
                         .frame(width: geoOut.size.width, height: geoIn.size.height)
 
-                        if isCurrentTimeInChart {
+                        if !isComplication {
                             CurrentTimeView(
-                                currentTime: currentTime,
-                                graphStartTime: startTime,
-                                graphEndTime: endTime
+                                startTime: startTime,
+                                endTime: endTime
                             )
                                 .frame(width: geoOut.size.width, height: geoIn.size.height)
                         }
                     }
                 }
-                TimeLabels(startTime: startTime, endTime: endTime, totalWidth: geoOut.size.width)
+                TimeLabels(
+                    startTime: startTime,
+                    endTime: endTime,
+                    totalWidth: geoOut.size.width,
+                    timeStepInSec: isComplication ? 2*60*60 : 60*60
+                )
                     .position(x: 0, y: 0)
                     .frame(width: geoOut.size.width)
-                    .padding(.top, 5)
+                    .padding(.top, isComplication ? 2 : 5)
                     .fixedSize(horizontal: false, vertical: true)
             }
-        }
-        .onReceive(timer) { newTime in
-            currentTime = newTime
         }
     }
 }
@@ -58,7 +51,7 @@ struct TimeLineContent: View {
 struct TimeLineContent_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        TimeLineContent(sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped)
+        IngestionTimeLineView(sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped)
             .frame(height: 300)
     }
 }

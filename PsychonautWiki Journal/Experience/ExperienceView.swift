@@ -39,7 +39,7 @@ struct ExperienceView: View {
                     footer: Text("Source: PsychonautWiki onset, comeup, peak & offset")
                 ) {
                     HorizontalScaleView {
-                        TimeLineContent(sortedIngestions: experience.sortedIngestionsUnwrapped)
+                        IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsUnwrapped)
                     }
                     .frame(height: 270)
                     .padding(.bottom, 5)

@@ -5,6 +5,7 @@ struct TimeLabels: View {
     let startTime: Date
     let endTime: Date
     let totalWidth: CGFloat
+    var timeStepInSec: TimeInterval = 60 * 60
 
     var body: some View {
         ZStack {
@@ -32,9 +33,7 @@ struct TimeLabels: View {
 
         let calendar = Calendar.current
 
-        let oneHour: TimeInterval = 60 * 60
-
-        var checkTime = startTime.addingTimeInterval(oneHour)
+        var checkTime = startTime.addingTimeInterval(timeStepInSec)
 
         while checkTime < endTime {
             var components = DateComponents()
@@ -49,7 +48,7 @@ struct TimeLabels: View {
             let newTime = calendar.date(from: components) ?? Date()
             fullHours.append(newTime)
 
-            checkTime.addTimeInterval(oneHour)
+            checkTime.addTimeInterval(timeStepInSec)
         }
 
         return fullHours

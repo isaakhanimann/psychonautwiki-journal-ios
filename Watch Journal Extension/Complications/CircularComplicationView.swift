@@ -1,7 +1,7 @@
 import SwiftUI
 import ClockKit
 
-struct ComplicationView: View {
+struct CircularComplicationView: View {
 
     let ingestions: [Ingestion]
     let timeToDisplay: Date
@@ -20,21 +20,21 @@ struct ComplicationView_Previews: PreviewProvider {
         let helper = PersistenceController.preview.createPreviewHelper()
         Group {
             CLKComplicationTemplateGraphicExtraLargeCircularView(
-                ComplicationView(
+                CircularComplicationView(
                     ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
                     timeToDisplay: Date()
                 )
             ).previewContext()
 
             CLKComplicationTemplateGraphicCircularView(
-                ComplicationView(
+                CircularComplicationView(
                     ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
                     timeToDisplay: Date()
                 )
             ).previewContext()
 
             CLKComplicationTemplateGraphicRectangularFullView(
-                ComplicationView(
+                CircularComplicationView(
                     ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
                     timeToDisplay: Date()
                 )

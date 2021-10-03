@@ -52,9 +52,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void
     ) {
         // Call the handler with the current timeline entry
-        let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
+        let sortedIngestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
         let now = Date()
-        guard let predictionTemplate = createTemplate(for: complication.family, date: now, ingestions: ingestions) else {handler(nil); return}
+        guard let predictionTemplate = createTemplate(for: complication.family, date: now, sortedIngestions: sortedIngestions) else {handler(nil); return}
         let entry = CLKComplicationTimelineEntry(date: now, complicationTemplate: predictionTemplate)
         handler(entry)
     }
@@ -67,12 +67,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     ) {
         // Call the handler with the timeline entries after the given date
         var entries = [CLKComplicationTimelineEntry]()
-        let ingestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
+        let sortedIngestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
 
         for index in 0 ..< limit {
             let predictionDate = date.addingTimeInterval(Double(60 * 5 * index))
 
-            guard let predictionTemplate = createTemplate(for: complication.family, date: predictionDate, ingestions: ingestions) else {handler(nil); return}
+            guard let predictionTemplate = createTemplate(for: complication.family, date: predictionDate, sortedIngestions: sortedIngestions) else {handler(nil); return}
 
             let entry = CLKComplicationTimelineEntry(date: predictionDate, complicationTemplate: predictionTemplate)
 
@@ -99,14 +99,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         components.minute = 10
         let sampleDate = Calendar.current.date(from: components) ?? Date()
 
-        guard let template = createTemplate(for: complication.family, date: sampleDate, ingestions: helper.experiences.first!.sortedIngestionsUnwrapped) else {handler(nil); return}
+        guard let template = createTemplate(for: complication.family, date: sampleDate, sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped) else {handler(nil); return}
         handler(template)
     }
 
     func createTemplate(
         for family: CLKComplicationFamily,
         date: Date,
-        ingestions: [Ingestion]
+        sortedIngestions: [Ingestion]
     ) -> CLKComplicationTemplate? {
 
         switch family {
@@ -115,7 +115,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 line1TextProvider: CLKSimpleTextProvider(text: "No ingestion", shortText: String("-")),
                 line2TextProvider: CLKSimpleTextProvider(text: "-")
             )
-            guard let firstIngestion = ingestions.first else {return defaultTemplate}
+            guard let firstIngestion = sortedIngestions.first else {return defaultTemplate}
             guard let line1Long = firstIngestion.substanceCopy?.nameUnwrapped else {return defaultTemplate}
             guard let line1Short = firstIngestion.substanceCopy?.nameUnwrapped.prefix(3) else {return defaultTemplate}
 
@@ -125,7 +125,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             )
             return template
         case .modularLarge:
-            let first3Ingestions = ingestions.prefix(3)
+            let first3Ingestions = sortedIngestions.prefix(3)
 
             let template = CLKComplicationTemplateModularLargeColumns(
                 row1Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 0]?.substanceCopy?.nameUnwrapped),
@@ -138,17 +138,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             return template
         case .graphicExtraLarge:
             let template = CLKComplicationTemplateGraphicExtraLargeCircularView(
-                ComplicationView(ingestions: ingestions, timeToDisplay: date)
+                CircularComplicationView(ingestions: sortedIngestions, timeToDisplay: date)
             )
             return template
         case .graphicCircular:
             let template = CLKComplicationTemplateGraphicCircularView(
-                ComplicationView(ingestions: ingestions, timeToDisplay: date)
+                CircularComplicationView(ingestions: sortedIngestions, timeToDisplay: date)
             )
             return template
         case .graphicRectangular:
             let template = CLKComplicationTemplateGraphicRectangularFullView(
-                ComplicationView(ingestions: ingestions, timeToDisplay: date)
+                RectangularComplicationView(sortedIngestions: sortedIngestions)
             )
             return template
         default:
