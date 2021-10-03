@@ -40,9 +40,11 @@ struct ExperienceView: View {
                     header: Text("Timeline"),
                     footer: Text("Source: PsychonautWiki onset, comeup, peak and offset")
                 ) {
-                    LineChartWithPicker(sortedIngestions: experience.sortedIngestionsUnwrapped)
-                        .padding(.bottom, 10)
-                        .listRowInsets(EdgeInsets())
+                    HorizontalScaleView {
+                        TimeLineContent(sortedIngestions: experience.sortedIngestionsUnwrapped)
+                    }
+                    .frame(height: 200)
+                    .listRowInsets(EdgeInsets())
                 }
             }
 
