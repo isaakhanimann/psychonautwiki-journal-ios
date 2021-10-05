@@ -41,9 +41,7 @@ struct ExperienceView: View {
                     HorizontalScaleView {
                         IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsUnwrapped)
                     }
-                    .frame(height: 270)
-                    .padding(.bottom, 5)
-                    .listRowInsets(EdgeInsets())
+                    .frame(height: 310)
                 }
             }
 

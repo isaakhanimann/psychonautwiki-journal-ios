@@ -7,16 +7,14 @@ struct HorizontalScaleView<Content: View>: View {
     @State private var scale: Double = 1
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
             GeometryReader { geo in
                 ScrollView(.horizontal) {
                     content
                         .frame(width: scale * geo.size.width, height: geo.size.height)
-                        .padding(.bottom, 10)
                 }
             }
             Slider(value: $scale, in: 1...10)
-                .padding(.horizontal)
         }
     }
 }
