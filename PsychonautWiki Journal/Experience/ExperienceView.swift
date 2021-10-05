@@ -14,7 +14,7 @@ struct ExperienceView: View {
     ) var storedFile: FetchedResults<SubstancesFile>
 
     @State private var selectedTitle: String
-    @State private var isShowingAddIngestionSheet = false
+    @AppStorage(PersistenceController.isShowingAddIngestionSheetKey) var isShowingAddIngestionSheet: Bool = false
     @State private var writtenText: String
     @State private var isKeyboardShowing = false
 

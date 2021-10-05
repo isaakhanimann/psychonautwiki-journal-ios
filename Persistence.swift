@@ -11,6 +11,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
     static let areSettingsShowingKey = "areSettingsShowing"
+    static let isShowingAddIngestionSheetKey = "isShowingAddIngestionSheet"
     static let isEyeOpenKey = "isEyeOpen"
     static let needsToUpdateWatchFaceKey = "needsToUpdateWatchFace"
 
