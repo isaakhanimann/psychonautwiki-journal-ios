@@ -10,6 +10,7 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
+    static let areSettingsShowingKey = "areSettingsShowing"
     static let isEyeOpenKey = "isEyeOpen"
     static let needsToUpdateWatchFaceKey = "needsToUpdateWatchFace"
 
@@ -55,7 +56,7 @@ struct PersistenceController {
         return file.getGeneralInteraction(with: name)
     }
 
-    private func getLatestExperience() -> Experience? {
+    func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
         guard let experiences = try? container.viewContext.fetch(fetchRequest) else {return nil}
@@ -64,7 +65,7 @@ struct PersistenceController {
 
     func getOrCreateLatestExperience() -> Experience? {
         if let resultExperience = getLatestExperience() {
-            if resultExperience.isActive {
+            if !resultExperience.isOver {
                 return resultExperience
             } else {
                 return createNewExperienceNow()
@@ -76,7 +77,7 @@ struct PersistenceController {
 
     func getOrCreateLatestExperienceWithoutSave() -> Experience {
         if let resultExperience = getLatestExperience() {
-            if resultExperience.isActive {
+            if !resultExperience.isOver {
                 return resultExperience
             } else {
                 return createNewExperienceNowWithoutSave()

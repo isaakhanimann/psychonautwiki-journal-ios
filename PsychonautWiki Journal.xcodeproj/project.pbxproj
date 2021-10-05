@@ -190,7 +190,6 @@
 		EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */; };
 		EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */; };
 		EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */; };
-		EAE4722426CBA664009FB0EC /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A926CBA664009FB0EC /* TimerView.swift */; };
 		EAE4722526CBA664009FB0EC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AA26CBA664009FB0EC /* HomeView.swift */; };
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
@@ -373,7 +372,6 @@
 		EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTimeAndColor.swift; sourceTree = "<group>"; };
 		EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceView.swift; sourceTree = "<group>"; };
 		EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDoseView.swift; sourceTree = "<group>"; };
-		EAE471A926CBA664009FB0EC /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		EAE471AA26CBA664009FB0EC /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
@@ -696,7 +694,6 @@
 		EAE4718726CBA664009FB0EC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				EAE471A926CBA664009FB0EC /* TimerView.swift */,
 				EAE471AA26CBA664009FB0EC /* HomeView.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
 			);
@@ -1111,7 +1108,6 @@
 				EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */,
 				EAE471E526CBA664009FB0EC /* DoseRange-CoreDataHelpers.swift in Sources */,
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
-				EAE4722426CBA664009FB0EC /* TimerView.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
 				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,

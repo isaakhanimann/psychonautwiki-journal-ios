@@ -28,7 +28,7 @@ struct HomeView: View {
         }
     }
 
-    @State private var areSettingsShowing = false
+    @AppStorage(PersistenceController.areSettingsShowingKey) var areSettingsShowing: Bool = false
     @State private var selection: Experience?
     @State private var isShowingDeleteExperienceAlert = false
     @State private var offsets: IndexSet?
@@ -72,7 +72,7 @@ struct HomeView: View {
                 }
             }
             .fullScreenCover(isPresented: $areSettingsShowing, content: {
-                SettingsView(toggleSettingsVisibility: {areSettingsShowing.toggle()})
+                SettingsView()
                     .environment(\.managedObjectContext, self.moc)
                     .environmentObject(calendarWrapper)
                     .environmentObject(connectivity)

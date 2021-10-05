@@ -16,6 +16,7 @@ struct HandleUniversalURLView: View {
     @State private var sheetToShow: SheetSelection?
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.areSettingsShowingKey) var areSettingsShowing: Bool = false
 
     private enum SheetSelection: Identifiable {
         case route(substance: Substance, experience: Experience)
@@ -42,10 +43,15 @@ struct HandleUniversalURLView: View {
                 )
             }
             .onOpenURL(perform: { url in
+                if areSettingsShowing {
+                    areSettingsShowing.toggle()
+                }
                 if !isEyeOpen {
                     toggleEye()
                 }
-                handleUniversalUrl(universalUrl: url)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    handleUniversalUrl(universalUrl: url)
+                }
             })
             .sheet(
                 item: $sheetToShow,

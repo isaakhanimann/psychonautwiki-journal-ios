@@ -8,11 +8,11 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     @Published var activationState = WCSessionActivationState.notActivated
 
-    #if os(iOS)
+#if os(iOS)
     @Published var isWatchAppInstalled = false
     @Published var isComplicationEnabled = false
     @Published var isPaired = false
-    #endif
+#endif
 
     // MARK: General Methods
 
@@ -26,7 +26,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         }
     }
 
-    #if os(iOS)
+#if os(iOS)
     func session(
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
@@ -54,7 +54,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         }
     }
 
-    #else
+#else
     func session(
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
@@ -64,7 +64,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             self.activationState = activationState
         }
     }
-    #endif
+#endif
 
     func transferUserInfo(_ userInfo: [String: Any]) {
         let session = WCSession.default
@@ -83,13 +83,13 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             case .createIngestion:
                 self.receiveNewIngestion(userInfo: userInfo)
             case .updateIngestion:
-                #if os(watchOS)
+#if os(watchOS)
                 self.receiveIngestionUpdate(userInfo: userInfo)
-                #endif
+#endif
             case .deleteIngestion:
-                #if os(watchOS)
+#if os(watchOS)
                 self.receiveIngestionDelete(userInfo: userInfo)
-                #endif
+#endif
             case .eyeState:
                 self.receiveEyeState(userInfo: userInfo)
             case .updateFavoriteSubstances:
@@ -97,9 +97,9 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             case .enableInteractions:
                 self.receiveInteractions(userInfo: userInfo)
             case .syncMessageToWatch:
-                #if os(watchOS)
+#if os(watchOS)
                 self.receiveSyncMessage(userInfo: userInfo)
-                #endif
+#endif
             }
         }
     }
@@ -136,7 +136,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     // MARK: Send Methods
 
-    #if os(iOS)
+#if os(iOS)
 
     func sendSyncMessageToWatch(with ingestions: [Ingestion]) {
         let ids = ingestions
@@ -187,7 +187,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         transferUserInfo(data)
     }
 
-    #endif
+#endif
 
     func sendNewIngestion(ingestion: Ingestion) {
         guard let identifier = ingestion.identifier else {return}
@@ -258,7 +258,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     // MARK: Receive Methods
 
-    #if os(watchOS)
+#if os(watchOS)
 
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length
@@ -283,7 +283,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
         let moc = PersistenceController.shared.container.viewContext
         moc.performAndWait {
-            guard let experienceToUpdate = PersistenceController.shared.getOrCreateLatestExperience() else {return}
+            guard let experienceToUpdate = PersistenceController.shared.getLatestExperience() else {return}
             experienceToUpdate.sortedIngestionsUnwrapped.forEach { ingestion in
                 createdIngestionUIDs.remove(ingestion.identifier ?? UUID())
                 moc.delete(ingestion)
@@ -328,13 +328,13 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
             server.reloadTimeline(for: complication)
         }
     }
-    #endif
+#endif
 
     func receiveIngestionDelete(userInfo: [String: Any]) {
         guard let identifier = userInfo[idKey] as? String else {return}
         guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
 
-        guard let experience = PersistenceController.shared.getOrCreateLatestExperience() else {return}
+        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
         guard let ingestionToDelete = experience.sortedIngestionsUnwrapped
                 .first(where: {$0.identifier == identifierUnwrapped}) else {return}
 
@@ -353,7 +353,11 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let dose = userInfo[doseKey] as? Double else {return}
         guard let colorName = userInfo[colorKey] as? String else {return}
 
+#if os(iOS)
         let experienceToAddTo = PersistenceController.shared.getOrCreateLatestExperience()
+#else
+        let experienceToAddTo = PersistenceController.shared.getLatestExperience()
+#endif
 
         guard let foundSubstance = PersistenceController.shared.findSubstance(with: substanceName) else {return}
         guard let routeUnwrapped = Roa.AdministrationRoute(rawValue: route) else {return}
@@ -395,7 +399,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
         guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
 
-        guard let experience = PersistenceController.shared.getOrCreateLatestExperience() else {return}
+        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
         guard let ingestionToUpdate = experience.sortedIngestionsUnwrapped
                 .first(where: {$0.identifier == identifierUnwrapped}) else {return}
 

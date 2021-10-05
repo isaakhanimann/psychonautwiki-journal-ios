@@ -60,12 +60,12 @@ extension Experience {
         sortedIngestionsUnwrapped.first?.timeUnwrapped
     }
 
-    var isActive: Bool {
+    var isOver: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
 
         guard let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped) else {return false}
 
-        return endOfGraph >= Date()
+        return endOfGraph < Date()
     }
 
     static func getEndTime(for ingestions: [Ingestion]) -> Date? {

@@ -33,12 +33,8 @@ struct ExperienceRow: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                if experience.isActive {
-                    TimerView(experience: experience, timer: timer)
-                } else {
-                    Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
-                        .foregroundColor(.secondary)
-                }
+                Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
+                    .foregroundColor(.secondary)
             }
         }
     }

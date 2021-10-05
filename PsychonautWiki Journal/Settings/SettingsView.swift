@@ -2,10 +2,9 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    let toggleSettingsVisibility: () -> Void
-
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var connectivity: Connectivity
+    @Environment(\.presentationMode) var presentationMode
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
@@ -89,7 +88,9 @@ struct SettingsView: View {
             .listStyle(InsetGroupedListStyle())
             .navigationTitle(Text("Settings"))
             .navigationBarItems(
-                trailing: Button("Done", action: toggleSettingsVisibility)
+                trailing: Button("Done") {
+                    presentationMode.wrappedValue.dismiss()
+                }
             )
             .onDisappear(perform: {
                 if moc.hasChanges {
@@ -144,7 +145,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(toggleSettingsVisibility: {})
+        SettingsView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(Connectivity())
             .environmentObject(CalendarWrapper())
