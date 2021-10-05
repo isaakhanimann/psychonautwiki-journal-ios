@@ -283,7 +283,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
         let moc = PersistenceController.shared.container.viewContext
         moc.performAndWait {
-            guard let experienceToUpdate = PersistenceController.shared.getLatestExperience() else {return}
+            guard let experienceToUpdate = PersistenceController.shared.getOrCreateLatestExperience() else {return}
             experienceToUpdate.sortedIngestionsUnwrapped.forEach { ingestion in
                 createdIngestionUIDs.remove(ingestion.identifier ?? UUID())
                 moc.delete(ingestion)
@@ -334,7 +334,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let identifier = userInfo[idKey] as? String else {return}
         guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
 
-        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
+        guard let experience = PersistenceController.shared.getOrCreateLatestExperience() else {return}
         guard let ingestionToDelete = experience.sortedIngestionsUnwrapped
                 .first(where: {$0.identifier == identifierUnwrapped}) else {return}
 
@@ -353,15 +353,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let dose = userInfo[doseKey] as? Double else {return}
         guard let colorName = userInfo[colorKey] as? String else {return}
 
-        #if os(iOS)
-        var experienceToAddTo = PersistenceController.shared.getLatestExperience()
-        if !(experienceToAddTo?.isActive ?? false) {
-            guard let newExperience = PersistenceController.shared.createNewExperienceNow() else {return}
-            experienceToAddTo = newExperience
-        }
-        #else
-        let experienceToAddTo = PersistenceController.shared.getLatestExperience()
-        #endif
+        let experienceToAddTo = PersistenceController.shared.getOrCreateLatestExperience()
 
         guard let foundSubstance = PersistenceController.shared.findSubstance(with: substanceName) else {return}
         guard let routeUnwrapped = Roa.AdministrationRoute(rawValue: route) else {return}
@@ -403,7 +395,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let colorUnwrapped = Ingestion.IngestionColor(rawValue: colorName) else {return}
         guard let identifierUnwrapped = UUID(uuidString: identifier) else {return}
 
-        guard let experience = PersistenceController.shared.getLatestExperience() else {return}
+        guard let experience = PersistenceController.shared.getOrCreateLatestExperience() else {return}
         guard let ingestionToUpdate = experience.sortedIngestionsUnwrapped
                 .first(where: {$0.identifier == identifierUnwrapped}) else {return}
 

@@ -98,6 +98,7 @@
 		EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAB2EDF226F140AC0020C554 /* SyncSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDF126F140AC0020C554 /* SyncSection.swift */; };
+		EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -291,6 +292,7 @@
 		EAB2EDE526EEB8F30020C554 /* ClockHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHands.swift; sourceTree = "<group>"; };
 		EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationUpdater.swift; sourceTree = "<group>"; };
 		EAB2EDF126F140AC0020C554 /* SyncSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSection.swift; sourceTree = "<group>"; };
+		EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleUniversalURLView.swift; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		EAE4722F26CBDDE7009FB0EC /* PsychonautWikiAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWikiAPIController.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* InitialSubstances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InitialSubstances.json; sourceTree = "<group>"; };
 		EAE4723826CC6598009FB0EC /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
+		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,8 +591,10 @@
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
 				EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
+				EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
+				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
 				EAE4710C26CBA582009FB0EC /* Preview Content */,
 			);
@@ -1118,6 +1123,7 @@
 				EAB2EDF226F140AC0020C554 /* SyncSection.swift in Sources */,
 				EA94AD2E26F709CC00E7592D /* Constants.swift in Sources */,
 				EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */,
+				EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EAE471ED26CBA664009FB0EC /* DurationTypes-CoreDataHelpers.swift in Sources */,
@@ -1371,6 +1377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";
@@ -1395,6 +1402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";

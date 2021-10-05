@@ -52,7 +52,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void
     ) {
         // Call the handler with the current timeline entry
-        let sortedIngestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
+        let sortedIngestions = PersistenceController.shared.getOrCreateLatestExperience()?.sortedIngestionsUnwrapped ?? []
         let now = Date()
         guard let predictionTemplate = createTemplate(for: complication.family, date: now, sortedIngestions: sortedIngestions) else {handler(nil); return}
         let entry = CLKComplicationTimelineEntry(date: now, complicationTemplate: predictionTemplate)
@@ -67,7 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     ) {
         // Call the handler with the timeline entries after the given date
         var entries = [CLKComplicationTimelineEntry]()
-        let sortedIngestions = PersistenceController.shared.getLatestExperience()?.sortedIngestionsUnwrapped ?? []
+        let sortedIngestions = PersistenceController.shared.getOrCreateLatestExperience()?.sortedIngestionsUnwrapped ?? []
 
         for index in 0 ..< limit {
             let predictionDate = date.addingTimeInterval(Double(60 * 5 * index))

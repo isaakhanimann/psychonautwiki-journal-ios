@@ -15,15 +15,18 @@ struct ContentView: View {
     ) var storedFile: FetchedResults<SubstancesFile>
 
     var body: some View {
-        Group {
-            if hasBeenSetupBefore {
-                HomeView()
-                    .onAppear(perform: maybeFetchAgain)
-            } else {
-                WelcomeScreen()
-                    .environment(\.managedObjectContext, self.moc)
-                    .environmentObject(calendarWrapper)
-                    .accentColor(Color.blue)
+        ZStack {
+            HandleUniversalURLView()
+            Group {
+                if hasBeenSetupBefore {
+                    HomeView()
+                        .onAppear(perform: maybeFetchAgain)
+                } else {
+                    WelcomeScreen()
+                        .environment(\.managedObjectContext, self.moc)
+                        .environmentObject(calendarWrapper)
+                        .accentColor(Color.blue)
+                }
             }
         }
         .onChange(
@@ -55,15 +58,6 @@ struct ContentView: View {
             return false
         }
         return true
-    }
-
-    enum ActiveSheet: Identifiable {
-        case setup, settings
-
-        // swiftlint:disable identifier_name
-        var id: Int {
-            hashValue
-        }
     }
 }
 

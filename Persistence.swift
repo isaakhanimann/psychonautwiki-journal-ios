@@ -55,11 +55,35 @@ struct PersistenceController {
         return file.getGeneralInteraction(with: name)
     }
 
-    func getLatestExperience() -> Experience? {
+    private func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
         guard let experiences = try? container.viewContext.fetch(fetchRequest) else {return nil}
         return experiences.first
+    }
+
+    func getOrCreateLatestExperience() -> Experience? {
+        if let resultExperience = getLatestExperience() {
+            if resultExperience.isActive {
+                return resultExperience
+            } else {
+                return createNewExperienceNow()
+            }
+        } else {
+            return createNewExperienceNow()
+        }
+    }
+
+    func getOrCreateLatestExperienceWithoutSave() -> Experience {
+        if let resultExperience = getLatestExperience() {
+            if resultExperience.isActive {
+                return resultExperience
+            } else {
+                return createNewExperienceNowWithoutSave()
+            }
+        } else {
+            return createNewExperienceNowWithoutSave()
+        }
     }
 
     func getCurrentFile() -> SubstancesFile? {
@@ -82,6 +106,16 @@ struct PersistenceController {
         }
 
         return result
+    }
+
+    func createNewExperienceNowWithoutSave() -> Experience {
+        let moc = container.viewContext
+        let experience = Experience(context: moc)
+        let now = Date()
+        experience.creationDate = now
+        experience.title = now.asDateString
+
+        return experience
     }
 
     func updateIngestion(
