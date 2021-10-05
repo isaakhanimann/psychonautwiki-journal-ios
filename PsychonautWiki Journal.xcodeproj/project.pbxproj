@@ -99,6 +99,7 @@
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAB2EDF226F140AC0020C554 /* SyncSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDF126F140AC0020C554 /* SyncSection.swift */; };
 		EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */; };
+		EABFA491270C938000A6953C /* Infograph Modular.watchface in Resources */ = {isa = PBXBuildFile; fileRef = EABFA490270C938000A6953C /* Infograph Modular.watchface */; };
 		EAC306A126CD16AD00C98E3E /* ChooseInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */; };
 		EAC306A326CD182F00C98E3E /* ChooseFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -292,6 +293,7 @@
 		EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationUpdater.swift; sourceTree = "<group>"; };
 		EAB2EDF126F140AC0020C554 /* SyncSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSection.swift; sourceTree = "<group>"; };
 		EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleUniversalURLView.swift; sourceTree = "<group>"; };
+		EABFA490270C938000A6953C /* Infograph Modular.watchface */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Infograph Modular.watchface"; sourceTree = "<group>"; };
 		EAC306A026CD16AC00C98E3E /* ChooseInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseInteractionsView.swift; sourceTree = "<group>"; };
 		EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesView.swift; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				EA128548270444E90085C3F6 /* X-Large.watchface */,
+				EABFA490270C938000A6953C /* Infograph Modular.watchface */,
 				EA12854A270447730085C3F6 /* AddFaceView.swift */,
 			);
 			path = "Add Watch Face";
@@ -916,6 +919,7 @@
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
 				EA128549270444E90085C3F6 /* X-Large.watchface in Resources */,
 				EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */,
+				EABFA491270C938000A6953C /* Infograph Modular.watchface in Resources */,
 				EA1285462703CFF70085C3F6 /* Launch Screen.storyboard in Resources */,
 				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
 			);

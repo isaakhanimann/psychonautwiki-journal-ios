@@ -8,23 +8,36 @@ struct AddFaceView: View {
 
     var body: some View {
         ZStack {
-            VStack {
-                Spacer()
-                Image("X-Large_email")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.horizontal, 10)
+            ScrollView {
+                VStack(spacing: 0) {
+                    Image("X-Large_email")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.horizontal, 10)
 
-                Button {
-                    isLoading = true
-                    addFaceWrapper(withName: "X-Large")
-                } label: {
-                    Image(colorScheme == .dark ? "Add Watch Face Dark" : "Add Watch Face Light")
+                    Button {
+                        isLoading = true
+                        addFaceWrapper(withName: "X-Large")
+                    } label: {
+                        Image(colorScheme == .dark ? "Add Watch Face Dark" : "Add Watch Face Light")
 
+                    }
+
+                    Spacer().frame(minHeight: 20)
+
+                    Image("Infograph Modular_email")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.horizontal, 10)
+
+                    Button {
+                        isLoading = true
+                        addFaceWrapper(withName: "Infograph Modular")
+                    } label: {
+                        Image(colorScheme == .dark ? "Add Watch Face Dark" : "Add Watch Face Light")
+
+                    }
                 }
-
-                Spacer()
-
             }
 
             if isLoading {
