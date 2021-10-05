@@ -22,8 +22,14 @@ struct IngestionRow: View {
 
                         Spacer()
 
-                        Text(ingestion.timeUnwrappedAsString)
-                            .foregroundColor(.primary)
+                        VStack(alignment: .trailing) {
+                            Text(ingestion.timeUnwrappedAsString)
+                                .foregroundColor(.primary)
+                            if ingestion.endTime > Date() {
+                                Text(ingestion.endTime, style: .relative)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                 }
             }
