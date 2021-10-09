@@ -57,7 +57,7 @@ struct ChooseSubstanceView: View {
                                 substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
                                 substance.isEnabled
                             }
-                    }) ?? []
+                        }) ?? []
                     ForEach(categories) { category in
                         Section(header: Text(category.nameUnwrapped)) {
                             let filteredSubstances = category.substancesUnwrapped
@@ -76,10 +76,16 @@ struct ChooseSubstanceView: View {
                         && categories.isEmpty {
                         Text("No substances found")
                             .foregroundColor(.secondary)
-                    } else if isEyeOpen {
-                        Text(Constants.substancesDisclaimerIOS)
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
+                    }
+
+                    if isEyeOpen {
+                        Section {
+                            EmptyView()
+                        } footer: {
+                            Text(Constants.substancesDisclaimerIOS)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 .listStyle(PlainListStyle())
@@ -117,6 +123,6 @@ struct ChooseSubstanceView_Previews: PreviewProvider {
             dismiss: {},
             experience: helper.experiences.first!
         )
-        .environmentObject(helper.experiences.first!)
+            .environmentObject(helper.experiences.first!)
     }
 }

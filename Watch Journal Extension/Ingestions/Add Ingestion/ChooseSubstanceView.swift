@@ -52,11 +52,15 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
-
+                
                 if isEyeOpen {
-                    Text(Constants.substancesDisclaimerWatch)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
+                    Section {
+                        EmptyView()
+                    } footer: {
+                        Text(Constants.substancesDisclaimerWatch)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .toolbar {
