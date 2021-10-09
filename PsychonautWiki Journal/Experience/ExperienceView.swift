@@ -97,16 +97,18 @@ struct ExperienceView: View {
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
         .onDisappear(perform: save)
+        .onAppear {
+            isShowingAddIngestionSheet = false
+        }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
                 dismiss: {isShowingAddIngestionSheet.toggle()},
                 experience: experience
             )
-            .environment(\.managedObjectContext, self.moc)
-            .environmentObject(calendarWrapper)
-            .environmentObject(connectivity)
-
-            .accentColor(Color.blue)
+                .environment(\.managedObjectContext, self.moc)
+                .environmentObject(calendarWrapper)
+                .environmentObject(connectivity)
+                .accentColor(Color.blue)
         }
     }
 
