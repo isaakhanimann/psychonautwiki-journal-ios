@@ -60,10 +60,9 @@ struct ChooseSubstanceView: View {
                         }) ?? []
                     ForEach(categories) { category in
                         Section(header: Text(category.nameUnwrapped)) {
-                            let filteredSubstances = category.substancesUnwrapped
+                            let filteredSubstances = category.sortedEnabledSubstancesUnwrapped
                                 .filter({ substance in
-                                    substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
-                                    substance.isEnabled
+                                    substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased())
                                 })
                             ForEach(filteredSubstances) { substance in
                                 SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
