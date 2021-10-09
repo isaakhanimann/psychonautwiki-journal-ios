@@ -72,9 +72,9 @@ struct ContentView: View {
 
     var shouldFetchAgain: Bool {
         guard hasBeenSetupBefore else {return false}
-        let oneWeek: TimeInterval = 60 * 60 * 24 * 7
+        let twoWeeks: TimeInterval = 60 * 60 * 24 * 14
         guard let file = storedFile.first else {return true}
-        guard file.creationDateUnwrapped.distance(to: Date()) > oneWeek else {
+        guard file.creationDateUnwrapped.distance(to: Date()) > twoWeeks else {
             return false
         }
         return true
