@@ -11,7 +11,7 @@ struct ContentView: View {
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
-        sortDescriptors: []
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
     var body: some View {

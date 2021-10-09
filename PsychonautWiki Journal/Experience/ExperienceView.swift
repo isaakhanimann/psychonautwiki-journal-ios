@@ -8,11 +8,6 @@ struct ExperienceView: View {
     @EnvironmentObject var calendarWrapper: CalendarWrapper
     @EnvironmentObject var connectivity: Connectivity
 
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: []
-    ) var storedFile: FetchedResults<SubstancesFile>
-
     @State private var selectedTitle: String
     @AppStorage(PersistenceController.isShowingAddIngestionSheetKey) var isShowingAddIngestionSheet: Bool = false
     @State private var writtenText: String
@@ -104,7 +99,6 @@ struct ExperienceView: View {
         .onDisappear(perform: save)
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
-                substancesFile: storedFile.first!,
                 dismiss: {isShowingAddIngestionSheet.toggle()},
                 experience: experience
             )

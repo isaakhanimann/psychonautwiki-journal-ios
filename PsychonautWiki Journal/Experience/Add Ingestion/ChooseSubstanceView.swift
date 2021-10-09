@@ -2,57 +2,34 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    let substancesFile: SubstancesFile
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
+    ) var storedFile: FetchedResults<SubstancesFile>
+
     let dismiss: () -> Void
     let experience: Experience
 
     @State private var isKeyboardShowing = false
     @State private var searchText = ""
-    @State private var recentsFiltered: [Substance]
-    @State private var favoritesFiltered: [Substance]
-    @State private var categoriesSearchResults: [CategorySearchResult]
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-
-    init(
-        substancesFile: SubstancesFile,
-        dismiss: @escaping () -> Void,
-        experience: Experience
-    ) {
-        self.substancesFile = substancesFile
-        self.dismiss = dismiss
-        self.experience = experience
-        self.recentsFiltered = substancesFile.getRecentlyUsedSubstancesInOrder(
-            maxSubstancesToGet: 5
-        )
-        self.favoritesFiltered = substancesFile.favoritesSorted
-        self.categoriesSearchResults = substancesFile.sortedCategoriesUnwrapped.compactMap { category in
-            if category.sortedEnabledSubstancesUnwrapped.isEmpty {
-                return nil
-            } else {
-                return CategorySearchResult(
-                    categoryName: category.nameUnwrapped,
-                    filteredSubstances: category.sortedEnabledSubstancesUnwrapped
-                )
-            }
-        }
-    }
 
     var body: some View {
         NavigationView {
             VStack {
-                let searchBinding = Binding<String>(
-                    get: {self.searchText},
-                    set: {
-                        self.searchText = $0
-                        filterSubstances(with: $0)
-                    }
-                )
-                TextField("Search Substances", text: searchBinding)
+                TextField("Search Substances", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
                     .autocapitalization(.words)
                     .padding(.horizontal)
                 List {
+                    let recentsFiltered = storedFile.first?
+                        .getRecentlyUsedSubstancesInOrder(maxSubstancesToGet: 5)
+                        .filter({ substance in
+                            substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
+                            substance.isEnabled
+                        }) ?? []
                     if !recentsFiltered.isEmpty {
                         Section(header: Text("Recently Used")) {
                             ForEach(recentsFiltered) { substance in
@@ -60,6 +37,12 @@ struct ChooseSubstanceView: View {
                             }
                         }
                     }
+                    let favoritesFiltered = storedFile.first?
+                        .favoritesSorted
+                        .filter({ substance in
+                            substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
+                            substance.isEnabled
+                        }) ?? []
                     if !favoritesFiltered.isEmpty {
                         Section(header: Text("Favorites")) {
                             ForEach(favoritesFiltered) { substance in
@@ -67,9 +50,22 @@ struct ChooseSubstanceView: View {
                             }
                         }
                     }
-                    ForEach(categoriesSearchResults) { categoriesSearchResult in
-                        Section(header: Text(categoriesSearchResult.categoryName)) {
-                            ForEach(categoriesSearchResult.filteredSubstances) { substance in
+                    let categories = storedFile.first?
+                        .categoriesUnwrappedSorted
+                        .filter({ cat in
+                            cat.substancesUnwrapped.contains { substance in
+                                substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
+                                substance.isEnabled
+                            }
+                    }) ?? []
+                    ForEach(categories) { category in
+                        Section(header: Text(category.nameUnwrapped)) {
+                            let filteredSubstances = category.substancesUnwrapped
+                                .filter({ substance in
+                                    substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
+                                    substance.isEnabled
+                                })
+                            ForEach(filteredSubstances) { substance in
                                 SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
                             }
                         }
@@ -77,7 +73,7 @@ struct ChooseSubstanceView: View {
 
                     if recentsFiltered.isEmpty
                         && favoritesFiltered.isEmpty
-                        && categoriesSearchResults.isEmpty {
+                        && categories.isEmpty {
                         Text("No substances found")
                             .foregroundColor(.secondary)
                     } else if isEyeOpen {
@@ -112,52 +108,12 @@ struct ChooseSubstanceView: View {
             }
         }
     }
-
-    struct CategorySearchResult: Identifiable {
-        // swiftlint:disable identifier_name
-        var id: String {
-            categoryName
-        }
-        let categoryName: String
-        let filteredSubstances: [Substance]
-    }
-
-    private func filterSubstances(with search: String) {
-        self.recentsFiltered = substancesFile.getRecentlyUsedSubstancesInOrder(
-            maxSubstancesToGet: 5
-        ).filter { substance in
-            substance.nameUnwrapped.hasPrefix(searchText)
-        }
-        self.favoritesFiltered = substancesFile.favoritesSorted.filter { substance in
-            substance.nameUnwrapped.hasPrefix(searchText)
-        }
-        self.categoriesSearchResults = substancesFile.sortedCategoriesUnwrapped.compactMap { category in
-            let filteredSubstancesInCategory = category.enabledSubstancesUnwrapped.filter(doesSearchTermInclude)
-            if filteredSubstancesInCategory.isEmpty {
-                return nil
-            } else {
-                return CategorySearchResult(
-                    categoryName: category.nameUnwrapped,
-                    filteredSubstances: filteredSubstancesInCategory
-                )
-            }
-        }
-    }
-
-    private func doesSearchTermInclude(substance: Substance) -> Bool {
-        if searchText.isEmpty {
-            return true
-        } else {
-            return substance.nameUnwrapped.lowercased().contains(searchText.lowercased())
-        }
-    }
 }
 
 struct ChooseSubstanceView_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
         ChooseSubstanceView(
-            substancesFile: helper.substancesFile,
             dismiss: {},
             experience: helper.experiences.first!
         )

@@ -5,7 +5,7 @@ struct DisclaimerViewShort: View {
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
     @FetchRequest(
         entity: SubstancesFile.entity(),
-        sortDescriptors: []
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
     @Environment(\.managedObjectContext) var moc

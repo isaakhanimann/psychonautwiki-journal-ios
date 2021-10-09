@@ -7,7 +7,7 @@ struct SettingsTab: View {
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
-        sortDescriptors: []
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false

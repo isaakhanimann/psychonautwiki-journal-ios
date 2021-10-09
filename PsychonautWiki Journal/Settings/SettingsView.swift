@@ -8,7 +8,7 @@ struct SettingsView: View {
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
-        sortDescriptors: []
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
     @State private var isShowingErrorAlert = false
