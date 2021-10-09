@@ -6,11 +6,6 @@ struct IngestionsTab: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var connectivity: Connectivity
 
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
-
     @State private var isShowingAddIngestionSheet = false
 
     var body: some View {
@@ -39,18 +34,13 @@ struct IngestionsTab: View {
             }
             .navigationTitle("Ingestions")
             .sheet(isPresented: $isShowingAddIngestionSheet) {
-                if let file = storedFile.first {
-                    ChooseSubstanceView(
-                        substancesFile: file,
-                        dismiss: {isShowingAddIngestionSheet.toggle()},
-                        experience: experience
-                    )
+                ChooseSubstanceView(
+                    dismiss: {isShowingAddIngestionSheet.toggle()},
+                    experience: experience
+                )
                     .environment(\.managedObjectContext, self.moc)
                     .environmentObject(connectivity)
                     .accentColor(Color.blue)
-                } else {
-                    Text("No Substances")
-                }
             }
         }
     }

@@ -2,7 +2,11 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    let substancesFile: SubstancesFile
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
+    ) var storedFile: FetchedResults<SubstancesFile>
+
     let dismiss: () -> Void
     let experience: Experience
 
@@ -10,11 +14,10 @@ struct ChooseSubstanceView: View {
 
     var body: some View {
         NavigationView {
-            let recentSubstances = substancesFile.getRecentlyUsedSubstancesInOrder(
-                maxSubstancesToGet: 5
-            )
             List {
-
+                let recentSubstances = storedFile.first?.getRecentlyUsedSubstancesInOrder(
+                    maxSubstancesToGet: 5
+                ) ?? []
                 if !recentSubstances.isEmpty {
                     Section(header: Text("Recently Used")) {
                         ForEach(recentSubstances) { substance in
@@ -26,9 +29,10 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
-                if !substancesFile.favoritesSorted.isEmpty {
+                let favoritesEnabled = storedFile.first?.favoritesSorted.filter({$0.isEnabled}) ?? []
+                if !favoritesEnabled.isEmpty {
                     Section(header: Text("Favorites")) {
-                        ForEach(substancesFile.favoritesSorted) { substance in
+                        ForEach(favoritesEnabled) { substance in
                             SubstanceRow(
                                 substance: substance,
                                 dismiss: dismiss,
@@ -38,7 +42,7 @@ struct ChooseSubstanceView: View {
                     }
                 }
 
-                ForEach(substancesFile.categoriesUnwrappedSorted) { category in
+                ForEach(storedFile.first?.categoriesUnwrappedSorted ?? []) { category in
                     let enabledSubstances = category.sortedEnabledSubstancesUnwrapped
                     if !enabledSubstances.isEmpty {
                         Section(header: Text(category.nameUnwrapped)) {
@@ -52,7 +56,7 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
-                
+
                 if isEyeOpen {
                     Section {
                         EmptyView()
@@ -76,7 +80,6 @@ struct ChooseSubstanceView_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
         ChooseSubstanceView(
-            substancesFile: helper.substancesFile,
             dismiss: {},
             experience: helper.experiences.first!
         )
