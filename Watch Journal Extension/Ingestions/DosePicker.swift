@@ -27,6 +27,7 @@ struct DosePicker: View {
                 Text(doseInfo?.units ?? "")
             }
             .onChange(of: doseText) { _ in
+                doseText = doseText.trimmingCharacters(in: .whitespaces)
                 if let doseUnwrapped = Double(doseText) {
                     doseDouble = doseUnwrapped
                     doseMaybe = doseUnwrapped
