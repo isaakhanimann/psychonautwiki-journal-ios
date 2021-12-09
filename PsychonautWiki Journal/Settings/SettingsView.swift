@@ -41,6 +41,8 @@ struct SettingsView: View {
                     )
                 }
 
+                CalendarSection()
+
                 if isEyeOpen {
                     Section(header: Text("Safety")) {
                         Link(
@@ -66,9 +68,12 @@ struct SettingsView: View {
                             }
                         )
                     }
-                }
 
-                CalendarSection()
+                    Link(
+                        "Send Me Feedback & Questions",
+                        destination: URL(string: "https://t.me/isaakhanimann")!
+                    )
+                }
 
                 Section(
                     footer: HStack {
