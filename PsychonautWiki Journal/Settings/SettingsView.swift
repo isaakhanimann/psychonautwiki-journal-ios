@@ -43,6 +43,11 @@ struct SettingsView: View {
 
                 CalendarSection()
 
+                Link(
+                    "Send Me Feedback & Questions",
+                    destination: URL(string: "https://t.me/isaakhanimann")!
+                )
+
                 if isEyeOpen {
                     Section(header: Text("Safety")) {
                         Link(
@@ -68,35 +73,26 @@ struct SettingsView: View {
                             }
                         )
                     }
-
-                    Link(
-                        "Send Me Feedback & Questions",
-                        destination: URL(string: "https://t.me/isaakhanimann")!
-                    )
                 }
-
-                Section(
-                    footer: HStack {
-                        Spacer()
-                        (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.secondary)
-                            .frame(width: 30, height: 30, alignment: .center)
-                            .onTapGesture(count: 3, perform: toggleEye)
-                        Spacer()
-                    }
-                ) { }
-
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle(Text("Settings"))
-            .navigationBarItems(
-                trailing: Button("Done") {
-                    presentationMode.wrappedValue.dismiss()
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.secondary)
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .onTapGesture(count: 3, perform: toggleEye)
                 }
-            )
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
             .onDisappear(perform: {
                 if moc.hasChanges {
                     try? moc.save()
