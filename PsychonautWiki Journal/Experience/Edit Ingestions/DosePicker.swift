@@ -21,69 +21,93 @@ struct DosePicker: View {
     }
 
     var body: some View {
-        let units = doseInfo?.units ?? ""
         VStack(alignment: .leading) {
-            HStack {
-                TextField("Enter Dose", text: $doseText)
-                    .keyboardType(.decimalPad)
-                Text(doseInfo?.units ?? "")
+            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
+               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
+               min < max {
+                dynamicDoseRangeView
+            } else {
+                stackedDoseRangeView
             }
-            .font(.title)
-            .onChange(of: doseText) { _ in
-                if let doseUnwrapped = Double(doseText) {
-                    doseDouble = doseUnwrapped
-                    doseMaybe = doseUnwrapped
-                } else {
-                    doseMaybe = nil
-                }
-            }
+
+            doseTextFieldWithUnit
 
             if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
                let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
                min < max {
-                Slider(
-                    value: $doseDouble.animation(),
-                    in: min...max,
-                    step: 1,
-                    minimumValueLabel: Text("\(min.cleanString) \(units)"),
-                    maximumValueLabel: Text("\(max.cleanString) \(units)")) {
-                    Text("Dose")
-                }
-                .onChange(of: doseDouble) { _ in
-                    let roundedDouble = doseDouble.rounded(toPlaces: 5)
-                    doseText = roundedDouble.cleanString
-                    doseMaybe = doseDouble
-                }
-
-                doseRangeView
-            } else {
-                VStack(alignment: .leading, spacing: 7) {
-                    if let thresh = doseInfo?.thresholdUnwrapped {
-                        Text("threshold (\(thresh.cleanString) \(units))")
-                    }
-                    if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                       let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
-                        Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-                    }
-                    if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                       let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
-                        Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-                    }
-                    if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                       let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
-                        Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-                    }
-                    if let heavy = doseInfo?.heavyUnwrapped {
-                        Text("heavy (\(heavy.cleanString) \(units)+)")
-                    }
-                }
+                getDoseSlider(min: min, max: max)
             }
 
         }
         .padding(.vertical)
     }
 
-    private var doseRangeView: some View {
+    private func getDoseSlider(min: Double, max: Double) -> some View {
+        let units = doseInfo?.units ?? ""
+        let difference = max - min
+        let stepCandidates = [0.5, 1.0, 5.0, 10.0]
+        let approximateStepSize = difference/20
+
+        let closestStep = stepCandidates.min(by: { abs($0 - approximateStepSize) < abs($1 - approximateStepSize)})!
+
+        return Slider(
+            value: $doseDouble.animation(),
+            in: min...max,
+            step: closestStep,
+            minimumValueLabel: Text("\(min.cleanString) \(units)"),
+            maximumValueLabel: Text("\(max.cleanString) \(units)")) {
+            Text("Dose")
+        }
+        .onChange(of: doseDouble) { _ in
+            let roundedDouble = doseDouble.rounded(toPlaces: 5)
+            doseText = roundedDouble.cleanString
+            doseMaybe = doseDouble
+        }
+    }
+
+    private var doseTextFieldWithUnit: some View {
+        HStack {
+            TextField("Enter Dose", text: $doseText)
+                .keyboardType(.decimalPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Text(doseInfo?.units ?? "")
+        }
+        .font(.title)
+        .onChange(of: doseText) { _ in
+            if let doseUnwrapped = Double(doseText) {
+                doseDouble = doseUnwrapped
+                doseMaybe = doseUnwrapped
+            } else {
+                doseMaybe = nil
+            }
+        }
+    }
+
+    private var stackedDoseRangeView: some View {
+        let units = doseInfo?.units ?? ""
+        return VStack(alignment: .leading, spacing: 7) {
+            if let thresh = doseInfo?.thresholdUnwrapped {
+                Text("threshold (\(thresh.cleanString) \(units))")
+            }
+            if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
+               let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
+                Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
+            }
+            if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
+               let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
+                Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
+            }
+            if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
+               let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
+                Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
+            }
+            if let heavy = doseInfo?.heavyUnwrapped {
+                Text("heavy (\(heavy.cleanString) \(units)+)")
+            }
+        }
+    }
+
+    private var dynamicDoseRangeView: some View {
         let units = doseInfo?.units ?? ""
 
         if let thresh = doseInfo?.thresholdUnwrapped,
