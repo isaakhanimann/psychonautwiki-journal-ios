@@ -20,7 +20,10 @@ struct TimeLabels: View {
 
         let xOffset = fraction * totalWidth
 
-        let hour = Calendar.current.component(.hour, from: date)
+        var hour = Calendar.current.component(.hour, from: date)
+        if hour == 0 {
+            hour = 24
+        }
         return Text("\(hour)")
             .offset(x: xOffset, y: 0)
             .foregroundColor(.secondary)
