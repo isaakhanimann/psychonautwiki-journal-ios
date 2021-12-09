@@ -104,8 +104,14 @@ struct SettingsView: View {
 
     private func toggleEye() {
         isEyeOpen.toggle()
+        playHapticFeedback()
         PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
         connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+    }
+
+    private func playHapticFeedback() {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
     }
 
     private func fetchNewSubstances() {
