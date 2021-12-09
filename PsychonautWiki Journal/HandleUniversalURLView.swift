@@ -16,8 +16,6 @@ struct HandleUniversalURLView: View {
     @State private var sheetToShow: SheetSelection?
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @AppStorage(PersistenceController.areSettingsShowingKey) var areSettingsShowing: Bool = false
-    @AppStorage(PersistenceController.isShowingAddIngestionSheetKey) var isShowingAddIngestionSheet: Bool = false
 
     private enum SheetSelection: Identifiable {
         case route(substance: Substance, experience: Experience)
@@ -44,12 +42,7 @@ struct HandleUniversalURLView: View {
                 )
             }
             .onOpenURL(perform: { url in
-                if areSettingsShowing {
-                    areSettingsShowing.toggle()
-                }
-                if isShowingAddIngestionSheet {
-                    isShowingAddIngestionSheet.toggle()
-                }
+                popToRoot()
                 if !isEyeOpen {
                     toggleEye()
                 }
@@ -94,6 +87,10 @@ struct HandleUniversalURLView: View {
                     }
                 }
             )
+    }
+
+    private func popToRoot() {
+        UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
     }
 
     private func toggleEye() {

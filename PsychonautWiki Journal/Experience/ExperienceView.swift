@@ -9,7 +9,7 @@ struct ExperienceView: View {
     @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedTitle: String
-    @AppStorage(PersistenceController.isShowingAddIngestionSheetKey) var isShowingAddIngestionSheet: Bool = false
+    @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
     @State private var isKeyboardShowing = false
 
@@ -22,7 +22,7 @@ struct ExperienceView: View {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
 
-                Button(action: addIngestion) {
+                Button(action: showOrHideAddIngestionSheet) {
                     Label("Add Ingestion", systemImage: "plus")
                         .foregroundColor(.accentColor)
                 }
@@ -97,12 +97,9 @@ struct ExperienceView: View {
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
         .onDisappear(perform: save)
-        .onAppear {
-            isShowingAddIngestionSheet = false
-        }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
-                dismiss: {isShowingAddIngestionSheet.toggle()},
+                dismiss: showOrHideAddIngestionSheet,
                 experience: experience
             )
                 .environment(\.managedObjectContext, self.moc)
@@ -112,7 +109,7 @@ struct ExperienceView: View {
         }
     }
 
-    private func addIngestion() {
+    private func showOrHideAddIngestionSheet() {
         isShowingAddIngestionSheet.toggle()
     }
 
