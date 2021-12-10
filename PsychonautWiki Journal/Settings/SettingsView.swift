@@ -43,11 +43,6 @@ struct SettingsView: View {
 
                 CalendarSection()
 
-                Link(
-                    "Send Me Feedback & Questions",
-                    destination: URL(string: "https://t.me/isaakhanimann")!
-                )
-
                 if isEyeOpen {
                     Section(header: Text("Safety")) {
                         Link(
@@ -73,7 +68,19 @@ struct SettingsView: View {
                             }
                         )
                     }
+
+                    NavigationLink(
+                        destination: FAQView(),
+                        label: {
+                            Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                        }
+                    )
                 }
+
+                Link(
+                    "Send Me Feedback & Questions",
+                    destination: URL(string: "https://t.me/isaakhanimann")!
+                )
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle(Text("Settings"))

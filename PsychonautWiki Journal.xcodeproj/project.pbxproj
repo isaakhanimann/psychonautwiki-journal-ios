@@ -10,6 +10,7 @@
 		EA1285462703CFF70085C3F6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */; };
 		EA128549270444E90085C3F6 /* X-Large.watchface in Resources */ = {isa = PBXBuildFile; fileRef = EA128548270444E90085C3F6 /* X-Large.watchface */; };
 		EA12854B270447730085C3F6 /* AddFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12854A270447730085C3F6 /* AddFaceView.swift */; };
+		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */; };
@@ -250,6 +251,7 @@
 		EA1285452703CFF70085C3F6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EA128548270444E90085C3F6 /* X-Large.watchface */ = {isa = PBXFileReference; lastKnownFileType = file; path = "X-Large.watchface"; sourceTree = "<group>"; };
 		EA12854A270447730085C3F6 /* AddFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFaceView.swift; sourceTree = "<group>"; };
+		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceModel.swift; sourceTree = "<group>"; };
 		EA48B9A126E802E6003BF667 /* WatchFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceView.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
 				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
+				EA460D1E2762CA8B002EF80B /* FAQView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1139,6 +1142,7 @@
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
+				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EAE471F326CBA664009FB0EC /* DurationTypes+CoreDataClass.swift in Sources */,
 				EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */,
 			);
