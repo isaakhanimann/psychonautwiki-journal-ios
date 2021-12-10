@@ -1,29 +1,13 @@
-import SwiftUI
+import Foundation
 
-struct FAQView: View {
-    var body: some View {
-        NavigationView {
-            List(RecursiveText.recursiveTexts, children: \.answer) { qAndA in
-                Text(qAndA.text)
-            }
-            .navigationTitle("FAQ")
-        }
-    }
-}
-
-struct QuestionAndAnswer {
-    let question: String
-    let answer: String
-}
-
-struct RecursiveText: Identifiable {
+struct QuestionAndAnswer: Identifiable, Hashable {
     // swiftlint:disable identifier_name
     let id = UUID()
-    let text: String
-    var answer: [RecursiveText]?
+    let question: String
+    let answer: String
 
     // swiftlint:disable line_length
-    private static let questionsAndAnswers: [QuestionAndAnswer] = [
+    static let list: [QuestionAndAnswer] = [
         QuestionAndAnswer(
             question: "How is the timeline drawn?",
             answer: "Based on onset, comeup, peak and offset"
@@ -68,16 +52,4 @@ struct RecursiveText: Identifiable {
             answer: "By triple tapping it"
         )
     ]
-
-    static var recursiveTexts: [RecursiveText] = questionsAndAnswers.map { qAndA in
-        let answer = RecursiveText(text: qAndA.answer)
-        let recursiveText = RecursiveText(text: qAndA.question, answer: [answer])
-        return recursiveText
-    }
-}
-
-struct FAQView_Previews: PreviewProvider {
-    static var previews: some View {
-        FAQView()
-    }
 }

@@ -11,6 +11,8 @@
 		EA128549270444E90085C3F6 /* X-Large.watchface in Resources */ = {isa = PBXBuildFile; fileRef = EA128548270444E90085C3F6 /* X-Large.watchface */; };
 		EA12854B270447730085C3F6 /* AddFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA12854A270447730085C3F6 /* AddFaceView.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
+		EA460D2227637933002EF80B /* QandAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2127637933002EF80B /* QandAView.swift */; };
+		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
 		EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */; };
@@ -252,6 +254,8 @@
 		EA128548270444E90085C3F6 /* X-Large.watchface */ = {isa = PBXFileReference; lastKnownFileType = file; path = "X-Large.watchface"; sourceTree = "<group>"; };
 		EA12854A270447730085C3F6 /* AddFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFaceView.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		EA460D2127637933002EF80B /* QandAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandAView.swift; sourceTree = "<group>"; };
+		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA48B99726E7B215003BF667 /* AngleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleModel.swift; sourceTree = "<group>"; };
 		EA48B99926E7E6AF003BF667 /* WatchFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceModel.swift; sourceTree = "<group>"; };
 		EA48B9A126E802E6003BF667 /* WatchFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFaceView.swift; sourceTree = "<group>"; };
@@ -415,6 +419,16 @@
 				EA12854A270447730085C3F6 /* AddFaceView.swift */,
 			);
 			path = "Add Watch Face";
+			sourceTree = "<group>";
+		};
+		EA460D202763790C002EF80B /* FAQ */ = {
+			isa = PBXGroup;
+			children = (
+				EA460D1E2762CA8B002EF80B /* FAQView.swift */,
+				EA460D2127637933002EF80B /* QandAView.swift */,
+				EA460D2327637964002EF80B /* QuestionAndAnswer.swift */,
+			);
+			path = FAQ;
 			sourceTree = "<group>";
 		};
 		EA48B99B26E7F105003BF667 /* Models */ = {
@@ -627,6 +641,7 @@
 		EAE4712A26CBA663009FB0EC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				EA460D202763790C002EF80B /* FAQ */,
 				EAE4712B26CBA663009FB0EC /* SettingsView.swift */,
 				EAE4713126CBA663009FB0EC /* SectionFooter.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
@@ -635,7 +650,6 @@
 				EAE4713426CBA663009FB0EC /* InteractionRowView.swift */,
 				EAC306A226CD182F00C98E3E /* ChooseFavoritesView.swift */,
 				EAE4718626CBA664009FB0EC /* FavoritesRowView.swift */,
-				EA460D1E2762CA8B002EF80B /* FAQView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1072,6 +1086,7 @@
 				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EA9D22AA26EB4B6900BCF893 /* EnabledSubstanceRowView.swift in Sources */,
+				EA460D2227637933002EF80B /* QandAView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
 				EAE471FB26CBA664009FB0EC /* DoseRange+CoreDataClass.swift in Sources */,
 				EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */,
@@ -1088,6 +1103,7 @@
 				EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */,
+				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EAE4720F26CBA664009FB0EC /* HelperMethods.swift in Sources */,
 				EAE471F426CBA664009FB0EC /* Substance+CoreDataClass.swift in Sources */,
