@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="categories" inverseEntity="SubstancesFile"/>
@@ -57,7 +57,7 @@
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
-        <relationship name="substanceCopy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCopy" inverseName="ingestion" inverseEntity="SubstanceCopy"/>
+        <relationship name="substanceCopy" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubstanceCopy" inverseName="ingestion" inverseEntity="SubstanceCopy"/>
     </entity>
     <entity name="Roa" representedClassName=".Roa" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
