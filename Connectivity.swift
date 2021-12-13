@@ -281,7 +281,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let colorsString = userInfo[colorKey] as? String else {return}
         let colors = colorsString.components(separatedBy: stringSeparator)
 
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.viewContext
         moc.performAndWait {
             guard let experienceToUpdate = PersistenceController.shared.getLatestExperience() else {return}
             experienceToUpdate.sortedIngestionsUnwrapped.forEach { ingestion in
@@ -369,7 +369,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard !createdIngestionUIDs.contains(identifierUnwrapped) else {return}
         createdIngestionUIDs.insert(identifierUnwrapped)
 
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.viewContext
         moc.perform {
             PersistenceController.shared.createIngestionWithoutSave(
                 context: moc,
@@ -429,7 +429,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let namesOfFavoriteSubstancesString = userInfo[substanceNameKey] as? String else {return}
         let namesOfFavoriteSubstances = namesOfFavoriteSubstancesString.components(separatedBy: stringSeparator)
 
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.viewContext
         moc.perform {
             for name in namesOfFavoriteSubstances {
                 guard let foundSubstance = PersistenceController.shared.findSubstance(with: name) else {continue}
@@ -448,7 +448,7 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
         guard let disabledString = userInfo[namesOfDisabledInteractionsKey] as? String else {return}
         let namesOfDisabled = disabledString.components(separatedBy: stringSeparator)
 
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.viewContext
         moc.perform {
             for name in namesOfEnabled {
                 guard let foundInteraction = PersistenceController.shared.findGeneralInteraction(

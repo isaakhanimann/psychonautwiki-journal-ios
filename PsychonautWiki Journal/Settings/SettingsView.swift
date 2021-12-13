@@ -160,7 +160,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(Connectivity())
             .environmentObject(CalendarWrapper())
             .accentColor(Color.blue)

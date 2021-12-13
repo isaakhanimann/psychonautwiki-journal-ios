@@ -12,7 +12,7 @@ class PreviewHelper {
 
     init(context: NSManagedObjectContext) {
         let controller = PersistenceController.preview
-        let moc = controller.container.viewContext
+        let moc = controller.viewContext
 
         // Add substance file
         let fileName = "InitialSubstances"

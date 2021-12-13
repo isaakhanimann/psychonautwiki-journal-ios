@@ -235,7 +235,7 @@ struct SubstanceRow: View {
 
 struct SubstanceRow_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper(context: PersistenceController.preview.container.viewContext)
+        let helper = PreviewHelper(context: PersistenceController.preview.viewContext)
         SubstanceRow(
             substance: helper.substance,
             dismiss: {},

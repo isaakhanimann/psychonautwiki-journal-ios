@@ -64,7 +64,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(Connectivity())
             .environmentObject(CalendarWrapper())
             .accentColor(Color.blue)

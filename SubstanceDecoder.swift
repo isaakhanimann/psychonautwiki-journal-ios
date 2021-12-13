@@ -15,7 +15,7 @@ enum SubstanceDecoder {
         creationDate: Date,
         earlierFileToDelete: SubstancesFile?
     ) throws {
-        let moc = PersistenceController.shared.container.viewContext
+        let moc = PersistenceController.shared.viewContext
         var didSaveSubstances = false
 
         moc.performAndWait {

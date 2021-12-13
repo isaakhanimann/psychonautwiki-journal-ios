@@ -130,7 +130,7 @@ struct SettingsTab: View {
 struct SettingsTab_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTab()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(Connectivity())
             .accentColor(Color.blue)
     }

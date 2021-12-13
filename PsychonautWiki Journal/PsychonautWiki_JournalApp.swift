@@ -13,7 +13,7 @@ struct PsychonautWiki_JournalApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.viewContext)
                 .environmentObject(calendarWrapper)
                 .environmentObject(connectivity)
                 .accentColor(Color.blue)

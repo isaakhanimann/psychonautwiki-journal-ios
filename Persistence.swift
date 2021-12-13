@@ -9,6 +9,8 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentContainer
+    let viewContext: NSManagedObjectContext
+    let backgroundContext: NSManagedObjectContext
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
     static let isEyeOpenKey = "isEyeOpen"
     static let needsToUpdateWatchFaceKey = "needsToUpdateWatchFace"
@@ -27,16 +29,16 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Main", managedObjectModel: Self.model)
-
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
-
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Fatal error loading store: \(error.localizedDescription)")
             }
         }
+        viewContext = container.viewContext
+        backgroundContext = container.newBackgroundContext()
     }
 
     func createPreviewHelper() -> PreviewHelper {
@@ -94,14 +96,13 @@ struct PersistenceController {
     }
 
     func createNewExperienceNow() -> Experience? {
-        let moc = container.viewContext
         var result: Experience?
-        moc.performAndWait {
-            let experience = Experience(context: moc)
+        viewContext.performAndWait {
+            let experience = Experience(context: viewContext)
             let now = Date()
             experience.creationDate = now
             experience.title = now.asDateString
-            try? moc.save()
+            try? viewContext.save()
             result = experience
         }
 
@@ -109,8 +110,7 @@ struct PersistenceController {
     }
 
     func createNewExperienceNowWithoutSave() -> Experience {
-        let moc = container.viewContext
-        let experience = Experience(context: moc)
+        let experience = Experience(context: viewContext)
         let now = Date()
         experience.creationDate = now
         experience.title = now.asDateString
@@ -125,23 +125,21 @@ struct PersistenceController {
         color: Ingestion.IngestionColor,
         dose: Double
     ) {
-        let moc = container.viewContext
-        moc.perform {
+        viewContext.perform {
             ingestionToUpdate.time = time
             ingestionToUpdate.administrationRoute = route.rawValue
             ingestionToUpdate.color = color.rawValue
             ingestionToUpdate.dose = dose
 
-            try? moc.save()
+            try? viewContext.save()
         }
     }
 
     func delete(ingestion: Ingestion) {
-        let moc = container.viewContext
-        moc.perform {
-            moc.delete(ingestion)
+        viewContext.perform {
+            viewContext.delete(ingestion)
 
-            try? moc.save()
+            try? viewContext.save()
         }
     }
 
@@ -178,21 +176,19 @@ struct PersistenceController {
             fatalError("Failed to load \(fileName) from bundle.")
         }
 
-        let moc = container.viewContext
-
-        moc.perform {
+        viewContext.perform {
             do {
                 let dateString = "2021/09/26 15:00"
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
                 let creationDate = formatter.date(from: dateString)!
 
-                let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: moc)
+                let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = creationDate
                 enableUncontrolledSubstances(in: substancesFile)
                 substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = false})
 
-                try moc.save()
+                try viewContext.save()
             } catch {
                 fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
             }
@@ -200,16 +196,14 @@ struct PersistenceController {
     }
 
     func toggleEye(to isOpen: Bool, modifyFile: SubstancesFile) {
-        let moc = container.viewContext
-
-        moc.perform {
+        viewContext.perform {
             if isOpen {
                 toggleAllOn(file: modifyFile)
             } else {
                 toggleAllControlledOff(file: modifyFile)
             }
-            if moc.hasChanges {
-                try? moc.save()
+            if viewContext.hasChanges {
+                try? viewContext.save()
             }
         }
         makeAllFutureDownloadsEnabledByDefault(isEnabled: isOpen)
