@@ -123,7 +123,7 @@ struct SettingsView: View {
 
     private func fetchNewSubstances() {
         isFetching = true
-        PsychonautWikiAPIController.performRequest { result in
+        performPsychonautWikiAPIRequest { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
