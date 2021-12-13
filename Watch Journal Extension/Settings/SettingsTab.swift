@@ -110,9 +110,8 @@ struct SettingsTab: View {
 
     private func tryToDecodeData(data: Data) {
         do {
-            try SubstanceDecoder.decodeAndSaveFile(
+            try PersistenceController.shared.decodeAndSaveFile(
                 from: data,
-                creationDate: Date(),
                 earlierFileToDelete: storedFile.first
             )
         } catch {

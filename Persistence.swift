@@ -183,7 +183,7 @@ struct PersistenceController {
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
                 let creationDate = formatter.date(from: dateString)!
 
-                let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: viewContext)
+                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = creationDate
                 substancesFile.enableUncontrolledSubstances()
                 substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = false})
@@ -192,6 +192,41 @@ struct PersistenceController {
             } catch {
                 fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
             }
+        }
+    }
+
+    enum DecodingFileError: Error {
+        case failedToDecodeOrSave
+    }
+
+    func decodeAndSaveFile(
+        from data: Data,
+        earlierFileToDelete: SubstancesFile?
+    ) throws {
+        var didSaveSubstances = false
+        viewContext.performAndWait {
+            do {
+                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
+                substancesFile.creationDate = Date()
+
+                if let fileToDelete = earlierFileToDelete {
+                    substancesFile.inheritFrom(otherfile: fileToDelete)
+                    viewContext.delete(fileToDelete)
+                }
+                do {
+                    try viewContext.save()
+                    didSaveSubstances = true
+                } catch {
+                    viewContext.rollback()
+                    return
+                }
+            } catch {
+                print("Failed to decode: \(error)")
+                viewContext.rollback()
+            }
+        }
+        if !didSaveSubstances {
+            throw DecodingFileError.failedToDecodeOrSave
         }
     }
 

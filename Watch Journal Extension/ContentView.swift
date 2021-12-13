@@ -63,9 +63,17 @@ struct ContentView: View {
     func maybeFetchAgain() {
         if shouldFetchAgain {
             if let file = storedFile.first {
-                PsychonautWikiAPIController.fetchAndSaveNewSubstancesAndDeleteOldOnes(
-                    oldFile: file
-                )
+                PsychonautWikiAPIController.performRequest { result in
+                    switch result {
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    case .success(let data):
+                        try? PersistenceController.shared.decodeAndSaveFile(
+                            from: data,
+                            earlierFileToDelete: file
+                        )
+                    }
+                }
             }
         }
     }

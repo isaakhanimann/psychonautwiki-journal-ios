@@ -23,7 +23,7 @@ class PreviewHelper {
         // swiftlint:disable force_try
         let data = try! Data(contentsOf: url)
 
-        self.substancesFile = try! SubstanceDecoder.decodeSubstancesFile(from: data, with: moc)
+        self.substancesFile = try! decodeSubstancesFile(from: data, with: moc)
 
         self.experiences = PreviewHelper.createDefaultExperiences(context: moc, substancesFile: substancesFile)
 
