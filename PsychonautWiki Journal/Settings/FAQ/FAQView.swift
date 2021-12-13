@@ -9,7 +9,6 @@ struct FAQView: View {
                 ForEach(QuestionAndAnswer.list) { qAndA in
                     QandAView(questionAndAnswer: qAndA, isExpanded: self.selection.contains(qAndA))
                         .onTapGesture { self.selectDeselect(qAndA) }
-                        .animation(.linear(duration: 0.3))
                     Divider()
                 }
                 .padding(.horizontal)
@@ -19,10 +18,12 @@ struct FAQView: View {
     }
 
     private func selectDeselect(_ qAndA: QuestionAndAnswer) {
-        if selection.contains(qAndA) {
-            selection.remove(qAndA)
-        } else {
-            selection.insert(qAndA)
+        withAnimation {
+            if selection.contains(qAndA) {
+                selection.remove(qAndA)
+            } else {
+                selection.insert(qAndA)
+            }
         }
     }
 }
