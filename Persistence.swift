@@ -185,7 +185,7 @@ struct PersistenceController {
 
                 let substancesFile = try SubstanceDecoder.decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = creationDate
-                enableUncontrolledSubstances(in: substancesFile)
+                substancesFile.enableUncontrolledSubstances()
                 substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = false})
 
                 try viewContext.save()
@@ -198,50 +198,14 @@ struct PersistenceController {
     func toggleEye(to isOpen: Bool, modifyFile: SubstancesFile) {
         viewContext.perform {
             if isOpen {
-                toggleAllOn(file: modifyFile)
+                modifyFile.toggleAllOn()
             } else {
-                toggleAllControlledOff(file: modifyFile)
+                modifyFile.toggleAllControlledOff()
             }
             if viewContext.hasChanges {
                 try? viewContext.save()
             }
         }
-        makeAllFutureDownloadsEnabledByDefault(isEnabled: isOpen)
     }
 
-    private func toggleAllOn(file: SubstancesFile) {
-        file.allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = true
-        }
-        file.generalInteractionsUnwrapped.forEach { interaction in
-            interaction.isEnabled = true
-        }
-    }
-
-    private func toggleAllControlledOff(file: SubstancesFile) {
-        file.allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = false
-        }
-        file.generalInteractionsUnwrapped.forEach { interaction in
-            interaction.isEnabled = false
-        }
-        enableUncontrolledSubstances(in: file)
-    }
-
-    private func makeAllFutureDownloadsEnabledByDefault(isEnabled: Bool) {
-        SubstanceDecoder.isDefaultEnabled = isEnabled
-    }
-
-    func enableUncontrolledSubstances(in file: SubstancesFile) {
-        let namesOfUncontrolledSubstances = [
-            "Caffeine",
-            "Myristicin",
-            "Choline bitartrate",
-            "Citicoline"
-        ]
-        for name in namesOfUncontrolledSubstances {
-            guard let foundSubstance = file.getSubstance(with: name) else {continue}
-            foundSubstance.isEnabled = true
-        }
-    }
 }

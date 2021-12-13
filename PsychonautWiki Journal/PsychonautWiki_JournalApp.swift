@@ -8,8 +8,6 @@ struct PsychonautWiki_JournalApp: App {
     @StateObject var calendarWrapper = CalendarWrapper()
     @StateObject var connectivity = Connectivity()
 
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -17,9 +15,6 @@ struct PsychonautWiki_JournalApp: App {
                 .environmentObject(calendarWrapper)
                 .environmentObject(connectivity)
                 .accentColor(Color.blue)
-                .onAppear {
-                    SubstanceDecoder.isDefaultEnabled = isEyeOpen
-                }
         }
     }
 }

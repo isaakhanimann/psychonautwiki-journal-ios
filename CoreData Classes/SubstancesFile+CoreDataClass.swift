@@ -214,4 +214,84 @@ public class SubstancesFile: NSManagedObject, Decodable {
         }
 
     }
+
+    func inheritFrom(otherfile: SubstancesFile) {
+        enableInteractions(basedOn: otherfile)
+        enableFavorites(basedOn: otherfile)
+        enableSubstances()
+        updateLastUsedSubstances(basedOn: otherfile)
+    }
+
+    private func enableInteractions(basedOn oldSubstancesFile: SubstancesFile) {
+        generalInteractionsUnwrapped.forEach { newInteraction in
+            if let foundInteraction = oldSubstancesFile.getGeneralInteraction(
+                    with: newInteraction.nameUnwrapped
+            ) {
+                newInteraction.isEnabled = foundInteraction.isEnabled
+            } else {
+                newInteraction.isEnabled = true
+            }
+        }
+    }
+
+    private func enableFavorites(basedOn oldSubstancesFile: SubstancesFile) {
+        for oldSubstance in oldSubstancesFile.favoritesSorted {
+            guard let foundSubstance = getSubstance(with: oldSubstance.nameUnwrapped) else {
+                continue
+            }
+            foundSubstance.isFavorite = true
+        }
+    }
+
+    private func enableSubstances() {
+        let isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
+        allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = isEyeOpen
+        }
+
+        if !isEyeOpen {
+            enableUncontrolledSubstances()
+        }
+    }
+
+    func enableUncontrolledSubstances() {
+        let namesOfUncontrolledSubstances = [
+            "Caffeine",
+            "Myristicin",
+            "Choline bitartrate",
+            "Citicoline"
+        ]
+        for name in namesOfUncontrolledSubstances {
+            guard let foundSubstance = getSubstance(with: name) else {continue}
+            foundSubstance.isEnabled = true
+        }
+    }
+
+    private func updateLastUsedSubstances(basedOn oldSubstancesFile: SubstancesFile) {
+        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
+            if let foundNewSubstance = getSubstance(with: oldSubstance.nameUnwrapped) {
+                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
+            }
+        }
+    }
+
+    func toggleAllOn() {
+        allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = true
+        }
+        generalInteractionsUnwrapped.forEach { interaction in
+            interaction.isEnabled = true
+        }
+    }
+
+    func toggleAllControlledOff() {
+        allSubstancesUnwrapped.forEach { substance in
+            substance.isEnabled = false
+        }
+        generalInteractionsUnwrapped.forEach { interaction in
+            interaction.isEnabled = false
+        }
+        enableUncontrolledSubstances()
+    }
+
 }

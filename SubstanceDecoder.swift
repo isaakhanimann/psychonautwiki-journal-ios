@@ -8,8 +8,6 @@ enum SubstanceDecoder {
         case failedToDecodeOrSave
     }
 
-    static var isDefaultEnabled = false
-
     static func decodeAndSaveFile(
         from data: Data,
         creationDate: Date,
@@ -24,10 +22,7 @@ enum SubstanceDecoder {
                 substancesFile.creationDate = creationDate
 
                 if let fileToDelete = earlierFileToDelete {
-                    enableInteractions(of: substancesFile, basedOn: fileToDelete)
-                    enableFavorites(of: substancesFile, basedOn: fileToDelete)
-                    enableSubstances(of: substancesFile)
-                    updateLastUsedSubstances(of: substancesFile, basedOn: fileToDelete)
+                    substancesFile.inheritFrom(otherfile: fileToDelete)
                     moc.delete(fileToDelete)
                 }
                 do {
@@ -64,51 +59,4 @@ enum SubstanceDecoder {
         return try decoder.decode(SubstancesFile.self, from: dataForFile)
     }
 
-    private static func updateLastUsedSubstances(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
-            if let foundNewSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) {
-                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
-            }
-        }
-    }
-
-    private static func enableInteractions(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        newSubstancesFile.generalInteractionsUnwrapped.forEach { newInteraction in
-            if let foundInteraction = oldSubstancesFile.getGeneralInteraction(
-                    with: newInteraction.nameUnwrapped
-            ) {
-                newInteraction.isEnabled = foundInteraction.isEnabled
-            } else {
-                newInteraction.isEnabled = true
-            }
-        }
-    }
-
-    private static func enableFavorites(
-        of newSubstancesFile: SubstancesFile,
-        basedOn oldSubstancesFile: SubstancesFile
-    ) {
-        for oldSubstance in oldSubstancesFile.favoritesSorted {
-            guard let foundSubstance = newSubstancesFile.getSubstance(with: oldSubstance.nameUnwrapped) else {
-                continue
-            }
-            foundSubstance.isFavorite = true
-        }
-    }
-
-    private static func enableSubstances(of newSubstancesFile: SubstancesFile) {
-        newSubstancesFile.allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = isDefaultEnabled
-        }
-
-        if !isDefaultEnabled {
-            PersistenceController.shared.enableUncontrolledSubstances(in: newSubstancesFile)
-        }
-    }
 }
