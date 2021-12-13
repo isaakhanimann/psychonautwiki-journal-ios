@@ -45,14 +45,17 @@ struct DosePicker: View {
     private func getDoseSlider(min: Double, max: Double) -> some View {
         let units = doseInfo?.units ?? ""
         let difference = max - min
-        let stepCandidates = [0.5, 1.0, 5.0, 10.0]
+        let stepCandidates = [0.1, 0.25, 0.5, 1.0, 5.0, 10.0]
         let approximateStepSize = difference/20
 
         let closestStep = stepCandidates.min(by: { abs($0 - approximateStepSize) < abs($1 - approximateStepSize)})!
 
+        let sliderMin = floor(min/closestStep) * closestStep
+        let sliderMax = ceil(max/closestStep) * closestStep
+
         return Slider(
             value: $doseDouble.animation(),
-            in: min...max,
+            in: sliderMin...sliderMax,
             step: closestStep,
             minimumValueLabel: Text("\(min.cleanString) \(units)"),
             maximumValueLabel: Text("\(max.cleanString) \(units)")) {
