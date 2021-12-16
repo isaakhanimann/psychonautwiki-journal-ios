@@ -1,24 +1,25 @@
 import Foundation
 import CoreData
-import SwiftyJSON
+
+enum ConversionError: Error {
+    case failedToConvertDataToJSON
+}
 
 func decodeSubstancesFile(
     from data: Data,
     with context: NSManagedObjectContext
 ) throws -> SubstancesFile {
-
     let decoder = JSONDecoder()
     decoder.userInfo[CodingUserInfoKey.managedObjectContext] = context
     decoder.dateDecodingStrategy = .deferredToDate
     decoder.keyDecodingStrategy = .useDefaultKeys
-
-    let json = try JSON(data: data)
-    let dataForFile = try json["data"].rawData()
-
-    return try decoder.decode(SubstancesFile.self, from: dataForFile)
+    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+          let fileObject = json["data"] else {
+        throw ConversionError.failedToConvertDataToJSON
+    }
+    let fileData = try JSONSerialization.data(withJSONObject: fileObject)
+    return try decoder.decode(SubstancesFile.self, from: fileData)
 }
-
-private let url = URL(string: "https://api.psychonautwiki.org/")!
 
 enum RequestError: Error {
     case badURL
@@ -45,7 +46,7 @@ func performPsychonautWikiAPIRequest(completion: @escaping (Result<Data, Request
 
 // swiftlint:disable function_body_length
 private func getURLRequest() throws -> URLRequest {
-    var request = URLRequest(url: url)
+    var request = URLRequest(url: URL(string: "https://api.psychonautwiki.org/")!)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     let query = """

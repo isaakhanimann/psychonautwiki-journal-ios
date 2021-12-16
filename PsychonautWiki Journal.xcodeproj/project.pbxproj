@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -83,7 +83,6 @@
 		EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */; };
-		EAA2EC6A26E2064D00B4FACF /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAA2EC6926E2064D00B4FACF /* SwiftyJSON */; };
 		EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6F26E2124600B4FACF /* DosePicker.swift */; };
 		EAA2EC7326E2151900B4FACF /* ChooseSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7226E2151900B4FACF /* ChooseSubstanceView.swift */; };
 		EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7626E21A7700B4FACF /* ChooseDoseView.swift */; };
@@ -200,7 +199,6 @@
 		EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */; };
 		EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
-		EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EAE4723226CC2525009FB0EC /* SwiftyJSON */; };
 		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 /* End PBXBuildFile section */
@@ -393,7 +391,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAA2EC6A26E2064D00B4FACF /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +398,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE4723326CC2525009FB0EC /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,7 +830,6 @@
 			);
 			name = "Watch Journal Extension";
 			packageProductDependencies = (
-				EAA2EC6926E2064D00B4FACF /* SwiftyJSON */,
 			);
 			productName = "Watch Journal Extension";
 			productReference = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */;
@@ -857,7 +852,6 @@
 			);
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
-				EAE4723226CC2525009FB0EC /* SwiftyJSON */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -893,7 +887,6 @@
 			);
 			mainGroup = EAE470FA26CBA57F009FB0EC;
 			packageReferences = (
-				EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -1476,30 +1469,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		EAA2EC6926E2064D00B4FACF /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		EAE4723226CC2525009FB0EC /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EAE4723126CC2525009FB0EC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
