@@ -166,7 +166,6 @@ struct PersistenceController {
         ingestion.dose = dose
         ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: context)
         substance.lastUsedDate = Date()
-        substance.category?.file?.lastUsedSubstance = substance
     }
 
     func addInitialSubstances() {

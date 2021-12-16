@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="categories" inverseEntity="SubstancesFile"/>
@@ -75,7 +75,6 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="substances" inverseEntity="Category"/>
         <relationship name="dangerousGeneralInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GeneralInteraction" inverseName="dangerousSubstanceInteractions" inverseEntity="GeneralInteraction"/>
         <relationship name="dangerousSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="dangerousSubstanceInteractions" inverseEntity="Substance"/>
-        <relationship name="inverseLastUsed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="lastUsedSubstance" inverseEntity="SubstancesFile"/>
         <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="substance" inverseEntity="Roa"/>
         <relationship name="unsafeGeneralInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GeneralInteraction" inverseName="unsafeSubstanceInteractions" inverseEntity="GeneralInteraction"/>
         <relationship name="unsafeSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="unsafeSubstanceInteractions" inverseEntity="Substance"/>
@@ -90,7 +89,6 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="file" inverseEntity="Category"/>
         <relationship name="generalInteractions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GeneralInteraction" inverseName="file" inverseEntity="GeneralInteraction"/>
-        <relationship name="lastUsedSubstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Substance" inverseName="inverseLastUsed" inverseEntity="Substance"/>
     </entity>
     <elements>
         <element name="Category" positionX="-459" positionY="-36" width="128" height="74"/>
@@ -102,8 +100,8 @@
         <element name="GeneralInteraction" positionX="-441" positionY="-18" width="128" height="104"/>
         <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="134"/>
         <element name="Roa" positionX="-166.0208740234375" positionY="247.5351257324219" width="128" height="104"/>
-        <element name="Substance" positionX="-383.1397705078125" positionY="120.6640625" width="128" height="209"/>
+        <element name="Substance" positionX="-383.1397705078125" positionY="120.6640625" width="128" height="194"/>
         <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="89"/>
-        <element name="SubstancesFile" positionX="-664.39013671875" positionY="133.0220947265625" width="128" height="89"/>
+        <element name="SubstancesFile" positionX="-664.39013671875" positionY="133.0220947265625" width="128" height="74"/>
     </elements>
 </model>

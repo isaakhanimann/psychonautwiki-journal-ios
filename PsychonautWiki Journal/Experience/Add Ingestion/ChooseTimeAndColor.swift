@@ -84,7 +84,6 @@ struct ChooseTimeAndColor: View {
             ingestion.substanceCopy = substanceCopy
             ingestion.color = selectedColor.rawValue
             substance.lastUsedDate = Date()
-            substance.category?.file?.lastUsedSubstance = substance
 
             calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
 

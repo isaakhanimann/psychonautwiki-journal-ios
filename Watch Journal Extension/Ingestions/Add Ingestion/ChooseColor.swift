@@ -38,7 +38,6 @@ struct ChooseColor: View {
             ingestion.substanceCopy = substanceCopy
             ingestion.color = color.rawValue
             substance.lastUsedDate = Date()
-            substance.category?.file?.lastUsedSubstance = substance
 
             connectivity.sendNewIngestion(ingestion: ingestion)
             try? moc.save()
