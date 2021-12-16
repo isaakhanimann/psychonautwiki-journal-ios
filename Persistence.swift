@@ -9,8 +9,10 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentContainer
+    // use viewContext to view objects and edit visible objects
     let viewContext: NSManagedObjectContext
-    let backgroundContext: NSManagedObjectContext
+    // use backgroundContext to parse new file and delete old one
+    private let backgroundContext: NSManagedObjectContext
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
     static let isEyeOpenKey = "isEyeOpen"
     static let needsToUpdateWatchFaceKey = "needsToUpdateWatchFace"
@@ -38,6 +40,7 @@ struct PersistenceController {
             }
         }
         viewContext = container.viewContext
+        viewContext.automaticallyMergesChangesFromParent = true
         backgroundContext = container.newBackgroundContext()
     }
 
@@ -90,7 +93,7 @@ struct PersistenceController {
 
     func getCurrentFile() -> SubstancesFile? {
         let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-        guard let file = try? container.viewContext.fetch(fetchRequest).first else {return nil}
+        guard let file = try? viewContext.fetch(fetchRequest).first else {return nil}
         return file
 
     }
@@ -196,28 +199,27 @@ struct PersistenceController {
     }
 
     enum DecodingFileError: Error {
-        case failedToDecodeOrSave
+        case failedToSave
     }
 
-    func decodeAndSaveFile(
-        from data: Data,
-        earlierFileToDelete: SubstancesFile?
-    ) throws {
+    func decodeAndSaveFile(from data: Data) throws {
         var didSaveSubstances = false
-        viewContext.performAndWait {
+        backgroundContext.performAndWait {
+            let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
+            let earlierFileToDelete = try? backgroundContext.fetch(fetchRequest).first
             do {
-                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
+                let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
                 substancesFile.creationDate = Date()
 
                 if let fileToDelete = earlierFileToDelete {
                     substancesFile.inheritFrom(otherfile: fileToDelete)
-                    viewContext.delete(fileToDelete)
+                    backgroundContext.delete(fileToDelete)
                 }
                 do {
-                    try viewContext.save()
+                    try backgroundContext.save()
                     didSaveSubstances = true
                 } catch {
-                    viewContext.rollback()
+                    backgroundContext.rollback()
                     return
                 }
             } catch {
@@ -226,7 +228,7 @@ struct PersistenceController {
             }
         }
         if !didSaveSubstances {
-            throw DecodingFileError.failedToDecodeOrSave
+            throw DecodingFileError.failedToSave
         }
     }
 

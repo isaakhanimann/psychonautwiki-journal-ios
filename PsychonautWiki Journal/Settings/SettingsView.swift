@@ -140,11 +140,9 @@ struct SettingsView: View {
 
     private func tryToDecodeData(data: Data) {
         do {
-            try PersistenceController.shared.decodeAndSaveFile(
-                from: data,
-                earlierFileToDelete: storedFile.first
-            )
+            try PersistenceController.shared.decodeAndSaveFile(from: data)
         } catch {
+            print("MyError: \(error.localizedDescription)")
             DispatchQueue.main.async {
                 self.alertMessage = "Not enough substances could be parsed."
                 self.isShowingErrorAlert.toggle()
