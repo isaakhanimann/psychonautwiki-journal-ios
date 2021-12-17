@@ -15,16 +15,13 @@ public class DoseRange: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
         let min = (try? container.decodeIfPresent(Double.self, forKey: .min)) ?? 0
         let max = (try? container.decodeIfPresent(Double.self, forKey: .max)) ?? 0
-
         if min > max {
             throw DecodingError.minBiggerThanMax
         }
+        self.init(context: context) // init needs to be called after calls that can throw an exception
         self.min = min
         self.max = max
     }

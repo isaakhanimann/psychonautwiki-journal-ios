@@ -11,11 +11,12 @@ public class DoseTypes: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.units = try container.decode(String.self, forKey: .units)
-        self.threshold = (try? container.decode(Double.self, forKey: .threshold)) ?? 0
+        let units = try container.decode(String.self, forKey: .units)
+        let threshold = (try? container.decode(Double.self, forKey: .threshold)) ?? 0
+        self.init(context: context) // init needs to be called after calls that can throw an exception
+        self.units = units
+        self.threshold = threshold
         if let lightUnwrapped = try? container.decode(DoseRange.self, forKey: .light) {
             self.light = lightUnwrapped
         } else {

@@ -209,7 +209,6 @@ struct PersistenceController {
             do {
                 let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
                 substancesFile.creationDate = Date()
-
                 if let fileToDelete = earlierFileToDelete {
                     substancesFile.inheritFrom(otherfile: fileToDelete)
                     backgroundContext.delete(fileToDelete)
@@ -222,8 +221,7 @@ struct PersistenceController {
                     return
                 }
             } catch {
-                print("Failed to decode: \(error)")
-                viewContext.rollback()
+                backgroundContext.rollback()
             }
         }
         if !didSaveSubstances {

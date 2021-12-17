@@ -53,15 +53,16 @@ public class Roa: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(AdministrationRoute.self, forKey: .name).rawValue
+        let name = try container.decode(AdministrationRoute.self, forKey: .name).rawValue
+        let durationTypes = try container.decode(DurationTypes.self, forKey: .duration)
+        self.init(context: context) // init needs to be called after calls that can throw an exception
+        self.name = name
         if let doseTypesUnwrapped = try? container.decodeIfPresent(DoseTypes.self, forKey: .dose) {
             self.doseTypes = doseTypesUnwrapped
         } else {
             self.doseTypes = DoseTypes.createDefault(moc: context)
         }
-        self.durationTypes = try container.decode(DurationTypes.self, forKey: .duration)
+        self.durationTypes = durationTypes
     }
 }

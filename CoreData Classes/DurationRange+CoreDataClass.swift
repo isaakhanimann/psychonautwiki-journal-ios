@@ -16,17 +16,13 @@ public class DurationRange: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
         var minValue = try container.decode(Double.self, forKey: .min)
         var maxValue = try container.decode(Double.self, forKey: .max)
         let unitSymbol = try container.decode(String.self, forKey: .units)
-
         if minValue > maxValue {
             throw DecodingError.minBiggerThanMax
         }
-
         var unit: UnitDuration
         switch unitSymbol {
         case "seconds":
@@ -42,10 +38,9 @@ public class DurationRange: NSManagedObject, Decodable {
         default:
             throw DecodingError.unknownDurationUnit
         }
-
         let min = Measurement(value: minValue, unit: unit)
         let max = Measurement(value: maxValue, unit: unit)
-
+        self.init(context: context) // init needs to be called after calls that can throw an exception
         self.minSec = min.converted(to: .seconds).value
         self.maxSec = max.converted(to: .seconds).value
     }

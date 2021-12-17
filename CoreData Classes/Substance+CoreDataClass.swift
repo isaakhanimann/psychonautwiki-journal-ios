@@ -33,30 +33,31 @@ public class Substance: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.url = try container.decode(URL.self, forKey: .url)
-
+        let name = try container.decode(String.self, forKey: .name)
+        let url = try container.decode(URL.self, forKey: .url)
         let throwableRoas = try container.decode(
             [Throwable<Roa>].self,
             forKey: .roas)
         let decodedRoas = throwableRoas.compactMap { try? $0.result.get() }
-
         if decodedRoas.isEmpty {
             throw SubstanceDecodingError.noRoaFound
         }
-        self.roas = Set(decodedRoas) as NSSet
         let decodedCategoriesNested = try container.decodeIfPresent(DecodedCategoriesNested.self, forKey: .category)
-        self.categoriesDecoded = decodedCategoriesNested?.psychoactive ?? []
-        self.unsafeInteractionsDecoded = try container.decodeIfPresent(
+        let unsafeInteractionsDecoded = try container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .unsafeInteractions
         ) ?? []
-        self.dangerousInteractionsDecoded = try container.decodeIfPresent(
+        let dangerousInteractionsDecoded = try container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
         ) ?? []
+        self.init(context: context) // init needs to be called after calls that can throw an exception
+        self.name = name
+        self.url = url
+        self.roas = Set(decodedRoas) as NSSet
+        self.unsafeInteractionsDecoded = unsafeInteractionsDecoded
+        self.dangerousInteractionsDecoded = dangerousInteractionsDecoded
+        self.categoriesDecoded = decodedCategoriesNested?.psychoactive ?? []
     }
 }

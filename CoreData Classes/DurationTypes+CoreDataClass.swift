@@ -11,12 +11,15 @@ public class DurationTypes: NSManagedObject, Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
-        self.init(context: context)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.onset = try container.decode(DurationRange.self, forKey: .onset)
-        self.comeup = try container.decode(DurationRange.self, forKey: .comeup)
-        self.peak = try container.decode(DurationRange.self, forKey: .peak)
-        self.offset = try container.decode(DurationRange.self, forKey: .offset)
+        let onset = try container.decode(DurationRange.self, forKey: .onset)
+        let comeup = try container.decode(DurationRange.self, forKey: .comeup)
+        let peak = try container.decode(DurationRange.self, forKey: .peak)
+        let offset = try container.decode(DurationRange.self, forKey: .offset)
+        self.init(context: context) // init needs to be called after calls that can throw an exception
+        self.onset = onset
+        self.comeup = comeup
+        self.peak = peak
+        self.offset = offset
     }
 }
