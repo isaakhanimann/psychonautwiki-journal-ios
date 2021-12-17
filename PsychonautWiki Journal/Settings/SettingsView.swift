@@ -21,6 +21,18 @@ struct SettingsView: View {
         NavigationView {
             List {
 
+                NavigationLink("SubstancesView") {
+                    MySubstancesView()
+                }
+
+                NavigationLink("FilesView") {
+                    MyFilesView()
+                }
+
+                NavigationLink("CategoriesView") {
+                    MyCategoriesView()
+                }
+
                 Section(
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
@@ -142,7 +154,6 @@ struct SettingsView: View {
         do {
             try PersistenceController.shared.decodeAndSaveFile(from: data)
         } catch {
-            print("MyError: \(error.localizedDescription)")
             DispatchQueue.main.async {
                 self.alertMessage = "Not enough substances could be parsed."
                 self.isShowingErrorAlert.toggle()
@@ -150,6 +161,53 @@ struct SettingsView: View {
         }
         DispatchQueue.main.async {
             self.isFetching = false
+        }
+    }
+}
+
+struct MySubstancesView: View {
+    @FetchRequest(
+        entity: Substance.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \Substance.name, ascending: false) ]
+    ) var substances: FetchedResults<Substance>
+
+    var body: some View {
+        List(substances) { substance in
+            HStack {
+                Text(substance.nameUnwrapped)
+                Text(substance.category?.file?.creationDate ?? Date(timeIntervalSince1970: 0), style: .date)
+            }
+        }
+    }
+}
+
+struct MyFilesView: View {
+    @FetchRequest(
+        entity: SubstancesFile.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
+    ) var files: FetchedResults<SubstancesFile>
+
+    var body: some View {
+        List(files) { file in
+            HStack {
+                Text(file.creationDateUnwrapped, style: .date)
+                Text(file.creationDateUnwrapped, style: .time)
+            }
+        }
+    }
+}
+
+struct MyCategoriesView: View {
+    @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \Category.name, ascending: false) ]
+    ) var categories: FetchedResults<Category>
+
+    var body: some View {
+        List(categories) { category in
+            HStack {
+                Text(category.nameUnwrapped)
+            }
         }
     }
 }
