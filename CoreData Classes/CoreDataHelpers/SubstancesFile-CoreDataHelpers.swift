@@ -16,12 +16,18 @@ extension SubstancesFile {
         }
     }
 
-    var substancesUnwrapped: [Substance] {
-        substances?.allObjects as? [Substance] ?? []
+    var categoriesUnwrapped: [Category] {
+        categories?.allObjects as? [Category] ?? []
+    }
+
+    var categoriesUnwrappedSorted: [Category] {
+        categoriesUnwrapped.sorted { cat1, cat2 in
+            cat1.nameUnwrapped < cat2.nameUnwrapped
+        }
     }
 
     var favoritesSorted: [Substance] {
-        let favorites = enabledSubstancesUnwrapped.filter { substance in
+        let favorites = allEnabledSubstancesUnwrapped.filter { substance in
             substance.isFavorite
         }
         return favorites.sorted { sub1, sub2 in
@@ -30,7 +36,7 @@ extension SubstancesFile {
     }
 
     func getRecentlyUsedSubstancesInOrder(maxSubstancesToGet: Int) -> [Substance] {
-        let substancesSortedByUse = enabledSubstancesUnwrapped.sorted { sub1, sub2 in
+        let substancesSortedByUse = allEnabledSubstancesUnwrapped.sorted { sub1, sub2 in
             guard let sub1DateUnwrapped = sub1.lastUsedDate else { return false }
             guard let sub2DateUnwrapped = sub2.lastUsedDate else { return true }
 
@@ -66,8 +72,12 @@ extension SubstancesFile {
         }
     }
 
-    var enabledSubstancesUnwrapped: [Substance] {
-        substancesUnwrapped.filter { substance in
+    var allSubstancesUnwrapped: [Substance] {
+        SubstancesFile.getAllSubstances(of: categoriesUnwrapped)
+    }
+
+    var allEnabledSubstancesUnwrapped: [Substance] {
+        SubstancesFile.getAllSubstances(of: categoriesUnwrapped).filter { substance in
             substance.isEnabled
         }
     }
@@ -79,10 +89,31 @@ extension SubstancesFile {
         }
     }
 
+    func getCategory(with name: String) -> Category? {
+        let lowerCaseName = name.lowercased()
+        return categoriesUnwrapped.first { category in
+            category.nameUnwrapped.lowercased() == lowerCaseName
+        }
+    }
+
     func getSubstance(with name: String) -> Substance? {
         let lowerCaseName = name.lowercased()
-        return substancesUnwrapped.first { substance in
+        return allSubstancesUnwrapped.first { substance in
             substance.nameUnwrapped.lowercased() == lowerCaseName
         }
+    }
+
+    var sortedCategoriesUnwrapped: [Category] {
+        categoriesUnwrapped.sorted { cat1, cat2 in
+            cat1.nameUnwrapped < cat2.nameUnwrapped
+        }
+    }
+
+    static func getAllSubstances(of categories: [Category]) -> [Substance] {
+        var allSubstances = [Substance]()
+        for category in categories {
+            allSubstances.append(contentsOf: category.substancesUnwrapped)
+        }
+        return allSubstances.uniqued()
     }
 }

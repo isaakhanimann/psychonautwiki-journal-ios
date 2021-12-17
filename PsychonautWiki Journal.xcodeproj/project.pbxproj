@@ -60,6 +60,7 @@
 		EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */; };
 		EAA2EC4826DFCBCF00B4FACF /* Substance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */; };
 		EAA2EC4926DFCBCF00B4FACF /* SubstancesFile-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */; };
+		EAA2EC4A26DFCBCF00B4FACF /* Category-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716226CBA664009FB0EC /* Category-CoreDataHelpers.swift */; };
 		EAA2EC4B26DFCBCF00B4FACF /* DoseTypes-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */; };
 		EAA2EC4C26DFCBE200B4FACF /* Roa+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716F26CBA664009FB0EC /* Roa+CoreDataClass.swift */; };
 		EAA2EC4D26DFCBE200B4FACF /* DoseTypes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717326CBA664009FB0EC /* DoseTypes+CoreDataClass.swift */; };
@@ -140,6 +141,7 @@
 		EAE471E326CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */; };
 		EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */; };
 		EAE471E526CBA664009FB0EC /* DoseRange-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716126CBA664009FB0EC /* DoseRange-CoreDataHelpers.swift */; };
+		EAE471E626CBA664009FB0EC /* Category-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716226CBA664009FB0EC /* Category-CoreDataHelpers.swift */; };
 		EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */; };
 		EAE471E826CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716426CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift */; };
 		EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */; };
@@ -323,6 +325,7 @@
 		EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DoseTypes-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Roa-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716126CBA664009FB0EC /* DoseRange-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DoseRange-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EAE4716226CBA664009FB0EC /* Category-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Substance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716426CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneralInteraction-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Experience-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -671,6 +674,7 @@
 				EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */,
 				EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */,
 				EAE4716426CBA664009FB0EC /* GeneralInteraction-CoreDataHelpers.swift */,
+				EAE4716226CBA664009FB0EC /* Category-CoreDataHelpers.swift */,
 				EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */,
 				EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */,
 				EAE4715F26CBA664009FB0EC /* DoseTypes-CoreDataHelpers.swift */,
@@ -1005,6 +1009,7 @@
 				EAA2EC5726DFCBFA00B4FACF /* Double-Rounded.swift in Sources */,
 				EADE46612709D30900F1058E /* IngestionLineModel.swift in Sources */,
 				EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */,
+				EAA2EC4A26DFCBCF00B4FACF /* Category-CoreDataHelpers.swift in Sources */,
 				EAA2EC4926DFCBCF00B4FACF /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EAA2EC7326E2151900B4FACF /* ChooseSubstanceView.swift in Sources */,
 				EAA2EC4126DFCBCF00B4FACF /* Experience-CoreDataHelpers.swift in Sources */,
@@ -1091,6 +1096,7 @@
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EAE4720F26CBA664009FB0EC /* HelperMethods.swift in Sources */,
 				EAE471F426CBA664009FB0EC /* Substance+CoreDataClass.swift in Sources */,
+				EAE471E626CBA664009FB0EC /* Category-CoreDataHelpers.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,

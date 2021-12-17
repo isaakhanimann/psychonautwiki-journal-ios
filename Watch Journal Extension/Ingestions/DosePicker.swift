@@ -71,7 +71,7 @@ struct DosePicker: View {
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        let substance = helper.substancesFile.substancesUnwrapped[2]
+        let substance = helper.substancesFile.allSubstancesUnwrapped[2]
 
         DosePicker(
             doseInfo: substance.getDose(

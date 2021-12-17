@@ -29,6 +29,10 @@ struct SettingsView: View {
                     MyFilesView()
                 }
 
+                NavigationLink("CategoriesView") {
+                    MyCategoriesView()
+                }
+
                 Section(
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
@@ -171,8 +175,7 @@ struct MySubstancesView: View {
         List(substances) { substance in
             HStack {
                 Text(substance.nameUnwrapped)
-                Text(substance.file == nil ? "No file" : "Has file")
-                Text(substance.file?.creationDate ?? Date(timeIntervalSince1970: 0), style: .date)
+                Text(substance.category?.file?.creationDate ?? Date(timeIntervalSince1970: 0), style: .date)
             }
         }
     }
@@ -189,6 +192,21 @@ struct MyFilesView: View {
             HStack {
                 Text(file.creationDateUnwrapped, style: .date)
                 Text(file.creationDateUnwrapped, style: .time)
+            }
+        }
+    }
+}
+
+struct MyCategoriesView: View {
+    @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [ NSSortDescriptor(keyPath: \Category.name, ascending: false) ]
+    ) var categories: FetchedResults<Category>
+
+    var body: some View {
+        List(categories) { category in
+            HStack {
+                Text(category.nameUnwrapped)
             }
         }
     }
