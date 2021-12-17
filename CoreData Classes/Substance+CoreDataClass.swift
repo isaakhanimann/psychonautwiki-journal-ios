@@ -23,8 +23,6 @@ public class Substance: NSManagedObject, Decodable {
     var unsafeInteractionsDecoded = [DecodedInteraction]()
     var dangerousInteractionsDecoded = [DecodedInteraction]()
 
-    var categoriesDecoded = [String]()
-
     enum SubstanceDecodingError: Error {
         case noRoaFound
     }
@@ -49,7 +47,9 @@ public class Substance: NSManagedObject, Decodable {
         }
         self.roas = Set(decodedRoas) as NSSet
         let decodedCategoriesNested = try container.decodeIfPresent(DecodedCategoriesNested.self, forKey: .category)
-        self.categoriesDecoded = decodedCategoriesNested?.psychoactive ?? []
+        // Todo: add the possibility to have a substance in multiple categories
+        let categories = decodedCategoriesNested?.psychoactive ?? []
+        self.category = categories.first
         self.unsafeInteractionsDecoded = try container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .unsafeInteractions

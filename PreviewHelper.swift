@@ -6,7 +6,7 @@ class PreviewHelper {
 
     let substancesFile: SubstancesFile
     var substance: Substance {
-        substancesFile.categoriesUnwrappedSorted.first!.sortedSubstancesUnwrapped.first!
+        substancesFile.substancesUnwrapped.first!
     }
     let experiences: [Experience]
 

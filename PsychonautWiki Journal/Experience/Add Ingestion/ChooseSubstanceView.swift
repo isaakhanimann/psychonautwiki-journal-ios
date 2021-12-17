@@ -50,29 +50,16 @@ struct ChooseSubstanceView: View {
                             }
                         }
                     }
-                    let categories = storedFile.first?
-                        .categoriesUnwrappedSorted
-                        .filter({ cat in
-                            cat.substancesUnwrapped.contains { substance in
-                                substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
-                                substance.isEnabled
-                            }
-                        }) ?? []
-                    ForEach(categories) { category in
-                        Section(header: Text(category.nameUnwrapped)) {
-                            let filteredSubstances = category.sortedEnabledSubstancesUnwrapped
-                                .filter({ substance in
-                                    substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased())
-                                })
-                            ForEach(filteredSubstances) { substance in
-                                SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
-                            }
-                        }
+                    let filteredSubstances = storedFile.first?.enabledSubstancesUnwrapped.filter({ substance in
+                        substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased())
+                    }) ?? []
+                    ForEach(filteredSubstances) { substance in
+                        SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
                     }
 
                     if recentsFiltered.isEmpty
                         && favoritesFiltered.isEmpty
-                        && categories.isEmpty {
+                        && filteredSubstances.isEmpty {
                         Text("No substances found")
                             .foregroundColor(.secondary)
                     }

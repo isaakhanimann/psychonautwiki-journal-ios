@@ -8,22 +8,14 @@ struct ChooseFavoritesView: View {
     @EnvironmentObject var connectivity: Connectivity
 
     var areThereAnyEnabledSubstances: Bool {
-        !file.allEnabledSubstancesUnwrapped.isEmpty
+        !file.enabledSubstancesUnwrapped.isEmpty
     }
 
     var body: some View {
         Group {
             if areThereAnyEnabledSubstances {
-                List {
-                    ForEach(file.sortedCategoriesUnwrapped) { category in
-                        if !category.sortedEnabledSubstancesUnwrapped.isEmpty {
-                            Section(header: Text(category.nameUnwrapped)) {
-                                ForEach(category.sortedEnabledSubstancesUnwrapped) { substance in
-                                    FavoritesRowView(substance: substance)
-                                }
-                            }
-                        }
-                    }
+                List(file.enabledSubstancesUnwrapped) { substance in
+                    FavoritesRowView(substance: substance)
                 }
                 .listStyle(PlainListStyle())
             } else {
