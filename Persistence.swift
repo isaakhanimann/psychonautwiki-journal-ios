@@ -323,7 +323,7 @@ struct PersistenceController {
 
     private func deleteDurationRangeWithoutDurationType() {
         backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<DoseRange> = DoseRange.fetchRequest()
+            let fetchRequest: NSFetchRequest<DurationRange> = DurationRange.fetchRequest()
             let pred1 = NSPredicate(format: "onsetType == nil")
             let pred2 = NSPredicate(format: "comeupType == nil")
             let pred3 = NSPredicate(format: "peakType == nil")
