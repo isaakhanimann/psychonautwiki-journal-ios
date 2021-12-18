@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @AppStorage(PersistenceController.hasCleanedUpCoreDataKey) var hasCleanedUpCoreData: Bool = false
 
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var calendarWrapper: CalendarWrapper
@@ -35,6 +36,10 @@ struct ContentView: View {
                 if newPhase == .active {
                     calendarWrapper.checkIfSomethingChanged()
                     maybeFetchAgain()
+                    if !hasCleanedUpCoreData {
+                        PersistenceController.shared.cleanupCoreData()
+                        hasCleanedUpCoreData = true
+                    }
                 }
             }
         )
