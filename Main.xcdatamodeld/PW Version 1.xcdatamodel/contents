@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="file" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="categories" inverseEntity="SubstancesFile"/>
+        <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="category" inverseEntity="Substance"/>
+    </entity>
+    <entity name="DoseRange" representedClassName=".DoseRange" syncable="YES" codeGenerationType="category">
+        <attribute name="max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="commonDoseType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoseTypes" inverseName="common" inverseEntity="DoseTypes"/>
+        <relationship name="lightDoseType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoseTypes" inverseName="light" inverseEntity="DoseTypes"/>
+        <relationship name="strongDoseType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoseTypes" inverseName="strong" inverseEntity="DoseTypes"/>
+    </entity>
+    <entity name="DoseTypes" representedClassName=".DoseTypes" syncable="YES" codeGenerationType="category">
+        <attribute name="heavy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="threshold" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+        <relationship name="common" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoseRange" inverseName="commonDoseType" inverseEntity="DoseRange"/>
+        <relationship name="light" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoseRange" inverseName="lightDoseType" inverseEntity="DoseRange"/>
+        <relationship name="strong" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoseRange" inverseName="strongDoseType" inverseEntity="DoseRange"/>
+        <relationship name="substanceRoa" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Roa" inverseName="doseTypes" inverseEntity="Roa"/>
+    </entity>
+    <entity name="DurationRange" representedClassName=".DurationRange" syncable="YES" codeGenerationType="category">
+        <attribute name="maxSec" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="minSec" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="comeupType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DurationTypes" inverseName="comeup" inverseEntity="DurationTypes"/>
+        <relationship name="offsetType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DurationTypes" inverseName="offset" inverseEntity="DurationTypes"/>
+        <relationship name="onsetType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DurationTypes" inverseName="onset" inverseEntity="DurationTypes"/>
+        <relationship name="peakType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DurationTypes" inverseName="peak" inverseEntity="DurationTypes"/>
+    </entity>
+    <entity name="DurationTypes" representedClassName=".DurationTypes" syncable="YES" codeGenerationType="category">
+        <relationship name="comeup" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="comeupType" inverseEntity="DurationRange"/>
+        <relationship name="offset" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="offsetType" inverseEntity="DurationRange"/>
+        <relationship name="onset" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="onsetType" inverseEntity="DurationRange"/>
+        <relationship name="peak" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="peakType" inverseEntity="DurationRange"/>
+        <relationship name="substanceRoa" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Roa" inverseName="durationTypes" inverseEntity="Roa"/>
+    </entity>
+    <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
+    </entity>
+    <entity name="GeneralInteraction" representedClassName="GeneralInteraction" syncable="YES" codeGenerationType="class">
+        <attribute name="isEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="dangerousSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="dangerousGeneralInteractions" inverseEntity="Substance"/>
+        <relationship name="file" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="generalInteractions" inverseEntity="SubstancesFile"/>
+        <relationship name="unsafeSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="unsafeGeneralInteractions" inverseEntity="Substance"/>
+    </entity>
+    <entity name="Ingestion" representedClassName="Ingestion" syncable="YES" codeGenerationType="class">
+        <attribute name="administrationRoute" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="dose" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
+        <relationship name="substanceCopy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCopy" inverseName="ingestion" inverseEntity="SubstanceCopy"/>
+    </entity>
+    <entity name="Roa" representedClassName=".Roa" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="doseTypes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DoseTypes" inverseName="substanceRoa" inverseEntity="DoseTypes"/>
+        <relationship name="durationTypes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationTypes" inverseName="substanceRoa" inverseEntity="DurationTypes"/>
+        <relationship name="substance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Substance" inverseName="roas" inverseEntity="Substance"/>
+        <relationship name="substanceCopy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCopy" inverseName="roas" inverseEntity="SubstanceCopy"/>
+    </entity>
+    <entity name="Substance" representedClassName=".Substance" syncable="YES" codeGenerationType="category">
+        <attribute name="isEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUsedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="substances" inverseEntity="Category"/>
+        <relationship name="dangerousGeneralInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GeneralInteraction" inverseName="dangerousSubstanceInteractions" inverseEntity="GeneralInteraction"/>
+        <relationship name="dangerousSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="dangerousSubstanceInteractions" inverseEntity="Substance"/>
+        <relationship name="inverseLastUsed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstancesFile" inverseName="lastUsedSubstance" inverseEntity="SubstancesFile"/>
+        <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="substance" inverseEntity="Roa"/>
+        <relationship name="unsafeGeneralInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GeneralInteraction" inverseName="unsafeSubstanceInteractions" inverseEntity="GeneralInteraction"/>
+        <relationship name="unsafeSubstanceInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Substance" inverseName="unsafeSubstanceInteractions" inverseEntity="Substance"/>
+    </entity>
+    <entity name="SubstanceCopy" representedClassName=".SubstanceCopy" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="ingestion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="substanceCopy" inverseEntity="Ingestion"/>
+        <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="substanceCopy" inverseEntity="Roa"/>
+    </entity>
+    <entity name="SubstancesFile" representedClassName=".SubstancesFile" syncable="YES" codeGenerationType="category">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="file" inverseEntity="Category"/>
+        <relationship name="generalInteractions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GeneralInteraction" inverseName="file" inverseEntity="GeneralInteraction"/>
+        <relationship name="lastUsedSubstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Substance" inverseName="inverseLastUsed" inverseEntity="Substance"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-459" positionY="-36" width="128" height="74"/>
+        <element name="DoseRange" positionX="-459" positionY="-36" width="128" height="14"/>
+        <element name="DoseTypes" positionX="49.950927734375" positionY="457.5096435546875" width="128" height="14"/>
+        <element name="DurationRange" positionX="-450" positionY="-27" width="128" height="14"/>
+        <element name="DurationTypes" positionX="5.0596923828125" positionY="-60.59397888183594" width="128" height="14"/>
+        <element name="Experience" positionX="-657.2791137695312" positionY="-182.0665588378906" width="128" height="104"/>
+        <element name="GeneralInteraction" positionX="-441" positionY="-18" width="128" height="104"/>
+        <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="149"/>
+        <element name="Roa" positionX="-166.0208740234375" positionY="247.5351257324219" width="128" height="104"/>
+        <element name="Substance" positionX="-383.1397705078125" positionY="120.6640625" width="128" height="209"/>
+        <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="89"/>
+        <element name="SubstancesFile" positionX="-664.39013671875" positionY="133.0220947265625" width="128" height="89"/>
+    </elements>
+</model>

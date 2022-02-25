@@ -269,6 +269,7 @@
 		EA4910BF26DFB4E1001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA4910C426DFB4E1001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeObserverView.swift; sourceTree = "<group>"; };
@@ -1474,9 +1475,10 @@
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */,
 				EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */,
 			);
-			currentVersion = EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */;
+			currentVersion = EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */;
 			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -231,113 +231,105 @@ struct PersistenceController {
     }
 
     func cleanupCoreData() {
-        deleteSubstancesWithoutCategory()
-        deleteRoasWithoutSubstancesOrSubstanceCopies()
-        deleteDoseTypesWithoutRoas()
-        deleteDurationTypesWithoutRoas()
-        deleteDoseRangeWithoutDoseType()
-        deleteDurationRangeWithoutDurationType()
-    }
-
-    private func deleteSubstancesWithoutCategory() {
         backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "category == nil")
-            fetchRequest.includesPropertyValues = false
-            let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for substance in substances {
-                backgroundContext.delete(substance)
+            deleteAllFiles()
+            deleteAllSubstances()
+            deleteAllRoas()
+            deleteAllDoseTypes()
+            deleteAllDurationTypes()
+            deleteAllDoseRanges()
+            deleteAllDurationRanges()
+            convertIngestions()
+            if backgroundContext.hasChanges {
+                try? backgroundContext.save()
             }
+        }
+        PersistenceController.shared.addInitialSubstances()
+        backgroundContext.performAndWait {
+            deleteAllSubstanceCopies()
             if backgroundContext.hasChanges {
                 try? backgroundContext.save()
             }
         }
     }
 
-    private func deleteRoasWithoutSubstancesOrSubstanceCopies() {
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<Roa> = Roa.fetchRequest()
-            let pred1 = NSPredicate(format: "substance == nil")
-            let pred2 = NSPredicate(format: "substanceCopy == nil")
-            let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [pred1, pred2])
-            fetchRequest.predicate = compound
-            fetchRequest.includesPropertyValues = false
-            let roas = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for roa in roas {
-                backgroundContext.delete(roa)
-            }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
+    private func deleteAllFiles() {
+        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let files = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for file in files {
+            backgroundContext.delete(file)
         }
     }
 
-    private func deleteDoseTypesWithoutRoas() {
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<DoseTypes> = DoseTypes.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "substanceRoa == nil")
-            fetchRequest.includesPropertyValues = false
-            let doseTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for doseT in doseTypes {
-                backgroundContext.delete(doseT)
-            }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
+    private func deleteAllSubstances() {
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for substance in substances {
+            backgroundContext.delete(substance)
         }
     }
 
-    private func deleteDurationTypesWithoutRoas() {
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<DurationTypes> = DurationTypes.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "substanceRoa == nil")
-            fetchRequest.includesPropertyValues = false
-            let durationTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for durationT in durationTypes {
-                backgroundContext.delete(durationT)
-            }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
+    private func deleteAllRoas() {
+        let fetchRequest: NSFetchRequest<Roa> = Roa.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let roas = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for roa in roas {
+            backgroundContext.delete(roa)
         }
     }
 
-    private func deleteDoseRangeWithoutDoseType() {
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<DoseRange> = DoseRange.fetchRequest()
-            let pred1 = NSPredicate(format: "lightDoseType == nil")
-            let pred2 = NSPredicate(format: "commonDoseType == nil")
-            let pred3 = NSPredicate(format: "strongDoseType == nil")
-            let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [pred1, pred2, pred3])
-            fetchRequest.predicate = compound
-            fetchRequest.includesPropertyValues = false
-            let doseRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for doseR in doseRanges {
-                backgroundContext.delete(doseR)
-            }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
+    private func deleteAllDoseTypes() {
+        let fetchRequest: NSFetchRequest<DoseTypes> = DoseTypes.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let doseTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for doseT in doseTypes {
+            backgroundContext.delete(doseT)
         }
     }
 
-    private func deleteDurationRangeWithoutDurationType() {
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<DurationRange> = DurationRange.fetchRequest()
-            let pred1 = NSPredicate(format: "onsetType == nil")
-            let pred2 = NSPredicate(format: "comeupType == nil")
-            let pred3 = NSPredicate(format: "peakType == nil")
-            let pred4 = NSPredicate(format: "offsetType == nil")
-            let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [pred1, pred2, pred3, pred4])
-            fetchRequest.predicate = compound
-            fetchRequest.includesPropertyValues = false
-            let durationRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
-            for durationR in durationRanges {
-                backgroundContext.delete(durationR)
-            }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
+    private func deleteAllDurationTypes() {
+        let fetchRequest: NSFetchRequest<DurationTypes> = DurationTypes.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let durationTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for durationT in durationTypes {
+            backgroundContext.delete(durationT)
+        }
+    }
+
+    private func deleteAllDoseRanges() {
+        let fetchRequest: NSFetchRequest<DoseRange> = DoseRange.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let doseRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for doseR in doseRanges {
+            backgroundContext.delete(doseR)
+        }
+    }
+
+    private func deleteAllDurationRanges() {
+        let fetchRequest: NSFetchRequest<DurationRange> = DurationRange.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let durationRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for durationR in durationRanges {
+            backgroundContext.delete(durationR)
+        }
+    }
+
+    private func convertIngestions() {
+        let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
+        let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for ingestion in ingestions {
+            ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
+        }
+    }
+
+    private func deleteAllSubstanceCopies() {
+        let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let substanceCopies = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for substanceCopy in substanceCopies {
+            backgroundContext.delete(substanceCopy)
         }
     }
 
