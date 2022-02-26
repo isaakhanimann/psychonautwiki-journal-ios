@@ -16,6 +16,16 @@ extension SubstancesFile {
         }
     }
 
+    var chemicalClassesUnwrapped: [ChemicalClass] {
+        chemicalClasses?.allObjects as? [ChemicalClass] ?? []
+    }
+
+    var chemicalClassesSorted: [ChemicalClass] {
+        chemicalClassesUnwrapped.sorted { cClass1, cClass2 in
+            cClass1.nameUnwrapped < cClass2.nameUnwrapped
+        }
+    }
+
     static let okInteractionNames: Set = [
         "alcohol",
         "antihistamine",

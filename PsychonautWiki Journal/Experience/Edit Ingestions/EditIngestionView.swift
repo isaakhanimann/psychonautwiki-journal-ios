@@ -63,14 +63,14 @@ struct EditIngestionView: View {
                 .padding(.vertical)
             }
         }
-        .navigationTitle(ingestion.substanceCopy?.name ?? "Unknown")
+        .navigationTitle(ingestion.substanceNameUnwrapped)
         .onChange(of: selectedTime) { _ in update() }
         .onChange(of: selectedDose) { _ in update() }
         .onChange(of: selectedAdministrationRoute) { _ in update() }
         .onChange(of: selectedColor) { _ in update() }
         .onDisappear(perform: {
             let defaults = UserDefaults.standard
-            defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy?.name ?? "Unknown")
+            defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceNameUnwrapped)
             if moc.hasChanges {
                 try? moc.save()
             }

@@ -6,14 +6,14 @@ struct IngestionRow: View {
 
     var body: some View {
         Group {
-            if let substanceCopyUnwrapped = ingestion.substanceCopy {
+            if let substance = ingestion.substance {
                 VStack(alignment: .leading) {
                     HStack {
                         Image(systemName: "circle.fill")
                             .font(.headline)
                             .foregroundColor(ingestion.swiftUIColorUnwrapped)
                         VStack(alignment: .leading) {
-                            Text(substanceCopyUnwrapped.nameUnwrapped).font(.headline)
+                            Text(substance.nameUnwrapped).font(.headline)
                             Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
                                 .foregroundColor(.secondary)
                                 .font(.footnote)

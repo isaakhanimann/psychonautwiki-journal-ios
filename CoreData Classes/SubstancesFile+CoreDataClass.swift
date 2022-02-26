@@ -23,185 +23,257 @@ public class SubstancesFile: NSManagedObject, Decodable {
         if substances.count < 50 {
             throw DecodingError.notEnoughSubstancesParsed
         }
-        let psychoactiveClasses = SubstancesFile.createAndFillCategories(from: substances, context: context)
-        SubstancesFile.createGeneralInteractionsAndAddThemToSubstances(
-            from: psychoactiveClasses,
-            context: context
-        )
         self.init(context: context)
-        self.psychoactiveClasses = psychoactiveClasses as NSSet
+        goThroughSubstancesOneByOneAndCreateObjectsAndRelationships(substances: substances, context: context)
     }
 
-    static private func createAndFillCategories(
-        from substances: [Substance],
+    private func goThroughSubstancesOneByOneAndCreateObjectsAndRelationships(
+        substances: [Substance],
         context: NSManagedObjectContext
-    ) -> Set<PsychoactiveClass> {
+    ) {
+        createClasses(substances: substances, context: context)
+        createEffectsAndAddThemToSubstances(substances: substances, context: context)
+        // The following 2 methods must be called after the classes have been constructed
+        createCrossTolerances(substances: substances, context: context)
+        createInteractions(substances: substances, context: context)
+    }
+
+    private func createClasses(
+        substances: [Substance],
+        context: NSManagedObjectContext
+    ) {
         var psychoactives = Set<PsychoactiveClass>()
-        var substancesWithoutCategory = [Substance]()
+        var chemicals = Set<ChemicalClass>()
         for substance in substances {
-            if substance.categoriesDecoded.isEmpty {
-                substancesWithoutCategory.append(substance)
-            } else {
-                for categoryDecoded in substance.categoriesDecoded {
-
-                    let maybeFirstCategory = psychoactives.first { cat in
-                        cat.nameUnwrapped.lowercased() == categoryDecoded.lowercased()
-                    }
-
-                    if let existingCategory = maybeFirstCategory {
-                        existingCategory.addToSubstances(substance)
-                    } else {
-                        let newCategory = PsychoactiveClass(context: context)
-                        newCategory.name = categoryDecoded
-                        newCategory.addToSubstances(substance)
-                        psychoactives.insert(newCategory)
-                    }
+            for psychoactiveName in substance.decodedClasses?.psychoactive ?? [] {
+                let match = psychoactives.first { cat in
+                    cat.nameUnwrapped.lowercased() == psychoactiveName.lowercased()
+                }
+                if let matchUnwrapped = match {
+                    matchUnwrapped.addToSubstances(substance)
+                } else {
+                    let pClass = PsychoactiveClass(context: context)
+                    pClass.name = psychoactiveName
+                    pClass.addToSubstances(substance)
+                    psychoactives.insert(pClass)
+                }
+            }
+            for chemicalName in substance.decodedClasses?.chemical ?? [] {
+                let match = chemicals.first { cat in
+                    cat.nameUnwrapped.lowercased() == chemicalName.lowercased()
+                }
+                if let matchUnwrapped = match {
+                    matchUnwrapped.addToSubstances(substance)
+                } else {
+                    let cClass = ChemicalClass(context: context)
+                    cClass.name = chemicalName
+                    cClass.addToSubstances(substance)
+                    chemicals.insert(cClass)
                 }
             }
         }
-        if !substancesWithoutCategory.isEmpty {
-            let newCategory = PsychoactiveClass(context: context)
-            newCategory.name = "No Class"
-
-            for subst in substancesWithoutCategory {
-                newCategory.addToSubstances(subst)
-            }
-            psychoactives.insert(newCategory)
-        }
-
-        return psychoactives
+        self.psychoactiveClasses = psychoactives as NSSet
+        self.chemicalClasses = chemicals as NSSet
     }
 
-    // Each substance has a string array of the names of the interactions
-    static private func createGeneralInteractionsAndAddThemToSubstances(
-        from categories: Set<PsychoactiveClass>,
+    private func createEffectsAndAddThemToSubstances(
+        substances: [Substance],
         context: NSManagedObjectContext
-        ) {
-
-        var allSubstances = Set<Substance>()
-        for category in categories {
-            allSubstances = allSubstances.union(category.substancesUnwrapped)
-        }
-
-        var newGeneralInteractions = Set<UnresolvedInteraction>()
-
-        for substance in allSubstances {
-            for interaction in substance.unsafeInteractionsDecoded {
-                SubstancesFile.findAndAddMatchOrAddToGeneralInteractions(
-                    unsafeOrDangerous: .unsafe,
-                    substanceToAdd: substance,
-                    toSubstancesIn: categories,
-                    matching: interaction,
-                    context: context,
-                    generalInteractions: &newGeneralInteractions
-                )
-            }
-
-            for interaction in substance.dangerousInteractionsDecoded {
-                SubstancesFile.findAndAddMatchOrAddToGeneralInteractions(
-                    unsafeOrDangerous: .dangerous,
-                    substanceToAdd: substance,
-                    toSubstancesIn: categories,
-                    matching: interaction,
-                    context: context,
-                    generalInteractions: &newGeneralInteractions
-                )
+    ) {
+        var effects = Set<Effect>()
+        for substance in substances {
+            for decodedEff in substance.decodedEffects {
+                let match = effects.first { eff in
+                    eff.nameUnwrapped.lowercased() == decodedEff.name.lowercased()
+                }
+                if let matchUnwrapped = match {
+                    substance.addToEffects(matchUnwrapped)
+                } else {
+                    let newEffect = Effect(context: context)
+                    newEffect.name = decodedEff.name
+                    newEffect.url = decodedEff.url
+                    effects.insert(newEffect)
+                    substance.addToEffects(newEffect)
+                }
             }
         }
     }
 
-    private enum UnsafeOrDangerous {
-        case unsafe, dangerous
+    private func createCrossTolerances(
+        substances: [Substance],
+        context: NSManagedObjectContext
+    ) {
+        for substance in substances {
+            for toleranceName in substance.decodedCrossTolerances {
+                // check if psychoactive
+                let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
+                    psy.nameUnwrapped.lowercased() == toleranceName.lowercased()
+                }
+                if let matchUnwrapped = matchPsycho {
+                    substance.addToCrossTolerancePsychoactives(matchUnwrapped)
+                    continue
+                }
+                // check if chemical
+                let matchChemical = self.chemicalClassesUnwrapped.first { chem in
+                    chem.nameUnwrapped.lowercased() == toleranceName.lowercased()
+                }
+                if let matchUnwrapped = matchChemical {
+                    substance.addToCrossToleranceChemicals(matchUnwrapped)
+                    continue
+                }
+                // check if substance
+                let matchSubstance = substances.first { sub in
+                    sub.nameUnwrapped.lowercased() == toleranceName.lowercased()
+                }
+                if let matchUnwrapped = matchSubstance {
+                    substance.addToCrossToleranceSubstances(matchUnwrapped)
+                    continue
+                }
+            }
+        }
     }
 
     // swiftlint:disable cyclomatic_complexity
-    // swiftlint:disable function_parameter_count
     // swiftlint:disable function_body_length
-    static private func findAndAddMatchOrAddToGeneralInteractions(
-        unsafeOrDangerous: UnsafeOrDangerous,
-        substanceToAdd: Substance,
-        toSubstancesIn categories: Set<PsychoactiveClass>,
-        matching decodedInteraction: Substance.DecodedInteraction,
-        context: NSManagedObjectContext,
-        generalInteractions: inout Set<UnresolvedInteraction>
+    private func createInteractions(
+        substances: [Substance],
+        context: NSManagedObjectContext
     ) {
-        // Try to match category
-        let firstCategoryMatch = categories.first { category in
-            decodedInteraction.name.lowercased() == category.nameUnwrapped.lowercased()
-        }
-        if let foundCategory = firstCategoryMatch {
-            for substanceInCategory in foundCategory.substancesUnwrapped {
-                switch unsafeOrDangerous {
-                case .unsafe:
-                    substanceInCategory.addToUnsafeSubstances(substanceToAdd)
-                case .dangerous:
-                    substanceInCategory.addToDangerousSubstances(substanceToAdd)
+        var unresolvedInteractions = Set<UnresolvedInteraction>()
+        for substance in substances {
+            for uncertainInteraction in substance.decodedUncertain {
+                // check if psychoactive
+                let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
+                    psy.nameUnwrapped.lowercased() == uncertainInteraction.name.lowercased()
                 }
-            }
-            return
-        }
-
-        // Try to match substance exact
-        var allSubstances = Set<Substance>()
-        for category in categories {
-            allSubstances = allSubstances.union(category.substancesUnwrapped)
-        }
-        let firstSubstanceMatch = allSubstances.first { substance2 in
-            decodedInteraction.name.lowercased() == substance2.nameUnwrapped.lowercased()
-        }
-        if let foundSubstance = firstSubstanceMatch {
-            switch unsafeOrDangerous {
-            case .unsafe:
-                foundSubstance.addToUnsafeSubstances(substanceToAdd)
-            case .dangerous:
-                foundSubstance.addToDangerousSubstances(substanceToAdd)
-            }
-            return
-        }
-
-        // Try to match substance with x wildcard
-        let regexString = decodedInteraction.name.lowercased().replacingOccurrences(of: "x", with: "*")
-        if let regex = try? NSRegularExpression(pattern: regexString, options: [.caseInsensitive]) {
-            let matchingSubstances = allSubstances.filter { substance in
-                let range = NSRange(location: 0, length: substance.nameUnwrapped.utf16.count)
-                return regex.firstMatch(in: substance.nameUnwrapped, options: [], range: range) != nil
-            }
-            if !matchingSubstances.isEmpty {
-                for matchingSubstance in matchingSubstances {
-                    switch unsafeOrDangerous {
-                    case .unsafe:
-                        matchingSubstance.addToUnsafeSubstances(substanceToAdd)
-                    case .dangerous:
-                        matchingSubstance.addToDangerousSubstances(substanceToAdd)
+                if let matchUnwrapped = matchPsycho {
+                    substance.addToUncertainPsychoactives(matchUnwrapped)
+                    continue
+                }
+                // check if chemical
+                let matchChemical = self.chemicalClassesUnwrapped.first { chem in
+                    chem.nameUnwrapped.lowercased() == uncertainInteraction.name.lowercased()
+                }
+                if let matchUnwrapped = matchChemical {
+                    substance.addToUncertainChemicals(matchUnwrapped)
+                    continue
+                }
+                // check if substance with x wildcard
+                let regexString = uncertainInteraction.name.lowercased().replacingOccurrences(of: "x", with: "*")
+                if let regex = try? NSRegularExpression(pattern: regexString, options: [.caseInsensitive]) {
+                    let matchingSubstances = substances.filter { substance in
+                        let range = NSRange(location: 0, length: substance.nameUnwrapped.utf16.count)
+                        return regex.firstMatch(in: substance.nameUnwrapped, options: [], range: range) != nil
+                    }
+                    if !matchingSubstances.isEmpty {
+                        for matchingSubstance in matchingSubstances {
+                            matchingSubstance.addToUncertainSubstances(substance)
+                        }
                     }
                 }
-                return
+                // if still here there was no match
+                // check if there are already general interactions
+                let firstGeneralMatch = unresolvedInteractions.first { generalInteraction in
+                    generalInteraction.nameUnwrapped.lowercased() == uncertainInteraction.name.lowercased()
+                }
+                if let foundGeneral = firstGeneralMatch {
+                    foundGeneral.addToUncertainSubstances(substance)
+                } else {
+                    let newUnresolved = UnresolvedInteraction(context: context)
+                    newUnresolved.name = uncertainInteraction.name
+                    substance.addToUncertainUnresolved(newUnresolved)
+                    unresolvedInteractions.insert(newUnresolved)
+                }
+            }
+            for unsafeInteraction in substance.decodedUnsafe {
+                // check if psychoactive
+                let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
+                    psy.nameUnwrapped.lowercased() == unsafeInteraction.name.lowercased()
+                }
+                if let matchUnwrapped = matchPsycho {
+                    substance.addToUnsafePsychoactives(matchUnwrapped)
+                    continue
+                }
+                // check if chemical
+                let matchChemical = self.chemicalClassesUnwrapped.first { chem in
+                    chem.nameUnwrapped.lowercased() == unsafeInteraction.name.lowercased()
+                }
+                if let matchUnwrapped = matchChemical {
+                    substance.addToUnsafeChemicals(matchUnwrapped)
+                    continue
+                }
+                // check if substance with x wildcard
+                let regexString = unsafeInteraction.name.lowercased().replacingOccurrences(of: "x", with: "*")
+                if let regex = try? NSRegularExpression(pattern: regexString, options: [.caseInsensitive]) {
+                    let matchingSubstances = substances.filter { substance in
+                        let range = NSRange(location: 0, length: substance.nameUnwrapped.utf16.count)
+                        return regex.firstMatch(in: substance.nameUnwrapped, options: [], range: range) != nil
+                    }
+                    if !matchingSubstances.isEmpty {
+                        for matchingSubstance in matchingSubstances {
+                            matchingSubstance.addToUnsafeSubstances(substance)
+                        }
+                    }
+                }
+                // if still here there was no match
+                // check if there are already general interactions
+                let firstGeneralMatch = unresolvedInteractions.first { generalInteraction in
+                    generalInteraction.nameUnwrapped.lowercased() == unsafeInteraction.name.lowercased()
+                }
+                if let foundGeneral = firstGeneralMatch {
+                    foundGeneral.addToUnsafeSubstances(substance)
+                } else {
+                    let newUnresolved = UnresolvedInteraction(context: context)
+                    newUnresolved.name = unsafeInteraction.name
+                    substance.addToUnsafeUnresolved(newUnresolved)
+                    unresolvedInteractions.insert(newUnresolved)
+                }
+            }
+            for dangerousInteraction in substance.decodedDangerous {
+                // check if psychoactive
+                let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
+                    psy.nameUnwrapped.lowercased() == dangerousInteraction.name.lowercased()
+                }
+                if let matchUnwrapped = matchPsycho {
+                    substance.addToDangerousPsychoactives(matchUnwrapped)
+                    continue
+                }
+                // check if chemical
+                let matchChemical = self.chemicalClassesUnwrapped.first { chem in
+                    chem.nameUnwrapped.lowercased() == dangerousInteraction.name.lowercased()
+                }
+                if let matchUnwrapped = matchChemical {
+                    substance.addToDangerousChemicals(matchUnwrapped)
+                    continue
+                }
+                // check if substance with x wildcard
+                let regexString = dangerousInteraction.name.lowercased().replacingOccurrences(of: "x", with: "*")
+                if let regex = try? NSRegularExpression(pattern: regexString, options: [.caseInsensitive]) {
+                    let matchingSubstances = substances.filter { substance in
+                        let range = NSRange(location: 0, length: substance.nameUnwrapped.utf16.count)
+                        return regex.firstMatch(in: substance.nameUnwrapped, options: [], range: range) != nil
+                    }
+                    if !matchingSubstances.isEmpty {
+                        for matchingSubstance in matchingSubstances {
+                            matchingSubstance.addToDangerousSubstances(substance)
+                        }
+                    }
+                }
+                // if still here there was no match
+                // check if there are already general interactions
+                let firstGeneralMatch = unresolvedInteractions.first { generalInteraction in
+                    generalInteraction.nameUnwrapped.lowercased() == dangerousInteraction.name.lowercased()
+                }
+                if let foundGeneral = firstGeneralMatch {
+                    foundGeneral.addToDangerousSubstances(substance)
+                } else {
+                    let newUnresolved = UnresolvedInteraction(context: context)
+                    newUnresolved.name = dangerousInteraction.name
+                    substance.addToDangerousUnresolved(newUnresolved)
+                    unresolvedInteractions.insert(newUnresolved)
+                }
             }
         }
-
-        // Try to match general interaction
-        let firstGeneralMatch = generalInteractions.first { generalInteraction in
-            generalInteraction.nameUnwrapped.lowercased() == decodedInteraction.name.lowercased()
-        }
-        if let foundGeneral = firstGeneralMatch {
-            switch unsafeOrDangerous {
-            case .unsafe:
-                foundGeneral.addToUnsafeSubstances(substanceToAdd)
-            case .dangerous:
-                foundGeneral.addToDangerousSubstances(substanceToAdd)
-            }
-        } else {
-            let newGeneralInteraction = UnresolvedInteraction(context: context)
-            newGeneralInteraction.name = decodedInteraction.name
-            switch unsafeOrDangerous {
-            case .unsafe:
-                newGeneralInteraction.addToUnsafeSubstances(substanceToAdd)
-            case .dangerous:
-                newGeneralInteraction.addToDangerousSubstances(substanceToAdd)
-            }
-            generalInteractions.insert(newGeneralInteraction)
-        }
-
     }
 
     static let namesOfUncontrolledSubstances = [

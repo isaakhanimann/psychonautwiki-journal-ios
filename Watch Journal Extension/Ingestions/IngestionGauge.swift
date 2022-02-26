@@ -21,7 +21,7 @@ struct IngestionGauge: View {
     let gradientStops: Gradient
 
     init(ingestion: Ingestion) {
-        self.name = ingestion.substanceCopy?.nameUnwrapped ?? "Unknown"
+        self.name = ingestion.substanceNameUnwrapped
         self.startTime = ingestion.timeUnwrapped
         let durations = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped)
 

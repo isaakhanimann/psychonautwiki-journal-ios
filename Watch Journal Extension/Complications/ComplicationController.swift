@@ -116,8 +116,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 line2TextProvider: CLKSimpleTextProvider(text: "-")
             )
             guard let firstIngestion = sortedIngestions.first else {return defaultTemplate}
-            guard let line1Long = firstIngestion.substanceCopy?.nameUnwrapped else {return defaultTemplate}
-            guard let line1Short = firstIngestion.substanceCopy?.nameUnwrapped.prefix(3) else {return defaultTemplate}
+            guard let line1Long = firstIngestion.substanceName else {return defaultTemplate}
+            guard let line1Short = firstIngestion.substanceName?.prefix(3) else {return defaultTemplate}
 
             let template = CLKComplicationTemplateExtraLargeStackText(
                 line1TextProvider: CLKSimpleTextProvider(text: line1Long, shortText: String(line1Short)),
@@ -128,11 +128,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let first3Ingestions = sortedIngestions.prefix(3)
 
             let template = CLKComplicationTemplateModularLargeColumns(
-                row1Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 0]?.substanceCopy?.nameUnwrapped),
+                row1Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 0]?.substanceNameUnwrapped),
                 row1Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 0]),
-                row2Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 1]?.substanceCopy?.nameUnwrapped),
+                row2Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 1]?.substanceNameUnwrapped),
                 row2Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 1]),
-                row3Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 2]?.substanceCopy?.nameUnwrapped),
+                row3Column1TextProvider: getSubstanceTitle(substanceName: first3Ingestions[safe: 2]?.substanceNameUnwrapped),
                 row3Column2TextProvider: getTimeIntervalProvider(for: first3Ingestions[safe: 2])
             )
             return template

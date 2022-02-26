@@ -12,14 +12,12 @@ public class RoaDuration: NSManagedObject, Decodable {
             fatalError("Missing managed object context")
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let onset = try container.decode(DurationRange.self, forKey: .onset)
-        let comeup = try container.decode(DurationRange.self, forKey: .comeup)
-        let peak = try container.decode(DurationRange.self, forKey: .peak)
-        let offset = try container.decode(DurationRange.self, forKey: .offset)
         self.init(context: context) // init needs to be called after calls that can throw an exception
-        self.onset = onset
-        self.comeup = comeup
-        self.peak = peak
-        self.offset = offset
+        self.onset = try? container.decodeIfPresent(DurationRange.self, forKey: .onset)
+        self.comeup = try? container.decodeIfPresent(DurationRange.self, forKey: .comeup)
+        self.peak = try? container.decodeIfPresent(DurationRange.self, forKey: .peak)
+        self.offset = try? container.decodeIfPresent(DurationRange.self, forKey: .offset)
+        self.total = try? container.decodeIfPresent(DurationRange.self, forKey: .total)
+        self.afterglow = try? container.decodeIfPresent(DurationRange.self, forKey: .afterglow)
     }
 }

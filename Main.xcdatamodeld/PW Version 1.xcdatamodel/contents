@@ -3,6 +3,7 @@
     <entity name="ChemicalClass" representedClassName="ChemicalClass" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="crossTolerance" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossToleranceChemicals" inverseEntity="Substance"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousChemicals" inverseEntity="Substance"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubstancesFile" inverseName="chemicalClasses" inverseEntity="SubstancesFile"/>
         <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="chemicalClass" inverseEntity="Substance"/>
@@ -45,6 +46,7 @@
     <entity name="PsychoactiveClass" representedClassName="PsychoactiveClass" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="crossTolerance" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossTolerancePsychoactives" inverseEntity="Substance"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousPsychoactives" inverseEntity="Substance"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubstancesFile" inverseName="psychoactiveClasses" inverseEntity="SubstancesFile"/>
         <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="psychoactiveClass" inverseEntity="Substance"/>
@@ -90,6 +92,9 @@
         <attribute name="toxicity" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="chemicalClass" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="substances" inverseEntity="ChemicalClass"/>
+        <relationship name="crossToleranceChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="crossTolerance" inverseEntity="ChemicalClass"/>
+        <relationship name="crossTolerancePsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="crossTolerance" inverseEntity="PsychoactiveClass"/>
+        <relationship name="crossToleranceSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossToleranceSubstances" inverseEntity="Substance"/>
         <relationship name="dangerousChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="dangerousSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="dangerousPsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="dangerousSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousSubstances" inverseEntity="Substance"/>
@@ -130,17 +135,17 @@
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeUnresolved" inverseEntity="Substance"/>
     </entity>
     <elements>
-        <element name="ChemicalClass" positionX="-441" positionY="-108" width="128" height="134"/>
+        <element name="ChemicalClass" positionX="-441" positionY="-108" width="128" height="14"/>
         <element name="DurationRange" positionX="-432" positionY="-90" width="128" height="164"/>
         <element name="Effect" positionX="-414" positionY="-72" width="128" height="74"/>
         <element name="Experience" positionX="-657.2791137695312" positionY="-182.0665588378906" width="128" height="104"/>
         <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="149"/>
-        <element name="PsychoactiveClass" positionX="-432" positionY="-99" width="128" height="134"/>
+        <element name="PsychoactiveClass" positionX="-432" positionY="-99" width="128" height="14"/>
         <element name="Roa" positionX="-450" positionY="-108" width="128" height="104"/>
         <element name="RoaDose" positionX="-423" positionY="-81" width="128" height="134"/>
         <element name="RoaDuration" positionX="-414" positionY="-72" width="128" height="134"/>
         <element name="RoaRange" positionX="-441" positionY="-99" width="128" height="119"/>
-        <element name="Substance" positionX="-405" positionY="-63" width="128" height="344"/>
+        <element name="Substance" positionX="-405" positionY="-63" width="128" height="14"/>
         <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="74"/>
         <element name="SubstancesFile" positionX="-450" positionY="-81" width="128" height="74"/>
         <element name="Tolerance" positionX="-396" positionY="-54" width="128" height="89"/>

@@ -6,7 +6,7 @@ struct IngestionRow: View {
 
     var body: some View {
         Group {
-            if let substanceUnwrapped = ingestion.substanceCopy {
+            if let substanceUnwrapped = ingestion.substance {
                 NavigationLink(destination: EditIngestionView(ingestion: ingestion)) {
                     HStack {
                         Image(systemName: "circle.fill")

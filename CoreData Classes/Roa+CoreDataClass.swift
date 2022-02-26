@@ -4,7 +4,7 @@ import CoreData
 public class Roa: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
-        case name, dose, duration
+        case name, dose, duration, bioavailability
     }
 
     // https://psychonautwiki.org/wiki/Route_of_administration
@@ -55,10 +55,10 @@ public class Roa: NSManagedObject, Decodable {
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let name = try container.decode(AdministrationRoute.self, forKey: .name).rawValue
-        let durationTypes = try container.decode(RoaDuration.self, forKey: .duration)
         self.init(context: context) // init needs to be called after calls that can throw an exception
         self.name = name
         self.dose = try? container.decodeIfPresent(RoaDose.self, forKey: .dose)
-        self.duration = durationTypes
+        self.duration = try? container.decodeIfPresent(RoaDuration.self, forKey: .duration)
+        self.bioavailability = try? container.decodeIfPresent(RoaRange.self, forKey: .bioavailability)
     }
 }

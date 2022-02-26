@@ -15,6 +15,10 @@ extension Ingestion {
         timeUnwrapped.asTimeString
     }
 
+    var substanceNameUnwrapped: String {
+        substanceName ?? "Unknown"
+    }
+
     var substance: Substance? {
         guard let substanceNameUnwrapped = substanceName else {return nil}
         return PersistenceController.shared.getSubstance(with: substanceNameUnwrapped)

@@ -42,7 +42,7 @@ extension Experience {
 
     var usedSubstanceNames: String {
         var names = sortedIngestionsUnwrapped.map { ingestion in
-            ingestion.substanceCopy?.nameUnwrapped ?? "Unknown"
+            ingestion.substanceName ?? "Unknown"
         }
         names = names.uniqued()
 
