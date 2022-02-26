@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class DoseRange: NSManagedObject, Decodable {
+public class RoaRange: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case min, max

@@ -14,7 +14,7 @@ struct IngestionLineModel {
         totalGraphDuration: TimeInterval,
         verticalWeight: Double,
         horizontalWeight: Double,
-        durations: DurationTypes,
+        durations: RoaDuration,
         insetTimes: Int
     ) {
         self.color = color

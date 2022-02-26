@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class DurationTypes: NSManagedObject, Decodable {
+public class RoaDuration: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey {
         case onset, comeup, peak, offset, total, afterglow

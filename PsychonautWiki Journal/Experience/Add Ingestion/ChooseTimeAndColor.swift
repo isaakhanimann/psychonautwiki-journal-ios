@@ -9,8 +9,6 @@ struct ChooseTimeAndColor: View {
     let experience: Experience
 
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedTime = Date()
     @State private var selectedColor: Ingestion.IngestionColor
@@ -80,16 +78,8 @@ struct ChooseTimeAndColor: View {
             ingestion.time = selectedTime
             ingestion.dose = dose
             ingestion.administrationRoute = administrationRoute.rawValue
-            guard let substanceCopy = SubstanceCopy(basedOn: substance, context: moc) else {return}
-            ingestion.substanceCopy = substanceCopy
+            ingestion.substanceName = substance.nameUnwrapped
             ingestion.color = selectedColor.rawValue
-            substance.lastUsedDate = Date()
-
-            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
-
-            if selectedTime.distance(to: Date()) < 24*60*60 {
-                connectivity.sendNewIngestion(ingestion: ingestion)
-            }
             try? moc.save()
         }
 

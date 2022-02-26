@@ -23,7 +23,7 @@ struct IngestionGauge: View {
     init(ingestion: Ingestion) {
         self.name = ingestion.substanceCopy?.nameUnwrapped ?? "Unknown"
         self.startTime = ingestion.timeUnwrapped
-        let durations = ingestion.substanceCopy?.getDuration(for: ingestion.administrationRouteUnwrapped)
+        let durations = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped)
 
         let onsetDuration = durations?.onset?.oneValue(at: 0.5) ?? 0
         let comeupDuration = durations?.comeup?.oneValue(at: 0.5) ?? 0

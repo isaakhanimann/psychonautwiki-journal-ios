@@ -9,7 +9,7 @@ struct HelperMethods {
 
         var linesData = [IngestionLineModel]()
         for (verticalWeight, ingestion) in getSortedIngestionsWithVerticalWeights(for: sortedIngestions) {
-            guard let substance = ingestion.substanceCopy else {continue}
+            guard let substance = ingestion.substance else {continue}
             guard let duration = substance.getDuration(for: ingestion.administrationRouteUnwrapped) else {continue}
             let ingestionTime = ingestion.timeUnwrapped
 
@@ -39,7 +39,7 @@ struct HelperMethods {
 
     private static func getInsetTimes(of ingestion: Ingestion, comparedTo previousIngestions: [Ingestion]) -> Int {
         let defaultInset = 0
-        guard let durationOriginal = ingestion.substanceCopy?.getDuration(
+        guard let durationOriginal = ingestion.substance?.getDuration(
                 for: ingestion.administrationRouteUnwrapped
         ) else {return defaultInset}
 
@@ -52,7 +52,7 @@ struct HelperMethods {
 
         var insetTimes = 0
         for previousIngestion in previousIngestions {
-            guard let duration = previousIngestion.substanceCopy?.getDuration(
+            guard let duration = previousIngestion.substance?.getDuration(
                 for: previousIngestion.administrationRouteUnwrapped
             ) else {continue}
 

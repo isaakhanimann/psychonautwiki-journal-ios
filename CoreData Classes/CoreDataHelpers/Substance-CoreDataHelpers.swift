@@ -12,19 +12,19 @@ extension Substance {
     }
 
     var unsafeSubstanceInteractionsUnwrapped: [Substance] {
-        unsafeSubstanceInteractions?.allObjects as? [Substance] ?? []
+        unsafeSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var unsafeGeneralInteractionsUnwrapped: [GeneralInteraction] {
-        unsafeGeneralInteractions?.allObjects as? [GeneralInteraction] ?? []
+    var unsafeGeneralInteractionsUnwrapped: [UnresolvedInteraction] {
+        unsafeUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
     }
 
     var dangerousSubstanceInteractionsUnwrapped: [Substance] {
-        dangerousSubstanceInteractions?.allObjects as? [Substance] ?? []
+        dangerousSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var dangerousGeneralInteractionsUnwrapped: [GeneralInteraction] {
-        dangerousGeneralInteractions?.allObjects as? [GeneralInteraction] ?? []
+    var dangerousGeneralInteractionsUnwrapped: [UnresolvedInteraction] {
+        dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
     }
 
     var administrationRoutesUnwrapped: [Roa.AdministrationRoute] {
@@ -33,23 +33,23 @@ extension Substance {
         }
     }
 
-    func getDuration(for administrationRoute: Roa.AdministrationRoute) -> DurationTypes? {
+    func getDuration(for administrationRoute: Roa.AdministrationRoute) -> RoaDuration? {
         let filteredRoas = roasUnwrapped.filter { roa in
             roa.nameUnwrapped == administrationRoute
         }
 
-        guard let duration = filteredRoas.first?.durationTypes else {
+        guard let duration = filteredRoas.first?.duration else {
             return nil
         }
         return duration
     }
 
-    func getDose(for administrationRoute: Roa.AdministrationRoute) -> DoseTypes? {
+    func getDose(for administrationRoute: Roa.AdministrationRoute) -> RoaDose? {
         let filteredRoas = roasUnwrapped.filter { roa in
             roa.nameUnwrapped == administrationRoute
         }
 
-        guard let dose = filteredRoas.first?.doseTypes else {
+        guard let dose = filteredRoas.first?.dose else {
             return nil
         }
         return dose

@@ -55,10 +55,6 @@ struct ExperienceView: View {
 
             }
 
-            if connectivity.activationState == .activated && connectivity.isWatchAppInstalled {
-                SyncSection(experience: experience)
-            }
-
             if connectivity.isPaired && !connectivity.isComplicationEnabled {
                 NavigationLink(destination: AddFaceView()) {
                     Label("Add Watch Face", systemImage: "applewatch.watchface")
@@ -125,7 +121,6 @@ struct ExperienceView: View {
     private func deleteIngestions(at offsets: IndexSet) {
         for offset in offsets {
             let ingestion = experience.sortedIngestionsUnwrapped[offset]
-            connectivity.sendIngestionDelete(for: ingestion.identifier)
             moc.delete(ingestion)
         }
         save()

@@ -30,7 +30,7 @@ struct AroundShapeModelDown: AroundShapeModel {
         // swiftlint:disable function_body_length
         init?(
             verticalWeight: CGFloat,
-            durations: DurationTypes,
+            durations: RoaDuration,
             ingestionTimeOffset: TimeInterval,
             totalGraphDuration: TimeInterval
         ) {

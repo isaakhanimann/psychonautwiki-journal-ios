@@ -29,7 +29,7 @@ struct LineModel {
         init?(
             horizontalWeight: Double,
             verticalWeight: CGFloat,
-            durations: DurationTypes,
+            durations: RoaDuration,
             ingestionTimeOffset: TimeInterval,
             totalGraphDuration: TimeInterval
         ) {

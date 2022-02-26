@@ -15,6 +15,11 @@ extension Ingestion {
         timeUnwrapped.asTimeString
     }
 
+    var substance: Substance? {
+        guard let substanceNameUnwrapped = substanceName else {return nil}
+        return PersistenceController.shared.getSubstance(with: substanceNameUnwrapped)
+    }
+
     var administrationRouteUnwrapped: Roa.AdministrationRoute {
         Roa.AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
     }
@@ -32,9 +37,8 @@ extension Ingestion {
     }
 
     var doseInfoString: String {
-        guard let substanceUnwrapped = substanceCopy else { return "" }
         let info = doseUnwrapped.cleanString
-        let unitsUnwrapped = substanceUnwrapped.getDose(
+        let unitsUnwrapped = substance?.getDose(
             for: administrationRouteUnwrapped
         )?.units ?? ""
         return info.appending(" \(unitsUnwrapped)")
@@ -47,7 +51,7 @@ extension Ingestion {
     var horizontalWeight: Double {
         let defaultWeight = 0.5
 
-        guard let doseTypesUnwrapped = substanceCopy?.getDose(for: administrationRouteUnwrapped) else {
+        guard let doseTypesUnwrapped = substance?.getDose(for: administrationRouteUnwrapped) else {
             return defaultWeight
         }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
@@ -59,13 +63,13 @@ extension Ingestion {
         } else {
             let doseRelative = doseUnwrapped - minMax.min
             let rangeLength = minMax.max - minMax.min
-            return doseRelative / rangeLength
+            return Double(doseRelative / rangeLength)
         }
     }
 
     var endTime: Date {
         let defaultEnd = timeUnwrapped.addingTimeInterval(5*60*60)
-        guard let durations = substanceCopy?.getDuration(for: administrationRouteUnwrapped) else {return defaultEnd}
+        guard let durations = substance?.getDuration(for: administrationRouteUnwrapped) else {return defaultEnd}
         guard let onset = durations.onset?.oneValue(at: 0.5) else {return defaultEnd}
         guard let comeup = durations.comeup?.oneValue(at: 0.5) else {return defaultEnd}
         guard let peak = durations.peak?.oneValue(at: horizontalWeight) else {return defaultEnd}

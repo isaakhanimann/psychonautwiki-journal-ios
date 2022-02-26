@@ -43,29 +43,7 @@ struct SettingsTab: View {
                     )
                 }
 
-                if let file = storedFile.first {
-                    if isEyeOpen {
-                        Section(header: Text("Choose Interactions")) {
-                            NavigationLink(
-                                destination: ChooseInteractionsView(file: file),
-                                label: {
-                                    Label(
-                                        "Interactions",
-                                        systemImage: "burst.fill"
-                                    )
-                                }
-                            )
-                        }
-
-                        Section(header: Text("Choose Favorites")) {
-                            NavigationLink(
-                                destination: ChooseFavoritesView(file: file),
-                                label: {
-                                    Label("Favorites", systemImage: "star.fill")
-                                }
-                            )
-                        }
-                    }
+                if storedFile.first != nil {
                     Section(
                         footer: HStack {
                             Spacer()
@@ -87,7 +65,6 @@ struct SettingsTab: View {
 
     private func toggleEye() {
         isEyeOpen.toggle()
-        PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
         connectivity.sendEyeState(isEyeOpen: isEyeOpen)
     }
 

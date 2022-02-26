@@ -75,7 +75,7 @@ extension Experience {
         // Initialize endOfGraphTime sensibly
         var endOfGraphTime = firstIngestion.timeUnwrapped
         for ingestion in ingestions {
-            guard let duration = ingestion.substanceCopy?
+            guard let duration = ingestion.substance?
                     .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
             guard let onset = duration.onset?.maxSec else {return nil}
             guard let comeup = duration.comeup?.maxSec else {return nil}

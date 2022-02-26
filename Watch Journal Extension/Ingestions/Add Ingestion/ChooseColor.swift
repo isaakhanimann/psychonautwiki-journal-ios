@@ -34,15 +34,10 @@ struct ChooseColor: View {
             ingestion.time = ingestionTime
             ingestion.dose = dose
             ingestion.administrationRoute = administrationRoute.rawValue
-            guard let substanceCopy = SubstanceCopy(basedOn: substance, context: moc) else {return}
-            ingestion.substanceCopy = substanceCopy
+            ingestion.substanceName = substance.nameUnwrapped
             ingestion.color = color.rawValue
-            substance.lastUsedDate = Date()
 
-            connectivity.sendNewIngestion(ingestion: ingestion)
             try? moc.save()
-
-            UserDefaults.standard.set(true, forKey: PersistenceController.needsToUpdateWatchFaceKey)
         }
 
         dismiss()

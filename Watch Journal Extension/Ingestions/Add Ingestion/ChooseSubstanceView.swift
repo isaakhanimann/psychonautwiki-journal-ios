@@ -15,12 +15,9 @@ struct ChooseSubstanceView: View {
     var body: some View {
         NavigationView {
             List {
-                let recentSubstances = storedFile.first?.getRecentlyUsedSubstancesInOrder(
-                    maxSubstancesToGet: 5
-                ) ?? []
-                if !recentSubstances.isEmpty {
-                    Section(header: Text("Recently Used")) {
-                        ForEach(recentSubstances) { substance in
+                ForEach(storedFile.first?.psychoactiveClassesSorted ?? []) { pClass in
+                    Section(header: Text(pClass.nameUnwrapped)) {
+                        ForEach(pClass.sortedSubstancesUnwrapped) { substance in
                             SubstanceRow(
                                 substance: substance,
                                 dismiss: dismiss,
@@ -29,34 +26,6 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
-                let favoritesEnabled = storedFile.first?.favoritesSorted.filter({$0.isEnabled}) ?? []
-                if !favoritesEnabled.isEmpty {
-                    Section(header: Text("Favorites")) {
-                        ForEach(favoritesEnabled) { substance in
-                            SubstanceRow(
-                                substance: substance,
-                                dismiss: dismiss,
-                                experience: experience
-                            )
-                        }
-                    }
-                }
-
-                ForEach(storedFile.first?.categoriesUnwrappedSorted ?? []) { category in
-                    let enabledSubstances = category.sortedEnabledSubstancesUnwrapped
-                    if !enabledSubstances.isEmpty {
-                        Section(header: Text(category.nameUnwrapped)) {
-                            ForEach(category.sortedEnabledSubstancesUnwrapped) { substance in
-                                SubstanceRow(
-                                    substance: substance,
-                                    dismiss: dismiss,
-                                    experience: experience
-                                )
-                            }
-                        }
-                    }
-                }
-
                 if isEyeOpen {
                     Section {
                         EmptyView()

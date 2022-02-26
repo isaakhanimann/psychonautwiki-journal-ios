@@ -2,13 +2,13 @@ import SwiftUI
 
 struct DosePicker: View {
 
-    let doseInfo: DoseTypes?
+    let doseInfo: RoaDose?
     @Binding var doseMaybe: Double?
 
     @State private var doseDouble: Double = 0
     @State private var doseText = ""
 
-    init(doseInfo: DoseTypes?, doseMaybe: Binding<Double?>) {
+    init(doseInfo: RoaDose?, doseMaybe: Binding<Double?>) {
         self.doseInfo = doseInfo
         self._doseMaybe = doseMaybe
 
@@ -140,7 +140,7 @@ struct DosePicker: View {
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        let substance = helper.substancesFile.allSubstancesUnwrapped[2]
+        let substance = helper.substancesFile.psychoactiveClassesSorted[0].substancesUnwrapped[2]
 
         Form {
             DosePicker(

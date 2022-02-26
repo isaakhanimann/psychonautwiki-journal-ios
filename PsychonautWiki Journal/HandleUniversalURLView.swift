@@ -94,22 +94,19 @@ struct HandleUniversalURLView: View {
     }
 
     private func toggleEye() {
-        if let file = storedFile.first {
-            isEyeOpen.toggle()
-            PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: file)
-            connectivity.sendEyeState(isEyeOpen: isEyeOpen)
-        }
+        isEyeOpen.toggle()
+        connectivity.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private func handleUniversalUrl(universalUrl: URL) {
         if let substanceName = getSubstanceName(from: universalUrl) {
-            if let foundSubstance = storedFile.first?.getSubstance(with: substanceName) {
+            if let foundSubstance = PersistenceController.shared.getSubstance(with: substanceName) {
                 let experience = PersistenceController.shared.getOrCreateLatestExperienceWithoutSave()
                 self.alertToShow = Alert(
                     title: Text("Add \(foundSubstance.nameUnwrapped)?")
                         .foregroundColor(Color.red)
                         .font(.title),
-                    message: Text(createAlertMessage(for: foundSubstance, with: experience)),
+                    message: Text("Replace this"),
                     primaryButton: .default(
                         Text("Yes"),
                         action: {
@@ -137,78 +134,6 @@ struct HandleUniversalURLView: View {
             )
             self.isShowingAlert = true
         }
-    }
-
-    private func createAlertMessage(for substance: Substance, with experience: Experience) -> String {
-        let dangerousIngestions = InteractionChecker.getDangerousIngestions(
-            of: substance,
-            with: experience.sortedIngestionsUnwrapped
-        )
-        let dangerousInteractions = InteractionChecker.getDangerousInteraction(of: substance)
-        let unsafeIngestions = InteractionChecker.getUnsafeIngestions(
-            of: substance,
-            with: experience.sortedIngestionsUnwrapped
-        )
-        let unsafeInteractions = InteractionChecker.getUnsafeInteraction(of: substance)
-
-        let isDangerous = !dangerousIngestions.isEmpty
-        || !dangerousInteractions.isEmpty
-        let isUnsafe = !unsafeIngestions.isEmpty
-        || !unsafeInteractions.isEmpty
-
-        if !(isDangerous || isUnsafe) {
-            return "Add \(substance.nameUnwrapped) to your ingestions"
-        }
-
-        var message = ""
-        if isDangerous && isUnsafe {
-            let dangerNames = getNames(of: dangerousInteractions, and: dangerousIngestions)
-            let dangerNamesString = getString(from: dangerNames)
-            message += "\(substance.nameUnwrapped) is dangerous with \(dangerNamesString)"
-            let unsafeNames = getNames(of: unsafeInteractions, and: unsafeIngestions)
-            let unsafeNamesString = getString(from: unsafeNames)
-            message += " and unsafe with \(unsafeNamesString)"
-            return message
-        } else if isDangerous {
-            let dangerNames = getNames(of: dangerousInteractions, and: dangerousIngestions)
-            let dangerNamesString = getString(from: dangerNames)
-            message += "\(substance.nameUnwrapped) is dangerous with \(dangerNamesString)"
-            return message
-        } else if isUnsafe {
-            let unsafeNames = getNames(of: unsafeInteractions, and: unsafeIngestions)
-            let unsafeNamesString = getString(from: unsafeNames)
-            message += "\(substance.nameUnwrapped) is unsafe with \(unsafeNamesString)"
-            return message
-        } else {
-            assertionFailure("This function should not be called in this case")
-            return message
-        }
-    }
-
-    private func getNames(of interactions: [GeneralInteraction], and ingestions: [Ingestion]) -> [String] {
-        var result = [String]()
-        for interaction in interactions {
-            result.append(interaction.nameUnwrapped)
-        }
-        for ingestion in ingestions {
-            guard let nameUnwrapped = ingestion.substanceCopy?.name else {continue}
-            result.append(nameUnwrapped)
-        }
-        return result.uniqued()
-    }
-
-    private func getString(from names: [String]) -> String {
-        var result = ""
-        for (index, name) in names.enumerated() {
-            if index < names.count-2 {
-                result += "\(name), "
-            } else if index == names.count-2 {
-                result += "\(name) & "
-            } else {
-                result += name
-            }
-        }
-        return result
     }
 
     private func addSubstance(substance: Substance, addTo experience: Experience) {

@@ -23,21 +23,20 @@ public class SubstancesFile: NSManagedObject, Decodable {
         if substances.count < 50 {
             throw DecodingError.notEnoughSubstancesParsed
         }
-        let categories = SubstancesFile.createAndFillCategories(from: substances, context: context)
-        let generalInteractions = SubstancesFile.createGeneralInteractionsAndAddThemToSubstances(
-            from: categories,
+        let psychoactiveClasses = SubstancesFile.createAndFillCategories(from: substances, context: context)
+        SubstancesFile.createGeneralInteractionsAndAddThemToSubstances(
+            from: psychoactiveClasses,
             context: context
         )
         self.init(context: context)
-        self.categories = categories as NSSet
-        self.generalInteractions = generalInteractions as NSSet
+        self.psychoactiveClasses = psychoactiveClasses as NSSet
     }
 
     static private func createAndFillCategories(
         from substances: [Substance],
         context: NSManagedObjectContext
-    ) -> Set<Category> {
-        var addedCategories = Set<Category>()
+    ) -> Set<PsychoactiveClass> {
+        var psychoactives = Set<PsychoactiveClass>()
         var substancesWithoutCategory = [Substance]()
         for substance in substances {
             if substance.categoriesDecoded.isEmpty {
@@ -45,46 +44,46 @@ public class SubstancesFile: NSManagedObject, Decodable {
             } else {
                 for categoryDecoded in substance.categoriesDecoded {
 
-                    let maybeFirstCategory = addedCategories.first { addedCategory in
-                        addedCategory.nameUnwrapped.lowercased() == categoryDecoded.lowercased()
+                    let maybeFirstCategory = psychoactives.first { cat in
+                        cat.nameUnwrapped.lowercased() == categoryDecoded.lowercased()
                     }
 
                     if let existingCategory = maybeFirstCategory {
                         existingCategory.addToSubstances(substance)
                     } else {
-                        let newCategory = Category(context: context)
+                        let newCategory = PsychoactiveClass(context: context)
                         newCategory.name = categoryDecoded
                         newCategory.addToSubstances(substance)
-                        addedCategories.insert(newCategory)
+                        psychoactives.insert(newCategory)
                     }
                 }
             }
         }
         if !substancesWithoutCategory.isEmpty {
-            let newCategory = Category(context: context)
-            newCategory.name = "No Category"
+            let newCategory = PsychoactiveClass(context: context)
+            newCategory.name = "No Class"
 
             for subst in substancesWithoutCategory {
                 newCategory.addToSubstances(subst)
             }
-            addedCategories.insert(newCategory)
+            psychoactives.insert(newCategory)
         }
 
-        return addedCategories
+        return psychoactives
     }
 
     // Each substance has a string array of the names of the interactions
     static private func createGeneralInteractionsAndAddThemToSubstances(
-        from categories: Set<Category>,
+        from categories: Set<PsychoactiveClass>,
         context: NSManagedObjectContext
-        ) -> Set<GeneralInteraction> {
+        ) {
 
         var allSubstances = Set<Substance>()
         for category in categories {
             allSubstances = allSubstances.union(category.substancesUnwrapped)
         }
 
-        var newGeneralInteractions = Set<GeneralInteraction>()
+        var newGeneralInteractions = Set<UnresolvedInteraction>()
 
         for substance in allSubstances {
             for interaction in substance.unsafeInteractionsDecoded {
@@ -109,8 +108,6 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 )
             }
         }
-
-        return newGeneralInteractions
     }
 
     private enum UnsafeOrDangerous {
@@ -123,10 +120,10 @@ public class SubstancesFile: NSManagedObject, Decodable {
     static private func findAndAddMatchOrAddToGeneralInteractions(
         unsafeOrDangerous: UnsafeOrDangerous,
         substanceToAdd: Substance,
-        toSubstancesIn categories: Set<Category>,
+        toSubstancesIn categories: Set<PsychoactiveClass>,
         matching decodedInteraction: Substance.DecodedInteraction,
         context: NSManagedObjectContext,
-        generalInteractions: inout Set<GeneralInteraction>
+        generalInteractions: inout Set<UnresolvedInteraction>
     ) {
         // Try to match category
         let firstCategoryMatch = categories.first { category in
@@ -136,9 +133,9 @@ public class SubstancesFile: NSManagedObject, Decodable {
             for substanceInCategory in foundCategory.substancesUnwrapped {
                 switch unsafeOrDangerous {
                 case .unsafe:
-                    substanceInCategory.addToUnsafeSubstanceInteractions(substanceToAdd)
+                    substanceInCategory.addToUnsafeSubstances(substanceToAdd)
                 case .dangerous:
-                    substanceInCategory.addToDangerousSubstanceInteractions(substanceToAdd)
+                    substanceInCategory.addToDangerousSubstances(substanceToAdd)
                 }
             }
             return
@@ -155,9 +152,9 @@ public class SubstancesFile: NSManagedObject, Decodable {
         if let foundSubstance = firstSubstanceMatch {
             switch unsafeOrDangerous {
             case .unsafe:
-                foundSubstance.addToUnsafeSubstanceInteractions(substanceToAdd)
+                foundSubstance.addToUnsafeSubstances(substanceToAdd)
             case .dangerous:
-                foundSubstance.addToDangerousSubstanceInteractions(substanceToAdd)
+                foundSubstance.addToDangerousSubstances(substanceToAdd)
             }
             return
         }
@@ -173,9 +170,9 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 for matchingSubstance in matchingSubstances {
                     switch unsafeOrDangerous {
                     case .unsafe:
-                        matchingSubstance.addToUnsafeSubstanceInteractions(substanceToAdd)
+                        matchingSubstance.addToUnsafeSubstances(substanceToAdd)
                     case .dangerous:
-                        matchingSubstance.addToDangerousSubstanceInteractions(substanceToAdd)
+                        matchingSubstance.addToDangerousSubstances(substanceToAdd)
                     }
                 }
                 return
@@ -189,102 +186,28 @@ public class SubstancesFile: NSManagedObject, Decodable {
         if let foundGeneral = firstGeneralMatch {
             switch unsafeOrDangerous {
             case .unsafe:
-                foundGeneral.addToUnsafeSubstanceInteractions(substanceToAdd)
+                foundGeneral.addToUnsafeSubstances(substanceToAdd)
             case .dangerous:
-                foundGeneral.addToDangerousSubstanceInteractions(substanceToAdd)
+                foundGeneral.addToDangerousSubstances(substanceToAdd)
             }
         } else {
-            let newGeneralInteraction = GeneralInteraction(context: context)
+            let newGeneralInteraction = UnresolvedInteraction(context: context)
             newGeneralInteraction.name = decodedInteraction.name
-            newGeneralInteraction.isEnabled = true
             switch unsafeOrDangerous {
             case .unsafe:
-                newGeneralInteraction.addToUnsafeSubstanceInteractions(substanceToAdd)
+                newGeneralInteraction.addToUnsafeSubstances(substanceToAdd)
             case .dangerous:
-                newGeneralInteraction.addToDangerousSubstanceInteractions(substanceToAdd)
+                newGeneralInteraction.addToDangerousSubstances(substanceToAdd)
             }
             generalInteractions.insert(newGeneralInteraction)
         }
 
     }
 
-    func inheritFrom(otherfile: SubstancesFile) {
-        enableInteractions(basedOn: otherfile)
-        enableFavorites(basedOn: otherfile)
-        enableSubstances()
-        updateLastUsedSubstances(basedOn: otherfile)
-    }
-
-    private func enableInteractions(basedOn oldSubstancesFile: SubstancesFile) {
-        generalInteractionsUnwrapped.forEach { newInteraction in
-            if let foundInteraction = oldSubstancesFile.getGeneralInteraction(
-                    with: newInteraction.nameUnwrapped
-            ) {
-                newInteraction.isEnabled = foundInteraction.isEnabled
-            } else {
-                newInteraction.isEnabled = true
-            }
-        }
-    }
-
-    private func enableFavorites(basedOn oldSubstancesFile: SubstancesFile) {
-        for oldSubstance in oldSubstancesFile.favoritesSorted {
-            guard let foundSubstance = getSubstance(with: oldSubstance.nameUnwrapped) else {
-                continue
-            }
-            foundSubstance.isFavorite = true
-        }
-    }
-
-    private func enableSubstances() {
-        let isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
-        allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = isEyeOpen
-        }
-
-        if !isEyeOpen {
-            enableUncontrolledSubstances()
-        }
-    }
-
-    func enableUncontrolledSubstances() {
-        let namesOfUncontrolledSubstances = [
-            "Caffeine",
-            "Myristicin",
-            "Choline bitartrate",
-            "Citicoline"
-        ]
-        for name in namesOfUncontrolledSubstances {
-            guard let foundSubstance = getSubstance(with: name) else {continue}
-            foundSubstance.isEnabled = true
-        }
-    }
-
-    private func updateLastUsedSubstances(basedOn oldSubstancesFile: SubstancesFile) {
-        for oldSubstance in oldSubstancesFile.allSubstancesUnwrapped {
-            if let foundNewSubstance = getSubstance(with: oldSubstance.nameUnwrapped) {
-                foundNewSubstance.lastUsedDate = oldSubstance.lastUsedDate
-            }
-        }
-    }
-
-    func toggleAllOn() {
-        allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = true
-        }
-        generalInteractionsUnwrapped.forEach { interaction in
-            interaction.isEnabled = true
-        }
-    }
-
-    func toggleAllControlledOff() {
-        allSubstancesUnwrapped.forEach { substance in
-            substance.isEnabled = false
-        }
-        generalInteractionsUnwrapped.forEach { interaction in
-            interaction.isEnabled = false
-        }
-        enableUncontrolledSubstances()
-    }
-
+    static let namesOfUncontrolledSubstances = [
+        "Caffeine",
+        "Myristicin",
+        "Choline bitartrate",
+        "Citicoline"
+    ]
 }

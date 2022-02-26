@@ -21,18 +21,6 @@ struct SettingsView: View {
         NavigationView {
             List {
 
-                NavigationLink("SubstancesView") {
-                    MySubstancesView()
-                }
-
-                NavigationLink("FilesView") {
-                    MyFilesView()
-                }
-
-                NavigationLink("CategoriesView") {
-                    MyCategoriesView()
-                }
-
                 Section(
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
@@ -60,24 +48,6 @@ struct SettingsView: View {
                         Link(
                             "Responsible Use",
                             destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
-                        )
-                    }
-
-                    Section(header: Text("Dangerous Interaction Notifications")) {
-                        NavigationLink(
-                            destination: ChooseInteractionsView(file: storedFile.first!),
-                            label: {
-                                Label("Choose Interactions", systemImage: "burst.fill")
-                            }
-                        )
-                    }
-
-                    Section(header: Text("Favorites")) {
-                        NavigationLink(
-                            destination: ChooseFavoritesView(file: storedFile.first!),
-                            label: {
-                                Label("Choose Favorites", systemImage: "star.fill")
-                            }
                         )
                     }
 
@@ -124,7 +94,6 @@ struct SettingsView: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        PersistenceController.shared.toggleEye(to: isEyeOpen, modifyFile: storedFile.first!)
         connectivity.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
@@ -161,53 +130,6 @@ struct SettingsView: View {
         }
         DispatchQueue.main.async {
             self.isFetching = false
-        }
-    }
-}
-
-struct MySubstancesView: View {
-    @FetchRequest(
-        entity: Substance.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \Substance.name, ascending: false) ]
-    ) var substances: FetchedResults<Substance>
-
-    var body: some View {
-        List(substances) { substance in
-            HStack {
-                Text(substance.nameUnwrapped)
-                Text(substance.category?.file?.creationDate ?? Date(timeIntervalSince1970: 0), style: .date)
-            }
-        }
-    }
-}
-
-struct MyFilesView: View {
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var files: FetchedResults<SubstancesFile>
-
-    var body: some View {
-        List(files) { file in
-            HStack {
-                Text(file.creationDateUnwrapped, style: .date)
-                Text(file.creationDateUnwrapped, style: .time)
-            }
-        }
-    }
-}
-
-struct MyCategoriesView: View {
-    @FetchRequest(
-        entity: Category.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \Category.name, ascending: false) ]
-    ) var categories: FetchedResults<Category>
-
-    var body: some View {
-        List(categories) { category in
-            HStack {
-                Text(category.nameUnwrapped)
-            }
         }
     }
 }

@@ -23,16 +23,4 @@ enum InteractionChecker {
             }
         }
     }
-
-    static func getUnsafeInteraction(of substance: Substance) -> [GeneralInteraction] {
-        substance.unsafeGeneralInteractionsUnwrapped.filter { interaction in
-            interaction.isEnabled
-        }
-    }
-
-    static func getDangerousInteraction(of substance: Substance) -> [GeneralInteraction] {
-        substance.dangerousGeneralInteractionsUnwrapped.filter { interaction in
-            interaction.isEnabled
-        }
-    }
 }

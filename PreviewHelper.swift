@@ -1,12 +1,11 @@
 import Foundation
 import CoreData
 
-// swiftlint:disable type_body_length
 class PreviewHelper {
 
     let substancesFile: SubstancesFile
     var substance: Substance {
-        substancesFile.categoriesUnwrappedSorted.first!.sortedSubstancesUnwrapped.first!
+        substancesFile.psychoactiveClassesUnwrapped.first!.sortedSubstancesUnwrapped.first!
     }
     let experiences: [Experience]
 
@@ -258,17 +257,14 @@ class PreviewHelper {
     ) -> Ingestion {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let substance = file.getSubstance(with: substanceName)!
+        let substance = PersistenceController.preview.getSubstance(with: substanceName)!
 
         let ingestion = Ingestion(context: context)
         ingestion.time = formatter.date(from: stringTime)
         ingestion.administrationRoute = substance.administrationRoutesUnwrapped.first!.rawValue
         ingestion.dose = dose
         ingestion.color = color.rawValue
-        ingestion.substanceCopy = SubstanceCopy(
-            basedOn: substance,
-            context: context
-        )
+        ingestion.substanceName = substanceName
         return ingestion
     }
 }

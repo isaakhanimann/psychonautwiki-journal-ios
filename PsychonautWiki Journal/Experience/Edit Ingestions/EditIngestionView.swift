@@ -5,8 +5,6 @@ struct EditIngestionView: View {
     let ingestion: Ingestion
 
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedAdministrationRoute: Roa.AdministrationRoute
     @State private var selectedDose: Double?
@@ -14,8 +12,8 @@ struct EditIngestionView: View {
     @State private var selectedTime: Date
     @State private var isKeyboardShowing = false
 
-    var doseInfo: DoseTypes? {
-        ingestion.substanceCopy?.getDose(for: selectedAdministrationRoute)
+    var doseInfo: RoaDose? {
+        ingestion.substance?.getDose(for: selectedAdministrationRoute)
     }
 
     var selectedUnit: String? {
@@ -28,7 +26,7 @@ struct EditIngestionView: View {
 
     var body: some View {
         Form {
-            if let administrationRoutesUnwrapped = ingestion.substanceCopy?.administrationRoutesUnwrapped,
+            if let administrationRoutesUnwrapped = ingestion.substance?.administrationRoutesUnwrapped,
                administrationRoutesUnwrapped.count > 1 {
                 Section(header: Text("Route of Administration")) {
                     Picker("Route", selection: $selectedAdministrationRoute) {
@@ -74,10 +72,6 @@ struct EditIngestionView: View {
             let defaults = UserDefaults.standard
             defaults.setValue(selectedColor.rawValue, forKey: ingestion.substanceCopy?.name ?? "Unknown")
             if moc.hasChanges {
-                connectivity.sendIngestionUpdate(for: ingestion)
-                if let experienceUnwrapped = ingestion.experience {
-                    calendarWrapper.createOrUpdateEventBeforeMocSave(from: experienceUnwrapped)
-                }
                 try? moc.save()
             }
         })

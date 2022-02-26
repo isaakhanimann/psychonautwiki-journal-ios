@@ -3,7 +3,6 @@ import SwiftUI
 struct ContentView: View {
 
     @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
-    @AppStorage(PersistenceController.needsToUpdateWatchFaceKey) var needsToUpdateWatchFace: Bool = false
 
     @Environment(\.scenePhase) var scenePhase
 
@@ -45,11 +44,6 @@ struct ContentView: View {
                     perform: { newPhase in
                         if newPhase == .active {
                             maybeFetchAgain()
-                        } else if newPhase == .background {
-                            if needsToUpdateWatchFace {
-                                needsToUpdateWatchFace.toggle()
-                                ComplicationUpdater.updateActiveComplications()
-                            }
                         }
                     }
                 )

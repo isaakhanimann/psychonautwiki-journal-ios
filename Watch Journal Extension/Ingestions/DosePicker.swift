@@ -2,14 +2,14 @@ import SwiftUI
 
 struct DosePicker: View {
 
-    let doseInfo: DoseTypes?
+    let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
 
     @State private var doseDouble: Double = 0
     @State private var doseText = ""
 
-    init(doseInfo: DoseTypes?, doseMaybe: Binding<Double?>) {
-        self.doseInfo = doseInfo
+    init(doseInfo: RoaDose?, doseMaybe: Binding<Double?>) {
+        self.roaDose = doseInfo
         self._doseMaybe = doseMaybe
 
         if let doseUnwrapped = doseMaybe.wrappedValue {
@@ -24,7 +24,7 @@ struct DosePicker: View {
         VStack(alignment: .leading) {
             HStack {
                 TextField("Enter Dose", text: $doseText)
-                Text(doseInfo?.units ?? "")
+                Text(roaDose?.units ?? "")
             }
             .onChange(of: doseText) { _ in
                 doseText = doseText.trimmingCharacters(in: .whitespaces)
@@ -42,24 +42,24 @@ struct DosePicker: View {
     }
 
     private var doseRangeView: some View {
-        let units = doseInfo?.units ?? ""
+        let units = roaDose?.units ?? ""
 
-        if let thresh = doseInfo?.thresholdUnwrapped,
+        if let thresh = roaDose?.thresholdUnwrapped,
            thresh >= doseDouble {
             return Text("threshold (\(thresh.cleanString) \(units))")
-        } else if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                  let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped,
+        } else if let lightMin = roaDose?.lightUnwrapped?.minUnwrapped,
+                  let lightMax = roaDose?.lightUnwrapped?.maxUnwrapped,
                   doseDouble >= lightMin && doseDouble <= lightMax {
             return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-        } else if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                  let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped,
+        } else if let commonMin = roaDose?.commonUnwrapped?.minUnwrapped,
+                  let commonMax = roaDose?.commonUnwrapped?.maxUnwrapped,
                   doseDouble >= commonMin && doseDouble <= commonMax {
             return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-        } else if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                  let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped,
+        } else if let strongMin = roaDose?.strongUnwrapped?.minUnwrapped,
+                  let strongMax = roaDose?.strongUnwrapped?.maxUnwrapped,
                   doseDouble >= strongMin && doseDouble <= strongMax {
             return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-        } else if let heavy = doseInfo?.heavyUnwrapped,
+        } else if let heavy = roaDose?.heavyUnwrapped,
                   doseDouble >= heavy {
             return Text("heavy (\(heavy.cleanString) \(units)+)")
         } else {
@@ -71,7 +71,7 @@ struct DosePicker: View {
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PersistenceController.preview.createPreviewHelper()
-        let substance = helper.substancesFile.allSubstancesUnwrapped[2]
+        let substance = helper.substancesFile.psychoactiveClassesUnwrapped[0].substancesUnwrapped[2]
 
         DosePicker(
             doseInfo: substance.getDose(

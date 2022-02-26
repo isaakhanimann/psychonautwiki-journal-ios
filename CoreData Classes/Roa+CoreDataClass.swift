@@ -55,14 +55,10 @@ public class Roa: NSManagedObject, Decodable {
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let name = try container.decode(AdministrationRoute.self, forKey: .name).rawValue
-        let durationTypes = try container.decode(DurationTypes.self, forKey: .duration)
+        let durationTypes = try container.decode(RoaDuration.self, forKey: .duration)
         self.init(context: context) // init needs to be called after calls that can throw an exception
         self.name = name
-        if let doseTypesUnwrapped = try? container.decodeIfPresent(DoseTypes.self, forKey: .dose) {
-            self.doseTypes = doseTypesUnwrapped
-        } else {
-            self.doseTypes = DoseTypes.createDefault(moc: context)
-        }
-        self.durationTypes = durationTypes
+        self.dose = try? container.decodeIfPresent(RoaDose.self, forKey: .dose)
+        self.duration = durationTypes
     }
 }

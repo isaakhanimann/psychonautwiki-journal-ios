@@ -1,13 +1,13 @@
 import Foundation
 import CoreData
 
-extension DoseTypes {
+extension RoaDose {
 
     var thresholdUnwrapped: Double? {
         threshold == 0 ? nil : threshold
     }
 
-    var lightUnwrapped: DoseRange? {
+    var lightUnwrapped: RoaRange? {
         guard let lightUn = light else {
             return nil
         }
@@ -17,7 +17,7 @@ extension DoseTypes {
         return light
     }
 
-    var commonUnwrapped: DoseRange? {
+    var commonUnwrapped: RoaRange? {
         guard let commonUn = light else {
             return nil
         }
@@ -27,7 +27,7 @@ extension DoseTypes {
         return common
     }
 
-    var strongUnwrapped: DoseRange? {
+    var strongUnwrapped: RoaRange? {
         guard let strongUn = strong else {
             return nil
         }
@@ -55,16 +55,5 @@ extension DoseTypes {
             return (lightMin, strongMax)
         }
         return nil
-    }
-
-    static func createDefault(moc: NSManagedObjectContext) -> DoseTypes {
-        let defaultDoses = DoseTypes(context: moc)
-        defaultDoses.units = "mg"
-        defaultDoses.threshold = 0
-        defaultDoses.light = DoseRange.createDefault(moc: moc, addTo: defaultDoses)
-        defaultDoses.common = DoseRange.createDefault(moc: moc, addTo: defaultDoses)
-        defaultDoses.strong = DoseRange.createDefault(moc: moc, addTo: defaultDoses)
-        defaultDoses.heavy = 0
-        return defaultDoses
     }
 }

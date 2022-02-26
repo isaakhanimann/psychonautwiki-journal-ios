@@ -20,7 +20,7 @@ struct AngleModel: Identifiable {
     }
 
     init?(ingestion: Ingestion) {
-        guard let durations = ingestion.substanceCopy?
+        guard let durations = ingestion.substance?
                 .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
         let weight = ingestion.horizontalWeight
 

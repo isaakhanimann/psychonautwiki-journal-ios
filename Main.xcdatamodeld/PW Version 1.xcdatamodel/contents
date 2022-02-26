@@ -9,7 +9,7 @@
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainChemicals" inverseEntity="Substance"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeChemicals" inverseEntity="Substance"/>
     </entity>
-    <entity name="DurationRange" representedClassName="DurationRange" syncable="YES" codeGenerationType="class">
+    <entity name="DurationRange" representedClassName=".DurationRange" syncable="YES" codeGenerationType="category">
         <attribute name="max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="units" optional="YES" attributeType="String"/>
@@ -51,14 +51,14 @@
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainPsychoactives" inverseEntity="Substance"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafePsychoactives" inverseEntity="Substance"/>
     </entity>
-    <entity name="Roa" representedClassName="Roa" syncable="YES" codeGenerationType="class">
+    <entity name="Roa" representedClassName=".Roa" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="belongsTo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Substance" inverseName="roas" inverseEntity="Substance"/>
         <relationship name="bioavailability" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaRange" inverseName="bioavailibility" inverseEntity="RoaRange"/>
         <relationship name="dose" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaDose" inverseName="roa" inverseEntity="RoaDose"/>
         <relationship name="duration" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaDuration" inverseName="roa" inverseEntity="RoaDuration"/>
     </entity>
-    <entity name="RoaDose" representedClassName="RoaDose" syncable="YES" codeGenerationType="class">
+    <entity name="RoaDose" representedClassName=".RoaDose" syncable="YES" codeGenerationType="category">
         <attribute name="heavy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="threshold" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="units" optional="YES" attributeType="String"/>
@@ -67,7 +67,7 @@
         <relationship name="roa" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Roa" inverseName="dose" inverseEntity="Roa"/>
         <relationship name="strong" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaRange" inverseName="strongDose" inverseEntity="RoaRange"/>
     </entity>
-    <entity name="RoaDuration" representedClassName="RoaDuration" syncable="YES" codeGenerationType="class">
+    <entity name="RoaDuration" representedClassName=".RoaDuration" syncable="YES" codeGenerationType="category">
         <relationship name="afterglow" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="afterglow" inverseEntity="DurationRange"/>
         <relationship name="comeup" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="comeup" inverseEntity="DurationRange"/>
         <relationship name="offset" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="offset" inverseEntity="DurationRange"/>
@@ -76,7 +76,7 @@
         <relationship name="roa" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Roa" inverseName="duration" inverseEntity="Roa"/>
         <relationship name="total" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DurationRange" inverseName="total" inverseEntity="DurationRange"/>
     </entity>
-    <entity name="RoaRange" representedClassName="RoaRange" syncable="YES" codeGenerationType="class">
+    <entity name="RoaRange" representedClassName=".RoaRange" syncable="YES" codeGenerationType="category">
         <attribute name="max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="bioavailibility" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Roa" inverseName="bioavailability" inverseEntity="Roa"/>
@@ -84,7 +84,7 @@
         <relationship name="lightDose" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaDose" inverseName="light" inverseEntity="RoaDose"/>
         <relationship name="strongDose" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RoaDose" inverseName="strong" inverseEntity="RoaDose"/>
     </entity>
-    <entity name="Substance" representedClassName="Substance" syncable="YES" codeGenerationType="class">
+    <entity name="Substance" representedClassName=".Substance" syncable="YES" codeGenerationType="category">
         <attribute name="addictionPotential" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="toxicity" optional="YES" attributeType="String"/>
@@ -93,7 +93,7 @@
         <relationship name="dangerousChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="dangerousSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="dangerousPsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="dangerousSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousSubstances" inverseEntity="Substance"/>
-        <relationship name="dangerousUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteractions" inverseName="dangerousSubstances" inverseEntity="UnresolvedInteractions"/>
+        <relationship name="dangerousUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="dangerousSubstances" inverseEntity="UnresolvedInteraction"/>
         <relationship name="effects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Effect" inverseName="substances" inverseEntity="Effect"/>
         <relationship name="psychoactiveClass" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="substances" inverseEntity="PsychoactiveClass"/>
         <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="belongsTo" inverseEntity="Roa"/>
@@ -101,29 +101,29 @@
         <relationship name="uncertainChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="uncertainSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="uncertainPsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="uncertainSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainSubstances" inverseEntity="Substance"/>
-        <relationship name="uncertainUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteractions" inverseName="uncertainSubstances" inverseEntity="UnresolvedInteractions"/>
+        <relationship name="uncertainUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="uncertainSubstances" inverseEntity="UnresolvedInteraction"/>
         <relationship name="unsafeChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="unsafeSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="unsafePsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="unsafeSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeSubstances" inverseEntity="Substance"/>
-        <relationship name="unsafeUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteractions" inverseName="unsafeSubstances" inverseEntity="UnresolvedInteractions"/>
+        <relationship name="unsafeUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="unsafeSubstances" inverseEntity="UnresolvedInteraction"/>
     </entity>
-    <entity name="SubstanceCopy" representedClassName=".SubstanceCopy" syncable="YES" codeGenerationType="category">
+    <entity name="SubstanceCopy" representedClassName="SubstanceCopy" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="ingestion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="substanceCopy" inverseEntity="Ingestion"/>
     </entity>
-    <entity name="SubstancesFile" representedClassName="SubstancesFile" syncable="YES" codeGenerationType="class">
+    <entity name="SubstancesFile" representedClassName=".SubstancesFile" syncable="YES" codeGenerationType="category">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="chemicalClasses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="file" inverseEntity="ChemicalClass"/>
         <relationship name="psychoactiveClasses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="file" inverseEntity="PsychoactiveClass"/>
     </entity>
-    <entity name="Tolerance" representedClassName="Tolerance" syncable="YES" codeGenerationType="class">
+    <entity name="Tolerance" representedClassName=".Tolerance" syncable="YES" codeGenerationType="category">
         <attribute name="full" optional="YES" attributeType="String"/>
         <attribute name="half" optional="YES" attributeType="String"/>
         <attribute name="zero" optional="YES" attributeType="String"/>
         <relationship name="belongsTo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Substance" inverseName="tolerance" inverseEntity="Substance"/>
     </entity>
-    <entity name="UnresolvedInteractions" representedClassName="UnresolvedInteractions" syncable="YES" codeGenerationType="class">
+    <entity name="UnresolvedInteraction" representedClassName="UnresolvedInteraction" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousUnresolved" inverseEntity="Substance"/>
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainUnresolved" inverseEntity="Substance"/>
@@ -141,9 +141,9 @@
         <element name="RoaDuration" positionX="-414" positionY="-72" width="128" height="134"/>
         <element name="RoaRange" positionX="-441" positionY="-99" width="128" height="119"/>
         <element name="Substance" positionX="-405" positionY="-63" width="128" height="344"/>
-        <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="14"/>
+        <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="74"/>
         <element name="SubstancesFile" positionX="-450" positionY="-81" width="128" height="74"/>
         <element name="Tolerance" positionX="-396" positionY="-54" width="128" height="89"/>
-        <element name="UnresolvedInteractions" positionX="-450" positionY="-36" width="128" height="89"/>
+        <element name="UnresolvedInteraction" positionX="-450" positionY="-36" width="128" height="89"/>
     </elements>
 </model>

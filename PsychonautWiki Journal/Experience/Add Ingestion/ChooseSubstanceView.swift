@@ -3,9 +3,9 @@ import SwiftUI
 struct ChooseSubstanceView: View {
 
     @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
+        entity: Substance.entity(),
+        sortDescriptors: [ ]
+    ) var substances: FetchedResults<Substance>
 
     let dismiss: () -> Void
     let experience: Experience
@@ -17,80 +17,22 @@ struct ChooseSubstanceView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                TextField("Search Substances", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .disableAutocorrection(true)
-                    .autocapitalization(.words)
-                    .padding(.horizontal)
-                List {
-                    let recentsFiltered = storedFile.first?
-                        .getRecentlyUsedSubstancesInOrder(maxSubstancesToGet: 5)
-                        .filter({ substance in
-                            substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
-                            substance.isEnabled
-                        }) ?? []
-                    if !recentsFiltered.isEmpty {
-                        Section(header: Text("Recently Used")) {
-                            ForEach(recentsFiltered) { substance in
-                                SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
-                            }
-                        }
-                    }
-                    let favoritesFiltered = storedFile.first?
-                        .favoritesSorted
-                        .filter({ substance in
-                            substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
-                            substance.isEnabled
-                        }) ?? []
-                    if !favoritesFiltered.isEmpty {
-                        Section(header: Text("Favorites")) {
-                            ForEach(favoritesFiltered) { substance in
-                                SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
-                            }
-                        }
-                    }
-                    let categories = storedFile.first?
-                        .categoriesUnwrappedSorted
-                        .filter({ cat in
-                            cat.substancesUnwrapped.contains { substance in
-                                substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased()) &&
-                                substance.isEnabled
-                            }
-                        }) ?? []
-                    ForEach(categories) { category in
-                        Section(header: Text(category.nameUnwrapped)) {
-                            let filteredSubstances = category.sortedEnabledSubstancesUnwrapped
-                                .filter({ substance in
-                                    substance.nameUnwrapped.lowercased().hasPrefix(searchText.lowercased())
-                                })
-                            ForEach(filteredSubstances) { substance in
-                                SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
-                            }
-                        }
-                    }
+            List {
+                ForEach(substances) { substance in
+                    SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
+                }
 
-                    if recentsFiltered.isEmpty
-                        && favoritesFiltered.isEmpty
-                        && categories.isEmpty {
-                        Text("No substances found")
+                if isEyeOpen {
+                    Section {
+                        EmptyView()
+                    } footer: {
+                        Text(Constants.substancesDisclaimerIOS)
+                            .font(.footnote)
                             .foregroundColor(.secondary)
                     }
-
-                    if isEyeOpen {
-                        Section {
-                            EmptyView()
-                        } footer: {
-                            Text(Constants.substancesDisclaimerIOS)
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                        }
-                    }
                 }
-                .listStyle(PlainListStyle())
-
-                Spacer().frame(maxHeight: 1) // fix SwiftUI bug, make the last element in the list show
             }
+            .listStyle(PlainListStyle())
             .navigationBarTitle("Add Ingestion")
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
                 withAnimation {

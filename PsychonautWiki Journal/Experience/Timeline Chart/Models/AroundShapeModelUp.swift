@@ -29,7 +29,7 @@ struct AroundShapeModelUp: AroundShapeModel {
 
         init?(
             verticalWeight: CGFloat,
-            durations: DurationTypes,
+            durations: RoaDuration,
             ingestionTimeOffset: TimeInterval,
             totalGraphDuration: TimeInterval
         ) {

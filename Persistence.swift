@@ -15,7 +15,6 @@ struct PersistenceController {
     private let backgroundContext: NSManagedObjectContext
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
     static let isEyeOpenKey = "isEyeOpen"
-    static let needsToUpdateWatchFaceKey = "needsToUpdateWatchFace"
     static let hasCleanedUpCoreDataKey = "hasCleanedUpCoreData"
 
     static let model: NSManagedObjectModel = {
@@ -47,18 +46,6 @@ struct PersistenceController {
 
     func createPreviewHelper() -> PreviewHelper {
         PreviewHelper(context: container.viewContext)
-    }
-
-    func findSubstance(with name: String) -> Substance? {
-        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-        guard let file = try? container.viewContext.fetch(fetchRequest).first else {return nil}
-        return file.getSubstance(with: name)
-    }
-
-    func findGeneralInteraction(with name: String) -> GeneralInteraction? {
-        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-        guard let file = try? container.viewContext.fetch(fetchRequest).first else {return nil}
-        return file.getGeneralInteraction(with: name)
     }
 
     func getLatestExperience() -> Experience? {
@@ -147,28 +134,6 @@ struct PersistenceController {
         }
     }
 
-    // swiftlint:disable function_parameter_count
-    func createIngestionWithoutSave(
-        context: NSManagedObjectContext,
-        identifier: UUID,
-        addTo experience: Experience,
-        substance: Substance,
-        ingestionTime: Date,
-        ingestionRoute: Roa.AdministrationRoute,
-        color: Ingestion.IngestionColor,
-        dose: Double
-    ) {
-        let ingestion = Ingestion(context: context)
-        ingestion.identifier = identifier
-        ingestion.experience = experience
-        ingestion.time = ingestionTime
-        ingestion.administrationRoute = ingestionRoute.rawValue
-        ingestion.color = color.rawValue
-        ingestion.dose = dose
-        ingestion.substanceCopy = SubstanceCopy(basedOn: substance, context: context)
-        substance.lastUsedDate = Date()
-    }
-
     func addInitialSubstances() {
         let fileName = "InitialSubstances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
@@ -188,8 +153,6 @@ struct PersistenceController {
 
                 let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = creationDate
-                substancesFile.enableUncontrolledSubstances()
-                substancesFile.generalInteractionsUnwrapped.forEach({$0.isEnabled = false})
 
                 try viewContext.save()
             } catch {
@@ -211,7 +174,6 @@ struct PersistenceController {
                 let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
                 substancesFile.creationDate = Date()
                 if let fileToDelete = earlierFileToDelete {
-                    substancesFile.inheritFrom(otherfile: fileToDelete)
                     backgroundContext.delete(fileToDelete)
                 }
                 do {
@@ -263,17 +225,11 @@ struct PersistenceController {
         }
     }
 
-    func toggleEye(to isOpen: Bool, modifyFile: SubstancesFile) {
-        viewContext.perform {
-            if isOpen {
-                modifyFile.toggleAllOn()
-            } else {
-                modifyFile.toggleAllControlledOff()
-            }
-            if viewContext.hasChanges {
-                try? viewContext.save()
-            }
-        }
+    func getSubstance(with name: String) -> Substance? {
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        let pred = NSPredicate(format: "name == %@", name)
+        fetchRequest.predicate = pred
+        return try? viewContext.fetch(fetchRequest).first
     }
 
 }
