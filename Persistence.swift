@@ -232,13 +232,6 @@ struct PersistenceController {
 
     func cleanupCoreData() {
         backgroundContext.performAndWait {
-            deleteAllFiles()
-            deleteAllSubstances()
-            deleteAllRoas()
-            deleteAllDoseTypes()
-            deleteAllDurationTypes()
-            deleteAllDoseRanges()
-            deleteAllDurationRanges()
             convertIngestions()
             if backgroundContext.hasChanges {
                 try? backgroundContext.save()
@@ -250,69 +243,6 @@ struct PersistenceController {
             if backgroundContext.hasChanges {
                 try? backgroundContext.save()
             }
-        }
-    }
-
-    private func deleteAllFiles() {
-        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let files = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for file in files {
-            backgroundContext.delete(file)
-        }
-    }
-
-    private func deleteAllSubstances() {
-        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for substance in substances {
-            backgroundContext.delete(substance)
-        }
-    }
-
-    private func deleteAllRoas() {
-        let fetchRequest: NSFetchRequest<Roa> = Roa.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let roas = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for roa in roas {
-            backgroundContext.delete(roa)
-        }
-    }
-
-    private func deleteAllDoseTypes() {
-        let fetchRequest: NSFetchRequest<DoseTypes> = DoseTypes.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let doseTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for doseT in doseTypes {
-            backgroundContext.delete(doseT)
-        }
-    }
-
-    private func deleteAllDurationTypes() {
-        let fetchRequest: NSFetchRequest<DurationTypes> = DurationTypes.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let durationTypes = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for durationT in durationTypes {
-            backgroundContext.delete(durationT)
-        }
-    }
-
-    private func deleteAllDoseRanges() {
-        let fetchRequest: NSFetchRequest<DoseRange> = DoseRange.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let doseRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for doseR in doseRanges {
-            backgroundContext.delete(doseR)
-        }
-    }
-
-    private func deleteAllDurationRanges() {
-        let fetchRequest: NSFetchRequest<DurationRange> = DurationRange.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let durationRanges = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for durationR in durationRanges {
-            backgroundContext.delete(durationR)
         }
     }
 
