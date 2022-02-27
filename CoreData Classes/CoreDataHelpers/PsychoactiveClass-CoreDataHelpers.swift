@@ -2,7 +2,7 @@ import Foundation
 
 extension PsychoactiveClass {
     var nameUnwrapped: String {
-        name ?? "Unknown"
+        name ?? "Miscellaneous"
     }
 
     var substancesUnwrapped: [Substance] {

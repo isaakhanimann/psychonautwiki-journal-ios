@@ -36,7 +36,6 @@
 		EA47E66C27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66B27CA63D000F6E10F /* Effect-CoreDataHelpers.swift */; };
 		EA47E66D27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66B27CA63D000F6E10F /* Effect-CoreDataHelpers.swift */; };
 		EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66F27CB477000F6E10F /* SearchTab.swift */; };
-		EA47E67127CB477000F6E10F /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66F27CB477000F6E10F /* SearchTab.swift */; };
 		EA47E67327CB490300F6E10F /* AllTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E67227CB490300F6E10F /* AllTabs.swift */; };
 		EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A426CBA664009FB0EC /* SubstanceRow.swift */; };
 		EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48B99726E7B215003BF667 /* AngleModel.swift */; };
@@ -68,6 +67,7 @@
 		EA9AE85827CB74A600D4D468 /* appicon-open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA9AE85627CB74A600D4D468 /* appicon-open@2x.png */; };
 		EA9AE85B27CB760600D4D468 /* appicon-closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA9AE85927CB760600D4D468 /* appicon-closed@3x.png */; };
 		EA9AE85C27CB760600D4D468 /* appicon-closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA9AE85A27CB760600D4D468 /* appicon-closed@2x.png */; };
+		EA9AE85E27CB89ED00D4D468 /* SearchTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchTabViewModel.swift */; };
 		EA9D22A626EB374D00BCF893 /* IngestionObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */; };
 		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
@@ -295,6 +295,7 @@
 		EA9AE85627CB74A600D4D468 /* appicon-open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-open@2x.png"; sourceTree = "<group>"; };
 		EA9AE85927CB760600D4D468 /* appicon-closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-closed@3x.png"; sourceTree = "<group>"; };
 		EA9AE85A27CB760600D4D468 /* appicon-closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-closed@2x.png"; sourceTree = "<group>"; };
+		EA9AE85D27CB89ED00D4D468 /* SearchTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabViewModel.swift; sourceTree = "<group>"; };
 		EA9D22A526EB374D00BCF893 /* IngestionObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionObserverView.swift; sourceTree = "<group>"; };
 		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAA2EC3A26DFC8B800B4FACF /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -430,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				EA47E66F27CB477000F6E10F /* SearchTab.swift */,
+				EA9AE85D27CB89ED00D4D468 /* SearchTabViewModel.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -994,7 +996,6 @@
 				EAA2EC5926DFCBFA00B4FACF /* Data-ToFile.swift in Sources */,
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
 				EA48B9A226E802E7003BF667 /* WatchFaceView.swift in Sources */,
-				EA47E67127CB477000F6E10F /* SearchTab.swift in Sources */,
 				EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */,
 				EAA2EC4426DFCBCF00B4FACF /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA47E64E27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
@@ -1157,6 +1158,7 @@
 				EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */,
 				EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */,
 				EA12854B270447730085C3F6 /* AddFaceView.swift in Sources */,
+				EA9AE85E27CB89ED00D4D468 /* SearchTabViewModel.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,

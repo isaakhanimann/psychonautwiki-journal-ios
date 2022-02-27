@@ -1,8 +1,19 @@
 import SwiftUI
 
 struct SearchTab: View {
+
+    @StateObject private var viewModel = SearchTabViewModel()
+
     var body: some View {
-        Text("Search")
+        NavigationView {
+            List {
+                ForEach(viewModel.sortedSubstances) { substance in
+                    Text(substance.nameUnwrapped)
+                }
+            }
+            .navigationTitle("Substances")
+        }
+        .searchable(text: $viewModel.searchText)
     }
 }
 
