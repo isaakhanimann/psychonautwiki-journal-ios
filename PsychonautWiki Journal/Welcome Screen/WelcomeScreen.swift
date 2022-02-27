@@ -3,14 +3,8 @@ import SwiftUI
 struct WelcomeScreen: View {
 
     @State private var isLoading = false
-
-    @Environment(\.managedObjectContext) var moc
-    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
 
     var imageName: String {
         isEyeOpen ? "Eye Open" : "Eye Closed"
@@ -51,7 +45,6 @@ struct WelcomeScreen: View {
                         }
                     }
                 }
-
                 Text("More info in Settings")
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -62,18 +55,13 @@ struct WelcomeScreen: View {
             .padding()
             .navigationBarHidden(true)
         }
-        .onAppear {
-            if storedFile.first == nil {
-                PersistenceController.shared.addInitialSubstances()
-            }
-        }
     }
 
     private func loadAndDismiss() {
         isLoading = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            hasBeenSetupBefore = true
+            hasSeenWelcome = true
         }
     }
 

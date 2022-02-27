@@ -2,18 +2,16 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
-    @Environment(\.managedObjectContext) var moc
+    @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
 
     var body: some View {
         ZStack {
             HandleUniversalURLView()
             Group {
-                if hasBeenSetupBefore {
+                if hasSeenWelcome {
                     AllTabs()
                 } else {
                     WelcomeScreen()
-                        .environment(\.managedObjectContext, self.moc)
                 }
             }
         }

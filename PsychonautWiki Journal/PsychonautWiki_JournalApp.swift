@@ -5,8 +5,8 @@ import SwiftUI
 struct PsychonautWiki_JournalApp: App {
 
     @AppStorage(PersistenceController.hasCleanedUpCoreDataKey) var hasCleanedUpCoreData: Bool = false
+    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
     @StateObject var calendarWrapper = CalendarWrapper()
-
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -19,9 +19,11 @@ struct PsychonautWiki_JournalApp: App {
         .onChange(of: scenePhase) { phase in
             if phase == .active {
                 calendarWrapper.checkIfSomethingChanged()
-                if !hasCleanedUpCoreData {
+                if hasBeenSetupBefore && !hasCleanedUpCoreData {
                     PersistenceController.shared.cleanupCoreData()
                     hasCleanedUpCoreData = true
+                } else if !hasBeenSetupBefore {
+                    PersistenceController.shared.addInitialSubstances()
                 }
             }
         }

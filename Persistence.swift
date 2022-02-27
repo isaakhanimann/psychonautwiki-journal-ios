@@ -14,6 +14,7 @@ struct PersistenceController {
     // use backgroundContext to parse new file and delete old one
     private let backgroundContext: NSManagedObjectContext
     static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
+    static let hasSeenWelcomeKey = "hasSeenWelcome"
     static let isEyeOpenKey = "isEyeOpen"
     static let hasCleanedUpCoreDataKey = "hasCleanedUpCoreData"
 
