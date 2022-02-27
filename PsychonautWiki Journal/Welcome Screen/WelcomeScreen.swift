@@ -9,11 +9,17 @@ struct WelcomeScreen: View {
         sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+
+    var imageName: String {
+        isEyeOpen ? "AppIcon Open" : "AppIcon"
+    }
+
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
                 ScrollView {
-                    Image(decorative: "AppIconCopy")
+                    Image(decorative: imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 130, height: 130, alignment: .center)

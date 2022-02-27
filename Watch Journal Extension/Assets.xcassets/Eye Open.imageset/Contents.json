@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "open-eye.png",
+      "filename" : "eye01_noBK.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "open-eye@2x.png",
+      "filename" : "eye01_noBK@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "open-eye@3x.png",
+      "filename" : "eye01_noBK@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

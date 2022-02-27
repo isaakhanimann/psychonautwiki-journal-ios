@@ -11,10 +11,16 @@ struct WatchWelcome: View {
 
     @Environment(\.managedObjectContext) var moc
 
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+
+    var imageName: String {
+        isEyeOpen ? "AppIcon Open" : "AppIcon"
+    }
+
     var body: some View {
         ScrollView {
             VStack {
-                Image(decorative: "AppIconCopy")
+                Image(decorative: imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80, height: 80, alignment: .center)

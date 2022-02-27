@@ -59,17 +59,18 @@ struct SettingsTab: View {
             .navigationTitle(Text("Settings"))
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    (isEyeOpen ? Image("Eye Open") : Image("Eye Closed"))
-                        .renderingMode(.template)
+                    Image(imageName)
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.secondary)
-                        .frame(width: 30, height: 30, alignment: .center)
                         .onTapGesture(count: 3, perform: toggleEye)
                 }
             }
         }
         .currentDeviceNavigationViewStyle()
+    }
+
+    private var imageName: String {
+        isEyeOpen ? "Eye Open" : "Eye Closed"
     }
 
     private func toggleEye() {
