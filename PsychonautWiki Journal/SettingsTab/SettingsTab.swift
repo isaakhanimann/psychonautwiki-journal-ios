@@ -76,6 +76,8 @@ struct SettingsTab: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
+        let nameOfNewAppicon = isEyeOpen ? "AppIcon-Open" : nil // nil sets it back to the default
+        UIApplication.shared.setAlternateIconName(nameOfNewAppicon)
         Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
