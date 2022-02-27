@@ -7,7 +7,6 @@ struct PsychonautWiki_JournalApp: App {
     let persistenceController = PersistenceController.shared
     @AppStorage(PersistenceController.hasCleanedUpCoreDataKey) var hasCleanedUpCoreData: Bool = false
     @StateObject var calendarWrapper = CalendarWrapper()
-    @StateObject var connectivity = Connectivity()
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -16,7 +15,6 @@ struct PsychonautWiki_JournalApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.viewContext)
                 .environmentObject(calendarWrapper)
-                .environmentObject(connectivity)
                 .accentColor(Color.blue)
         }
         .onChange(of: scenePhase) { phase in

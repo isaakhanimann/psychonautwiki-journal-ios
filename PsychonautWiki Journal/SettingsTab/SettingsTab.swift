@@ -2,17 +2,7 @@ import SwiftUI
 
 struct SettingsTab: View {
 
-    @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var connectivity: Connectivity
-
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
-
-    @State private var isShowingErrorAlert = false
-    @State private var alertMessage = ""
-    @State private var isFetching = false
+    @StateObject private var viewModel = SettingsViewModel()
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
@@ -23,18 +13,21 @@ struct SettingsTab: View {
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
                 ) {
-                    if isFetching {
+                    if viewModel.isFetching {
                         Text("Fetching Substances...")
                     } else {
-                        Button(action: fetchNewSubstances, label: {
-                            Label(storedFile.first!.creationDateUnwrapped.asDateAndTime, systemImage: "arrow.clockwise")
+                        Button(action: viewModel.fetchNewSubstances, label: {
+                            Label(
+                                viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "No Substances",
+                                systemImage: "arrow.clockwise"
+                            )
                         })
                     }
                 }
-                .alert(isPresented: $isShowingErrorAlert) {
+                .alert(isPresented: $viewModel.isShowingErrorAlert) {
                     Alert(
                         title: Text("Fetch Failed"),
-                        message: Text(alertMessage),
+                        message: Text(viewModel.alertMessage),
                         dismissButton: .default(Text("Ok"))
                     )
                 }
@@ -75,11 +68,6 @@ struct SettingsTab: View {
                         .onTapGesture(count: 3, perform: toggleEye)
                 }
             }
-            .onDisappear(perform: {
-                if moc.hasChanges {
-                    try? moc.save()
-                }
-            })
         }
         .currentDeviceNavigationViewStyle()
     }
@@ -87,43 +75,12 @@ struct SettingsTab: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private func playHapticFeedback() {
         let impactMed = UIImpactFeedbackGenerator(style: .medium)
         impactMed.impactOccurred()
-    }
-
-    private func fetchNewSubstances() {
-        isFetching = true
-        performPsychonautWikiAPIRequest { result in
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.alertMessage = "Request to PsychonautWiki API failed."
-                    self.isShowingErrorAlert.toggle()
-                    self.isFetching = false
-                }
-            case .success(let data):
-                tryToDecodeData(data: data)
-            }
-        }
-    }
-
-    private func tryToDecodeData(data: Data) {
-        do {
-            try PersistenceController.shared.decodeAndSaveFile(from: data)
-        } catch {
-            DispatchQueue.main.async {
-                self.alertMessage = "Not enough substances could be parsed."
-                self.isShowingErrorAlert.toggle()
-            }
-        }
-        DispatchQueue.main.async {
-            self.isFetching = false
-        }
     }
 }
 

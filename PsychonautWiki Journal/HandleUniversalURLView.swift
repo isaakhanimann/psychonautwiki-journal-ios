@@ -9,7 +9,6 @@ struct HandleUniversalURLView: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
 
     @State private var alertToShow: Alert?
     @State private var isShowingAlert = false
@@ -69,7 +68,6 @@ struct HandleUniversalURLView: View {
                         }
                         .environment(\.managedObjectContext, self.moc)
                         .environmentObject(calendarWrapper)
-                        .environmentObject(connectivity)
                     case .dose(let route, let substance, let experience):
                         NavigationView {
                             ChooseDoseView(
@@ -83,7 +81,6 @@ struct HandleUniversalURLView: View {
                         }
                         .environment(\.managedObjectContext, self.moc)
                         .environmentObject(calendarWrapper)
-                        .environmentObject(connectivity)
                     }
                 }
             )
@@ -100,7 +97,7 @@ struct HandleUniversalURLView: View {
 
     private func toggleEye() {
         isEyeOpen.toggle()
-        connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private func handleUniversalUrl(universalUrl: URL) {

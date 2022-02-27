@@ -3,7 +3,6 @@ import SwiftUI
 struct SettingsTab: View {
 
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var connectivity: Connectivity
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
@@ -65,7 +64,7 @@ struct SettingsTab: View {
 
     private func toggleEye() {
         isEyeOpen.toggle()
-        connectivity.sendEyeState(isEyeOpen: isEyeOpen)
+        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private func fetchNewSubstances() {
@@ -104,7 +103,5 @@ struct SettingsTab_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTab()
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
-            .environmentObject(Connectivity())
-            .accentColor(Color.blue)
     }
 }

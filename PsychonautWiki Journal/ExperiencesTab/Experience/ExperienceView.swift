@@ -6,7 +6,6 @@ struct ExperienceView: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
 
     @State private var selectedTitle: String
     @State private var isShowingAddIngestionSheet = false
@@ -55,7 +54,7 @@ struct ExperienceView: View {
 
             }
 
-            if connectivity.isPaired && !connectivity.isComplicationEnabled {
+            if Connectivity.shared.isPaired && !Connectivity.shared.isComplicationEnabled {
                 NavigationLink(destination: AddFaceView()) {
                     Label("Add Watch Face", systemImage: "applewatch.watchface")
                         .foregroundColor(.accentColor)
@@ -100,7 +99,6 @@ struct ExperienceView: View {
             )
                 .environment(\.managedObjectContext, self.moc)
                 .environmentObject(calendarWrapper)
-                .environmentObject(connectivity)
                 .accentColor(Color.blue)
         }
     }

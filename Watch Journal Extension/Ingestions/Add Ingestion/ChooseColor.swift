@@ -10,7 +10,6 @@ struct ChooseColor: View {
     let ingestionTime: Date
 
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var connectivity: Connectivity
 
     var body: some View {
         ScrollView {

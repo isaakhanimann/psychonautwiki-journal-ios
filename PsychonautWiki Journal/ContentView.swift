@@ -6,7 +6,6 @@ struct ContentView: View {
 
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
     @Environment(\.managedObjectContext) var moc
 
     var body: some View {

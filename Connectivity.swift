@@ -6,6 +6,8 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     @Published var activationState = WCSessionActivationState.notActivated
 
+    static let shared: Connectivity = Connectivity()
+
 #if os(iOS)
     @Published var isWatchAppInstalled = false
     @Published var isComplicationEnabled = false

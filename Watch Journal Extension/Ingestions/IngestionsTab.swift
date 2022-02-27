@@ -4,7 +4,6 @@ struct IngestionsTab: View {
 
     @ObservedObject var experience: Experience
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var connectivity: Connectivity
 
     @State private var isShowingAddIngestionSheet = false
 
@@ -39,7 +38,6 @@ struct IngestionsTab: View {
                     experience: experience
                 )
                     .environment(\.managedObjectContext, self.moc)
-                    .environmentObject(connectivity)
                     .accentColor(Color.blue)
             }
         }
