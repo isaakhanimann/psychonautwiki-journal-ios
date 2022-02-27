@@ -13,7 +13,7 @@ class SearchTabViewModel: NSObject, ObservableObject, NSFetchedResultsController
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
         substanceFetchController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: PersistenceController.shared.viewContext,
+            managedObjectContext: getContextForPreviewOrView(),
             sectionNameKeyPath: nil, cacheName: nil
         )
         super.init()
