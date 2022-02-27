@@ -1,10 +1,9 @@
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsTab: View {
 
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var connectivity: Connectivity
-    @Environment(\.presentationMode) var presentationMode
 
     @FetchRequest(
         entity: SubstancesFile.entity(),
@@ -20,7 +19,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-
                 Section(
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
@@ -75,11 +73,6 @@ struct SettingsView: View {
                         .foregroundColor(.secondary)
                         .frame(width: 30, height: 30, alignment: .center)
                         .onTapGesture(count: 3, perform: toggleEye)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
                 }
             }
             .onDisappear(perform: {
@@ -136,7 +129,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsTab()
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(Connectivity())
             .environmentObject(CalendarWrapper())

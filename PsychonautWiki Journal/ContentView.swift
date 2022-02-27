@@ -14,7 +14,7 @@ struct ContentView: View {
             HandleUniversalURLView()
             Group {
                 if hasBeenSetupBefore {
-                    HomeView()
+                    AllTabs()
                 } else {
                     WelcomeScreen()
                         .environment(\.managedObjectContext, self.moc)

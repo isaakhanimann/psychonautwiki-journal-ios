@@ -1,14 +1,12 @@
 import SwiftUI
 
-struct HomeView: View {
+struct ExperiencesTab: View {
 
     #if DEBUG
     let isDoingAppStoreScreenshots = false
     #endif
 
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @EnvironmentObject var connectivity: Connectivity
 
     @FetchRequest(
         entity: Experience.entity(),
@@ -28,7 +26,6 @@ struct HomeView: View {
         }
     }
 
-    @State private var areSettingsShowing = false
     @State private var selection: Experience?
     @State private var isShowingDeleteExperienceAlert = false
     @State private var offsets: IndexSet?
@@ -71,23 +68,8 @@ struct HomeView: View {
                     .padding()
                 }
             }
-            .fullScreenCover(isPresented: $areSettingsShowing, content: {
-                SettingsView()
-                    .environment(\.managedObjectContext, self.moc)
-                    .environmentObject(calendarWrapper)
-                    .environmentObject(connectivity)
-                    .accentColor(Color.blue)
-            })
             .navigationTitle("Experiences")
             .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    Button(
-                        action: {areSettingsShowing.toggle()},
-                        label: {
-                            Label("Settings", systemImage: "gearshape")
-                        }
-                    )
-                }
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
                     if !experiences.isEmpty {
                         Button(action: addExperience) {
@@ -119,7 +101,6 @@ struct HomeView: View {
             let now = Date()
             experience.creationDate = now
             experience.title = now.asDateString
-            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
             try? moc.save()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 selection = experience
@@ -144,9 +125,9 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct YourExperiencesTab_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        ExperiencesTab()
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
     }
 }
