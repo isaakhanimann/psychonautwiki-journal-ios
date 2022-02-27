@@ -194,13 +194,14 @@ struct PersistenceController {
 
     func cleanupCoreData() {
         backgroundContext.performAndWait {
-            convertIngestions()
+            convertSubstanceNamesOfIngestions()
             if backgroundContext.hasChanges {
                 try? backgroundContext.save()
             }
         }
         PersistenceController.shared.addInitialSubstances()
         backgroundContext.performAndWait {
+            convertUnitsOfIngestions()
             deleteAllSubstanceCopies()
             if backgroundContext.hasChanges {
                 try? backgroundContext.save()
@@ -208,13 +209,24 @@ struct PersistenceController {
         }
     }
 
-    private func convertIngestions() {
+    private func convertSubstanceNamesOfIngestions() {
         let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
         let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
         for ingestion in ingestions {
             ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
         }
     }
+
+    private func convertUnitsOfIngestions() {
+        let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
+        let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+        for ingestion in ingestions {
+            let substance = getSubstance(with: ingestion.substanceNameUnwrapped)
+            let dose = substance?.getDose(for: ingestion.administrationRouteUnwrapped)
+            ingestion.units = dose?.units
+        }
+    }
+
 
     private func deleteAllSubstanceCopies() {
         let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
