@@ -53,10 +53,20 @@ private func getURLRequest() throws -> URLRequest {
                     query AllSubstances {
                       substances(limit: 9999) {
                         name
+                        url
+                        effects {
+                          name
+                          url
+                        }
                         class {
+                          chemical
                           psychoactive
                         }
-                        url
+                        tolerance {
+                          full
+                          half
+                          zero
+                        }
                         roas {
                           name
                           dose {
@@ -97,7 +107,28 @@ private func getURLRequest() throws -> URLRequest {
                               max
                               units
                             }
+                            total {
+                              min
+                              max
+                              units
+                            }
+                            afterglow {
+                              min
+                              max
+                              units
+                            }
                           }
+                          bioavailability {
+                            min
+                            max
+                          }
+                        }
+                        summary
+                        addictionPotential
+                        toxicity
+                        crossTolerances
+                        uncertainInteractions {
+                          name
                         }
                         unsafeInteractions {
                           name
