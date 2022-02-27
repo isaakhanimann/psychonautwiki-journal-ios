@@ -227,7 +227,6 @@ struct PersistenceController {
         }
     }
 
-
     private func deleteAllSubstanceCopies() {
         let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
         fetchRequest.includesPropertyValues = false

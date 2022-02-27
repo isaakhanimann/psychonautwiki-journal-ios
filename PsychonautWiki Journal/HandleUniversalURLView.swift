@@ -90,7 +90,12 @@ struct HandleUniversalURLView: View {
     }
 
     private func popToRoot() {
-        UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        keyWindow?.rootViewController?.dismiss(animated: true)
     }
 
     private func toggleEye() {
