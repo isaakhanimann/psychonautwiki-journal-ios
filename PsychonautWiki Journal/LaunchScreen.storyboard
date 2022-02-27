@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Eye Open" translatesAutoresizingMaskIntoConstraints="NO" id="xoL-FV-XFn">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye-open-no-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="xoL-FV-XFn">
                                 <rect key="frame" x="117" y="348" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xoL-FV-XFn" secondAttribute="height" multiplier="460:460" id="R7O-JS-JuG"/>
@@ -38,7 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Eye Open" width="956.5" height="845.5"/>
+        <image name="eye-open-no-background.png" width="956.5" height="845.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
