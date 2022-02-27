@@ -137,10 +137,8 @@
 		EADE466A2709D34B00F1058E /* CurrentTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719E26CBA664009FB0EC /* CurrentTimeView.swift */; };
 		EADE466C2709D3C500F1058E /* RectangularComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
-		EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
-		EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */; };
 		EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712926CBA663009FB0EC /* ContentView.swift */; };
 		EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712B26CBA663009FB0EC /* SettingsTab.swift */; };
 		EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713226CBA663009FB0EC /* CalendarSection.swift */; };
@@ -323,10 +321,8 @@
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
-		EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclaimerViewShort.swift; sourceTree = "<group>"; };
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAE4712926CBA663009FB0EC /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EAE4712B26CBA663009FB0EC /* SettingsTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -647,9 +643,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */,
-				EAE4711C26CBA663009FB0EC /* CalendarScreen.swift */,
 				EAE4712226CBA663009FB0EC /* Feature.swift */,
-				EAE4712326CBA663009FB0EC /* DisclaimerViewShort.swift */,
 				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 			);
 			path = "Welcome Screen";
@@ -1101,7 +1095,6 @@
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EA460D2227637933002EF80B /* QandAView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
-				EAE471B126CBA664009FB0EC /* CalendarScreen.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */,
@@ -1149,7 +1142,6 @@
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
 				EAE4721326CBA664009FB0EC /* AroundShape.swift in Sources */,
 				EA94AD2E26F709CC00E7592D /* Constants.swift in Sources */,
-				EAE471B726CBA664009FB0EC /* DisclaimerViewShort.swift in Sources */,
 				EA47E66C27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
 				EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */,

@@ -2,17 +2,18 @@ import SwiftUI
 
 struct WelcomeScreen: View {
 
-    @Environment(\.managedObjectContext) var moc
+    @State private var isLoading = false
 
+    @Environment(\.managedObjectContext) var moc
+    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @FetchRequest(
         entity: SubstancesFile.entity(),
         sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
     ) var storedFile: FetchedResults<SubstancesFile>
 
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-
     var imageName: String {
-        isEyeOpen ? "AppIcon Open" : "AppIcon"
+        isEyeOpen ? "Eye Open" : "Eye Closed"
     }
 
     var body: some View {
@@ -23,8 +24,7 @@ struct WelcomeScreen: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 130, height: 130, alignment: .center)
-                        .cornerRadius(10)
-                        .accessibilityHidden(true)
+                        .padding(.leading, 10)
                     VStack(spacing: 20) {
                         (Text("Welcome to ") + Text("PsychonautWiki Journal").foregroundColor(.accentColor))
                             .multilineTextAlignment(.center)
@@ -56,13 +56,8 @@ struct WelcomeScreen: View {
                     .font(.footnote)
                     .foregroundColor(.secondary)
 
-                NavigationLink(
-                    destination: CalendarScreen(),
-                    label: {
-                        Text("Continue")
-                            .primaryButtonText()
-                    }
-                )
+                Button("I understand", action: loadAndDismiss)
+                    .buttonStyle(PrimaryButtonStyle())
             }
             .padding()
             .navigationBarHidden(true)
@@ -74,21 +69,30 @@ struct WelcomeScreen: View {
         }
     }
 
+    private func loadAndDismiss() {
+        isLoading = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            hasBeenSetupBefore = true
+        }
+    }
+
     let features = [
         Feature(
-            title: "Keep Track",
-            description: "Have an overview of your substance experiences. During and after the experience.",
-            image: "binoculars"
+            title: "Risk & Reliability",
+            // swiftlint:disable line_length
+            description: "Any reliance you place on PsychonautWiki Journal is strictly at your own risk. The developer is not liable.",
+            image: "brain.head.profile"
         ),
         Feature(
-            title: "Be Safe",
-            description: "Get notified of dangerous interactions. Add ingestions before you actually take them.",
-            image: "checkmark.shield"
+            title: "Third Party Resources",
+            description: "All data in the app should be verified with other sources for accuracy.",
+            image: "person.2.wave.2"
         ),
         Feature(
-            title: "Privacy",
-            description: "Your data belongs to you and will never be shared.",
-            image: "lock.shield"
+            title: "Consult a Doctor",
+            description: "Consult a doctor before making medical decisions.",
+            image: "heart.text.square"
         )
     ]
 }
