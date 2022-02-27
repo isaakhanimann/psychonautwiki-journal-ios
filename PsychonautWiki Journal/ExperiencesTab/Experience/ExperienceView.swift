@@ -149,7 +149,6 @@ struct ExperienceView_Previews: PreviewProvider {
         let helper = PersistenceController.preview.createPreviewHelper()
         ExperienceView(experience: helper.experiences.first!)
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
-            .environmentObject(Connectivity())
             .environmentObject(CalendarWrapper())
             .accentColor(Color.blue)
     }
