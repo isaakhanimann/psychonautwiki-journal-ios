@@ -13,10 +13,10 @@ struct PersistenceController {
     let viewContext: NSManagedObjectContext
     // use backgroundContext to parse new file and delete old one
     private let backgroundContext: NSManagedObjectContext
-    static let hasBeenSetupBeforeKey = "hasBeenSetupBefore"
+    static let comesFromVersion10Key = "hasBeenSetupBefore"
     static let hasSeenWelcomeKey = "hasSeenWelcome"
     static let isEyeOpenKey = "isEyeOpen"
-    static let hasCleanedUpCoreDataKey = "hasCleanedUpCoreData"
+    static let hasInitialSubstancesKey = "hasInitialSubstances"
 
     static let model: NSManagedObjectModel = {
         guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {

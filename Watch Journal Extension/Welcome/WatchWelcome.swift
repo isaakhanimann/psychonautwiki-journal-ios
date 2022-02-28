@@ -2,16 +2,8 @@ import SwiftUI
 
 struct WatchWelcome: View {
 
-    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
-
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
-
-    @Environment(\.managedObjectContext) var moc
-
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
 
     var imageName: String {
         isEyeOpen ? "AppIcon Open" : "AppIcon"
@@ -31,15 +23,9 @@ struct WatchWelcome: View {
                     .font(.title3.bold())
 
                 Button("Continue") {
-                    hasBeenSetupBefore = true
+                    hasSeenWelcome = true
                 }
                 .buttonStyle(BorderedButtonStyle(tint: .accentColor))
-            }
-        }
-        .onAppear {
-            if storedFile.first == nil {
-                PersistenceController.shared.addInitialSubstances()
-                _ = PersistenceController.shared.createNewExperienceNow()
             }
         }
     }

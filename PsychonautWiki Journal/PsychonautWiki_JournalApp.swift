@@ -4,8 +4,8 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
-    @AppStorage(PersistenceController.hasCleanedUpCoreDataKey) var hasCleanedUpCoreData: Bool = false
-    @AppStorage(PersistenceController.hasBeenSetupBeforeKey) var hasBeenSetupBefore: Bool = false
+    @AppStorage(PersistenceController.hasInitialSubstancesKey) var hasInitialSubstances: Bool = false
+    @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
     @StateObject var calendarWrapper = CalendarWrapper()
     @Environment(\.scenePhase) private var scenePhase
 
@@ -25,11 +25,12 @@ struct PsychonautWiki_JournalApp: App {
     }
 
     private func setupSubstances() {
-        if hasBeenSetupBefore && !hasCleanedUpCoreData {
+        let needsCleanup = comesFromVersion10 && !hasInitialSubstances
+        if needsCleanup {
             PersistenceController.shared.cleanupCoreData()
-            hasCleanedUpCoreData = true
-        } else if !hasBeenSetupBefore {
+        } else if !hasInitialSubstances {
             PersistenceController.shared.addInitialSubstances()
         }
+        hasInitialSubstances = true
     }
 }
