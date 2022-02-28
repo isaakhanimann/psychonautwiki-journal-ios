@@ -148,9 +148,12 @@ struct PersistenceController {
                 // check if decoding will succeed
                 _ = try decodeSubstancesFile(from: data, with: backgroundContext)
                 // delete all substances, which deletes everything because all the relationships have a cascade delete
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Substance.self))
-                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                try backgroundContext.execute(deleteRequest)
+                let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+                fetchRequest.includesPropertyValues = false
+                let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
+                for substance in substances {
+                    backgroundContext.delete(substance)
+                }
                 // decode substances
                 _ = try decodeSubstancesFile(from: data, with: backgroundContext)
                 try backgroundContext.save()
