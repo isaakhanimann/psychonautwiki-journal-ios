@@ -3,7 +3,6 @@ import SwiftUI
 struct SettingsTab: View {
 
     @StateObject private var viewModel = ViewModel()
-
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {

@@ -55,6 +55,8 @@
 		EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA5856CC27CBCC4600D336EF /* eye-open-no-background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA5856CA27CBCC4500D336EF /* eye-open-no-background@3x.png */; };
 		EA5856CD27CBCC4600D336EF /* eye-open-no-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA5856CB27CBCC4500D336EF /* eye-open-no-background@2x.png */; };
+		EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
+		EA8447DA27CCD7B100B10DD3 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* TimeObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */; };
@@ -986,6 +988,7 @@
 				EAA2EC4426DFCBCF00B4FACF /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA47E64E27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
 				EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */,
+				EA8447DA27CCD7B100B10DD3 /* SubstanceFilePublisher.swift in Sources */,
 				EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */,
 				EA47E65227CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
 				EADE466C2709D3C500F1058E /* RectangularComplicationView.swift in Sources */,
@@ -1007,6 +1010,7 @@
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
 				EAB2EDDE26EE8AD20020C554 /* CircularComplicationView.swift in Sources */,
 				EADE465E2709D30900F1058E /* AroundShapeModelUp.swift in Sources */,
+				EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
 				EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */,
 				EADE46692709D33500F1058E /* CurrentTimeShape.swift in Sources */,

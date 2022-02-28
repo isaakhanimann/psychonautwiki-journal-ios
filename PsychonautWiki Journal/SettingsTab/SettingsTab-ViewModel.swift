@@ -29,14 +29,16 @@ extension SettingsTab {
                         self.isFetching = false
                     }
                 case .success(let data):
-                    self.tryToDecodeData(data: data)
+                    Task {
+                        await self.tryToDecodeData(data: data)
+                    }
                 }
             }
         }
 
-        private func tryToDecodeData(data: Data) {
+        private func tryToDecodeData(data: Data) async {
             do {
-                try PersistenceController.shared.decodeAndSaveFile(from: data)
+                try await PersistenceController.shared.decodeAndSaveFile(from: data)
             } catch {
                 DispatchQueue.main.async {
                     self.alertMessage = "Not enough substances could be parsed."
@@ -47,7 +49,5 @@ extension SettingsTab {
                 self.isFetching = false
             }
         }
-
     }
-
 }

@@ -138,41 +138,32 @@ struct PersistenceController {
         return creationDate
     }
 
-
     enum DecodingFileError: Error {
-        case failedToSave
+        case failedToDecode
     }
 
-    func decodeAndSaveFile(from data: Data) throws {
-        var didSaveSubstances = false
-        backgroundContext.performAndWait {
-            let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-            let earlierFileToDelete = try? backgroundContext.fetch(fetchRequest).first
+    func decodeAndSaveFile(from data: Data) async throws {
+        try await backgroundContext.perform {
             do {
-                let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
-                substancesFile.creationDate = Date()
-                if let fileToDelete = earlierFileToDelete {
-                    backgroundContext.delete(fileToDelete)
-                }
-                do {
-                    try backgroundContext.save()
-                    didSaveSubstances = true
-                } catch {
-                    backgroundContext.rollback()
-                    return
-                }
+                // check if decoding will succeed
+                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
+                // delete all substances, which deletes everything because all the relationships have a cascade delete
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Substance.self))
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                try backgroundContext.execute(deleteRequest)
+                // decode substances
+                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
+                try backgroundContext.save()
             } catch {
                 backgroundContext.rollback()
+                throw DecodingFileError.failedToDecode
             }
-        }
-        if !didSaveSubstances {
-            throw DecodingFileError.failedToSave
         }
     }
 
     func cleanupCoreData() {
         convertSubstanceNamesOfIngestions()
-        PersistenceController.shared.addInitialSubstances()
+        addInitialSubstances()
         convertUnitsOfIngestions()
         deleteAllSubstanceCopies()
     }
