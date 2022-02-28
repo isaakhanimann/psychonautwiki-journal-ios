@@ -579,6 +579,7 @@
 				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
+				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
 				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
@@ -639,7 +640,6 @@
 			children = (
 				EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */,
 				EAE4712226CBA663009FB0EC /* Feature.swift */,
-				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 			);
 			path = "Welcome Screen";
 			sourceTree = "<group>";
