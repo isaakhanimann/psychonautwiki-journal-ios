@@ -28,6 +28,11 @@ struct DurationView: View {
                     .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
                 Text(" \(duration?.offset?.displayString ?? "")")
             }
+            VStack {
+                CurveBottom()
+                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                Text("\(duration?.afterglow?.displayString ?? "") ")
+            }
         }
         .font(.footnote)
         .frame(height: 100)
