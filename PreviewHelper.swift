@@ -4,10 +4,17 @@ import CoreData
 class PreviewHelper {
 
     let substancesFile: SubstancesFile
+    var allSubstances: [Substance] {
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        let substances = try? context.fetch(fetchRequest)
+        return substances ?? []
+    }
     var substance: Substance {
-        substancesFile.psychoactiveClassesUnwrapped.first!.sortedSubstancesUnwrapped.first!
+        allSubstances.first!
     }
     let experiences: [Experience]
+    let context: NSManagedObjectContext
 
     init() {
         let fileName = "InitialSubstances"
@@ -16,7 +23,7 @@ class PreviewHelper {
         }
         // swiftlint:disable force_try
         let data = try! Data(contentsOf: url)
-        let context = PersistenceController.preview.viewContext
+        self.context = PersistenceController.preview.viewContext
         self.substancesFile = try! decodeSubstancesFile(from: data, with: context)
         self.experiences = PreviewHelper.createDefaultExperiences(context: context, substancesFile: substancesFile)
         try? context.save()
@@ -231,10 +238,11 @@ class PreviewHelper {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let substance = PersistenceController.preview.getSubstance(with: substanceName)!
-
         let ingestion = Ingestion(context: context)
         ingestion.time = formatter.date(from: stringTime)
-        ingestion.administrationRoute = substance.administrationRoutesUnwrapped.first!.rawValue
+        let route = substance.administrationRoutesUnwrapped.first!
+        ingestion.administrationRoute = route.rawValue
+        ingestion.units = substance.getDose(for: route)?.units
         ingestion.dose = dose
         ingestion.color = color.rawValue
         ingestion.substanceName = substanceName

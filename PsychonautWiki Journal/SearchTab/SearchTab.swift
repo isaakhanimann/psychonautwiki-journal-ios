@@ -2,11 +2,12 @@ import SwiftUI
 
 struct SearchTab: View {
 
-    @StateObject private var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()
 
     var body: some View {
         NavigationView {
             List {
+                Text("hello: \(viewModel.sortedSubstances.count)")
                 ForEach(viewModel.sortedSubstances) { substance in
                     Text(substance.nameUnwrapped)
                 }
@@ -19,6 +20,6 @@ struct SearchTab: View {
 
 struct SearchTab_Previews: PreviewProvider {
     static var previews: some View {
-        SearchTab()
+        SearchTab(viewModel: SearchTab.ViewModel(isPreview: true))
     }
 }

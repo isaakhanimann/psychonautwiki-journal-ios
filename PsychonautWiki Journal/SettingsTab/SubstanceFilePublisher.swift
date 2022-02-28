@@ -13,7 +13,7 @@ class SubstanceFilePublisher: NSObject, ObservableObject, NSFetchedResultsContro
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
         fileFetchController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: getContextForPreviewOrView(),
+            managedObjectContext: PersistenceController.shared.viewContext,
             sectionNameKeyPath: nil, cacheName: nil
         )
         super.init()

@@ -57,6 +57,7 @@
 		EA5856CD27CBCC4600D336EF /* eye-open-no-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA5856CB27CBCC4500D336EF /* eye-open-no-background@2x.png */; };
 		EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
 		EA8447DA27CCD7B100B10DD3 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
+		EA8447E227CD0B3B00B10DD3 /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* TimeObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */; };
@@ -97,7 +98,6 @@
 		EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
 		EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
 		EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
-		EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */; };
 		EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6F26E2124600B4FACF /* DosePicker.swift */; };
 		EAA2EC7326E2151900B4FACF /* ChooseSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7226E2151900B4FACF /* ChooseSubstanceView.swift */; };
@@ -979,6 +979,7 @@
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
 				EA47E66D27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EAA2EC5326DFCBE200B4FACF /* Throwable.swift in Sources */,
+				EA8447E227CD0B3B00B10DD3 /* PreviewHelper.swift in Sources */,
 				EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */,
 				EADE46642709D30900F1058E /* AroundShapeModelDown.swift in Sources */,
 				EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */,
@@ -1012,7 +1013,6 @@
 				EADE465E2709D30900F1058E /* AroundShapeModelUp.swift in Sources */,
 				EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
-				EAA2EC6126DFCC2B00B4FACF /* PreviewHelper.swift in Sources */,
 				EADE46692709D33500F1058E /* CurrentTimeShape.swift in Sources */,
 				EAA2EC7B26E21AB000B4FACF /* ChooseColor.swift in Sources */,
 				EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */,

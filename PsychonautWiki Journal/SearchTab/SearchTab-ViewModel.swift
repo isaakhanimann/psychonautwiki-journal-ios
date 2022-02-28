@@ -7,21 +7,27 @@ extension SearchTab {
         @Published var sortedSubstances: [Substance] = []
         @Published var searchText = ""
 
-        private let substanceFetchController: NSFetchedResultsController<Substance>
+        private let substanceFetchController: NSFetchedResultsController<Substance>?
+
+        init(isPreview: Bool = false) {
+            sortedSubstances = PreviewHelper().allSubstances
+            searchText = "Hello for Preview"
+            substanceFetchController = nil
+        }
 
         override init() {
             let fetchRequest = Substance.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
             substanceFetchController = NSFetchedResultsController(
                 fetchRequest: fetchRequest,
-                managedObjectContext: getContextForPreviewOrView(),
+                managedObjectContext: PersistenceController.shared.viewContext,
                 sectionNameKeyPath: nil, cacheName: nil
             )
             super.init()
-            substanceFetchController.delegate = self
+            substanceFetchController?.delegate = self
             do {
-                try substanceFetchController.performFetch()
-                sortedSubstances = substanceFetchController.fetchedObjects ?? []
+                try substanceFetchController?.performFetch()
+                sortedSubstances = substanceFetchController?.fetchedObjects ?? []
             } catch {
                 NSLog("Error: could not fetch SubstancesFiles")
             }

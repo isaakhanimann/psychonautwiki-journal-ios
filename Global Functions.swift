@@ -145,8 +145,3 @@ private func getURLRequest() throws -> URLRequest {
     request.httpBody = try JSONEncoder().encode(HTTPBody(query: query))
     return request
 }
-
-func getContextForPreviewOrView() -> NSManagedObjectContext {
-    let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    return isPreview ? PersistenceController.preview.viewContext : PersistenceController.shared.viewContext
-}
