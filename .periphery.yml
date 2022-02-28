@@ -1,0 +1,9 @@
+project: PsychonautWiki Journal.xcodeproj
+schemes:
+- PsychonautWiki Journal
+- Watch Journal
+- Watch Journal (Complication)
+targets:
+- PsychonautWiki Journal
+- Watch Journal
+- Watch Journal Extension
