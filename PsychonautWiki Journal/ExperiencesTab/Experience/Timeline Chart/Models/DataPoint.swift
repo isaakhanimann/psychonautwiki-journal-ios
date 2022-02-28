@@ -1,5 +1,6 @@
 import SwiftUI
 
+// (0,0) = bottom/left, (1,1) = top/right
 struct DataPoint {
     let xValue: CGFloat
     let yValue: CGFloat
@@ -9,5 +10,15 @@ struct DataPoint {
         assert(yValue >= 0 && yValue <= 1)
         self.xValue = xValue
         self.yValue = yValue
+    }
+
+    func toCGPoint(inside rect: CGRect) -> CGPoint {
+        // swiftlint:disable identifier_name
+        var x = xValue * rect.width
+        var y = yValue * rect.height
+        y = rect.height - y
+        x += rect.minX
+        y += rect.minY
+        return CGPoint(x: x, y: y)
     }
 }

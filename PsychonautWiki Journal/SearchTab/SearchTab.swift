@@ -11,9 +11,10 @@ struct SearchTab: View {
                     Text(substance.nameUnwrapped)
                 }
             }
+            .listStyle(.plain)
             .navigationTitle("Substances")
         }
-        .searchable(text: $viewModel.searchText)
+        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
     }
 }
 

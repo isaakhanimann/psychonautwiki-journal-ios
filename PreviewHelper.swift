@@ -16,6 +16,10 @@ class PreviewHelper {
     let experiences: [Experience]
     let context: NSManagedObjectContext
 
+    func getSubstance(with name: String) -> Substance? {
+        allSubstances.first(where: {$0.nameUnwrapped == name})
+    }
+
     init() {
         let fileName = "InitialSubstances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {

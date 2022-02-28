@@ -19,42 +19,29 @@ struct AroundShape: Shape {
         let drawRect = rect.inset(by: insets)
 
         // Start
-        var destination = getCGPoint(for: aroundShapeModel.bottomLeft, inside: drawRect)
+        var destination = aroundShapeModel.bottomLeft.toCGPoint(inside: drawRect)
         path.move(to: destination)
 
         // Bottom Line
-        destination = getCGPoint(for: aroundShapeModel.bottomRight, inside: drawRect)
+        destination = aroundShapeModel.bottomRight.toCGPoint(inside: drawRect)
         path.addLine(to: destination)
 
         // Curve Up
-        destination = getCGPoint(for: aroundShapeModel.curveToTopRight.endPoint, inside: drawRect)
-        var control1 = getCGPoint(for: aroundShapeModel.curveToTopRight.controlPoint0, inside: drawRect)
-        var control2 = getCGPoint(for: aroundShapeModel.curveToTopRight.controlPoint1, inside: drawRect)
+        destination = aroundShapeModel.curveToTopRight.endPoint.toCGPoint(inside: drawRect)
+        var control1 = aroundShapeModel.curveToTopRight.controlPoint0.toCGPoint(inside: drawRect)
+        var control2 = aroundShapeModel.curveToTopRight.controlPoint1.toCGPoint(inside: drawRect)
         path.addCurve(to: destination, control1: control1, control2: control2)
 
         // Top Line
-        destination = getCGPoint(for: aroundShapeModel.topLeft, inside: drawRect)
+        destination = aroundShapeModel.topLeft.toCGPoint(inside: drawRect)
         path.addLine(to: destination)
 
         // Curve Down
-        destination = getCGPoint(for: aroundShapeModel.curveToBottomLeft.endPoint, inside: drawRect)
-        control1 = getCGPoint(for: aroundShapeModel.curveToBottomLeft.controlPoint0, inside: drawRect)
-        control2 = getCGPoint(for: aroundShapeModel.curveToBottomLeft.controlPoint1, inside: drawRect)
+        destination = aroundShapeModel.curveToBottomLeft.endPoint.toCGPoint(inside: drawRect)
+        control1 = aroundShapeModel.curveToBottomLeft.controlPoint0.toCGPoint(inside: drawRect)
+        control2 = aroundShapeModel.curveToBottomLeft.controlPoint1.toCGPoint(inside: drawRect)
         path.addCurve(to: destination, control1: control1, control2: control2)
 
         return path
-    }
-
-    private func getCGPoint(for dataPoint: DataPoint, inside rect: CGRect) -> CGPoint {
-        // swiftlint:disable identifier_name
-        var x = dataPoint.xValue * rect.width
-        var y = dataPoint.yValue * rect.height
-
-        y = rect.height - y
-
-        x += rect.minX
-        y += rect.minY
-
-        return CGPoint(x: x, y: y)
     }
 }

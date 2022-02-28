@@ -22,6 +22,27 @@ extension DurationRange {
         convertToSec(value: minUnwrapped)
     }
 
+    var displayString: String {
+        guard let unitsUnwrapped = unitsUnwrapped,
+              let minUnwrapped = minUnwrapped,
+              let maxUnwrapped = maxUnwrapped
+        else {
+            return ""
+        }
+        var result = "\(minUnwrapped.cleanString)-\(maxUnwrapped.cleanString)"
+        switch unitsUnwrapped {
+        case .seconds:
+            result += "s"
+        case .minutes:
+            result += "m"
+        case .hours:
+            result += "h"
+        case .days:
+            result += "d"
+        }
+        return result
+    }
+
     private func convertToSec(value: Double?) -> Double? {
         guard var convert = value else {return nil}
         var unit: UnitDuration
