@@ -9,24 +9,17 @@ class PreviewHelper {
     }
     let experiences: [Experience]
 
-    init(context: NSManagedObjectContext) {
-        let controller = PersistenceController.preview
-        let moc = controller.viewContext
-
-        // Add substance file
+    init() {
         let fileName = "InitialSubstances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             fatalError("Failed to locate \(fileName) in bundle.")
         }
-
         // swiftlint:disable force_try
         let data = try! Data(contentsOf: url)
-
-        self.substancesFile = try! decodeSubstancesFile(from: data, with: moc)
-
-        self.experiences = PreviewHelper.createDefaultExperiences(context: moc, substancesFile: substancesFile)
-
-        try? moc.save()
+        let context = PersistenceController.preview.viewContext
+        self.substancesFile = try! decodeSubstancesFile(from: data, with: context)
+        self.experiences = PreviewHelper.createDefaultExperiences(context: context, substancesFile: substancesFile)
+        try? context.save()
     }
 
     // swiftlint:disable function_body_length
@@ -41,7 +34,6 @@ class PreviewHelper {
                 with: .red,
                 stringTime: "2021/08/18 08:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine",
                 dose: 100
             )
@@ -51,7 +43,6 @@ class PreviewHelper {
                 with: .blue,
                 stringTime: "2021/08/18 09:10",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine",
                 dose: 200
             )
@@ -61,7 +52,6 @@ class PreviewHelper {
                 with: .green,
                 stringTime: "2021/08/18 11:10",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine",
                 dose: 150
             )
@@ -74,7 +64,6 @@ class PreviewHelper {
                 with: .red,
                 stringTime: "2021/08/10 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -83,7 +72,6 @@ class PreviewHelper {
                 with: .yellow,
                 stringTime: "2021/08/10 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Myristicin"
             )
         )
@@ -92,7 +80,6 @@ class PreviewHelper {
                 with: .purple,
                 stringTime: "2021/08/10 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -104,7 +91,6 @@ class PreviewHelper {
                 with: .green,
                 stringTime: "2021/07/20 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -113,7 +99,6 @@ class PreviewHelper {
                 with: .red,
                 stringTime: "2021/07/20 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -125,7 +110,6 @@ class PreviewHelper {
                 with: .green,
                 stringTime: "2021/02/11 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -134,7 +118,6 @@ class PreviewHelper {
                 with: .blue,
                 stringTime: "2021/02/11 22:01",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -146,7 +129,6 @@ class PreviewHelper {
                 with: .pink,
                 stringTime: "2020/12/31 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -155,7 +137,6 @@ class PreviewHelper {
                 with: .red,
                 stringTime: "2020/12/31 22:13",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -167,7 +148,6 @@ class PreviewHelper {
                 with: .orange,
                 stringTime: "2020/10/10 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -179,7 +159,6 @@ class PreviewHelper {
                 with: .blue,
                 stringTime: "2020/06/05 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -188,7 +167,6 @@ class PreviewHelper {
                 with: .purple,
                 stringTime: "2020/06/05 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -197,7 +175,6 @@ class PreviewHelper {
                 with: .blue,
                 stringTime: "2020/06/05 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -209,7 +186,6 @@ class PreviewHelper {
                 with: .green,
                 stringTime: "2020/06/03 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -221,7 +197,6 @@ class PreviewHelper {
                 with: .yellow,
                 stringTime: "2020/03/11 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Citicoline"
             )
         )
@@ -230,7 +205,6 @@ class PreviewHelper {
                 with: .purple,
                 stringTime: "2020/03/11 22:03",
                 context: context,
-                file: substancesFile,
                 substanceName: "Caffeine"
             )
         )
@@ -251,7 +225,6 @@ class PreviewHelper {
         with color: Ingestion.IngestionColor,
         stringTime: String,
         context: NSManagedObjectContext,
-        file: SubstancesFile,
         substanceName: String,
         dose: Double = 10
     ) -> Ingestion {

@@ -118,7 +118,7 @@ struct ChooseTimeAndColor: View {
 
 struct ChooseTimeAndColor_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         return ChooseTimeAndColor(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,

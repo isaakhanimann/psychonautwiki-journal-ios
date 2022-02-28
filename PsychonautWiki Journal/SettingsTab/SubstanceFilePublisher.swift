@@ -26,7 +26,7 @@ class SubstanceFilePublisher: NSObject, ObservableObject, NSFetchedResultsContro
         }
     }
 
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    internal func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let files = controller.fetchedObjects as? [SubstancesFile] else {return}
         self.file.value = files.first
     }

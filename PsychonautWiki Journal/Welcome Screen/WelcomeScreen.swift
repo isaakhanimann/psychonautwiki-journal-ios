@@ -2,7 +2,6 @@ import SwiftUI
 
 struct WelcomeScreen: View {
 
-    @State private var isLoading = false
     @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
@@ -49,7 +48,7 @@ struct WelcomeScreen: View {
                     .font(.footnote)
                     .foregroundColor(.secondary)
 
-                Button("I understand", action: loadAndDismiss)
+                Button("I understand", action: dismiss)
                     .buttonStyle(PrimaryButtonStyle())
             }
             .padding()
@@ -57,9 +56,7 @@ struct WelcomeScreen: View {
         }
     }
 
-    private func loadAndDismiss() {
-        isLoading = true
-
+    private func dismiss() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             hasSeenWelcome = true
         }

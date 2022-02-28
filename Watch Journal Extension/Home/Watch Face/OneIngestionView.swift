@@ -41,7 +41,7 @@ struct OneIngestionView: View {
 
 struct OneIngestionView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         GeometryReader { geometry in
             let squareSize = min(geometry.size.width, geometry.size.height)
             OneIngestionView(

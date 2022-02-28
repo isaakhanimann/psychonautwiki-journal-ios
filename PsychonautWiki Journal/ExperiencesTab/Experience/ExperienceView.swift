@@ -146,7 +146,7 @@ struct ExperienceView: View {
 
 struct ExperienceView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         ExperienceView(experience: helper.experiences.first!)
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(CalendarWrapper())

@@ -28,7 +28,7 @@ struct IngestionRow: View {
 
 struct IngestionRow_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         List {
             IngestionRow(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
         }

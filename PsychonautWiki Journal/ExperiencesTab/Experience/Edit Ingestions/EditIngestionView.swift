@@ -16,10 +16,6 @@ struct EditIngestionView: View {
         ingestion.substance?.getDose(for: selectedAdministrationRoute)
     }
 
-    var selectedUnit: String? {
-        doseInfo?.units
-    }
-
     let colorColumns = [
         GridItem(.adaptive(minimum: 44))
     ]
@@ -99,17 +95,6 @@ struct EditIngestionView: View {
         }
     }
 
-    private func getColorForSubstance(with name: String) -> Ingestion.IngestionColor {
-        var color = Ingestion.IngestionColor.allCases.randomElement()!
-        let defaults = UserDefaults.standard
-        if let savedColorString = defaults.object(forKey: name) as? String {
-            if let savedColor = Ingestion.IngestionColor(rawValue: savedColorString) {
-                color = savedColor
-            }
-        }
-        return color
-    }
-
     private func colorButton(for color: Ingestion.IngestionColor) -> some View {
         ZStack {
             Color.from(ingestionColor: color)
@@ -155,7 +140,7 @@ struct EditIngestionView: View {
 
 struct EditIngestionView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         EditIngestionView(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
             .environmentObject(helper.experiences.first!)
     }

@@ -31,7 +31,7 @@ struct ChooseRouteView: View {
 
 struct ChooseRouteView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         ChooseRouteView(
             substance: helper.substance,
             dismiss: {},

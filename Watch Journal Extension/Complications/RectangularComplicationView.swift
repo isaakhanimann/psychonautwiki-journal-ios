@@ -12,7 +12,7 @@ struct RectangularComplicationView: View {
 
 struct RectangularComplicationView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         CLKComplicationTemplateGraphicRectangularFullView(
             RectangularComplicationView(
                 sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped

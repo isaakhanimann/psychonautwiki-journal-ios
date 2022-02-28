@@ -56,7 +56,7 @@ struct ExperienceRow: View {
 struct ExperienceRow_Previews: PreviewProvider {
 
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
         ExperienceRow(

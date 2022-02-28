@@ -3,10 +3,7 @@ import EventKit
 
 struct CalendarSection: View {
 
-    @AppStorage("calendarIdentifier") var calendarIdentifier: String = ""
-
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-
     @State private var isShowingActionSheet = false
     @State private var isShowingAlert = false
 
@@ -35,7 +32,6 @@ struct CalendarSection: View {
             } else {
                 Text("Please Enable Calendar Access in your iPhone Settings")
             }
-
         }
         .actionSheet(isPresented: $isShowingActionSheet) {
             ActionSheet(

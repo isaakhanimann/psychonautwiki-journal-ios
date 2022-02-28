@@ -74,7 +74,7 @@ struct IngestionsTab: View {
 
 struct IngestionsTab_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         IngestionsTab(experience: helper.experiences.first!)
     }
 }

@@ -37,11 +37,4 @@ extension SubstancesFile {
         "selective serotonin reuptake inhibitor",
         "tricyclic antidepressants"
     ]
-
-    func getPsychoactiveClass(with name: String) -> PsychoactiveClass? {
-        let lowerCaseName = name.lowercased()
-        return psychoactiveClassesUnwrapped.first { pClass in
-            pClass.nameUnwrapped.lowercased() == lowerCaseName
-        }
-    }
 }

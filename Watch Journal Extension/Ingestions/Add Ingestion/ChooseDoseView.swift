@@ -8,7 +8,6 @@ struct ChooseDoseView: View {
     let experience: Experience
 
     @State private var selectedDose: Double?
-    @State private var isKeyboardShowing = false
 
     var body: some View {
         ScrollView {
@@ -50,7 +49,7 @@ struct ChooseDoseView: View {
 
 struct ChooseDoseView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         ChooseDoseView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,

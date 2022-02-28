@@ -90,7 +90,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     ) {
         // This method will be called once per supported complication, and the results will be cached
 
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         var components = DateComponents()
         components.year = 2021
         components.month = 8

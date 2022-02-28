@@ -2,8 +2,6 @@ import SwiftUI
 
 struct SettingsTab: View {
 
-    @Environment(\.managedObjectContext) var moc
-
     @FetchRequest(
         entity: SubstancesFile.entity(),
         sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]

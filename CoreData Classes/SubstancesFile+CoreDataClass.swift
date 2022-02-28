@@ -34,7 +34,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         createClasses(substances: substances, context: context)
         createEffectsAndAddThemToSubstances(substances: substances, context: context)
         // The following 2 methods must be called after the classes have been constructed
-        createCrossTolerances(substances: substances, context: context)
+        createCrossTolerances(substances: substances)
         createInteractions(substances: substances, context: context)
     }
 
@@ -99,10 +99,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         }
     }
 
-    private func createCrossTolerances(
-        substances: [Substance],
-        context: NSManagedObjectContext
-    ) {
+    private func createCrossTolerances(substances: [Substance]) {
         for substance in substances {
             for toleranceName in substance.decodedCrossTolerances {
                 // check if psychoactive

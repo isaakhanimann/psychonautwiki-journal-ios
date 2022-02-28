@@ -17,7 +17,7 @@ struct CircularComplicationView: View {
 
 struct ComplicationView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         Group {
             CLKComplicationTemplateGraphicExtraLargeCircularView(
                 CircularComplicationView(

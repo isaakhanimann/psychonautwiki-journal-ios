@@ -45,10 +45,6 @@ struct PersistenceController {
         backgroundContext = container.newBackgroundContext()
     }
 
-    func createPreviewHelper() -> PreviewHelper {
-        PreviewHelper(context: container.viewContext)
-    }
-
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
@@ -108,31 +104,6 @@ struct PersistenceController {
         experience.title = now.asDateString
 
         return experience
-    }
-
-    func updateIngestion(
-        ingestionToUpdate: Ingestion,
-        time: Date,
-        route: Roa.AdministrationRoute,
-        color: Ingestion.IngestionColor,
-        dose: Double
-    ) {
-        viewContext.perform {
-            ingestionToUpdate.time = time
-            ingestionToUpdate.administrationRoute = route.rawValue
-            ingestionToUpdate.color = color.rawValue
-            ingestionToUpdate.dose = dose
-
-            try? viewContext.save()
-        }
-    }
-
-    func delete(ingestion: Ingestion) {
-        viewContext.perform {
-            viewContext.delete(ingestion)
-
-            try? viewContext.save()
-        }
     }
 
     func addInitialSubstances() {

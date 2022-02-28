@@ -49,7 +49,7 @@ struct IngestionTimeLineView: View {
 
 struct TimeLineContent_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         IngestionTimeLineView(sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped)
             .frame(height: 300)
     }

@@ -2,12 +2,9 @@ import SwiftUI
 
 struct IngestionObserverView: View {
 
-    @ObservedObject var experience: Experience
-
     @FetchRequest private var ingestions: FetchedResults<Ingestion>
 
     init(experience: Experience) {
-        self.experience = experience
         _ingestions = FetchRequest(
             entity: Ingestion.entity(),
             sortDescriptors: [

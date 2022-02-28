@@ -136,7 +136,7 @@ struct ChooseTimeView: View {
 
 struct ChooseTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         ChooseTimeView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,

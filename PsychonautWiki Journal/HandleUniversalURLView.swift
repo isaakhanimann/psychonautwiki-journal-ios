@@ -2,11 +2,6 @@ import SwiftUI
 
 struct HandleUniversalURLView: View {
 
-    @FetchRequest(
-        entity: SubstancesFile.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
-    ) var storedFile: FetchedResults<SubstancesFile>
-
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
 

@@ -92,9 +92,6 @@
 		EAA2EC5326DFCBE200B4FACF /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 		EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
 		EAA2EC5726DFCBFA00B4FACF /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
-		EAA2EC5926DFCBFA00B4FACF /* Data-ToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717926CBA664009FB0EC /* Data-ToFile.swift */; };
-		EAA2EC5B26DFCBFA00B4FACF /* Date-Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716A26CBA664009FB0EC /* Date-Difference.swift */; };
-		EAA2EC5C26DFCBFA00B4FACF /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */; };
 		EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
 		EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
 		EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
@@ -146,7 +143,6 @@
 		EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713226CBA663009FB0EC /* CalendarSection.swift */; };
 		EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */; };
 		EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
-		EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */; };
 		EAE471E326CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715F26CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift */; };
 		EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */; };
 		EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716126CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift */; };
@@ -157,12 +153,10 @@
 		EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */; };
 		EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */; };
 		EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */; };
-		EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716A26CBA664009FB0EC /* Date-Difference.swift */; };
 		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
 		EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
 		EAE471F126CBA664009FB0EC /* View-NaviationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */; };
 		EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
-		EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717926CBA664009FB0EC /* Data-ToFile.swift */; };
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
@@ -195,7 +189,6 @@
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
-		EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */; };
 		EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
@@ -334,7 +327,6 @@
 		EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Goya.xcdatamodel; sourceTree = "<group>"; };
 		EAE4715926CBA664009FB0EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence-Uniqued.swift"; sourceTree = "<group>"; };
-		EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
 		EAE4715F26CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoaDose-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Roa-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716126CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoaRange-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -345,12 +337,10 @@
 		EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingestion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubstancesFile-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoaDuration-CoreDataHelpers.swift"; sourceTree = "<group>"; };
-		EAE4716A26CBA664009FB0EC /* Date-Difference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-Difference.swift"; sourceTree = "<group>"; };
 		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
 		EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-CleanString.swift"; sourceTree = "<group>"; };
 		EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-NaviationViewStyle.swift"; sourceTree = "<group>"; };
 		EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
-		EAE4717926CBA664009FB0EC /* Data-ToFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data-ToFile.swift"; sourceTree = "<group>"; };
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color-StringColor.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
@@ -383,7 +373,6 @@
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
-		EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextStyle.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* InitialSubstances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InitialSubstances.json; sourceTree = "<group>"; };
 		EAE4723826CC6598009FB0EC /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
@@ -671,12 +660,9 @@
 			isa = PBXGroup;
 			children = (
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
-				EAE4715D26CBA664009FB0EC /* Binding-OnChange.swift */,
-				EAE4716A26CBA664009FB0EC /* Date-Difference.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */,
 				EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */,
-				EAE4717926CBA664009FB0EC /* Data-ToFile.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
 				EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
@@ -813,7 +799,6 @@
 			children = (
 				EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */,
 				EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */,
-				EAE471AF26CBA664009FB0EC /* TitleTextStyle.swift */,
 			);
 			path = "Reused Styles";
 			sourceTree = "<group>";
@@ -995,7 +980,6 @@
 				EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */,
 				EADE46642709D30900F1058E /* AroundShapeModelDown.swift in Sources */,
 				EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */,
-				EAA2EC5926DFCBFA00B4FACF /* Data-ToFile.swift in Sources */,
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
 				EA48B9A226E802E7003BF667 /* WatchFaceView.swift in Sources */,
 				EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */,
@@ -1043,7 +1027,6 @@
 				EA47E64A27CA136C00F6E10F /* Tolerance+CoreDataClass.swift in Sources */,
 				EA47E66227CA136C00F6E10F /* DurationRange+CoreDataClass.swift in Sources */,
 				EAA2EC4126DFCBCF00B4FACF /* Experience-CoreDataHelpers.swift in Sources */,
-				EAA2EC5C26DFCBFA00B4FACF /* Binding-OnChange.swift in Sources */,
 				EA47E65E27CA136C00F6E10F /* Roa+CoreDataClass.swift in Sources */,
 				EAB2EDD926EE25FA0020C554 /* IngestionRow.swift in Sources */,
 				EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */,
@@ -1052,7 +1035,6 @@
 				EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */,
 				EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */,
 				EA94AD2F26F709CC00E7592D /* Constants.swift in Sources */,
-				EAA2EC5B26DFCBFA00B4FACF /* Date-Difference.swift in Sources */,
 				EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */,
 				EA47E64627CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EADE46652709D31B00F1058E /* TimeLabels.swift in Sources */,
@@ -1099,7 +1081,6 @@
 				EA47E65D27CA136C00F6E10F /* Roa+CoreDataClass.swift in Sources */,
 				EAE4721726CBA664009FB0EC /* AroundShapeModelUp.swift in Sources */,
 				EAE4721626CBA664009FB0EC /* LineModel.swift in Sources */,
-				EAE471EE26CBA664009FB0EC /* Date-Difference.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EA460D2227637933002EF80B /* QandAView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
@@ -1128,13 +1109,10 @@
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */,
-				EAE4722926CBA664009FB0EC /* TitleTextStyle.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
 				EAC306AD26CE32AD00C98E3E /* AroundShapeModel.swift in Sources */,
-				EAE471FC26CBA664009FB0EC /* Data-ToFile.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
-				EAE471E226CBA664009FB0EC /* Binding-OnChange.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE4721F26CBA664009FB0EC /* SubstanceRow.swift in Sources */,
 				EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */,

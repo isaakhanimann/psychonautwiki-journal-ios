@@ -73,7 +73,7 @@ struct IngestionGauge: View {
 
 struct IngestionGauge_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PersistenceController.preview.createPreviewHelper()
+        let helper = PreviewHelper()
         IngestionGauge(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
     }
 }
