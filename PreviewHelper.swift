@@ -6,7 +6,7 @@ class PreviewHelper {
     let substancesFile: SubstancesFile
     var allSubstances: [Substance] {
         let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
-        fetchRequest.fetchLimit = 1
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
         let substances = try? context.fetch(fetchRequest)
         return substances ?? []
     }

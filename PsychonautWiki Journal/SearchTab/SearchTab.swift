@@ -7,7 +7,6 @@ struct SearchTab: View {
     var body: some View {
         NavigationView {
             List {
-                Text("hello: \(viewModel.sortedSubstances.count)")
                 ForEach(viewModel.sortedSubstances) { substance in
                     Text(substance.nameUnwrapped)
                 }
