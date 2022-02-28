@@ -107,31 +107,37 @@ struct PersistenceController {
     }
 
     func addInitialSubstances() {
+        let data = getInitialData()
+        backgroundContext.perform {
+            do {
+                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
+                substancesFile.creationDate = getCreationDate()
+                try backgroundContext.save()
+            } catch {
+                fatalError("Failed to decode initial substances from bundle: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func getInitialData() -> Data {
         let fileName = "InitialSubstances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             fatalError("Failed to locate \(fileName) in bundle.")
         }
-
         guard let data = try? Data(contentsOf: url) else {
             fatalError("Failed to load \(fileName) from bundle.")
         }
-
-        viewContext.perform {
-            do {
-                let dateString = "2022/02/25 16:54"
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let creationDate = formatter.date(from: dateString)!
-
-                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
-                substancesFile.creationDate = creationDate
-
-                try viewContext.save()
-            } catch {
-                fatalError("Failed to decode \(fileName) from bundle: \(error.localizedDescription)")
-            }
-        }
+        return data
     }
+
+    private func getCreationDate() -> Date {
+        let dateString = "2022/02/25 16:54"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let creationDate = formatter.date(from: dateString)!
+        return creationDate
+    }
+
 
     enum DecodingFileError: Error {
         case failedToSave
@@ -165,46 +171,51 @@ struct PersistenceController {
     }
 
     func cleanupCoreData() {
-        backgroundContext.performAndWait {
-            convertSubstanceNamesOfIngestions()
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
-        }
+        convertSubstanceNamesOfIngestions()
         PersistenceController.shared.addInitialSubstances()
-        backgroundContext.performAndWait {
-            convertUnitsOfIngestions()
-            deleteAllSubstanceCopies()
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
-            }
-        }
+        convertUnitsOfIngestions()
+        deleteAllSubstanceCopies()
     }
 
     private func convertSubstanceNamesOfIngestions() {
-        let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-        let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for ingestion in ingestions {
-            ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
+        backgroundContext.performAndWait {
+            let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
+            let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            for ingestion in ingestions {
+                ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
+            }
+            if backgroundContext.hasChanges {
+                try? backgroundContext.save()
+            }
         }
     }
 
     private func convertUnitsOfIngestions() {
-        let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-        let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for ingestion in ingestions {
-            let substance = getSubstance(with: ingestion.substanceNameUnwrapped)
-            let dose = substance?.getDose(for: ingestion.administrationRouteUnwrapped)
-            ingestion.units = dose?.units
+        backgroundContext.performAndWait {
+            let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
+            let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            for ingestion in ingestions {
+                let substance = getSubstance(with: ingestion.substanceNameUnwrapped)
+                let dose = substance?.getDose(for: ingestion.administrationRouteUnwrapped)
+                ingestion.units = dose?.units
+            }
+            if backgroundContext.hasChanges {
+                try? backgroundContext.save()
+            }
         }
     }
 
     private func deleteAllSubstanceCopies() {
-        let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let substanceCopies = (try? backgroundContext.fetch(fetchRequest)) ?? []
-        for substanceCopy in substanceCopies {
-            backgroundContext.delete(substanceCopy)
+        backgroundContext.performAndWait {
+            let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
+            fetchRequest.includesPropertyValues = false
+            let substanceCopies = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            for substanceCopy in substanceCopies {
+                backgroundContext.delete(substanceCopy)
+            }
+            if backgroundContext.hasChanges {
+                try? backgroundContext.save()
+            }
         }
     }
 
