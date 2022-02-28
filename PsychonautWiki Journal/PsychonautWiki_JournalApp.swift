@@ -19,13 +19,17 @@ struct PsychonautWiki_JournalApp: App {
         .onChange(of: scenePhase) { phase in
             if phase == .active {
                 calendarWrapper.checkIfSomethingChanged()
-                if hasBeenSetupBefore && !hasCleanedUpCoreData {
-                    PersistenceController.shared.cleanupCoreData()
-                    hasCleanedUpCoreData = true
-                } else if !hasBeenSetupBefore {
-                    PersistenceController.shared.addInitialSubstances()
-                }
+                setupSubstances()
             }
+        }
+    }
+
+    private func setupSubstances() {
+        if hasBeenSetupBefore && !hasCleanedUpCoreData {
+            PersistenceController.shared.cleanupCoreData()
+            hasCleanedUpCoreData = true
+        } else if !hasBeenSetupBefore {
+            PersistenceController.shared.addInitialSubstances()
         }
     }
 }

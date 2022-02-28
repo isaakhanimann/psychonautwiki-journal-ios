@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SearchTab: View {
 
-    @StateObject private var viewModel = SearchTabViewModel()
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         NavigationView {
