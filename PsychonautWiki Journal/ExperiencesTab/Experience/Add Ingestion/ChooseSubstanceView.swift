@@ -59,11 +59,10 @@ struct ChooseSubstanceView: View {
 
 struct ChooseSubstanceView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
         ChooseSubstanceView(
             dismiss: {},
-            experience: helper.experiences.first!
+            experience: PreviewHelper.shared.experiences.first!
         )
-            .environmentObject(helper.experiences.first!)
+            .environmentObject(PreviewHelper.shared.experiences.first!)
     }
 }

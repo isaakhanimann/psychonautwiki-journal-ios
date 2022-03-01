@@ -19,7 +19,7 @@ struct OneLayerView: View {
 
 struct OneLayerView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         OneLayerView(
             layer: WatchFaceModel(ingestions: helper.experiences.first!.sortedIngestionsUnwrapped).layers.first!,
             lineWidth: 20

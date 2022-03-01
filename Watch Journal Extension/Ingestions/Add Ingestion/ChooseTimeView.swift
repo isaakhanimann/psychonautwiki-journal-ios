@@ -136,7 +136,7 @@ struct ChooseTimeView: View {
 
 struct ChooseTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         ChooseTimeView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,

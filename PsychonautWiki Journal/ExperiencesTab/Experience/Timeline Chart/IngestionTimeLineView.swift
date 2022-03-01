@@ -49,8 +49,7 @@ struct IngestionTimeLineView: View {
 
 struct TimeLineContent_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
-        IngestionTimeLineView(sortedIngestions: helper.experiences.first!.sortedIngestionsUnwrapped)
+        IngestionTimeLineView(sortedIngestions: PreviewHelper.shared.experiences.first!.sortedIngestionsUnwrapped)
             .frame(height: 300)
     }
 }

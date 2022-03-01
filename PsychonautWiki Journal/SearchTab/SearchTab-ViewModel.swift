@@ -10,7 +10,7 @@ extension SearchTab {
         private let substanceFetchController: NSFetchedResultsController<Substance>?
 
         init(isPreview: Bool = false) {
-            sortedSubstances = PreviewHelper().allSubstances
+            sortedSubstances = PreviewHelper.shared.allSubstances
             searchText = "Hello for Preview"
             substanceFetchController = nil
         }

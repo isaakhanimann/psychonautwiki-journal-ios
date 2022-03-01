@@ -74,7 +74,7 @@ struct IngestionsTab: View {
 
 struct IngestionsTab_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         IngestionsTab(experience: helper.experiences.first!)
     }
 }

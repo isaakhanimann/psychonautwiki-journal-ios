@@ -94,7 +94,7 @@ struct DoseView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 List {
-                    let dose = PreviewHelper().getSubstance(with: "Caffeine")!.roasUnwrapped.first!.dose!
+                    let dose = PreviewHelper.shared.getSubstance(with: "Caffeine")!.roasUnwrapped.first!.dose!
                     Section {
                         DoseView(roaDose: dose)
                             .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))

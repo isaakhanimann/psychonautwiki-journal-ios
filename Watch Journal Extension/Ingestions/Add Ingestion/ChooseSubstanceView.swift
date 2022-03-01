@@ -47,7 +47,7 @@ struct ChooseSubstanceView: View {
 
 struct ChooseSubstanceView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         ChooseSubstanceView(
             dismiss: {},
             experience: helper.experiences.first!

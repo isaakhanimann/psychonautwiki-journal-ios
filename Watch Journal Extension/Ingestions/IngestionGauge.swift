@@ -73,7 +73,7 @@ struct IngestionGauge: View {
 
 struct IngestionGauge_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         IngestionGauge(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
     }
 }

@@ -28,7 +28,7 @@ struct IngestionRow: View {
 
 struct IngestionRow_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         List {
             IngestionRow(ingestion: helper.experiences.first!.sortedIngestionsUnwrapped.first!)
         }

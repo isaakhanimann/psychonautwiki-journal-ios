@@ -63,7 +63,7 @@ struct ChooseDoseView: View {
 
 struct ChooseDoseView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         ChooseDoseView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,

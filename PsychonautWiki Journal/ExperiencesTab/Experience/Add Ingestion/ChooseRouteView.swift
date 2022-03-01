@@ -32,7 +32,7 @@ struct ChooseRouteView: View {
 
 struct ChooseRouteView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         ChooseRouteView(
             substance: helper.substance,
             dismiss: {},

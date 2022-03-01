@@ -152,6 +152,6 @@ struct RowLabelView: View {
 
 struct SubstanceView_Previews: PreviewProvider {
     static var previews: some View {
-        SubstanceView(substance: PreviewHelper().getSubstance(with: "Caffeine")!)
+        SubstanceView(substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!)
     }
 }

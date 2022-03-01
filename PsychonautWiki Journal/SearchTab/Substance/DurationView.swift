@@ -46,7 +46,7 @@ struct DurationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                let duration = PreviewHelper().getSubstance(with: "Caffeine")!.roasUnwrapped.first!.duration!
+                let duration = PreviewHelper.shared.getSubstance(with: "Caffeine")!.roasUnwrapped.first!.duration!
                 Section {
                     DurationView(duration: duration)
                         .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))

@@ -60,7 +60,7 @@ struct WatchFaceView: View {
 
 struct AllLayersView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper()
+        let helper = PreviewHelper.shared
         WatchFaceView(
             ingestions: helper.experiences.first!.sortedIngestionsUnwrapped,
             clockHandStyle: .hourAndMinute,

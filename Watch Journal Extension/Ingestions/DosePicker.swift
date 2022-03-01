@@ -70,7 +70,7 @@ struct DosePicker: View {
 
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
-        let substance = PreviewHelper().substancesFile.psychoactiveClassesUnwrapped[0].substancesUnwrapped[2]
+        let substance = PreviewHelper.shared.substancesFile.psychoactiveClassesUnwrapped[0].substancesUnwrapped[2]
 
         DosePicker(
             doseInfo: substance.getDose(
