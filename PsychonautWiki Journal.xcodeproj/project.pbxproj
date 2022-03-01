@@ -128,6 +128,10 @@
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
 		EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */; };
 		EAC306AD26CE32AD00C98E3E /* AroundShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */; };
+		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
+		EACB6DFD27CDE43100940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
+		EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */; };
+		EACB6E0127CDE95300940291 /* Substance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0027CDE95300940291 /* Substance-ViewModel.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -331,6 +335,9 @@
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAC306AA26CE2F8500C98E3E /* AroundShapeModelDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModelDown.swift; sourceTree = "<group>"; };
 		EAC306AC26CE32AD00C98E3E /* AroundShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundShapeModel.swift; sourceTree = "<group>"; };
+		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
+		EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tolerance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EACB6E0027CDE95300940291 /* Substance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substance-ViewModel.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -491,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */,
+				EACB6E0027CDE95300940291 /* Substance-ViewModel.swift */,
 				EA8447E627CD175000B10DD3 /* DoseView.swift */,
 				EA8447EA27CD276300B10DD3 /* DurationView.swift */,
 				EA8447EE27CD2B9C00B10DD3 /* Curves */,
@@ -710,6 +718,7 @@
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
 				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
+				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -731,6 +740,7 @@
 				EA47E66527CA258C00F6E10F /* PsychoactiveClass-CoreDataHelpers.swift */,
 				EA47E66827CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift */,
 				EA47E66B27CA63D000F6E10F /* Effect-CoreDataHelpers.swift */,
+				EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */,
 			);
 			path = CoreDataHelpers;
 			sourceTree = "<group>";
@@ -1066,6 +1076,7 @@
 				EAA2EC5726DFCBFA00B4FACF /* Double-Rounded.swift in Sources */,
 				EADE46612709D30900F1058E /* IngestionLineModel.swift in Sources */,
 				EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */,
+				EACB6DFD27CDE43100940291 /* String-Optional.swift in Sources */,
 				EAA2EC4926DFCBCF00B4FACF /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EAA2EC7326E2151900B4FACF /* ChooseSubstanceView.swift in Sources */,
 				EA47E64A27CA136C00F6E10F /* Tolerance+CoreDataClass.swift in Sources */,
@@ -1146,6 +1157,7 @@
 				EA47E64927CA136C00F6E10F /* Tolerance+CoreDataClass.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
+				EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
@@ -1190,8 +1202,10 @@
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* DurationView.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
+				EACB6E0127CDE95300940291 /* Substance-ViewModel.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
+				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EA8447F227CD312300B10DD3 /* CurveTop.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,

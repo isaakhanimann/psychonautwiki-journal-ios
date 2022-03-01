@@ -7,23 +7,75 @@ extension Substance {
         name ?? "Unknown"
     }
 
+    var addictionPotentialUnwrapped: String? {
+        addictionPotential?.optionalIfEmpty
+    }
+
+    var toxicityUnwrapped: String? {
+        toxicity?.optionalIfEmpty
+    }
+
     var roasUnwrapped: [Roa] {
         roas?.allObjects as? [Roa] ?? []
     }
 
-    var unsafeSubstanceInteractionsUnwrapped: [Substance] {
+    var crossToleranceSubstancesUnwrapped: [Substance] {
+        crossToleranceSubstances?.allObjects as? [Substance] ?? []
+    }
+
+    var crossTolerancePsychoactivesUnwrapped: [PsychoactiveClass] {
+        crossTolerancePsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+    }
+
+    var crossToleranceChemicalsUnwrapped: [ChemicalClass] {
+        crossToleranceChemicals?.allObjects as? [ChemicalClass] ?? []
+    }
+
+    var uncertainSubstancesUnwrapped: [Substance] {
+        uncertainSubstances?.allObjects as? [Substance] ?? []
+    }
+
+    var uncertainPsychoactivesUnwrapped: [PsychoactiveClass] {
+        uncertainPsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+    }
+
+    var uncertainChemicalsUnwrapped: [ChemicalClass] {
+        uncertainChemicals?.allObjects as? [ChemicalClass] ?? []
+    }
+
+    var uncertainUnresolvedUnwrapped: [UnresolvedInteraction] {
+        uncertainUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
+    }
+
+    var unsafeSubstancesUnwrapped: [Substance] {
         unsafeSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var unsafeGeneralInteractionsUnwrapped: [UnresolvedInteraction] {
+    var unsafePsychoactivesUnwrapped: [PsychoactiveClass] {
+        unsafePsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+    }
+
+    var unsafeChemicalsUnwrapped: [ChemicalClass] {
+        unsafeChemicals?.allObjects as? [ChemicalClass] ?? []
+    }
+
+    var unsafeUnresolvedUnwrapped: [UnresolvedInteraction] {
         unsafeUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
     }
 
-    var dangerousSubstanceInteractionsUnwrapped: [Substance] {
+    var dangerousSubstancesUnwrapped: [Substance] {
         dangerousSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var dangerousGeneralInteractionsUnwrapped: [UnresolvedInteraction] {
+    var dangerousPsychoactivesUnwrapped: [PsychoactiveClass] {
+        dangerousPsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+    }
+
+    var dangerousChemicalsUnwrapped: [ChemicalClass] {
+        dangerousChemicals?.allObjects as? [ChemicalClass] ?? []
+    }
+
+    var dangerousUnresolvedUnwrapped: [UnresolvedInteraction] {
         dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
     }
 

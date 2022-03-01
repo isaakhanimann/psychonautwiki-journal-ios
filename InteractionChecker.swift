@@ -7,7 +7,7 @@ enum InteractionChecker {
         with previousIngestions: [Ingestion]
     ) -> [Ingestion] {
         previousIngestions.filter { ingestion in
-            substance.unsafeSubstanceInteractionsUnwrapped.contains { unsafeSubstance in
+            substance.unsafeSubstancesUnwrapped.contains { unsafeSubstance in
                 unsafeSubstance.name == ingestion.substanceName
             }
         }
@@ -18,7 +18,7 @@ enum InteractionChecker {
         with previousIngestions: [Ingestion]
     ) -> [Ingestion] {
         previousIngestions.filter { ingestion in
-            substance.dangerousSubstanceInteractionsUnwrapped.contains { dangerousSubstance in
+            substance.dangerousSubstancesUnwrapped.contains { dangerousSubstance in
                 dangerousSubstance.name == ingestion.substanceName
             }
         }
