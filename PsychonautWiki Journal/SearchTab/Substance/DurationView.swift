@@ -7,35 +7,38 @@ struct DurationView: View {
     let lineWidth: CGFloat = 3
 
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            VStack {
-                CurveBottom()
-                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-                Text("\(duration?.onset?.displayString ?? "") ")
+        VStack(alignment: .leading, spacing: 0) {
+            if let total = duration?.total?.displayString {
+                Text("Total: \(total)")
             }
-            VStack {
-                CurveUp()
-                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-                Text(" \(duration?.comeup?.displayString ?? "") ")
+            if let afterglow = duration?.afterglow?.displayString {
+                Text("After effects: \(afterglow)")
             }
-            VStack {
-                CurveTop()
-                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-                Text(" \(duration?.peak?.displayString ?? "") ")
+            HStack(alignment: .top, spacing: 0) {
+                VStack {
+                    CurveBottom()
+                        .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                    Text(duration?.onset?.displayString ?? "")
+                }
+                VStack {
+                    CurveUp()
+                        .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                    Text(" \(duration?.comeup?.displayString ?? "") ")
+                }
+                VStack {
+                    CurveTop()
+                        .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                    Text(duration?.peak?.displayString ?? "")
+                }
+                VStack {
+                    CurveDown()
+                        .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+                    Text(" \(duration?.offset?.displayString ?? "") ")
+                }
             }
-            VStack {
-                CurveDown()
-                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-                Text(" \(duration?.offset?.displayString ?? "")")
-            }
-            VStack {
-                CurveBottom()
-                    .stroke(.blue, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
-                Text("\(duration?.afterglow?.displayString ?? "") ")
-            }
+            .frame(height: 70)
         }
         .font(.footnote)
-        .frame(height: 100)
     }
 }
 
