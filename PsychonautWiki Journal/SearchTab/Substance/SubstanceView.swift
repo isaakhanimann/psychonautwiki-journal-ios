@@ -24,7 +24,21 @@ struct SubstanceView: View {
                 }
             }
             .navigationTitle(substance.nameUnwrapped)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if let url = substance.url {
+                        Link("Article", destination: url)
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Ingest", action: ingest)
+                }
+            }
         }
+    }
+
+    private func ingest() {
+
     }
 }
 
