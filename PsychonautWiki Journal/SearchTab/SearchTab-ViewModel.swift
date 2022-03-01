@@ -26,14 +26,16 @@ extension SearchTab {
         }
         @Published var groupBy = GroupBy.psychoactive {
             didSet {
-                setupFetchRequestPredicateAndFetch()
+                sections = SearchTab.ViewModel.getSections(substances: substances, groupBy: groupBy)
             }
         }
-
+        private var substances: [Substance] = []
         private let substanceFetchController: NSFetchedResultsController<Substance>?
 
         init(isPreview: Bool = false) {
-            sections = SearchTab.ViewModel.getSections(substances: PreviewHelper.shared.allSubstances)
+            substances = PreviewHelper.shared.allSubstances
+            groupBy = .psychoactive
+            sections = SearchTab.ViewModel.getSections(substances: substances, groupBy: .psychoactive)
             searchText = "LS"
             substanceFetchController = nil
         }
@@ -48,19 +50,28 @@ extension SearchTab {
             )
             super.init()
             substanceFetchController?.delegate = self
+            groupBy = .psychoactive
             do {
                 try substanceFetchController?.performFetch()
-                let substances = substanceFetchController?.fetchedObjects ?? []
-                sections = SearchTab.ViewModel.getSections(substances: substances)
+                substances = substanceFetchController?.fetchedObjects ?? []
+                sections = SearchTab.ViewModel.getSections(substances: substances, groupBy: .psychoactive)
             } catch {
                 NSLog("Error: could not fetch SubstancesFiles")
             }
         }
 
-        private static func getSections(substances: [Substance]) -> [SubstanceSection] {
+        private static func getSections(substances: [Substance], groupBy: GroupBy) -> [SubstanceSection] {
             var sections: [SubstanceSection] = []
-            let groupedByClass = Dictionary(grouping: substances) { sub in
-                sub.psychoactivesUnwrapped.first?.name ?? "Miscellaneous"
+            var groupedByClass: [String: [Substance]]
+            switch groupBy {
+            case .psychoactive:
+                groupedByClass = Dictionary(grouping: substances) { sub in
+                    sub.psychoactivesUnwrapped.first?.name ?? "Miscellaneous"
+                }
+            case .chemical:
+                groupedByClass = Dictionary(grouping: substances) { sub in
+                    sub.chemicalsUnwrapped.first?.name ?? "Miscellaneous"
+                }
             }
             for (sectionName, subs) in groupedByClass {
                 sections.append(SubstanceSection(sectionName: sectionName, substances: subs.sorted()))
@@ -70,7 +81,7 @@ extension SearchTab {
 
         public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             guard let subs = controller.fetchedObjects as? [Substance] else {return}
-            sections = SearchTab.ViewModel.getSections(substances: subs)
+            sections = SearchTab.ViewModel.getSections(substances: subs, groupBy: groupBy)
         }
 
         private func setupFetchRequestPredicateAndFetch() {
@@ -81,9 +92,8 @@ extension SearchTab {
                 substanceFetchController?.fetchRequest.predicate = predicate
             }
             try? substanceFetchController?.performFetch()
-            let substances = substanceFetchController?.fetchedObjects ?? []
-            sections = SearchTab.ViewModel.getSections(substances: substances)
-
+            substances = substanceFetchController?.fetchedObjects ?? []
+            sections = SearchTab.ViewModel.getSections(substances: substances, groupBy: groupBy)
         }
 
     }
