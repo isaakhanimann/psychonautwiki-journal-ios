@@ -10,13 +10,7 @@ extension ChemicalClass: Comparable {
     }
 
     var substancesUnwrapped: [Substance] {
-        substances?.allObjects as? [Substance] ?? []
-    }
-
-    var sortedSubstancesUnwrapped: [Substance] {
-        substancesUnwrapped.sorted { (substance1, substance2) -> Bool in
-            substance1.nameUnwrapped < substance2.nameUnwrapped
-        }
+        (substances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var uncertainSubstancesUnwrapped: [Substance] {
@@ -29,5 +23,9 @@ extension ChemicalClass: Comparable {
 
     var dangerousSubstancesUnwrapped: [Substance] {
         dangerousSubstances?.allObjects as? [Substance] ?? []
+    }
+
+    var crossToleranceUnwrapped: [Substance] {
+        (crossTolerance?.allObjects as? [Substance] ?? []).sorted()
     }
 }

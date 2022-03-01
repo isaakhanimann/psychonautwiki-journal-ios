@@ -8,4 +8,8 @@ extension Effect: Comparable {
     var nameUnwrapped: String {
         name ?? "Unknown"
     }
+
+    var substancesUnwrapped: [Substance] {
+        (substances?.allObjects as? [Substance] ?? []).sorted()
+    }
 }

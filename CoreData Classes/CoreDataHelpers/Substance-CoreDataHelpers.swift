@@ -83,6 +83,10 @@ extension Substance: Comparable {
         (dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
+    var effectsUnwrapped: [Effect] {
+        (effects?.allObjects as? [Effect] ?? []).sorted()
+    }
+
     var administrationRoutesUnwrapped: [Roa.AdministrationRoute] {
         roasUnwrapped.map { roa in
             roa.nameUnwrapped

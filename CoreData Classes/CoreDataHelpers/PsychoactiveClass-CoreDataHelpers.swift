@@ -24,4 +24,8 @@ extension PsychoactiveClass: Comparable {
     var dangerousSubstancesUnwrapped: [Substance] {
         (dangerousSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
+
+    var crossToleranceUnwrapped: [Substance] {
+        (crossTolerance?.allObjects as? [Substance] ?? []).sorted()
+    }
 }

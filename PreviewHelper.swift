@@ -12,6 +12,12 @@ class PreviewHelper {
         let substances = try? context.fetch(fetchRequest)
         return substances ?? []
     }
+    var unresolvedInteractions: [UnresolvedInteraction] {
+        let fetchRequest: NSFetchRequest<UnresolvedInteraction> = UnresolvedInteraction.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \UnresolvedInteraction.name, ascending: true) ]
+        let unresolved = try? context.fetch(fetchRequest)
+        return unresolved ?? []
+    }
     var substance: Substance {
         allSubstances.first!
     }
