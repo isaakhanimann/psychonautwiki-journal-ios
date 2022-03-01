@@ -11,6 +11,15 @@ struct SubstanceView: View {
                     Section(roa.nameUnwrapped.rawValue) {
                         DoseView(roaDose: roa.dose)
                         DurationView(duration: roa.duration)
+                        if let bio = roa.bioavailability?.displayString {
+                            HStack {
+                                Text("Bioavailability ")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text("\(bio)%")
+
+                            }
+                        }
                     }
                 }
             }
@@ -21,6 +30,6 @@ struct SubstanceView: View {
 
 struct SubstanceView_Previews: PreviewProvider {
     static var previews: some View {
-        SubstanceView(substance: PreviewHelper().getSubstance(with: "Caffeine")!)
+        SubstanceView(substance: PreviewHelper().getSubstance(with: "Galantamine")!)
     }
 }

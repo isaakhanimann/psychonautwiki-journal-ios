@@ -47,16 +47,16 @@ struct DosePicker: View {
         if let thresh = roaDose?.thresholdUnwrapped,
            thresh >= doseDouble {
             return Text("threshold (\(thresh.cleanString) \(units))")
-        } else if let lightMin = roaDose?.lightUnwrapped?.minUnwrapped,
-                  let lightMax = roaDose?.lightUnwrapped?.maxUnwrapped,
+        } else if let lightMin = roaDose?.light?.minUnwrapped,
+                  let lightMax = roaDose?.light?.maxUnwrapped,
                   doseDouble >= lightMin && doseDouble <= lightMax {
             return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-        } else if let commonMin = roaDose?.commonUnwrapped?.minUnwrapped,
-                  let commonMax = roaDose?.commonUnwrapped?.maxUnwrapped,
+        } else if let commonMin = roaDose?.common?.minUnwrapped,
+                  let commonMax = roaDose?.common?.maxUnwrapped,
                   doseDouble >= commonMin && doseDouble <= commonMax {
             return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-        } else if let strongMin = roaDose?.strongUnwrapped?.minUnwrapped,
-                  let strongMax = roaDose?.strongUnwrapped?.maxUnwrapped,
+        } else if let strongMin = roaDose?.strong?.minUnwrapped,
+                  let strongMax = roaDose?.strong?.maxUnwrapped,
                   doseDouble >= strongMin && doseDouble <= strongMax {
             return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
         } else if let heavy = roaDose?.heavyUnwrapped,

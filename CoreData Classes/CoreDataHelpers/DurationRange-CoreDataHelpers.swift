@@ -22,14 +22,12 @@ extension DurationRange {
         convertToSec(value: minUnwrapped)
     }
 
-    var displayString: String {
-        guard let unitsUnwrapped = unitsUnwrapped,
-              let minUnwrapped = minUnwrapped,
-              let maxUnwrapped = maxUnwrapped
-        else {
-            return ""
-        }
-        var result = "\(minUnwrapped.cleanString)-\(maxUnwrapped.cleanString)"
+    var displayString: String? {
+        guard minUnwrapped != nil || maxUnwrapped != nil else {return nil}
+        let min = minUnwrapped?.cleanString ?? ".."
+        let max = maxUnwrapped?.cleanString ?? ".."
+        var result = "\(min)-\(max)"
+        guard let unitsUnwrapped = unitsUnwrapped else {return nil}
         switch unitsUnwrapped {
         case .seconds:
             result += "s"

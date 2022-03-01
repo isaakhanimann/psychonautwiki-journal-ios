@@ -22,8 +22,8 @@ struct DosePicker: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
-               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
+            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.light?.minUnwrapped,
+               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strong?.maxUnwrapped,
                min < max {
                 dynamicDoseRangeView
             } else {
@@ -32,8 +32,8 @@ struct DosePicker: View {
 
             doseTextFieldWithUnit
 
-            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.lightUnwrapped?.minUnwrapped,
-               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strongUnwrapped?.maxUnwrapped,
+            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.light?.minUnwrapped,
+               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strong?.maxUnwrapped,
                min < max {
                 getDoseSlider(min: min, max: max)
             }
@@ -92,16 +92,16 @@ struct DosePicker: View {
             if let thresh = doseInfo?.thresholdUnwrapped {
                 Text("threshold (\(thresh.cleanString) \(units))")
             }
-            if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-               let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped {
+            if let lightMin = doseInfo?.light?.minUnwrapped,
+               let lightMax = doseInfo?.light?.maxUnwrapped {
                 Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
             }
-            if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-               let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped {
+            if let commonMin = doseInfo?.common?.minUnwrapped,
+               let commonMax = doseInfo?.common?.maxUnwrapped {
                 Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
             }
-            if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-               let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped {
+            if let strongMin = doseInfo?.strong?.minUnwrapped,
+               let strongMax = doseInfo?.strong?.maxUnwrapped {
                 Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
             }
             if let heavy = doseInfo?.heavyUnwrapped {
@@ -116,16 +116,16 @@ struct DosePicker: View {
         if let thresh = doseInfo?.thresholdUnwrapped,
            thresh >= doseDouble {
             return Text("threshold (\(thresh.cleanString) \(units))")
-        } else if let lightMin = doseInfo?.lightUnwrapped?.minUnwrapped,
-                  let lightMax = doseInfo?.lightUnwrapped?.maxUnwrapped,
+        } else if let lightMin = doseInfo?.light?.minUnwrapped,
+                  let lightMax = doseInfo?.light?.maxUnwrapped,
                   doseDouble >= lightMin && doseDouble <= lightMax {
             return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-        } else if let commonMin = doseInfo?.commonUnwrapped?.minUnwrapped,
-                  let commonMax = doseInfo?.commonUnwrapped?.maxUnwrapped,
+        } else if let commonMin = doseInfo?.common?.minUnwrapped,
+                  let commonMax = doseInfo?.common?.maxUnwrapped,
                   doseDouble >= commonMin && doseDouble <= commonMax {
             return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-        } else if let strongMin = doseInfo?.strongUnwrapped?.minUnwrapped,
-                  let strongMax = doseInfo?.strongUnwrapped?.maxUnwrapped,
+        } else if let strongMin = doseInfo?.strong?.minUnwrapped,
+                  let strongMax = doseInfo?.strong?.maxUnwrapped,
                   doseDouble >= strongMin && doseDouble <= strongMax {
             return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
         } else if let heavy = doseInfo?.heavyUnwrapped,

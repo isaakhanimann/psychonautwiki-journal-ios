@@ -6,32 +6,32 @@ struct DoseView: View {
     private var threshOrLightMin: String {
         if let thresh = roaDose?.thresholdUnwrapped?.cleanString {
             return thresh
-        } else if let lightMin = roaDose?.lightUnwrapped?.min.cleanString {
+        } else if let lightMin = roaDose?.light?.min.cleanString {
             return lightMin
         } else {
             return "..."
         }
     }
     private var lightMaxOrCommonMin: String {
-        if let lightMax = roaDose?.lightUnwrapped?.max.cleanString {
+        if let lightMax = roaDose?.light?.max.cleanString {
             return lightMax
-        } else if let commonMin = roaDose?.commonUnwrapped?.min.cleanString {
+        } else if let commonMin = roaDose?.common?.min.cleanString {
             return commonMin
         } else {
             return "..."
         }
     }
     private var commonMaxOrStrongMin: String {
-        if let commonMax = roaDose?.commonUnwrapped?.max.cleanString {
+        if let commonMax = roaDose?.common?.max.cleanString {
             return commonMax
-        } else if let strongMin = roaDose?.strongUnwrapped?.min.cleanString {
+        } else if let strongMin = roaDose?.strong?.min.cleanString {
             return strongMin
         } else {
             return "..."
         }
     }
     private var strongMaxOrHeavy: String {
-        if let strongMax = roaDose?.strongUnwrapped?.max.cleanString {
+        if let strongMax = roaDose?.strong?.max.cleanString {
             return strongMax
         } else if let heavy = roaDose?.heavyUnwrapped?.cleanString {
             return heavy
