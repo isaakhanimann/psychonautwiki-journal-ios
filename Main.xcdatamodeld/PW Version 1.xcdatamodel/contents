@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="ChemicalClass" representedClassName="ChemicalClass" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="crossTolerance" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossToleranceChemicals" inverseEntity="Substance"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousChemicals" inverseEntity="Substance"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubstancesFile" inverseName="chemicalClasses" inverseEntity="SubstancesFile"/>
-        <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="chemicalClass" inverseEntity="Substance"/>
+        <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="chemicalClasses" inverseEntity="Substance"/>
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainChemicals" inverseEntity="Substance"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeChemicals" inverseEntity="Substance"/>
     </entity>
@@ -50,7 +50,7 @@
         <relationship name="crossTolerance" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossTolerancePsychoactives" inverseEntity="Substance"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousPsychoactives" inverseEntity="Substance"/>
         <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubstancesFile" inverseName="psychoactiveClasses" inverseEntity="SubstancesFile"/>
-        <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="psychoactiveClass" inverseEntity="Substance"/>
+        <relationship name="substances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="psychoactiveClasses" inverseEntity="Substance"/>
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainPsychoactives" inverseEntity="Substance"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafePsychoactives" inverseEntity="Substance"/>
     </entity>
@@ -92,7 +92,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="toxicity" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
-        <relationship name="chemicalClass" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="substances" inverseEntity="ChemicalClass"/>
+        <relationship name="chemicalClasses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="substances" inverseEntity="ChemicalClass"/>
         <relationship name="crossToleranceChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="crossTolerance" inverseEntity="ChemicalClass"/>
         <relationship name="crossTolerancePsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="crossTolerance" inverseEntity="PsychoactiveClass"/>
         <relationship name="crossToleranceSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="crossToleranceSubstances" inverseEntity="Substance"/>
@@ -101,7 +101,7 @@
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousSubstances" inverseEntity="Substance"/>
         <relationship name="dangerousUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="dangerousSubstances" inverseEntity="UnresolvedInteraction"/>
         <relationship name="effects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Effect" inverseName="substances" inverseEntity="Effect"/>
-        <relationship name="psychoactiveClass" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="substances" inverseEntity="PsychoactiveClass"/>
+        <relationship name="psychoactiveClasses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="substances" inverseEntity="PsychoactiveClass"/>
         <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="belongsTo" inverseEntity="Roa"/>
         <relationship name="tolerance" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Tolerance" inverseName="belongsTo" inverseEntity="Tolerance"/>
         <relationship name="uncertainChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="uncertainSubstances" inverseEntity="ChemicalClass"/>
@@ -146,7 +146,7 @@
         <element name="RoaDose" positionX="-423" positionY="-81" width="128" height="134"/>
         <element name="RoaDuration" positionX="-414" positionY="-72" width="128" height="134"/>
         <element name="RoaRange" positionX="-441" positionY="-99" width="128" height="119"/>
-        <element name="Substance" positionX="-405" positionY="-63" width="128" height="14"/>
+        <element name="Substance" positionX="-405" positionY="-63" width="128" height="389"/>
         <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="74"/>
         <element name="SubstancesFile" positionX="-450" positionY="-81" width="128" height="74"/>
         <element name="Tolerance" positionX="-396" positionY="-54" width="128" height="89"/>

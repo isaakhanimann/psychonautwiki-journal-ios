@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -138,6 +138,7 @@
 		EACB6E0D27CE1D2700940291 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0C27CE1D2700940291 /* EffectView.swift */; };
 		EACB6E0F27CE236600940291 /* UnresolvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0E27CE236600940291 /* UnresolvedView.swift */; };
 		EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1427CE2F2100940291 /* ArticleToolbarItem.swift */; };
+		EACB6E1A27CE514800940291 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EACB6E1927CE514800940291 /* Algorithms */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -426,6 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACB6E1A27CE514800940291 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,6 +929,7 @@
 			);
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
+				EACB6E1927CE514800940291 /* Algorithms */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -962,6 +965,7 @@
 			);
 			mainGroup = EAE470FA26CBA57F009FB0EC;
 			packageReferences = (
+				EACB6E1827CE514800940291 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -1556,6 +1560,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EACB6E1827CE514800940291 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EACB6E1927CE514800940291 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EACB6E1827CE514800940291 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {

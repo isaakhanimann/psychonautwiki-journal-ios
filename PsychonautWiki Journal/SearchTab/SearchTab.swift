@@ -7,9 +7,13 @@ struct SearchTab: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.sortedSubstances) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
+                ForEach(viewModel.sections) { sec in
+                    Section(sec.sectionName) {
+                        ForEach(sec.substances) { sub in
+                            NavigationLink(sub.nameUnwrapped) {
+                                SubstanceView(substance: sub)
+                            }
+                        }
                     }
                 }
             }

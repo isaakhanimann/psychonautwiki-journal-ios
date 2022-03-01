@@ -11,6 +11,18 @@ extension Substance: Comparable {
         name ?? "Unknown"
     }
 
+    var psychoactivesUnwrapped: [PsychoactiveClass] {
+        (psychoactiveClasses?.allObjects as? [PsychoactiveClass] ?? []).sorted()
+    }
+
+    var firstPsychoactiveName: String {
+        psychoactivesUnwrapped.first?.name ?? "Miscellaneous"
+    }
+
+    var chemicalsUnwrapped: [ChemicalClass] {
+        (chemicalClasses?.allObjects as? [ChemicalClass] ?? []).sorted()
+    }
+
     var addictionPotentialUnwrapped: String? {
         addictionPotential?.optionalIfEmpty
     }

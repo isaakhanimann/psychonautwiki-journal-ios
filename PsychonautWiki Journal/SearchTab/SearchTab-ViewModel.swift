@@ -1,25 +1,41 @@
 import Foundation
 import Combine
 import CoreData
+import Algorithms
 
 extension SearchTab {
     enum GroupBy {
         case psychoactive, chemical
     }
+    struct SubstanceSection: Identifiable, Comparable {
+        static func < (lhs: SearchTab.SubstanceSection, rhs: SearchTab.SubstanceSection) -> Bool {
+            lhs.sectionName < rhs.sectionName
+        }
+        // swiftlint:disable identifier_name
+        var id: String {
+            sectionName
+        }
+        let sectionName: String
+        let substances: [Substance]
+    }
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-        @Published var sortedSubstances: [Substance] = []
+        @Published var sections: [SubstanceSection] = []
         @Published var searchText = "" {
             didSet {
-              setupFetchRequestPredicateAndFetch()
+                setupFetchRequestPredicateAndFetch()
             }
-          }
-        @Published var groupBy = GroupBy.psychoactive
+        }
+        @Published var groupBy = GroupBy.psychoactive {
+            didSet {
+                setupFetchRequestPredicateAndFetch()
+            }
+        }
 
         private let substanceFetchController: NSFetchedResultsController<Substance>?
 
         init(isPreview: Bool = false) {
-            sortedSubstances = PreviewHelper.shared.allSubstances
-            searchText = "Hello for Preview"
+            sections = SearchTab.ViewModel.getSections(substances: PreviewHelper.shared.allSubstances)
+            searchText = "LS"
             substanceFetchController = nil
         }
 
@@ -35,26 +51,40 @@ extension SearchTab {
             substanceFetchController?.delegate = self
             do {
                 try substanceFetchController?.performFetch()
-                sortedSubstances = substanceFetchController?.fetchedObjects ?? []
+                let substances = substanceFetchController?.fetchedObjects ?? []
+                sections = SearchTab.ViewModel.getSections(substances: substances)
             } catch {
                 NSLog("Error: could not fetch SubstancesFiles")
             }
         }
 
+        private static func getSections(substances: [Substance]) -> [SubstanceSection] {
+            var sections: [SubstanceSection] = []
+            let groupedByClass = Dictionary(grouping: substances) { sub in
+                sub.psychoactivesUnwrapped.first?.name ?? "Miscellaneous"
+            }
+            for (sectionName, subs) in groupedByClass {
+                sections.append(SubstanceSection(sectionName: sectionName, substances: subs.sorted()))
+            }
+            return sections.sorted()
+        }
+
         public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             guard let subs = controller.fetchedObjects as? [Substance] else {return}
-            self.sortedSubstances = subs
+            sections = SearchTab.ViewModel.getSections(substances: subs)
         }
 
         private func setupFetchRequestPredicateAndFetch() {
-          if searchText == "" {
-              substanceFetchController?.fetchRequest.predicate = nil
-          } else {
-            let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText as CVarArg)
-              substanceFetchController?.fetchRequest.predicate = predicate
-          }
-          try? substanceFetchController?.performFetch()
-          sortedSubstances = substanceFetchController?.fetchedObjects ?? []
+            if searchText == "" {
+                substanceFetchController?.fetchRequest.predicate = nil
+            } else {
+                let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText as CVarArg)
+                substanceFetchController?.fetchRequest.predicate = predicate
+            }
+            try? substanceFetchController?.performFetch()
+            let substances = substanceFetchController?.fetchedObjects ?? []
+            sections = SearchTab.ViewModel.getSections(substances: substances)
+
         }
 
     }
