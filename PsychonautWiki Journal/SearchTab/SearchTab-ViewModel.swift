@@ -3,9 +3,13 @@ import Combine
 import CoreData
 
 extension SearchTab {
+    enum GroupBy {
+        case psychoactive, chemical
+    }
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var sortedSubstances: [Substance] = []
         @Published var searchText = ""
+        @Published var groupBy = GroupBy.psychoactive
 
         private let substanceFetchController: NSFetchedResultsController<Substance>?
 
