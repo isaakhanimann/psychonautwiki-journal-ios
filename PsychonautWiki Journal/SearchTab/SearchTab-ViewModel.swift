@@ -8,7 +8,11 @@ extension SearchTab {
     }
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var sortedSubstances: [Substance] = []
-        @Published var searchText = ""
+        @Published var searchText = "" {
+            didSet {
+              setupFetchRequestPredicateAndFetch()
+            }
+          }
         @Published var groupBy = GroupBy.psychoactive
 
         private let substanceFetchController: NSFetchedResultsController<Substance>?
@@ -40,6 +44,17 @@ extension SearchTab {
         public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             guard let subs = controller.fetchedObjects as? [Substance] else {return}
             self.sortedSubstances = subs
+        }
+
+        private func setupFetchRequestPredicateAndFetch() {
+          if searchText == "" {
+              substanceFetchController?.fetchRequest.predicate = nil
+          } else {
+            let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText as CVarArg)
+              substanceFetchController?.fetchRequest.predicate = predicate
+          }
+          try? substanceFetchController?.performFetch()
+          sortedSubstances = substanceFetchController?.fetchedObjects ?? []
         }
 
     }

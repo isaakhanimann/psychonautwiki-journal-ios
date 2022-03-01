@@ -29,6 +29,7 @@ struct SearchTab: View {
             }
         }
         .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .disableAutocorrection(true)
     }
 }
 
