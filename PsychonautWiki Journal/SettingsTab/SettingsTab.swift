@@ -8,6 +8,7 @@ struct SettingsTab: View {
     var body: some View {
         NavigationView {
             List {
+                eye
                 Section(
                     header: Text("Last Successfull Substance Fetch"),
                     footer: Text("Source: PsychonautWiki")
@@ -25,7 +26,7 @@ struct SettingsTab: View {
                 }
                 .alert(isPresented: $viewModel.isShowingErrorAlert) {
                     Alert(
-                        title: Text("Fetch Failed"),
+                        title: Text("Try Again Later"),
                         message: Text(viewModel.alertMessage),
                         dismissButton: .default(Text("Ok"))
                     )
@@ -49,23 +50,28 @@ struct SettingsTab: View {
                     )
                 }
 
-                Link(
-                    "Send Me Feedback & Questions",
-                    destination: URL(string: "https://t.me/isaakhanimann")!
-                )
-            }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle(Text("Settings"))
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .onTapGesture(count: 3, perform: toggleEye)
+                Section("Communication") {
+                    Link(
+                        "Send Me Feedback & Questions",
+                        destination: URL(string: "https://t.me/isaakhanimann")!
+                    )
                 }
-            }
+            }.navigationTitle("Settings")
         }
         .currentDeviceNavigationViewStyle()
+    }
+
+    private var eye: some View {
+        HStack {
+            Spacer()
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80, alignment: .center)
+                .onTapGesture(count: 3, perform: toggleEye)
+            Spacer()
+        }
+        .listRowBackground(Color.clear)
     }
 
     private var imageName: String {
