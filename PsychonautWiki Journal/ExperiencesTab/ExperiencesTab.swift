@@ -20,12 +20,6 @@ struct ExperiencesTab: View {
     ) var storedFile: FetchedResults<SubstancesFile>
     #endif
 
-    private var experiencesSorted: [Experience] {
-        experiences.sorted { experience1, experience2 in
-            experience1.dateToSortBy > experience2.dateToSortBy
-        }
-    }
-
     @State private var selection: Experience?
     @State private var isShowingDeleteExperienceAlert = false
     @State private var offsets: IndexSet?
@@ -34,7 +28,7 @@ struct ExperiencesTab: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ForEach(experiencesSorted) { experience in
+                    ForEach(experiences.sorted()) { experience in
                         ExperienceRow(experience: experience, timer: timer, selection: $selection)
                     }
                     .onDelete(perform: deleteExperiencesMaybe)
@@ -116,7 +110,7 @@ struct ExperiencesTab: View {
     private func deleteExperiences() {
         guard let offsetsUnwrapped = self.offsets else {return}
         for offset in offsetsUnwrapped {
-            let experience = experiencesSorted[offset]
+            let experience = experiences.sorted()[offset]
             moc.delete(experience)
         }
         if moc.hasChanges {

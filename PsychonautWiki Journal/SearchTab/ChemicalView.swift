@@ -1,36 +1,36 @@
 import SwiftUI
 
-struct PsychoactiveView: View {
+struct ChemicalView: View {
 
-    let psychoactive: PsychoactiveClass
+    let chemical: ChemicalClass
 
     var body: some View {
         NavigationView {
             List {
-                Section("Substances in this psychoactive class") {
-                    ForEach(psychoactive.substancesUnwrapped) { sub in
+                Section("Substances in this chemical class") {
+                    ForEach(chemical.sortedSubstancesUnwrapped) { sub in
                         NavigationLink(sub.nameUnwrapped) {
                             SubstanceView(substance: sub)
                         }
                     }
                 }
-                let hasUncertain = !psychoactive.uncertainSubstancesUnwrapped.isEmpty
-                let hasUnsafe = !psychoactive.unsafeSubstancesUnwrapped.isEmpty
-                let hasDangerous = !psychoactive.dangerousSubstancesUnwrapped.isEmpty
+                let hasUncertain = !chemical.uncertainSubstancesUnwrapped.isEmpty
+                let hasUnsafe = !chemical.unsafeSubstancesUnwrapped.isEmpty
+                let hasDangerous = !chemical.dangerousSubstancesUnwrapped.isEmpty
                 let showInteractions = hasUncertain || hasUnsafe || hasDangerous
                 if showInteractions {
                     Section("Interactions (not exhaustive)") {
-                        ForEach(psychoactive.uncertainSubstancesUnwrapped) { sub in
+                        ForEach(chemical.uncertainSubstancesUnwrapped) { sub in
                             NavigationLink(sub.nameUnwrapped) {
                                 SubstanceView(substance: sub)
                             }.listRowBackground(Color.yellow)
                         }
-                        ForEach(psychoactive.unsafeSubstancesUnwrapped) { sub in
+                        ForEach(chemical.unsafeSubstancesUnwrapped) { sub in
                             NavigationLink(sub.nameUnwrapped) {
                                 SubstanceView(substance: sub)
                             }.listRowBackground(Color.orange)
                         }
-                        ForEach(psychoactive.dangerousSubstancesUnwrapped) { sub in
+                        ForEach(chemical.dangerousSubstancesUnwrapped) { sub in
                             NavigationLink(sub.nameUnwrapped) {
                                 SubstanceView(substance: sub)
                             }.listRowBackground(Color.red)
@@ -38,10 +38,10 @@ struct PsychoactiveView: View {
                     }
                 }
             }
-            .navigationTitle(psychoactive.nameUnwrapped)
+            .navigationTitle(chemical.nameUnwrapped)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if let url = psychoactive.url {
+                    if let url = chemical.url {
                         Link("Article", destination: url)
                     }
                 }
@@ -50,8 +50,8 @@ struct PsychoactiveView: View {
     }
 }
 
-struct PsychoactiveView_Previews: PreviewProvider {
+struct ChemicalView_Previews: PreviewProvider {
     static var previews: some View {
-        PsychoactiveView(psychoactive: PreviewHelper.shared.substancesFile.psychoactiveClassesUnwrapped.first!)
+        ChemicalView(chemical: PreviewHelper.shared.substancesFile.chemicalClassesUnwrapped.first!)
     }
 }

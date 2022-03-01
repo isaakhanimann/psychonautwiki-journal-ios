@@ -140,7 +140,7 @@ struct DosePicker: View {
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PreviewHelper.shared
-        let substance = helper.substancesFile.psychoactiveClassesSorted[0].substancesUnwrapped[2]
+        let substance = helper.substancesFile.psychoactiveClassesUnwrapped[0].substancesUnwrapped[2]
 
         Form {
             DosePicker(

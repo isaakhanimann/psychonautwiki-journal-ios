@@ -2,7 +2,10 @@ import Foundation
 import SwiftUI
 import CoreData
 
-extension Ingestion {
+extension Ingestion: Comparable {
+    public static func < (lhs: Ingestion, rhs: Ingestion) -> Bool {
+        lhs.timeUnwrapped < rhs.timeUnwrapped
+    }
 
     enum IngestionColor: String, CaseIterable {
         case blue, green, orange, pink, purple, red, yellow

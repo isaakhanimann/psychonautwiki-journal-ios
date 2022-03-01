@@ -15,9 +15,9 @@ struct ChooseSubstanceView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(storedFile.first?.psychoactiveClassesSorted ?? []) { pClass in
+                ForEach(storedFile.first?.psychoactiveClassesUnwrapped ?? []) { pClass in
                     Section(header: Text(pClass.nameUnwrapped)) {
-                        ForEach(pClass.sortedSubstancesUnwrapped) { substance in
+                        ForEach(pClass.substancesUnwrapped) { substance in
                             SubstanceRow(
                                 substance: substance,
                                 dismiss: dismiss,

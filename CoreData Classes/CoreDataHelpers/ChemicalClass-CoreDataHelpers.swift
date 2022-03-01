@@ -1,6 +1,10 @@
 import Foundation
 
-extension ChemicalClass {
+extension ChemicalClass: Comparable {
+    public static func < (lhs: ChemicalClass, rhs: ChemicalClass) -> Bool {
+        lhs.nameUnwrapped < rhs.nameUnwrapped
+    }
+
     var nameUnwrapped: String {
         name ?? "Unknown"
     }
@@ -13,5 +17,17 @@ extension ChemicalClass {
         substancesUnwrapped.sorted { (substance1, substance2) -> Bool in
             substance1.nameUnwrapped < substance2.nameUnwrapped
         }
+    }
+
+    var uncertainSubstancesUnwrapped: [Substance] {
+        uncertainSubstances?.allObjects as? [Substance] ?? []
+    }
+
+    var unsafeSubstancesUnwrapped: [Substance] {
+        unsafeSubstances?.allObjects as? [Substance] ?? []
+    }
+
+    var dangerousSubstancesUnwrapped: [Substance] {
+        dangerousSubstances?.allObjects as? [Substance] ?? []
     }
 }

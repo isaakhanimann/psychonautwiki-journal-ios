@@ -1,14 +1,15 @@
 import Foundation
 import SwiftUI
 
-extension Experience {
+extension Experience: Comparable {
+    public static func < (lhs: Experience, rhs: Experience) -> Bool {
+        let leftDateToSortBy = lhs.sortedIngestionsUnwrapped.first?.timeUnwrapped ?? lhs.creationDateUnwrapped
+        let rightDateToSortBy = rhs.sortedIngestionsUnwrapped.first?.timeUnwrapped ?? rhs.creationDateUnwrapped
+        return leftDateToSortBy > rightDateToSortBy
+    }
 
     var creationDateUnwrapped: Date {
         creationDate ?? Date()
-    }
-
-    var dateToSortBy: Date {
-        sortedIngestionsUnwrapped.first?.timeUnwrapped ?? creationDateUnwrapped
     }
 
     var titleUnwrapped: String {
@@ -26,10 +27,7 @@ extension Experience {
     }
 
     var sortedIngestionsUnwrapped: [Ingestion] {
-        let ingestions = ingestions?.allObjects as? [Ingestion] ?? []
-        return ingestions.sorted { (ing1, ing2) -> Bool in
-            ing1.timeUnwrapped < ing2.timeUnwrapped
-        }
+        (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
     var ingestionColors: [Color] {
@@ -45,14 +43,11 @@ extension Experience {
             ingestion.substanceName ?? "Unknown"
         }
         names = names.uniqued()
-
         guard !names.isEmpty else {return ""}
-
         var result = names.reduce("") { intermediateResult, name in
             intermediateResult + "\(name), "
         }
         result.removeLast(2)
-
         return result
     }
 
@@ -62,16 +57,12 @@ extension Experience {
 
     var isOver: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
-
         guard let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped) else {return false}
-
         return endOfGraph < Date()
     }
 
     static func getEndTime(for ingestions: [Ingestion]) -> Date? {
-
         guard let firstIngestion = ingestions.first else {return nil}
-
         // Initialize endOfGraphTime sensibly
         var endOfGraphTime = firstIngestion.timeUnwrapped
         for ingestion in ingestions {
@@ -81,19 +72,16 @@ extension Experience {
             guard let comeup = duration.comeup?.maxSec else {return nil}
             guard let peak = duration.peak?.maxSec else {return nil}
             guard let offset = duration.offset?.maxSec else {return nil}
-
             // Choose the latest possible offset to make sure that the graph fits all ingestions
             let offsetEnd = onset
                 + comeup
                 + peak
                 + offset
-
             let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
             if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
                 endOfGraphTime = maybeNewEndTime
             }
         }
-
         return endOfGraphTime
     }
 }

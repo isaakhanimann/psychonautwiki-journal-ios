@@ -1,7 +1,11 @@
 import Foundation
 import CoreData
 
-extension Substance {
+extension Substance: Comparable {
+
+    public static func < (lhs: Substance, rhs: Substance) -> Bool {
+        lhs.nameUnwrapped < rhs.nameUnwrapped
+    }
 
     var nameUnwrapped: String {
         name ?? "Unknown"
@@ -20,63 +24,63 @@ extension Substance {
     }
 
     var crossToleranceSubstancesUnwrapped: [Substance] {
-        crossToleranceSubstances?.allObjects as? [Substance] ?? []
+        (crossToleranceSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var crossTolerancePsychoactivesUnwrapped: [PsychoactiveClass] {
-        crossTolerancePsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+        (crossTolerancePsychoactives?.allObjects as? [PsychoactiveClass] ?? []).sorted()
     }
 
     var crossToleranceChemicalsUnwrapped: [ChemicalClass] {
-        crossToleranceChemicals?.allObjects as? [ChemicalClass] ?? []
+        (crossToleranceChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
     var uncertainSubstancesUnwrapped: [Substance] {
-        uncertainSubstances?.allObjects as? [Substance] ?? []
+        (uncertainSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var uncertainPsychoactivesUnwrapped: [PsychoactiveClass] {
-        uncertainPsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+        (uncertainPsychoactives?.allObjects as? [PsychoactiveClass] ?? []).sorted()
     }
 
     var uncertainChemicalsUnwrapped: [ChemicalClass] {
-        uncertainChemicals?.allObjects as? [ChemicalClass] ?? []
+        (uncertainChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
     var uncertainUnresolvedUnwrapped: [UnresolvedInteraction] {
-        uncertainUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
+        (uncertainUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var unsafeSubstancesUnwrapped: [Substance] {
-        unsafeSubstances?.allObjects as? [Substance] ?? []
+        (unsafeSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var unsafePsychoactivesUnwrapped: [PsychoactiveClass] {
-        unsafePsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+        (unsafePsychoactives?.allObjects as? [PsychoactiveClass] ?? []).sorted()
     }
 
     var unsafeChemicalsUnwrapped: [ChemicalClass] {
-        unsafeChemicals?.allObjects as? [ChemicalClass] ?? []
+        (unsafeChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
     var unsafeUnresolvedUnwrapped: [UnresolvedInteraction] {
-        unsafeUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
+        (unsafeUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var dangerousSubstancesUnwrapped: [Substance] {
-        dangerousSubstances?.allObjects as? [Substance] ?? []
+        (dangerousSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var dangerousPsychoactivesUnwrapped: [PsychoactiveClass] {
-        dangerousPsychoactives?.allObjects as? [PsychoactiveClass] ?? []
+        (dangerousPsychoactives?.allObjects as? [PsychoactiveClass] ?? []).sorted()
     }
 
     var dangerousChemicalsUnwrapped: [ChemicalClass] {
-        dangerousChemicals?.allObjects as? [ChemicalClass] ?? []
+        (dangerousChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
     var dangerousUnresolvedUnwrapped: [UnresolvedInteraction] {
-        dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []
+        (dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var administrationRoutesUnwrapped: [Roa.AdministrationRoute] {

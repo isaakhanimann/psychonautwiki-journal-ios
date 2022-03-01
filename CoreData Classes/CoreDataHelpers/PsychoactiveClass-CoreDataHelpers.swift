@@ -1,18 +1,27 @@
 import Foundation
 
-extension PsychoactiveClass {
+extension PsychoactiveClass: Comparable {
+    public static func < (lhs: PsychoactiveClass, rhs: PsychoactiveClass) -> Bool {
+        lhs.nameUnwrapped < rhs.nameUnwrapped
+    }
+
     var nameUnwrapped: String {
         name ?? "Miscellaneous"
     }
 
     var substancesUnwrapped: [Substance] {
-        substances?.allObjects as? [Substance] ?? []
+        (substances?.allObjects as? [Substance] ?? []).sorted()
     }
 
-    var sortedSubstancesUnwrapped: [Substance] {
-        substancesUnwrapped.sorted { (substance1, substance2) -> Bool in
-            substance1.nameUnwrapped < substance2.nameUnwrapped
-        }
+    var uncertainSubstancesUnwrapped: [Substance] {
+        (uncertainSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
+    var unsafeSubstancesUnwrapped: [Substance] {
+        (unsafeSubstances?.allObjects as? [Substance] ?? []).sorted()
+    }
+
+    var dangerousSubstancesUnwrapped: [Substance] {
+        (dangerousSubstances?.allObjects as? [Substance] ?? []).sorted()
+    }
 }

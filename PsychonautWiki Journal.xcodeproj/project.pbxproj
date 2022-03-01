@@ -133,6 +133,8 @@
 		EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */; };
 		EACB6E0127CDE95300940291 /* Substance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0027CDE95300940291 /* Substance-ViewModel.swift */; };
 		EACB6E0827CE0FAB00940291 /* PsychoactiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0727CE0FAB00940291 /* PsychoactiveView.swift */; };
+		EACB6E0A27CE115D00940291 /* ChemicalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0927CE115D00940291 /* ChemicalView.swift */; };
+		EACB6E0B27CE170F00940291 /* Tolerance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -340,6 +342,7 @@
 		EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tolerance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EACB6E0027CDE95300940291 /* Substance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substance-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E0727CE0FAB00940291 /* PsychoactiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychoactiveView.swift; sourceTree = "<group>"; };
+		EACB6E0927CE115D00940291 /* ChemicalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalView.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -450,6 +453,7 @@
 				EA9AE85D27CB89ED00D4D468 /* SearchTab-ViewModel.swift */,
 				EA8447E527CD14C000B10DD3 /* Substance */,
 				EACB6E0727CE0FAB00940291 /* PsychoactiveView.swift */,
+				EACB6E0927CE115D00940291 /* ChemicalView.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -1047,6 +1051,7 @@
 				EA47E65227CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
 				EADE466C2709D3C500F1058E /* RectangularComplicationView.swift in Sources */,
 				EA47E65627CA136C00F6E10F /* Substance+CoreDataClass.swift in Sources */,
+				EACB6E0B27CE170F00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */,
 				EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */,
 				EAC23795276750C500109622 /* Global Functions.swift in Sources */,
@@ -1144,6 +1149,7 @@
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
+				EACB6E0A27CE115D00940291 /* ChemicalView.swift in Sources */,
 				EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */,
 				EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */,
 				EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */,
