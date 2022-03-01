@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import CoreData
 
 extension Ingestion {
 
@@ -21,7 +22,10 @@ extension Ingestion {
 
     var substance: Substance? {
         guard let substanceNameUnwrapped = substanceName else {return nil}
-        return PersistenceController.shared.getSubstance(with: substanceNameUnwrapped)
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        let pred = NSPredicate(format: "name == %@", substanceNameUnwrapped)
+        fetchRequest.predicate = pred
+        return try? self.managedObjectContext?.fetch(fetchRequest).first
     }
 
     var administrationRouteUnwrapped: Roa.AdministrationRoute {
