@@ -1,7 +1,6 @@
 import Foundation
 import Combine
 import CoreData
-import Algorithms
 
 extension SearchTab {
     enum GroupBy {
