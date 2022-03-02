@@ -220,7 +220,14 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 unr.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let unrUnwrap = unrMatch {
-                unrUnwrap.addToUncertainSubstances(substance)
+                switch interactionType {
+                case .uncertain:
+                    unrUnwrap.addToUncertainSubstances(substance)
+                case .unsafe:
+                    unrUnwrap.addToUnsafeSubstances(substance)
+                case .dangerous:
+                    unrUnwrap.addToDangerousSubstances(substance)
+                }
             } else {
                 let newUnresolved = UnresolvedInteraction(context: context)
                 newUnresolved.name = interactionName.capitalized
