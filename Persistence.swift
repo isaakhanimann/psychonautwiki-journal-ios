@@ -10,7 +10,7 @@ struct PersistenceController {
     static let comesFromVersion10Key = "hasBeenSetupBefore"
     static let hasSeenWelcomeKey = "hasSeenWelcome"
     static let isEyeOpenKey = "isEyeOpen"
-    static let hasInitialSubstancesKey = "hasInitialSubstances"
+    static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }

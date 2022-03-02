@@ -138,6 +138,7 @@
 		EACB6E0D27CE1D2700940291 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0C27CE1D2700940291 /* EffectView.swift */; };
 		EACB6E0F27CE236600940291 /* UnresolvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0E27CE236600940291 /* UnresolvedView.swift */; };
 		EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1427CE2F2100940291 /* ArticleToolbarItem.swift */; };
+		EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -209,7 +210,6 @@
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
-		EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
@@ -349,11 +349,11 @@
 		EACB6E0C27CE1D2700940291 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
 		EACB6E0E27CE236600940291 /* UnresolvedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnresolvedView.swift; sourceTree = "<group>"; };
 		EACB6E1427CE2F2100940291 /* ArticleToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleToolbarItem.swift; sourceTree = "<group>"; };
+		EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions for iOS.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
-		EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -642,13 +642,13 @@
 			isa = PBXGroup;
 			children = (
 				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
-				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
 				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
 				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EA94AD2D26F709CC00E7592D /* Constants.swift */,
+				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4716E26CBA664009FB0EC /* CoreData Classes */,
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
@@ -677,27 +677,19 @@
 				EAE4718726CBA664009FB0EC /* ExperiencesTab */,
 				EA47E66E27CB475100F6E10F /* SearchTab */,
 				EAE4712A26CBA663009FB0EC /* SettingsTab */,
+				EA9AE85427CB72E600D4D468 /* App Icons */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
 				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 				EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
+				EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
-				EA9AE85427CB72E600D4D468 /* App Icons */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
-				EAE4710C26CBA582009FB0EC /* Preview Content */,
 			);
 			path = "PsychonautWiki Journal";
-			sourceTree = "<group>";
-		};
-		EAE4710C26CBA582009FB0EC /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				EAE4710D26CBA582009FB0EC /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		EAE4711B26CBA663009FB0EC /* Welcome Screen */ = {
@@ -1004,7 +996,6 @@
 				EA9AE85827CB74A600D4D468 /* appicon-open@2x.png in Resources */,
 				EA128549270444E90085C3F6 /* X-Large.watchface in Resources */,
 				EA9AE85727CB74A600D4D468 /* appicon-open@3x.png in Resources */,
-				EAE4722D26CBAE54009FB0EC /* Preview Assets.xcassets in Resources */,
 				EABFA491270C938000A6953C /* Infograph Modular.watchface in Resources */,
 				EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */,
 				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
@@ -1195,6 +1186,7 @@
 				EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */,
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
+				EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
 				EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */,
@@ -1474,7 +1466,6 @@
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
@@ -1499,7 +1490,6 @@
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PsychonautWiki Journal/Preview Content\"";
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";

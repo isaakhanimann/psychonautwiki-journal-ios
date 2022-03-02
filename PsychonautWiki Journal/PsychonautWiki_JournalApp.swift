@@ -4,8 +4,10 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
-    @AppStorage(PersistenceController.hasInitialSubstancesKey) var hasInitialSubstances: Bool = false
+    // swiftlint:disable line_length
+    @AppStorage(PersistenceController.hasInitialSubstancesOfCurrentVersion) var hasInitialSubstancesOfCurrentVersion: Bool = false
     @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @StateObject var calendarWrapper = CalendarWrapper()
     @Environment(\.scenePhase) private var scenePhase
 
@@ -18,21 +20,32 @@ struct PsychonautWiki_JournalApp: App {
         }
         .onChange(of: scenePhase) { phase in
             if phase == .active {
-                calendarWrapper.checkIfSomethingChanged()
-                setupSubstances()
+                appHasBecomeActive()
             } else if phase == .background {
                 PersistenceController.shared.saveViewContext()
             }
         }
     }
 
-    private func setupSubstances() {
-        let needsCleanup = comesFromVersion10 && !hasInitialSubstances
+    private func appHasBecomeActive() {
+        calendarWrapper.checkIfSomethingChanged()
+        if !hasInitialSubstancesOfCurrentVersion {
+            migrateOrSetup()
+        }
+    }
+
+    private func migrateOrSetup() {
+        let needsCleanup = comesFromVersion10
         if needsCleanup {
             PersistenceController.shared.cleanupCoreData()
-        } else if !hasInitialSubstances {
+            if isEyeOpen {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    changeAppIcon(toOpen: true)
+                }
+            }
+        } else {
             PersistenceController.shared.addInitialSubstances()
         }
-        hasInitialSubstances = true
+        hasInitialSubstancesOfCurrentVersion = true
     }
 }

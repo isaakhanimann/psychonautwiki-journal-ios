@@ -66,14 +66,8 @@ struct WelcomeScreen: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        let nameOfNewAppicon = isEyeOpen ? "AppIcon-Open" : nil // nil sets it back to the default
-        UIApplication.shared.setAlternateIconName(nameOfNewAppicon)
+        changeAppIcon(toOpen: isEyeOpen)
         Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
-    }
-
-    private func playHapticFeedback() {
-        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-        impactMed.impactOccurred()
     }
 
     let features = [
