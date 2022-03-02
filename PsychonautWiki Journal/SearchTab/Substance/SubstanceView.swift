@@ -7,15 +7,15 @@ struct SubstanceView: View {
         guard substance.uncertainSubstancesUnwrapped.isEmpty else {return true}
         guard substance.uncertainPsychoactivesUnwrapped.isEmpty else {return true}
         guard substance.uncertainChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.uncertainUnresolvedUnwrapped.isEmpty else {return true}
+        guard substance.uncertainUnresolvedsUnwrapped.isEmpty else {return true}
         guard substance.unsafeSubstancesUnwrapped.isEmpty else {return true}
         guard substance.unsafePsychoactivesUnwrapped.isEmpty else {return true}
         guard substance.unsafeChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.unsafeUnresolvedUnwrapped.isEmpty else {return true}
+        guard substance.unsafeUnresolvedsUnwrapped.isEmpty else {return true}
         guard substance.dangerousSubstancesUnwrapped.isEmpty else {return true}
         guard substance.dangerousPsychoactivesUnwrapped.isEmpty else {return true}
         guard substance.dangerousChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.dangerousUnresolvedUnwrapped.isEmpty else {return true}
+        guard substance.dangerousUnresolvedsUnwrapped.isEmpty else {return true}
         return false
     }
 
@@ -131,7 +131,7 @@ struct SubstanceView: View {
                         SubstanceView(substance: sub)
                     }
                 }
-                ForEach(substance.dangerousUnresolvedUnwrapped) { unr in
+                ForEach(substance.dangerousUnresolvedsUnwrapped) { unr in
                     NavigationLink(unr.nameUnwrapped) {
                         UnresolvedView(unresolved: unr)
                     }
@@ -154,7 +154,7 @@ struct SubstanceView: View {
                         SubstanceView(substance: sub)
                     }
                 }
-                ForEach(substance.unsafeUnresolvedUnwrapped) { unr in
+                ForEach(substance.unsafeUnresolvedsUnwrapped) { unr in
                     NavigationLink(unr.nameUnwrapped) {
                         UnresolvedView(unresolved: unr)
                     }
@@ -177,7 +177,7 @@ struct SubstanceView: View {
                         SubstanceView(substance: sub)
                     }
                 }
-                ForEach(substance.uncertainUnresolvedUnwrapped) { unr in
+                ForEach(substance.uncertainUnresolvedsUnwrapped) { unr in
                     NavigationLink(unr.nameUnwrapped) {
                         UnresolvedView(unresolved: unr)
                     }

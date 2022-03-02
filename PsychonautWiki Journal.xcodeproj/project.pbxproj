@@ -139,6 +139,8 @@
 		EACB6E0F27CE236600940291 /* UnresolvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0E27CE236600940291 /* UnresolvedView.swift */; };
 		EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1427CE2F2100940291 /* ArticleToolbarItem.swift */; };
 		EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */; };
+		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
+		EACB6E2027CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -350,6 +352,7 @@
 		EACB6E0E27CE236600940291 /* UnresolvedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnresolvedView.swift; sourceTree = "<group>"; };
 		EACB6E1427CE2F2100940291 /* ArticleToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleToolbarItem.swift; sourceTree = "<group>"; };
 		EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions for iOS.swift"; sourceTree = "<group>"; };
+		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -727,6 +730,7 @@
 				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
 				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
+				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1110,6 +1114,7 @@
 				EA941CED26E8EDD700DBFCFF /* HandShape.swift in Sources */,
 				EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */,
 				EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */,
+				EACB6E2027CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */,
 				EADE46632709D30900F1058E /* DataPoint.swift in Sources */,
 				EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */,
@@ -1187,6 +1192,7 @@
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
 				EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */,
+				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
 				EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */,

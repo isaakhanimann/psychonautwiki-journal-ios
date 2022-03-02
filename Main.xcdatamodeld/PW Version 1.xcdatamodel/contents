@@ -99,7 +99,7 @@
         <relationship name="dangerousChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="dangerousSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="dangerousPsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="dangerousSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousSubstances" inverseEntity="Substance"/>
-        <relationship name="dangerousUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="dangerousSubstances" inverseEntity="UnresolvedInteraction"/>
+        <relationship name="dangerousUnresolveds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="dangerousSubstances" inverseEntity="UnresolvedInteraction"/>
         <relationship name="effects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Effect" inverseName="substances" inverseEntity="Effect"/>
         <relationship name="psychoactiveClasses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="substances" inverseEntity="PsychoactiveClass"/>
         <relationship name="roas" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Roa" inverseName="belongsTo" inverseEntity="Roa"/>
@@ -107,11 +107,11 @@
         <relationship name="uncertainChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="uncertainSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="uncertainPsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="uncertainSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainSubstances" inverseEntity="Substance"/>
-        <relationship name="uncertainUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="uncertainSubstances" inverseEntity="UnresolvedInteraction"/>
+        <relationship name="uncertainUnresolveds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="uncertainSubstances" inverseEntity="UnresolvedInteraction"/>
         <relationship name="unsafeChemicals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChemicalClass" inverseName="unsafeSubstances" inverseEntity="ChemicalClass"/>
         <relationship name="unsafePsychoactives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PsychoactiveClass" inverseName="unsafeSubstances" inverseEntity="PsychoactiveClass"/>
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeSubstances" inverseEntity="Substance"/>
-        <relationship name="unsafeUnresolved" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="unsafeSubstances" inverseEntity="UnresolvedInteraction"/>
+        <relationship name="unsafeUnresolveds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UnresolvedInteraction" inverseName="unsafeSubstances" inverseEntity="UnresolvedInteraction"/>
     </entity>
     <entity name="SubstanceCopy" representedClassName="SubstanceCopy" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -131,9 +131,9 @@
     </entity>
     <entity name="UnresolvedInteraction" representedClassName="UnresolvedInteraction" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousUnresolved" inverseEntity="Substance"/>
-        <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainUnresolved" inverseEntity="Substance"/>
-        <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeUnresolved" inverseEntity="Substance"/>
+        <relationship name="dangerousSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="dangerousUnresolveds" inverseEntity="Substance"/>
+        <relationship name="uncertainSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="uncertainUnresolveds" inverseEntity="Substance"/>
+        <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeUnresolveds" inverseEntity="Substance"/>
     </entity>
     <elements>
         <element name="ChemicalClass" positionX="-1202.32421875" positionY="581.19140625" width="128" height="14"/>

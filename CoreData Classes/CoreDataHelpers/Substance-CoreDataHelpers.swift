@@ -59,8 +59,8 @@ extension Substance: Comparable {
         (uncertainChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
-    var uncertainUnresolvedUnwrapped: [UnresolvedInteraction] {
-        (uncertainUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
+    var uncertainUnresolvedsUnwrapped: [UnresolvedInteraction] {
+        (uncertainUnresolveds?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var unsafeSubstancesUnwrapped: [Substance] {
@@ -75,8 +75,8 @@ extension Substance: Comparable {
         (unsafeChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
-    var unsafeUnresolvedUnwrapped: [UnresolvedInteraction] {
-        (unsafeUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
+    var unsafeUnresolvedsUnwrapped: [UnresolvedInteraction] {
+        (unsafeUnresolveds?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var dangerousSubstancesUnwrapped: [Substance] {
@@ -91,8 +91,8 @@ extension Substance: Comparable {
         (dangerousChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
-    var dangerousUnresolvedUnwrapped: [UnresolvedInteraction] {
-        (dangerousUnresolved?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
+    var dangerousUnresolvedsUnwrapped: [UnresolvedInteraction] {
+        (dangerousUnresolveds?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
     var effectsUnwrapped: [Effect] {
