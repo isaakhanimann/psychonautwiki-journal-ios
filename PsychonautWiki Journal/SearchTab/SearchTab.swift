@@ -27,7 +27,7 @@ struct SearchTab: View {
                             Text("Chemical Class").tag(GroupBy.chemical)
                         }
                     } label: {
-                        Label("More", systemImage: "ellipsis.circle")
+                        Label("More", systemImage: "line.horizontal.3.decrease.circle")
                     }
                 }
             }
