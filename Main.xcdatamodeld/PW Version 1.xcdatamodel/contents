@@ -136,20 +136,20 @@
         <relationship name="unsafeSubstances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Substance" inverseName="unsafeUnresolved" inverseEntity="Substance"/>
     </entity>
     <elements>
-        <element name="ChemicalClass" positionX="-441" positionY="-108" width="128" height="14"/>
-        <element name="DurationRange" positionX="-432" positionY="-90" width="128" height="164"/>
-        <element name="Effect" positionX="-414" positionY="-72" width="128" height="74"/>
-        <element name="Experience" positionX="-657.2791137695312" positionY="-182.0665588378906" width="128" height="104"/>
+        <element name="ChemicalClass" positionX="-1202.32421875" positionY="581.19140625" width="128" height="14"/>
+        <element name="DurationRange" positionX="295.26171875" positionY="336.8984375" width="128" height="164"/>
+        <element name="Effect" positionX="-206.01953125" positionY="168.5078125" width="128" height="74"/>
+        <element name="Experience" positionX="-270.1033325195312" positionY="-382.2306213378906" width="128" height="104"/>
         <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="14"/>
-        <element name="PsychoactiveClass" positionX="-432" positionY="-99" width="128" height="14"/>
-        <element name="Roa" positionX="-450" positionY="-108" width="128" height="104"/>
-        <element name="RoaDose" positionX="-423" positionY="-81" width="128" height="134"/>
-        <element name="RoaDuration" positionX="-414" positionY="-72" width="128" height="134"/>
-        <element name="RoaRange" positionX="-441" positionY="-99" width="128" height="119"/>
-        <element name="Substance" positionX="-405" positionY="-63" width="128" height="389"/>
-        <element name="SubstanceCopy" positionX="-459" positionY="-36" width="128" height="74"/>
-        <element name="SubstancesFile" positionX="-450" positionY="-81" width="128" height="74"/>
-        <element name="Tolerance" positionX="-396" positionY="-54" width="128" height="89"/>
-        <element name="UnresolvedInteraction" positionX="-450" positionY="-36" width="128" height="89"/>
+        <element name="PsychoactiveClass" positionX="-1073.4375" positionY="208.640625" width="128" height="14"/>
+        <element name="Roa" positionX="-204.79296875" positionY="416.4296875" width="128" height="104"/>
+        <element name="RoaDose" positionX="36.97265625" positionY="177.30078125" width="128" height="134"/>
+        <element name="RoaDuration" positionX="33.53515625" positionY="381.625" width="128" height="134"/>
+        <element name="RoaRange" positionX="298.0625" positionY="178.59765625" width="128" height="119"/>
+        <element name="Substance" positionX="-518.71484375" positionY="226.5234375" width="128" height="389"/>
+        <element name="SubstanceCopy" positionX="-602.70703125" positionY="-178.91796875" width="128" height="74"/>
+        <element name="SubstancesFile" positionX="-1195.6875" positionY="376.125" width="128" height="74"/>
+        <element name="Tolerance" positionX="-200.29296875" positionY="554.88671875" width="128" height="89"/>
+        <element name="UnresolvedInteraction" positionX="-220.4921875" positionY="823.61328125" width="128" height="89"/>
     </elements>
 </model>
