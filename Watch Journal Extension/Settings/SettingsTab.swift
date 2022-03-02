@@ -8,7 +8,6 @@ struct SettingsTab: View {
     var body: some View {
         NavigationView {
             List {
-
                 Section(
                     header: Text("Last Fetch"),
                     footer: Text("Source: PsychonautWiki").font(.system(size: 11))

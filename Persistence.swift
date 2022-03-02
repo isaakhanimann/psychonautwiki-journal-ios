@@ -158,6 +158,7 @@ struct PersistenceController {
 
     func cleanupCoreData() {
         convertSubstanceNamesOfIngestions()
+        deleteAllOldStuff()
         addInitialSubstances()
         convertUnitsOfIngestions()
         deleteAllSubstanceCopies()
@@ -173,6 +174,44 @@ struct PersistenceController {
             if viewContext.hasChanges {
                 try? viewContext.save()
             }
+        }
+    }
+
+    private func deleteAllOldStuff() {
+        viewContext.performAndWait {
+            deleteFiles()
+            deleteSubstances()
+            deleteRoas()
+            if viewContext.hasChanges {
+                try? viewContext.save()
+            }
+        }
+    }
+
+    private func deleteFiles() {
+        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let files = (try? viewContext.fetch(fetchRequest)) ?? []
+        for file in files {
+            viewContext.delete(file)
+        }
+    }
+
+    private func deleteSubstances() {
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let subs = (try? viewContext.fetch(fetchRequest)) ?? []
+        for sub in subs {
+            viewContext.delete(sub)
+        }
+    }
+
+    private func deleteRoas() {
+        let fetchRequest: NSFetchRequest<Roa> = Roa.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let roas = (try? viewContext.fetch(fetchRequest)) ?? []
+        for roa in roas {
+            viewContext.delete(roa)
         }
     }
 
