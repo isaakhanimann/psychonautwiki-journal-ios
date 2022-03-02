@@ -18,30 +18,14 @@ struct PsychoactiveView: View {
             let hasDangerous = !psychoactive.dangerousSubstancesUnwrapped.isEmpty
             let showInteractions = hasUncertain || hasUnsafe || hasDangerous
             if showInteractions {
-                Section("Interactions (not exhaustive)") {
-                    ForEach(psychoactive.uncertainSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.yellow)
-                    }
-                    ForEach(psychoactive.unsafeSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.orange)
-                    }
-                    ForEach(psychoactive.dangerousSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.red)
-                    }
-                }
+                SubstanceInteractionsSection(substanceInteractable: psychoactive)
             }
             if !psychoactive.crossToleranceUnwrapped.isEmpty {
-                Section("Cross tolerance (not exhaustive)") {
+                Section("Cross Tolerance (not exhaustive)") {
                     ForEach(psychoactive.crossToleranceUnwrapped) { sub in
                         NavigationLink(sub.nameUnwrapped) {
                             SubstanceView(substance: sub)
-                        }.listRowBackground(Color.yellow)
+                        }
                     }
                 }
             }

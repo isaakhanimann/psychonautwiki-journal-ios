@@ -45,14 +45,14 @@ struct SubstanceView: View {
             if areThereInteractions {
                 interactionSection
             }
-            if !substance.effectsUnwrapped.isEmpty {
-                effectSection
-            }
             if !substance.psychoactivesUnwrapped.isEmpty {
                 psychoactiveSection
             }
             if !substance.chemicalsUnwrapped.isEmpty {
                 chemicalSection
+            }
+            if !substance.effectsUnwrapped.isEmpty {
+                effectSection
             }
         }
         .navigationTitle(substance.nameUnwrapped)
@@ -79,7 +79,7 @@ struct SubstanceView: View {
     }
 
     private var crossToleranceSection: some View {
-        Section("Cross Tolerance") {
+        Section("Cross Tolerance (not exhaustive)") {
             ForEach(substance.crossTolerancePsychoactivesUnwrapped) { psych in
                 NavigationLink(psych.nameUnwrapped) {
                     PsychoactiveView(psychoactive: psych)
@@ -111,79 +111,97 @@ struct SubstanceView: View {
     }
 
     private var interactionSection: some View {
-        let uncertainColor = Color.yellow
-        let unsafeColor = Color.orange
-        let dangerousColor = Color.red
         return Section("Interactions (Not Exhaustive)") {
             Group {
                 ForEach(substance.dangerousPsychoactivesUnwrapped) { psych in
-                    NavigationLink(psych.nameUnwrapped) {
+                    NavigationLink {
                         PsychoactiveView(psychoactive: psych)
+                    } label: {
+                        InteractionLabel(text: psych.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
                 ForEach(substance.dangerousChemicalsUnwrapped) { chem in
-                    NavigationLink(chem.nameUnwrapped) {
+                    NavigationLink {
                         ChemicalView(chemical: chem)
+                    } label: {
+                        InteractionLabel(text: chem.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
                 ForEach(substance.dangerousSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
+                    NavigationLink {
                         SubstanceView(substance: sub)
+                    } label: {
+                        InteractionLabel(text: sub.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
                 ForEach(substance.dangerousUnresolvedsUnwrapped) { unr in
-                    NavigationLink(unr.nameUnwrapped) {
+                    NavigationLink {
                         UnresolvedView(unresolved: unr)
+                    } label: {
+                        InteractionLabel(text: unr.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
             }
-            .foregroundColor(dangerousColor)
             Group {
                 ForEach(substance.unsafePsychoactivesUnwrapped) { psych in
-                    NavigationLink(psych.nameUnwrapped) {
+                    NavigationLink {
                         PsychoactiveView(psychoactive: psych)
+                    } label: {
+                        InteractionLabel(text: psych.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
                 ForEach(substance.unsafeChemicalsUnwrapped) { chem in
-                    NavigationLink(chem.nameUnwrapped) {
+                    NavigationLink {
                         ChemicalView(chemical: chem)
+                    } label: {
+                        InteractionLabel(text: chem.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
                 ForEach(substance.unsafeSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
+                    NavigationLink {
                         SubstanceView(substance: sub)
+                    } label: {
+                        InteractionLabel(text: sub.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
                 ForEach(substance.unsafeUnresolvedsUnwrapped) { unr in
-                    NavigationLink(unr.nameUnwrapped) {
+                    NavigationLink {
                         UnresolvedView(unresolved: unr)
+                    } label: {
+                        InteractionLabel(text: unr.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
             }
-            .foregroundColor(unsafeColor)
             Group {
                 ForEach(substance.uncertainPsychoactivesUnwrapped) { psych in
-                    NavigationLink(psych.nameUnwrapped) {
+                    NavigationLink {
                         PsychoactiveView(psychoactive: psych)
+                    } label: {
+                        InteractionLabel(text: psych.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
                 ForEach(substance.uncertainChemicalsUnwrapped) { chem in
-                    NavigationLink(chem.nameUnwrapped) {
+                    NavigationLink {
                         ChemicalView(chemical: chem)
+                    } label: {
+                        InteractionLabel(text: chem.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
                 ForEach(substance.uncertainSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
+                    NavigationLink {
                         SubstanceView(substance: sub)
+                    } label: {
+                        InteractionLabel(text: sub.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
                 ForEach(substance.uncertainUnresolvedsUnwrapped) { unr in
-                    NavigationLink(unr.nameUnwrapped) {
+                    NavigationLink {
                         UnresolvedView(unresolved: unr)
+                    } label: {
+                        InteractionLabel(text: unr.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
             }
-            .foregroundColor(uncertainColor)
         }
     }
 

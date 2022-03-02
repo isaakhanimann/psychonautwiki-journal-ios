@@ -18,30 +18,14 @@ struct ChemicalView: View {
             let hasDangerous = !chemical.dangerousSubstancesUnwrapped.isEmpty
             let showInteractions = hasUncertain || hasUnsafe || hasDangerous
             if showInteractions {
-                Section("Interactions (not exhaustive)") {
-                    ForEach(chemical.uncertainSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.yellow)
-                    }
-                    ForEach(chemical.unsafeSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.orange)
-                    }
-                    ForEach(chemical.dangerousSubstancesUnwrapped) { sub in
-                        NavigationLink(sub.nameUnwrapped) {
-                            SubstanceView(substance: sub)
-                        }.listRowBackground(Color.red)
-                    }
-                }
+                SubstanceInteractionsSection(substanceInteractable: chemical)
             }
             if !chemical.crossToleranceUnwrapped.isEmpty {
-                Section("Cross tolerance (not exhaustive)") {
+                Section("Cross Tolerance (not exhaustive)") {
                     ForEach(chemical.crossToleranceUnwrapped) { sub in
                         NavigationLink(sub.nameUnwrapped) {
                             SubstanceView(substance: sub)
-                        }.listRowBackground(Color.yellow)
+                        }
                     }
                 }
             }

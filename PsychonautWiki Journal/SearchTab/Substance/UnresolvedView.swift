@@ -6,26 +6,7 @@ struct UnresolvedView: View {
 
     var body: some View {
         List {
-            Section("Substances with this interaction") {
-                ForEach(unresolved.uncertainSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
-                    }
-                    .listRowBackground(Color.yellow)
-                }
-                ForEach(unresolved.unsafeSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
-                    }
-                    .listRowBackground(Color.orange)
-                }
-                ForEach(unresolved.dangerousSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
-                    }
-                    .listRowBackground(Color.red)
-                }
-            }
+            SubstanceInteractionsSection(substanceInteractable: unresolved)
         }
         .navigationTitle(unresolved.nameUnwrapped)
     }
