@@ -50,6 +50,16 @@ struct PersistenceController {
         backgroundContext = container.newBackgroundContext()
     }
 
+    func saveViewContext() {
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save()
+            } catch {
+                assertionFailure("Failed to save viewContext: \(error)")
+            }
+        }
+    }
+
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]

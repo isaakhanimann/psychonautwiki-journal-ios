@@ -3,14 +3,10 @@ import SwiftUI
 struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
-
-    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-
     @State private var selectedTitle: String
     @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
-    @State private var isKeyboardShowing = false
 
     var body: some View {
         List {
@@ -63,41 +59,13 @@ struct ExperienceView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(selectedTitle)
-        .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                if isKeyboardShowing {
-                    Button {
-                        hideKeyboard()
-                        save()
-                    } label: {
-                        Text("Done")
-                            .font(.callout)
-                    }
-                }
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
-            withAnimation {
-                isKeyboardShowing = true
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-            withAnimation {
-                isKeyboardShowing = false
-                if writtenText == "" {
-                    writtenText = placeholderString
-                }
-            }
-        }
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
-        .onDisappear(perform: save)
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
                 dismiss: showOrHideAddIngestionSheet,
                 experience: experience
             )
-                .environment(\.managedObjectContext, self.moc)
                 .environmentObject(calendarWrapper)
                 .accentColor(Color.blue)
         }
@@ -119,20 +87,9 @@ struct ExperienceView: View {
     private func deleteIngestions(at offsets: IndexSet) {
         for offset in offsets {
             let ingestion = experience.sortedIngestionsUnwrapped[offset]
-            moc.delete(ingestion)
+            PersistenceController.shared.viewContext.delete(ingestion)
         }
-        save()
-    }
-
-    private func save() {
-        if moc.hasChanges {
-            calendarWrapper.createOrUpdateEventBeforeMocSave(from: experience)
-            do {
-                try moc.save()
-            } catch {
-                assertionFailure(error.localizedDescription)
-            }
-        }
+        PersistenceController.shared.saveViewContext()
     }
 
     private func update() {

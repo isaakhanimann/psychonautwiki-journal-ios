@@ -20,6 +20,8 @@ struct PsychonautWiki_JournalApp: App {
             if phase == .active {
                 calendarWrapper.checkIfSomethingChanged()
                 setupSubstances()
+            } else if phase == .background {
+                PersistenceController.shared.saveViewContext()
             }
         }
     }

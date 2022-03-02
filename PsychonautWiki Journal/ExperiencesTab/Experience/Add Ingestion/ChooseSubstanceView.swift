@@ -2,26 +2,21 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    @FetchRequest(
-        entity: Substance.entity(),
-        sortDescriptors: [ ]
-    ) var substances: FetchedResults<Substance>
-
+    @StateObject var viewModel = SearchTab.ViewModel()
     let dismiss: () -> Void
     let experience: Experience
-
-    @State private var isKeyboardShowing = false
-    @State private var searchText = ""
-
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(substances) { substance in
-                    SubstanceRow(substance: substance, dismiss: dismiss, experience: experience)
+                ForEach(viewModel.sections) { sec in
+                    Section(sec.sectionName) {
+                        ForEach(sec.substances) { sub in
+                            SubstanceRow(substance: sub, dismiss: dismiss, experience: experience)
+                        }
+                    }
                 }
-
                 if isEyeOpen {
                     Section {
                         EmptyView()
@@ -32,28 +27,11 @@ struct ChooseSubstanceView: View {
                     }
                 }
             }
-            .listStyle(PlainListStyle())
+            .listStyle(.plain)
             .navigationBarTitle("Add Ingestion")
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
-                withAnimation {
-                    isKeyboardShowing = true
-                }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-                withAnimation {
-                    isKeyboardShowing = false
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                    if isKeyboardShowing {
-                        Button("Done", action: hideKeyboard)
-                    } else {
-                        Button("Cancel", action: dismiss)
-                    }
-                }
-            }
         }
+        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .disableAutocorrection(true)
     }
 }
 
