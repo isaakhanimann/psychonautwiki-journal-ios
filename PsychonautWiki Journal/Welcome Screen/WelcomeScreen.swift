@@ -18,6 +18,7 @@ struct WelcomeScreen: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 130, height: 130, alignment: .center)
                         .padding(.leading, 10)
+                        .onTapGesture(count: 3, perform: toggleEye)
                     VStack(spacing: 20) {
                         (Text("Welcome to ") + Text("PsychonautWiki Journal").foregroundColor(.accentColor))
                             .multilineTextAlignment(.center)
@@ -60,6 +61,19 @@ struct WelcomeScreen: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             hasSeenWelcome = true
         }
+    }
+
+    private func toggleEye() {
+        isEyeOpen.toggle()
+        playHapticFeedback()
+        let nameOfNewAppicon = isEyeOpen ? "AppIcon-Open" : nil // nil sets it back to the default
+        UIApplication.shared.setAlternateIconName(nameOfNewAppicon)
+        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
+    }
+
+    private func playHapticFeedback() {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
     }
 
     let features = [
