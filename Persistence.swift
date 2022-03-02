@@ -34,6 +34,11 @@ struct PersistenceController {
         container = NSPersistentContainer(name: "Main", managedObjectModel: Self.model)
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            let description = NSPersistentStoreDescription()
+            description.shouldInferMappingModelAutomatically = true
+            description.shouldMigrateStoreAutomatically = true
+            container.persistentStoreDescriptions = [description]
         }
         container.loadPersistentStores { _, error in
             if let error = error {
