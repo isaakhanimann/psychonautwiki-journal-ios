@@ -116,82 +116,74 @@ struct SubstanceView: View {
         let dangerousColor = Color.red
         return Section("Interactions (Not Exhaustive)") {
             Group {
-                ForEach(substance.uncertainPsychoactivesUnwrapped) { psych in
-                    NavigationLink(psych.nameUnwrapped) {
-                        PsychoactiveView(psychoactive: psych)
-                    }
-                    .listRowBackground(uncertainColor)
-                }
-                ForEach(substance.uncertainChemicalsUnwrapped) { chem in
-                    NavigationLink(chem.nameUnwrapped) {
-                        ChemicalView(chemical: chem)
-                    }
-                    .listRowBackground(uncertainColor)
-                }
-                ForEach(substance.uncertainSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
-                    }
-                    .listRowBackground(uncertainColor)
-                }
-                ForEach(substance.uncertainUnresolvedUnwrapped) { unr in
-                    NavigationLink(unr.nameUnwrapped) {
-                        UnresolvedView(unresolved: unr)
-                    }
-                    .listRowBackground(uncertainColor)
-                }
-            }
-            Group {
-                ForEach(substance.unsafePsychoactivesUnwrapped) { psych in
-                    NavigationLink(psych.nameUnwrapped) {
-                        PsychoactiveView(psychoactive: psych)
-                    }
-                    .listRowBackground(unsafeColor)                        }
-                ForEach(substance.unsafeChemicalsUnwrapped) { chem in
-                    NavigationLink(chem.nameUnwrapped) {
-                        ChemicalView(chemical: chem)
-                    }
-                    .listRowBackground(unsafeColor)
-                }
-                ForEach(substance.unsafeSubstancesUnwrapped) { sub in
-                    NavigationLink(sub.nameUnwrapped) {
-                        SubstanceView(substance: sub)
-                    }
-                    .listRowBackground(unsafeColor)
-                }
-                ForEach(substance.unsafeUnresolvedUnwrapped) { unr in
-                    NavigationLink(unr.nameUnwrapped) {
-                        UnresolvedView(unresolved: unr)
-                    }
-                    .listRowBackground(unsafeColor)
-                }
-            }
-            Group {
                 ForEach(substance.dangerousPsychoactivesUnwrapped) { psych in
                     NavigationLink(psych.nameUnwrapped) {
                         PsychoactiveView(psychoactive: psych)
                     }
-                    .listRowBackground(dangerousColor)
                 }
                 ForEach(substance.dangerousChemicalsUnwrapped) { chem in
                     NavigationLink(chem.nameUnwrapped) {
                         ChemicalView(chemical: chem)
                     }
-                    .listRowBackground(dangerousColor)
                 }
                 ForEach(substance.dangerousSubstancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
                         SubstanceView(substance: sub)
                     }
-                    .listRowBackground(dangerousColor)
                 }
                 ForEach(substance.dangerousUnresolvedUnwrapped) { unr in
                     NavigationLink(unr.nameUnwrapped) {
                         UnresolvedView(unresolved: unr)
                     }
-                    .listRowBackground(dangerousColor)
                 }
             }
+            .foregroundColor(dangerousColor)
+            Group {
+                ForEach(substance.unsafePsychoactivesUnwrapped) { psych in
+                    NavigationLink(psych.nameUnwrapped) {
+                        PsychoactiveView(psychoactive: psych)
+                    }
+                }
+                ForEach(substance.unsafeChemicalsUnwrapped) { chem in
+                    NavigationLink(chem.nameUnwrapped) {
+                        ChemicalView(chemical: chem)
+                    }
+                }
+                ForEach(substance.unsafeSubstancesUnwrapped) { sub in
+                    NavigationLink(sub.nameUnwrapped) {
+                        SubstanceView(substance: sub)
+                    }
+                }
+                ForEach(substance.unsafeUnresolvedUnwrapped) { unr in
+                    NavigationLink(unr.nameUnwrapped) {
+                        UnresolvedView(unresolved: unr)
+                    }
+                }
+            }
+            .foregroundColor(unsafeColor)
+            Group {
+                ForEach(substance.uncertainPsychoactivesUnwrapped) { psych in
+                    NavigationLink(psych.nameUnwrapped) {
+                        PsychoactiveView(psychoactive: psych)
+                    }
+                }
+                ForEach(substance.uncertainChemicalsUnwrapped) { chem in
+                    NavigationLink(chem.nameUnwrapped) {
+                        ChemicalView(chemical: chem)
+                    }
+                }
+                ForEach(substance.uncertainSubstancesUnwrapped) { sub in
+                    NavigationLink(sub.nameUnwrapped) {
+                        SubstanceView(substance: sub)
+                    }
+                }
+                ForEach(substance.uncertainUnresolvedUnwrapped) { unr in
+                    NavigationLink(unr.nameUnwrapped) {
+                        UnresolvedView(unresolved: unr)
+                    }
+                }
+            }
+            .foregroundColor(uncertainColor)
         }
     }
 
