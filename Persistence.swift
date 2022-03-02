@@ -3,51 +3,28 @@ import SwiftUI
 
 struct PersistenceController {
     static let shared = PersistenceController()
-
     static var preview: PersistenceController = {
         PersistenceController(inMemory: true)
     }()
-
     let container: NSPersistentContainer
-    // use viewContext to view objects and edit visible objects
-    let viewContext: NSManagedObjectContext
-    // use backgroundContext to parse new file and delete old one
-    private let backgroundContext: NSManagedObjectContext
     static let comesFromVersion10Key = "hasBeenSetupBefore"
     static let hasSeenWelcomeKey = "hasSeenWelcome"
     static let isEyeOpenKey = "isEyeOpen"
     static let hasInitialSubstancesKey = "hasInitialSubstances"
-
-    static let model: NSManagedObjectModel = {
-        guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
-            fatalError("Failed to locate model file.")
-        }
-
-        guard let managedObjectModel = NSManagedObjectModel(contentsOf: url) else {
-            fatalError("Failed to load model file.")
-        }
-
-        return managedObjectModel
-    }()
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Main", managedObjectModel: Self.model)
+        container = NSPersistentContainer(name: "Main")
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
-        } else {
-            let description = NSPersistentStoreDescription()
-            description.shouldInferMappingModelAutomatically = true
-            description.shouldMigrateStoreAutomatically = true
-            container.persistentStoreDescriptions = [description]
         }
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { (_, error) in
             if let error = error {
-                fatalError("Fatal error loading store: \(error.localizedDescription)")
+                fatalError("Failed to load Core Data stack: \(error)")
             }
         }
-        viewContext = container.viewContext
-        viewContext.automaticallyMergesChangesFromParent = true
-        backgroundContext = container.newBackgroundContext()
     }
 
     func saveViewContext() {
@@ -63,7 +40,7 @@ struct PersistenceController {
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
-        guard let experiences = try? container.viewContext.fetch(fetchRequest) else {return nil}
+        guard let experiences = try? viewContext.fetch(fetchRequest) else {return nil}
         return experiences.first
     }
 
@@ -123,11 +100,11 @@ struct PersistenceController {
 
     func addInitialSubstances() {
         let data = getInitialData()
-        backgroundContext.perform {
+        viewContext.perform {
             do {
                 let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = getCreationDate()
-                try backgroundContext.save()
+                try viewContext.save()
             } catch {
                 fatalError("Failed to decode initial substances from bundle: \(error.localizedDescription)")
             }
@@ -158,22 +135,22 @@ struct PersistenceController {
     }
 
     func decodeAndSaveFile(from data: Data) async throws {
-        try await backgroundContext.perform {
+        try await viewContext.perform {
             do {
                 // check if decoding will succeed
-                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
+                _ = try decodeSubstancesFile(from: data, with: viewContext)
                 // delete all substances, which deletes everything because all the relationships have a cascade delete
                 let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
                 fetchRequest.includesPropertyValues = false
-                let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
+                let substances = (try? viewContext.fetch(fetchRequest)) ?? []
                 for substance in substances {
-                    backgroundContext.delete(substance)
+                    viewContext.delete(substance)
                 }
                 // decode substances
-                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
-                try backgroundContext.save()
+                _ = try decodeSubstancesFile(from: data, with: viewContext)
+                try viewContext.save()
             } catch {
-                backgroundContext.rollback()
+                viewContext.rollback()
                 throw DecodingFileError.failedToDecode
             }
         }
@@ -187,43 +164,43 @@ struct PersistenceController {
     }
 
     private func convertSubstanceNamesOfIngestions() {
-        backgroundContext.performAndWait {
+        viewContext.performAndWait {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-            let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            let ingestions = (try? viewContext.fetch(fetchRequest)) ?? []
             for ingestion in ingestions {
                 ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
             }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
+            if viewContext.hasChanges {
+                try? viewContext.save()
             }
         }
     }
 
     private func convertUnitsOfIngestions() {
-        backgroundContext.performAndWait {
+        viewContext.performAndWait {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-            let ingestions = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            let ingestions = (try? viewContext.fetch(fetchRequest)) ?? []
             for ingestion in ingestions {
                 let substance = getSubstance(with: ingestion.substanceNameUnwrapped)
                 let dose = substance?.getDose(for: ingestion.administrationRouteUnwrapped)
                 ingestion.units = dose?.units
             }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
+            if viewContext.hasChanges {
+                try? viewContext.save()
             }
         }
     }
 
     private func deleteAllSubstanceCopies() {
-        backgroundContext.performAndWait {
+        viewContext.performAndWait {
             let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
             fetchRequest.includesPropertyValues = false
-            let substanceCopies = (try? backgroundContext.fetch(fetchRequest)) ?? []
+            let substanceCopies = (try? viewContext.fetch(fetchRequest)) ?? []
             for substanceCopy in substanceCopies {
-                backgroundContext.delete(substanceCopy)
+                viewContext.delete(substanceCopy)
             }
-            if backgroundContext.hasChanges {
-                try? backgroundContext.save()
+            if viewContext.hasChanges {
+                try? viewContext.save()
             }
         }
     }
