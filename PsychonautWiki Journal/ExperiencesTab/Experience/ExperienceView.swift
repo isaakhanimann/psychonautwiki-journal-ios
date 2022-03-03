@@ -36,18 +36,7 @@ struct ExperienceView: View {
             }
 
             Section(header: Text("Notes")) {
-                ZStack {
-                    TextEditor(text: $writtenText)
-                        .frame(minHeight: 200, alignment: .leading)
-                        .foregroundColor(self.writtenText == placeholderString ? .secondary : .primary)
-                        .onTapGesture {
-                            if self.writtenText == placeholderString {
-                                self.writtenText = ""
-                            }
-                        }
-                    Text(writtenText).opacity(0).padding(.all, 8)
-                }
-
+                TextEditor(text: $writtenText)
             }
 
             if Connectivity.shared.isPaired && !Connectivity.shared.isComplicationEnabled {
@@ -78,11 +67,8 @@ struct ExperienceView: View {
     init(experience: Experience) {
         self.experience = experience
         _selectedTitle = State(wrappedValue: experience.titleUnwrapped)
-        let initialText = experience.textUnwrapped
-        _writtenText = State(wrappedValue: initialText == "" ? placeholderString : initialText)
+        _writtenText = State(wrappedValue: experience.textUnwrapped)
     }
-
-    private let placeholderString = "Enter some notes here"
 
     private func deleteIngestions(at offsets: IndexSet) {
         for offset in offsets {
@@ -95,9 +81,7 @@ struct ExperienceView: View {
     private func update() {
         experience.objectWillChange.send()
         experience.title = selectedTitle
-        if writtenText != placeholderString {
-            experience.text = writtenText
-        }
+        experience.text = writtenText
     }
 }
 
