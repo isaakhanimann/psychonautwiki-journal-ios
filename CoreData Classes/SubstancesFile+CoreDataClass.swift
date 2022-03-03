@@ -178,7 +178,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 sub.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let subUnwrap = matchSub {
-                substanceAddable.addToSubstances(substance: subUnwrap)
+                substanceAddable.addToSubstances(sub: subUnwrap)
                 continue
             }
             // if still here there was no match
@@ -208,7 +208,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 private protocol SubstanceAddable {
     func addToChemicals(chemical: ChemicalClass)
     func addToPsychoactives(psychocative: PsychoactiveClass)
-    func addToSubstances(substance: Substance)
+    func addToSubstances(sub: Substance)
     func addToUnresolved(unresolved: UnresolvedInteraction)
 }
 
@@ -224,8 +224,8 @@ private struct AddToUncertainSubstance: SubstanceAddable {
         substance.addToUncertainPsychoactives(psychocative)
     }
 
-    func addToSubstances(substance: Substance) {
-        substance.addToUncertainSubstances(substance)
+    func addToSubstances(sub: Substance) {
+        substance.addToUncertainSubstances(sub)
     }
 
     func addToUnresolved(unresolved: UnresolvedInteraction) {
@@ -245,8 +245,8 @@ private struct AddToUnsafeSubstance: SubstanceAddable {
         substance.addToUnsafePsychoactives(psychocative)
     }
 
-    func addToSubstances(substance: Substance) {
-        substance.addToUnsafeSubstances(substance)
+    func addToSubstances(sub: Substance) {
+        substance.addToUnsafeSubstances(sub)
     }
 
     func addToUnresolved(unresolved: UnresolvedInteraction) {
@@ -266,8 +266,8 @@ private struct AddToDangerousSubstance: SubstanceAddable {
         substance.addToDangerousPsychoactives(psychocative)
     }
 
-    func addToSubstances(substance: Substance) {
-        substance.addToDangerousSubstances(substance)
+    func addToSubstances(sub: Substance) {
+        substance.addToDangerousSubstances(sub)
     }
 
     func addToUnresolved(unresolved: UnresolvedInteraction) {
