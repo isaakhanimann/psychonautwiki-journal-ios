@@ -132,17 +132,17 @@ public class SubstancesFile: NSManagedObject, Decodable {
         for substance in substancesForParsing {
             let uncertainNames = substance.decodedUncertain.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
-                addToSub: AddToUncertainSubstance(substance: substance),
+                substanceAddable: AddToUncertainSubstance(substance: substance),
                 interactionNames: uncertainNames
             )
             let unsafeNames = substance.decodedUnsafe.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
-                addToSub: AddToUnsafeSubstance(substance: substance),
+                substanceAddable: AddToUnsafeSubstance(substance: substance),
                 interactionNames: unsafeNames
             )
             let dangerousNames = substance.decodedDangerous.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
-                addToSub: AddToDangerousSubstance(substance: substance),
+                substanceAddable: AddToDangerousSubstance(substance: substance),
                 interactionNames: dangerousNames
             )
         }
@@ -153,7 +153,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
     }
 
     private func addToPsychoactivesChemicalsSubstancesOrUnresolved(
-        addToSub: AddToSubstance,
+        substanceAddable: SubstanceAddable,
         interactionNames: [String]
     ) {
         for interactionName in interactionNames {
@@ -162,7 +162,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 psy.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let psyUnwrap = matchPsycho {
-                addToSub.addToPsychoactives(psychocative: psyUnwrap)
+                substanceAddable.addToPsychoactives(psychocative: psyUnwrap)
                 continue
             }
             // check if chemical
@@ -170,7 +170,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 chem.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let chemUnwrap = matchChemical {
-                addToSub.addToChemicals(chemical: chemUnwrap)
+                substanceAddable.addToChemicals(chemical: chemUnwrap)
                 continue
             }
             // check if substance
@@ -178,7 +178,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 sub.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let subUnwrap = matchSub {
-                addToSub.addToSubstances(substance: subUnwrap)
+                substanceAddable.addToSubstances(substance: subUnwrap)
                 continue
             }
             // if still here there was no match
@@ -187,11 +187,11 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 unr.nameUnwrapped.hasEqualMeaning(other: interactionName)
             }
             if let unrUnwrap = unrMatch {
-                addToSub.addToUnresolved(unresolved: unrUnwrap)
+                substanceAddable.addToUnresolved(unresolved: unrUnwrap)
             } else {
                 let newUnresolved = UnresolvedInteraction(context: contextForParsing)
                 newUnresolved.name = interactionName.capitalized
-                addToSub.addToUnresolved(unresolved: newUnresolved)
+                substanceAddable.addToUnresolved(unresolved: newUnresolved)
                 unresolvedsForParsing.insert(newUnresolved)
             }
         }
@@ -205,14 +205,14 @@ public class SubstancesFile: NSManagedObject, Decodable {
     ]
 }
 
-private protocol AddToSubstance {
+private protocol SubstanceAddable {
     func addToChemicals(chemical: ChemicalClass)
     func addToPsychoactives(psychocative: PsychoactiveClass)
     func addToSubstances(substance: Substance)
     func addToUnresolved(unresolved: UnresolvedInteraction)
 }
 
-private struct AddToUncertainSubstance: AddToSubstance {
+private struct AddToUncertainSubstance: SubstanceAddable {
 
     let substance: Substance
 
@@ -233,7 +233,7 @@ private struct AddToUncertainSubstance: AddToSubstance {
     }
 }
 
-private struct AddToUnsafeSubstance: AddToSubstance {
+private struct AddToUnsafeSubstance: SubstanceAddable {
 
     let substance: Substance
 
@@ -254,7 +254,7 @@ private struct AddToUnsafeSubstance: AddToSubstance {
     }
 }
 
-private struct AddToDangerousSubstance: AddToSubstance {
+private struct AddToDangerousSubstance: SubstanceAddable {
 
     let substance: Substance
 
