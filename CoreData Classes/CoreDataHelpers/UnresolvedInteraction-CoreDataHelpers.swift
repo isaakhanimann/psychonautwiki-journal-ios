@@ -10,7 +10,7 @@ extension UnresolvedInteraction: Comparable {
     }
 
     var uncertainSubstancesUnwrapped: [Substance] {
-        (unsafeSubstances?.allObjects as? [Substance] ?? []).sorted()
+        (uncertainSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var unsafeSubstancesUnwrapped: [Substance] {

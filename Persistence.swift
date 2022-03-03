@@ -246,8 +246,7 @@ struct PersistenceController {
 
     func getSubstance(with name: String) -> Substance? {
         let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
-        let pred = NSPredicate(format: "name == %@", name)
-        fetchRequest.predicate = pred
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
         return try? viewContext.fetch(fetchRequest).first
     }
 
