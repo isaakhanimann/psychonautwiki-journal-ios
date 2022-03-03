@@ -1,6 +1,6 @@
 import Foundation
 
-extension ChemicalClass: Comparable {
+extension ChemicalClass: Comparable, SubstanceInteractable {
     public static func < (lhs: ChemicalClass, rhs: ChemicalClass) -> Bool {
         lhs.nameUnwrapped < rhs.nameUnwrapped
     }

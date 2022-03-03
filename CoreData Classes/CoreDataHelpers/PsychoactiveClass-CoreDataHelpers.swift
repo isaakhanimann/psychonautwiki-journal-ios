@@ -1,6 +1,6 @@
 import Foundation
 
-extension PsychoactiveClass: Comparable {
+extension PsychoactiveClass: Comparable, SubstanceInteractable {
     public static func < (lhs: PsychoactiveClass, rhs: PsychoactiveClass) -> Bool {
         lhs.nameUnwrapped < rhs.nameUnwrapped
     }

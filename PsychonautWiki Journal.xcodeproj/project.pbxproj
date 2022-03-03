@@ -143,8 +143,9 @@
 		EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */; };
 		EACB6E2D27D00D0500940291 /* ChemicalClass-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66827CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift */; };
 		EACB6E2E27D00D3A00940291 /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716426CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift */; };
-		EACB6E3127D00D9900940291 /* SubstanceInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3027D00D9900940291 /* SubstanceInteractable.swift */; };
 		EACB6E3D27D09C8800940291 /* JournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3C27D09C8800940291 /* JournalTests.swift */; };
+		EACB6E4427D0DF9500940291 /* SubstanceInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4327D0DF9500940291 /* SubstanceInteractable.swift */; };
+		EACB6E4527D0DF9500940291 /* SubstanceInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4327D0DF9500940291 /* SubstanceInteractable.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -366,9 +367,9 @@
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
-		EACB6E3027D00D9900940291 /* SubstanceInteractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractable.swift; sourceTree = "<group>"; };
 		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACB6E3C27D09C8800940291 /* JournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTests.swift; sourceTree = "<group>"; };
+		EACB6E4327D0DF9500940291 /* SubstanceInteractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractable.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -666,20 +667,20 @@
 			path = Complications;
 			sourceTree = "<group>";
 		};
-		EACB6E2F27D00D7800940291 /* iOS only Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				EACB6E3027D00D9900940291 /* SubstanceInteractable.swift */,
-			);
-			path = "iOS only Extensions";
-			sourceTree = "<group>";
-		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
 			isa = PBXGroup;
 			children = (
 				EACB6E3C27D09C8800940291 /* JournalTests.swift */,
 			);
 			path = JournalTests;
+			sourceTree = "<group>";
+		};
+		EACB6E4627D0DF9A00940291 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EACB6E4327D0DF9500940291 /* SubstanceInteractable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		EAE470FA26CBA57F009FB0EC = {
@@ -694,6 +695,7 @@
 				EA94AD2D26F709CC00E7592D /* Constants.swift */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
+				EACB6E4627D0DF9A00940291 /* Protocols */,
 				EAE4716E26CBA664009FB0EC /* CoreData Classes */,
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EA4910AC26DFB4E0001A5316 /* Watch Journal */,
@@ -718,7 +720,6 @@
 		EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */ = {
 			isa = PBXGroup;
 			children = (
-				EACB6E2F27D00D7800940291 /* iOS only Extensions */,
 				EAE471AC26CBA664009FB0EC /* Reused Styles */,
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4718726CBA664009FB0EC /* ExperiencesTab */,
@@ -1114,6 +1115,7 @@
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
 				EA47E66D27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EAA2EC5326DFCBE200B4FACF /* Throwable.swift in Sources */,
+				EACB6E4527D0DF9500940291 /* SubstanceInteractable.swift in Sources */,
 				EA8447E227CD0B3B00B10DD3 /* PreviewHelper.swift in Sources */,
 				EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */,
 				EADE46642709D30900F1058E /* AroundShapeModelDown.swift in Sources */,
@@ -1235,7 +1237,6 @@
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EA460D2227637933002EF80B /* QandAView.swift in Sources */,
 				EAE4721426CBA664009FB0EC /* IngestionLineModel.swift in Sources */,
-				EACB6E3127D00D9900940291 /* SubstanceInteractable.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */,
@@ -1314,6 +1315,7 @@
 				EA8447F227CD312300B10DD3 /* CurveTop.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
+				EACB6E4427D0DF9500940291 /* SubstanceInteractable.swift in Sources */,
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,

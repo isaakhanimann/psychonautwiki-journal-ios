@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension Substance: Comparable {
+extension Substance: Comparable, SubstanceInteractable {
 
     public static func < (lhs: Substance, rhs: Substance) -> Bool {
         lhs.nameUnwrapped < rhs.nameUnwrapped

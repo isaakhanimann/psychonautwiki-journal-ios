@@ -1,11 +1,5 @@
 import SwiftUI
 
-protocol SubstanceInteractable {
-    var dangerousSubstancesUnwrapped: [Substance] { get }
-    var unsafeSubstancesUnwrapped: [Substance] { get }
-    var uncertainSubstancesUnwrapped: [Substance] { get }
-}
-
 struct SubstanceInteractionsSection: View {
 
     let substanceInteractable: SubstanceInteractable
