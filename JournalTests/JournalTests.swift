@@ -75,6 +75,7 @@ class JournalTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable line_length
     func testLSD() throws {
         let fetchRequest = Substance.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", "LSD")
@@ -89,20 +90,22 @@ class JournalTests: XCTestCase {
         XCTAssertEqual(lsd.crossToleranceSubstancesUnwrapped.count, 0)
         XCTAssertEqual(lsd.crossTolerancePsychoactivesUnwrapped.count, 1)
         XCTAssertEqual(lsd.crossTolerancePsychoactivesUnwrapped.first!.name, "Psychedelics")
+        // Check if interactions are supersets of what it says in the json file
+        // This is because in the json the interactions are not always mutual
         // uncertain
-        XCTAssertEqual(Set(lsd.uncertainSubstancesUnwrapped.map { $0.name }), ["Cannabis"])
-        XCTAssertEqual(Set(lsd.uncertainChemicalsUnwrapped.map { $0.name }), [])
-        XCTAssertEqual(Set(lsd.uncertainPsychoactivesUnwrapped.map { $0.name }), ["Stimulants"])
-        XCTAssertEqual(Set(lsd.uncertainUnresolvedsUnwrapped.map { $0.name }), [])
+        XCTAssertTrue(Set(lsd.uncertainSubstancesUnwrapped.map { $0.name }).isSuperset(of: ["Cannabis"]))
+        XCTAssertTrue(Set(lsd.uncertainChemicalsUnwrapped.map { $0.name }).isSuperset(of: []))
+        XCTAssertTrue(Set(lsd.uncertainPsychoactivesUnwrapped.map { $0.name }).isSuperset(of: ["Stimulants"]))
+        XCTAssertTrue(Set(lsd.uncertainUnresolvedsUnwrapped.map { $0.name }).isSuperset(of: []))
         // unsafe
-        XCTAssertEqual(Set(lsd.unsafeSubstancesUnwrapped.map { $0.name }), ["Tramadol"])
-        XCTAssertEqual(Set(lsd.unsafeChemicalsUnwrapped.map { $0.name }), [])
-        XCTAssertEqual(Set(lsd.unsafePsychoactivesUnwrapped.map { $0.name }), ["Deliriant"])
-        XCTAssertEqual(Set(lsd.unsafeUnresolvedsUnwrapped.map { $0.name }), ["Tricyclic Antidepressants", "Ritonavir"])
+        XCTAssertTrue(Set(lsd.unsafeSubstancesUnwrapped.map { $0.name }).isSuperset(of: ["Tramadol"]))
+        XCTAssertTrue(Set(lsd.unsafeChemicalsUnwrapped.map { $0.name }).isSuperset(of: []))
+        XCTAssertTrue(Set(lsd.unsafePsychoactivesUnwrapped.map { $0.name }).isSuperset(of: ["Deliriant"]))
+        XCTAssertTrue(Set(lsd.unsafeUnresolvedsUnwrapped.map { $0.name }).isSuperset(of: ["Tricyclic Antidepressants", "Ritonavir"]))
         // dangerous
-        XCTAssertEqual(Set(lsd.dangerousSubstancesUnwrapped.map { $0.name }), [])
-        XCTAssertEqual(Set(lsd.dangerousChemicalsUnwrapped.map { $0.name }), [])
-        XCTAssertEqual(Set(lsd.dangerousPsychoactivesUnwrapped.map { $0.name }), [])
-        XCTAssertEqual(Set(lsd.dangerousUnresolvedsUnwrapped.map { $0.name }), [])
+        XCTAssertTrue(Set(lsd.dangerousSubstancesUnwrapped.map { $0.name }).isSuperset(of: []))
+        XCTAssertTrue(Set(lsd.dangerousChemicalsUnwrapped.map { $0.name }).isSuperset(of: []))
+        XCTAssertTrue(Set(lsd.dangerousPsychoactivesUnwrapped.map { $0.name }).isSuperset(of: []))
+        XCTAssertTrue(Set(lsd.dangerousUnresolvedsUnwrapped.map { $0.name }).isSuperset(of: []))
     }
 }
