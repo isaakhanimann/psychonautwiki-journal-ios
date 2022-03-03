@@ -100,7 +100,7 @@ struct PersistenceController {
 
     func addInitialSubstances() {
         let data = getInitialData()
-        viewContext.perform {
+        viewContext.performAndWait {
             do {
                 let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
                 substancesFile.creationDate = getCreationDate()

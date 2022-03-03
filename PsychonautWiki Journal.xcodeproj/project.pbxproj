@@ -144,6 +144,7 @@
 		EACB6E2D27D00D0500940291 /* ChemicalClass-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66827CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift */; };
 		EACB6E2E27D00D3A00940291 /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716426CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift */; };
 		EACB6E3127D00D9900940291 /* SubstanceInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3027D00D9900940291 /* SubstanceInteractable.swift */; };
+		EACB6E3D27D09C8800940291 /* JournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3C27D09C8800940291 /* JournalTests.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -234,6 +235,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = EA4910AA26DFB4E0001A5316;
 			remoteInfo = "Watch Journal";
+		};
+		EACB6E3E27D09C8800940291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE470FB26CBA57F009FB0EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAE4710226CBA57F009FB0EC;
+			remoteInfo = "PsychonautWiki Journal";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -359,6 +367,8 @@
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
 		EACB6E3027D00D9900940291 /* SubstanceInteractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractable.swift; sourceTree = "<group>"; };
+		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EACB6E3C27D09C8800940291 /* JournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTests.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -425,6 +435,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		EA4910B126DFB4E0001A5316 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EACB6E3727D09C8800940291 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -657,6 +674,14 @@
 			path = "iOS only Extensions";
 			sourceTree = "<group>";
 		};
+		EACB6E3B27D09C8800940291 /* JournalTests */ = {
+			isa = PBXGroup;
+			children = (
+				EACB6E3C27D09C8800940291 /* JournalTests.swift */,
+			);
+			path = JournalTests;
+			sourceTree = "<group>";
+		};
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +698,7 @@
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EA4910AC26DFB4E0001A5316 /* Watch Journal */,
 				EA4910B826DFB4E0001A5316 /* Watch Journal Extension */,
+				EACB6E3B27D09C8800940291 /* JournalTests */,
 				EAE4710426CBA57F009FB0EC /* Products */,
 				EAA2EC6826E2064D00B4FACF /* Frameworks */,
 			);
@@ -684,6 +710,7 @@
 				EAE4710326CBA57F009FB0EC /* Journal.app */,
 				EA4910AB26DFB4E0001A5316 /* Journal.app */,
 				EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */,
+				EACB6E3A27D09C8800940291 /* JournalTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -923,6 +950,24 @@
 			productReference = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		EACB6E3927D09C8800940291 /* JournalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EACB6E4027D09C8800940291 /* Build configuration list for PBXNativeTarget "JournalTests" */;
+			buildPhases = (
+				EACB6E3627D09C8800940291 /* Sources */,
+				EACB6E3727D09C8800940291 /* Frameworks */,
+				EACB6E3827D09C8800940291 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EACB6E3F27D09C8800940291 /* PBXTargetDependency */,
+			);
+			name = JournalTests;
+			productName = JournalTests;
+			productReference = EACB6E3A27D09C8800940291 /* JournalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAE4711726CBA582009FB0EC /* Build configuration list for PBXNativeTarget "PsychonautWiki Journal" */;
@@ -951,7 +996,7 @@
 		EAE470FB26CBA57F009FB0EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					EA4910AA26DFB4E0001A5316 = {
@@ -959,6 +1004,10 @@
 					};
 					EA4910B326DFB4E0001A5316 = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					EACB6E3927D09C8800940291 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = EAE4710226CBA57F009FB0EC;
 					};
 					EAE4710226CBA57F009FB0EC = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -983,6 +1032,7 @@
 				EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EA4910AA26DFB4E0001A5316 /* Watch Journal */,
 				EA4910B326DFB4E0001A5316 /* Watch Journal Extension */,
+				EACB6E3927D09C8800940291 /* JournalTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1003,6 +1053,13 @@
 				EAA2EC8026E21D9200B4FACF /* InitialSubstances.json in Resources */,
 				EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */,
 				EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EACB6E3827D09C8800940291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1200,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EACB6E3627D09C8800940291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EACB6E3D27D09C8800940291 /* JournalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAE470FF26CBA57F009FB0EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1269,6 +1334,11 @@
 			target = EA4910AA26DFB4E0001A5316 /* Watch Journal */;
 			targetProxy = EA4910C526DFB4E1001A5316 /* PBXContainerItemProxy */;
 		};
+		EACB6E3F27D09C8800940291 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */;
+			targetProxy = EACB6E3E27D09C8800940291 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1365,6 +1435,46 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+			};
+			name = Release;
+		};
+		EACB6E4127D09C8800940291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = isaak.JournalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Journal.app/Journal";
+			};
+			name = Debug;
+		};
+		EACB6E4227D09C8800940291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = isaak.JournalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Journal.app/Journal";
 			};
 			name = Release;
 		};
@@ -1549,6 +1659,15 @@
 			buildConfigurations = (
 				EA4910C926DFB4E1001A5316 /* Debug */,
 				EA4910CA26DFB4E1001A5316 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EACB6E4027D09C8800940291 /* Build configuration list for PBXNativeTarget "JournalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EACB6E4127D09C8800940291 /* Debug */,
+				EACB6E4227D09C8800940291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
