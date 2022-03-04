@@ -57,7 +57,6 @@ class ChemicalTests: XCTestCase {
         XCTAssertTrue(names.contains("Gabapentinoids"))
         XCTAssertTrue(names.contains("Lactones"))
         XCTAssertTrue(names.contains("Khat#1#s"))
-        XCTAssertTrue(names.contains("Inorganic Molecules"))
         XCTAssertTrue(names.contains("Naphthoylindoles"))
         XCTAssertTrue(names.contains("Indole Alkaloids"))
         XCTAssertTrue(names.contains("Substituted Piperazines"))

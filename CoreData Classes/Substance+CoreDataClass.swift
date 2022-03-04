@@ -41,11 +41,11 @@ public class Substance: NSManagedObject, Decodable {
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let decodedName = try container.decode(String.self, forKey: .name)
-        if Self.namesOfPsychoactiveClasses.contains(decodedName) {
-            throw SubstanceDecodingError.invalidName("\(decodedName) is the name of a psychoactive class")
+        if Self.namesThatShouldNotBeParsed.contains(decodedName.lowercased()) {
+            throw SubstanceDecodingError.invalidName("\(decodedName) is not a substance")
         }
-        if Self.namesOfChemicalClasses.contains(decodedName) {
-            throw SubstanceDecodingError.invalidName("\(decodedName) is the name of a chemical class")
+        if decodedName.lowercased().contains("experience") {
+            throw SubstanceDecodingError.invalidName("substance name contains the word experience")
         }
         self.init(context: context) // init needs to be called after calls that can throw an exception
         self.name = decodedName.capitalizedSubstanceName
@@ -120,38 +120,38 @@ public class Substance: NSManagedObject, Decodable {
         self.decodedChemicalNames = chemicalNames
     }
 
-    private static let namesOfPsychoactiveClasses: Set = [
-        "25x-NBOH",
-        "Antidepressants",
-        "Dissociatives",
-        "Entactogens",
-        "Entheogen",
-        "Gabapentinoids",
-        "Hallucinogens",
-        "Opioids",
-        "Psychedelics",
-        "Sedative",
-        "Serotonergic psychedelic",
-        "Stimulants",
-        "Classical psychedelics"
-    ]
-    private static let namesOfChemicalClasses: Set = [
-        "Arylcyclohexylamines",
-        "Barbiturates",
-        "Benzodiazepines",
-        "Diarylethylamines",
-        "Lysergamides",
-        "Racetams",
-        "Thienodiazepines",
-        "Xanthines",
-        "Substituted amphetamines",
-        "Substituted aminorexes",
-        "Substituted cathinones",
-        "Substituted morphinans",
-        "Substituted phenethylamines",
-        "Substituted phenidates",
-        "Substituted tryptamines"
-    ]
+    private static let namesThatShouldNotBeParsed: Set = Set([
+        "2C-T-X",
+        "2C-X",
+        "25X-Nbome",
+        "Amphetamine (Disambiguation)",
+        "Antihistamine",
+        "Antipsychotic",
+        "Cannabinoid",
+        "Datura (Botany)",
+        "Deliriant",
+        "Depressant",
+        "Dox",
+        "Harmala Alkaloid",
+        "Hyoscyamus Niger (Botany)",
+        "Hypnotic",
+        "Iso-LSD",
+        "List Of Prodrugs",
+        "Mandragora Officinarum (Botany)",
+        "Nbx",
+        "Nootropic",
+        "Phenethylamine (Compound)",
+        "Piper Nigrum (Botany)",
+        "RIMA",
+        "Selective Serotonin Reuptake Inhibitor",
+        "Serotonin",
+        "Serotonin-Norepinephrine Reuptake Inhibitor",
+        "Synthetic Cannabinoid",
+        "Tabernanthe Iboga (Botany)",
+        "Tryptamine (Compound)",
+        "Cake",
+        "Inhalants"
+    ].map({$0.lowercased()}))
 }
 
 private struct DecodedInteraction: Decodable {

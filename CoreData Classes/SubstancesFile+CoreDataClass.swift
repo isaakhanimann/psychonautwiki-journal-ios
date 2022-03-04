@@ -61,7 +61,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         for substance in substancesForParsing {
             for psychoactiveName in substance.decodedPsychoactiveNames {
                 let match = psychoactives.first { cat in
-                    cat.nameUnwrapped.lowercased() == psychoactiveName.lowercased()
+                    cat.nameUnwrapped.hasEqualMeaning(other: psychoactiveName)
                 }
                 if let matchUnwrapped = match {
                     matchUnwrapped.addToSubstances(substance)
@@ -77,7 +77,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
             }
             for chemicalName in substance.decodedChemicalNames {
                 let match = chemicals.first { cat in
-                    cat.nameUnwrapped.lowercased() == chemicalName.lowercased()
+                    cat.nameUnwrapped.hasEqualMeaning(other: chemicalName)
                 }
                 if let matchUnwrapped = match {
                     matchUnwrapped.addToSubstances(substance)

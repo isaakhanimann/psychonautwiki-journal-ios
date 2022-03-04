@@ -17,7 +17,7 @@ class JournalTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThanOrEqual(substances.count, 361)
+        XCTAssertGreaterThanOrEqual(substances.count, 357)
     }
 
     private func getAllSubstances() throws -> [Substance] {
@@ -54,43 +54,46 @@ class JournalTests: XCTestCase {
         XCTAssertTrue(names.contains("Methcathinone"))
     }
 
-    func testNoPsychoactiveClassParsedAsSubstance() throws {
-        let psychoactives = try getAllPsychoactives()
-        var psyNames = Set(psychoactives.map { $0.nameUnwrapped })
-        let psyNamesNotParsed: Set = [
-            "Entheogen",
-            "Antidepressants",
-            "Gabapentinoids",
-            "25x-NBOH",
-            "Sedative",
-            "Serotonergic psychedelic"
+    func testSubstancesWhichShouldBeFilteredOut() throws {
+        let substances = try getAllSubstances()
+        let subNames = Set(substances.map { $0.nameUnwrapped.lowercased() })
+        var namesThatShouldNotBeThere = [
+            "2C-T-X",
+            "2C-X",
+            "25X-Nbome",
+            "Amphetamine (Disambiguation)",
+            "Antihistamine",
+            "Antipsychotic",
+            "Cannabinoid",
+            "Datura (Botany)",
+            "Deliriant",
+            "Depressant",
+            "Dox",
+            "Harmala Alkaloid",
+            "Hyoscyamus Niger (Botany)",
+            "Hypnotic",
+            "Iso-LSD",
+            "List Of Prodrugs",
+            "Mandragora Officinarum (Botany)",
+            "Nbx",
+            "Nootropic",
+            "Phenethylamine (Compound)",
+            "Piper Nigrum (Botany)",
+            "RIMA",
+            "Selective Serotonin Reuptake Inhibitor",
+            "Serotonin",
+            "Serotonin-Norepinephrine Reuptake Inhibitor",
+            "Synthetic Cannabinoid",
+            "Tabernanthe Iboga (Botany)",
+            "Tryptamine (Compound)",
+            "Cake",
+            "Inhalants"
         ]
-        psyNames = psyNames.union(psyNamesNotParsed)
-        let substances = try getAllSubstances()
-        let subNames = Set(substances.map { $0.nameUnwrapped })
-        for psyName in psyNames {
-            XCTAssertFalse(subNames.contains(psyName), "\(psyName) was parsed as a substance")
+        namesThatShouldNotBeThere = namesThatShouldNotBeThere.map {$0.lowercased()}
+        for subName in subNames {
+            XCTAssertFalse(namesThatShouldNotBeThere.contains(subName), "\(subName) was parsed as a substance")
+            XCTAssertFalse(subName.localizedCaseInsensitiveContains("experience"), "\(subName) contains the word experience")
         }
-    }
-
-    private func getAllPsychoactives() throws -> [PsychoactiveClass] {
-        let fetchRequest = PsychoactiveClass.fetchRequest()
-        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
-    }
-
-    func testNoChemicalClassParsedAsSubstance() throws {
-        let chemicals = try getAllChemicals()
-        let cheNames = Set(chemicals.map { $0.nameUnwrapped })
-        let substances = try getAllSubstances()
-        let subNames = Set(substances.map { $0.nameUnwrapped })
-        for cheName in cheNames {
-            XCTAssertFalse(subNames.contains(cheName), "\(cheName) was parsed as a substance")
-        }
-    }
-
-    private func getAllChemicals() throws -> [ChemicalClass] {
-        let fetchRequest = ChemicalClass.fetchRequest()
-        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
     }
 
     // swiftlint:disable cyclomatic_complexity

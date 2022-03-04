@@ -34,6 +34,7 @@ struct SubstanceView: View {
             if substance.tolerance?.isAtLeastOneDefined ?? false {
                 toleranceSection
             }
+            roaSection
             let hasSubs = !substance.crossToleranceSubstancesUnwrapped.isEmpty
             let hasPsych = !substance.crossTolerancePsychoactivesUnwrapped.isEmpty
             let hasChem = !substance.crossToleranceChemicalsUnwrapped.isEmpty
@@ -41,7 +42,6 @@ struct SubstanceView: View {
             if showTolerance {
                 crossToleranceSection
             }
-            roaSection
             if areThereInteractions {
                 interactionSection
             }
