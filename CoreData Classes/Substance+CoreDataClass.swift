@@ -48,7 +48,7 @@ public class Substance: NSManagedObject, Decodable {
             throw SubstanceDecodingError.invalidName("\(decodedName) is the name of a chemical class")
         }
         self.init(context: context) // init needs to be called after calls that can throw an exception
-        self.name = decodedName
+        self.name = decodedName.capitalizedSubstanceName
         self.url = try? container.decodeIfPresent(URL.self, forKey: .url)
         self.decodedEffects = (try? container.decodeIfPresent(
             [DecodedEffect].self,
@@ -132,7 +132,8 @@ public class Substance: NSManagedObject, Decodable {
         "Psychedelics",
         "Sedative",
         "Serotonergic psychedelic",
-        "Stimulants"
+        "Stimulants",
+        "Classical psychedelics"
     ]
     private static let namesOfChemicalClasses: Set = [
         "Arylcyclohexylamines",

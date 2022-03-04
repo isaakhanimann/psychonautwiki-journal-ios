@@ -11,4 +11,12 @@ extension String {
         }
         return result
     }
+
+    var capitalizedSubstanceName: String {
+        if self != self.uppercased() {
+            return self.capitalized
+        } else {
+            return self
+        }
+    }
 }
