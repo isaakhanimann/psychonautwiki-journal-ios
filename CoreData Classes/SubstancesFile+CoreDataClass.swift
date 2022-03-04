@@ -41,6 +41,20 @@ public class SubstancesFile: NSManagedObject, Decodable {
         createInteractions()
     }
 
+    private static let psychoactiveURLs = [
+        "Antipsychotics": URL(string: "https://psychonautwiki.org/wiki/Antipsychotic"),
+        "Cannabinoids": URL(string: "https://psychonautwiki.org/wiki/Cannabinoid"),
+        "Deliriants": URL(string: "https://psychonautwiki.org/wiki/Deliriant"),
+        "Depressants": URL(string: "https://psychonautwiki.org/wiki/Depressant"),
+        "Dissociatives": URL(string: "https://psychonautwiki.org/wiki/Dissociatives"),
+        "Entactogens": URL(string: "https://psychonautwiki.org/wiki/Entactogens"),
+        "Hallucinogens": URL(string: "https://psychonautwiki.org/wiki/Hallucinogens"),
+        "Nootropics": URL(string: "https://psychonautwiki.org/wiki/Nootropic"),
+        "Opioids": URL(string: "https://psychonautwiki.org/wiki/Opioids"),
+        "Psychedelics": URL(string: "https://psychonautwiki.org/wiki/Psychedelics"),
+        "Stimulants": URL(string: "https://psychonautwiki.org/wiki/Stimulants")
+    ]
+
     private func createClasses() {
         var psychoactives = Set<PsychoactiveClass>()
         var chemicals = Set<ChemicalClass>()
@@ -52,10 +66,13 @@ public class SubstancesFile: NSManagedObject, Decodable {
                 if let matchUnwrapped = match {
                     matchUnwrapped.addToSubstances(substance)
                 } else {
-                    let pClass = PsychoactiveClass(context: contextForParsing)
-                    pClass.name = psychoactiveName
-                    pClass.addToSubstances(substance)
-                    psychoactives.insert(pClass)
+                    let newPsy = PsychoactiveClass(context: contextForParsing)
+                    if let url = Self.psychoactiveURLs[psychoactiveName] {
+                        newPsy.url = url
+                    }
+                    newPsy.name = psychoactiveName
+                    newPsy.addToSubstances(substance)
+                    psychoactives.insert(newPsy)
                 }
             }
             for chemicalName in substance.decodedChemicalNames {
