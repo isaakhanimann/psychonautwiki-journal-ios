@@ -3,7 +3,7 @@ import CoreData
 
 public class Substance: NSManagedObject, Decodable {
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name
         case url
         case effects
@@ -18,20 +18,6 @@ public class Substance: NSManagedObject, Decodable {
         case dangerousInteractions
     }
 
-    struct DecodedInteraction: Decodable {
-        var name: String
-    }
-
-    struct DecodedEffect: Decodable {
-        var name: String
-        var url: URL
-    }
-
-    struct DecodedClasses: Decodable {
-        var psychoactive: [String]
-        var chemical: [String]
-    }
-
     // These variables are intermediately stored
     // such that they can be used in SubstancesFile to create objects and relationships
     var decodedUncertainNames = [String]()
@@ -42,7 +28,7 @@ public class Substance: NSManagedObject, Decodable {
     var decodedEffects = [DecodedEffect]()
     var decodedCrossToleranceNames = [String]()
 
-    let noClassName = "Miscellaneous"
+    static let noClassName = "Miscellaneous"
 
     enum SubstanceDecodingError: Error {
         case invalidName(String)
@@ -118,8 +104,8 @@ public class Substance: NSManagedObject, Decodable {
         if let firstPsychoactive = psychoactiveNames.first {
             self.firstPsychoactiveName = firstPsychoactive
         } else {
-            self.firstPsychoactiveName = noClassName
-            psychoactiveNames.append(noClassName)
+            self.firstPsychoactiveName = Self.noClassName
+            psychoactiveNames.append(Self.noClassName)
         }
         self.decodedPsychoactiveNames = psychoactiveNames
         var chemicalNames = decodedClasses?.chemical.map { name in
@@ -128,8 +114,8 @@ public class Substance: NSManagedObject, Decodable {
         if let firstChemical = chemicalNames.first {
             self.firstChemicalName = firstChemical
         } else {
-            self.firstChemicalName = noClassName
-            chemicalNames.append(noClassName)
+            self.firstChemicalName = Self.noClassName
+            chemicalNames.append(Self.noClassName)
         }
         self.decodedChemicalNames = chemicalNames
     }
@@ -158,4 +144,39 @@ public class Substance: NSManagedObject, Decodable {
         "Thienodiazepines",
         "Xanthines"
     ]
+}
+
+private struct DecodedInteraction: Decodable {
+    var name: String
+}
+
+struct DecodedEffect: Decodable {
+    var name: String
+    var url: URL
+}
+
+private struct DecodedClasses: Decodable {
+    var psychoactive: [String]
+    var chemical: [String]
+
+    private enum ClassCodingKeys: String, CodingKey {
+        case psychoactive
+        case chemical
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ClassCodingKeys.self)
+        let psychos = try? container.decodeIfPresent([String].self, forKey: .psychoactive)
+        if let psychosUnwrap = psychos, !psychosUnwrap.isEmpty {
+            self.psychoactive = psychosUnwrap
+        } else {
+            self.psychoactive = [Substance.noClassName]
+        }
+        let chems = try? container.decodeIfPresent([String].self, forKey: .chemical)
+        if let chemsUnwrap = chems, !chemsUnwrap.isEmpty {
+            self.chemical = chemsUnwrap
+        } else {
+            self.chemical = [Substance.noClassName]
+        }
+    }
 }

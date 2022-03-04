@@ -16,11 +16,11 @@ extension Substance: Comparable, SubstanceInteractable {
     }
 
     var firstPsychoactiveNameUnwrapped: String {
-        firstPsychoactiveName ?? noClassName
+        firstPsychoactiveName ?? Self.noClassName
     }
 
     var firstChemicalNameUnwrapped: String {
-        firstChemicalName ?? noClassName
+        firstChemicalName ?? Self.noClassName
     }
 
     var chemicalsUnwrapped: [ChemicalClass] {
