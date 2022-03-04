@@ -150,7 +150,8 @@ public class Substance: NSManagedObject, Decodable {
         "Tabernanthe Iboga (Botany)",
         "Tryptamine (Compound)",
         "Cake",
-        "Inhalants"
+        "Inhalants",
+        "MAOI"
     ].map({$0.lowercased()}))
 }
 
