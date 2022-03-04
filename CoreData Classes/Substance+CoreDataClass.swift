@@ -44,14 +44,25 @@ public class Substance: NSManagedObject, Decodable {
 
     let noClassName = "Miscellaneous"
 
+    enum SubstanceDecodingError: Error {
+        case invalidName(String)
+    }
+
     // swiftlint:disable function_body_length
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let decodedName = try container.decode(String.self, forKey: .name)
+        if Self.namesOfPsychoactiveClasses.contains(decodedName) {
+            throw SubstanceDecodingError.invalidName("\(decodedName) is the name of a psychoactive class")
+        }
+        if Self.namesOfChemicalClasses.contains(decodedName) {
+            throw SubstanceDecodingError.invalidName("\(decodedName) is the name of a chemical class")
+        }
         self.init(context: context) // init needs to be called after calls that can throw an exception
-        self.name = try? container.decodeIfPresent(String.self, forKey: .name)
+        self.name = decodedName
         self.url = try? container.decodeIfPresent(URL.self, forKey: .url)
         self.decodedEffects = (try? container.decodeIfPresent(
             [DecodedEffect].self,
@@ -122,4 +133,29 @@ public class Substance: NSManagedObject, Decodable {
         }
         self.decodedChemicalNames = chemicalNames
     }
+
+    private static let namesOfPsychoactiveClasses: Set = [
+        "25x-NBOH",
+        "Antidepressants",
+        "Dissociatives",
+        "Entactogens",
+        "Entheogen",
+        "Gabapentinoids",
+        "Hallucinogens",
+        "Opioids",
+        "Psychedelics",
+        "Sedative",
+        "Serotonergic psychedelic",
+        "Stimulants"
+    ]
+    private static let namesOfChemicalClasses: Set = [
+        "Arylcyclohexylamines",
+        "Barbiturates",
+        "Benzodiazepines",
+        "Diarylethylamines",
+        "Lysergamides",
+        "Racetams",
+        "Thienodiazepines",
+        "Xanthines"
+    ]
 }

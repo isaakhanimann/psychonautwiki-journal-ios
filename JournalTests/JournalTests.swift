@@ -31,7 +31,7 @@ class JournalTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThan(substances.count, 388)
+        XCTAssertGreaterThanOrEqual(substances.count, 369)
     }
 
     private func getAllSubstances() throws -> [Substance] {
@@ -209,8 +209,10 @@ class JournalTests: XCTestCase {
         let lsd = substances.first!
         XCTAssertEqual(lsd.psychoactivesUnwrapped.count, 1)
         XCTAssertEqual(lsd.psychoactivesUnwrapped.first!.name, "Psychedelics")
+        XCTAssertEqual(lsd.firstPsychoactiveNameUnwrapped, "Psychedelics")
         XCTAssertEqual(lsd.chemicalsUnwrapped.count, 1)
         XCTAssertEqual(lsd.chemicalsUnwrapped.first!.name, "Lysergamides")
+        XCTAssertEqual(lsd.firstChemicalNameUnwrapped, "Lysergamides")
         XCTAssertEqual(lsd.crossToleranceChemicalsUnwrapped.count, 0)
         XCTAssertEqual(lsd.crossToleranceSubstancesUnwrapped.count, 0)
         XCTAssertEqual(lsd.crossTolerancePsychoactivesUnwrapped.count, 1)
