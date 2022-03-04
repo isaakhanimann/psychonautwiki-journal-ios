@@ -143,7 +143,14 @@ public class Substance: NSManagedObject, Decodable {
         "Lysergamides",
         "Racetams",
         "Thienodiazepines",
-        "Xanthines"
+        "Xanthines",
+        "Substituted amphetamines",
+        "Substituted aminorexes",
+        "Substituted cathinones",
+        "Substituted morphinans",
+        "Substituted phenethylamines",
+        "Substituted phenidates",
+        "Substituted tryptamines"
     ]
 }
 

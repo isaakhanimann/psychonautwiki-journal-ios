@@ -3,7 +3,6 @@ import XCTest
 import CoreData
 
 // swiftlint:disable line_length
-// swiftlint:disable type_body_length
 class JournalTests: XCTestCase {
 
     override func setUp() {
@@ -12,46 +11,18 @@ class JournalTests: XCTestCase {
     }
 
     override func tearDown() {
-        let fetchRequest = Substance.fetchRequest()
-        fetchRequest.includesPropertyValues = false
-        let substances = (try? PersistenceController.preview.viewContext.fetch(fetchRequest)) ?? []
-        for substance in substances {
-            PersistenceController.preview.viewContext.delete(substance)
-        }
-        if PersistenceController.preview.viewContext.hasChanges {
-            try? PersistenceController.preview.viewContext.save()
-        }
+        PersistenceController.preview.deleteAllSubstances()
         super.tearDown()
-    }
-
-    func testHasOneFile() throws {
-        let fetchRequest = SubstancesFile.fetchRequest()
-        let files = try PersistenceController.preview.viewContext.fetch(fetchRequest)
-        XCTAssertEqual(files.count, 1)
     }
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThanOrEqual(substances.count, 369)
+        XCTAssertGreaterThanOrEqual(substances.count, 368)
     }
 
     private func getAllSubstances() throws -> [Substance] {
         let fetchRequest = Substance.fetchRequest()
         return try PersistenceController.preview.viewContext.fetch(fetchRequest)
-    }
-
-    func testHasPsychoactives() throws {
-        let psychoactives = try getAllPsychoactives()
-        let names = Set(psychoactives.map { $0.nameUnwrapped })
-        XCTAssertTrue(names.contains("Psychedelics"))
-        XCTAssertTrue(names.contains("Cannabinoids"))
-        XCTAssertTrue(names.contains("Dissociatives"))
-        XCTAssertTrue(names.contains("Deliriants"))
-        XCTAssertTrue(names.contains("Depressants"))
-        XCTAssertTrue(names.contains("Stimulants"))
-        XCTAssertTrue(names.contains("Entactogens"))
-        XCTAssertTrue(names.contains("Nootropics"))
-        XCTAssertTrue(names.contains("Antipsychotics"))
     }
 
     func testHasSubstances() throws {
@@ -83,80 +54,6 @@ class JournalTests: XCTestCase {
         XCTAssertTrue(names.contains("Methcathinone"))
     }
 
-    private func getAllPsychoactives() throws -> [PsychoactiveClass] {
-        let fetchRequest = PsychoactiveClass.fetchRequest()
-        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
-    }
-
-    // swiftlint:disable function_body_length
-    func testHasChemicals() throws {
-        let chemicals = try getAllChemicals()
-        let names = Set(chemicals.map { $0.nameUnwrapped })
-        XCTAssertTrue(names.contains("Arylcyclohexylamines"))
-        XCTAssertTrue(names.contains("Substituted Amphetamines"))
-        XCTAssertTrue(names.contains("Substituted Tryptamines"))
-        XCTAssertTrue(names.contains("Phenisobutylamines"))
-        XCTAssertTrue(names.contains("Indazolecarboxamides"))
-        XCTAssertTrue(names.contains("Substituted Phenidates"))
-        XCTAssertTrue(names.contains("Substituted Benzofurans"))
-        XCTAssertTrue(names.contains("Indolecarboxylates"))
-        XCTAssertTrue(names.contains("Indazolecarboxamides"))
-        XCTAssertTrue(names.contains("Lysergamides"))
-        XCTAssertTrue(names.contains("Anilidopiperidines"))
-        XCTAssertTrue(names.contains("Alcohols"))
-        XCTAssertTrue(names.contains("Substituted Phenethylamines"))
-        XCTAssertTrue(names.contains("Choline Derivatives"))
-        XCTAssertTrue(names.contains("Benzodiazepines"))
-        XCTAssertTrue(names.contains("Adamantanes"))
-        XCTAssertTrue(names.contains("Racetams"))
-        XCTAssertTrue(names.contains("Benzhydryls"))
-        XCTAssertTrue(names.contains("Substituted Tropanes"))
-        XCTAssertTrue(names.contains("Butyric Acids"))
-        XCTAssertTrue(names.contains("Indazoles"))
-        XCTAssertTrue(names.contains("Substituted Morphinans"))
-        XCTAssertTrue(names.contains("Xanthines"))
-        XCTAssertTrue(names.contains("Cannabinoids"))
-        XCTAssertTrue(names.contains("Carbamates"))
-        XCTAssertTrue(names.contains("Ammonium Salts"))
-        XCTAssertTrue(names.contains("Imidazolines"))
-        XCTAssertTrue(names.contains("Nitrogenous Organic Acids"))
-        XCTAssertTrue(names.contains("Thienodiazepines"))
-        XCTAssertTrue(names.contains("Substituted Piperidines"))
-        XCTAssertTrue(names.contains("Phenylpropylamines"))
-        XCTAssertTrue(names.contains("Ethanolamines"))
-        XCTAssertTrue(names.contains("Diarylethylamines"))
-        XCTAssertTrue(names.contains("Benzoxazines"))
-        XCTAssertTrue(names.contains("Amphetamines"))
-        XCTAssertTrue(names.contains("Substituted Cathinones"))
-        XCTAssertTrue(names.contains("Gabapentinoids"))
-        XCTAssertTrue(names.contains("Lactones"))
-        XCTAssertTrue(names.contains("Khat#1#s"))
-        XCTAssertTrue(names.contains("Inorganic Molecules"))
-        XCTAssertTrue(names.contains("Naphthoylindoles"))
-        XCTAssertTrue(names.contains("Indole Alkaloids"))
-        XCTAssertTrue(names.contains("Substituted Piperazines"))
-        XCTAssertTrue(names.contains("Aminoindanes"))
-        XCTAssertTrue(names.contains("Quinazolinones"))
-        XCTAssertTrue(names.contains("Diphenylpropylamines"))
-        XCTAssertTrue(names.contains("Peptides"))
-        XCTAssertTrue(names.contains("GABAs"))
-        XCTAssertTrue(names.contains("Phenothiazines"))
-        XCTAssertTrue(names.contains("Cycloalkylamines"))
-    }
-
-    private func getAllChemicals() throws -> [ChemicalClass] {
-        let fetchRequest = ChemicalClass.fetchRequest()
-        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
-    }
-
-    func testPsychoactivesEndWithS() throws {
-        let psychoactives = try getAllPsychoactives()
-        let names = Set(psychoactives.map { $0.nameUnwrapped })
-        for name in names {
-            XCTAssertTrue(name.hasSuffix("s"), "\(name) doesn't have suffix s")
-        }
-    }
-
     func testNoPsychoactiveClassParsedAsSubstance() throws {
         let psychoactives = try getAllPsychoactives()
         var psyNames = Set(psychoactives.map { $0.nameUnwrapped })
@@ -176,6 +73,11 @@ class JournalTests: XCTestCase {
         }
     }
 
+    private func getAllPsychoactives() throws -> [PsychoactiveClass] {
+        let fetchRequest = PsychoactiveClass.fetchRequest()
+        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
+    }
+
     func testNoChemicalClassParsedAsSubstance() throws {
         let chemicals = try getAllChemicals()
         let cheNames = Set(chemicals.map { $0.nameUnwrapped })
@@ -184,6 +86,11 @@ class JournalTests: XCTestCase {
         for cheName in cheNames {
             XCTAssertFalse(subNames.contains(cheName), "\(cheName) was parsed as a substance")
         }
+    }
+
+    private func getAllChemicals() throws -> [ChemicalClass] {
+        let fetchRequest = ChemicalClass.fetchRequest()
+        return try PersistenceController.preview.viewContext.fetch(fetchRequest)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -265,15 +172,5 @@ class JournalTests: XCTestCase {
         XCTAssertTrue(Set(lsd.dangerousChemicalsUnwrapped.map { $0.name }).isSuperset(of: []))
         XCTAssertTrue(Set(lsd.dangerousPsychoactivesUnwrapped.map { $0.name }).isSuperset(of: []))
         XCTAssertTrue(Set(lsd.dangerousUnresolvedsUnwrapped.map { $0.name }).isSuperset(of: []))
-    }
-
-    func testPsychoactiveURLs() throws {
-        let psychoactives = try getAllPsychoactives()
-        for psychoactive in psychoactives {
-            let name = psychoactive.nameUnwrapped
-            if !["Eugeroics", "Miscellaneous", "Oneirogens"].contains(name) {
-                XCTAssertTrue(psychoactive.url != nil, "\(name) has no url")
-            }
-        }
     }
 }

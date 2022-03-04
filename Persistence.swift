@@ -37,6 +37,18 @@ struct PersistenceController {
         }
     }
 
+    func deleteAllSubstances() {
+        let fetchRequest = Substance.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        let substances = (try? viewContext.fetch(fetchRequest)) ?? []
+        for substance in substances {
+            viewContext.delete(substance)
+        }
+        if viewContext.hasChanges {
+            try? viewContext.save()
+        }
+    }
+
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
