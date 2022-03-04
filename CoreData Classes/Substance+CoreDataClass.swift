@@ -34,13 +34,17 @@ public class Substance: NSManagedObject, Decodable {
 
     // These variables are intermediately stored
     // such that they can be used in SubstancesFile to create objects and relationships
-    var decodedUncertain = [DecodedInteraction]()
-    var decodedUnsafe = [DecodedInteraction]()
-    var decodedDangerous = [DecodedInteraction]()
-    var decodedClasses: DecodedClasses?
+    var decodedUncertainNames = [String]()
+    var decodedUnsafeNames = [String]()
+    var decodedDangerousNames = [String]()
+    var decodedPsychoactiveNames = [String]()
+    var decodedChemicalNames = [String]()
     var decodedEffects = [DecodedEffect]()
-    var decodedCrossTolerances = [String]()
+    var decodedCrossToleranceNames = [String]()
 
+    let noClassName = "Miscellaneous"
+
+    // swiftlint:disable function_body_length
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Missing managed object context")
@@ -71,22 +75,51 @@ public class Substance: NSManagedObject, Decodable {
             forKey: .toxicity
         )
         self.toxicity = toxicities?.first
-        self.decodedCrossTolerances = (try? container.decodeIfPresent(
+        self.decodedCrossToleranceNames = (try? container.decodeIfPresent(
             [String].self,
             forKey: .crossTolerances
         )) ?? []
-        self.decodedUncertain = (try? container.decodeIfPresent(
+        let decodedUncertain = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .uncertainInteractions
         )) ?? []
-        self.decodedUnsafe = (try? container.decodeIfPresent(
+        self.decodedUncertainNames = decodedUncertain.map { dec in
+            dec.name
+        }
+        let decodedUnsafe = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .unsafeInteractions
         )) ?? []
-        self.decodedDangerous = (try? container.decodeIfPresent(
+        self.decodedUnsafeNames = decodedUnsafe.map { dec in
+            dec.name
+        }
+        let decodedDangerous = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
         )) ?? []
-        self.decodedClasses = try? container.decodeIfPresent(DecodedClasses.self, forKey: .category)
+        self.decodedDangerousNames = decodedDangerous.map { dec in
+            dec.name
+        }
+        let decodedClasses = try? container.decodeIfPresent(DecodedClasses.self, forKey: .category)
+        var psychoactiveNames = decodedClasses?.psychoactive.map { name in
+            name.validClassName
+        } ?? []
+        if let firstPsychoactive = psychoactiveNames.first {
+            self.firstPsychoactiveName = firstPsychoactive
+        } else {
+            self.firstPsychoactiveName = noClassName
+            psychoactiveNames.append(noClassName)
+        }
+        self.decodedPsychoactiveNames = psychoactiveNames
+        var chemicalNames = decodedClasses?.chemical.map { name in
+            name.validClassName
+        } ?? []
+        if let firstChemical = chemicalNames.first {
+            self.firstChemicalName = firstChemical
+        } else {
+            self.firstChemicalName = noClassName
+            chemicalNames.append(noClassName)
+        }
+        self.decodedChemicalNames = chemicalNames
     }
 }

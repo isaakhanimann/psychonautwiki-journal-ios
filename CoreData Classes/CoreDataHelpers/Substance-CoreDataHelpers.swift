@@ -15,8 +15,12 @@ extension Substance: Comparable, SubstanceInteractable {
         (psychoactiveClasses?.allObjects as? [PsychoactiveClass] ?? []).sorted()
     }
 
-    var firstPsychoactiveName: String {
-        psychoactivesUnwrapped.first?.name ?? "Miscellaneous"
+    var firstPsychoactiveNameUnwrapped: String {
+        firstPsychoactiveName ?? noClassName
+    }
+
+    var firstChemicalNameUnwrapped: String {
+        firstChemicalName ?? noClassName
     }
 
     var chemicalsUnwrapped: [ChemicalClass] {

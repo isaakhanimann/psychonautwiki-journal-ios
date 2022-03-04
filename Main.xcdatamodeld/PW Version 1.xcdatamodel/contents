@@ -89,6 +89,8 @@
     </entity>
     <entity name="Substance" representedClassName=".Substance" syncable="YES" codeGenerationType="category">
         <attribute name="addictionPotential" optional="YES" attributeType="String"/>
+        <attribute name="firstChemicalName" optional="YES" attributeType="String"/>
+        <attribute name="firstPsychoactiveName" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="toxicity" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -146,7 +148,7 @@
         <element name="RoaDose" positionX="36.97265625" positionY="177.30078125" width="128" height="134"/>
         <element name="RoaDuration" positionX="33.53515625" positionY="381.625" width="128" height="134"/>
         <element name="RoaRange" positionX="298.0625" positionY="178.59765625" width="128" height="119"/>
-        <element name="Substance" positionX="-518.71484375" positionY="226.5234375" width="128" height="389"/>
+        <element name="Substance" positionX="-518.71484375" positionY="226.5234375" width="128" height="419"/>
         <element name="SubstanceCopy" positionX="-602.70703125" positionY="-178.91796875" width="128" height="74"/>
         <element name="SubstancesFile" positionX="-1195.6875" positionY="376.125" width="128" height="74"/>
         <element name="Tolerance" positionX="-200.29296875" positionY="554.88671875" width="128" height="89"/>

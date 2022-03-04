@@ -45,7 +45,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         var psychoactives = Set<PsychoactiveClass>()
         var chemicals = Set<ChemicalClass>()
         for substance in substancesForParsing {
-            for psychoactiveName in substance.decodedClasses?.psychoactive ?? [] {
+            for psychoactiveName in substance.decodedPsychoactiveNames {
                 let match = psychoactives.first { cat in
                     cat.nameUnwrapped.lowercased() == psychoactiveName.lowercased()
                 }
@@ -58,7 +58,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                     psychoactives.insert(pClass)
                 }
             }
-            for chemicalName in substance.decodedClasses?.chemical ?? [] {
+            for chemicalName in substance.decodedChemicalNames {
                 let match = chemicals.first { cat in
                     cat.nameUnwrapped.lowercased() == chemicalName.lowercased()
                 }
@@ -98,7 +98,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
 
     private func createCrossTolerances() {
         for substance in substancesForParsing {
-            for toleranceName in substance.decodedCrossTolerances {
+            for toleranceName in substance.decodedCrossToleranceNames {
                 // check if psychoactive
                 let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
                     psy.nameUnwrapped.hasEqualMeaning(other: toleranceName)
@@ -130,20 +130,17 @@ public class SubstancesFile: NSManagedObject, Decodable {
     private func createInteractions() {
         unresolvedsForParsing = Set<UnresolvedInteraction>()
         for substance in substancesForParsing {
-            let uncertainNames = substance.decodedUncertain.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
                 substanceAddable: AddToUncertainSubstance(substance: substance),
-                interactionNames: uncertainNames
+                interactionNames: substance.decodedUncertainNames
             )
-            let unsafeNames = substance.decodedUnsafe.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
                 substanceAddable: AddToUnsafeSubstance(substance: substance),
-                interactionNames: unsafeNames
+                interactionNames: substance.decodedUnsafeNames
             )
-            let dangerousNames = substance.decodedDangerous.map { $0.name }
             addToPsychoactivesChemicalsSubstancesOrUnresolved(
                 substanceAddable: AddToDangerousSubstance(substance: substance),
-                interactionNames: dangerousNames
+                interactionNames: substance.decodedDangerousNames
             )
         }
     }
