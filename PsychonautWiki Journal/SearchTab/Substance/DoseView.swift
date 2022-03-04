@@ -47,44 +47,48 @@ struct DoseView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            VStack {
-                Text(threshOrLightMin)
-                    .foregroundLinearGradient(colors: [threshColor, lightColor])
-                Text("thresh ")
-                    .foregroundColor(threshColor)
-                    .font(.footnote)
+            Spacer()
+            Group {
+                VStack {
+                    Text(threshOrLightMin)
+                        .foregroundLinearGradient(colors: [threshColor, lightColor])
+                    Text("thresh ")
+                        .foregroundColor(threshColor)
+                        .font(.footnote)
+                }
+                VStack {
+                    Text("-")
+                    Text("light")
+                        .font(.footnote)
+                }
+                .foregroundColor(lightColor)
+                Text(lightMaxOrCommonMin)
+                    .foregroundLinearGradient(colors: [lightColor, commonColor])
+                VStack {
+                    Text("-")
+                    Text("common")
+                        .font(.footnote)
+                }
+                .foregroundColor(commonColor)
+                Text(commonMaxOrStrongMin)
+                    .foregroundLinearGradient(colors: [commonColor, strongColor])
+                VStack {
+                    Text("-")
+                    Text("strong")
+                        .font(.footnote)
+                }
+                .foregroundColor(strongColor)
+                Text(strongMaxOrHeavy)
+                    .foregroundLinearGradient(colors: [strongColor, heavyColor])
+                VStack {
+                    Text("- ...")
+                    Text("heavy")
+                        .font(.footnote)
+                }
+                .foregroundColor(heavyColor)
+                Text(roaDose?.units ?? "")
             }
-            VStack {
-                Text("-")
-                Text("light")
-                    .font(.footnote)
-            }
-            .foregroundColor(lightColor)
-            Text(lightMaxOrCommonMin)
-                .foregroundLinearGradient(colors: [lightColor, commonColor])
-            VStack {
-                Text("-")
-                Text("common")
-                    .font(.footnote)
-            }
-            .foregroundColor(commonColor)
-            Text(commonMaxOrStrongMin)
-                .foregroundLinearGradient(colors: [commonColor, strongColor])
-            VStack {
-                Text("-")
-                Text("strong")
-                    .font(.footnote)
-            }
-            .foregroundColor(strongColor)
-            Text(strongMaxOrHeavy)
-                .foregroundLinearGradient(colors: [strongColor, heavyColor])
-            VStack {
-                Text("- ...")
-                Text("heavy")
-                    .font(.footnote)
-            }
-            .foregroundColor(heavyColor)
-            Text(roaDose?.units ?? "")
+            Spacer()
         }
     }
 }
@@ -94,7 +98,7 @@ struct DoseView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 List {
-                    let dose = PreviewHelper.shared.getSubstance(with: "Caffeine")!.roasUnwrapped.first!.dose!
+                    let dose = PreviewHelper.shared.getSubstance(with: "Melatonin")!.roasUnwrapped.first!.dose!
                     Section {
                         DoseView(roaDose: dose)
                             .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
