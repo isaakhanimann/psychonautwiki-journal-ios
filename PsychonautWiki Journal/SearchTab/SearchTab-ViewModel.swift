@@ -26,7 +26,7 @@ extension SearchTab {
         }
         @Published var groupBy = GroupBy.psychoactive {
             didSet {
-                sections = SearchTab.ViewModel.getSections(substances: substances, groupBy: groupBy)
+                setupFetchRequestPredicateAndFetch()
             }
         }
         private var substances: [Substance] = []
@@ -88,8 +88,16 @@ extension SearchTab {
             if searchText == "" {
                 substanceFetchController?.fetchRequest.predicate = nil
             } else {
-                let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText as CVarArg)
-                substanceFetchController?.fetchRequest.predicate = predicate
+                let predicateSubstance = NSPredicate(format: "name CONTAINS[cd] %@", searchText as CVarArg)
+                let predicateClass: NSPredicate
+                switch groupBy {
+                case .psychoactive:
+                    predicateClass = NSPredicate(format: "firstPsychoactiveName CONTAINS[cd] %@", searchText as CVarArg)
+                case .chemical:
+                    predicateClass = NSPredicate(format: "firstChemicalName CONTAINS[cd] %@", searchText as CVarArg)
+                }
+                let compound = NSCompoundPredicate(orPredicateWithSubpredicates: [predicateSubstance, predicateClass])
+                substanceFetchController?.fetchRequest.predicate = compound
             }
             try? substanceFetchController?.performFetch()
             substances = substanceFetchController?.fetchedObjects ?? []
