@@ -104,7 +104,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
                     substance.addToEffects(matchUnwrapped)
                 } else {
                     let newEffect = Effect(context: contextForParsing)
-                    newEffect.name = decodedEff.name.capitalized
+                    newEffect.name = decodedEff.name
                     newEffect.url = decodedEff.url
                     effects.insert(newEffect)
                     substance.addToEffects(newEffect)
@@ -210,7 +210,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
             substanceAddable.addToUnresolved(unresolved: unrUnwrap)
         } else {
             let newUnresolved = UnresolvedInteraction(context: contextForParsing)
-            newUnresolved.name = interactionName.capitalized
+            newUnresolved.name = interactionName
             substanceAddable.addToUnresolved(unresolved: newUnresolved)
             unresolvedsForParsing.insert(newUnresolved)
         }

@@ -48,7 +48,7 @@ public class Substance: NSManagedObject, Decodable {
             throw SubstanceDecodingError.invalidName("substance name contains the word experience")
         }
         self.init(context: context) // init needs to be called after calls that can throw an exception
-        self.name = decodedName.capitalizedIfNotAlready
+        self.name = decodedName.removeGreekLetters.capitalizedIfNotAlready
         self.url = try? container.decodeIfPresent(URL.self, forKey: .url)
         self.decodedEffects = (try? container.decodeIfPresent(
             [DecodedEffect].self,
@@ -76,27 +76,27 @@ public class Substance: NSManagedObject, Decodable {
             [String].self,
             forKey: .crossTolerances
         )) ?? []
-        self.decodedCrossToleranceNames = toleranceNames.map {$0.capitalizedIfNotAlready}
+        self.decodedCrossToleranceNames = toleranceNames.map {$0.removeGreekLetters.capitalizedIfNotAlready}
         let decodedUncertain = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .uncertainInteractions
         )) ?? []
         self.decodedUncertainNames = decodedUncertain.map { dec in
-            dec.name.capitalizedIfNotAlready
+            dec.name.removeGreekLetters.capitalizedIfNotAlready
         }
         let decodedUnsafe = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .unsafeInteractions
         )) ?? []
         self.decodedUnsafeNames = decodedUnsafe.map { dec in
-            dec.name.capitalizedIfNotAlready
+            dec.name.removeGreekLetters.capitalizedIfNotAlready
         }
         let decodedDangerous = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
         )) ?? []
         self.decodedDangerousNames = decodedDangerous.map { dec in
-            dec.name.capitalizedIfNotAlready
+            dec.name.removeGreekLetters.capitalizedIfNotAlready
         }
         let decodedClasses = try? container.decodeIfPresent(DecodedClasses.self, forKey: .category)
         var psychoactiveNames = decodedClasses?.psychoactive.map { name in
@@ -163,6 +163,18 @@ private struct DecodedInteraction: Decodable {
 struct DecodedEffect: Decodable {
     var name: String
     var url: URL
+
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case url
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let name = try container.decode(String.self, forKey: .name)
+        self.name = name.capitalized
+        self.url = try container.decode(URL.self, forKey: .url)
+    }
 }
 
 private struct DecodedClasses: Decodable {

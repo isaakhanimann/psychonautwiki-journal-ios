@@ -2,13 +2,20 @@ import Foundation
 
 extension String {
     var validClassName: String {
-        var result = self.replacingOccurrences(of: "_", with: " ")
-        if result != result.uppercased() {
-            result = result.capitalized
-        }
+        var result = self.replacingOccurrences(of: "_", with: " ").capitalizedIfNotAlready
         if !result.hasSuffix("s") {
             result.append(contentsOf: "s")
         }
+        return result
+    }
+
+    var removeGreekLetters: String {
+        let alpha = "Α"
+        let regularA = "A"
+        let beta = "Β"
+        let regularB = "B"
+        var result = self.replacingOccurrences(of: alpha, with: regularA)
+        result = result.replacingOccurrences(of: beta, with: regularB)
         return result
     }
 
