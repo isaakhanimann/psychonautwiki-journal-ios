@@ -77,24 +77,34 @@ public class Substance: NSManagedObject, Decodable {
             forKey: .crossTolerances
         )) ?? []
         self.decodedCrossToleranceNames = toleranceNames.map {$0.removeGreekLetters.capitalizedIfNotAlready}
-        let decodedUncertain = (try? container.decodeIfPresent(
-            [DecodedInteraction].self,
-            forKey: .uncertainInteractions
-        )) ?? []
-        self.decodedUncertainNames = decodedUncertain.map { dec in
-            dec.name.removeGreekLetters.capitalizedIfNotAlready
-        }
-        let decodedUnsafe = (try? container.decodeIfPresent(
-            [DecodedInteraction].self,
-            forKey: .unsafeInteractions
-        )) ?? []
-        self.decodedUnsafeNames = decodedUnsafe.map { dec in
-            dec.name.removeGreekLetters.capitalizedIfNotAlready
-        }
         let decodedDangerous = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
         )) ?? []
+        var decodedUnsafe = (try? container.decodeIfPresent(
+            [DecodedInteraction].self,
+            forKey: .unsafeInteractions
+        )) ?? []
+        var decodedUncertain = (try? container.decodeIfPresent(
+            [DecodedInteraction].self,
+            forKey: .uncertainInteractions
+        )) ?? []
+        decodedUncertain.removeAll { dec in
+            (decodedDangerous + decodedUnsafe).contains { otherdec in
+                dec.name == otherdec.name
+            }
+        }
+        decodedUnsafe.removeAll { dec in
+            decodedDangerous.contains { otherdec in
+                dec.name == otherdec.name
+            }
+        }
+        self.decodedUnsafeNames = decodedUnsafe.map { dec in
+            dec.name.removeGreekLetters.capitalizedIfNotAlready
+        }
+        self.decodedUncertainNames = decodedUncertain.map { dec in
+            dec.name.removeGreekLetters.capitalizedIfNotAlready
+        }
         self.decodedDangerousNames = decodedDangerous.map { dec in
             dec.name.removeGreekLetters.capitalizedIfNotAlready
         }
