@@ -25,6 +25,7 @@ struct PersistenceController {
                 fatalError("Failed to load Core Data stack: \(error)")
             }
         }
+        viewContext.automaticallyMergesChangesFromParent = true
     }
 
     func saveViewContext() {
@@ -110,13 +111,14 @@ struct PersistenceController {
         return experience
     }
 
-    func addInitialSubstances() {
+    func addInitialSubstances(context: NSManagedObjectContext? = nil) {
         let data = getInitialData()
-        viewContext.performAndWait {
+        let backgroundContext = context ?? container.newBackgroundContext()
+        backgroundContext.performAndWait {
             do {
-                let substancesFile = try decodeSubstancesFile(from: data, with: viewContext)
+                let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
                 substancesFile.creationDate = getCreationDate()
-                try viewContext.save()
+                try backgroundContext.save()
             } catch {
                 fatalError("Failed to decode initial substances from bundle: \(error.localizedDescription)")
             }
@@ -147,111 +149,113 @@ struct PersistenceController {
     }
 
     func decodeAndSaveFile(from data: Data) async throws {
-        try await viewContext.perform {
+        let backgroundContext = container.newBackgroundContext()
+        try await backgroundContext.perform {
             do {
                 // check if decoding will succeed
-                _ = try decodeSubstancesFile(from: data, with: viewContext)
+                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
                 // delete all substances, which deletes everything because all the relationships have a cascade delete
                 let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
                 fetchRequest.includesPropertyValues = false
-                let substances = (try? viewContext.fetch(fetchRequest)) ?? []
+                let substances = (try? backgroundContext.fetch(fetchRequest)) ?? []
                 for substance in substances {
-                    viewContext.delete(substance)
+                    backgroundContext.delete(substance)
                 }
                 // decode substances
-                _ = try decodeSubstancesFile(from: data, with: viewContext)
-                try viewContext.save()
+                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
+                try backgroundContext.save()
             } catch {
-                viewContext.rollback()
+                backgroundContext.rollback()
                 throw DecodingFileError.failedToDecode
             }
         }
     }
 
     func cleanupCoreData() {
-        convertSubstanceNamesOfIngestions()
-        deleteAllOldStuff()
-        addInitialSubstances()
-        convertUnitsOfIngestions()
-        deleteAllSubstanceCopies()
+        let backgroundContext = container.newBackgroundContext()
+        convertSubstanceNamesOfIngestions(context: backgroundContext)
+        deleteAllOldStuff(context: backgroundContext)
+        addInitialSubstances(context: backgroundContext)
+        convertUnitsOfIngestions(context: backgroundContext)
+        deleteAllSubstanceCopies(context: backgroundContext)
     }
 
-    private func convertSubstanceNamesOfIngestions() {
-        viewContext.performAndWait {
+    private func convertSubstanceNamesOfIngestions(context: NSManagedObjectContext) {
+        context.performAndWait {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-            let ingestions = (try? viewContext.fetch(fetchRequest)) ?? []
+            let ingestions = (try? context.fetch(fetchRequest)) ?? []
             for ingestion in ingestions {
                 ingestion.substanceName = ingestion.substanceCopy?.nameUnwrapped
             }
-            if viewContext.hasChanges {
-                try? viewContext.save()
+            if context.hasChanges {
+                try? context.save()
             }
         }
     }
 
-    private func deleteAllOldStuff() {
-        viewContext.performAndWait {
-            deleteFiles()
-            deleteSubstances()
-            deleteRoas()
-            if viewContext.hasChanges {
-                try? viewContext.save()
+    private func deleteAllOldStuff(context: NSManagedObjectContext) {
+        context.performAndWait {
+            deleteFiles(context: context)
+            deleteSubstances(context: context)
+            deleteRoas(context: context)
+            if context.hasChanges {
+                try? context.save()
             }
         }
     }
 
-    private func deleteFiles() {
+    private func deleteFiles(context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
         fetchRequest.includesPropertyValues = false
-        let files = (try? viewContext.fetch(fetchRequest)) ?? []
+        let files = (try? context.fetch(fetchRequest)) ?? []
         for file in files {
-            viewContext.delete(file)
+            context.delete(file)
         }
     }
 
-    private func deleteSubstances() {
+    private func deleteSubstances(context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
         fetchRequest.includesPropertyValues = false
-        let subs = (try? viewContext.fetch(fetchRequest)) ?? []
+        let subs = (try? context.fetch(fetchRequest)) ?? []
         for sub in subs {
-            viewContext.delete(sub)
+            context.delete(sub)
         }
     }
 
-    private func deleteRoas() {
+    private func deleteRoas(context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<Roa> = Roa.fetchRequest()
         fetchRequest.includesPropertyValues = false
-        let roas = (try? viewContext.fetch(fetchRequest)) ?? []
+        let roas = (try? context.fetch(fetchRequest)) ?? []
         for roa in roas {
-            viewContext.delete(roa)
+            context.delete(roa)
         }
     }
 
-    private func convertUnitsOfIngestions() {
-        viewContext.performAndWait {
+    private func convertUnitsOfIngestions(context: NSManagedObjectContext) {
+        context.performAndWait {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
-            let ingestions = (try? viewContext.fetch(fetchRequest)) ?? []
+            let ingestions = (try? context.fetch(fetchRequest)) ?? []
             for ingestion in ingestions {
                 let substance = getSubstance(with: ingestion.substanceNameUnwrapped)
                 let dose = substance?.getDose(for: ingestion.administrationRouteUnwrapped)
                 ingestion.units = dose?.units
             }
-            if viewContext.hasChanges {
-                try? viewContext.save()
+            if context.hasChanges {
+                try? context.save()
             }
         }
     }
 
-    private func deleteAllSubstanceCopies() {
-        viewContext.performAndWait {
+    private func deleteAllSubstanceCopies(context: NSManagedObjectContext) {
+        context.performAndWait {
             let fetchRequest: NSFetchRequest<SubstanceCopy> = SubstanceCopy.fetchRequest()
             fetchRequest.includesPropertyValues = false
-            let substanceCopies = (try? viewContext.fetch(fetchRequest)) ?? []
+            let substanceCopies = (try? context.fetch(fetchRequest)) ?? []
             for substanceCopy in substanceCopies {
-                viewContext.delete(substanceCopy)
+                context.delete(substanceCopy)
             }
-            if viewContext.hasChanges {
-                try? viewContext.save()
+            if context.hasChanges {
+                try? context.save()
             }
         }
     }
