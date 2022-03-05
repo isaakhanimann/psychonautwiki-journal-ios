@@ -16,7 +16,7 @@ class JournalTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThanOrEqual(substances.count, 357)
+        XCTAssertGreaterThanOrEqual(substances.count, 356)
     }
 
     private func getAllSubstances() throws -> [Substance] {

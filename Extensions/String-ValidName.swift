@@ -12,8 +12,8 @@ extension String {
         return result
     }
 
-    var capitalizedSubstanceName: String {
-        if uppercaseLetterCount >= 3 {
+    var capitalizedIfNotAlready: String {
+        if uppercaseLetterCount >= 2 {
             return self
         } else {
             return self.capitalized
@@ -22,10 +22,8 @@ extension String {
 
     private var uppercaseLetterCount: Int {
         var result = 0
-        for letter in self {
-            if letter.isUppercase {
-                result += 1
-            }
+        for letter in self where letter.isUppercase {
+            result += 1
         }
         return result
     }

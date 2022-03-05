@@ -151,6 +151,11 @@
 		EACB6E4E27D2565600940291 /* PsychoactiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */; };
 		EACB6E5027D2582D00940291 /* ChemicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4F27D2582D00940291 /* ChemicalTests.swift */; };
 		EACB6E5227D2592800940291 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* FileTests.swift */; };
+		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
+		EACB6E5527D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
+		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
+		EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
+		EACB6E5A27D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -379,6 +384,9 @@
 		EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychoactiveTests.swift; sourceTree = "<group>"; };
 		EACB6E4F27D2582D00940291 /* ChemicalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTests.swift; sourceTree = "<group>"; };
 		EACB6E5127D2592800940291 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
+		EACB6E5327D3473600940291 /* String-Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Regex.swift"; sourceTree = "<group>"; };
+		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
+		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -683,6 +691,7 @@
 				EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */,
 				EACB6E4F27D2582D00940291 /* ChemicalTests.swift */,
 				EACB6E5127D2592800940291 /* FileTests.swift */,
+				EACB6E5627D3483900940291 /* RegexTests.swift */,
 			);
 			path = JournalTests;
 			sourceTree = "<group>";
@@ -789,6 +798,8 @@
 				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
 				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
 				EACB6E4A27D1FF2C00940291 /* String-ValidName.swift */,
+				EACB6E5327D3473600940291 /* String-Regex.swift */,
+				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1126,11 +1137,13 @@
 				EADE46662709D32700F1058E /* LineView.swift in Sources */,
 				EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */,
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
+				EACB6E5A27D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EA47E66D27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EAA2EC5326DFCBE200B4FACF /* Throwable.swift in Sources */,
 				EACB6E4527D0DF9500940291 /* SubstanceInteractable.swift in Sources */,
 				EA8447E227CD0B3B00B10DD3 /* PreviewHelper.swift in Sources */,
 				EA941CE926E8EAF400DBFCFF /* ClockHand.swift in Sources */,
+				EACB6E5527D3473600940291 /* String-Regex.swift in Sources */,
 				EADE46642709D30900F1058E /* AroundShapeModelDown.swift in Sources */,
 				EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
@@ -1224,6 +1237,7 @@
 				EACB6E5227D2592800940291 /* FileTests.swift in Sources */,
 				EACB6E3D27D09C8800940291 /* SubstanceTests.swift in Sources */,
 				EACB6E4E27D2565600940291 /* PsychoactiveTests.swift in Sources */,
+				EACB6E5727D3483900940291 /* RegexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,6 +1313,7 @@
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
+				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */,
 				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
@@ -1337,6 +1352,7 @@
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
+				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

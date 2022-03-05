@@ -48,7 +48,7 @@ public class Substance: NSManagedObject, Decodable {
             throw SubstanceDecodingError.invalidName("substance name contains the word experience")
         }
         self.init(context: context) // init needs to be called after calls that can throw an exception
-        self.name = decodedName.capitalizedSubstanceName
+        self.name = decodedName.capitalizedIfNotAlready
         self.url = try? container.decodeIfPresent(URL.self, forKey: .url)
         self.decodedEffects = (try? container.decodeIfPresent(
             [DecodedEffect].self,
@@ -72,30 +72,31 @@ public class Substance: NSManagedObject, Decodable {
             forKey: .toxicity
         )
         self.toxicity = toxicities?.first
-        self.decodedCrossToleranceNames = (try? container.decodeIfPresent(
+        let toleranceNames = (try? container.decodeIfPresent(
             [String].self,
             forKey: .crossTolerances
         )) ?? []
+        self.decodedCrossToleranceNames = toleranceNames.map {$0.capitalizedIfNotAlready}
         let decodedUncertain = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .uncertainInteractions
         )) ?? []
         self.decodedUncertainNames = decodedUncertain.map { dec in
-            dec.name
+            dec.name.capitalizedIfNotAlready
         }
         let decodedUnsafe = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .unsafeInteractions
         )) ?? []
         self.decodedUnsafeNames = decodedUnsafe.map { dec in
-            dec.name
+            dec.name.capitalizedIfNotAlready
         }
         let decodedDangerous = (try? container.decodeIfPresent(
             [DecodedInteraction].self,
             forKey: .dangerousInteractions
         )) ?? []
         self.decodedDangerousNames = decodedDangerous.map { dec in
-            dec.name
+            dec.name.capitalizedIfNotAlready
         }
         let decodedClasses = try? container.decodeIfPresent(DecodedClasses.self, forKey: .category)
         var psychoactiveNames = decodedClasses?.psychoactive.map { name in

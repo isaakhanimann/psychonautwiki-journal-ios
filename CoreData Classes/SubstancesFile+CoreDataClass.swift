@@ -116,27 +116,15 @@ public class SubstancesFile: NSManagedObject, Decodable {
     private func createCrossTolerances() {
         for substance in substancesForParsing {
             for toleranceName in substance.decodedCrossToleranceNames {
-                // check if psychoactive
-                let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
-                    psy.nameUnwrapped.hasEqualMeaning(other: toleranceName)
-                }
-                if let matchUnwrapped = matchPsycho {
+                if let matchUnwrapped = getFirstPsyMatch(with: toleranceName) {
                     substance.addToCrossTolerancePsychoactives(matchUnwrapped)
                     continue
                 }
-                // check if chemical
-                let matchChemical = self.chemicalClassesUnwrapped.first { chem in
-                    chem.nameUnwrapped.hasEqualMeaning(other: toleranceName)
-                }
-                if let matchUnwrapped = matchChemical {
+                if let matchUnwrapped = getFirstChemMatch(with: toleranceName) {
                     substance.addToCrossToleranceChemicals(matchUnwrapped)
                     continue
                 }
-                // check if substance
-                let matchSubstance = substancesForParsing.first { sub in
-                    sub.nameUnwrapped.hasEqualMeaning(other: toleranceName)
-                }
-                if let matchUnwrapped = matchSubstance {
+                if let matchUnwrapped = getFirsSubMatch(with: toleranceName) {
                     substance.addToCrossToleranceSubstances(matchUnwrapped)
                     continue
                 }
@@ -144,71 +132,98 @@ public class SubstancesFile: NSManagedObject, Decodable {
         }
     }
 
+    private func getFirstPsyMatch(with name: String) -> PsychoactiveClass? {
+        return self.psychoactiveClassesUnwrapped.first { psy in
+            psy.nameUnwrapped.hasEqualMeaning(other: name)
+        }
+    }
+
+    private func getFirstChemMatch(with name: String) -> ChemicalClass? {
+        return self.chemicalClassesUnwrapped.first { chem in
+            chem.nameUnwrapped.hasEqualMeaning(other: name)
+        }
+    }
+
+    private func getFirsSubMatch(with name: String) -> Substance? {
+        return self.substancesForParsing.first { sub in
+            sub.nameUnwrapped.hasEqualMeaning(other: name)
+        }
+    }
+
+    private func getFirsUnrMatch(with name: String) -> UnresolvedInteraction? {
+        return self.unresolvedsForParsing.first { unr in
+            unr.nameUnwrapped.hasEqualMeaning(other: name)
+        }
+    }
+
     private func createInteractions() {
         unresolvedsForParsing = Set<UnresolvedInteraction>()
         for substance in substancesForParsing {
-            addToPsychoactivesChemicalsSubstancesOrUnresolved(
+            goThroughInteractionsToAdd(
                 substanceAddable: AddToUncertainSubstance(substance: substance),
                 interactionNames: substance.decodedUncertainNames
             )
-            addToPsychoactivesChemicalsSubstancesOrUnresolved(
+            goThroughInteractionsToAdd(
                 substanceAddable: AddToUnsafeSubstance(substance: substance),
                 interactionNames: substance.decodedUnsafeNames
             )
-            addToPsychoactivesChemicalsSubstancesOrUnresolved(
+            goThroughInteractionsToAdd(
                 substanceAddable: AddToDangerousSubstance(substance: substance),
                 interactionNames: substance.decodedDangerousNames
             )
         }
     }
 
-    private enum InteractionType {
-        case uncertain, unsafe, dangerous
-    }
-
-    private func addToPsychoactivesChemicalsSubstancesOrUnresolved(
+    private func goThroughInteractionsToAdd(
         substanceAddable: SubstanceAddable,
         interactionNames: [String]
     ) {
         for interactionName in interactionNames {
-            // check if psychoactive
-            let matchPsycho = self.psychoactiveClassesUnwrapped.first { psy in
-                psy.nameUnwrapped.hasEqualMeaning(other: interactionName)
-            }
-            if let psyUnwrap = matchPsycho {
-                substanceAddable.addToPsychoactives(psychocative: psyUnwrap)
-                continue
-            }
-            // check if chemical
-            let matchChemical = self.chemicalClassesUnwrapped.first { chem in
-                chem.nameUnwrapped.hasEqualMeaning(other: interactionName)
-            }
-            if let chemUnwrap = matchChemical {
-                substanceAddable.addToChemicals(chemical: chemUnwrap)
-                continue
-            }
-            // check if substance
-            let matchSub = self.substancesForParsing.first { sub in
-                sub.nameUnwrapped.hasEqualMeaning(other: interactionName)
-            }
-            if let subUnwrap = matchSub {
-                substanceAddable.addToSubstances(sub: subUnwrap)
-                continue
-            }
-            // if still here there was no match
-            // check if there are already unresolved interactions
-            let unrMatch = unresolvedsForParsing.first { unr in
-                unr.nameUnwrapped.hasEqualMeaning(other: interactionName)
-            }
-            if let unrUnwrap = unrMatch {
-                substanceAddable.addToUnresolved(unresolved: unrUnwrap)
-            } else {
-                let newUnresolved = UnresolvedInteraction(context: contextForParsing)
-                newUnresolved.name = interactionName.capitalized
-                substanceAddable.addToUnresolved(unresolved: newUnresolved)
-                unresolvedsForParsing.insert(newUnresolved)
-            }
+            addToPsychoactivesChemicalsSubstancesOrUnresolved(
+                substanceAddable: substanceAddable,
+                interactionName: interactionName
+            )
         }
+    }
+
+    private func addToPsychoactivesChemicalsSubstancesOrUnresolved(
+        substanceAddable: SubstanceAddable,
+        interactionName: String
+    ) {
+        if let psyUnwrap = getFirstPsyMatch(with: interactionName) {
+            substanceAddable.addToPsychoactives(psychocative: psyUnwrap)
+            return
+        }
+        if let chemUnwrap = getFirstChemMatch(with: interactionName) {
+            substanceAddable.addToChemicals(chemical: chemUnwrap)
+            return
+        }
+        let substanceMatches = getSubstanceMatchesWithWildcards(wildcardName: interactionName)
+        for matchingSubstance in substanceMatches {
+            substanceAddable.addToSubstances(sub: matchingSubstance)
+        }
+        if !substanceMatches.isEmpty {
+            return
+        }
+        // if still here there was no match
+        if let unrUnwrap = getFirsUnrMatch(with: interactionName) {
+            substanceAddable.addToUnresolved(unresolved: unrUnwrap)
+        } else {
+            let newUnresolved = UnresolvedInteraction(context: contextForParsing)
+            newUnresolved.name = interactionName.capitalized
+            substanceAddable.addToUnresolved(unresolved: newUnresolved)
+            unresolvedsForParsing.insert(newUnresolved)
+        }
+    }
+
+    private func getSubstanceMatchesWithWildcards(wildcardName: String) -> [Substance] {
+        if let regex = try? wildcardName.getRegexWithxAsWildcard() {
+            let matchingSubstances = substancesForParsing.filter { sub in
+                regex.isMatch(with: sub.nameUnwrapped)
+            }
+            return matchingSubstances
+        }
+        return []
     }
 
     static let namesOfUncontrolledSubstances = [
