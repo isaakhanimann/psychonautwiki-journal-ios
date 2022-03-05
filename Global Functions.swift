@@ -5,6 +5,25 @@ enum ConversionError: Error {
     case failedToConvertDataToJSON
 }
 
+func getInitialData() -> Data {
+    let fileName = "InitialSubstances"
+    guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+        fatalError("Failed to locate \(fileName) in bundle.")
+    }
+    guard let data = try? Data(contentsOf: url) else {
+        fatalError("Failed to load \(fileName) from bundle.")
+    }
+    return data
+}
+
+private func getDataForSubstances(from fileData: Data) throws -> Data {
+    guard let json = try JSONSerialization.jsonObject(with: fileData, options: []) as? [String: Any],
+          let fileObject = json["data"] else {
+        throw ConversionError.failedToConvertDataToJSON
+    }
+    return try JSONSerialization.data(withJSONObject: fileObject)
+}
+
 func decodeSubstancesFile(
     from data: Data,
     with context: NSManagedObjectContext
@@ -13,12 +32,8 @@ func decodeSubstancesFile(
     decoder.userInfo[CodingUserInfoKey.managedObjectContext] = context
     decoder.dateDecodingStrategy = .deferredToDate
     decoder.keyDecodingStrategy = .useDefaultKeys
-    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-          let fileObject = json["data"] else {
-        throw ConversionError.failedToConvertDataToJSON
-    }
-    let fileData = try JSONSerialization.data(withJSONObject: fileObject)
-    return try decoder.decode(SubstancesFile.self, from: fileData)
+    let dataForSubstances = try getDataForSubstances(from: data)
+    return try decoder.decode(SubstancesFile.self, from: dataForSubstances)
 }
 
 enum RequestError: Error {

@@ -125,17 +125,6 @@ struct PersistenceController {
         }
     }
 
-    private func getInitialData() -> Data {
-        let fileName = "InitialSubstances"
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("Failed to locate \(fileName) in bundle.")
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load \(fileName) from bundle.")
-        }
-        return data
-    }
-
     private func getCreationDate() -> Date {
         let dateString = "2022/02/25 16:54"
         let formatter = DateFormatter()
@@ -161,7 +150,6 @@ struct PersistenceController {
                 for substance in substances {
                     backgroundContext.delete(substance)
                 }
-                // decode substances
                 _ = try decodeSubstancesFile(from: data, with: backgroundContext)
                 try backgroundContext.save()
             } catch {
