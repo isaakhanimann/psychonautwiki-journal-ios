@@ -4,7 +4,7 @@ import CoreData
 extension ExperiencesTab {
     struct ExperienceSection: Identifiable, Comparable {
         static func < (lhs: ExperienceSection, rhs: ExperienceSection) -> Bool {
-            lhs.year < rhs.year
+            lhs.year > rhs.year
         }
         // swiftlint:disable identifier_name
         var id: Int {

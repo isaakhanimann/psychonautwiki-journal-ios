@@ -60,7 +60,6 @@ struct ExperiencesTab: View {
 
 struct YourExperiencesTab_Previews: PreviewProvider {
     static var previews: some View {
-        ExperiencesTab()
-            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+        ExperiencesTab(viewModel: ExperiencesTab.ViewModel(isPreview: true))
     }
 }
