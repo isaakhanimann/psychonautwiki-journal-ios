@@ -17,7 +17,6 @@ struct SearchTab: View {
                     }
                 }
             }
-            .listStyle(.plain)
             .navigationTitle("Substances")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
