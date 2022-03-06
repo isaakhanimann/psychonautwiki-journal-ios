@@ -13,9 +13,9 @@ struct PsychoactiveView: View {
                     }
                 }
             }
-            let hasUncertain = !psychoactive.uncertainSubstancesUnwrapped.isEmpty
-            let hasUnsafe = !psychoactive.unsafeSubstancesUnwrapped.isEmpty
-            let hasDangerous = !psychoactive.dangerousSubstancesUnwrapped.isEmpty
+            let hasUncertain = !psychoactive.uncertainSubstancesToShow.isEmpty
+            let hasUnsafe = !psychoactive.unsafeSubstancesToShow.isEmpty
+            let hasDangerous = !psychoactive.dangerousSubstancesToShow.isEmpty
             let showInteractions = hasUncertain || hasUnsafe || hasDangerous
             if showInteractions {
                 SubstanceInteractionsSection(substanceInteractable: psychoactive)

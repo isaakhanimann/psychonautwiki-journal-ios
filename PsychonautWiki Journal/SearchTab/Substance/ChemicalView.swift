@@ -13,9 +13,9 @@ struct ChemicalView: View {
                     }
                 }
             }
-            let hasUncertain = !chemical.uncertainSubstancesUnwrapped.isEmpty
-            let hasUnsafe = !chemical.unsafeSubstancesUnwrapped.isEmpty
-            let hasDangerous = !chemical.dangerousSubstancesUnwrapped.isEmpty
+            let hasUncertain = !chemical.uncertainSubstancesToShow.isEmpty
+            let hasUnsafe = !chemical.unsafeSubstancesToShow.isEmpty
+            let hasDangerous = !chemical.dangerousSubstancesToShow.isEmpty
             let showInteractions = hasUncertain || hasUnsafe || hasDangerous
             if showInteractions {
                 SubstanceInteractionsSection(substanceInteractable: chemical)

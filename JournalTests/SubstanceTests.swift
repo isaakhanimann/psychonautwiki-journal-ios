@@ -2,7 +2,8 @@ import XCTest
 @testable import Journal
 import CoreData
 
-class JournalTests: XCTestCase {
+// swiftlint:disable type_body_length
+class SubstanceTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -98,52 +99,6 @@ class JournalTests: XCTestCase {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity
-    func testCoreDataAssumptions() throws {
-        let substances = try getAllSubstances()
-        for substance in substances {
-            // uncertain
-            for chemical in substance.uncertainChemicalsUnwrapped {
-                XCTAssertTrue(chemical.uncertainSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for psych in substance.uncertainPsychoactivesUnwrapped {
-                XCTAssertTrue(psych.uncertainSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for unres in substance.uncertainUnresolvedsUnwrapped {
-                XCTAssertTrue(unres.uncertainSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for sub in substance.uncertainSubstancesUnwrapped {
-                XCTAssertTrue(sub.uncertainSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            // unsafe
-            for chemical in substance.unsafeChemicalsUnwrapped {
-                XCTAssertTrue(chemical.unsafeSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for psych in substance.unsafePsychoactivesUnwrapped {
-                XCTAssertTrue(psych.unsafeSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for unres in substance.unsafeUnresolvedsUnwrapped {
-                XCTAssertTrue(unres.unsafeSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for sub in substance.unsafeSubstancesUnwrapped {
-                XCTAssertTrue(sub.unsafeSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            // dangerous
-            for chemical in substance.dangerousChemicalsUnwrapped {
-                XCTAssertTrue(chemical.dangerousSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for psych in substance.dangerousPsychoactivesUnwrapped {
-                XCTAssertTrue(psych.dangerousSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for unres in substance.dangerousUnresolvedsUnwrapped {
-                XCTAssertTrue(unres.dangerousSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-            for sub in substance.dangerousSubstancesUnwrapped {
-                XCTAssertTrue(sub.dangerousSubstancesUnwrapped.contains(substance), substance.nameUnwrapped)
-            }
-        }
-    }
-
     func testLSD() throws {
         let fetchRequest = Substance.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", "LSD")
@@ -163,12 +118,12 @@ class JournalTests: XCTestCase {
         // Check if interactions are supersets of what it says in the json file
         // This is because in the json the interactions are not always mutual
         // uncertain
-        XCTAssertTrue(Set(lsd.uncertainSubstancesUnwrapped.map { $0.name }).contains("Cannabis"))
-        XCTAssertTrue(Set(lsd.uncertainPsychoactivesUnwrapped.map { $0.name }).contains("Stimulants"))
-        XCTAssertTrue(Set(lsd.unsafeSubstancesUnwrapped.map { $0.name }).contains("Tramadol"))
-        XCTAssertTrue(Set(lsd.unsafePsychoactivesUnwrapped.map { $0.name }).contains("Deliriants"))
-        XCTAssertTrue(Set(lsd.unsafeUnresolvedsUnwrapped.map { $0.name }).contains("Tricyclic Antidepressants"))
-        XCTAssertTrue(Set(lsd.unsafeUnresolvedsUnwrapped.map { $0.name }).contains("Ritonavir"))
+        XCTAssertTrue(Set(lsd.uncertainSubstancesToShow.map { $0.name }).contains("Cannabis"))
+        XCTAssertTrue(Set(lsd.uncertainPsychoactivesToShow.map { $0.name }).contains("Stimulants"))
+        XCTAssertTrue(Set(lsd.unsafeSubstancesToShow.map { $0.name }).contains("Tramadol"))
+        XCTAssertTrue(Set(lsd.unsafePsychoactivesToShow.map { $0.name }).contains("Deliriants"))
+        XCTAssertTrue(Set(lsd.unsafeUnresolvedsToShow.map { $0.name }).contains("Tricyclic Antidepressants"))
+        XCTAssertTrue(Set(lsd.unsafeUnresolvedsToShow.map { $0.name }).contains("Ritonavir"))
     }
 
     // swiftlint:disable function_body_length
@@ -188,14 +143,13 @@ class JournalTests: XCTestCase {
         XCTAssertEqual(mdma.crossToleranceSubstancesUnwrapped.count, 0)
         XCTAssertEqual(mdma.crossTolerancePsychoactivesUnwrapped.count, 1)
         XCTAssertEqual(mdma.crossTolerancePsychoactivesUnwrapped.first!.name, "Stimulants")
-        let uncertainSubstanceNames = Set(mdma.uncertainSubstancesUnwrapped.map { $0.name })
+        let uncertainSubstanceNames = Set(mdma.uncertainSubstancesToShow.map { $0.name })
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-DALT"))
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-DMT"))
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-DiPT"))
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-EiPT"))
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-MiPT"))
         XCTAssertTrue(uncertainSubstanceNames.contains("5-MeO-aMT"))
-        XCTAssertTrue(uncertainSubstanceNames.contains("Alcohol"))
         XCTAssertTrue(uncertainSubstanceNames.contains("Cocaine"))
         XCTAssertTrue(uncertainSubstanceNames.contains("DOC"))
         XCTAssertTrue(uncertainSubstanceNames.contains("DOB"))
@@ -205,7 +159,9 @@ class JournalTests: XCTestCase {
         XCTAssertTrue(uncertainSubstanceNames.contains("GBL"))
         XCTAssertTrue(uncertainSubstanceNames.contains("Methoxetamine"))
         XCTAssertTrue(uncertainSubstanceNames.contains("AMT"))
-        let unsafeSubstanceNames = Set(mdma.unsafeSubstancesUnwrapped.map { $0.name })
+        let uncertainChemicalNames = Set(mdma.uncertainChemicalsToShow.map { $0.name })
+        XCTAssertTrue(uncertainChemicalNames.contains("Alcohols"))
+        let unsafeSubstanceNames = Set(mdma.unsafeSubstancesToShow.map { $0.name })
         XCTAssertTrue(unsafeSubstanceNames.contains("25B-NBOMe"))
         XCTAssertTrue(unsafeSubstanceNames.contains("25C-NBOMe"))
         XCTAssertTrue(unsafeSubstanceNames.contains("25D-NBOMe"))
@@ -216,10 +172,78 @@ class JournalTests: XCTestCase {
         XCTAssertTrue(unsafeSubstanceNames.contains("2C-T-2"))
         XCTAssertTrue(unsafeSubstanceNames.contains("2C-T-7"))
         XCTAssertTrue(unsafeSubstanceNames.contains("5-Hydroxytryptophan"))
-        XCTAssertTrue(Set(mdma.unsafeUnresolvedsUnwrapped.map { $0.name }).contains("Serotonin"))
-        let dangerousSubstanceNames = Set(mdma.dangerousSubstancesUnwrapped.map { $0.name })
+        XCTAssertTrue(Set(mdma.unsafeUnresolvedsToShow.map { $0.name }).contains("Serotonin"))
+        let dangerousSubstanceNames = Set(mdma.dangerousSubstancesToShow.map { $0.name })
         XCTAssertTrue(dangerousSubstanceNames.contains("Tramadol"))
         XCTAssertTrue(dangerousSubstanceNames.contains("Dextromethorphan"))
-        XCTAssertTrue(Set(mdma.dangerousUnresolvedsUnwrapped.map { $0.name }).contains("MAOI"))
+        XCTAssertTrue(Set(mdma.dangerousUnresolvedsToShow.map { $0.name }).contains("MAOI"))
+    }
+
+    func testCocaine() throws {
+        let fetchRequest = Substance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", "Cocaine")
+        let substances = try PersistenceController.preview.viewContext.fetch(fetchRequest)
+        XCTAssertEqual(substances.count, 1)
+        let cocaine = substances.first!
+        XCTAssertEqual(cocaine.psychoactivesUnwrapped.count, 1)
+        XCTAssertEqual(cocaine.psychoactivesUnwrapped.first!.name, "Stimulants")
+        XCTAssertEqual(cocaine.firstPsychoactiveNameUnwrapped, "Stimulants")
+        XCTAssertEqual(cocaine.chemicalsUnwrapped.count, 1)
+        XCTAssertEqual(cocaine.chemicalsUnwrapped.first!.name, "Substituted Tropanes")
+        XCTAssertEqual(cocaine.firstChemicalNameUnwrapped, "Substituted Tropanes")
+        XCTAssertEqual(cocaine.crossToleranceChemicalsUnwrapped.count, 0)
+        XCTAssertEqual(cocaine.crossToleranceSubstancesUnwrapped.count, 0)
+        XCTAssertEqual(cocaine.crossTolerancePsychoactivesUnwrapped.count, 1)
+        XCTAssertEqual(cocaine.crossTolerancePsychoactivesUnwrapped.first!.name, "Stimulants")
+        let dangerousPsychoactiveNames = Set(cocaine.dangerousPsychoactivesToShow.map { $0.name })
+        XCTAssertTrue(dangerousPsychoactiveNames.contains("Opioids"))
+        let dangerousSubstanceNames = Set(cocaine.dangerousSubstancesToShow.map { $0.name })
+        XCTAssertTrue(dangerousSubstanceNames.contains("AMT"))
+        let dangerousUnresolvedNames = Set(cocaine.dangerousUnresolvedsToShow.map { $0.name })
+        XCTAssertTrue(dangerousUnresolvedNames.contains("MAOI"))
+        let unsafeSubstanceNames = Set(cocaine.unsafeSubstancesToShow.map { $0.name })
+        XCTAssertTrue(unsafeSubstanceNames.contains("25B-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("25C-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("25D-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("25H-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("25I-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("25N-NBOMe"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("PCP"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("2C-T-2"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("2C-T-7"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("DOB"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("DOM"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("DOI"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("Dextromethorphan"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-DALT"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-DMT"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-DiPT"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-EiPT"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-MiPT"))
+        XCTAssertTrue(unsafeSubstanceNames.contains("5-MeO-aMT"))
+        let unsafeChemicalNames = Set(cocaine.unsafeChemicalsToShow.map { $0.name })
+        XCTAssertTrue(unsafeChemicalNames.contains("Alcohols"))
+        let uncertainSubstanceNames = Set(cocaine.uncertainSubstancesToShow.map { $0.name })
+        XCTAssertTrue(uncertainSubstanceNames.contains("Psilocybin Mushrooms"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("LSD"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("DMT"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("Mescaline"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-B"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-C"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-D"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-E"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-H"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-I"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-P"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("2C-T"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("Cannabis"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("Ketamine"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("Methoxetamine"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("MDMA"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("Caffeine"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("GHB"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("GBL"))
+        let uncertainChemicalNames = Set(cocaine.uncertainChemicalsToShow.map { $0.name })
+        XCTAssertTrue(uncertainChemicalNames.contains("Substituted Amphetamines"))
     }
 }

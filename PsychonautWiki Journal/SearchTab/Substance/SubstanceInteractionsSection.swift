@@ -6,21 +6,21 @@ struct SubstanceInteractionsSection: View {
 
     var body: some View {
         Section("Interactions (not exhaustive)") {
-            ForEach(substanceInteractable.dangerousSubstancesUnwrapped) { sub in
+            ForEach(substanceInteractable.dangerousSubstancesToShow) { sub in
                 NavigationLink {
                     SubstanceView(substance: sub)
                 } label: {
                     InteractionLabel(text: sub.nameUnwrapped, interactionType: .dangerous)
                 }
             }
-            ForEach(substanceInteractable.unsafeSubstancesUnwrapped) { sub in
+            ForEach(substanceInteractable.unsafeSubstancesToShow) { sub in
                 NavigationLink {
                     SubstanceView(substance: sub)
                 } label: {
                     InteractionLabel(text: sub.nameUnwrapped, interactionType: .unsafe)
                 }
             }
-            ForEach(substanceInteractable.uncertainSubstancesUnwrapped) { sub in
+            ForEach(substanceInteractable.uncertainSubstancesToShow) { sub in
                 NavigationLink {
                     SubstanceView(substance: sub)
                 } label: {

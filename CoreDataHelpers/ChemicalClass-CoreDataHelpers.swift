@@ -1,6 +1,6 @@
 import Foundation
 
-extension ChemicalClass: Comparable, SubstanceInteractable {
+extension ChemicalClass: Comparable {
     public static func < (lhs: ChemicalClass, rhs: ChemicalClass) -> Bool {
         lhs.nameUnwrapped < rhs.nameUnwrapped
     }
@@ -13,19 +13,41 @@ extension ChemicalClass: Comparable, SubstanceInteractable {
         (substances?.allObjects as? [Substance] ?? []).sorted()
     }
 
-    var uncertainSubstancesUnwrapped: [Substance] {
+    private var uncertainSubstancesUnwrapped: [Substance] {
         uncertainSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var unsafeSubstancesUnwrapped: [Substance] {
+    private var unsafeSubstancesUnwrapped: [Substance] {
         unsafeSubstances?.allObjects as? [Substance] ?? []
     }
 
-    var dangerousSubstancesUnwrapped: [Substance] {
+    private var dangerousSubstancesUnwrapped: [Substance] {
         dangerousSubstances?.allObjects as? [Substance] ?? []
     }
 
     var crossToleranceUnwrapped: [Substance] {
         (crossTolerance?.allObjects as? [Substance] ?? []).sorted()
+    }
+
+    func containsSubstance(substance: Substance) -> Bool {
+        substancesUnwrapped.contains(substance)
+    }
+}
+
+extension ChemicalClass: SubstanceInteractable {
+
+    var dangerousSubstancesToShow: [Substance] {
+        dangerousSubstancesUnwrapped
+    }
+
+    var unsafeSubstancesToShow: [Substance] {
+        unsafeSubstancesUnwrapped.filter { sub in
+            !dangerousSubstancesUnwrapped.contains(sub)
+        }
+    }
+    var uncertainSubstancesToShow: [Substance] {
+        uncertainSubstancesUnwrapped.filter { sub in
+            !dangerousSubstancesUnwrapped.contains(sub) && !unsafeSubstancesUnwrapped.contains(sub)
+        }
     }
 }

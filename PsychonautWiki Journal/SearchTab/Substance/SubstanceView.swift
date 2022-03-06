@@ -3,21 +3,6 @@ import SwiftUI
 struct SubstanceView: View {
 
     let substance: Substance
-    var areThereInteractions: Bool {
-        guard substance.uncertainSubstancesUnwrapped.isEmpty else {return true}
-        guard substance.uncertainPsychoactivesUnwrapped.isEmpty else {return true}
-        guard substance.uncertainChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.uncertainUnresolvedsUnwrapped.isEmpty else {return true}
-        guard substance.unsafeSubstancesUnwrapped.isEmpty else {return true}
-        guard substance.unsafePsychoactivesUnwrapped.isEmpty else {return true}
-        guard substance.unsafeChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.unsafeUnresolvedsUnwrapped.isEmpty else {return true}
-        guard substance.dangerousSubstancesUnwrapped.isEmpty else {return true}
-        guard substance.dangerousPsychoactivesUnwrapped.isEmpty else {return true}
-        guard substance.dangerousChemicalsUnwrapped.isEmpty else {return true}
-        guard substance.dangerousUnresolvedsUnwrapped.isEmpty else {return true}
-        return false
-    }
 
     var body: some View {
         List {
@@ -31,27 +16,23 @@ struct SubstanceView: View {
                     Text(toxicity)
                 }
             }
-            if substance.tolerance?.isAtLeastOneDefined ?? false {
+            if substance.showTolerance {
                 toleranceSection
             }
             roaSection
-            let hasSubs = !substance.crossToleranceSubstancesUnwrapped.isEmpty
-            let hasPsych = !substance.crossTolerancePsychoactivesUnwrapped.isEmpty
-            let hasChem = !substance.crossToleranceChemicalsUnwrapped.isEmpty
-            let showTolerance = hasSubs || hasPsych || hasChem
-            if showTolerance {
+            if substance.showCrossTolerance {
                 crossToleranceSection
             }
-            if areThereInteractions {
+            if substance.areThereInteractions {
                 interactionSection
             }
-            if !substance.psychoactivesUnwrapped.isEmpty {
+            if substance.showPsychoactiveClass {
                 psychoactiveSection
             }
-            if !substance.chemicalsUnwrapped.isEmpty {
+            if substance.showChemicalClass {
                 chemicalSection
             }
-            if !substance.effectsUnwrapped.isEmpty {
+            if substance.showEffects {
                 effectSection
             }
         }
@@ -113,28 +94,28 @@ struct SubstanceView: View {
     private var interactionSection: some View {
         return Section("Interactions (Not Exhaustive)") {
             Group {
-                ForEach(substance.dangerousPsychoactivesUnwrapped) { psych in
+                ForEach(substance.dangerousPsychoactivesToShow) { psych in
                     NavigationLink {
                         PsychoactiveView(psychoactive: psych)
                     } label: {
                         InteractionLabel(text: psych.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
-                ForEach(substance.dangerousChemicalsUnwrapped) { chem in
+                ForEach(substance.dangerousChemicalsToShow) { chem in
                     NavigationLink {
                         ChemicalView(chemical: chem)
                     } label: {
                         InteractionLabel(text: chem.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
-                ForEach(substance.dangerousSubstancesUnwrapped) { sub in
+                ForEach(substance.dangerousSubstancesToShow) { sub in
                     NavigationLink {
                         SubstanceView(substance: sub)
                     } label: {
                         InteractionLabel(text: sub.nameUnwrapped, interactionType: .dangerous)
                     }
                 }
-                ForEach(substance.dangerousUnresolvedsUnwrapped) { unr in
+                ForEach(substance.dangerousUnresolvedsToShow) { unr in
                     NavigationLink {
                         UnresolvedView(unresolved: unr)
                     } label: {
@@ -143,28 +124,28 @@ struct SubstanceView: View {
                 }
             }
             Group {
-                ForEach(substance.unsafePsychoactivesUnwrapped) { psych in
+                ForEach(substance.unsafePsychoactivesToShow) { psych in
                     NavigationLink {
                         PsychoactiveView(psychoactive: psych)
                     } label: {
                         InteractionLabel(text: psych.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
-                ForEach(substance.unsafeChemicalsUnwrapped) { chem in
+                ForEach(substance.unsafeChemicalsToShow) { chem in
                     NavigationLink {
                         ChemicalView(chemical: chem)
                     } label: {
                         InteractionLabel(text: chem.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
-                ForEach(substance.unsafeSubstancesUnwrapped) { sub in
+                ForEach(substance.unsafeSubstancesToShow) { sub in
                     NavigationLink {
                         SubstanceView(substance: sub)
                     } label: {
                         InteractionLabel(text: sub.nameUnwrapped, interactionType: .unsafe)
                     }
                 }
-                ForEach(substance.unsafeUnresolvedsUnwrapped) { unr in
+                ForEach(substance.unsafeUnresolvedsToShow) { unr in
                     NavigationLink {
                         UnresolvedView(unresolved: unr)
                     } label: {
@@ -173,28 +154,28 @@ struct SubstanceView: View {
                 }
             }
             Group {
-                ForEach(substance.uncertainPsychoactivesUnwrapped) { psych in
+                ForEach(substance.uncertainPsychoactivesToShow) { psych in
                     NavigationLink {
                         PsychoactiveView(psychoactive: psych)
                     } label: {
                         InteractionLabel(text: psych.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
-                ForEach(substance.uncertainChemicalsUnwrapped) { chem in
+                ForEach(substance.uncertainChemicalsToShow) { chem in
                     NavigationLink {
                         ChemicalView(chemical: chem)
                     } label: {
                         InteractionLabel(text: chem.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
-                ForEach(substance.uncertainSubstancesUnwrapped) { sub in
+                ForEach(substance.uncertainSubstancesToShow) { sub in
                     NavigationLink {
                         SubstanceView(substance: sub)
                     } label: {
                         InteractionLabel(text: sub.nameUnwrapped, interactionType: .uncertain)
                     }
                 }
-                ForEach(substance.uncertainUnresolvedsUnwrapped) { unr in
+                ForEach(substance.uncertainUnresolvedsToShow) { unr in
                     NavigationLink {
                         UnresolvedView(unresolved: unr)
                     } label: {
@@ -216,7 +197,7 @@ struct SubstanceView: View {
     }
 
     private var psychoactiveSection: some View {
-        Section("Psychoactive Classes") {
+        Section("Psychoactive Class") {
             ForEach(substance.psychoactivesUnwrapped) { psy in
                 NavigationLink(psy.nameUnwrapped) {
                     PsychoactiveView(psychoactive: psy)
@@ -226,7 +207,7 @@ struct SubstanceView: View {
     }
 
     private var chemicalSection: some View {
-        Section("Chemical Classes") {
+        Section("Chemical Class") {
             ForEach(substance.chemicalsUnwrapped) { che in
                 NavigationLink(che.nameUnwrapped) {
                     ChemicalView(chemical: che)

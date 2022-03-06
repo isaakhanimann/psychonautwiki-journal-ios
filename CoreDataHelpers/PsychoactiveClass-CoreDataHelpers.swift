@@ -1,6 +1,6 @@
 import Foundation
 
-extension PsychoactiveClass: Comparable, SubstanceInteractable {
+extension PsychoactiveClass: Comparable {
     public static func < (lhs: PsychoactiveClass, rhs: PsychoactiveClass) -> Bool {
         lhs.nameUnwrapped < rhs.nameUnwrapped
     }
@@ -13,19 +13,41 @@ extension PsychoactiveClass: Comparable, SubstanceInteractable {
         (substances?.allObjects as? [Substance] ?? []).sorted()
     }
 
-    var uncertainSubstancesUnwrapped: [Substance] {
+    private var uncertainSubstancesUnwrapped: [Substance] {
         (uncertainSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
-    var unsafeSubstancesUnwrapped: [Substance] {
+    private var unsafeSubstancesUnwrapped: [Substance] {
         (unsafeSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
-    var dangerousSubstancesUnwrapped: [Substance] {
+    private var dangerousSubstancesUnwrapped: [Substance] {
         (dangerousSubstances?.allObjects as? [Substance] ?? []).sorted()
     }
 
     var crossToleranceUnwrapped: [Substance] {
         (crossTolerance?.allObjects as? [Substance] ?? []).sorted()
+    }
+
+    func containsSubstance(substance: Substance) -> Bool {
+        substancesUnwrapped.contains(substance)
+    }
+}
+
+extension PsychoactiveClass: SubstanceInteractable {
+
+    var dangerousSubstancesToShow: [Substance] {
+        dangerousSubstancesUnwrapped
+    }
+
+    var unsafeSubstancesToShow: [Substance] {
+        unsafeSubstancesUnwrapped.filter { sub in
+            !dangerousSubstancesUnwrapped.contains(sub)
+        }
+    }
+    var uncertainSubstancesToShow: [Substance] {
+        uncertainSubstancesUnwrapped.filter { sub in
+            !dangerousSubstancesUnwrapped.contains(sub) && !unsafeSubstancesUnwrapped.contains(sub)
+        }
     }
 }
