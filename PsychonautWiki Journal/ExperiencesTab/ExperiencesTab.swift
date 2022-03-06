@@ -12,15 +12,11 @@ struct ExperiencesTab: View {
                         Section(String(sec.year)) {
                             ForEach(sec.experiences) { exp in
                                 ExperienceRow(experience: exp, selection: $viewModel.selection)
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        Button(role: .destructive) {
-                                            withAnimation {
-                                                viewModel.delete(experience: exp)
-                                            }
-                                        } label: {
-                                            Label("Delete", systemImage: "trash")
-                                        }
-                                    }
+                            }
+                            .onDelete { indexSet in
+                                indexSet.forEach { index in
+                                    viewModel.delete(experience: sec.experiences[index])
+                                }
                             }
                         }
                     }
@@ -41,7 +37,12 @@ struct ExperiencesTab: View {
             }
             .navigationTitle("Experiences")
             .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if viewModel.hasExperiences {
+                        EditButton()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     if viewModel.hasExperiences {
                         Button {
                             withAnimation {
