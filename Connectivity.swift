@@ -5,16 +5,7 @@ import ClockKit
 class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
 
     @Published var activationState = WCSessionActivationState.notActivated
-
     static let shared: Connectivity = Connectivity()
-
-#if os(iOS)
-    @Published var isWatchAppInstalled = false
-    @Published var isComplicationEnabled = false
-    @Published var isPaired = false
-#endif
-
-    // MARK: General Methods
 
     override init() {
         super.init()
@@ -34,11 +25,6 @@ class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
     ) {
         DispatchQueue.main.async {
             self.activationState = activationState
-            if activationState == .activated {
-                self.isWatchAppInstalled = session.isWatchAppInstalled
-                self.isComplicationEnabled = session.isComplicationEnabled
-                self.isPaired = session.isPaired
-            }
         }
     }
 

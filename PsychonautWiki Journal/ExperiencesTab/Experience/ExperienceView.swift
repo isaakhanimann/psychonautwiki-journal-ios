@@ -8,6 +8,12 @@ struct ExperienceView: View {
     @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
 
+    init(experience: Experience) {
+        self.experience = experience
+        _selectedTitle = State(wrappedValue: experience.titleUnwrapped)
+        _writtenText = State(wrappedValue: experience.textUnwrapped)
+    }
+
     var body: some View {
         List {
             Section(header: Text("Title")) {
@@ -22,7 +28,6 @@ struct ExperienceView: View {
                         .foregroundColor(.accentColor)
                 }
             }
-
             if !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section(
                     header: Text("Timeline"),
@@ -34,16 +39,8 @@ struct ExperienceView: View {
                     .frame(height: 310)
                 }
             }
-
             Section(header: Text("Notes")) {
                 TextEditor(text: $writtenText)
-            }
-
-            if Connectivity.shared.isPaired && !Connectivity.shared.isComplicationEnabled {
-                NavigationLink(destination: AddFaceView()) {
-                    Label("Add Watch Face", systemImage: "applewatch.watchface")
-                        .foregroundColor(.accentColor)
-                }
             }
         }
         .listStyle(InsetGroupedListStyle())
@@ -62,12 +59,6 @@ struct ExperienceView: View {
 
     private func showOrHideAddIngestionSheet() {
         isShowingAddIngestionSheet.toggle()
-    }
-
-    init(experience: Experience) {
-        self.experience = experience
-        _selectedTitle = State(wrappedValue: experience.titleUnwrapped)
-        _writtenText = State(wrappedValue: experience.textUnwrapped)
     }
 
     private func deleteIngestions(at offsets: IndexSet) {
