@@ -35,6 +35,13 @@ struct ExperienceView: View {
                     .frame(height: 310)
                 }
             }
+            if !experience.ingestionsWithDistinctSubstances.isEmpty {
+                Section(header: Text("Substances")) {
+                    ForEach(experience.ingestionsWithDistinctSubstances) { ing in
+                        IngestionSubstanceRow(ingestion: ing)
+                    }
+                }
+            }
             Section(header: Text("Notes")) {
                 TextEditor(text: $writtenText)
             }
@@ -51,7 +58,7 @@ struct ExperienceView: View {
                 dismiss: showOrHideAddIngestionSheet,
                 experience: experience
             )
-            .accentColor(Color.blue)
+                .accentColor(Color.blue)
         }
     }
 

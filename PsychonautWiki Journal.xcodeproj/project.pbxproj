@@ -156,6 +156,7 @@
 		EACB6E5D27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
 		EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6427D4D86900940291 /* AppDelegate.swift */; };
 		EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */; };
+		EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -385,6 +386,7 @@
 		EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
 		EACB6E6427D4D86900940291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperiencesTab-ViewModel.swift"; sourceTree = "<group>"; };
+		EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionSubstanceRow.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -844,6 +846,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
+				EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
@@ -1279,6 +1282,7 @@
 				EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
+				EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
 				EAC306AB26CE2F8500C98E3E /* AroundShapeModelDown.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,

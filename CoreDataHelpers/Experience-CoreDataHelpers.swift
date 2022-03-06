@@ -96,4 +96,15 @@ extension Experience: Comparable {
         }
         return endOfGraphTime
     }
+
+    var ingestionsWithDistinctSubstances: [Ingestion] {
+        sortedIngestionsUnwrapped.reduce([]) { partialResult, ing in
+            let resultSubs = partialResult.map { $0.substance }
+            var resultIngs = partialResult
+            if !resultSubs.contains(ing.substance) {
+                resultIngs.append(ing)
+            }
+            return resultIngs
+        }
+    }
 }
