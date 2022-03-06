@@ -6,7 +6,7 @@ class CalendarWrapper: ObservableObject {
     @Published var authorizationStatus = EKAuthorizationStatus.notDetermined
     @Published var psychonautWikiCalendar: EKCalendar?
 
-    private var isSetupComplete: Bool {
+    var isSetupComplete: Bool {
         authorizationStatus == .authorized && psychonautWikiCalendar != nil
     }
 
@@ -50,7 +50,7 @@ class CalendarWrapper: ObservableObject {
         self.psychonautWikiCalendar = calendar
     }
 
-    func createOrUpdateEventBeforeMocSave(from experience: Experience) {
+    func createOrUpdateEvent(from experience: Experience) {
         guard let eventIdentifierUnwrapped = experience.eventIdentifier else {
             let eventIdentifier = createNewEvent(from: experience)
             experience.eventIdentifier = eventIdentifier
@@ -62,7 +62,7 @@ class CalendarWrapper: ObservableObject {
             experience.eventIdentifier = eventIdentifier
             return
         }
-
+        experience.lastSyncToCalendar = Date()
         updateEvent(with: experience)
     }
 
@@ -70,7 +70,6 @@ class CalendarWrapper: ObservableObject {
         guard isSetupComplete else {
             return nil
         }
-
         let event = EKEvent(eventStore: store)
         event.calendar = psychonautWikiCalendar
         event.alarms = []
@@ -92,19 +91,16 @@ class CalendarWrapper: ObservableObject {
         guard isSetupComplete else {
             return
         }
-
         guard let eventIdentifierUnwrapped = experience.eventIdentifier else {
             assertionFailure("Experience does not have an event yet")
             return
         }
-
         guard let eventUnwrapped = store.event(withIdentifier: eventIdentifierUnwrapped) else {
             assertionFailure("Failed to find event with identifier: \(eventIdentifierUnwrapped)")
             return
         }
         eventUnwrapped.title = experience.titleUnwrapped
         eventUnwrapped.notes = getNotes(from: experience)
-
         let (start, end) = getStartAndEnd(for: experience)
         eventUnwrapped.startDate = start
         eventUnwrapped.endDate = end
@@ -116,7 +112,6 @@ class CalendarWrapper: ObservableObject {
     }
 
     private func getStartAndEnd(for experience: Experience) -> (start: Date, end: Date) {
-
         if let start = experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
            let end = Experience.getEndTime(for: experience.sortedIngestionsUnwrapped) {
             return (start, end)
@@ -137,7 +132,6 @@ class CalendarWrapper: ObservableObject {
             result += "\(ingestion.administrationRouteUnwrapped.displayString)\n"
         }
         result += "\n" + experience.textUnwrapped
-
         return result
     }
 

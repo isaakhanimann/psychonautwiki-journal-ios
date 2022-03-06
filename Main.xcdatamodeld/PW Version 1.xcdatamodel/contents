@@ -29,6 +29,7 @@
     <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="lastSyncToCalendar" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
@@ -141,7 +142,7 @@
         <element name="ChemicalClass" positionX="-1202.32421875" positionY="581.19140625" width="128" height="14"/>
         <element name="DurationRange" positionX="295.26171875" positionY="336.8984375" width="128" height="164"/>
         <element name="Effect" positionX="-206.01953125" positionY="168.5078125" width="128" height="74"/>
-        <element name="Experience" positionX="-270.1033325195312" positionY="-382.2306213378906" width="128" height="104"/>
+        <element name="Experience" positionX="-270.1033325195312" positionY="-382.2306213378906" width="128" height="119"/>
         <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="14"/>
         <element name="PsychoactiveClass" positionX="-1073.4375" positionY="208.640625" width="128" height="14"/>
         <element name="Roa" positionX="-204.79296875" positionY="416.4296875" width="128" height="104"/>

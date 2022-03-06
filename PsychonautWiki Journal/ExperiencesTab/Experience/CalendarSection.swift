@@ -6,21 +6,25 @@ struct CalendarSection: View {
     @EnvironmentObject var calendarWrapper: CalendarWrapper
     @State private var isShowingActionSheet = false
     @State private var isShowingAlert = false
+    @ObservedObject var experience: Experience
 
     var body: some View {
-        Section(header: Text("Apple Calendar")) {
+        Section(
+            header: Text("Sync Experience to Your Calendar"),
+            footer: footer
+        ) {
             if calendarWrapper.authorizationStatus == .notDetermined {
                 Button("Allow Access to Apple Calendar") {
                     calendarWrapper.requestAccess()
                 }
             } else if calendarWrapper.authorizationStatus == .authorized {
                 if calendarWrapper.psychonautWikiCalendar != nil {
-                    HStack {
-                        Text("Your PsychonautWiki Calendar is All Set")
-                        Spacer()
-                        Image(systemName: "checkmark")
-                            .font(.title2)
-                            .foregroundColor(.green)
+                    Button {
+                        experience.objectWillChange.send()
+                        calendarWrapper.createOrUpdateEvent(from: experience)
+                        try? PersistenceController.shared.viewContext.save()
+                    } label: {
+                        Label("Sync Now", systemImage: "arrow.clockwise")
                     }
                 } else {
                     Button(action: {
@@ -46,6 +50,14 @@ struct CalendarSection: View {
                 message: Text("Do you have the Apple Calendar App installed?"),
                 dismissButton: .default(Text("Ok"))
             )
+        }
+    }
+
+    private var footer: Text {
+        if calendarWrapper.isSetupComplete {
+            return Text("Last Sync: \(experience.lastSyncToCalendar?.asDateAndTime ?? "-")")
+        } else {
+            return Text("")
         }
     }
 

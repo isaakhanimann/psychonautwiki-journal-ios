@@ -45,7 +45,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>PsychonautWiki Journal wants you to be able to store your experiences in a the Calendar app to make sure you never lose them.</string>
+	<string>Allow yourself to sync your experiences to your calendar</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

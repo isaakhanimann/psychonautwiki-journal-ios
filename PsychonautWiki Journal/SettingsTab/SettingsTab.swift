@@ -9,10 +9,7 @@ struct SettingsTab: View {
         NavigationView {
             List {
                 eye
-                Section(
-                    header: Text("Last Successfull Substance Fetch"),
-                    footer: Text("Source: PsychonautWiki")
-                ) {
+                Section(header: Text("Last Successfull Substance Fetch")) {
                     if viewModel.isFetching {
                         Text("Fetching Substances...")
                     } else {
@@ -31,8 +28,6 @@ struct SettingsTab: View {
                         dismissButton: .default(Text("Ok"))
                     )
                 }
-
-                CalendarSection()
 
                 if isEyeOpen {
                     Section(header: Text("Safety")) {

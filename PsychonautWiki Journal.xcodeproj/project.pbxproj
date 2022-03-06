@@ -740,7 +740,6 @@
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 				EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */,
-				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
@@ -764,7 +763,6 @@
 				EA460D202763790C002EF80B /* FAQ */,
 				EAE4712B26CBA663009FB0EC /* SettingsTab.swift */,
 				EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */,
-				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */,
 			);
 			path = SettingsTab;
@@ -847,6 +845,8 @@
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
+				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
+				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EAE4718C26CBA664009FB0EC /* Timeline Chart */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,

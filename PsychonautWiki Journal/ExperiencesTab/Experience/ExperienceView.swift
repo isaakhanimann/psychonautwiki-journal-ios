@@ -3,7 +3,6 @@ import SwiftUI
 struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
     @State private var selectedTitle: String
     @State private var isShowingAddIngestionSheet = false
     @State private var writtenText: String
@@ -29,10 +28,7 @@ struct ExperienceView: View {
                 }
             }
             if !experience.sortedIngestionsUnwrapped.isEmpty {
-                Section(
-                    header: Text("Timeline"),
-                    footer: Text("Source: PsychonautWiki onset, comeup, peak & offset")
-                ) {
+                Section(header: Text("Timeline")) {
                     HorizontalScaleView {
                         IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsUnwrapped)
                     }
@@ -42,8 +38,8 @@ struct ExperienceView: View {
             Section(header: Text("Notes")) {
                 TextEditor(text: $writtenText)
             }
+            CalendarSection(experience: experience)
         }
-        .listStyle(InsetGroupedListStyle())
         .navigationTitle(selectedTitle)
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
@@ -52,8 +48,7 @@ struct ExperienceView: View {
                 dismiss: showOrHideAddIngestionSheet,
                 experience: experience
             )
-                .environmentObject(calendarWrapper)
-                .accentColor(Color.blue)
+            .accentColor(Color.blue)
         }
     }
 
@@ -79,7 +74,6 @@ struct ExperienceView: View {
 struct ExperienceView_Previews: PreviewProvider {
     static var previews: some View {
         ExperienceView(experience: PreviewHelper.shared.experiences.first!)
-            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
             .environmentObject(CalendarWrapper())
             .accentColor(Color.blue)
     }
