@@ -44,7 +44,7 @@ struct ExperienceView: View {
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
         .onDisappear {
-            try? PersistenceController.shared.viewContext.save()
+            PersistenceController.shared.saveViewContext()
         }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
