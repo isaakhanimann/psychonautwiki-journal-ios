@@ -40,27 +40,20 @@ struct ChooseTimeAndColor: View {
         VStack {
             Form {
                 Section(header: Text("Time")) {
-                    DatePicker(
-                        "Time",
-                        selection: $selectedTime
-                    )
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
+                    DatePicker("Time", selection: $selectedTime, displayedComponents: [.date, .hourAndMinute])
+                        .labelsHidden()
                 }
-
                 Section(header: Text("Color")) {
                     LazyVGrid(columns: colorColumns) {
                         ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
                     }
                     .padding(.vertical)
                 }
-
             }
             Button("Add Ingestion", action: addIngestion)
                 .buttonStyle(PrimaryButtonStyle())
                 .padding()
         }
-
         .navigationBarTitle("Choose Time")
         .toolbar {
             ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {

@@ -44,12 +44,8 @@ struct EditIngestionView: View {
             }
 
             Section(header: Text("Time")) {
-                DatePicker(
-                    "Time",
-                    selection: $selectedTime
-                )
-                .labelsHidden()
-                .datePickerStyle(WheelDatePickerStyle())
+                DatePicker("Time", selection: $selectedTime, displayedComponents: [.date, .hourAndMinute])
+                    .labelsHidden()
             }
 
             Section(header: Text("Color")) {
