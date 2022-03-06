@@ -43,6 +43,9 @@ struct ExperienceView: View {
         .navigationTitle(selectedTitle)
         .onChange(of: selectedTitle) { _ in update() }
         .onChange(of: writtenText) { _ in update() }
+        .onDisappear {
+            try? PersistenceController.shared.viewContext.save()
+        }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             ChooseSubstanceView(
                 dismiss: showOrHideAddIngestionSheet,
