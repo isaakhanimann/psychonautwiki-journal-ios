@@ -237,7 +237,8 @@ struct RowLabelView: View {
 struct SubstanceView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SubstanceView(substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!)
+            SubstanceView(substance: PreviewHelper.shared.getSubstance(with: "Tyrosine")!)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
         }
     }
 }

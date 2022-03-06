@@ -53,75 +53,91 @@ struct DoseView: View {
         || strongMaxOrHeavy != nil
         if showDoseView {
             HStack(alignment: .top, spacing: 0) {
-                Spacer()
-                Group {
-                    if let threshOrLightMin = threshOrLightMin {
-                        VStack {
-                            Text(threshOrLightMin)
-                                .foregroundLinearGradient(colors: [threshColor, lightColor])
-                                .font(doseFont)
-                            Text("thresh ")
-                                .foregroundColor(threshColor)
-                                .font(.footnote)
-                        }
-                    }
-                    if threshOrLightMin != nil || lightMaxOrCommonMin != nil {
-                        VStack {
-                            Text("-")
-                                .font(doseFont)
-                            Text("light")
-                                .font(.footnote)
-                        }
-                        .foregroundColor(lightColor)
-                    }
-                    if let lightMaxOrCommonMin = lightMaxOrCommonMin {
-                        Text(lightMaxOrCommonMin)
-                            .foregroundLinearGradient(colors: [lightColor, commonColor])
+                if let threshOrLightMin = threshOrLightMin {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text(threshOrLightMin)
+                            .foregroundLinearGradient(colors: [threshColor, lightColor])
                             .font(doseFont)
+                        Text("thresh ")
+                            .foregroundColor(threshColor)
+                            .font(.footnote)
                     }
-                    if lightMaxOrCommonMin != nil || commonMaxOrStrongMin != nil {
-                        VStack {
-                            Text("-")
-                                .font(doseFont)
-                            Text("common")
-                                .font(.footnote)
-                        }
-                        .foregroundColor(commonColor)
-                    }
-                    if let commonMaxOrStrongMin = commonMaxOrStrongMin {
-                        Text(commonMaxOrStrongMin)
-                            .foregroundLinearGradient(colors: [commonColor, strongColor])
-                            .font(doseFont)
-                    }
-                    if commonMaxOrStrongMin != nil || strongMaxOrHeavy != nil {
-                        VStack {
-                            Text("-")
-                                .font(doseFont)
-                            Text("strong")
-                                .font(.footnote)
-                        }
-                        .foregroundColor(strongColor)
-                    }
-                    if let strongMaxOrHeavy = strongMaxOrHeavy {
-                        Text(strongMaxOrHeavy)
-                            .foregroundLinearGradient(colors: [strongColor, heavyColor])
-                            .font(doseFont)
-                    }
-                    if strongMaxOrHeavy != nil {
-                        VStack {
-                            Text("-")
-                                .font(doseFont)
-                            Text("heavy")
-                                .font(.footnote)
-                        }
-                        .foregroundColor(heavyColor)
-                        .font(doseFont)
-                    }
-                    Text(roaDose?.units ?? "")
-                        .font(doseFont)
+                    Spacer(minLength: 0)
                 }
-                Spacer()
-            }.listRowInsets(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                if threshOrLightMin != nil || lightMaxOrCommonMin != nil {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text("-")
+                            .font(doseFont)
+                        Text("light")
+                            .font(.footnote)
+                    }
+                    .foregroundColor(lightColor)
+                    Spacer(minLength: 0)
+                }
+                if let lightMaxOrCommonMin = lightMaxOrCommonMin {
+                    Spacer(minLength: 0)
+                    Text(lightMaxOrCommonMin)
+                        .foregroundLinearGradient(colors: [lightColor, commonColor])
+                        .font(doseFont)
+                    Spacer(minLength: 0)
+                }
+                if lightMaxOrCommonMin != nil || commonMaxOrStrongMin != nil {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text("-")
+                            .font(doseFont)
+                        Text("common")
+                            .font(.footnote)
+                    }
+                    .foregroundColor(commonColor)
+                    Spacer(minLength: 0)
+                }
+                if let commonMaxOrStrongMin = commonMaxOrStrongMin {
+                    Spacer(minLength: 0)
+                    Text(commonMaxOrStrongMin)
+                        .foregroundLinearGradient(colors: [commonColor, strongColor])
+                        .font(doseFont)
+                    Spacer(minLength: 0)
+                }
+                if commonMaxOrStrongMin != nil || strongMaxOrHeavy != nil {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text("-")
+                            .font(doseFont)
+                        Text("strong")
+                            .font(.footnote)
+                    }
+                    .foregroundColor(strongColor)
+                    Spacer(minLength: 0)
+                }
+                if let strongMaxOrHeavy = strongMaxOrHeavy {
+                    Spacer(minLength: 0)
+                    Text(strongMaxOrHeavy)
+                        .foregroundLinearGradient(colors: [strongColor, heavyColor])
+                        .font(doseFont)
+                    Spacer(minLength: 0)
+                }
+                if strongMaxOrHeavy != nil {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text("-")
+                            .font(doseFont)
+                        Text("heavy")
+                            .font(.footnote)
+                    }
+                    .foregroundColor(heavyColor)
+                    .font(doseFont)
+                    Spacer(minLength: 0)
+                }
+                if let units = roaDose?.units {
+                    Spacer(minLength: 0)
+                    Text(units)
+                        .font(doseFont)
+                    Spacer(minLength: 0)
+                }
+            }
         } else {
             EmptyView()
         }
