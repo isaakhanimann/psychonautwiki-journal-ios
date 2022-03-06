@@ -5,6 +5,8 @@ class CalendarWrapper: ObservableObject {
     private let store = EKEventStore()
     @Published var authorizationStatus = EKAuthorizationStatus.notDetermined
     @Published var psychonautWikiCalendar: EKCalendar?
+    @Published var isShowingActionSheet = false
+    @Published var isShowingAlert = false
 
     var isSetupComplete: Bool {
         authorizationStatus == .authorized && psychonautWikiCalendar != nil
@@ -31,7 +33,11 @@ class CalendarWrapper: ObservableObject {
             if granted {
                 DispatchQueue.main.async {
                     self.authorizationStatus = .authorized
-                    self.psychonautWikiCalendar = self.findPsychonautWikiCalendar()
+                    let calendar = self.findPsychonautWikiCalendar()
+                    self.psychonautWikiCalendar = calendar
+                    if calendar == nil {
+                        self.isShowingActionSheet.toggle()
+                    }
                 }
             }
         }
@@ -41,13 +47,21 @@ class CalendarWrapper: ObservableObject {
         store.sources
     }
 
-    func createPsychonautWikiCalendar(with source: EKSource) throws {
+    func showActionSheet() {
+        isShowingActionSheet.toggle()
+    }
+
+    func createPsychonautWikiCalendar(with source: EKSource) {
         let calendar = EKCalendar(for: .event, eventStore: store)
         calendar.title = "PsychonautWiki"
         calendar.cgColor = UIColor.blue.cgColor
         calendar.source = source
-        try store.saveCalendar(calendar, commit: true)
-        self.psychonautWikiCalendar = calendar
+        do {
+            try store.saveCalendar(calendar, commit: true)
+            self.psychonautWikiCalendar = calendar
+        } catch {
+            isShowingAlert.toggle()
+        }
     }
 
     func createOrUpdateEvent(from experience: Experience) {

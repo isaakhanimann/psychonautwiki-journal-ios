@@ -4,13 +4,11 @@ import EventKit
 struct CalendarSection: View {
 
     @EnvironmentObject var calendarWrapper: CalendarWrapper
-    @State private var isShowingActionSheet = false
-    @State private var isShowingAlert = false
     @ObservedObject var experience: Experience
 
     var body: some View {
         Section(
-            header: Text("Sync Experience to Your Calendar"),
+            header: Text("Sync to Your Calendar"),
             footer: footer
         ) {
             if calendarWrapper.authorizationStatus == .notDetermined {
@@ -27,24 +25,20 @@ struct CalendarSection: View {
                         Label("Sync Now", systemImage: "arrow.clockwise")
                     }
                 } else {
-                    Button(action: {
-                        isShowingActionSheet.toggle()
-                    }, label: {
-                        Text("Create PsychonautWiki Calendar")
-                    })
+                    Button("Create PsychonautWiki Calendar", action: calendarWrapper.showActionSheet)
                 }
             } else {
-                Text("Please Enable Calendar Access in your iPhone Settings")
+                Text("Enable Calendar Access in your iPhone Settings")
             }
         }
-        .actionSheet(isPresented: $isShowingActionSheet) {
+        .actionSheet(isPresented: $calendarWrapper.isShowingActionSheet) {
             ActionSheet(
                 title: Text("Select Account"),
                 message: Text("Select an account for creating the PsychonautWiki calendar. iCloud recommended"),
                 buttons: actionSheetButtons
             )
         }
-        .alert(isPresented: $isShowingAlert) {
+        .alert(isPresented: $calendarWrapper.isShowingAlert) {
             Alert(
                 title: Text("Failed to Create Calendar"),
                 message: Text("Do you have the Apple Calendar App installed?"),
@@ -65,11 +59,7 @@ struct CalendarSection: View {
         var buttons = [ActionSheet.Button]()
         for source in calendarWrapper.getSources() {
             let button = ActionSheet.Button.default(Text(source.title)) {
-                do {
-                    try calendarWrapper.createPsychonautWikiCalendar(with: source)
-                } catch {
-                    isShowingAlert.toggle()
-                }
+                calendarWrapper.createPsychonautWikiCalendar(with: source)
             }
             buttons.append(button)
         }
