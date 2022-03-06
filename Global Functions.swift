@@ -19,8 +19,8 @@ func getInitialData() -> Data {
 private func getDataForSubstances(from fileData: Data) throws -> Data {
     guard let json = try JSONSerialization.jsonObject(with: fileData, options: []) as? [String: Any],
           let fileObject = json["data"] else {
-        throw ConversionError.failedToConvertDataToJSON
-    }
+              throw ConversionError.failedToConvertDataToJSON
+          }
     return try JSONSerialization.data(withJSONObject: fileObject)
 }
 
@@ -39,6 +39,21 @@ func decodeSubstancesFile(
 enum RequestError: Error {
     case badURL
     case noData
+}
+
+func refreshSubstances(completion: @escaping () -> Void) {
+    performPsychonautWikiAPIRequest { result in
+        switch result {
+        case .failure(let error):
+            print(error.localizedDescription)
+            completion()
+        case .success(let data):
+            Task {
+                try? await PersistenceController.shared.decodeAndSaveFile(from: data)
+                completion()
+            }
+        }
+    }
 }
 
 func performPsychonautWikiAPIRequest(completion: @escaping (Result<Data, RequestError>) -> Void) {

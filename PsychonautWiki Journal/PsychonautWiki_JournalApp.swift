@@ -4,6 +4,7 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     // swiftlint:disable line_length
     @AppStorage(PersistenceController.hasInitialSubstancesOfCurrentVersion) var hasInitialSubstancesOfCurrentVersion: Bool = false
     @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
@@ -23,6 +24,7 @@ struct PsychonautWiki_JournalApp: App {
                 appHasBecomeActive()
             } else if phase == .background {
                 PersistenceController.shared.saveViewContext()
+                appDelegate.scheduleSubstancesRefresh()
             }
         }
     }

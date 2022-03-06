@@ -157,6 +157,7 @@
 		EACB6E5A27D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
 		EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
 		EACB6E5D27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
+		EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6427D4D86900940291 /* AppDelegate.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -388,6 +389,7 @@
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
 		EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
+		EACB6E6427D4D86900940291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -749,6 +751,7 @@
 				EAE4712A26CBA663009FB0EC /* SettingsTab */,
 				EA9AE85427CB72E600D4D468 /* App Icons */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
 				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
@@ -1335,6 +1338,7 @@
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
+				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,
 				EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */,
 				EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */,
 				EA12854B270447730085C3F6 /* AddFaceView.swift in Sources */,
