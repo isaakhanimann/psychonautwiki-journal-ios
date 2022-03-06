@@ -25,6 +25,7 @@ struct ExperiencesTab: View {
                         }
                     }
                 }
+                .listStyle(.insetGrouped)
                 if !viewModel.hasExperiences {
                     Button(action: {
                         withAnimation {
