@@ -69,7 +69,8 @@ struct SubstanceDecoder {
         "Cake",
         "Inhalants",
         "MAOI",
-        "Opioids"
+        "Opioids",
+        "Benzodiazepines"
     ].map({$0.lowercased()}))
 
     func getURL() -> URL? {

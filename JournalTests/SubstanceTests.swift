@@ -17,7 +17,7 @@ class SubstanceTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThanOrEqual(substances.count, 355)
+        XCTAssertGreaterThanOrEqual(substances.count, 354)
     }
 
     private func getAllSubstances() throws -> [Substance] {
@@ -54,6 +54,7 @@ class SubstanceTests: XCTestCase {
         XCTAssertTrue(names.contains("Methcathinone"))
     }
 
+    // swiftlint:disable function_body_length
     func testSubstancesWhichShouldBeFilteredOut() throws {
         let substances = try getAllSubstances()
         let subNames = Set(substances.map { $0.nameUnwrapped.lowercased() })
@@ -89,7 +90,8 @@ class SubstanceTests: XCTestCase {
             "Cake",
             "Inhalants",
             "MAOI",
-            "Opioids"
+            "Opioids",
+            "Benzodiazepines"
         ]
         namesThatShouldNotBeThere = namesThatShouldNotBeThere.map {$0.lowercased()}
         for subName in subNames {
@@ -245,5 +247,43 @@ class SubstanceTests: XCTestCase {
         XCTAssertTrue(uncertainSubstanceNames.contains("GBL"))
         let uncertainChemicalNames = Set(cocaine.uncertainChemicalsToShow.map { $0.name })
         XCTAssertTrue(uncertainChemicalNames.contains("Substituted Amphetamines"))
+    }
+
+    func testHeroin() throws {
+        let fetchRequest = Substance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", "Heroin")
+        let substances = try PersistenceController.preview.viewContext.fetch(fetchRequest)
+        XCTAssertEqual(substances.count, 1)
+        let heroin = substances.first!
+        XCTAssertEqual(heroin.psychoactivesUnwrapped.count, 1)
+        XCTAssertEqual(heroin.psychoactivesUnwrapped.first!.name, "Opioids")
+        XCTAssertEqual(heroin.firstPsychoactiveNameUnwrapped, "Opioids")
+        XCTAssertEqual(heroin.chemicalsUnwrapped.count, 1)
+        XCTAssertEqual(heroin.chemicalsUnwrapped.first!.name, "Substituted Morphinans")
+        XCTAssertEqual(heroin.firstChemicalNameUnwrapped, "Substituted Morphinans")
+        XCTAssertEqual(heroin.crossToleranceChemicalsUnwrapped.count, 0)
+        XCTAssertEqual(heroin.crossToleranceSubstancesUnwrapped.count, 0)
+        XCTAssertEqual(heroin.crossTolerancePsychoactivesUnwrapped.count, 1)
+        XCTAssertEqual(heroin.crossTolerancePsychoactivesUnwrapped.first!.name, "Opioids")
+        let dangerousChemicalNames = Set(heroin.dangerousChemicalsToShow.map { $0.name })
+        XCTAssertTrue(dangerousChemicalNames.contains("Alcohols"))
+        XCTAssertTrue(dangerousChemicalNames.contains("Benzodiazepines"))
+        let dangerousSubstanceNames = Set(heroin.dangerousSubstancesToShow.map { $0.name })
+        XCTAssertTrue(dangerousSubstanceNames.contains("Cocaine"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("Dextromethorphan"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("Ketamine"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("Methoxetamine"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("Tramadol"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("GHB"))
+        XCTAssertTrue(dangerousSubstanceNames.contains("GBL"))
+        let dangerousUnresolvedNames = Set(heroin.dangerousUnresolvedsToShow.map { $0.name })
+        XCTAssertTrue(dangerousUnresolvedNames.contains("Grapefruit"))
+        let uncertainSubstanceNames = Set(heroin.uncertainSubstancesToShow.map { $0.name })
+        XCTAssertTrue(uncertainSubstanceNames.contains("Nitrous"))
+        XCTAssertTrue(uncertainSubstanceNames.contains("PCP"))
+        let uncertainChemicalNames = Set(heroin.uncertainChemicalsToShow.map { $0.name })
+        XCTAssertTrue(uncertainChemicalNames.contains("Substituted Amphetamines"))
+        let uncertainUnresolvedNames = Set(heroin.uncertainUnresolvedsToShow.map { $0.name })
+        XCTAssertTrue(uncertainUnresolvedNames.contains("MAOI"))
     }
 }
