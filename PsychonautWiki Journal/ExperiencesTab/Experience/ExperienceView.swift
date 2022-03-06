@@ -27,10 +27,10 @@ struct ExperienceView: View {
                         .foregroundColor(.accentColor)
                 }
             }
-            if !experience.sortedIngestionsUnwrapped.isEmpty {
+            if !experience.sortedIngestionsToDraw.isEmpty {
                 Section(header: Text("Timeline")) {
                     HorizontalScaleView {
-                        IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsUnwrapped)
+                        IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsToDraw)
                     }
                     .frame(height: 310)
                 }

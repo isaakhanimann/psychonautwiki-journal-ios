@@ -61,12 +61,10 @@ extension Ingestion: Comparable {
     // values in between are interpolated linearly
     var horizontalWeight: Double {
         let defaultWeight = 0.5
-
         guard let doseTypesUnwrapped = substance?.getDose(for: administrationRouteUnwrapped) else {
             return defaultWeight
         }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
-
         if doseUnwrapped <= minMax.min {
             return 0
         } else if doseUnwrapped >= minMax.max {
@@ -90,5 +88,11 @@ extension Ingestion: Comparable {
             + peak
             + offset
         return timeUnwrapped.addingTimeInterval(totalDuration)
+    }
+
+    var canTimeLineBeDrawn: Bool {
+        guard let substanceUnwrap = substance else {return false}
+        guard let duration = substanceUnwrap.getDuration(for: administrationRouteUnwrapped) else {return false}
+        return duration.isFullTimeLineDefined
     }
 }

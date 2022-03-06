@@ -2,6 +2,13 @@ import Foundation
 
 extension DurationRange {
 
+    var isFullyDefined: Bool {
+        guard unitsUnwrapped != nil else {return false}
+        guard let minUnwrap = minUnwrapped else {return false}
+        guard let maxUnwrap = maxUnwrapped else {return false}
+        return minUnwrap <= maxUnwrap
+    }
+
     var unitsUnwrapped: Units? {
         Units(rawValue: units ?? "Unknown")
     }

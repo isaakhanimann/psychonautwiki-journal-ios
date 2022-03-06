@@ -36,6 +36,12 @@ extension Experience: Comparable {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
+    var sortedIngestionsToDraw: [Ingestion] {
+        sortedIngestionsUnwrapped.filter { ing in
+            ing.canTimeLineBeDrawn
+        }
+    }
+
     var ingestionColors: [Color] {
         var colors = [Color]()
         for ingestion in sortedIngestionsUnwrapped {
