@@ -158,6 +158,7 @@
 		EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
 		EACB6E5D27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
 		EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6427D4D86900940291 /* AppDelegate.swift */; };
+		EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -195,7 +196,6 @@
 		EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */; };
 		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
 		EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
-		EAE471F126CBA664009FB0EC /* View-NaviationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */; };
 		EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
@@ -390,6 +390,7 @@
 		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
 		EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
 		EACB6E6427D4D86900940291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperiencesTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -415,7 +416,6 @@
 		EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoaDuration-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
 		EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-CleanString.swift"; sourceTree = "<group>"; };
-		EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-NaviationViewStyle.swift"; sourceTree = "<group>"; };
 		EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color-StringColor.swift"; sourceTree = "<group>"; };
@@ -792,7 +792,6 @@
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */,
-				EAE4716D26CBA664009FB0EC /* View-NaviationViewStyle.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
 				EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
@@ -853,6 +852,7 @@
 			children = (
 				EAE4718826CBA664009FB0EC /* Experience */,
 				EAE471AA26CBA664009FB0EC /* ExperiencesTab.swift */,
+				EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
 			);
 			path = ExperiencesTab;
@@ -1281,7 +1281,6 @@
 				EAE4721826CBA664009FB0EC /* DataPoint.swift in Sources */,
 				EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */,
 				EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */,
-				EAE471F126CBA664009FB0EC /* View-NaviationViewStyle.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange+CoreDataClass.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* ExperiencesTab.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift in Sources */,
@@ -1335,6 +1334,7 @@
 				EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */,
 				EACB6E0827CE0FAB00940291 /* PsychoactiveView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
+				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,

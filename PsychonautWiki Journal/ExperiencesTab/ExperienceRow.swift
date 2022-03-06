@@ -4,7 +4,6 @@ import Combine
 struct ExperienceRow: View {
 
     @ObservedObject var experience: Experience
-    let timer: Publishers.Autoconnect<Timer.TimerPublisher>
     @Binding var selection: Experience?
 
     var body: some View {
@@ -56,12 +55,8 @@ struct ExperienceRow: View {
 struct ExperienceRow_Previews: PreviewProvider {
 
     static var previews: some View {
-        let helper = PreviewHelper.shared
-        let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
         ExperienceRow(
-            experience: helper.experiences.first!,
-            timer: timer,
+            experience: PreviewHelper.shared.experiences.first!,
             selection: .constant(nil)
         )
     }

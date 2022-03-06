@@ -3,9 +3,15 @@ import SwiftUI
 
 extension Experience: Comparable {
     public static func < (lhs: Experience, rhs: Experience) -> Bool {
-        let leftDateToSortBy = lhs.sortedIngestionsUnwrapped.first?.timeUnwrapped ?? lhs.creationDateUnwrapped
-        let rightDateToSortBy = rhs.sortedIngestionsUnwrapped.first?.timeUnwrapped ?? rhs.creationDateUnwrapped
-        return leftDateToSortBy > rightDateToSortBy
+        lhs.dateForSorting > rhs.dateForSorting
+    }
+
+    var dateForSorting: Date {
+        sortedIngestionsUnwrapped.first?.timeUnwrapped ?? creationDateUnwrapped
+    }
+
+    var year: Int {
+        Calendar.current.component(.year, from: dateForSorting)
     }
 
     var creationDateUnwrapped: Date {

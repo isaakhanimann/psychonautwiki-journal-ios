@@ -58,7 +58,6 @@ struct SettingsTab: View {
                 }
             }.navigationTitle("Settings")
         }
-        .currentDeviceNavigationViewStyle()
     }
 
     private var eye: some View {
