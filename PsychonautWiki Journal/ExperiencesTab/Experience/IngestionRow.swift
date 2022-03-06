@@ -19,20 +19,21 @@ struct IngestionRow: View {
                             Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
                                 .foregroundColor(.secondary)
                         }
-
                         Spacer()
-
-                        VStack(alignment: .trailing) {
-                            Text(ingestion.timeUnwrappedAsString)
-                                .foregroundColor(.primary)
-                            if ingestion.endTime > Date() {
-                                Text(ingestion.endTime, style: .relative)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
+                        Text(ingestion.timeUnwrappedAsString)
+                            .foregroundColor(.primary)
                     }
                 }
             }
         }
+    }
+}
+
+struct IngestionRow_Previews: PreviewProvider {
+    static var previews: some View {
+        List {
+            IngestionRow(ingestion: PreviewHelper.shared.experiences.first!.sortedIngestionsUnwrapped.first!)
+        }
+        .accentColor(Color.blue)
     }
 }
