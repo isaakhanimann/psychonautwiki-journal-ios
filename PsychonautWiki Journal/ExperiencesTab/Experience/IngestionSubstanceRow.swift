@@ -11,8 +11,6 @@ struct IngestionSubstanceRow: View {
             } label: {
                 VStack(alignment: .leading) {
                     Text(ingestion.substanceNameUnwrapped)
-                        .font(.title3)
-                        .foregroundColor(.primary)
                     if !ingestion.canTimeLineBeDrawn {
                         Text("Timeline not fully defined")
                             .font(.footnote)
@@ -24,8 +22,6 @@ struct IngestionSubstanceRow: View {
         } else {
             VStack(alignment: .leading) {
                 Text(ingestion.substanceNameUnwrapped)
-                    .font(.title3)
-                    .foregroundColor(.primary)
                 Text("No info on this substance")
                     .font(.footnote)
                     .foregroundColor(.secondary)

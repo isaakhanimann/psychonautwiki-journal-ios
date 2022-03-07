@@ -3,20 +3,12 @@ import SwiftUI
 struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
-    @State private var selectedTitle: String
-    @State private var isShowingAddIngestionSheet = false
-    @State private var writtenText: String
-
-    init(experience: Experience) {
-        self.experience = experience
-        _selectedTitle = State(wrappedValue: experience.titleUnwrapped)
-        _writtenText = State(wrappedValue: experience.textUnwrapped)
-    }
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         List {
             Section(header: Text("Title")) {
-                TextField("Title", text: $selectedTitle)
+                TextField("Title", text: $viewModel.selectedTitle)
             }
             Section(header: Text("Ingestions")) {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
@@ -43,17 +35,18 @@ struct ExperienceView: View {
                 }
             }
             Section(header: Text("Notes")) {
-                TextEditor(text: $writtenText)
+                TextEditor(text: $viewModel.writtenText)
             }
             CalendarSection(experience: experience)
         }
-        .navigationTitle(selectedTitle)
-        .onChange(of: selectedTitle) { _ in update() }
-        .onChange(of: writtenText) { _ in update() }
+        .task {
+            viewModel.initialize(experience: experience)
+        }
+        .navigationTitle(viewModel.selectedTitle)
         .onDisappear {
             PersistenceController.shared.saveViewContext()
         }
-        .sheet(isPresented: $isShowingAddIngestionSheet) {
+        .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
             ChooseSubstanceView(
                 dismiss: showOrHideAddIngestionSheet,
                 experience: experience
@@ -63,7 +56,7 @@ struct ExperienceView: View {
     }
 
     private func showOrHideAddIngestionSheet() {
-        isShowingAddIngestionSheet.toggle()
+        viewModel.isShowingAddIngestionSheet.toggle()
     }
 
     private func deleteIngestions(at offsets: IndexSet) {
@@ -72,12 +65,6 @@ struct ExperienceView: View {
             PersistenceController.shared.viewContext.delete(ingestion)
         }
         PersistenceController.shared.saveViewContext()
-    }
-
-    private func update() {
-        experience.objectWillChange.send()
-        experience.title = selectedTitle
-        experience.text = writtenText
     }
 }
 

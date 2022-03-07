@@ -3,10 +3,33 @@ import Foundation
 extension EditIngestionView {
     class ViewModel: ObservableObject {
         var ingestion: Ingestion?
-        @Published var selectedAdministrationRoute: Roa.AdministrationRoute = .oral
-        @Published var selectedDose: Double?
-        @Published var selectedColor: Ingestion.IngestionColor = .blue
-        @Published var selectedTime: Date = Date()
+        @Published var selectedAdministrationRoute: Roa.AdministrationRoute = .oral {
+            didSet {
+                ingestion?.administrationRoute = selectedAdministrationRoute.rawValue
+            }
+        }
+        @Published var selectedDose: Double? {
+            didSet {
+                if let doseDouble = selectedDose {
+                    ingestion?.dose = doseDouble
+                }
+            }
+        }
+        @Published var selectedColor: Ingestion.IngestionColor = .blue {
+            didSet {
+                ingestion?.color = selectedColor.rawValue
+            }
+        }
+        @Published var selectedTime = Date() {
+            didSet {
+                ingestion?.time = selectedTime
+            }
+        }
+        @Published var selectedName = "" {
+            didSet {
+                ingestion?.substanceName = selectedName
+            }
+        }
 
         var roaDose: RoaDose? {
             ingestion?.substance?.getDose(for: selectedAdministrationRoute)
@@ -14,15 +37,13 @@ extension EditIngestionView {
 
         init() {}
 
-        func updateAndSave() {
-            ingestion?.experience?.objectWillChange.send()
-            ingestion?.time = selectedTime
-            if let doseDouble = selectedDose {
-                ingestion?.dose = doseDouble
-            }
-            ingestion?.administrationRoute = selectedAdministrationRoute.rawValue
-            ingestion?.color = selectedColor.rawValue
-            PersistenceController.shared.saveViewContext()
+        func initialize(ingestion: Ingestion) {
+            self.ingestion = ingestion
+            self.selectedAdministrationRoute = ingestion.administrationRouteUnwrapped
+            self.selectedDose = ingestion.doseUnwrapped
+            self.selectedColor = ingestion.colorUnwrapped
+            self.selectedTime = ingestion.timeUnwrapped
+            self.selectedName = ingestion.substanceNameUnwrapped
         }
     }
 }

@@ -7,6 +7,10 @@ struct EditIngestionView: View {
 
     var body: some View {
         Form {
+            Section(header: Text("Substance")) {
+                TextField("Name", text: $viewModel.selectedName)
+                    .disableAutocorrection(true)
+            }
             if let administrationRoutesUnwrapped = ingestion.substance?.administrationRoutesUnwrapped,
                administrationRoutesUnwrapped.count > 1 {
                 Section(header: Text("Route of Administration")) {
@@ -32,7 +36,6 @@ struct EditIngestionView: View {
                 DatePicker("Time", selection: $viewModel.selectedTime, displayedComponents: [.date, .hourAndMinute])
                     .labelsHidden()
             }
-
             Section(header: Text("Color")) {
                 LazyVGrid(columns: colorColumns) {
                     ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
@@ -41,14 +44,12 @@ struct EditIngestionView: View {
             }
         }
         .task {
-            viewModel.ingestion = ingestion
-            viewModel.selectedAdministrationRoute = ingestion.administrationRouteUnwrapped
-            viewModel.selectedDose = ingestion.doseUnwrapped
-            viewModel.selectedColor = ingestion.colorUnwrapped
-            viewModel.selectedTime = ingestion.timeUnwrapped
+            viewModel.initialize(ingestion: ingestion)
         }
-        .navigationTitle(ingestion.substanceNameUnwrapped)
-        .onDisappear(perform: viewModel.updateAndSave)
+        .navigationTitle("Edit Ingestion")
+        .onDisappear {
+            PersistenceController.shared.saveViewContext()
+        }
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 Button("Done") {
