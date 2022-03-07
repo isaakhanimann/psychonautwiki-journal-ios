@@ -2,13 +2,18 @@ import SwiftUI
 
 struct AllTabs: View {
 
-    @State private var tabSelection = 0
+    @State private var tabSelection = TabSelection.experience
     @State private var tappedTwice: Bool = false
-    @State private var search = UUID()
-    @State private var experience = UUID()
+    @State private var experienceID = UUID()
+    @State private var searchID = UUID()
+    @State private var settingsID = UUID()
+
+    enum TabSelection {
+        case experience, search, settings
+    }
 
     var body: some View {
-        var handler: Binding<Int> {
+        var handler: Binding<TabSelection> {
             Binding {
                 self.tabSelection
             } set: {
@@ -20,35 +25,54 @@ struct AllTabs: View {
         }
         return TabView(selection: handler) {
             ExperiencesTab()
-                .id(experience)
+                .id(experienceID)
+                .tag(TabSelection.experience)
                 .tabItem {
                     Image(systemName: "books.vertical")
                     Text("Your Experiences")
                 }
-                .tag(0)
             SearchTab()
-                .id(search)
+                .id(searchID)
+                .tag(TabSelection.search)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
-                .tag(1)
             SettingsTab()
+                .id(settingsID)
+                .tag(TabSelection.settings)
                 .tabItem {
                     Image(systemName: "gearshape")
                     Text("Settings")
                 }
-                .tag(2)
         }
-        .onChange(of: tappedTwice, perform: { newValue in
-            guard newValue else {return}
-            if tabSelection == 0 {
-                experience = UUID()
-            } else if tabSelection == 1 {
-                search = UUID()
+        .onChange(
+            of: tappedTwice,
+            perform: { newValue in
+                guard newValue else {return}
+                switch tabSelection {
+                case .experience:
+                    reloadExperienceTab()
+                case .search:
+                    reloadSearchTab()
+                case .settings:
+                    reloadSettingsTab()
+                }
+                tappedTwice = false
             }
-            tappedTwice = false
-        })
+        )
+    }
+
+    private func reloadExperienceTab() {
+        experienceID = UUID()
+    }
+
+    private func reloadSearchTab() {
+        searchID = UUID()
+    }
+
+    private func reloadSettingsTab() {
+        settingsID = UUID()
     }
 }
 
