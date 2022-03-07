@@ -22,7 +22,7 @@ struct ExperienceRow: View {
                             center: .center
                         )
                     )
-                    .frame(width: 30, height: 30)
+                    .frame(width: 35, height: 35)
                 Spacer()
                     .frame(width: 10)
                 VStack(alignment: .leading) {

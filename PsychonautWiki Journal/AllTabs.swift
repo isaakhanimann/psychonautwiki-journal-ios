@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AllTabs: View {
 
-    @State private var tabSelection = 1
+    @State private var tabSelection = 0
     @State private var tappedTwice: Bool = false
     @State private var search = UUID()
     @State private var experience = UUID()
