@@ -33,7 +33,7 @@ struct ExperienceRow: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
+                Text(experience.dateForSorting, format: Date.FormatStyle().day().month())
                     .font(.footnote)
                     .foregroundColor(.secondary)
             }

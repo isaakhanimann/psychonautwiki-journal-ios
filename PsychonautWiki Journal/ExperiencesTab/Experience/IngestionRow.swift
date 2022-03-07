@@ -18,7 +18,7 @@ struct IngestionRow: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Text(ingestion.timeUnwrappedAsString)
+                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute())
                     .foregroundColor(.primary)
             }
         }
