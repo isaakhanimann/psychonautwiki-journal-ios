@@ -2,35 +2,21 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    @StateObject var viewModel = SearchTab.ViewModel()
+    @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
+    @StateObject var recentsViewModel = RecentSubstancesViewModel()
     let dismiss: () -> Void
     let experience: Experience
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.sections) { sec in
-                    Section(sec.sectionName) {
-                        ForEach(sec.substances) { sub in
-                            SubstanceRow(substance: sub, dismiss: dismiss, experience: experience)
-                        }
-                    }
-                }
-                if isEyeOpen {
-                    Section {
-                        EmptyView()
-                    } footer: {
-                        Text(Constants.substancesDisclaimerIOS)
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                    }
-                }
+            SearchList(sectionedViewModel: sectionedViewModel,
+                       recentsViewModel: recentsViewModel
+            ) { sub in
+                SubstanceRow(substance: sub, dismiss: dismiss, experience: experience)
             }
-            .listStyle(.plain)
             .navigationBarTitle("Add Ingestion")
         }
-        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .searchable(text: $sectionedViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
         .disableAutocorrection(true)
     }
 }

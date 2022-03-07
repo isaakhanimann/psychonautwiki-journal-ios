@@ -26,15 +26,6 @@ struct ChooseSubstanceView: View {
                         }
                     }
                 }
-                if isEyeOpen {
-                    Section {
-                        EmptyView()
-                    } footer: {
-                        Text(Constants.substancesDisclaimerWatch)
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                    }
-                }
             }
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.cancellationAction) {

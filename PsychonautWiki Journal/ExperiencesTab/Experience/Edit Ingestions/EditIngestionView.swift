@@ -14,7 +14,7 @@ struct EditIngestionView: View {
             routeSection
             Section(
                 header: Text("\(viewModel.selectedAdministrationRoute.rawValue) Dose"),
-                footer: Text(Constants.doseDisclaimer)
+                footer: Text(ChooseDoseView.doseDisclaimer)
             ) {
                 DoseView(roaDose: viewModel.roaDose)
                 DosePicker(

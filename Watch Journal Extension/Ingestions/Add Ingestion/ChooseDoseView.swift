@@ -32,10 +32,6 @@ struct ChooseDoseView: View {
                     )
                     .buttonStyle(BorderedButtonStyle(tint: .accentColor))
                 }
-
-                Text(Constants.doseDisclaimer)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
             }
         }
         .navigationBarTitle("Choose Dose")

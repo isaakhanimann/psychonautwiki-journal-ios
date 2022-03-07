@@ -10,10 +10,13 @@ struct ChooseDoseView: View {
     @State private var selectedDose: Double?
     @State private var isKeyboardShowing = false
 
+    // swiftlint:disable line_length
+    static let doseDisclaimer = "Dosage information is gathered from users and resources such as clinical studies. It is not a recommendation and should be verified with other sources for accuracy."
+
     var body: some View {
         ZStack(alignment: .bottom) {
             Form {
-                Section(footer: Text(Constants.doseDisclaimer)
+                Section(footer: Text(Self.doseDisclaimer)
                 ) {
                     DosePicker(
                         roaDose: substance.getDose(for: administrationRoute),
