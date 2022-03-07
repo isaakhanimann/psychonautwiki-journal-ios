@@ -2,7 +2,7 @@ import SwiftUI
 
 struct IngestionSubstanceRow: View {
 
-    let ingestion: Ingestion
+    @ObservedObject var ingestion: Ingestion
 
     var body: some View {
         if let sub = ingestion.substance {
