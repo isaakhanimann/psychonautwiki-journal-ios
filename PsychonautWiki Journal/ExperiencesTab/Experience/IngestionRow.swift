@@ -12,7 +12,7 @@ struct IngestionRow: View {
                     .foregroundColor(ingestion.swiftUIColorUnwrapped)
                 VStack(alignment: .leading) {
                     Text(ingestion.substanceNameUnwrapped)
-                        .font(.title3)
+                        .font(.headline)
                         .foregroundColor(.primary)
                     Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
                         .foregroundColor(.secondary)

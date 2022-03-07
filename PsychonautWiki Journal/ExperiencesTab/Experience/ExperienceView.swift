@@ -53,6 +53,13 @@ struct ExperienceView: View {
             )
                 .accentColor(Color.blue)
         }
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                if !experience.sortedIngestionsUnwrapped.isEmpty {
+                    EditButton()
+                }
+            }
+        }
     }
 
     private func showOrHideAddIngestionSheet() {
