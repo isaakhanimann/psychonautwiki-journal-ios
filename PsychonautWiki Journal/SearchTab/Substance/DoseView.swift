@@ -40,11 +40,11 @@ struct DoseView: View {
             return .body
         }
     }
-    private let threshColor = Color.blue
-    private let lightColor = Color.green
-    private let commonColor = Color.yellow
-    private let strongColor = Color.orange
-    private let heavyColor = Color.red
+    static let threshColor = Color.blue
+    static let lightColor = Color.green
+    static let commonColor = Color.yellow
+    static let strongColor = Color.orange
+    static let heavyColor = Color.red
 
     var body: some View {
         let showDoseView = threshOrLightMin != nil
@@ -57,10 +57,10 @@ struct DoseView: View {
                     Spacer(minLength: 0)
                     VStack {
                         Text(threshOrLightMin)
-                            .foregroundLinearGradient(colors: [threshColor, lightColor])
+                            .foregroundLinearGradient(colors: [Self.threshColor, Self.lightColor])
                             .font(doseFont)
                         Text("thresh ")
-                            .foregroundColor(threshColor)
+                            .foregroundColor(Self.threshColor)
                             .font(.footnote)
                     }
                     Spacer(minLength: 0)
@@ -73,13 +73,13 @@ struct DoseView: View {
                         Text("light")
                             .font(.footnote)
                     }
-                    .foregroundColor(lightColor)
+                    .foregroundColor(Self.lightColor)
                     Spacer(minLength: 0)
                 }
                 if let lightMaxOrCommonMin = lightMaxOrCommonMin {
                     Spacer(minLength: 0)
                     Text(lightMaxOrCommonMin)
-                        .foregroundLinearGradient(colors: [lightColor, commonColor])
+                        .foregroundLinearGradient(colors: [Self.lightColor, Self.commonColor])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
@@ -91,13 +91,13 @@ struct DoseView: View {
                         Text("common")
                             .font(.footnote)
                     }
-                    .foregroundColor(commonColor)
+                    .foregroundColor(Self.commonColor)
                     Spacer(minLength: 0)
                 }
                 if let commonMaxOrStrongMin = commonMaxOrStrongMin {
                     Spacer(minLength: 0)
                     Text(commonMaxOrStrongMin)
-                        .foregroundLinearGradient(colors: [commonColor, strongColor])
+                        .foregroundLinearGradient(colors: [Self.commonColor, Self.strongColor])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
@@ -109,13 +109,13 @@ struct DoseView: View {
                         Text("strong")
                             .font(.footnote)
                     }
-                    .foregroundColor(strongColor)
+                    .foregroundColor(Self.strongColor)
                     Spacer(minLength: 0)
                 }
                 if let strongMaxOrHeavy = strongMaxOrHeavy {
                     Spacer(minLength: 0)
                     Text(strongMaxOrHeavy)
-                        .foregroundLinearGradient(colors: [strongColor, heavyColor])
+                        .foregroundLinearGradient(colors: [Self.strongColor, Self.heavyColor])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
@@ -127,7 +127,7 @@ struct DoseView: View {
                         Text("heavy")
                             .font(.footnote)
                     }
-                    .foregroundColor(heavyColor)
+                    .foregroundColor(Self.heavyColor)
                     .font(doseFont)
                     Spacer(minLength: 0)
                 }

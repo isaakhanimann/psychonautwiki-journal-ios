@@ -8,7 +8,7 @@ extension EditIngestionView {
         @Published var selectedColor: Ingestion.IngestionColor = .blue
         @Published var selectedTime: Date = Date()
 
-        var doseInfo: RoaDose? {
+        var roaDose: RoaDose? {
             ingestion?.substance?.getDose(for: selectedAdministrationRoute)
         }
 

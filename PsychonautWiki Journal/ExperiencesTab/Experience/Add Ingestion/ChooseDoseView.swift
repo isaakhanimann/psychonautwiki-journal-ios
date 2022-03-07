@@ -16,7 +16,7 @@ struct ChooseDoseView: View {
                 Section(footer: Text(Constants.doseDisclaimer)
                 ) {
                     DosePicker(
-                        doseInfo: substance.getDose(for: administrationRoute),
+                        roaDose: substance.getDose(for: administrationRoute),
                         doseMaybe: $selectedDose
                     )
                 }

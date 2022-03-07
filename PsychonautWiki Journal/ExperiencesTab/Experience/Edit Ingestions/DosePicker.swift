@@ -2,23 +2,17 @@ import SwiftUI
 
 struct DosePicker: View {
 
-    let doseInfo: RoaDose?
+    let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
     @State private var doseText = ""
     @State private var dose: Double = 0
 
     var body: some View {
         VStack(alignment: .leading) {
-            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.light?.minUnwrapped,
-               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strong?.maxUnwrapped,
-               min < max {
-                dynamicDoseRangeView
-            } else {
-                stackedDoseRangeView
-            }
+            dynamicDoseRangeView
             doseTextFieldWithUnit
-            if let min = doseInfo?.thresholdUnwrapped ?? doseInfo?.light?.minUnwrapped,
-               let max = doseInfo?.heavyUnwrapped ?? doseInfo?.strong?.maxUnwrapped,
+            if let min = roaDose?.thresholdUnwrapped ?? roaDose?.light?.minUnwrapped,
+               let max = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
                min < max {
                 getDoseSlider(min: min, max: max)
             }
@@ -29,11 +23,10 @@ struct DosePicker: View {
                 dose = doseUnwrapped
             }
         }
-        .padding(.vertical)
     }
 
     private func getDoseSlider(min: Double, max: Double) -> some View {
-        let units = doseInfo?.units ?? ""
+        let units = roaDose?.units ?? ""
         let difference = max - min
         let stepCandidates = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500]
         let approximateStepSize = difference/20
@@ -45,7 +38,8 @@ struct DosePicker: View {
             in: sliderMin...sliderMax,
             step: closestStep,
             minimumValueLabel: Text("\(min.cleanString) \(units)"),
-            maximumValueLabel: Text("\(max.cleanString) \(units)")) {
+            maximumValueLabel: Text("\(max.cleanString) \(units)")
+        ) {
             Text("Dose")
         }
         .onChange(of: dose) { _ in
@@ -55,12 +49,59 @@ struct DosePicker: View {
         }
     }
 
+    private enum RangeType {
+        case thresh, light, common, strong, heavy
+    }
+
+    private var currentRange: RangeType? {
+        if let thresh = roaDose?.thresholdUnwrapped,
+           thresh >= dose {
+            return .thresh
+        } else if let lightMin = roaDose?.light?.minUnwrapped,
+                  let lightMax = roaDose?.light?.maxUnwrapped,
+                  dose >= lightMin && dose <= lightMax {
+            return .light
+        } else if let commonMin = roaDose?.common?.minUnwrapped,
+                  let commonMax = roaDose?.common?.maxUnwrapped,
+                  dose >= commonMin && dose <= commonMax {
+            return .common
+        } else if let strongMin = roaDose?.strong?.minUnwrapped,
+                  let strongMax = roaDose?.strong?.maxUnwrapped,
+                  dose >= strongMin && dose <= strongMax {
+            return .strong
+        } else if let heavyOrStrongMax = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
+                  dose >= heavyOrStrongMax {
+            return .heavy
+        } else {
+            return nil
+        }
+    }
+
+    var doseColor: Color {
+        guard let currentRange = currentRange else {
+            return .primary
+        }
+        switch currentRange {
+        case .thresh:
+            return DoseView.threshColor
+        case .light:
+            return DoseView.lightColor
+        case .common:
+            return DoseView.commonColor
+        case .strong:
+            return DoseView.strongColor
+        case .heavy:
+            return DoseView.heavyColor
+        }
+    }
+
     private var doseTextFieldWithUnit: some View {
         HStack {
             TextField("Enter Dose", text: $doseText)
                 .keyboardType(.decimalPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            Text(doseInfo?.units ?? "")
+                .foregroundColor(doseColor)
+            Text(roaDose?.units ?? "")
         }
         .font(.title)
         .onChange(of: doseText) { _ in
@@ -73,50 +114,31 @@ struct DosePicker: View {
         }
     }
 
-    private var stackedDoseRangeView: some View {
-        let units = doseInfo?.units ?? ""
-        return VStack(alignment: .leading, spacing: 7) {
-            if let thresh = doseInfo?.thresholdUnwrapped {
-                Text("threshold (\(thresh.cleanString) \(units))")
-            }
-            if let lightMin = doseInfo?.light?.minUnwrapped,
-               let lightMax = doseInfo?.light?.maxUnwrapped {
-                Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-            }
-            if let commonMin = doseInfo?.common?.minUnwrapped,
-               let commonMax = doseInfo?.common?.maxUnwrapped {
-                Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-            }
-            if let strongMin = doseInfo?.strong?.minUnwrapped,
-               let strongMax = doseInfo?.strong?.maxUnwrapped {
-                Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-            }
-            if let heavy = doseInfo?.heavyUnwrapped {
-                Text("heavy (\(heavy.cleanString) \(units)+)")
-            }
-        }
-    }
-
     private var dynamicDoseRangeView: some View {
-        let units = doseInfo?.units ?? ""
-        if let thresh = doseInfo?.thresholdUnwrapped,
+        let units = roaDose?.units ?? ""
+        if let thresh = roaDose?.thresholdUnwrapped,
            thresh >= dose {
             return Text("threshold (\(thresh.cleanString) \(units))")
-        } else if let lightMin = doseInfo?.light?.minUnwrapped,
-                  let lightMax = doseInfo?.light?.maxUnwrapped,
+                .foregroundColor(DoseView.threshColor)
+        } else if let lightMin = roaDose?.light?.minUnwrapped,
+                  let lightMax = roaDose?.light?.maxUnwrapped,
                   dose >= lightMin && dose <= lightMax {
             return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-        } else if let commonMin = doseInfo?.common?.minUnwrapped,
-                  let commonMax = doseInfo?.common?.maxUnwrapped,
+                .foregroundColor(DoseView.lightColor)
+        } else if let commonMin = roaDose?.common?.minUnwrapped,
+                  let commonMax = roaDose?.common?.maxUnwrapped,
                   dose >= commonMin && dose <= commonMax {
             return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-        } else if let strongMin = doseInfo?.strong?.minUnwrapped,
-                  let strongMax = doseInfo?.strong?.maxUnwrapped,
+                .foregroundColor(DoseView.commonColor)
+        } else if let strongMin = roaDose?.strong?.minUnwrapped,
+                  let strongMax = roaDose?.strong?.maxUnwrapped,
                   dose >= strongMin && dose <= strongMax {
             return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-        } else if let heavy = doseInfo?.heavyUnwrapped,
-                  dose >= heavy {
-            return Text("heavy (\(heavy.cleanString) \(units)+)")
+                .foregroundColor(DoseView.strongColor)
+        } else if let heavyOrStrongMax = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
+                  dose >= heavyOrStrongMax {
+            return Text("heavy (\(heavyOrStrongMax.cleanString) \(units)+)")
+                .foregroundColor(DoseView.heavyColor)
         } else {
             return Text(" ")
         }
@@ -129,7 +151,7 @@ struct DosePicker_Previews: PreviewProvider {
 
         Form {
             DosePicker(
-                doseInfo: substance.getDose(
+                roaDose: substance.getDose(
                     for: substance.administrationRoutesUnwrapped.first!),
                 doseMaybe: .constant(nil)
             )

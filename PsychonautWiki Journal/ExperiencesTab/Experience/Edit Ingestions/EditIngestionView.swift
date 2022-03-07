@@ -21,11 +21,13 @@ struct EditIngestionView: View {
                 header: Text("Dose"),
                 footer: Text(Constants.doseDisclaimer)
             ) {
+                DoseView(roaDose: viewModel.roaDose)
                 DosePicker(
-                    doseInfo: viewModel.doseInfo,
+                    roaDose: viewModel.roaDose,
                     doseMaybe: $viewModel.selectedDose
                 )
             }
+            .listRowSeparator(.hidden)
             Section(header: Text("Time")) {
                 DatePicker("Time", selection: $viewModel.selectedTime, displayedComponents: [.date, .hourAndMinute])
                     .labelsHidden()
