@@ -47,12 +47,12 @@ extension Ingestion: Comparable {
         Color.from(ingestionColor: colorUnwrapped)
     }
 
+    var unitsUnwrapped: String {
+        units ?? ""
+    }
+
     var doseInfoString: String {
-        let info = doseUnwrapped.cleanString
-        let unitsUnwrapped = substance?.getDose(
-            for: administrationRouteUnwrapped
-        )?.units ?? ""
-        return info.appending(" \(unitsUnwrapped)")
+        return doseUnwrapped.cleanString + " " + unitsUnwrapped
     }
 
     // Get value between 0 and 1

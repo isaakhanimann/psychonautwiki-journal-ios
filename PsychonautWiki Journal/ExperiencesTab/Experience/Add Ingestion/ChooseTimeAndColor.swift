@@ -55,21 +55,18 @@ struct ChooseTimeAndColor: View {
     }
 
     private func addIngestion() {
-
         moc.performAndWait {
             let ingestion = Ingestion(context: moc)
             ingestion.experience = experience
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
             ingestion.dose = dose
+            ingestion.units = substance.getDose(for: administrationRoute)?.units
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substance.nameUnwrapped
             ingestion.color = selectedColor.rawValue
             try? moc.save()
         }
-
-        let defaults = UserDefaults.standard
-        defaults.setValue(selectedColor.rawValue, forKey: substance.nameUnwrapped)
         dismiss()
     }
     let colorColumns = [

@@ -32,10 +32,10 @@ struct ChooseColor: View {
             ingestion.experience = experience
             ingestion.time = ingestionTime
             ingestion.dose = dose
+            ingestion.units = substance.getDose(for: administrationRoute)?.units
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substance.nameUnwrapped
             ingestion.color = color.rawValue
-
             try? moc.save()
         }
 

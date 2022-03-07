@@ -11,18 +11,9 @@ struct EditIngestionView: View {
                 TextField("Name", text: $viewModel.selectedName)
                     .disableAutocorrection(true)
             }
-            if let administrationRoutesUnwrapped = ingestion.substance?.administrationRoutesUnwrapped,
-               administrationRoutesUnwrapped.count > 1 {
-                Section(header: Text("Route of Administration")) {
-                    Picker("Route", selection: $viewModel.selectedAdministrationRoute) {
-                        ForEach(administrationRoutesUnwrapped, id: \.self) { route in
-                            Text(route.displayString).tag(route)
-                        }
-                    }
-                }
-            }
+            routeSection
             Section(
-                header: Text("Dose"),
+                header: Text("\(viewModel.selectedAdministrationRoute.rawValue) Dose"),
                 footer: Text(Constants.doseDisclaimer)
             ) {
                 DoseView(roaDose: viewModel.roaDose)
@@ -54,6 +45,26 @@ struct EditIngestionView: View {
             ToolbarItem(placement: .keyboard) {
                 Button("Done") {
                     hideKeyboard()
+                }
+            }
+        }
+    }
+
+    private var routeSection: some View {
+        Section(header: Text("Route of Administration")) {
+            Picker("Route", selection: $viewModel.selectedAdministrationRoute) {
+                let administrationRoutesUnwrapped = ingestion.substance?.administrationRoutesUnwrapped ?? []
+                ForEach(administrationRoutesUnwrapped, id: \.self) { route in
+                    Text(route.rawValue)
+                        .tag(route)
+                }
+                let otherRoutes = Roa.AdministrationRoute.allCases.filter { route in
+                    !administrationRoutesUnwrapped.contains(route)
+                }
+                ForEach(otherRoutes, id: \.self) { route in
+                    Text(route.rawValue)
+                        .foregroundColor(.secondary)
+                        .tag(route)
                 }
             }
         }
