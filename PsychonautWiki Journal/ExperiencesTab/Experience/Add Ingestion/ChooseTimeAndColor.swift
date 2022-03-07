@@ -25,15 +25,7 @@ struct ChooseTimeAndColor: View {
         self.dose = dose
         self.dismiss = dismiss
         self.experience = experience
-
         self._selectedColor = State(wrappedValue: Ingestion.IngestionColor.allCases.randomElement()!)
-        let defaults = UserDefaults.standard
-        let savedObject = defaults.object(forKey: substance.nameUnwrapped)
-        if let savedColorString = savedObject as? String {
-            if let savedColor = Ingestion.IngestionColor(rawValue: savedColorString) {
-                self._selectedColor = State(wrappedValue: savedColor)
-            }
-        }
     }
 
     var body: some View {

@@ -157,6 +157,7 @@
 		EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6427D4D86900940291 /* AppDelegate.swift */; };
 		EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */; };
 		EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */; };
+		EACB6E7127D5EB1E00940291 /* EditIngestion-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7027D5EB1E00940291 /* EditIngestion-ViewModel.swift */; };
 		EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */; };
 		EADE46552709D2E700F1058E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EADE46562709D2F600F1058E /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719026CBA664009FB0EC /* HelperMethods.swift */; };
@@ -387,6 +388,7 @@
 		EACB6E6427D4D86900940291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperiencesTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionSubstanceRow.swift; sourceTree = "<group>"; };
+		EACB6E7027D5EB1E00940291 /* EditIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
 		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -900,6 +902,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A226CBA664009FB0EC /* EditIngestionView.swift */,
+				EACB6E7027D5EB1E00940291 /* EditIngestion-ViewModel.swift */,
 				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
 			);
 			path = "Edit Ingestions";
@@ -1303,6 +1306,7 @@
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
+				EACB6E7127D5EB1E00940291 /* EditIngestion-ViewModel.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EACB6E1527CE2F2100940291 /* ArticleToolbarItem.swift in Sources */,
 				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
