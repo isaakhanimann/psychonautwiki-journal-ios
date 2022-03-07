@@ -27,12 +27,14 @@ struct ExperienceRow: View {
                     .frame(width: 10)
                 VStack(alignment: .leading) {
                     Text(experience.titleUnwrapped)
-                        .font(.title2)
+                        .font(.headline)
                     Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
+                        .font(.footnote)
                         .foregroundColor(.secondary)
                 }
                 Spacer()
                 Text(experience.timeOfFirstIngestion?.asDateNumberString ?? "")
+                    .font(.footnote)
                     .foregroundColor(.secondary)
             }
         }
@@ -55,9 +57,11 @@ struct ExperienceRow: View {
 struct ExperienceRow_Previews: PreviewProvider {
 
     static var previews: some View {
-        ExperienceRow(
-            experience: PreviewHelper.shared.experiences.first!,
-            selection: .constant(nil)
-        )
+        List {
+            ExperienceRow(
+                experience: PreviewHelper.shared.experiences.first!,
+                selection: .constant(nil)
+            )
+        }
     }
 }
