@@ -6,7 +6,7 @@ class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
     private var ingestions: [Ingestion] = []
     private let recentIngestionFetchController: NSFetchedResultsController<Ingestion>?
 
-    init(isPreview: Bool = false) {
+    init(isPreview: Bool) {
         self.recentSubstances = Array(PreviewHelper.shared.allSubstances.prefix(upTo: 10))
         self.recentIngestionFetchController = nil
     }

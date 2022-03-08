@@ -31,7 +31,7 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
     private var substances: [Substance] = []
     private let substanceFetchController: NSFetchedResultsController<Substance>?
 
-    init(isPreview: Bool = false) {
+    init(isPreview: Bool) {
         substances = PreviewHelper.shared.allSubstances
         groupBy = .psychoactive
         sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: .psychoactive)

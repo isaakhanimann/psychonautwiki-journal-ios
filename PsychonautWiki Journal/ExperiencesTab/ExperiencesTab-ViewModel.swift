@@ -22,7 +22,7 @@ extension ExperiencesTab {
         private var experiences: [Experience] = []
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 
-        init(isPreview: Bool = false) {
+        init(isPreview: Bool) {
             let exps = PreviewHelper.shared.experiences
             self.experiences = exps
             self.hasExperiences = !exps.isEmpty
