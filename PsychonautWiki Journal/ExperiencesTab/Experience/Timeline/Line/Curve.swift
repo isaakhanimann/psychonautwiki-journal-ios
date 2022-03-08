@@ -7,12 +7,15 @@ struct Curve {
 
     init(startPoint: DataPoint, endPoint: DataPoint) {
         self.endPoint = endPoint
-        let middleX = (startPoint.xValue + endPoint.xValue) / 2
+        let xDiff = endPoint.xValue - startPoint.xValue
+        let ratio = 0.17
         self.controlPoint0 = DataPoint(
-            xValue: middleX,
-            yValue: startPoint.yValue)
+            xValue: startPoint.xValue + ratio*xDiff,
+            yValue: startPoint.yValue
+        )
         self.controlPoint1 = DataPoint(
-            xValue: middleX,
-            yValue: endPoint.yValue)
+            xValue: endPoint.xValue - ratio*xDiff,
+            yValue: endPoint.yValue
+        )
     }
 }

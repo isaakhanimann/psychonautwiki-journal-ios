@@ -2,10 +2,10 @@ import SwiftUI
 
 // (0,0) = bottom/left, (1,1) = top/right
 struct DataPoint {
-    let xValue: CGFloat
-    let yValue: CGFloat
+    let xValue: Double
+    let yValue: Double
 
-    init(xValue: CGFloat, yValue: CGFloat) {
+    init(xValue: Double, yValue: Double) {
         assert(xValue >= 0 && xValue <= 1)
         assert(yValue >= 0 && yValue <= 1)
         self.xValue = xValue
