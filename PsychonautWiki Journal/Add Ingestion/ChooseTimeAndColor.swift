@@ -6,33 +6,14 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: Roa.AdministrationRoute
     let dose: Double
     let dismiss: () -> Void
-    let experience: Experience
-
-    @Environment(\.managedObjectContext) var moc
-
-    @State private var selectedTime = Date()
-    @State private var selectedColor: Ingestion.IngestionColor
-
-    init(
-        substance: Substance,
-        administrationRoute: Roa.AdministrationRoute,
-        dose: Double,
-        dismiss: @escaping () -> Void,
-        experience: Experience
-    ) {
-        self.substance = substance
-        self.administrationRoute = administrationRoute
-        self.dose = dose
-        self.dismiss = dismiss
-        self.experience = experience
-        self._selectedColor = State(wrappedValue: Ingestion.IngestionColor.allCases.randomElement()!)
-    }
+    let experience: Experience?
+    @StateObject var viewModel = ViewModel()
 
     var body: some View {
         VStack {
             Form {
                 Section(header: Text("Time")) {
-                    DatePicker("Time", selection: $selectedTime, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Time", selection: $viewModel.selectedTime, displayedComponents: [.date, .hourAndMinute])
                         .labelsHidden()
                 }
                 Section(header: Text("Color")) {
@@ -42,9 +23,35 @@ struct ChooseTimeAndColor: View {
                     .padding(.vertical)
                 }
             }
-            Button("Add Ingestion", action: addIngestion)
+            if let experienceUnwrap = experience {
+                Button("Add Ingestion") {
+                    viewModel.addIngestionSaveAndDismiss(to: experienceUnwrap)
+                }
                 .buttonStyle(PrimaryButtonStyle())
                 .padding()
+            } else {
+                if let lastExperienceUnwrap = viewModel.lastExperience {
+                    Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
+                        viewModel.addIngestionSaveAndDismiss(to: lastExperienceUnwrap)
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+                    .padding()
+                }
+                Button("Add to new experience") {
+                    viewModel.addIngestionToNewExperienceSaveAndDismiss()
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                .padding()
+            }
+        }
+        .task {
+            viewModel.initialize(
+                substance: substance,
+                administrationRoute: administrationRoute,
+                dose: dose,
+                dismiss: dismiss,
+                experience: experience
+            )
         }
         .navigationBarTitle("Choose Time")
         .toolbar {
@@ -54,21 +61,6 @@ struct ChooseTimeAndColor: View {
         }
     }
 
-    private func addIngestion() {
-        moc.performAndWait {
-            let ingestion = Ingestion(context: moc)
-            ingestion.experience = experience
-            ingestion.identifier = UUID()
-            ingestion.time = selectedTime
-            ingestion.dose = dose
-            ingestion.units = substance.getDose(for: administrationRoute)?.units
-            ingestion.administrationRoute = administrationRoute.rawValue
-            ingestion.substanceName = substance.nameUnwrapped
-            ingestion.color = selectedColor.rawValue
-            try? moc.save()
-        }
-        dismiss()
-    }
     let colorColumns = [
         GridItem(.adaptive(minimum: 44))
     ]
@@ -79,20 +71,20 @@ struct ChooseTimeAndColor: View {
                 .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(6)
 
-            if color == selectedColor {
+            if color == viewModel.selectedColor {
                 Image(systemName: "checkmark.circle")
                     .foregroundColor(.white)
                     .font(.largeTitle)
             }
         }
         .onTapGesture {
-            selectedColor = color
+            viewModel.selectedColor = color
         }
         .accessibilityElement(children: .ignore)
         .accessibilityAddTraits(
-            color == selectedColor
-                ? [.isButton, .isSelected]
-                : .isButton
+            color == viewModel.selectedColor
+            ? [.isButton, .isSelected]
+            : .isButton
         )
         .accessibilityLabel(LocalizedStringKey(color.rawValue))
     }

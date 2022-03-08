@@ -18,11 +18,7 @@ struct ChooseSubstanceView: View {
                 ForEach(storedFile.first?.psychoactiveClassesUnwrapped ?? []) { pClass in
                     Section(header: Text(pClass.nameUnwrapped)) {
                         ForEach(pClass.substancesUnwrapped) { substance in
-                            SubstanceRow(
-                                substance: substance,
-                                dismiss: dismiss,
-                                experience: experience
-                            )
+                            Text(substance.nameUnwrapped)
                         }
                     }
                 }

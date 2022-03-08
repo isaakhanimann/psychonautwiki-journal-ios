@@ -130,6 +130,22 @@ extension Substance: Comparable {
         }
         return dose
     }
+
+    var hasAnyInteractions: Bool {
+        guard uncertainSubstancesUnwrapped.isEmpty else {return true}
+        guard uncertainPsychoactivesUnwrapped.isEmpty else {return true}
+        guard uncertainChemicalsUnwrapped.isEmpty else {return true}
+        guard uncertainUnresolvedsUnwrapped.isEmpty else {return true}
+        guard unsafeSubstancesUnwrapped.isEmpty else {return true}
+        guard unsafePsychoactivesUnwrapped.isEmpty else {return true}
+        guard unsafeChemicalsUnwrapped.isEmpty else {return true}
+        guard unsafeUnresolvedsUnwrapped.isEmpty else {return true}
+        guard dangerousSubstancesUnwrapped.isEmpty else {return true}
+        guard dangerousPsychoactivesUnwrapped.isEmpty else {return true}
+        guard dangerousChemicalsUnwrapped.isEmpty else {return true}
+        guard dangerousUnresolvedsUnwrapped.isEmpty else {return true}
+        return false
+    }
 }
 
 extension Substance: SubstanceInteractable {

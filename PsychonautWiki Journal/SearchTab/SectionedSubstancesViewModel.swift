@@ -30,7 +30,6 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
     }
     private var substances: [Substance] = []
     private let substanceFetchController: NSFetchedResultsController<Substance>?
-    private let recentIngestionFetchController: NSFetchedResultsController<Ingestion>?
 
     init(isPreview: Bool = false) {
         substances = PreviewHelper.shared.allSubstances
@@ -38,7 +37,6 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
         sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: .psychoactive)
         searchText = "LS"
         substanceFetchController = nil
-        recentIngestionFetchController = nil
     }
 
     override init() {
@@ -49,18 +47,8 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
             managedObjectContext: PersistenceController.shared.viewContext,
             sectionNameKeyPath: nil, cacheName: nil
         )
-        let ingestionFetchRequest = Ingestion.fetchRequest()
-        ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
-        ingestionFetchRequest.fetchLimit = 10
-        recentIngestionFetchController = NSFetchedResultsController(
-            fetchRequest: ingestionFetchRequest,
-            managedObjectContext: PersistenceController.shared.viewContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
         super.init()
         substanceFetchController?.delegate = self
-        recentIngestionFetchController?.delegate = self
         groupBy = .psychoactive
         do {
             try substanceFetchController?.performFetch()

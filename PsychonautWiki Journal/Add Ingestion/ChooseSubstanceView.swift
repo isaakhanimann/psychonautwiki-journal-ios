@@ -12,9 +12,20 @@ struct ChooseSubstanceView: View {
             SearchList(sectionedViewModel: sectionedViewModel,
                        recentsViewModel: recentsViewModel
             ) { sub in
-                SubstanceRow(substance: sub, dismiss: dismiss, experience: experience)
+                NavigationLink(sub.nameUnwrapped) {
+                    if sub.hasAnyInteractions {
+                        AcknowledgeInteractionsView(experience: experience, substance: sub, dismiss: dismiss)
+                    } else {
+                        ChooseRouteView(substance: sub, dismiss: dismiss, experience: experience)
+                    }
+                }
             }
             .navigationBarTitle("Add Ingestion")
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Cancel", action: dismiss)
+            }
         }
         .searchable(text: $sectionedViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
         .disableAutocorrection(true)
@@ -27,6 +38,5 @@ struct ChooseSubstanceView_Previews: PreviewProvider {
             dismiss: {},
             experience: PreviewHelper.shared.experiences.first!
         )
-            .environmentObject(PreviewHelper.shared.experiences.first!)
     }
 }

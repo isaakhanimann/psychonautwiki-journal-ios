@@ -5,7 +5,7 @@ struct ChooseDoseView: View {
     let substance: Substance
     let administrationRoute: Roa.AdministrationRoute
     let dismiss: () -> Void
-    let experience: Experience
+    let experience: Experience?
 
     @State private var selectedDose: Double?
     @State private var isKeyboardShowing = false
