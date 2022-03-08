@@ -26,7 +26,7 @@ extension DurationRange {
     }
 
     var maxSec: Double? {
-        convertToSec(value: minUnwrapped)
+        convertToSec(value: maxUnwrapped)
     }
 
     var displayString: String? {
