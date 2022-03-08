@@ -3,7 +3,6 @@ import SwiftUI
 struct HorizontalScaleView<Content: View>: View {
 
     @ViewBuilder var content: Content
-
     @State private var scale: Double = 1
 
     var body: some View {
