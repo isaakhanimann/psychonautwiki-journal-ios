@@ -46,7 +46,6 @@
 		EA4910B526DFB4E0001A5316 /* Watch Journal Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA4910BA26DFB4E0001A5316 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910B926DFB4E0001A5316 /* ContentView.swift */; };
 		EA4910BC26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */; };
-		EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */; };
 		EA4910C026DFB4E1001A5316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910BF26DFB4E1001A5316 /* Assets.xcassets */; };
 		EA4910C326DFB4E1001A5316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */; };
 		EA4910C726DFB4E1001A5316 /* Journal.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EA4910AB26DFB4E0001A5316 /* Journal.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -109,11 +108,9 @@
 		EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
 		EAA2EC8026E21D9200B4FACF /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 		EAB2EDD926EE25FA0020C554 /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDD826EE25FA0020C554 /* IngestionRow.swift */; };
-		EAB2EDDE26EE8AD20020C554 /* CircularComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDD26EE8AD20020C554 /* CircularComplicationView.swift */; };
 		EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAB2EDE226EEAAFB0020C554 /* IngestionGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */; };
 		EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE526EEB8F30020C554 /* ClockHands.swift */; };
-		EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -175,7 +172,6 @@
 		EADE46682709D33500F1058E /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719326CBA664009FB0EC /* LineShape.swift */; };
 		EADE46692709D33500F1058E /* CurrentTimeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719426CBA664009FB0EC /* CurrentTimeShape.swift */; };
 		EADE466A2709D34B00F1058E /* CurrentTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719E26CBA664009FB0EC /* CurrentTimeView.swift */; };
-		EADE466C2709D3C500F1058E /* RectangularComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
@@ -314,7 +310,6 @@
 		EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Journal Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4910B926DFB4E0001A5316 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
-		EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		EA4910BF26DFB4E1001A5316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA4910C226DFB4E1001A5316 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA4910C426DFB4E1001A5316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -353,11 +348,9 @@
 		EAA2EC7826E21A8D00B4FACF /* ChooseRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRouteView.swift; sourceTree = "<group>"; };
 		EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseColor.swift; sourceTree = "<group>"; };
 		EAB2EDD826EE25FA0020C554 /* IngestionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
-		EAB2EDDD26EE8AD20020C554 /* CircularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularComplicationView.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAB2EDE126EEAAFB0020C554 /* IngestionGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionGauge.swift; sourceTree = "<group>"; };
 		EAB2EDE526EEB8F30020C554 /* ClockHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHands.swift; sourceTree = "<group>"; };
-		EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationUpdater.swift; sourceTree = "<group>"; };
 		EABFA48E270C5C4900A6953C /* HandleUniversalURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleUniversalURLView.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -393,7 +386,6 @@
 		EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EACB6E7A27D6456400940291 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
-		EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularComplicationView.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
@@ -525,7 +517,6 @@
 			children = (
 				EA4910BB26DFB4E0001A5316 /* PsychonautWiki_JournalApp.swift */,
 				EA4910B926DFB4E0001A5316 /* ContentView.swift */,
-				EAB2EDDC26EE8A9E0020C554 /* Complications */,
 				EAA2EC7F26E21D5600B4FACF /* Welcome */,
 				EAB2EDD226EE24080020C554 /* Home */,
 				EAA2EC6426E2021B00B4FACF /* Settings */,
@@ -666,17 +657,6 @@
 				EAA2EC6326E2020A00B4FACF /* Watch Face */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		EAB2EDDC26EE8A9E0020C554 /* Complications */ = {
-			isa = PBXGroup;
-			children = (
-				EA4910BD26DFB4E0001A5316 /* ComplicationController.swift */,
-				EAB2EDE926EF463A0020C554 /* ComplicationUpdater.swift */,
-				EAB2EDDD26EE8AD20020C554 /* CircularComplicationView.swift */,
-				EADE466B2709D3C500F1058E /* RectangularComplicationView.swift */,
-			);
-			path = Complications;
 			sourceTree = "<group>";
 		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
@@ -1151,7 +1131,6 @@
 				EA8447DA27CCD7B100B10DD3 /* SubstanceFilePublisher.swift in Sources */,
 				EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */,
 				EA47E65227CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
-				EADE466C2709D3C500F1058E /* RectangularComplicationView.swift in Sources */,
 				EA47E65627CA136C00F6E10F /* Substance+CoreDataClass.swift in Sources */,
 				EACB6E0B27CE170F00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EA48B9A926E890B8003BF667 /* OneLayerView.swift in Sources */,
@@ -1161,7 +1140,6 @@
 				EA48B99626E7425F003BF667 /* SubstanceRow.swift in Sources */,
 				EAA2EC4226DFCBCF00B4FACF /* RoaDuration-CoreDataHelpers.swift in Sources */,
 				EAA2EC3F26DFCBB400B4FACF /* Main.xcdatamodeld in Sources */,
-				EAB2EDEA26EF463A0020C554 /* ComplicationUpdater.swift in Sources */,
 				EADE46622709D30900F1058E /* LineModel.swift in Sources */,
 				EAA2EC4826DFCBCF00B4FACF /* Substance-CoreDataHelpers.swift in Sources */,
 				EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */,
@@ -1170,7 +1148,6 @@
 				EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */,
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
-				EAB2EDDE26EE8AD20020C554 /* CircularComplicationView.swift in Sources */,
 				EADE465E2709D30900F1058E /* AroundShapeModelUp.swift in Sources */,
 				EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
@@ -1214,7 +1191,6 @@
 				EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */,
 				EAA2EC3D26DFC8F300B4FACF /* IngestionsTab.swift in Sources */,
 				EACB6E2027CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
-				EA4910BE26DFB4E0001A5316 /* ComplicationController.swift in Sources */,
 				EADE46632709D30900F1058E /* DataPoint.swift in Sources */,
 				EA48B99A26E7E6AF003BF667 /* WatchFaceModel.swift in Sources */,
 				EA47E66727CA258C00F6E10F /* PsychoactiveClass-CoreDataHelpers.swift in Sources */,
