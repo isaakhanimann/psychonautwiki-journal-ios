@@ -9,12 +9,21 @@ extension IngestionTimeLineView {
         let lineModels: [IngestionWithTimelineContext]
 
         init(sortedIngestions: [Ingestion]) {
-            self.startTime = sortedIngestions.first?.timeUnwrapped ?? Date()
-            self.endTime = Experience.getEndTime(for: sortedIngestions) ?? Date().addingTimeInterval(5*60*60)
-            self.lineModels = Self.getLineModels(sortedIngestions: sortedIngestions)
+            let startTime = sortedIngestions.first?.timeUnwrapped ?? Date()
+            self.startTime = startTime
+            let endTime = getMaxEndTime(for: sortedIngestions) ?? Date().addingTimeInterval(5*60*60)
+            self.endTime = endTime
+            self.lineModels = Self.getLineModels(
+                sortedIngestions: sortedIngestions,
+                startTime: startTime, endTime: endTime
+            )
         }
 
-        static func getLineModels(sortedIngestions: [Ingestion]) -> [IngestionWithTimelineContext] {
+        static func getLineModels(
+            sortedIngestions: [Ingestion],
+            startTime: Date,
+            endTime: Date
+        ) -> [IngestionWithTimelineContext] {
             var linesData = [IngestionWithTimelineContext]()
             for (verticalWeight, ingestion) in getSortedIngestionsWithVerticalWeights(for: sortedIngestions) {
                 let insetTimes = getInsetTimes(of: ingestion, comparedTo: sortedIngestions.prefix(while: { ing in
@@ -23,7 +32,9 @@ extension IngestionTimeLineView {
                 let ingestionTimelineModel = IngestionWithTimelineContext(
                     ingestion: ingestion,
                     insetIndex: insetTimes,
-                    verticalWeight: verticalWeight
+                    verticalWeight: verticalWeight,
+                    graphStartTime: startTime,
+                    graphEndTime: endTime
                 )
                 linesData.append(ingestionTimelineModel)
             }

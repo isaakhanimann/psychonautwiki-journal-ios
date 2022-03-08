@@ -12,22 +12,20 @@ extension LineShape {
         let lineWidth: Double
 
         init?(
-            ingestionLineModel: IngestionWithTimelineContext,
-            graphStartTime: Date,
-            graphEndTime: Date,
+            timelineContext: IngestionWithTimelineContext,
             lineWidth: Double
         ) {
-            self.insetIndex = ingestionLineModel.insetIndex
+            self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            let ingestion = ingestionLineModel.ingestion
+            let ingestion = timelineContext.ingestion
             guard let roaDuration = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped) else {
                 return nil
             }
-            let offset = graphStartTime.distance(to: ingestion.timeUnwrapped)
-            let total = graphStartTime.distance(to: graphEndTime)
+            let offset = timelineContext.graphStartTime.distance(to: ingestion.timeUnwrapped)
+            let total = timelineContext.graphStartTime.distance(to: timelineContext.graphEndTime)
             guard let normalized = NormalizedDataPoints(
                 horizontalWeight: ingestion.horizontalWeight,
-                verticalWeight: ingestionLineModel.verticalWeight,
+                verticalWeight: timelineContext.verticalWeight,
                 durations: roaDuration,
                 ingestionTimeOffset: offset,
                 totalGraphDuration: total

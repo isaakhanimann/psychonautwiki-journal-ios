@@ -14,11 +14,7 @@ struct IngestionTimeLineView: View {
                 GeometryReader { geoIn in
                     ZStack(alignment: .bottom) {
                         ForEach(0..<viewModel.lineModels.count, id: \.self) { index in
-                            LineView(
-                                ingestionLineModel: viewModel.lineModels[index],
-                                graphStartTime: viewModel.startTime,
-                                graphEndTime: viewModel.endTime
-                            )
+                            LineView(ingestionWithTimelineContext: viewModel.lineModels[index])
                         }
                         .frame(width: geoOut.size.width, height: geoIn.size.height)
                         CurrentTimeView(

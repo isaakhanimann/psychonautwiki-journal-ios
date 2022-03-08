@@ -1,19 +1,15 @@
 import SwiftUI
 
-struct AroundShapeDown: Shape {
+struct AroundShapeUp: Shape {
 
     let viewModel: ViewModel?
 
     init(
-        ingestionLineModel: IngestionWithTimelineContext,
-        graphStartTime: Date,
-        graphEndTime: Date,
+        ingestionWithTimelineContext: IngestionWithTimelineContext,
         lineWidth: Double
     ) {
         self.viewModel = ViewModel(
-            ingestionLineModel: ingestionLineModel,
-            graphStartTime: graphStartTime,
-            graphEndTime: graphEndTime,
+            timelineContext: ingestionWithTimelineContext,
             lineWidth: lineWidth
         )
     }
@@ -21,7 +17,7 @@ struct AroundShapeDown: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         guard let viewModelUnwrap = viewModel else {
-            assertionFailure("AroundShapeModelDown view model could not be created")
+            assertionFailure("AroundShapeModelUp view model could not be created")
             return path
         }
         let halfLineWidth = viewModelUnwrap.lineWidth/2

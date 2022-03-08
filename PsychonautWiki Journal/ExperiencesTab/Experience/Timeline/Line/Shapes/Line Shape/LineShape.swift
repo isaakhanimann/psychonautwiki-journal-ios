@@ -5,15 +5,11 @@ struct LineShape: Shape {
     let viewModel: ViewModel?
 
     init(
-        ingestionLineModel: IngestionWithTimelineContext,
-        graphStartTime: Date,
-        graphEndTime: Date,
+        ingestionWithTimelineContext: IngestionWithTimelineContext,
         lineWidth: Double
     ) {
         self.viewModel = ViewModel(
-            ingestionLineModel: ingestionLineModel,
-            graphStartTime: graphStartTime,
-            graphEndTime: graphEndTime,
+            timelineContext: ingestionWithTimelineContext,
             lineWidth: lineWidth
         )
     }

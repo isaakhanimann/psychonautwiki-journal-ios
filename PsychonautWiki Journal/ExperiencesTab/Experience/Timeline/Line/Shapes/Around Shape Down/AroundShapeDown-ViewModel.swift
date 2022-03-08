@@ -1,6 +1,6 @@
 import Foundation
 
-extension AroundShapeUp {
+extension AroundShapeDown {
 
     class ViewModel {
         let bottomLeft: DataPoint
@@ -11,21 +11,20 @@ extension AroundShapeUp {
         let insetIndex: Int
         let lineWidth: Double
 
-        init?(ingestionLineModel: IngestionWithTimelineContext,
-              graphStartTime: Date,
-              graphEndTime: Date,
-              lineWidth: Double
+        init?(
+            timelineContext: IngestionWithTimelineContext,
+            lineWidth: Double
         ) {
-            self.insetIndex = ingestionLineModel.insetIndex
+            self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            let ingestion = ingestionLineModel.ingestion
+            let ingestion = timelineContext.ingestion
             guard let roaDuration = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped) else {
                 return nil
             }
-            let offset = graphStartTime.distance(to: ingestion.timeUnwrapped)
-            let total = graphStartTime.distance(to: graphEndTime)
+            let offset = timelineContext.graphStartTime.distance(to: ingestion.timeUnwrapped)
+            let total = timelineContext.graphStartTime.distance(to: timelineContext.graphEndTime)
             guard let normalizedPoints = NormalizedAroundShape(
-                verticalWeight: ingestionLineModel.verticalWeight,
+                verticalWeight: timelineContext.verticalWeight,
                 durations: roaDuration,
                 ingestionTimeOffset: offset,
                 totalGraphDuration: total
@@ -62,24 +61,36 @@ extension AroundShapeUp {
             guard let onsetMax = durations.onset?.maxSec else {return nil}
             guard let comeupMin = durations.comeup?.minSec else {return nil}
             guard let comeupMax = durations.comeup?.maxSec else {return nil}
+            guard let peakMin = durations.peak?.minSec else {return nil}
+            guard let peakMax = durations.peak?.maxSec else {return nil}
+            guard let offsetMin = durations.offset?.minSec else {return nil}
+            guard let offsetMax = durations.offset?.maxSec else {return nil}
             self.bottomLeft = DataPoint(
-                xValue: (ingestionTimeOffset + onsetMin).ratio(to: totalGraphDuration),
+                xValue: (ingestionTimeOffset
+                         + onsetMin
+                         + comeupMin
+                         + peakMin
+                         + offsetMin).ratio(to: totalGraphDuration),
                 yValue: minY)
             self.bottomRight = DataPoint(
-                xValue: (ingestionTimeOffset + onsetMax).ratio(to: totalGraphDuration),
+                xValue: (ingestionTimeOffset
+                         + onsetMax
+                         + comeupMax
+                         + peakMax
+                         + offsetMax).ratio(to: totalGraphDuration),
                 yValue: minY)
             self.topRight = DataPoint(
                 xValue: (ingestionTimeOffset
                          + onsetMax
-                         + comeupMax).ratio(to: totalGraphDuration),
-                yValue: maxY
-            )
+                         + comeupMax
+                         + peakMax).ratio(to: totalGraphDuration),
+                yValue: maxY)
             self.topLeft = DataPoint(
                 xValue: (ingestionTimeOffset
-                         +  onsetMin
-                         + comeupMin).ratio(to: totalGraphDuration),
-                yValue: maxY
-            )
+                         + onsetMin
+                         + comeupMin
+                         + peakMin).ratio(to: totalGraphDuration),
+                yValue: maxY)
         }
     }
 }

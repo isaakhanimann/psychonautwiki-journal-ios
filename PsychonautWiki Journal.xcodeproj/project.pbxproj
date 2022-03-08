@@ -680,31 +680,22 @@
 			path = Line;
 			sourceTree = "<group>";
 		};
-		EACB6E8527D748DF00940291 /* Around Shapes */ = {
-			isa = PBXGroup;
-			children = (
-				EACB6E9127D754B300940291 /* Up */,
-				EACB6E9027D754A600940291 /* Down */,
-			);
-			path = "Around Shapes";
-			sourceTree = "<group>";
-		};
-		EACB6E9027D754A600940291 /* Down */ = {
+		EACB6E9027D754A600940291 /* Around Shape Down */ = {
 			isa = PBXGroup;
 			children = (
 				EACB6E8C27D753F000940291 /* AroundShapeDown.swift */,
 				EACB6E8E27D7543600940291 /* AroundShapeDown-ViewModel.swift */,
 			);
-			path = Down;
+			path = "Around Shape Down";
 			sourceTree = "<group>";
 		};
-		EACB6E9127D754B300940291 /* Up */ = {
+		EACB6E9127D754B300940291 /* Around Shape Up */ = {
 			isa = PBXGroup;
 			children = (
 				EACB6E8627D7493000940291 /* AroundShapeUp.swift */,
 				EACB6E8827D749CA00940291 /* AroundShapeUp-ViewModel.swift */,
 			);
-			path = Up;
+			path = "Around Shape Up";
 			sourceTree = "<group>";
 		};
 		EACB6E9227D755FD00940291 /* Line Shape */ = {
@@ -720,7 +711,8 @@
 			isa = PBXGroup;
 			children = (
 				EACB6E9227D755FD00940291 /* Line Shape */,
-				EACB6E8527D748DF00940291 /* Around Shapes */,
+				EACB6E9127D754B300940291 /* Around Shape Up */,
+				EACB6E9027D754A600940291 /* Around Shape Down */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";

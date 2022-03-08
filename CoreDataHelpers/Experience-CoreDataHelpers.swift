@@ -69,32 +69,8 @@ extension Experience: Comparable {
 
     var isOver: Bool {
         guard sortedIngestionsUnwrapped.first != nil else {return false}
-        guard let endOfGraph = Experience.getEndTime(for: sortedIngestionsUnwrapped) else {return false}
+        guard let endOfGraph = getMaxEndTime(for: sortedIngestionsUnwrapped) else {return false}
         return endOfGraph < Date()
-    }
-
-    static func getEndTime(for ingestions: [Ingestion]) -> Date? {
-        guard let firstIngestion = ingestions.first else {return nil}
-        // Initialize endOfGraphTime sensibly
-        var endOfGraphTime = firstIngestion.timeUnwrapped
-        for ingestion in ingestions {
-            guard let duration = ingestion.substance?
-                    .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
-            guard let onset = duration.onset?.maxSec else {return nil}
-            guard let comeup = duration.comeup?.maxSec else {return nil}
-            guard let peak = duration.peak?.maxSec else {return nil}
-            guard let offset = duration.offset?.maxSec else {return nil}
-            // Choose the latest possible offset to make sure that the graph fits all ingestions
-            let offsetEnd = onset
-                + comeup
-                + peak
-                + offset
-            let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
-            if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
-                endOfGraphTime = maybeNewEndTime
-            }
-        }
-        return endOfGraphTime
     }
 
     var ingestionsWithDistinctSubstances: [Ingestion] {
