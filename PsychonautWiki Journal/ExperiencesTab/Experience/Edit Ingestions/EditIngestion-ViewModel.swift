@@ -6,6 +6,9 @@ extension EditIngestionView {
         @Published var selectedAdministrationRoute: Roa.AdministrationRoute = .oral {
             didSet {
                 ingestion?.administrationRoute = selectedAdministrationRoute.rawValue
+                if let newUnits = ingestion?.substance?.getDose(for: selectedAdministrationRoute)?.units {
+                    ingestion?.units = newUnits
+                }
             }
         }
         @Published var selectedDose: Double? {
