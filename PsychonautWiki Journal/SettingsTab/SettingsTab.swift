@@ -11,16 +11,19 @@ struct SettingsTab: View {
             List {
                 eye
                 Section(header: Text("Last Successfull Substance Fetch")) {
-                    if viewModel.isFetching {
-                        Text("Fetching Substances...")
-                            .foregroundColor(.secondary)
-                    } else {
-                        Button(action: viewModel.fetchNewSubstances, label: {
-                            Label(
-                                viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "No Substances",
-                                systemImage: "arrow.clockwise"
-                            )
-                        })
+                    HStack(spacing: 10) {
+                        if viewModel.isFetching {
+                            ProgressView()
+                            Text("Fetching Substances")
+                                .foregroundColor(.secondary)
+                        } else {
+                            Button(action: viewModel.fetchNewSubstances, label: {
+                                Label(
+                                    viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "No Substances",
+                                    systemImage: "arrow.clockwise"
+                                )
+                            })
+                        }
                     }
                 }
                 if isEyeOpen {
