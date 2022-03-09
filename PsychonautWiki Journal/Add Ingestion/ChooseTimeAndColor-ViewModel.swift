@@ -6,7 +6,7 @@ extension ChooseTimeAndColor {
     class ViewModel: ObservableObject {
 
         @Published var lastExperience: Experience?
-        @Published var selectedColor = Ingestion.IngestionColor.blue
+        @Published var selectedColor = Ingestion.IngestionColor.allCases.randomElement() ?? Ingestion.IngestionColor.blue
         @Published var selectedTime = Date()
         var substance: Substance?
         var administrationRoute = Roa.AdministrationRoute.allCases.randomElement() ?? Roa.AdministrationRoute.oral
