@@ -60,6 +60,7 @@ struct DoseView: View {
                             .foregroundLinearGradient(colors: [Self.threshColor, Self.lightColor])
                             .font(doseFont)
                         Text("thresh ")
+                            .lineLimit(1)
                             .foregroundColor(Self.threshColor)
                             .font(.footnote)
                     }
@@ -71,6 +72,7 @@ struct DoseView: View {
                         Text("-")
                             .font(doseFont)
                         Text("light")
+                            .lineLimit(1)
                             .font(.footnote)
                     }
                     .foregroundColor(Self.lightColor)
@@ -89,6 +91,7 @@ struct DoseView: View {
                         Text("-")
                             .font(doseFont)
                         Text("common")
+                            .lineLimit(1)
                             .font(.footnote)
                     }
                     .foregroundColor(Self.commonColor)
@@ -107,6 +110,7 @@ struct DoseView: View {
                         Text("-")
                             .font(doseFont)
                         Text("strong")
+                            .lineLimit(1)
                             .font(.footnote)
                     }
                     .foregroundColor(Self.strongColor)
@@ -125,6 +129,7 @@ struct DoseView: View {
                         Text("-")
                             .font(doseFont)
                         Text("heavy")
+                            .lineLimit(1)
                             .font(.footnote)
                     }
                     .foregroundColor(Self.heavyColor)
