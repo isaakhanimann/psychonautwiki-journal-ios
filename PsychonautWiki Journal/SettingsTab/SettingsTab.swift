@@ -1,4 +1,5 @@
 import SwiftUI
+import AlertToast
 
 struct SettingsTab: View {
 
@@ -12,6 +13,7 @@ struct SettingsTab: View {
                 Section(header: Text("Last Successfull Substance Fetch")) {
                     if viewModel.isFetching {
                         Text("Fetching Substances...")
+                            .foregroundColor(.secondary)
                     } else {
                         Button(action: viewModel.fetchNewSubstances, label: {
                             Label(
@@ -21,14 +23,6 @@ struct SettingsTab: View {
                         })
                     }
                 }
-                .alert(isPresented: $viewModel.isShowingErrorAlert) {
-                    Alert(
-                        title: Text("Try Again Later"),
-                        message: Text(viewModel.alertMessage),
-                        dismissButton: .default(Text("Ok"))
-                    )
-                }
-
                 if isEyeOpen {
                     Section(header: Text("Safety")) {
                         Link(
@@ -51,7 +45,15 @@ struct SettingsTab: View {
                         destination: URL(string: "https://t.me/isaakhanimann")!
                     )
                 }
-            }.navigationTitle("Settings")
+            }
+            .navigationTitle("Settings")
+            .toast(isPresenting: $viewModel.isShowingErrorAlert) {
+                AlertToast(
+                    displayMode: .alert,
+                    type: .error(Color.red),
+                    title: "Try Again Later"
+                )
+            }
         }
     }
 
