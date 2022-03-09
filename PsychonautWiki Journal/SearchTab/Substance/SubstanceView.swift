@@ -36,6 +36,24 @@ struct SubstanceView: View {
                 effectSection
             }
         }
+        .sheet(isPresented: $isShowingAddIngestionSheet) {
+            NavigationView {
+                if substance.hasAnyInteractions {
+                    AcknowledgeInteractionsView(
+                        substance: substance,
+                        dismiss: dismiss,
+                        experience: nil
+                    )
+                } else {
+                    ChooseRouteView(
+                        substance: substance,
+                        dismiss: dismiss,
+                        experience: nil
+                    )
+                }
+            }
+            .accentColor(Color.blue)
+        }
         .navigationTitle(substance.nameUnwrapped)
         .toolbar {
             ArticleToolbarItem(articleURL: substance.url)
@@ -121,7 +139,15 @@ struct SubstanceView: View {
         }
     }
 
-    private func ingest() {}
+    @State private var isShowingAddIngestionSheet = false
+
+    private func dismiss() {
+        isShowingAddIngestionSheet.toggle()
+    }
+
+    private func ingest() {
+        isShowingAddIngestionSheet.toggle()
+    }
 }
 
 struct RowLabelView: View {

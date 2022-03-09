@@ -2,9 +2,9 @@ import SwiftUI
 
 struct AcknowledgeInteractionsView: View {
 
-    let experience: Experience?
     let substance: Substance
     let dismiss: () -> Void
+    let experience: Experience?
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -24,6 +24,11 @@ struct AcknowledgeInteractionsView: View {
             )
             .padding()
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Cancel", action: dismiss)
+            }
+        }
         .navigationBarTitle(substance.nameUnwrapped)
     }
 }
@@ -31,9 +36,9 @@ struct AcknowledgeInteractionsView: View {
 struct AcknowledgeInteractionsView_Previews: PreviewProvider {
     static var previews: some View {
         AcknowledgeInteractionsView(
-            experience: nil,
             substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!,
-            dismiss: {}
+            dismiss: {},
+            experience: nil
         )
     }
 }

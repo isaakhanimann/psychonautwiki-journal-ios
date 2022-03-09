@@ -14,9 +14,17 @@ struct ChooseSubstanceView: View {
             ) { sub in
                 NavigationLink(sub.nameUnwrapped) {
                     if sub.hasAnyInteractions {
-                        AcknowledgeInteractionsView(experience: experience, substance: sub, dismiss: dismiss)
+                        AcknowledgeInteractionsView(
+                            substance: sub,
+                            dismiss: dismiss,
+                            experience: experience
+                        )
                     } else {
-                        ChooseRouteView(substance: sub, dismiss: dismiss, experience: experience)
+                        ChooseRouteView(
+                            substance: sub,
+                            dismiss: dismiss,
+                            experience: experience
+                        )
                     }
                 }
             }

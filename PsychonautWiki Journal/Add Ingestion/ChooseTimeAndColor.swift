@@ -10,7 +10,7 @@ struct ChooseTimeAndColor: View {
     @StateObject var viewModel = ViewModel()
 
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             Form {
                 Section(header: Text("Time")) {
                     DatePicker("Time", selection: $viewModel.selectedTime, displayedComponents: [.date, .hourAndMinute])
@@ -30,18 +30,21 @@ struct ChooseTimeAndColor: View {
                 .buttonStyle(PrimaryButtonStyle())
                 .padding()
             } else {
-                if let lastExperienceUnwrap = viewModel.lastExperience {
-                    Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
-                        viewModel.addIngestionSaveAndDismiss(to: lastExperienceUnwrap)
+                VStack {
+                    let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
+                    if let lastExperienceUnwrap = viewModel.lastExperience,
+                       lastExperienceUnwrap.dateForSorting > twoDaysAgo {
+                        Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
+                            viewModel.addIngestionSaveAndDismiss(to: lastExperienceUnwrap)
+                        }
+                        .padding(.horizontal)
                     }
-                    .buttonStyle(PrimaryButtonStyle())
+                    Button("Add to New Experience") {
+                        viewModel.addIngestionToNewExperienceSaveAndDismiss()
+                    }
                     .padding()
                 }
-                Button("Add to new experience") {
-                    viewModel.addIngestionToNewExperienceSaveAndDismiss()
-                }
                 .buttonStyle(PrimaryButtonStyle())
-                .padding()
             }
         }
         .task {
