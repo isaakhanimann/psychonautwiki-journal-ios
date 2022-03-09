@@ -17,7 +17,7 @@ class SubstanceTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertGreaterThanOrEqual(substances.count, 352)
+        XCTAssertGreaterThanOrEqual(substances.count, 351)
     }
 
     private func getAllSubstances() throws -> [Substance] {
@@ -94,7 +94,8 @@ class SubstanceTests: XCTestCase {
             "Benzodiazepines",
             "Classic Psychedelics",
             "Psychedelics",
-            "Serotonergic Psychedelic"
+            "Serotonergic Psychedelic",
+            "25x-NBOH"
         ]
         namesThatShouldNotBeThere = namesThatShouldNotBeThere.map {$0.lowercased()}
         for subName in subNames {
