@@ -20,6 +20,8 @@ extension AcknowledgeInteractionsView {
         @Published var dangerousIngestions = [Ingestion]()
         @Published var unsafeIngestions = [Ingestion]()
         @Published var uncertainIngestions = [Ingestion]()
+        @Published var isShowingAlert = false
+        @Published var isShowingNext = false
 
         func checkInteractionsWith(substance: Substance) {
             let recentIngestions = getRecentIngestions()
@@ -65,6 +67,14 @@ extension AcknowledgeInteractionsView {
                 }
             }
             return distinctIngestions
+        }
+
+        func pressNext() {
+            if hasInteractions {
+                isShowingAlert = true
+            } else {
+                isShowingNext = true
+            }
         }
     }
 }
