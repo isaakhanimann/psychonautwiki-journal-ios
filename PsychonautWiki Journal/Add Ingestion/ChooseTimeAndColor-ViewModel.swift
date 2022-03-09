@@ -12,7 +12,6 @@ extension ChooseTimeAndColor {
         var administrationRoute = Roa.AdministrationRoute.allCases.randomElement() ?? Roa.AdministrationRoute.oral
         var dose: Double = 0
         var dismiss: () -> Void = {}
-        var experience: Experience?
 
         func initialize(
             substance: Substance,
@@ -25,7 +24,6 @@ extension ChooseTimeAndColor {
             self.administrationRoute = administrationRoute
             self.dose = dose
             self.dismiss = dismiss
-            self.experience = experience
             if experience == nil {
                 setLastExperience()
             }
