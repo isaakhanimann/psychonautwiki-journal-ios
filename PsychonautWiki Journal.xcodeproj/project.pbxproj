@@ -95,7 +95,6 @@
 		EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
 		EAA2EC5726DFCBFA00B4FACF /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
 		EAA2EC5D26DFCBFA00B4FACF /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
-		EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
 		EAA2EC6026DFCBFA00B4FACF /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6626E2040300B4FACF /* WatchWelcome.swift */; };
 		EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC6F26E2124600B4FACF /* DosePicker.swift */; };
@@ -188,7 +187,6 @@
 		EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
 		EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
-		EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAE4720126CBA664009FB0EC /* PreviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */; };
 		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
@@ -229,6 +227,10 @@
 		EAF76CA227D8E78500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
 		EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA527D9081C00945587 /* InteractionAlertView.swift */; };
+		EAF76CA927D90CF900945587 /* IngestionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* IngestionColor.swift */; };
+		EAF76CAA27D90D2400945587 /* IngestionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* IngestionColor.swift */; };
+		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
+		EAF76CAD27D90F9600945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -420,7 +422,6 @@
 		EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-CleanString.swift"; sourceTree = "<group>"; };
 		EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
-		EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color-StringColor.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
 		EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewHelper.swift; sourceTree = "<group>"; };
 		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
@@ -457,6 +458,8 @@
 		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
 		EAF76CA527D9081C00945587 /* InteractionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertView.swift; sourceTree = "<group>"; };
+		EAF76CA827D90CF900945587 /* IngestionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionColor.swift; sourceTree = "<group>"; };
+		EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRoute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,6 +765,7 @@
 				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
+				EAF76CA727D90CE500945587 /* Enums */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EACB6E4627D0DF9A00940291 /* Protocols */,
 				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
@@ -838,7 +842,6 @@
 				EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */,
 				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
-				EAE4717B26CBA664009FB0EC /* Color-StringColor.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
 				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
@@ -871,7 +874,6 @@
 				EAE4716426CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift */,
 				EA47E66B27CA63D000F6E10F /* Effect-CoreDataHelpers.swift */,
 				EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */,
-				EAF76C9C27D8B10500945587 /* InteractionType.swift */,
 			);
 			path = CoreDataHelpers;
 			sourceTree = "<group>";
@@ -969,6 +971,16 @@
 				EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */,
 			);
 			path = "Reused Styles";
+			sourceTree = "<group>";
+		};
+		EAF76CA727D90CE500945587 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				EAF76C9C27D8B10500945587 /* InteractionType.swift */,
+				EAF76CA827D90CF900945587 /* IngestionColor.swift */,
+				EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1172,6 +1184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */,
+				EAF76CAD27D90F9600945587 /* AdministrationRoute.swift in Sources */,
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
 				EACB6E5A27D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EACB6E5D27D36BD000940291 /* SubstanceDecoder.swift in Sources */,
@@ -1204,10 +1217,10 @@
 				EAA2EC3B26DFC8B800B4FACF /* SettingsTab.swift in Sources */,
 				EAA2EC6726E2040300B4FACF /* WatchWelcome.swift in Sources */,
 				EA8447D927CCD61800B10DD3 /* SettingsTab-ViewModel.swift in Sources */,
+				EAF76CAA27D90D2400945587 /* IngestionColor.swift in Sources */,
 				EAA2EC7026E2124600B4FACF /* DosePicker.swift in Sources */,
 				EADE46692709D33500F1058E /* CurrentTimeShape.swift in Sources */,
 				EAA2EC7B26E21AB000B4FACF /* ChooseColor.swift in Sources */,
-				EAA2EC5F26DFCBFA00B4FACF /* Color-StringColor.swift in Sources */,
 				EAA2EC3E26DFCB9D00B4FACF /* Persistence.swift in Sources */,
 				EAA2EC3726DFB70E00B4FACF /* Connectivity.swift in Sources */,
 				EACB6E2D27D00D0500940291 /* ChemicalClass-CoreDataHelpers.swift in Sources */,
@@ -1277,6 +1290,7 @@
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EAE471EA26CBA664009FB0EC /* DurationRange-CoreDataHelpers.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange+CoreDataClass.swift in Sources */,
+				EAF76CA927D90CF900945587 /* IngestionColor.swift in Sources */,
 				EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */,
 				EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */,
@@ -1359,6 +1373,7 @@
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
 				EABFA48F270C5C4900A6953C /* HandleUniversalURLView.swift in Sources */,
 				EACB6E0827CE0FAB00940291 /* PsychoactiveView.swift in Sources */,
+				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EACB6E8127D7409400940291 /* IngestionWithTimelineContext.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
@@ -1389,7 +1404,6 @@
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
-				EAE471FE26CBA664009FB0EC /* Color-StringColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

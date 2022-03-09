@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseColor: View {
 
     let substance: Substance
-    let administrationRoute: Roa.AdministrationRoute
+    let administrationRoute: AdministrationRoute
     let dose: Double
     let dismiss: () -> Void
     let experience: Experience
@@ -14,7 +14,7 @@ struct ChooseColor: View {
     var body: some View {
         ScrollView {
                 LazyVGrid(columns: colorColumns) {
-                ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
+                ForEach(IngestionColor.allCases, id: \.self, content: colorButton)
             }
         }
         .navigationBarTitle("Choose Color")
@@ -25,7 +25,7 @@ struct ChooseColor: View {
         }
     }
 
-    private func addIngestion(with color: Ingestion.IngestionColor) {
+    private func addIngestion(with color: IngestionColor) {
         moc.performAndWait {
             let ingestion = Ingestion(context: moc)
             ingestion.identifier = UUID()
@@ -46,11 +46,11 @@ struct ChooseColor: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-    private func colorButton(for color: Ingestion.IngestionColor) -> some View {
+    private func colorButton(for color: IngestionColor) -> some View {
         Button(action: {
             addIngestion(with: color)
         }, label: {
-            Color.from(ingestionColor: color)
+            color.swiftUIColor
                 .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(6)
         })

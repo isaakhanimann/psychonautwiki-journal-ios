@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseTimeAndColor: View {
 
     let substance: Substance
-    let administrationRoute: Roa.AdministrationRoute
+    let administrationRoute: AdministrationRoute
     let dose: Double
     let dismiss: (AddResult) -> Void
     let experience: Experience?
@@ -18,7 +18,7 @@ struct ChooseTimeAndColor: View {
                 }
                 Section(header: Text("Color")) {
                     LazyVGrid(columns: colorColumns) {
-                        ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
+                        ForEach(IngestionColor.allCases, id: \.self, content: colorButton)
                     }
                     .padding(.vertical)
                 }
@@ -70,9 +70,9 @@ struct ChooseTimeAndColor: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-    private func colorButton(for color: Ingestion.IngestionColor) -> some View {
+    private func colorButton(for color: IngestionColor) -> some View {
         ZStack {
-            Color.from(ingestionColor: color)
+            color.swiftUIColor
                 .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(6)
 

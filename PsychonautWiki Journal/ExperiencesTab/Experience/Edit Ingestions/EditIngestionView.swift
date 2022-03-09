@@ -29,7 +29,7 @@ struct EditIngestionView: View {
             }
             Section(header: Text("Color")) {
                 LazyVGrid(columns: colorColumns) {
-                    ForEach(Ingestion.IngestionColor.allCases, id: \.self, content: colorButton)
+                    ForEach(IngestionColor.allCases, id: \.self, content: colorButton)
                 }
                 .padding(.vertical)
             }
@@ -58,7 +58,7 @@ struct EditIngestionView: View {
                     Text(route.rawValue)
                         .tag(route)
                 }
-                let otherRoutes = Roa.AdministrationRoute.allCases.filter { route in
+                let otherRoutes = AdministrationRoute.allCases.filter { route in
                     !administrationRoutesUnwrapped.contains(route)
                 }
                 ForEach(otherRoutes, id: \.self) { route in
@@ -74,9 +74,9 @@ struct EditIngestionView: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-    private func colorButton(for color: Ingestion.IngestionColor) -> some View {
+    private func colorButton(for color: IngestionColor) -> some View {
         ZStack {
-            Color.from(ingestionColor: color)
+            color.swiftUIColor
                 .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(6)
 

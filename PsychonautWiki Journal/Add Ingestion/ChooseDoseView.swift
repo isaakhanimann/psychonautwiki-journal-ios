@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseDoseView: View {
 
     let substance: Substance
-    let administrationRoute: Roa.AdministrationRoute
+    let administrationRoute: AdministrationRoute
     let dismiss: (AddResult) -> Void
     let experience: Experience?
 

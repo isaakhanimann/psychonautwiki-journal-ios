@@ -241,7 +241,7 @@ class PreviewHelper {
     }
 
     static private func createDefaultIngestion(
-        with color: Ingestion.IngestionColor,
+        with color: IngestionColor,
         stringTime: String,
         context: NSManagedObjectContext,
         substanceName: String,

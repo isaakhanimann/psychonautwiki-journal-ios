@@ -103,13 +103,13 @@ extension Substance: Comparable {
         (effects?.allObjects as? [Effect] ?? []).sorted()
     }
 
-    var administrationRoutesUnwrapped: [Roa.AdministrationRoute] {
+    var administrationRoutesUnwrapped: [AdministrationRoute] {
         roasUnwrapped.map { roa in
             roa.nameUnwrapped
         }
     }
 
-    func getDuration(for administrationRoute: Roa.AdministrationRoute) -> RoaDuration? {
+    func getDuration(for administrationRoute: AdministrationRoute) -> RoaDuration? {
         let filteredRoas = roasUnwrapped.filter { roa in
             roa.nameUnwrapped == administrationRoute
         }
@@ -120,7 +120,7 @@ extension Substance: Comparable {
         return duration
     }
 
-    func getDose(for administrationRoute: Roa.AdministrationRoute) -> RoaDose? {
+    func getDose(for administrationRoute: AdministrationRoute) -> RoaDose? {
         let filteredRoas = roasUnwrapped.filter { roa in
             roa.nameUnwrapped == administrationRoute
         }

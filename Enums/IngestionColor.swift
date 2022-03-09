@@ -1,9 +1,10 @@
 import SwiftUI
 
-extension Color {
+enum IngestionColor: String, CaseIterable {
+    case blue, green, orange, pink, purple, red, yellow
 
-    static func from(ingestionColor: Ingestion.IngestionColor) -> Color {
-        switch ingestionColor {
+    var swiftUIColor: Color {
+        switch self {
         case .blue:
             return Color.blue
         case .green:

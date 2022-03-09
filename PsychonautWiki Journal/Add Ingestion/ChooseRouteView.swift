@@ -23,7 +23,7 @@ struct ChooseRouteView: View {
                     )
                 )
             }
-            let otherRoutes = Roa.AdministrationRoute.allCases.filter { route in
+            let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !administrationRoutesUnwrapped.contains(route)
             }
             Section {

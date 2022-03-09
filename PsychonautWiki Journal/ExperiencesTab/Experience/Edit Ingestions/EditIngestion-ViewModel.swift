@@ -3,7 +3,7 @@ import Foundation
 extension EditIngestionView {
     class ViewModel: ObservableObject {
         var ingestion: Ingestion?
-        @Published var selectedAdministrationRoute: Roa.AdministrationRoute = .oral {
+        @Published var selectedAdministrationRoute: AdministrationRoute = .oral {
             didSet {
                 ingestion?.administrationRoute = selectedAdministrationRoute.rawValue
                 if let newUnits = ingestion?.substance?.getDose(for: selectedAdministrationRoute)?.units {
@@ -18,7 +18,7 @@ extension EditIngestionView {
                 }
             }
         }
-        @Published var selectedColor: Ingestion.IngestionColor = .blue {
+        @Published var selectedColor: IngestionColor = .blue {
             didSet {
                 ingestion?.color = selectedColor.rawValue
             }

@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseTimeView: View {
 
     let substance: Substance
-    let administrationRoute: Roa.AdministrationRoute
+    let administrationRoute: AdministrationRoute
     let dose: Double
     let dismiss: () -> Void
     let experience: Experience
@@ -24,7 +24,7 @@ struct ChooseTimeView: View {
 
     init(
         substance: Substance,
-        administrationRoute: Roa.AdministrationRoute,
+        administrationRoute: AdministrationRoute,
         dose: Double,
         dismiss: @escaping () -> Void,
         experience: Experience

@@ -7,10 +7,6 @@ extension Ingestion: Comparable {
         lhs.timeUnwrapped < rhs.timeUnwrapped
     }
 
-    enum IngestionColor: String, CaseIterable {
-        case blue, green, orange, pink, purple, red, yellow
-    }
-
     var timeUnwrapped: Date {
         time ?? Date()
     }
@@ -31,8 +27,8 @@ extension Ingestion: Comparable {
         return try? self.managedObjectContext?.fetch(fetchRequest).first
     }
 
-    var administrationRouteUnwrapped: Roa.AdministrationRoute {
-        Roa.AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
+    var administrationRouteUnwrapped: AdministrationRoute {
+        AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
     }
 
     var doseUnwrapped: Double {
@@ -44,7 +40,7 @@ extension Ingestion: Comparable {
     }
 
     var swiftUIColorUnwrapped: Color {
-        Color.from(ingestionColor: colorUnwrapped)
+        colorUnwrapped.swiftUIColor
     }
 
     var unitsUnwrapped: String {

@@ -6,16 +6,16 @@ extension ChooseTimeAndColor {
     class ViewModel: ObservableObject {
 
         @Published var lastExperience: Experience?
-        @Published var selectedColor = Ingestion.IngestionColor.allCases.randomElement() ?? Ingestion.IngestionColor.blue
+        @Published var selectedColor = IngestionColor.allCases.randomElement() ?? IngestionColor.blue
         @Published var selectedTime = Date()
         var substance: Substance?
-        var administrationRoute = Roa.AdministrationRoute.allCases.randomElement() ?? Roa.AdministrationRoute.oral
+        var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
         var dose: Double = 0
         var dismiss: (AddResult) -> Void = {print($0)}
 
         func initialize(
             substance: Substance,
-            administrationRoute: Roa.AdministrationRoute,
+            administrationRoute: AdministrationRoute,
             dose: Double,
             dismiss: @escaping (AddResult) -> Void,
             experience: Experience?

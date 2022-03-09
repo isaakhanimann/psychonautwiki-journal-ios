@@ -11,7 +11,7 @@ struct IngestionRow: View {
                     HStack {
                         Image(systemName: "circle.fill")
                             .font(.headline)
-                            .foregroundColor(ingestion.swiftUIColorUnwrapped)
+                            .foregroundColor(ingestion.colorUnwrapped.swiftUIColor)
                         VStack(alignment: .leading) {
                             Text(substance.nameUnwrapped).font(.headline)
                             Text("\(ingestion.doseInfoString) \(ingestion.administrationRouteUnwrapped.rawValue)")
