@@ -80,7 +80,6 @@ struct SettingsTab: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        changeAppIcon(toOpen: isEyeOpen)
         Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 }

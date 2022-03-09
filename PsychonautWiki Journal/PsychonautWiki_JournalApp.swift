@@ -40,11 +40,6 @@ struct PsychonautWiki_JournalApp: App {
         let needsCleanup = comesFromVersion10
         if needsCleanup {
             PersistenceController.shared.cleanupCoreData()
-            if isEyeOpen {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    changeAppIcon(toOpen: true)
-                }
-            }
         } else {
             PersistenceController.shared.addInitialSubstances()
         }
