@@ -7,21 +7,7 @@ struct ExperiencesTab: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                List {
-                    ForEach(viewModel.sections) { sec in
-                        Section(String(sec.year)) {
-                            ForEach(sec.experiences) { exp in
-                                ExperienceRow(experience: exp, selection: $viewModel.selection)
-                            }
-                            .onDelete { indexSet in
-                                indexSet.forEach { index in
-                                    viewModel.delete(experience: sec.experiences[index])
-                                }
-                            }
-                        }
-                    }
-                }
-                .listStyle(.insetGrouped)
+                ExperiencesList(viewModel: viewModel)
                 if !viewModel.hasExperiences {
                     Button(action: {
                         withAnimation {

@@ -227,6 +227,7 @@
 		EAF76CA027D8B72900945587 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9F27D8B72900945587 /* Algorithms */; };
 		EAF76CA127D8E77F00945587 /* Substance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */; };
 		EAF76CA227D8E78500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
+		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -453,6 +454,7 @@
 		EAF76C9527D8952200945587 /* AddResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddResult.swift; sourceTree = "<group>"; };
 		EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AcknowledgeInteractions-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
+		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -895,6 +897,7 @@
 			children = (
 				EAE4718826CBA664009FB0EC /* Experience */,
 				EAE471AA26CBA664009FB0EC /* ExperiencesTab.swift */,
+				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
 				EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
 			);
@@ -1324,6 +1327,7 @@
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
+				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */,
 				EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */,
