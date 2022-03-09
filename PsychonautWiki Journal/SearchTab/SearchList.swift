@@ -19,30 +19,36 @@ struct SearchList<Content: View>: View {
     @Environment(\.isSearching) var isSearching
 
     var body: some View {
-        List {
-            let showRecents = !isSearching && !recentsViewModel.recentSubstances.isEmpty
-            if showRecents {
-                Section("Recently Used") {
-                    ForEach(recentsViewModel.recentSubstances) { sub in
-                        getRowForSubstance(sub)
+        ZStack {
+            List {
+                let showRecents = !isSearching && !recentsViewModel.recentSubstances.isEmpty
+                if showRecents {
+                    Section("Recently Used") {
+                        ForEach(recentsViewModel.recentSubstances) { sub in
+                            getRowForSubstance(sub)
+                        }
+                    }
+                }
+                ForEach(sectionedViewModel.sections) { sec in
+                    Section(sec.sectionName) {
+                        ForEach(sec.substances) { sub in
+                            getRowForSubstance(sub)
+                        }
+                    }
+                }
+                if isEyeOpen {
+                    Section {
+                        EmptyView()
+                    } footer: {
+                        Text(substancesDisclaimer)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
-            ForEach(sectionedViewModel.sections) { sec in
-                Section(sec.sectionName) {
-                    ForEach(sec.substances) { sub in
-                        getRowForSubstance(sub)
-                    }
-                }
-            }
-            if isEyeOpen {
-                Section {
-                    EmptyView()
-                } footer: {
-                    Text(substancesDisclaimer)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
+            if isSearching && sectionedViewModel.sections.isEmpty {
+                Text("No Results")
+                    .foregroundColor(.secondary)
             }
         }
     }
