@@ -102,7 +102,6 @@
 		EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7626E21A7700B4FACF /* ChooseDoseView.swift */; };
 		EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7826E21A8D00B4FACF /* ChooseRouteView.swift */; };
 		EAA2EC7B26E21AB000B4FACF /* ChooseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC7A26E21AB000B4FACF /* ChooseColor.swift */; };
-		EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
 		EAA2EC8026E21D9200B4FACF /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
 		EAB2EDD926EE25FA0020C554 /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDD826EE25FA0020C554 /* IngestionRow.swift */; };
 		EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
@@ -192,7 +191,6 @@
 		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
-		EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */; };
 		EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718B26CBA664009FB0EC /* ExperienceView.swift */; };
 		EAE4720D26CBA664009FB0EC /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718E26CBA664009FB0EC /* LineView.swift */; };
 		EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4719326CBA664009FB0EC /* LineShape.swift */; };
@@ -427,7 +425,6 @@
 		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
-		EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EAE4718B26CBA664009FB0EC /* ExperienceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceView.swift; sourceTree = "<group>"; };
 		EAE4718E26CBA664009FB0EC /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		EAE4719326CBA664009FB0EC /* LineShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
@@ -762,7 +759,6 @@
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
 				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
 				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
-				EAE4718A26CBA664009FB0EC /* InteractionChecker.swift */,
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAF76CA727D90CE500945587 /* Enums */,
@@ -1183,7 +1179,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAA2EC7E26E21CC800B4FACF /* InteractionChecker.swift in Sources */,
 				EAF76CAD27D90F9600945587 /* AdministrationRoute.swift in Sources */,
 				EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */,
 				EACB6E5A27D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
@@ -1299,7 +1294,6 @@
 				EACB6E8727D7493000940291 /* AroundShapeUp.swift in Sources */,
 				EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */,
-				EAE4720A26CBA664009FB0EC /* InteractionChecker.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
 				EAF76C8E27D786DD00945587 /* TimeLabels-ViewModel.swift in Sources */,
