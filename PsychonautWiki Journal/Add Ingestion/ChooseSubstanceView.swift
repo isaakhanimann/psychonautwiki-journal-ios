@@ -29,11 +29,11 @@ struct ChooseSubstanceView: View {
                 }
             }
             .navigationBarTitle("Add Ingestion")
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss(.cancelled)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Cancel") {
+                        dismiss(.cancelled)
+                    }
                 }
             }
         }
