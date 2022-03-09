@@ -2,29 +2,9 @@ import SwiftUI
 
 struct HandleUniversalURLView: View {
 
-    @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
-
     @State private var alertToShow: Alert?
     @State private var isShowingAlert = false
-    @State private var sheetToShow: SheetSelection?
-
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-
-    private enum SheetSelection: Identifiable {
-        case route(substance: Substance, experience: Experience)
-        case dose(route: Roa.AdministrationRoute, substance: Substance, experience: Experience)
-
-        // swiftlint:disable identifier_name
-        var id: String {
-            switch self {
-            case .route(_, _):
-                return "route"
-            case .dose(_, _, _):
-                return "dose"
-            }
-        }
-    }
 
     var body: some View {
         Text("Show Add Substance")
@@ -44,41 +24,6 @@ struct HandleUniversalURLView: View {
                     handleUniversalUrl(universalUrl: url)
                 }
             })
-            .sheet(
-                item: $sheetToShow,
-                onDismiss: {
-                    moc.rollback()
-                },
-                content: { item in
-                    switch item {
-                    case .route(let substance, let experience):
-                        NavigationView {
-                            ChooseRouteView(
-                                substance: substance,
-                                dismiss: {
-                                    self.sheetToShow = nil
-                                },
-                                experience: experience
-                            )
-                        }
-                        .environment(\.managedObjectContext, self.moc)
-                        .environmentObject(calendarWrapper)
-                    case .dose(let route, let substance, let experience):
-                        NavigationView {
-                            ChooseDoseView(
-                                substance: substance,
-                                administrationRoute: route,
-                                dismiss: {
-                                    self.sheetToShow = nil
-                                },
-                                experience: experience
-                            )
-                        }
-                        .environment(\.managedObjectContext, self.moc)
-                        .environmentObject(calendarWrapper)
-                    }
-                }
-            )
     }
 
     private func popToRoot() {
@@ -98,23 +43,7 @@ struct HandleUniversalURLView: View {
     private func handleUniversalUrl(universalUrl: URL) {
         if let substanceName = getSubstanceName(from: universalUrl) {
             if let foundSubstance = PersistenceController.shared.getSubstance(with: substanceName) {
-                let experience = PersistenceController.shared.getOrCreateLatestExperienceWithoutSave()
-                self.alertToShow = Alert(
-                    title: Text("Add \(foundSubstance.nameUnwrapped)?")
-                        .foregroundColor(Color.red)
-                        .font(.title),
-                    message: Text("Replace this"),
-                    primaryButton: .default(
-                        Text("Yes"),
-                        action: {
-                            addSubstance(substance: foundSubstance, addTo: experience)
-                        }
-                    ),
-                    secondaryButton: .cancel({
-                        moc.rollback()
-                    })
-                )
-                self.isShowingAlert = true
+                print(foundSubstance)
             } else {
                 self.alertToShow = Alert(
                     title: Text("No Substance Found"),
@@ -131,16 +60,6 @@ struct HandleUniversalURLView: View {
             )
             self.isShowingAlert = true
         }
-    }
-
-    private func addSubstance(substance: Substance, addTo experience: Experience) {
-        if substance.administrationRoutesUnwrapped.count > 1 {
-            self.sheetToShow = .route(substance: substance, experience: experience)
-        } else {
-            guard let firstRoute = substance.administrationRoutesUnwrapped.first else {return}
-            self.sheetToShow = .dose(route: firstRoute, substance: substance, experience: experience)
-        }
-
     }
 
     private func getSubstanceName(from url: URL) -> String? {

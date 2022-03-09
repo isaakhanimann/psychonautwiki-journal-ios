@@ -1,8 +1,11 @@
 import SwiftUI
+import AlertToast
 
 struct SubstanceView: View {
 
     let substance: Substance
+    @State private var isShowingAddIngestionSheet = false
+    @State private var isShowingSuccessToast = false
 
     var body: some View {
         List {
@@ -53,6 +56,13 @@ struct SubstanceView: View {
                 }
             }
             .accentColor(Color.blue)
+        }
+        .toast(isPresenting: $isShowingSuccessToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: .complete(Color.green),
+                title: "Ingestion Added"
+            )
         }
         .navigationTitle(substance.nameUnwrapped)
         .toolbar {
@@ -139,9 +149,10 @@ struct SubstanceView: View {
         }
     }
 
-    @State private var isShowingAddIngestionSheet = false
-
-    private func dismiss() {
+    private func dismiss(result: AddResult) {
+        if result == .ingestionWasAdded {
+            isShowingSuccessToast.toggle()
+        }
         isShowingAddIngestionSheet.toggle()
     }
 

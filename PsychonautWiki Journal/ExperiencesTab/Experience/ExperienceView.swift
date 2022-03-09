@@ -48,7 +48,7 @@ struct ExperienceView: View {
         }
         .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
             ChooseSubstanceView(
-                dismiss: showOrHideAddIngestionSheet,
+                dismiss: dismiss,
                 experience: experience
             )
                 .accentColor(Color.blue)
@@ -63,6 +63,10 @@ struct ExperienceView: View {
     }
 
     private func showOrHideAddIngestionSheet() {
+        viewModel.isShowingAddIngestionSheet.toggle()
+    }
+
+    private func dismiss(result: AddResult) {
         viewModel.isShowingAddIngestionSheet.toggle()
     }
 

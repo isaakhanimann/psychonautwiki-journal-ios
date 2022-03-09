@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -221,6 +221,8 @@
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
 		EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9127D7A6C400945587 /* InteractionsSection.swift */; };
 		EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */; };
+		EAF76C9627D8952200945587 /* AddResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9527D8952200945587 /* AddResult.swift */; };
+		EAF76C9927D899E700945587 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9827D899E700945587 /* AlertToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -444,6 +446,7 @@
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
 		EAF76C9127D7A6C400945587 /* InteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsSection.swift; sourceTree = "<group>"; };
 		EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseTimeAndColor-ViewModel.swift"; sourceTree = "<group>"; };
+		EAF76C9527D8952200945587 /* AddResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +468,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF76C9927D899E700945587 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,6 +942,7 @@
 				EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */,
 				EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */,
 				EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */,
+				EAF76C9527D8952200945587 /* AddResult.swift */,
 			);
 			path = "Add Ingestion";
 			sourceTree = "<group>";
@@ -1025,6 +1030,7 @@
 			);
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
+				EAF76C9827D899E700945587 /* AlertToast */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -1064,6 +1070,7 @@
 			);
 			mainGroup = EAE470FA26CBA57F009FB0EC;
 			packageReferences = (
+				EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -1310,6 +1317,7 @@
 				EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */,
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
+				EAF76C9627D8952200945587 /* AddResult.swift in Sources */,
 				EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */,
 				EACB6E8F27D7543600940291 /* AroundShapeDown-ViewModel.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
@@ -1733,6 +1741,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EAF76C9827D899E700945587 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {

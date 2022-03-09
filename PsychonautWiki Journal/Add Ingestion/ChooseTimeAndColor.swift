@@ -5,7 +5,7 @@ struct ChooseTimeAndColor: View {
     let substance: Substance
     let administrationRoute: Roa.AdministrationRoute
     let dose: Double
-    let dismiss: () -> Void
+    let dismiss: (AddResult) -> Void
     let experience: Experience?
     @StateObject var viewModel = ViewModel()
 
@@ -58,8 +58,10 @@ struct ChooseTimeAndColor: View {
         }
         .navigationBarTitle("Choose Time")
         .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                Button("Cancel", action: dismiss)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Cancel") {
+                    dismiss(.cancelled)
+                }
             }
         }
     }
@@ -100,7 +102,7 @@ struct ChooseTimeAndColor_Previews: PreviewProvider {
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,
-            dismiss: {},
+            dismiss: {print($0)},
             experience: helper.experiences.first!
         )
     }

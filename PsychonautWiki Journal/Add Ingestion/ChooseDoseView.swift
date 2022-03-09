@@ -4,7 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: Roa.AdministrationRoute
-    let dismiss: () -> Void
+    let dismiss: (AddResult) -> Void
     let experience: Experience?
 
     @State private var selectedDose: Double?
@@ -38,16 +38,19 @@ struct ChooseDoseView: View {
                             .primaryButtonText()
                     }
                 )
-                .padding()
+                    .padding()
             }
         }
         .navigationBarTitle("Choose Dose")
         .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+            ToolbarItem(placement: .keyboard) {
                 if isKeyboardShowing {
                     Button("Done", action: hideKeyboard)
-                } else {
-                    Button("Cancel", action: dismiss)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Cancel") {
+                    dismiss(.cancelled)
                 }
             }
         }
@@ -70,7 +73,7 @@ struct ChooseDoseView_Previews: PreviewProvider {
         ChooseDoseView(
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
-            dismiss: {},
+            dismiss: {print($0)},
             experience: helper.experiences.first!
         )
     }

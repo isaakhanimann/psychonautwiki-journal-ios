@@ -11,13 +11,13 @@ extension ChooseTimeAndColor {
         var substance: Substance?
         var administrationRoute = Roa.AdministrationRoute.allCases.randomElement() ?? Roa.AdministrationRoute.oral
         var dose: Double = 0
-        var dismiss: () -> Void = {}
+        var dismiss: (AddResult) -> Void = {print($0)}
 
         func initialize(
             substance: Substance,
             administrationRoute: Roa.AdministrationRoute,
             dose: Double,
-            dismiss: @escaping () -> Void,
+            dismiss: @escaping (AddResult) -> Void,
             experience: Experience?
         ) {
             self.substance = substance
@@ -57,7 +57,7 @@ extension ChooseTimeAndColor {
                 experience.addToIngestions(ingestion)
                 try? context.save()
             }
-            dismiss()
+            dismiss(.ingestionWasAdded)
         }
 
         func addIngestionToNewExperienceSaveAndDismiss() {
@@ -71,7 +71,7 @@ extension ChooseTimeAndColor {
                 newExperience.addToIngestions(ingestion)
                 try? context.save()
             }
-            dismiss()
+            dismiss(.ingestionWasAdded)
         }
 
         private func createIngestion() -> Ingestion {

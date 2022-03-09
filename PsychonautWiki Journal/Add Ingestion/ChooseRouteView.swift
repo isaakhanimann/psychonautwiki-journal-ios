@@ -3,12 +3,15 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    let dismiss: () -> Void
+    let dismiss: (AddResult) -> Void
     let experience: Experience?
 
     var body: some View {
         List {
             let administrationRoutesUnwrapped = substance.administrationRoutesUnwrapped
+            if administrationRoutesUnwrapped.isEmpty {
+                Text("No Routes Defined by PsychonautWiki")
+            }
             ForEach(administrationRoutesUnwrapped, id: \.self) { route in
                 NavigationLink(
                     route.displayString,
@@ -41,8 +44,10 @@ struct ChooseRouteView: View {
         }
         .navigationBarTitle("Choose Route")
         .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                Button("Cancel", action: dismiss)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Cancel") {
+                    dismiss(.cancelled)
+                }
             }
         }
     }
@@ -54,7 +59,7 @@ struct ChooseRouteView_Previews: PreviewProvider {
         NavigationView {
             ChooseRouteView(
                 substance: helper.substance,
-                dismiss: {},
+                dismiss: {print($0)},
                 experience: helper.experiences.first!
             )
         }

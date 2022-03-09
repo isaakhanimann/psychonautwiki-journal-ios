@@ -4,7 +4,7 @@ struct ChooseSubstanceView: View {
 
     @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    let dismiss: () -> Void
+    let dismiss: (AddResult) -> Void
     let experience: Experience
 
     var body: some View {
@@ -32,7 +32,9 @@ struct ChooseSubstanceView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel", action: dismiss)
+                Button("Cancel") {
+                    dismiss(.cancelled)
+                }
             }
         }
         .searchable(text: $sectionedViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -43,7 +45,7 @@ struct ChooseSubstanceView: View {
 struct ChooseSubstanceView_Previews: PreviewProvider {
     static var previews: some View {
         ChooseSubstanceView(
-            dismiss: {},
+            dismiss: {print($0)},
             experience: PreviewHelper.shared.experiences.first!
         )
     }
