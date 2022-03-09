@@ -42,7 +42,7 @@ struct ExperienceView: View {
         .task {
             viewModel.initialize(experience: experience)
         }
-        .navigationTitle(viewModel.selectedTitle)
+        .navigationTitle(experience.titleUnwrapped)
         .onDisappear {
             PersistenceController.shared.saveViewContext()
         }
