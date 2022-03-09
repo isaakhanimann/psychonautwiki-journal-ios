@@ -27,16 +27,15 @@ struct ExperienceRow: View {
                     .frame(width: 10)
                 VStack(alignment: .leading) {
                     Text(experience.titleUnwrapped)
-                        .font(.headline)
+                        .font(.title2)
                     Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
-                        .font(.footnote)
                         .foregroundColor(.secondary)
                 }
                 Spacer()
                 Text(experience.dateForSorting, format: Date.FormatStyle().day().month())
-                    .font(.footnote)
                     .foregroundColor(.secondary)
             }
+            .padding(.vertical, 5)
         }
     }
 

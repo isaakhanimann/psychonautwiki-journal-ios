@@ -22,7 +22,6 @@ struct ExperiencesList: View {
                 }
             }
         }
-        .listStyle(.insetGrouped)
     }
 }
 
