@@ -95,4 +95,9 @@ extension Ingestion: Comparable {
         guard let duration = substanceUnwrap.getDuration(for: administrationRouteUnwrapped) else {return false}
         return duration.isFullTimeLineDefined
     }
+
+    func getInteraction(with otherSubstance: Substance) -> InteractionType {
+        guard let substanceUnwrapped = substance else { return .none }
+        return substanceUnwrapped.getInteraction(with: otherSubstance)
+    }
 }

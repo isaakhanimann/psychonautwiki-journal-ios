@@ -88,7 +88,6 @@
 		EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */; };
 		EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
 		EAA2EC4726DFCBCF00B4FACF /* Ingestion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */; };
-		EAA2EC4826DFCBCF00B4FACF /* Substance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */; };
 		EAA2EC4926DFCBCF00B4FACF /* SubstancesFile-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */; };
 		EAA2EC4B26DFCBCF00B4FACF /* RoaDose-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715F26CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift */; };
 		EAA2EC5026DFCBE200B4FACF /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
@@ -223,6 +222,11 @@
 		EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */; };
 		EAF76C9627D8952200945587 /* AddResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9527D8952200945587 /* AddResult.swift */; };
 		EAF76C9927D899E700945587 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9827D899E700945587 /* AlertToast */; };
+		EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */; };
+		EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
+		EAF76CA027D8B72900945587 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9F27D8B72900945587 /* Algorithms */; };
+		EAF76CA127D8E77F00945587 /* Substance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */; };
+		EAF76CA227D8E78500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -447,6 +451,8 @@
 		EAF76C9127D7A6C400945587 /* InteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsSection.swift; sourceTree = "<group>"; };
 		EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseTimeAndColor-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76C9527D8952200945587 /* AddResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddResult.swift; sourceTree = "<group>"; };
+		EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AcknowledgeInteractions-ViewModel.swift"; sourceTree = "<group>"; };
+		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +474,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF76CA027D8B72900945587 /* Algorithms in Frameworks */,
 				EAF76C9927D899E700945587 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -860,6 +867,7 @@
 				EAE4716426CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift */,
 				EA47E66B27CA63D000F6E10F /* Effect-CoreDataHelpers.swift */,
 				EACB6DFE27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift */,
+				EAF76C9C27D8B10500945587 /* InteractionType.swift */,
 			);
 			path = CoreDataHelpers;
 			sourceTree = "<group>";
@@ -938,6 +946,7 @@
 			children = (
 				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
 				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
+				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
 				EAE471A526CBA664009FB0EC /* ChooseRouteView.swift */,
 				EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */,
 				EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */,
@@ -1031,6 +1040,7 @@
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
 				EAF76C9827D899E700945587 /* AlertToast */,
+				EAF76C9F27D8B72900945587 /* Algorithms */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -1071,6 +1081,7 @@
 			mainGroup = EAE470FA26CBA57F009FB0EC;
 			packageReferences = (
 				EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -1168,6 +1179,7 @@
 				EAA2EC7926E21A8D00B4FACF /* ChooseRouteView.swift in Sources */,
 				EA48B9A226E802E7003BF667 /* WatchFaceView.swift in Sources */,
 				EA47E64E27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
+				EAF76CA127D8E77F00945587 /* Substance-CoreDataHelpers.swift in Sources */,
 				EAA2EC7726E21A7700B4FACF /* ChooseDoseView.swift in Sources */,
 				EA8447DA27CCD7B100B10DD3 /* SubstanceFilePublisher.swift in Sources */,
 				EAA2EC4526DFCBCF00B4FACF /* Roa-CoreDataHelpers.swift in Sources */,
@@ -1180,7 +1192,6 @@
 				EA9D22A626EB374D00BCF893 /* IngestionObserverView.swift in Sources */,
 				EAA2EC4226DFCBCF00B4FACF /* RoaDuration-CoreDataHelpers.swift in Sources */,
 				EAA2EC3F26DFCBB400B4FACF /* Main.xcdatamodeld in Sources */,
-				EAA2EC4826DFCBCF00B4FACF /* Substance-CoreDataHelpers.swift in Sources */,
 				EAB2EDE626EEB8F30020C554 /* ClockHands.swift in Sources */,
 				EACB6E2E27D00D3A00940291 /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EAA2EC4626DFCBCF00B4FACF /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
@@ -1212,6 +1223,7 @@
 				EA48B99826E7B215003BF667 /* AngleModel.swift in Sources */,
 				EAB2EDE026EEA0D60020C554 /* Collection-Safe.swift in Sources */,
 				EAA2EC5626DFCBFA00B4FACF /* Double-CleanString.swift in Sources */,
+				EAF76CA227D8E78500945587 /* InteractionType.swift in Sources */,
 				EA47E64627CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EA47E65A27CA136C00F6E10F /* RoaRange+CoreDataClass.swift in Sources */,
 				EAA2EC4B26DFCBCF00B4FACF /* RoaDose-CoreDataHelpers.swift in Sources */,
@@ -1331,6 +1343,7 @@
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */,
 				EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */,
+				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
 				EACB6E8927D749CA00940291 /* AroundShapeUp-ViewModel.swift in Sources */,
@@ -1344,6 +1357,7 @@
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
+				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,
@@ -1751,6 +1765,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1758,6 +1780,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		EAF76C9F27D8B72900945587 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -146,6 +146,25 @@ extension Substance: Comparable {
         guard dangerousUnresolvedsUnwrapped.isEmpty else {return true}
         return false
     }
+
+    func getInteraction(with otherSubstance: Substance) -> InteractionType {
+        if dangerousSubstancesUnwrapped.contains(otherSubstance) ||
+            dangerousPsychoactivesContain(substance: otherSubstance) ||
+            dangerousChemicalsContain(substance: otherSubstance) {
+            return .dangerous
+        }
+        if unsafeSubstancesUnwrapped.contains(otherSubstance) ||
+            unsafePsychoactivesContain(substance: otherSubstance) ||
+            unsafeChemicalsContain(substance: otherSubstance) {
+            return .unsafe
+        }
+        if uncertainSubstancesUnwrapped.contains(otherSubstance) ||
+            uncertainPsychoactivesContain(substance: otherSubstance) ||
+            uncertainChemicalsContain(substance: otherSubstance) {
+            return .uncertain
+        }
+        return .none
+    }
 }
 
 extension Substance: SubstanceInteractable {
