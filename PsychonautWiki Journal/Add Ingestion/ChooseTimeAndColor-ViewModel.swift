@@ -16,13 +16,13 @@ extension ChooseTimeAndColor {
         func initialize(
             substance: Substance,
             administrationRoute: AdministrationRoute,
-            dose: Double,
+            dose: Double?,
             dismiss: @escaping (AddResult) -> Void,
             experience: Experience?
         ) {
             self.substance = substance
             self.administrationRoute = administrationRoute
-            self.dose = dose
+            self.dose = dose ?? 0
             self.dismiss = dismiss
             if experience == nil {
                 setLastExperience()

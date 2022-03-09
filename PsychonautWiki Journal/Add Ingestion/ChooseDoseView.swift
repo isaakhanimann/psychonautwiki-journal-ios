@@ -6,63 +6,84 @@ struct ChooseDoseView: View {
     let administrationRoute: AdministrationRoute
     let dismiss: (AddResult) -> Void
     let experience: Experience?
-
-    @State private var selectedDose: Double?
-    @State private var isKeyboardShowing = false
-
+    @StateObject private var viewModel = ViewModel()
     // swiftlint:disable line_length
-    static let doseDisclaimer = "Dosage information is gathered from users and resources such as clinical studies. It is not a recommendation and should be verified with other sources for accuracy."
+    static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Form {
-                Section(footer: Text(Self.doseDisclaimer)
-                ) {
-                    DosePicker(
-                        roaDose: substance.getDose(for: administrationRoute),
-                        doseMaybe: $selectedDose
-                    )
-                }
-            }
-            if let doseDouble = selectedDose, doseDouble != 0 {
-                NavigationLink(
-                    destination: ChooseTimeAndColor(
-                        substance: substance,
-                        administrationRoute: administrationRoute,
-                        dose: doseDouble,
-                        dismiss: dismiss,
-                        experience: experience
-                    ),
-                    label: {
-                        Text("Next")
-                            .primaryButtonText()
-                    }
-                )
-                    .padding()
+        ZStack {
+            regularContent
+                .blur(radius: viewModel.isShowingUnknownDoseAlert ? 10 : 0)
+                .allowsHitTesting(viewModel.isShowingUnknownDoseAlert ? false : true)
+            if viewModel.isShowingUnknownDoseAlert {
+                UnknownDoseAlert(viewModel: viewModel)
             }
         }
         .navigationBarTitle("Choose Dose")
         .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                if isKeyboardShowing {
-                    Button("Done", action: hideKeyboard)
-                }
-            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
                     dismiss(.cancelled)
                 }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
-            withAnimation {
-                isKeyboardShowing = true
+    }
+
+    var regularContent: some View {
+        ZStack(alignment: .bottom) {
+            Form {
+                Section(
+                    header: Text("Pure Dose"),
+                    footer: Text(Self.doseDisclaimer)
+                ) {
+                    let roaDose = substance.getDose(for: administrationRoute)
+                    DoseView(roaDose: roaDose)
+                    DosePicker(
+                        roaDose: roaDose,
+                        doseMaybe: $viewModel.selectedPureDose
+                    )
+                }
+                .listRowSeparator(.hidden)
+                if let impureDoseUnwrap = viewModel.impureDoseRounded {
+                    Section(
+                        header: Text("Purity")
+                    ) {
+                        Stepper(
+                            "\(viewModel.purity.formatted())%",
+                            value: $viewModel.purity,
+                            in: 1...100,
+                            step: 0.1
+                        )
+                        let units = substance.getDose(for: administrationRoute)?.units
+                        HStack {
+                            Text("Raw Amount")
+                            Spacer()
+                            Text(impureDoseUnwrap.formatted() + " " + (units ?? ""))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                Button("Unknown Dose/Purity") {
+                    viewModel.isShowingUnknownDoseAlert.toggle()
+                }
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-            withAnimation {
-                isKeyboardShowing = false
-            }
+            let showNavigation = viewModel.selectedPureDose != nil
+            NavigationLink(
+                destination: ChooseTimeAndColor(
+                    substance: substance,
+                    administrationRoute: administrationRoute,
+                    dose: viewModel.selectedPureDose,
+                    dismiss: dismiss,
+                    experience: experience
+                ),
+                isActive: $viewModel.isShowingNext,
+                label: {
+                    Text("Next")
+                        .primaryButtonText()
+                }
+            )
+                .opacity(showNavigation ? 1 : 0)
+                .padding()
         }
     }
 }

@@ -31,8 +31,12 @@ extension Ingestion: Comparable {
         AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
     }
 
-    var doseUnwrapped: Double {
-        dose
+    var doseUnwrapped: Double? {
+        if dose == 0 {
+            return nil
+        } else {
+            return dose
+        }
     }
 
     var colorUnwrapped: IngestionColor {
@@ -48,7 +52,10 @@ extension Ingestion: Comparable {
     }
 
     var doseInfoString: String {
-        return doseUnwrapped.cleanString + " " + unitsUnwrapped
+        guard let doseUnwrapped = doseUnwrapped else {
+            return "Unknown Dose"
+        }
+        return doseUnwrapped.formatted() + " " + unitsUnwrapped
     }
 
     // Get value between 0 and 1
@@ -61,12 +68,13 @@ extension Ingestion: Comparable {
             return defaultWeight
         }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
-        if doseUnwrapped <= minMax.min {
+        guard let doseDoubleUnwrap = doseUnwrapped else {return defaultWeight}
+        if doseDoubleUnwrap <= minMax.min {
             return 0
-        } else if doseUnwrapped >= minMax.max {
+        } else if doseDoubleUnwrap >= minMax.max {
             return 1
         } else {
-            let doseRelative = doseUnwrapped - minMax.min
+            let doseRelative = doseDoubleUnwrap - minMax.min
             let rangeLength = minMax.max - minMax.min
             return Double(doseRelative / rangeLength)
         }

@@ -9,9 +9,7 @@ struct DosePicker: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if currentRange != nil {
-                dynamicDoseRangeView
-            }
+            dynamicDoseRangeView
             doseTextFieldWithUnit
             if let min = roaDose?.thresholdUnwrapped ?? roaDose?.light?.minUnwrapped,
                let max = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
@@ -101,7 +99,7 @@ struct DosePicker: View {
         HStack {
             TextField("Enter Dose", text: $doseText)
                 .keyboardType(.decimalPad)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseColor)
             Text(roaDose?.units ?? "")
         }
@@ -142,7 +140,7 @@ struct DosePicker: View {
             return Text("heavy (\(heavyOrStrongMax.cleanString) \(units)+)")
                 .foregroundColor(DoseView.heavyColor)
         } else {
-            return Text("")
+            return Text(" ")
         }
     }
 }

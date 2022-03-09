@@ -4,7 +4,7 @@ struct ChooseTimeAndColor: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    let dose: Double
+    let dose: Double?
     let dismiss: (AddResult) -> Void
     let experience: Experience?
     @StateObject var viewModel = ViewModel()
