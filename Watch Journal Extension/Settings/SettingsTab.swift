@@ -8,20 +8,33 @@ struct SettingsTab: View {
     var body: some View {
         NavigationView {
             List {
-                Section(
-                    header: Text("Last Fetch"),
-                    footer: Text("Source: PsychonautWiki").font(.system(size: 11))
-                ) {
+                Section(header: Text("Substances")) {
+                    HStack {
+                        Text("Last Update")
+                        Spacer()
+                        Text(viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "-")
+                            .foregroundColor(.secondary)
+                    }
                     if viewModel.isFetching {
-                        Text("Fetching...")
+                        HStack(spacing: 10) {
+                            ProgressView()
+                            Text("Fetching Substances")
+                                .foregroundColor(.secondary)
+                        }
                     } else {
                         Button {
-                            viewModel.fetchNewSubstances()
+                            Task {
+                                await viewModel.fetchNewSubstances()
+                            }
                         } label: {
-                            Label(
-                                viewModel.substancesFile?.creationDate?.asDateAndTime ?? "No Substances",
-                                systemImage: "arrow.clockwise"
-                            )
+                            Label("Refresh Now", systemImage: "arrow.triangle.2.circlepath")
+                        }
+                        Button {
+                            Task {
+                                await viewModel.resetSubstances()
+                            }
+                        } label: {
+                            Label("Reset Substances", systemImage: "arrow.uturn.left.circle")
                         }
                     }
                 }

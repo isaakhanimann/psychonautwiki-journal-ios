@@ -17,26 +17,15 @@ extension SettingsTab {
             }
         }
 
-        func fetchNewSubstances() {
+        func fetchNewSubstances() async {
             isFetching = true
-            performPsychonautWikiAPIRequest { result in
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    self.isShowingErrorAlert.toggle()
-                    self.isFetching = false
-                case .success(let data):
-                    Task {
-                        do {
-                            try await PersistenceController.shared.decodeAndSaveFile(from: data)
-                        } catch {
-                            assertionFailure("Failed to fetch substances: \(error.localizedDescription)")
-                            self.isShowingErrorAlert = true
-                        }
-                        self.isFetching = false
-                    }
-                }
+            do {
+                let data = try await getPsychonautWikiData()
+                try await PersistenceController.shared.decodeAndSaveFile(from: data)
+            } catch {
+                self.isShowingErrorAlert = true
             }
+            self.isFetching = false
         }
 
         func resetSubstances() async {

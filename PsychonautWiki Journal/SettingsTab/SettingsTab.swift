@@ -60,7 +60,7 @@ struct SettingsTab: View {
                 }
             }
             .navigationTitle("Settings")
-            .toast(isPresenting: $viewModel.isShowingErrorAlert) {
+            .toast(isPresenting: $viewModel.isShowingErrorAlert, duration: 3) {
                 AlertToast(
                     displayMode: .alert,
                     type: .error(Color.red),
@@ -96,20 +96,19 @@ struct SettingsTab: View {
     private var substancesSection: some View {
         Section(header: Text("Substances")) {
             HStack {
-                Text("Last Update")
+                Text("Last Refresh")
                 Spacer()
                 Text(viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "-")
                     .foregroundColor(.secondary)
             }
             if viewModel.isFetching {
-                HStack(spacing: 10) {
-                    ProgressView()
-                    Text("Fetching Substances")
-                        .foregroundColor(.secondary)
-                }
+                Text("Fetching Substances...")
+                    .foregroundColor(.secondary)
             } else {
                 Button {
-                    viewModel.fetchNewSubstances()
+                    Task {
+                        await viewModel.fetchNewSubstances()
+                    }
                 } label: {
                     Label("Refresh Now", systemImage: "arrow.triangle.2.circlepath")
                 }

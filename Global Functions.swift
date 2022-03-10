@@ -36,42 +36,25 @@ func decodeSubstancesFile(
     return try decoder.decode(SubstancesFile.self, from: dataForSubstances)
 }
 
+func refreshSubstances() async throws {
+    let data = try await getPsychonautWikiData()
+    try await PersistenceController.shared.decodeAndSaveFile(from: data)
+}
+
 enum RequestError: Error {
     case badURL
     case noData
+    case invalidServerResponse
 }
 
-func refreshSubstances(completion: @escaping () -> Void) {
-    performPsychonautWikiAPIRequest { result in
-        switch result {
-        case .failure(let error):
-            print(error.localizedDescription)
-            completion()
-        case .success(let data):
-            Task {
-                try? await PersistenceController.shared.decodeAndSaveFile(from: data)
-                completion()
-            }
+func getPsychonautWikiData() async throws -> Data {
+    let request = try getURLRequest()
+    let (data, response) = try await URLSession.shared.data(for: request)
+    guard let httpResponse = response as? HTTPURLResponse,
+          httpResponse.statusCode == 200 else {
+          throw RequestError.invalidServerResponse
         }
-    }
-}
-
-func performPsychonautWikiAPIRequest(completion: @escaping (Result<Data, RequestError>) -> Void) {
-    guard let request = try? getURLRequest() else {
-        completion(.failure(.badURL))
-        return
-    }
-    URLSession.shared.dataTask(with: request) { (data, _, error) in
-        if error != nil {
-            completion(.failure(.badURL))
-            return
-        }
-        guard let data = data else {
-            completion(.failure(.noData))
-            return
-        }
-        completion(.success(data))
-    }.resume()
+    return data
 }
 
 // swiftlint:disable function_body_length

@@ -27,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             queue.cancelAllOperations()
         }
         queue.addOperation {
-            refreshSubstances {
+            Task {
+                try? await refreshSubstances()
                 task.setTaskCompleted(success: true)
             }
         }
