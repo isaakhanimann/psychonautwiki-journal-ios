@@ -35,7 +35,6 @@ struct ExperienceRow: View {
                 Text(experience.dateForSorting, format: Date.FormatStyle().day().month())
                     .foregroundColor(.secondary)
             }
-            .padding(.vertical, 5)
         }
     }
 
