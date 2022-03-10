@@ -119,8 +119,16 @@ struct SubstanceView: View {
         }
     }
 
+    // swiftlint:disable line_length
+    private let effectsDisclaimer = """
+The listed effects are based on anecdotal user reports and the personal analyses of PsychonautWiki contributors. As a result, they should be viewed with a healthy degree of skepticism.
+It is also worth noting that these effects will not necessarily occur in a predictable or reliable manner, although higher doses are more liable to induce the full spectrum of effects. Likewise, adverse effects become increasingly likely with higher doses and may include addiction, severe injury, or death.
+"""
     private var effectSection: some View {
-        Section("Subjective Effects (not exhaustive)") {
+        Section(
+            header: Text("Subjective Effects (not exhaustive)"),
+            footer: Text(effectsDisclaimer)
+        ) {
             ForEach(substance.effectsUnwrapped) { eff in
                 NavigationLink(eff.nameUnwrapped) {
                     EffectView(effect: eff)
