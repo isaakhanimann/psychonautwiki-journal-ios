@@ -1,5 +1,6 @@
 import SwiftUI
 import AlertToast
+import StoreKit
 
 struct SettingsTab: View {
 
@@ -26,27 +27,38 @@ struct SettingsTab: View {
                         }
                     }
                 }
-                if isEyeOpen {
-                    Section(header: Text("Safety")) {
-                        Link(
-                            "Responsible Use",
-                            destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
-                        )
-                    }
+                Section(header: Text("Safety")) {
+                    Link(
+                        "Responsible Use",
+                        destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
+                    )
+                }
 
+                Section("Communication") {
+                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
+                        Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
+                    }
+                    Button {
+                        if let windowScene = (UIApplication
+                                                .shared
+                                                .connectedScenes
+                                                .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                                                .first { $0.isKeyWindow }?.windowScene) {
+                            SKStoreReviewController.requestReview(in: windowScene)
+                        }
+                    } label: {
+                        Label("Rate in App Store", systemImage: "star")
+                    }
+                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
+                        Label("Ask a Question", systemImage: "ellipsis.bubble")
+                    }
                     NavigationLink(
                         destination: FAQView(),
                         label: {
                             Label("Frequently Asked Questions", systemImage: "questionmark.square")
                         }
                     )
-                }
-
-                Section("Communication") {
-                    Link(
-                        "Send Me Feedback & Questions",
-                        destination: URL(string: "https://t.me/isaakhanimann")!
-                    )
+                        .foregroundColor(.accentColor)
                 }
             }
             .navigationTitle("Settings")
