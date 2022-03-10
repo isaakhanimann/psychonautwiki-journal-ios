@@ -10,7 +10,7 @@ class PsychoactiveTests: XCTestCase {
     }
 
     override func tearDown() {
-        PersistenceController.preview.deleteAllSubstances()
+        PersistenceController.preview.deleteAllSubstancesWithSave()
         super.tearDown()
     }
 

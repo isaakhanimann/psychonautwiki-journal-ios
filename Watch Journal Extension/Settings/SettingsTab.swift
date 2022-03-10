@@ -15,18 +15,19 @@ struct SettingsTab: View {
                     if viewModel.isFetching {
                         Text("Fetching...")
                     } else {
-                        Button(action: viewModel.fetchNewSubstances, label: {
+                        Button {
+                            viewModel.fetchNewSubstances()
+                        } label: {
                             Label(
                                 viewModel.substancesFile?.creationDate?.asDateAndTime ?? "No Substances",
                                 systemImage: "arrow.clockwise"
                             )
-                        })
+                        }
                     }
                 }
                 .alert(isPresented: $viewModel.isShowingErrorAlert) {
                     Alert(
-                        title: Text("Fetch Failed"),
-                        message: Text(viewModel.alertMessage),
+                        title: Text("Try Again Later"),
                         dismissButton: .default(Text("Ok"))
                     )
                 }

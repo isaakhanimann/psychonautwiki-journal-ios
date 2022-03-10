@@ -38,15 +38,37 @@ struct PersistenceController {
         }
     }
 
-    func deleteAllSubstances() {
+    func deleteAllSubstancesWithSave() {
+        let backgroundContext = container.newBackgroundContext()
+        backgroundContext.performAndWait {
+            deleteAllSubstancesWithoutSave(context: backgroundContext)
+            if backgroundContext.hasChanges {
+                try? backgroundContext.save()
+            }
+        }
+    }
+
+    func deleteAllSubstancesWithoutSave(context: NSManagedObjectContext) {
         let fetchRequest = Substance.fetchRequest()
         fetchRequest.includesPropertyValues = false
-        let substances = (try? viewContext.fetch(fetchRequest)) ?? []
+        let substances = (try? context.fetch(fetchRequest)) ?? []
         for substance in substances {
-            viewContext.delete(substance)
+            context.delete(substance)
         }
-        if viewContext.hasChanges {
-            try? viewContext.save()
+    }
+
+    func resetAllSubstancesToInitialAndSave() async {
+        let backgroundContext = container.newBackgroundContext()
+        await backgroundContext.perform {
+            deleteAllSubstancesWithoutSave(context: backgroundContext)
+            let data = getInitialData()
+            do {
+                let substancesFile = try decodeSubstancesFile(from: data, with: backgroundContext)
+                substancesFile.creationDate = getCreationDate()
+                try backgroundContext.save()
+            } catch {
+                backgroundContext.rollback()
+            }
         }
     }
 

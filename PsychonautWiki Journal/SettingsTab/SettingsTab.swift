@@ -11,22 +11,7 @@ struct SettingsTab: View {
         NavigationView {
             List {
                 eye
-                Section(header: Text("Last Successfull Substance Fetch")) {
-                    HStack(spacing: 10) {
-                        if viewModel.isFetching {
-                            ProgressView()
-                            Text("Fetching Substances")
-                                .foregroundColor(.secondary)
-                        } else {
-                            Button(action: viewModel.fetchNewSubstances, label: {
-                                Label(
-                                    viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "No Substances",
-                                    systemImage: "arrow.clockwise"
-                                )
-                            })
-                        }
-                    }
-                }
+                substancesSection
                 Section(header: Text("Safety")) {
                     Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
                         Label("Responsible Use", systemImage: "brain")
@@ -107,6 +92,38 @@ struct SettingsTab: View {
         playHapticFeedback()
         Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
+
+    private var substancesSection: some View {
+        Section(header: Text("Substances")) {
+            HStack {
+                Text("Last Update")
+                Spacer()
+                Text(viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "-")
+                    .foregroundColor(.secondary)
+            }
+            if viewModel.isFetching {
+                HStack(spacing: 10) {
+                    ProgressView()
+                    Text("Fetching Substances")
+                        .foregroundColor(.secondary)
+                }
+            } else {
+                Button {
+                    viewModel.fetchNewSubstances()
+                } label: {
+                    Label("Refresh Now", systemImage: "arrow.triangle.2.circlepath")
+                }
+                Button {
+                    Task {
+                        await viewModel.resetSubstances()
+                    }
+                } label: {
+                    Label("Reset Substances", systemImage: "arrow.uturn.left.circle")
+                }
+            }
+        }
+    }
+
 }
 
 struct SettingsView_Previews: PreviewProvider {

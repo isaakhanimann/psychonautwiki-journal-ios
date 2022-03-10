@@ -2,9 +2,9 @@ import Foundation
 import Combine
 
 extension SettingsTab {
+    @MainActor
     class ViewModel: ObservableObject {
         @Published var isShowingErrorAlert = false
-        @Published var alertMessage = ""
         @Published var isFetching = false
         @Published var substancesFile: SubstancesFile?
 
@@ -23,31 +23,26 @@ extension SettingsTab {
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        self.alertMessage = "Request to PsychonautWiki API failed."
-                        self.isShowingErrorAlert.toggle()
-                        self.isFetching = false
-                    }
+                    self.isShowingErrorAlert.toggle()
+                    self.isFetching = false
                 case .success(let data):
                     Task {
-                        await self.tryToDecodeData(data: data)
+                        do {
+                            try await PersistenceController.shared.decodeAndSaveFile(from: data)
+                        } catch {
+                            assertionFailure("Failed to fetch substances: \(error.localizedDescription)")
+                            self.isShowingErrorAlert = true
+                        }
+                        self.isFetching = false
                     }
                 }
             }
         }
 
-        private func tryToDecodeData(data: Data) async {
-            do {
-                try await PersistenceController.shared.decodeAndSaveFile(from: data)
-            } catch {
-                DispatchQueue.main.async {
-                    self.alertMessage = "Not enough substances could be parsed."
-                    self.isShowingErrorAlert.toggle()
-                }
-            }
-            DispatchQueue.main.async {
-                self.isFetching = false
-            }
+        func resetSubstances() async {
+            isFetching = true
+            await PersistenceController.shared.resetAllSubstancesToInitialAndSave()
+            isFetching = false
         }
     }
 }
