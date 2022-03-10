@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
+		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2227637933002EF80B /* QandAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2127637933002EF80B /* QandAView.swift */; };
@@ -279,6 +280,7 @@
 
 /* Begin PBXFileReference section */
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
+		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2127637933002EF80B /* QandAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandAView.swift; sourceTree = "<group>"; };
@@ -858,6 +860,7 @@
 				EACB6E5327D3473600940291 /* String-Regex.swift */,
 				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
 				EACB6E9827D77A2200940291 /* Date-NearestHour.swift */,
+				EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1311,6 +1314,7 @@
 				EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */,
 				EADE46542709AAAD00F1058E /* HorizontalScaleView.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange+CoreDataClass.swift in Sources */,
+				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* ExperiencesTab.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift in Sources */,

@@ -35,15 +35,26 @@ struct SettingsTab: View {
                 }
 
                 Section("Communication") {
+                    Button {
+                        let controller = UIActivityViewController(
+                            activityItems: [
+                                URL(string: "https://apps.apple.com/ch/app/psychonautwiki-journal/id1582059415?l=en")!
+                            ],
+                            applicationActivities: nil
+                        )
+                        UIApplication.shared.currentWindow?.rootViewController?.present(
+                            controller,
+                            animated: true,
+                            completion: nil
+                        )
+                    } label: {
+                        Label("Share With a Friend", systemImage: "square.and.arrow.up")
+                    }
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
                     }
                     Button {
-                        if let windowScene = (UIApplication
-                                                .shared
-                                                .connectedScenes
-                                                .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                                                .first { $0.isKeyWindow }?.windowScene) {
+                        if let windowScene = UIApplication.shared.currentWindow?.windowScene {
                             SKStoreReviewController.requestReview(in: windowScene)
                         }
                     } label: {
