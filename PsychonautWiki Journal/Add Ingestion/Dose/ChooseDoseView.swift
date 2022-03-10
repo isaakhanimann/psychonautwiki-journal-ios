@@ -59,6 +59,7 @@ struct ChooseDoseView: View {
                 Button("Unknown Dose/Purity") {
                     viewModel.isShowingUnknownDoseAlert.toggle()
                 }
+                bottomPadding
             }
             let showNavigation = viewModel.selectedPureDose != nil
             NavigationLink(
@@ -95,6 +96,12 @@ struct ChooseDoseView: View {
             )
         }
         .listRowSeparator(.hidden)
+    }
+
+    var bottomPadding: some View {
+        Section(header: Text("")) {
+            EmptyView()
+        }
     }
 }
 

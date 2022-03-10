@@ -25,6 +25,7 @@ struct AcknowledgeInteractionsView: View {
         ZStack(alignment: .bottom) {
             List {
                 InteractionsSection(substance: substance)
+                bottomPadding
             }
             Button("Next") {
                 viewModel.pressNext()
@@ -49,6 +50,12 @@ struct AcknowledgeInteractionsView: View {
             }
         }
         .navigationBarTitle(substance.nameUnwrapped)
+    }
+
+    var bottomPadding: some View {
+        Section(header: Text("")) {
+            EmptyView()
+        }
     }
 }
 
