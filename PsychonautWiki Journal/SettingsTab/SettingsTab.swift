@@ -69,6 +69,10 @@ struct SettingsTab: View {
                     )
                         .foregroundColor(.accentColor)
                 }
+                Section {
+                    Text("Version 1.0.6")
+                        .foregroundColor(.secondary)
+                }
             }
             .navigationTitle("Settings")
             .toast(isPresenting: $viewModel.isShowingErrorAlert) {
