@@ -51,7 +51,7 @@ struct DoseView: View {
         || lightMaxOrCommonMin != nil
         || commonMaxOrStrongMin != nil
         || strongMaxOrHeavy != nil
-        if showDoseView {
+        if showDoseView && roaDose?.unitsUnwrapped != nil {
             HStack(alignment: .top, spacing: 0) {
                 if let threshOrLightMin = threshOrLightMin {
                     Spacer(minLength: 0)

@@ -5,6 +5,7 @@ struct ChooseTimeAndColor: View {
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dose: Double?
+    let units: String?
     let dismiss: (AddResult) -> Void
     let experience: Experience?
     @StateObject var viewModel = ViewModel()
@@ -48,13 +49,15 @@ struct ChooseTimeAndColor: View {
             }
         }
         .task {
-            viewModel.initialize(
-                substance: substance,
-                administrationRoute: administrationRoute,
-                dose: dose,
-                dismiss: dismiss,
-                experience: experience
-            )
+            viewModel.substance = substance
+            viewModel.administrationRoute = administrationRoute
+            viewModel.dose = dose ?? 0
+            viewModel.units = units
+            viewModel.dismiss = dismiss
+            if experience == nil {
+                viewModel.setLastExperience()
+            }
+            viewModel.setDefaultColor()
         }
         .navigationBarTitle("Choose Time")
         .toolbar {
@@ -102,6 +105,7 @@ struct ChooseTimeAndColor_Previews: PreviewProvider {
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,
+            units: "mg",
             dismiss: {print($0)},
             experience: helper.experiences.first!
         )

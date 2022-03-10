@@ -14,8 +14,11 @@ struct EditIngestionView: View {
             routeSection
             Section(
                 header: Text("\(viewModel.selectedAdministrationRoute.rawValue) Dose"),
-                footer: Text(ChooseDoseView.doseDisclaimer)
+                footer: Text(viewModel.roaDose?.unitsUnwrapped != nil ? ChooseDoseView.doseDisclaimer : "")
             ) {
+                if viewModel.roaDose?.unitsUnwrapped == nil {
+                    UnitsPicker(units: $viewModel.selectedUnits)
+                }
                 DoseView(roaDose: viewModel.roaDose)
                 DosePicker(
                     roaDose: viewModel.roaDose,

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2227637933002EF80B /* QandAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2127637933002EF80B /* QandAView.swift */; };
@@ -277,6 +278,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2127637933002EF80B /* QandAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QandAView.swift; sourceTree = "<group>"; };
@@ -478,6 +480,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA095A1027D9E3D0007D44D6 /* Dose */ = {
+			isa = PBXGroup;
+			children = (
+				EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */,
+				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
+				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
+				EAF76CC127D9669200945587 /* UnknownDoseAlert.swift */,
+			);
+			path = Dose;
+			sourceTree = "<group>";
+		};
+		EA095A1127D9E3E8007D44D6 /* Time and Color */ = {
+			isa = PBXGroup;
+			children = (
+				EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */,
+				EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */,
+			);
+			path = "Time and Color";
+			sourceTree = "<group>";
+		};
+		EA095A1227D9E400007D44D6 /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
+				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
+				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
+			);
+			path = Interactions;
+			sourceTree = "<group>";
+		};
 		EA460D202763790C002EF80B /* FAQ */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,15 +958,10 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
-				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
-				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
-				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
+				EA095A1227D9E400007D44D6 /* Interactions */,
 				EAE471A526CBA664009FB0EC /* ChooseRouteView.swift */,
-				EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */,
-				EAF76CC127D9669200945587 /* UnknownDoseAlert.swift */,
-				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
-				EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */,
-				EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */,
+				EA095A1027D9E3D0007D44D6 /* Dose */,
+				EA095A1127D9E3E8007D44D6 /* Time and Color */,
 				EAF76C9527D8952200945587 /* AddResult.swift */,
 			);
 			path = "Add Ingestion";
@@ -1346,6 +1373,7 @@
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
+				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,

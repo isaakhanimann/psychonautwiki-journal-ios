@@ -3,6 +3,13 @@ import CoreData
 
 extension RoaDose {
 
+    var unitsUnwrapped: String? {
+        if let unwrap = units, unwrap != "" {
+            return unwrap
+        }
+        return nil
+    }
+
     var thresholdUnwrapped: Double? {
         threshold == 0 ? nil : threshold
     }

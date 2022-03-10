@@ -7,7 +7,7 @@ extension EditIngestionView {
             didSet {
                 ingestion?.administrationRoute = selectedAdministrationRoute.rawValue
                 if let newUnits = ingestion?.substance?.getDose(for: selectedAdministrationRoute)?.units {
-                    ingestion?.units = newUnits
+                    selectedUnits = newUnits
                 }
             }
         }
@@ -16,6 +16,11 @@ extension EditIngestionView {
                 if let doseDouble = selectedDose {
                     ingestion?.dose = doseDouble
                 }
+            }
+        }
+        @Published var selectedUnits: String? {
+            didSet {
+                ingestion?.units = selectedUnits
             }
         }
         @Published var selectedColor: IngestionColor = .blue {
@@ -44,6 +49,7 @@ extension EditIngestionView {
             self.ingestion = ingestion
             self.selectedAdministrationRoute = ingestion.administrationRouteUnwrapped
             self.selectedDose = ingestion.doseUnwrapped
+            self.selectedUnits = ingestion.unitsUnwrapped
             self.selectedColor = ingestion.colorUnwrapped
             self.selectedTime = ingestion.timeUnwrapped
             self.selectedName = ingestion.substanceNameUnwrapped

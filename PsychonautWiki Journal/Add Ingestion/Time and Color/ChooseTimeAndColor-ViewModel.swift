@@ -11,24 +11,8 @@ extension ChooseTimeAndColor {
         var substance: Substance?
         var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
         var dose: Double = 0
+        var units: String?
         var dismiss: (AddResult) -> Void = {print($0)}
-
-        func initialize(
-            substance: Substance,
-            administrationRoute: AdministrationRoute,
-            dose: Double?,
-            dismiss: @escaping (AddResult) -> Void,
-            experience: Experience?
-        ) {
-            self.substance = substance
-            self.administrationRoute = administrationRoute
-            self.dose = dose ?? 0
-            self.dismiss = dismiss
-            if experience == nil {
-                setLastExperience()
-            }
-            setDefaultColor()
-        }
 
         func setLastExperience() {
             let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
@@ -80,7 +64,7 @@ extension ChooseTimeAndColor {
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
             ingestion.dose = dose
-            ingestion.units = substance?.getDose(for: administrationRoute)?.units
+            ingestion.units = units
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substance?.nameUnwrapped
             ingestion.color = selectedColor.rawValue

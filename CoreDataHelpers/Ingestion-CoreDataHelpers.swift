@@ -47,15 +47,19 @@ extension Ingestion: Comparable {
         colorUnwrapped.swiftUIColor
     }
 
-    var unitsUnwrapped: String {
-        units ?? ""
+    var unitsUnwrapped: String? {
+        if let unwrap = units, unwrap != "" {
+            return unwrap
+        }
+        return nil
     }
 
     var doseInfoString: String {
-        guard let doseUnwrapped = doseUnwrapped else {
+        guard let doseUnwrapped = doseUnwrapped,
+              let unitsUnwrap = unitsUnwrapped else {
             return "Unknown Dose"
         }
-        return doseUnwrapped.formatted() + " " + unitsUnwrapped
+        return doseUnwrapped.formatted() + " " + unitsUnwrap
     }
 
     // Get value between 0 and 1

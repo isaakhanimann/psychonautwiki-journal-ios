@@ -27,23 +27,16 @@ struct ChooseDoseView: View {
                 }
             }
         }
+        .task {
+            let routeUnits = substance.getDose(for: administrationRoute)?.units
+            viewModel.initializeUnits(routeUnits: routeUnits)
+        }
     }
 
     var regularContent: some View {
         ZStack(alignment: .bottom) {
             Form {
-                Section(
-                    header: Text("Pure Dose"),
-                    footer: Text(Self.doseDisclaimer)
-                ) {
-                    let roaDose = substance.getDose(for: administrationRoute)
-                    DoseView(roaDose: roaDose)
-                    DosePicker(
-                        roaDose: roaDose,
-                        doseMaybe: $viewModel.selectedPureDose
-                    )
-                }
-                .listRowSeparator(.hidden)
+                doseSection
                 if let impureDoseUnwrap = viewModel.impureDoseRounded {
                     Section(
                         header: Text("Purity")
@@ -73,6 +66,7 @@ struct ChooseDoseView: View {
                     substance: substance,
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,
+                    units: viewModel.selectedUnits,
                     dismiss: dismiss,
                     experience: experience
                 ),
@@ -85,6 +79,24 @@ struct ChooseDoseView: View {
                 .opacity(showNavigation ? 1 : 0)
                 .padding()
         }
+    }
+
+    var doseSection: some View {
+        let roaDose = substance.getDose(for: administrationRoute)
+        return Section(
+            header: Text("Pure Dose"),
+            footer: Text(roaDose?.unitsUnwrapped != nil ? Self.doseDisclaimer : "")
+        ) {
+            if roaDose?.unitsUnwrapped == nil {
+                UnitsPicker(units: $viewModel.selectedUnits)
+            }
+            DoseView(roaDose: roaDose)
+            DosePicker(
+                roaDose: roaDose,
+                doseMaybe: $viewModel.selectedPureDose
+            )
+        }
+        .listRowSeparator(.hidden)
     }
 }
 
