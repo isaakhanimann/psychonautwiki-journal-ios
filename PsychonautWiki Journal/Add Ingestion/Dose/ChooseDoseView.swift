@@ -87,13 +87,11 @@ struct ChooseDoseView: View {
             header: Text("Pure Dose"),
             footer: Text(roaDose?.unitsUnwrapped != nil ? Self.doseDisclaimer : "")
         ) {
-            if roaDose?.unitsUnwrapped == nil {
-                UnitsPicker(units: $viewModel.selectedUnits)
-            }
             DoseView(roaDose: roaDose)
             DosePicker(
                 roaDose: roaDose,
-                doseMaybe: $viewModel.selectedPureDose
+                doseMaybe: $viewModel.selectedPureDose,
+                selectedUnits: $viewModel.selectedUnits
             )
         }
         .listRowSeparator(.hidden)

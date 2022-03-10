@@ -4,18 +4,23 @@ struct DosePicker: View {
 
     let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
+    @Binding var selectedUnits: String?
     @State private var doseText = ""
     @State private var dose: Double = 0
 
     var body: some View {
         VStack(alignment: .leading) {
-            if roaDose?.unitsUnwrapped != nil {
+            let areUnitsDefined = roaDose?.unitsUnwrapped != nil
+            if !areUnitsDefined {
+                UnitsPicker(units: $selectedUnits)
+            }
+            if areUnitsDefined {
                 dynamicDoseRangeView
             }
             doseTextFieldWithUnit
             if let min = roaDose?.thresholdUnwrapped ?? roaDose?.light?.minUnwrapped,
                let max = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
-               min < max, roaDose?.unitsUnwrapped != nil {
+               min < max, areUnitsDefined {
                 getDoseSlider(min: min, max: max)
             }
         }
@@ -103,7 +108,7 @@ struct DosePicker: View {
                 .keyboardType(.decimalPad)
                 .textFieldStyle(.roundedBorder)
                 .foregroundColor(roaDose?.units != nil ? doseColor : .primary)
-            Text(roaDose?.units ?? "")
+            Text(selectedUnits ?? "")
         }
         .font(.title)
         .onChange(of: doseText) { _ in
@@ -155,7 +160,8 @@ struct DosePicker_Previews: PreviewProvider {
             DosePicker(
                 roaDose: substance.getDose(
                     for: substance.administrationRoutesUnwrapped.first!),
-                doseMaybe: .constant(nil)
+                doseMaybe: .constant(nil),
+                selectedUnits: .constant("mg")
             )
         }
     }
