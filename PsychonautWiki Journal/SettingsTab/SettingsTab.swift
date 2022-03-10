@@ -28,12 +28,10 @@ struct SettingsTab: View {
                     }
                 }
                 Section(header: Text("Safety")) {
-                    Link(
-                        "Responsible Use",
-                        destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
-                    )
+                    Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
+                        Label("Responsible Use", systemImage: "brain")
+                    }
                 }
-
                 Section("Communication") {
                     Button {
                         let controller = UIActivityViewController(
