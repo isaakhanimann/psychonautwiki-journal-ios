@@ -19,7 +19,7 @@ struct DurationView: View {
         if isTotalOrAfterglowDefined || isPartOfCurveDefined {
             VStack(alignment: .leading, spacing: 0) {
                 if let total = duration?.total?.displayString {
-                    Text("Total: \(total)")
+                    Text("Total Duration: \(total)")
                 }
                 if let afterglow = duration?.afterglow?.displayString {
                     Text("After effects: \(afterglow)")

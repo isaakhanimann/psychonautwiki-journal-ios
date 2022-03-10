@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AllTabs: View {
 
-    @State private var tabSelection = TabSelection.experience
+    @State private var tabSelection = TabSelection.search
     @State private var tappedTwice: Bool = false
     @State private var experienceID = UUID()
     @State private var searchID = UUID()
@@ -29,7 +29,7 @@ struct AllTabs: View {
                 .tag(TabSelection.experience)
                 .tabItem {
                     Image(systemName: "books.vertical")
-                    Text("Your Experiences")
+                    Text("Experiences")
                 }
             SearchTab()
                 .id(searchID)

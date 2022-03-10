@@ -50,7 +50,7 @@ struct WelcomeScreen: View {
                     .foregroundColor(.secondary)
 
                 Button("I understand", action: dismiss)
-                    .buttonStyle(PrimaryButtonStyle())
+                    .buttonStyle(.primary)
             }
             .padding()
             .navigationBarHidden(true)

@@ -6,6 +6,7 @@ struct EffectView: View {
 
     var body: some View {
         List {
+            ArticleURLLink(articleURL: effect.url)
             Section("Substances with this effect") {
                 ForEach(effect.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -15,9 +16,6 @@ struct EffectView: View {
             }
         }
         .navigationTitle(effect.nameUnwrapped)
-        .toolbar {
-            ArticleToolbarItem(articleURL: effect.url)
-        }
     }
 }
 

@@ -37,6 +37,12 @@ struct ChooseDoseView: View {
         ZStack(alignment: .bottom) {
             Form {
                 doseSection
+                Button("Unknown Dose/Purity") {
+                    viewModel.isShowingUnknownDoseAlert.toggle()
+                }
+                .buttonStyle(.primary)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
                 if let impureDoseUnwrap = viewModel.impureDoseRounded {
                     Section(
                         header: Text("Purity")
@@ -55,9 +61,6 @@ struct ChooseDoseView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                }
-                Button("Unknown Dose/Purity") {
-                    viewModel.isShowingUnknownDoseAlert.toggle()
                 }
                 bottomPadding
             }

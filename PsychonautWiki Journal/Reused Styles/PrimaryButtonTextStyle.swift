@@ -4,7 +4,7 @@ struct PrimaryButtonTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.vertical)
-            .frame(maxWidth: .infinity, minHeight: 44)
+            .frame(maxWidth: 500, minHeight: 44)
             .background(Color.accentColor)
             .foregroundColor(.white)
             .cornerRadius(10)

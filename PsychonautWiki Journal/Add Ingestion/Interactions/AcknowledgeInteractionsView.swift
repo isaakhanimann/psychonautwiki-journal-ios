@@ -30,7 +30,7 @@ struct AcknowledgeInteractionsView: View {
             Button("Next") {
                 viewModel.pressNext()
             }
-            .buttonStyle(PrimaryButtonStyle())
+            .buttonStyle(.primary)
             .padding()
             NavigationLink("Next", isActive: $viewModel.isShowingNext) {
                 ChooseRouteView(

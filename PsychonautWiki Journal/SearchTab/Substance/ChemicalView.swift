@@ -6,6 +6,7 @@ struct ChemicalView: View {
 
     var body: some View {
         List {
+            ArticleURLLink(articleURL: chemical.url)
             Section("Substances in this chemical class") {
                 ForEach(chemical.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -31,9 +32,6 @@ struct ChemicalView: View {
             }
         }
         .navigationTitle(chemical.nameUnwrapped)
-        .toolbar {
-            ArticleToolbarItem(articleURL: chemical.url)
-        }
     }
 }
 

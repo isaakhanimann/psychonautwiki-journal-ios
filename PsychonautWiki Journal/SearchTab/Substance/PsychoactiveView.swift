@@ -6,6 +6,7 @@ struct PsychoactiveView: View {
 
     var body: some View {
         List {
+            ArticleURLLink(articleURL: psychoactive.url)
             Section("Substances in this psychoactive class") {
                 ForEach(psychoactive.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -31,9 +32,6 @@ struct PsychoactiveView: View {
             }
         }
         .navigationTitle(psychoactive.nameUnwrapped)
-        .toolbar {
-            ArticleToolbarItem(articleURL: psychoactive.url)
-        }
     }
 }
 

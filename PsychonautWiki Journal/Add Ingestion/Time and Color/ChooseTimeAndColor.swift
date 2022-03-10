@@ -28,7 +28,7 @@ struct ChooseTimeAndColor: View {
                 Button("Add Ingestion") {
                     viewModel.addIngestionSaveAndDismiss(to: experienceUnwrap)
                 }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(.primary)
                 .padding()
             } else {
                 VStack {
@@ -45,7 +45,7 @@ struct ChooseTimeAndColor: View {
                     }
                     .padding()
                 }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(.primary)
             }
         }
         .task {
@@ -59,7 +59,7 @@ struct ChooseTimeAndColor: View {
             }
             viewModel.setDefaultColor()
         }
-        .navigationBarTitle("Choose Time")
+        .navigationBarTitle("Ingestion Time")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

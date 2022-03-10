@@ -9,6 +9,7 @@ struct SubstanceView: View {
 
     var body: some View {
         List {
+            ArticleURLLink(articleURL: substance.url)
             if let addictionPotential = substance.addictionPotentialUnwrapped {
                 Section("Addiction Potential") {
                     Text(addictionPotential)
@@ -66,7 +67,6 @@ struct SubstanceView: View {
         }
         .navigationTitle(substance.nameUnwrapped)
         .toolbar {
-            ArticleToolbarItem(articleURL: substance.url)
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Ingest", action: ingest)
             }

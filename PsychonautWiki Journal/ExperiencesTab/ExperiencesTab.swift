@@ -17,7 +17,7 @@ struct ExperiencesTab: View {
                         Label("Add Experience", systemImage: "plus")
 
                     })
-                        .buttonStyle(PrimaryButtonStyle())
+                        .buttonStyle(.primary)
                         .padding()
                 }
             }
