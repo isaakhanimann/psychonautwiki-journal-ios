@@ -42,8 +42,6 @@ func refreshSubstances() async throws {
 }
 
 enum RequestError: Error {
-    case badURL
-    case noData
     case invalidServerResponse
 }
 
