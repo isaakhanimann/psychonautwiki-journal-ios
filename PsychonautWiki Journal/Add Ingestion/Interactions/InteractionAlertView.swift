@@ -18,13 +18,23 @@ struct InteractionAlertView: View {
         .padding(.horizontal, 20)
     }
 
+    var iconColor: Color {
+        if !viewModel.dangerousIngestions.isEmpty {
+            return Color.red
+        } else if !viewModel.unsafeIngestions.isEmpty {
+            return Color.orange
+        } else {
+            return Color.yellow
+        }
+    }
+
     var title: some View {
         VStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 50, height: 50)
-                .foregroundColor(.red)
+                .foregroundColor(iconColor)
             Text("Interaction Detected")
                 .font(.title.bold())
         }
@@ -62,11 +72,11 @@ struct InteractionAlertView: View {
         var result = Text("")
         switch type {
         case .uncertain:
-            result = Text("**Uncertain Interaction**").foregroundColor(.yellow)
+            result = Text("**Uncertain Interaction**")
         case .unsafe:
-            result = Text("**Unsafe Interaction**").foregroundColor(.orange)
+            result = Text("**Unsafe Interaction**")
         case .dangerous:
-            result = Text("**Dangerous Interaction**").foregroundColor(.red)
+            result = Text("**Dangerous Interaction**")
         case .none:
             break
         }
