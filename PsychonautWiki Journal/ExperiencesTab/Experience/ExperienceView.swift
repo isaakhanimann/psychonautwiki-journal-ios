@@ -34,9 +34,7 @@ struct ExperienceView: View {
                     }
                 }
             }
-            Section(header: Text("Notes")) {
-                TextEditor(text: $viewModel.writtenText)
-            }
+            noteSection
             CalendarSection(experience: experience)
         }
         .task {
@@ -58,6 +56,16 @@ struct ExperienceView: View {
                 if !experience.sortedIngestionsUnwrapped.isEmpty {
                     EditButton()
                 }
+            }
+        }
+    }
+
+    private var noteSection: some View {
+        Section(header: Text("Notes")) {
+            ZStack {
+                TextEditor(text: $viewModel.writtenText)
+                // this makes sure that the texteditor has a dynamic height
+                Text(viewModel.writtenText).opacity(0).padding(.all, 8)
             }
         }
     }
