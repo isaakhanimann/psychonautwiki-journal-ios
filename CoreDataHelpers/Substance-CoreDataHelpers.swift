@@ -311,4 +311,25 @@ extension Substance: SubstanceInteractable {
             psy.containsSubstance(substance: substance)
         }
     }
+
+    var hasDangerousInteractionsToShow: Bool {
+        !dangerousSubstancesToShow.isEmpty ||
+        !dangerousPsychoactivesToShow.isEmpty ||
+        !dangerousChemicalsToShow.isEmpty ||
+        !dangerousUnresolvedsToShow.isEmpty
+    }
+
+    var hasUnsafeInteractionsToShow: Bool {
+        !unsafeSubstancesToShow.isEmpty ||
+        !unsafePsychoactivesToShow.isEmpty ||
+        !unsafeChemicalsToShow.isEmpty ||
+        !unsafeUnresolvedsToShow.isEmpty
+    }
+
+    var hasUncertainInteractionsToShow: Bool {
+        !uncertainSubstancesToShow.isEmpty ||
+        !uncertainPsychoactivesToShow.isEmpty ||
+        !uncertainChemicalsToShow.isEmpty ||
+        !uncertainUnresolvedsToShow.isEmpty
+    }
 }
