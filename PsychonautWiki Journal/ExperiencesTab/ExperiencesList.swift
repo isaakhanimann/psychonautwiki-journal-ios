@@ -18,6 +18,9 @@ struct ExperiencesList: View {
                         indexSet.forEach { index in
                             viewModel.delete(experience: sec.experiences[index])
                         }
+                        if viewModel.sections.isEmpty {
+                            mode?.wrappedValue = .inactive
+                        }
                     }
                 }
             }
