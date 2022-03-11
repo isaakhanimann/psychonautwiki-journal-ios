@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum IngestionColor: String, CaseIterable {
-    case blue, green, orange, pink, purple, red, yellow
+    case blue, brown, cyan, green, indigo, mint, orange, pink, purple, red, teal, yellow
 
     var swiftUIColor: Color {
         switch self {
@@ -19,6 +19,16 @@ enum IngestionColor: String, CaseIterable {
             return Color.red
         case .yellow:
             return Color.yellow
+        case .brown:
+            return Color.brown
+        case .cyan:
+            return Color.cyan
+        case .indigo:
+            return Color.indigo
+        case .mint:
+            return Color.mint
+        case .teal:
+            return Color.teal
         }
     }
 }
