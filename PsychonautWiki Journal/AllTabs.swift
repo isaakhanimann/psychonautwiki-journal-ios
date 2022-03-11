@@ -2,14 +2,14 @@ import SwiftUI
 
 struct AllTabs: View {
 
-    @State private var tabSelection = TabSelection.search
+    @State private var tabSelection = TabSelection.substances
     @State private var tappedTwice: Bool = false
     @State private var experienceID = UUID()
     @State private var searchID = UUID()
     @State private var settingsID = UUID()
 
     enum TabSelection {
-        case experience, search, settings
+        case experience, substances, settings
     }
 
     var body: some View {
@@ -33,10 +33,10 @@ struct AllTabs: View {
                 }
             SearchTab()
                 .id(searchID)
-                .tag(TabSelection.search)
+                .tag(TabSelection.substances)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
-                    Text("Search")
+                    Text("Substances")
                 }
             SettingsTab()
                 .id(settingsID)
@@ -53,7 +53,7 @@ struct AllTabs: View {
                 switch tabSelection {
                 case .experience:
                     reloadExperienceTab()
-                case .search:
+                case .substances:
                     reloadSearchTab()
                 case .settings:
                     reloadSettingsTab()
