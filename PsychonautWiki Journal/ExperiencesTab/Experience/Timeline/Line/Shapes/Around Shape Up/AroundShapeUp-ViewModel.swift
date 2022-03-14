@@ -11,12 +11,13 @@ extension AroundShapeUp {
         let insetIndex: Int
         let lineWidth: Double
 
-        init?(timelineContext: IngestionWithTimelineContext,
-              lineWidth: Double
+        init?(
+            timelineContext: IngestionWithTimelineContext,
+            ingestion: Ingestion,
+            lineWidth: Double
         ) {
             self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            let ingestion = timelineContext.ingestion
             guard let roaDuration = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped) else {
                 return nil
             }

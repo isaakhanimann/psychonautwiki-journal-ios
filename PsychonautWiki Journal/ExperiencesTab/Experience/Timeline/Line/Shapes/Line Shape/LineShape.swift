@@ -2,16 +2,12 @@ import SwiftUI
 
 struct LineShape: Shape {
 
-    let viewModel: ViewModel?
+    let ingestionWithTimelineContext: IngestionWithTimelineContext
+    let lineWidth: Double
+    @ObservedObject var ingestion: Ingestion
 
-    init(
-        ingestionWithTimelineContext: IngestionWithTimelineContext,
-        lineWidth: Double
-    ) {
-        self.viewModel = ViewModel(
-            timelineContext: ingestionWithTimelineContext,
-            lineWidth: lineWidth
-        )
+    var viewModel: ViewModel? {
+        ViewModel(timelineContext: ingestionWithTimelineContext, ingestion: ingestion, lineWidth: lineWidth)
     }
 
     func path(in rect: CGRect) -> Path {

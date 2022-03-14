@@ -22,7 +22,7 @@ struct ExperienceView: View {
             if !experience.sortedIngestionsToDraw.isEmpty {
                 Section(header: Text("Timeline")) {
                     HorizontalScaleView {
-                        IngestionTimeLineView(sortedIngestions: experience.sortedIngestionsToDraw)
+                        IngestionTimeLineView(experience: experience)
                     }
                     .frame(height: 310)
                 }

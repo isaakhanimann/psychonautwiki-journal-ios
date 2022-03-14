@@ -2,38 +2,43 @@ import SwiftUI
 
 struct IngestionTimeLineView: View {
 
-    let viewModel: ViewModel
-
-    init(sortedIngestions: [Ingestion]) {
-        self.viewModel = ViewModel(sortedIngestions: sortedIngestions)
-    }
+    @ObservedObject var experience: Experience
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         GeometryReader { geoOut in
             VStack {
-                GeometryReader { geoIn in
-                    ZStack(alignment: .bottom) {
-                        ForEach(0..<viewModel.lineModels.count, id: \.self) { index in
-                            LineView(ingestionWithTimelineContext: viewModel.lineModels[index])
-                        }
-                        .frame(width: geoOut.size.width, height: geoIn.size.height)
-                        CurrentTimeView(
-                            startTime: viewModel.startTime,
-                            endTime: viewModel.endTime
-                        )
+                if let startTime = viewModel.startTime, let endTime = viewModel.endTime {
+                    GeometryReader { geoIn in
+                        ZStack(alignment: .bottom) {
+                            ForEach(0..<viewModel.ingestionContexts.count, id: \.self) { index in
+                                LineView(
+                                    ingestionWithTimelineContext: viewModel.ingestionContexts[index],
+                                    ingestion: viewModel.ingestionContexts[index].ingestion
+                                )
+                            }
                             .frame(width: geoOut.size.width, height: geoIn.size.height)
+                            CurrentTimeView(
+                                startTime: startTime,
+                                endTime: endTime
+                            )
+                                .frame(width: geoOut.size.width, height: geoIn.size.height)
+                        }
                     }
+                    TimeLabels(
+                        startTime: startTime,
+                        endTime: endTime,
+                        totalWidth: geoOut.size.width
+                    )
+                        .position(x: 0, y: 0)
+                        .frame(width: geoOut.size.width)
+                        .padding(.top, 5)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                TimeLabels(
-                    startTime: viewModel.startTime,
-                    endTime: viewModel.endTime,
-                    totalWidth: geoOut.size.width
-                )
-                    .position(x: 0, y: 0)
-                    .frame(width: geoOut.size.width)
-                    .padding(.top, 5)
-                    .fixedSize(horizontal: false, vertical: true)
             }
+        }
+        .task {
+            viewModel.setupFetchRequestPredicateAndFetch(experience: experience)
         }
     }
 }
@@ -41,7 +46,7 @@ struct IngestionTimeLineView: View {
 struct TimeLineContent_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            IngestionTimeLineView(sortedIngestions: PreviewHelper.shared.experiences.first!.sortedIngestionsUnwrapped)
+            IngestionTimeLineView(experience: PreviewHelper.shared.experiences.first!)
                 .frame(height: 300)
         }
     }
