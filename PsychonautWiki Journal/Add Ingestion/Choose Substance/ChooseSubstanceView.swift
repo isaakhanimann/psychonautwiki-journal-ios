@@ -3,31 +3,16 @@ import SwiftUI
 struct ChooseSubstanceView: View {
 
     @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
-    @StateObject var recentsViewModel = RecentSubstancesViewModel()
     let dismiss: (AddResult) -> Void
     let experience: Experience
 
     var body: some View {
         NavigationView {
-            SearchList(sectionedViewModel: sectionedViewModel,
-                       recentsViewModel: recentsViewModel
-            ) { sub in
-                NavigationLink(sub.nameUnwrapped) {
-                    if sub.hasAnyInteractions {
-                        AcknowledgeInteractionsView(
-                            substance: sub,
-                            dismiss: dismiss,
-                            experience: experience
-                        )
-                    } else {
-                        ChooseRouteView(
-                            substance: sub,
-                            dismiss: dismiss,
-                            experience: experience
-                        )
-                    }
-                }
-            }
+            ChooseSubstanceList(
+                sectionedViewModel: sectionedViewModel,
+                experience: experience,
+                dismiss: dismiss
+            )
             .navigationBarTitle("Add Ingestion")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

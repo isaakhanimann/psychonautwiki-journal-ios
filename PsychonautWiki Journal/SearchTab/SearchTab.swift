@@ -3,17 +3,10 @@ import SwiftUI
 struct SearchTab: View {
 
     @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
-    @StateObject var recentsViewModel = RecentSubstancesViewModel()
 
     var body: some View {
         NavigationView {
-            SearchList(sectionedViewModel: sectionedViewModel,
-                       recentsViewModel: recentsViewModel
-            ) { sub in
-                NavigationLink(sub.nameUnwrapped) {
-                    SubstanceView(substance: sub)
-                }
-            }
+            SearchList(sectionedViewModel: sectionedViewModel)
             .navigationTitle("Substances")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -36,8 +29,7 @@ struct SearchTab: View {
 struct SearchTab_Previews: PreviewProvider {
     static var previews: some View {
         SearchTab(
-            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true),
-            recentsViewModel: RecentSubstancesViewModel(isPreview: true)
+            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true)
         )
     }
 }

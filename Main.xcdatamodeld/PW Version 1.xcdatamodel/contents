@@ -45,6 +45,17 @@
         <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
         <relationship name="substanceCopy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCopy" inverseName="ingestion" inverseEntity="SubstanceCopy"/>
     </entity>
+    <entity name="Preset" representedClassName="Preset" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+        <relationship name="components" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PresetComponent" inverseName="preset" inverseEntity="PresetComponent"/>
+    </entity>
+    <entity name="PresetComponent" representedClassName="PresetComponent" syncable="YES" codeGenerationType="class">
+        <attribute name="administrationRoute" optional="YES" attributeType="String"/>
+        <attribute name="dosePerUnit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <relationship name="preset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Preset" inverseName="components" inverseEntity="Preset"/>
+    </entity>
     <entity name="PsychoactiveClass" representedClassName="PsychoactiveClass" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -154,5 +165,7 @@
         <element name="SubstancesFile" positionX="-1195.6875" positionY="376.125" width="128" height="74"/>
         <element name="Tolerance" positionX="-200.29296875" positionY="554.88671875" width="128" height="89"/>
         <element name="UnresolvedInteraction" positionX="-220.4921875" positionY="823.61328125" width="128" height="89"/>
+        <element name="Preset" positionX="-999" positionY="-225" width="128" height="74"/>
+        <element name="PresetComponent" positionX="-990" positionY="-216" width="128" height="89"/>
     </elements>
 </model>

@@ -61,6 +61,8 @@
 		EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EF27CD30ED00B10DD3 /* CurveBottom.swift */; };
 		EA8447F227CD312300B10DD3 /* CurveTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447F127CD312300B10DD3 /* CurveTop.swift */; };
 		EA8447F427CD315000B10DD3 /* CurveDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447F327CD315000B10DD3 /* CurveDown.swift */; };
+		EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */; };
+		EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* TimeObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */; };
@@ -322,6 +324,8 @@
 		EA8447EF27CD30ED00B10DD3 /* CurveBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveBottom.swift; sourceTree = "<group>"; };
 		EA8447F127CD312300B10DD3 /* CurveTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveTop.swift; sourceTree = "<group>"; };
 		EA8447F327CD315000B10DD3 /* CurveDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveDown.swift; sourceTree = "<group>"; };
+		EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetViewModel.swift; sourceTree = "<group>"; };
+		EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceList.swift; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeObserverView.swift; sourceTree = "<group>"; };
@@ -527,6 +531,7 @@
 				EACB6E7A27D6456400940291 /* SearchList.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
+				EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -601,6 +606,15 @@
 				EA8447F327CD315000B10DD3 /* CurveDown.swift */,
 			);
 			path = Curves;
+			sourceTree = "<group>";
+		};
+		EA891BB827DF9F3B00AF04C6 /* Choose Substance */ = {
+			isa = PBXGroup;
+			children = (
+				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
+				EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */,
+			);
+			path = "Choose Substance";
 			sourceTree = "<group>";
 		};
 		EA941CE726E8EADF00DBFCFF /* Clockhands */ = {
@@ -957,7 +971,7 @@
 		EAE471A326CBA664009FB0EC /* Add Ingestion */ = {
 			isa = PBXGroup;
 			children = (
-				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
+				EA891BB827DF9F3B00AF04C6 /* Choose Substance */,
 				EA095A1227D9E400007D44D6 /* Interactions */,
 				EAE471A526CBA664009FB0EC /* ChooseRouteView.swift */,
 				EA095A1027D9E3D0007D44D6 /* Dose */,
@@ -1301,6 +1315,7 @@
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa+CoreDataClass.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
+				EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */,
@@ -1333,6 +1348,7 @@
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EACB6E4B27D1FF2C00940291 /* String-ValidName.swift in Sources */,
+				EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */,
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,

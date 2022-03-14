@@ -1,21 +1,10 @@
 import SwiftUI
 
-struct SearchList<Content: View>: View {
-
-    public init(
-        sectionedViewModel: SectionedSubstancesViewModel,
-        recentsViewModel: RecentSubstancesViewModel,
-        @ViewBuilder getRowForSubstance: @escaping (Substance) -> Content
-    ) {
-        self.getRowForSubstance = getRowForSubstance
-        self.sectionedViewModel = sectionedViewModel
-        self.recentsViewModel = recentsViewModel
-    }
+struct SearchList: View {
 
     @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
-    @ObservedObject var recentsViewModel: RecentSubstancesViewModel
-    let getRowForSubstance: (Substance) -> Content
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @StateObject var recentsViewModel = RecentSubstancesViewModel()
+    @StateObject var presetViewModel = PresetViewModel()
     @Environment(\.isSearching) var isSearching
 
     var body: some View {
@@ -25,24 +14,24 @@ struct SearchList<Content: View>: View {
                 if showRecents {
                     Section("Recently Used") {
                         ForEach(recentsViewModel.recentSubstances) { sub in
-                            getRowForSubstance(sub)
+                            NavigationLink(sub.nameUnwrapped) {
+                                SubstanceView(substance: sub)
+                            }
                         }
                     }
                 }
                 ForEach(sectionedViewModel.sections) { sec in
                     Section(sec.sectionName) {
                         ForEach(sec.substances) { sub in
-                            getRowForSubstance(sub)
+                            NavigationLink(sub.nameUnwrapped) {
+                                SubstanceView(substance: sub)
+                            }
                         }
                     }
                 }
-                if isEyeOpen {
-                    Section {
-                        EmptyView()
-                    } footer: {
-                        Text(substancesDisclaimer)
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
+                Section(header: Text("Presets")) {
+                    ForEach(presetViewModel.presets) { pre in
+                        Text(pre.name ?? "hello")
                     }
                 }
             }
@@ -52,26 +41,12 @@ struct SearchList<Content: View>: View {
             }
         }
     }
-
-    let substancesDisclaimer =
-"""
-This list is neither a suggestion nor an incitement to the consumption of these substances.
-Using these substances always involves risks and can never be considered safe.
-
-Consult a doctor before making medical decisions.
-"""
 }
 
 struct SearchList_Previews: PreviewProvider {
     static var previews: some View {
         SearchList(
-            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true),
-            recentsViewModel: RecentSubstancesViewModel(isPreview: true)
-        ) { sub in
-            NavigationLink(sub.nameUnwrapped) {
-                SubstanceView(substance: sub)
-            }
-
-        }
+            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true)
+        )
     }
 }
