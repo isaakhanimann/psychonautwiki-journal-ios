@@ -9,6 +9,10 @@ struct QuestionAndAnswer: Identifiable, Hashable {
     // swiftlint:disable line_length
     static let list: [QuestionAndAnswer] = [
         QuestionAndAnswer(
+            question: "Why is an interaction or other info on a substance present in the PsychonautWiki article but not in the app?",
+            answer: "Chances are that the info is not annotated correctly such that it's not propagated to the API."
+        ),
+        QuestionAndAnswer(
             question: "How is the timeline drawn?",
             answer: "The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If not all of these durations are defined the timeline for this substance cannot be drawn."
         ),
