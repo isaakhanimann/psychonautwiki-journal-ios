@@ -4,25 +4,32 @@ struct ExperiencesList: View {
 
     @ObservedObject var viewModel: ExperiencesTab.ViewModel
     @Environment(\.editMode) var mode
+    @Environment(\.isSearching) var isSearching
 
     var body: some View {
-        List {
-            ForEach(viewModel.sections) { sec in
-                Section(String(sec.year)) {
-                    ForEach(sec.experiences) { exp in
-                        let isEditing = mode?.wrappedValue.isEditing ?? false
-                        ExperienceRow(experience: exp, selection: $viewModel.selection)
-                            .deleteDisabled(!isEditing)
-                    }
-                    .onDelete { indexSet in
-                        indexSet.forEach { index in
-                            viewModel.delete(experience: sec.experiences[index])
+        ZStack {
+            List {
+                ForEach(viewModel.sections) { sec in
+                    Section(String(sec.year)) {
+                        ForEach(sec.experiences) { exp in
+                            let isEditing = mode?.wrappedValue.isEditing ?? false
+                            ExperienceRow(experience: exp, selection: $viewModel.selection)
+                                .deleteDisabled(!isEditing)
                         }
-                        if viewModel.sections.isEmpty {
-                            mode?.wrappedValue = .inactive
+                        .onDelete { indexSet in
+                            indexSet.forEach { index in
+                                viewModel.delete(experience: sec.experiences[index])
+                            }
+                            if viewModel.sections.isEmpty {
+                                mode?.wrappedValue = .inactive
+                            }
                         }
                     }
                 }
+            }
+            if isSearching && viewModel.sections.isEmpty {
+                Text("No Results")
+                    .foregroundColor(.secondary)
             }
         }
     }

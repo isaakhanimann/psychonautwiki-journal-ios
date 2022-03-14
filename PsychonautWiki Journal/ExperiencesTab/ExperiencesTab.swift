@@ -41,6 +41,8 @@ struct ExperiencesTab: View {
                 }
             }
         }
+        .searchable(text: $viewModel.searchText)
+        .disableAutocorrection(true)
     }
 }
 

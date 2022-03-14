@@ -19,6 +19,11 @@ extension ExperiencesTab {
         @Published var isShowingDeleteExperienceAlert = false
         @Published var offsets: IndexSet?
         @Published var hasExperiences = false
+        @Published var searchText = "" {
+            didSet {
+                setupFetchRequestPredicateAndFetch()
+            }
+        }
         private var experiences: [Experience] = []
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 
@@ -60,6 +65,30 @@ extension ExperiencesTab {
                 sections.append(ExperienceSection(year: expYear, experiences: expsInYear.sorted()))
             }
             return sections.sorted()
+        }
+
+        private func setupFetchRequestPredicateAndFetch() {
+            if searchText == "" {
+                experienceFetchController?.fetchRequest.predicate = nil
+            } else {
+                let predicateTitle = NSPredicate(
+                    format: "title CONTAINS[cd] %@",
+                    searchText as CVarArg
+                )
+                let predicateSubstance = NSPredicate(
+                    format: "%K.%K CONTAINS[cd] %@",
+                    #keyPath(Experience.ingestions),
+                    #keyPath(Ingestion.substanceName),
+                    searchText as CVarArg
+                )
+                let predicateCompound = NSCompoundPredicate(
+                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                )
+                experienceFetchController?.fetchRequest.predicate = predicateCompound
+            }
+            try? experienceFetchController?.performFetch()
+            self.experiences = experienceFetchController?.fetchedObjects ?? []
+            sections = Self.getSections(experiences: experiences)
         }
 
         public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
