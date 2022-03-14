@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func scheduleSubstancesRefresh() {
         let request = BGProcessingTaskRequest(identifier: taskIdentifier)
         // Apple recommends to keep earliestBeginDate under a week else it might not be scheduled at all
-        let twoDays: TimeInterval = 2*24*60*60
-        request.earliestBeginDate = Date(timeIntervalSinceNow: twoDays)
+        let fourDays: TimeInterval = 4*24*60*60
+        request.earliestBeginDate = Date(timeIntervalSinceNow: fourDays)
         request.requiresNetworkConnectivity = true
         do {
             try BGTaskScheduler.shared.submit(request)
