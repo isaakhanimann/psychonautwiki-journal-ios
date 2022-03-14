@@ -52,6 +52,11 @@ struct ExperienceView: View {
                 .accentColor(Color.blue)
         }
         .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    hideKeyboard()
+                }
+            }
             ToolbarItem(placement: .navigation) {
                 if !experience.sortedIngestionsUnwrapped.isEmpty {
                     EditButton()
