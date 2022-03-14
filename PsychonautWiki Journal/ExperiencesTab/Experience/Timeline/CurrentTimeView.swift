@@ -5,22 +5,13 @@ struct CurrentTimeView: View {
     let startTime: Date
     let endTime: Date
 
-    private let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
-
-    @State private var currentTime = Date()
-
-    var isCurrentTimeInChart: Bool {
-        currentTime > startTime && currentTime < endTime
-    }
-
-    var xValue: CGFloat {
-        let graphLength = startTime.distance(to: endTime)
-        let time = startTime.distance(to: currentTime)
-        return CGFloat(time) / CGFloat(graphLength)
-    }
-
     var body: some View {
-        Group {
+        TimelineView(.periodic(from: .now, by: 5)) { context in
+            let currentTime = context.date
+            let isCurrentTimeInChart = currentTime > startTime && currentTime < endTime
+            let graphLength = startTime.distance(to: endTime)
+            let offset = startTime.distance(to: currentTime)
+            let xValue = CGFloat(offset) / CGFloat(graphLength)
             if isCurrentTimeInChart {
                 CurrentTimeShape(xValue: xValue)
                     .stroke(
@@ -34,12 +25,7 @@ struct CurrentTimeView: View {
                             dashPhase: 0
                         )
                     )
-            } else {
-                EmptyView()
             }
-        }
-        .onReceive(timer) { newTime in
-            currentTime = newTime
         }
     }
 }
