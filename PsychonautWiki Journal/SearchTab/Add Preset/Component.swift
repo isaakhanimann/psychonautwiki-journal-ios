@@ -1,9 +1,10 @@
 import Foundation
 
 struct Component: Identifiable {
-    var substance: Substance
-    var administrationRoute: AdministrationRoute
-    var dose: Double
+    let substance: Substance
+    let administrationRoute: AdministrationRoute
+    let dose: Double
+    let units: String
     // swiftlint:disable identifier_name
     let id: UUID
 }

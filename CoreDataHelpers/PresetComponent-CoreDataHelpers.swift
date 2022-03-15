@@ -10,11 +10,15 @@ extension PresetComponent {
         AdministrationRoute(rawValue: administrationRoute ?? "")
     }
 
-    var dosePerUnitUnwrapped: Double? {
-        if dosePerUnit == 0 {
+    var unitsUnwrapped: String {
+        units ?? ""
+    }
+
+    var dosePerUnitOfPresetUnwrapped: Double? {
+        if dosePerUnitOfPreset == 0 {
             return nil
         } else {
-            return dosePerUnit
+            return dosePerUnitOfPreset
         }
     }
 }

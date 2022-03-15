@@ -8,9 +8,14 @@ struct AddPresetView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Preset Name", text: $viewModel.presetName)
-                UnitsPicker(units: $viewModel.units)
-
+                Section(header: Text("Name")) {
+                    TextField("Preset Name", text: $viewModel.presetName)
+                }
+                .headerProminence(.increased)
+                Section(header: Text("Units")) {
+                    UnitsPicker(units: $viewModel.units)
+                }
+                .headerProminence(.increased)
                 Section("1 \(viewModel.units ?? "") contains") {
                     ForEach(viewModel.components) { com in
                         HStack {
@@ -27,11 +32,29 @@ struct AddPresetView: View {
                         Label("Add Component", systemImage: "plus")
                     }
                 }
+                .headerProminence(.increased)
             }
             .navigationTitle("Add Preset")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if viewModel.isEverythingNeededDefined {
+                        Button("Done") {
+                            viewModel.savePreset()
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                }
+            }
             .sheet(isPresented: $viewModel.isShowingAddComponentSheet) {
                 AddComponentView(
-                    addComponent: viewModel.addComponentToList
+                    addComponent: viewModel.addComponentToList,
+                    presetName: $viewModel.presetName,
+                    presetUnit: $viewModel.units
                 )
             }
         }

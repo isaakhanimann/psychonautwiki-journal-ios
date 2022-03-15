@@ -52,8 +52,9 @@
     </entity>
     <entity name="PresetComponent" representedClassName="PresetComponent" syncable="YES" codeGenerationType="class">
         <attribute name="administrationRoute" optional="YES" attributeType="String"/>
-        <attribute name="dosePerUnit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dosePerUnitOfPreset" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
         <relationship name="preset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Preset" inverseName="components" inverseEntity="Preset"/>
     </entity>
     <entity name="PsychoactiveClass" representedClassName="PsychoactiveClass" syncable="YES" codeGenerationType="class">
@@ -166,6 +167,6 @@
         <element name="Tolerance" positionX="-200.29296875" positionY="554.88671875" width="128" height="89"/>
         <element name="UnresolvedInteraction" positionX="-220.4921875" positionY="823.61328125" width="128" height="89"/>
         <element name="Preset" positionX="-999" positionY="-225" width="128" height="74"/>
-        <element name="PresetComponent" positionX="-990" positionY="-216" width="128" height="89"/>
+        <element name="PresetComponent" positionX="-990" positionY="-216" width="128" height="104"/>
     </elements>
 </model>

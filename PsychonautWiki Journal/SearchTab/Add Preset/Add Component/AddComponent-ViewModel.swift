@@ -10,12 +10,22 @@ extension AddComponentView {
                 administrationRoute = selectedSubstance.administrationRoutesUnwrapped.first ?? AdministrationRoute.oral
             }
         }
-        @Published var administrationRoute = AdministrationRoute.oral
+        @Published var administrationRoute = AdministrationRoute.oral {
+            didSet {
+                selectedUnit = roaDose?.units
+            }
+        }
         @Published var dosePerUnit: Double?
-        @Published var selectedUnitDummy: String?
+        @Published var selectedUnit: String?
 
         var roaDose: RoaDose? {
             selectedSubstance.getDose(for: administrationRoute)
+        }
+
+        var isEverythingNeededDefined: Bool {
+            guard dosePerUnit != nil else {return false}
+            guard selectedUnit != nil else {return false}
+            return true
         }
 
         init() {
@@ -24,13 +34,16 @@ extension AddComponentView {
             let substances = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
             self.sortedSubstances = substances
             selectedSubstance = substances.first!
+            selectedUnit = roaDose?.units
         }
 
         func getComponent() -> Component {
+            assert(isEverythingNeededDefined, "Tried to add component without defining the necessary fields")
             return Component(
                 substance: selectedSubstance,
                 administrationRoute: administrationRoute,
                 dose: dosePerUnit ?? 0,
+                units: selectedUnit ?? "",
                 id: UUID()
             )
         }
