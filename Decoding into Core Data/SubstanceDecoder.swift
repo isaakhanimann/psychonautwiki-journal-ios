@@ -74,7 +74,9 @@ struct SubstanceDecoder {
         "Classic Psychedelics",
         "Psychedelics",
         "Serotonergic Psychedelic",
-        "25x-NBOH"
+        "25x-NBOH",
+        "Antidepressants",
+        "Barbiturates"
     ].map({$0.lowercased()}))
 
     func getURL() -> URL? {
