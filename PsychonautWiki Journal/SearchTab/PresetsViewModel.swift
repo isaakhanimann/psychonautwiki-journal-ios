@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-class PresetViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+class PresetsViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     @Published var presets: [Preset] = []
     private let fetchController: NSFetchedResultsController<Preset>!
 

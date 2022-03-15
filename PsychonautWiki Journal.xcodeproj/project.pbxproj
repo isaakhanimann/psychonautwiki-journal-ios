@@ -61,7 +61,7 @@
 		EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EF27CD30ED00B10DD3 /* CurveBottom.swift */; };
 		EA8447F227CD312300B10DD3 /* CurveTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447F127CD312300B10DD3 /* CurveTop.swift */; };
 		EA8447F427CD315000B10DD3 /* CurveDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447F327CD315000B10DD3 /* CurveDown.swift */; };
-		EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */; };
+		EA891BB527DF8D8600AF04C6 /* PresetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB427DF8D8600AF04C6 /* PresetsViewModel.swift */; };
 		EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */; };
 		EA891BBA27E0827C00AF04C6 /* Preset-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB927E0827C00AF04C6 /* Preset-CoreDataHelpers.swift */; };
 		EA891BBC27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BBB27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift */; };
@@ -70,6 +70,7 @@
 		EA891BC327E09CE100AF04C6 /* AddComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC227E09CE100AF04C6 /* AddComponentView.swift */; };
 		EA891BC527E09CFE00AF04C6 /* AddComponent-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */; };
 		EA891BC827E09DE900AF04C6 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC727E09DE900AF04C6 /* Component.swift */; };
+		EA891BCB27E0E74100AF04C6 /* PresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BCA27E0E74100AF04C6 /* PresetView.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* TimeObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */; };
@@ -331,7 +332,7 @@
 		EA8447EF27CD30ED00B10DD3 /* CurveBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveBottom.swift; sourceTree = "<group>"; };
 		EA8447F127CD312300B10DD3 /* CurveTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveTop.swift; sourceTree = "<group>"; };
 		EA8447F327CD315000B10DD3 /* CurveDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveDown.swift; sourceTree = "<group>"; };
-		EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetViewModel.swift; sourceTree = "<group>"; };
+		EA891BB427DF8D8600AF04C6 /* PresetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsViewModel.swift; sourceTree = "<group>"; };
 		EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceList.swift; sourceTree = "<group>"; };
 		EA891BB927E0827C00AF04C6 /* Preset-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preset-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EA891BBB27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetComponent-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -340,6 +341,7 @@
 		EA891BC227E09CE100AF04C6 /* AddComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComponentView.swift; sourceTree = "<group>"; };
 		EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddComponent-ViewModel.swift"; sourceTree = "<group>"; };
 		EA891BC727E09DE900AF04C6 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		EA891BCA27E0E74100AF04C6 /* PresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetView.swift; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeObserverView.swift; sourceTree = "<group>"; };
@@ -541,12 +543,13 @@
 			isa = PBXGroup;
 			children = (
 				EA8447E527CD14C000B10DD3 /* Substance */,
+				EA891BBF27E0858D00AF04C6 /* Add Preset */,
 				EA47E66F27CB477000F6E10F /* SearchTab.swift */,
 				EACB6E7A27D6456400940291 /* SearchList.swift */,
-				EA891BBF27E0858D00AF04C6 /* Add Preset */,
+				EA891BCA27E0E74100AF04C6 /* PresetView.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
-				EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */,
+				EA891BB427DF8D8600AF04C6 /* PresetsViewModel.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -1388,7 +1391,7 @@
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EACB6E4B27D1FF2C00940291 /* String-ValidName.swift in Sources */,
-				EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */,
+				EA891BB527DF8D8600AF04C6 /* PresetsViewModel.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */,
 				EA891BC827E09DE900AF04C6 /* Component.swift in Sources */,
@@ -1432,6 +1435,7 @@
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
+				EA891BCB27E0E74100AF04C6 /* PresetView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,

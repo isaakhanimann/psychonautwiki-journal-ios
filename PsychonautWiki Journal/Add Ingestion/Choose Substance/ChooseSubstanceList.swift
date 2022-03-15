@@ -6,7 +6,7 @@ struct ChooseSubstanceList: View {
     let experience: Experience
     let dismiss: (AddResult) -> Void
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    @StateObject var presetViewModel = PresetViewModel()
+    @StateObject var presetsViewModel = PresetsViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @Environment(\.isSearching) var isSearching
 
@@ -57,7 +57,7 @@ struct ChooseSubstanceList: View {
                     }
                 }
                 Section(header: Text("Presets")) {
-                    ForEach(presetViewModel.presets) { pre in
+                    ForEach(presetsViewModel.presets) { pre in
                         Text(pre.name ?? "hello")
                     }
                 }

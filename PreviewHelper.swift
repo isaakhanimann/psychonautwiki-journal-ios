@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+// swiftlint:disable type_body_length
 class PreviewHelper {
 
     static let shared = PreviewHelper()
@@ -22,6 +23,7 @@ class PreviewHelper {
         allSubstances.first!
     }
     let experiences: [Experience]
+    let preset: Preset
     let context: NSManagedObjectContext
 
     func getSubstance(with name: String) -> Substance? {
@@ -37,7 +39,8 @@ class PreviewHelper {
         let data = try! Data(contentsOf: url)
         self.context = PersistenceController.preview.viewContext
         self.substancesFile = try! decodeSubstancesFile(from: data, with: context)
-        self.experiences = PreviewHelper.createDefaultExperiences(context: context, substancesFile: substancesFile)
+        self.experiences = Self.createDefaultExperiences(context: context, substancesFile: substancesFile)
+        self.preset = Self.createDefaultPreset(context: context)
         try? context.save()
     }
 
@@ -259,5 +262,18 @@ class PreviewHelper {
         ingestion.color = color.rawValue
         ingestion.substanceName = substanceName
         return ingestion
+    }
+
+    static func createDefaultPreset(context: NSManagedObjectContext) -> Preset {
+        let preset = Preset(context: context)
+        preset.name = "Malboro Gold"
+        preset.units = "cigarettes"
+        let component = PresetComponent(context: context)
+        component.units = "mg"
+        component.substanceName = "Nicotine"
+        component.administrationRoute = AdministrationRoute.smoked.rawValue
+        component.dosePerUnitOfPreset = 0.5
+        preset.addToComponents(component)
+        return preset
     }
 }

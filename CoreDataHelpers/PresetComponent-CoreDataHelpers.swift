@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 extension PresetComponent {
 
@@ -20,5 +21,13 @@ extension PresetComponent {
         } else {
             return dosePerUnitOfPreset
         }
+    }
+
+    var substance: Substance? {
+        guard let substanceNameUnwrapped = substanceName else {return nil}
+        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        let pred = NSPredicate(format: "name == %@", substanceNameUnwrapped)
+        fetchRequest.predicate = pred
+        return try? self.managedObjectContext?.fetch(fetchRequest).first
     }
 }

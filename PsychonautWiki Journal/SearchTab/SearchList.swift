@@ -4,7 +4,7 @@ struct SearchList: View {
 
     @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    @StateObject var presetViewModel = PresetViewModel()
+    @StateObject var presetsViewModel = PresetsViewModel()
     @Environment(\.isSearching) var isSearching
     @State private var isShowingAddPreset = false
 
@@ -22,8 +22,10 @@ struct SearchList: View {
                         }
                     }
                     Section(header: Text("Presets")) {
-                        ForEach(presetViewModel.presets) { pre in
-                            Text(pre.nameUnwrapped)
+                        ForEach(presetsViewModel.presets) { pre in
+                            NavigationLink(pre.nameUnwrapped) {
+                                PresetView(preset: pre)
+                            }
                         }
                         Button {
                             isShowingAddPreset.toggle()
