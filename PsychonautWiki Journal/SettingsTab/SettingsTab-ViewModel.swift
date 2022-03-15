@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 extension SettingsTab {
-    @MainActor
+
     class ViewModel: ObservableObject {
         @Published var isShowingErrorAlert = false
         @Published var isFetching = false
@@ -17,7 +17,7 @@ extension SettingsTab {
             }
         }
 
-        func fetchNewSubstances() async {
+        @MainActor func fetchNewSubstances() async {
             isFetching = true
             do {
                 let data = try await getPsychonautWikiData()
@@ -28,7 +28,7 @@ extension SettingsTab {
             self.isFetching = false
         }
 
-        func resetSubstances() async {
+        @MainActor func resetSubstances() async {
             isFetching = true
             await PersistenceController.shared.resetAllSubstancesToInitialAndSave()
             isFetching = false
