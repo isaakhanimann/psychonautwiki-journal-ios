@@ -406,7 +406,7 @@
 		EACB6E9827D77A2200940291 /* Date-NearestHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-NearestHour.swift"; sourceTree = "<group>"; };
 		EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestHourTests.swift; sourceTree = "<group>"; };
 		EADE46532709AAAD00F1058E /* HorizontalScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScaleView.swift; sourceTree = "<group>"; };
-		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE4710326CBA57F009FB0EC /* Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -840,7 +840,7 @@
 		EAE4710426CBA57F009FB0EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EAE4710326CBA57F009FB0EC /* Journal.app */,
+				EAE4710326CBA57F009FB0EC /* Debug.app */,
 				EA4910AB26DFB4E0001A5316 /* Journal.app */,
 				EA4910B426DFB4E0001A5316 /* Watch Journal Extension.appex */,
 				EACB6E3A27D09C8800940291 /* JournalTests.xctest */,
@@ -1118,7 +1118,7 @@
 				EAF76C9F27D8B72900945587 /* Algorithms */,
 			);
 			productName = "PsychonautWiki Journal";
-			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
+			productReference = EAE4710326CBA57F009FB0EC /* Debug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1502,13 +1502,14 @@
 				IBSC_MODULE = Watch_Journal_Extension;
 				INFOPLIST_FILE = "Watch Journal/Info.plist";
 				MARKETING_VERSION = 1.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.watchkitapp";
 				PRODUCT_NAME = Journal;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WK_COMPANION_APP_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug";
 			};
 			name = Debug;
 		};
@@ -1531,6 +1532,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WK_COMPANION_APP_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 			};
 			name = Release;
 		};
@@ -1550,13 +1552,14 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WK_APP_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.watchkitapp";
 			};
 			name = Debug;
 		};
@@ -1583,6 +1586,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WK_APP_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.watchkitapp";
 			};
 			name = Release;
 		};
@@ -1759,8 +1763,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
-				PRODUCT_NAME = Journal;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug";
+				PRODUCT_NAME = Debug;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
