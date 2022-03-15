@@ -63,6 +63,13 @@
 		EA8447F427CD315000B10DD3 /* CurveDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447F327CD315000B10DD3 /* CurveDown.swift */; };
 		EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */; };
 		EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */; };
+		EA891BBA27E0827C00AF04C6 /* Preset-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB927E0827C00AF04C6 /* Preset-CoreDataHelpers.swift */; };
+		EA891BBC27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BBB27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift */; };
+		EA891BBE27E0852400AF04C6 /* AddPresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BBD27E0852400AF04C6 /* AddPresetView.swift */; };
+		EA891BC127E085A000AF04C6 /* AddPreset-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC027E085A000AF04C6 /* AddPreset-ViewModel.swift */; };
+		EA891BC327E09CE100AF04C6 /* AddComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC227E09CE100AF04C6 /* AddComponentView.swift */; };
+		EA891BC527E09CFE00AF04C6 /* AddComponent-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */; };
+		EA891BC827E09DE900AF04C6 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC727E09DE900AF04C6 /* Component.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA941CE226E8CB9E00DBFCFF /* IngestionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */; };
 		EA941CE426E8DA6900DBFCFF /* TimeObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */; };
@@ -326,6 +333,13 @@
 		EA8447F327CD315000B10DD3 /* CurveDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveDown.swift; sourceTree = "<group>"; };
 		EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetViewModel.swift; sourceTree = "<group>"; };
 		EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceList.swift; sourceTree = "<group>"; };
+		EA891BB927E0827C00AF04C6 /* Preset-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preset-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EA891BBB27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetComponent-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EA891BBD27E0852400AF04C6 /* AddPresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPresetView.swift; sourceTree = "<group>"; };
+		EA891BC027E085A000AF04C6 /* AddPreset-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddPreset-ViewModel.swift"; sourceTree = "<group>"; };
+		EA891BC227E09CE100AF04C6 /* AddComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComponentView.swift; sourceTree = "<group>"; };
+		EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddComponent-ViewModel.swift"; sourceTree = "<group>"; };
+		EA891BC727E09DE900AF04C6 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA941CE126E8CB9E00DBFCFF /* IngestionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionPoint.swift; sourceTree = "<group>"; };
 		EA941CE326E8DA6900DBFCFF /* TimeObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeObserverView.swift; sourceTree = "<group>"; };
@@ -529,6 +543,7 @@
 				EA8447E527CD14C000B10DD3 /* Substance */,
 				EA47E66F27CB477000F6E10F /* SearchTab.swift */,
 				EACB6E7A27D6456400940291 /* SearchList.swift */,
+				EA891BBF27E0858D00AF04C6 /* Add Preset */,
 				EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
 				EA891BB427DF8D8600AF04C6 /* PresetViewModel.swift */,
@@ -615,6 +630,26 @@
 				EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */,
 			);
 			path = "Choose Substance";
+			sourceTree = "<group>";
+		};
+		EA891BBF27E0858D00AF04C6 /* Add Preset */ = {
+			isa = PBXGroup;
+			children = (
+				EA891BBD27E0852400AF04C6 /* AddPresetView.swift */,
+				EA891BC027E085A000AF04C6 /* AddPreset-ViewModel.swift */,
+				EA891BC727E09DE900AF04C6 /* Component.swift */,
+				EA891BC627E09D2700AF04C6 /* Add Component */,
+			);
+			path = "Add Preset";
+			sourceTree = "<group>";
+		};
+		EA891BC627E09D2700AF04C6 /* Add Component */ = {
+			isa = PBXGroup;
+			children = (
+				EA891BC227E09CE100AF04C6 /* AddComponentView.swift */,
+				EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */,
+			);
+			path = "Add Component";
 			sourceTree = "<group>";
 		};
 		EA941CE726E8EADF00DBFCFF /* Clockhands */ = {
@@ -882,6 +917,8 @@
 				EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */,
 				EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */,
 				EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */,
+				EA891BB927E0827C00AF04C6 /* Preset-CoreDataHelpers.swift */,
+				EA891BBB27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift */,
 				EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */,
 				EAE4716326CBA664009FB0EC /* Substance-CoreDataHelpers.swift */,
 				EAE4716026CBA664009FB0EC /* Roa-CoreDataHelpers.swift */,
@@ -1308,6 +1345,7 @@
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,
 				EACB6E8727D7493000940291 /* AroundShapeUp.swift in Sources */,
 				EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */,
+				EA891BC327E09CE100AF04C6 /* AddComponentView.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
@@ -1331,6 +1369,7 @@
 				EAE471E326CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance+CoreDataClass.swift in Sources */,
+				EA891BC127E085A000AF04C6 /* AddPreset-ViewModel.swift in Sources */,
 				EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EACB6E9927D77A2200940291 /* Date-NearestHour.swift in Sources */,
@@ -1339,6 +1378,7 @@
 				EA47E64927CA136C00F6E10F /* Tolerance+CoreDataClass.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EACB6E0F27CE236600940291 /* UnresolvedView.swift in Sources */,
+				EA891BBA27E0827C00AF04C6 /* Preset-CoreDataHelpers.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
 				EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
@@ -1351,7 +1391,9 @@
 				EA891BB527DF8D8600AF04C6 /* PresetViewModel.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */,
+				EA891BC827E09DE900AF04C6 /* Component.swift in Sources */,
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
+				EA891BBE27E0852400AF04C6 /* AddPresetView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
@@ -1372,6 +1414,7 @@
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
 				EACB6E9427D7571E00940291 /* LineShape-ViewModel.swift in Sources */,
+				EA891BBC27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */,
 				EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */,
@@ -1379,6 +1422,7 @@
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
 				EAE4721B26CBA664009FB0EC /* CurrentTimeView.swift in Sources */,
 				EACB6E8927D749CA00940291 /* AroundShapeUp-ViewModel.swift in Sources */,
+				EA891BC527E09CFE00AF04C6 /* AddComponent-ViewModel.swift in Sources */,
 				EA47E66C27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EA8447ED27CD2B4C00B10DD3 /* CurveUp.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,

@@ -1,7 +1,7 @@
 import Foundation
 
 // https://psychonautwiki.org/wiki/Route_of_administration
-enum AdministrationRoute: String, Codable, CaseIterable {
+enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
     case oral
     case sublingual
     case buccal
@@ -13,6 +13,11 @@ enum AdministrationRoute: String, Codable, CaseIterable {
     case intravenous
     case smoked
     case inhaled
+
+    // swiftlint:disable identifier_name
+    var id: String {
+        self.rawValue
+    }
 
     var displayString: String {
         switch self {

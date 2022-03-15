@@ -6,17 +6,29 @@ struct SearchList: View {
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var presetViewModel = PresetViewModel()
     @Environment(\.isSearching) var isSearching
+    @State private var isShowingAddPreset = false
 
     var body: some View {
         ZStack {
             List {
-                let showRecents = !isSearching && !recentsViewModel.recentSubstances.isEmpty
-                if showRecents {
-                    Section("Recently Used") {
-                        ForEach(recentsViewModel.recentSubstances) { sub in
-                            NavigationLink(sub.nameUnwrapped) {
-                                SubstanceView(substance: sub)
+                if !isSearching {
+                    if !recentsViewModel.recentSubstances.isEmpty {
+                        Section("Recently Used") {
+                            ForEach(recentsViewModel.recentSubstances) { sub in
+                                NavigationLink(sub.nameUnwrapped) {
+                                    SubstanceView(substance: sub)
+                                }
                             }
+                        }
+                    }
+                    Section(header: Text("Presets")) {
+                        ForEach(presetViewModel.presets) { pre in
+                            Text(pre.nameUnwrapped)
+                        }
+                        Button {
+                            isShowingAddPreset.toggle()
+                        } label: {
+                            Label("Add Preset", systemImage: "plus")
                         }
                     }
                 }
@@ -29,16 +41,14 @@ struct SearchList: View {
                         }
                     }
                 }
-                Section(header: Text("Presets")) {
-                    ForEach(presetViewModel.presets) { pre in
-                        Text(pre.name ?? "hello")
-                    }
-                }
             }
             if isSearching && sectionedViewModel.sections.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
             }
+        }
+        .sheet(isPresented: $isShowingAddPreset) {
+            AddPresetView()
         }
     }
 }
