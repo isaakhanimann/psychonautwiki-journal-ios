@@ -41,7 +41,7 @@ struct ExperiencesTab: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText)
+        .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
         .disableAutocorrection(true)
     }
 }
