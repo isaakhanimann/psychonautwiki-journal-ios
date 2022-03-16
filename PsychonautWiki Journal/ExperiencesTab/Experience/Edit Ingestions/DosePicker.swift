@@ -56,50 +56,11 @@ struct DosePicker: View {
         }
     }
 
-    private enum RangeType {
-        case thresh, light, common, strong, heavy
-    }
-
-    private var currentRange: RangeType? {
-        if let thresh = roaDose?.thresholdUnwrapped,
-           thresh >= dose {
-            return .thresh
-        } else if let lightMin = roaDose?.light?.minUnwrapped,
-                  let lightMax = roaDose?.light?.maxUnwrapped,
-                  dose >= lightMin && dose <= lightMax {
-            return .light
-        } else if let commonMin = roaDose?.common?.minUnwrapped,
-                  let commonMax = roaDose?.common?.maxUnwrapped,
-                  dose >= commonMin && dose <= commonMax {
-            return .common
-        } else if let strongMin = roaDose?.strong?.minUnwrapped,
-                  let strongMax = roaDose?.strong?.maxUnwrapped,
-                  dose >= strongMin && dose <= strongMax {
-            return .strong
-        } else if let heavyOrStrongMax = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
-                  dose >= heavyOrStrongMax {
-            return .heavy
-        } else {
-            return nil
+    var doseType: DoseRangeType {
+        guard let selectedUnits = selectedUnits else {
+            return .none
         }
-    }
-
-    var doseColor: Color {
-        guard let currentRange = currentRange else {
-            return .primary
-        }
-        switch currentRange {
-        case .thresh:
-            return DoseView.threshColor
-        case .light:
-            return DoseView.lightColor
-        case .common:
-            return DoseView.commonColor
-        case .strong:
-            return DoseView.strongColor
-        case .heavy:
-            return DoseView.heavyColor
-        }
+        return roaDose?.getRangeType(for: dose, with: selectedUnits) ?? .none
     }
 
     private var doseTextFieldWithUnit: some View {
@@ -107,7 +68,7 @@ struct DosePicker: View {
             TextField("Enter Dose", text: $doseText)
                 .keyboardType(.decimalPad)
                 .textFieldStyle(.roundedBorder)
-                .foregroundColor(roaDose?.units != nil ? doseColor : .primary)
+                .foregroundColor(doseType.color)
             Text(selectedUnits ?? "")
         }
         .font(.title)
@@ -126,26 +87,26 @@ struct DosePicker: View {
         if let thresh = roaDose?.thresholdUnwrapped,
            thresh >= dose {
             return Text("threshold (\(thresh.cleanString) \(units))")
-                .foregroundColor(DoseView.threshColor)
+                .foregroundColor(DoseRangeType.thresh.color)
         } else if let lightMin = roaDose?.light?.minUnwrapped,
                   let lightMax = roaDose?.light?.maxUnwrapped,
                   dose >= lightMin && dose <= lightMax {
             return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
-                .foregroundColor(DoseView.lightColor)
+                .foregroundColor(DoseRangeType.light.color)
         } else if let commonMin = roaDose?.common?.minUnwrapped,
                   let commonMax = roaDose?.common?.maxUnwrapped,
                   dose >= commonMin && dose <= commonMax {
             return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
-                .foregroundColor(DoseView.commonColor)
+                .foregroundColor(DoseRangeType.common.color)
         } else if let strongMin = roaDose?.strong?.minUnwrapped,
                   let strongMax = roaDose?.strong?.maxUnwrapped,
                   dose >= strongMin && dose <= strongMax {
             return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
-                .foregroundColor(DoseView.strongColor)
+                .foregroundColor(DoseRangeType.strong.color)
         } else if let heavyOrStrongMax = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
                   dose >= heavyOrStrongMax {
             return Text("heavy (\(heavyOrStrongMax.cleanString) \(units)+)")
-                .foregroundColor(DoseView.heavyColor)
+                .foregroundColor(DoseRangeType.heavy.color)
         } else {
             return Text(" ")
         }

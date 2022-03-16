@@ -120,11 +120,13 @@ extension Substance: Comparable {
         return duration
     }
 
-    func getDose(for administrationRoute: AdministrationRoute) -> RoaDose? {
+    func getDose(for administrationRoute: AdministrationRoute?) -> RoaDose? {
+        guard let administrationRoute = administrationRoute else {
+            return nil
+        }
         let filteredRoas = roasUnwrapped.filter { roa in
             roa.nameUnwrapped == administrationRoute
         }
-
         guard let dose = filteredRoas.first?.dose else {
             return nil
         }

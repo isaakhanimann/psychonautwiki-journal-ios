@@ -33,4 +33,29 @@ extension RoaDose {
         }
         return nil
     }
+
+    func getRangeType(for dose: Double, with doseUnits: String) -> DoseRangeType {
+        guard self.units == doseUnits else {return .none}
+        if let thresh = thresholdUnwrapped,
+           thresh >= dose {
+            return .thresh
+        } else if let lightMin = light?.minUnwrapped,
+                  let lightMax = light?.maxUnwrapped,
+                  dose >= lightMin && dose <= lightMax {
+            return .light
+        } else if let commonMin = common?.minUnwrapped,
+                  let commonMax = common?.maxUnwrapped,
+                  dose >= commonMin && dose <= commonMax {
+            return .common
+        } else if let strongMin = strong?.minUnwrapped,
+                  let strongMax = strong?.maxUnwrapped,
+                  dose >= strongMin && dose <= strongMax {
+            return .strong
+        } else if let heavyOrStrongMax = heavyUnwrapped ?? strong?.maxUnwrapped,
+                  dose >= heavyOrStrongMax {
+            return .heavy
+        } else {
+            return .none
+        }
+    }
 }
