@@ -12,7 +12,7 @@ struct UnknownDoseAlert: View {
                 .padding(.top, 10)
         }
         .padding(20)
-        .background(.ultraThinMaterial)
+        .background(.ultraThickMaterial)
         .cornerRadius(15)
         .clipped()
         .padding(.horizontal, 20)
