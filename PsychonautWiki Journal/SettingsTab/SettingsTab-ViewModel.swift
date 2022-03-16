@@ -6,6 +6,7 @@ extension SettingsTab {
     class ViewModel: ObservableObject {
         @Published var isShowingErrorAlert = false
         @Published var isFetching = false
+        @Published var isResetting = false
         @Published var substancesFile: SubstancesFile?
 
         private var cancellable: AnyCancellable?
@@ -25,13 +26,13 @@ extension SettingsTab {
             } catch {
                 self.isShowingErrorAlert = true
             }
-            self.isFetching = false
+            isFetching = false
         }
 
         @MainActor func resetSubstances() async {
-            isFetching = true
+            isResetting = true
             await PersistenceController.shared.resetAllSubstancesToInitialAndSave()
-            isFetching = false
+            isResetting = false
         }
     }
 }

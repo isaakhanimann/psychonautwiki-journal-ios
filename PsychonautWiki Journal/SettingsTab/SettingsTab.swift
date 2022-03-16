@@ -52,7 +52,7 @@ struct SettingsTab: View {
                             Label("Frequently Asked Questions", systemImage: "questionmark.square")
                         }
                     )
-                        .foregroundColor(.accentColor)
+                    .foregroundColor(.accentColor)
                 }
                 Section {
                     Text("Version 1.0.6")
@@ -102,6 +102,9 @@ struct SettingsTab: View {
             }
             if viewModel.isFetching {
                 Text("Fetching Substances...")
+                    .foregroundColor(.secondary)
+            } else if viewModel.isResetting {
+                Text("Resetting Substances...")
                     .foregroundColor(.secondary)
             } else {
                 Button {
