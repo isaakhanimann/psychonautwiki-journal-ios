@@ -34,6 +34,31 @@ struct PresetView: View {
                     }
                 }
             }
+
+            if !preset.dangerousInteractions.isEmpty {
+                Section("Dangerous Combination") {
+                    ForEach(preset.dangerousInteractions, id: \.0) { combo in
+                        Text("\(combo.0.nameUnwrapped) is dangerous with \(combo.1.nameUnwrapped)")
+                            .foregroundColor(InteractionType.dangerous.color)
+                    }
+                }
+            }
+            if !preset.unsafeInteractions.isEmpty {
+                Section("Unsafe Combination") {
+                    ForEach(preset.unsafeInteractions, id: \.0) { combo in
+                        Text("\(combo.0.nameUnwrapped) is unsafe with \(combo.1.nameUnwrapped)")
+                            .foregroundColor(InteractionType.unsafe.color)
+                    }
+                }
+            }
+            if !preset.uncertainInteractions.isEmpty {
+                Section("Uncertain Combination") {
+                    ForEach(preset.uncertainInteractions, id: \.0) { combo in
+                        Text("\(combo.0.nameUnwrapped) is uncertain with \(combo.1.nameUnwrapped)")
+                            .foregroundColor(InteractionType.uncertain.color)
+                    }
+                }
+            }
         }
         .navigationTitle(preset.nameUnwrapped)
     }

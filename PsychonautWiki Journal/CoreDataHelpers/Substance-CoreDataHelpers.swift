@@ -332,4 +332,22 @@ extension Substance: SubstanceInteractable {
         !uncertainChemicalsToShow.isEmpty ||
         !uncertainUnresolvedsToShow.isEmpty
     }
+
+    func isDangerous(with otherSubstance: Substance) -> Bool {
+        dangerousChemicalsContain(substance: otherSubstance) ||
+        dangerousPsychoactivesContain(substance: otherSubstance) ||
+        dangerousSubstancesUnwrapped.contains(otherSubstance)
+    }
+
+    func isUnsafe(with otherSubstance: Substance) -> Bool {
+        unsafeChemicalsContain(substance: otherSubstance) ||
+        unsafePsychoactivesContain(substance: otherSubstance) ||
+        unsafeSubstancesUnwrapped.contains(otherSubstance)
+    }
+
+    func isUncertain(with otherSubstance: Substance) -> Bool {
+        uncertainChemicalsContain(substance: otherSubstance) ||
+        uncertainPsychoactivesContain(substance: otherSubstance) ||
+        uncertainSubstancesUnwrapped.contains(otherSubstance)
+    }
 }

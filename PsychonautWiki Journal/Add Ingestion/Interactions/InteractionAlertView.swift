@@ -20,11 +20,11 @@ struct InteractionAlertView: View {
 
     var iconColor: Color {
         if !viewModel.dangerousIngestions.isEmpty {
-            return Color.red
+            return InteractionType.dangerous.color
         } else if !viewModel.unsafeIngestions.isEmpty {
-            return Color.orange
+            return InteractionType.unsafe.color
         } else {
-            return Color.yellow
+            return InteractionType.uncertain.color
         }
     }
 
