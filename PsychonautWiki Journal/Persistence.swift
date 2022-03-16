@@ -276,4 +276,11 @@ struct PersistenceController {
         return try? viewContext.fetch(fetchRequest).first
     }
 
+    func getRecentIngestions() -> [Ingestion] {
+        let fetchRequest = Ingestion.fetchRequest()
+        let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
+        fetchRequest.predicate = NSPredicate(format: "time > %@", twoDaysAgo as NSDate)
+        return (try? viewContext.fetch(fetchRequest)) ?? []
+    }
+
 }

@@ -108,4 +108,20 @@ extension Ingestion: Comparable {
         guard let substanceUnwrapped = substance else { return .none }
         return substanceUnwrapped.getInteraction(with: otherSubstance)
     }
+
+    func getInteraction(with otherSubstances: [Substance]) -> InteractionType {
+        guard let substanceUnwrapped = substance else { return .none }
+        let interactions = otherSubstances.map { sub in
+            substanceUnwrapped.getInteraction(with: sub)
+        }
+        if interactions.contains(.dangerous) {
+            return .dangerous
+        } else if interactions.contains(.unsafe) {
+            return .unsafe
+        } else if interactions.contains(.uncertain) {
+            return .uncertain
+        } else {
+            return .none
+        }
+    }
 }

@@ -1,8 +1,11 @@
 import SwiftUI
+import AlertToast
 
 struct PresetView: View {
 
     @ObservedObject var preset: Preset
+    @State private var isShowingAddIngestionSheet = false
+    @State private var isShowingSuccessToast = false
 
     var body: some View {
         List {
@@ -34,33 +37,53 @@ struct PresetView: View {
                     }
                 }
             }
-
-            if !preset.dangerousInteractions.isEmpty {
-                Section("Dangerous Combination") {
-                    ForEach(preset.dangerousInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is dangerous with \(combo.1.nameUnwrapped)")
-                            .foregroundColor(InteractionType.dangerous.color)
-                    }
-                }
-            }
-            if !preset.unsafeInteractions.isEmpty {
-                Section("Unsafe Combination") {
-                    ForEach(preset.unsafeInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is unsafe with \(combo.1.nameUnwrapped)")
-                            .foregroundColor(InteractionType.unsafe.color)
-                    }
-                }
-            }
-            if !preset.uncertainInteractions.isEmpty {
-                Section("Uncertain Combination") {
-                    ForEach(preset.uncertainInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is uncertain with \(combo.1.nameUnwrapped)")
-                            .foregroundColor(InteractionType.uncertain.color)
-                    }
+            PresetInteractionsSection(preset: preset)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Ingest") {
+                    isShowingAddIngestionSheet.toggle()
                 }
             }
         }
+        .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+            let showInteractionSheet = preset.substances.contains(where: { sub in
+                sub.hasAnyInteractions
+            }) || !preset.dangerousInteractions.isEmpty
+            || !preset.unsafeInteractions.isEmpty
+            || !preset.uncertainInteractions.isEmpty
+            NavigationView {
+                if showInteractionSheet {
+                    PresetAcknowledgeInteractionsView(
+                        preset: preset,
+                        dismiss: dismiss,
+                        experience: nil
+                    )
+                } else {
+                    PresetChooseDoseView(
+                        preset: preset,
+                        dismiss: dismiss,
+                        experience: nil
+                    )
+                }
+            }
+            .accentColor(Color.blue)
+        })
+        .toast(isPresenting: $isShowingSuccessToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: .complete(Color.green),
+                title: "Ingestion Added"
+            )
+        }
         .navigationTitle(preset.nameUnwrapped)
+    }
+
+    private func dismiss(result: AddResult) {
+        if result == .ingestionWasAdded {
+            isShowingSuccessToast.toggle()
+        }
+        isShowingAddIngestionSheet.toggle()
     }
 }
 

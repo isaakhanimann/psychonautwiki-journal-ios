@@ -1,43 +1,32 @@
 import Foundation
 import Algorithms
 
-extension AcknowledgeInteractionsView {
+extension PresetAcknowledgeInteractionsView {
 
-    class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject, InteractionAlertable {
 
-        var hasInteractions: Bool {
-            hasDangerousInteractions || hasUnsafeInteractions || hasUncertainInteractions
-        }
-        var hasDangerousInteractions: Bool {
-            !dangerousIngestions.isEmpty
-        }
-        var hasUnsafeInteractions: Bool {
-            !unsafeIngestions.isEmpty
-        }
-        var hasUncertainInteractions: Bool {
-            !uncertainIngestions.isEmpty
-        }
-        @Published var dangerousIngestions = [Ingestion]()
-        @Published var unsafeIngestions = [Ingestion]()
-        @Published var uncertainIngestions = [Ingestion]()
+        @Published var dangerousIngestions: [Ingestion] = []
+        @Published var unsafeIngestions: [Ingestion] = []
+        @Published var uncertainIngestions: [Ingestion] = []
         @Published var isShowingAlert = false
         @Published var isShowingNext = false
 
-        func checkInteractionsWith(substance: Substance) {
-            let recentIngestions = getRecentIngestions()
-            setInteractionIngestions(from: recentIngestions, substance: substance)
+        func hideAlert() {
+            isShowingAlert.toggle()
         }
 
-        func getRecentIngestions() -> [Ingestion] {
-            let fetchRequest = Ingestion.fetchRequest()
-            let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
-            fetchRequest.predicate = NSPredicate(format: "time > %@", twoDaysAgo as NSDate)
-            return (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
+        func showNext() {
+            isShowingNext.toggle()
         }
 
-        func setInteractionIngestions(from ingestions: [Ingestion], substance: Substance) {
+        func checkInteractionsWith(preset: Preset) {
+            let recentIngestions = PersistenceController.shared.getRecentIngestions()
+            setInteractionIngestions(from: recentIngestions, substances: preset.substances)
+        }
+
+        func setInteractionIngestions(from ingestions: [Ingestion], substances: [Substance]) {
             let chunkedIngestions = ingestions.chunked { ing in
-                ing.getInteraction(with: substance)
+                ing.getInteraction(with: substances)
             }
             for chunk in chunkedIngestions {
                 let type = chunk.0
@@ -70,7 +59,7 @@ extension AcknowledgeInteractionsView {
         }
 
         func pressNext() {
-            if hasInteractions {
+            if !dangerousIngestions.isEmpty || !unsafeIngestions.isEmpty || !uncertainIngestions.isEmpty {
                 isShowingAlert = true
             } else {
                 isShowingNext = true

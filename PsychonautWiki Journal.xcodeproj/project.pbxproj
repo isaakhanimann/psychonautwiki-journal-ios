@@ -44,6 +44,11 @@
 		EA891BC527E09CFE00AF04C6 /* AddComponent-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */; };
 		EA891BC827E09DE900AF04C6 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BC727E09DE900AF04C6 /* Component.swift */; };
 		EA891BCB27E0E74100AF04C6 /* PresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BCA27E0E74100AF04C6 /* PresetView.swift */; };
+		EA8AEA7427E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7327E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift */; };
+		EA8AEA7627E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7527E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift */; };
+		EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */; };
+		EA8AEA7A27E1ECEF00B30A16 /* PresetChooseDoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */; };
+		EA8AEA7C27E1F23C00B30A16 /* PresetInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7B27E1F23C00B30A16 /* PresetInteractionsSection.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
 		EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
@@ -217,6 +222,11 @@
 		EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddComponent-ViewModel.swift"; sourceTree = "<group>"; };
 		EA891BC727E09DE900AF04C6 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		EA891BCA27E0E74100AF04C6 /* PresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetView.swift; sourceTree = "<group>"; };
+		EA8AEA7327E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetAcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
+		EA8AEA7527E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetAcknowledgeInteractions-ViewModel.swift"; sourceTree = "<group>"; };
+		EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertable.swift; sourceTree = "<group>"; };
+		EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetChooseDoseView.swift; sourceTree = "<group>"; };
+		EA8AEA7B27E1F23C00B30A16 /* PresetInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetInteractionsSection.swift; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFilePublisher.swift; sourceTree = "<group>"; };
@@ -373,7 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
-				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
 			);
 			path = Interactions;
@@ -481,6 +490,28 @@
 				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		EA8AEA7127E1DC0500B30A16 /* Substance Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				EA095A1227D9E400007D44D6 /* Interactions */,
+				EA095A1027D9E3D0007D44D6 /* Dose */,
+				EA095A1127D9E3E8007D44D6 /* Time and Color */,
+				EAE471A526CBA664009FB0EC /* ChooseRouteView.swift */,
+			);
+			path = "Substance Sheets";
+			sourceTree = "<group>";
+		};
+		EA8AEA7227E1DC4400B30A16 /* Preset Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				EA8AEA7327E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift */,
+				EA8AEA7527E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift */,
+				EA8AEA7B27E1F23C00B30A16 /* PresetInteractionsSection.swift */,
+				EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */,
+			);
+			path = "Preset Sheets";
 			sourceTree = "<group>";
 		};
 		EAA2EC6826E2064D00B4FACF /* Frameworks */ = {
@@ -755,11 +786,11 @@
 			isa = PBXGroup;
 			children = (
 				EA891BB827DF9F3B00AF04C6 /* Choose Substance */,
-				EA095A1227D9E400007D44D6 /* Interactions */,
-				EAE471A526CBA664009FB0EC /* ChooseRouteView.swift */,
-				EA095A1027D9E3D0007D44D6 /* Dose */,
-				EA095A1127D9E3E8007D44D6 /* Time and Color */,
+				EA8AEA7127E1DC0500B30A16 /* Substance Sheets */,
+				EA8AEA7227E1DC4400B30A16 /* Preset Sheets */,
 				EAF76C9527D8952200945587 /* AddResult.swift */,
+				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
+				EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */,
 			);
 			path = "Add Ingestion";
 			sourceTree = "<group>";
@@ -942,6 +973,7 @@
 				EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
 				EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */,
 				EACB6E7B27D6456400940291 /* SearchList.swift in Sources */,
+				EA8AEA7A27E1ECEF00B30A16 /* PresetChooseDoseView.swift in Sources */,
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,
 				EACB6E8727D7493000940291 /* AroundShapeUp.swift in Sources */,
 				EAE471E726CBA664009FB0EC /* Substance-CoreDataHelpers.swift in Sources */,
@@ -954,6 +986,7 @@
 				EA47E65D27CA136C00F6E10F /* Roa+CoreDataClass.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */,
+				EA8AEA7627E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */,
@@ -987,6 +1020,7 @@
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,
 				EACB6E4B27D1FF2C00940291 /* String-ValidName.swift in Sources */,
+				EA8AEA7427E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift in Sources */,
 				EA891BB527DF8D8600AF04C6 /* PresetsViewModel.swift in Sources */,
 				EAE471E826CBA664009FB0EC /* UnresolvedInteraction-CoreDataHelpers.swift in Sources */,
 				EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */,
@@ -998,6 +1032,7 @@
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
+				EA8AEA7C27E1F23C00B30A16 /* PresetInteractionsSection.swift in Sources */,
 				EAE471E426CBA664009FB0EC /* Roa-CoreDataHelpers.swift in Sources */,
 				EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */,
 				EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */,
@@ -1036,6 +1071,7 @@
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,
+				EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,
 				EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */,

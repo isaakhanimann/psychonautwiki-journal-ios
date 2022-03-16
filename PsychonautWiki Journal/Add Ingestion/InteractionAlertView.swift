@@ -2,7 +2,7 @@ import SwiftUI
 
 struct InteractionAlertView: View {
 
-    @ObservedObject var viewModel: AcknowledgeInteractionsView.ViewModel
+    var alertable: InteractionAlertable
 
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -19,9 +19,9 @@ struct InteractionAlertView: View {
     }
 
     var iconColor: Color {
-        if !viewModel.dangerousIngestions.isEmpty {
+        if !alertable.dangerousIngestions.isEmpty {
             return InteractionType.dangerous.color
-        } else if !viewModel.unsafeIngestions.isEmpty {
+        } else if !alertable.unsafeIngestions.isEmpty {
             return InteractionType.unsafe.color
         } else {
             return InteractionType.uncertain.color
@@ -42,13 +42,13 @@ struct InteractionAlertView: View {
 
     var textBody: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ForEach(viewModel.dangerousIngestions) { ing in
+            ForEach(alertable.dangerousIngestions) { ing in
                 getAlertText(for: ing, of: .dangerous)
             }
-            ForEach(viewModel.unsafeIngestions) { ing in
+            ForEach(alertable.unsafeIngestions) { ing in
                 getAlertText(for: ing, of: .unsafe)
             }
-            ForEach(viewModel.uncertainIngestions) { ing in
+            ForEach(alertable.uncertainIngestions) { ing in
                 getAlertText(for: ing, of: .uncertain)
             }
         }
@@ -57,12 +57,12 @@ struct InteractionAlertView: View {
     var buttons: some View {
         HStack {
             Button("Cancel") {
-                viewModel.isShowingAlert.toggle()
+                alertable.hideAlert()
             }
             Spacer()
             Button("Add Anyway") {
-                viewModel.isShowingAlert.toggle()
-                viewModel.isShowingNext = true
+                alertable.hideAlert()
+                alertable.showNext()
             }
             .foregroundColor(.red)
         }
@@ -98,6 +98,6 @@ struct InteractionAlertView: View {
 
 struct InteractionAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionAlertView(viewModel: AcknowledgeInteractionsView.ViewModel())
+        InteractionAlertView(alertable: AcknowledgeInteractionsView.ViewModel())
     }
 }

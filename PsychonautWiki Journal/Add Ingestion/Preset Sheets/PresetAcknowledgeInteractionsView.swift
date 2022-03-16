@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct AcknowledgeInteractionsView: View {
+struct PresetAcknowledgeInteractionsView: View {
 
-    let substance: Substance
+    let preset: Preset
     let dismiss: (AddResult) -> Void
     let experience: Experience?
     @StateObject private var viewModel = ViewModel()
@@ -13,18 +13,18 @@ struct AcknowledgeInteractionsView: View {
                 .blur(radius: viewModel.isShowingAlert ? 10 : 0)
                 .allowsHitTesting(viewModel.isShowingAlert ? false : true)
             if viewModel.isShowingAlert {
-                InteractionAlertView(viewModel: viewModel)
+                InteractionAlertView(alertable: viewModel)
             }
         }
         .task {
-            viewModel.checkInteractionsWith(substance: substance)
+            viewModel.checkInteractionsWith(preset: preset)
         }
     }
 
     var regularContent: some View {
         ZStack(alignment: .bottom) {
             List {
-                InteractionsSection(substance: substance)
+                PresetInteractionsSection(preset: preset)
                 bottomPadding
             }
             Button("Next") {
@@ -33,8 +33,8 @@ struct AcknowledgeInteractionsView: View {
             .buttonStyle(.primary)
             .padding()
             NavigationLink("Next", isActive: $viewModel.isShowingNext) {
-                ChooseRouteView(
-                    substance: substance,
+                PresetChooseDoseView(
+                    preset: preset,
                     dismiss: dismiss,
                     experience: experience
                 )
@@ -49,7 +49,7 @@ struct AcknowledgeInteractionsView: View {
                 }
             }
         }
-        .navigationBarTitle(substance.nameUnwrapped)
+        .navigationBarTitle(preset.nameUnwrapped)
     }
 
     var bottomPadding: some View {
@@ -59,10 +59,10 @@ struct AcknowledgeInteractionsView: View {
     }
 }
 
-struct AcknowledgeInteractionsView_Previews: PreviewProvider {
+struct PresetAcknowledgeInteractionsView_Previews: PreviewProvider {
     static var previews: some View {
-        AcknowledgeInteractionsView(
-            substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!,
+        PresetAcknowledgeInteractionsView(
+            preset: PreviewHelper.shared.preset,
             dismiss: {print($0)},
             experience: nil
         )
