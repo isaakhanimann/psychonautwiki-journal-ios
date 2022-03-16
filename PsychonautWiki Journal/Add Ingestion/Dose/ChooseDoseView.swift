@@ -51,7 +51,7 @@ struct ChooseDoseView: View {
                             "\(viewModel.purity.formatted())%",
                             value: $viewModel.purity,
                             in: 1...100,
-                            step: 0.1
+                            step: 1
                         )
                         let units = substance.getDose(for: administrationRoute)?.units
                         HStack {
