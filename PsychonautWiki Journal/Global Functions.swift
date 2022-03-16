@@ -1,5 +1,10 @@
-import Foundation
 import CoreData
+import UIKit
+
+func playHapticFeedback() {
+    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+    impactMed.impactOccurred()
+}
 
 enum ConversionError: Error {
     case failedToConvertDataToJSON

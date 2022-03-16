@@ -48,7 +48,6 @@
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
 		EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
 		EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */; };
-		EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -58,7 +57,6 @@
 		EACB6E0A27CE115D00940291 /* ChemicalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0927CE115D00940291 /* ChemicalView.swift */; };
 		EACB6E0D27CE1D2700940291 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0C27CE1D2700940291 /* EffectView.swift */; };
 		EACB6E0F27CE236600940291 /* UnresolvedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E0E27CE236600940291 /* UnresolvedView.swift */; };
-		EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
 		EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */; };
@@ -223,7 +221,6 @@
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFilePublisher.swift; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedSubstancesViewModel.swift; sourceTree = "<group>"; };
-		EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -233,7 +230,6 @@
 		EACB6E0927CE115D00940291 /* ChemicalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalView.swift; sourceTree = "<group>"; };
 		EACB6E0C27CE1D2700940291 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
 		EACB6E0E27CE236600940291 /* UnresolvedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnresolvedView.swift; sourceTree = "<group>"; };
-		EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions for iOS.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
@@ -466,6 +462,27 @@
 			path = "Add Component";
 			sourceTree = "<group>";
 		};
+		EA8AEA6F27E1CC3A00B30A16 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EA8AEA7027E1CC5100B30A16 /* Content */,
+				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
+				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
+				EA47E67227CB490300F6E10F /* AllTabs.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EA8AEA7027E1CC5100B30A16 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				EAE4712926CBA663009FB0EC /* ContentView.swift */,
+				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
 		EAA2EC6826E2064D00B4FACF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,17 +571,6 @@
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
-				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
-				EAE4718026CBA664009FB0EC /* Persistence.swift */,
-				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
-				EAA2EC3526DFB5B200B4FACF /* Connectivity.swift */,
-				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
-				EAC23793276750C500109622 /* Global Functions.swift */,
-				EAF76CA727D90CE500945587 /* Enums */,
-				EAE4715B26CBA664009FB0EC /* Extensions */,
-				EACB6E4627D0DF9A00940291 /* Protocols */,
-				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
-				EAE4716E26CBA664009FB0EC /* Decoding into Core Data */,
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EACB6E3B27D09C8800940291 /* JournalTests */,
 				EAE4710426CBA57F009FB0EC /* Products */,
@@ -584,19 +590,23 @@
 		EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */ = {
 			isa = PBXGroup;
 			children = (
+				EAF76CA727D90CE500945587 /* Enums */,
+				EAE4715B26CBA664009FB0EC /* Extensions */,
+				EACB6E4627D0DF9A00940291 /* Protocols */,
+				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
+				EAE4716E26CBA664009FB0EC /* Decoding into Core Data */,
 				EAE471AC26CBA664009FB0EC /* Reused Styles */,
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* ExperiencesTab */,
 				EA47E66E27CB475100F6E10F /* SearchTab */,
 				EAE4712A26CBA663009FB0EC /* SettingsTab */,
-				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
-				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
-				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
-				EAE4712926CBA663009FB0EC /* ContentView.swift */,
-				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
-				EA47E67227CB490300F6E10F /* AllTabs.swift */,
-				EACB6E1C27CFB00800940291 /* Global Functions for iOS.swift */,
+				EA8AEA6F27E1CC3A00B30A16 /* Main */,
+				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
+				EAE4718026CBA664009FB0EC /* Persistence.swift */,
+				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
+				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
+				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
@@ -960,7 +970,6 @@
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance+CoreDataClass.swift in Sources */,
 				EA891BC127E085A000AF04C6 /* AddPreset-ViewModel.swift in Sources */,
-				EAA2EC3626DFB5B200B4FACF /* Connectivity.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EACB6E9927D77A2200940291 /* Date-NearestHour.swift in Sources */,
 				EACB6E0D27CE1D2700940291 /* EffectView.swift in Sources */,
@@ -995,7 +1004,6 @@
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
 				EAF76C9627D8952200945587 /* AddResult.swift in Sources */,
-				EACB6E1D27CFB00800940291 /* Global Functions for iOS.swift in Sources */,
 				EACB6E8F27D7543600940291 /* AroundShapeDown-ViewModel.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,

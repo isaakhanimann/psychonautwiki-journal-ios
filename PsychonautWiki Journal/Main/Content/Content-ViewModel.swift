@@ -45,7 +45,6 @@ extension ContentView {
 
         private func openEye() {
             self.isEyeOpen = true
-            Connectivity.shared.sendEyeState(isEyeOpen: true)
         }
 
         private func handleUniversalUrl(universalUrl: URL) {

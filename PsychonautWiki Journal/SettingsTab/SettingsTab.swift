@@ -90,7 +90,6 @@ struct SettingsTab: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     private var substancesSection: some View {

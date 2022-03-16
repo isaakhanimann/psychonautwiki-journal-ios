@@ -66,7 +66,6 @@ struct WelcomeScreen: View {
     private func toggleEye() {
         isEyeOpen.toggle()
         playHapticFeedback()
-        Connectivity.shared.sendEyeState(isEyeOpen: isEyeOpen)
     }
 
     let features = [
