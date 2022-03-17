@@ -7,6 +7,7 @@ struct ChooseSubstanceList: View {
     let dismiss: (AddResult) -> Void
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var presetsViewModel = PresetsViewModel()
+    @StateObject var customsViewModel = CustomSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @Environment(\.isSearching) var isSearching
 
@@ -61,6 +62,19 @@ struct ChooseSubstanceList: View {
                                     }
                                 }
 
+                            }
+                        }
+                    }
+                    if !customsViewModel.customSubstances.isEmpty {
+                        Section(header: Text("Custom Substances")) {
+                            ForEach(customsViewModel.customSubstances) { cust in
+                                NavigationLink(cust.nameUnwrapped) {
+                                    AddCustomIngestionView(
+                                        customSubstance: cust,
+                                        dismiss: dismiss,
+                                        experience: experience
+                                    )
+                                }
                             }
                         }
                     }
