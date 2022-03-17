@@ -55,6 +55,8 @@
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
 		EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
 		EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */; };
+		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
+		EAB1659927E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -235,6 +237,8 @@
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFilePublisher.swift; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedSubstancesViewModel.swift; sourceTree = "<group>"; };
+		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetChooseTimeAndColors-ViewModel.swift"; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */,
+				EAB1659427E302BC003DF79D /* ColorPicker.swift */,
 				EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */,
 			);
 			path = "Time and Color";
@@ -510,10 +515,9 @@
 		EA8AEA7227E1DC4400B30A16 /* Preset Sheets */ = {
 			isa = PBXGroup;
 			children = (
-				EA8AEA7327E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift */,
-				EA8AEA7527E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift */,
+				EAB1659627E303E8003DF79D /* Interactions */,
+				EAB1659727E303FC003DF79D /* Time And Color */,
 				EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */,
-				EA8AEA7E27E2132D00B30A16 /* PresetChooseTimeAndColorsView.swift */,
 			);
 			path = "Preset Sheets";
 			sourceTree = "<group>";
@@ -532,6 +536,24 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAB1659627E303E8003DF79D /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				EA8AEA7327E1DE5100B30A16 /* PresetAcknowledgeInteractionsView.swift */,
+				EA8AEA7527E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift */,
+			);
+			path = Interactions;
+			sourceTree = "<group>";
+		};
+		EAB1659727E303FC003DF79D /* Time And Color */ = {
+			isa = PBXGroup;
+			children = (
+				EA8AEA7E27E2132D00B30A16 /* PresetChooseTimeAndColorsView.swift */,
+				EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */,
+			);
+			path = "Time And Color";
 			sourceTree = "<group>";
 		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
@@ -1075,8 +1097,10 @@
 				EA47E66C27CA63D000F6E10F /* Effect-CoreDataHelpers.swift in Sources */,
 				EA8447ED27CD2B4C00B10DD3 /* CurveUp.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
+				EAB1659927E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift in Sources */,
 				EACB6E0827CE0FAB00940291 /* PsychoactiveView.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
+				EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */,
 				EACB6E8127D7409400940291 /* IngestionWithTimelineContext.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,

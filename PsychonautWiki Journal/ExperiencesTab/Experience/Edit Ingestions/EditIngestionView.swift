@@ -29,10 +29,7 @@ struct EditIngestionView: View {
                     .labelsHidden()
             }
             Section(header: Text("Color")) {
-                LazyVGrid(columns: colorColumns) {
-                    ForEach(IngestionColor.allCases, id: \.self, content: colorButton)
-                }
-                .padding(.vertical)
+                ColorPicker(selectedColor: $viewModel.selectedColor)
             }
         }
         .task {
@@ -69,34 +66,6 @@ struct EditIngestionView: View {
                 }
             }
         }
-    }
-
-    let colorColumns = [
-        GridItem(.adaptive(minimum: 44))
-    ]
-
-    private func colorButton(for color: IngestionColor) -> some View {
-        ZStack {
-            color.swiftUIColor
-                .aspectRatio(1, contentMode: .fit)
-                .cornerRadius(6)
-
-            if color == viewModel.selectedColor {
-                Image(systemName: "checkmark.circle")
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-            }
-        }
-        .onTapGesture {
-            viewModel.selectedColor = color
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityAddTraits(
-            color == viewModel.selectedColor
-                ? [.isButton, .isSelected]
-                : .isButton
-        )
-        .accessibilityLabel(LocalizedStringKey(color.rawValue))
     }
 }
 

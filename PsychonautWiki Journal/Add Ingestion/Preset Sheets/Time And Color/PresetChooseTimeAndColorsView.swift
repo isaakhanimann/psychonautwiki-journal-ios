@@ -1,14 +1,12 @@
 import SwiftUI
 
-struct ChooseTimeAndColor: View {
+struct PresetChooseTimeAndColorsView: View {
 
-    let substance: Substance
-    let administrationRoute: AdministrationRoute
-    let dose: Double?
-    let units: String?
+    let preset: Preset
+    let dose: Double
     let dismiss: (AddResult) -> Void
     let experience: Experience?
-    @StateObject var viewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -21,13 +19,16 @@ struct ChooseTimeAndColor: View {
                     )
                     .labelsHidden()
                 }
-                Section("Choose Color") {
-                    ColorPicker(selectedColor: $viewModel.selectedColor)
+                ForEach($viewModel.componentColorCombos) { $combo in
+                    Section("\(combo.component.substanceNameUnwrapped) Color") {
+                        ColorPicker(selectedColor: $combo.selectedColor)
+                    }
                 }
+                bottomPadding
             }
             if let experienceUnwrap = experience {
                 Button("Add Ingestion") {
-                    viewModel.addIngestion(to: experienceUnwrap)
+                    viewModel.addIngestions(to: experienceUnwrap)
                     dismiss(.ingestionWasAdded)
                 }
                 .buttonStyle(.primary)
@@ -38,13 +39,13 @@ struct ChooseTimeAndColor: View {
                     if let lastExperienceUnwrap = viewModel.lastExperience,
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
-                            viewModel.addIngestion(to: lastExperienceUnwrap)
+                            viewModel.addIngestions(to: lastExperienceUnwrap)
                             dismiss(.ingestionWasAdded)
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
-                        viewModel.addIngestionToNewExperience()
+                        viewModel.addIngestionsToNewExperience()
                         dismiss(.ingestionWasAdded)
                     }
                     .padding()
@@ -53,14 +54,14 @@ struct ChooseTimeAndColor: View {
             }
         }
         .task {
-            viewModel.substance = substance
-            viewModel.administrationRoute = administrationRoute
-            viewModel.dose = dose ?? 0
-            viewModel.units = units
+            viewModel.preset = preset
+            viewModel.presetDose = dose
             if experience == nil {
                 viewModel.setLastExperience()
             }
-            viewModel.setDefaultColor()
+            viewModel.componentColorCombos = preset.componentsUnwrapped.map { com in
+                ComponentColorCombo(component: com)
+            }
         }
         .navigationBarTitle("Ingestion Time")
         .toolbar {
@@ -71,18 +72,22 @@ struct ChooseTimeAndColor: View {
             }
         }
     }
+
+    var bottomPadding: some View {
+        Section(header: Text("")) {
+            EmptyView()
+        }
+        .padding(.bottom, 50)
+    }
 }
 
-struct ChooseTimeAndColor_Previews: PreviewProvider {
+struct PresetChooseTimeAndColorsView_Previews: PreviewProvider {
     static var previews: some View {
-        let helper = PreviewHelper.shared
-        return ChooseTimeAndColor(
-            substance: helper.substance,
-            administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
-            dose: 10,
-            units: "mg",
-            dismiss: {print($0)},
-            experience: helper.experiences.first!
+        PresetChooseTimeAndColorsView(
+            preset: PreviewHelper.shared.preset,
+            dose: 1,
+            dismiss: { _ in },
+            experience: nil
         )
     }
 }

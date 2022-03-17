@@ -12,7 +12,6 @@ extension ChooseTimeAndColor {
         var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
         var dose: Double = 0
         var units: String?
-        var dismiss: (AddResult) -> Void = {print($0)}
 
         func setLastExperience() {
             let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
@@ -34,17 +33,16 @@ extension ChooseTimeAndColor {
             }
         }
 
-        func addIngestionSaveAndDismiss(to experience: Experience) {
+        func addIngestion(to experience: Experience) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
                 let ingestion = createIngestion()
                 experience.addToIngestions(ingestion)
                 try? context.save()
             }
-            dismiss(.ingestionWasAdded)
         }
 
-        func addIngestionToNewExperienceSaveAndDismiss() {
+        func addIngestionToNewExperience() {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
                 let newExperience = Experience(context: context)
@@ -55,7 +53,6 @@ extension ChooseTimeAndColor {
                 newExperience.addToIngestions(ingestion)
                 try? context.save()
             }
-            dismiss(.ingestionWasAdded)
         }
 
         private func createIngestion() -> Ingestion {
