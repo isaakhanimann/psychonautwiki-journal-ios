@@ -46,7 +46,7 @@ struct PresetView: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+        .sheet(isPresented: $isShowingAddIngestionSheet) {
             let showInteractionSheet = preset.substances.contains(where: { sub in
                 sub.hasAnyInteractions
             }) || !preset.dangerousInteractions.isEmpty
@@ -68,7 +68,7 @@ struct PresetView: View {
                 }
             }
             .accentColor(Color.blue)
-        })
+        }
         .toast(isPresenting: $isShowingSuccessToast) {
             AlertToast(
                 displayMode: .alert,

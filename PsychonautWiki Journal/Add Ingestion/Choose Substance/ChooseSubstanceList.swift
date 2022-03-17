@@ -13,24 +13,54 @@ struct ChooseSubstanceList: View {
     var body: some View {
         ZStack {
             List {
-                let showRecents = !isSearching && !recentsViewModel.recentSubstances.isEmpty
-                if showRecents {
-                    Section("Recently Used") {
-                        ForEach(recentsViewModel.recentSubstances) { sub in
-                            NavigationLink(sub.nameUnwrapped) {
-                                if sub.hasAnyInteractions {
-                                    AcknowledgeInteractionsView(
-                                        substance: sub,
-                                        dismiss: dismiss,
-                                        experience: experience
-                                    )
-                                } else {
-                                    ChooseRouteView(
-                                        substance: sub,
-                                        dismiss: dismiss,
-                                        experience: experience
-                                    )
+                if !isSearching {
+                    if !recentsViewModel.recentSubstances.isEmpty {
+                        Section("Recently Used") {
+                            ForEach(recentsViewModel.recentSubstances) { sub in
+                                NavigationLink(sub.nameUnwrapped) {
+                                    if sub.hasAnyInteractions {
+                                        AcknowledgeInteractionsView(
+                                            substance: sub,
+                                            dismiss: dismiss,
+                                            experience: experience
+                                        )
+                                    } else {
+                                        ChooseRouteView(
+                                            substance: sub,
+                                            dismiss: dismiss,
+                                            experience: experience
+                                        )
+                                    }
                                 }
+                            }
+                        }
+                    }
+                    if !presetsViewModel.presets.isEmpty {
+                        Section(header: Text("Presets")) {
+                            ForEach(presetsViewModel.presets) { pre in
+                                let showInteractionSheet = pre.substances.contains(where: { sub in
+                                    sub.hasAnyInteractions
+                                }) || !pre.dangerousInteractions.isEmpty
+                                || !pre.unsafeInteractions.isEmpty
+                                || !pre.uncertainInteractions.isEmpty
+                                if showInteractionSheet {
+                                    NavigationLink(pre.nameUnwrapped) {
+                                        PresetAcknowledgeInteractionsView(
+                                            preset: pre,
+                                            dismiss: dismiss,
+                                            experience: experience
+                                        )
+                                    }
+                                } else {
+                                    NavigationLink(pre.nameUnwrapped) {
+                                        PresetChooseDoseView(
+                                            preset: pre,
+                                            dismiss: dismiss,
+                                            experience: experience
+                                        )
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -54,11 +84,6 @@ struct ChooseSubstanceList: View {
                                 }
                             }
                         }
-                    }
-                }
-                Section(header: Text("Presets")) {
-                    ForEach(presetsViewModel.presets) { pre in
-                        Text(pre.name ?? "hello")
                     }
                 }
                 if isEyeOpen {
