@@ -9,7 +9,11 @@ struct AddPresetView: View {
         NavigationView {
             Form {
                 Section(header: Text("Name")) {
-                    TextField("Preset Name", text: $viewModel.presetName)
+                    TextField(
+                        "Preset Name",
+                        text: $viewModel.presetName,
+                        prompt: Text("e.g. Coffee")
+                    )
                 }
                 .headerProminence(.increased)
                 Section(header: Text("Units")) {
@@ -33,6 +37,12 @@ struct AddPresetView: View {
                     }
                 }
                 .headerProminence(.increased)
+                Section("Explanation") {
+                    // swiftlint:disable line_length
+                    Text("Components are used to create ingestions. E.g. when you define a preset **Coffee** with a unit **cup** and a component **40mg Caffeine oral per cup**, then when you ingest **1 Coffee** an ingestion with **40mg Caffeine** will be created.")
+                        .lineLimit(nil)
+                        .foregroundColor(.secondary)
+                }
             }
             .navigationTitle("Add Preset")
             .toolbar {
