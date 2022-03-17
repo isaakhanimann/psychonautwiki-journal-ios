@@ -8,24 +8,24 @@ struct PresetInteractionsSection: View {
         Group {
             if !preset.dangerousInteractions.isEmpty {
                 Section("Intrinsically Dangerous") {
-                    ForEach(preset.dangerousInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is dangerous with \(combo.1.nameUnwrapped)")
+                    ForEach(preset.dangerousInteractions) { interaction in
+                        Text("\(interaction.sub1.nameUnwrapped) is dangerous with \(interaction.sub2.nameUnwrapped)")
                             .foregroundColor(InteractionType.dangerous.color)
                     }
                 }
             }
             if !preset.unsafeInteractions.isEmpty {
                 Section("Intrinsically Unsafe") {
-                    ForEach(preset.unsafeInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is unsafe with \(combo.1.nameUnwrapped)")
+                    ForEach(preset.unsafeInteractions) { interaction in
+                        Text("\(interaction.sub1.nameUnwrapped) is unsafe with \(interaction.sub2.nameUnwrapped)")
                             .foregroundColor(InteractionType.unsafe.color)
                     }
                 }
             }
             if !preset.uncertainInteractions.isEmpty {
                 Section("Intrinsically Uncertain") {
-                    ForEach(preset.uncertainInteractions, id: \.0) { combo in
-                        Text("\(combo.0.nameUnwrapped) is uncertain with \(combo.1.nameUnwrapped)")
+                    ForEach(preset.uncertainInteractions) { interaction in
+                        Text("\(interaction.sub1.nameUnwrapped) is uncertain with \(interaction.sub2.nameUnwrapped)")
                             .foregroundColor(InteractionType.uncertain.color)
                     }
                 }

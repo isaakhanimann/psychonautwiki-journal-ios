@@ -15,49 +15,52 @@ extension Preset {
         components?.allObjects as? [PresetComponent] ?? []
     }
 
-    var dangerousInteractions: [(Substance, Substance)] {
+    struct SubstanceSubstanceInteraction: Identifiable, Hashable {
+        let sub1: Substance
+        let sub2: Substance
+        // swiftlint:disable identifier_name
+        var id: String {
+            sub1.nameUnwrapped + sub2.nameUnwrapped
+        }
+    }
+
+    var dangerousInteractions: [SubstanceSubstanceInteraction] {
         substances.combinations(ofCount: 2).compactMap { combo in
             guard let first = combo[safe: 0] else {return nil}
             guard let second = combo[safe: 1] else {return nil}
             if first.isDangerous(with: second) {
-                return (first, second)
+                return SubstanceSubstanceInteraction(sub1: first, sub2: second)
             } else {
                 return nil
             }
         }
-        .uniqued { elem in
-            elem.0.nameUnwrapped + elem.1.nameUnwrapped
-        }
+        .uniqued()
     }
 
-    var unsafeInteractions: [(Substance, Substance)] {
+    var unsafeInteractions: [SubstanceSubstanceInteraction] {
         substances.combinations(ofCount: 2).compactMap { combo in
             guard let first = combo[safe: 0] else {return nil}
             guard let second = combo[safe: 1] else {return nil}
             if first.isUnsafe(with: second) {
-                return (first, second)
+                return SubstanceSubstanceInteraction(sub1: first, sub2: second)
             } else {
                 return nil
             }
         }
-        .uniqued { elem in
-            elem.0.nameUnwrapped + elem.1.nameUnwrapped
-        }
+        .uniqued()
     }
 
-    var uncertainInteractions: [(Substance, Substance)] {
+    var uncertainInteractions: [SubstanceSubstanceInteraction] {
         substances.combinations(ofCount: 2).compactMap { combo in
             guard let first = combo[safe: 0] else {return nil}
             guard let second = combo[safe: 1] else {return nil}
             if first.isUncertain(with: second) {
-                return (first, second)
+                return SubstanceSubstanceInteraction(sub1: first, sub2: second)
             } else {
                 return nil
             }
         }
-        .uniqued { elem in
-            elem.0.nameUnwrapped + elem.1.nameUnwrapped
-        }
+        .uniqued()
     }
 
     var substances: [Substance] {
