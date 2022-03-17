@@ -7,7 +7,6 @@ struct SearchList: View {
     @StateObject var presetsViewModel = PresetsViewModel()
     @Environment(\.isSearching) var isSearching
     @State private var isShowingAddPreset = false
-    @State var editMode: EditMode = .inactive
 
     var body: some View {
         ZStack {
@@ -22,28 +21,16 @@ struct SearchList: View {
                             }
                         }
                     }
-                    Section {
+                    Section("Presets") {
                         ForEach(presetsViewModel.presets) { pre in
                             NavigationLink(pre.nameUnwrapped) {
                                 PresetView(preset: pre)
-                            }
-                        }
-                        .onDelete { indexSet in
-                            presetsViewModel.deletePresets(at: indexSet)
-                            if presetsViewModel.presets.isEmpty {
-                                editMode = .inactive
                             }
                         }
                         Button {
                             isShowingAddPreset.toggle()
                         } label: {
                             Label("Add Preset", systemImage: "plus")
-                        }
-                    } header: {
-                        HStack {
-                            Text("Presets")
-                            Spacer()
-                            EditButton().environment(\.editMode, $editMode)
                         }
                     }
                 }
@@ -65,7 +52,6 @@ struct SearchList: View {
         .sheet(isPresented: $isShowingAddPreset) {
             AddPresetView()
         }
-        .environment(\.editMode, $editMode)
     }
 }
 
