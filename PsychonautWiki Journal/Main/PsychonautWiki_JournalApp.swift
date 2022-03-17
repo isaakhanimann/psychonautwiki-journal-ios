@@ -15,6 +15,7 @@ struct PsychonautWiki_JournalApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .navigationViewStyle(.stack)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environmentObject(calendarWrapper)
                 .accentColor(Color.blue)
