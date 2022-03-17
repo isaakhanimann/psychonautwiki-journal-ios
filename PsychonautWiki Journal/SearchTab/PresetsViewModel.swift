@@ -32,4 +32,12 @@ class PresetsViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDe
         guard let pres = controller.fetchedObjects as? [Preset] else {return}
         self.presets = pres
     }
+
+    func deletePresets(at indexSet: IndexSet) {
+        for index in indexSet {
+            let pre = presets[index]
+            PersistenceController.shared.viewContext.delete(pre)
+        }
+        PersistenceController.shared.saveViewContext()
+    }
 }

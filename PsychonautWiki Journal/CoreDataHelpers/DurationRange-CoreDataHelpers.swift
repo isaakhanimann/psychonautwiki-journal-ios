@@ -31,8 +31,8 @@ extension DurationRange {
 
     var displayString: String? {
         guard minUnwrapped != nil || maxUnwrapped != nil else {return nil}
-        let min = minUnwrapped?.cleanString ?? ".."
-        let max = maxUnwrapped?.cleanString ?? ".."
+        let min = minUnwrapped?.formatted() ?? ".."
+        let max = maxUnwrapped?.formatted() ?? ".."
         var result = "\(min)-\(max)"
         guard let unitsUnwrapped = unitsUnwrapped else {return nil}
         switch unitsUnwrapped {

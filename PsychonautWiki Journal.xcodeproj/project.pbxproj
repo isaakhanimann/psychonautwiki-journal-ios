@@ -57,6 +57,7 @@
 		EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659927E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */; };
+		EAB1659C27E33BBF003DF79D /* DoseConversionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659B27E33BBF003DF79D /* DoseConversionSectionView.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -116,7 +117,6 @@
 		EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */; };
 		EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */; };
 		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
-		EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */; };
 		EAE471F526CBA664009FB0EC /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */; };
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
@@ -239,6 +239,7 @@
 		EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetChooseTimeAndColors-ViewModel.swift"; sourceTree = "<group>"; };
+		EAB1659B27E33BBF003DF79D /* DoseConversionSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseConversionSectionView.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -302,7 +303,6 @@
 		EAE4716826CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubstancesFile-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716926CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoaDuration-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
-		EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-CleanString.swift"; sourceTree = "<group>"; };
 		EAE4717226CBA664009FB0EC /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
@@ -517,7 +517,7 @@
 			children = (
 				EAB1659627E303E8003DF79D /* Interactions */,
 				EAB1659727E303FC003DF79D /* Time And Color */,
-				EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */,
+				EAB1659A27E33BA8003DF79D /* Dose */,
 			);
 			path = "Preset Sheets";
 			sourceTree = "<group>";
@@ -554,6 +554,15 @@
 				EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */,
 			);
 			path = "Time And Color";
+			sourceTree = "<group>";
+		};
+		EAB1659A27E33BA8003DF79D /* Dose */ = {
+			isa = PBXGroup;
+			children = (
+				EA8AEA7927E1ECEF00B30A16 /* PresetChooseDoseView.swift */,
+				EAB1659B27E33BBF003DF79D /* DoseConversionSectionView.swift */,
+			);
+			path = Dose;
 			sourceTree = "<group>";
 		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
@@ -705,7 +714,6 @@
 			children = (
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
-				EAE4716C26CBA664009FB0EC /* Double-CleanString.swift */,
 				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
@@ -1083,8 +1091,8 @@
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
 				EACB6E7127D5EB1E00940291 /* EditIngestion-ViewModel.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
-				EAE471F026CBA664009FB0EC /* Double-CleanString.swift in Sources */,
 				EACB6E9427D7571E00940291 /* LineShape-ViewModel.swift in Sources */,
+				EAB1659C27E33BBF003DF79D /* DoseConversionSectionView.swift in Sources */,
 				EA891BBC27E0830900AF04C6 /* PresetComponent-CoreDataHelpers.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAE471C426CBA664009FB0EC /* CalendarSection.swift in Sources */,

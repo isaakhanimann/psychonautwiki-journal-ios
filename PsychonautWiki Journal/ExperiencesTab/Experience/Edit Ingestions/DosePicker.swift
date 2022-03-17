@@ -26,7 +26,7 @@ struct DosePicker: View {
         }
         .task {
             if let doseUnwrapped = doseMaybe {
-                doseText = doseUnwrapped.cleanString
+                doseText = doseUnwrapped.formatted()
                 dose = doseUnwrapped
             }
         }
@@ -44,14 +44,14 @@ struct DosePicker: View {
             value: $dose.animation(),
             in: sliderMin...sliderMax,
             step: closestStep,
-            minimumValueLabel: Text("\(min.cleanString) \(units)"),
-            maximumValueLabel: Text("\(max.cleanString) \(units)")
+            minimumValueLabel: Text("\(min.formatted()) \(units)"),
+            maximumValueLabel: Text("\(max.formatted()) \(units)")
         ) {
             Text("Dose")
         }
         .onChange(of: dose) { _ in
             let roundedDouble = dose.rounded(toPlaces: 5)
-            doseText = roundedDouble.cleanString
+            doseText = roundedDouble.formatted()
             doseMaybe = roundedDouble
         }
     }
@@ -86,26 +86,26 @@ struct DosePicker: View {
         let units = roaDose?.units ?? ""
         if let thresh = roaDose?.thresholdUnwrapped,
            thresh >= dose {
-            return Text("threshold (\(thresh.cleanString) \(units))")
+            return Text("threshold (\(thresh.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.thresh.color)
         } else if let lightMin = roaDose?.light?.minUnwrapped,
                   let lightMax = roaDose?.light?.maxUnwrapped,
                   dose >= lightMin && dose <= lightMax {
-            return Text("light (\(lightMin.cleanString) - \(lightMax.cleanString) \(units))")
+            return Text("light (\(lightMin.formatted()) - \(lightMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.light.color)
         } else if let commonMin = roaDose?.common?.minUnwrapped,
                   let commonMax = roaDose?.common?.maxUnwrapped,
                   dose >= commonMin && dose <= commonMax {
-            return Text("common (\(commonMin.cleanString) - \(commonMax.cleanString) \(units))")
+            return Text("common (\(commonMin.formatted()) - \(commonMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.common.color)
         } else if let strongMin = roaDose?.strong?.minUnwrapped,
                   let strongMax = roaDose?.strong?.maxUnwrapped,
                   dose >= strongMin && dose <= strongMax {
-            return Text("strong (\(strongMin.cleanString) - \(strongMax.cleanString) \(units))")
+            return Text("strong (\(strongMin.formatted()) - \(strongMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.strong.color)
         } else if let heavyOrStrongMax = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
                   dose >= heavyOrStrongMax {
-            return Text("heavy (\(heavyOrStrongMax.cleanString) \(units)+)")
+            return Text("heavy (\(heavyOrStrongMax.formatted()) \(units)+)")
                 .foregroundColor(DoseRangeType.heavy.color)
         } else {
             return Text(" ")
@@ -115,8 +115,7 @@ struct DosePicker: View {
 
 struct DosePicker_Previews: PreviewProvider {
     static var previews: some View {
-        let substance = PreviewHelper.shared.substancesFile.psychoactiveClassesUnwrapped[0].substancesUnwrapped[2]
-
+        let substance = PreviewHelper.shared.getSubstance(with: "2-FA")!
         Form {
             DosePicker(
                 roaDose: substance.getDose(

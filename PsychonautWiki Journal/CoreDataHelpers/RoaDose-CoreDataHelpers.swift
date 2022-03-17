@@ -36,26 +36,58 @@ extension RoaDose {
 
     func getRangeType(for dose: Double, with doseUnits: String) -> DoseRangeType {
         guard self.units == doseUnits else {return .none}
-        if let thresh = thresholdUnwrapped,
-           thresh >= dose {
+        if let threshOrLightMinUnwrap = threshOrLightMin,
+           threshOrLightMinUnwrap >= dose {
             return .thresh
-        } else if let lightMin = light?.minUnwrapped,
-                  let lightMax = light?.maxUnwrapped,
-                  dose >= lightMin && dose <= lightMax {
+        } else if let threshOrLightMinUnwrap = threshOrLightMin,
+                  let lightMaxOrCommonMinUnwrap = lightMaxOrCommonMin,
+                  dose >= threshOrLightMinUnwrap && dose <= lightMaxOrCommonMinUnwrap {
             return .light
-        } else if let commonMin = common?.minUnwrapped,
-                  let commonMax = common?.maxUnwrapped,
-                  dose >= commonMin && dose <= commonMax {
+        } else if let lightMaxOrCommonMinUnwrap = lightMaxOrCommonMin,
+                  let commonMaxOrStrongMinUnwrap = commonMaxOrStrongMin,
+                  dose >= lightMaxOrCommonMinUnwrap && dose <= commonMaxOrStrongMinUnwrap {
             return .common
-        } else if let strongMin = strong?.minUnwrapped,
-                  let strongMax = strong?.maxUnwrapped,
-                  dose >= strongMin && dose <= strongMax {
+        } else if let commonMaxOrStrongMinUnwrap = commonMaxOrStrongMin,
+                  let strongMaxOrHeavyUnwrap = strongMaxOrHeavy,
+                  dose >= commonMaxOrStrongMinUnwrap && dose <= strongMaxOrHeavyUnwrap {
             return .strong
-        } else if let heavyOrStrongMax = heavyUnwrapped ?? strong?.maxUnwrapped,
-                  dose >= heavyOrStrongMax {
+        } else if let strongMaxOrHeavyUnwrap = strongMaxOrHeavy,
+                  dose >= strongMaxOrHeavyUnwrap {
             return .heavy
         } else {
             return .none
+        }
+    }
+
+    var threshOrLightMin: Double? {
+        if let thresh = thresholdUnwrapped {
+            return thresh
+        } else {
+            return light?.minUnwrapped
+        }
+    }
+
+    var lightMaxOrCommonMin: Double? {
+        if let lightMax = light?.maxUnwrapped {
+            return lightMax
+        } else {
+            return common?.minUnwrapped
+        }
+    }
+
+    var commonMaxOrStrongMin: Double? {
+        if let commonMax = common?.maxUnwrapped {
+            return commonMax
+        } else {
+            return strong?.minUnwrapped
+        }
+    }
+
+    var strongMaxOrHeavy: Double? {
+        if let strongMax = strong?.maxUnwrapped {
+            return strongMax
+        } else {
+            return heavyUnwrapped
         }
     }
 }

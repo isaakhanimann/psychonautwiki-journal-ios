@@ -25,6 +25,9 @@ extension Preset {
                 return nil
             }
         }
+        .uniqued { elem in
+            elem.0.nameUnwrapped + elem.1.nameUnwrapped
+        }
     }
 
     var unsafeInteractions: [(Substance, Substance)] {
@@ -37,6 +40,9 @@ extension Preset {
                 return nil
             }
         }
+        .uniqued { elem in
+            elem.0.nameUnwrapped + elem.1.nameUnwrapped
+        }
     }
 
     var uncertainInteractions: [(Substance, Substance)] {
@@ -48,6 +54,9 @@ extension Preset {
             } else {
                 return nil
             }
+        }
+        .uniqued { elem in
+            elem.0.nameUnwrapped + elem.1.nameUnwrapped
         }
     }
 

@@ -3,38 +3,12 @@ import SwiftUI
 struct DoseView: View {
 
     let roaDose: RoaDose?
-    private var threshOrLightMin: String? {
-        if let thresh = roaDose?.thresholdUnwrapped?.cleanString {
-            return thresh
-        } else {
-            return roaDose?.light?.min.cleanString
-        }
-    }
-    private var lightMaxOrCommonMin: String? {
-        if let lightMax = roaDose?.light?.max.cleanString {
-            return lightMax
-        } else {
-            return roaDose?.common?.min.cleanString
-        }
-    }
-    private var commonMaxOrStrongMin: String? {
-        if let commonMax = roaDose?.common?.max.cleanString {
-            return commonMax
-        } else {
-            return roaDose?.strong?.min.cleanString
-        }
-    }
-    private var strongMaxOrHeavy: String? {
-        if let strongMax = roaDose?.strong?.max.cleanString {
-            return strongMax
-        } else {
-            return roaDose?.heavyUnwrapped?.cleanString
-        }
-    }
     var doseFont: Font {
-        if let lightMaxOrCommonMinUnwrap = lightMaxOrCommonMin, lightMaxOrCommonMinUnwrap.count >= 4 {
+        if let lightMaxOrCommonMinUnwrap = roaDose?.lightMaxOrCommonMin,
+           lightMaxOrCommonMinUnwrap.formatted().count >= 4 {
             return .footnote
-        } else if let commonMaxOrStrongMinUnwrap = commonMaxOrStrongMin, commonMaxOrStrongMinUnwrap.count >= 4 {
+        } else if let commonMaxOrStrongMinUnwrap = roaDose?.commonMaxOrStrongMin,
+                  commonMaxOrStrongMinUnwrap.formatted().count >= 4 {
             return .footnote
         } else {
             return .body
@@ -42,16 +16,16 @@ struct DoseView: View {
     }
 
     var body: some View {
-        let showDoseView = threshOrLightMin != nil
-        || lightMaxOrCommonMin != nil
-        || commonMaxOrStrongMin != nil
-        || strongMaxOrHeavy != nil
+        let showDoseView = roaDose?.threshOrLightMin != nil
+        || roaDose?.lightMaxOrCommonMin != nil
+        || roaDose?.commonMaxOrStrongMin != nil
+        || roaDose?.strongMaxOrHeavy != nil
         if showDoseView && roaDose?.unitsUnwrapped != nil {
             HStack(alignment: .top, spacing: 0) {
-                if let threshOrLightMin = threshOrLightMin {
+                if let threshOrLightMin = roaDose?.threshOrLightMin {
                     Spacer(minLength: 0)
                     VStack {
-                        Text(threshOrLightMin)
+                        Text(threshOrLightMin.formatted())
                             .foregroundLinearGradient(colors: [DoseRangeType.thresh.color, DoseRangeType.light.color])
                             .font(doseFont)
                         Text("thresh ")
@@ -61,7 +35,7 @@ struct DoseView: View {
                     }
                     Spacer(minLength: 0)
                 }
-                if threshOrLightMin != nil || lightMaxOrCommonMin != nil {
+                if roaDose?.threshOrLightMin != nil || roaDose?.lightMaxOrCommonMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -73,14 +47,14 @@ struct DoseView: View {
                     .foregroundColor(DoseRangeType.light.color)
                     Spacer(minLength: 0)
                 }
-                if let lightMaxOrCommonMin = lightMaxOrCommonMin {
+                if let lightMaxOrCommonMin = roaDose?.lightMaxOrCommonMin {
                     Spacer(minLength: 0)
-                    Text(lightMaxOrCommonMin)
+                    Text(lightMaxOrCommonMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.light.color, DoseRangeType.common.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if lightMaxOrCommonMin != nil || commonMaxOrStrongMin != nil {
+                if roaDose?.lightMaxOrCommonMin != nil || roaDose?.commonMaxOrStrongMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -92,14 +66,14 @@ struct DoseView: View {
                     .foregroundColor(DoseRangeType.common.color)
                     Spacer(minLength: 0)
                 }
-                if let commonMaxOrStrongMin = commonMaxOrStrongMin {
+                if let commonMaxOrStrongMin = roaDose?.commonMaxOrStrongMin {
                     Spacer(minLength: 0)
-                    Text(commonMaxOrStrongMin)
+                    Text(commonMaxOrStrongMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.common.color, DoseRangeType.strong.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if commonMaxOrStrongMin != nil || strongMaxOrHeavy != nil {
+                if roaDose?.commonMaxOrStrongMin != nil || roaDose?.strongMaxOrHeavy != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -111,14 +85,14 @@ struct DoseView: View {
                     .foregroundColor(DoseRangeType.strong.color)
                     Spacer(minLength: 0)
                 }
-                if let strongMaxOrHeavy = strongMaxOrHeavy {
+                if let strongMaxOrHeavy = roaDose?.strongMaxOrHeavy {
                     Spacer(minLength: 0)
-                    Text(strongMaxOrHeavy)
+                    Text(strongMaxOrHeavy.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.strong.color, DoseRangeType.heavy.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if strongMaxOrHeavy != nil {
+                if roaDose?.strongMaxOrHeavy != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")

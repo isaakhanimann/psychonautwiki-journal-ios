@@ -26,25 +26,12 @@ struct PresetChooseDoseView: View {
                     }
                 }
                 ForEach(preset.componentsUnwrapped) { com in
-                    Section("\(com.substanceNameUnwrapped) Conversion") {
-                        let roaDose = com.substance?.getDose(for: com.administrationRouteUnwrapped)
-                        DoseView(roaDose: roaDose)
-                        if let dosePerUnit = com.dosePerUnitOfPresetUnwrapped {
-                            let comDose = dosePerUnit * dose
-                            let doseText = comDose.formatted()
-                            HStack(alignment: .firstTextBaseline) {
-                                let type = roaDose?.getRangeType(for: comDose, with: com.unitsUnwrapped) ?? .none
-                                Text("\(doseText) \(com.unitsUnwrapped) ")
-                                    .foregroundColor(type.color)
-                                    .font(.title)
-                                Spacer()
-                                Text(com.administrationRouteUnwrapped?.rawValue ?? "")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
-                    .listRowSeparator(.hidden)
+                    DoseConversionSectionView(
+                        presetComponent: com,
+                        presetDose: $dose
+                    )
                 }
+                bottomPadding
             }
             NavigationLink(
                 destination: PresetChooseTimeAndColorsView(
@@ -68,6 +55,12 @@ struct PresetChooseDoseView: View {
             }
         }
         .navigationTitle(preset.nameUnwrapped)
+    }
+
+    var bottomPadding: some View {
+        Section(header: Text("")) {
+            EmptyView()
+        }
     }
 }
 
