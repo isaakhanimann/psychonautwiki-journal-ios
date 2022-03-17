@@ -4,8 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
     // swiftlint:disable line_length
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
@@ -23,7 +22,7 @@ struct ChooseDoseView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -70,9 +69,7 @@ struct ChooseDoseView: View {
                     substance: substance,
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,
-                    units: viewModel.selectedUnits,
-                    dismiss: dismiss,
-                    experience: experience
+                    units: viewModel.selectedUnits
                 ),
                 isActive: $viewModel.isShowingNext,
                 label: {
@@ -107,9 +104,7 @@ struct ChooseDoseView_Previews: PreviewProvider {
         let helper = PreviewHelper.shared
         ChooseDoseView(
             substance: helper.substance,
-            administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
-            dismiss: {print($0)},
-            experience: helper.experiences.first!
+            administrationRoute: helper.substance.administrationRoutesUnwrapped.first!
         )
     }
 }

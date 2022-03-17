@@ -6,8 +6,7 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @StateObject var viewModel = ViewModel()
 
     var body: some View {
@@ -25,10 +24,11 @@ struct ChooseTimeAndColor: View {
                     ColorPicker(selectedColor: $viewModel.selectedColor)
                 }
             }
-            if let experienceUnwrap = experience {
+            if let experienceUnwrap = sheetContext.experience {
                 Button("Add Ingestion") {
                     viewModel.addIngestion(to: experienceUnwrap)
-                    dismiss(.ingestionWasAdded)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetContext.showSuccessToast()
                 }
                 .buttonStyle(.primary)
                 .padding()
@@ -39,13 +39,15 @@ struct ChooseTimeAndColor: View {
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
                             viewModel.addIngestion(to: lastExperienceUnwrap)
-                            dismiss(.ingestionWasAdded)
+                            sheetContext.isShowingAddIngestionSheet.toggle()
+                            sheetContext.showSuccessToast()
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
                         viewModel.addIngestionToNewExperience()
-                        dismiss(.ingestionWasAdded)
+                        sheetContext.isShowingAddIngestionSheet.toggle()
+                        sheetContext.showSuccessToast()
                     }
                     .padding()
                 }
@@ -57,7 +59,7 @@ struct ChooseTimeAndColor: View {
             viewModel.administrationRoute = administrationRoute
             viewModel.dose = dose ?? 0
             viewModel.units = units
-            if experience == nil {
+            if sheetContext.experience == nil {
                 viewModel.setLastExperience()
             }
             viewModel.setDefaultColor()
@@ -66,7 +68,7 @@ struct ChooseTimeAndColor: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -80,9 +82,7 @@ struct ChooseTimeAndColor_Previews: PreviewProvider {
             substance: helper.substance,
             administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
             dose: 10,
-            units: "mg",
-            dismiss: {print($0)},
-            experience: helper.experiences.first!
+            units: "mg"
         )
     }
 }

@@ -3,8 +3,7 @@ import SwiftUI
 struct PresetAcknowledgeInteractionsView: View {
 
     let preset: Preset
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -33,11 +32,7 @@ struct PresetAcknowledgeInteractionsView: View {
             .buttonStyle(.primary)
             .padding()
             NavigationLink("Next", isActive: $viewModel.isShowingNext) {
-                PresetChooseDoseView(
-                    preset: preset,
-                    dismiss: dismiss,
-                    experience: experience
-                )
+                PresetChooseDoseView(preset: preset)
             }
             .allowsHitTesting(false)
             .hidden()
@@ -45,7 +40,7 @@ struct PresetAcknowledgeInteractionsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -55,10 +50,6 @@ struct PresetAcknowledgeInteractionsView: View {
 
 struct PresetAcknowledgeInteractionsView_Previews: PreviewProvider {
     static var previews: some View {
-        PresetAcknowledgeInteractionsView(
-            preset: PreviewHelper.shared.preset,
-            dismiss: {print($0)},
-            experience: nil
-        )
+        PresetAcknowledgeInteractionsView(preset: PreviewHelper.shared.preset)
     }
 }

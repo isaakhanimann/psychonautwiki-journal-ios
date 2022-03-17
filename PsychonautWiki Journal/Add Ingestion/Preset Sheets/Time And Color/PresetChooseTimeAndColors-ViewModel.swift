@@ -5,7 +5,7 @@ extension PresetChooseTimeAndColorsView {
 
     struct ComponentColorCombo: Identifiable {
         let component: PresetComponent
-        var selectedColor = IngestionColor.blue
+        var selectedColor = IngestionColor.allCases.randomElement() ?? IngestionColor.blue
 
         // swiftlint:disable identifier_name
         var id: ObjectIdentifier {

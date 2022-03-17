@@ -50,22 +50,20 @@ struct CustomSubstanceView: View {
         }
         .sheet(isPresented: $isShowingAddCustomSheet) {
             NavigationView {
-                AddCustomIngestionView(
-                    customSubstance: customSubstance,
-                    dismiss: dismiss,
-                    experience: nil
-                )
+                AddCustomIngestionView(customSubstance: customSubstance)
             }
             .accentColor(Color.blue)
+            .environmentObject(
+                AddIngestionSheetContext(
+                    experience: nil,
+                    showSuccessToast: {
+                        isShowingSuccessToast.toggle()
+                    },
+                    isShowingAddIngestionSheet: $isShowingAddCustomSheet
+                )
+            )
         }
         .navigationTitle(customSubstance.nameUnwrapped)
-    }
-
-    private func dismiss(result: AddResult) {
-        if result == .ingestionWasAdded {
-            isShowingSuccessToast.toggle()
-        }
-        isShowingAddCustomSheet.toggle()
     }
 }
 

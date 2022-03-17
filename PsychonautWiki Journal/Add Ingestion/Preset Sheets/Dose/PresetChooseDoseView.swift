@@ -3,8 +3,7 @@ import SwiftUI
 struct PresetChooseDoseView: View {
 
     let preset: Preset
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @State private var dose = 1.0
     @State private var doseText = "1"
 
@@ -36,9 +35,7 @@ struct PresetChooseDoseView: View {
             NavigationLink(
                 destination: PresetChooseTimeAndColorsView(
                     preset: preset,
-                    dose: dose,
-                    dismiss: dismiss,
-                    experience: experience
+                    dose: dose
                 ),
                 label: {
                     Text("Next")
@@ -50,7 +47,7 @@ struct PresetChooseDoseView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -61,11 +58,7 @@ struct PresetChooseDoseView: View {
 struct PresetChooseDoseView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PresetChooseDoseView(
-                preset: PreviewHelper.shared.preset,
-                dismiss: { _ in },
-                experience: nil
-            )
+            PresetChooseDoseView(preset: PreviewHelper.shared.preset)
         }
     }
 }

@@ -14,7 +14,9 @@ struct ExperienceView: View {
                 ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
                     .onDelete(perform: deleteIngestions)
 
-                Button(action: showOrHideAddIngestionSheet) {
+                Button {
+                    viewModel.isShowingAddIngestionSheet.toggle()
+                } label: {
                     Label("Add Ingestion", systemImage: "plus")
                         .foregroundColor(.accentColor)
                 }
@@ -45,11 +47,15 @@ struct ExperienceView: View {
             PersistenceController.shared.saveViewContext()
         }
         .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
-            ChooseSubstanceView(
-                dismiss: dismiss,
-                experience: experience
-            )
+            ChooseSubstanceView()
                 .accentColor(Color.blue)
+                .environmentObject(
+                    AddIngestionSheetContext(
+                        experience: experience,
+                        showSuccessToast: {},
+                        isShowingAddIngestionSheet: $viewModel.isShowingAddIngestionSheet
+                    )
+                )
         }
         .toolbar {
             ToolbarItem(placement: .keyboard) {
@@ -73,14 +79,6 @@ struct ExperienceView: View {
                 Text(viewModel.writtenText).opacity(0).padding(.all, 8)
             }
         }
-    }
-
-    private func showOrHideAddIngestionSheet() {
-        viewModel.isShowingAddIngestionSheet.toggle()
-    }
-
-    private func dismiss(result: AddResult) {
-        viewModel.isShowingAddIngestionSheet.toggle()
     }
 
     private func deleteIngestions(at offsets: IndexSet) {

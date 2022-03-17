@@ -3,8 +3,7 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
 
     var body: some View {
         List {
@@ -12,14 +11,12 @@ struct ChooseRouteView: View {
             if administrationRoutesUnwrapped.isEmpty {
                 Text("No Routes Defined by PsychonautWiki")
             }
-            ForEach(administrationRoutesUnwrapped, id: \.self) { route in
+            ForEach(administrationRoutesUnwrapped) { route in
                 NavigationLink(
                     route.displayString,
                     destination: ChooseDoseView(
                         substance: substance,
-                        administrationRoute: route,
-                        dismiss: dismiss,
-                        experience: experience
+                        administrationRoute: route
                     )
                 )
             }
@@ -33,9 +30,7 @@ struct ChooseRouteView: View {
                             route.displayString,
                             destination: ChooseDoseView(
                                 substance: substance,
-                                administrationRoute: route,
-                                dismiss: dismiss,
-                                experience: experience
+                                administrationRoute: route
                             )
                         )
                     }
@@ -46,7 +41,7 @@ struct ChooseRouteView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -57,11 +52,7 @@ struct ChooseRouteView_Previews: PreviewProvider {
     static var previews: some View {
         let helper = PreviewHelper.shared
         NavigationView {
-            ChooseRouteView(
-                substance: helper.substance,
-                dismiss: {print($0)},
-                experience: helper.experiences.first!
-            )
+            ChooseRouteView(substance: helper.substance)
         }
     }
 }

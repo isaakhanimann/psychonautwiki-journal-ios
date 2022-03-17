@@ -75,19 +75,20 @@ struct PresetView: View {
             || !preset.uncertainInteractions.isEmpty
             NavigationView {
                 if showInteractionSheet {
-                    PresetAcknowledgeInteractionsView(
-                        preset: preset,
-                        dismiss: dismiss,
-                        experience: nil
-                    )
+                    PresetAcknowledgeInteractionsView(preset: preset)
                 } else {
-                    PresetChooseDoseView(
-                        preset: preset,
-                        dismiss: dismiss,
-                        experience: nil
-                    )
+                    PresetChooseDoseView(preset: preset)
                 }
             }
+            .environmentObject(
+                AddIngestionSheetContext(
+                    experience: nil,
+                    showSuccessToast: {
+                        isShowingSuccessToast.toggle()
+                    },
+                    isShowingAddIngestionSheet: $isShowingAddIngestionSheet
+                )
+            )
             .accentColor(Color.blue)
         }
         .toast(isPresenting: $isShowingSuccessToast) {
@@ -98,13 +99,6 @@ struct PresetView: View {
             )
         }
         .navigationTitle(preset.nameUnwrapped)
-    }
-
-    private func dismiss(result: AddResult) {
-        if result == .ingestionWasAdded {
-            isShowingSuccessToast.toggle()
-        }
-        isShowingAddIngestionSheet.toggle()
     }
 }
 

@@ -3,8 +3,6 @@ import SwiftUI
 struct ChooseSubstanceList: View {
 
     @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
-    let experience: Experience
-    let dismiss: (AddResult) -> Void
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
@@ -20,17 +18,9 @@ struct ChooseSubstanceList: View {
                             ForEach(recentsViewModel.recentSubstances) { sub in
                                 NavigationLink(sub.nameUnwrapped) {
                                     if sub.hasAnyInteractions {
-                                        AcknowledgeInteractionsView(
-                                            substance: sub,
-                                            dismiss: dismiss,
-                                            experience: experience
-                                        )
+                                        AcknowledgeInteractionsView(substance: sub)
                                     } else {
-                                        ChooseRouteView(
-                                            substance: sub,
-                                            dismiss: dismiss,
-                                            experience: experience
-                                        )
+                                        ChooseRouteView(substance: sub)
                                     }
                                 }
                             }
@@ -46,19 +36,11 @@ struct ChooseSubstanceList: View {
                                 || !pre.uncertainInteractions.isEmpty
                                 if showInteractionSheet {
                                     NavigationLink(pre.nameUnwrapped) {
-                                        PresetAcknowledgeInteractionsView(
-                                            preset: pre,
-                                            dismiss: dismiss,
-                                            experience: experience
-                                        )
+                                        PresetAcknowledgeInteractionsView(preset: pre)
                                     }
                                 } else {
                                     NavigationLink(pre.nameUnwrapped) {
-                                        PresetChooseDoseView(
-                                            preset: pre,
-                                            dismiss: dismiss,
-                                            experience: experience
-                                        )
+                                        PresetChooseDoseView(preset: pre)
                                     }
                                 }
 
@@ -69,11 +51,7 @@ struct ChooseSubstanceList: View {
                         Section(header: Text("Custom Substances")) {
                             ForEach(customsViewModel.customSubstances) { cust in
                                 NavigationLink(cust.nameUnwrapped) {
-                                    AddCustomIngestionView(
-                                        customSubstance: cust,
-                                        dismiss: dismiss,
-                                        experience: experience
-                                    )
+                                    AddCustomIngestionView(customSubstance: cust)
                                 }
                             }
                         }
@@ -84,17 +62,9 @@ struct ChooseSubstanceList: View {
                         ForEach(sec.substances) { sub in
                             NavigationLink(sub.nameUnwrapped) {
                                 if sub.hasAnyInteractions {
-                                    AcknowledgeInteractionsView(
-                                        substance: sub,
-                                        dismiss: dismiss,
-                                        experience: experience
-                                    )
+                                    AcknowledgeInteractionsView(substance: sub)
                                 } else {
-                                    ChooseRouteView(
-                                        substance: sub,
-                                        dismiss: dismiss,
-                                        experience: experience
-                                    )
+                                    ChooseRouteView(substance: sub)
                                 }
                             }
                         }
@@ -129,9 +99,7 @@ Consult a doctor before making medical decisions.
 struct ChooseSubstanceList_Previews: PreviewProvider {
     static var previews: some View {
         ChooseSubstanceList(
-            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true),
-            experience: PreviewHelper.shared.experiences.first!,
-            dismiss: {_ in }
+            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true)
         )
     }
 }

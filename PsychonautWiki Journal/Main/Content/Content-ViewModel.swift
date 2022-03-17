@@ -17,13 +17,6 @@ extension ContentView {
             self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
         }
 
-        func dismiss(result: AddResult) {
-            foundSubstance = nil
-            if result == .ingestionWasAdded {
-                isShowingAddSuccessToast.toggle()
-            }
-        }
-
         func receiveURL(url: URL) {
             popToRoot()
             if !isEyeOpen {

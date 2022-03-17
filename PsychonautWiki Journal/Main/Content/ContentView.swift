@@ -5,6 +5,15 @@ struct ContentView: View {
 
     @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
     @StateObject private var viewModel = ViewModel()
+    var isShowingIngestion: Binding<Bool> {
+        Binding {
+            viewModel.foundSubstance != nil
+        } set: {
+            if !$0 {
+                viewModel.foundSubstance = nil
+            }
+        }
+    }
 
     var body: some View {
         if hasSeenWelcome {
@@ -24,24 +33,30 @@ struct ContentView: View {
                         title: "Ingestion Added"
                     )
                 }
-                .sheet(item: $viewModel.foundSubstance) { substance in
-                    NavigationView {
-                        if substance.hasAnyInteractions {
-                            AcknowledgeInteractionsView(
-                                substance: substance,
-                                dismiss: viewModel.dismiss,
-                                experience: nil
-                            )
-                        } else {
-                            ChooseRouteView(
-                                substance: substance,
-                                dismiss: viewModel.dismiss,
-                                experience: nil
-                            )
+                .sheet(
+                    item: $viewModel.foundSubstance,
+                    onDismiss: {
+                        viewModel.foundSubstance = nil
+                    }, content: { substance in
+                        NavigationView {
+                            if substance.hasAnyInteractions {
+                                AcknowledgeInteractionsView(substance: substance)
+                            } else {
+                                ChooseRouteView(substance: substance)
+                            }
                         }
+                        .accentColor(Color.blue)
+                        .environmentObject(
+                            AddIngestionSheetContext(
+                                experience: nil,
+                                showSuccessToast: {
+                                    viewModel.isShowingAddSuccessToast.toggle()
+                                },
+                                isShowingAddIngestionSheet: isShowingIngestion
+                            )
+                        )
                     }
-                    .accentColor(Color.blue)
-                }
+                )
         } else {
             WelcomeScreen()
         }

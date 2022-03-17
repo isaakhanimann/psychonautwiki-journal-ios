@@ -4,8 +4,7 @@ struct PresetChooseTimeAndColorsView: View {
 
     let preset: Preset
     let dose: Double
-    let dismiss: (AddResult) -> Void
-    let experience: Experience?
+    @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -26,10 +25,11 @@ struct PresetChooseTimeAndColorsView: View {
                 }
                 EmptySectionForPadding()
             }
-            if let experienceUnwrap = experience {
+            if let experienceUnwrap = sheetContext.experience {
                 Button("Add Ingestion") {
                     viewModel.addIngestions(to: experienceUnwrap)
-                    dismiss(.ingestionWasAdded)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetContext.showSuccessToast()
                 }
                 .buttonStyle(.primary)
                 .padding()
@@ -40,13 +40,15 @@ struct PresetChooseTimeAndColorsView: View {
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
                             viewModel.addIngestions(to: lastExperienceUnwrap)
-                            dismiss(.ingestionWasAdded)
+                            sheetContext.isShowingAddIngestionSheet.toggle()
+                            sheetContext.showSuccessToast()
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
                         viewModel.addIngestionsToNewExperience()
-                        dismiss(.ingestionWasAdded)
+                        sheetContext.isShowingAddIngestionSheet.toggle()
+                        sheetContext.showSuccessToast()
                     }
                     .padding()
                 }
@@ -56,7 +58,7 @@ struct PresetChooseTimeAndColorsView: View {
         .task {
             viewModel.preset = preset
             viewModel.presetDose = dose
-            if experience == nil {
+            if sheetContext.experience == nil {
                 viewModel.setLastExperience()
             }
             viewModel.componentColorCombos = preset.componentsUnwrapped.map { com in
@@ -67,7 +69,7 @@ struct PresetChooseTimeAndColorsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    dismiss(.cancelled)
+                    sheetContext.isShowingAddIngestionSheet.toggle()
                 }
             }
         }
@@ -78,9 +80,7 @@ struct PresetChooseTimeAndColorsView_Previews: PreviewProvider {
     static var previews: some View {
         PresetChooseTimeAndColorsView(
             preset: PreviewHelper.shared.preset,
-            dose: 1,
-            dismiss: { _ in },
-            experience: nil
+            dose: 1
         )
     }
 }

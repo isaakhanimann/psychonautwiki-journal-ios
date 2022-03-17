@@ -66,6 +66,7 @@
 		EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A927E36A4F003DF79D /* AddCustomIngestionView.swift */; };
 		EAB165AC27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */; };
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
+		EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -157,7 +158,6 @@
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
 		EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9127D7A6C400945587 /* InteractionsSection.swift */; };
 		EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */; };
-		EAF76C9627D8952200945587 /* AddResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9527D8952200945587 /* AddResult.swift */; };
 		EAF76C9927D899E700945587 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9827D899E700945587 /* AlertToast */; };
 		EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */; };
 		EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
@@ -256,6 +256,7 @@
 		EAB165A927E36A4F003DF79D /* AddCustomIngestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomIngestionView.swift; sourceTree = "<group>"; };
 		EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCustomIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
+		EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionSheetContext.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -351,7 +352,6 @@
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
 		EAF76C9127D7A6C400945587 /* InteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsSection.swift; sourceTree = "<group>"; };
 		EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseTimeAndColor-ViewModel.swift"; sourceTree = "<group>"; };
-		EAF76C9527D8952200945587 /* AddResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddResult.swift; sourceTree = "<group>"; };
 		EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AcknowledgeInteractions-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
@@ -862,7 +862,7 @@
 				EA8AEA7127E1DC0500B30A16 /* Substance Sheets */,
 				EA8AEA7227E1DC4400B30A16 /* Preset Sheets */,
 				EAB165A827E3677C003DF79D /* Custom Sheets */,
-				EAF76C9527D8952200945587 /* AddResult.swift */,
+				EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */,
 				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 				EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */,
@@ -1121,7 +1121,6 @@
 				EAE471E526CBA664009FB0EC /* RoaRange-CoreDataHelpers.swift in Sources */,
 				EAE4721126CBA664009FB0EC /* LineShape.swift in Sources */,
 				EAE4721526CBA664009FB0EC /* Curve.swift in Sources */,
-				EAF76C9627D8952200945587 /* AddResult.swift in Sources */,
 				EACB6E8F27D7543600940291 /* AroundShapeDown-ViewModel.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
@@ -1162,6 +1161,7 @@
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,
 				EAE471ED26CBA664009FB0EC /* RoaDuration-CoreDataHelpers.swift in Sources */,
+				EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */,
 				EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */,
 				EA8447F427CD315000B10DD3 /* CurveDown.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */,

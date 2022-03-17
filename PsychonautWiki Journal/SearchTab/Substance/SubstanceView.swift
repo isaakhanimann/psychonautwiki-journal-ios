@@ -43,20 +43,21 @@ struct SubstanceView: View {
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             NavigationView {
                 if substance.hasAnyInteractions {
-                    AcknowledgeInteractionsView(
-                        substance: substance,
-                        dismiss: dismiss,
-                        experience: nil
-                    )
+                    AcknowledgeInteractionsView(substance: substance)
                 } else {
-                    ChooseRouteView(
-                        substance: substance,
-                        dismiss: dismiss,
-                        experience: nil
-                    )
+                    ChooseRouteView(substance: substance)
                 }
             }
             .accentColor(Color.blue)
+            .environmentObject(
+                AddIngestionSheetContext(
+                    experience: nil,
+                    showSuccessToast: {
+                        isShowingSuccessToast.toggle()
+                    },
+                    isShowingAddIngestionSheet: $isShowingAddIngestionSheet
+                )
+            )
         }
         .toast(isPresenting: $isShowingSuccessToast) {
             AlertToast(
@@ -158,13 +159,6 @@ It is also worth noting that these effects will not necessarily occur in a predi
                 }
             }
         }
-    }
-
-    private func dismiss(result: AddResult) {
-        if result == .ingestionWasAdded {
-            isShowingSuccessToast.toggle()
-        }
-        isShowingAddIngestionSheet.toggle()
     }
 
     private func ingest() {
