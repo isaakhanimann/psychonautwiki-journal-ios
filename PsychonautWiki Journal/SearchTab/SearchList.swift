@@ -5,8 +5,17 @@ struct SearchList: View {
     @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var presetsViewModel = PresetsViewModel()
+    @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) var isSearching
-    @State private var isShowingAddPreset = false
+    @State private var sheetToShow: Sheet?
+
+    enum Sheet: Identifiable {
+        // swiftlint:disable identifier_name
+        var id: Sheet {
+            self
+        }
+        case addPreset, addCustomSubstance
+    }
 
     var body: some View {
         ZStack {
@@ -28,9 +37,21 @@ struct SearchList: View {
                             }
                         }
                         Button {
-                            isShowingAddPreset.toggle()
+                            sheetToShow = .addPreset
                         } label: {
                             Label("Add Preset", systemImage: "plus")
+                        }
+                    }
+                    Section("Custom Substances") {
+                        ForEach(customsViewModel.customSubstances) { cust in
+                            NavigationLink(cust.nameUnwrapped) {
+                                CustomSubstanceView(customSubstance: cust)
+                            }
+                        }
+                        Button {
+                            sheetToShow = .addCustomSubstance
+                        } label: {
+                            Label("Add Custom", systemImage: "plus")
                         }
                     }
                 }
@@ -49,9 +70,14 @@ struct SearchList: View {
                     .foregroundColor(.secondary)
             }
         }
-        .sheet(isPresented: $isShowingAddPreset) {
-            AddPresetView()
-        }
+        .sheet(item: $sheetToShow, content: { item in
+            switch item {
+            case .addPreset:
+                AddPresetView()
+            case .addCustomSubstance:
+                AddCustomSubstanceView()
+            }
+        })
     }
 }
 

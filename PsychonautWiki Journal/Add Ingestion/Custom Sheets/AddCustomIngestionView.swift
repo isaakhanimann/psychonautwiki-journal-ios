@@ -1,9 +1,8 @@
 import SwiftUI
 
-struct PresetChooseTimeAndColorsView: View {
+struct AddCustomIngestionView: View {
 
-    let preset: Preset
-    let dose: Double
+    let customSubstance: CustomSubstance
     let dismiss: (AddResult) -> Void
     let experience: Experience?
     @StateObject private var viewModel = ViewModel()
@@ -11,7 +10,25 @@ struct PresetChooseTimeAndColorsView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             Form {
-                Section("Choose Time") {
+                Section("Route of Administration") {
+                    Picker("Route", selection: $viewModel.selectedAdministrationRoute) {
+                        ForEach(AdministrationRoute.allCases) { route in
+                            Text(route.rawValue)
+                                .foregroundColor(.secondary)
+                                .tag(route)
+                        }
+                    }
+                }
+                Section("Dose") {
+                    HStack {
+                        TextField("Enter Dose", text: $viewModel.selectedDoseText)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                        Text(customSubstance.unitsUnwrapped)
+                    }
+                    .font(.title)
+                }
+                Section("Time") {
                     DatePicker(
                         "Time",
                         selection: $viewModel.selectedTime,
@@ -19,16 +36,15 @@ struct PresetChooseTimeAndColorsView: View {
                     )
                     .labelsHidden()
                 }
-                ForEach($viewModel.componentColorCombos) { $combo in
-                    Section("\(combo.component.substanceNameUnwrapped) Color") {
-                        ColorPicker(selectedColor: $combo.selectedColor)
-                    }
+                Section("Color") {
+                    ColorPicker(selectedColor: $viewModel.selectedColor)
                 }
                 EmptySectionForPadding()
+                    .padding(.bottom, 50)
             }
             if let experienceUnwrap = experience {
                 Button("Add Ingestion") {
-                    viewModel.addIngestions(to: experienceUnwrap)
+                    viewModel.addIngestion(to: experienceUnwrap)
                     dismiss(.ingestionWasAdded)
                 }
                 .buttonStyle(.primary)
@@ -39,13 +55,13 @@ struct PresetChooseTimeAndColorsView: View {
                     if let lastExperienceUnwrap = viewModel.lastExperience,
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
-                            viewModel.addIngestions(to: lastExperienceUnwrap)
+                            viewModel.addIngestion(to: lastExperienceUnwrap)
                             dismiss(.ingestionWasAdded)
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
-                        viewModel.addIngestionsToNewExperience()
+                        viewModel.addIngestionToNewExperience()
                         dismiss(.ingestionWasAdded)
                     }
                     .padding()
@@ -54,16 +70,12 @@ struct PresetChooseTimeAndColorsView: View {
             }
         }
         .task {
-            viewModel.preset = preset
-            viewModel.presetDose = dose
+            viewModel.customSubstance = customSubstance
             if experience == nil {
                 viewModel.setLastExperience()
             }
-            viewModel.componentColorCombos = preset.componentsUnwrapped.map { com in
-                ComponentColorCombo(component: com)
-            }
         }
-        .navigationBarTitle("Ingestion Time")
+        .navigationBarTitle("Add Ingestion")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
@@ -74,11 +86,10 @@ struct PresetChooseTimeAndColorsView: View {
     }
 }
 
-struct PresetChooseTimeAndColorsView_Previews: PreviewProvider {
+struct AddCustomIngestionView_Previews: PreviewProvider {
     static var previews: some View {
-        PresetChooseTimeAndColorsView(
-            preset: PreviewHelper.shared.preset,
-            dose: 1,
+        AddCustomIngestionView(
+            customSubstance: PreviewHelper.shared.customSubstance,
             dismiss: { _ in },
             experience: nil
         )

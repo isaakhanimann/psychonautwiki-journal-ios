@@ -62,7 +62,7 @@ struct ChooseDoseView: View {
                         }
                     }
                 }
-                bottomPadding
+                EmptySectionForPadding()
             }
             let showNavigation = viewModel.selectedPureDose != nil
             NavigationLink(
@@ -99,12 +99,6 @@ struct ChooseDoseView: View {
             )
         }
         .listRowSeparator(.hidden)
-    }
-
-    var bottomPadding: some View {
-        Section(header: Text("")) {
-            EmptyView()
-        }
     }
 }
 

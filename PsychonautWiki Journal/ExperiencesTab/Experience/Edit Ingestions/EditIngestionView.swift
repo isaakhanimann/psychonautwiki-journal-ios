@@ -7,7 +7,7 @@ struct EditIngestionView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Substance")) {
+            Section("Substance") {
                 TextField("Name", text: $viewModel.selectedName)
                     .disableAutocorrection(true)
             }
@@ -24,11 +24,11 @@ struct EditIngestionView: View {
                 )
             }
             .listRowSeparator(.hidden)
-            Section(header: Text("Time")) {
+            Section("Time") {
                 DatePicker("Time", selection: $viewModel.selectedTime, displayedComponents: [.date, .hourAndMinute])
                     .labelsHidden()
             }
-            Section(header: Text("Color")) {
+            Section("Color") {
                 ColorPicker(selectedColor: $viewModel.selectedColor)
             }
         }
@@ -49,17 +49,17 @@ struct EditIngestionView: View {
     }
 
     private var routeSection: some View {
-        Section(header: Text("Route of Administration")) {
+        Section("Route of Administration") {
             Picker("Route", selection: $viewModel.selectedAdministrationRoute) {
                 let administrationRoutesUnwrapped = ingestion.substance?.administrationRoutesUnwrapped ?? []
-                ForEach(administrationRoutesUnwrapped, id: \.self) { route in
+                ForEach(administrationRoutesUnwrapped) { route in
                     Text(route.rawValue)
                         .tag(route)
                 }
                 let otherRoutes = AdministrationRoute.allCases.filter { route in
                     !administrationRoutesUnwrapped.contains(route)
                 }
-                ForEach(otherRoutes, id: \.self) { route in
+                ForEach(otherRoutes) { route in
                     Text(route.rawValue)
                         .foregroundColor(.secondary)
                         .tag(route)

@@ -58,15 +58,15 @@ struct PresetView: View {
         }
         .confirmationDialog(
             "Are you sure you want to delete this Preset?",
-            isPresented: $isShowingConfirmation,
-            actions: {
-                Button("Delete Preset", role: .destructive) {
-                    presentationMode.wrappedValue.dismiss()
-                    PersistenceController.shared.viewContext.delete(preset)
-                    PersistenceController.shared.saveViewContext()
-                }
-                Button("Cancel", role: .cancel) {}
-            })
+            isPresented: $isShowingConfirmation
+        ) {
+            Button("Delete Preset", role: .destructive) {
+                presentationMode.wrappedValue.dismiss()
+                PersistenceController.shared.viewContext.delete(preset)
+                PersistenceController.shared.saveViewContext()
+            }
+            Button("Cancel", role: .cancel) {}
+        }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             let showInteractionSheet = preset.substances.contains(where: { sub in
                 sub.hasAnyInteractions

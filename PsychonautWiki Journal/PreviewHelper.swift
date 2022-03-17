@@ -24,6 +24,7 @@ class PreviewHelper {
     }
     let experiences: [Experience]
     let preset: Preset
+    let customSubstance: CustomSubstance
     let context: NSManagedObjectContext
 
     func getSubstance(with name: String) -> Substance? {
@@ -41,6 +42,7 @@ class PreviewHelper {
         self.substancesFile = try! decodeSubstancesFile(from: data, with: context)
         self.experiences = Self.createDefaultExperiences(context: context, substancesFile: substancesFile)
         self.preset = Self.createDefaultPreset(context: context)
+        self.customSubstance = Self.createDefaultCustomSubstance(context: context)
         try? context.save()
     }
 
@@ -275,5 +277,12 @@ class PreviewHelper {
         component.dosePerUnitOfPreset = 0.5
         preset.addToComponents(component)
         return preset
+    }
+
+    static func createDefaultCustomSubstance(context: NSManagedObjectContext) -> CustomSubstance {
+        let custom = CustomSubstance(context: context)
+        custom.name = "My Custom Substance"
+        custom.units = "puff"
+        return custom
     }
 }

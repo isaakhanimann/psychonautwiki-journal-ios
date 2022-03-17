@@ -25,7 +25,7 @@ struct PresetAcknowledgeInteractionsView: View {
         ZStack(alignment: .bottom) {
             List {
                 PresetInteractionsSection(preset: preset)
-                bottomPadding
+                EmptySectionForPadding()
             }
             Button("Next") {
                 viewModel.pressNext()
@@ -50,12 +50,6 @@ struct PresetAcknowledgeInteractionsView: View {
             }
         }
         .navigationBarTitle(preset.nameUnwrapped)
-    }
-
-    var bottomPadding: some View {
-        Section(header: Text("")) {
-            EmptyView()
-        }
     }
 }
 

@@ -31,7 +31,7 @@ struct PresetChooseDoseView: View {
                         presetDose: $dose
                     )
                 }
-                bottomPadding
+                EmptySectionForPadding()
             }
             NavigationLink(
                 destination: PresetChooseTimeAndColorsView(
@@ -55,12 +55,6 @@ struct PresetChooseDoseView: View {
             }
         }
         .navigationTitle(preset.nameUnwrapped)
-    }
-
-    var bottomPadding: some View {
-        Section(header: Text("")) {
-            EmptyView()
-        }
     }
 }
 
