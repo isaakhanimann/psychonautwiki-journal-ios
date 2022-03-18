@@ -76,7 +76,24 @@ struct SubstanceDecoder {
         "Serotonergic Psychedelic",
         "25x-NBOH",
         "Antidepressants",
-        "Barbiturates"
+        "Barbiturates",
+        "Substituted Aminorexes",
+        "Substituted Amphetamines",
+        "Substituted Cathinones",
+        "Substituted Morphinans",
+        "Substituted Phenethylamines",
+        "Substituted Phenidates",
+        "Substituted Tryptamines",
+        "Classical Psychedelics",
+        "Diarylethylamines",
+        "Dissociatives",
+        "Entactogens",
+        "Gabapentinoids",
+        "Hallucinogens",
+        "Lysergamides",
+        "Thienodiazepines",
+        "Xanthines",
+        "Arylcyclohexylamines"
     ].map({$0.lowercased()}))
 
     func getURL() -> URL? {
