@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WelcomeScreen: View {
 
-    @AppStorage(PersistenceController.hasSeenWelcomeKey) var hasSeenWelcome: Bool = false
+    @Binding var isShowingWelcome: Bool
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var imageName: String {
@@ -48,18 +48,13 @@ struct WelcomeScreen: View {
                 Text("More info in Settings")
                     .font(.footnote)
                     .foregroundColor(.secondary)
-
-                Button("I understand", action: dismiss)
-                    .buttonStyle(.primary)
+                Button("I understand") {
+                    isShowingWelcome.toggle()
+                }
+                .buttonStyle(.primary)
             }
             .padding()
             .navigationBarHidden(true)
-        }
-    }
-
-    private func dismiss() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            hasSeenWelcome = true
         }
     }
 
@@ -90,7 +85,7 @@ struct WelcomeScreen: View {
 
 struct WelcomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeScreen()
+        WelcomeScreen(isShowingWelcome: .constant(true))
             .preferredColorScheme(.dark)
             .accentColor(Color.blue)
     }
