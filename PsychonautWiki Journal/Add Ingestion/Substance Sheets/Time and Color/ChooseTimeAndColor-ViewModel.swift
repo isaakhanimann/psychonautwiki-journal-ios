@@ -13,14 +13,6 @@ extension ChooseTimeAndColor {
         var dose: Double = 0
         var units: String?
 
-        func setLastExperience() {
-            let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
-            fetchRequest.fetchLimit = 10
-            let experiences = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            self.lastExperience = experiences.sorted().first
-        }
-
         func setDefaultColor() {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]

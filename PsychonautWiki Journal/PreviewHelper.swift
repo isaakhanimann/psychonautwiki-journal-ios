@@ -6,7 +6,6 @@ class PreviewHelper {
 
     static let shared = PreviewHelper()
 
-    let substancesFile: SubstancesFile
     var allSubstances: [Substance] {
         let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
@@ -39,18 +38,15 @@ class PreviewHelper {
         // swiftlint:disable force_try
         let data = try! Data(contentsOf: url)
         self.context = PersistenceController.preview.viewContext
-        self.substancesFile = try! decodeSubstancesFile(from: data, with: context)
-        self.experiences = Self.createDefaultExperiences(context: context, substancesFile: substancesFile)
+        _ = try! decodeSubstancesFile(from: data, with: context)
+        self.experiences = Self.createDefaultExperiences(context: context)
         self.preset = Self.createDefaultPreset(context: context)
         self.customSubstance = Self.createDefaultCustomSubstance(context: context)
         try? context.save()
     }
 
     // swiftlint:disable function_body_length
-    static func createDefaultExperiences(
-        context: NSManagedObjectContext,
-        substancesFile: SubstancesFile
-    ) -> [Experience] {
+    static func createDefaultExperiences(context: NSManagedObjectContext) -> [Experience] {
         let experience1 = Experience(context: context)
         experience1.title = "18 Aug 2021"
         experience1.addToIngestions(

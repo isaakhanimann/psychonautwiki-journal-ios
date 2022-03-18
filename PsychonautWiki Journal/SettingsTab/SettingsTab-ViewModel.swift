@@ -1,21 +1,37 @@
 import Foundation
-import Combine
+import CoreData
 
 extension SettingsTab {
-
-    class ViewModel: ObservableObject {
+    class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var isShowingErrorAlert = false
         @Published var isFetching = false
         @Published var isResetting = false
         @Published var substancesFile: SubstancesFile?
 
-        private var cancellable: AnyCancellable?
+        private let fetchController: NSFetchedResultsController<SubstancesFile>!
 
-        // swiftlint:disable line_length
-        init(filePublisher: AnyPublisher<SubstancesFile?, Never> = SubstanceFilePublisher.shared.file.eraseToAnyPublisher()) {
-            cancellable = filePublisher.sink { file in
-                self.substancesFile = file
+        override init() {
+            let fetchRequest = SubstancesFile.fetchRequest()
+            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \SubstancesFile.creationDate, ascending: false) ]
+            fetchRequest.fetchLimit = 1
+            fetchController = NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: PersistenceController.shared.viewContext,
+                sectionNameKeyPath: nil, cacheName: nil
+            )
+            super.init()
+            fetchController.delegate = self
+            do {
+                try fetchController.performFetch()
+                self.substancesFile = (fetchController?.fetchedObjects ?? []).first
+            } catch {
+                NSLog("Error: could not fetch Substance files")
             }
+        }
+
+        public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            guard let files = controller.fetchedObjects as? [SubstancesFile] else {return}
+            self.substancesFile = files.first
         }
 
         @MainActor func fetchNewSubstances() async {

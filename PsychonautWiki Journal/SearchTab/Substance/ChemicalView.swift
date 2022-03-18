@@ -38,7 +38,7 @@ struct ChemicalView: View {
 struct ChemicalView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ChemicalView(chemical: PreviewHelper.shared.substancesFile.chemicalClassesUnwrapped.first!)
+            ChemicalView(chemical: PreviewHelper.shared.substance.chemicalsUnwrapped.first!)
         }
     }
 }

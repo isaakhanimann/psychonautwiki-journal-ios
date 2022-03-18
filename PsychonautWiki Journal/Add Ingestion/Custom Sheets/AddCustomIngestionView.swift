@@ -74,7 +74,7 @@ struct AddCustomIngestionView: View {
         .task {
             viewModel.customSubstance = customSubstance
             if sheetContext.experience == nil {
-                viewModel.setLastExperience()
+                viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
         }
         .navigationBarTitle("Add Ingestion")

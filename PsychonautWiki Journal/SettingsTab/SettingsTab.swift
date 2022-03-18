@@ -97,7 +97,7 @@ struct SettingsTab: View {
             HStack {
                 Text("Last Refresh")
                 Spacer()
-                Text(viewModel.substancesFile?.creationDateUnwrapped.asDateAndTime ?? "-")
+                Text(viewModel.substancesFile?.creationDate?.asDateAndTime ?? "-")
                     .foregroundColor(.secondary)
             }
             if viewModel.isFetching {

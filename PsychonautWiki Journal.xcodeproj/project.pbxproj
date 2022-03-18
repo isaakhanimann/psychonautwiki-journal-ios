@@ -53,7 +53,6 @@
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */; };
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
-		EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */; };
 		EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659927E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */; };
@@ -243,7 +242,6 @@
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA8F5FA22709A988006E646E /* IngestionTimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionTimeLineView.swift; sourceTree = "<group>"; };
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
-		EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFilePublisher.swift; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659827E3041F003DF79D /* PresetChooseTimeAndColors-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresetChooseTimeAndColors-ViewModel.swift"; sourceTree = "<group>"; };
@@ -733,7 +731,6 @@
 				EA460D202763790C002EF80B /* FAQ */,
 				EAE4712B26CBA663009FB0EC /* SettingsTab.swift */,
 				EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */,
-				EA9AE85127CB59BF00D4D468 /* SubstanceFilePublisher.swift */,
 			);
 			path = SettingsTab;
 			sourceTree = "<group>";
@@ -1049,7 +1046,6 @@
 				EAF76CA927D90CF900945587 /* IngestionColor.swift in Sources */,
 				EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */,
 				EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */,
-				EA9AE85227CB59BF00D4D468 /* SubstanceFilePublisher.swift in Sources */,
 				EACB6E7B27D6456400940291 /* SearchList.swift in Sources */,
 				EA8AEA7A27E1ECEF00B30A16 /* PresetChooseDoseView.swift in Sources */,
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,

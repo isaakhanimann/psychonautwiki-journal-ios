@@ -7,7 +7,11 @@ extension Experience: Comparable {
     }
 
     var dateForSorting: Date {
-        sortedIngestionsUnwrapped.first?.timeUnwrapped ?? creationDateUnwrapped
+        timeOfFirstIngestion ?? creationDateUnwrapped
+    }
+
+    var timeOfFirstIngestion: Date? {
+        sortedIngestionsUnwrapped.first?.timeUnwrapped
     }
 
     var year: Int {
@@ -61,16 +65,6 @@ extension Experience: Comparable {
         }
         result.removeLast(2)
         return result
-    }
-
-    var timeOfFirstIngestion: Date? {
-        sortedIngestionsUnwrapped.first?.timeUnwrapped
-    }
-
-    var isOver: Bool {
-        guard sortedIngestionsUnwrapped.first != nil else {return false}
-        guard let endOfGraph = getMaxEndTime(for: sortedIngestionsUnwrapped) else {return false}
-        return endOfGraph < Date()
     }
 
     var ingestionsWithDistinctSubstances: [Ingestion] {

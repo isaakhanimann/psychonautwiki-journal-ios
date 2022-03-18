@@ -56,10 +56,9 @@ struct PresetChooseTimeAndColorsView: View {
             }
         }
         .task {
-            viewModel.preset = preset
             viewModel.presetDose = dose
             if sheetContext.experience == nil {
-                viewModel.setLastExperience()
+                viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
             viewModel.componentColorCombos = preset.componentsUnwrapped.map { com in
                 ComponentColorCombo(component: com)

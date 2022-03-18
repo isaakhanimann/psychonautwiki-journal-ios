@@ -84,20 +84,6 @@ extension Ingestion: Comparable {
         }
     }
 
-    var endTime: Date {
-        let defaultEnd = timeUnwrapped.addingTimeInterval(5*60*60)
-        guard let durations = substance?.getDuration(for: administrationRouteUnwrapped) else {return defaultEnd}
-        guard let onset = durations.onset?.oneValue(at: 0.5) else {return defaultEnd}
-        guard let comeup = durations.comeup?.oneValue(at: 0.5) else {return defaultEnd}
-        guard let peak = durations.peak?.oneValue(at: horizontalWeight) else {return defaultEnd}
-        guard let offset = durations.offset?.oneValue(at: horizontalWeight) else {return defaultEnd}
-        let totalDuration = onset
-            + comeup
-            + peak
-            + offset
-        return timeUnwrapped.addingTimeInterval(totalDuration)
-    }
-
     var canTimeLineBeDrawn: Bool {
         guard let substanceUnwrap = substance else {return false}
         guard let duration = substanceUnwrap.getDuration(for: administrationRouteUnwrapped) else {return false}

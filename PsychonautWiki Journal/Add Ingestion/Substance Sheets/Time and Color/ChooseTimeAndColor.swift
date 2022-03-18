@@ -60,7 +60,7 @@ struct ChooseTimeAndColor: View {
             viewModel.dose = dose ?? 0
             viewModel.units = units
             if sheetContext.experience == nil {
-                viewModel.setLastExperience()
+                viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
             viewModel.setDefaultColor()
         }

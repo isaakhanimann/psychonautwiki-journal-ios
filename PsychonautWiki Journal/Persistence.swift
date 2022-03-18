@@ -75,62 +75,9 @@ struct PersistenceController {
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
-        guard let experiences = try? viewContext.fetch(fetchRequest) else {return nil}
-        return experiences.first
-    }
-
-    func getOrCreateLatestExperience() -> Experience? {
-        if let resultExperience = getLatestExperience() {
-            if !resultExperience.isOver {
-                return resultExperience
-            } else {
-                return createNewExperienceNow()
-            }
-        } else {
-            return createNewExperienceNow()
-        }
-    }
-
-    func getOrCreateLatestExperienceWithoutSave() -> Experience {
-        if let resultExperience = getLatestExperience() {
-            if !resultExperience.isOver {
-                return resultExperience
-            } else {
-                return createNewExperienceNowWithoutSave()
-            }
-        } else {
-            return createNewExperienceNowWithoutSave()
-        }
-    }
-
-    func getCurrentFile() -> SubstancesFile? {
-        let fetchRequest: NSFetchRequest<SubstancesFile> = SubstancesFile.fetchRequest()
-        guard let file = try? viewContext.fetch(fetchRequest).first else {return nil}
-        return file
-
-    }
-
-    func createNewExperienceNow() -> Experience? {
-        var result: Experience?
-        viewContext.performAndWait {
-            let experience = Experience(context: viewContext)
-            let now = Date()
-            experience.creationDate = now
-            experience.title = now.asDateString
-            try? viewContext.save()
-            result = experience
-        }
-
-        return result
-    }
-
-    func createNewExperienceNowWithoutSave() -> Experience {
-        let experience = Experience(context: viewContext)
-        let now = Date()
-        experience.creationDate = now
-        experience.title = now.asDateString
-
-        return experience
+        fetchRequest.fetchLimit = 10
+        let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
+        return experiences.sorted().first
     }
 
     func addInitialSubstances(context: NSManagedObjectContext? = nil) {
@@ -172,7 +119,8 @@ struct PersistenceController {
                 for substance in substances {
                     backgroundContext.delete(substance)
                 }
-                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
+                let file = try decodeSubstancesFile(from: data, with: backgroundContext)
+                file.creationDate = Date()
                 try backgroundContext.save()
             } catch {
                 backgroundContext.rollback()

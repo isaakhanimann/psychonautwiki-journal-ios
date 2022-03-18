@@ -20,10 +20,6 @@ extension AddPresetView {
             components.append(component)
         }
 
-        func dismissComponentView() {
-            isShowingAddComponentSheet.toggle()
-        }
-
         func savePreset() {
             assert(isEverythingNeededDefined, "Tried to save preset without defining the necessary fields")
             let context = PersistenceController.shared.viewContext

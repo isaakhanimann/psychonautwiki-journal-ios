@@ -31,16 +31,7 @@ extension PresetChooseTimeAndColorsView {
         @Published var selectedTime = Date()
         @Published var componentColorCombos: [ComponentColorCombo] = []
         @Published var lastExperience: Experience?
-        var preset: Preset?
         var presetDose: Double = 0
-
-        func setLastExperience() {
-            let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
-            fetchRequest.fetchLimit = 10
-            let experiences = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            self.lastExperience = experiences.sorted().first
-        }
 
         func addIngestions(to experience: Experience) {
             let context = PersistenceController.shared.viewContext

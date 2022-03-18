@@ -38,7 +38,7 @@ struct PsychoactiveView: View {
 struct PsychoactiveView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PsychoactiveView(psychoactive: PreviewHelper.shared.substancesFile.psychoactiveClassesUnwrapped.first!)
+            PsychoactiveView(psychoactive: PreviewHelper.shared.substance.psychoactivesUnwrapped.first!)
         }
     }
 }

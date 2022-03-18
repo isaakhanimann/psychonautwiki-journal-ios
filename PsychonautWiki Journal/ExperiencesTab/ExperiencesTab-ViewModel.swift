@@ -16,8 +16,6 @@ extension ExperiencesTab {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var sections: [ExperienceSection] = []
         @Published var selection: Experience?
-        @Published var isShowingDeleteExperienceAlert = false
-        @Published var offsets: IndexSet?
         @Published var hasExperiences = false
         @Published var searchText = "" {
             didSet {

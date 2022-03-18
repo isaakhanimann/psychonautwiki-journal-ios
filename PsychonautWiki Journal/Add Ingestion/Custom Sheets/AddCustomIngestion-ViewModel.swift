@@ -14,14 +14,6 @@ extension AddCustomIngestionView {
         }
         var customSubstance: CustomSubstance?
 
-        func setLastExperience() {
-            let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
-            fetchRequest.fetchLimit = 10
-            let experiences = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            self.lastExperience = experiences.sorted().first
-        }
-
         func addIngestion(to experience: Experience) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {

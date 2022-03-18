@@ -1,9 +1,9 @@
 project: PsychonautWiki Journal.xcodeproj
+retain_objc_accessible: true
+retain_public: true
 schemes:
+- AlertToast
 - PsychonautWiki Journal
-- Watch Journal
-- Watch Journal (Complication)
 targets:
+- JournalTests
 - PsychonautWiki Journal
-- Watch Journal
-- Watch Journal Extension

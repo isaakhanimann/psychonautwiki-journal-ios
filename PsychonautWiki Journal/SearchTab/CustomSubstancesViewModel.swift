@@ -32,12 +32,4 @@ class CustomSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
         guard let customs = controller.fetchedObjects as? [CustomSubstance] else {return}
         self.customSubstances = customs
     }
-
-    func deleteCustomSubstances(at indexSet: IndexSet) {
-        for index in indexSet {
-            let pre = customSubstances[index]
-            PersistenceController.shared.viewContext.delete(pre)
-        }
-        PersistenceController.shared.saveViewContext()
-    }
 }
