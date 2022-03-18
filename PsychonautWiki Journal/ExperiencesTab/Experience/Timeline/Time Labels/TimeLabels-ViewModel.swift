@@ -23,7 +23,9 @@ extension TimeLabels {
             let timeDifference = startTime.distance(to: endTime)
             guard timeDifference != 0 else {return nil}
             let differenceInHours = timeDifference/(60*60)
-            let hourSteps = Int(ceil(differenceInHours/15))
+            let widthPerHour = totalWidth/differenceInHours
+            let minWidthPerHour = 20.0
+            let hourSteps = Int(ceil(minWidthPerHour/widthPerHour))
             let dates = Self.getDates(from: startTime, to: endTime, hourSteps: hourSteps)
             labels = dates.map { date in
                 Self.getLabel(for: date, startTime: startTime, timeDifference: timeDifference, totalWidth: totalWidth)
