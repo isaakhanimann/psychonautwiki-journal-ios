@@ -17,6 +17,16 @@ let namesOfUncontrolledSubstances = [
     "Citicoline"
 ]
 
+func getOkSubstances(substancesToFilter: [Substance], isEyeOpen: Bool) -> [Substance] {
+    if isEyeOpen {
+        return substancesToFilter
+    } else {
+        return substancesToFilter.filter { sub in
+            namesOfUncontrolledSubstances.contains(sub.nameUnwrapped)
+        }
+    }
+}
+
 func getInitialData() -> Data {
     let fileName = "InitialSubstances"
     guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {

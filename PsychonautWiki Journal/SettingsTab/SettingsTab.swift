@@ -1,6 +1,5 @@
 import SwiftUI
 import AlertToast
-import StoreKit
 
 struct SettingsTab: View {
 
@@ -12,47 +11,33 @@ struct SettingsTab: View {
             List {
                 eye
                 substancesSection
-                Section(header: Text("Safety")) {
-                    Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
-                        Label("Responsible Use", systemImage: "brain")
+                if isEyeOpen {
+                    Section(header: Text("Safety")) {
+                        Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
+                            Label("Responsible Use", systemImage: "brain")
+                        }
                     }
                 }
                 Section("Communication") {
-                    Button {
-                        let controller = UIActivityViewController(
-                            activityItems: [
-                                URL(string: "https://apps.apple.com/ch/app/psychonautwiki-journal/id1582059415?l=en")!
-                            ],
-                            applicationActivities: nil
-                        )
-                        UIApplication.shared.currentWindow?.rootViewController?.present(
-                            controller,
-                            animated: true,
-                            completion: nil
-                        )
-                    } label: {
-                        Label("Share With a Friend", systemImage: "square.and.arrow.up")
+                    ShareButton()
+                    if isEyeOpen {
+                        RateInAppStoreButton()
                     }
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
                     }
-                    Button {
-                        if let windowScene = UIApplication.shared.currentWindow?.windowScene {
-                            SKStoreReviewController.requestReview(in: windowScene)
-                        }
-                    } label: {
-                        Label("Rate in App Store", systemImage: "star")
-                    }
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Ask a Question", systemImage: "ellipsis.bubble")
                     }
-                    NavigationLink(
-                        destination: FAQView(),
-                        label: {
-                            Label("Frequently Asked Questions", systemImage: "questionmark.square")
-                        }
-                    )
-                    .foregroundColor(.accentColor)
+                    if isEyeOpen {
+                        NavigationLink(
+                            destination: FAQView(),
+                            label: {
+                                Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                            }
+                        )
+                        .foregroundColor(.accentColor)
+                    }
                 }
                 Section {
                     Text("Version 1.0.6")

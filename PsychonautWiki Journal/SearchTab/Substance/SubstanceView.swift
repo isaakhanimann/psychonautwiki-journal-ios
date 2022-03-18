@@ -6,10 +6,13 @@ struct SubstanceView: View {
     let substance: Substance
     @State private var isShowingAddIngestionSheet = false
     @State private var isShowingSuccessToast = false
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
         List {
-            ArticleURLLink(articleURL: substance.url)
+            if isEyeOpen {
+                ArticleURLLink(articleURL: substance.url)
+            }
             if let addictionPotential = substance.addictionPotentialUnwrapped {
                 Section("Addiction Potential") {
                     Text(addictionPotential)
@@ -24,25 +27,27 @@ struct SubstanceView: View {
                 toleranceSection
             }
             roaSection
-            if substance.showCrossTolerance {
+            if substance.showCrossTolerance && isEyeOpen {
                 crossToleranceSection
             }
-            if substance.areThereInteractions {
-                InteractionsSection(substance: substance)
-            }
-            if substance.showPsychoactiveClass {
-                psychoactiveSection
-            }
-            if substance.showChemicalClass {
-                chemicalSection
-            }
-            if substance.showEffects {
-                effectSection
+            if isEyeOpen {
+                if substance.areThereInteractions {
+                    InteractionsSection(substance: substance)
+                }
+                if substance.showPsychoactiveClass {
+                    psychoactiveSection
+                }
+                if substance.showChemicalClass {
+                    chemicalSection
+                }
+                if substance.showEffects {
+                    effectSection
+                }
             }
         }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
             NavigationView {
-                if substance.hasAnyInteractions {
+                if substance.hasAnyInteractions && isEyeOpen {
                     AcknowledgeInteractionsView(substance: substance)
                 } else {
                     ChooseRouteView(substance: substance)

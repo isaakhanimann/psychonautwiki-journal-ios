@@ -7,16 +7,22 @@ class PreviewHelper {
     static let shared = PreviewHelper()
 
     var allSubstances: [Substance] {
-        let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
+        let fetchRequest = Substance.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
         let substances = try? context.fetch(fetchRequest)
         return substances ?? []
     }
     var unresolvedInteractions: [UnresolvedInteraction] {
-        let fetchRequest: NSFetchRequest<UnresolvedInteraction> = UnresolvedInteraction.fetchRequest()
+        let fetchRequest = UnresolvedInteraction.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \UnresolvedInteraction.name, ascending: true) ]
         let unresolved = try? context.fetch(fetchRequest)
         return unresolved ?? []
+    }
+    var allEffects: [Effect] {
+        let fetchRequest = Effect.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Effect.name, ascending: true) ]
+        let effects = try? context.fetch(fetchRequest)
+        return effects ?? []
     }
     var substance: Substance {
         allSubstances.first!
@@ -24,7 +30,14 @@ class PreviewHelper {
     let experiences: [Experience]
     let preset: Preset
     let customSubstance: CustomSubstance
+    let file: SubstancesFile
     let context: NSManagedObjectContext
+    var psychoactives: [PsychoactiveClass] {
+        file.psychoactiveClassesUnwrapped
+    }
+    var chemicals: [ChemicalClass] {
+        file.chemicalClassesUnwrapped
+    }
 
     func getSubstance(with name: String) -> Substance? {
         allSubstances.first(where: {$0.nameUnwrapped == name})
@@ -38,7 +51,7 @@ class PreviewHelper {
         // swiftlint:disable force_try
         let data = try! Data(contentsOf: url)
         self.context = PersistenceController.preview.viewContext
-        _ = try! decodeSubstancesFile(from: data, with: context)
+        self.file = try! decodeSubstancesFile(from: data, with: context)
         self.experiences = Self.createDefaultExperiences(context: context)
         self.preset = Self.createDefaultPreset(context: context)
         self.customSubstance = Self.createDefaultCustomSubstance(context: context)

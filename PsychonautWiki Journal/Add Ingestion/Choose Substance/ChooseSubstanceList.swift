@@ -29,12 +29,12 @@ struct ChooseSubstanceList: View {
                     if !presetsViewModel.presets.isEmpty {
                         Section(header: Text("Presets")) {
                             ForEach(presetsViewModel.presets) { pre in
-                                let showInteractionSheet = pre.substances.contains(where: { sub in
+                                let hasInteractions = pre.substances.contains(where: { sub in
                                     sub.hasAnyInteractions
                                 }) || !pre.dangerousInteractions.isEmpty
                                 || !pre.unsafeInteractions.isEmpty
                                 || !pre.uncertainInteractions.isEmpty
-                                if showInteractionSheet {
+                                if hasInteractions && isEyeOpen {
                                     NavigationLink(pre.nameUnwrapped) {
                                         PresetAcknowledgeInteractionsView(preset: pre)
                                     }
@@ -61,7 +61,7 @@ struct ChooseSubstanceList: View {
                     Section(sec.sectionName) {
                         ForEach(sec.substances) { sub in
                             NavigationLink(sub.nameUnwrapped) {
-                                if sub.hasAnyInteractions {
+                                if sub.hasAnyInteractions && isEyeOpen {
                                     AcknowledgeInteractionsView(substance: sub)
                                 } else {
                                     ChooseRouteView(substance: sub)

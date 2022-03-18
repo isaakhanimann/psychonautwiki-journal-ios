@@ -32,8 +32,9 @@ extension AddComponentView {
             let fetchRequest = Substance.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Substance.name, ascending: true) ]
             let substances = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            self.sortedSubstances = substances
-            selectedSubstance = substances.first!
+            let isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
+            sortedSubstances = getOkSubstances(substancesToFilter: substances, isEyeOpen: isEyeOpen)
+            selectedSubstance = sortedSubstances.first!
             selectedUnit = roaDose?.units
         }
 

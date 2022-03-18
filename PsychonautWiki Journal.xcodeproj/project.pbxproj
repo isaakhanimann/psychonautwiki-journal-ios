@@ -67,6 +67,8 @@
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
 		EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */; };
 		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
+		EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C627E4ED86003DF79D /* ShareButton.swift */; };
+		EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -257,6 +259,8 @@
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
 		EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionSheetContext.swift; sourceTree = "<group>"; };
 		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
+		EAB165C627E4ED86003DF79D /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
+		EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInAppStoreButton.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -733,6 +737,8 @@
 				EA460D202763790C002EF80B /* FAQ */,
 				EAE4712B26CBA663009FB0EC /* SettingsTab.swift */,
 				EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */,
+				EAB165C627E4ED86003DF79D /* ShareButton.swift */,
+				EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */,
 			);
 			path = SettingsTab;
 			sourceTree = "<group>";
@@ -1109,6 +1115,7 @@
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
 				EA891BBE27E0852400AF04C6 /* AddPresetView.swift in Sources */,
+				EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
@@ -1168,6 +1175,7 @@
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* DurationView.swift in Sources */,
+				EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,

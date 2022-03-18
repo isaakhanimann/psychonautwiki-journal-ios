@@ -61,7 +61,7 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
         do {
             try substanceFetchController?.performFetch()
             let fetchedSubstances = substanceFetchController?.fetchedObjects ?? []
-            substances = filterSubstancesIfEyeIsOpen(substancesToFilter: fetchedSubstances)
+            substances = getOkSubstances(substancesToFilter: fetchedSubstances, isEyeOpen: isEyeOpen)
             sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: .psychoactive)
         } catch {
             NSLog("Error: could not fetch Substances")
@@ -70,18 +70,8 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let subs = controller.fetchedObjects as? [Substance] else {return}
-        substances = filterSubstancesIfEyeIsOpen(substancesToFilter: subs)
+        substances = getOkSubstances(substancesToFilter: subs, isEyeOpen: isEyeOpen)
         sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: groupBy)
-    }
-
-    private func filterSubstancesIfEyeIsOpen(substancesToFilter: [Substance]) -> [Substance] {
-        if isEyeOpen {
-            return substancesToFilter
-        } else {
-            return substancesToFilter.filter { sub in
-                namesOfUncontrolledSubstances.contains(sub.nameUnwrapped)
-            }
-        }
     }
 
     private static func getSections(substances: [Substance], groupBy: GroupBy) -> [SubstanceSection] {
@@ -120,7 +110,7 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
         }
         try? substanceFetchController?.performFetch()
         let fetchedSubstances = substanceFetchController?.fetchedObjects ?? []
-        substances = filterSubstancesIfEyeIsOpen(substancesToFilter: fetchedSubstances)
+        substances = getOkSubstances(substancesToFilter: fetchedSubstances, isEyeOpen: isEyeOpen)
         sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: groupBy)
     }
 
