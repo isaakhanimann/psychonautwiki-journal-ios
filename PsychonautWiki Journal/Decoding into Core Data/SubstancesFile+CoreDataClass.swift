@@ -225,13 +225,6 @@ public class SubstancesFile: NSManagedObject, Decodable {
         }
         return []
     }
-
-    static let namesOfUncontrolledSubstances = [
-        "Caffeine",
-        "Myristicin",
-        "Choline bitartrate",
-        "Citicoline"
-    ]
 }
 
 private protocol SubstanceAddable {

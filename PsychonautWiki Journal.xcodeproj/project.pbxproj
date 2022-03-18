@@ -66,6 +66,7 @@
 		EAB165AC27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */; };
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
 		EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */; };
+		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC306A526CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */; };
@@ -255,6 +256,7 @@
 		EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCustomIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
 		EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionSheetContext.swift; sourceTree = "<group>"; };
+		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC306A426CD9B0100C98E3E /* SubstanceCopy-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCopy-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
+				EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
@@ -1153,6 +1156,7 @@
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EA8447F027CD30ED00B10DD3 /* CurveBottom.swift in Sources */,
+				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
 				EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */,
 				EAE471EC26CBA664009FB0EC /* SubstancesFile-CoreDataHelpers.swift in Sources */,
 				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,

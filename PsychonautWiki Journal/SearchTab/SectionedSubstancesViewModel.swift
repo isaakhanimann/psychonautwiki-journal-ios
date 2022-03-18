@@ -30,6 +30,8 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
     }
     private var substances: [Substance] = []
     private let substanceFetchController: NSFetchedResultsController<Substance>?
+    private var cancellable: AnyCancellable?
+    private var isEyeOpen = false
 
     init(isPreview: Bool) {
         substances = PreviewHelper.shared.allSubstances
@@ -48,14 +50,37 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
             sectionNameKeyPath: nil, cacheName: nil
         )
         super.init()
+        cancellable = NotificationCenter.default.publisher(for: Notification.eyeName)
+            .sink { _ in
+                self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
+                self.setupFetchRequestPredicateAndFetch()
+            }
+        self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
         substanceFetchController?.delegate = self
         groupBy = .psychoactive
         do {
             try substanceFetchController?.performFetch()
-            substances = substanceFetchController?.fetchedObjects ?? []
+            let fetchedSubstances = substanceFetchController?.fetchedObjects ?? []
+            substances = filterSubstancesIfEyeIsOpen(substancesToFilter: fetchedSubstances)
             sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: .psychoactive)
         } catch {
-            NSLog("Error: could not fetch SubstancesFiles")
+            NSLog("Error: could not fetch Substances")
+        }
+    }
+
+    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        guard let subs = controller.fetchedObjects as? [Substance] else {return}
+        substances = filterSubstancesIfEyeIsOpen(substancesToFilter: subs)
+        sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: groupBy)
+    }
+
+    private func filterSubstancesIfEyeIsOpen(substancesToFilter: [Substance]) -> [Substance] {
+        if isEyeOpen {
+            return substancesToFilter
+        } else {
+            return substancesToFilter.filter { sub in
+                namesOfUncontrolledSubstances.contains(sub.nameUnwrapped)
+            }
         }
     }
 
@@ -78,11 +103,6 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
         return sections.sorted()
     }
 
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard let subs = controller.fetchedObjects as? [Substance] else {return}
-        sections = SectionedSubstancesViewModel.getSections(substances: subs, groupBy: groupBy)
-    }
-
     private func setupFetchRequestPredicateAndFetch() {
         if searchText == "" {
             substanceFetchController?.fetchRequest.predicate = nil
@@ -99,7 +119,8 @@ class SectionedSubstancesViewModel: NSObject, ObservableObject, NSFetchedResults
             substanceFetchController?.fetchRequest.predicate = compound
         }
         try? substanceFetchController?.performFetch()
-        substances = substanceFetchController?.fetchedObjects ?? []
+        let fetchedSubstances = substanceFetchController?.fetchedObjects ?? []
+        substances = filterSubstancesIfEyeIsOpen(substancesToFilter: fetchedSubstances)
         sections = SectionedSubstancesViewModel.getSections(substances: substances, groupBy: groupBy)
     }
 

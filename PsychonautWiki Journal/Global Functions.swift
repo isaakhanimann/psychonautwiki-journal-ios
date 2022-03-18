@@ -10,6 +10,13 @@ enum ConversionError: Error {
     case failedToConvertDataToJSON
 }
 
+let namesOfUncontrolledSubstances = [
+    "Caffeine",
+    "Myristicin",
+    "Choline Bitartrate",
+    "Citicoline"
+]
+
 func getInitialData() -> Data {
     let fileName = "InitialSubstances"
     guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {

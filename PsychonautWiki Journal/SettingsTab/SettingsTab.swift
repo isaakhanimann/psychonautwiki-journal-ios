@@ -89,6 +89,7 @@ struct SettingsTab: View {
 
     private func toggleEye() {
         isEyeOpen.toggle()
+        NotificationCenter.default.post(name: Notification.eyeName, object: nil)
         playHapticFeedback()
     }
 
