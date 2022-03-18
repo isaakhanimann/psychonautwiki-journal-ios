@@ -22,8 +22,10 @@ extension TimeLabels {
         ) {
             let timeDifference = startTime.distance(to: endTime)
             guard timeDifference != 0 else {return nil}
-            let fullHours = Self.getFullHours(from: startTime, to: endTime)
-            labels = fullHours.map { date in
+            let differenceInHours = timeDifference/(60*60)
+            let hourSteps = Int(ceil(differenceInHours/15))
+            let dates = Self.getDates(from: startTime, to: endTime, hourSteps: hourSteps)
+            labels = dates.map { date in
                 Self.getLabel(for: date, startTime: startTime, timeDifference: timeDifference, totalWidth: totalWidth)
             }
         }
@@ -44,14 +46,14 @@ extension TimeLabels {
             return Label(xOffset: xOffset, text: String(hour))
         }
 
-        static func getFullHours(from startTime: Date, to endTime: Date) -> [Date] {
-            guard let firstFullHour = startTime.nearestFullHourInTheFuture() else {return []}
-            let oneHour: TimeInterval = 60*60
+        static func getDates(from startTime: Date, to endTime: Date, hourSteps: Int) -> [Date] {
+            guard let firstDate = startTime.nearestFullHourInTheFuture() else {return []}
+            let hourStepsInSec: TimeInterval = Double(hourSteps)*60*60
             var fullHours = [Date]()
-            var checkTime = firstFullHour
+            var checkTime = firstDate
             while checkTime < endTime {
                 fullHours.append(checkTime)
-                checkTime = checkTime.addingTimeInterval(oneHour)
+                checkTime = checkTime.addingTimeInterval(hourStepsInSec)
             }
             return fullHours
         }
