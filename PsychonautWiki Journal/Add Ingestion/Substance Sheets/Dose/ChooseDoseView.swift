@@ -6,6 +6,7 @@ struct ChooseDoseView: View {
     let administrationRoute: AdministrationRoute
     @EnvironmentObject var sheetContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     // swiftlint:disable line_length
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
@@ -36,12 +37,14 @@ struct ChooseDoseView: View {
         ZStack(alignment: .bottom) {
             Form {
                 doseSection
-                Button("Unknown Dose/Purity") {
-                    viewModel.isShowingUnknownDoseAlert.toggle()
+                if isEyeOpen {
+                    Button("Unknown Dose/Purity") {
+                        viewModel.isShowingUnknownDoseAlert.toggle()
+                    }
+                    .buttonStyle(.primary)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 }
-                .buttonStyle(.primary)
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
                 if let impureDoseUnwrap = viewModel.impureDoseRounded {
                     Section(
                         header: Text("Purity")
