@@ -8,6 +8,7 @@ struct PresetView: View {
     @State private var isShowingSuccessToast = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingConfirmation = false
+    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
         List {
@@ -39,7 +40,9 @@ struct PresetView: View {
                     }
                 }
             }
-            PresetInteractionsSection(preset: preset)
+            if isEyeOpen {
+                PresetInteractionsSection(preset: preset)
+            }
         }
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
@@ -68,13 +71,13 @@ struct PresetView: View {
             Button("Cancel", role: .cancel) {}
         }
         .sheet(isPresented: $isShowingAddIngestionSheet) {
-            let showInteractionSheet = preset.substances.contains(where: { sub in
+            let hasInteractions = preset.substances.contains(where: { sub in
                 sub.hasAnyInteractions
             }) || !preset.dangerousInteractions.isEmpty
             || !preset.unsafeInteractions.isEmpty
             || !preset.uncertainInteractions.isEmpty
             NavigationView {
-                if showInteractionSheet {
+                if hasInteractions && isEyeOpen {
                     PresetAcknowledgeInteractionsView(preset: preset)
                 } else {
                     PresetChooseDoseView(preset: preset)

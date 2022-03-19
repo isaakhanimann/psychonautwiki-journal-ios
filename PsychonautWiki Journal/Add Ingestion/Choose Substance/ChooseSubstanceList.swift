@@ -17,7 +17,7 @@ struct ChooseSubstanceList: View {
                         Section("Recently Used") {
                             ForEach(recentsViewModel.recentSubstances) { sub in
                                 NavigationLink(sub.nameUnwrapped) {
-                                    if sub.hasAnyInteractions {
+                                    if sub.hasAnyInteractions && isEyeOpen {
                                         AcknowledgeInteractionsView(substance: sub)
                                     } else {
                                         ChooseRouteView(substance: sub)
