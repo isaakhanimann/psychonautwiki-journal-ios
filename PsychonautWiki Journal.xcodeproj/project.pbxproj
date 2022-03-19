@@ -509,7 +509,6 @@
 				EA8AEA7027E1CC5100B30A16 /* Content */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
 				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
-				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 			);
 			path = Main;
@@ -716,6 +715,7 @@
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
+				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
 			);
