@@ -28,14 +28,14 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate {
     @Binding var isLoading: Bool
 
     init(isLoading: Binding<Bool>) {
-        self._isLoading = isLoading
+        _isLoading = isLoading
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.isLoading = true
+        isLoading = true
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.isLoading = false
+        isLoading = false
     }
 }

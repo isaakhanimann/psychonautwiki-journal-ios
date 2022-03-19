@@ -5,20 +5,15 @@ import WebKit
 struct SubstanceView: View {
 
     let substance: Substance
-    @State private var isShowingAddIngestionSheet = false
-    @State private var isShowingSuccessToast = false
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @State private var isShowingArticle = false
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         List {
             if isEyeOpen {
                 if let articleURL = substance.url {
                     Button("Article") {
-                        isShowingArticle.toggle()
-                    }
-                    .popover(isPresented: $isShowingArticle) {
-                        WebViewSheet(articleURL: articleURL)
+                        viewModel.sheetToShow = .article(url: articleURL)
                     }
                 }
             }
@@ -54,26 +49,31 @@ struct SubstanceView: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowingAddIngestionSheet) {
-            NavigationView {
-                if substance.hasAnyInteractions && isEyeOpen {
-                    AcknowledgeInteractionsView(substance: substance)
-                } else {
-                    ChooseRouteView(substance: substance)
+        .sheet(item: $viewModel.sheetToShow) { type in
+            switch type {
+            case .addIngestion:
+                NavigationView {
+                    if substance.hasAnyInteractions && isEyeOpen {
+                        AcknowledgeInteractionsView(substance: substance)
+                    } else {
+                        ChooseRouteView(substance: substance)
+                    }
                 }
-            }
-            .accentColor(Color.blue)
-            .environmentObject(
-                AddIngestionSheetContext(
-                    experience: nil,
-                    showSuccessToast: {
-                        isShowingSuccessToast.toggle()
-                    },
-                    isShowingAddIngestionSheet: $isShowingAddIngestionSheet
+                .accentColor(Color.blue)
+                .environmentObject(
+                    AddIngestionSheetContext(
+                        experience: nil,
+                        showSuccessToast: {
+                            viewModel.isShowingSuccessToast.toggle()
+                        },
+                        isShowingAddIngestionSheet: viewModel.isShowingIngestion
+                    )
                 )
-            )
+            case .article(let url):
+                WebViewSheet(articleURL: url)
+            }
         }
-        .toast(isPresenting: $isShowingSuccessToast) {
+        .toast(isPresenting: $viewModel.isShowingSuccessToast) {
             AlertToast(
                 displayMode: .alert,
                 type: .complete(Color.green),
@@ -86,7 +86,9 @@ struct SubstanceView: View {
                 Button("", action: {}) // here so that SwiftUI layout works
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Ingest", action: ingest)
+                Button("Ingest") {
+                    viewModel.sheetToShow = .addIngestion
+                }
             }
         }
     }
@@ -165,25 +167,6 @@ struct SubstanceView: View {
                     ChemicalView(chemical: che)
                 }
             }
-        }
-    }
-
-    private func ingest() {
-        isShowingAddIngestionSheet.toggle()
-    }
-}
-
-struct RowLabelView: View {
-
-    let label: String
-    let value: String
-
-    var body: some View {
-        HStack {
-            Text(label+" ")
-            Spacer()
-            Text(value)
-                .foregroundColor(.secondary)
         }
     }
 }
