@@ -36,7 +36,7 @@ struct DosePicker: View {
         let units = roaDose?.units ?? ""
         let difference = max - min
         let stepCandidates = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500]
-        let approximateStepSize = difference/30
+        let approximateStepSize = difference/60
         let closestStep = stepCandidates.min(by: { abs($0 - approximateStepSize) < abs($1 - approximateStepSize)})!
         let sliderMin = floor(min/closestStep) * closestStep
         let sliderMax = ceil(max/closestStep) * closestStep
