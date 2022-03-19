@@ -125,6 +125,7 @@ struct SubstanceView: View {
                     RowLabelView(label: "Bioavailability", value: "\(bio)%")
                 }
             }
+            .listRowSeparator(.hidden)
         }
     }
 

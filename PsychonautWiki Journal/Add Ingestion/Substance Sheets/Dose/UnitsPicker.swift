@@ -26,6 +26,7 @@ struct UnitsPicker: View {
                     .autocapitalization(.none)
             }
         }
+        .listRowSeparator(.hidden)
         .onChange(of: pickerValue) { newValue in
             if newValue != .custom {
                 units = newValue.rawValue
