@@ -9,16 +9,20 @@ struct IngestionSubstanceRow: View {
             NavigationLink {
                 SubstanceView(substance: sub)
             } label: {
-                VStack(alignment: .leading) {
-                    Text(ingestion.substanceNameUnwrapped)
-                    if !ingestion.canTimeLineBeDrawn {
-                        Text("Timeline not fully defined")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
+                HStack {
+                    Image(systemName: "info.circle")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                    VStack(alignment: .leading) {
+                        Text(ingestion.substanceNameUnwrapped)
+                        if !ingestion.canTimeLineBeDrawn {
+                            Text("Timeline not fully defined")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
-
         } else {
             VStack(alignment: .leading) {
                 Text(ingestion.substanceNameUnwrapped)
