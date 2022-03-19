@@ -70,15 +70,6 @@ struct ChooseSubstanceList: View {
                         }
                     }
                 }
-                if isEyeOpen {
-                    Section {
-                        EmptyView()
-                    } footer: {
-                        Text(substancesDisclaimer)
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                    }
-                }
             }
             if isSearching && sectionedViewModel.sections.isEmpty {
                 Text("No Results")
@@ -86,14 +77,6 @@ struct ChooseSubstanceList: View {
             }
         }
     }
-
-    let substancesDisclaimer =
-"""
-This list is neither a suggestion nor an incitement to the consumption of these substances.
-Using these substances always involves risks and can never be considered safe.
-
-Consult a doctor before making medical decisions.
-"""
 }
 
 struct ChooseSubstanceList_Previews: PreviewProvider {

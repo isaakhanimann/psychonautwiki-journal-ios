@@ -12,10 +12,7 @@ struct EditIngestionView: View {
                     .disableAutocorrection(true)
             }
             routeSection
-            Section(
-                header: Text("\(viewModel.selectedAdministrationRoute.rawValue) Dose"),
-                footer: Text(viewModel.roaDose?.unitsUnwrapped != nil ? ChooseDoseView.doseDisclaimer : "")
-            ) {
+            Section("\(viewModel.selectedAdministrationRoute.rawValue) Dose") {
                 DoseView(roaDose: viewModel.roaDose)
                 DosePicker(
                     roaDose: viewModel.roaDose,
