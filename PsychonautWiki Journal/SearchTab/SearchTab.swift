@@ -21,7 +21,11 @@ struct SearchTab: View {
                 }
             }
         }
-        .searchable(text: $sectionedViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .searchable(
+            text: $sectionedViewModel.searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: Text("Search by substance or class")
+        )
         .disableAutocorrection(true)
     }
 }
