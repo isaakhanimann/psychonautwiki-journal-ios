@@ -31,10 +31,8 @@ struct ExperienceRow: View {
                     Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
                         .foregroundColor(.secondary)
                 }
-                Spacer()
-                Text(experience.dateForSorting, format: Date.FormatStyle().day().month())
-                    .foregroundColor(.secondary)
             }
+            .badge(Text(experience.dateForSorting, format: Date.FormatStyle().day().month()))
         }
     }
 
