@@ -3,10 +3,17 @@ import SwiftUI
 struct ChemicalView: View {
 
     let chemical: ChemicalClass
+    @State private var isShowingArticle = false
 
     var body: some View {
         List {
-            ArticleURLLink(articleURL: chemical.url)
+            if chemical.url != nil {
+                Button {
+                    isShowingArticle.toggle()
+                } label: {
+                    Label("Article", systemImage: "link")
+                }
+            }
             Section("Substances in this chemical class") {
                 ForEach(chemical.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -32,6 +39,13 @@ struct ChemicalView: View {
             }
         }
         .navigationTitle(chemical.nameUnwrapped)
+        .sheet(isPresented: $isShowingArticle) {
+            if let articleURL = chemical.url {
+                WebViewSheet(articleURL: articleURL)
+            } else {
+                Text("Could not find website")
+            }
+        }
     }
 }
 

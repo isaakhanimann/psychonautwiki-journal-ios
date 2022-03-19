@@ -13,7 +13,6 @@
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
-		EA095A1627DAB395007D44D6 /* ArticleURLLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1527DAB395007D44D6 /* ArticleURLLink.swift */; };
 		EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
@@ -207,7 +206,6 @@
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
-		EA095A1527DAB395007D44D6 /* ArticleURLLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleURLLink.swift; sourceTree = "<group>"; };
 		EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
@@ -476,7 +474,6 @@
 				EACB6E0927CE115D00940291 /* ChemicalView.swift */,
 				EACB6E0E27CE236600940291 /* UnresolvedView.swift */,
 				EACB6E0C27CE1D2700940291 /* EffectView.swift */,
-				EA095A1527DAB395007D44D6 /* ArticleURLLink.swift */,
 			);
 			path = Substance;
 			sourceTree = "<group>";
@@ -1120,7 +1117,6 @@
 				EA47E65127CA136C00F6E10F /* RoaDose+CoreDataClass.swift in Sources */,
 				EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
-				EA095A1627DAB395007D44D6 /* ArticleURLLink.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
 				EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,

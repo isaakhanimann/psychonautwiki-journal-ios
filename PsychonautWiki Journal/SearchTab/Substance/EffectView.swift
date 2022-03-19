@@ -3,10 +3,17 @@ import SwiftUI
 struct EffectView: View {
 
     let effect: Effect
+    @State private var isShowingArticle = false
 
     var body: some View {
         List {
-            ArticleURLLink(articleURL: effect.url)
+            if effect.url != nil {
+                Button {
+                    isShowingArticle.toggle()
+                } label: {
+                    Label("Article", systemImage: "link")
+                }
+            }
             Section("Substances with this effect") {
                 ForEach(effect.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -16,6 +23,13 @@ struct EffectView: View {
             }
         }
         .navigationTitle(effect.nameUnwrapped)
+        .sheet(isPresented: $isShowingArticle) {
+            if let articleURL = effect.url {
+                WebViewSheet(articleURL: articleURL)
+            } else {
+                Text("Could not find website")
+            }
+        }
     }
 }
 

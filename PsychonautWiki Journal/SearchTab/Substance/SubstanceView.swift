@@ -12,8 +12,10 @@ struct SubstanceView: View {
         List {
             if isEyeOpen {
                 if let articleURL = substance.url {
-                    Button("Article") {
+                    Button {
                         viewModel.sheetToShow = .article(url: articleURL)
+                    } label: {
+                        Label("Article", systemImage: "link")
                     }
                 }
             }

@@ -3,10 +3,17 @@ import SwiftUI
 struct PsychoactiveView: View {
 
     let psychoactive: PsychoactiveClass
+    @State private var isShowingArticle = false
 
     var body: some View {
         List {
-            ArticleURLLink(articleURL: psychoactive.url)
+            if psychoactive.url != nil {
+                Button {
+                    isShowingArticle.toggle()
+                } label: {
+                    Label("Article", systemImage: "link")
+                }
+            }
             Section("Substances in this psychoactive class") {
                 ForEach(psychoactive.substancesUnwrapped) { sub in
                     NavigationLink(sub.nameUnwrapped) {
@@ -32,6 +39,13 @@ struct PsychoactiveView: View {
             }
         }
         .navigationTitle(psychoactive.nameUnwrapped)
+        .sheet(isPresented: $isShowingArticle) {
+            if let articleURL = psychoactive.url {
+                WebViewSheet(articleURL: articleURL)
+            } else {
+                Text("Could not find website")
+            }
+        }
     }
 }
 
