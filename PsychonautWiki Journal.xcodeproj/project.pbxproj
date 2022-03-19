@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9427E5DB5200077FB2 /* WebView.swift */; };
+		EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9927E5E72000077FB2 /* WebViewSheet.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA095A1627DAB395007D44D6 /* ArticleURLLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1527DAB395007D44D6 /* ArticleURLLink.swift */; };
@@ -197,6 +199,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA014F9427E5DB5200077FB2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		EA014F9927E5E72000077FB2 /* WebViewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewSheet.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA095A1527DAB395007D44D6 /* ArticleURLLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleURLLink.swift; sourceTree = "<group>"; };
@@ -387,6 +391,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA014F9627E5DC6500077FB2 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				EA014F9427E5DB5200077FB2 /* WebView.swift */,
+				EA014F9927E5E72000077FB2 /* WebViewSheet.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		EA095A1027D9E3D0007D44D6 /* Dose */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				EA8447EE27CD2B9C00B10DD3 /* Curves */,
+				EA014F9627E5DC6500077FB2 /* Web */,
 				EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */,
 				EAF76C9127D7A6C400945587 /* InteractionsSection.swift */,
 				EACB6E2127D0064E00940291 /* InteractionLabel.swift */,
@@ -1132,6 +1146,7 @@
 				EA47E66927CA25E700F6E10F /* ChemicalClass-CoreDataHelpers.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration+CoreDataClass.swift in Sources */,
 				EACB6E7127D5EB1E00940291 /* EditIngestion-ViewModel.swift in Sources */,
+				EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */,
 				EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EACB6E9427D7571E00940291 /* LineShape-ViewModel.swift in Sources */,
@@ -1193,6 +1208,7 @@
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EAF76CC227D9669200945587 /* UnknownDoseAlert.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
+				EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

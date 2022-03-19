@@ -1,5 +1,6 @@
 import SwiftUI
 import AlertToast
+import WebKit
 
 struct SubstanceView: View {
 
@@ -7,11 +8,19 @@ struct SubstanceView: View {
     @State private var isShowingAddIngestionSheet = false
     @State private var isShowingSuccessToast = false
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @State private var isShowingArticle = false
 
     var body: some View {
         List {
             if isEyeOpen {
-                ArticleURLLink(articleURL: substance.url)
+                if let articleURL = substance.url {
+                    Button("Article") {
+                        isShowingArticle.toggle()
+                    }
+                    .popover(isPresented: $isShowingArticle) {
+                        WebViewSheet(articleURL: articleURL)
+                    }
+                }
             }
             if let addictionPotential = substance.addictionPotentialUnwrapped {
                 Section("Addiction Potential") {
