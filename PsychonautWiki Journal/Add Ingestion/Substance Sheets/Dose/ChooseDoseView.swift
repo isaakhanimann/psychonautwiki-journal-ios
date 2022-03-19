@@ -38,10 +38,14 @@ struct ChooseDoseView: View {
             Form {
                 doseSection
                 if isEyeOpen {
-                    Button("Unknown Dose/Purity") {
-                        viewModel.isShowingUnknownDoseAlert.toggle()
+                    HStack {
+                        Spacer()
+                        Button("Unknown Dose/Purity") {
+                            viewModel.isShowingUnknownDoseAlert.toggle()
+                        }
+                        .buttonStyle(.primary)
+                        Spacer()
                     }
-                    .buttonStyle(.primary)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                 }
