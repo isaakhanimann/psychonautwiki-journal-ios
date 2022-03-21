@@ -36,7 +36,22 @@ struct UnitsPicker: View {
             units = newValue
         }
         .task {
-            units = UnitPickerOptions.mg.rawValue
+            initializePicker()
+        }
+    }
+
+    private func initializePicker() {
+        guard let unitsUnwrap = units else {
+            pickerValue = UnitPickerOptions.custom
+            return
+        }
+        if let startOption = UnitPickerOptions(rawValue: unitsUnwrap) {
+            pickerValue = startOption
+        } else {
+            pickerValue = UnitPickerOptions.custom
+            if !unitsUnwrap.isEmpty {
+                textValue = unitsUnwrap
+            }
         }
     }
 }

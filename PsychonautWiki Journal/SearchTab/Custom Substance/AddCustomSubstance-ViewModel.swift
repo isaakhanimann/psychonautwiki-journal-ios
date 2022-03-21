@@ -4,7 +4,7 @@ extension AddCustomSubstanceView {
 
     class ViewModel: ObservableObject {
         @Published var name = ""
-        @Published var units: String?
+        @Published var units: String? = "mg"
 
         var isEverythingNeededDefined: Bool {
             guard !name.isEmpty else {return false}

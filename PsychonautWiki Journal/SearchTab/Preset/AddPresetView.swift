@@ -8,7 +8,7 @@ struct AddPresetView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Name")) {
+                Section("Name") {
                     TextField(
                         "Preset Name",
                         text: $viewModel.presetName,
@@ -16,11 +16,12 @@ struct AddPresetView: View {
                     )
                 }
                 .headerProminence(.increased)
-                Section(header: Text("Units")) {
+                Section("Units") {
                     UnitsPicker(units: $viewModel.units)
                 }
                 .headerProminence(.increased)
-                Section("1 \(viewModel.units ?? "") contains") {
+                let unitOrPlaceHolder = (viewModel.units?.isEmpty ?? true) ? "unit" : (viewModel.units ?? "unit")
+                Section("1 \(unitOrPlaceHolder) contains") {
                     ForEach(viewModel.components) { com in
                         HStack {
                             Text(com.substance.nameUnwrapped)

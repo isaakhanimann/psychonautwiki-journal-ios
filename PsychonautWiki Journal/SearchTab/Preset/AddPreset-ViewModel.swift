@@ -5,13 +5,13 @@ extension AddPresetView {
     class ViewModel: ObservableObject {
 
         @Published var presetName = ""
-        @Published var units: String?
+        @Published var units: String? = ""
         @Published var components: [Component] = []
         @Published var isShowingAddComponentSheet = false
 
         var isEverythingNeededDefined: Bool {
             guard !presetName.isEmpty else {return false}
-            guard units != nil else {return false}
+            guard let unitsUnwrap = units, !unitsUnwrap.isEmpty else {return false}
             guard !components.isEmpty else {return false}
             return true
         }

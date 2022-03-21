@@ -8,7 +8,7 @@ struct AddCustomSubstanceView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Name")) {
+                Section("Name") {
                     TextField(
                         "Name",
                         text: $viewModel.name,
@@ -16,7 +16,7 @@ struct AddCustomSubstanceView: View {
                     )
                 }
                 .headerProminence(.increased)
-                Section(header: Text("Units")) {
+                Section("Units") {
                     UnitsPicker(units: $viewModel.units)
                 }
                 .headerProminence(.increased)
