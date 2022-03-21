@@ -15,8 +15,6 @@ extension ExperienceView {
             }
         }
 
-        init() {}
-
         func initialize(experience: Experience) {
             self.experience = experience
             self.selectedTitle = experience.titleUnwrapped

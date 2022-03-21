@@ -18,8 +18,15 @@ struct IngestionRow: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Text(ingestion.timeUnwrapped, style: .time)
-                    .foregroundColor(.primary)
+                VStack(alignment: .trailing) {
+                    Text(ingestion.timeUnwrapped, style: .time)
+                        .foregroundColor(.primary)
+                    if !ingestion.canTimeLineBeDrawn {
+                        Text("Timeline not fully defined")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
         }
     }

@@ -28,8 +28,13 @@ struct ExperienceRow: View {
                 VStack(alignment: .leading) {
                     Text(experience.titleUnwrapped)
                         .font(.title2)
-                    Text(!experience.usedSubstanceNames.isEmpty ? experience.usedSubstanceNames : "No substance yet")
-                        .foregroundColor(.secondary)
+                    if experience.distinctUsedSubstanceNames.isEmpty {
+                        Text("No substance yet")
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(experience.distinctUsedSubstanceNames, format: .list(type: .and))
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .badge(Text(experience.dateForSorting, format: Date.FormatStyle().day().month()))

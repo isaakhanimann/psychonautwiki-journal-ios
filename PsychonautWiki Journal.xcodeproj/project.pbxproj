@@ -96,7 +96,7 @@
 		EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */; };
 		EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6427D4D86900940291 /* AppDelegate.swift */; };
 		EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */; };
-		EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */; };
+		EACB6E6E27D5651800940291 /* SubstanceDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6D27D5651800940291 /* SubstanceDoseRow.swift */; };
 		EACB6E7127D5EB1E00940291 /* EditIngestion-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7027D5EB1E00940291 /* EditIngestion-ViewModel.swift */; };
 		EACB6E7727D60BD800940291 /* Experience-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7627D60BD800940291 /* Experience-ViewModel.swift */; };
 		EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */; };
@@ -292,7 +292,7 @@
 		EACB6E5B27D36BD000940291 /* SubstanceDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDecoder.swift; sourceTree = "<group>"; };
 		EACB6E6427D4D86900940291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperiencesTab-ViewModel.swift"; sourceTree = "<group>"; };
-		EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionSubstanceRow.swift; sourceTree = "<group>"; };
+		EACB6E6D27D5651800940291 /* SubstanceDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDoseRow.swift; sourceTree = "<group>"; };
 		EACB6E7027D5EB1E00940291 /* EditIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E7627D60BD800940291 /* Experience-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Experience-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSubstancesViewModel.swift; sourceTree = "<group>"; };
@@ -845,8 +845,8 @@
 				EAE4719F26CBA664009FB0EC /* Edit Ingestions */,
 				EAE4718B26CBA664009FB0EC /* ExperienceView.swift */,
 				EACB6E7627D60BD800940291 /* Experience-ViewModel.swift */,
-				EACB6E6D27D5651800940291 /* IngestionSubstanceRow.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
+				EACB6E6D27D5651800940291 /* SubstanceDoseRow.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
 				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 			);
@@ -1118,7 +1118,7 @@
 				EACB6DFF27CDE5CE00940291 /* Tolerance-CoreDataHelpers.swift in Sources */,
 				EAE4721226CBA664009FB0EC /* CurrentTimeShape.swift in Sources */,
 				EAE4721E26CBA664009FB0EC /* EditIngestionView.swift in Sources */,
-				EACB6E6E27D5651800940291 /* IngestionSubstanceRow.swift in Sources */,
+				EACB6E6E27D5651800940291 /* SubstanceDoseRow.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */,
 				EAB165AC27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift in Sources */,
 				EAE4721A26CBA664009FB0EC /* TimeLabels.swift in Sources */,

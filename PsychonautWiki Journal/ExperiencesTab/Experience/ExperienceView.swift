@@ -29,10 +29,10 @@ struct ExperienceView: View {
                     .frame(height: 310)
                 }
             }
-            if !experience.ingestionsWithDistinctSubstances.isEmpty {
-                Section(header: Text("Substances")) {
-                    ForEach(experience.ingestionsWithDistinctSubstances) { ing in
-                        IngestionSubstanceRow(ingestion: ing)
+            if !experience.substancesWithDose.isEmpty {
+                Section("Substances") {
+                    ForEach(experience.substancesWithDose) { subDos in
+                        SubstanceDoseRow(substanceDose: subDos)
                     }
                 }
             }
