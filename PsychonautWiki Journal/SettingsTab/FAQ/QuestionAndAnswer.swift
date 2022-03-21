@@ -10,31 +10,43 @@ struct QuestionAndAnswer: Identifiable, Hashable {
     static let list: [QuestionAndAnswer] = [
         QuestionAndAnswer(
             question: "Why is an interaction or other info on a substance present in the PsychonautWiki article but not in the app?",
-            answer: "Chances are that the info is not annotated correctly such that it's not propagated to the API."
+            answer: "Chances are that the info is not annotated correctly such that it is not propagated to the API."
         ),
         QuestionAndAnswer(
-            question: "How is the timeline drawn?",
-            answer: "The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If not all of these durations are defined the timeline for this substance cannot be drawn."
+            question: "When does the app detect interactions?",
+            answer: "If there is an interaction with a substance that was taken less than 2 days ago."
+        ),
+        QuestionAndAnswer(
+            question: "Why are there sometimes more interations in the app than in the PsychonautWiki article?",
+            answer: "Because in the PsychonautWiki articles sometimes a substance A lists an interaction with another substance B, but substance B does not list substance A in its interactions. The app consolidates the interactions to always be mutual."
         ),
         QuestionAndAnswer(
             question: "How can one change or add info on a substance (duration, dose, interactions and effects)?",
             answer: "By editing the corresponding PsychonautWiki article."
         ),
         QuestionAndAnswer(
+            question: "How long does it take for a change in the PsychonautWiki article to be reflected in the app?",
+            answer: "A few days."
+        ),
+        QuestionAndAnswer(
+            question: "How often are substances updated automatically?",
+            answer: "The app automatically tries to update its substances every 4 days but one can tap refresh in settings to update them immediately."
+        ),
+        QuestionAndAnswer(
+            question: "How is the timeline drawn?",
+            answer: "The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If not all of these durations are defined the timeline for this substance cannot be drawn."
+        ),
+        QuestionAndAnswer(
+            question: "Why does it sometimes say \"No Timeline\"?",
+            answer: "Because the onset, comeup, peak or offset durations of the substance are not defined for the given administration route."
+        ),
+        QuestionAndAnswer(
             question: "Why does the timeline not add up the curves for the same substance?",
             answer: "One can not add two curves together because one ingestion might build up tolerance, influencing the curve of the other ingestion. The curve can only be drawn based on data that is available through PsychonautWiki."
         ),
         QuestionAndAnswer(
-            question: "Why does the timeline not show cumulative effects of different substances?",
+            question: "Why does the timeline not show cumulative timelines of different substances?",
             answer: "Because the curve can only be drawn based on data that is available through PsychonautWiki."
-        ),
-        QuestionAndAnswer(
-            question: "Does PsychonautWiki Journal add up the doses of the same substance?",
-            answer: "No, it treats every ingestion independently. So make sure that your cumulative dose is not dangerous"
-        ),
-        QuestionAndAnswer(
-            question: "How often are substances updated?",
-            answer: "The app automatically tries to update its substances every 4 days but you can tap refresh in settings if you want it to update immediately."
         ),
         QuestionAndAnswer(
             question: "Why is the eye closed by default?",
