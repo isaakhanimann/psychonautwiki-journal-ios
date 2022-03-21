@@ -1,9 +1,9 @@
 import Foundation
-import UIKit
 
 extension ContentView {
     class ViewModel: ObservableObject {
         @Published var foundSubstance: Substance?
+        @Published var isShowingAddIngestionSheet = false
         @Published var isShowingErrorToast = false
         @Published var isShowingAddSuccessToast = false
         @Published var toastMessage = ""
@@ -18,32 +18,19 @@ extension ContentView {
         }
 
         func receiveURL(url: URL) {
-            popToRoot()
             if !isEyeOpen {
-                openEye()
+                self.isEyeOpen = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            DispatchQueue.main.async {
                 self.handleUniversalUrl(universalUrl: url)
             }
-        }
-
-        private func popToRoot() {
-            let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .compactMap({$0 as? UIWindowScene})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
-            keyWindow?.rootViewController?.dismiss(animated: true)
-        }
-
-        private func openEye() {
-            self.isEyeOpen = true
         }
 
         private func handleUniversalUrl(universalUrl: URL) {
             if let substanceName = getSubstanceName(from: universalUrl) {
                 if let foundSubstance = PersistenceController.shared.getSubstance(with: substanceName) {
                     self.foundSubstance = foundSubstance
+                    self.isShowingAddIngestionSheet.toggle()
                 } else {
                     self.isShowingErrorToast.toggle()
                     self.toastMessage = "\(substanceName) Not Found"

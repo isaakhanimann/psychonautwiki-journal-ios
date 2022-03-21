@@ -5,15 +5,6 @@ struct ContentView: View {
 
     @AppStorage(PersistenceController.needsToSeeWelcomeKey) var needsToSeeWelcome: Bool = true
     @StateObject private var viewModel = ViewModel()
-    var isShowingIngestion: Binding<Bool> {
-        Binding {
-            viewModel.foundSubstance != nil
-        } set: {
-            if !$0 {
-                viewModel.foundSubstance = nil
-            }
-        }
-    }
 
     var body: some View {
         AllTabs()
@@ -32,16 +23,13 @@ struct ContentView: View {
                     title: "Ingestion Added"
                 )
             }
-            .sheet(
-                item: $viewModel.foundSubstance,
-                onDismiss: {
-                    viewModel.foundSubstance = nil
-                }, content: { substance in
+            .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
+                if let substanceUnwrap = viewModel.foundSubstance {
                     NavigationView {
-                        if substance.hasAnyInteractions {
-                            AcknowledgeInteractionsView(substance: substance)
+                        if substanceUnwrap.hasAnyInteractions {
+                            AcknowledgeInteractionsView(substance: substanceUnwrap)
                         } else {
-                            ChooseRouteView(substance: substance)
+                            ChooseRouteView(substance: substanceUnwrap)
                         }
                     }
                     .accentColor(Color.blue)
@@ -51,11 +39,14 @@ struct ContentView: View {
                             showSuccessToast: {
                                 viewModel.isShowingAddSuccessToast.toggle()
                             },
-                            isShowingAddIngestionSheet: isShowingIngestion
+                            isShowingAddIngestionSheet: $viewModel.isShowingAddIngestionSheet
                         )
                     )
+                } else {
+                    Text("An error occured")
                 }
-            )
+
+            }
             .fullScreenCover(isPresented: $needsToSeeWelcome) {
                 WelcomeScreen(isShowingWelcome: $needsToSeeWelcome)
             }
