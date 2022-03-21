@@ -48,11 +48,44 @@ public class SubstancesFile: NSManagedObject, Decodable {
         "Depressants": URL(string: "https://psychonautwiki.org/wiki/Depressant"),
         "Dissociatives": URL(string: "https://psychonautwiki.org/wiki/Dissociatives"),
         "Entactogens": URL(string: "https://psychonautwiki.org/wiki/Entactogens"),
+        "Entheogens": URL(string: "https://psychonautwiki.org/wiki/Entheogen"),
+        "Eugeroics": URL(string: "https://psychonautwiki.org/wiki/Eugeroics"),
         "Hallucinogens": URL(string: "https://psychonautwiki.org/wiki/Hallucinogens"),
         "Nootropics": URL(string: "https://psychonautwiki.org/wiki/Nootropic"),
+        "Oneirogens": URL(string: "https://psychonautwiki.org/wiki/Oneirogen"),
         "Opioids": URL(string: "https://psychonautwiki.org/wiki/Opioids"),
         "Psychedelics": URL(string: "https://psychonautwiki.org/wiki/Psychedelics"),
         "Stimulants": URL(string: "https://psychonautwiki.org/wiki/Stimulants")
+    ]
+
+    private static let chemicalURLs = [
+        "Adamantanes": URL(string: "https://psychonautwiki.org/wiki/Adamantanes"),
+        "Alcohols": URL(string: "https://psychonautwiki.org/wiki/Alcohol"),
+        "Amphetamines": URL(string: "https://psychonautwiki.org/wiki/Substituted_amphetamine"),
+        "Arylcyclohexylamines": URL(string: "https://psychonautwiki.org/wiki/Arylcyclohexylamine"),
+        "Barbiturates": URL(string: "https://psychonautwiki.org/wiki/Barbiturates"),
+        "Benzodiazepines": URL(string: "https://psychonautwiki.org/wiki/Benzodiazepines"),
+        "Cannabinoids": URL(string: "https://psychonautwiki.org/wiki/Cannabinoid"),
+        "Cycloalkylamines": URL(string: "https://psychonautwiki.org/wiki/Cycloalkylamine"),
+        "Diarylethylamines": URL(string: "https://psychonautwiki.org/wiki/Diarylethylamine"),
+        "Gabapentinoids": URL(string: "https://psychonautwiki.org/wiki/Gabapentinoids"),
+        "Indazoles": URL(string: "https://psychonautwiki.org/wiki/Indazole"),
+        "Khat#1#s": URL(string: "https://psychonautwiki.org/wiki/Substituted_cathinone"),
+        "Lysergamides": URL(string: "https://psychonautwiki.org/wiki/Lysergamides"),
+        "Phenylpropenes": URL(string: "https://psychonautwiki.org/wiki/Phenylpropene"),
+        "Racetams": URL(string: "https://psychonautwiki.org/wiki/Racetam"),
+        "Salvinorins": URL(string: "https://psychonautwiki.org/wiki/Salvinorin"),
+        "Substituted Amphetamines": URL(string: "https://psychonautwiki.org/wiki/Substituted_amphetamine"),
+        "Substituted Cathinones": URL(string: "https://psychonautwiki.org/wiki/Cathinones"),
+        "Substituted Morphinans": URL(string: "https://psychonautwiki.org/wiki/Morphinan"),
+        "Substituted Phenethylamines": URL(string: "https://psychonautwiki.org/wiki/Phenethylamines"),
+        "Substituted Phenidates": URL(string: "https://psychonautwiki.org/wiki/Phenidates"),
+        "Substituted Piperazines": URL(string: "https://psychonautwiki.org/wiki/Piperazines"),
+        "Substituted Piperidines": URL(string: "https://psychonautwiki.org/wiki/Piperidine"),
+        "Substituted Tropanes": URL(string: "https://psychonautwiki.org/wiki/Tropanes"),
+        "Substituted Tryptamines": URL(string: "https://psychonautwiki.org/wiki/Tryptamines"),
+        "Thienodiazepines": URL(string: "https://psychonautwiki.org/wiki/Thienodiazepine"),
+        "Xanthines": URL(string: "https://psychonautwiki.org/wiki/Xanthine")
     ]
 
     private func createClasses() {
@@ -83,6 +116,9 @@ public class SubstancesFile: NSManagedObject, Decodable {
                     matchUnwrapped.addToSubstances(substance)
                 } else {
                     let cClass = ChemicalClass(context: contextForParsing)
+                    if let url = Self.chemicalURLs[chemicalName] {
+                        cClass.url = url
+                    }
                     cClass.name = chemicalName
                     cClass.addToSubstances(substance)
                     chemicals.insert(cClass)
