@@ -19,7 +19,7 @@ struct SubstanceDoseRow: View {
                         let doseText = substanceDose.cumulativeDose == 0 ?
                         "Unknown" :
                         "\(substanceDose.cumulativeDose.formatted()) \(unitsText)"
-                        Text("Cumulative Dose: \(doseText)")
+                        Text("Total Dose: \(doseText)")
                             .foregroundColor(.secondary)
                     }
                 }

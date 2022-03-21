@@ -22,7 +22,7 @@ struct IngestionRow: View {
                     Text(ingestion.timeUnwrapped, style: .time)
                         .foregroundColor(.primary)
                     if !ingestion.canTimeLineBeDrawn {
-                        Text("Timeline not fully defined")
+                        Text("No Timeline")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                     }
