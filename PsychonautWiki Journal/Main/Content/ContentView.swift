@@ -36,13 +36,11 @@ struct ContentView: View {
                             ChooseRouteView(substance: foundSubstance)
                         }
                     }
-                    .accentColor(Color.blue)
                     .environmentObject(
                         AddIngestionSheetContext(experience: nil)
                     )
                 case .addIngestionFromExperience(let experience):
                     ChooseSubstanceView()
-                        .accentColor(Color.blue)
                         .environmentObject(AddIngestionSheetContext(experience: experience))
                 case .addIngestionFromSubstance(let substance):
                     NavigationView {
@@ -52,7 +50,6 @@ struct ContentView: View {
                             ChooseRouteView(substance: substance)
                         }
                     }
-                    .accentColor(Color.blue)
                     .environmentObject(
                         AddIngestionSheetContext(experience: nil)
                     )
@@ -72,12 +69,10 @@ struct ContentView: View {
                     .environmentObject(
                         AddIngestionSheetContext(experience: nil)
                     )
-                    .accentColor(Color.blue)
                 case .addIngestionFromCustom(let custom):
                     NavigationView {
                         AddCustomIngestionView(customSubstance: custom)
                     }
-                    .accentColor(Color.blue)
                     .environmentObject(AddIngestionSheetContext(experience: nil))
                 case .article(let url):
                     WebViewSheet(articleURL: url)
