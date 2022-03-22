@@ -3,13 +3,13 @@ import SwiftUI
 struct EffectView: View {
 
     let effect: Effect
-    @State private var isShowingArticle = false
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
-            if effect.url != nil {
+            if let articleURL = effect.url {
                 Button {
-                    isShowingArticle.toggle()
+                    sheetViewModel.sheetToShow = .article(url: articleURL)
                 } label: {
                     Label("Article", systemImage: "link")
                 }
@@ -23,13 +23,6 @@ struct EffectView: View {
             }
         }
         .navigationTitle(effect.nameUnwrapped)
-        .sheet(isPresented: $isShowingArticle) {
-            if let articleURL = effect.url {
-                WebViewSheet(articleURL: articleURL)
-            } else {
-                Text("Could not find website")
-            }
-        }
     }
 }
 

@@ -3,10 +3,10 @@ import CoreData
 
 extension SettingsTab {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-        @Published var isShowingErrorAlert = false
         @Published var isFetching = false
         @Published var isResetting = false
         @Published var substancesFile: SubstancesFile?
+        var toastViewModel: ToastViewModel?
 
         private let fetchController: NSFetchedResultsController<SubstancesFile>!
 
@@ -40,7 +40,7 @@ extension SettingsTab {
                 let data = try await getPsychonautWikiData()
                 try await PersistenceController.shared.decodeAndSaveFile(from: data)
             } catch {
-                self.isShowingErrorAlert = true
+                toastViewModel?.showErrorToast(message: "Try Again Later")
             }
             isFetching = false
         }

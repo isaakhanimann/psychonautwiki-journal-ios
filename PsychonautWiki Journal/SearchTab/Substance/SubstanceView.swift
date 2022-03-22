@@ -1,6 +1,4 @@
 import SwiftUI
-import AlertToast
-import WebKit
 
 struct SubstanceView: View {
 

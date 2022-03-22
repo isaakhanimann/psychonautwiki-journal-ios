@@ -1,10 +1,10 @@
 import SwiftUI
-import AlertToast
 
 struct SettingsTab: View {
 
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @EnvironmentObject var toastViewModel: ToastViewModel
 
     var body: some View {
         NavigationView {
@@ -49,12 +49,8 @@ struct SettingsTab: View {
                 }
             }
             .navigationTitle("Settings")
-            .toast(isPresenting: $viewModel.isShowingErrorAlert, duration: 3) {
-                AlertToast(
-                    displayMode: .alert,
-                    type: .error(Color.red),
-                    title: "Try Again Later"
-                )
+            .task {
+                viewModel.toastViewModel = toastViewModel
             }
         }
     }

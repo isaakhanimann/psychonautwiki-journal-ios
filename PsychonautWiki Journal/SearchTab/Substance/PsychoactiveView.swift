@@ -3,13 +3,13 @@ import SwiftUI
 struct PsychoactiveView: View {
 
     let psychoactive: PsychoactiveClass
-    @State private var isShowingArticle = false
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
-            if psychoactive.url != nil {
+            if let articleURL = psychoactive.url {
                 Button {
-                    isShowingArticle.toggle()
+                    sheetViewModel.sheetToShow = .article(url: articleURL)
                 } label: {
                     Label("Article", systemImage: "link")
                 }
@@ -39,13 +39,6 @@ struct PsychoactiveView: View {
             }
         }
         .navigationTitle(psychoactive.nameUnwrapped)
-        .sheet(isPresented: $isShowingArticle) {
-            if let articleURL = psychoactive.url {
-                WebViewSheet(articleURL: articleURL)
-            } else {
-                Text("Could not find website")
-            }
-        }
     }
 }
 

@@ -3,13 +3,13 @@ import SwiftUI
 struct ChemicalView: View {
 
     let chemical: ChemicalClass
-    @State private var isShowingArticle = false
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
-            if chemical.url != nil {
+            if let articleURL = chemical.url {
                 Button {
-                    isShowingArticle.toggle()
+                    sheetViewModel.sheetToShow = .article(url: articleURL)
                 } label: {
                     Label("Article", systemImage: "link")
                 }
@@ -39,13 +39,6 @@ struct ChemicalView: View {
             }
         }
         .navigationTitle(chemical.nameUnwrapped)
-        .sheet(isPresented: $isShowingArticle) {
-            if let articleURL = chemical.url {
-                WebViewSheet(articleURL: articleURL)
-            } else {
-                Text("Could not find website")
-            }
-        }
     }
 }
 
