@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9427E5DB5200077FB2 /* WebView.swift */; };
 		EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9927E5E72000077FB2 /* WebViewSheet.swift */; };
-		EA014F9C27E5F4AA00077FB2 /* Substance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9B27E5F4AA00077FB2 /* Substance-ViewModel.swift */; };
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
+		EA014FA227EA0D8C00077FB2 /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */; };
+		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */; };
@@ -202,8 +203,9 @@
 /* Begin PBXFileReference section */
 		EA014F9427E5DB5200077FB2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		EA014F9927E5E72000077FB2 /* WebViewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewSheet.swift; sourceTree = "<group>"; };
-		EA014F9B27E5F4AA00077FB2 /* Substance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
+		EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
+		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -463,7 +465,6 @@
 				EA8447EE27CD2B9C00B10DD3 /* Curves */,
 				EA014F9627E5DC6500077FB2 /* Web */,
 				EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */,
-				EA014F9B27E5F4AA00077FB2 /* Substance-ViewModel.swift */,
 				EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */,
 				EAF76C9127D7A6C400945587 /* InteractionsSection.swift */,
 				EACB6E2127D0064E00940291 /* InteractionLabel.swift */,
@@ -525,6 +526,9 @@
 			children = (
 				EA8AEA7027E1CC5100B30A16 /* Content */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */,
+				EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */,
+				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 			);
@@ -848,7 +852,6 @@
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
 				EACB6E6D27D5651800940291 /* SubstanceDoseRow.swift */,
 				EAE4713226CBA663009FB0EC /* CalendarSection.swift */,
-				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 			);
 			path = Experience;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* ExperiencesTab.swift in Sources */,
+				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471E326CBA664009FB0EC /* RoaDose-CoreDataHelpers.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance+CoreDataClass.swift in Sources */,
@@ -1177,6 +1181,7 @@
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EA891BCB27E0E74100AF04C6 /* PresetView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
+				EA014FA227EA0D8C00077FB2 /* SheetViewModel.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
@@ -1190,7 +1195,6 @@
 				EA8F5FA32709A988006E646E /* IngestionTimeLineView.swift in Sources */,
 				EA8447F427CD315000B10DD3 /* CurveDown.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */,
-				EA014F9C27E5F4AA00077FB2 /* Substance-ViewModel.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* DurationView.swift in Sources */,

@@ -4,7 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     // swiftlint:disable line_length
@@ -23,7 +23,7 @@ struct ChooseDoseView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

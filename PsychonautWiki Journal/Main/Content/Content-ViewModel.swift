@@ -2,16 +2,13 @@ import Foundation
 
 extension ContentView {
     class ViewModel: ObservableObject {
-        @Published var foundSubstance: Substance?
-        @Published var isShowingAddIngestionSheet = false
-        @Published var isShowingErrorToast = false
-        @Published var isShowingAddSuccessToast = false
-        @Published var toastMessage = ""
         @Published var isEyeOpen = false {
             didSet {
                 UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey)
             }
         }
+        var sheetViewModel: SheetViewModel?
+        var toastViewModel: ToastViewModel?
 
         init() {
             self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
@@ -29,15 +26,12 @@ extension ContentView {
         private func handleUniversalUrl(universalUrl: URL) {
             if let substanceName = getSubstanceName(from: universalUrl) {
                 if let foundSubstance = PersistenceController.shared.getSubstance(with: substanceName) {
-                    self.foundSubstance = foundSubstance
-                    self.isShowingAddIngestionSheet.toggle()
+                    self.sheetViewModel?.sheetToShow = .addIngestionFromContent(foundSubstance: foundSubstance)
                 } else {
-                    self.isShowingErrorToast.toggle()
-                    self.toastMessage = "\(substanceName) Not Found"
+                    self.toastViewModel?.showErrorToast(message: "\(substanceName) Not Found")
                 }
             } else {
-                self.isShowingErrorToast.toggle()
-                self.toastMessage = "No Substance Found"
+                self.toastViewModel?.showErrorToast(message: "No Substance Found")
             }
         }
 

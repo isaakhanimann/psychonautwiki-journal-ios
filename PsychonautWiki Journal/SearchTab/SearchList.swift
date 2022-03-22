@@ -7,15 +7,7 @@ struct SearchList: View {
     @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) var isSearching
-    @State private var sheetToShow: Sheet?
-
-    enum Sheet: Identifiable {
-        // swiftlint:disable identifier_name
-        var id: Sheet {
-            self
-        }
-        case addPreset, addCustomSubstance
-    }
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         ZStack {
@@ -37,7 +29,7 @@ struct SearchList: View {
                             }
                         }
                         Button {
-                            sheetToShow = .addPreset
+                            sheetViewModel.sheetToShow = .addPreset
                         } label: {
                             Label("Add Preset", systemImage: "plus")
                         }
@@ -49,7 +41,7 @@ struct SearchList: View {
                             }
                         }
                         Button {
-                            sheetToShow = .addCustomSubstance
+                            sheetViewModel.sheetToShow = .addCustom
                         } label: {
                             Label("Add Custom", systemImage: "plus")
                         }
@@ -70,14 +62,6 @@ struct SearchList: View {
                     .foregroundColor(.secondary)
             }
         }
-        .sheet(item: $sheetToShow, content: { item in
-            switch item {
-            case .addPreset:
-                AddPresetView()
-            case .addCustomSubstance:
-                AddCustomSubstanceView()
-            }
-        })
     }
 }
 

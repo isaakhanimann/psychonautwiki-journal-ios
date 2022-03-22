@@ -3,7 +3,7 @@ import SwiftUI
 struct PresetChooseDoseView: View {
 
     let preset: Preset
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
     @State private var dose = 1.0
     @State private var doseText = "1"
 
@@ -47,7 +47,7 @@ struct PresetChooseDoseView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

@@ -3,7 +3,9 @@ import SwiftUI
 struct AddCustomIngestionView: View {
 
     let customSubstance: CustomSubstance
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject var toastViewModel: ToastViewModel
+    @EnvironmentObject var addIngestionContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -41,11 +43,11 @@ struct AddCustomIngestionView: View {
                 EmptySectionForPadding()
                     .padding(.bottom, 50)
             }
-            if let experienceUnwrap = sheetContext.experience {
+            if let experienceUnwrap = addIngestionContext.experience {
                 Button("Add Ingestion") {
                     viewModel.addIngestion(to: experienceUnwrap)
-                    sheetContext.isShowingAddIngestionSheet.toggle()
-                    sheetContext.showSuccessToast()
+                    sheetViewModel.dismiss()
+                    toastViewModel.showSuccessToast()
                 }
                 .buttonStyle(.primary)
                 .padding()
@@ -56,15 +58,15 @@ struct AddCustomIngestionView: View {
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
                             viewModel.addIngestion(to: lastExperienceUnwrap)
-                            sheetContext.isShowingAddIngestionSheet.toggle()
-                            sheetContext.showSuccessToast()
+                            sheetViewModel.dismiss()
+                            toastViewModel.showSuccessToast()
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
                         viewModel.addIngestionToNewExperience()
-                        sheetContext.isShowingAddIngestionSheet.toggle()
-                        sheetContext.showSuccessToast()
+                        sheetViewModel.dismiss()
+                        toastViewModel.showSuccessToast()
                     }
                     .padding()
                 }
@@ -73,7 +75,7 @@ struct AddCustomIngestionView: View {
         }
         .task {
             viewModel.customSubstance = customSubstance
-            if sheetContext.experience == nil {
+            if addIngestionContext.experience == nil {
                 viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
         }
@@ -81,7 +83,7 @@ struct AddCustomIngestionView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

@@ -6,14 +6,14 @@ struct SubstanceView: View {
 
     let substance: Substance
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @StateObject private var viewModel = ViewModel()
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
             if isEyeOpen {
                 if let articleURL = substance.url {
                     Button {
-                        viewModel.sheetToShow = .article(url: articleURL)
+                        sheetViewModel.sheetToShow = .article(url: articleURL)
                     } label: {
                         Label("Article", systemImage: "link")
                     }
@@ -51,37 +51,6 @@ struct SubstanceView: View {
                 }
             }
         }
-        .sheet(item: $viewModel.sheetToShow) { type in
-            switch type {
-            case .addIngestion:
-                NavigationView {
-                    if substance.hasAnyInteractions && isEyeOpen {
-                        AcknowledgeInteractionsView(substance: substance)
-                    } else {
-                        ChooseRouteView(substance: substance)
-                    }
-                }
-                .accentColor(Color.blue)
-                .environmentObject(
-                    AddIngestionSheetContext(
-                        experience: nil,
-                        showSuccessToast: {
-                            viewModel.isShowingSuccessToast.toggle()
-                        },
-                        isShowingAddIngestionSheet: viewModel.isShowingIngestion
-                    )
-                )
-            case .article(let url):
-                WebViewSheet(articleURL: url)
-            }
-        }
-        .toast(isPresenting: $viewModel.isShowingSuccessToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: .complete(Color.green),
-                title: "Ingestion Added"
-            )
-        }
         .navigationTitle(substance.nameUnwrapped)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -89,7 +58,7 @@ struct SubstanceView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Ingest") {
-                    viewModel.sheetToShow = .addIngestion
+                    sheetViewModel.sheetToShow = .addIngestionFromSubstance(substance: substance)
                 }
             }
         }

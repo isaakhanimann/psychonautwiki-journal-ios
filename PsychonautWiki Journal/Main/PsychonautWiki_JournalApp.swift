@@ -9,6 +9,8 @@ struct PsychonautWiki_JournalApp: App {
     @AppStorage(PersistenceController.hasInitialSubstancesOfCurrentVersion) var hasInitialSubstancesOfCurrentVersion: Bool = false
     @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
     @StateObject var calendarWrapper = CalendarWrapper()
+    @StateObject private var sheetViewModel = SheetViewModel()
+    @StateObject private var toastViewModel = ToastViewModel()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -17,6 +19,8 @@ struct PsychonautWiki_JournalApp: App {
                 .navigationViewStyle(.stack)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environmentObject(calendarWrapper)
+                .environmentObject(sheetViewModel)
+                .environmentObject(toastViewModel)
                 .accentColor(Color.blue)
         }
         .onChange(of: scenePhase) { phase in

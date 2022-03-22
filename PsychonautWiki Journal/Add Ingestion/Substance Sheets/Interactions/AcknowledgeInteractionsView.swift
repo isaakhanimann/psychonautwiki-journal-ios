@@ -3,7 +3,7 @@ import SwiftUI
 struct AcknowledgeInteractionsView: View {
 
     let substance: Substance
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -40,7 +40,7 @@ struct AcknowledgeInteractionsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

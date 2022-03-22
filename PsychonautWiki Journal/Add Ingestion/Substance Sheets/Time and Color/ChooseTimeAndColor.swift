@@ -6,7 +6,9 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject var toastViewModel: ToastViewModel
+    @EnvironmentObject var addIngestionContext: AddIngestionSheetContext
     @StateObject var viewModel = ViewModel()
 
     var body: some View {
@@ -24,11 +26,11 @@ struct ChooseTimeAndColor: View {
                     ColorPicker(selectedColor: $viewModel.selectedColor)
                 }
             }
-            if let experienceUnwrap = sheetContext.experience {
+            if let experienceUnwrap = addIngestionContext.experience {
                 Button("Add Ingestion") {
                     viewModel.addIngestion(to: experienceUnwrap)
-                    sheetContext.isShowingAddIngestionSheet.toggle()
-                    sheetContext.showSuccessToast()
+                    sheetViewModel.dismiss()
+                    toastViewModel.showSuccessToast()
                 }
                 .buttonStyle(.primary)
                 .padding()
@@ -39,15 +41,15 @@ struct ChooseTimeAndColor: View {
                        lastExperienceUnwrap.dateForSorting > twoDaysAgo {
                         Button("Add to \(lastExperienceUnwrap.titleUnwrapped)") {
                             viewModel.addIngestion(to: lastExperienceUnwrap)
-                            sheetContext.isShowingAddIngestionSheet.toggle()
-                            sheetContext.showSuccessToast()
+                            sheetViewModel.dismiss()
+                            toastViewModel.showSuccessToast()
                         }
                         .padding(.horizontal)
                     }
                     Button("Add to New Experience") {
                         viewModel.addIngestionToNewExperience()
-                        sheetContext.isShowingAddIngestionSheet.toggle()
-                        sheetContext.showSuccessToast()
+                        sheetViewModel.dismiss()
+                        toastViewModel.showSuccessToast()
                     }
                     .padding()
                 }
@@ -59,7 +61,7 @@ struct ChooseTimeAndColor: View {
             viewModel.administrationRoute = administrationRoute
             viewModel.dose = dose ?? 0
             viewModel.units = units
-            if sheetContext.experience == nil {
+            if addIngestionContext.experience == nil {
                 viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
             viewModel.setDefaultColor()
@@ -68,7 +70,7 @@ struct ChooseTimeAndColor: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

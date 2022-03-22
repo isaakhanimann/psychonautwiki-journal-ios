@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
@@ -41,7 +41,7 @@ struct ChooseRouteView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetContext.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.dismiss()
                 }
             }
         }

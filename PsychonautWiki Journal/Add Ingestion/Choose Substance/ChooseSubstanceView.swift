@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseSubstanceView: View {
 
     @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
-    @EnvironmentObject var sheetContext: AddIngestionSheetContext
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         NavigationView {
@@ -12,7 +12,7 @@ struct ChooseSubstanceView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Cancel") {
-                        sheetContext.isShowingAddIngestionSheet.toggle()
+                        sheetViewModel.dismiss()
                     }
                 }
             }

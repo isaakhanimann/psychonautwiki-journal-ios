@@ -4,6 +4,7 @@ struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
     @StateObject private var viewModel = ViewModel()
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
@@ -15,7 +16,7 @@ struct ExperienceView: View {
                     .onDelete(perform: deleteIngestions)
 
                 Button {
-                    viewModel.isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.sheetToShow = .addIngestionFromExperience(experience: experience)
                 } label: {
                     Label("Add Ingestion", systemImage: "plus")
                         .foregroundColor(.accentColor)
@@ -45,17 +46,6 @@ struct ExperienceView: View {
         .navigationTitle(experience.titleUnwrapped)
         .onDisappear {
             PersistenceController.shared.saveViewContext()
-        }
-        .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
-            ChooseSubstanceView()
-                .accentColor(Color.blue)
-                .environmentObject(
-                    AddIngestionSheetContext(
-                        experience: experience,
-                        showSuccessToast: {},
-                        isShowingAddIngestionSheet: $viewModel.isShowingAddIngestionSheet
-                    )
-                )
         }
         .toolbar {
             ToolbarItem(placement: .keyboard) {

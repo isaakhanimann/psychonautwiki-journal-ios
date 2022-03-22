@@ -8,7 +8,6 @@ extension ExperienceView {
                 experience?.title = selectedTitle
             }
         }
-        @Published var isShowingAddIngestionSheet = false
         @Published var writtenText = "" {
             didSet {
                 experience?.text = writtenText

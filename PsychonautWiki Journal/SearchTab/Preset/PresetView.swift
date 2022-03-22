@@ -4,10 +4,9 @@ import AlertToast
 struct PresetView: View {
 
     @ObservedObject var preset: Preset
-    @State private var isShowingAddIngestionSheet = false
-    @State private var isShowingSuccessToast = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingConfirmation = false
+    @EnvironmentObject var sheetViewModel: SheetViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {
@@ -55,7 +54,7 @@ struct PresetView: View {
             }
             ToolbarItem(placement: .navigation) {
                 Button("Ingest") {
-                    isShowingAddIngestionSheet.toggle()
+                    sheetViewModel.sheetToShow = .addIngestionFromPreset(preset: preset)
                 }
             }
         }
@@ -69,37 +68,6 @@ struct PresetView: View {
                 PersistenceController.shared.saveViewContext()
             }
             Button("Cancel", role: .cancel) {}
-        }
-        .sheet(isPresented: $isShowingAddIngestionSheet) {
-            let hasInteractions = preset.substances.contains(where: { sub in
-                sub.hasAnyInteractions
-            }) || !preset.dangerousInteractions.isEmpty
-            || !preset.unsafeInteractions.isEmpty
-            || !preset.uncertainInteractions.isEmpty
-            NavigationView {
-                if hasInteractions && isEyeOpen {
-                    PresetAcknowledgeInteractionsView(preset: preset)
-                } else {
-                    PresetChooseDoseView(preset: preset)
-                }
-            }
-            .environmentObject(
-                AddIngestionSheetContext(
-                    experience: nil,
-                    showSuccessToast: {
-                        isShowingSuccessToast.toggle()
-                    },
-                    isShowingAddIngestionSheet: $isShowingAddIngestionSheet
-                )
-            )
-            .accentColor(Color.blue)
-        }
-        .toast(isPresenting: $isShowingSuccessToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: .complete(Color.green),
-                title: "Ingestion Added"
-            )
         }
         .navigationTitle(preset.nameUnwrapped)
     }

@@ -4,10 +4,9 @@ import AlertToast
 struct CustomSubstanceView: View {
 
     @ObservedObject var customSubstance: CustomSubstance
-    @State private var isShowingAddCustomSheet = false
-    @State private var isShowingSuccessToast = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingConfirmation = false
+    @EnvironmentObject var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
@@ -26,7 +25,7 @@ struct CustomSubstanceView: View {
             }
             ToolbarItem(placement: .navigation) {
                 Button("Ingest") {
-                    isShowingAddCustomSheet.toggle()
+                    sheetViewModel.sheetToShow = .addIngestionFromCustom(custom: customSubstance)
                 }
             }
         }
@@ -40,28 +39,6 @@ struct CustomSubstanceView: View {
                 PersistenceController.shared.saveViewContext()
             }
             Button("Cancel", role: .cancel) {}
-        }
-        .toast(isPresenting: $isShowingSuccessToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: .complete(Color.green),
-                title: "Ingestion Added"
-            )
-        }
-        .sheet(isPresented: $isShowingAddCustomSheet) {
-            NavigationView {
-                AddCustomIngestionView(customSubstance: customSubstance)
-            }
-            .accentColor(Color.blue)
-            .environmentObject(
-                AddIngestionSheetContext(
-                    experience: nil,
-                    showSuccessToast: {
-                        isShowingSuccessToast.toggle()
-                    },
-                    isShowingAddIngestionSheet: $isShowingAddCustomSheet
-                )
-            )
         }
         .navigationTitle(customSubstance.nameUnwrapped)
     }
