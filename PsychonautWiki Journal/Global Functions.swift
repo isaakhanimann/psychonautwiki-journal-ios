@@ -6,6 +6,11 @@ func playHapticFeedback() {
     impactMed.impactOccurred()
 }
 
+func getCurrentAppVersion() -> String {
+    // swiftlint:disable force_cast
+    return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+}
+
 enum ConversionError: Error {
     case failedToConvertDataToJSON
 }

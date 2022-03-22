@@ -40,8 +40,12 @@ struct SettingsTab: View {
                     }
                 }
                 Section {
-                    Text("Version 1.0.6")
-                        .foregroundColor(.secondary)
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(getCurrentAppVersion())
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .navigationTitle("Settings")
