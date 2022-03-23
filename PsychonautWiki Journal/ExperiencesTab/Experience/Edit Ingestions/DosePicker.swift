@@ -13,6 +13,7 @@ struct DosePicker: View {
             let areUnitsDefined = roaDose?.unitsUnwrapped != nil
             if !areUnitsDefined {
                 UnitsPicker(units: $selectedUnits)
+                    .padding(.bottom, 10)
             }
             if areUnitsDefined {
                 dynamicDoseRangeView

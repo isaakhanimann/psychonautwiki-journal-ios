@@ -21,6 +21,11 @@ struct ChooseDoseView: View {
         }
         .navigationBarTitle("Choose Dose")
         .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    hideKeyboard()
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
                     sheetViewModel.dismiss()
