@@ -25,15 +25,20 @@ struct SubstanceDoseRow: View {
                 }
             }
         } else {
-            VStack(alignment: .leading) {
-                Text(substanceDose.substanceName)
-                HStack {
-                    Text("Total Dose: \(doseText)")
-                    Spacer()
-                    Text("No info")
-                        .font(.footnote)
+            HStack {
+                Image(systemName: "questionmark.circle")
+                    .font(.title2)
+                    .foregroundColor(.secondary)
+                VStack(alignment: .leading) {
+                    Text(substanceDose.substanceName)
+                    HStack {
+                        Text("Total Dose: \(doseText)")
+                        Spacer()
+                        Text("No info")
+                            .font(.footnote)
+                    }
+                    .foregroundColor(.secondary)
                 }
-                .foregroundColor(.secondary)
             }
         }
     }
