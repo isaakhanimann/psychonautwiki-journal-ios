@@ -37,6 +37,9 @@ struct SettingsTab: View {
                             }
                         )
                         .foregroundColor(.accentColor)
+                        Link(destination: URL(string: "https://github.com/isaakhanimann/PsychonautWiki-Journal")!) {
+                            Label("Open Source Code", systemImage: "doc.text.magnifyingglass")
+                        }
                     }
                 }
                 Section {
