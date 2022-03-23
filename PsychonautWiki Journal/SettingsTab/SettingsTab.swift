@@ -12,7 +12,7 @@ struct SettingsTab: View {
                 eye
                 substancesSection
                 if isEyeOpen {
-                    Section(header: Text("Safety")) {
+                    Section("Safety") {
                         Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
                             Label("Responsible Use", systemImage: "brain")
                         }
@@ -82,7 +82,7 @@ struct SettingsTab: View {
     }
 
     private var substancesSection: some View {
-        Section(header: Text("Substances")) {
+        Section("Substances") {
             HStack {
                 Text("Last Refresh")
                 Spacer()

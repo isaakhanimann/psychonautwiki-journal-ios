@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EmptySectionForPadding: View {
     var body: some View {
-        Section(header: Text("")) {
+        Section("") {
             EmptyView()
         }
     }

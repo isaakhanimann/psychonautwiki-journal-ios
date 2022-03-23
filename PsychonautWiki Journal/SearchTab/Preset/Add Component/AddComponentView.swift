@@ -11,14 +11,14 @@ struct AddComponentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Substance")) {
+                Section("Substance") {
                     Picker("Substance", selection: $viewModel.selectedSubstance) {
                         ForEach(viewModel.sortedSubstances) { sub in
                             Text(sub.nameUnwrapped).tag(sub)
                         }
                     }
                 }
-                Section(header: Text("Administration Route")) {
+                Section("Administration Route") {
                     Picker("Administration Route", selection: $viewModel.administrationRoute) {
                         let wikiRoutes = viewModel.selectedSubstance.administrationRoutesUnwrapped
                         ForEach(wikiRoutes) { route in
@@ -33,9 +33,7 @@ struct AddComponentView: View {
                         }
                     }
                 }
-                Section(
-                    header: Text("Dose in 1 \(presetUnit ?? "unit") of \(presetName.isEmpty ? "preset" : presetName)")
-                ) {
+                Section("Dose in 1 \(presetUnit ?? "unit") of \(presetName.isEmpty ? "preset" : presetName)") {
                     DoseView(roaDose: viewModel.roaDose)
                     DosePicker(
                         roaDose: viewModel.roaDose,

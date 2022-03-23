@@ -50,9 +50,7 @@ struct ChooseDoseView: View {
                     .listRowInsets(EdgeInsets())
                 }
                 if let impureDoseUnwrap = viewModel.impureDoseRounded {
-                    Section(
-                        header: Text("Purity")
-                    ) {
+                    Section("Purity") {
                         Stepper(
                             "\(viewModel.purity.formatted())%",
                             value: $viewModel.purity,

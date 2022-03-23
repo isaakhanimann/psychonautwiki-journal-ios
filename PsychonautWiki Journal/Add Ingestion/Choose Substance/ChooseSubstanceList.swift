@@ -27,7 +27,7 @@ struct ChooseSubstanceList: View {
                         }
                     }
                     if !presetsViewModel.presets.isEmpty {
-                        Section(header: Text("Presets")) {
+                        Section("Presets") {
                             ForEach(presetsViewModel.presets) { pre in
                                 let hasInteractions = pre.substances.contains(where: { sub in
                                     sub.hasAnyInteractions
@@ -48,7 +48,7 @@ struct ChooseSubstanceList: View {
                         }
                     }
                     if !customsViewModel.customSubstances.isEmpty {
-                        Section(header: Text("Custom Substances")) {
+                        Section("Custom Substances") {
                             ForEach(customsViewModel.customSubstances) { cust in
                                 NavigationLink(cust.nameUnwrapped) {
                                     AddCustomIngestionView(customSubstance: cust)
