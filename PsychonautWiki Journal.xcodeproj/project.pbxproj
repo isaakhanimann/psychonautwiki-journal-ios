@@ -14,7 +14,6 @@
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
-		EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift */; };
@@ -208,7 +207,6 @@
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
-		EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstancesFile+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -736,7 +734,6 @@
 				EAE4717E26CBA664009FB0EC /* PreviewHelper.swift */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
-				EA1285452703CFF70085C3F6 /* LaunchScreen.storyboard */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
 			);
@@ -1014,7 +1011,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
-				EA1285462703CFF70085C3F6 /* LaunchScreen.storyboard in Resources */,
 				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
