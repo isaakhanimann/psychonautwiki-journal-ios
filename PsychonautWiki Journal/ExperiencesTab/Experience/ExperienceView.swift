@@ -67,6 +67,7 @@ struct ExperienceView: View {
         .onChange(of: editMode?.wrappedValue) { newValue in
             guard let isEditing = newValue?.isEditing else {return}
             if !isEditing {
+                hideKeyboard()
                 PersistenceController.shared.saveViewContext()
             }
         }
@@ -74,11 +75,6 @@ struct ExperienceView: View {
             PersistenceController.shared.saveViewContext()
         }
         .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                Button("Done") {
-                    hideKeyboard()
-                }
-            }
             ToolbarItem(placement: .navigation) {
                 EditButton()
             }
