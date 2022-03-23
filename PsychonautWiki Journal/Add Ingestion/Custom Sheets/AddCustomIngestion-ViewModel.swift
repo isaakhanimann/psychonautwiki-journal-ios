@@ -23,6 +23,18 @@ extension AddCustomIngestionView {
             }
         }
 
+        func setDefaultColor() {
+            let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
+            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            guard let name = customSubstance?.nameUnwrapped else { return }
+            fetchRequest.predicate = NSPredicate(format: "substanceName == %@", name)
+            fetchRequest.fetchLimit = 1
+            let ingestions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
+            if let color = ingestions.first?.colorUnwrapped {
+                self.selectedColor = color
+            }
+        }
+
         func addIngestionToNewExperience() {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {

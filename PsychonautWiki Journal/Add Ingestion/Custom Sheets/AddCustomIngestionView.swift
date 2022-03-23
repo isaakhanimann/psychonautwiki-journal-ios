@@ -78,6 +78,7 @@ struct AddCustomIngestionView: View {
             if addIngestionContext.experience == nil {
                 viewModel.lastExperience = PersistenceController.shared.getLatestExperience()
             }
+            viewModel.setDefaultColor()
         }
         .navigationBarTitle("Add Ingestion")
         .toolbar {
