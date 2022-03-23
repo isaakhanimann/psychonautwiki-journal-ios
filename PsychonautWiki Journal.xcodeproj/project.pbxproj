@@ -12,6 +12,8 @@
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
 		EA014FA227EA0D8C00077FB2 /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */; };
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
+		EA014FAC27EB6E1A00077FB2 /* SubstancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAB27EB6E1A00077FB2 /* SubstancePicker.swift */; };
+		EA014FAE27EB706800077FB2 /* SubstancePickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAD27EB706800077FB2 /* SubstancePickerList.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
@@ -205,6 +207,8 @@
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
 		EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
+		EA014FAB27EB6E1A00077FB2 /* SubstancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstancePicker.swift; sourceTree = "<group>"; };
+		EA014FAD27EB706800077FB2 /* SubstancePickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstancePickerList.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
@@ -515,6 +519,8 @@
 			children = (
 				EA891BC227E09CE100AF04C6 /* AddComponentView.swift */,
 				EA891BC427E09CFE00AF04C6 /* AddComponent-ViewModel.swift */,
+				EA014FAB27EB6E1A00077FB2 /* SubstancePicker.swift */,
+				EA014FAD27EB706800077FB2 /* SubstancePickerList.swift */,
 			);
 			path = "Add Component";
 			sourceTree = "<group>";
@@ -1080,6 +1086,7 @@
 				EA47E64527CA136C00F6E10F /* SubstancesFile+CoreDataClass.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
+				EA014FAE27EB706800077FB2 /* SubstancePickerList.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
 				EAF76C8E27D786DD00945587 /* TimeLabels-ViewModel.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
@@ -1088,6 +1095,7 @@
 				EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */,
 				EA8AEA7627E1E06500B30A16 /* PresetAcknowledgeInteractions-ViewModel.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
+				EA014FAC27EB6E1A00077FB2 /* SubstancePicker.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EACB6E5C27D36BD000940291 /* SubstanceDecoder.swift in Sources */,
 				EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */,

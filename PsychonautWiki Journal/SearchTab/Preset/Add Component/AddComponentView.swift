@@ -12,9 +12,14 @@ struct AddComponentView: View {
         NavigationView {
             Form {
                 Section("Substance") {
-                    Picker("Substance", selection: $viewModel.selectedSubstance) {
-                        ForEach(viewModel.sortedSubstances) { sub in
-                            Text(sub.nameUnwrapped).tag(sub)
+                    NavigationLink {
+                        SubstancePicker(pickedSubstance: $viewModel.selectedSubstance)
+                    } label: {
+                        HStack {
+                            Text("Substance")
+                            Spacer()
+                            Text(viewModel.selectedSubstance.nameUnwrapped)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
