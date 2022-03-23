@@ -13,15 +13,13 @@ extension AroundShapeDown {
 
         init?(
             timelineContext: IngestionWithTimelineContext,
-            ingestion: Ingestion,
-            lineWidth: Double
+            lineWidth: Double,
+            roaDuration: RoaDuration,
+            ingestionTime: Date
         ) {
             self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            guard let roaDuration = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped) else {
-                return nil
-            }
-            let offset = timelineContext.graphStartTime.distance(to: ingestion.timeUnwrapped)
+            let offset = timelineContext.graphStartTime.distance(to: ingestionTime)
             let total = timelineContext.graphStartTime.distance(to: timelineContext.graphEndTime)
             guard let normalizedPoints = NormalizedAroundShape(
                 verticalWeight: timelineContext.verticalWeight,

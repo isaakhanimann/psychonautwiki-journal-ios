@@ -4,7 +4,7 @@ struct LineShape: Shape {
 
     let ingestionWithTimelineContext: IngestionWithTimelineContext
     let lineWidth: Double
-    let roaDuration: RoaDuration?
+    let roaDuration: RoaDuration
     let ingestionTime: Date
     let horizontalWeight: Double
 

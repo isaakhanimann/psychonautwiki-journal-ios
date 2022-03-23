@@ -4,10 +4,16 @@ struct AroundShapeUp: Shape {
 
     let ingestionWithTimelineContext: IngestionWithTimelineContext
     let lineWidth: Double
-    @ObservedObject var ingestion: Ingestion
+    let roaDuration: RoaDuration
+    let ingestionTime: Date
 
     var viewModel: ViewModel? {
-        ViewModel(timelineContext: ingestionWithTimelineContext, ingestion: ingestion, lineWidth: lineWidth)
+        ViewModel(
+            timelineContext: ingestionWithTimelineContext,
+            lineWidth: lineWidth,
+            roaDuration: roaDuration,
+            ingestionTime: ingestionTime
+        )
     }
 
     func path(in rect: CGRect) -> Path {

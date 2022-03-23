@@ -13,16 +13,13 @@ extension LineShape {
 
         init?(
             timelineContext: IngestionWithTimelineContext,
-            roaDuration: RoaDuration?,
+            roaDuration: RoaDuration,
             ingestionTime: Date,
             horizontalWeight: Double,
             lineWidth: Double
         ) {
             self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            guard let roaDuration = roaDuration else {
-                return nil
-            }
             let offset = timelineContext.graphStartTime.distance(to: ingestionTime)
             let total = timelineContext.graphStartTime.distance(to: timelineContext.graphEndTime)
             guard let normalized = NormalizedDataPoints(
