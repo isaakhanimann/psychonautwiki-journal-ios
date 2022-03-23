@@ -3,7 +3,7 @@ import SwiftUI
 struct PresetAcknowledgeInteractionsView: View {
 
     let preset: Preset
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {

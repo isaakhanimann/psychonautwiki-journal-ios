@@ -5,8 +5,8 @@ struct ContentView: View {
 
     @AppStorage(PersistenceController.needsToSeeWelcomeKey) var needsToSeeWelcome: Bool = true
     @StateObject private var viewModel = ViewModel()
-    @EnvironmentObject var sheetViewModel: SheetViewModel
-    @EnvironmentObject var toastViewModel: ToastViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {

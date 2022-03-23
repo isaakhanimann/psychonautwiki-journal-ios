@@ -3,7 +3,7 @@ import SwiftUI
 struct ChemicalView: View {
 
     let chemical: ChemicalClass
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {

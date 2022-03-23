@@ -3,9 +3,9 @@ import SwiftUI
 struct AddCustomIngestionView: View {
 
     let customSubstance: CustomSubstance
-    @EnvironmentObject var sheetViewModel: SheetViewModel
-    @EnvironmentObject var toastViewModel: ToastViewModel
-    @EnvironmentObject var addIngestionContext: AddIngestionSheetContext
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var toastViewModel: ToastViewModel
+    @EnvironmentObject private var addIngestionContext: AddIngestionSheetContext
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {

@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {

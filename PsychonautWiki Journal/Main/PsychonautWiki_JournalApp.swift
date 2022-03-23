@@ -8,7 +8,7 @@ struct PsychonautWiki_JournalApp: App {
     // swiftlint:disable line_length
     @AppStorage(PersistenceController.hasInitialSubstancesOfCurrentVersion) var hasInitialSubstancesOfCurrentVersion: Bool = false
     @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
-    @StateObject var calendarWrapper = CalendarWrapper()
+    @StateObject private var calendarWrapper = CalendarWrapper()
     @StateObject private var sheetViewModel = SheetViewModel()
     @StateObject private var toastViewModel = ToastViewModel()
     @Environment(\.scenePhase) private var scenePhase

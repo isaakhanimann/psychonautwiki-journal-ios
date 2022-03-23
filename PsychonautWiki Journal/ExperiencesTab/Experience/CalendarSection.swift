@@ -3,8 +3,8 @@ import EventKit
 
 struct CalendarSection: View {
 
-    @EnvironmentObject var calendarWrapper: CalendarWrapper
     @ObservedObject var experience: Experience
+    @EnvironmentObject private var calendarWrapper: CalendarWrapper
 
     var body: some View {
         Section(

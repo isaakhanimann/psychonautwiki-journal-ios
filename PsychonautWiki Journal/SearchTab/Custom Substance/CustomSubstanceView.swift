@@ -5,7 +5,7 @@ struct CustomSubstanceView: View {
     @ObservedObject var customSubstance: CustomSubstance
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingConfirmation = false
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {

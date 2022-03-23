@@ -6,9 +6,9 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
-    @EnvironmentObject var sheetViewModel: SheetViewModel
-    @EnvironmentObject var toastViewModel: ToastViewModel
-    @EnvironmentObject var addIngestionContext: AddIngestionSheetContext
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var toastViewModel: ToastViewModel
+    @EnvironmentObject private var addIngestionContext: AddIngestionSheetContext
     @StateObject var viewModel = ViewModel()
 
     var body: some View {

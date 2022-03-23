@@ -4,9 +4,9 @@ struct PresetChooseTimeAndColorsView: View {
 
     let preset: Preset
     let dose: Double
-    @EnvironmentObject var addIngestionContext: AddIngestionSheetContext
-    @EnvironmentObject var sheetViewModel: SheetViewModel
-    @EnvironmentObject var toastViewModel: ToastViewModel
+    @EnvironmentObject private var addIngestionContext: AddIngestionSheetContext
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {

@@ -4,7 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     // swiftlint:disable line_length

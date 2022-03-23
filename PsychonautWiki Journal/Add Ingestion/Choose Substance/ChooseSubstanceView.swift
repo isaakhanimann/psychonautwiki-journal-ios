@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseSubstanceView: View {
 
     @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         NavigationView {

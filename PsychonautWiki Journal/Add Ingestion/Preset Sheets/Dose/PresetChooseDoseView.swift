@@ -3,7 +3,7 @@ import SwiftUI
 struct PresetChooseDoseView: View {
 
     let preset: Preset
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
     @State private var dose = 1.0
     @State private var doseText = "1"
 

@@ -4,7 +4,7 @@ struct SettingsTab: View {
 
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @EnvironmentObject var toastViewModel: ToastViewModel
+    @EnvironmentObject private var toastViewModel: ToastViewModel
 
     var body: some View {
         NavigationView {

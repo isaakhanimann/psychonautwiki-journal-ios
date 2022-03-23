@@ -5,7 +5,7 @@ struct PresetView: View {
     @ObservedObject var preset: Preset
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingConfirmation = false
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
 
     var body: some View {

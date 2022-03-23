@@ -4,7 +4,7 @@ struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
     @StateObject private var viewModel = ViewModel()
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {

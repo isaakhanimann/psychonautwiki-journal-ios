@@ -7,7 +7,7 @@ struct SearchList: View {
     @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) var isSearching
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         ZStack {

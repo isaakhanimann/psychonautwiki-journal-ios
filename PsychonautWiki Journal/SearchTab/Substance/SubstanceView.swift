@@ -4,7 +4,7 @@ struct SubstanceView: View {
 
     let substance: Substance
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {

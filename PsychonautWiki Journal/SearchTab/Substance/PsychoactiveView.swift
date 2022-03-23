@@ -3,7 +3,7 @@ import SwiftUI
 struct PsychoactiveView: View {
 
     let psychoactive: PsychoactiveClass
-    @EnvironmentObject var sheetViewModel: SheetViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
