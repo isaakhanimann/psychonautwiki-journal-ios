@@ -45,6 +45,11 @@ struct PresetChooseDoseView: View {
             .padding()
         }
         .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    hideKeyboard()
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
                     sheetViewModel.dismiss()
