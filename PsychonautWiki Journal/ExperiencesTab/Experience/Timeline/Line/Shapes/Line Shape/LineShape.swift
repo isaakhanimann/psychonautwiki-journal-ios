@@ -4,10 +4,18 @@ struct LineShape: Shape {
 
     let ingestionWithTimelineContext: IngestionWithTimelineContext
     let lineWidth: Double
-    @ObservedObject var ingestion: Ingestion
+    let roaDuration: RoaDuration?
+    let ingestionTime: Date
+    let horizontalWeight: Double
 
     var viewModel: ViewModel? {
-        ViewModel(timelineContext: ingestionWithTimelineContext, ingestion: ingestion, lineWidth: lineWidth)
+        ViewModel(
+            timelineContext: ingestionWithTimelineContext,
+            roaDuration: roaDuration,
+            ingestionTime: ingestionTime,
+            horizontalWeight: horizontalWeight,
+            lineWidth: lineWidth
+        )
     }
 
     func path(in rect: CGRect) -> Path {

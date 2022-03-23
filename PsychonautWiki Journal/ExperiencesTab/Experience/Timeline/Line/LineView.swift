@@ -12,22 +12,24 @@ struct LineView: View {
                 lineWidth: lineWidth,
                 ingestion: ingestion
             )
-                .fill(ingestion.swiftUIColorUnwrapped.opacity(0.2))
+            .fill(ingestion.swiftUIColorUnwrapped.opacity(0.2))
             AroundShapeDown(
                 ingestionWithTimelineContext: ingestionWithTimelineContext,
                 lineWidth: lineWidth,
                 ingestion: ingestion
             )
-                .fill(ingestion.swiftUIColorUnwrapped.opacity(0.2))
+            .fill(ingestion.swiftUIColorUnwrapped.opacity(0.2))
             LineShape(
                 ingestionWithTimelineContext: ingestionWithTimelineContext,
                 lineWidth: lineWidth,
-                ingestion: ingestion
+                roaDuration: ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped),
+                ingestionTime: ingestion.timeUnwrapped,
+                horizontalWeight: ingestion.horizontalWeight
             )
-                .stroke(
-                    ingestion.swiftUIColorUnwrapped,
-                    style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
-                )
+            .stroke(
+                ingestion.swiftUIColorUnwrapped,
+                style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
+            )
         }
     }
 }

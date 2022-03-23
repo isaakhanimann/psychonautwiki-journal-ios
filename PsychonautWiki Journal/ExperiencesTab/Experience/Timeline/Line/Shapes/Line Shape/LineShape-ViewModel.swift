@@ -1,7 +1,7 @@
 import Foundation
 
 extension LineShape {
-    class ViewModel {
+    struct ViewModel {
 
         let startLineStartPoint: DataPoint
         let startLineEndPoint: DataPoint
@@ -13,18 +13,20 @@ extension LineShape {
 
         init?(
             timelineContext: IngestionWithTimelineContext,
-            ingestion: Ingestion,
+            roaDuration: RoaDuration?,
+            ingestionTime: Date,
+            horizontalWeight: Double,
             lineWidth: Double
         ) {
             self.insetIndex = timelineContext.insetIndex
             self.lineWidth = lineWidth
-            guard let roaDuration = ingestion.substance?.getDuration(for: ingestion.administrationRouteUnwrapped) else {
+            guard let roaDuration = roaDuration else {
                 return nil
             }
-            let offset = timelineContext.graphStartTime.distance(to: ingestion.timeUnwrapped)
+            let offset = timelineContext.graphStartTime.distance(to: ingestionTime)
             let total = timelineContext.graphStartTime.distance(to: timelineContext.graphEndTime)
             guard let normalized = NormalizedDataPoints(
-                horizontalWeight: ingestion.horizontalWeight,
+                horizontalWeight: horizontalWeight,
                 verticalWeight: timelineContext.verticalWeight,
                 durations: roaDuration,
                 ingestionTimeOffset: offset,
