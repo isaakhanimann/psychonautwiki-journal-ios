@@ -81,6 +81,11 @@ struct AddCustomIngestionView: View {
         }
         .navigationBarTitle("Add Ingestion")
         .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    hideKeyboard()
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
                     sheetViewModel.dismiss()
