@@ -5,6 +5,10 @@ struct SubstanceDoseRow: View {
     let substanceDose: Experience.SubstanceWithDose
 
     var body: some View {
+        let unitsText = substanceDose.units ?? ""
+        let doseText = substanceDose.cumulativeDose == 0 ?
+        "Unknown" :
+        "\(substanceDose.cumulativeDose.formatted()) \(unitsText)"
         if let sub = substanceDose.substance {
             NavigationLink {
                 SubstanceView(substance: sub)
@@ -15,10 +19,6 @@ struct SubstanceDoseRow: View {
                         .foregroundColor(.secondary)
                     VStack(alignment: .leading) {
                         Text(substanceDose.substanceName)
-                        let unitsText = substanceDose.units ?? ""
-                        let doseText = substanceDose.cumulativeDose == 0 ?
-                        "Unknown" :
-                        "\(substanceDose.cumulativeDose.formatted()) \(unitsText)"
                         Text("Total Dose: \(doseText)")
                             .foregroundColor(.secondary)
                     }
@@ -27,9 +27,13 @@ struct SubstanceDoseRow: View {
         } else {
             VStack(alignment: .leading) {
                 Text(substanceDose.substanceName)
-                Text("No info on this substance")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+                HStack {
+                    Text("Total Dose: \(doseText)")
+                    Spacer()
+                    Text("No info")
+                        .font(.footnote)
+                }
+                .foregroundColor(.secondary)
             }
         }
     }
