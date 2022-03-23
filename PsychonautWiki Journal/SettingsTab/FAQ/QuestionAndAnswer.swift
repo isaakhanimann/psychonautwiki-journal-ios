@@ -10,7 +10,7 @@ struct QuestionAndAnswer: Identifiable, Hashable {
     static let list: [QuestionAndAnswer] = [
         QuestionAndAnswer(
             question: "Why is an interaction or other info on a substance present in the PsychonautWiki article but not in the app?",
-            answer: "Chances are that the info is not annotated correctly such that it is not propagated to the API."
+            answer: "There can be a couple reasons. Either the info is not annotated correctly in the article, the PsychonautWiki API does not parse the info correctly or the app does not import the info from the API correctly. In any case please report the bug through the app."
         ),
         QuestionAndAnswer(
             question: "When does the app detect interactions?",
