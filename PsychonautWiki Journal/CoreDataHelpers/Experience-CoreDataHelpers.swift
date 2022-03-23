@@ -84,7 +84,9 @@ extension Experience: Comparable {
             if let firstSubDos = result.first(where: { subdos in
                 subdos.substanceName == ingestion.substanceNameUnwrapped
             }) {
-                if ingestion.dose == 0 {
+                if ingestion.dose == 0
+                    || ingestion.unitsUnwrapped != firstSubDos.units
+                    || firstSubDos.cumulativeDose == 0 {
                     firstSubDos.cumulativeDose = 0
                 } else {
                     firstSubDos.cumulativeDose += ingestion.dose
