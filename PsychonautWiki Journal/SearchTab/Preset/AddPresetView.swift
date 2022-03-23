@@ -30,6 +30,15 @@ struct AddPresetView: View {
                             Text("\(com.dose.formatted()) \(units) \(com.administrationRoute.rawValue)")
                                 .foregroundColor(.secondary)
                         }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                viewModel.components.removeAll { iter in
+                                    iter.id == com.id
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                     }
                     Button {
                         viewModel.isShowingAddComponentSheet.toggle()
