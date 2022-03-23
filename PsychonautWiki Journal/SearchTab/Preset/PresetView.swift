@@ -38,19 +38,23 @@ struct PresetView: View {
                     }
                 }
             }
+            Section {
+                HStack {
+                    Spacer()
+                    Button {
+                        isShowingConfirmation.toggle()
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    .foregroundColor(.red)
+                    Spacer()
+                }
+            }
             if isEyeOpen {
                 PresetInteractionsSection(preset: preset)
             }
         }
         .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(role: .destructive) {
-                    isShowingConfirmation.toggle()
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-                .foregroundColor(.red)
-            }
             ToolbarItem(placement: .navigation) {
                 Button("Ingest") {
                     sheetViewModel.sheetToShow = .addIngestionFromPreset(preset: preset)

@@ -12,16 +12,20 @@ struct CustomSubstanceView: View {
             Section("Units") {
                 Text(customSubstance.unitsUnwrapped)
             }
+            Section {
+                HStack {
+                    Spacer()
+                    Button {
+                        isShowingConfirmation.toggle()
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    .foregroundColor(.red)
+                    Spacer()
+                }
+            }
         }
         .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(role: .destructive) {
-                    isShowingConfirmation.toggle()
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-                .foregroundColor(.red)
-            }
             ToolbarItem(placement: .navigation) {
                 Button("Ingest") {
                     sheetViewModel.sheetToShow = .addIngestionFromCustom(custom: customSubstance)
