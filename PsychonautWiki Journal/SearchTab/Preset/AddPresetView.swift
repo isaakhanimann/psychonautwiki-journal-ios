@@ -3,7 +3,7 @@ import SwiftUI
 struct AddPresetView: View {
 
     @StateObject private var viewModel = ViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         NavigationView {

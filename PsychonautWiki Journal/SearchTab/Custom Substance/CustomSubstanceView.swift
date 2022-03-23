@@ -3,7 +3,7 @@ import SwiftUI
 struct CustomSubstanceView: View {
 
     @ObservedObject var customSubstance: CustomSubstance
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     @State private var isShowingConfirmation = false
     @EnvironmentObject private var sheetViewModel: SheetViewModel
 

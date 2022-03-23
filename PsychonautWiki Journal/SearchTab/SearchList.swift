@@ -6,7 +6,7 @@ struct SearchList: View {
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
-    @Environment(\.isSearching) var isSearching
+    @Environment(\.isSearching) private var isSearching
     @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {

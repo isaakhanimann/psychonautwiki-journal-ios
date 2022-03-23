@@ -4,7 +4,7 @@ struct WebViewSheet: View {
 
     let articleURL: URL
     @State private var isWebViewLoading = true
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         ZStack {

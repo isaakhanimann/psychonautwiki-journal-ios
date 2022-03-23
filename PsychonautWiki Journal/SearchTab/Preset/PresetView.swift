@@ -3,7 +3,7 @@ import SwiftUI
 struct PresetView: View {
 
     @ObservedObject var preset: Preset
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     @State private var isShowingConfirmation = false
     @EnvironmentObject private var sheetViewModel: SheetViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false

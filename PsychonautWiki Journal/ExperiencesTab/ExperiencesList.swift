@@ -3,8 +3,8 @@ import SwiftUI
 struct ExperiencesList: View {
 
     @ObservedObject var viewModel: ExperiencesTab.ViewModel
-    @Environment(\.editMode) var mode
-    @Environment(\.isSearching) var isSearching
+    @Environment(\.editMode) private var mode
+    @Environment(\.isSearching) private var isSearching
 
     var body: some View {
         ZStack {

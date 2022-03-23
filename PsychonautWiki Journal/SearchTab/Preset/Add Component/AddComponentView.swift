@@ -6,7 +6,7 @@ struct AddComponentView: View {
     @Binding var presetName: String
     @Binding var presetUnit: String?
     @StateObject private var viewModel = ViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         NavigationView {

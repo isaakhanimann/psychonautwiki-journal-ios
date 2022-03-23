@@ -7,7 +7,7 @@ struct ChooseSubstanceList: View {
     @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @Environment(\.isSearching) var isSearching
+    @Environment(\.isSearching) private var isSearching
 
     var body: some View {
         ZStack {
