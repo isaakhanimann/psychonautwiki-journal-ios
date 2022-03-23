@@ -89,7 +89,7 @@ extension IngestionTimeLineView {
                 }
                 let maxDose = allDoses.max() ?? 0
                 var verticalWeight = 1.0
-                if maxDose == 0 {
+                if maxDose == 0 || ingestion.dose == 0 {
                     verticalWeight = 1.0
                 } else {
                     verticalWeight = ingestion.dose / maxDose
