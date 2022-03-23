@@ -5,45 +5,71 @@ struct ExperienceView: View {
     @ObservedObject var experience: Experience
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @Environment(\.editMode) private var editMode
 
     var body: some View {
-        List {
-            Section(header: Text("Title")) {
-                TextField("Title", text: $viewModel.selectedTitle)
-            }
-            Section(header: Text("Ingestions")) {
-                ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
-                    .onDelete(perform: deleteIngestions)
-
-                Button {
-                    sheetViewModel.sheetToShow = .addIngestionFromExperience(experience: experience)
-                } label: {
-                    Label("Add Ingestion", systemImage: "plus")
-                        .foregroundColor(.accentColor)
+        let isEditing = editMode?.wrappedValue.isEditing == true
+        return List {
+            if isEditing {
+                Section("Title") {
+                    TextField("Title", text: $viewModel.selectedTitle)
                 }
             }
-            if !experience.sortedIngestionsToDraw.isEmpty {
-                Section(header: Text("Timeline")) {
+            if !isEditing || !experience.sortedIngestionsUnwrapped.isEmpty {
+                Section("Ingestions") {
+                    ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
+                        .onDelete(perform: deleteIngestions)
+                    if !isEditing {
+                        Button {
+                            sheetViewModel.sheetToShow = .addIngestionFromExperience(experience: experience)
+                        } label: {
+                            Label("Add Ingestion", systemImage: "plus")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+            }
+            if !experience.sortedIngestionsToDraw.isEmpty && !isEditing {
+                Section("Timeline") {
                     HorizontalScaleView {
                         IngestionTimeLineView(experience: experience)
                     }
                     .frame(height: 310)
                 }
             }
-            if !experience.substancesWithDose.isEmpty {
+            if !experience.substancesWithDose.isEmpty && !isEditing {
                 Section("Substances") {
                     ForEach(experience.substancesWithDose) { subDos in
                         SubstanceDoseRow(substanceDose: subDos)
                     }
                 }
             }
-            noteSection
-            CalendarSection(experience: experience)
+            if !viewModel.writtenText.isEmpty || isEditing {
+                Section("Notes") {
+                    if isEditing {
+                        TextEditor(text: $viewModel.writtenText)
+                            .frame(minHeight: 300)
+                    } else {
+                        Text(viewModel.writtenText)
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 5)
+                    }
+                }
+            }
+            if !experience.sortedIngestionsUnwrapped.isEmpty {
+                CalendarSection(experience: experience)
+            }
         }
         .task {
             viewModel.initialize(experience: experience)
         }
         .navigationTitle(experience.titleUnwrapped)
+        .onChange(of: editMode?.wrappedValue) { newValue in
+            guard let isEditing = newValue?.isEditing else {return}
+            if !isEditing {
+                PersistenceController.shared.saveViewContext()
+            }
+        }
         .onDisappear {
             PersistenceController.shared.saveViewContext()
         }
@@ -54,19 +80,7 @@ struct ExperienceView: View {
                 }
             }
             ToolbarItem(placement: .navigation) {
-                if !experience.sortedIngestionsUnwrapped.isEmpty {
-                    EditButton()
-                }
-            }
-        }
-    }
-
-    private var noteSection: some View {
-        Section(header: Text("Notes")) {
-            ZStack {
-                TextEditor(text: $viewModel.writtenText)
-                // this makes sure that the texteditor has a dynamic height
-                Text(viewModel.writtenText).opacity(0).padding(.all, 8)
+                EditButton()
             }
         }
     }
@@ -77,6 +91,9 @@ struct ExperienceView: View {
             PersistenceController.shared.viewContext.delete(ingestion)
         }
         PersistenceController.shared.saveViewContext()
+        if experience.sortedIngestionsUnwrapped.isEmpty {
+            editMode?.wrappedValue = .inactive
+        }
     }
 }
 

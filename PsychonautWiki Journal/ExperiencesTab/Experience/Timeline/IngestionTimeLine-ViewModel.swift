@@ -48,15 +48,14 @@ extension IngestionTimeLineView {
         }
 
         private func setStartEndAndContexts() {
-            let startTime = sortedIngestions.first?.timeUnwrapped ?? Date()
-            self.startTime = startTime
-            let endTime = getMaxEndTime(for: sortedIngestions) ?? Date().addingTimeInterval(5*60*60)
-            self.endTime = endTime
+            self.startTime = sortedIngestions.first?.timeUnwrapped
+            self.endTime = getMaxEndTime(for: sortedIngestions)
             setIngestionContexts()
         }
 
         private func setIngestionContexts() {
             guard let startTime = startTime, let endTime = endTime else {
+                self.ingestionContexts = []
                 return
             }
             var contexts = [IngestionWithTimelineContext]()

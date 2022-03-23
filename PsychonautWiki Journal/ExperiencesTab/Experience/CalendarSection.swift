@@ -8,7 +8,7 @@ struct CalendarSection: View {
 
     var body: some View {
         Section(
-            header: Text("Sync to Your Calendar"),
+            header: Text("Sync to Calendar"),
             footer: footer
         ) {
             if calendarWrapper.authorizationStatus == .notDetermined {
@@ -18,7 +18,6 @@ struct CalendarSection: View {
             } else if calendarWrapper.authorizationStatus == .authorized {
                 if calendarWrapper.psychonautWikiCalendar != nil {
                     Button {
-                        experience.objectWillChange.send()
                         calendarWrapper.createOrUpdateEvent(from: experience)
                         try? PersistenceController.shared.viewContext.save()
                     } label: {
