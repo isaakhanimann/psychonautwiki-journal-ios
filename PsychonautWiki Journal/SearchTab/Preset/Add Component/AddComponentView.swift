@@ -20,8 +20,16 @@ struct AddComponentView: View {
                 }
                 Section(header: Text("Administration Route")) {
                     Picker("Administration Route", selection: $viewModel.administrationRoute) {
-                        ForEach(AdministrationRoute.allCases) { route in
+                        let wikiRoutes = viewModel.selectedSubstance.administrationRoutesUnwrapped
+                        ForEach(wikiRoutes) { route in
                             Text(route.rawValue).tag(route)
+                        }
+                        let otherRoutes = AdministrationRoute.allCases.filter { route in
+                            !wikiRoutes.contains(route)
+                        }
+                        ForEach(otherRoutes) { route in
+                            Text(route.rawValue).tag(route)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
