@@ -6,11 +6,6 @@ struct UnitsPicker: View {
     @State private var pickerValue = UnitPickerOptions.mg
     @State private var textValue = ""
 
-    private enum UnitPickerOptions: String, CaseIterable {
-        // swiftlint:disable identifier_name
-        case g, mg, μg, mL, custom
-    }
-
     var body: some View {
         Group {
             Picker("Units", selection: $pickerValue) {

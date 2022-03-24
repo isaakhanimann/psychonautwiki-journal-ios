@@ -13,6 +13,7 @@ struct ExperienceView: View {
             if isEditing {
                 Section("Title") {
                     TextField("Title", text: $viewModel.selectedTitle)
+                        .disableAutocorrection(true)
                 }
             }
             if !isEditing || !experience.sortedIngestionsUnwrapped.isEmpty {

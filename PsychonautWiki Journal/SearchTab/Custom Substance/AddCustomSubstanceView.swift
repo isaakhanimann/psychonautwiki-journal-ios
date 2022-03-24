@@ -14,6 +14,7 @@ struct AddCustomSubstanceView: View {
                         text: $viewModel.name,
                         prompt: Text("Custom Substance Name")
                     )
+                    .disableAutocorrection(true)
                 }
                 .headerProminence(.increased)
                 Section("Units") {

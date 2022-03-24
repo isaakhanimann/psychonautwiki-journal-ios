@@ -14,6 +14,7 @@ struct AddPresetView: View {
                         text: $viewModel.presetName,
                         prompt: Text("e.g. Coffee")
                     )
+                    .disableAutocorrection(true)
                 }
                 .headerProminence(.increased)
                 Section("Units") {

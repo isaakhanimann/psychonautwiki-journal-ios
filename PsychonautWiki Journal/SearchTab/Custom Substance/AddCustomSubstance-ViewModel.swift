@@ -4,7 +4,7 @@ extension AddCustomSubstanceView {
 
     class ViewModel: ObservableObject {
         @Published var name = ""
-        @Published var units: String? = "mg"
+        @Published var units: String? = UnitPickerOptions.mg.rawValue
 
         var isEverythingNeededDefined: Bool {
             guard !name.isEmpty else {return false}

@@ -3,7 +3,7 @@ import Foundation
 extension ChooseDoseView {
 
     class ViewModel: ObservableObject {
-        @Published var selectedUnits: String?
+        @Published var selectedUnits: String? = UnitPickerOptions.mg.rawValue
         @Published var selectedPureDose: Double?
         @Published var purity = 100.0
         @Published var isShowingUnknownDoseAlert = false
@@ -18,7 +18,9 @@ extension ChooseDoseView {
         }
 
         func initializeUnits(routeUnits: String?) {
-            self.selectedUnits = routeUnits
+            if let routeUnits = routeUnits {
+                self.selectedUnits = routeUnits
+            }
         }
 
     }
