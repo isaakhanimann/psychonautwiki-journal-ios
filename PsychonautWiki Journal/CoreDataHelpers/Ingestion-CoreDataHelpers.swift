@@ -71,6 +71,9 @@ extension Ingestion: Comparable {
         guard let doseTypesUnwrapped = substance?.getDose(for: administrationRouteUnwrapped) else {
             return defaultWeight
         }
+        guard unitsUnwrapped == doseTypesUnwrapped.unitsUnwrapped else {
+            return defaultWeight
+        }
         guard let minMax = doseTypesUnwrapped.minAndMaxRangeForGraph else { return defaultWeight }
         guard let doseDoubleUnwrap = doseUnwrapped else {return defaultWeight}
         if doseDoubleUnwrap <= minMax.min {
