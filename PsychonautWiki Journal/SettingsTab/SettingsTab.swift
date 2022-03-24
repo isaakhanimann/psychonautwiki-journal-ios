@@ -5,6 +5,7 @@ struct SettingsTab: View {
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @EnvironmentObject private var toastViewModel: ToastViewModel
+    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         NavigationView {
@@ -13,7 +14,11 @@ struct SettingsTab: View {
                 substancesSection
                 if isEyeOpen {
                     Section("Safety") {
-                        Link(destination: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!) {
+                        Button {
+                            sheetViewModel.sheetToShow = .article(
+                                url: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
+                            )
+                        } label: {
                             Label("Responsible Use", systemImage: "brain")
                         }
                     }
