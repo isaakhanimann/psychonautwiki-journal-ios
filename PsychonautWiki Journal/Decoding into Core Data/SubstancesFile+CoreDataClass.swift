@@ -41,6 +41,7 @@ public class SubstancesFile: NSManagedObject, Decodable {
         createInteractions()
     }
 
+    // swiftlint:disable line_length
     private static let psychoactiveURLs = [
         "Antipsychotics": URL(string: "https://psychonautwiki.org/wiki/Antipsychotic"),
         "Cannabinoids": URL(string: "https://psychonautwiki.org/wiki/Cannabinoid"),
@@ -55,7 +56,11 @@ public class SubstancesFile: NSManagedObject, Decodable {
         "Oneirogens": URL(string: "https://psychonautwiki.org/wiki/Oneirogen"),
         "Opioids": URL(string: "https://psychonautwiki.org/wiki/Opioids"),
         "Psychedelics": URL(string: "https://psychonautwiki.org/wiki/Psychedelics"),
-        "Stimulants": URL(string: "https://psychonautwiki.org/wiki/Stimulants")
+        "Stimulants": URL(string: "https://psychonautwiki.org/wiki/Stimulants"),
+        "Sedatives": URL(string: "https://psychonautwiki.org/wiki/Sedative"),
+        "Antidepressants": URL(string: "https://psychonautwiki.org/wiki/Antidepressants"),
+        "Hypnotics": URL(string: "https://psychonautwiki.org/wiki/Hypnotics"),
+        "Selective Serotonin Reuptake Inhibitors": URL(string: "https://psychonautwiki.org/wiki/Selective_serotonin_reuptake_inhibitors")
     ]
 
     private static let chemicalURLs = [

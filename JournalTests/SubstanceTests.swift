@@ -17,7 +17,7 @@ class SubstanceTests: XCTestCase {
 
     func testHasEnoughSubstances() throws {
         let substances = try getAllSubstances()
-        XCTAssertEqual(substances.count, 328)
+        XCTAssertEqual(substances.count, 329)
     }
 
     private func getAllSubstances() throws -> [Substance] {
@@ -151,7 +151,7 @@ class SubstanceTests: XCTestCase {
         XCTAssertTrue(Set(lsd.uncertainPsychoactivesToShow.map { $0.name }).contains("Stimulants"))
         XCTAssertTrue(Set(lsd.unsafeSubstancesToShow.map { $0.name }).contains("Tramadol"))
         XCTAssertTrue(Set(lsd.unsafePsychoactivesToShow.map { $0.name }).contains("Deliriants"))
-        XCTAssertTrue(Set(lsd.unsafeUnresolvedsToShow.map { $0.name }).contains("Tricyclic Antidepressants"))
+        XCTAssertTrue(Set(lsd.unsafeChemicalsToShow.map { $0.name }).contains("Tricyclic Antidepressants"))
         XCTAssertTrue(Set(lsd.unsafeUnresolvedsToShow.map { $0.name }).contains("Ritonavir"))
     }
 
@@ -162,12 +162,22 @@ class SubstanceTests: XCTestCase {
         let substances = try PersistenceController.preview.viewContext.fetch(fetchRequest)
         XCTAssertEqual(substances.count, 1)
         let mdma = substances.first!
-        XCTAssertEqual(mdma.psychoactivesUnwrapped.count, 1)
-        XCTAssertEqual(mdma.psychoactivesUnwrapped.first!.name, "Miscellaneous")
-        XCTAssertEqual(mdma.firstPsychoactiveNameUnwrapped, "Miscellaneous")
-        XCTAssertEqual(mdma.chemicalsUnwrapped.count, 1)
-        XCTAssertEqual(mdma.chemicalsUnwrapped.first!.name, "Miscellaneous")
-        XCTAssertEqual(mdma.firstChemicalNameUnwrapped, "Miscellaneous")
+        XCTAssertEqual(mdma.psychoactivesUnwrapped.count, 2)
+        XCTAssertTrue(mdma.psychoactivesUnwrapped.map({ $0.name }).contains("Entactogens"))
+        XCTAssertTrue(mdma.psychoactivesUnwrapped.map({ $0.name }).contains("Stimulants"))
+        XCTAssertTrue(
+            mdma.firstPsychoactiveNameUnwrapped == "Entactogens"
+            || mdma.firstPsychoactiveNameUnwrapped == "Stimulants"
+        )
+        XCTAssertEqual(mdma.chemicalsUnwrapped.count, 3)
+        XCTAssertTrue(mdma.chemicalsUnwrapped.map({ $0.name }).contains("Amphetamines"))
+        XCTAssertTrue(mdma.chemicalsUnwrapped.map({ $0.name }).contains("MDxxs"))
+        XCTAssertTrue(mdma.chemicalsUnwrapped.map({ $0.name }).contains("Substituted Amphetamines"))
+        XCTAssertTrue(
+            mdma.firstChemicalNameUnwrapped == "Amphetamines"
+            || mdma.firstChemicalNameUnwrapped == "MDxxs"
+            || mdma.firstChemicalNameUnwrapped == "Substituted Amphetamines"
+        )
         XCTAssertEqual(mdma.crossToleranceChemicalsUnwrapped.count, 0)
         XCTAssertEqual(mdma.crossToleranceSubstancesUnwrapped.count, 0)
         XCTAssertEqual(mdma.crossTolerancePsychoactivesUnwrapped.count, 1)
@@ -268,7 +278,6 @@ class SubstanceTests: XCTestCase {
         XCTAssertTrue(uncertainSubstanceNames.contains("Cannabis"))
         XCTAssertTrue(uncertainSubstanceNames.contains("Ketamine"))
         XCTAssertTrue(uncertainSubstanceNames.contains("Methoxetamine"))
-        XCTAssertTrue(uncertainSubstanceNames.contains("MDMA"))
         XCTAssertTrue(uncertainSubstanceNames.contains("Caffeine"))
         XCTAssertTrue(uncertainSubstanceNames.contains("GHB"))
         XCTAssertTrue(uncertainSubstanceNames.contains("GBL"))

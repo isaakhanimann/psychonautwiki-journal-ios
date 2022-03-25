@@ -186,7 +186,7 @@
       "message": "Float cannot represent non numeric value: [3, 5]",
       "path": [
         "substances",
-        264,
+        265,
         "roas",
         0,
         "duration",
@@ -199,7 +199,7 @@
       "message": "Float cannot represent non numeric value: [3, 5]",
       "path": [
         "substances",
-        264,
+        265,
         "roas",
         0,
         "duration",
@@ -212,7 +212,7 @@
       "message": "Float cannot represent non numeric value: [4, 7]",
       "path": [
         "substances",
-        264,
+        265,
         "roas",
         0,
         "duration",
@@ -225,7 +225,7 @@
       "message": "Float cannot represent non numeric value: { max: 200, min: 75 }",
       "path": [
         "substances",
-        276,
+        277,
         "roas",
         0,
         "dose",
@@ -237,7 +237,7 @@
       "message": "String cannot represent value: [\"almost immediately after ingestion\", \"after consecutive dosing for several days\"]",
       "path": [
         "substances",
-        286,
+        287,
         "tolerance",
         "full"
       ],
@@ -247,7 +247,7 @@
       "message": "Float cannot represent non numeric value: [50, 100]",
       "path": [
         "substances",
-        306,
+        307,
         "roas",
         0,
         "dose",
@@ -260,7 +260,7 @@
       "message": "String cannot represent value: [\"minutes\", \"hour\"]",
       "path": [
         "substances",
-        369,
+        370,
         "roas",
         0,
         "duration",
@@ -583,7 +583,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Diol",
+            "Alkanediol"
+          ],
           "psychoactive": [
             "Depressant"
           ]
@@ -2477,7 +2480,10 @@
         ],
         "summary": "",
         "addictionPotential": "not habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "toxic dose is unknown",
+          "extremely low toxicity"
+        ],
         "crossTolerances": [
           "psychedelic"
         ],
@@ -3213,7 +3219,10 @@
         ],
         "summary": "",
         "addictionPotential": "not habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "toxic dose is unknown",
+          "extremely low toxicity"
+        ],
         "crossTolerances": [
           "psychedelic"
         ],
@@ -3301,7 +3310,10 @@
           "chemical": [
             "Amphetamine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics"
+          ]
         },
         "tolerance": {
           "full": "after ingestion over the couse of multiple days",
@@ -3759,7 +3771,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Stimulants"
@@ -4101,9 +4113,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -4422,7 +4437,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -5273,7 +5291,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -5479,7 +5497,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -5939,7 +5957,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -6319,7 +6337,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -6737,7 +6755,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -7069,7 +7087,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -7408,7 +7426,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -7796,7 +7814,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -8204,7 +8222,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -8643,7 +8661,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -9123,7 +9141,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -9514,7 +9532,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Substituted phenethylamines",
+            "Substituted benzofurans"
+          ],
           "psychoactive": [
             "Psychedelics"
           ]
@@ -9797,7 +9818,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -10071,7 +10092,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -10383,7 +10404,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -10560,9 +10581,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -10800,7 +10824,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -11112,7 +11136,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -11376,7 +11400,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -11657,7 +11681,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -12019,7 +12043,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -12346,7 +12370,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -12866,7 +12890,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -13330,7 +13354,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -13629,7 +13656,16 @@
             "url": "https://psychonautwiki.org/wiki/Headache"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "2 - 3 days",
@@ -13914,7 +13950,16 @@
             "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "3 - 7 days",
@@ -14187,7 +14232,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Phenylmorpholine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -15118,7 +15166,10 @@
           "chemical": [
             "Khat#1#"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -17496,7 +17547,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -17897,7 +17948,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -18232,7 +18283,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -18680,7 +18731,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -18973,7 +19024,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -19273,7 +19324,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -19561,7 +19612,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -19885,9 +19936,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -20215,13 +20269,20 @@
           {
             "name": "Headache",
             "url": "https://psychonautwiki.org/wiki/Headache"
+          },
+          {
+            "name": "Tremor",
+            "url": "https://psychonautwiki.org/wiki/Tremor"
           }
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -20563,7 +20624,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -20855,7 +20916,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -21148,7 +21209,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -21388,7 +21449,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -21686,7 +21747,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -21790,7 +21851,7 @@
           }
         ],
         "summary": "",
-        "addictionPotential": "not habit-forming",
+        "addictionPotential": null,
         "toxicity": [
           "toxic dose is unknown"
         ],
@@ -21967,7 +22028,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -22343,7 +22404,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -22533,7 +22594,10 @@
           "chemical": [
             "Khat#1#"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -23450,7 +23514,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -23687,7 +23751,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -23940,7 +24004,16 @@
             "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Substituted benzofurans",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "3 - 7 days",
@@ -24193,7 +24266,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amino acid",
+            "Substituted tryptamines"
+          ],
           "psychoactive": [
             "Nootropic"
           ]
@@ -24353,7 +24429,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Substituted benzofurans",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Entactogens"
           ]
@@ -24603,7 +24682,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -24952,7 +25031,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -25253,7 +25332,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_benzofurans"
+            "Substituted benzofurans"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -25517,7 +25596,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -25799,7 +25878,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -26059,9 +26138,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -26404,9 +26486,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -26557,7 +26642,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Adamantanes",
+            "Indazolecarboxamide"
+          ],
           "psychoactive": [
             "Cannabinoid"
           ]
@@ -27196,7 +27284,16 @@
             "url": "https://psychonautwiki.org/wiki/Perspective_hallucination"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Substituted benzofurans",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "with prolonged and repeated use",
           "half": "3-4 weeks",
@@ -27556,7 +27653,17 @@
             "url": "https://psychonautwiki.org/wiki/Perspective_hallucination"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Substituted phenethylamines",
+            "Substituted benzofurans",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "with prolonged and repeated use",
           "half": "21-30 days",
@@ -27892,7 +27999,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Pyrrolidinophenone",
+            "Substituted cathinones"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -28315,7 +28425,11 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Khat#1#",
+            "Pyrrolidinophenone",
+            "Substituted cathinones"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -29109,7 +29223,10 @@
         ],
         "summary": "",
         "addictionPotential": "not habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "toxic dose is unknown",
+          "extremely low toxicity"
+        ],
         "crossTolerances": [
           "psychedelic"
         ],
@@ -29495,7 +29612,10 @@
         ],
         "summary": "",
         "addictionPotential": "not habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "toxic dose is unknown",
+          "extremely low toxicity"
+        ],
         "crossTolerances": [
           "psychedelic"
         ],
@@ -29604,7 +29724,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Indole cannabinoid",
+            "Indolecarboxamide"
+          ],
           "psychoactive": [
             "Cannabinoid"
           ]
@@ -29845,7 +29968,11 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "potentially fatal at heavy dosages",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines",
+          "unintentionally spilling a very small amount of acetylfentanyl on one's skin could result in a fatal overdose."
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -30283,6 +30410,10 @@
             "url": "https://psychonautwiki.org/wiki/Body_odor_alteration"
           },
           {
+            "name": "Suggestibility suppression",
+            "url": "https://psychonautwiki.org/wiki/Suggestibility_suppression"
+          },
+          {
             "name": "Sleep paralysis",
             "url": "https://psychonautwiki.org/wiki/Sleep_paralysis"
           },
@@ -30469,7 +30600,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -30733,7 +30864,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -30850,7 +30981,7 @@
         ],
         "class": {
           "chemical": [
-            "Choline_derivative"
+            "Choline derivative"
           ],
           "psychoactive": [
             "Nootropic"
@@ -31093,7 +31224,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -31478,7 +31612,11 @@
           "chemical": [
             "Adamantanes"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Dissociatives",
+            "Deliriant",
+            "Stimulants"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -31751,7 +31889,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Stimulants"
@@ -32293,7 +32431,7 @@
             "Benzhydryl"
           ],
           "psychoactive": [
-            "Eugeroic"
+            "Eugeroics"
           ]
         },
         "tolerance": {
@@ -32426,7 +32564,7 @@
         "effects": [],
         "class": {
           "chemical": [
-            "Substituted_tropanes"
+            "Substituted tropanes"
           ],
           "psychoactive": [
             "Deliriant"
@@ -33012,7 +33150,16 @@
             "url": "https://psychonautwiki.org/wiki/Perspective_hallucination"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Substituted phenethylamines",
+            "BOx"
+          ],
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
+        },
         "tolerance": null,
         "roas": [
           {
@@ -33223,7 +33370,7 @@
         ],
         "class": {
           "chemical": [
-            "Butyric_acid"
+            "Butyric acid"
           ],
           "psychoactive": [
             "Depressant"
@@ -33283,7 +33430,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol, benzodiazepines or opioids"
+        ],
         "crossTolerances": [
           "GABA"
         ],
@@ -33528,7 +33678,10 @@
         "roas": [],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethality increases significantly when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -33695,7 +33848,10 @@
           "chemical": [
             "Indazole"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Deliriant",
+            "Stimulants"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -33832,7 +33988,10 @@
           "chemical": [
             "Adamantanes"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Nootropic"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -34151,7 +34310,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Substituted benzofurans",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Psychedelics"
           ]
@@ -34218,7 +34380,11 @@
         ],
         "summary": "",
         "addictionPotential": "not habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "extreme vasoconstrictive effects",
+          "one can easily overdose if this substance is not measured correctly",
+          "toxic dose is unknown"
+        ],
         "crossTolerances": [
           "psychedelic"
         ],
@@ -34388,7 +34554,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -34542,7 +34708,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -34909,7 +35075,17 @@
             "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Khat#1#",
+            "MDxx",
+            "Substituted cathinones"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "3 - 7 days",
@@ -35070,6 +35246,10 @@
           {
             "name": "Dizziness",
             "url": "https://psychonautwiki.org/wiki/Dizziness"
+          },
+          {
+            "name": "Physical euphoria",
+            "url": "https://psychonautwiki.org/wiki/Physical_euphoria"
           },
           {
             "name": "Bronchodilation",
@@ -36046,7 +36226,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "moderate toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -36109,7 +36292,7 @@
         ],
         "class": {
           "chemical": [
-            "Ammonium_salt"
+            "Ammonium salt"
           ],
           "psychoactive": [
             "Nootropic"
@@ -36266,7 +36449,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -36329,7 +36515,7 @@
         ],
         "class": {
           "chemical": [
-            "Ammonium_salt"
+            "Ammonium salt"
           ],
           "psychoactive": [
             "Nootropic"
@@ -36567,7 +36753,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -36734,7 +36923,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -37078,7 +37270,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tropanes"
+            "Substituted tropanes"
           ],
           "psychoactive": [
             "Stimulants"
@@ -37444,7 +37636,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -37508,7 +37700,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -37814,7 +38009,7 @@
         ],
         "class": {
           "chemical": [
-            "Nitrogenous_organic_acid"
+            "Nitrogenous organic acid"
           ],
           "psychoactive": [
             "Nootropic"
@@ -38086,7 +38281,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "4-oxazolidinone",
+            "Substituted aminorexes"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -38345,7 +38543,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -38674,7 +38872,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -39115,7 +39313,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -39487,7 +39685,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -39884,7 +40082,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -40216,7 +40414,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -40612,7 +40810,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -41295,7 +41493,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepine",
           "thienodiazepine"
@@ -41539,10 +41740,6 @@
           {
             "name": "Perspective hallucination",
             "url": "https://psychonautwiki.org/wiki/Perspective_hallucination"
-          },
-          {
-            "name": "Orgasm enhancement",
-            "url": "https://psychonautwiki.org/wiki/Orgasm_enhancement"
           }
         ],
         "class": {
@@ -41798,7 +41995,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -42041,7 +42238,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_piperidines"
+            "Substituted piperidines"
           ],
           "psychoactive": [
             "Stimulants"
@@ -42614,7 +42811,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Dissociatives"
@@ -42742,6 +42939,9 @@
           },
           {
             "name": "Antihistamine"
+          },
+          {
+            "name": "Bupropion"
           }
         ]
       },
@@ -42884,7 +43084,11 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "high toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines",
+          "known to cause potentially fatal heart arrhythmias"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -43066,7 +43270,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -43347,7 +43551,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -43478,7 +43685,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tropanes"
+            "Substituted tropanes"
           ],
           "psychoactive": [
             "Stimulants"
@@ -43735,7 +43942,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "GABAergic"
         ],
@@ -43818,7 +44028,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -43866,7 +44076,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -44263,7 +44476,10 @@
           "chemical": [
             "Ethanolamine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Deliriant",
+            "Depressant"
+          ]
         },
         "tolerance": {
           "full": "with repeated use",
@@ -45165,7 +45381,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -46096,7 +46312,10 @@
         ],
         "summary": "",
         "addictionPotential": "not known to be habit-forming",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "may cause liver toxicity at high doses or after chronic use"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -46771,7 +46990,10 @@
           "chemical": [
             "Khat#1#"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -47086,7 +47308,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -47332,7 +47554,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -47380,7 +47602,10 @@
         ],
         "summary": "",
         "addictionPotential": "very addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -47752,7 +47977,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -48064,11 +48289,29 @@
         ],
         "summary": "",
         "addictionPotential": "highly addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepine",
           "thienodiazepine"
         ],
+        "uncertainInteractions": null,
+        "unsafeInteractions": null,
+        "dangerousInteractions": null
+      },
+      {
+        "name": "Eugeroics",
+        "url": "https://psychonautwiki.org/wiki/Eugeroics",
+        "effects": [],
+        "class": null,
+        "tolerance": null,
+        "roas": [],
+        "summary": "",
+        "addictionPotential": null,
+        "toxicity": null,
+        "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
         "dangerousInteractions": null
@@ -48184,7 +48427,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_cathinones"
+            "Substituted cathinones"
           ],
           "psychoactive": [
             "Stimulants"
@@ -48406,7 +48649,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -48689,7 +48932,11 @@
         ],
         "summary": "",
         "addictionPotential": "moderately physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol, benzodiazepines or opioids",
+          "exact toxic dosage is unknown"
+        ],
         "crossTolerances": [
           "GABA"
         ],
@@ -48759,7 +49006,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Racetams",
+            "Substituted piperidines"
+          ],
           "psychoactive": [
             "Nootropic"
           ]
@@ -48884,7 +49134,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Substituted piperidines",
+            "Anilidopiperidine"
+          ],
           "psychoactive": [
             "Opioids"
           ]
@@ -49009,7 +49262,11 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "potentially fatal at heavy dosages",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines",
+          "unintentionally transporting the substance from the skin by touching the mouth, nose or eyes is dangerous"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -49420,7 +49677,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -49559,7 +49819,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -49644,7 +49907,10 @@
         "roas": [],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepine",
           "thienodiazepine"
@@ -49840,7 +50106,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -49999,7 +50268,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -50545,7 +50817,7 @@
         ],
         "class": {
           "chemical": [
-            "Butyric_acid"
+            "Butyric acid"
           ],
           "psychoactive": [
             "Depressant"
@@ -50613,7 +50885,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately to highly physically and moderately psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "Doses above 10 grams are associated with a risk of death",
+          "considered to be a safe and non-toxic substance when used responsibly or medically"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": [
           {
@@ -51051,7 +51326,16 @@
             "url": "https://psychonautwiki.org/wiki/Muscle_twitching"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Tetrahydroisoxazole",
+            "Tetrahydroisoxazolopyridine"
+          ],
+          "psychoactive": [
+            "Hallucinogens",
+            "Depressant"
+          ]
+        },
         "tolerance": null,
         "roas": [
           {
@@ -51173,7 +51457,10 @@
           "chemical": [
             "Benzazepine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Sedative",
+            "Oneirogen"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -51730,7 +52017,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Butyrophenone",
+            "Substituted piperidines"
+          ],
           "psychoactive": [
             "Antipsychotic"
           ]
@@ -51777,7 +52067,10 @@
         ],
         "summary": "",
         "addictionPotential": null,
-        "toxicity": null,
+        "toxicity": [
+          "can have serious side effects at higher dosages",
+          "risk of having severe extrapyramidal symptoms and muscle rigidity"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -51986,7 +52279,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -52480,7 +52773,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -52669,7 +52962,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -53131,7 +53424,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -53189,7 +53482,7 @@
         "effects": [],
         "class": {
           "chemical": [
-            "Inorganic_molecule"
+            "Inorganic molecule"
           ],
           "psychoactive": [
             "Dissociatives"
@@ -53331,7 +53624,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -54529,9 +54822,12 @@
         ],
         "class": {
           "chemical": [
-            "Indole_alkaloids"
+            "Indole alkaloids"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Opioids"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -56403,7 +56699,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -56678,7 +56977,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -56860,7 +57162,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_piperazines"
+            "Substituted piperazines"
           ],
           "psychoactive": [
             "Stimulants"
@@ -57275,7 +57577,11 @@
           "chemical": [
             "Amphetamine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "repeated and heavy usage",
@@ -57857,7 +58163,11 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "MDxx",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Entactogens"
           ]
@@ -58324,7 +58634,17 @@
             "url": "https://psychonautwiki.org/wiki/Neurotoxicity"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "MDxx",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "with prolonged and repeated use",
           "half": "1 month",
@@ -58603,7 +58923,17 @@
             "url": "https://psychonautwiki.org/wiki/Muscle_twitching"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "MDxx",
+            "Pyrrolidinophenone",
+            "Substituted cathinones"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": null,
         "roas": [
           {
@@ -58980,7 +59310,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -59367,7 +59697,16 @@
             "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "with prolonged and repeated use",
           "half": "1 months",
@@ -59632,7 +59971,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -60636,7 +60975,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Oneirogen"
@@ -61008,7 +61347,10 @@
           "chemical": [
             "Adamantanes"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Dissociatives",
+            "Deliriant"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -61203,7 +61545,16 @@
             "url": "https://psychonautwiki.org/wiki/Body_odor_alteration"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Khat#1#",
+            "Substituted cathinones"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "3 - 7 days",
@@ -61457,7 +61808,10 @@
         "roas": [],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "moderate toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -61722,7 +62076,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -61951,7 +62305,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "moderate toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -62217,7 +62574,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -62509,7 +62866,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -63045,7 +63405,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive",
-        "toxicity": null,
+        "toxicity": [
+          "doses of over 300mg can be dangerous for first time users",
+          "safe at appropriate dosages"
+        ],
         "crossTolerances": [
           "GABA|gabaergic",
           "depressants"
@@ -63135,7 +63498,16 @@
             "url": "https://psychonautwiki.org/wiki/Talk:Anhedonia"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Khat#1#",
+            "Substituted cathinones"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
+        },
         "tolerance": null,
         "roas": [
           {
@@ -64143,7 +64515,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -64434,7 +64806,10 @@
           "chemical": [
             "Khat#1#"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -64697,7 +65072,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenidates"
+            "Substituted phenidates"
           ],
           "psychoactive": [
             "Stimulants"
@@ -65657,7 +66032,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -65923,7 +66298,11 @@
           "chemical": [
             "Piperazinoazepine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Deliriant",
+            "Depressant",
+            "Antidepressants"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -66079,7 +66458,7 @@
             "Benzhydryl"
           ],
           "psychoactive": [
-            "Eugeroic"
+            "Eugeroics"
           ]
         },
         "tolerance": {
@@ -66304,7 +66683,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -66787,7 +67166,10 @@
         ],
         "summary": "",
         "addictionPotential": "is not known to be addictive",
-        "toxicity": null,
+        "toxicity": [
+          "is neurotoxic",
+          "can be fatal in extremely high doses"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": [
           {
@@ -66906,7 +67288,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Substituted amino acid",
+            "Cysteine"
+          ],
           "psychoactive": [
             "Nootropic"
           ]
@@ -67951,7 +68336,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Aminoindane"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -68073,7 +68461,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -68231,7 +68619,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Pyridine",
+            "Substituted pyrrolidines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -68504,7 +68895,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -68952,7 +69346,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "moderate potential toxicity relative to its dose due to its potency",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -69629,7 +70026,10 @@
           "chemical": [
             "Racetams"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Nootropic"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -69677,7 +70077,10 @@
         ],
         "summary": "",
         "addictionPotential": "non-addictive with a low potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "safe even when high doses are consumed for a long period of time",
+          "exact toxic dosage is unknown"
+        ],
         "crossTolerances": [
           "racetam",
           "nootropic"
@@ -69789,7 +70192,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -69878,7 +70281,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -70009,7 +70415,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_morphinans"
+            "Substituted morphinans"
           ],
           "psychoactive": [
             "Opioids"
@@ -71445,7 +71851,16 @@
             "url": "https://psychonautwiki.org/wiki/Cognitive_dysphoria"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Hallucinogens",
+            "Entactogens"
+          ]
+        },
         "tolerance": null,
         "roas": [
           {
@@ -71470,7 +71885,10 @@
         ],
         "summary": "",
         "addictionPotential": null,
-        "toxicity": null,
+        "toxicity": [
+          "can be considered extremely toxic when compared to other substances such as Methamphetamine or MDMA",
+          "Ingestion of PMA has been associated with severe tachycardia (abnormally high heart rate), seizures, hyperthermia, and death"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": [
           {
@@ -71654,7 +72072,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Entactogens"
           ]
@@ -71680,7 +72101,10 @@
         ],
         "summary": "",
         "addictionPotential": null,
-        "toxicity": null,
+        "toxicity": [
+          "can be considered extremely toxic when compared to other substances such as Methamphetamine or MDMA",
+          "Ingestion of PMMA has been associated with severe tachycardia (abnormally high heart rate), seizures, hyperthermia, and death"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -71785,7 +72209,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Stimulants"
@@ -72739,7 +73163,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "moderate toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -72914,7 +73341,10 @@
           "chemical": [
             "Khat#1#"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -73106,7 +73536,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_piperidines"
+            "Substituted piperidines"
           ],
           "psychoactive": [
             "Opioids"
@@ -73162,7 +73592,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "high toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -73392,7 +73825,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -73725,7 +74161,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol, benzodiazepines or opioids"
+        ],
         "crossTolerances": [
           "GABA"
         ],
@@ -74093,7 +74532,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "moderate toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -74200,7 +74642,10 @@
           "chemical": [
             "Racetams"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Nootropic"
+          ]
         },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
@@ -74252,7 +74697,10 @@
         ],
         "summary": "",
         "addictionPotential": "non-addictive with a low potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "safe even when high doses are consumed for a long period of time",
+          "exact toxic dosage is unknown"
+        ],
         "crossTolerances": [
           "racetam",
           "nootropic"
@@ -74370,7 +74818,10 @@
           "chemical": [
             "GABA"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Depressant",
+            "Nootropic"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -74418,7 +74869,10 @@
         ],
         "summary": "",
         "addictionPotential": "unknown",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol, benzodiazepines or opioids"
+        ],
         "crossTolerances": [
           "GABA"
         ],
@@ -74640,7 +75094,7 @@
         ],
         "class": {
           "chemical": [
-            "Alkyl_nitrites"
+            "Alkyl nitrites"
           ],
           "psychoactive": null
         },
@@ -75336,7 +75790,11 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amphetamine",
+            "Substituted pyrrolidines",
+            "Substituted amphetamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -75563,7 +76021,10 @@
           "chemical": [
             "Phenothiazine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Deliriant",
+            "Depressant"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -76061,7 +76522,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -76138,10 +76599,6 @@
           {
             "name": "Physical euphoria",
             "url": "https://psychonautwiki.org/wiki/Physical_euphoria"
-          },
-          {
-            "name": "Bronchodilation",
-            "url": "https://psychonautwiki.org/wiki/Bronchodilation"
           },
           {
             "name": "Thought acceleration",
@@ -76260,39 +76717,9 @@
         "addictionPotential": null,
         "toxicity": null,
         "crossTolerances": null,
-        "uncertainInteractions": [
-          {
-            "name": "Alcohol"
-          },
-          {
-            "name": "Methoxetamine"
-          },
-          {
-            "name": "Dissociatives"
-          }
-        ],
-        "unsafeInteractions": [
-          {
-            "name": "Dextromethorphan"
-          },
-          {
-            "name": "MDMA"
-          },
-          {
-            "name": "Stimulants"
-          }
-        ],
-        "dangerousInteractions": [
-          {
-            "name": "25x-NBOMe"
-          },
-          {
-            "name": "25x-NBOH"
-          },
-          {
-            "name": "Tramadol"
-          }
-        ]
+        "uncertainInteractions": null,
+        "unsafeInteractions": null,
+        "dangerousInteractions": null
       },
       {
         "name": "Psilocin",
@@ -76637,7 +77064,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -77073,7 +77500,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
           "psychoactive": [
             "Psychedelics"
@@ -77274,7 +77701,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -77810,7 +78240,7 @@
         ],
         "class": {
           "chemical": [
-            "Nitrogenous_organic_acid"
+            "Nitrogenous organic acid"
           ],
           "psychoactive": [
             "Nootropic"
@@ -77950,7 +78380,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Adamantanes",
+            "Indolecarboxamide"
+          ],
           "psychoactive": [
             "Cannabinoid"
           ]
@@ -78233,7 +78666,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Terpenoid",
+            "Salvinorin"
+          ],
           "psychoactive": [
             "Hallucinogens"
           ]
@@ -78737,7 +79173,10 @@
           "chemical": [
             "Tetralin"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Selective serotonin reuptake inhibitor",
+            "Antidepressants"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -79039,7 +79478,11 @@
         ],
         "summary": "",
         "addictionPotential": "extremely addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "potentially fatal at heavy dosages",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines",
+          "unintentionally spilling a very small amount of sufentanil on one's skin could result in a fatal overdose."
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -79776,7 +80219,10 @@
           "chemical": [
             "Amphetamine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -79973,9 +80419,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_amphetamines"
+            "Substituted amphetamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -80186,7 +80635,16 @@
             "url": "https://psychonautwiki.org/wiki/Immersion_enhancement"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Amphetamine",
+            "Substituted amphetamines"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Psychedelics"
+          ]
+        },
         "tolerance": {
           "full": "almost immediately after ingestion",
           "half": "3 days",
@@ -80461,7 +80919,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -80683,7 +81144,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -80901,7 +81365,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "4-oxazolidinone",
+            "Substituted aminorexes"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -81074,7 +81541,16 @@
             "url": "https://psychonautwiki.org/wiki/Compulsive_redosing"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Xanthines",
+            "Purine alkaloid"
+          ],
+          "psychoactive": [
+            "Stimulants",
+            "Nootropic"
+          ]
+        },
         "tolerance": {
           "full": "develops with prolonged and repeated use",
           "half": "3 - 7 days",
@@ -81217,7 +81693,7 @@
         ],
         "class": {
           "chemical": [
-            "Amino_acid_analogue"
+            "Amino acid analogue"
           ],
           "psychoactive": [
             "Nootropic"
@@ -81482,7 +81958,17 @@
             "url": "https://psychonautwiki.org/wiki/Headache"
           }
         ],
-        "class": null,
+        "class": {
+          "chemical": [
+            "Dibenzothiazepine",
+            "Tricyclic antidepressant"
+          ],
+          "psychoactive": [
+            "Nootropic",
+            "Opioids",
+            "Antidepressants"
+          ]
+        },
         "tolerance": {
           "full": "with prolonged use",
           "half": "3 - 7 days",
@@ -81742,7 +82228,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -81991,7 +82480,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -82142,7 +82634,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tropanes"
+            "Substituted tropanes"
           ],
           "psychoactive": [
             "Stimulants"
@@ -82358,7 +82850,10 @@
           }
         ],
         "class": {
-          "chemical": null,
+          "chemical": [
+            "Amino acid",
+            "Substituted phenethylamines"
+          ],
           "psychoactive": [
             "Stimulants"
           ]
@@ -82611,7 +83106,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive with a high potential for abuse",
-        "toxicity": null,
+        "toxicity": [
+          "high toxicity relative to its dose due to its extreme potency",
+          "potentially lethal when mixed with depressants like alcohol or benzodiazepines"
+        ],
         "crossTolerances": [
           "opioids"
         ],
@@ -82879,7 +83377,11 @@
           "chemical": [
             "Pyrazolopyrimidine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Hallucinogens",
+            "Depressant",
+            "Hypnotic"
+          ]
         },
         "tolerance": {
           "full": "within a couple of weeks of daily use",
@@ -82939,7 +83441,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderate physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like benzodiazepines, alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -83198,7 +83703,10 @@
           "chemical": [
             "Imidazopyridine"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Hallucinogens",
+            "Depressant"
+          ]
         },
         "tolerance": null,
         "roas": [
@@ -83254,7 +83762,10 @@
         ],
         "summary": "",
         "addictionPotential": "moderately addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like alcohol or opioids"
+        ],
         "crossTolerances": null,
         "uncertainInteractions": null,
         "unsafeInteractions": null,
@@ -83369,7 +83880,10 @@
           "chemical": [
             "Cyclopyrrolone"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Hallucinogens",
+            "Depressant"
+          ]
         },
         "tolerance": {
           "full": "within a couple of weeks of daily use",
@@ -83421,7 +83935,10 @@
         ],
         "summary": "",
         "addictionPotential": "extremely physically and psychologically addictive",
-        "toxicity": null,
+        "toxicity": [
+          "low toxicity",
+          "potentially lethal when mixed with depressants like benzodiazepines, alcohol or opioids"
+        ],
         "crossTolerances": [
           "benzodiazepines"
         ],
@@ -83631,9 +84148,12 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_tryptamines"
+            "Substituted tryptamines"
           ],
-          "psychoactive": null
+          "psychoactive": [
+            "Psychedelics",
+            "Entactogens"
+          ]
         },
         "tolerance": {
           "full": "almost immediately after ingestion",
@@ -83914,7 +84434,7 @@
         ],
         "class": {
           "chemical": [
-            "Substituted_phenethylamines"
+            "Substituted phenethylamines"
           ],
           "psychoactive": [
             "Psychedelics"
