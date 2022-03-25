@@ -97,7 +97,8 @@ struct SubstanceDecoder {
         "Entheogen",
         "Racetams",
         "Sedative",
-        "Stimulants"
+        "Stimulants",
+        "Eugeroics"
     ].map({$0.lowercased()}))
 
     func getURL() -> URL? {
