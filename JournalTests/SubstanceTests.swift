@@ -154,6 +154,7 @@ class SubstanceTests: XCTestCase {
         XCTAssertTrue(Set(lsd.unsafePsychoactivesToShow.map { $0.name }).contains("Deliriants"))
         XCTAssertTrue(Set(lsd.unsafeChemicalsToShow.map { $0.name }).contains("Tricyclic Antidepressants"))
         XCTAssertTrue(Set(lsd.unsafeUnresolvedsToShow.map { $0.name }).contains("Ritonavir"))
+        XCTAssertTrue(Set(lsd.dangerousUnresolvedsToShow.map { $0.name }).contains("Lithium"))
     }
 
     // swiftlint:disable function_body_length

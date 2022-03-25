@@ -1042,8 +1042,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1P-ETH-LAD",
@@ -1318,8 +1326,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1P-LSD",
@@ -1714,8 +1730,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1V-LSD",
@@ -2118,8 +2142,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1cP-AL-LAD",
@@ -2495,8 +2527,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1cP-LSD",
@@ -2885,8 +2925,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "1cP-MiPLA",
@@ -3234,8 +3282,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2,5-DMA",
@@ -3337,8 +3393,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2-Aminoindane",
@@ -5319,8 +5383,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "25B-NBOMe",
@@ -5636,7 +5708,11 @@
             "name": "Tramadol"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25C-NBOH",
@@ -6031,8 +6107,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "25C-NBOMe",
@@ -6450,7 +6534,11 @@
             "name": "ΑMT"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25D-NBOMe",
@@ -6858,7 +6946,11 @@
             "name": "ΑMT"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25E-NBOH",
@@ -7489,7 +7581,11 @@
             "name": "Tramadol"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25I-NBOH",
@@ -7896,8 +7992,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "25I-NBOMe",
@@ -8392,7 +8496,11 @@
             "name": "ΑMT"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25N-NBOMe",
@@ -8774,7 +8882,11 @@
             "name": "ΑMT"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium]"
+          }
+        ]
       },
       {
         "name": "25x-NBOH",
@@ -9291,8 +9403,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-B-FLY",
@@ -9616,8 +9736,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-C",
@@ -9894,8 +10022,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-D",
@@ -10174,8 +10310,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-E",
@@ -10527,8 +10671,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-H",
@@ -10610,8 +10762,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-I",
@@ -10906,8 +11066,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-P",
@@ -11218,8 +11386,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "2C-T",
@@ -12554,8 +12730,16 @@
             "name": "nbomes"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "ΑMT"
+          }
+        ]
       },
       {
         "name": "2M2B",
@@ -17670,8 +17854,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "3C-P",
@@ -18017,8 +18209,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-AcO-DET",
@@ -18365,8 +18565,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-AcO-DMT",
@@ -18866,8 +19074,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-AcO-DiPT",
@@ -19106,8 +19322,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-AcO-MET",
@@ -19406,8 +19630,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-AcO-MiPT",
@@ -19694,8 +19926,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-FA",
@@ -20706,8 +20946,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-DPT",
@@ -21043,8 +21291,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-DiPT",
@@ -21287,8 +21543,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-EPT",
@@ -21505,8 +21769,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-MET",
@@ -21866,8 +22138,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-MPT",
@@ -22110,8 +22390,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-HO-MiPT",
@@ -22486,8 +22774,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4-MEC",
@@ -23313,8 +23609,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "4F-ADB",
@@ -25398,8 +25702,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "5-MeO-DiPT",
@@ -26553,8 +26865,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "5F-AKB48",
@@ -29238,8 +29558,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "ALD-52",
@@ -29627,8 +29955,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "APICA",
@@ -32290,7 +32626,11 @@
         ],
         "uncertainInteractions": null,
         "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "MAOI"
+          }
+        ]
       },
       {
         "name": "Antidepressants",
@@ -33212,8 +33552,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Baclofen",
@@ -34396,8 +34744,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Bufotenin",
@@ -34630,8 +34986,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Buprenorphine",
@@ -39003,8 +39367,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "DOB",
@@ -39395,8 +39767,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "DOC",
@@ -39812,8 +40192,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "DOI",
@@ -40160,8 +40548,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "DOM",
@@ -42885,7 +43281,11 @@
         "crossTolerances": [
           "dissociatives"
         ],
-        "uncertainInteractions": null,
+        "uncertainInteractions": [
+          {
+            "name": "Benzodiazepines"
+          }
+        ],
         "unsafeInteractions": [
           {
             "name": "DOx"
@@ -43805,7 +44205,11 @@
         ],
         "uncertainInteractions": null,
         "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "MAOI"
+          }
+        ]
       },
       {
         "name": "Diclazepam",
@@ -46100,8 +46504,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Efavirenz",
@@ -47378,8 +47790,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Etazene",
@@ -54693,7 +55113,11 @@
           }
         ],
         "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ]
       },
       {
         "name": "Kratom",
@@ -54987,7 +55411,11 @@
             "name": "Cocaine"
           }
         ],
-        "unsafeInteractions": null,
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
         "dangerousInteractions": null
       },
       {
@@ -55372,8 +55800,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "LSD",
@@ -55845,7 +56281,11 @@
             "name": "Deliriant"
           }
         ],
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "LSM-775",
@@ -56228,8 +56668,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "LSZ",
@@ -56490,8 +56938,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Lisdexamfetamine",
@@ -62167,8 +62623,16 @@
             "name": "MAOI"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "ΑMT"
+          }
+        ]
       },
       {
         "name": "Methadone",
@@ -64157,7 +64621,11 @@
             "name": "Selective serotonin reuptake inhibitor"
           }
         ],
-        "unsafeInteractions": null,
+        "unsafeInteractions": [
+          {
+            "name": "MAOI"
+          }
+        ],
         "dangerousInteractions": [
           {
             "name": "ΑMT"
@@ -65898,8 +66366,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "MiPT",
@@ -66360,7 +66836,11 @@
         "addictionPotential": "not habit-forming",
         "toxicity": null,
         "crossTolerances": null,
-        "uncertainInteractions": null,
+        "uncertainInteractions": [
+          {
+            "name": "Antidepressants"
+          }
+        ],
         "unsafeInteractions": null,
         "dangerousInteractions": null
       },
@@ -70896,8 +71376,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "PCE",
@@ -72706,8 +73194,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Peganum harmala",
@@ -77591,8 +78087,16 @@
             "name": "Stimulants"
           }
         ],
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "unsafeInteractions": [
+          {
+            "name": "Tramadol"
+          }
+        ],
+        "dangerousInteractions": [
+          {
+            "name": "Lithium"
+          }
+        ]
       },
       {
         "name": "Pyrazolam",
@@ -77907,7 +78411,11 @@
           }
         ],
         "unsafeInteractions": null,
-        "dangerousInteractions": null
+        "dangerousInteractions": [
+          {
+            "name": "Depressant"
+          }
+        ]
       },
       {
         "name": "RIMA",
@@ -82249,7 +82757,11 @@
             "name": "PCP"
           }
         ],
-        "unsafeInteractions": null,
+        "unsafeInteractions": [
+          {
+            "name": "2C-T-x"
+          }
+        ],
         "dangerousInteractions": [
           {
             "name": "MAOI"
