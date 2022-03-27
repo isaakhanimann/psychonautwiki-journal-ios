@@ -51,8 +51,33 @@ extension Substance: Comparable {
         (crossToleranceChemicals?.allObjects as? [ChemicalClass] ?? []).sorted()
     }
 
-    private var uncertainSubstancesUnwrapped: [Substance] {
-        (uncertainSubstances?.allObjects as? [Substance] ?? []).sorted()
+    private var uncertainSubstancesOfClasses: [Substance] {
+        (psychoactivesUnwrapped.flatMap { psy in
+            psy.uncertainSubstancesToShow
+        } + chemicalsUnwrapped.flatMap { che in
+            che.uncertainSubstancesToShow
+        }).uniqued()
+    }
+
+    private var unsafeSubstancesOfClasses: [Substance] {
+        (psychoactivesUnwrapped.flatMap { psy in
+            psy.unsafeSubstancesToShow
+        } + chemicalsUnwrapped.flatMap { che in
+            che.unsafeSubstancesToShow
+        }).uniqued()
+    }
+
+    private var dangerousSubstancesOfClasses: [Substance] {
+        (psychoactivesUnwrapped.flatMap { psy in
+            psy.dangerousSubstancesToShow
+        } + chemicalsUnwrapped.flatMap { che in
+            che.dangerousSubstancesToShow
+        }).uniqued()
+    }
+
+    private var uncertainSubstancesUnwrapped: Set<Substance> {
+        let subs = uncertainSubstances as? Set<Substance> ?? Set<Substance>()
+        return subs.union(uncertainSubstancesOfClasses)
     }
 
     private var uncertainPsychoactivesUnwrapped: [PsychoactiveClass] {
@@ -67,8 +92,9 @@ extension Substance: Comparable {
         (uncertainUnresolveds?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
-    private var unsafeSubstancesUnwrapped: [Substance] {
-        (unsafeSubstances?.allObjects as? [Substance] ?? []).sorted()
+    private var unsafeSubstancesUnwrapped: Set<Substance> {
+        let subs = unsafeSubstances as? Set<Substance> ?? Set<Substance>()
+        return subs.union(unsafeSubstancesOfClasses)
     }
 
     private var unsafePsychoactivesUnwrapped: [PsychoactiveClass] {
@@ -83,8 +109,9 @@ extension Substance: Comparable {
         (unsafeUnresolveds?.allObjects as? [UnresolvedInteraction] ?? []).sorted()
     }
 
-    private var dangerousSubstancesUnwrapped: [Substance] {
-        (dangerousSubstances?.allObjects as? [Substance] ?? []).sorted()
+    private var dangerousSubstancesUnwrapped: Set<Substance> {
+        let subs = dangerousSubstances as? Set<Substance> ?? Set<Substance>()
+        return subs.union(dangerousSubstancesOfClasses)
     }
 
     private var dangerousPsychoactivesUnwrapped: [PsychoactiveClass] {
@@ -260,14 +287,14 @@ extension Substance: SubstanceInteractable {
     var dangerousSubstancesToShow: [Substance] {
         dangerousSubstancesUnwrapped.filter { sub in
             !dangerousPsychoactivesContain(substance: sub) && !dangerousChemicalsContain(substance: sub)
-        }
+        }.sorted()
     }
 
     var unsafeSubstancesToShow: [Substance] {
         unsafeSubstancesUnwrapped.filter { sub in
             !dangerousPsychoactivesContain(substance: sub) && !dangerousChemicalsContain(substance: sub)
             && !unsafePsychoactivesContain(substance: sub) && !unsafeChemicalsContain(substance: sub)
-        }
+        }.sorted()
     }
 
     var uncertainSubstancesToShow: [Substance] {
@@ -275,7 +302,7 @@ extension Substance: SubstanceInteractable {
             !dangerousPsychoactivesContain(substance: sub) && !dangerousChemicalsContain(substance: sub)
             && !unsafePsychoactivesContain(substance: sub) && !unsafeChemicalsContain(substance: sub)
             && !uncertainPsychoactivesContain(substance: sub) && !uncertainChemicalsContain(substance: sub)
-        }
+        }.sorted()
     }
 
     func uncertainChemicalsContain(substance: Substance) -> Bool {
