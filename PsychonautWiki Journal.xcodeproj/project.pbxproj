@@ -1398,7 +1398,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
@@ -1408,7 +1408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MY_BUNDLE_DISPLAY_NAME = Debug;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug";
 				PRODUCT_NAME = Journal;
@@ -1424,7 +1424,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
@@ -1434,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MY_BUNDLE_DISPLAY_NAME = Journal;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = Journal;
