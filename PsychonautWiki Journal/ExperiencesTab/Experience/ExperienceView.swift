@@ -18,8 +18,12 @@ struct ExperienceView: View {
             }
             if !isEditing || !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section("Ingestions") {
-                    ForEach(experience.sortedIngestionsUnwrapped, content: IngestionRow.init)
-                        .onDelete(perform: deleteIngestions)
+
+                    ForEach(experience.sortedIngestionsUnwrapped) { ing in
+                        IngestionRow(ingestion: ing)
+                            .deleteDisabled(!isEditing)
+                    }
+                    .onDelete(perform: deleteIngestions)
                     if !isEditing {
                         Button {
                             sheetViewModel.sheetToShow = .addIngestionFromExperience(experience: experience)
