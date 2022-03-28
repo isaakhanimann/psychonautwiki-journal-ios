@@ -176,7 +176,6 @@
 		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
 		EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */; };
 		EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */; };
-		EAF76CC227D9669200945587 /* UnknownDoseAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CC127D9669200945587 /* UnknownDoseAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,7 +375,6 @@
 		EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRoute.swift; sourceTree = "<group>"; };
 		EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseDose-ViewModel.swift"; sourceTree = "<group>"; };
-		EAF76CC127D9669200945587 /* UnknownDoseAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownDoseAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,7 +412,6 @@
 				EAE471A826CBA664009FB0EC /* ChooseDoseView.swift */,
 				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
-				EAF76CC127D9669200945587 /* UnknownDoseAlert.swift */,
 			);
 			path = Dose;
 			sourceTree = "<group>";
@@ -1222,7 +1219,6 @@
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
-				EAF76CC227D9669200945587 /* UnknownDoseAlert.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */,
 			);

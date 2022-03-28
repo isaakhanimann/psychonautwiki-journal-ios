@@ -11,13 +11,53 @@ struct ChooseDoseView: View {
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
     var body: some View {
-        ZStack {
-            regularContent
-                .blur(radius: viewModel.isShowingUnknownDoseAlert ? 10 : 0)
-                .allowsHitTesting(viewModel.isShowingUnknownDoseAlert ? false : true)
-            if viewModel.isShowingUnknownDoseAlert {
-                UnknownDoseAlert(viewModel: viewModel)
+        ZStack(alignment: .bottom) {
+            Form {
+                doseSection
+                Section("Purity") {
+                    Stepper(
+                        "\(viewModel.purity.formatted())%",
+                        value: $viewModel.purity,
+                        in: 1...100,
+                        step: 1
+                    )
+                    HStack {
+                        Text("Raw Amount")
+                        Spacer()
+                        Text(viewModel.impureDoseText)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                if isEyeOpen {
+                    Section {
+                        Button {
+                            viewModel.selectedPureDose = nil
+                            viewModel.isShowingNext = true
+                        } label: {
+                            Label("Use Unknown Dose", systemImage: "exclamationmark.triangle")
+                        }
+
+                    } footer: {
+                        // swiftlint:disable line_length
+                        Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
+                    }
+                }
+                EmptySectionForPadding()
             }
+            NavigationLink(
+                destination: ChooseTimeAndColor(
+                    substance: substance,
+                    administrationRoute: administrationRoute,
+                    dose: viewModel.selectedPureDose,
+                    units: viewModel.selectedUnits
+                ),
+                isActive: $viewModel.isShowingNext,
+                label: {
+                    Text("Next")
+                        .primaryButtonText()
+                }
+            )
+            .padding()
         }
         .navigationBarTitle("Choose Dose")
         .toolbar {
@@ -35,60 +75,6 @@ struct ChooseDoseView: View {
         .task {
             let routeUnits = substance.getDose(for: administrationRoute)?.units
             viewModel.initializeUnits(routeUnits: routeUnits)
-        }
-    }
-
-    var regularContent: some View {
-        ZStack(alignment: .bottom) {
-            Form {
-                doseSection
-                if isEyeOpen {
-                    HStack {
-                        Spacer()
-                        Button("Unknown Dose/Purity") {
-                            viewModel.isShowingUnknownDoseAlert.toggle()
-                        }
-                        .buttonStyle(.primary)
-                        Spacer()
-                    }
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets())
-                }
-                if let impureDoseUnwrap = viewModel.impureDoseRounded {
-                    Section("Purity") {
-                        Stepper(
-                            "\(viewModel.purity.formatted())%",
-                            value: $viewModel.purity,
-                            in: 1...100,
-                            step: 1
-                        )
-                        let units = substance.getDose(for: administrationRoute)?.units
-                        HStack {
-                            Text("Raw Amount")
-                            Spacer()
-                            Text(impureDoseUnwrap.formatted() + " " + (units ?? ""))
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-                EmptySectionForPadding()
-            }
-            let showNavigation = viewModel.selectedPureDose != nil
-            NavigationLink(
-                destination: ChooseTimeAndColor(
-                    substance: substance,
-                    administrationRoute: administrationRoute,
-                    dose: viewModel.selectedPureDose,
-                    units: viewModel.selectedUnits
-                ),
-                isActive: $viewModel.isShowingNext,
-                label: {
-                    Text("Next")
-                        .primaryButtonText()
-                }
-            )
-                .opacity(showNavigation ? 1 : 0)
-                .padding()
         }
     }
 
