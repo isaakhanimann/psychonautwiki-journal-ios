@@ -114,8 +114,6 @@ struct PersistenceController {
         let backgroundContext = container.newBackgroundContext()
         try await backgroundContext.perform {
             do {
-                // check if decoding will succeed
-                _ = try decodeSubstancesFile(from: data, with: backgroundContext)
                 // delete all substances, which deletes everything because all the relationships have a cascade delete
                 let fetchRequest: NSFetchRequest<Substance> = Substance.fetchRequest()
                 fetchRequest.includesPropertyValues = false
