@@ -97,11 +97,11 @@ struct PersistenceController {
     private func getCreationDate() -> Date {
         var dateComponents = DateComponents()
         dateComponents.year = 2022
-        dateComponents.month = 3
-        dateComponents.day = 25
+        dateComponents.month = 4
+        dateComponents.day = 11
         dateComponents.timeZone = TimeZone(abbreviation: "CEST")
-        dateComponents.hour = 14
-        dateComponents.minute = 14
+        dateComponents.hour = 13
+        dateComponents.minute = 52
         let calendar = Calendar(identifier: .gregorian)
         return calendar.date(from: dateComponents) ?? Date()
     }

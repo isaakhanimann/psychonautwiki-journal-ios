@@ -4,7 +4,7 @@
       "message": "Float cannot represent non numeric value: [15, 30, 40]",
       "path": [
         "substances",
-        68,
+        67,
         "roas",
         0,
         "dose",
@@ -17,7 +17,7 @@
       "message": "Float cannot represent non numeric value: [20, 40, 60]",
       "path": [
         "substances",
-        68,
+        67,
         "roas",
         0,
         "dose",
@@ -30,7 +30,7 @@
       "message": "String cannot represent value: [\"minutes\", \"hours\"]",
       "path": [
         "substances",
-        120,
+        119,
         "roas",
         0,
         "duration",
@@ -272,223 +272,6 @@
   ],
   "data": {
     "substances": [
-      {
-        "name": "1,3-DMAA",
-        "url": "https://psychonautwiki.org/wiki/1,3-DMAA",
-        "effects": [
-          {
-            "name": "Focus enhancement",
-            "url": "https://psychonautwiki.org/wiki/Focus_enhancement"
-          },
-          {
-            "name": "Motivation enhancement",
-            "url": "https://psychonautwiki.org/wiki/Motivation_enhancement"
-          },
-          {
-            "name": "Memory enhancement",
-            "url": "https://psychonautwiki.org/wiki/Memory_enhancement"
-          },
-          {
-            "name": "Dehydration",
-            "url": "https://psychonautwiki.org/wiki/Dehydration"
-          },
-          {
-            "name": "Nausea",
-            "url": "https://psychonautwiki.org/wiki/Nausea"
-          },
-          {
-            "name": "Vasoconstriction",
-            "url": "https://psychonautwiki.org/wiki/Vasoconstriction"
-          },
-          {
-            "name": "Frequent urination",
-            "url": "https://psychonautwiki.org/wiki/Frequent_urination"
-          },
-          {
-            "name": "Temporary erectile dysfunction",
-            "url": "https://psychonautwiki.org/wiki/Temporary_erectile_dysfunction"
-          },
-          {
-            "name": "Pupil dilation",
-            "url": "https://psychonautwiki.org/wiki/Pupil_dilation"
-          },
-          {
-            "name": "Bronchodilation",
-            "url": "https://psychonautwiki.org/wiki/Bronchodilation"
-          },
-          {
-            "name": "Thought acceleration",
-            "url": "https://psychonautwiki.org/wiki/Thought_acceleration"
-          },
-          {
-            "name": "Increased libido",
-            "url": "https://psychonautwiki.org/wiki/Increased_libido"
-          },
-          {
-            "name": "Ego inflation",
-            "url": "https://psychonautwiki.org/wiki/Ego_inflation"
-          },
-          {
-            "name": "Analysis enhancement",
-            "url": "https://psychonautwiki.org/wiki/Analysis_enhancement"
-          },
-          {
-            "name": "Cognitive euphoria",
-            "url": "https://psychonautwiki.org/wiki/Cognitive_euphoria"
-          },
-          {
-            "name": "Depression",
-            "url": "https://psychonautwiki.org/wiki/Depression"
-          },
-          {
-            "name": "Anxiety",
-            "url": "https://psychonautwiki.org/wiki/Anxiety"
-          },
-          {
-            "name": "Irritability",
-            "url": "https://psychonautwiki.org/wiki/Irritability"
-          },
-          {
-            "name": "Thought deceleration",
-            "url": "https://psychonautwiki.org/wiki/Thought_deceleration"
-          },
-          {
-            "name": "Disinhibition",
-            "url": "https://psychonautwiki.org/wiki/Disinhibition"
-          },
-          {
-            "name": "Stimulation",
-            "url": "https://psychonautwiki.org/wiki/Stimulation"
-          },
-          {
-            "name": "Wakefulness",
-            "url": "https://psychonautwiki.org/wiki/Wakefulness"
-          },
-          {
-            "name": "Appetite suppression",
-            "url": "https://psychonautwiki.org/wiki/Appetite_suppression"
-          },
-          {
-            "name": "Increased heart rate",
-            "url": "https://psychonautwiki.org/wiki/Increased_heart_rate"
-          },
-          {
-            "name": "Increased blood pressure",
-            "url": "https://psychonautwiki.org/wiki/Increased_blood_pressure"
-          },
-          {
-            "name": "Increased perspiration",
-            "url": "https://psychonautwiki.org/wiki/Increased_perspiration"
-          },
-          {
-            "name": "Increased music appreciation",
-            "url": "https://psychonautwiki.org/wiki/Increased_music_appreciation"
-          },
-          {
-            "name": "Thought organization",
-            "url": "https://psychonautwiki.org/wiki/Thought_organization"
-          },
-          {
-            "name": "Abnormal heartbeat",
-            "url": "https://psychonautwiki.org/wiki/Abnormal_heartbeat"
-          },
-          {
-            "name": "Stamina enhancement",
-            "url": "https://psychonautwiki.org/wiki/Stamina_enhancement"
-          },
-          {
-            "name": "Increased bodily temperature",
-            "url": "https://psychonautwiki.org/wiki/Increased_bodily_temperature"
-          },
-          {
-            "name": "Teeth grinding",
-            "url": "https://psychonautwiki.org/wiki/Teeth_grinding"
-          },
-          {
-            "name": "Compulsive redosing",
-            "url": "https://psychonautwiki.org/wiki/Compulsive_redosing"
-          },
-          {
-            "name": "Cognitive fatigue",
-            "url": "https://psychonautwiki.org/wiki/Cognitive_fatigue"
-          },
-          {
-            "name": "Motivation suppression",
-            "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
-          },
-          {
-            "name": "Euphoria",
-            "url": "https://psychonautwiki.org/wiki/Euphoria"
-          }
-        ],
-        "class": {
-          "chemical": [
-            "Amine"
-          ],
-          "psychoactive": [
-            "Stimulants"
-          ]
-        },
-        "tolerance": null,
-        "roas": [
-          {
-            "name": "oral",
-            "dose": {
-              "units": "mg",
-              "threshold": 30,
-              "light": {
-                "min": 50,
-                "max": 100
-              },
-              "common": {
-                "min": 100,
-                "max": 200
-              },
-              "strong": {
-                "min": 200,
-                "max": 500
-              },
-              "heavy": 500
-            },
-            "duration": {
-              "onset": {
-                "min": 15,
-                "max": 30,
-                "units": "minutes"
-              },
-              "comeup": null,
-              "peak": {
-                "min": 2,
-                "max": 4,
-                "units": "hours"
-              },
-              "offset": {
-                "min": 3,
-                "max": 5,
-                "units": "hours"
-              },
-              "total": {
-                "min": 6,
-                "max": 8,
-                "units": "hours"
-              },
-              "afterglow": {
-                "min": 2,
-                "max": 10,
-                "units": null
-              }
-            },
-            "bioavailability": null
-          }
-        ],
-        "summary": "",
-        "addictionPotential": null,
-        "toxicity": null,
-        "crossTolerances": null,
-        "uncertainInteractions": null,
-        "unsafeInteractions": null,
-        "dangerousInteractions": null
-      },
       {
         "name": "1,4-Butanediol",
         "url": "https://psychonautwiki.org/wiki/1,4-Butanediol",
@@ -15365,7 +15148,7 @@
             "name": "insufflated",
             "dose": {
               "units": "mg",
-              "threshold": 20,
+              "threshold": 10,
               "light": {
                 "min": 20,
                 "max": 40
@@ -15418,7 +15201,7 @@
             "name": "oral",
             "dose": {
               "units": "mg",
-              "threshold": 50,
+              "threshold": 25,
               "light": {
                 "min": 50,
                 "max": 150
@@ -30775,21 +30558,21 @@
           {
             "name": "oral",
             "dose": {
-              "units": "unit",
-              "threshold": 1,
+              "units": "mL EtOH",
+              "threshold": 13,
               "light": {
-                "min": 2,
-                "max": 3
+                "min": 25,
+                "max": 38
               },
               "common": {
-                "min": 3,
-                "max": 5
+                "min": 38,
+                "max": 64
               },
               "strong": {
-                "min": 5,
-                "max": 6
+                "min": 64,
+                "max": 76
               },
-              "heavy": 6
+              "heavy": 76
             },
             "duration": {
               "onset": {
@@ -34388,6 +34171,145 @@
             }
           }
         ],
+        "summary": "",
+        "addictionPotential": null,
+        "toxicity": null,
+        "crossTolerances": null,
+        "uncertainInteractions": null,
+        "unsafeInteractions": null,
+        "dangerousInteractions": null
+      },
+      {
+        "name": "Bromazolam",
+        "url": "https://psychonautwiki.org/wiki/Bromazolam",
+        "effects": [
+          {
+            "name": "Acuity suppression",
+            "url": "https://psychonautwiki.org/wiki/Acuity_suppression"
+          },
+          {
+            "name": "Emotion suppression",
+            "url": "https://psychonautwiki.org/wiki/Emotion_suppression"
+          },
+          {
+            "name": "Dizziness",
+            "url": "https://psychonautwiki.org/wiki/Dizziness"
+          },
+          {
+            "name": "Dream potentiation",
+            "url": "https://psychonautwiki.org/wiki/Dream_potentiation"
+          },
+          {
+            "name": "Anxiety",
+            "url": "https://psychonautwiki.org/wiki/Anxiety"
+          },
+          {
+            "name": "Irritability",
+            "url": "https://psychonautwiki.org/wiki/Irritability"
+          },
+          {
+            "name": "Thought deceleration",
+            "url": "https://psychonautwiki.org/wiki/Thought_deceleration"
+          },
+          {
+            "name": "Analysis suppression",
+            "url": "https://psychonautwiki.org/wiki/Analysis_suppression"
+          },
+          {
+            "name": "Thought disorganization",
+            "url": "https://psychonautwiki.org/wiki/Thought_disorganization"
+          },
+          {
+            "name": "Language suppression",
+            "url": "https://psychonautwiki.org/wiki/Language_suppression"
+          },
+          {
+            "name": "Memory suppression",
+            "url": "https://psychonautwiki.org/wiki/Memory_suppression"
+          },
+          {
+            "name": "Disinhibition",
+            "url": "https://psychonautwiki.org/wiki/Disinhibition"
+          },
+          {
+            "name": "Dream suppression",
+            "url": "https://psychonautwiki.org/wiki/Dream_suppression"
+          },
+          {
+            "name": "Appetite enhancement",
+            "url": "https://psychonautwiki.org/wiki/Appetite_enhancement"
+          },
+          {
+            "name": "Perception of bodily heaviness",
+            "url": "https://psychonautwiki.org/wiki/Perception_of_bodily_heaviness"
+          },
+          {
+            "name": "Sedation",
+            "url": "https://psychonautwiki.org/wiki/Sedation"
+          },
+          {
+            "name": "Motor control loss",
+            "url": "https://psychonautwiki.org/wiki/Motor_control_loss"
+          },
+          {
+            "name": "Respiratory depression",
+            "url": "https://psychonautwiki.org/wiki/Respiratory_depression"
+          },
+          {
+            "name": "Muscle relaxation",
+            "url": "https://psychonautwiki.org/wiki/Muscle_relaxation"
+          },
+          {
+            "name": "Anxiety suppression",
+            "url": "https://psychonautwiki.org/wiki/Anxiety_suppression"
+          },
+          {
+            "name": "Delusion",
+            "url": "https://psychonautwiki.org/wiki/Delusion"
+          },
+          {
+            "name": "Confusion",
+            "url": "https://psychonautwiki.org/wiki/Confusion"
+          },
+          {
+            "name": "Amnesia",
+            "url": "https://psychonautwiki.org/wiki/Amnesia"
+          },
+          {
+            "name": "Compulsive redosing",
+            "url": "https://psychonautwiki.org/wiki/Compulsive_redosing"
+          },
+          {
+            "name": "Motivation suppression",
+            "url": "https://psychonautwiki.org/wiki/Motivation_suppression"
+          },
+          {
+            "name": "Sleepiness",
+            "url": "https://psychonautwiki.org/wiki/Sleepiness"
+          },
+          {
+            "name": "Seizure suppression",
+            "url": "https://psychonautwiki.org/wiki/Seizure_suppression"
+          },
+          {
+            "name": "Euphoria",
+            "url": "https://psychonautwiki.org/wiki/Euphoria"
+          },
+          {
+            "name": "Blurred Vision",
+            "url": "https://psychonautwiki.org/wiki/Blurred_Vision"
+          }
+        ],
+        "class": {
+          "chemical": [
+            "Benzodiazepines"
+          ],
+          "psychoactive": [
+            "Depressant"
+          ]
+        },
+        "tolerance": null,
+        "roas": [],
         "summary": "",
         "addictionPotential": null,
         "toxicity": null,
@@ -43284,6 +43206,9 @@
         "uncertainInteractions": [
           {
             "name": "Benzodiazepines"
+          },
+          {
+            "name": "Cannabis"
           }
         ],
         "unsafeInteractions": [
@@ -43339,9 +43264,6 @@
           },
           {
             "name": "Antihistamine"
-          },
-          {
-            "name": "Bupropion"
           }
         ]
       },
@@ -44870,10 +44792,6 @@
           {
             "name": "Muscle twitching",
             "url": "https://psychonautwiki.org/wiki/Muscle_twitching"
-          },
-          {
-            "name": "Neurotoxicity",
-            "url": "https://psychonautwiki.org/wiki/Neurotoxicity"
           }
         ],
         "class": {
@@ -51229,10 +51147,6 @@
           {
             "name": "Stomach cramp",
             "url": "https://psychonautwiki.org/wiki/Stomach_cramp"
-          },
-          {
-            "name": "Neurotoxicity",
-            "url": "https://psychonautwiki.org/wiki/Neurotoxicity"
           }
         ],
         "class": {
@@ -55395,7 +55309,35 @@
           ]
         },
         "tolerance": null,
-        "roas": [],
+        "roas": [
+          {
+            "name": "oral",
+            "dose": {
+              "units": null,
+              "threshold": null,
+              "light": null,
+              "common": {
+                "min": 500,
+                "max": 1500
+              },
+              "strong": null,
+              "heavy": null
+            },
+            "duration": {
+              "onset": null,
+              "comeup": null,
+              "peak": null,
+              "offset": null,
+              "total": {
+                "min": 4,
+                "max": 10,
+                "units": "hours"
+              },
+              "afterglow": null
+            },
+            "bioavailability": null
+          }
+        ],
         "summary": "",
         "addictionPotential": null,
         "toxicity": null,
@@ -56191,7 +56133,7 @@
         "tolerance": {
           "full": "almost immediately after ingestion",
           "half": null,
-          "zero": "2 weeks"
+          "zero": "5 days"
         },
         "roas": [
           {
@@ -59212,6 +59154,12 @@
           },
           {
             "name": "5-Hydroxytryptophan"
+          },
+          {
+            "name": "Selective serotonin reuptake inhibitor"
+          },
+          {
+            "name": "SNRIs"
           }
         ],
         "dangerousInteractions": [
