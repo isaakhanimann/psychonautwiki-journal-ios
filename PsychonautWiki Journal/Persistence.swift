@@ -95,11 +95,15 @@ struct PersistenceController {
     }
 
     private func getCreationDate() -> Date {
-        let dateString = "2022/03/25 14:14"
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let creationDate = formatter.date(from: dateString)!
-        return creationDate
+        var dateComponents = DateComponents()
+        dateComponents.year = 2022
+        dateComponents.month = 3
+        dateComponents.day = 25
+        dateComponents.timeZone = TimeZone(abbreviation: "CEST")
+        dateComponents.hour = 14
+        dateComponents.minute = 14
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(from: dateComponents) ?? Date()
     }
 
     enum DecodingFileError: Error {
