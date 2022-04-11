@@ -190,16 +190,8 @@ func getMaxEndTime(for ingestions: [Ingestion]) -> Date? {
     for ingestion in ingestions {
         guard let duration = ingestion.substance?
                 .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
-        guard let onset = duration.onset?.maxSec else {return nil}
-        guard let comeup = duration.comeup?.maxSec else {return nil}
-        guard let peak = duration.peak?.maxSec else {return nil}
-        guard let offset = duration.offset?.maxSec else {return nil}
-        // Choose the latest possible offset to make sure that the graph fits all ingestions
-        let offsetEnd = onset
-            + comeup
-            + peak
-            + offset
-        let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(offsetEnd)
+        guard let lineLengthInSec = duration.maxLengthOfTimelineInSec else {return nil}
+        let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(lineLengthInSec)
         if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
             endOfGraphTime = maybeNewEndTime
         }

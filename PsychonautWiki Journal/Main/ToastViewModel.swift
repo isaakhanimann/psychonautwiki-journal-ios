@@ -1,6 +1,7 @@
 import Foundation
 
 class ToastViewModel: ObservableObject {
+    @Published var successToastMessage = "Success"
     @Published var isShowingSuccessToast = false
     @Published var isShowingErrorToast = false
     @Published var errorToastMessage = "Error"
@@ -10,7 +11,8 @@ class ToastViewModel: ObservableObject {
         isShowingErrorToast = true
     }
 
-    func showSuccessToast() {
+    func showSuccessToast(message: String = "Ingestion Added") {
+        successToastMessage = message
         isShowingSuccessToast = true
     }
 }

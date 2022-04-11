@@ -23,7 +23,7 @@ struct ContentView: View {
                 AlertToast(
                     displayMode: .alert,
                     type: .complete(Color.green),
-                    title: "Ingestion Added"
+                    title: toastViewModel.successToastMessage
                 )
             }
             .sheet(item: $sheetViewModel.sheetToShow) { item in

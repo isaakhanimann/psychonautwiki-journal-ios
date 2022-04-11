@@ -47,6 +47,7 @@ struct SettingsTab: View {
                         }
                     }
                 }
+                CalendarSectionInSettings()
                 Section {
                     HStack {
                         Text("Version")

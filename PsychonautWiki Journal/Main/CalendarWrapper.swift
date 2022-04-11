@@ -70,13 +70,11 @@ class CalendarWrapper: ObservableObject {
             experience.eventIdentifier = eventIdentifier
             return
         }
-
         guard store.event(withIdentifier: eventIdentifierUnwrapped) != nil else {
             let eventIdentifier = createNewEvent(from: experience)
             experience.eventIdentifier = eventIdentifier
             return
         }
-        experience.lastSyncToCalendar = Date()
         updateEvent(with: experience)
     }
 
@@ -89,12 +87,12 @@ class CalendarWrapper: ObservableObject {
         event.alarms = []
         event.title = experience.titleUnwrapped
         event.notes = getNotes(from: experience)
-
         let (start, end) = getStartAndEnd(for: experience)
         event.startDate = start
         event.endDate = end
         do {
             try store.save(event, span: .thisEvent)
+            experience.lastSyncToCalendar = Date()
         } catch {
             assertionFailure(error.localizedDescription)
         }
@@ -120,18 +118,19 @@ class CalendarWrapper: ObservableObject {
         eventUnwrapped.endDate = end
         do {
             try store.save(eventUnwrapped, span: .thisEvent)
+            experience.lastSyncToCalendar = Date()
         } catch {
             assertionFailure(error.localizedDescription)
         }
     }
 
     private func getStartAndEnd(for experience: Experience) -> (start: Date, end: Date) {
-        if let start = experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
-           let end = getMaxEndTime(for: experience.sortedIngestionsUnwrapped) {
+        let start = experience.dateForSorting
+        if let end = getMaxEndTime(for: experience.sortedIngestionsUnwrapped) {
             return (start, end)
         } else {
             let fiveHours: TimeInterval = 5*60*60
-            return (experience.creationDateUnwrapped, experience.creationDateUnwrapped.addingTimeInterval(fiveHours))
+            return (start, start.addingTimeInterval(fiveHours))
         }
     }
 

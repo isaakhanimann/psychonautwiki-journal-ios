@@ -62,7 +62,7 @@ struct ExperienceView: View {
                 }
             }
             if !experience.sortedIngestionsUnwrapped.isEmpty {
-                CalendarSection(experience: experience)
+                CalendarSectionInExperience(experience: experience)
             }
         }
         .task {

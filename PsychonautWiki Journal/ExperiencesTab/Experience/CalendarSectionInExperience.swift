@@ -1,7 +1,7 @@
 import SwiftUI
 import EventKit
 
-struct CalendarSection: View {
+struct CalendarSectionInExperience: View {
 
     @ObservedObject var experience: Experience
     @EnvironmentObject private var calendarWrapper: CalendarWrapper
