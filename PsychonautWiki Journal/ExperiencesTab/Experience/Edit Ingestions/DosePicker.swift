@@ -74,7 +74,10 @@ struct DosePicker: View {
         }
         .font(.title)
         .onChange(of: doseText) { _ in
-            if let doseUnwrapped = Double(doseText) {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .decimal
+            if let doseUnwrapped = formatter.number(from: doseText)?.doubleValue {
                 dose = doseUnwrapped
                 doseMaybe = doseUnwrapped
             } else {
