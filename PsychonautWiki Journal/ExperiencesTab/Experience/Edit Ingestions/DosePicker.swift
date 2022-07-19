@@ -39,6 +39,7 @@ struct DosePicker: View {
         HStack {
             TextField("Enter Dose", text: $doseText)
                 .keyboardType(.decimalPad)
+                .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseType.color)
             Text(selectedUnits ?? "")
         }

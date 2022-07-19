@@ -14,20 +14,7 @@ struct ChooseDoseView: View {
         ZStack(alignment: .bottom) {
             Form {
                 doseSection
-                Section("Purity") {
-                    Stepper(
-                        "\(viewModel.purity.formatted())%",
-                        value: $viewModel.purity,
-                        in: 1...100,
-                        step: 1
-                    )
-                    HStack {
-                        Text("Raw Amount")
-                        Spacer()
-                        Text(viewModel.impureDoseText)
-                            .foregroundColor(.secondary)
-                    }
-                }
+                puritySection
                 if isEyeOpen {
                     Section {
                         Button {
@@ -75,6 +62,33 @@ struct ChooseDoseView: View {
         .task {
             let routeUnits = substance.getDose(for: administrationRoute)?.units
             viewModel.initializeUnits(routeUnits: routeUnits)
+        }
+    }
+
+    @State private var purityText = "100"
+    var purity: Double? {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        return formatter.number(from: purityText)?.doubleValue
+    }
+
+    private var puritySection: some View {
+        Section("Purity") {
+            VStack {
+                HStack {
+                    TextField("Enter Purity", text: $purityText)
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(.roundedBorder)
+                    Text("%")
+                }
+                HStack {
+                    Text("Raw Amount")
+                    Spacer()
+                    Text(viewModel.impureDoseText)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
     }
 
