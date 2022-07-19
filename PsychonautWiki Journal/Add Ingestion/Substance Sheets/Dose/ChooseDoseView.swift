@@ -89,7 +89,7 @@ struct ChooseDoseView: View {
                 roaDose: roaDose,
                 doseMaybe: $viewModel.selectedPureDose,
                 selectedUnits: $viewModel.selectedUnits
-            )
+            ).padding(.bottom, 5)
         }
         .listRowSeparator(.hidden)
     }

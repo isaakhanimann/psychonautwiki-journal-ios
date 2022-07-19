@@ -19,41 +19,12 @@ struct DosePicker: View {
                 dynamicDoseRangeView
             }
             doseTextFieldWithUnit
-            if let min = roaDose?.thresholdUnwrapped ?? roaDose?.light?.minUnwrapped,
-               let max = roaDose?.heavyUnwrapped ?? roaDose?.strong?.maxUnwrapped,
-               min < max, areUnitsDefined {
-                getDoseSlider(min: min, max: max)
-            }
         }
         .task {
             if let doseUnwrapped = doseMaybe {
                 doseText = doseUnwrapped.formatted()
                 dose = doseUnwrapped
             }
-        }
-    }
-
-    private func getDoseSlider(min: Double, max: Double) -> some View {
-        let units = roaDose?.units ?? ""
-        let difference = max - min
-        let stepCandidates = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500]
-        let approximateStepSize = difference/40
-        let closestStep = stepCandidates.min(by: { abs($0 - approximateStepSize) < abs($1 - approximateStepSize)})!
-        let sliderMin = floor(min/closestStep) * closestStep
-        let sliderMax = ceil(max/closestStep) * closestStep
-        return Slider(
-            value: $dose.animation(),
-            in: sliderMin...sliderMax,
-            step: closestStep,
-            minimumValueLabel: Text("\(min.formatted()) \(units)"),
-            maximumValueLabel: Text("\(max.formatted()) \(units)")
-        ) {
-            Text("Dose")
-        }
-        .onChange(of: dose) { _ in
-            let roundedDouble = dose.rounded(toPlaces: 5)
-            doseText = roundedDouble.formatted()
-            doseMaybe = roundedDouble
         }
     }
 
@@ -68,7 +39,6 @@ struct DosePicker: View {
         HStack {
             TextField("Enter Dose", text: $doseText)
                 .keyboardType(.decimalPad)
-                .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseType.color)
             Text(selectedUnits ?? "")
         }
