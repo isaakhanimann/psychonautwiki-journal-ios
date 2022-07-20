@@ -21,12 +21,6 @@ struct AddCustomSubstanceView: View {
                     UnitsPicker(units: $viewModel.units)
                 }
                 .headerProminence(.increased)
-                Section("Explanation") {
-                    // swiftlint:disable line_length
-                    Text("Define a custom substance if the substance you intend to ingest is not covered by the app yet. If you want to define a substance that consists of other substances consider creating a preset instead.")
-                        .lineLimit(nil)
-                        .foregroundColor(.secondary)
-                }
             }
             .navigationTitle("Create Custom")
             .toolbar {

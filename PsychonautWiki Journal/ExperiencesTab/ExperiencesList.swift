@@ -34,9 +34,3 @@ struct ExperiencesList: View {
         }
     }
 }
-
-struct ExperiencesList_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperiencesList(viewModel: ExperiencesTab.ViewModel(isPreview: true))
-    }
-}

@@ -5,9 +5,6 @@ import SwiftUI
 struct PsychonautWiki_JournalApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    // swiftlint:disable line_length
-    @AppStorage(PersistenceController.hasInitialSubstancesOfCurrentVersion) var hasInitialSubstancesOfCurrentVersion: Bool = false
-    @AppStorage(PersistenceController.comesFromVersion10Key) var comesFromVersion10: Bool = false
     @StateObject private var calendarWrapper = CalendarWrapper()
     @StateObject private var sheetViewModel = SheetViewModel()
     @StateObject private var toastViewModel = ToastViewModel()
@@ -35,18 +32,5 @@ struct PsychonautWiki_JournalApp: App {
 
     private func appHasBecomeActive() {
         calendarWrapper.checkIfSomethingChanged()
-        if !hasInitialSubstancesOfCurrentVersion {
-            migrateOrSetup()
-        }
-    }
-
-    private func migrateOrSetup() {
-        let needsCleanup = comesFromVersion10
-        if needsCleanup {
-            PersistenceController.shared.cleanupCoreData()
-        } else {
-            PersistenceController.shared.addInitialSubstances()
-        }
-        hasInitialSubstancesOfCurrentVersion = true
     }
 }

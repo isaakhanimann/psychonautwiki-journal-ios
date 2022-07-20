@@ -96,7 +96,7 @@ struct ChooseDoseView: View {
         let roaDose = substance.getDose(for: administrationRoute)
         return Section(
             header: Text("Pure Dose"),
-            footer: Text(roaDose?.unitsUnwrapped != nil ? Self.doseDisclaimer : "")
+            footer: Text(roaDose?.units != nil ? Self.doseDisclaimer : "")
         ) {
             DoseView(roaDose: roaDose)
             DosePicker(
@@ -106,15 +106,5 @@ struct ChooseDoseView: View {
             ).padding(.bottom, 5)
         }
         .listRowSeparator(.hidden)
-    }
-}
-
-struct ChooseDoseView_Previews: PreviewProvider {
-    static var previews: some View {
-        let helper = PreviewHelper.shared
-        ChooseDoseView(
-            substance: helper.substance,
-            administrationRoute: helper.substance.administrationRoutesUnwrapped.first!
-        )
     }
 }

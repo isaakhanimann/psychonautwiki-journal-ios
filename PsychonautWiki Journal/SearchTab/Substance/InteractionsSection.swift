@@ -6,110 +6,15 @@ struct InteractionsSection: View {
 
     var body: some View {
         Group {
-            if substance.hasDangerousInteractionsToShow {
-                Section("Dangerous Interactions (Not Exhaustive)") {
-                    ForEach(substance.dangerousPsychoactivesToShow) { psych in
-                        NavigationLink {
-                            PsychoactiveView(psychoactive: psych)
-                        } label: {
-                            InteractionLabel(text: psych.nameUnwrapped, interactionType: .dangerous)
-                        }
-                    }
-                    ForEach(substance.dangerousChemicalsToShow) { chem in
-                        NavigationLink {
-                            ChemicalView(chemical: chem)
-                        } label: {
-                            InteractionLabel(text: chem.nameUnwrapped, interactionType: .dangerous)
-                        }
-                    }
-                    ForEach(substance.dangerousSubstancesToShow) { sub in
-                        NavigationLink {
-                            SubstanceView(substance: sub)
-                        } label: {
-                            InteractionLabel(text: sub.nameUnwrapped, interactionType: .dangerous)
-                        }
-                    }
-                    ForEach(substance.dangerousUnresolvedsToShow) { unr in
-                        NavigationLink {
-                            UnresolvedView(unresolved: unr)
-                        } label: {
-                            InteractionLabel(text: unr.nameUnwrapped, interactionType: .dangerous)
-                        }
-                    }
-                }
+            Section("Dangerous Interactions (Not Exhaustive)") {
+                Text("Hello")
             }
-            if substance.hasUnsafeInteractionsToShow {
-                Section("Unsafe Interactions (Not Exhaustive)") {
-                    ForEach(substance.unsafePsychoactivesToShow) { psych in
-                        NavigationLink {
-                            PsychoactiveView(psychoactive: psych)
-                        } label: {
-                            InteractionLabel(text: psych.nameUnwrapped, interactionType: .unsafe)
-                        }
-                    }
-                    ForEach(substance.unsafeChemicalsToShow) { chem in
-                        NavigationLink {
-                            ChemicalView(chemical: chem)
-                        } label: {
-                            InteractionLabel(text: chem.nameUnwrapped, interactionType: .unsafe)
-                        }
-                    }
-                    ForEach(substance.unsafeSubstancesToShow) { sub in
-                        NavigationLink {
-                            SubstanceView(substance: sub)
-                        } label: {
-                            InteractionLabel(text: sub.nameUnwrapped, interactionType: .unsafe)
-                        }
-                    }
-                    ForEach(substance.unsafeUnresolvedsToShow) { unr in
-                        NavigationLink {
-                            UnresolvedView(unresolved: unr)
-                        } label: {
-                            InteractionLabel(text: unr.nameUnwrapped, interactionType: .unsafe)
-                        }
-                    }
-                }
+            Section("Unsafe Interactions (Not Exhaustive)") {
+                Text("Hello")
             }
-            if substance.hasUncertainInteractionsToShow {
-                Section("Uncertain Interactions (Not Exhaustive)") {
-                    ForEach(substance.uncertainPsychoactivesToShow) { psych in
-                        NavigationLink {
-                            PsychoactiveView(psychoactive: psych)
-                        } label: {
-                            InteractionLabel(text: psych.nameUnwrapped, interactionType: .uncertain)
-                        }
-                    }
-                    ForEach(substance.uncertainChemicalsToShow) { chem in
-                        NavigationLink {
-                            ChemicalView(chemical: chem)
-                        } label: {
-                            InteractionLabel(text: chem.nameUnwrapped, interactionType: .uncertain)
-                        }
-                    }
-                    ForEach(substance.uncertainSubstancesToShow) { sub in
-                        NavigationLink {
-                            SubstanceView(substance: sub)
-                        } label: {
-                            InteractionLabel(text: sub.nameUnwrapped, interactionType: .uncertain)
-                        }
-                    }
-                    ForEach(substance.uncertainUnresolvedsToShow) { unr in
-                        NavigationLink {
-                            UnresolvedView(unresolved: unr)
-                        } label: {
-                            InteractionLabel(text: unr.nameUnwrapped, interactionType: .uncertain)
-                        }
-                    }
-                }
+            Section("Uncertain Interactions (Not Exhaustive)") {
+                Text("Hello")
             }
-        }
-    }
-}
-
-struct InteractionsSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            InteractionsSection(substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!)
         }
     }
 }

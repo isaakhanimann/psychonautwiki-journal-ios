@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CustomSubstance" representedClassName="CustomSubstance" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="lastSyncToCalendar" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
+    </entity>
+    <entity name="Ingestion" representedClassName="Ingestion" syncable="YES" codeGenerationType="class">
+        <attribute name="administrationRoute" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="dose" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
+    </entity>
+    <elements>
+        <element name="CustomSubstance" positionX="-999" positionY="-225" width="128" height="59"/>
+        <element name="Experience" positionX="-270.1033325195312" positionY="-382.2306213378906" width="128" height="119"/>
+        <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="149"/>
+    </elements>
+</model>

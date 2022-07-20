@@ -25,14 +25,6 @@ extension ExperiencesTab {
         private var experiences: [Experience] = []
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 
-        init(isPreview: Bool) {
-            let exps = PreviewHelper.shared.experiences
-            self.experiences = exps
-            self.hasExperiences = !exps.isEmpty
-            sections = ViewModel.getSections(experiences: exps)
-            experienceFetchController = nil
-        }
-
         override init() {
             let fetchRequest = Experience.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]

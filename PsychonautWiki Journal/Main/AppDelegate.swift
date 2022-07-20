@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         queue.addOperation {
             Task {
-                try? await refreshSubstances()
+                // TODO: — check if there are interactions and if not go straight to choose route refresh Substances
                 task.setTaskCompleted(success: true)
             }
         }

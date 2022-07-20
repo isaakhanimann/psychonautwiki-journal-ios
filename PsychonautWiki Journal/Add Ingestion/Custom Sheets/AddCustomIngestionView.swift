@@ -95,11 +95,3 @@ struct AddCustomIngestionView: View {
         }
     }
 }
-
-struct AddCustomIngestionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCustomIngestionView(
-            customSubstance: PreviewHelper.shared.customSubstance
-        )
-    }
-}

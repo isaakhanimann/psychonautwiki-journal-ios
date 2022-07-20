@@ -25,23 +25,6 @@ extension AcknowledgeInteractionsView {
         }
 
         func setInteractionIngestions(from ingestions: [Ingestion], substance: Substance) {
-            let chunkedIngestions = ingestions.chunked { ing in
-                ing.getInteraction(with: substance)
-            }
-            for chunk in chunkedIngestions {
-                let type = chunk.0
-                let sameTypeIngs = getDistinctSubstanceLatestIngestion(from: chunk.1)
-                switch type {
-                case .none:
-                    break
-                case .uncertain:
-                    self.uncertainIngestions = sameTypeIngs
-                case .unsafe:
-                    self.unsafeIngestions = sameTypeIngs
-                case .dangerous:
-                    self.dangerousIngestions = sameTypeIngs
-                }
-            }
         }
 
         func getDistinctSubstanceLatestIngestion(from ingestions: Array<Ingestion>.SubSequence) -> [Ingestion] {

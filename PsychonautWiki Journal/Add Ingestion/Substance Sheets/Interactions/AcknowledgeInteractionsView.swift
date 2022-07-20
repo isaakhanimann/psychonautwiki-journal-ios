@@ -44,14 +44,6 @@ struct AcknowledgeInteractionsView: View {
                 }
             }
         }
-        .navigationBarTitle(substance.nameUnwrapped)
-    }
-}
-
-struct AcknowledgeInteractionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        AcknowledgeInteractionsView(
-            substance: PreviewHelper.shared.getSubstance(with: "Caffeine")!
-        )
+        .navigationBarTitle(substance.name)
     }
 }

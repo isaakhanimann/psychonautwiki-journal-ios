@@ -54,15 +54,3 @@ struct ExperienceRow: View {
         return doubleColors
     }
 }
-
-struct ExperienceRow_Previews: PreviewProvider {
-
-    static var previews: some View {
-        List {
-            ExperienceRow(
-                experience: PreviewHelper.shared.experiences.first!,
-                selection: .constant(nil)
-            )
-        }
-    }
-}

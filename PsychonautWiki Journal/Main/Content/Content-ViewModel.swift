@@ -25,11 +25,7 @@ extension ContentView {
 
         private func handleUniversalUrl(universalUrl: URL) {
             if let substanceName = getSubstanceName(from: universalUrl) {
-                if let foundSubstance = PersistenceController.shared.getSubstance(with: substanceName) {
-                    self.sheetViewModel?.sheetToShow = .addIngestionFromContent(foundSubstance: foundSubstance)
-                } else {
-                    self.toastViewModel?.showErrorToast(message: "\(substanceName) Not Found")
-                }
+                self.toastViewModel?.showErrorToast(message: "\(substanceName) Not Found")
             } else {
                 self.toastViewModel?.showErrorToast(message: "No Substance Found")
             }

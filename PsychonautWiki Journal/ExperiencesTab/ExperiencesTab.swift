@@ -45,9 +45,3 @@ struct ExperiencesTab: View {
         .disableAutocorrection(true)
     }
 }
-
-struct YourExperiencesTab_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperiencesTab(viewModel: ExperiencesTab.ViewModel(isPreview: true))
-    }
-}

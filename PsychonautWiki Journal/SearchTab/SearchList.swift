@@ -4,7 +4,6 @@ struct SearchList: View {
 
     @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    @StateObject var presetsViewModel = PresetsViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) private var isSearching
     @EnvironmentObject private var sheetViewModel: SheetViewModel
@@ -15,23 +14,7 @@ struct SearchList: View {
                 if !isSearching {
                     if !recentsViewModel.recentSubstances.isEmpty {
                         Section("Recently Used") {
-                            ForEach(recentsViewModel.recentSubstances) { sub in
-                                NavigationLink(sub.nameUnwrapped) {
-                                    SubstanceView(substance: sub)
-                                }
-                            }
-                        }
-                    }
-                    Section("Presets") {
-                        ForEach(presetsViewModel.presets) { pre in
-                            NavigationLink(pre.nameUnwrapped) {
-                                PresetView(preset: pre)
-                            }
-                        }
-                        Button {
-                            sheetViewModel.sheetToShow = .addPreset
-                        } label: {
-                            Label("Add Preset", systemImage: "plus")
+                            Text("Hello")
                         }
                     }
                     Section("Custom Substances") {
@@ -47,28 +30,12 @@ struct SearchList: View {
                         }
                     }
                 }
-                ForEach(sectionedViewModel.sections) { sec in
-                    Section(sec.sectionName) {
-                        ForEach(sec.substances) { sub in
-                            NavigationLink(sub.nameUnwrapped) {
-                                SubstanceView(substance: sub)
-                            }
-                        }
-                    }
-                }
+                Text("Substances")
             }
-            if isSearching && sectionedViewModel.sections.isEmpty {
+            if isSearching && sectionedViewModel.substances.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
             }
         }
-    }
-}
-
-struct SearchList_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchList(
-            sectionedViewModel: SectionedSubstancesViewModel(isPreview: true)
-        )
     }
 }

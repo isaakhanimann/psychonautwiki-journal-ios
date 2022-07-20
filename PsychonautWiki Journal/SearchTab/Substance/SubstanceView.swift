@@ -17,39 +17,38 @@ struct SubstanceView: View {
                     }
                 }
             }
-            if let addictionPotential = substance.addictionPotentialUnwrapped {
+            if let addictionPotential = substance.addictionPotential {
                 Section("Addiction Potential") {
                     Text(addictionPotential)
                 }
             }
-            if let toxicity = substance.toxicityUnwrapped {
+            if let toxicities = substance.toxicities, !toxicities.isEmpty {
                 Section("Toxicity") {
-                    Text(toxicity)
+                    VStack {
+                        ForEach(toxicities, id: \.self) { toxicity in
+                            Text(toxicity)
+                        }
+                    }
                 }
             }
-            if substance.showTolerance {
+            if substance.tolerance != nil {
                 toleranceSection
             }
             roaSection
-            if substance.showCrossTolerance && isEyeOpen {
+            if !substance.crossTolerances.isEmpty && isEyeOpen {
                 crossToleranceSection
             }
             if isEyeOpen {
-                if substance.areThereInteractions {
-                    InteractionsSection(substance: substance)
-                }
-                if substance.showPsychoactiveClass {
+                InteractionsSection(substance: substance)
+                if !substance.psychoactiveClasses.isEmpty {
                     psychoactiveSection
                 }
-                if substance.showChemicalClass {
+                if !substance.chemicalClasses.isEmpty {
                     chemicalSection
-                }
-                if substance.showEffects {
-                    effectSection
                 }
             }
         }
-        .navigationTitle(substance.nameUnwrapped)
+        .navigationTitle(substance.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("", action: {}) // here so that SwiftUI layout works
@@ -78,27 +77,12 @@ struct SubstanceView: View {
 
     private var crossToleranceSection: some View {
         Section("Cross Tolerance (not exhaustive)") {
-            ForEach(substance.crossTolerancePsychoactivesUnwrapped) { psych in
-                NavigationLink(psych.nameUnwrapped) {
-                    PsychoactiveView(psychoactive: psych)
-                }
-            }
-            ForEach(substance.crossToleranceChemicalsUnwrapped) { chem in
-                NavigationLink(chem.nameUnwrapped) {
-                    ChemicalView(chemical: chem)
-                }
-            }
-            ForEach(substance.crossToleranceSubstancesUnwrapped) { sub in
-                NavigationLink(sub.nameUnwrapped) {
-                    SubstanceView(substance: sub)
-                }
-            }
         }
     }
 
     private var roaSection: some View {
-        ForEach(substance.roasUnwrapped) { roa in
-            Section(roa.nameUnwrapped.rawValue) {
+        ForEach(substance.roas, id: \.name) { roa in
+            Section(roa.name.rawValue) {
                 DoseView(roaDose: roa.dose)
                 DurationView(duration: roa.duration)
                 if let bio = roa.bioavailability?.displayString {
@@ -109,42 +93,19 @@ struct SubstanceView: View {
         }
     }
 
-    private var effectSection: some View {
-        Section("Subjective Effects (not exhaustive)") {
-            ForEach(substance.effectsUnwrapped) { eff in
-                NavigationLink(eff.nameUnwrapped) {
-                    EffectView(effect: eff)
-                }
-            }
-        }
-    }
-
     private var psychoactiveSection: some View {
         Section("Psychoactive Class") {
-            ForEach(substance.psychoactivesUnwrapped) { psy in
-                NavigationLink(psy.nameUnwrapped) {
-                    PsychoactiveView(psychoactive: psy)
-                }
+            ForEach(substance.psychoactiveClasses, id: \.self) { psy in
+                Text(psy)
             }
         }
     }
 
     private var chemicalSection: some View {
         Section("Chemical Class") {
-            ForEach(substance.chemicalsUnwrapped) { che in
-                NavigationLink(che.nameUnwrapped) {
-                    ChemicalView(chemical: che)
-                }
+            ForEach(substance.chemicalClasses, id: \.self) { che in
+                Text(che)
             }
-        }
-    }
-}
-
-struct SubstanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            SubstanceView(substance: PreviewHelper.shared.getSubstance(with: "Tyrosine")!)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
         }
     }
 }

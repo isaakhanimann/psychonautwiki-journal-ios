@@ -126,12 +126,9 @@ class CalendarWrapper: ObservableObject {
 
     private func getStartAndEnd(for experience: Experience) -> (start: Date, end: Date) {
         let start = experience.dateForSorting
-        if let end = getMaxEndTime(for: experience.sortedIngestionsUnwrapped) {
-            return (start, end)
-        } else {
-            let fiveHours: TimeInterval = 5*60*60
-            return (start, start.addingTimeInterval(fiveHours))
-        }
+        // TODO: use better interval than default 5 hours
+        let fiveHours: TimeInterval = 5*60*60
+        return (start, start.addingTimeInterval(fiveHours))
     }
 
     private func getNotes(from experience: Experience) -> String {

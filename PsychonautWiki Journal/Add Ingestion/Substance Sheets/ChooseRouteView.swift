@@ -47,12 +47,3 @@ struct ChooseRouteView: View {
         }
     }
 }
-
-struct ChooseRouteView_Previews: PreviewProvider {
-    static var previews: some View {
-        let helper = PreviewHelper.shared
-        NavigationView {
-            ChooseRouteView(substance: helper.substance)
-        }
-    }
-}

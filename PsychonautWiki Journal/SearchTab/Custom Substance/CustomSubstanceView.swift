@@ -46,11 +46,3 @@ struct CustomSubstanceView: View {
         .navigationTitle(customSubstance.nameUnwrapped)
     }
 }
-
-struct CustomSubstanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CustomSubstanceView(customSubstance: PreviewHelper.shared.customSubstance)
-        }
-    }
-}

@@ -20,7 +20,7 @@ struct DoseView: View {
         || roaDose?.lightMaxOrCommonMin != nil
         || roaDose?.commonMaxOrStrongMin != nil
         || roaDose?.strongMaxOrHeavy != nil
-        if showDoseView && roaDose?.unitsUnwrapped != nil {
+        if showDoseView && roaDose?.units != nil {
             HStack(alignment: .top, spacing: 0) {
                 if let threshOrLightMin = roaDose?.threshOrLightMin {
                     Spacer(minLength: 0)
@@ -114,23 +114,6 @@ struct DoseView: View {
             }
         } else {
             EmptyView()
-        }
-    }
-}
-
-struct DoseView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationView {
-                List {
-                    let dose = PreviewHelper.shared.getSubstance(with: "Melatonin")!.roasUnwrapped.first!.dose!
-                    Section {
-                        DoseView(roaDose: dose)
-                            .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
-                            .preferredColorScheme(.light)
-                    }
-                }
-            }
         }
     }
 }

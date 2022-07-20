@@ -27,45 +27,9 @@ func getOkSubstances(substancesToFilter: [Substance], isEyeOpen: Bool) -> [Subst
         return substancesToFilter
     } else {
         return substancesToFilter.filter { sub in
-            namesOfUncontrolledSubstances.contains(sub.nameUnwrapped)
+            namesOfUncontrolledSubstances.contains(sub.name)
         }
     }
-}
-
-func getInitialData() -> Data {
-    let fileName = "InitialSubstances"
-    guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-        fatalError("Failed to locate \(fileName) in bundle.")
-    }
-    guard let data = try? Data(contentsOf: url) else {
-        fatalError("Failed to load \(fileName) from bundle.")
-    }
-    return data
-}
-
-private func getDataForSubstances(from fileData: Data) throws -> Data {
-    guard let json = try JSONSerialization.jsonObject(with: fileData, options: []) as? [String: Any],
-          let fileObject = json["data"] else {
-              throw ConversionError.failedToConvertDataToJSON
-          }
-    return try JSONSerialization.data(withJSONObject: fileObject)
-}
-
-func decodeSubstancesFile(
-    from data: Data,
-    with context: NSManagedObjectContext
-) throws -> SubstancesFile {
-    let decoder = JSONDecoder()
-    decoder.userInfo[CodingUserInfoKey.managedObjectContext] = context
-    decoder.dateDecodingStrategy = .deferredToDate
-    decoder.keyDecodingStrategy = .useDefaultKeys
-    let dataForSubstances = try getDataForSubstances(from: data)
-    return try decoder.decode(SubstancesFile.self, from: dataForSubstances)
-}
-
-func refreshSubstances() async throws {
-    let data = try await getPsychonautWikiData()
-    try await PersistenceController.shared.decodeAndSaveFile(from: data)
 }
 
 enum RequestError: Error {
@@ -182,19 +146,4 @@ private func getURLRequest() throws -> URLRequest {
     }
     request.httpBody = try JSONEncoder().encode(HTTPBody(query: query))
     return request
-}
-
-func getMaxEndTime(for ingestions: [Ingestion]) -> Date? {
-    guard let firstIngestion = ingestions.first else {return nil}
-    var endOfGraphTime = firstIngestion.timeUnwrapped
-    for ingestion in ingestions {
-        guard let duration = ingestion.substance?
-                .getDuration(for: ingestion.administrationRouteUnwrapped) else {return nil}
-        guard let lineLengthInSec = duration.maxLengthOfTimelineInSec else {return nil}
-        let maybeNewEndTime = ingestion.timeUnwrapped.addingTimeInterval(lineLengthInSec)
-        if endOfGraphTime.distance(to: maybeNewEndTime) > 0 {
-            endOfGraphTime = maybeNewEndTime
-        }
-    }
-    return endOfGraphTime
 }

@@ -90,15 +90,3 @@ struct ChooseTimeAndColor: View {
         }
     }
 }
-
-struct ChooseTimeAndColor_Previews: PreviewProvider {
-    static var previews: some View {
-        let helper = PreviewHelper.shared
-        return ChooseTimeAndColor(
-            substance: helper.substance,
-            administrationRoute: helper.substance.administrationRoutesUnwrapped.first!,
-            dose: 10,
-            units: "mg"
-        )
-    }
-}

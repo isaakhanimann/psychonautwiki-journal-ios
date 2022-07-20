@@ -34,21 +34,6 @@ struct ExperienceView: View {
                     }
                 }
             }
-            if !experience.sortedIngestionsToDraw.isEmpty && !isEditing {
-                Section("Timeline") {
-                    HorizontalScaleView {
-                        IngestionTimeLineView(experience: experience)
-                    }
-                    .frame(height: 310)
-                }
-            }
-            if !experience.substancesWithDose.isEmpty && !isEditing {
-                Section("Substances") {
-                    ForEach(experience.substancesWithDose) { subDos in
-                        SubstanceDoseRow(substanceDose: subDos)
-                    }
-                }
-            }
             if !viewModel.writtenText.isEmpty || isEditing {
                 Section("Notes") {
                     if isEditing {
@@ -95,13 +80,5 @@ struct ExperienceView: View {
         if experience.sortedIngestionsUnwrapped.isEmpty {
             editMode?.wrappedValue = .inactive
         }
-    }
-}
-
-struct ExperienceView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperienceView(experience: PreviewHelper.shared.experiences.first!)
-            .environmentObject(CalendarWrapper())
-            .accentColor(Color.blue)
     }
 }

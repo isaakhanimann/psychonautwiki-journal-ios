@@ -2,14 +2,9 @@ import Foundation
 import CoreData
 
 class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-    @Published var recentSubstances: [Substance] = []
+    @Published var recentSubstances: [String] = []
     private var ingestions: [Ingestion] = []
     private let recentIngestionFetchController: NSFetchedResultsController<Ingestion>?
-
-    init(isPreview: Bool) {
-        self.recentSubstances = Array(PreviewHelper.shared.allSubstances.prefix(upTo: 10))
-        self.recentIngestionFetchController = nil
-    }
 
     override init() {
         let ingestionFetchRequest = Ingestion.fetchRequest()
@@ -34,7 +29,7 @@ class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
 
     private func setDistinctSubstances() {
         let nonNilSubstances = ingestions.compactMap { ing in
-            ing.substance
+            ing.substanceName
         }
         self.recentSubstances = nonNilSubstances.uniqued()
     }

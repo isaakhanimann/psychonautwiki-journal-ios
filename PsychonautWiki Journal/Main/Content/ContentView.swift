@@ -30,11 +30,8 @@ struct ContentView: View {
                 switch item {
                 case .addIngestionFromContent(let foundSubstance):
                     NavigationView {
-                        if foundSubstance.hasAnyInteractions {
-                            AcknowledgeInteractionsView(substance: foundSubstance)
-                        } else {
-                            ChooseRouteView(substance: foundSubstance)
-                        }
+                        // TODO: — check if there are interactions and if not go straight to choose route
+                        AcknowledgeInteractionsView(substance: foundSubstance)
                     }
                     .environmentObject(
                         AddIngestionSheetContext(experience: nil)
@@ -44,27 +41,8 @@ struct ContentView: View {
                         .environmentObject(AddIngestionSheetContext(experience: experience))
                 case .addIngestionFromSubstance(let substance):
                     NavigationView {
-                        if substance.hasAnyInteractions && isEyeOpen {
-                            AcknowledgeInteractionsView(substance: substance)
-                        } else {
-                            ChooseRouteView(substance: substance)
-                        }
-                    }
-                    .environmentObject(
-                        AddIngestionSheetContext(experience: nil)
-                    )
-                case .addIngestionFromPreset(let preset):
-                    let hasInteractions = preset.substances.contains(where: { sub in
-                        sub.hasAnyInteractions
-                    }) || !preset.dangerousInteractions.isEmpty
-                    || !preset.unsafeInteractions.isEmpty
-                    || !preset.uncertainInteractions.isEmpty
-                    NavigationView {
-                        if hasInteractions && isEyeOpen {
-                            PresetAcknowledgeInteractionsView(preset: preset)
-                        } else {
-                            PresetChooseDoseView(preset: preset)
-                        }
+                        // TODO: — check if there are interactions and if not go straight to choose route
+                        AcknowledgeInteractionsView(substance: substance)
                     }
                     .environmentObject(
                         AddIngestionSheetContext(experience: nil)
@@ -76,8 +54,6 @@ struct ContentView: View {
                     .environmentObject(AddIngestionSheetContext(experience: nil))
                 case .article(let url):
                     WebViewSheet(articleURL: url)
-                case .addPreset:
-                    AddPresetView()
                 case .addCustom:
                     AddCustomSubstanceView()
                 }

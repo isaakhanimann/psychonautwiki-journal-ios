@@ -92,7 +92,7 @@ struct SettingsTab: View {
             HStack {
                 Text("Last Refresh")
                 Spacer()
-                Text(viewModel.substancesFile?.creationDate?.asDateAndTime ?? "-")
+                Text("-")
                     .foregroundColor(.secondary)
             }
             if viewModel.isFetching {
@@ -104,14 +104,14 @@ struct SettingsTab: View {
             } else {
                 Button {
                     Task {
-                        await viewModel.fetchNewSubstances()
+
                     }
                 } label: {
                     Label("Refresh Now", systemImage: "arrow.triangle.2.circlepath")
                 }
                 Button {
                     Task {
-                        await viewModel.resetSubstances()
+
                     }
                 } label: {
                     Label("Reset Substances", systemImage: "arrow.uturn.left.circle")

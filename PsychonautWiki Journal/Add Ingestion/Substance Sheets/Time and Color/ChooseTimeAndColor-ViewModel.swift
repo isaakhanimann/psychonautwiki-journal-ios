@@ -16,7 +16,7 @@ extension ChooseTimeAndColor {
         func setDefaultColor() {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
-            guard let name = substance?.nameUnwrapped else { return }
+            guard let name = substance?.name else { return }
             fetchRequest.predicate = NSPredicate(format: "substanceName == %@", name)
             fetchRequest.fetchLimit = 1
             let ingestions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
@@ -55,7 +55,7 @@ extension ChooseTimeAndColor {
             ingestion.dose = dose
             ingestion.units = units
             ingestion.administrationRoute = administrationRoute.rawValue
-            ingestion.substanceName = substance?.nameUnwrapped
+            ingestion.substanceName = substance?.name
             ingestion.color = selectedColor.rawValue
             return ingestion
         }
