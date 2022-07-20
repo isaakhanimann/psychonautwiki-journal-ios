@@ -8,7 +8,7 @@ struct IngestionRow: View {
         HStack {
             Image(systemName: "circle.fill")
                 .font(.title2)
-                .foregroundColor(ingestion.swiftUIColorUnwrapped)
+                .foregroundColor(ingestion.substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
                 Text(ingestion.substanceNameUnwrapped)
                     .font(.headline)

@@ -12,10 +12,13 @@ struct ChooseSubstanceList: View {
         ZStack {
             List {
                 if !isSearching {
-                    if !recentsViewModel.recentSubstanceNames.isEmpty {
+                    let substancesWithColors = recentsViewModel.substancesWithColor
+                    if !substancesWithColors.isEmpty {
                         Section("Recently Used") {
-                            ForEach(recentsViewModel.recentSubstanceNames, id: \.self) { sub in
-                                Text(sub)
+                            ForEach(substancesWithColors) { substanceWithColor in
+                                NavigationLink(substanceWithColor.substance.name) {
+                                    SubstanceView(substance: substanceWithColor.substance)
+                                }
                             }
                         }
                     }

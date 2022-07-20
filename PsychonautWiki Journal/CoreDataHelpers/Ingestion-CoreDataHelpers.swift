@@ -31,14 +31,6 @@ extension Ingestion: Comparable {
         }
     }
 
-    var colorUnwrapped: IngestionColor {
-            IngestionColor(rawValue: color ?? "purple") ?? IngestionColor.purple
-    }
-
-    var swiftUIColorUnwrapped: Color {
-        colorUnwrapped.swiftUIColor
-    }
-
     var unitsUnwrapped: String? {
         if let unwrap = units, unwrap != "" {
             return unwrap
@@ -52,5 +44,15 @@ extension Ingestion: Comparable {
             return "Unknown Dose"
         }
         return doseUnwrapped.formatted() + " " + unitsUnwrap
+    }
+
+    var substanceColor: SubstanceColor {
+        let fetchRequest = SubstanceCompanion.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(
+            format: "substanceName = %@", substanceNameUnwrapped
+        )
+        let maybeColor = try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.color
+        return maybeColor ?? SubstanceColor.purple
     }
 }

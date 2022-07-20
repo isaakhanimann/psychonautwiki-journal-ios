@@ -1,10 +1,10 @@
 import SwiftUI
 
-enum IngestionColor: String, CaseIterable, Identifiable {
+enum SubstanceColor: String, CaseIterable, Identifiable {
     case blue, brown, cyan, green, indigo, mint, orange, pink, purple, red, teal, yellow
 
     // swiftlint:disable identifier_name
-    var id: IngestionColor {
+    var id: SubstanceColor {
         self
     }
 

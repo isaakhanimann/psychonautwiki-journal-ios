@@ -12,10 +12,18 @@ struct SearchList: View {
         ZStack {
             List {
                 if !isSearching {
-                    if !recentsViewModel.recentSubstanceNames.isEmpty {
+                    let substancesWithColors = recentsViewModel.substancesWithColor
+                    if !substancesWithColors.isEmpty {
                         Section("Recently Used") {
-                            ForEach(recentsViewModel.recentSubstanceNames, id: \.self) { name in
-                                Text(name)
+                            ForEach(substancesWithColors, id: \.substance.name) { substanceWithColor in
+                                NavigationLink {
+                                    SubstanceView(substance: substanceWithColor.substance)
+                                } label: {
+                                    Image(systemName: "circle.fill")
+                                        .font(.title2)
+                                        .foregroundColor(substanceWithColor.color.swiftUIColor)
+                                    Text(substanceWithColor.substance.name)
+                                }
                             }
                         }
                     }

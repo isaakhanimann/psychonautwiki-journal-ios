@@ -18,6 +18,10 @@ class SubstanceRepo: ObservableObject {
         lastUpdated = SubstanceRepo.getCreationDate()
     }
 
+    func getSubstance(name: String) -> Substance? {
+        substances.first(where: {$0.name == name})
+    }
+
     static private func getCreationDate() -> Date {
         var dateComponents = DateComponents()
         dateComponents.year = 2022

@@ -42,7 +42,7 @@ extension Experience: Comparable {
     var ingestionColors: [Color] {
         var colors = [Color]()
         for ingestion in sortedIngestionsUnwrapped {
-            colors.append(ingestion.swiftUIColorUnwrapped)
+            colors.append(ingestion.substanceColor.swiftUIColor)
         }
         return colors
     }

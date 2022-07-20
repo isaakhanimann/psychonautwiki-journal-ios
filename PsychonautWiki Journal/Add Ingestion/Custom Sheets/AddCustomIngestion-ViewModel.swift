@@ -6,7 +6,7 @@ extension AddCustomIngestionView {
 
         @Published var selectedDoseText = ""
         @Published var selectedTime = Date()
-        @Published var selectedColor = IngestionColor.allCases.randomElement() ?? IngestionColor.blue
+        @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedAdministrationRoute = AdministrationRoute.oral
         @Published var lastExperience: Experience?
         var selectedDose: Double? {
@@ -30,7 +30,7 @@ extension AddCustomIngestionView {
             fetchRequest.predicate = NSPredicate(format: "substanceName == %@", name)
             fetchRequest.fetchLimit = 1
             let ingestions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            if let color = ingestions.first?.colorUnwrapped {
+            if let color = ingestions.first?.substanceColor {
                 self.selectedColor = color
             }
         }

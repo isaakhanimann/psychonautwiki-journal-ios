@@ -6,7 +6,7 @@ extension ChooseTimeAndColor {
     class ViewModel: ObservableObject {
 
         @Published var lastExperience: Experience?
-        @Published var selectedColor = IngestionColor.allCases.randomElement() ?? IngestionColor.blue
+        @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
         var substance: Substance?
         var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
@@ -20,7 +20,7 @@ extension ChooseTimeAndColor {
             fetchRequest.predicate = NSPredicate(format: "substanceName == %@", name)
             fetchRequest.fetchLimit = 1
             let ingestions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            if let color = ingestions.first?.colorUnwrapped {
+            if let color = ingestions.first?.substanceColor {
                 self.selectedColor = color
             }
         }

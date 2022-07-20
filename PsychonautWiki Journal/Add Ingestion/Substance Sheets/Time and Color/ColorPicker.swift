@@ -2,11 +2,11 @@ import SwiftUI
 
 struct ColorPicker: View {
 
-    @Binding var selectedColor: IngestionColor
+    @Binding var selectedColor: SubstanceColor
 
     var body: some View {
         LazyVGrid(columns: colorColumns) {
-            ForEach(IngestionColor.allCases, content: colorButton)
+            ForEach(SubstanceColor.allCases, content: colorButton)
         }
         .padding(.vertical)
     }
@@ -15,7 +15,7 @@ struct ColorPicker: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-    private func colorButton(for color: IngestionColor) -> some View {
+    private func colorButton(for color: SubstanceColor) -> some View {
         ZStack {
             color.swiftUIColor
                 .aspectRatio(1, contentMode: .fit)
