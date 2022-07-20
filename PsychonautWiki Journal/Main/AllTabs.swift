@@ -36,7 +36,7 @@ struct AllTabs: View {
                 .id(ingestionID)
                 .tag(TabSelection.ingestions)
                 .tabItem {
-                    Image(systemName: "book")
+                    Image(systemName: "pills")
                     Text("Ingestions")
                 }
             SearchTab()
@@ -62,7 +62,7 @@ struct AllTabs: View {
                 case .experience:
                     reloadExperienceTab()
                 case .ingestions:
-                    break
+                    reloadIngestionTab()
                 case .substances:
                     reloadSearchTab()
                 case .settings:
@@ -75,6 +75,10 @@ struct AllTabs: View {
 
     private func reloadExperienceTab() {
         experienceID = UUID()
+    }
+
+    private func reloadIngestionTab() {
+        ingestionID = UUID()
     }
 
     private func reloadSearchTab() {
