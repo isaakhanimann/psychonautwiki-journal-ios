@@ -1,8 +1,11 @@
 import Foundation
 import CoreData
 
-struct Substance: Decodable {
-
+struct Substance: Decodable, Identifiable {
+    // swiftlint:disable identifier_name
+    var id: String {
+        name
+    }
     let name: String
     let url: URL
     let roas: [Roa]

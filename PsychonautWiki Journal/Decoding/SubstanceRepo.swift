@@ -1,28 +1,21 @@
 import Foundation
 import CoreData
 
-class SubstanceParser: ObservableObject {
+class SubstanceRepo: ObservableObject {
+
+    static let shared = SubstanceRepo()
 
     @Published var substances: [Substance]
     @Published var lastUpdated: Date
 
     init() {
-        let data = SubstanceParser.getInitialData()
+        let data = SubstanceRepo.getInitialData()
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .deferredToDate
         decoder.keyDecodingStrategy = .useDefaultKeys
         // swiftlint:disable force_try
-        let dataForSubstances = try! SubstanceParser.getDataForSubstances(from: data)
-        substances = try! decoder.decode([Substance].self, from: dataForSubstances)
-        lastUpdated = SubstanceParser.getCreationDate()
-    }
-
-    static private func getDataForSubstances(from fileData: Data) throws -> Data {
-        guard let json = try JSONSerialization.jsonObject(with: fileData, options: []) as? [String: Any],
-              let fileObject = json["data"] else {
-                  throw ConversionError.failedToConvertDataToJSON
-              }
-        return try JSONSerialization.data(withJSONObject: fileObject)
+        substances = try! decoder.decode([Substance].self, from: data)
+        lastUpdated = SubstanceRepo.getCreationDate()
     }
 
     static private func getCreationDate() -> Date {

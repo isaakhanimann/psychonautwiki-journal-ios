@@ -2,12 +2,12 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
+    @StateObject var sectionedViewModel = SearchViewModel()
     @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         NavigationView {
-            ChooseSubstanceList(sectionedViewModel: sectionedViewModel)
+            ChooseSubstanceList(searchViewModel: sectionedViewModel)
             .navigationBarTitle("Add Ingestion")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

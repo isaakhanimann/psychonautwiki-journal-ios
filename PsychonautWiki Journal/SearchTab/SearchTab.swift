@@ -2,17 +2,17 @@ import SwiftUI
 
 struct SearchTab: View {
 
-    @StateObject var sectionedViewModel = SectionedSubstancesViewModel()
+    @StateObject var searchViewModel = SearchViewModel()
 
     var body: some View {
         NavigationView {
-            SearchList(sectionedViewModel: sectionedViewModel)
+            SearchList(searchViewModel: searchViewModel)
             .navigationTitle("Substances")
         }
         .searchable(
-            text: $sectionedViewModel.searchText,
+            text: $searchViewModel.searchText,
             placement: .navigationBarDrawer(displayMode: .always),
-            prompt: Text("Search by substance or class")
+            prompt: Text("Search Substance")
         )
         .disableAutocorrection(true)
     }

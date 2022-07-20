@@ -17,7 +17,7 @@
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
-		EA47E64527CA136C00F6E10F /* SubstanceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceParser.swift */; };
+		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
 		EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63B27CA136C00F6E10F /* RoaDose.swift */; };
@@ -35,7 +35,7 @@
 		EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
-		EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */; };
+		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAA49E16280452A600184A10 /* CalendarSectionInSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA49E15280452A600184A10 /* CalendarSectionInSettings.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */; };
@@ -150,7 +150,7 @@
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
-		EA47E63527CA136C00F6E10F /* SubstanceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceParser.swift; sourceTree = "<group>"; };
+		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
 		EA47E63B27CA136C00F6E10F /* RoaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDose.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertable.swift; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
-		EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedSubstancesViewModel.swift; sourceTree = "<group>"; };
+		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAA49E15280452A600184A10 /* CalendarSectionInSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSectionInSettings.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSubstance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 				EAB165A527E35C0C003DF79D /* Custom Substance */,
 				EA47E66F27CB477000F6E10F /* SearchTab.swift */,
 				EACB6E7A27D6456400940291 /* SearchList.swift */,
-				EA9AE85D27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift */,
+				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
 				EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */,
 			);
@@ -534,7 +534,7 @@
 		EAE4716E26CBA664009FB0EC /* Decoding */ = {
 			isa = PBXGroup;
 			children = (
-				EA47E63527CA136C00F6E10F /* SubstanceParser.swift */,
+				EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */,
 				EA47E63D27CA136C00F6E10F /* Substance.swift */,
 				EA47E63727CA136C00F6E10F /* Tolerance.swift */,
 				EA47E64127CA136C00F6E10F /* Roa.swift */,
@@ -760,7 +760,7 @@
 				EACB6E7B27D6456400940291 /* SearchList.swift in Sources */,
 				EAA49E16280452A600184A10 /* CalendarSectionInSettings.swift in Sources */,
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,
-				EA47E64527CA136C00F6E10F /* SubstanceParser.swift in Sources */,
+				EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
@@ -826,7 +826,7 @@
 				EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */,
 				EACB6E6527D4D86900940291 /* AppDelegate.swift in Sources */,
 				EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */,
-				EA9AE85E27CB89ED00D4D468 /* SectionedSubstancesViewModel.swift in Sources */,
+				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* DurationView.swift in Sources */,

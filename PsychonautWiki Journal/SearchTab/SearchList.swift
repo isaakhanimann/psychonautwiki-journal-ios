@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SearchList: View {
 
-    @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) private var isSearching
@@ -30,9 +30,13 @@ struct SearchList: View {
                         }
                     }
                 }
-                Text("Substances")
+                ForEach(searchViewModel.filteredSubstances) { sub in
+                    NavigationLink(sub.name) {
+                        SubstanceView(substance: sub)
+                    }
+                }
             }
-            if isSearching && sectionedViewModel.substances.isEmpty {
+            if isSearching && searchViewModel.filteredSubstances.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
             }

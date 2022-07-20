@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ChooseSubstanceList: View {
 
-    @ObservedObject var sectionedViewModel: SectionedSubstancesViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
@@ -29,11 +29,11 @@ struct ChooseSubstanceList: View {
                         }
                     }
                 }
-                ForEach(sectionedViewModel.substances, id: \.name) { sub in
+                ForEach(searchViewModel.filteredSubstances) { sub in
                     Text(sub.name)
                 }
             }
-            if isSearching && sectionedViewModel.substances.isEmpty {
+            if isSearching && searchViewModel.filteredSubstances.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
             }
