@@ -12,9 +12,11 @@ struct SearchList: View {
         ZStack {
             List {
                 if !isSearching {
-                    if !recentsViewModel.recentSubstances.isEmpty {
+                    if !recentsViewModel.recentSubstanceNames.isEmpty {
                         Section("Recently Used") {
-                            Text("Hello")
+                            ForEach(recentsViewModel.recentSubstanceNames, id: \.self) { name in
+                                Text(name)
+                            }
                         }
                     }
                     Section("Custom Substances") {
