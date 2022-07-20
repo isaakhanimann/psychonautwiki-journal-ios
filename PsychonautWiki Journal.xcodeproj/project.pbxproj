@@ -52,6 +52,7 @@
 		EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
+		EABDA72E28881B4800A23DB3 /* IngestionsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
@@ -188,6 +189,7 @@
 		EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInAppStoreButton.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
@@ -421,6 +423,14 @@
 			path = "Custom Sheets";
 			sourceTree = "<group>";
 		};
+		EABDA72C28881B0000A23DB3 /* IngestionsTab */ = {
+			isa = PBXGroup;
+			children = (
+				EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */,
+			);
+			path = IngestionsTab;
+			sourceTree = "<group>";
+		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +474,7 @@
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* ExperiencesTab */,
+				EABDA72C28881B0000A23DB3 /* IngestionsTab */,
 				EA47E66E27CB475100F6E10F /* SearchTab */,
 				EAE4712A26CBA663009FB0EC /* SettingsTab */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
@@ -842,6 +853,7 @@
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */,
 				EACB6E7727D60BD800940291 /* Experience-ViewModel.swift in Sources */,
+				EABDA72E28881B4800A23DB3 /* IngestionsTab.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
 				EAB165A027E34B40003DF79D /* CustomSubstancesViewModel.swift in Sources */,

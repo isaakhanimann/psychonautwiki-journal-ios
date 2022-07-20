@@ -5,11 +5,12 @@ struct AllTabs: View {
     @State private var tabSelection = TabSelection.substances
     @State private var tappedTwice: Bool = false
     @State private var experienceID = UUID()
+    @State private var ingestionID = UUID()
     @State private var searchID = UUID()
     @State private var settingsID = UUID()
 
     enum TabSelection {
-        case experience, substances, settings
+        case experience, ingestions, substances, settings
     }
 
     var body: some View {
@@ -30,6 +31,13 @@ struct AllTabs: View {
                 .tabItem {
                     Image(systemName: "books.vertical")
                     Text("Experiences")
+                }
+            IngestionsTab()
+                .id(ingestionID)
+                .tag(TabSelection.ingestions)
+                .tabItem {
+                    Image(systemName: "book")
+                    Text("Ingestions")
                 }
             SearchTab()
                 .id(searchID)
@@ -53,6 +61,8 @@ struct AllTabs: View {
                 switch tabSelection {
                 case .experience:
                     reloadExperienceTab()
+                case .ingestions:
+                    break
                 case .substances:
                     reloadSearchTab()
                 case .settings:
