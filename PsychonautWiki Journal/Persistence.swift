@@ -7,7 +7,6 @@ struct PersistenceController {
         PersistenceController(inMemory: true)
     }()
     let container: NSPersistentContainer
-    static let comesFromVersion10Key = "hasBeenSetupBefore"
     static let needsToSeeWelcomeKey = "needsToSeeWelcome"
     static let isEyeOpenKey = "isEyeOpen"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
@@ -28,6 +27,25 @@ struct PersistenceController {
         viewContext.automaticallyMergesChangesFromParent = true
     }
 
+    func migrate() {
+        viewContext.performAndWait {
+            let fetchRequest = Ingestion.fetchRequest()
+            let allIngestions = (try? viewContext.fetch(fetchRequest)) ?? []
+            var substanceNames = Set<String>()
+            for ingestion in allIngestions {
+                guard let name = ingestion.substanceName else {continue}
+                guard let colorUnwrap = ingestion.color else {continue}
+                if !substanceNames.contains(name) {
+                    let companion = SubstanceCompanion(context: viewContext)
+                    companion.substanceName = name
+                    companion.colorAsText = colorUnwrap
+                    substanceNames.insert(name)
+                }
+            }
+            try? viewContext.save()
+        }
+    }
+
     func saveViewContext() {
         if viewContext.hasChanges {
             do {
@@ -44,10 +62,6 @@ struct PersistenceController {
         fetchRequest.fetchLimit = 10
         let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
         return experiences.sorted().first
-    }
-
-    enum DecodingFileError: Error {
-        case failedToDecode
     }
 
     func getRecentIngestions() -> [Ingestion] {

@@ -8,6 +8,7 @@ struct ContentView: View {
     @EnvironmentObject private var sheetViewModel: SheetViewModel
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @AppStorage("hasBeenMigrated") var hasBeenMigrated: Bool = false
 
     var body: some View {
         AllTabs()
@@ -30,7 +31,6 @@ struct ContentView: View {
                 switch item {
                 case .addIngestionFromContent(let foundSubstance):
                     NavigationView {
-                        // TODO: — check if there are interactions and if not go straight to choose route
                         AcknowledgeInteractionsView(substance: foundSubstance)
                     }
                     .environmentObject(
@@ -41,7 +41,6 @@ struct ContentView: View {
                         .environmentObject(AddIngestionSheetContext(experience: experience))
                 case .addIngestionFromSubstance(let substance):
                     NavigationView {
-                        // TODO: — check if there are interactions and if not go straight to choose route
                         AcknowledgeInteractionsView(substance: substance)
                     }
                     .environmentObject(
@@ -64,12 +63,10 @@ struct ContentView: View {
             .task {
                 viewModel.sheetViewModel = sheetViewModel
                 viewModel.toastViewModel = toastViewModel
+                if !hasBeenMigrated {
+                    PersistenceController.shared.migrate()
+                    hasBeenMigrated = true
+                }
             }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
