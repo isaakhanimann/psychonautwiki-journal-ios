@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct IngestionsTab: View {
+struct StatsTab: View {
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
@@ -18,8 +18,8 @@ struct IngestionsTab: View {
     }
 }
 
-struct IngestionsTab_Previews: PreviewProvider {
+struct StatsTab_Previews: PreviewProvider {
     static var previews: some View {
-        IngestionsTab()
+        StatsTab()
     }
 }

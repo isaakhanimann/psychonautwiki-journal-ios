@@ -417,12 +417,12 @@
 			path = "Custom Sheets";
 			sourceTree = "<group>";
 		};
-		EABDA72C28881B0000A23DB3 /* IngestionsTab */ = {
+		EABDA72C28881B0000A23DB3 /* StatsTab */ = {
 			isa = PBXGroup;
 			children = (
 				EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */,
 			);
-			path = IngestionsTab;
+			path = StatsTab;
 			sourceTree = "<group>";
 		};
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
@@ -468,7 +468,7 @@
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* ExperiencesTab */,
-				EABDA72C28881B0000A23DB3 /* IngestionsTab */,
+				EABDA72C28881B0000A23DB3 /* StatsTab */,
 				EA47E66E27CB475100F6E10F /* SearchTab */,
 				EAE4712A26CBA663009FB0EC /* SettingsTab */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,

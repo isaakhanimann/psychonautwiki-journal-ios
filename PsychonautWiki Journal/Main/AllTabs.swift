@@ -32,12 +32,12 @@ struct AllTabs: View {
                     Image(systemName: "books.vertical")
                     Text("Experiences")
                 }
-            IngestionsTab()
+            StatsTab()
                 .id(ingestionID)
                 .tag(TabSelection.ingestions)
                 .tabItem {
-                    Image(systemName: "pills")
-                    Text("Ingestions")
+                    Image(systemName: "chart.bar.xaxis")
+                    Text("Stats")
                 }
             SearchTab()
                 .id(searchID)
@@ -50,8 +50,8 @@ struct AllTabs: View {
                 .id(settingsID)
                 .tag(TabSelection.settings)
                 .tabItem {
-                    Image(systemName: "gearshape")
-                    Text("Settings")
+                    Image(systemName: "cross.fill")
+                    Text("Safer")
                 }
         }
         .onChange(
