@@ -3,16 +3,13 @@ import SwiftUI
 struct SettingsScreen: View {
 
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
             eye
             Section("Safety") {
-                Button {
-                    sheetViewModel.sheetToShow = .article(
-                        url: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!
-                    )
+                NavigationLink {
+                    WebViewScreen(articleURL: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!)
                 } label: {
                     Label("Responsible Use", systemImage: "brain")
                 }

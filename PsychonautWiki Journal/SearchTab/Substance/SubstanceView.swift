@@ -4,14 +4,13 @@ struct SubstanceView: View {
 
     let substance: Substance
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         List {
             if isEyeOpen {
                 if let articleURL = substance.url {
-                    Button {
-                        sheetViewModel.sheetToShow = .article(url: articleURL)
+                    NavigationLink {
+                        WebViewScreen(articleURL: articleURL)
                     } label: {
                         Label("Article", systemImage: "link")
                     }
@@ -52,11 +51,6 @@ struct SubstanceView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("", action: {}) // here so that SwiftUI layout works
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Ingest") {
-                    sheetViewModel.sheetToShow = .addIngestionFromSubstance(substance: substance)
-                }
             }
         }
     }

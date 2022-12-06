@@ -4,7 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    let dismiss: DismissAction
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     // swiftlint:disable line_length
@@ -36,7 +36,8 @@ struct ChooseDoseView: View {
                     substance: substance,
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,
-                    units: viewModel.selectedUnits
+                    units: viewModel.selectedUnits,
+                    dismiss: dismiss
                 ),
                 isActive: $viewModel.isShowingNext,
                 label: {
@@ -55,7 +56,7 @@ struct ChooseDoseView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetViewModel.dismiss()
+                    dismiss()
                 }
             }
         }

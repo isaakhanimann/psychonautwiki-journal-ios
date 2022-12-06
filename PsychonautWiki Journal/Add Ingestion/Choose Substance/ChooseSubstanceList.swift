@@ -3,6 +3,7 @@ import SwiftUI
 struct ChooseSubstanceList: View {
 
     @ObservedObject var searchViewModel: SearchViewModel
+    let dismiss: DismissAction
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
@@ -17,7 +18,7 @@ struct ChooseSubstanceList: View {
                         Section("Recently Used") {
                             ForEach(substancesWithColors) { substanceWithColor in
                                 NavigationLink(substanceWithColor.substance.name) {
-                                    SubstanceView(substance: substanceWithColor.substance)
+                                    AcknowledgeInteractionsView(substance: substanceWithColor.substance, dismiss: dismiss)
                                 }
                             }
                         }
@@ -26,14 +27,16 @@ struct ChooseSubstanceList: View {
                         Section("Custom Substances") {
                             ForEach(customsViewModel.customSubstances) { cust in
                                 NavigationLink(cust.nameUnwrapped) {
-                                    AddCustomIngestionView(customSubstance: cust)
+                                    AddCustomIngestionView(customSubstance: cust, dismiss: dismiss)
                                 }
                             }
                         }
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in
-                    Text(sub.name)
+                    NavigationLink(sub.name) {
+                        AcknowledgeInteractionsView(substance: sub, dismiss: dismiss)
+                    }
                 }
             }
             if isSearching && searchViewModel.filteredSubstances.isEmpty {

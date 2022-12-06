@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9427E5DB5200077FB2 /* WebView.swift */; };
-		EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9927E5E72000077FB2 /* WebViewSheet.swift */; };
+		EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9427E5DB5200077FB2 /* WebViewRepresentable.swift */; };
+		EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9927E5E72000077FB2 /* WebViewScreen.swift */; };
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
-		EA014FA227EA0D8C00077FB2 /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */; };
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
@@ -44,7 +43,6 @@
 		EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A927E36A4F003DF79D /* AddCustomIngestionView.swift */; };
 		EAB165AC27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */; };
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
-		EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */; };
 		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
 		EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C627E4ED86003DF79D /* ShareButton.swift */; };
 		EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */; };
@@ -140,10 +138,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EA014F9427E5DB5200077FB2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		EA014F9927E5E72000077FB2 /* WebViewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewSheet.swift; sourceTree = "<group>"; };
+		EA014F9427E5DB5200077FB2 /* WebViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewRepresentable.swift; sourceTree = "<group>"; };
+		EA014F9927E5E72000077FB2 /* WebViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScreen.swift; sourceTree = "<group>"; };
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
-		EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
@@ -179,7 +176,6 @@
 		EAB165A927E36A4F003DF79D /* AddCustomIngestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomIngestionView.swift; sourceTree = "<group>"; };
 		EAB165AB27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCustomIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
-		EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionSheetContext.swift; sourceTree = "<group>"; };
 		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
 		EAB165C627E4ED86003DF79D /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInAppStoreButton.swift; sourceTree = "<group>"; };
@@ -277,8 +273,8 @@
 		EA014F9627E5DC6500077FB2 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				EA014F9427E5DB5200077FB2 /* WebView.swift */,
-				EA014F9927E5E72000077FB2 /* WebViewSheet.swift */,
+				EA014F9427E5DB5200077FB2 /* WebViewRepresentable.swift */,
+				EA014F9927E5E72000077FB2 /* WebViewScreen.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -364,7 +360,6 @@
 			children = (
 				EA8AEA7027E1CC5100B30A16 /* Content */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
-				EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */,
 				EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 			);
@@ -594,7 +589,6 @@
 				EA891BB827DF9F3B00AF04C6 /* Choose Substance */,
 				EA8AEA7127E1DC0500B30A16 /* Substance Sheets */,
 				EAB165A827E3677C003DF79D /* Custom Sheets */,
-				EAB165AF27E382E4003DF79D /* AddIngestionSheetContext.swift */,
 				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 				EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */,
@@ -817,7 +811,7 @@
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
-				EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */,
+				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
@@ -832,13 +826,11 @@
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
-				EA014FA227EA0D8C00077FB2 /* SheetViewModel.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
 				EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */,
-				EAB165B027E382E4003DF79D /* AddIngestionSheetContext.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */,
@@ -861,7 +853,7 @@
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
-				EA014F9527E5DB5200077FB2 /* WebView.swift in Sources */,
+				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

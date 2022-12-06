@@ -1,18 +1,18 @@
 import SwiftUI
 import MobileCoreServices
 
-struct WebViewSheet: View {
+struct WebViewScreen: View {
 
     let articleURL: URL
     @State private var isWebViewLoading = true
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @State private var isShowingCopySuccess = false
 
     var body: some View {
         ZStack {
             VStack(alignment: .trailing, spacing: 0) {
                 toolbar
-                WebView(isLoading: $isWebViewLoading, url: articleURL)
+                WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
             }
             if isWebViewLoading {
                 ProgressView()
@@ -41,15 +41,15 @@ struct WebViewSheet: View {
 
             Spacer()
             Button("Done") {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         }
         .padding()
     }
 }
 
-struct WebViewSheet_Previews: PreviewProvider {
+struct WebViewScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WebViewSheet(articleURL: URL(string: "https://psychonautwiki.org/wiki/LSD")!)
+        WebViewScreen(articleURL: URL(string: "https://psychonautwiki.org/wiki/LSD")!)
     }
 }

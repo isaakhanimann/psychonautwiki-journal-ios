@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="CustomSubstance" representedClassName="CustomSubstance" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="units" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
-        <attribute name="lastSyncToCalendar" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
@@ -26,10 +24,4 @@
         <attribute name="colorAsText" optional="YES" attributeType="String"/>
         <attribute name="substanceName" optional="YES" attributeType="String"/>
     </entity>
-    <elements>
-        <element name="CustomSubstance" positionX="-999" positionY="-225" width="128" height="59"/>
-        <element name="Experience" positionX="-270.1033325195312" positionY="-382.2306213378906" width="128" height="119"/>
-        <element name="Ingestion" positionX="-236.0462646484375" positionY="-196.5068054199219" width="128" height="149"/>
-        <element name="SubstanceCompanion" positionX="-792" positionY="-225" width="128" height="59"/>
-    </elements>
 </model>

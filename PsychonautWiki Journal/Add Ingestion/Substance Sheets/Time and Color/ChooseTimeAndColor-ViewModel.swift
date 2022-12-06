@@ -35,7 +35,7 @@ extension ChooseTimeAndColor {
             isLoadingCompanions = false
         }
 
-        func addIngestion(to experience: Experience?) {
+        func addIngestionToNewExperience() {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
                 if !doesCompanionExistAlready {
@@ -43,6 +43,10 @@ extension ChooseTimeAndColor {
                     companion.substanceName = substance?.name
                     companion.colorAsText = selectedColor.rawValue
                 }
+                let experience = Experience(context: context)
+                experience.creationDate = Date()
+                experience.title = "Todo title"
+                experience.text = ""
                 let ingestion = Ingestion(context: context)
                 ingestion.identifier = UUID()
                 ingestion.time = selectedTime

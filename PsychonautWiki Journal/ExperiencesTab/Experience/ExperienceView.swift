@@ -4,7 +4,7 @@ struct ExperienceView: View {
 
     @ObservedObject var experience: Experience
     @StateObject private var viewModel = ViewModel()
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @State private var isShowingAddIngestionSheet = false
     @Environment(\.editMode) private var editMode
 
     var body: some View {
@@ -18,7 +18,6 @@ struct ExperienceView: View {
             }
             if !isEditing || !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section("Ingestions") {
-
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         IngestionRow(ingestion: ing)
                             .deleteDisabled(!isEditing)
@@ -26,7 +25,7 @@ struct ExperienceView: View {
                     .onDelete(perform: deleteIngestions)
                     if !isEditing {
                         Button {
-                            sheetViewModel.sheetToShow = .addIngestionFromExperience(experience: experience)
+                            isShowingAddIngestionSheet.toggle()
                         } label: {
                             Label("Add Ingestion", systemImage: "plus")
                                 .foregroundColor(.accentColor)
@@ -47,6 +46,9 @@ struct ExperienceView: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+            ChooseSubstanceView()
+        })
         .task {
             viewModel.initialize(experience: experience)
         }

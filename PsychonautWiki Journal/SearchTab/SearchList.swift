@@ -5,8 +5,8 @@ struct SearchList: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
+    @State private var isShowingAddCustomSubstance = false
     @Environment(\.isSearching) private var isSearching
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
 
     var body: some View {
         ZStack {
@@ -34,10 +34,12 @@ struct SearchList: View {
                             }
                         }
                         Button {
-                            sheetViewModel.sheetToShow = .addCustom
+                            isShowingAddCustomSubstance.toggle()
                         } label: {
                             Label("Add Custom", systemImage: "plus")
                         }
+                    }.sheet(isPresented: $isShowingAddCustomSubstance) {
+                        AddCustomSubstanceView()
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in

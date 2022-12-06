@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    let dismiss: DismissAction
 
     var body: some View {
         List {
@@ -16,7 +16,8 @@ struct ChooseRouteView: View {
                     route.displayString,
                     destination: ChooseDoseView(
                         substance: substance,
-                        administrationRoute: route
+                        administrationRoute: route,
+                        dismiss: dismiss
                     )
                 )
             }
@@ -30,7 +31,8 @@ struct ChooseRouteView: View {
                             route.displayString,
                             destination: ChooseDoseView(
                                 substance: substance,
-                                administrationRoute: route
+                                administrationRoute: route,
+                                dismiss: dismiss
                             )
                         )
                     }
@@ -41,7 +43,7 @@ struct ChooseRouteView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetViewModel.dismiss()
+                    dismiss()
                 }
             }
         }

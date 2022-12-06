@@ -7,7 +7,7 @@ struct ChooseSubstanceView: View {
 
     var body: some View {
         NavigationView {
-            ChooseSubstanceList(searchViewModel: searchViewModel)
+            ChooseSubstanceList(searchViewModel: searchViewModel, dismiss: dismiss)
                 .searchable(text: $searchViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
                 .disableAutocorrection(true)
                 .navigationBarTitle("Add Ingestion")

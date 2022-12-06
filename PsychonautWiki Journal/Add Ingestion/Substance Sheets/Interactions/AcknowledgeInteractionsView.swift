@@ -3,7 +3,7 @@ import SwiftUI
 struct AcknowledgeInteractionsView: View {
 
     let substance: Substance
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    let dismiss: DismissAction
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -32,7 +32,7 @@ struct AcknowledgeInteractionsView: View {
             .buttonStyle(.primary)
             .padding()
             NavigationLink("Next", isActive: $viewModel.isShowingNext) {
-                ChooseRouteView(substance: substance)
+                ChooseRouteView(substance: substance, dismiss: dismiss)
             }
             .allowsHitTesting(false)
             .hidden()
@@ -40,7 +40,7 @@ struct AcknowledgeInteractionsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
-                    sheetViewModel.dismiss()
+                    dismiss()
                 }
             }
         }

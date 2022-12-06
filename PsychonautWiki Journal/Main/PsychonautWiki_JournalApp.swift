@@ -4,7 +4,6 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
-    @StateObject private var sheetViewModel = SheetViewModel()
     @StateObject private var toastViewModel = ToastViewModel()
     @Environment(\.scenePhase) private var scenePhase
 
@@ -13,7 +12,6 @@ struct PsychonautWiki_JournalApp: App {
             ContentView()
                 .navigationViewStyle(.stack)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
-                .environmentObject(sheetViewModel)
                 .environmentObject(toastViewModel)
                 .accentColor(Color.blue)
         }

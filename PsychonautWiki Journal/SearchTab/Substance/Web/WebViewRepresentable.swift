@@ -1,7 +1,7 @@
 import WebKit
 import SwiftUI
 
-struct WebView: UIViewRepresentable {
+struct WebViewRepresentable: UIViewRepresentable {
 
     @Binding var isLoading: Bool
     let url: URL

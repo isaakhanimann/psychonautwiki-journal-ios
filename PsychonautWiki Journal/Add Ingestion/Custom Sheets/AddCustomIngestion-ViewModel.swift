@@ -14,15 +14,6 @@ extension AddCustomIngestionView {
         }
         var customSubstance: CustomSubstance?
 
-        func addIngestion(to experience: Experience) {
-            let context = PersistenceController.shared.viewContext
-            context.performAndWait {
-                let ingestion = createIngestion()
-                experience.addToIngestions(ingestion)
-                try? context.save()
-            }
-        }
-
         func setDefaultColor() {
             let fetchRequest: NSFetchRequest<Ingestion> = Ingestion.fetchRequest()
             fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]

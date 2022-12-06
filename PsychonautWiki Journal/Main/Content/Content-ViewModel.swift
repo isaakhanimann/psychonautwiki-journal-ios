@@ -7,7 +7,6 @@ extension ContentView {
                 UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey)
             }
         }
-        var sheetViewModel: SheetViewModel?
         var toastViewModel: ToastViewModel?
 
         init() {
