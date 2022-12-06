@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct ExperiencesTab: View {
-
+    
     @StateObject var viewModel = ViewModel()
-
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 ExperiencesList(viewModel: viewModel)
+                    .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
+                    .disableAutocorrection(true)
                 if !viewModel.hasExperiences {
                     Button(action: {
                         withAnimation {
@@ -15,10 +17,10 @@ struct ExperiencesTab: View {
                         }
                     }, label: {
                         Label("Add Experience", systemImage: "plus")
-
+                        
                     })
-                        .buttonStyle(.primary)
-                        .padding()
+                    .buttonStyle(.primary)
+                    .padding()
                 }
             }
             .navigationTitle("Experiences")
@@ -41,7 +43,5 @@ struct ExperiencesTab: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
-        .disableAutocorrection(true)
     }
 }
