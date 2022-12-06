@@ -47,7 +47,6 @@ struct SettingsTab: View {
                         }
                     }
                 }
-                CalendarSectionInSettings()
                 Section {
                     HStack {
                         Text("Version")
@@ -126,7 +125,6 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTab()
             .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
-            .environmentObject(CalendarWrapper())
             .accentColor(Color.blue)
     }
 }

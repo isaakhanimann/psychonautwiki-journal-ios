@@ -36,7 +36,6 @@
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA9AE85027CB57BC00D4D468 /* SettingsTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */; };
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
-		EAA49E16280452A600184A10 /* CalendarSectionInSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA49E15280452A600184A10 /* CalendarSectionInSettings.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */; };
 		EAB165A027E34B40003DF79D /* CustomSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */; };
@@ -79,7 +78,6 @@
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
 		EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712926CBA663009FB0EC /* ContentView.swift */; };
 		EAE471BE26CBA664009FB0EC /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712B26CBA663009FB0EC /* SettingsTab.swift */; };
-		EAE471C426CBA664009FB0EC /* CalendarSectionInExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4713226CBA663009FB0EC /* CalendarSectionInExperience.swift */; };
 		EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */; };
 		EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
 		EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */; };
@@ -87,7 +85,6 @@
 		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
-		EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
 		EAE4720B26CBA664009FB0EC /* ExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718B26CBA664009FB0EC /* ExperienceView.swift */; };
@@ -173,7 +170,6 @@
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsTab-ViewModel.swift"; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		EAA49E15280452A600184A10 /* CalendarSectionInSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSectionInSettings.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSubstance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstancesViewModel.swift; sourceTree = "<group>"; };
@@ -220,7 +216,6 @@
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAE4712926CBA663009FB0EC /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EAE4712B26CBA663009FB0EC /* SettingsTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
-		EAE4713226CBA663009FB0EC /* CalendarSectionInExperience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSectionInExperience.swift; sourceTree = "<group>"; };
 		EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Goya.xcdatamodel; sourceTree = "<group>"; };
 		EAE4715926CBA664009FB0EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence-Uniqued.swift"; sourceTree = "<group>"; };
@@ -229,7 +224,6 @@
 		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
-		EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWrapper.swift; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
 		EAE4718B26CBA664009FB0EC /* ExperienceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceView.swift; sourceTree = "<group>"; };
@@ -370,7 +364,6 @@
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
 				EA014FA127EA0D8C00077FB2 /* SheetViewModel.swift */,
 				EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */,
-				EAE4717F26CBA664009FB0EC /* CalendarWrapper.swift */,
 				EACB6E6427D4D86900940291 /* AppDelegate.swift */,
 				EA47E67227CB490300F6E10F /* AllTabs.swift */,
 			);
@@ -503,7 +496,6 @@
 			children = (
 				EA460D202763790C002EF80B /* FAQ */,
 				EAE4712B26CBA663009FB0EC /* SettingsTab.swift */,
-				EAA49E15280452A600184A10 /* CalendarSectionInSettings.swift */,
 				EA9AE84F27CB57BC00D4D468 /* SettingsTab-ViewModel.swift */,
 				EAB165C627E4ED86003DF79D /* ShareButton.swift */,
 				EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */,
@@ -581,7 +573,6 @@
 				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
 				EACB6E7627D60BD800940291 /* Experience-ViewModel.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
-				EAE4713226CBA663009FB0EC /* CalendarSectionInExperience.swift */,
 			);
 			path = Experience;
 			sourceTree = "<group>";
@@ -773,7 +764,6 @@
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
 				EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */,
 				EACB6E7B27D6456400940291 /* SearchList.swift in Sources */,
-				EAA49E16280452A600184A10 /* CalendarSectionInSettings.swift in Sources */,
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
@@ -821,8 +811,6 @@
 				EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
-				EAE471C426CBA664009FB0EC /* CalendarSectionInExperience.swift in Sources */,
-				EAE4720226CBA664009FB0EC /* CalendarWrapper.swift in Sources */,
 				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,

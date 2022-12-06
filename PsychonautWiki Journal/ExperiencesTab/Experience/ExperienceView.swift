@@ -46,9 +46,6 @@ struct ExperienceView: View {
                     }
                 }
             }
-            if !experience.sortedIngestionsUnwrapped.isEmpty {
-                CalendarSectionInExperience(experience: experience)
-            }
         }
         .task {
             viewModel.initialize(experience: experience)
