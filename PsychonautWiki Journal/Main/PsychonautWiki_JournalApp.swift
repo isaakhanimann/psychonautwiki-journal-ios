@@ -4,7 +4,6 @@ import SwiftUI
 @main
 struct PsychonautWiki_JournalApp: App {
 
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var sheetViewModel = SheetViewModel()
     @StateObject private var toastViewModel = ToastViewModel()
     @Environment(\.scenePhase) private var scenePhase
@@ -21,10 +20,8 @@ struct PsychonautWiki_JournalApp: App {
         .onChange(of: scenePhase) { phase in
             if phase == .background {
                 PersistenceController.shared.saveViewContext()
-                appDelegate.scheduleSubstancesRefresh()
             }
         }
     }
-
 
 }
