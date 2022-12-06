@@ -2,19 +2,19 @@ import SwiftUI
 
 struct ChooseSubstanceView: View {
 
-    @StateObject var sectionedViewModel = SearchViewModel()
-    @EnvironmentObject private var sheetViewModel: SheetViewModel
+    @StateObject var searchViewModel = SearchViewModel()
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
-            ChooseSubstanceList(searchViewModel: sectionedViewModel)
-                .searchable(text: $sectionedViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+            ChooseSubstanceList(searchViewModel: searchViewModel)
+                .searchable(text: $searchViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
                 .disableAutocorrection(true)
                 .navigationBarTitle("Add Ingestion")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Cancel") {
-                            sheetViewModel.dismiss()
+                            dismiss()
                         }
                     }
                 }

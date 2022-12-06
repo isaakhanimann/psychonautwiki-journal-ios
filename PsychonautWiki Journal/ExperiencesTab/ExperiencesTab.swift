@@ -3,6 +3,7 @@ import SwiftUI
 struct ExperiencesTab: View {
 
     @StateObject var viewModel = ViewModel()
+    @State private var isShowingAddIngestionSheet = false
 
     var body: some View {
         NavigationView {
@@ -10,33 +11,32 @@ struct ExperiencesTab: View {
                 ExperiencesList(viewModel: viewModel)
                     .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
                     .disableAutocorrection(true)
-                if !viewModel.hasExperiences {
+                if viewModel.experiences.isEmpty {
                     Button(action: {
-                        withAnimation {
-                            viewModel.addExperience()
-                        }
+                        isShowingAddIngestionSheet.toggle()
                     }, label: {
-                        Label("Add Experience", systemImage: "plus")
+                        Label("Add Ingestion", systemImage: "plus")
                     })
                     .buttonStyle(.primary)
                     .padding()
                 }
             }
+            .sheet(isPresented: $isShowingAddIngestionSheet) {
+                ChooseSubstanceView()
+            }
             .navigationTitle("Experiences")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if viewModel.hasExperiences {
+                    if !viewModel.experiences.isEmpty {
                         EditButton()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if viewModel.hasExperiences {
+                    if !viewModel.experiences.isEmpty {
                         Button {
-                            withAnimation {
-                                viewModel.addExperience()
-                            }
+                            isShowingAddIngestionSheet.toggle()
                         } label: {
-                            Label("Add Experience", systemImage: "plus")
+                            Label("Add Ingestion", systemImage: "plus")
                         }
                     }
                 }

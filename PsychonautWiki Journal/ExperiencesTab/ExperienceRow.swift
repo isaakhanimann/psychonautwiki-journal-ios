@@ -4,14 +4,10 @@ import Combine
 struct ExperienceRow: View {
 
     @ObservedObject var experience: Experience
-    @Binding var selection: Experience?
 
     var body: some View {
-
         return NavigationLink(
-            destination: ExperienceView(experience: experience),
-            tag: experience,
-            selection: $selection
+            destination: ExperienceView(experience: experience)
         ) {
             HStack {
                 Circle()
@@ -42,15 +38,12 @@ struct ExperienceRow: View {
     }
 
     private func getDoubleColors(from colors: [Color]) -> [Color] {
-
         var doubleColors = colors.flatMap { color in
             Array(repeating: color, count: 2)
         }
-
         if let firstColor = experience.ingestionColors.first {
             doubleColors.append(firstColor)
         }
-
         return doubleColors
     }
 }
