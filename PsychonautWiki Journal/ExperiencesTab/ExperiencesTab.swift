@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ExperiencesTab: View {
-    
+
     @StateObject var viewModel = ViewModel()
-    
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
@@ -17,7 +17,6 @@ struct ExperiencesTab: View {
                         }
                     }, label: {
                         Label("Add Experience", systemImage: "plus")
-                        
                     })
                     .buttonStyle(.primary)
                     .padding()

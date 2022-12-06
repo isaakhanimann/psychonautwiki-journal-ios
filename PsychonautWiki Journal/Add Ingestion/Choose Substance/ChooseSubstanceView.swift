@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ChooseSubstanceView: View {
-    
+
     @StateObject var sectionedViewModel = SearchViewModel()
     @EnvironmentObject private var sheetViewModel: SheetViewModel
-    
+
     var body: some View {
         NavigationView {
             ChooseSubstanceList(searchViewModel: sectionedViewModel)

@@ -53,6 +53,8 @@
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* IngestionsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
+		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
+		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
@@ -97,7 +99,7 @@
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
-		EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* InitialSubstances.json */; };
+		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
 		EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9127D7A6C400945587 /* InteractionsSection.swift */; };
@@ -186,6 +188,8 @@
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
+		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
+		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
@@ -234,7 +238,7 @@
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
-		EAE4723426CC42F7009FB0EC /* InitialSubstances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InitialSubstances.json; sourceTree = "<group>"; };
+		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
 		EAE4723826CC6598009FB0EC /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
@@ -470,7 +474,7 @@
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
 				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
-				EAE4723426CC42F7009FB0EC /* InitialSubstances.json */,
+				EAE4723426CC42F7009FB0EC /* substances.json */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
@@ -540,6 +544,8 @@
 			children = (
 				EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */,
 				EA47E63D27CA136C00F6E10F /* Substance.swift */,
+				EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */,
+				EACB0C1A293F9C0100C605E2 /* Category.swift */,
 				EA47E63727CA136C00F6E10F /* Tolerance.swift */,
 				EA47E64127CA136C00F6E10F /* Roa.swift */,
 				EA47E63927CA136C00F6E10F /* RoaDuration.swift */,
@@ -706,7 +712,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
-				EAE4723526CC42F7009FB0EC /* InitialSubstances.json in Resources */,
+				EAE4723526CC42F7009FB0EC /* substances.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +811,7 @@
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewSheet.swift in Sources */,
+				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EAB165AA27E36A4F003DF79D /* AddCustomIngestionView.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
@@ -831,6 +838,7 @@
 				EA8447EB27CD276300B10DD3 /* DurationView.swift in Sources */,
 				EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
+				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,

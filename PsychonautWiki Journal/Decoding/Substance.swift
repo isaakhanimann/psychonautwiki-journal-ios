@@ -39,7 +39,6 @@ struct Substance: Decodable, Identifiable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        // TODO: remove substances that contain word experiences
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
         let throwableRoas = try? container.decodeIfPresent(

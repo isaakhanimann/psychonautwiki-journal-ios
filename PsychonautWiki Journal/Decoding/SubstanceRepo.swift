@@ -1,12 +1,13 @@
 import Foundation
 import CoreData
 
-class SubstanceRepo: ObservableObject {
+class SubstanceRepo {
 
     static let shared = SubstanceRepo()
 
-    @Published var substances: [Substance]
-    @Published var lastUpdated: Date
+    let substances: [Substance]
+    let categories: [Category]
+    private let substancesDict: [String: Substance]
 
     init() {
         let data = SubstanceRepo.getInitialData()
@@ -14,28 +15,22 @@ class SubstanceRepo: ObservableObject {
         decoder.dateDecodingStrategy = .deferredToDate
         decoder.keyDecodingStrategy = .useDefaultKeys
         // swiftlint:disable force_try
-        substances = try! decoder.decode([Substance].self, from: data)
-        lastUpdated = SubstanceRepo.getCreationDate()
+        let file = try! decoder.decode(SubstanceFile.self, from: data)
+        substances = file.substances
+        categories = file.categories
+        substancesDict = Dictionary(
+            uniqueKeysWithValues: substances.map({ substance in
+                (substance.name, substance)
+            })
+        )
     }
 
     func getSubstance(name: String) -> Substance? {
-        substances.first(where: {$0.name == name})
-    }
-
-    static private func getCreationDate() -> Date {
-        var dateComponents = DateComponents()
-        dateComponents.year = 2022
-        dateComponents.month = 4
-        dateComponents.day = 11
-        dateComponents.timeZone = TimeZone(abbreviation: "CEST")
-        dateComponents.hour = 13
-        dateComponents.minute = 52
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(from: dateComponents) ?? Date()
+        substancesDict[name]
     }
 
     static private func getInitialData() -> Data {
-        let fileName = "InitialSubstances"
+        let fileName = "substances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             fatalError("Failed to locate \(fileName) in bundle.")
         }
@@ -44,5 +39,4 @@ class SubstanceRepo: ObservableObject {
         }
         return data
     }
-
 }
