@@ -6,7 +6,7 @@ extension Experience: Comparable {
     }
 
     var dateForSorting: Date {
-        timeOfFirstIngestion ?? creationDateUnwrapped
+        sortDate ?? creationDateUnwrapped
     }
 
     var timeOfFirstIngestion: Date? {

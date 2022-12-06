@@ -45,11 +45,13 @@ extension ChooseTimeAndColor {
                 }
                 let experience = Experience(context: context)
                 experience.creationDate = Date()
+                experience.sortDate = selectedTime
                 experience.title = "Todo title"
                 experience.text = ""
                 let ingestion = Ingestion(context: context)
                 ingestion.identifier = UUID()
                 ingestion.time = selectedTime
+                ingestion.creationDate = Date()
                 ingestion.dose = dose
                 ingestion.units = units
                 ingestion.administrationRoute = administrationRoute.rawValue

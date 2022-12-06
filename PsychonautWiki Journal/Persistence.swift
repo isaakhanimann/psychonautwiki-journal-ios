@@ -58,7 +58,7 @@ struct PersistenceController {
 
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
         fetchRequest.fetchLimit = 10
         let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
         return experiences.sorted().first

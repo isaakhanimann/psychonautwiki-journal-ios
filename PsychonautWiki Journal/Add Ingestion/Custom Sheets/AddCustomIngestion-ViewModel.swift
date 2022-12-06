@@ -32,6 +32,7 @@ extension AddCustomIngestionView {
                 let newExperience = Experience(context: context)
                 let now = Date()
                 newExperience.creationDate = now
+                newExperience.sortDate = selectedTime
                 newExperience.title = now.asDateString
                 let ingestion = createIngestion()
                 newExperience.addToIngestions(ingestion)
@@ -44,6 +45,7 @@ extension AddCustomIngestionView {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
+            ingestion.creationDate = Date()
             ingestion.dose = selectedDose ?? 0
             ingestion.units = customSubstance?.units
             ingestion.administrationRoute = selectedAdministrationRoute.rawValue

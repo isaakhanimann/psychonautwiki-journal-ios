@@ -24,7 +24,7 @@ extension ExperiencesTab {
 
         override init() {
             let fetchRequest = Experience.fetchRequest()
-            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.creationDate, ascending: false) ]
+            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
             experienceFetchController = NSFetchedResultsController(
                 fetchRequest: fetchRequest,
                 managedObjectContext: PersistenceController.shared.viewContext,
