@@ -29,8 +29,8 @@ struct PersistenceController {
 
     func migrate() {
         viewContext.performAndWait {
-            let fetchRequest = Ingestion.fetchRequest()
-            let allIngestions = (try? viewContext.fetch(fetchRequest)) ?? []
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
             var substanceNames = Set<String>()
             for ingestion in allIngestions {
                 guard let name = ingestion.substanceName else {continue}
@@ -41,6 +41,11 @@ struct PersistenceController {
                     companion.colorAsText = colorUnwrap
                     substanceNames.insert(name)
                 }
+            }
+            let experienceFetchRequest = Experience.fetchRequest()
+            let allExperiences = (try? viewContext.fetch(experienceFetchRequest)) ?? []
+            for experience in allExperiences {
+                experience.sortDate = experience.sortedIngestionsUnwrapped.first?.time
             }
             try? viewContext.save()
         }

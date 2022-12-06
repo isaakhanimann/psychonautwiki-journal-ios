@@ -7,7 +7,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    @AppStorage("hasBeenMigrated") var hasBeenMigrated: Bool = false
+    @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
 
     var body: some View {
         AllTabs()
@@ -31,9 +31,9 @@ struct ContentView: View {
             }
             .task {
                 viewModel.toastViewModel = toastViewModel
-                if !hasBeenMigrated {
+                if !hasBeenMigrated2 {
                     PersistenceController.shared.migrate()
-                    hasBeenMigrated = true
+                    hasBeenMigrated2 = true
                 }
             }
     }
