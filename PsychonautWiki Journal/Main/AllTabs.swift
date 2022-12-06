@@ -46,7 +46,7 @@ struct AllTabs: View {
                     Image(systemName: "magnifyingglass")
                     Text("Substances")
                 }
-            SettingsTab()
+            SaferTab()
                 .id(settingsID)
                 .tag(TabSelection.settings)
                 .tabItem {
