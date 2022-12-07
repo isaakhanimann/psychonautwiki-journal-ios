@@ -18,7 +18,10 @@ struct ChooseSubstanceList: View {
                         Section("Recently Used") {
                             ForEach(substancesWithColors) { substanceWithColor in
                                 NavigationLink(substanceWithColor.substance.name) {
-                                    AcknowledgeInteractionsView(substance: substanceWithColor.substance, dismiss: dismiss)
+                                    AcknowledgeInteractionsView(
+                                        substance: substanceWithColor.substance,
+                                        dismiss: dismiss
+                                    )
                                 }
                             }
                         }

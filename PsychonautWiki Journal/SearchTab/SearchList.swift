@@ -43,9 +43,7 @@ struct SearchList: View {
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in
-                    NavigationLink(sub.name) {
-                        SubstanceView(substance: sub)
-                    }
+                    SearchSubstanceRow(substance: sub)
                 }
             }
             if isSearching && searchViewModel.filteredSubstances.isEmpty {

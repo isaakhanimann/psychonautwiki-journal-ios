@@ -48,12 +48,14 @@
 		EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
-		EABDA72E28881B4800A23DB3 /* IngestionsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */; };
+		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferTab.swift */; };
 		EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
+		EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */; };
+		EACB0C2529408E1000C605E2 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = EACB0C2429408E1000C605E2 /* WrappingHStack */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
@@ -180,12 +182,13 @@
 		EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInAppStoreButton.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
-		EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsTab.swift; sourceTree = "<group>"; };
+		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferTab.swift; sourceTree = "<group>"; };
 		EACB0C1F293FED5500C605E2 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
+		EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubstanceRow.swift; sourceTree = "<group>"; };
 		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF76CA027D8B72900945587 /* Algorithms in Frameworks */,
+				EACB0C2529408E1000C605E2 /* WrappingHStack in Frameworks */,
 				EAF76C9927D899E700945587 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +326,7 @@
 				EAB165A527E35C0C003DF79D /* Custom Substance */,
 				EA47E66F27CB477000F6E10F /* SearchTab.swift */,
 				EACB6E7A27D6456400940291 /* SearchList.swift */,
+				EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
 				EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */,
@@ -413,7 +418,7 @@
 		EABDA72C28881B0000A23DB3 /* StatsTab */ = {
 			isa = PBXGroup;
 			children = (
-				EABDA72D28881B4800A23DB3 /* IngestionsTab.swift */,
+				EABDA72D28881B4800A23DB3 /* StatsTab.swift */,
 			);
 			path = StatsTab;
 			sourceTree = "<group>";
@@ -652,6 +657,7 @@
 			packageProductDependencies = (
 				EAF76C9827D899E700945587 /* AlertToast */,
 				EAF76C9F27D8B72900945587 /* Algorithms */,
+				EACB0C2429408E1000C605E2 /* WrappingHStack */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -687,6 +693,7 @@
 			packageReferences = (
 				EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -823,6 +830,7 @@
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
+				EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceView.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
@@ -841,7 +849,7 @@
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */,
 				EACB6E7727D60BD800940291 /* Experience-ViewModel.swift in Sources */,
-				EABDA72E28881B4800A23DB3 /* IngestionsTab.swift in Sources */,
+				EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
 				EAB165A027E34B40003DF79D /* CustomSubstancesViewModel.swift in Sources */,
@@ -1105,6 +1113,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -1124,6 +1140,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EACB0C2429408E1000C605E2 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		EAF76C9827D899E700945587 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */;
