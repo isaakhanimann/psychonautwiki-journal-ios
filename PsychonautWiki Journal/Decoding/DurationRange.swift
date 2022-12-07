@@ -7,33 +7,8 @@ struct DurationRange: Decodable {
     let max: Double?
     let units: Units
 
-    enum CodingKeys: String, CodingKey {
-        case min, max, units
-    }
-
-    enum DecodingError: Error {
-        case unknownDurationUnit
-        case minBiggerThanMax
-    }
-
-    enum Units: String, CaseIterable {
+    enum Units: String, CaseIterable, Decodable {
         case seconds, minutes, hours, days
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let minValue = try container.decode(Double.self, forKey: .min)
-        let maxValue = try container.decode(Double.self, forKey: .max)
-        let unitSymbol = try container.decode(String.self, forKey: .units)
-        if minValue > maxValue {
-            throw DecodingError.minBiggerThanMax
-        }
-        guard let validUnits = Units(rawValue: unitSymbol) else {
-            throw DecodingError.unknownDurationUnit
-        }
-        self.units = validUnits
-        self.min = minValue
-        self.max = maxValue
     }
 
     var isFullyDefined: Bool {

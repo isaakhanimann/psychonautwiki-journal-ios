@@ -10,20 +10,6 @@ struct RoaDuration: Decodable {
     let total: DurationRange?
     let afterglow: DurationRange?
 
-    enum CodingKeys: String, CodingKey {
-        case onset, comeup, peak, offset, total, afterglow
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.onset = try? container.decodeIfPresent(DurationRange.self, forKey: .onset)
-        self.comeup = try? container.decodeIfPresent(DurationRange.self, forKey: .comeup)
-        self.peak = try? container.decodeIfPresent(DurationRange.self, forKey: .peak)
-        self.offset = try? container.decodeIfPresent(DurationRange.self, forKey: .offset)
-        self.total = try? container.decodeIfPresent(DurationRange.self, forKey: .total)
-        self.afterglow = try? container.decodeIfPresent(DurationRange.self, forKey: .afterglow)
-    }
-
     var maxLengthOfTimelineInSec: TimeInterval? {
         let total = total?.maxSec
         guard let onset = onset?.maxSec else {return total}

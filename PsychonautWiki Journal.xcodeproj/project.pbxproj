@@ -53,12 +53,12 @@
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferTab.swift */; };
+		EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
 		EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */; };
 		EACB6E3D27D09C8800940291 /* SubstanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3C27D09C8800940291 /* SubstanceTests.swift */; };
-		EACB6E4B27D1FF2C00940291 /* String-ValidName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4A27D1FF2C00940291 /* String-ValidName.swift */; };
 		EACB6E4E27D2565600940291 /* PsychoactiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */; };
 		EACB6E5027D2582D00940291 /* ChemicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4F27D2582D00940291 /* ChemicalTests.swift */; };
 		EACB6E5227D2592800940291 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* FileTests.swift */; };
@@ -98,7 +98,6 @@
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
-		EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4723826CC6598009FB0EC /* Throwable.swift */; };
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
 		EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9127D7A6C400945587 /* InteractionsSection.swift */; };
 		EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */; };
@@ -186,13 +185,13 @@
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferTab.swift; sourceTree = "<group>"; };
+		EACB0C1F293FED5500C605E2 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
 		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
 		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACB6E3C27D09C8800940291 /* SubstanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceTests.swift; sourceTree = "<group>"; };
-		EACB6E4A27D1FF2C00940291 /* String-ValidName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-ValidName.swift"; sourceTree = "<group>"; };
 		EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychoactiveTests.swift; sourceTree = "<group>"; };
 		EACB6E4F27D2582D00940291 /* ChemicalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTests.swift; sourceTree = "<group>"; };
 		EACB6E5127D2592800940291 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
@@ -235,7 +234,6 @@
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
-		EAE4723826CC6598009FB0EC /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
 		EAF76C9127D7A6C400945587 /* InteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsSection.swift; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
 				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
 				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
-				EACB6E4A27D1FF2C00940291 /* String-ValidName.swift */,
 				EACB6E5327D3473600940291 /* String-Regex.swift */,
 				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
 				EACB6E9827D77A2200940291 /* Date-NearestHour.swift */,
@@ -547,6 +544,7 @@
 			children = (
 				EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */,
 				EA47E63D27CA136C00F6E10F /* Substance.swift */,
+				EACB0C1F293FED5500C605E2 /* Interactions.swift */,
 				EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */,
 				EACB0C1A293F9C0100C605E2 /* Category.swift */,
 				EA47E63727CA136C00F6E10F /* Tolerance.swift */,
@@ -555,7 +553,6 @@
 				EA47E63B27CA136C00F6E10F /* RoaDose.swift */,
 				EA47E63F27CA136C00F6E10F /* RoaRange.swift */,
 				EA47E64327CA136C00F6E10F /* DurationRange.swift */,
-				EAE4723826CC6598009FB0EC /* Throwable.swift */,
 			);
 			path = Decoding;
 			sourceTree = "<group>";
@@ -782,7 +779,6 @@
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */,
-				EAE4723926CC6598009FB0EC /* Throwable.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */,
@@ -799,7 +795,6 @@
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsScreen.swift in Sources */,
 				EAB165AC27E36A7A003DF79D /* AddCustomIngestion-ViewModel.swift in Sources */,
-				EACB6E4B27D1FF2C00940291 /* String-ValidName.swift in Sources */,
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
@@ -823,6 +818,7 @@
 				EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
+				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,

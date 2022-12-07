@@ -39,12 +39,6 @@ struct SubstanceView: View {
             }
             if isEyeOpen {
                 InteractionsSection(substance: substance)
-                if !substance.psychoactiveClasses.isEmpty {
-                    psychoactiveSection
-                }
-                if !substance.chemicalClasses.isEmpty {
-                    chemicalSection
-                }
             }
         }
         .navigationTitle(substance.name)
@@ -84,22 +78,6 @@ struct SubstanceView: View {
                 }
             }
             .listRowSeparator(.hidden)
-        }
-    }
-
-    private var psychoactiveSection: some View {
-        Section("Psychoactive Class") {
-            ForEach(substance.psychoactiveClasses, id: \.self) { psy in
-                Text(psy)
-            }
-        }
-    }
-
-    private var chemicalSection: some View {
-        Section("Chemical Class") {
-            ForEach(substance.chemicalClasses, id: \.self) { che in
-                Text(che)
-            }
         }
     }
 }

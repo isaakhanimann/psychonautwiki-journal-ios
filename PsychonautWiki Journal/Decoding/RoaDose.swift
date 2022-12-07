@@ -10,20 +10,6 @@ struct RoaDose: Decodable {
     let strong: RoaRange?
     let heavy: Double?
 
-    enum CodingKeys: String, CodingKey {
-        case units, threshold, light, common, strong, heavy
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.units = try? container.decodeIfPresent(String.self, forKey: .units)
-        self.threshold = (try? container.decodeIfPresent(Double.self, forKey: .threshold)) ?? 0
-        self.light = try? container.decodeIfPresent(RoaRange.self, forKey: .light)
-        self.common = try? container.decodeIfPresent(RoaRange.self, forKey: .common)
-        self.strong = try? container.decodeIfPresent(RoaRange.self, forKey: .strong)
-        self.heavy = (try? container.decodeIfPresent(Double.self, forKey: .heavy)) ?? 0
-    }
-
     var minAndMaxRangeForGraph: (min: Double, max: Double)? {
         if let thresholdUnwrap = threshold, let heavyUnwrap = heavy, thresholdUnwrap <= heavyUnwrap {
             return (thresholdUnwrap, heavyUnwrap)

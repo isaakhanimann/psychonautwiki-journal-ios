@@ -8,88 +8,70 @@ struct Substance: Decodable, Identifiable {
     }
     let name: String
     let url: URL
-    let roas: [Roa]
-    let psychoactiveClasses: [String]
-    let chemicalClasses: [String]
+    let commonNames: [String]
+    let isApproved: Bool
     let tolerance: Tolerance?
+    let crossTolerances: [String]
     let addictionPotential: String?
     let toxicities: [String]
-    let crossTolerances: [String]
-    let uncertainInteractions: [String]
-    let unsafeInteractions: [String]
-    let dangerousInteractions: [String]
+    let categories: [String]
+    let interactions: Interactions?
+    let roas: [Roa]
+    let summary: String?
+    let effectsSummary: String?
+    let dosageRemark: String?
+    let generalRisks: String?
+    let longtermRisks: String?
+    let saferUse: [String]
 
     enum CodingKeys: String, CodingKey {
         case name
         case url
-        case roas
-        case category = "class"
+        case commonNames
+        case isApproved
         case tolerance
-        case addictionPotential
-        case toxicity
         case crossTolerances
-        case uncertainInteractions
-        case unsafeInteractions
-        case dangerousInteractions
-    }
-
-    enum SubstanceDecodingError: Error {
-        case invalidName(String)
+        case addictionPotential
+        case toxicities
+        case categories
+        case interactions
+        case roas
+        case summary
+        case effectsSummary
+        case dosageRemark
+        case generalRisks
+        case longtermRisks
+        case saferUse
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
-        let throwableRoas = try? container.decodeIfPresent(
-            [Throwable<Roa>].self,
-            forKey: .roas)
-        self.roas = throwableRoas?.compactMap { try? $0.result.get() } ?? []
-        self.tolerance = try? container.decodeIfPresent(
-            Tolerance.self,
-            forKey: .tolerance
-        )
+        self.commonNames = try container.decode([String].self, forKey: .commonNames)
+        self.isApproved = try container.decode(Bool.self, forKey: .isApproved)
+        self.tolerance = try? container.decodeIfPresent(Tolerance.self, forKey: .tolerance)
+        self.crossTolerances = (try? container.decodeIfPresent([String].self, forKey: .crossTolerances)) ?? []
         self.addictionPotential = try? container.decodeIfPresent(
             String.self,
             forKey: .addictionPotential
         )
         self.toxicities = (try? container.decodeIfPresent(
             [String].self,
-            forKey: .toxicity
+            forKey: .toxicities
         )) ?? []
-        let crossNames = (try? container.decodeIfPresent(
+        self.categories = (try? container.decodeIfPresent(
             [String].self,
-            forKey: .crossTolerances
+            forKey: .categories
         )) ?? []
-        self.crossTolerances = crossNames.map {$0.removeGreekLetters.capitalizedIfNotAlready}
-        let decodedUncertain = (try? container.decodeIfPresent(
-            [DecodedInteraction].self,
-            forKey: .uncertainInteractions
-        )) ?? []
-        self.uncertainInteractions = decodedUncertain.map { dec in
-            dec.name.removeGreekLetters.capitalizedIfNotAlready
-        }
-        let decodedUnsafe = (try? container.decodeIfPresent(
-            [DecodedInteraction].self,
-            forKey: .unsafeInteractions
-        )) ?? []
-        self.unsafeInteractions = decodedUnsafe.map { dec in
-            dec.name.removeGreekLetters.capitalizedIfNotAlready
-        }
-        let decodedDangerous = (try? container.decodeIfPresent(
-            [DecodedInteraction].self,
-            forKey: .dangerousInteractions
-        )) ?? []
-        self.dangerousInteractions = decodedDangerous.map { dec in
-            dec.name.removeGreekLetters.capitalizedIfNotAlready
-        }
-        let decodedClasses = try? container.decodeIfPresent(DecodedClasses.self, forKey: .category)
-        self.psychoactiveClasses = decodedClasses?.psychoactive.map { name in
-            name.validClassName
-        } ?? []
-        self.chemicalClasses = decodedClasses?.chemical.map { name in
-            name.validClassName
-        } ?? []
+        self.interactions = try? container.decodeIfPresent(Interactions.self, forKey: .interactions)
+        self.roas = (try? container.decodeIfPresent([Roa].self, forKey: .roas)) ?? []
+        self.summary = try? container.decodeIfPresent(String.self, forKey: .summary)
+        self.effectsSummary = try? container.decodeIfPresent(String.self, forKey: .effectsSummary)
+        self.dosageRemark = try? container.decodeIfPresent(String.self, forKey: .dosageRemark)
+        self.generalRisks = try? container.decodeIfPresent(String.self, forKey: .generalRisks)
+        self.longtermRisks = try? container.decodeIfPresent(String.self, forKey: .longtermRisks)
+        self.saferUse = (try? container.decodeIfPresent([String].self, forKey: .saferUse)) ?? []
     }
 
     var administrationRoutesUnwrapped: [AdministrationRoute] {
@@ -120,99 +102,5 @@ struct Substance: Decodable, Identifiable {
             return nil
         }
         return dose
-    }
-
-    private static let namesThatShouldNotBeParsed: Set = Set([
-        "2C-T-X",
-        "2C-X",
-        "25X-Nbome",
-        "Amphetamine (Disambiguation)",
-        "Antihistamine",
-        "Antipsychotic",
-        "Cannabinoid",
-        "Datura (Botany)",
-        "Deliriant",
-        "Depressant",
-        "Dox",
-        "Harmala Alkaloid",
-        "Hyoscyamus Niger (Botany)",
-        "Hypnotic",
-        "Iso-LSD",
-        "List Of Prodrugs",
-        "Mandragora Officinarum (Botany)",
-        "Nbx",
-        "Nootropic",
-        "Phenethylamine (Compound)",
-        "Piper Nigrum (Botany)",
-        "RIMA",
-        "Selective Serotonin Reuptake Inhibitor",
-        "Serotonin",
-        "Serotonin-Norepinephrine Reuptake Inhibitor",
-        "Synthetic Cannabinoid",
-        "Tabernanthe Iboga (Botany)",
-        "Tryptamine (Compound)",
-        "Cake",
-        "Inhalants",
-        "MAOI",
-        "Opioids",
-        "Benzodiazepines",
-        "Classic Psychedelics",
-        "Psychedelics",
-        "Serotonergic Psychedelic",
-        "25x-NBOH",
-        "Antidepressants",
-        "Barbiturates",
-        "Substituted Aminorexes",
-        "Substituted Amphetamines",
-        "Substituted Cathinones",
-        "Substituted Morphinans",
-        "Substituted Phenethylamines",
-        "Substituted Phenidates",
-        "Substituted Tryptamines",
-        "Classical Psychedelics",
-        "Diarylethylamines",
-        "Dissociatives",
-        "Entactogens",
-        "Gabapentinoids",
-        "Hallucinogens",
-        "Lysergamides",
-        "Thienodiazepines",
-        "Xanthines",
-        "Arylcyclohexylamines",
-        "Entheogen",
-        "Racetams",
-        "Sedative",
-        "Stimulants",
-        "Eugeroics"
-    ].map({$0.lowercased()}))
-}
-
-private struct DecodedInteraction: Decodable {
-    var name: String
-}
-
-private struct DecodedClasses: Decodable {
-    var psychoactive: [String]
-    var chemical: [String]
-
-    private enum ClassCodingKeys: String, CodingKey {
-        case psychoactive
-        case chemical
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: ClassCodingKeys.self)
-        let psychos = try? container.decodeIfPresent([String].self, forKey: .psychoactive)
-        if let psychosUnwrap = psychos, !psychosUnwrap.isEmpty {
-            self.psychoactive = psychosUnwrap
-        } else {
-            self.psychoactive = []
-        }
-        let chems = try? container.decodeIfPresent([String].self, forKey: .chemical)
-        if let chemsUnwrap = chems, !chemsUnwrap.isEmpty {
-            self.chemical = chemsUnwrap
-        } else {
-            self.chemical = []
-        }
     }
 }
