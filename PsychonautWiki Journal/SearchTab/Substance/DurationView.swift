@@ -2,26 +2,63 @@ import SwiftUI
 
 struct DurationView: View {
 
-    let duration: RoaDuration?
-    let lineWidth: CGFloat = 3
-    var isTotalOrAfterglowDefined: Bool {
-        duration?.total?.displayString != nil
-        || duration?.afterglow?.displayString != nil
-    }
+    let duration: RoaDuration
 
     var body: some View {
-        if isTotalOrAfterglowDefined {
-            VStack(alignment: .leading, spacing: 0) {
-                if let total = duration?.total?.displayString {
-                    Text("Total Duration: \(total)")
+        VStack {
+            HStack {
+                if let onset = duration.onset?.displayString {
+                    DurationChip(name: "onset", text: onset)
                 }
-                if let afterglow = duration?.afterglow?.displayString {
-                    Text("After effects: \(afterglow)")
+                if let comeup = duration.comeup?.displayString {
+                    DurationChip(name: "comeup", text: comeup)
+                }
+                if let peak = duration.peak?.displayString {
+                    DurationChip(name: "peak", text: peak)
+                }
+                if let offset = duration.offset?.displayString {
+                    DurationChip(name: "offset", text: offset)
                 }
             }
-            .font(.footnote)
-        } else {
-            EmptyView()
+            HStack {
+                if let total = duration.total?.displayString {
+                    Text("total: \(total)")
+                }
+                Spacer()
+                if let afterglow = duration.afterglow?.displayString {
+                    Text("after effects: \(afterglow)")
+                }
+            }
+        }
+        .font(.footnote)
+    }
+}
+
+struct DurationChip: View {
+    let name: String
+    let text: String
+
+    var body: some View {
+        VStack {
+            Text(text)
+            Text(name)
+        }.padding(5)
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(12)
+            .frame(maxWidth: .infinity)
+    }
+}
+
+struct DurationView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            List {
+                Section {
+                    DurationView(
+                        duration: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDuration(for: .oral)!
+                    )
+                }
+            }
         }
     }
 }
