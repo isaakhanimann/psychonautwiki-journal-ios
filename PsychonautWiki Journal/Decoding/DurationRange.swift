@@ -67,4 +67,23 @@ struct DurationRange: Decodable {
         let difference = maxU - minU
         return minU + valueFrom0To1 * difference
     }
+
+    var maybeFullDurationRange: FullDurationRange? {
+        if let min = minSec, let max = maxSec {
+            return FullDurationRange(min: min, max: max)
+        } else {
+            return nil
+        }
+    }
+
+}
+
+struct FullDurationRange {
+    let min: TimeInterval
+    let max: TimeInterval
+
+    func interpolateAtValueInSeconds(weight: Double) -> TimeInterval {
+        let diff = max - min
+        return min + (diff * weight)
+    }
 }

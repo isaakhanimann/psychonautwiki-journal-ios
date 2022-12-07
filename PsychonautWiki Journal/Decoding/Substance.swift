@@ -102,4 +102,22 @@ struct Substance: Decodable, Identifiable {
         }
         return dose
     }
+
+    var durationInfos: [DurationInfo] {
+        roas.compactMap({ roa in
+            if let duration = roa.duration {
+                return DurationInfo(
+                    route: roa.name.rawValue.localizedCapitalized,
+                    roaDuration: duration
+                )
+            } else {
+                return nil
+            }
+        })
+    }
+}
+
+struct DurationInfo {
+    let route: String
+    let roaDuration: RoaDuration
 }

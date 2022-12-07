@@ -77,25 +77,9 @@ struct SubstanceView: View {
                         }
                     }
                 }
-                let durationInfos: [DurationInfo] = substance.roas.compactMap({ roa in
-                    if let duration = roa.duration {
-                        return DurationInfo(
-                            route: roa.name.rawValue.localizedCapitalized,
-                            roaDuration: duration
-                        )
-                    } else {
-                        return nil
-                    }
-                })
-                if !durationInfos.isEmpty {
-                    Section("Duration") {
-                        ForEach(durationInfos, id: \.route) { info in
-                            VStack(alignment: .leading) {
-                                Text(info.route).font(.headline)
-                                DurationView(duration: info.roaDuration)
-                            }
-                        }
-                    }
+
+                if !substance.durationInfos.isEmpty {
+                    DurationSection(durationInfos: substance.durationInfos)
                 }
             }
             InteractionsSection(substance: substance)
@@ -147,9 +131,4 @@ struct DoseInfo {
     let route: String
     let roaDose: RoaDose
     let bioavailability: RoaRange?
-}
-
-struct DurationInfo {
-    let route: String
-    let roaDuration: RoaDuration
 }

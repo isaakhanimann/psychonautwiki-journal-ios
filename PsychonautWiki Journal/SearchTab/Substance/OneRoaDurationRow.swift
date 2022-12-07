@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DurationView: View {
+struct OneRoaDurationRow: View {
 
     let duration: RoaDuration
 
@@ -54,7 +54,7 @@ struct DurationView_Previews: PreviewProvider {
         NavigationView {
             List {
                 Section {
-                    DurationView(
+                    OneRoaDurationRow(
                         duration: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDuration(for: .oral)!
                     )
                 }
