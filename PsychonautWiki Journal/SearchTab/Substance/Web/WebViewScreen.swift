@@ -11,8 +11,24 @@ struct WebViewScreen: View {
     var body: some View {
         ZStack {
             VStack(alignment: .trailing, spacing: 0) {
-                toolbar
                 WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
+            }.toolbar {
+                ToolbarItem {
+                    if !isShowingCopySuccess {
+                        Button {
+                            UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
+                            isShowingCopySuccess = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                isShowingCopySuccess = false
+                            }
+                        } label: {
+                            Label("Copy Link", systemImage: "doc.on.doc")
+                        }
+                    } else {
+                        Label("Link Copied", systemImage: "checkmark")
+                            .foregroundColor(.green)
+                    }
+                }
             }
             if isWebViewLoading {
                 ProgressView()
@@ -20,31 +36,6 @@ struct WebViewScreen: View {
                     .tint(.accentColor)
             }
         }
-    }
-
-    var toolbar: some View {
-        HStack {
-            if !isShowingCopySuccess {
-                Button {
-                    UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
-                    isShowingCopySuccess = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        isShowingCopySuccess = false
-                    }
-                } label: {
-                    Label("Copy Link", systemImage: "doc.on.doc")
-                }
-            } else {
-                Label("Link Copied", systemImage: "checkmark")
-                    .foregroundColor(.green)
-            }
-
-            Spacer()
-            Button("Done") {
-                dismiss()
-            }
-        }
-        .padding()
     }
 }
 
