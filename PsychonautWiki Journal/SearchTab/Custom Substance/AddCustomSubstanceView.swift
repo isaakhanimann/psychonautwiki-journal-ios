@@ -12,15 +12,21 @@ struct AddCustomSubstanceView: View {
                     TextField(
                         "Name",
                         text: $viewModel.name,
-                        prompt: Text("Custom Substance Name")
+                        prompt: Text("Enter Name")
                     )
                     .disableAutocorrection(true)
                 }
-                .headerProminence(.increased)
+                Section("Description") {
+                    TextField(
+                        "Description",
+                        text: $viewModel.name,
+                        prompt: Text("Enter Description")
+                    )
+                    .disableAutocorrection(true)
+                }
                 Section("Units") {
                     UnitsPicker(units: $viewModel.units)
                 }
-                .headerProminence(.increased)
             }
             .navigationTitle("Create Custom")
             .toolbar {

@@ -4,6 +4,7 @@ extension AddCustomSubstanceView {
 
     class ViewModel: ObservableObject {
         @Published var name = ""
+        @Published var explanation = ""
         @Published var units: String? = UnitPickerOptions.mg.rawValue
 
         var isEverythingNeededDefined: Bool {
@@ -19,6 +20,7 @@ extension AddCustomSubstanceView {
                 let custom = CustomSubstance(context: context)
                 custom.name = name
                 custom.units = units
+                custom.explanation = explanation
                 try? context.save()
             }
         }

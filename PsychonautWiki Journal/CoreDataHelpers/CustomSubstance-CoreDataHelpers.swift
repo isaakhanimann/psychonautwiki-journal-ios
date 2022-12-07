@@ -9,4 +9,8 @@ extension CustomSubstance {
     var unitsUnwrapped: String {
         units ?? ""
     }
+
+    var explanationUnwrapped: String {
+        explanation ?? ""
+    }
 }

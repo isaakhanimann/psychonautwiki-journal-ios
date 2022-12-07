@@ -11,6 +11,9 @@ struct CustomSubstanceView: View {
             Section("Units") {
                 Text(customSubstance.unitsUnwrapped)
             }
+            Section("Description") {
+                Text(customSubstance.explanationUnwrapped)
+            }
             Section {
                 HStack {
                     Spacer()
