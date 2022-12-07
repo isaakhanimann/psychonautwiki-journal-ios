@@ -46,6 +46,7 @@
 		EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C627E4ED86003DF79D /* ShareButton.swift */; };
 		EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
+		EABD91F92940D60C0073303A /* CategoryExplanationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91F82940D60C0073303A /* CategoryExplanationScreen.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -57,7 +58,6 @@
 		EACB0C2529408E1000C605E2 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = EACB0C2429408E1000C605E2 /* WrappingHStack */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
-		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
 		EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */; };
 		EACB6E5227D2592800940291 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* FileTests.swift */; };
 		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
@@ -176,6 +176,7 @@
 		EAB165C627E4ED86003DF79D /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		EAB165C827E4EDC7003DF79D /* RateInAppStoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInAppStoreButton.swift; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
+		EABD91F82940D60C0073303A /* CategoryExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExplanationScreen.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -186,7 +187,6 @@
 		EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubstanceRow.swift; sourceTree = "<group>"; };
 		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
 		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
-		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
 		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACB6E5127D2592800940291 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 				EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */,
 				EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */,
 				EAF76C9127D7A6C400945587 /* InteractionsSection.swift */,
-				EACB6E2127D0064E00940291 /* InteractionLabel.swift */,
+				EABD91F82940D60C0073303A /* CategoryExplanationScreen.swift */,
 				EA8447E627CD175000B10DD3 /* DoseView.swift */,
 				EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */,
 				EA8447EA27CD276300B10DD3 /* DurationView.swift */,
@@ -748,7 +748,6 @@
 				EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
-				EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */,
@@ -783,6 +782,7 @@
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
+				EABD91F92940D60C0073303A /* CategoryExplanationScreen.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */,

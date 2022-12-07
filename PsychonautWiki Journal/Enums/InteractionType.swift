@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum InteractionType {
-    case none, uncertain, unsafe, dangerous
+    case uncertain, unsafe, dangerous
 
     var color: Color {
         switch self {
@@ -11,21 +11,17 @@ enum InteractionType {
             return Color.orange
         case .dangerous:
             return Color.red
-        case .none:
-            return Color.primary
         }
     }
 
-    var systemImageName: String {
+    var dangerCount: Int {
         switch self {
-        case .none:
-            return "questionmark"
         case .uncertain:
-            return "exclamationmark.triangle"
+            return 1
         case .unsafe:
-            return "exclamationmark.triangle"
+            return 2
         case .dangerous:
-            return "xmark"
+            return 3
         }
     }
 }

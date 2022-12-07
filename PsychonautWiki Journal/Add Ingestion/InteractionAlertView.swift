@@ -77,8 +77,6 @@ struct InteractionAlertView: View {
             result = Text("**Unsafe Interaction**")
         case .dangerous:
             result = Text("**Dangerous Interaction**")
-        case .none:
-            break
         }
         result = result + Text(" with **\(ingestion.substanceNameUnwrapped)**")
         let isIngestionInPast = ingestion.timeUnwrapped < Date()
