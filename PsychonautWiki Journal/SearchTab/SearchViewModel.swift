@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import CoreData
 
-class SearchViewModel: ObservableObject {
+class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     var filteredSubstances: [Substance] {
         if searchText.count < 3 {
             return getSortedPrefixResults()
@@ -53,5 +53,45 @@ class SearchViewModel: ObservableObject {
         } else {
             return mainPrefixMatches
         }
+    }
+
+    @Published private var customSubstances: [CustomSubstance] = []
+    private let fetchController: NSFetchedResultsController<CustomSubstance>!
+
+    var filteredCustomSubstances: [CustomSubstance] {
+        let lowerCaseSearchText = searchText.lowercased()
+        if searchText.count < 3 {
+            return customSubstances.filter { cust in
+                cust.nameUnwrapped.lowercased().hasPrefix(lowerCaseSearchText)
+            }
+        } else {
+            return customSubstances.filter { cust in
+                cust.nameUnwrapped.lowercased().contains(lowerCaseSearchText)
+            }
+        }
+    }
+
+    override init() {
+        let fetchRequest = CustomSubstance.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \CustomSubstance.name, ascending: true) ]
+        fetchController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: PersistenceController.shared.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        super.init()
+        fetchController.delegate = self
+        do {
+            try fetchController.performFetch()
+            self.customSubstances = fetchController?.fetchedObjects ?? []
+        } catch {
+            NSLog("Error: could not fetch CustomSubstances")
+        }
+    }
+
+    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        guard let customs = controller.fetchedObjects as? [CustomSubstance] else {return}
+        self.customSubstances = customs
     }
 }

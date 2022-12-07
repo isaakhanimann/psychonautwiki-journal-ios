@@ -36,7 +36,6 @@
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */; };
-		EAB165A027E34B40003DF79D /* CustomSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */; };
 		EAB165A227E35883003DF79D /* CustomSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A127E35883003DF79D /* CustomSubstanceView.swift */; };
 		EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A327E35BE0003DF79D /* AddCustomSubstanceView.swift */; };
 		EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A627E35C29003DF79D /* AddCustomSubstance-ViewModel.swift */; };
@@ -167,7 +166,6 @@
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSubstance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
-		EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EAB165A127E35883003DF79D /* CustomSubstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceView.swift; sourceTree = "<group>"; };
 		EAB165A327E35BE0003DF79D /* AddCustomSubstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomSubstanceView.swift; sourceTree = "<group>"; };
 		EAB165A627E35C29003DF79D /* AddCustomSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCustomSubstance-ViewModel.swift"; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 				EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 				EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */,
-				EAB1659F27E34B40003DF79D /* CustomSubstancesViewModel.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -818,7 +815,6 @@
 				EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
-				EAB165A027E34B40003DF79D /* CustomSubstancesViewModel.swift in Sources */,
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,

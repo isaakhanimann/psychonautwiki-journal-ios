@@ -39,16 +39,24 @@ struct SearchSubstanceRow: View {
                     spacing: .constant(3),
                     lineSpacing: 3
                 ) { category in
-                    Text(category)
-                        .font(.caption)
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background(Color.gray.opacity(0.3))
-                        .cornerRadius(12)
+                    Chip(name: category)
                 }
             }
         }
 
+    }
+}
+
+struct Chip: View {
+    let name: String
+
+    var body: some View {
+        Text(name)
+            .font(.caption)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 3)
+            .background(Color.gray.opacity(0.3))
+            .cornerRadius(12)
     }
 }
 

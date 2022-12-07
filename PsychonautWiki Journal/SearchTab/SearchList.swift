@@ -4,7 +4,6 @@ struct SearchList: View {
 
     @ObservedObject var searchViewModel: SearchViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    @StateObject var customsViewModel = CustomSubstancesViewModel()
     @Environment(\.isSearching) private var isSearching
 
     var body: some View {
@@ -22,33 +21,39 @@ struct SearchList: View {
                             }
                         }
                     }
-                    if !customsViewModel.customSubstances.isEmpty {
-                        Section("Custom Substances") {
-                            ForEach(customsViewModel.customSubstances) { cust in
-                                NavigationLink {
-                                    CustomSubstanceView(customSubstance: cust)
-                                } label: {
-                                    Text(cust.nameUnwrapped).font(.headline)
-                                }
-                            }
-                        }
-                    }
                 }
-                if !isSearching {
-                    Section("All Substances") {
-                        ForEach(searchViewModel.filteredSubstances) { sub in
-                            SearchSubstanceRow(substance: sub, color: nil)
-                        }
+                if isSearching {
+                    Section {
+                        allSubstances
                     }
                 } else {
-                    ForEach(searchViewModel.filteredSubstances) { sub in
-                        SearchSubstanceRow(substance: sub, color: nil)
+                    Section("All Substances") {
+                        allSubstances
                     }
                 }
             }
-            if isSearching && searchViewModel.filteredSubstances.isEmpty {
+            if isSearching && searchViewModel.filteredSubstances.isEmpty && searchViewModel.filteredCustomSubstances.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
+            }
+        }
+    }
+
+    var allSubstances: some View {
+        Group {
+            ForEach(searchViewModel.filteredCustomSubstances) { cust in
+                NavigationLink {
+                    CustomSubstanceView(customSubstance: cust)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(cust.nameUnwrapped).font(.headline)
+                        Spacer().frame(height: 5)
+                        Chip(name: "custom")
+                    }
+                }
+            }
+            ForEach(searchViewModel.filteredSubstances) { sub in
+                SearchSubstanceRow(substance: sub, color: nil)
             }
         }
     }

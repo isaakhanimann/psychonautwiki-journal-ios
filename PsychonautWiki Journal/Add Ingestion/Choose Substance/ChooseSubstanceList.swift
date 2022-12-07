@@ -5,7 +5,6 @@ struct ChooseSubstanceList: View {
     @ObservedObject var searchViewModel: SearchViewModel
     let dismiss: DismissAction
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
-    @StateObject var customsViewModel = CustomSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @Environment(\.isSearching) private var isSearching
 
@@ -26,14 +25,10 @@ struct ChooseSubstanceList: View {
                             }
                         }
                     }
-                    if !customsViewModel.customSubstances.isEmpty {
-                        Section("Custom Substances") {
-                            ForEach(customsViewModel.customSubstances) { cust in
-                                NavigationLink(cust.nameUnwrapped) {
-                                    AddCustomIngestionView(customSubstance: cust, dismiss: dismiss)
-                                }
-                            }
-                        }
+                }
+                ForEach(searchViewModel.filteredCustomSubstances) { cust in
+                    NavigationLink(cust.nameUnwrapped) {
+                        AddCustomIngestionView(customSubstance: cust, dismiss: dismiss)
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in
