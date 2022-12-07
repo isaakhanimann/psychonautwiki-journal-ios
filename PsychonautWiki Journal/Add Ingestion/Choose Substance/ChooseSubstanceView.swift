@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ChooseSubstanceView: View {
-
     @StateObject var searchViewModel = SearchViewModel()
     @Environment(\.dismiss) var dismiss
 

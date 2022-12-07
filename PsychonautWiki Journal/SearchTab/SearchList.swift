@@ -5,7 +5,6 @@ struct SearchList: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @StateObject var customsViewModel = CustomSubstancesViewModel()
-    @State private var isShowingAddCustomSubstance = false
     @Environment(\.isSearching) private var isSearching
 
     var body: some View {
@@ -16,34 +15,23 @@ struct SearchList: View {
                     if !substancesWithColors.isEmpty {
                         Section("Recently Used") {
                             ForEach(substancesWithColors, id: \.substance.name) { substanceWithColor in
-                                NavigationLink {
-                                    SubstanceView(substance: substanceWithColor.substance)
-                                } label: {
-                                    Image(systemName: "circle.fill")
-                                        .font(.title2)
-                                        .foregroundColor(substanceWithColor.color.swiftUIColor)
-                                    Text(substanceWithColor.substance.name)
-                                }
+                                SearchSubstanceRow(
+                                    substance: substanceWithColor.substance,
+                                    color: substanceWithColor.color.swiftUIColor
+                                )
                             }
                         }
                     }
-                    Section("Custom Substances") {
-                        ForEach(customsViewModel.customSubstances) { cust in
-                            NavigationLink(cust.nameUnwrapped) {
-                                CustomSubstanceView(customSubstance: cust)
-                            }
-                        }
-                        Button {
-                            isShowingAddCustomSubstance.toggle()
-                        } label: {
-                            Label("Add Custom", systemImage: "plus")
-                        }
-                    }.sheet(isPresented: $isShowingAddCustomSubstance) {
-                        AddCustomSubstanceView()
+                }
+                ForEach(customsViewModel.customSubstances) { cust in
+                    NavigationLink {
+                        CustomSubstanceView(customSubstance: cust)
+                    } label: {
+                        Text(cust.nameUnwrapped).font(.headline)
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in
-                    SearchSubstanceRow(substance: sub)
+                    SearchSubstanceRow(substance: sub, color: nil)
                 }
             }
             if isSearching && searchViewModel.filteredSubstances.isEmpty {

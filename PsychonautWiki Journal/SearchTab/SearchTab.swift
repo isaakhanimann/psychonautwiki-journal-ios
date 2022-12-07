@@ -3,6 +3,7 @@ import SwiftUI
 struct SearchTab: View {
 
     @StateObject var searchViewModel = SearchViewModel()
+    @State private var isShowingAddCustomSubstance = false
 
     var body: some View {
         NavigationView {
@@ -14,6 +15,18 @@ struct SearchTab: View {
                 )
                 .disableAutocorrection(true)
                 .navigationTitle("Substances")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            isShowingAddCustomSubstance.toggle()
+                        } label: {
+                            Label("Add custom substance", systemImage: "plus")
+                        }
+                    }
+                }
+                .sheet(isPresented: $isShowingAddCustomSubstance) {
+                    AddCustomSubstanceView()
+                }
         }
     }
 }
