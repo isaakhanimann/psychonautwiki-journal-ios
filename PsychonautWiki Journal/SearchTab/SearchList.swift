@@ -9,7 +9,7 @@ struct SearchList: View {
     var body: some View {
         ZStack {
             List {
-                if !isSearching {
+                if !isSearching && searchViewModel.selectedCategories.isEmpty {
                     let substancesWithColors = recentsViewModel.substancesWithColor
                     if !substancesWithColors.isEmpty {
                         Section("Recently Used") {
@@ -22,38 +22,26 @@ struct SearchList: View {
                         }
                     }
                 }
-                if isSearching {
-                    Section {
-                        allSubstances
+                Section {
+                    ForEach(searchViewModel.filteredCustomSubstances) { cust in
+                        NavigationLink {
+                            CustomSubstanceView(customSubstance: cust)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(cust.nameUnwrapped).font(.headline)
+                                Spacer().frame(height: 5)
+                                Chip(name: "custom")
+                            }
+                        }
                     }
-                } else {
-                    Section("All Substances") {
-                        allSubstances
+                    ForEach(searchViewModel.filteredSubstances) { sub in
+                        SearchSubstanceRow(substance: sub, color: nil)
                     }
                 }
             }
             if isSearching && searchViewModel.filteredSubstances.isEmpty && searchViewModel.filteredCustomSubstances.isEmpty {
                 Text("No Results")
                     .foregroundColor(.secondary)
-            }
-        }
-    }
-
-    var allSubstances: some View {
-        Group {
-            ForEach(searchViewModel.filteredCustomSubstances) { cust in
-                NavigationLink {
-                    CustomSubstanceView(customSubstance: cust)
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text(cust.nameUnwrapped).font(.headline)
-                        Spacer().frame(height: 5)
-                        Chip(name: "custom")
-                    }
-                }
-            }
-            ForEach(searchViewModel.filteredSubstances) { sub in
-                SearchSubstanceRow(substance: sub, color: nil)
             }
         }
     }

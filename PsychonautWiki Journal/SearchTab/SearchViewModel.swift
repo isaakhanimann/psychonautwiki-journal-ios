@@ -3,6 +3,15 @@ import Combine
 import CoreData
 
 class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+
+    private var substancesFilteredWithCategoriesOnly: [Substance] {
+        SubstanceRepo.shared.substances.filter { sub in
+            selectedCategories.allSatisfy { selected in
+                sub.categories.contains(selected)
+            }
+        }
+    }
+
     var filteredSubstances: [Substance] {
         if searchText.count < 3 {
             return getSortedPrefixResults()
@@ -20,14 +29,30 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         }
     }
     @Published var searchText = ""
+    @Published var selectedCategories: [String] = []
+    static let custom = "custom"
+
+    let allCategories = [custom] + SubstanceRepo.shared.categories.map { cat in
+        cat.name
+    }
+
+    func toggleCategory(category: String) {
+        if selectedCategories.contains(category) {
+            selectedCategories.removeAll { cat in
+                cat == category
+            }
+        } else {
+            selectedCategories.append(category)
+        }
+    }
 
     private func getSortedPrefixResults() -> [Substance] {
         let lowerCaseSearchText = searchText.lowercased()
-        let mainPrefixMatches =  SubstanceRepo.shared.substances.filter { sub in
+        let mainPrefixMatches =  substancesFilteredWithCategoriesOnly.filter { sub in
             sub.name.lowercased().hasPrefix(lowerCaseSearchText)
         }
         if mainPrefixMatches.isEmpty {
-            return SubstanceRepo.shared.substances.filter { sub in
+            return substancesFilteredWithCategoriesOnly.filter { sub in
                 let names = sub.commonNames + [sub.name]
                 return names.contains { name in
                     name.lowercased().hasPrefix(lowerCaseSearchText)
@@ -40,11 +65,11 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
 
     private func getSortedContainsResults() -> [Substance] {
         let lowerCaseSearchText = searchText.lowercased()
-        let mainPrefixMatches =  SubstanceRepo.shared.substances.filter { sub in
+        let mainPrefixMatches =  substancesFilteredWithCategoriesOnly.filter { sub in
             sub.name.lowercased().contains(lowerCaseSearchText)
         }
         if mainPrefixMatches.isEmpty {
-            return SubstanceRepo.shared.substances.filter { sub in
+            return substancesFilteredWithCategoriesOnly.filter { sub in
                 let names = sub.commonNames + [sub.name]
                 return names.contains { name in
                     name.lowercased().contains(lowerCaseSearchText)
@@ -58,14 +83,24 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
     @Published private var customSubstances: [CustomSubstance] = []
     private let fetchController: NSFetchedResultsController<CustomSubstance>!
 
+    var customFilteredWithCategories: [CustomSubstance] {
+        if selectedCategories.isEmpty {
+            return customSubstances
+        } else if selectedCategories.contains(SearchViewModel.custom) {
+            return customSubstances
+        } else {
+            return []
+        }
+    }
+
     var filteredCustomSubstances: [CustomSubstance] {
         let lowerCaseSearchText = searchText.lowercased()
         if searchText.count < 3 {
-            return customSubstances.filter { cust in
+            return customFilteredWithCategories.filter { cust in
                 cust.nameUnwrapped.lowercased().hasPrefix(lowerCaseSearchText)
             }
         } else {
-            return customSubstances.filter { cust in
+            return customFilteredWithCategories.filter { cust in
                 cust.nameUnwrapped.lowercased().contains(lowerCaseSearchText)
             }
         }
