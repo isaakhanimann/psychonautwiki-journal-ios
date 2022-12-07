@@ -66,7 +66,6 @@ struct WelcomeScreen: View {
     let features = [
         Feature(
             title: "Risk & Reliability",
-            // swiftlint:disable line_length
             description: "Any reliance you place on PsychonautWiki Journal is strictly at your own risk. The developer is not liable.",
             image: "brain.head.profile"
         ),

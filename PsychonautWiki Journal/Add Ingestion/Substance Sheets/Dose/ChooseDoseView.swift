@@ -7,7 +7,6 @@ struct ChooseDoseView: View {
     let dismiss: DismissAction
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
-    // swiftlint:disable line_length
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
     var body: some View {
@@ -25,7 +24,6 @@ struct ChooseDoseView: View {
                         }
 
                     } footer: {
-                        // swiftlint:disable line_length
                         Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
                     }
                 }

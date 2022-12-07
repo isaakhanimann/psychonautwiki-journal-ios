@@ -14,7 +14,6 @@ class SubstanceRepo {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .deferredToDate
         decoder.keyDecodingStrategy = .useDefaultKeys
-        // swiftlint:disable force_try
         let file = try! decoder.decode(SubstanceFile.self, from: data)
         substances = file.substances
         categories = file.categories

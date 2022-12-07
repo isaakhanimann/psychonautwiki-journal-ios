@@ -36,7 +36,6 @@ class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
 }
 
 struct SubstanceWithColor: Identifiable {
-    // swiftlint:disable identifier_name
     var id: String {
         substance.name
     }

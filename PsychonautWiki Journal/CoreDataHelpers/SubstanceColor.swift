@@ -3,7 +3,6 @@ import SwiftUI
 enum SubstanceColor: String, CaseIterable, Identifiable {
     case blue, brown, cyan, green, indigo, mint, orange, pink, purple, red, teal, yellow
 
-    // swiftlint:disable identifier_name
     var id: SubstanceColor {
         self
     }

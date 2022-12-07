@@ -7,7 +7,6 @@ func playHapticFeedback() {
 }
 
 func getCurrentAppVersion() -> String {
-    // swiftlint:disable force_cast
     return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 }
 
@@ -46,7 +45,6 @@ func getPsychonautWikiData() async throws -> Data {
     return data
 }
 
-// swiftlint:disable function_body_length
 private func getURLRequest() throws -> URLRequest {
     var request = URLRequest(url: URL(string: "https://api.psychonautwiki.org/")!)
     request.httpMethod = "POST"

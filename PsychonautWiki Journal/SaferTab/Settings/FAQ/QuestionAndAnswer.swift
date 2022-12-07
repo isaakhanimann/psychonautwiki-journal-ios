@@ -6,7 +6,6 @@ struct QuestionAndAnswer: Identifiable, Hashable {
     let question: String
     let answer: String
 
-    // swiftlint:disable line_length
     static let list: [QuestionAndAnswer] = [
         QuestionAndAnswer(
             question: "Why is an interaction or other info on a substance present in the PsychonautWiki article but not in the app?",

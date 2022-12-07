@@ -2,7 +2,6 @@ import Foundation
 import CoreData
 
 struct Substance: Decodable, Identifiable {
-    // swiftlint:disable identifier_name
     var id: String {
         name
     }

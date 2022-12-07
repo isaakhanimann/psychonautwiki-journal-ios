@@ -1,6 +1,5 @@
 import SwiftUI
 
-// swiftlint:disable type_name
 @main
 struct PsychonautWiki_JournalApp: App {
 

@@ -80,7 +80,6 @@ struct InteractionAlertView: View {
         case .none:
             break
         }
-        // swiftlint:disable shorthand_operator
         result = result + Text(" with **\(ingestion.substanceNameUnwrapped)**")
         let isIngestionInPast = ingestion.timeUnwrapped < Date()
         if isIngestionInPast {

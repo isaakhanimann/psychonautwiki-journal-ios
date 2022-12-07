@@ -60,9 +60,6 @@
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E2227D0064E00940291 /* InteractionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2127D0064E00940291 /* InteractionLabel.swift */; };
 		EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */; };
-		EACB6E3D27D09C8800940291 /* SubstanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E3C27D09C8800940291 /* SubstanceTests.swift */; };
-		EACB6E4E27D2565600940291 /* PsychoactiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */; };
-		EACB6E5027D2582D00940291 /* ChemicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E4F27D2582D00940291 /* ChemicalTests.swift */; };
 		EACB6E5227D2592800940291 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* FileTests.swift */; };
 		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
@@ -194,9 +191,6 @@
 		EACB6E2127D0064E00940291 /* InteractionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionLabel.swift; sourceTree = "<group>"; };
 		EACB6E2827D00A5D00940291 /* SubstanceInteractionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceInteractionsSection.swift; sourceTree = "<group>"; };
 		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EACB6E3C27D09C8800940291 /* SubstanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceTests.swift; sourceTree = "<group>"; };
-		EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychoactiveTests.swift; sourceTree = "<group>"; };
-		EACB6E4F27D2582D00940291 /* ChemicalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTests.swift; sourceTree = "<group>"; };
 		EACB6E5127D2592800940291 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		EACB6E5327D3473600940291 /* String-Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Regex.swift"; sourceTree = "<group>"; };
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
@@ -437,9 +431,6 @@
 		EACB6E3B27D09C8800940291 /* JournalTests */ = {
 			isa = PBXGroup;
 			children = (
-				EACB6E3C27D09C8800940291 /* SubstanceTests.swift */,
-				EACB6E4D27D2565600940291 /* PsychoactiveTests.swift */,
-				EACB6E4F27D2582D00940291 /* ChemicalTests.swift */,
 				EACB6E5127D2592800940291 /* FileTests.swift */,
 				EACB6E5627D3483900940291 /* RegexTests.swift */,
 				EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */,
@@ -643,7 +634,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAE4711726CBA582009FB0EC /* Build configuration list for PBXNativeTarget "PsychonautWiki Journal" */;
 			buildPhases = (
-				EAE4722A26CBAB21009FB0EC /* SwiftLint */,
 				EAE470FF26CBA57F009FB0EC /* Sources */,
 				EAE4710026CBA57F009FB0EC /* Frameworks */,
 				EAE4722B26CBAE31009FB0EC /* Resources */,
@@ -724,36 +714,12 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		EAE4722A26CBAB21009FB0EC /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		EACB6E3627D09C8800940291 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EACB6E5027D2582D00940291 /* ChemicalTests.swift in Sources */,
 				EACB6E5227D2592800940291 /* FileTests.swift in Sources */,
-				EACB6E3D27D09C8800940291 /* SubstanceTests.swift in Sources */,
-				EACB6E4E27D2565600940291 /* PsychoactiveTests.swift in Sources */,
 				EACB6E9C27D77A6C00940291 /* NearestHourTests.swift in Sources */,
 				EACB6E5727D3483900940291 /* RegexTests.swift in Sources */,
 			);

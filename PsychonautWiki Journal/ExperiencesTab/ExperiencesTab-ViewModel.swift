@@ -6,7 +6,6 @@ extension ExperiencesTab {
         static func < (lhs: ExperienceSection, rhs: ExperienceSection) -> Bool {
             lhs.year > rhs.year
         }
-        // swiftlint:disable identifier_name
         var id: Int {
             year
         }

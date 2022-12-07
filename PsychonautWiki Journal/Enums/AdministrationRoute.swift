@@ -14,7 +14,6 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
     case smoked
     case inhaled
 
-    // swiftlint:disable identifier_name
     var id: String {
         self.rawValue
     }
