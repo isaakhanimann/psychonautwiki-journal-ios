@@ -22,16 +22,28 @@ struct SearchList: View {
                             }
                         }
                     }
-                }
-                ForEach(customsViewModel.customSubstances) { cust in
-                    NavigationLink {
-                        CustomSubstanceView(customSubstance: cust)
-                    } label: {
-                        Text(cust.nameUnwrapped).font(.headline)
+                    if !customsViewModel.customSubstances.isEmpty {
+                        Section("Custom Substances") {
+                            ForEach(customsViewModel.customSubstances) { cust in
+                                NavigationLink {
+                                    CustomSubstanceView(customSubstance: cust)
+                                } label: {
+                                    Text(cust.nameUnwrapped).font(.headline)
+                                }
+                            }
+                        }
                     }
                 }
-                ForEach(searchViewModel.filteredSubstances) { sub in
-                    SearchSubstanceRow(substance: sub, color: nil)
+                if !isSearching {
+                    Section("All Substances") {
+                        ForEach(searchViewModel.filteredSubstances) { sub in
+                            SearchSubstanceRow(substance: sub, color: nil)
+                        }
+                    }
+                } else {
+                    ForEach(searchViewModel.filteredSubstances) { sub in
+                        SearchSubstanceRow(substance: sub, color: nil)
+                    }
                 }
             }
             if isSearching && searchViewModel.filteredSubstances.isEmpty {
