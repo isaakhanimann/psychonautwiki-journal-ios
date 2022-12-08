@@ -25,7 +25,7 @@ struct SearchList: View {
                 Section {
                     ForEach(searchViewModel.filteredCustomSubstances) { cust in
                         NavigationLink {
-                            CustomSubstanceView(customSubstance: cust)
+                            EditCustomSubstanceView(customSubstance: cust)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(cust.nameUnwrapped).font(.headline)

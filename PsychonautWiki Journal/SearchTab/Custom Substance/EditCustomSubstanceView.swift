@@ -1,18 +1,20 @@
 import SwiftUI
 
-struct CustomSubstanceView: View {
+struct EditCustomSubstanceView: View {
 
     @ObservedObject var customSubstance: CustomSubstance
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingConfirmation = false
+    @State private var units = ""
+    @State private var description = ""
 
     var body: some View {
         List {
             Section("Units") {
-                Text(customSubstance.unitsUnwrapped)
+                TextField("Units", text: $units)
             }
             Section("Description") {
-                Text(customSubstance.explanationUnwrapped)
+                TextField("Description", text: $description)
             }
             Section {
                 HStack {
@@ -37,6 +39,22 @@ struct CustomSubstanceView: View {
                 PersistenceController.shared.saveViewContext()
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .onAppear {
+            units = customSubstance.unitsUnwrapped
+            description = customSubstance.explanationUnwrapped
+        }
+        .toolbar {
+            ToolbarItem {
+                Button("Done") {
+                    if !units.isEmpty {
+                        customSubstance.units = units
+                        customSubstance.explanation = description
+                        PersistenceController.shared.saveViewContext()
+                    }
+                    dismiss()
+                }
+            }
         }
         .navigationTitle(customSubstance.nameUnwrapped)
     }
