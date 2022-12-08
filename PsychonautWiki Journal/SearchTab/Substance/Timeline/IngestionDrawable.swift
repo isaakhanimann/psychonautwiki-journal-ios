@@ -25,6 +25,8 @@ struct IngestionDrawable {
         self.roaDuration = roaDuration
         self.verticalWeight = verticalWeight
         self.horizontalWeight = horizontalWeight
-        self.timelineDrawable = roaDuration?.toFullTimeline(peakAndOffsetWeight: horizontalWeight) ?? roaDuration?.toTotalTimeline(totalWeight: horizontalWeight)
+        self.timelineDrawable = roaDuration?.toFullTimeline(peakAndOffsetWeight: horizontalWeight)
+        ?? roaDuration?.toOnsetTotalTimeline(totalWeight: horizontalWeight)
+        ?? roaDuration?.toTotalTimeline(totalWeight: horizontalWeight)
     }
 }
