@@ -23,7 +23,7 @@ struct SearchTab: View {
                             Label("Add custom substance", systemImage: "plus")
                         }
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Menu(content: {
                             ForEach(viewModel.allCategories, id: \.self) { cat in
                                 Button {
@@ -39,6 +39,14 @@ struct SearchTab: View {
                         }, label: {
                             Label("Filter", systemImage: viewModel.selectedCategories.isEmpty ? "line.3.horizontal.decrease.circle": "line.3.horizontal.decrease.circle.fill")
                         })
+                        if !viewModel.selectedCategories.isEmpty {
+                            Button {
+                                viewModel.clearCategories()
+                            } label: {
+                                Text("Clear")
+                            }
+
+                        }
                     }
                 }
                 .sheet(isPresented: $isShowingAddCustomSubstance) {

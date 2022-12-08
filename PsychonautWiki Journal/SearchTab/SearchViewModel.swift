@@ -46,6 +46,10 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         }
     }
 
+    func clearCategories() {
+        selectedCategories.removeAll()
+    }
+
     private func getSortedPrefixResults() -> [Substance] {
         let lowerCaseSearchText = searchText.lowercased()
         let mainPrefixMatches =  substancesFilteredWithCategoriesOnly.filter { sub in
