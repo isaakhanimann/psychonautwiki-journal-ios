@@ -12,6 +12,7 @@ struct DurationSection: View {
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
+    private let lineWidth: Double = 6
 
     var body: some View {
         Section("Duration") {
@@ -21,18 +22,34 @@ struct DurationSection: View {
                 displayedComponents: [.hourAndMinute]
             )
             Canvas { context, size in
-                var path = Path()
-                path.move(to: CGPoint(x: 0, y: 0))
-                path.addLine(to: CGPoint(x: size.width, y: size.height))
-                context.stroke(path, with: .foreground, lineWidth: 6)
+                if let model = timelineModel {
+                    let startX: Double = 0
+                    let pixelsPerSec = size.width/model.totalWidth
+                    timelineModel?.ingestionDrawables.forEach({ drawable in
+                        drawable.timelineDrawable?.drawTimeLine(
+                            context: context,
+                            height: size.height,
+                            startX: startX,
+                            pixelsPerSec: pixelsPerSec,
+                            color: Color.blue,
+                            lineWidth: lineWidth
+                        )
+                    })
+                }
+
             }
             .frame(height: 200)
+            .background(Color.red.opacity(0.2))
             ForEach(durationInfos, id: \.route) { info in
                 VStack(alignment: .leading) {
                     Text(info.route).font(.headline)
                     OneRoaDurationRow(duration: info.roaDuration)
                 }
             }
+        }.onAppear {
+            timelineModel = TimelineModel(everythingForEachLine: durationInfos.map({ info in
+                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: .blue)
+            }))
         }
     }
 }
