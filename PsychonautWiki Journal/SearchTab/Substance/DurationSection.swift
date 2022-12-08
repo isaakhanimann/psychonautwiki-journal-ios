@@ -22,7 +22,7 @@ struct DurationSection: View {
                 displayedComponents: [.hourAndMinute]
             )
             if let model = timelineModel {
-                VStack(spacing: 2) {
+                VStack(spacing: 0) {
                     Canvas { context, size in
                         let pixelsPerSec = size.width/model.totalWidth
                         model.ingestionDrawables.forEach({ drawable in
@@ -38,7 +38,6 @@ struct DurationSection: View {
                         })
                     }
                     .frame(height: 200)
-                    .border(Color.blue)
                     Canvas { context, size in
                         let widthInPixels = size.width
                         let pixelsPerSec = widthInPixels/model.totalWidth
@@ -54,7 +53,6 @@ struct DurationSection: View {
                             )
                         }
                     }
-                    .border(Color.blue)
                 }
             }
             ForEach(durationInfos, id: \.route) { info in

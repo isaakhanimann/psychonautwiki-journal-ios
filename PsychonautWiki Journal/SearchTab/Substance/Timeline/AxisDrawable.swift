@@ -14,7 +14,7 @@ struct AxisDrawable {
     func getFullHours(pixelsPerSec: Double, widthInPixels: Double) -> [FullHour] {
         let widthInWholeHours = (widthInSeconds/60/60).rounded(.up)
         let widthPerHour = widthInPixels / widthInWholeHours
-        let minWidthPerHour = 70.0
+        let minWidthPerHour: Double = 30
         var stepSize = Int(minWidthPerHour / widthPerHour)
         if (stepSize == 0) {
             stepSize = 1
@@ -26,13 +26,21 @@ struct AxisDrawable {
         )
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"
-        return dates.map { date in
+        var fullHours = dates.map { date in
             let diff = date.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
             return FullHour(
                 distanceFromStart: diff * pixelsPerSec,
                 label: formatter.string(from: date)
             )
         }
+        let widthOfOneLetter: Double = 7
+        if let firstHour = fullHours.first, firstHour.distanceFromStart < widthOfOneLetter {
+            fullHours = Array(fullHours.dropFirst())
+        }
+        if let lastHour = fullHours.last, widthInPixels - lastHour.distanceFromStart < widthOfOneLetter {
+            fullHours = Array(fullHours.dropLast())
+        }
+        return fullHours
     }
 
     static func getInstantsBetween(startTime: Date, endTime: Date, stepSizeInHours: Int) -> [Date] {
