@@ -104,35 +104,32 @@ struct FullTimeline: TimelineDrawable {
     }
 
     func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-//        drawScope.drawPath(
-//                    path = Path().apply {
-//                        // path over top
-//                        val onsetStartMinX = startX + (onset.minInSeconds * pixelsPerSec)
-//                        val comeupEndMinX = onsetStartMinX + (comeup.minInSeconds * pixelsPerSec)
-//                        val peakEndMaxX =
-//                            startX + ((onset.maxInSeconds + comeup.maxInSeconds + peak.maxInSeconds) * pixelsPerSec)
-//                        val offsetEndMaxX =
-//                            peakEndMaxX + (offset.maxInSeconds * pixelsPerSec)
-//                        moveTo(onsetStartMinX, height)
-//                        lineTo(x = comeupEndMinX, y = 0f)
-//                        lineTo(x = peakEndMaxX, y = 0f)
-//                        lineTo(x = offsetEndMaxX, y = height)
-//                        // path bottom back
-//                        val onsetStartMaxX = startX + (onset.maxInSeconds * pixelsPerSec)
-//                        val comeupEndMaxX =
-//                            onsetStartMaxX + (comeup.maxInSeconds * pixelsPerSec)
-//                        val peakEndMinX =
-//                            startX + ((onset.minInSeconds + comeup.minInSeconds + peak.minInSeconds) * pixelsPerSec)
-//                        val offsetEndMinX =
-//                            peakEndMinX + (offset.minInSeconds * pixelsPerSec)
-//                        lineTo(x = offsetEndMinX, y = height)
-//                        lineTo(x = peakEndMinX, y = 0f)
-//                        lineTo(x = comeupEndMaxX, y = 0f)
-//                        lineTo(x = onsetStartMaxX, y = height)
-//                        close()
-//                    },
-//                    color = color.copy(alpha = shapeAlpha)
-//                )
+        var path = Path()
+        // path over top
+        let onsetStartMinX = startX + (onset.min * pixelsPerSec)
+        let comeupEndMinX = onsetStartMinX + (comeup.min * pixelsPerSec)
+        let peakEndMaxX =
+            startX + ((onset.max + comeup.max + peak.max) * pixelsPerSec)
+        let offsetEndMaxX =
+            peakEndMaxX + (offset.max * pixelsPerSec)
+        path.move(to: CGPoint(x: onsetStartMinX, y: height))
+        path.addLine(to: CGPoint(x: comeupEndMinX, y: 0))
+        path.addLine(to: CGPoint(x: peakEndMaxX, y: 0))
+        path.addLine(to: CGPoint(x: offsetEndMaxX, y: height))
+        // path bottom back
+        let onsetStartMaxX = startX + (onset.max * pixelsPerSec)
+        let comeupEndMaxX =
+            onsetStartMaxX + (comeup.max * pixelsPerSec)
+        let peakEndMinX =
+            startX + ((onset.min + comeup.min + peak.min) * pixelsPerSec)
+        let offsetEndMinX =
+            peakEndMinX + (offset.min * pixelsPerSec)
+        path.addLine(to: CGPoint(x: offsetEndMinX, y: height))
+        path.addLine(to: CGPoint(x: peakEndMinX, y: 0))
+        path.addLine(to: CGPoint(x: comeupEndMaxX, y: 0))
+        path.addLine(to: CGPoint(x: onsetStartMaxX, y: height))
+        path.closeSubpath()
+        context.fill(path, with: .color(color.opacity(0.3)))
     }
 
     func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {

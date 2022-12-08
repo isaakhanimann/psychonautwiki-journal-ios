@@ -23,10 +23,18 @@ struct DurationSection: View {
             )
             Canvas { context, size in
                 if let model = timelineModel {
-                    let startX: Double = 0
                     let pixelsPerSec = size.width/model.totalWidth
-                    timelineModel?.ingestionDrawables.forEach({ drawable in
+                    model.ingestionDrawables.forEach({ drawable in
+                        let startX = drawable.distanceFromStart * pixelsPerSec
                         drawable.timelineDrawable?.drawTimeLine(
+                            context: context,
+                            height: size.height,
+                            startX: startX,
+                            pixelsPerSec: pixelsPerSec,
+                            color: Color.blue,
+                            lineWidth: lineWidth
+                        )
+                        drawable.timelineDrawable?.drawTimeLineShape(
                             context: context,
                             height: size.height,
                             startX: startX,
@@ -36,10 +44,9 @@ struct DurationSection: View {
                         )
                     })
                 }
-
             }
             .frame(height: 200)
-            .background(Color.red.opacity(0.2))
+            .border(Color.blue)
             ForEach(durationInfos, id: \.route) { info in
                 VStack(alignment: .leading) {
                     Text(info.route).font(.headline)
