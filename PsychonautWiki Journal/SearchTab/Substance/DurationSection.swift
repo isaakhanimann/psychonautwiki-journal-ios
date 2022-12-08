@@ -12,7 +12,7 @@ struct DurationSection: View {
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
-    private let lineWidth: Double = 6
+    private let lineWidth: Double = 5
 
     var body: some View {
         Section("Duration") {
@@ -61,16 +61,20 @@ struct DurationSection: View {
                 .border(Color.blue)
 
             }
-            
             ForEach(durationInfos, id: \.route) { info in
                 VStack(alignment: .leading) {
-                    Text(info.route).font(.headline)
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .font(.title2)
+                            .foregroundColor(info.route.color)
+                        Text(info.route.rawValue.localizedCapitalized).font(.headline)
+                    }
                     OneRoaDurationRow(duration: info.roaDuration)
                 }
             }
         }.onAppear {
             timelineModel = TimelineModel(everythingForEachLine: durationInfos.map({ info in
-                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: .blue)
+                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
             }))
         }
     }

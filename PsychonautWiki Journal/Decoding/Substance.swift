@@ -107,7 +107,7 @@ struct Substance: Decodable, Identifiable {
         roas.compactMap({ roa in
             if let duration = roa.duration {
                 return DurationInfo(
-                    route: roa.name.rawValue.localizedCapitalized,
+                    route: roa.name,
                     roaDuration: duration
                 )
             } else {
@@ -118,6 +118,6 @@ struct Substance: Decodable, Identifiable {
 }
 
 struct DurationInfo {
-    let route: String
+    let route: AdministrationRoute
     let roaDuration: RoaDuration
 }

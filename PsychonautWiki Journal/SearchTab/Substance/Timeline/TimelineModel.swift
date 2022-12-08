@@ -30,10 +30,11 @@ struct TimelineModel {
             )
         }
         self.ingestionDrawables = drawablesWithoutInsets
-        let sumWidth = drawablesWithoutInsets.map({ draw in
-            draw.timelineDrawable?.width ?? 2 * 60 * 60
-        }).reduce(0, +)
-        self.totalWidth = sumWidth
-        self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: sumWidth)
+        let twoHours: TimeInterval = 2 * 60 * 60
+        let maxWidth: TimeInterval = drawablesWithoutInsets.map({ draw in
+            draw.distanceFromStart + (draw.timelineDrawable?.width ?? twoHours)
+        }).max() ?? twoHours
+        self.totalWidth = maxWidth
+        self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
 }

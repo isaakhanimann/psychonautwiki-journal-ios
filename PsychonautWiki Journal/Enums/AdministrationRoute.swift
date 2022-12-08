@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 // https://psychonautwiki.org/wiki/Route_of_administration
 enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
@@ -44,4 +45,33 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
             return "inhaled"
         }
     }
+
+    var color: Color {
+        switch self {
+        case .oral:
+            return .blue
+        case .sublingual:
+            return .cyan
+        case .buccal:
+            return .teal
+        case .insufflated:
+            return .orange
+        case .rectal:
+            return .pink
+        case .transdermal:
+            return .green
+        case .subcutaneous:
+            return .mint
+        case .intramuscular:
+            return .brown
+        case .intravenous:
+            return .red
+        case .smoked:
+            return .yellow
+        case .inhaled:
+            return .purple
+        }
+    }
 }
+
+
