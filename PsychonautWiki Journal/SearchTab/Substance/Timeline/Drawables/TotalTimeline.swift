@@ -31,7 +31,8 @@ struct TotalTimeline: TimelineDrawable {
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
         var path = Path()
-        path.move(to: CGPoint(x: startX, y: height))
+        path.move(to: CGPoint(x: startX, y: height-2*lineWidth))
+        path.addLine(to: CGPoint(x: startX, y: height))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: startX,

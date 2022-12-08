@@ -31,7 +31,8 @@ struct FullTimeline: TimelineDrawable {
             comeupEndX + (peak.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
         let offsetEndX =
             peakEndX + (offset.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
-        path.move(to: CGPoint(x: startX, y: maxHeight))
+        path.move(to: CGPoint(x: startX, y: maxHeight-2*lineWidth))
+        path.addLine(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         path.addLine(to: CGPoint(x: comeupEndX, y: minHeight))
         path.addLine(to: CGPoint(x: peakEndX, y: minHeight))

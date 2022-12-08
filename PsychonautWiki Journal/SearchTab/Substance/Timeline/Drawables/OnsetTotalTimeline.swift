@@ -34,7 +34,8 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let onsetWeight = 0.5
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetWeight) * pixelsPerSec)
         var path0 = Path()
-        path0.move(to: CGPoint(x: startX, y: maxHeight))
+        path0.move(to: CGPoint(x: startX, y: maxHeight-2*lineWidth))
+        path0.addLine(to: CGPoint(x: startX, y: maxHeight))
         path0.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec

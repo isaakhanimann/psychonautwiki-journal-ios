@@ -15,8 +15,8 @@ struct NoTimeline: TimelineDrawable {
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         var path = Path()
-        path.move(to: CGPoint(x: startX, y: height))
-        path.addLine(to: CGPoint(x: startX, y: height - lineWidth * 5))
+        path.move(to: CGPoint(x: startX, y: height - lineWidth * 2))
+        path.addLine(to: CGPoint(x: startX, y: height))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
     }
 

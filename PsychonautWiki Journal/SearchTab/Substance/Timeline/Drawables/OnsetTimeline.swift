@@ -30,7 +30,8 @@ struct OnsetTimeline : TimelineDrawable {
         let maxHeight = height - minHeight
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
         var path = Path()
-        path.move(to: CGPoint(x: startX, y: maxHeight))
+        path.move(to: CGPoint(x: startX, y: maxHeight-2*lineWidth))
+        path.addLine(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
     }
