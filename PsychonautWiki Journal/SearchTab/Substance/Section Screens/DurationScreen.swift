@@ -11,7 +11,6 @@ struct DurationScreen: View {
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
-    private let lineWidth: Double = 5
 
     var body: some View {
         List {
@@ -22,39 +21,7 @@ struct DurationScreen: View {
                     displayedComponents: [.hourAndMinute]
                 )
                 if let model = timelineModel {
-                    let halfLineWidth = lineWidth/2
-                    VStack(spacing: 0) {
-                        Canvas { context, size in
-                            let pixelsPerSec = (size.width-halfLineWidth)/model.totalWidth
-                            model.ingestionDrawables.forEach({ drawable in
-                                let startX = (drawable.distanceFromStart * pixelsPerSec) + halfLineWidth
-                                drawable.timelineDrawable.drawTimeLineWithShape(
-                                    context: context,
-                                    height: size.height,
-                                    startX: startX,
-                                    pixelsPerSec: pixelsPerSec,
-                                    color: drawable.color,
-                                    lineWidth: lineWidth
-                                )
-                            })
-                        }
-                        .frame(height: 200)
-                        Canvas { context, size in
-                            let widthInPixels = size.width - halfLineWidth
-                            let pixelsPerSec = widthInPixels/model.totalWidth
-                            let fullHours = model.axisDrawable.getFullHours(
-                                pixelsPerSec: pixelsPerSec,
-                                widthInPixels: widthInPixels
-                            )
-                            fullHours.forEach { fullHour in
-                                context.draw(
-                                    Text(fullHour.label).font(.caption),
-                                    at: CGPoint(x: fullHour.distanceFromStart + halfLineWidth, y: size.height/2),
-                                    anchor: .center
-                                )
-                            }
-                        }
-                    }
+                    EffectTimeline(timelineModel: model)
                 }
                 ForEach(durationInfos, id: \.route) { info in
                     VStack(alignment: .leading) {

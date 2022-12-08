@@ -34,6 +34,7 @@
 		EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8D2942896B009C142D /* RiskScreen.swift */; };
 		EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8F29428A6C009C142D /* SaferUseScreen.swift */; };
 		EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9129428B02009C142D /* AddictionScreen.swift */; };
+		EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseView.swift */; };
 		EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */; };
@@ -184,6 +185,7 @@
 		EA527A8D2942896B009C142D /* RiskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskScreen.swift; sourceTree = "<group>"; };
 		EA527A8F29428A6C009C142D /* SaferUseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferUseScreen.swift; sourceTree = "<group>"; };
 		EA527A9129428B02009C142D /* AddictionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddictionScreen.swift; sourceTree = "<group>"; };
+		EA527A9329428CD8009C142D /* EffectTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTimeline.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceView.swift; sourceTree = "<group>"; };
 		EA8447E627CD175000B10DD3 /* DoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseView.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				EA527A8329427E61009C142D /* ToleranceScreen.swift */,
 				EA527A8529427F56009C142D /* ToxicityScreen.swift */,
 				EA527A8729428011009C142D /* DurationScreen.swift */,
+				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
 				EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */,
 				EA527A8929428146009C142D /* InteractionsScreen.swift */,
 				EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */,
@@ -852,6 +855,7 @@
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
+				EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */,
 				EABD92002941C3740073303A /* AxisDrawable.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* CustomSubstanceView.swift in Sources */,
