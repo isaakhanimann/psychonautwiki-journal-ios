@@ -49,6 +49,10 @@
 		EABD91F92940D60C0073303A /* CategoryExplanationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91F82940D60C0073303A /* CategoryExplanationScreen.swift */; };
 		EABD91FB294101930073303A /* DurationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FA294101930073303A /* DurationSection.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
+		EABD92002941C3740073303A /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
+		EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
+		EABD92042941C3C30073303A /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92032941C3C30073303A /* FullTimeline.swift */; };
+		EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92052941C4080073303A /* TimelineDrawable.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -70,7 +74,6 @@
 		EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */; };
 		EACB6E7B27D6456400940291 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7A27D6456400940291 /* SearchList.swift */; };
 		EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9627D7620800940291 /* Double-Ratio.swift */; };
-		EACB6E9927D77A2200940291 /* Date-NearestHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9827D77A2200940291 /* Date-NearestHour.swift */; };
 		EACB6E9C27D77A6C00940291 /* NearestHourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
@@ -181,6 +184,10 @@
 		EABD91F82940D60C0073303A /* CategoryExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExplanationScreen.swift; sourceTree = "<group>"; };
 		EABD91FA294101930073303A /* DurationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationSection.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
+		EABD91FF2941C3740073303A /* AxisDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDrawable.swift; sourceTree = "<group>"; };
+		EABD92012941C3A30073303A /* IngestionDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDrawable.swift; sourceTree = "<group>"; };
+		EABD92032941C3C30073303A /* FullTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeline.swift; sourceTree = "<group>"; };
+		EABD92052941C4080073303A /* TimelineDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDrawable.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -202,7 +209,6 @@
 		EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EACB6E7A27D6456400940291 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		EACB6E9627D7620800940291 /* Double-Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-Ratio.swift"; sourceTree = "<group>"; };
-		EACB6E9827D77A2200940291 /* Date-NearestHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-NearestHour.swift"; sourceTree = "<group>"; };
 		EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestHourTests.swift; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,6 +422,10 @@
 			isa = PBXGroup;
 			children = (
 				EABD91FC294105830073303A /* TimelineModel.swift */,
+				EABD92032941C3C30073303A /* FullTimeline.swift */,
+				EABD92052941C4080073303A /* TimelineDrawable.swift */,
+				EABD92012941C3A30073303A /* IngestionDrawable.swift */,
+				EABD91FF2941C3740073303A /* AxisDrawable.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -528,7 +538,6 @@
 				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
 				EACB6E5327D3473600940291 /* String-Regex.swift */,
 				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
-				EACB6E9827D77A2200940291 /* Date-NearestHour.swift */,
 				EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */,
 			);
 			path = Extensions;
@@ -742,12 +751,14 @@
 			files = (
 				EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */,
 				EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */,
+				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EA47E67327CB490300F6E10F /* AllTabs.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
+				EABD92042941C3C30073303A /* FullTimeline.swift in Sources */,
 				EACB6E2927D00A5D00940291 /* SubstanceInteractionsSection.swift in Sources */,
 				EACB6E7B27D6456400940291 /* SearchList.swift in Sources */,
 				EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */,
@@ -764,14 +775,15 @@
 				EAE4722026CBA664009FB0EC /* ChooseRouteView.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
+				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAF76C9227D7A6C400945587 /* InteractionsSection.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* ExperiencesTab.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EABD91FB294101930073303A /* DurationSection.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
+				EABD92002941C3740073303A /* AxisDrawable.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
-				EACB6E9927D77A2200940291 /* Date-NearestHour.swift in Sources */,
 				EAB165A227E35883003DF79D /* CustomSubstanceView.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,

@@ -21,24 +21,47 @@ struct DurationSection: View {
                 selection: $selectedTime,
                 displayedComponents: [.hourAndMinute]
             )
-            Canvas { context, size in
-                if let model = timelineModel {
-                    let pixelsPerSec = size.width/model.totalWidth
-                    model.ingestionDrawables.forEach({ drawable in
-                        let startX = drawable.distanceFromStart * pixelsPerSec
-                        drawable.timelineDrawable?.drawTimeLineWithShape(
-                            context: context,
-                            height: size.height,
-                            startX: startX,
-                            pixelsPerSec: pixelsPerSec,
-                            color: drawable.color,
-                            lineWidth: lineWidth
-                        )
-                    })
+            VStack(spacing: 2) {
+                Canvas { context, size in
+                    if let model = timelineModel {
+                        let pixelsPerSec = size.width/model.totalWidth
+                        model.ingestionDrawables.forEach({ drawable in
+                            let startX = drawable.distanceFromStart * pixelsPerSec
+                            drawable.timelineDrawable?.drawTimeLineWithShape(
+                                context: context,
+                                height: size.height,
+                                startX: startX,
+                                pixelsPerSec: pixelsPerSec,
+                                color: drawable.color,
+                                lineWidth: lineWidth
+                            )
+                        })
+                    }
                 }
+                .frame(height: 200)
+                .border(Color.blue)
+                Canvas { context, size in
+                    if let model = timelineModel {
+                        let widthInPixels = size.width
+                        let pixelsPerSec = widthInPixels/model.totalWidth
+                        let fullHours = model.axisDrawable.getFullHours(
+                            pixelsPerSec: pixelsPerSec,
+                            widthInPixels: widthInPixels
+                        )
+                        fullHours.forEach { fullHour in
+                            context.draw(
+                                Text(fullHour.label).font(.caption),
+                                at: CGPoint(x: fullHour.distanceFromStart, y: size.height/2),
+                                anchor: .center
+                            )
+                        }
+
+                    }
+                }
+                .border(Color.blue)
+
             }
-            .frame(height: 200)
-            .border(Color.blue)
+            
             ForEach(durationInfos, id: \.route) { info in
                 VStack(alignment: .leading) {
                     Text(info.route).font(.headline)
