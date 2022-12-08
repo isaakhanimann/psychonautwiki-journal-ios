@@ -26,20 +26,12 @@ struct DurationSection: View {
                     let pixelsPerSec = size.width/model.totalWidth
                     model.ingestionDrawables.forEach({ drawable in
                         let startX = drawable.distanceFromStart * pixelsPerSec
-                        drawable.timelineDrawable?.drawTimeLine(
+                        drawable.timelineDrawable?.drawTimeLineWithShape(
                             context: context,
                             height: size.height,
                             startX: startX,
                             pixelsPerSec: pixelsPerSec,
-                            color: Color.blue,
-                            lineWidth: lineWidth
-                        )
-                        drawable.timelineDrawable?.drawTimeLineShape(
-                            context: context,
-                            height: size.height,
-                            startX: startX,
-                            pixelsPerSec: pixelsPerSec,
-                            color: Color.blue,
+                            color: drawable.color,
                             lineWidth: lineWidth
                         )
                     })

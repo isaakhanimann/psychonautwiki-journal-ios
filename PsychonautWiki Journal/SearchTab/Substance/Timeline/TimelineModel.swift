@@ -82,7 +82,12 @@ struct FullTimeline: TimelineDrawable {
         onset.max + comeup.max + peak.max + offset.max
     }
 
-    func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+    func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+        drawTimeLine(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
+        drawTimeLineShape(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
+    }
+
+    private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
         var path = Path()
@@ -103,7 +108,7 @@ struct FullTimeline: TimelineDrawable {
         context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
     }
 
-    func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+    private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         var path = Path()
         // path over top
         let onsetStartMinX = startX + (onset.min * pixelsPerSec)
@@ -147,16 +152,7 @@ struct FullTimeline: TimelineDrawable {
 protocol TimelineDrawable {
     var width: TimeInterval {get}
 
-    func drawTimeLine(
-        context: GraphicsContext,
-        height: Double,
-        startX: Double,
-        pixelsPerSec: Double,
-        color: Color,
-        lineWidth: Double
-    )
-
-    func drawTimeLineShape(
+    func drawTimeLineWithShape(
         context: GraphicsContext,
         height: Double,
         startX: Double,
