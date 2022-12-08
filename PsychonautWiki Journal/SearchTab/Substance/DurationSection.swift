@@ -22,11 +22,12 @@ struct DurationSection: View {
                 displayedComponents: [.hourAndMinute]
             )
             if let model = timelineModel {
+                let halfLineWidth = lineWidth/2
                 VStack(spacing: 0) {
                     Canvas { context, size in
-                        let pixelsPerSec = size.width/model.totalWidth
+                        let pixelsPerSec = (size.width-halfLineWidth)/model.totalWidth
                         model.ingestionDrawables.forEach({ drawable in
-                            let startX = drawable.distanceFromStart * pixelsPerSec
+                            let startX = (drawable.distanceFromStart * pixelsPerSec) + halfLineWidth
                             drawable.timelineDrawable.drawTimeLineWithShape(
                                 context: context,
                                 height: size.height,
@@ -39,7 +40,7 @@ struct DurationSection: View {
                     }
                     .frame(height: 200)
                     Canvas { context, size in
-                        let widthInPixels = size.width
+                        let widthInPixels = size.width - halfLineWidth
                         let pixelsPerSec = widthInPixels/model.totalWidth
                         let fullHours = model.axisDrawable.getFullHours(
                             pixelsPerSec: pixelsPerSec,
@@ -48,7 +49,7 @@ struct DurationSection: View {
                         fullHours.forEach { fullHour in
                             context.draw(
                                 Text(fullHour.label).font(.caption),
-                                at: CGPoint(x: fullHour.distanceFromStart, y: size.height/2),
+                                at: CGPoint(x: fullHour.distanceFromStart + halfLineWidth, y: size.height/2),
                                 anchor: .center
                             )
                         }
