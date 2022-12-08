@@ -58,6 +58,7 @@
 		EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920C294202680073303A /* StrokeStyle-Timeline.swift */; };
 		EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */; };
 		EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */; };
+		EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD9212294215FB0073303A /* OnsetTimeline.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -198,6 +199,7 @@
 		EABD920C294202680073303A /* StrokeStyle-Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StrokeStyle-Timeline.swift"; sourceTree = "<group>"; };
 		EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupTotalTimeline.swift; sourceTree = "<group>"; };
 		EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupPeakTotalTimeline.swift; sourceTree = "<group>"; };
+		EABD9212294215FB0073303A /* OnsetTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetTimeline.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				EABD92082941EA4B0073303A /* TotalTimeline.swift */,
 				EABD920C294202680073303A /* StrokeStyle-Timeline.swift */,
 				EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */,
+				EABD9212294215FB0073303A /* OnsetTimeline.swift */,
 				EABD92052941C4080073303A /* TimelineDrawable.swift */,
 				EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */,
 				EABD920A2941FB160073303A /* OnsetTotalTimeline.swift */,
@@ -845,6 +848,7 @@
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
+				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */,
