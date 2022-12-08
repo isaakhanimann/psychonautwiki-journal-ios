@@ -15,7 +15,7 @@ struct IngestionDrawable {
     let verticalWeight: Double
     let horizontalWeight: Double
     let distanceFromStart: TimeInterval
-    let timelineDrawable: TimelineDrawable?
+    let timelineDrawable: TimelineDrawable
     var insetTimes = 0
 
     init(startGraph: Date, color: Color, ingestionTime: Date, roaDuration: RoaDuration?, verticalWeight: Double = 1, horizontalWeight: Double = 0.5) {
@@ -42,7 +42,7 @@ struct IngestionDrawable {
         } else if let onset = roaDuration?.toOnsetTimeline() {
             self.timelineDrawable = onset
         } else {
-            self.timelineDrawable = nil
+            self.timelineDrawable = NoTimeline()
         }
     }
 }

@@ -61,6 +61,7 @@
 		EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD9212294215FB0073303A /* OnsetTimeline.swift */; };
 		EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921429421CE60073303A /* OnsetComeupTimeline.swift */; };
 		EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921629421E960073303A /* OnsetComeupPeakTimeline.swift */; };
+		EABD921929422C580073303A /* NoTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921829422C580073303A /* NoTimeline.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -204,6 +205,7 @@
 		EABD9212294215FB0073303A /* OnsetTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetTimeline.swift; sourceTree = "<group>"; };
 		EABD921429421CE60073303A /* OnsetComeupTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupTimeline.swift; sourceTree = "<group>"; };
 		EABD921629421E960073303A /* OnsetComeupPeakTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupPeakTimeline.swift; sourceTree = "<group>"; };
+		EABD921829422C580073303A /* NoTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTimeline.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				EABD92052941C4080073303A /* TimelineDrawable.swift */,
 				EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */,
 				EABD920A2941FB160073303A /* OnsetTotalTimeline.swift */,
+				EABD921829422C580073303A /* NoTimeline.swift */,
 			);
 			path = Drawables;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
 				EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
+				EABD921929422C580073303A /* NoTimeline.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,
