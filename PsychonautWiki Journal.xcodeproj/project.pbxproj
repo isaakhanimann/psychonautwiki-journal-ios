@@ -59,6 +59,7 @@
 		EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */; };
 		EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */; };
 		EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD9212294215FB0073303A /* OnsetTimeline.swift */; };
+		EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921429421CE60073303A /* OnsetComeupTimeline.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -200,6 +201,7 @@
 		EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupTotalTimeline.swift; sourceTree = "<group>"; };
 		EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupPeakTotalTimeline.swift; sourceTree = "<group>"; };
 		EABD9212294215FB0073303A /* OnsetTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetTimeline.swift; sourceTree = "<group>"; };
+		EABD921429421CE60073303A /* OnsetComeupTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupTimeline.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				EABD92032941C3C30073303A /* FullTimeline.swift */,
 				EABD92082941EA4B0073303A /* TotalTimeline.swift */,
 				EABD920C294202680073303A /* StrokeStyle-Timeline.swift */,
+				EABD921429421CE60073303A /* OnsetComeupTimeline.swift */,
 				EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */,
 				EABD9212294215FB0073303A /* OnsetTimeline.swift */,
 				EABD92052941C4080073303A /* TimelineDrawable.swift */,
@@ -782,6 +785,7 @@
 				EA47E67327CB490300F6E10F /* AllTabs.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
+				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
