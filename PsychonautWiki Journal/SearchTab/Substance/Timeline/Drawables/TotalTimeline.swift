@@ -48,12 +48,7 @@ struct TotalTimeline: TimelineDrawable {
         context.stroke(
             path,
             with: .color(color),
-            style: StrokeStyle(
-                lineWidth: lineWidth,
-                lineCap: .round,
-                dash: [10, 10],
-                dashPhase: 0
-            )
+            style: StrokeStyle.getDotted(lineWidth: lineWidth)
         )
     }
 
