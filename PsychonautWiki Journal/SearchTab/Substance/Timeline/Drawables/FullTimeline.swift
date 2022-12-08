@@ -69,11 +69,6 @@ struct FullTimeline: TimelineDrawable {
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        let startRange = startDuration + onset.interpolateAtValueInSeconds(weight: 0.5) + comeup.interpolateAtValueInSeconds(weight: 0.5)
-        return startRange...(startRange + peak.interpolateAtValueInSeconds(weight: peakAndOffsetWeight))
-    }
-
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange

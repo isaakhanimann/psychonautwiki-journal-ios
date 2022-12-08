@@ -19,8 +19,4 @@ struct NoTimeline: TimelineDrawable {
         path.addLine(to: CGPoint(x: startX, y: height))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
     }
-
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        nil
-    }
 }

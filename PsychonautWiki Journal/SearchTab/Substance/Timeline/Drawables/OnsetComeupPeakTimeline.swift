@@ -19,11 +19,6 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
     let peak: FullDurationRange
     let peakWeight: Double
 
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        let startRange = startDuration + onset.interpolateAtValueInSeconds(weight: 0.5) + comeup.interpolateAtValueInSeconds(weight: 0.5)
-        return startRange...(startRange + peak.interpolateAtValueInSeconds(weight: peakWeight))
-    }
-
     var width: TimeInterval {
         onset.max + comeup.max + peak.max
     }

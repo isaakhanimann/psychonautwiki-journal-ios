@@ -19,6 +19,4 @@ protocol TimelineDrawable {
         color: Color,
         lineWidth: Double
     )
-
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>?
 }

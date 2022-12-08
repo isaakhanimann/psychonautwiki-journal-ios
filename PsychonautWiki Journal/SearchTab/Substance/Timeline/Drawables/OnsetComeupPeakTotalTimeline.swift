@@ -20,11 +20,6 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         drawTimeLineShape(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
     }
 
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        let startRange = startDuration + onset.interpolateAtValueInSeconds(weight: 0.5) + comeup.interpolateAtValueInSeconds(weight:0.5)
-        return startRange...(startRange + peak.interpolateAtValueInSeconds(weight: peakAndTotalWeight))
-    }
-
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange

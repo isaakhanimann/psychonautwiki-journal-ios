@@ -19,10 +19,6 @@ struct OnsetTotalTimeline: TimelineDrawable {
         drawTimeLineShape(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
     }
 
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        return nil
-    }
-
     let onset: FullDurationRange
     let total: FullDurationRange
     let totalWeight: Double

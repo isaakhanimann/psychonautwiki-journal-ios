@@ -16,10 +16,6 @@ struct OnsetTimeline : TimelineDrawable {
 
     let onset: FullDurationRange
 
-    func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
-        return nil
-    }
-
     var width: TimeInterval {
         onset.max
     }
