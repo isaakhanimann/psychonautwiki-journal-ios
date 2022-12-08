@@ -21,9 +21,9 @@ struct DurationSection: View {
                 selection: $selectedTime,
                 displayedComponents: [.hourAndMinute]
             )
-            VStack(spacing: 2) {
-                Canvas { context, size in
-                    if let model = timelineModel {
+            if let model = timelineModel {
+                VStack(spacing: 2) {
+                    Canvas { context, size in
                         let pixelsPerSec = size.width/model.totalWidth
                         model.ingestionDrawables.forEach({ drawable in
                             let startX = drawable.distanceFromStart * pixelsPerSec
@@ -37,11 +37,9 @@ struct DurationSection: View {
                             )
                         })
                     }
-                }
-                .frame(height: 200)
-                .border(Color.blue)
-                Canvas { context, size in
-                    if let model = timelineModel {
+                    .frame(height: 200)
+                    .border(Color.blue)
+                    Canvas { context, size in
                         let widthInPixels = size.width
                         let pixelsPerSec = widthInPixels/model.totalWidth
                         let fullHours = model.axisDrawable.getFullHours(
@@ -55,11 +53,9 @@ struct DurationSection: View {
                                 anchor: .center
                             )
                         }
-
                     }
+                    .border(Color.blue)
                 }
-                .border(Color.blue)
-
             }
             ForEach(durationInfos, id: \.route) { info in
                 VStack(alignment: .leading) {
@@ -77,6 +73,11 @@ struct DurationSection: View {
                 EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
             }))
         }
+        .onChange(of: selectedTime) { newValue in
+            timelineModel = TimelineModel(everythingForEachLine: durationInfos.map({ info in
+                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
+            }))
+        }
     }
 }
 
@@ -84,7 +85,7 @@ struct DurationSection_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                DurationSection(durationInfos: SubstanceRepo.shared.getSubstance(name: "MDMA")!.durationInfos)
+                DurationSection(durationInfos: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.durationInfos)
             }
         }
     }

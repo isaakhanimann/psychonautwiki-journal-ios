@@ -28,9 +28,9 @@ struct FullTimeline: TimelineDrawable {
         let comeupEndX =
             onsetEndX + (comeup.interpolateAtValueInSeconds(weight: onsetAndComeupWeight) * pixelsPerSec)
         let peakEndX =
-            comeupEndX + (peak.interpolateAtValueInSeconds(weight: horizontalWeight) * pixelsPerSec)
+            comeupEndX + (peak.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
         let offsetEndX =
-            peakEndX + (offset.interpolateAtValueInSeconds(weight: horizontalWeight) * pixelsPerSec)
+            peakEndX + (offset.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
         path.move(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         path.addLine(to: CGPoint(x: comeupEndX, y: minHeight))
@@ -70,18 +70,18 @@ struct FullTimeline: TimelineDrawable {
 
     func getPeakDurationRangeInSeconds(startDuration: TimeInterval) -> ClosedRange<TimeInterval>? {
         let startRange = startDuration + onset.interpolateAtValueInSeconds(weight: 0.5) + comeup.interpolateAtValueInSeconds(weight: 0.5)
-        return startRange...(startRange + peak.interpolateAtValueInSeconds(weight: horizontalWeight))
+        return startRange...(startRange + peak.interpolateAtValueInSeconds(weight: peakAndOffsetWeight))
     }
 
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange
     let offset: FullDurationRange
-    let horizontalWeight: Double
+    let peakAndOffsetWeight: Double
 }
 
 extension RoaDuration {
-    func toFullTimeline(horizontalWeight: Double) -> FullTimeline? {
+    func toFullTimeline(peakAndOffsetWeight: Double) -> FullTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
            let fullPeak = peak?.maybeFullDurationRange,
@@ -92,7 +92,7 @@ extension RoaDuration {
                 comeup: fullComeup,
                 peak: fullPeak,
                 offset: fullOffset,
-                horizontalWeight: horizontalWeight
+                peakAndOffsetWeight: peakAndOffsetWeight
             )
         } else {
             return nil

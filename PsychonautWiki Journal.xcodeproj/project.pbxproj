@@ -53,6 +53,7 @@
 		EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
 		EABD92042941C3C30073303A /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92032941C3C30073303A /* FullTimeline.swift */; };
 		EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92052941C4080073303A /* TimelineDrawable.swift */; };
+		EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92082941EA4B0073303A /* TotalTimeline.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -188,6 +189,7 @@
 		EABD92012941C3A30073303A /* IngestionDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDrawable.swift; sourceTree = "<group>"; };
 		EABD92032941C3C30073303A /* FullTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeline.swift; sourceTree = "<group>"; };
 		EABD92052941C4080073303A /* TimelineDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDrawable.swift; sourceTree = "<group>"; };
+		EABD92082941EA4B0073303A /* TotalTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTimeline.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -421,13 +423,22 @@
 		EABD91FE294108100073303A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				EABD92072941EA1A0073303A /* Drawables */,
 				EABD91FC294105830073303A /* TimelineModel.swift */,
-				EABD92032941C3C30073303A /* FullTimeline.swift */,
-				EABD92052941C4080073303A /* TimelineDrawable.swift */,
 				EABD92012941C3A30073303A /* IngestionDrawable.swift */,
 				EABD91FF2941C3740073303A /* AxisDrawable.swift */,
 			);
 			path = Timeline;
+			sourceTree = "<group>";
+		};
+		EABD92072941EA1A0073303A /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				EABD92032941C3C30073303A /* FullTimeline.swift */,
+				EABD92082941EA4B0073303A /* TotalTimeline.swift */,
+				EABD92052941C4080073303A /* TimelineDrawable.swift */,
+			);
+			path = Drawables;
 			sourceTree = "<group>";
 		};
 		EABDA72C28881B0000A23DB3 /* StatsTab */ = {
@@ -766,6 +777,7 @@
 				EAE4722326CBA664009FB0EC /* ChooseDoseView.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
+				EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,

@@ -59,7 +59,7 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
         case .rectal:
             return .pink
         case .transdermal:
-            return .green
+            return .yellow
         case .subcutaneous:
             return .mint
         case .intramuscular:
@@ -67,7 +67,7 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
         case .intravenous:
             return .red
         case .smoked:
-            return .yellow
+            return .green
         case .inhaled:
             return .purple
         }

@@ -7,29 +7,29 @@ struct InteractionsSection: View {
     var body: some View {
         if let interactions = substance.interactions {
             Section("Interactions") {
+                let iconName = "exclamationmark.triangle"
                 ForEach(interactions.dangerous, id: \.self) { name in
-                    HStack {
+                    HStack(spacing: 0) {
                         Text(name)
                         Spacer()
-                        ForEach(0..<3) { _ in
-                            Image(systemName: "exclamationmark.triangle")
-                        }
+                        Image(systemName: iconName)
+                        Image(systemName: iconName)
+                        Image(systemName: iconName)
                     }
                 }.foregroundColor(InteractionType.dangerous.color)
                 ForEach(interactions.unsafe, id: \.self) { name in
-                    HStack {
+                    HStack(spacing: 0) {
                         Text(name)
                         Spacer()
-                        ForEach(0..<2) { _ in
-                            Image(systemName: "exclamationmark.triangle")
-                        }
+                        Image(systemName: iconName)
+                        Image(systemName: iconName)
                     }
                 }.foregroundColor(InteractionType.unsafe.color)
                 ForEach(interactions.uncertain, id: \.self) { name in
-                    HStack {
+                    HStack(spacing: 0) {
                         Text(name)
                         Spacer()
-                        Image(systemName: "exclamationmark.triangle")
+                        Image(systemName: iconName)
                     }
                 }.foregroundColor(InteractionType.uncertain.color)
             }
