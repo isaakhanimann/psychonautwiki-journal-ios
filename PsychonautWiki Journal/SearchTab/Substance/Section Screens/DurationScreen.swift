@@ -36,6 +36,7 @@ struct DurationScreen: View {
                             Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                                 .resizable()
                                 .frame(width: 24, height: 24)
+                                .font(.headline)
                                 .foregroundColor(info.route.color)
                                 .onTapGesture {
                                     toggle(route: info.route)
