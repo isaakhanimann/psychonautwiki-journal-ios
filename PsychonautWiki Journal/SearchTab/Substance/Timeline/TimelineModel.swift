@@ -100,7 +100,7 @@ struct FullTimeline: TimelineDrawable {
         path.addLine(to: CGPoint(x: comeupEndX, y: minHeight))
         path.addLine(to: CGPoint(x: peakEndX, y: minHeight))
         path.addLine(to: CGPoint(x: offsetEndX, y: maxHeight))
-        context.stroke(path, with: .color(color), lineWidth: lineWidth)
+        context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
     }
 
     func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
