@@ -65,7 +65,7 @@ struct DurationSection: View {
                             .foregroundColor(info.route.color)
                         Text(info.route.rawValue.localizedCapitalized).font(.headline)
                     }
-                    OneRoaDurationRow(duration: info.roaDuration)
+                    OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
                 }
             }
         }.onAppear {

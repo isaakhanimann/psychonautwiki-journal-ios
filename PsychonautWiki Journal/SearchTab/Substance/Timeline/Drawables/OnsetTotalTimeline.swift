@@ -98,7 +98,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
             endY: height
         )
         path.closeSubpath()
-        context.fill(path, with: .color(color.opacity(0.3)))
+        context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 }
 

@@ -50,7 +50,7 @@ struct OnsetComeupTimeline : TimelineDrawable {
         path.addLine(to: CGPoint(x: comeupEndMaxX, y: 0))
         path.addLine(to: CGPoint(x: onsetStartMaxX, y: height))
         path.closeSubpath()
-        context.fill(path, with: .color(color.opacity(0.3)))
+        context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 }
 

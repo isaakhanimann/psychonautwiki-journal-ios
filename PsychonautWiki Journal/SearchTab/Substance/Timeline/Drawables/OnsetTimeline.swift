@@ -45,7 +45,7 @@ struct OnsetTimeline : TimelineDrawable {
         path.addLine(to: CGPoint(x: onsetEndMaxX, y: height - shapeHeight))
         path.addLine(to: CGPoint(x: onsetEndMinX, y: height - shapeHeight))
         path.closeSubpath()
-        context.fill(path, with: .color(color.opacity(0.3)))
+        context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 }
 
