@@ -115,9 +115,30 @@ struct Substance: Decodable, Identifiable {
             }
         })
     }
+
+    var doseInfos: [DoseInfo] {
+        roas.compactMap({ roa in
+            if let dose = roa.dose {
+                return DoseInfo(
+                    route: roa.name,
+                    roaDose: dose,
+                    bioavailability: roa.bioavailability
+                )
+            } else {
+                return nil
+            }
+        })
+    }
 }
 
 struct DurationInfo {
     let route: AdministrationRoute
     let roaDuration: RoaDuration
 }
+
+struct DoseInfo {
+    let route: AdministrationRoute
+    let roaDose: RoaDose
+    let bioavailability: RoaRange?
+}
+

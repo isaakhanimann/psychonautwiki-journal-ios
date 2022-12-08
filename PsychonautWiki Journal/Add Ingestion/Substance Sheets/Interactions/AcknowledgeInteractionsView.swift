@@ -23,7 +23,11 @@ struct AcknowledgeInteractionsView: View {
     var regularContent: some View {
         ZStack(alignment: .bottom) {
             List {
-                InteractionsSection(substance: substance)
+                if let interactions = substance.interactions {
+                    InteractionList(interactions: interactions, substanceURL: substance.url)
+                } else {
+                    Text("There are no documented interactions")
+                }
                 EmptySectionForPadding()
             }
             Button("Next") {
