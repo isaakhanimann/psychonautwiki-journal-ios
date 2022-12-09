@@ -18,7 +18,6 @@ struct IngestionRow: View {
             }
             Spacer()
             Text(ingestion.timeUnwrapped, style: .time)
-                .foregroundColor(.primary)
         }
     }
 }
