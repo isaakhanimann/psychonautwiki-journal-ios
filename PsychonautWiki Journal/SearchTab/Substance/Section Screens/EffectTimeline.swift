@@ -15,21 +15,32 @@ struct EffectTimeline: View {
     var body: some View {
         let halfLineWidth = lineWidth/2
         VStack(spacing: 0) {
-            Canvas { context, size in
-                let pixelsPerSec = (size.width-halfLineWidth)/timelineModel.totalWidth
-                timelineModel.ingestionDrawables.forEach({ drawable in
-                    let startX = (drawable.distanceFromStart * pixelsPerSec) + halfLineWidth
-                    drawable.timelineDrawable.drawTimeLineWithShape(
-                        context: context,
-                        height: size.height,
-                        startX: startX,
-                        pixelsPerSec: pixelsPerSec,
-                        color: drawable.color,
-                        lineWidth: lineWidth
-                    )
-                })
+            TimelineView(.everyMinute) { timeline in
+                let timelineDate = timeline.date
+                Canvas { context, size in
+                    let pixelsPerSec = (size.width-halfLineWidth)/timelineModel.totalWidth
+                    timelineModel.ingestionDrawables.forEach({ drawable in
+                        let startX = (drawable.distanceFromStart * pixelsPerSec) + halfLineWidth
+                        drawable.timelineDrawable.drawTimeLineWithShape(
+                            context: context,
+                            height: size.height,
+                            startX: startX,
+                            pixelsPerSec: pixelsPerSec,
+                            color: drawable.color,
+                            lineWidth: lineWidth
+                        )
+                    })
+                    let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(3*60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth)
+                    if shouldDrawCurrentTime {
+                        let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate)*pixelsPerSec) + halfLineWidth
+                        var path = Path()
+                        path.move(to: CGPoint(x: currentTimeX, y: 0))
+                        path.addLine(to: CGPoint(x: currentTimeX, y: size.height))
+                        context.stroke(path, with: .foreground, lineWidth: 3)
+                    }
+                }
+                .frame(height: 200)
             }
-            .frame(height: 200)
             Canvas { context, size in
                 let widthInPixels = size.width - halfLineWidth
                 let pixelsPerSec = widthInPixels/timelineModel.totalWidth
