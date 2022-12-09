@@ -12,91 +12,55 @@ struct InteractionsScreen: View {
     let substanceURL: URL
 
     var body: some View {
-        InteractionList(
-            interactions: interactions,
-            substanceURL: substanceURL
-        ).navigationTitle("Interactions")
+        List {
+            InteractionSection(
+                interactions: interactions,
+                substanceURL: substanceURL
+            )
+        }
+        .navigationTitle("Interactions")
     }
 }
 
-struct InteractionList: View {
+struct InteractionSection: View {
     let interactions: Interactions
     let substanceURL: URL
 
     var body: some View {
-        List {
+        Section {
+            let iconName = "exclamationmark.triangle"
+            ForEach(interactions.dangerous, id: \.self) { name in
+                HStack(spacing: 0) {
+                    Text(name)
+                    Spacer()
+                    Image(systemName: iconName)
+                    Image(systemName: iconName)
+                    Image(systemName: iconName)
+                }
+            }.foregroundColor(InteractionType.dangerous.color)
+            ForEach(interactions.unsafe, id: \.self) { name in
+                HStack(spacing: 0) {
+                    Text(name)
+                    Spacer()
+                    Image(systemName: iconName)
+                    Image(systemName: iconName)
+                }
+            }.foregroundColor(InteractionType.unsafe.color)
+            ForEach(interactions.uncertain, id: \.self) { name in
+                HStack(spacing: 0) {
+                    Text(name)
+                    Spacer()
+                    Image(systemName: iconName)
+                }
+            }.foregroundColor(InteractionType.uncertain.color)
             if let interactionURL = URL(string: substanceURL.absoluteString + "#Dangerous_interactions") {
-                Section("Explanations") {
-                    NavigationLink {
-                        WebViewScreen(articleURL: interactionURL)
-                    } label: {
-                        Label("Article", systemImage: "link")
-                    }
-                }
-            }
-            if !interactions.dangerous.isEmpty {
-                Section("Dangerous") {
-                    DangerousInteractions(dangerousInteractions: interactions.dangerous)
-                }
-            }
-            if !interactions.unsafe.isEmpty {
-                Section("Unsafe") {
-                    UnsafeInteractions(unsafeInteractions: interactions.unsafe)
-                }
-            }
-            if !interactions.uncertain.isEmpty {
-                Section("Uncertain") {
-                    UncertainInteractions(uncertainInteractions: interactions.uncertain)
+                NavigationLink {
+                    WebViewScreen(articleURL: interactionURL)
+                } label: {
+                    Label("Explanations", systemImage: "info.circle")
                 }
             }
         }
-    }
-}
-
-let iconName = "exclamationmark.triangle"
-
-struct DangerousInteractions: View {
-    let dangerousInteractions: [String]
-
-    var body: some View {
-        ForEach(dangerousInteractions, id: \.self) { name in
-            HStack(spacing: 0) {
-                Text(name)
-                Spacer()
-                Image(systemName: iconName)
-                Image(systemName: iconName)
-                Image(systemName: iconName)
-            }
-        }.foregroundColor(InteractionType.dangerous.color)
-    }
-}
-
-struct UnsafeInteractions: View {
-    let unsafeInteractions: [String]
-
-    var body: some View {
-        ForEach(unsafeInteractions, id: \.self) { name in
-            HStack(spacing: 0) {
-                Text(name)
-                Spacer()
-                Image(systemName: iconName)
-                Image(systemName: iconName)
-            }
-        }.foregroundColor(InteractionType.unsafe.color)
-    }
-}
-
-struct UncertainInteractions: View {
-    let uncertainInteractions: [String]
-
-    var body: some View {
-        ForEach(uncertainInteractions, id: \.self) { name in
-            HStack(spacing: 0) {
-                Text(name)
-                Spacer()
-                Image(systemName: iconName)
-            }
-        }.foregroundColor(InteractionType.uncertain.color)
     }
 }
 
