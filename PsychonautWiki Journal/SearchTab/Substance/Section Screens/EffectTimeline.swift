@@ -30,7 +30,7 @@ struct EffectTimeline: View {
                             lineWidth: lineWidth
                         )
                     })
-                    let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(3*60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth)
+                    let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2*60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth)
                     if shouldDrawCurrentTime {
                         let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate)*pixelsPerSec) + halfLineWidth
                         var path = Path()
