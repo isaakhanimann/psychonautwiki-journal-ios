@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ChooseTimeAndColor: View {
 
-    let substance: Substance
+    let substanceName: String
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
@@ -25,8 +25,14 @@ struct ChooseTimeAndColor: View {
                         Toggle("Part of \(experience.titleUnwrapped)", isOn: $viewModel.isAddingToFoundExperience)
                     }
                 }
-                Section("Choose Color") {
-                    ColorPicker(selectedColor: $viewModel.selectedColor)
+                if !viewModel.doesCompanionExistAlready {
+                    Section("Choose Color") {
+                        ColorPicker(
+                            selectedColor: $viewModel.selectedColor,
+                            alreadyUsedColors: viewModel.alreadyUsedColors,
+                            otherColors: viewModel.otherColors
+                        )
+                    }
                 }
             }
             Button("Add Ingestion") {
@@ -38,11 +44,11 @@ struct ChooseTimeAndColor: View {
             .padding()
         }
         .task {
-            viewModel.substance = substance
+            viewModel.substanceName = substanceName
             viewModel.administrationRoute = administrationRoute
             viewModel.dose = dose ?? 0
             viewModel.units = units
-            viewModel.initializeColorAndHasCompanion(for: substance.name)
+            viewModel.initializeColorAndHasCompanion(for: substanceName)
         }
         .navigationBarTitle("Ingestion Time")
         .toolbar {

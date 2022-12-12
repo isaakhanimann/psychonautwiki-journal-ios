@@ -3,10 +3,19 @@ import SwiftUI
 struct ColorPicker: View {
 
     @Binding var selectedColor: SubstanceColor
+    let alreadyUsedColors: Set<SubstanceColor>
+    let otherColors: Set<SubstanceColor>
 
     var body: some View {
-        LazyVGrid(columns: colorColumns) {
-            ForEach(SubstanceColor.allCases, content: colorButton)
+        VStack(alignment: .leading) {
+            Text("Free Colors")
+            LazyVGrid(columns: colorColumns) {
+                ForEach(Array(otherColors), content: colorButton)
+            }
+            Text("Already Used Colors")
+            LazyVGrid(columns: colorColumns) {
+                ForEach(Array(alreadyUsedColors), content: colorButton)
+            }
         }
         .padding(.vertical)
     }
@@ -41,6 +50,17 @@ struct ColorPicker: View {
 
 struct ColorPicker_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPicker(selectedColor: .constant(.blue))
+        NavigationView {
+            Form {
+                Section {
+                    let alreadyUsed: Set = [SubstanceColor.blue, .red, .orange]
+                    ColorPicker(
+                        selectedColor: .constant(.blue),
+                        alreadyUsedColors: alreadyUsed,
+                        otherColors: Set(SubstanceColor.allCases).subtracting(alreadyUsed)
+                    )
+                }
+            }
+        }
     }
 }

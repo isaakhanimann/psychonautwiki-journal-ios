@@ -36,9 +36,9 @@ struct AddCustomIngestionView: View {
                     )
                     .labelsHidden()
                 }
-                Section("Color") {
-                    ColorPicker(selectedColor: $viewModel.selectedColor)
-                }
+//                Section("Color") {
+//                    ColorPicker(selectedColor: $viewModel.selectedColor)
+//                }
                 EmptySectionForPadding()
                     .padding(.bottom, 50)
             }

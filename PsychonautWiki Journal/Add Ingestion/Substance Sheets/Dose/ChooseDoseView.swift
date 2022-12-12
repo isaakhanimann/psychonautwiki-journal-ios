@@ -31,7 +31,7 @@ struct ChooseDoseView: View {
             }
             NavigationLink(
                 destination: ChooseTimeAndColor(
-                    substance: substance,
+                    substanceName: substance.name,
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,
                     units: viewModel.selectedUnits,

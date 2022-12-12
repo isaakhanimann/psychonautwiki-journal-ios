@@ -11,8 +11,8 @@ extension ChooseTimeAndColor {
         @Published var isAddingToFoundExperience = true
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
-        var doesCompanionExistAlready = true
-        var substance: Substance?
+        @Published var doesCompanionExistAlready = true
+        var substanceName: String?
         var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
         var dose: Double = 0
         var units: String?
@@ -69,7 +69,7 @@ extension ChooseTimeAndColor {
         private func maybeCreateCompanion(with context: NSManagedObjectContext) {
             if !doesCompanionExistAlready {
                 let companion = SubstanceCompanion(context: context)
-                companion.substanceName = substance?.name
+                companion.substanceName = substanceName
                 companion.colorAsText = selectedColor.rawValue
             }
         }
@@ -82,7 +82,7 @@ extension ChooseTimeAndColor {
             ingestion.dose = dose
             ingestion.units = units
             ingestion.administrationRoute = administrationRoute.rawValue
-            ingestion.substanceName = substance?.name
+            ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
             ingestion.experience = experience
         }
