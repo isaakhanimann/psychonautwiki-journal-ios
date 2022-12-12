@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChooseDoseView: View {
+struct ChooseDoseScreen: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute

@@ -1,6 +1,6 @@
 import Foundation
 
-extension ChooseDoseView {
+extension ChooseDoseScreen {
 
     class ViewModel: ObservableObject {
         @Published var selectedUnits: String? = UnitPickerOptions.mg.rawValue

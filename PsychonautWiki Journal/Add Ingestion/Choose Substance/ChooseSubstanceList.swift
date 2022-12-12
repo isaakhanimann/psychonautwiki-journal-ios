@@ -28,7 +28,11 @@ struct ChooseSubstanceList: View {
                 }
                 ForEach(searchViewModel.filteredCustomSubstances) { cust in
                     NavigationLink(cust.nameUnwrapped) {
-                        AddCustomIngestionView(customSubstance: cust, dismiss: dismiss)
+                        CustomChooseRouteScreen(
+                            substanceName: cust.nameUnwrapped,
+                            units: cust.unitsUnwrapped,
+                            dismiss: dismiss
+                        )
                     }
                 }
                 ForEach(searchViewModel.filteredSubstances) { sub in

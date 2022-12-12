@@ -36,7 +36,7 @@ struct AcknowledgeInteractionsView: View {
             .buttonStyle(.primary)
             .padding()
             NavigationLink("Next", isActive: $viewModel.isShowingNext) {
-                ChooseRouteView(substance: substance, dismiss: dismiss)
+                ChooseRouteScreen(substance: substance, dismiss: dismiss)
             }
             .allowsHitTesting(false)
             .hidden()
