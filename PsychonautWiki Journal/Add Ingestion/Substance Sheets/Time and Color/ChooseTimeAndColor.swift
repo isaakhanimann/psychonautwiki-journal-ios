@@ -6,7 +6,7 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
-    let dismiss: DismissAction
+    let dismiss: () -> Void
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject var viewModel = ViewModel()
 

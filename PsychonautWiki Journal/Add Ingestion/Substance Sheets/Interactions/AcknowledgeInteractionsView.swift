@@ -3,7 +3,7 @@ import SwiftUI
 struct AcknowledgeInteractionsView: View {
 
     let substance: Substance
-    let dismiss: DismissAction
+    let dismiss: () -> Void
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {

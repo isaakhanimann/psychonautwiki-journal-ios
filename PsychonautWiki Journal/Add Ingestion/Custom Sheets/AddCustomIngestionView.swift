@@ -3,7 +3,7 @@ import SwiftUI
 struct AddCustomIngestionView: View {
 
     let customSubstance: CustomSubstance
-    let dismiss: DismissAction
+    let dismiss: () -> Void
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject private var viewModel = ViewModel()
 

@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseRouteView: View {
 
     let substance: Substance
-    let dismiss: DismissAction
+    let dismiss: () -> Void
 
     var body: some View {
         List {
@@ -46,6 +46,18 @@ struct ChooseRouteView: View {
                     dismiss()
                 }
             }
+        }
+    }
+}
+
+struct ChooseRouteView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        NavigationView {
+            ChooseRouteView(
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                dismiss: {}
+            )
         }
     }
 }

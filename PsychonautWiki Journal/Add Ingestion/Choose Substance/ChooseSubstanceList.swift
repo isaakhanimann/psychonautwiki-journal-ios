@@ -3,7 +3,7 @@ import SwiftUI
 struct ChooseSubstanceList: View {
 
     @ObservedObject var searchViewModel: SearchViewModel
-    let dismiss: DismissAction
+    let dismiss: () -> Void
     @StateObject var recentsViewModel = RecentSubstancesViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     @Environment(\.isSearching) private var isSearching

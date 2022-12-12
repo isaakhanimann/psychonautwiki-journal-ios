@@ -4,7 +4,7 @@ struct ChooseDoseView: View {
 
     let substance: Substance
     let administrationRoute: AdministrationRoute
-    let dismiss: DismissAction
+    let dismiss: () -> Void
     @StateObject private var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
