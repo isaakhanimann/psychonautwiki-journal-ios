@@ -13,7 +13,7 @@ struct ExperienceView: View {
                 } header: {
                     Text("Effect Timeline")
                 } footer: {
-                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.dateForSorting
+                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
                 }
                 Section("Ingestions") {

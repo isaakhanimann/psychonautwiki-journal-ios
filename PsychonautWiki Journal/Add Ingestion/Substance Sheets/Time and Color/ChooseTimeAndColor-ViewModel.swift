@@ -61,5 +61,28 @@ extension ChooseTimeAndColor {
                 try? context.save()
             }
         }
+
+        @Published var closestExperience: Experience?
+
+        init() {
+            $selectedTime.map({ date in
+                let fetchRequest = Ingestion.fetchRequest()
+                fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+                fetchRequest.fetchLimit = 1
+                fetchRequest.predicate = ChooseTimeAndColor.ViewModel.getPredicate(from: date)
+                return try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.experience
+            }).assign(to: &$closestExperience)
+        }
+
+        private static func getPredicate(from date: Date) -> NSCompoundPredicate {
+            let halfDay: TimeInterval = 12*60*60
+            let startDate = date.addingTimeInterval(-halfDay)
+            let endDate = date.addingTimeInterval(halfDay)
+            let laterThanStart = NSPredicate(format: "time > %@", startDate as NSDate)
+            let earlierThanEnd = NSPredicate(format: "time < %@", endDate as NSDate)
+            return NSCompoundPredicate(
+                andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd]
+            )
+        }
     }
 }

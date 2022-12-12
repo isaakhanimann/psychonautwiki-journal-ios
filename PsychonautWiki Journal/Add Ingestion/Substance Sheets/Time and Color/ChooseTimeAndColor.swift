@@ -21,6 +21,12 @@ struct ChooseTimeAndColor: View {
                     )
                     .labelsHidden()
                 }
+                if let experience = viewModel.closestExperience {
+                    Section("Experience") {
+                        Text(experience.titleUnwrapped)
+                        Text(experience.sortDateUnwrapped.asDateString)
+                    }
+                }
                 Section("Choose Color") {
                     ColorPicker(selectedColor: $viewModel.selectedColor)
                 }

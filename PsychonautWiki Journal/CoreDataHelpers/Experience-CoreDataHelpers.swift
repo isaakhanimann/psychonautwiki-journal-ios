@@ -2,10 +2,10 @@ import SwiftUI
 
 extension Experience: Comparable {
     public static func < (lhs: Experience, rhs: Experience) -> Bool {
-        lhs.dateForSorting > rhs.dateForSorting
+        lhs.sortDateUnwrapped > rhs.sortDateUnwrapped
     }
 
-    var dateForSorting: Date {
+    var sortDateUnwrapped: Date {
         sortDate ?? creationDateUnwrapped
     }
 
@@ -14,7 +14,7 @@ extension Experience: Comparable {
     }
 
     var year: Int {
-        Calendar.current.component(.year, from: dateForSorting)
+        Calendar.current.component(.year, from: sortDateUnwrapped)
     }
 
     var creationDateUnwrapped: Date {
