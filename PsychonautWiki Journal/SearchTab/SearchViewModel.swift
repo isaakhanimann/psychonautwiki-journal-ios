@@ -4,32 +4,47 @@ import CoreData
 
 class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
-    private var substancesFilteredWithCategoriesOnly: [Substance] {
-        SubstanceRepo.shared.substances.filter { sub in
-            selectedCategories.allSatisfy { selected in
-                sub.categories.contains(selected)
-            }
+    var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
+
+    @Published var searchText = "" {
+        didSet {
+            setFilteredSubstances()
         }
     }
 
-    var filteredSubstances: [Substance] {
+    private func setFilteredSubstances() {
         if searchText.count < 3 {
-            return getSortedPrefixResults()
+            let prefixResult = getSortedPrefixResults()
+            filteredSubstances =  prefixResult
         } else {
             let prefixResult = getSortedPrefixResults()
             if prefixResult.count < 3 {
                 let containsResult = getSortedContainsResults()
-                return (prefixResult + containsResult).uniqued { sub in
+                let combinedResult =  (prefixResult + containsResult).uniqued { sub in
                     sub.name
                 }
-            } else {
-                return prefixResult
-            }
+                filteredSubstances =  combinedResult
 
+            } else {
+                filteredSubstances =  prefixResult
+            }
         }
     }
-    @Published var searchText = ""
-    @Published var selectedCategories: [String] = []
+
+
+    @Published var selectedCategories: [String] = [] {
+        didSet {
+            substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
+                selectedCategories.allSatisfy { selected in
+                    sub.categories.contains(selected)
+                }
+            }
+            setFilteredSubstances()
+        }
+    }
+
+    private var substancesFilteredWithCategoriesOnly: [Substance] = SubstanceRepo.shared.substances
+
     static let custom = "custom"
 
     let allCategories = [custom] + SubstanceRepo.shared.categories.map { cat in
