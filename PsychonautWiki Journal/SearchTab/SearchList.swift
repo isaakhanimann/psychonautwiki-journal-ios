@@ -23,6 +23,9 @@ struct SearchList: View {
                     }
                 }
                 Section {
+                    ForEach(searchViewModel.filteredSubstances) { sub in
+                        SearchSubstanceRow(substance: sub, color: nil)
+                    }
                     ForEach(searchViewModel.filteredCustomSubstances) { cust in
                         NavigationLink {
                             EditCustomSubstanceView(customSubstance: cust)
@@ -33,9 +36,6 @@ struct SearchList: View {
                                 Chip(name: "custom")
                             }
                         }
-                    }
-                    ForEach(searchViewModel.filteredSubstances) { sub in
-                        SearchSubstanceRow(substance: sub, color: nil)
                     }
                 }
             }

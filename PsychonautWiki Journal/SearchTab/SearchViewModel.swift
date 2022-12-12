@@ -81,18 +81,12 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
                         sub.categories.contains(selected)
                     }
                 }
-                let prefixResult = SearchViewModel.getSortedPrefixResults(substances: substancesFilteredWithCategoriesOnly, searchText: search)
-                if search.count < 3 {
-                    return prefixResult
-                } else {
-                    if prefixResult.count < 3 {
-                        let containsResult = SearchViewModel.getSortedContainsResults(substances: substancesFilteredWithCategoriesOnly, searchText: search)
-                        return (prefixResult + containsResult).uniqued { sub in
-                            sub.name
-                        }
-                    } else {
-                        return prefixResult
-                    }
+                let filteredSubstances = SearchViewModel.getFilteredSubstances(substances: substancesFilteredWithCategoriesOnly, searchText: search)
+                let common = filteredSubstances.filter { sub in
+                    sub.categories.contains("common")
+                }
+                return (common + filteredSubstances).uniqued { sub in
+                    sub.name
                 }
             }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
     }
@@ -102,8 +96,24 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         self.customSubstances = customs
     }
 
-    private static func getSortedPrefixResults(substances: [Substance], searchText: String) -> [Substance] {
+    private static func getFilteredSubstances(substances: [Substance], searchText: String) -> [Substance] {
         let lowerCaseSearchText = searchText.lowercased()
+        let prefixResult = getSortedPrefixResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
+        if searchText.count < 3 {
+            return prefixResult
+        } else {
+            if prefixResult.count < 3 {
+                let containsResult = getSortedContainsResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
+                return (prefixResult + containsResult).uniqued { sub in
+                    sub.name
+                }
+            } else {
+                return prefixResult
+            }
+        }
+    }
+
+    private static func getSortedPrefixResults(substances: [Substance], lowerCaseSearchText: String) -> [Substance] {
         let mainPrefixMatches =  substances.filter { sub in
             sub.name.lowercased().hasPrefix(lowerCaseSearchText)
         }
@@ -119,8 +129,7 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         }
     }
 
-    private static func getSortedContainsResults(substances: [Substance], searchText: String) -> [Substance] {
-        let lowerCaseSearchText = searchText.lowercased()
+    private static func getSortedContainsResults(substances: [Substance], lowerCaseSearchText: String) -> [Substance] {
         let mainPrefixMatches =  substances.filter { sub in
             sub.name.lowercased().contains(lowerCaseSearchText)
         }
