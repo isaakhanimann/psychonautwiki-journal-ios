@@ -13,20 +13,28 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
     }
 
     private func setFilteredSubstances() {
-        if searchText.count < 3 {
-            let prefixResult = getSortedPrefixResults()
-            filteredSubstances =  prefixResult
-        } else {
-            let prefixResult = getSortedPrefixResults()
-            if prefixResult.count < 3 {
-                let containsResult = getSortedContainsResults()
-                let combinedResult =  (prefixResult + containsResult).uniqued { sub in
-                    sub.name
+        DispatchQueue.global(qos: .userInitiated).async {
+            if self.searchText.count < 3 {
+                let prefixResult = self.getSortedPrefixResults()
+                DispatchQueue.main.async {
+                    self.filteredSubstances =  prefixResult
                 }
-                filteredSubstances =  combinedResult
-
             } else {
-                filteredSubstances =  prefixResult
+                let prefixResult = self.getSortedPrefixResults()
+                if prefixResult.count < 3 {
+                    let containsResult = self.getSortedContainsResults()
+                    let combinedResult =  (prefixResult + containsResult).uniqued { sub in
+                        sub.name
+                    }
+                    DispatchQueue.main.async {
+                        self.filteredSubstances =  combinedResult
+                    }
+
+                } else {
+                    DispatchQueue.main.async {
+                        self.filteredSubstances =  prefixResult
+                    }
+                }
             }
         }
     }
