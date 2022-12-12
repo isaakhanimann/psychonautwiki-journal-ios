@@ -20,11 +20,9 @@ struct ChooseTimeAndColor: View {
                         displayedComponents: [.date, .hourAndMinute]
                     )
                     .labelsHidden()
-                }
-                if let experience = viewModel.closestExperience {
-                    Section("Experience") {
-                        Text(experience.titleUnwrapped)
-                        Text(experience.sortDateUnwrapped.asDateString)
+                    .datePickerStyle(.wheel)
+                    if let experience = viewModel.closestExperience {
+                        Toggle("Part of \(experience.titleUnwrapped)", isOn: $viewModel.isAddingToFoundExperience)
                     }
                 }
                 Section("Choose Color") {
@@ -32,7 +30,7 @@ struct ChooseTimeAndColor: View {
                 }
             }
             Button("Add Ingestion") {
-                viewModel.addIngestionToNewExperience()
+                viewModel.addIngestion()
                 dismiss()
                 toastViewModel.showSuccessToast()
             }
@@ -44,7 +42,7 @@ struct ChooseTimeAndColor: View {
             viewModel.administrationRoute = administrationRoute
             viewModel.dose = dose ?? 0
             viewModel.units = units
-            viewModel.setDefaultColor()
+            viewModel.initializeColorAndHasCompanion(for: substance.name)
         }
         .navigationBarTitle("Ingestion Time")
         .toolbar {

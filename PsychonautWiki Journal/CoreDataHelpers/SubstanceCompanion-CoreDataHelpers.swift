@@ -2,11 +2,11 @@ import Foundation
 
 extension SubstanceCompanion {
 
-    var color: SubstanceColor? {
+    var color: SubstanceColor {
         if let text = colorAsText, let color = SubstanceColor(rawValue: text) {
             return color
         } else {
-            return nil
+            return SubstanceColor.red
         }
     }
 

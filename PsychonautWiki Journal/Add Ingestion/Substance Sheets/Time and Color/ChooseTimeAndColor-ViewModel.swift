@@ -8,58 +8,83 @@ extension ChooseTimeAndColor {
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
         @Published var isLoadingCompanions = true
+        @Published var isAddingToFoundExperience = true
+        @Published var alreadyUsedColors = Set<SubstanceColor>()
+        @Published var otherColors = Set<SubstanceColor>()
         var doesCompanionExistAlready = true
         var substance: Substance?
         var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
         var dose: Double = 0
         var units: String?
 
-        func setDefaultColor() {
+        func initializeColorAndHasCompanion(for substanceName: String) {
             let fetchRequest = SubstanceCompanion.fetchRequest()
-            guard let name = substance?.name else { return }
             let companions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            let maybeColor = companions.first { comp in
-                comp.substanceNameUnwrapped == name
-            }?.color
-            if let color = maybeColor {
+            alreadyUsedColors = Set(companions.map { $0.color })
+            otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+            let companionMatch = companions.first { comp in
+                comp.substanceNameUnwrapped == substanceName
+            }
+            if let companionMatchUnwrap = companionMatch {
                 doesCompanionExistAlready = true
-                self.selectedColor = color
+                self.selectedColor = companionMatchUnwrap.color
             } else {
                 doesCompanionExistAlready = false
-                let usedColors = companions.compactMap { comp in
-                    comp.color
-                }
-                let otherColors = Set(SubstanceColor.allCases).subtracting(usedColors)
                 self.selectedColor = otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
             }
             isLoadingCompanions = false
         }
 
-        func addIngestionToNewExperience() {
+        func addIngestion() {
+            if let experience = closestExperience, isAddingToFoundExperience {
+                addIngestion(to: experience)
+            } else {
+                addIngestionToNewExperience()
+            }
+        }
+
+        private func addIngestion(to experience: Experience) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                if !doesCompanionExistAlready {
-                    let companion = SubstanceCompanion(context: context)
-                    companion.substanceName = substance?.name
-                    companion.colorAsText = selectedColor.rawValue
-                }
+                maybeCreateCompanion(with: context)
+                createIngestion(with: experience, and: context)
+                try? context.save()
+            }
+        }
+
+        private func addIngestionToNewExperience() {
+            let context = PersistenceController.shared.viewContext
+            context.performAndWait {
+                maybeCreateCompanion(with: context)
                 let experience = Experience(context: context)
                 experience.creationDate = Date()
                 experience.sortDate = selectedTime
                 experience.title = selectedTime.asDateString
                 experience.text = ""
-                let ingestion = Ingestion(context: context)
-                ingestion.identifier = UUID()
-                ingestion.time = selectedTime
-                ingestion.creationDate = Date()
-                ingestion.dose = dose
-                ingestion.units = units
-                ingestion.administrationRoute = administrationRoute.rawValue
-                ingestion.substanceName = substance?.name
-                ingestion.color = selectedColor.rawValue
-                ingestion.experience = experience
+                createIngestion(with: experience, and: context)
                 try? context.save()
             }
+        }
+
+        private func maybeCreateCompanion(with context: NSManagedObjectContext) {
+            if !doesCompanionExistAlready {
+                let companion = SubstanceCompanion(context: context)
+                companion.substanceName = substance?.name
+                companion.colorAsText = selectedColor.rawValue
+            }
+        }
+
+        private func createIngestion(with experience: Experience, and context: NSManagedObjectContext) {
+            let ingestion = Ingestion(context: context)
+            ingestion.identifier = UUID()
+            ingestion.time = selectedTime
+            ingestion.creationDate = Date()
+            ingestion.dose = dose
+            ingestion.units = units
+            ingestion.administrationRoute = administrationRoute.rawValue
+            ingestion.substanceName = substance?.name
+            ingestion.color = selectedColor.rawValue
+            ingestion.experience = experience
         }
 
         @Published var closestExperience: Experience?
