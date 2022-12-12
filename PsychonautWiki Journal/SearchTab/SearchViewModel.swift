@@ -4,56 +4,11 @@ import CoreData
 
 class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
-    var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
+    @Published var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
 
-    @Published var searchText = "" {
-        didSet {
-            setFilteredSubstances()
-        }
-    }
+    @Published var searchText = ""
 
-    private func setFilteredSubstances() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if self.searchText.count < 3 {
-                let prefixResult = self.getSortedPrefixResults()
-                DispatchQueue.main.async {
-                    self.filteredSubstances =  prefixResult
-                }
-            } else {
-                let prefixResult = self.getSortedPrefixResults()
-                if prefixResult.count < 3 {
-                    let containsResult = self.getSortedContainsResults()
-                    let combinedResult =  (prefixResult + containsResult).uniqued { sub in
-                        sub.name
-                    }
-                    DispatchQueue.main.async {
-                        self.filteredSubstances =  combinedResult
-                    }
-
-                } else {
-                    DispatchQueue.main.async {
-                        self.filteredSubstances =  prefixResult
-                    }
-                }
-            }
-        }
-    }
-
-
-    @Published var selectedCategories: [String] = [] {
-        didSet {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
-                    self.selectedCategories.allSatisfy { selected in
-                        sub.categories.contains(selected)
-                    }
-                }
-            }
-            setFilteredSubstances()
-        }
-    }
-
-    private var substancesFilteredWithCategoriesOnly: [Substance] = SubstanceRepo.shared.substances
+    @Published var selectedCategories: [String] = []
 
     static let custom = "custom"
 
@@ -73,40 +28,6 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
 
     func clearCategories() {
         selectedCategories.removeAll()
-    }
-
-    private func getSortedPrefixResults() -> [Substance] {
-        let lowerCaseSearchText = searchText.lowercased()
-        let mainPrefixMatches =  substancesFilteredWithCategoriesOnly.filter { sub in
-            sub.name.lowercased().hasPrefix(lowerCaseSearchText)
-        }
-        if mainPrefixMatches.isEmpty {
-            return substancesFilteredWithCategoriesOnly.filter { sub in
-                let names = sub.commonNames + [sub.name]
-                return names.contains { name in
-                    name.lowercased().hasPrefix(lowerCaseSearchText)
-                }
-            }
-        } else {
-            return mainPrefixMatches
-        }
-    }
-
-    private func getSortedContainsResults() -> [Substance] {
-        let lowerCaseSearchText = searchText.lowercased()
-        let mainPrefixMatches =  substancesFilteredWithCategoriesOnly.filter { sub in
-            sub.name.lowercased().contains(lowerCaseSearchText)
-        }
-        if mainPrefixMatches.isEmpty {
-            return substancesFilteredWithCategoriesOnly.filter { sub in
-                let names = sub.commonNames + [sub.name]
-                return names.contains { name in
-                    name.lowercased().contains(lowerCaseSearchText)
-                }
-            }
-        } else {
-            return mainPrefixMatches
-        }
     }
 
     @Published private var customSubstances: [CustomSubstance] = []
@@ -152,10 +73,68 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         } catch {
             NSLog("Error: could not fetch CustomSubstances")
         }
+        $searchText
+            .debounce(for: .milliseconds(100), scheduler: DispatchQueue.global(qos: .userInitiated))
+            .combineLatest($selectedCategories) { search, cats in
+                let substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
+                    cats.allSatisfy { selected in
+                        sub.categories.contains(selected)
+                    }
+                }
+                let prefixResult = SearchViewModel.getSortedPrefixResults(substances: substancesFilteredWithCategoriesOnly, searchText: search)
+                if search.count < 3 {
+                    return prefixResult
+                } else {
+                    if prefixResult.count < 3 {
+                        let containsResult = SearchViewModel.getSortedContainsResults(substances: substancesFilteredWithCategoriesOnly, searchText: search)
+                        return (prefixResult + containsResult).uniqued { sub in
+                            sub.name
+                        }
+                    } else {
+                        return prefixResult
+                    }
+                }
+            }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let customs = controller.fetchedObjects as? [CustomSubstance] else {return}
         self.customSubstances = customs
     }
+
+    private static func getSortedPrefixResults(substances: [Substance], searchText: String) -> [Substance] {
+        let lowerCaseSearchText = searchText.lowercased()
+        let mainPrefixMatches =  substances.filter { sub in
+            sub.name.lowercased().hasPrefix(lowerCaseSearchText)
+        }
+        if mainPrefixMatches.isEmpty {
+            return substances.filter { sub in
+                let names = sub.commonNames + [sub.name]
+                return names.contains { name in
+                    name.lowercased().hasPrefix(lowerCaseSearchText)
+                }
+            }
+        } else {
+            return mainPrefixMatches
+        }
+    }
+
+    private static func getSortedContainsResults(substances: [Substance], searchText: String) -> [Substance] {
+        let lowerCaseSearchText = searchText.lowercased()
+        let mainPrefixMatches =  substances.filter { sub in
+            sub.name.lowercased().contains(lowerCaseSearchText)
+        }
+        if mainPrefixMatches.isEmpty {
+            return substances.filter { sub in
+                let names = sub.commonNames + [sub.name]
+                return names.contains { name in
+                    name.lowercased().contains(lowerCaseSearchText)
+                }
+            }
+        } else {
+            return mainPrefixMatches
+        }
+    }
+
+
 }
