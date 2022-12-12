@@ -33,7 +33,7 @@ struct ExperienceRow: View {
                     }
                 }
             }
-            .badge(Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month()))
+            .badge(Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year(.twoDigits)))
         }
     }
 
