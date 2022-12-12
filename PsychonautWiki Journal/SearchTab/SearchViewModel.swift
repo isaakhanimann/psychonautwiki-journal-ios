@@ -42,9 +42,11 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
 
     @Published var selectedCategories: [String] = [] {
         didSet {
-            substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
-                selectedCategories.allSatisfy { selected in
-                    sub.categories.contains(selected)
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
+                    self.selectedCategories.allSatisfy { selected in
+                        sub.categories.contains(selected)
+                    }
                 }
             }
             setFilteredSubstances()
