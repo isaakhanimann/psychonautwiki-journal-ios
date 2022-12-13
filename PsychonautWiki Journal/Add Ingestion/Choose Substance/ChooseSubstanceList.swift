@@ -12,7 +12,7 @@ struct ChooseSubstanceList: View {
             List {
                 let suggestions = suggestionsViewModel.suggestions
                 if !suggestions.isEmpty {
-                    QuickLoggingSection(suggestions: suggestions)
+                    QuickLoggingSection(suggestions: suggestions, dismiss: dismiss)
                 }
                 Section("Other") {
                     ForEach(searchViewModel.filteredSubstances) { sub in

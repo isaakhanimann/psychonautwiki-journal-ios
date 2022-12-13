@@ -19,11 +19,12 @@ class SuggestionsViewModel: ObservableObject {
         let groupedBySubstance = Dictionary(grouping: ingestions, by: { $0.substanceNameUnwrapped })
         suggestions = groupedBySubstance.map { (substanceName: String, ingestionsWithSameSubstance: [Ingestion]) in
             let groupedByRoute = Dictionary(grouping: ingestionsWithSameSubstance, by: { $0.administrationRouteUnwrapped })
-            let isCustom = SubstanceRepo.shared.getSubstance(name: substanceName) == nil
+            let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
             let substanceColor = ingestionsWithSameSubstance.first?.substanceColor ?? .red
             let routesAndDoses = groupedByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
                 RouteAndDoses(
                     route: route,
+                    units: ingestions.first?.unitsUnwrapped ?? "",
                     doses: ingestions.map { ing in
                         DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped)
                     }.uniqued()
@@ -33,7 +34,7 @@ class SuggestionsViewModel: ObservableObject {
             }
             return Suggestion(
                 substanceName: substanceName,
-                isCustom: isCustom,
+                substance: substance,
                 substanceColor: substanceColor,
                 routesAndDoses: routesAndDoses
             )
@@ -47,7 +48,7 @@ struct Suggestion: Identifiable {
         substanceName
     }
     let substanceName: String
-    let isCustom: Bool
+    let substance: Substance?
     let substanceColor: SubstanceColor
     let routesAndDoses: [RouteAndDoses]
 }
@@ -57,6 +58,7 @@ struct RouteAndDoses: Identifiable {
         route
     }
     let route: AdministrationRoute
+    let units: String
     let doses: [DoseAndUnit]
 }
 

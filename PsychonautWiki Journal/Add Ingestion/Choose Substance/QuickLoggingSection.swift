@@ -11,12 +11,7 @@ import WrappingHStack
 struct QuickLoggingSection: View {
 
     let suggestions: [Suggestion]
-
-    let doseColumns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-    ]
+    let dismiss: () -> Void
 
     var body: some View {
         Section("Quick Logging") {
@@ -28,30 +23,59 @@ struct QuickLoggingSection: View {
                             .foregroundColor(suggestion.substanceColor.swiftUIColor)
                         Text(suggestion.substanceName).font(.headline)
                     }
-                    ForEach(suggestion.routesAndDoses) { route in
+                    ForEach(suggestion.routesAndDoses) { routeAndDoses in
                         Spacer().frame(height: 5)
-                        Text(route.route.rawValue.localizedCapitalized)
-                        WrappingHStack(
-                            route.doses,
-                            alignment: .leading,
-                            spacing: .constant(3),
-                            lineSpacing: 3
-                        ) { dose in
-                            if let doseUnwrap = dose.dose {
-                                Button("\(doseUnwrap.formatted()) \(dose.units ?? "")") {
-                                    // TODO:
-                                }.buttonStyle(.bordered).fixedSize().padding(2)
-                            } else {
-                                Button("Unknown") {
-                                    // TODO:
-                                }.buttonStyle(.bordered).fixedSize().padding(2)
-                            }
-                            if let lastDose = route.doses.last, dose.id == lastDose.id {
-                                Button("Other") {
-                                    // TODO:
-                                }.buttonStyle(.bordered).padding(2)
+                        GroupBox(routeAndDoses.route.rawValue.localizedCapitalized) {
+                            WrappingHStack(
+                                routeAndDoses.doses,
+                                alignment: .leading,
+                                spacing: .constant(3),
+                                lineSpacing: 3
+                            ) { dose in
+                                if let doseUnwrap = dose.dose {
+                                    NavigationLink("\(doseUnwrap.formatted()) \(dose.units ?? "")") {
+                                        ChooseTimeAndColor(
+                                            substanceName: suggestion.substanceName,
+                                            administrationRoute: routeAndDoses.route,
+                                            dose: doseUnwrap,
+                                            units: dose.units,
+                                            dismiss: dismiss
+                                        )
+                                    }.buttonStyle(.bordered).fixedSize()
+                                } else {
+                                    NavigationLink("Unknown") {
+                                        ChooseTimeAndColor(
+                                            substanceName: suggestion.substanceName,
+                                            administrationRoute: routeAndDoses.route,
+                                            dose: dose.dose,
+                                            units: dose.units,
+                                            dismiss: dismiss
+                                        )
+                                    }.buttonStyle(.bordered).fixedSize()
+                                }
+                                if let lastDose = routeAndDoses.doses.last, dose.id == lastDose.id {
+                                    if let substance = suggestion.substance {
+                                        NavigationLink("Other") {
+                                            ChooseDoseScreen(
+                                                substance: substance,
+                                                administrationRoute: routeAndDoses.route,
+                                                dismiss: dismiss
+                                            )
+                                        }.buttonStyle(.bordered).fixedSize()
+                                    } else {
+//                                        NavigationLink("Other") {
+//                                            CustomChooseDoseScreen(
+//                                                substanceName: suggestion.substanceName,
+//                                                units: routeAndDoses.units,
+//                                                administrationRoute: routeAndDoses.route,
+//                                                dismiss: dismiss)
+//                                        }.buttonStyle(.borderedProminent).fixedSize()
+                                    }
+
+                                }
                             }
                         }
+
                     }
                 }
             }
@@ -66,11 +90,12 @@ struct QuickLoggingSection_Previews: PreviewProvider {
                 QuickLoggingSection(suggestions: [
                     Suggestion(
                         substanceName: "MDMA",
-                        isCustom: false,
+                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
                         substanceColor: .blue,
                         routesAndDoses: [
                             RouteAndDoses(
                                 route: .oral,
+                                units: "mg",
                                 doses: [
                                     DoseAndUnit(dose: 50, units: "mg"),
                                     DoseAndUnit(dose: 100, units: "mg"),
@@ -82,6 +107,7 @@ struct QuickLoggingSection_Previews: PreviewProvider {
                             ),
                             RouteAndDoses(
                                 route: .insufflated,
+                                units: "mg",
                                 doses: [
                                     DoseAndUnit(dose: 40, units: "mg"),
                                     DoseAndUnit(dose: 30, units: "mg"),
@@ -92,11 +118,12 @@ struct QuickLoggingSection_Previews: PreviewProvider {
                     ),
                     Suggestion(
                         substanceName: "Cocaine",
-                        isCustom: false,
+                        substance: SubstanceRepo.shared.getSubstance(name: "Cocaine"),
                         substanceColor: .yellow,
                         routesAndDoses: [
                             RouteAndDoses(
                                 route: .insufflated,
+                                units: "mg",
                                 doses: [
                                     DoseAndUnit(dose: 20, units: "mg"),
                                     DoseAndUnit(dose: 40, units: "mg"),
@@ -107,31 +134,24 @@ struct QuickLoggingSection_Previews: PreviewProvider {
                         ]
                     ),
                     Suggestion(
-                        substanceName: "Cannabis",
-                        isCustom: false,
-                        substanceColor: .green,
+                        substanceName: "Coffee",
+                        substance: nil,
+                        substanceColor: .brown,
                         routesAndDoses: [
                             RouteAndDoses(
-                                route: .smoked,
-                                doses: [
-                                    DoseAndUnit(dose: 1.5, units: "mg"),
-                                    DoseAndUnit(dose: 5, units: "mg"),
-                                    DoseAndUnit(dose: 8, units: "mg"),
-                                    DoseAndUnit(dose: 2, units: "mg"),
-                                    DoseAndUnit(dose: nil, units: "mg"),
-                                ]
-                            ),
-                            RouteAndDoses(
                                 route: .oral,
+                                units: "cups",
                                 doses: [
-                                    DoseAndUnit(dose: 2, units: "mg"),
-                                    DoseAndUnit(dose: 5, units: "mg"),
+                                    DoseAndUnit(dose: 2, units: "cups"),
+                                    DoseAndUnit(dose: 5, units: "cups"),
 
                                 ]
                             )
                         ]
                     )
-                ])
+                ],
+                dismiss: {}
+                )
             }
         }
     }
