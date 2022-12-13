@@ -8,13 +8,16 @@ struct ColorPicker: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Free Colors")
-            LazyVGrid(columns: colorColumns) {
-                ForEach(Array(otherColors), content: colorButton)
+            if !otherColors.isEmpty {
+                LazyVGrid(columns: colorColumns) {
+                    ForEach(Array(otherColors), content: colorButton)
+                }
             }
-            Text("Already Used Colors")
-            LazyVGrid(columns: colorColumns) {
-                ForEach(Array(alreadyUsedColors), content: colorButton)
+            if !alreadyUsedColors.isEmpty {
+                Text("Used Colors")
+                LazyVGrid(columns: colorColumns) {
+                    ForEach(Array(alreadyUsedColors), content: colorButton)
+                }
             }
         }
         .padding(.vertical)

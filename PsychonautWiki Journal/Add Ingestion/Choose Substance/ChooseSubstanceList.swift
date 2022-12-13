@@ -12,19 +12,7 @@ struct ChooseSubstanceList: View {
             List {
                 let suggestions = suggestionsViewModel.suggestions
                 if !suggestions.isEmpty {
-                    Section("Quick Logging") {
-                        ForEach(suggestions) { suggestion in
-                            VStack {
-                                Text(suggestion.substanceName)
-                                ForEach(suggestion.routesAndDoses) { route in
-                                    Text(route.route.rawValue)
-                                    ForEach(route.doses) { dose in
-                                        Text("\(dose.dose?.formatted() ?? "Unknown") \(dose.units ?? "")")
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    QuickLoggingSection(suggestions: suggestions)
                 }
                 Section("Other") {
                     ForEach(searchViewModel.filteredSubstances) { sub in
