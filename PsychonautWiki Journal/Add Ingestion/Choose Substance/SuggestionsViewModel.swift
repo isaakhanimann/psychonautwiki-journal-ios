@@ -28,6 +28,8 @@ class SuggestionsViewModel: ObservableObject {
                         DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped)
                     }.uniqued()
                 )
+            }.sorted { r1, r2 in
+                r1.doses.count > r2.doses.count
             }
             return Suggestion(
                 substanceName: substanceName,

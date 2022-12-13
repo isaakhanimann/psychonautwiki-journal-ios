@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct QuickLoggingSection: View {
 
@@ -20,7 +21,7 @@ struct QuickLoggingSection: View {
     var body: some View {
         Section("Quick Logging") {
             ForEach(suggestions) { suggestion in
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 5) {
                         Image(systemName: "circle.fill")
                             .font(.title2)
@@ -28,29 +29,29 @@ struct QuickLoggingSection: View {
                         Text(suggestion.substanceName).font(.headline)
                     }
                     ForEach(suggestion.routesAndDoses) { route in
-                        Text(route.route.rawValue)
-                        LazyVGrid(columns: doseColumns) {
-                            ForEach(route.doses) { dose in
-                                if let doseUnwrap = dose.dose {
-                                    Button("\(doseUnwrap.formatted()) \(dose.units ?? "")") {
-                                        // TODO:
-                                    }.buttonStyle(.bordered)
-                                } else {
-                                    Button("Unknown") {
-                                        // TODO:
-                                    }.buttonStyle(.bordered)
-                                }
+                        Spacer().frame(height: 5)
+                        Text(route.route.rawValue.localizedCapitalized)
+                        WrappingHStack(
+                            route.doses,
+                            alignment: .leading,
+                            spacing: .constant(3),
+                            lineSpacing: 3
+                        ) { dose in
+                            if let doseUnwrap = dose.dose {
+                                Button("\(doseUnwrap.formatted()) \(dose.units ?? "")") {
+                                    // TODO:
+                                }.buttonStyle(.bordered).fixedSize().padding(2)
+                            } else {
+                                Button("Unknown") {
+                                    // TODO:
+                                }.buttonStyle(.bordered).fixedSize().padding(2)
                             }
-                            Button("Other") {
-                                // TODO:
-                            }.buttonStyle(.bordered)
-                        }.background(Color.green).frame(
-                            minWidth: 0,
-                            maxWidth: .infinity,
-                            minHeight: 0,
-                            maxHeight: .infinity,
-                            alignment: .topLeading
-                        ).background(Color.brown)
+                            if let lastDose = route.doses.last, dose.id == lastDose.id {
+                                Button("Other") {
+                                    // TODO:
+                                }.buttonStyle(.bordered).padding(2)
+                            }
+                        }
                     }
                 }
             }
@@ -75,6 +76,7 @@ struct QuickLoggingSection_Previews: PreviewProvider {
                                     DoseAndUnit(dose: 100, units: "mg"),
                                     DoseAndUnit(dose: 30, units: "mg"),
                                     DoseAndUnit(dose: 80, units: "mg"),
+                                    DoseAndUnit(dose: 70, units: "mg"),
                                     DoseAndUnit(dose: nil, units: "mg"),
                                 ]
                             ),
