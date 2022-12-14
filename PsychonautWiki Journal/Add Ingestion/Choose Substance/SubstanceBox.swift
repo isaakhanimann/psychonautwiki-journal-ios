@@ -17,7 +17,15 @@ struct SubstanceBox: View {
             AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
         } label: {
             GroupBox(substance.name) {
-                Text(substance.commonNames, format: .list(type: .or)).font(.subheadline).foregroundColor(.secondary)
+                if !substance.commonNames.isEmpty {
+                    HStack {
+                        Text(substance.commonNames, format: .list(type: .or))
+                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                }
             }
         }
 

@@ -17,13 +17,14 @@ struct ChooseSubstanceContent: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVStack {
+                LazyVStack(alignment: .leading) {
                     if !filteredSuggestions.isEmpty {
                         Section("Quick Logging") {
                             ForEach(filteredSuggestions) { suggestion in
                                 SuggestionBox(suggestion: suggestion, dismiss: dismiss)
                             }
                         }.padding(.horizontal)
+                        Spacer().frame(height: 20)
                     }
                     if !filteredSubstances.isEmpty {
                         Section("All Substances") {
@@ -31,6 +32,7 @@ struct ChooseSubstanceContent: View {
                                 SubstanceBox(substance: substance, dismiss: dismiss)
                             }
                         }.padding(.horizontal)
+                        Spacer().frame(height: 20)
                     }
                     if !filteredCustomSubstances.isEmpty {
                         Section("Custom Substances") {

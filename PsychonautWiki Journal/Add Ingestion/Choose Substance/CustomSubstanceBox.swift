@@ -20,9 +20,7 @@ struct CustomSubstanceBox: View {
                 dismiss: dismiss
             )
         } label: {
-            GroupBox(customSubstanceModel.name) {
-                Text("custom").font(.subheadline).foregroundColor(.secondary)
-            }
+            GroupBox(customSubstanceModel.name) {}
         }
 
     }
