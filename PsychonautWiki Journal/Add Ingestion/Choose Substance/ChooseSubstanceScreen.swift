@@ -1,15 +1,15 @@
 import SwiftUI
 
 struct ChooseSubstanceScreen: View {
-    @StateObject var searchViewModel = SearchViewModel()
+    @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ChooseSubstanceContent(
-            searchText: $searchViewModel.searchText,
-            filteredSuggestions: [],
-            filteredSubstances: [],
-            filteredCustomSubstances: [],
+            searchText: $viewModel.searchText,
+            filteredSuggestions: viewModel.filteredSuggestions,
+            filteredSubstances: viewModel.filteredSubstances,
+            filteredCustomSubstances: viewModel.filteredCustomSubstances,
             dismiss: {dismiss()}
         )
     }

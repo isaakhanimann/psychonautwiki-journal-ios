@@ -5,9 +5,7 @@ import CoreData
 class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
     @Published var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
-
     @Published var searchText = ""
-
     @Published var selectedCategories: [String] = []
 
     static let custom = "custom"
@@ -81,19 +79,23 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
                         sub.categories.contains(selected)
                     }
                 }
-                let filteredSubstances = SearchViewModel.getFilteredSubstances(substances: substancesFilteredWithCategoriesOnly, searchText: search)
-                let common = filteredSubstances.filter { sub in
-                    sub.categories.contains("common")
-                }
-                return (common + filteredSubstances).uniqued { sub in
-                    sub.name
-                }
+                return SearchViewModel.getFilteredSubstancesSorted(substances: substancesFilteredWithCategoriesOnly, searchText: search)
             }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let customs = controller.fetchedObjects as? [CustomSubstance] else {return}
         self.customSubstances = customs
+    }
+
+    static func getFilteredSubstancesSorted(substances: [Substance], searchText: String) -> [Substance] {
+        let filteredSubstances = getFilteredSubstances(substances: substances, searchText: searchText)
+        let common = filteredSubstances.filter { sub in
+            sub.categories.contains("common")
+        }
+        return (common + filteredSubstances).uniqued { sub in
+            sub.name
+        }
     }
 
     private static func getFilteredSubstances(substances: [Substance], searchText: String) -> [Substance] {

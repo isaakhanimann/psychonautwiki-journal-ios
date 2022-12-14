@@ -31,19 +31,18 @@ extension Ingestion: Comparable {
         }
     }
 
-    var unitsUnwrapped: String? {
-        if let unwrap = units, unwrap != "" {
+    var unitsUnwrapped: String {
+        if let unwrap = units {
             return unwrap
         }
-        return nil
+        return ""
     }
 
     var doseInfoString: String {
-        guard let doseUnwrapped = doseUnwrapped,
-              let unitsUnwrap = unitsUnwrapped else {
+        guard let doseUnwrapped = doseUnwrapped else {
             return "Unknown Dose"
         }
-        return doseUnwrapped.formatted() + " " + unitsUnwrap
+        return doseUnwrapped.formatted() + " " + unitsUnwrapped
     }
 
     var substanceColor: SubstanceColor {

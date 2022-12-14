@@ -54,36 +54,6 @@ struct ChooseSubstanceContent: View {
     }
 }
 
-
-struct Suggestion: Identifiable {
-    var id: String {
-        substanceName + route.rawValue
-    }
-    let substanceName: String
-    let substance: Substance?
-    let units: String
-    let route: AdministrationRoute
-    let substanceColor: SubstanceColor
-    let dosesAndUnit: [DoseAndUnit]
-}
-
-struct DoseAndUnit: Hashable, Identifiable {
-    var id: String {
-        (dose?.description ?? "") + (units ?? "")
-    }
-    let dose: Double?
-    let units: String?
-}
-
-struct CustomSubstanceModel: Identifiable {
-    var id: String {
-        name
-    }
-    let name: String
-    let units: String
-}
-
-
 struct ChooseSubstanceContent_Previews: PreviewProvider {
     static var previews: some View {
         ChooseSubstanceContent(

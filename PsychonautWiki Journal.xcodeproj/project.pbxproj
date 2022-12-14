@@ -17,6 +17,8 @@
 		EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */; };
 		EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */; };
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
+		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
+		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -48,7 +50,6 @@
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
-		EAACB091294860E90050E002 /* SuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB090294860E90050E002 /* SuggestionsViewModel.swift */; };
 		EAACB0952949A6FC0050E002 /* ChooseSubstanceContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */; };
@@ -171,6 +172,8 @@
 		EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionBox.swift; sourceTree = "<group>"; };
 		EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
+		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
+		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -204,7 +207,6 @@
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
-		EAACB090294860E90050E002 /* SuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsViewModel.swift; sourceTree = "<group>"; };
 		EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceContent.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSubstance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -393,11 +395,12 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A726CBA664009FB0EC /* ChooseSubstanceScreen.swift */,
+				EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */,
+				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
 				EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */,
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
 				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
-				EAACB090294860E90050E002 /* SuggestionsViewModel.swift */,
 			);
 			path = "Choose Substance";
 			sourceTree = "<group>";
@@ -900,9 +903,9 @@
 				EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
+				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
-				EAACB091294860E90050E002 /* SuggestionsViewModel.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
 				EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */,
@@ -938,6 +941,7 @@
 				EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */,
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
+				EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 			);
