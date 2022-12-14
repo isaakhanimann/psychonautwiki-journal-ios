@@ -18,12 +18,13 @@ struct SuggestionBox: View {
             WrappingHStack(spacing: .constant(0), lineSpacing: 5) {
                 ForEach(suggestion.dosesAndUnit) { dose in
                     if let doseUnwrap = dose.dose {
-                        NavigationLink("\(doseUnwrap.formatted()) \(dose.units ?? "")") {
+                        NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")") {
                             ChooseTimeAndColor(
                                 substanceName: suggestion.substanceName,
                                 administrationRoute: suggestion.route,
                                 dose: doseUnwrap,
                                 units: dose.units,
+                                isEstimate: dose.isEstimate,
                                 dismiss: dismiss
                             )
                         }.buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
@@ -34,6 +35,7 @@ struct SuggestionBox: View {
                                 administrationRoute: suggestion.route,
                                 dose: dose.dose,
                                 units: dose.units,
+                                isEstimate: dose.isEstimate,
                                 dismiss: dismiss
                             )
                         }.buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
@@ -80,15 +82,18 @@ struct SuggestionBox_Previews: PreviewProvider {
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 20,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: true
                         ),
                         DoseAndUnit(
                             dose: nil,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 30,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         )
                     ]
                 ), dismiss: {}).padding(.horizontal)

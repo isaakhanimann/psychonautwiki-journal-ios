@@ -6,6 +6,7 @@ struct ChooseTimeAndColor: View {
     let administrationRoute: AdministrationRoute
     let dose: Double?
     let units: String?
+    let isEstimate: Bool
     let dismiss: () -> Void
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject var viewModel = ViewModel()
@@ -36,7 +37,13 @@ struct ChooseTimeAndColor: View {
                 }
             }
             Button("Add Ingestion") {
-                viewModel.addIngestion()
+                viewModel.addIngestion(
+                    substanceName: substanceName,
+                    administrationRoute: administrationRoute,
+                    dose: dose,
+                    units: units,
+                    isEstimate: isEstimate
+                )
                 dismiss()
                 toastViewModel.showSuccessToast()
             }
@@ -44,10 +51,6 @@ struct ChooseTimeAndColor: View {
             .padding()
         }
         .task {
-            viewModel.substanceName = substanceName
-            viewModel.administrationRoute = administrationRoute
-            viewModel.dose = dose ?? 0
-            viewModel.units = units
             viewModel.initializeColorAndHasCompanion(for: substanceName)
         }
         .navigationBarTitle("Ingestion Time")

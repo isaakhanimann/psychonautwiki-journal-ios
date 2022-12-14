@@ -6,6 +6,7 @@ extension ChooseDoseScreen {
         @Published var selectedUnits: String? = UnitPickerOptions.mg.rawValue
         @Published var selectedPureDose: Double?
         @Published var purity = 100.0
+        @Published var isEstimate = false
         @Published var isShowingNext = false
         private var impureDose: Double? {
             guard let selectedPureDose = selectedPureDose else { return nil }

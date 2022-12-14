@@ -27,7 +27,7 @@ class SuggestionsCreator {
     }
 
     private func maybeAdd(ingestion: Ingestion, to suggestion: Suggestion) {
-        let doseAndUnit = DoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped)
+        let doseAndUnit = DoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped, isEstimate: ingestion.isEstimate)
         if !suggestion.dosesAndUnit.contains(doseAndUnit) {
             suggestion.dosesAndUnit.append(doseAndUnit)
         }
@@ -43,7 +43,7 @@ class SuggestionsCreator {
                 units: units,
                 route: ingestion.administrationRouteUnwrapped,
                 substanceColor: ingestion.substanceColor,
-                dosesAndUnit: [DoseAndUnit(dose: ingestion.doseUnwrapped, units: units)]
+                dosesAndUnit: [DoseAndUnit(dose: ingestion.doseUnwrapped, units: units, isEstimate: ingestion.isEstimate)]
             )
         )
     }
@@ -73,10 +73,11 @@ class Suggestion: Identifiable {
 
 struct DoseAndUnit: Hashable, Identifiable {
     var id: String {
-        (dose?.description ?? "") + units
+        (dose?.description ?? "") + (units ?? "")
     }
     let dose: Double?
-    let units: String
+    let units: String?
+    let isEstimate: Bool
 }
 
 struct CustomSubstanceModel: Identifiable {

@@ -7,15 +7,12 @@ extension ChooseTimeAndColor {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
+        @Published var enteredNote = ""
         @Published var isLoadingCompanions = true
         @Published var isAddingToFoundExperience = true
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
         @Published var doesCompanionExistAlready = true
-        var substanceName: String?
-        var administrationRoute = AdministrationRoute.allCases.randomElement() ?? AdministrationRoute.oral
-        var dose: Double = 0
-        var units: String?
 
         func initializeColorAndHasCompanion(for substanceName: String) {
             let fetchRequest = SubstanceCompanion.fetchRequest()
@@ -35,38 +32,86 @@ extension ChooseTimeAndColor {
             isLoadingCompanions = false
         }
 
-        func addIngestion() {
+        func addIngestion(
+            substanceName: String,
+            administrationRoute: AdministrationRoute,
+            dose: Double?,
+            units: String?,
+            isEstimate: Bool
+        ) {
             if let experience = closestExperience, isAddingToFoundExperience {
-                addIngestion(to: experience)
+                addIngestion(
+                    to: experience,
+                    substanceName: substanceName,
+                    administrationRoute: administrationRoute,
+                    dose: dose,
+                    units: units,
+                    isEstimate: isEstimate
+                )
             } else {
-                addIngestionToNewExperience()
+                addIngestionToNewExperience(
+                    substanceName: substanceName,
+                    administrationRoute: administrationRoute,
+                    dose: dose,
+                    units: units,
+                    isEstimate: isEstimate
+                )
             }
         }
 
-        private func addIngestion(to experience: Experience) {
+        private func addIngestion(
+            to experience: Experience,
+            substanceName: String,
+            administrationRoute: AdministrationRoute,
+            dose: Double?,
+            units: String?,
+            isEstimate: Bool
+        ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                maybeCreateCompanion(with: context)
-                createIngestion(with: experience, and: context)
+                maybeCreateCompanion(with: context, substanceName: substanceName)
+                createIngestion(
+                    with: experience,
+                    and: context,
+                    substanceName: substanceName,
+                    administrationRoute: administrationRoute,
+                    dose: dose,
+                    units: units,
+                    isEstimate: isEstimate
+                )
                 try? context.save()
             }
         }
 
-        private func addIngestionToNewExperience() {
+        private func addIngestionToNewExperience(
+            substanceName: String,
+            administrationRoute: AdministrationRoute,
+            dose: Double?,
+            units: String?,
+            isEstimate: Bool
+        ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                maybeCreateCompanion(with: context)
+                maybeCreateCompanion(with: context, substanceName: substanceName)
                 let experience = Experience(context: context)
                 experience.creationDate = Date()
                 experience.sortDate = selectedTime
                 experience.title = selectedTime.asDateString
                 experience.text = ""
-                createIngestion(with: experience, and: context)
+                createIngestion(
+                    with: experience,
+                    and: context,
+                    substanceName: substanceName,
+                    administrationRoute: administrationRoute,
+                    dose: dose,
+                    units: units,
+                    isEstimate: isEstimate
+                )
                 try? context.save()
             }
         }
 
-        private func maybeCreateCompanion(with context: NSManagedObjectContext) {
+        private func maybeCreateCompanion(with context: NSManagedObjectContext, substanceName: String) {
             if !doesCompanionExistAlready {
                 let companion = SubstanceCompanion(context: context)
                 companion.substanceName = substanceName
@@ -74,13 +119,23 @@ extension ChooseTimeAndColor {
             }
         }
 
-        private func createIngestion(with experience: Experience, and context: NSManagedObjectContext) {
+        private func createIngestion(
+            with experience: Experience,
+            and context: NSManagedObjectContext,
+            substanceName: String,
+            administrationRoute: AdministrationRoute,
+            dose: Double?,
+            units: String?,
+            isEstimate: Bool
+        ) {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
             ingestion.creationDate = Date()
-            ingestion.dose = dose
+            ingestion.dose = dose ?? 0
             ingestion.units = units
+            ingestion.isEstimate = isEstimate
+            ingestion.note = enteredNote
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue

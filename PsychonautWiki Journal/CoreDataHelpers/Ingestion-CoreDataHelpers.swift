@@ -11,6 +11,10 @@ extension Ingestion: Comparable {
         time ?? Date()
     }
 
+    var noteUnwrapped: String {
+        note ?? ""
+    }
+
     var timeUnwrappedAsString: String {
         timeUnwrapped.asTimeString
     }

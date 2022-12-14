@@ -16,6 +16,7 @@ struct CustomChooseDoseScreen: View {
     @State private var doseText = ""
     @State private var isShowingNext = false
     @State private var dose: Double? = nil
+    @State private var isEstimate = false
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -38,6 +39,7 @@ struct CustomChooseDoseScreen: View {
                         Text(units)
                     }
                     .font(.title)
+                    Toggle("Dose is an Estimate", isOn: $isEstimate).padding(.bottom, 5)
                 }
                 Section {
                     Button {
@@ -55,6 +57,7 @@ struct CustomChooseDoseScreen: View {
                     administrationRoute: administrationRoute,
                     dose: dose,
                     units: units,
+                    isEstimate: isEstimate,
                     dismiss: dismiss
                 ),
                 isActive: $isShowingNext,

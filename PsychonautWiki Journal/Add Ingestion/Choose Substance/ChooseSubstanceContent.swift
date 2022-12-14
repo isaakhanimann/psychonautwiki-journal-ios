@@ -70,15 +70,18 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 20,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: true
                         ),
                         DoseAndUnit(
                             dose: nil,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 30,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         )
                     ]
                 ),
@@ -91,15 +94,18 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 20,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: nil,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 30,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         )
                     ]
                 ),
@@ -112,19 +118,23 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 3,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 6,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: true
                         ),
                         DoseAndUnit(
                             dose: nil,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 2.5,
-                            units: "mg"
+                            units: "mg",
+                            isEstimate: false
                         )
                     ]
                 ),
@@ -137,11 +147,13 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 1,
-                            units: "cups"
+                            units: "cups",
+                            isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 3,
-                            units: "cups"
+                            units: "cups",
+                            isEstimate: false
                         ),
                     ]
                 )

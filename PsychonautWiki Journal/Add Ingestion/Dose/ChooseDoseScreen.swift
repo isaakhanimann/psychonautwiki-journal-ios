@@ -35,6 +35,7 @@ struct ChooseDoseScreen: View {
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,
                     units: viewModel.selectedUnits,
+                    isEstimate: viewModel.isEstimate,
                     dismiss: dismiss
                 ),
                 isActive: $viewModel.isShowingNext,
@@ -97,12 +98,14 @@ struct ChooseDoseScreen: View {
             header: Text("Pure Dose"),
             footer: Text(roaDose?.units != nil ? Self.doseDisclaimer : "")
         ) {
+            Spacer().frame(height: 5)
             DoseView(roaDose: roaDose)
             DosePicker(
                 roaDose: roaDose,
                 doseMaybe: $viewModel.selectedPureDose,
                 selectedUnits: $viewModel.selectedUnits
-            ).padding(.bottom, 5)
+            )
+            Toggle("Dose is an Estimate", isOn: $viewModel.isEstimate).padding(.bottom, 5)
         }
         .listRowSeparator(.hidden)
     }
