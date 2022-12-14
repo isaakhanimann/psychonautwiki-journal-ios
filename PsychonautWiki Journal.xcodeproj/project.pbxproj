@@ -15,6 +15,8 @@
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */; };
+		EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */; };
+		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -167,6 +169,8 @@
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionBox.swift; sourceTree = "<group>"; };
+		EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceBox.swift; sourceTree = "<group>"; };
+		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -391,6 +395,8 @@
 				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
 				EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */,
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
+				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
+				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
 				EAACB090294860E90050E002 /* SuggestionsViewModel.swift */,
 			);
 			path = "Choose Substance";
@@ -915,7 +921,9 @@
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
 				EAB165C927E4EDC7003DF79D /* RateInAppStoreButton.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
+				EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */,
 				EABD921929422C580073303A /* NoTimeline.swift in Sources */,
+				EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,

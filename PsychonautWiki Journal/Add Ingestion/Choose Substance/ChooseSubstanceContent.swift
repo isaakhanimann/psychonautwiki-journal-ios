@@ -13,7 +13,7 @@ struct ChooseSubstanceContent: View {
     let filteredSubstances: [Substance]
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: ()->Void
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -25,11 +25,17 @@ struct ChooseSubstanceContent: View {
                             }
                         }.padding(.horizontal)
                     }
-                    if !filteredSuggestions.isEmpty {
+                    if !filteredSubstances.isEmpty {
                         Section("All Substances") {
-                            ForEach(filteredSuggestions) { suggestion in
-                                SuggestionBox(suggestion: suggestion, dismiss: dismiss)
+                            ForEach(filteredSubstances) { substance in
+                                SubstanceBox(substance: substance, dismiss: dismiss)
                             }
+                        }.padding(.horizontal)
+                    }
+                    if !filteredCustomSubstances.isEmpty {
+                        Section("Custom Substances") {
+                            ForEach(filteredCustomSubstances) { custom in
+                                CustomSubstanceBox(customSubstanceModel: custom, dismiss: dismiss)                            }
                         }.padding(.horizontal)
                     }
                 }
@@ -69,7 +75,10 @@ struct DoseAndUnit: Hashable, Identifiable {
     let units: String?
 }
 
-struct CustomSubstanceModel {
+struct CustomSubstanceModel: Identifiable {
+    var id: String {
+        name
+    }
     let name: String
     let units: String
 }
