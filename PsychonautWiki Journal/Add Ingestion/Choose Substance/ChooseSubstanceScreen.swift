@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ChooseSubstanceView: View {
+struct ChooseSubstanceScreen: View {
     @StateObject var searchViewModel = SearchViewModel()
     @Environment(\.dismiss) var dismiss
 

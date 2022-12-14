@@ -43,7 +43,7 @@ struct ExperienceView: View {
             }
         }
         .sheet(isPresented: $isShowingAddIngestionSheet, content: {
-            ChooseSubstanceView()
+            ChooseSubstanceScreen()
         })
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {

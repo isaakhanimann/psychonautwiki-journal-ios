@@ -22,7 +22,7 @@ struct ExperiencesTab: View {
                 }
             }
             .sheet(isPresented: $isShowingAddIngestionSheet) {
-                ChooseSubstanceView()
+                ChooseSubstanceScreen()
             }
             .navigationTitle("Experiences")
             .toolbar {
