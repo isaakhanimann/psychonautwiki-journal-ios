@@ -26,6 +26,10 @@ struct ChooseTimeAndColor: View {
                         Toggle("Part of \(experience.titleUnwrapped)", isOn: $viewModel.isAddingToFoundExperience)
                     }
                 }
+                Section("Notes") {
+                    TextField("Notes", text: $viewModel.enteredNote)
+                        .autocapitalization(.sentences)
+                }
                 if !viewModel.doesCompanionExistAlready {
                     Section("Choose Color") {
                         ColorPicker(
