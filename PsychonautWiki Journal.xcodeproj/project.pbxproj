@@ -14,6 +14,7 @@
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
+		EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -40,14 +41,13 @@
 		EA8447E727CD175000B10DD3 /* DoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseView.swift */; };
 		EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */; };
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
-		EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */; };
 		EA8AEA7827E1E89400B30A16 /* InteractionAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAACB091294860E90050E002 /* SuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB090294860E90050E002 /* SuggestionsViewModel.swift */; };
-		EAACB093294883130050E002 /* QuickLoggingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB092294883130050E002 /* QuickLoggingSection.swift */; };
+		EAACB0952949A6FC0050E002 /* ChooseSubstanceContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPicker.swift */; };
 		EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */; };
 		EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A127E35883003DF79D /* EditCustomSubstanceView.swift */; };
@@ -166,6 +166,7 @@
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
+		EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionBox.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -194,14 +195,13 @@
 		EA8447E627CD175000B10DD3 /* DoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseView.swift; sourceTree = "<group>"; };
 		EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-LinearGradient.swift"; sourceTree = "<group>"; };
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
-		EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceList.swift; sourceTree = "<group>"; };
 		EA8AEA7727E1E89400B30A16 /* InteractionAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertable.swift; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAACB090294860E90050E002 /* SuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsViewModel.swift; sourceTree = "<group>"; };
-		EAACB092294883130050E002 /* QuickLoggingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLoggingSection.swift; sourceTree = "<group>"; };
+		EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceContent.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		EAB1659D27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSubstance-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAB165A127E35883003DF79D /* EditCustomSubstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCustomSubstanceView.swift; sourceTree = "<group>"; };
@@ -389,8 +389,8 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A726CBA664009FB0EC /* ChooseSubstanceView.swift */,
-				EA891BB627DF95D300AF04C6 /* ChooseSubstanceList.swift */,
-				EAACB092294883130050E002 /* QuickLoggingSection.swift */,
+				EAACB0942949A6FC0050E002 /* ChooseSubstanceContent.swift */,
+				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EAACB090294860E90050E002 /* SuggestionsViewModel.swift */,
 			);
 			path = "Choose Substance";
@@ -823,7 +823,6 @@
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EA47E67327CB490300F6E10F /* AllTabs.swift in Sources */,
-				EAACB093294883130050E002 /* QuickLoggingSection.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
@@ -845,17 +844,18 @@
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
-				EA891BB727DF95D300AF04C6 /* ChooseSubstanceList.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
+				EAACB0952949A6FC0050E002 /* ChooseSubstanceContent.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* ExperiencesTab.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
 				EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */,
+				EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */,
 				EABD92002941C3740073303A /* AxisDrawable.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */,

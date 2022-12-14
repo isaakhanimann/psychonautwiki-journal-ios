@@ -17,56 +17,33 @@ class SuggestionsViewModel: ObservableObject {
         ingestionFetchRequest.fetchLimit = 100
         let ingestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
         let groupedBySubstance = Dictionary(grouping: ingestions, by: { $0.substanceNameUnwrapped })
-        suggestions = groupedBySubstance.map { (substanceName: String, ingestionsWithSameSubstance: [Ingestion]) in
-            let groupedByRoute = Dictionary(grouping: ingestionsWithSameSubstance, by: { $0.administrationRouteUnwrapped })
-            let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
-            let substanceColor = ingestionsWithSameSubstance.first?.substanceColor ?? .red
-            let routesAndDoses = groupedByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
-                RouteAndDoses(
-                    route: route,
-                    units: ingestions.first?.unitsUnwrapped ?? "",
-                    doses: ingestions.map { ing in
-                        DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped)
-                    }.uniqued()
-                )
-            }.sorted { r1, r2 in
-                r1.doses.count > r2.doses.count
-            }
-            return Suggestion(
-                substanceName: substanceName,
-                substance: substance,
-                substanceColor: substanceColor,
-                routesAndDoses: routesAndDoses
-            )
+        suggestions = []
 
-        }
+//        groupedBySubstance.map { (substanceName: String, ingestionsWithSameSubstance: [Ingestion]) in
+//            let groupedByRoute = Dictionary(grouping: ingestionsWithSameSubstance, by: { $0.administrationRouteUnwrapped })
+//            let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
+//            let substanceColor = ingestionsWithSameSubstance.first?.substanceColor ?? .red
+//            let routesAndDoses = groupedByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
+//                RouteAndDoses(
+//                    route: route,
+//                    units: ingestions.first?.unitsUnwrapped ?? "",
+//                    doses: ingestions.map { ing in
+//                        DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped)
+//                    }.uniqued()
+//                )
+//            }.sorted { r1, r2 in
+//                r1.doses.count > r2.doses.count
+//            }
+//            return Suggestion(
+//                substanceName: substanceName,
+//                substance: substance,
+//                substanceColor: substanceColor,
+//                routesAndDoses: routesAndDoses
+//            )
+//
+//        }
     }
 }
 
-struct Suggestion: Identifiable {
-    var id: String {
-        substanceName
-    }
-    let substanceName: String
-    let substance: Substance?
-    let substanceColor: SubstanceColor
-    let routesAndDoses: [RouteAndDoses]
-}
 
-struct RouteAndDoses: Identifiable {
-    var id: AdministrationRoute {
-        route
-    }
-    let route: AdministrationRoute
-    let units: String
-    let doses: [DoseAndUnit]
-}
-
-struct DoseAndUnit: Hashable, Identifiable {
-    var id: String {
-        (dose?.description ?? "") + (units ?? "")
-    }
-    let dose: Double?
-    let units: String?
-}
 
