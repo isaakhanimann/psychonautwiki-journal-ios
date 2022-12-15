@@ -55,7 +55,7 @@ struct Chip: View {
             .font(.caption)
             .padding(.horizontal, 7)
             .padding(.vertical, 3)
-            .background(Color.gray.opacity(0.3))
+            .background(Color(.systemGray5))
             .cornerRadius(12)
     }
 }
