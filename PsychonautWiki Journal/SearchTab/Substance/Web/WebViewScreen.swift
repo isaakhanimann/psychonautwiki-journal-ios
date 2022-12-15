@@ -13,7 +13,7 @@ struct WebViewScreen: View {
             VStack(alignment: .trailing, spacing: 0) {
                 WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
             }.toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     if !isShowingCopySuccess {
                         Button {
                             UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
@@ -27,6 +27,9 @@ struct WebViewScreen: View {
                     } else {
                         Label("Link Copied", systemImage: "checkmark")
                             .foregroundColor(.green)
+                    }
+                    Link(destination: articleURL) {
+                        Label("Open in Safari", systemImage: "safari")
                     }
                 }
             }
