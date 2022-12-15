@@ -13,8 +13,11 @@ struct DosesScreen: View {
     
     var body: some View {
         List {
+            Section("Disclaimer") {
+                Text(ChooseDoseScreen.doseDisclaimer)
+            }
             if let remark = substance.dosageRemark {
-                Section("Disclaimer") {
+                Section("\(substance.name) Dosing") {
                     Text(remark)
                 }
             }
