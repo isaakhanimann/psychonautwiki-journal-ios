@@ -46,7 +46,7 @@ struct ChooseDoseScreen: View {
             )
             .padding()
         }
-        .navigationBarTitle("Choose Dose")
+        .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 Button("Done") {
@@ -98,8 +98,12 @@ struct ChooseDoseScreen: View {
             header: Text("Pure Dose"),
             footer: Text(roaDose?.units != nil ? Self.doseDisclaimer : "")
         ) {
-            Spacer().frame(height: 5)
-            DoseView(roaDose: roaDose)
+            if let remark = substance.dosageRemark {
+                Text(remark)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            DoseRow(roaDose: roaDose)
             DosePicker(
                 roaDose: roaDose,
                 doseMaybe: $viewModel.selectedPureDose,

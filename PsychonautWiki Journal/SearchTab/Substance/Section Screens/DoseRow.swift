@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DoseView: View {
+struct DoseRow: View {
 
     let roaDose: RoaDose?
     var doseFont: Font {
@@ -16,11 +16,11 @@ struct DoseView: View {
     }
 
     var body: some View {
-        let showDoseView = roaDose?.threshOrLightMin != nil
+        let showDoseRow = roaDose?.threshOrLightMin != nil
         || roaDose?.lightMaxOrCommonMin != nil
         || roaDose?.commonMaxOrStrongMin != nil
         || roaDose?.strongMaxOrHeavy != nil
-        if showDoseView && roaDose?.units != nil {
+        if showDoseRow && roaDose?.units != nil {
             HStack(alignment: .top, spacing: 0) {
                 if let threshOrLightMin = roaDose?.threshOrLightMin {
                     Spacer(minLength: 0)

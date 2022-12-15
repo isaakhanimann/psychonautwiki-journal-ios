@@ -44,7 +44,7 @@ struct ExperienceView: View {
                         .padding(.vertical, 5)
                 } else {
                     NavigationLink {
-                        EditExperience()
+                        EditExperienceScreen(experience: experience)
                     } label: {
                         Label("Add Note", systemImage: "pencil")
                     }
@@ -58,7 +58,7 @@ struct ExperienceView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    EditExperience()
+                    EditExperienceScreen(experience: experience)
                 } label: {
                     Label("Edit Experience", systemImage: "pencil")
                 }

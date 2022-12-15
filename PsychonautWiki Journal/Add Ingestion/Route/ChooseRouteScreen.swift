@@ -42,7 +42,7 @@ struct ChooseRouteScreen: View {
                 }
             }
         }
-        .navigationBarTitle("Choose Route")
+        .navigationBarTitle("\(substance.name) Route")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

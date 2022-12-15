@@ -27,11 +27,20 @@ struct ChooseSubstanceContent: View {
                         Spacer().frame(height: 20)
                     }
                     if !filteredSubstances.isEmpty {
-                        Section("All Substances") {
-                            ForEach(filteredSubstances) { substance in
-                                SubstanceBox(substance: substance, dismiss: dismiss)
-                            }
-                        }.padding(.horizontal)
+                        if filteredSuggestions.isEmpty {
+                            Section {
+                                ForEach(filteredSubstances) { substance in
+                                    SubstanceBox(substance: substance, dismiss: dismiss)
+                                }
+                            }.padding(.horizontal)
+                        } else {
+                            Section("All Substances") {
+                                ForEach(filteredSubstances) { substance in
+                                    SubstanceBox(substance: substance, dismiss: dismiss)
+                                }
+                            }.padding(.horizontal)
+                        }
+
                         Spacer().frame(height: 20)
                     }
                     if !filteredCustomSubstances.isEmpty {
@@ -54,6 +63,8 @@ struct ChooseSubstanceContent: View {
             }
         }
     }
+
+
 }
 
 struct ChooseSubstanceContent_Previews: PreviewProvider {

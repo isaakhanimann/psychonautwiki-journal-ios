@@ -29,7 +29,7 @@ struct IngestionRow: View {
                         .foregroundColor(.secondary)
                     Spacer()
                     if let doseUnwrapped = dose {
-                        Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + units)
+                        Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
                     } else {
                         Text("Unknown Dose")
                     }

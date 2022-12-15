@@ -31,7 +31,7 @@ struct CustomChooseRouteScreen: View {
                 }
             }
         }
-        .navigationBarTitle("Choose Route")
+        .navigationBarTitle("\(substanceName) Route")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
