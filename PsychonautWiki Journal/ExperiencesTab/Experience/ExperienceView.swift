@@ -18,7 +18,16 @@ struct ExperienceView: View {
                 }
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
-                        IngestionRow(ingestion: ing)
+                        IngestionRow(
+                            substanceColor: ing.substanceColor,
+                            substanceName: ing.substanceNameUnwrapped,
+                            dose: ing.doseUnwrapped,
+                            units: ing.unitsUnwrapped,
+                            isEstimate: ing.isEstimate,
+                            administrationRoute: ing.administrationRouteUnwrapped,
+                            ingestionTime: ing.timeUnwrapped,
+                            note: ing.noteUnwrapped
+                        )
                     }
                     .onDelete(perform: deleteIngestions)
                     Button {

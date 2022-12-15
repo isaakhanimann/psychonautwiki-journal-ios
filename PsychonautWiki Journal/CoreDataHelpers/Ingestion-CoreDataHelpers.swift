@@ -42,13 +42,6 @@ extension Ingestion: Comparable {
         return ""
     }
 
-    var doseInfoString: String {
-        guard let doseUnwrapped = doseUnwrapped else {
-            return "Unknown Dose"
-        }
-        return doseUnwrapped.formatted() + " " + unitsUnwrapped
-    }
-
     var substanceColor: SubstanceColor {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         fetchRequest.fetchLimit = 1
