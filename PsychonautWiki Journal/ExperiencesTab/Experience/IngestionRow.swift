@@ -36,7 +36,7 @@ struct IngestionRow: View {
                 }
                 if !note.isEmpty {
                     Text(note)
-                        .font(.caption).foregroundColor(.secondary)
+                        .foregroundColor(.secondary)
                 }
             }
         }

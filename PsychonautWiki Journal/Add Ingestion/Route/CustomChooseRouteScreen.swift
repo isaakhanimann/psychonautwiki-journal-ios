@@ -44,6 +44,6 @@ struct CustomChooseRouteScreen: View {
 
 struct CustomChooseRouteScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CustomChooseRouteScreen(substanceName: "Coffee", units: "cup", dismiss: {})
+        CustomChooseRouteScreen(substanceName: "Coffee", units: "cups", dismiss: {})
     }
 }

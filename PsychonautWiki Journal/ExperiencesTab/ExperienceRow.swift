@@ -7,7 +7,7 @@ struct ExperienceRow: View {
 
     var body: some View {
         return NavigationLink(
-            destination: ExperienceView(experience: experience)
+            destination: ExperienceScreen(experience: experience)
         ) {
             HStack {
                 Circle()

@@ -16,7 +16,7 @@ struct ChooseTimeAndColor: View {
             Form {
                 Section("Choose Time") {
                     DatePicker(
-                        "Time",
+                        "Ingestion Time",
                         selection: $viewModel.selectedTime,
                         displayedComponents: [.date, .hourAndMinute]
                     )
@@ -57,7 +57,7 @@ struct ChooseTimeAndColor: View {
         .task {
             viewModel.initializeColorAndHasCompanion(for: substanceName)
         }
-        .navigationBarTitle("Ingestion Time")
+        .navigationBarTitle("Finish")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

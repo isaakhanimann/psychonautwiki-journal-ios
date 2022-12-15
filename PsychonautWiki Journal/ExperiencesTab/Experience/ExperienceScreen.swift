@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ExperienceView: View {
+struct ExperienceScreen: View {
 
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionSheet = false
@@ -18,18 +18,22 @@ struct ExperienceView: View {
                 }
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
-                        IngestionRow(
-                            substanceColor: ing.substanceColor,
-                            substanceName: ing.substanceNameUnwrapped,
-                            dose: ing.doseUnwrapped,
-                            units: ing.unitsUnwrapped,
-                            isEstimate: ing.isEstimate,
-                            administrationRoute: ing.administrationRouteUnwrapped,
-                            ingestionTime: ing.timeUnwrapped,
-                            note: ing.noteUnwrapped
-                        )
+                        NavigationLink {
+                            //EditIngestionScreen()
+                            Text("Hello")
+                        } label: {
+                            IngestionRow(
+                                substanceColor: ing.substanceColor,
+                                substanceName: ing.substanceNameUnwrapped,
+                                dose: ing.doseUnwrapped,
+                                units: ing.unitsUnwrapped,
+                                isEstimate: ing.isEstimate,
+                                administrationRoute: ing.administrationRouteUnwrapped,
+                                ingestionTime: ing.timeUnwrapped,
+                                note: ing.noteUnwrapped
+                            )
+                        }
                     }
-                    .onDelete(perform: deleteIngestions)
                     Button {
                         isShowingAddIngestionSheet.toggle()
                     } label: {
@@ -57,21 +61,11 @@ struct ExperienceView: View {
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
+                NavigationLink("Edit") {
                     EditExperienceScreen(experience: experience)
-                } label: {
-                    Label("Edit Experience", systemImage: "pencil")
                 }
             }
         }
-    }
-
-    private func deleteIngestions(at offsets: IndexSet) {
-        for offset in offsets {
-            let ingestion = experience.sortedIngestionsUnwrapped[offset]
-            PersistenceController.shared.viewContext.delete(ingestion)
-        }
-        PersistenceController.shared.saveViewContext()
     }
 
     var timelineModel: TimelineModel {

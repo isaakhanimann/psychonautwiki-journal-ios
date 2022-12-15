@@ -26,11 +26,6 @@ struct ExperiencesTab: View {
             }
             .navigationTitle("Experiences")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if !viewModel.experiences.isEmpty {
-                        EditButton()
-                    }
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if !viewModel.experiences.isEmpty {
                         Button {

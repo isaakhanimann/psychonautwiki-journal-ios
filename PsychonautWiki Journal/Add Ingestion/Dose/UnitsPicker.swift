@@ -16,7 +16,7 @@ struct UnitsPicker: View {
             }
             .pickerStyle(.segmented)
             if pickerValue == .custom {
-                TextField("Units", text: $textValue, prompt: Text("e.g. cup"))
+                TextField("Units", text: $textValue, prompt: Text("e.g. cups"))
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
             }

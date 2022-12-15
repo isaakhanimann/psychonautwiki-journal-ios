@@ -18,7 +18,8 @@ struct EditExperienceScreen: View {
         EditExperienceContent(
             title: $title,
             notes: $notes,
-            save: save
+            save: save,
+            delete: delete
         )
         .onAppear {
             title = experience.titleUnwrapped
@@ -32,6 +33,12 @@ struct EditExperienceScreen: View {
         PersistenceController.shared.saveViewContext()
         dismiss()
     }
+
+    private func delete() {
+        PersistenceController.shared.viewContext.delete(experience)
+        PersistenceController.shared.saveViewContext()
+        dismiss()
+    }
 }
 
 struct EditExperienceContent: View {
@@ -39,6 +46,8 @@ struct EditExperienceContent: View {
     @Binding var title: String
     @Binding var notes: String
     let save: () -> Void
+    let delete: () -> Void
+    @State private var isShowingDeleteAlert = false
 
     var body: some View {
         Form {
@@ -50,6 +59,21 @@ struct EditExperienceContent: View {
                 TextEditor(text: $notes)
                     .autocapitalization(.sentences)
                     .frame(minHeight: 300)
+            }
+            Section("Delete") {
+                Button {
+                    isShowingDeleteAlert.toggle()
+                } label: {
+                    Label("Delete Experience", systemImage: "trash").foregroundColor(.red)
+                }
+                .alert(isPresented: $isShowingDeleteAlert) {
+                    Alert(
+                        title: Text("Delete Experience?"),
+                        message: Text("This will also delete all of its ingestions."),
+                        primaryButton: .destructive(Text("Delete"), action: delete),
+                        secondaryButton: .cancel()
+                    )
+                }
             }
         }.navigationTitle("Edit Experience")
             .toolbar {
@@ -66,7 +90,8 @@ struct EditExperienceContent_Previews: PreviewProvider {
             EditExperienceContent(
                 title: .constant("This is my title"),
                 notes: .constant("These are my notes. They can be very long and should work with many lines. If this should be editable then create a view inside this preview struct that has state."),
-                save: {}
+                save: {},
+                delete: {}
             )
         }
     }
