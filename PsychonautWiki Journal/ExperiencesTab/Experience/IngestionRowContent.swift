@@ -4,9 +4,11 @@ import SwiftUI
 struct IngestionRow: View {
 
     @ObservedObject var ingestion: Ingestion
+    let roaDose: RoaDose?
 
     var body: some View {
         IngestionRowContent(
+            roaDose: roaDose,
             substanceColor: ingestion.substanceColor,
             substanceName: ingestion.substanceNameUnwrapped,
             dose: ingestion.doseUnwrapped,
@@ -22,6 +24,7 @@ struct IngestionRow: View {
 
 struct IngestionRowContent: View {
 
+    let roaDose: RoaDose?
     let substanceColor: SubstanceColor
     let substanceName: String
     let dose: Double?
@@ -63,10 +66,22 @@ struct IngestionRowContent: View {
     }
 }
 
+struct DotRows: View {
+
+    let numDots: Int
+
+    var body: some View {
+        VStack {
+            // Todo: 
+        }
+    }
+}
+
 struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             IngestionRowContent(
+                roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")?.getDose(for: .oral),
                 substanceColor: .pink,
                 substanceName: "MDMA",
                 dose: 50,
@@ -75,8 +90,9 @@ struct IngestionRowContent_Previews: PreviewProvider {
                 administrationRoute: .oral,
                 ingestionTime: Date(),
                 note: ""
-            ).previewLayout(.sizeThatFits)
+            )
             IngestionRowContent(
+                roaDose: SubstanceRepo.shared.getSubstance(name: "Cocaine")?.getDose(for: .insufflated),
                 substanceColor: .blue,
                 substanceName: "Cocaine",
                 dose: 30,
@@ -85,8 +101,9 @@ struct IngestionRowContent_Previews: PreviewProvider {
                 administrationRoute: .insufflated,
                 ingestionTime: Date(),
                 note: "This is a longer note that might not fit on one line and it needs to be able to handle this"
-            ).previewLayout(.sizeThatFits)
+            )
         }
+        .previewLayout(.sizeThatFits)
     }
 }
 

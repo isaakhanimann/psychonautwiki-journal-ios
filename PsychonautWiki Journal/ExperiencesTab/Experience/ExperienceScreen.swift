@@ -28,7 +28,7 @@ struct ExperienceScreen: View {
                                 route: route
                             )
                         } label: {
-                            IngestionRow(ingestion: ing)
+                            IngestionRow(ingestion: ing, roaDose: roaDose)
                         }
                     }
                     Button {
