@@ -4,11 +4,11 @@ struct DoseRow: View {
 
     let roaDose: RoaDose?
     var doseFont: Font {
-        if let lightMaxOrCommonMinUnwrap = roaDose?.lightMaxOrCommonMin,
-           lightMaxOrCommonMinUnwrap.formatted().count >= 4 {
+        if let commonMinUnwrap = roaDose?.commonMin,
+           commonMinUnwrap.formatted().count >= 4 {
             return .footnote
-        } else if let commonMaxOrStrongMinUnwrap = roaDose?.commonMaxOrStrongMin,
-                  commonMaxOrStrongMinUnwrap.formatted().count >= 4 {
+        } else if let strongMinUnwrap = roaDose?.strongMin,
+                  strongMinUnwrap.formatted().count >= 4 {
             return .footnote
         } else {
             return .body
@@ -16,16 +16,16 @@ struct DoseRow: View {
     }
 
     var body: some View {
-        let showDoseRow = roaDose?.threshOrLightMin != nil
-        || roaDose?.lightMaxOrCommonMin != nil
-        || roaDose?.commonMaxOrStrongMin != nil
-        || roaDose?.strongMaxOrHeavy != nil
+        let showDoseRow = roaDose?.lightMin != nil
+        || roaDose?.commonMin != nil
+        || roaDose?.strongMin != nil
+        || roaDose?.heavyMin != nil
         if showDoseRow && roaDose?.units != nil {
             HStack(alignment: .top, spacing: 0) {
-                if let threshOrLightMin = roaDose?.threshOrLightMin {
+                if let lightMin = roaDose?.lightMin {
                     Spacer(minLength: 0)
                     VStack {
-                        Text(threshOrLightMin.formatted())
+                        Text(lightMin.formatted())
                             .foregroundLinearGradient(colors: [DoseRangeType.thresh.color, DoseRangeType.light.color])
                             .font(doseFont)
                         Text("thresh ")
@@ -37,7 +37,7 @@ struct DoseRow: View {
                     }
                     Spacer(minLength: 0)
                 }
-                if roaDose?.threshOrLightMin != nil || roaDose?.lightMaxOrCommonMin != nil {
+                if roaDose?.lightMin != nil || roaDose?.commonMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -50,14 +50,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.light.color)
                     Spacer(minLength: 0)
                 }
-                if let lightMaxOrCommonMin = roaDose?.lightMaxOrCommonMin {
+                if let commonMin = roaDose?.commonMin {
                     Spacer(minLength: 0)
-                    Text(lightMaxOrCommonMin.formatted())
+                    Text(commonMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.light.color, DoseRangeType.common.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.lightMaxOrCommonMin != nil || roaDose?.commonMaxOrStrongMin != nil {
+                if roaDose?.commonMin != nil || roaDose?.strongMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -70,14 +70,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.common.color)
                     Spacer(minLength: 0)
                 }
-                if let commonMaxOrStrongMin = roaDose?.commonMaxOrStrongMin {
+                if let strongMin = roaDose?.strongMin {
                     Spacer(minLength: 0)
-                    Text(commonMaxOrStrongMin.formatted())
+                    Text(strongMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.common.color, DoseRangeType.strong.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.commonMaxOrStrongMin != nil || roaDose?.strongMaxOrHeavy != nil {
+                if roaDose?.strongMin != nil || roaDose?.heavyMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -90,14 +90,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.strong.color)
                     Spacer(minLength: 0)
                 }
-                if let strongMaxOrHeavy = roaDose?.strongMaxOrHeavy {
+                if let heavyMin = roaDose?.heavyMin {
                     Spacer(minLength: 0)
-                    Text(strongMaxOrHeavy.formatted())
+                    Text(heavyMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.strong.color, DoseRangeType.heavy.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.strongMaxOrHeavy != nil {
+                if roaDose?.heavyMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")

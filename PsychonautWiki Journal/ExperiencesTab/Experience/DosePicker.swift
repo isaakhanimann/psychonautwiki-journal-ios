@@ -59,28 +59,28 @@ struct DosePicker: View {
 
     private var dynamicDoseRangeView: some View {
         let units = roaDose?.units ?? ""
-        if let thresh = roaDose?.threshold,
-           thresh >= dose {
-            return Text("threshold (\(thresh.formatted()) \(units))")
+        if let threshold = roaDose?.lightMin,
+           threshold >= dose {
+            return Text("threshold (\(threshold.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.thresh.color)
-        } else if let lightMin = roaDose?.light?.min,
-                  let lightMax = roaDose?.light?.max,
+        } else if let lightMin = roaDose?.lightMin,
+                  let lightMax = roaDose?.commonMin,
                   dose >= lightMin && dose <= lightMax {
             return Text("light (\(lightMin.formatted()) - \(lightMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.light.color)
-        } else if let commonMin = roaDose?.common?.min,
-                  let commonMax = roaDose?.common?.max,
+        } else if let commonMin = roaDose?.commonMin,
+                  let commonMax = roaDose?.strongMin,
                   dose >= commonMin && dose <= commonMax {
             return Text("common (\(commonMin.formatted()) - \(commonMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.common.color)
-        } else if let strongMin = roaDose?.strong?.min,
-                  let strongMax = roaDose?.strong?.max,
+        } else if let strongMin = roaDose?.strongMin,
+                  let strongMax = roaDose?.heavyMin,
                   dose >= strongMin && dose <= strongMax {
             return Text("strong (\(strongMin.formatted()) - \(strongMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.strong.color)
-        } else if let heavyOrStrongMax = roaDose?.heavy ?? roaDose?.strong?.max,
-                  dose >= heavyOrStrongMax {
-            return Text("heavy (\(heavyOrStrongMax.formatted()) \(units)+)")
+        } else if let heavyMin = roaDose?.heavyMin,
+                  dose >= heavyMin {
+            return Text("heavy (\(heavyMin.formatted()) \(units)+)")
                 .foregroundColor(DoseRangeType.heavy.color)
         } else {
             return Text(" ")
