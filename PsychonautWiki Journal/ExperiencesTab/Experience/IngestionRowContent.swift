@@ -1,6 +1,26 @@
 import SwiftUI
 
+
 struct IngestionRow: View {
+
+    @ObservedObject var ingestion: Ingestion
+
+    var body: some View {
+        IngestionRowContent(
+            substanceColor: ingestion.substanceColor,
+            substanceName: ingestion.substanceNameUnwrapped,
+            dose: ingestion.doseUnwrapped,
+            units: ingestion.unitsUnwrapped,
+            isEstimate: ingestion.isEstimate,
+            administrationRoute: ingestion.administrationRouteUnwrapped,
+            ingestionTime: ingestion.timeUnwrapped,
+            note: ingestion.noteUnwrapped
+        )
+    }
+}
+
+
+struct IngestionRowContent: View {
 
     let substanceColor: SubstanceColor
     let substanceName: String
@@ -43,10 +63,10 @@ struct IngestionRow: View {
     }
 }
 
-struct IngestionRow_Previews: PreviewProvider {
+struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
-        List {
-            IngestionRow(
+        Group {
+            IngestionRowContent(
                 substanceColor: .pink,
                 substanceName: "MDMA",
                 dose: 50,
@@ -55,8 +75,8 @@ struct IngestionRow_Previews: PreviewProvider {
                 administrationRoute: .oral,
                 ingestionTime: Date(),
                 note: ""
-            )
-            IngestionRow(
+            ).previewLayout(.sizeThatFits)
+            IngestionRowContent(
                 substanceColor: .blue,
                 substanceName: "Cocaine",
                 dose: 30,
@@ -65,7 +85,7 @@ struct IngestionRow_Previews: PreviewProvider {
                 administrationRoute: .insufflated,
                 ingestionTime: Date(),
                 note: "This is a longer note that might not fit on one line and it needs to be able to handle this"
-            )
+            ).previewLayout(.sizeThatFits)
         }
     }
 }

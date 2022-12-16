@@ -112,7 +112,7 @@
 		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
-		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
+		EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRowContent.swift */; };
 		EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */; };
 		EAE4721C26CBA664009FB0EC /* DosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A026CBA664009FB0EC /* DosePicker.swift */; };
 		EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A526CBA664009FB0EC /* ChooseRouteScreen.swift */; };
@@ -274,7 +274,7 @@
 		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
+		EAE4718926CBA664009FB0EC /* IngestionRowContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRowContent.swift; sourceTree = "<group>"; };
 		EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceScreen.swift; sourceTree = "<group>"; };
 		EAE471A026CBA664009FB0EC /* DosePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DosePicker.swift; sourceTree = "<group>"; };
 		EAE471A526CBA664009FB0EC /* ChooseRouteScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseRouteScreen.swift; sourceTree = "<group>"; };
@@ -666,7 +666,7 @@
 				EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */,
 				EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */,
 				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
-				EAE4718926CBA664009FB0EC /* IngestionRow.swift */,
+				EAE4718926CBA664009FB0EC /* IngestionRowContent.swift */,
 			);
 			path = Experience;
 			sourceTree = "<group>";
@@ -887,7 +887,7 @@
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
-				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
+				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,

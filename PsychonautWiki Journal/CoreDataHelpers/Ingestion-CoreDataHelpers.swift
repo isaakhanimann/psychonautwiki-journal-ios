@@ -35,6 +35,10 @@ extension Ingestion: Comparable {
         }
     }
 
+    var substance: Substance? {
+        SubstanceRepo.shared.getSubstance(name: substanceNameUnwrapped)
+    }
+
     var unitsUnwrapped: String {
         if let unwrap = units {
             return unwrap

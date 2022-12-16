@@ -18,20 +18,17 @@ struct ExperienceScreen: View {
                 }
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
+                        let route = ing.administrationRouteUnwrapped
+                        let roaDose = ing.substance?.getDose(for: route)
                         NavigationLink {
-                            //EditIngestionScreen()
-                            Text("Hello")
-                        } label: {
-                            IngestionRow(
-                                substanceColor: ing.substanceColor,
+                            EditIngestionScreen(
+                                ingestion: ing,
                                 substanceName: ing.substanceNameUnwrapped,
-                                dose: ing.doseUnwrapped,
-                                units: ing.unitsUnwrapped,
-                                isEstimate: ing.isEstimate,
-                                administrationRoute: ing.administrationRouteUnwrapped,
-                                ingestionTime: ing.timeUnwrapped,
-                                note: ing.noteUnwrapped
+                                roaDose: roaDose,
+                                route: route
                             )
+                        } label: {
+                            IngestionRow(ingestion: ing)
                         }
                     }
                     Button {
