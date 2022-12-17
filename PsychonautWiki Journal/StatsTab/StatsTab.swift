@@ -10,7 +10,7 @@ struct StatsTab: View {
         NavigationView {
             List {
                 ForEach(ingestions) { ing in
-                    IngestionRow(ingestion: ing)
+                    //IngestionRow(ingestion: ing)
                 }
             }
             .navigationTitle("Ingestions")
