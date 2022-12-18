@@ -4,17 +4,20 @@ struct ExperienceScreen: View {
 
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionSheet = false
+    @State private var timelineModel: TimelineModel?
 
     var body: some View {
         return List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
-                Section {
-                    EffectTimeline(timelineModel: timelineModel)
-                } header: {
-                    Text("Effect Timeline")
-                } footer: {
-                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
-                    Text(firstDate, style: .date)
+                if let timelineModelUnwrap = timelineModel {
+                    Section {
+                        EffectTimeline(timelineModel: timelineModelUnwrap)
+                    } header: {
+                        Text("Effect Timeline")
+                    } footer: {
+                        let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
+                        Text(firstDate, style: .date)
+                    }
                 }
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
@@ -63,10 +66,16 @@ struct ExperienceScreen: View {
                 }
             }
         }
+        .onAppear {
+            updateTimeline()
+        }
+        .onChange(of: experience) { _ in
+            updateTimeline()
+        }
     }
 
-    var timelineModel: TimelineModel {
-        TimelineModel(everythingForEachLine: experience.sortedIngestionsUnwrapped.map { ingestion in
+    func updateTimeline() {
+        timelineModel = TimelineModel(everythingForEachLine: experience.sortedIngestionsUnwrapped.map { ingestion in
             let substance = SubstanceRepo.shared.getSubstance(name: ingestion.substanceNameUnwrapped)
             let roaDuration = substance?.getDuration(for: ingestion.administrationRouteUnwrapped)
             return EverythingForOneLine(
@@ -78,4 +87,6 @@ struct ExperienceScreen: View {
             )
         })
     }
+
+
 }

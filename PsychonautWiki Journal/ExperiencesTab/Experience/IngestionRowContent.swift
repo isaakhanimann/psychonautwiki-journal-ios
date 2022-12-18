@@ -8,7 +8,7 @@ struct IngestionRow: View {
 
     var body: some View {
         IngestionRowContent(
-            roaDose: roaDose,
+            numDots: roaDose?.getNumDots(ingestionDose: ingestion.doseUnwrapped, ingestionUnits: ingestion.unitsUnwrapped),
             substanceColor: ingestion.substanceColor,
             substanceName: ingestion.substanceNameUnwrapped,
             dose: ingestion.doseUnwrapped,
@@ -24,7 +24,7 @@ struct IngestionRow: View {
 
 struct IngestionRowContent: View {
 
-    let roaDose: RoaDose?
+    let numDots: Int?
     let substanceColor: SubstanceColor
     let substanceName: String
     let dose: Double?
@@ -40,24 +40,25 @@ struct IngestionRowContent: View {
                 .font(.title2)
                 .foregroundColor(substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
-                HStack {
-                    Text(substanceName)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading) {
+                        Text(substanceName)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        Text(ingestionTime, style: .time)
+                    }
                     Spacer()
-                    Text(ingestionTime, style: .time)
-                }
-                HStack {
-                    Text(administrationRoute.rawValue.localizedCapitalized)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    if let doseUnwrapped = dose {
-                        Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
-                    } else {
-                        Text("Unknown Dose")
+                    VStack(alignment: .trailing) {
+                        if let doseUnwrapped = dose {
+                            Text(administrationRoute.rawValue.localizedCapitalized + " " + (isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
+                        } else {
+                            Text("Unknown Dose")
+                        }
+                        if let numDotsUnwrap = numDots {
+                            DotRows(numDots: numDotsUnwrap)
+                        }
                     }
                 }
-                DotRows(numDots: 5)
                 if !note.isEmpty {
                     Text(note)
                         .foregroundColor(.secondary)
@@ -119,7 +120,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             IngestionRowContent(
-                roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")?.getDose(for: .oral),
+                numDots: 1,
                 substanceColor: .pink,
                 substanceName: "MDMA",
                 dose: 50,
@@ -130,7 +131,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                 note: ""
             )
             IngestionRowContent(
-                roaDose: SubstanceRepo.shared.getSubstance(name: "Cocaine")?.getDose(for: .insufflated),
+                numDots: 2,
                 substanceColor: .blue,
                 substanceName: "Cocaine",
                 dose: 30,
