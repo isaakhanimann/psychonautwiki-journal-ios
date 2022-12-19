@@ -5,6 +5,7 @@ struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionSheet = false
     @State private var timelineModel: TimelineModel?
+    @State private var cumulativeDoses: [CumulativeDose] = []
 
     var body: some View {
         return List {
@@ -41,6 +42,18 @@ struct ExperienceScreen: View {
                             .foregroundColor(.accentColor)
                     }
                 }
+                if !cumulativeDoses.isEmpty {
+                    Section("Cumulative Doses") {
+                        ForEach(cumulativeDoses) { cumulative in
+                            CumulativeDoseRow(
+                                substanceName: cumulative.substanceName,
+                                substanceColor: cumulative.substanceColor,
+                                cumulativeRoutes: cumulative.cumulativeRoutes
+                            )
+                        }
+                    }
+
+                }
             }
             Section("Notes") {
                 if let notes = experience.textUnwrapped, !notes.isEmpty {
@@ -67,14 +80,16 @@ struct ExperienceScreen: View {
             }
         }
         .onAppear {
-            updateTimeline()
-        }
-        .onChange(of: experience) { _ in
-            updateTimeline()
+            calculateScreen()
         }
     }
 
-    func updateTimeline() {
+    private func calculateScreen() {
+        calculateTimeline()
+        calculateCumulativeDoses()
+    }
+
+    private func calculateTimeline() {
         timelineModel = TimelineModel(everythingForEachLine: experience.sortedIngestionsUnwrapped.map { ingestion in
             let substance = SubstanceRepo.shared.getSubstance(name: ingestion.substanceNameUnwrapped)
             let roaDuration = substance?.getDuration(for: ingestion.administrationRouteUnwrapped)
@@ -88,5 +103,78 @@ struct ExperienceScreen: View {
         })
     }
 
+    private func calculateCumulativeDoses() {
+        let ingestionsBySubstance = Dictionary(grouping: experience.sortedIngestionsUnwrapped, by: { $0.substanceNameUnwrapped })
+        cumulativeDoses = ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
+            guard ingestions.count > 1 else {return nil}
+            guard let color = ingestions.first?.substanceColor else {return nil}
+            return CumulativeDose(ingestionsForSubstance: ingestions, substanceName: substanceName, substanceColor: color)
+        }
+    }
 
+}
+
+struct CumulativeDose: Identifiable {
+    var id: String {
+        substanceName
+    }
+    let substanceName: String
+    let substanceColor: SubstanceColor
+    let cumulativeRoutes: [CumulativeRouteAndDose]
+
+    init(ingestionsForSubstance: [Ingestion], substanceName: String, substanceColor: SubstanceColor) {
+        self.substanceName = substanceName
+        self.substanceColor = substanceColor
+        let substance = ingestionsForSubstance.first?.substance
+        let ingestionsByRoute = Dictionary(grouping: ingestionsForSubstance, by: { $0.administrationRouteUnwrapped })
+        self.cumulativeRoutes = ingestionsByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
+            CumulativeRouteAndDose(route: route, roaDose: substance?.getDose(for: route), ingestionForRoute: ingestions)
+        }
+    }
+}
+
+struct CumulativeRouteAndDose {
+    let route: AdministrationRoute
+    let numDots: Int?
+    let isEstimate: Bool
+    let dose: Double?
+    let units: String
+
+    init(route: AdministrationRoute, roaDose: RoaDose?, ingestionForRoute: [Ingestion]) {
+        self.route = route
+        let units = ingestionForRoute.first?.units ?? "unknown"
+        self.units = units
+        var totalDose = 0.0
+        var isOneDoseUnknown = false
+        var isOneDoseAnEstimate = false
+        for ingestion in ingestionForRoute {
+            if let doseUnwrap = ingestion.doseUnwrapped, ingestion.unitsUnwrapped == units {
+                totalDose += doseUnwrap
+                if ingestion.isEstimate {
+                    isOneDoseAnEstimate = true
+                }
+            } else {
+                isOneDoseUnknown = true
+                break
+            }
+        }
+        if isOneDoseUnknown {
+            self.dose = nil
+            self.isEstimate = isOneDoseAnEstimate
+            self.numDots = nil
+        } else {
+            self.dose = totalDose
+            self.isEstimate = isOneDoseAnEstimate
+            self.numDots = roaDose?.getNumDots(ingestionDose: totalDose, ingestionUnits: units)
+        }
+
+    }
+
+    init(route: AdministrationRoute, numDots: Int?, isEstimate: Bool, dose: Double?, units: String) {
+        self.route = route
+        self.numDots = numDots
+        self.isEstimate = isEstimate
+        self.dose = dose
+        self.units = units
+    }
 }
