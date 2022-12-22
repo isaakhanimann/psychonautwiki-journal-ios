@@ -46,12 +46,11 @@ struct ExperienceRowContent: View {
                 Text(title)
                     .font(.headline)
                 if distinctSubstanceNames.isEmpty {
-                    Text("No substance yet")
+                    Text("No substance")
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
                 } else {
                     Text(distinctSubstanceNames, format: .list(type: .and))
-                        .foregroundColor(.secondary)
+                        .font(.subheadline)
                 }
             }
         }
