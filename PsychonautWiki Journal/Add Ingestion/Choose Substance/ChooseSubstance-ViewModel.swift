@@ -31,19 +31,17 @@ extension ChooseSubstanceScreen {
                 CustomSubstanceModel(name: cust.nameUnwrapped, units: cust.unitsUnwrapped)
             }
             $searchText
-                .debounce(for: .milliseconds(100), scheduler: DispatchQueue.global(qos: .userInitiated)) // debounce because if we type extremely fast it crashes
                 .map { search in
                     let allSubstances = SubstanceRepo.shared.substances
                     return SearchViewModel.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
-                }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
+                }.assign(to: &$filteredSubstances)
             $searchText
-                .debounce(for: .milliseconds(100), scheduler: DispatchQueue.global(qos: .userInitiated)) // debounce because if we type extremely fast it crashes
                 .map { search in
                     let searchLowerCased = search.lowercased()
                     return self.customSubstanceModels.filter { custModel in
                         custModel.name.lowercased().contains(searchLowerCased)
                     }
-                }.receive(on: DispatchQueue.main).assign(to: &$filteredCustomSubstances)
+                }.assign(to: &$filteredCustomSubstances)
             $filteredSubstances.combineLatest($filteredCustomSubstances) { filteredSubstances, filteredCustom in
                 self.allPossibleSuggestions.filter { suggestion in
                     filteredSubstances.contains { substance in

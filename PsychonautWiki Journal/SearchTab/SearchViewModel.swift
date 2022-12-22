@@ -73,7 +73,6 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
             NSLog("Error: could not fetch CustomSubstances")
         }
         $searchText
-            .debounce(for: .milliseconds(100), scheduler: DispatchQueue.global(qos: .userInitiated)) // debounce because if we type extremely fast it crashes
             .combineLatest($selectedCategories) { search, cats in
                 let substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
                     cats.allSatisfy { selected in
@@ -81,7 +80,7 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
                     }
                 }
                 return SearchViewModel.getFilteredSubstancesSorted(substances: substancesFilteredWithCategoriesOnly, searchText: search)
-            }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
+            }.assign(to: &$filteredSubstances)
     }
 
     nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
