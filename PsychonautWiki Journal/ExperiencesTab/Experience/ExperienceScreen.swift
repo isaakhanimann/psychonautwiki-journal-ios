@@ -4,6 +4,7 @@ struct ExperienceScreen: View {
 
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionSheet = false
+    @State private var isTimeRelative = false
     @State private var timelineModel: TimelineModel?
     @State private var cumulativeDoses: [CumulativeDose] = []
 
@@ -32,7 +33,11 @@ struct ExperienceScreen: View {
                                 route: route
                             )
                         } label: {
-                            IngestionRow(ingestion: ing, roaDose: roaDose)
+                            IngestionRow(
+                                ingestion: ing,
+                                roaDose: roaDose,
+                                isTimeRelative: isTimeRelative
+                            )
                         }
                     }
                     Button {
@@ -64,7 +69,7 @@ struct ExperienceScreen: View {
                         EditExperienceScreen(experience: experience)
                     } label: {
                         Label("Add Note", systemImage: "pencil")
-                    }
+                    }.foregroundColor(.accentColor)
                 }
             }
         }
@@ -73,7 +78,12 @@ struct ExperienceScreen: View {
         })
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItemGroup {
+                Button {
+                    isTimeRelative.toggle()
+                } label: {
+                    Label("Relative Time", systemImage: "timer.circle" + (isTimeRelative ? ".fill" : ""))
+                }
                 NavigationLink("Edit") {
                     EditExperienceScreen(experience: experience)
                 }

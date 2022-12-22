@@ -5,6 +5,7 @@ struct IngestionRow: View {
 
     @ObservedObject var ingestion: Ingestion
     let roaDose: RoaDose?
+    let isTimeRelative: Bool
 
     var body: some View {
         IngestionRowContent(
@@ -16,7 +17,8 @@ struct IngestionRow: View {
             isEstimate: ingestion.isEstimate,
             administrationRoute: ingestion.administrationRouteUnwrapped,
             ingestionTime: ingestion.timeUnwrapped,
-            note: ingestion.noteUnwrapped
+            note: ingestion.noteUnwrapped,
+            isTimeRelative: isTimeRelative
         )
     }
 }
@@ -33,6 +35,7 @@ struct IngestionRowContent: View {
     let administrationRoute: AdministrationRoute
     let ingestionTime: Date
     let note: String
+    let isTimeRelative: Bool
 
     var body: some View {
         HStack(alignment: .center) {
@@ -45,7 +48,12 @@ struct IngestionRowContent: View {
                         Text(substanceName)
                             .font(.headline)
                             .foregroundColor(.primary)
-                        Text(ingestionTime, style: .time)
+                        if isTimeRelative {
+                            Text(ingestionTime, style: .relative) + Text(" ago")
+                        } else {
+                            Text(ingestionTime, style: .time)
+                        }
+
                     }
                     Spacer()
                     VStack(alignment: .trailing) {
@@ -132,7 +140,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEstimate: true,
                     administrationRoute: .oral,
                     ingestionTime: Date(),
-                    note: ""
+                    note: "",
+                    isTimeRelative: false
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -143,7 +152,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEstimate: true,
                     administrationRoute: .insufflated,
                     ingestionTime: Date(),
-                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this"
+                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                    isTimeRelative: true
                 )
             }
         }
