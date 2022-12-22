@@ -55,7 +55,7 @@ struct ExperienceRowContent: View {
                 }
             }
         }
-        .badge(isTimeRelative ? Text(sortDate, style: .relative) : Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits)))
+        .badge(isTimeRelative ? Text(sortDate, style: .relative) + Text(" ago") : Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits)))
     }
 
     private func getDoubleColors() -> [Color] {
