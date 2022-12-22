@@ -21,6 +21,7 @@ struct FullTimeline: TimelineDrawable {
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
+        context.drawDot(startX: startX, maxHeight: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
         var path = Path()
         let onsetAndComeupWeight = 0.5
         let onsetEndX =
@@ -31,8 +32,7 @@ struct FullTimeline: TimelineDrawable {
             comeupEndX + (peak.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
         let offsetEndX =
             peakEndX + (offset.interpolateAtValueInSeconds(weight: peakAndOffsetWeight) * pixelsPerSec)
-        path.move(to: CGPoint(x: startX, y: maxHeight-2*lineWidth))
-        path.addLine(to: CGPoint(x: startX, y: maxHeight))
+        path.move(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         path.addLine(to: CGPoint(x: comeupEndX, y: minHeight))
         path.addLine(to: CGPoint(x: peakEndX, y: minHeight))

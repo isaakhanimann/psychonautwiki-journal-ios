@@ -28,12 +28,12 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
+        context.drawDot(startX: startX, maxHeight: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
         let onsetAndComeupWeight = 0.5
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetAndComeupWeight) * pixelsPerSec)
         let comeupEndX = onsetEndX + (comeup.interpolateAtValueInSeconds(weight: onsetAndComeupWeight) * pixelsPerSec)
         var path0 = Path()
-        path0.move(to: CGPoint(x: startX, y: maxHeight-2*lineWidth))
-        path0.addLine(to: CGPoint(x: startX, y: maxHeight))
+        path0.move(to: CGPoint(x: startX, y: maxHeight))
         path0.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
         path0.addLine(to: CGPoint(x: comeupEndX, y: minHeight))
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))

@@ -26,9 +26,9 @@ struct TotalTimeline: TimelineDrawable {
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        context.drawDot(startX: startX, maxHeight: height, dotRadius: 1.5 * lineWidth, color: color)
         var path = Path()
-        path.move(to: CGPoint(x: startX, y: height-2*lineWidth))
-        path.addLine(to: CGPoint(x: startX, y: height))
+        path.move(to: CGPoint(x: startX, y: height))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: startX,

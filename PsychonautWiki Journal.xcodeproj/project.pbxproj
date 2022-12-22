@@ -14,6 +14,7 @@
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
+		EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */; };
 		EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */; };
 		EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */; };
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
@@ -171,6 +172,7 @@
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
+		EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphicsContext-DrawDot.swift"; sourceTree = "<group>"; };
 		EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionBox.swift; sourceTree = "<group>"; };
 		EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				EABD92032941C3C30073303A /* FullTimeline.swift */,
+				EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */,
 				EABD92082941EA4B0073303A /* TotalTimeline.swift */,
 				EABD920C294202680073303A /* StrokeStyle-Timeline.swift */,
 				EABD921429421CE60073303A /* OnsetComeupTimeline.swift */,
@@ -907,6 +910,7 @@
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */,
+				EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
