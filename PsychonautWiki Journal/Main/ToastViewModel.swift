@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 class ToastViewModel: ObservableObject {
     @Published var successToastMessage = "Success"
     @Published var isShowingSuccessToast = false

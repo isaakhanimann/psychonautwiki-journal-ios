@@ -12,7 +12,7 @@ struct AcknowledgeInteractionsView: View {
                 .blur(radius: viewModel.isShowingAlert ? 10 : 0)
                 .allowsHitTesting(viewModel.isShowingAlert ? false : true)
             if viewModel.isShowingAlert {
-                InteractionAlertView(alertable: viewModel)
+                InteractionAlertView(viewModel: viewModel)
             }
         }
         .task {

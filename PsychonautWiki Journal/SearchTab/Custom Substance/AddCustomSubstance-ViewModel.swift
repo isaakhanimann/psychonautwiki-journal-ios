@@ -2,6 +2,7 @@ import Foundation
 
 extension AddCustomSubstanceView {
 
+    @MainActor
     class ViewModel: ObservableObject {
         @Published var name = ""
         @Published var explanation = ""

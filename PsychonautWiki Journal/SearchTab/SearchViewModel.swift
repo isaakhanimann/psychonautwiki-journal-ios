@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import CoreData
 
+@MainActor
 class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
     @Published var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
@@ -83,9 +84,13 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
             }.receive(on: DispatchQueue.main).assign(to: &$filteredSubstances)
     }
 
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let customs = controller.fetchedObjects as? [CustomSubstance] else {return}
-        self.customSubstances = customs
+        Task {
+            await MainActor.run {
+                self.customSubstances = customs
+            }
+        }
     }
 
     static func getFilteredSubstancesSorted(substances: [Substance], searchText: String) -> [Substance] {

@@ -11,7 +11,9 @@ struct ContentView: View {
 
     var body: some View {
         AllTabs()
-            .onOpenURL(perform: viewModel.receiveURL)
+            .onOpenURL(perform: { url in
+                viewModel.receiveURL(url: url)
+            })
             .toast(isPresenting: $toastViewModel.isShowingErrorToast) {
                 AlertToast(
                     displayMode: .alert,

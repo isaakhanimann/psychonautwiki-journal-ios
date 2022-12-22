@@ -1,6 +1,7 @@
 import Foundation
 
 extension ContentView {
+    @MainActor
     class ViewModel: ObservableObject {
         @Published var isEyeOpen = false {
             didSet {
@@ -15,11 +16,9 @@ extension ContentView {
 
         func receiveURL(url: URL) {
             if !isEyeOpen {
-                self.isEyeOpen = true
+                isEyeOpen = true
             }
-            DispatchQueue.main.async {
-                self.handleUniversalUrl(universalUrl: url)
-            }
+            handleUniversalUrl(universalUrl: url)
         }
 
         private func handleUniversalUrl(universalUrl: URL) {

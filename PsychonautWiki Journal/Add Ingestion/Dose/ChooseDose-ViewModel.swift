@@ -2,6 +2,7 @@ import Foundation
 
 extension ChooseDoseScreen {
 
+    @MainActor
     class ViewModel: ObservableObject {
         @Published var selectedUnits: String? = UnitPickerOptions.mg.rawValue
         @Published var selectedPureDose: Double?

@@ -3,6 +3,7 @@ import CoreData
 
 extension ChooseTimeAndColor {
 
+    @MainActor
     class ViewModel: ObservableObject {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue

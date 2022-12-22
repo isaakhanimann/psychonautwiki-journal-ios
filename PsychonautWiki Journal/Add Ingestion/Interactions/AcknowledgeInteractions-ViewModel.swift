@@ -3,7 +3,8 @@ import Algorithms
 
 extension AcknowledgeInteractionsView {
 
-    class ViewModel: ObservableObject, InteractionAlertable {
+    @MainActor
+    class ViewModel: ObservableObject {
 
         @Published var dangerousIngestions = [Ingestion]()
         @Published var unsafeIngestions = [Ingestion]()

@@ -8,6 +8,7 @@
 import Foundation
 
 extension ChooseSubstanceScreen {
+    @MainActor
     class ViewModel: ObservableObject {
         
         @Published var searchText = ""

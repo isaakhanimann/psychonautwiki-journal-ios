@@ -12,6 +12,7 @@ extension ExperiencesTab {
         let year: Int
         let experiences: [Experience]
     }
+    @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var experiences: [Experience] = []
         @Published var searchText = "" {
@@ -62,9 +63,13 @@ extension ExperiencesTab {
             self.experiences = experienceFetchController?.fetchedObjects ?? []
         }
 
-        public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             guard let exps = controller.fetchedObjects as? [Experience] else {return}
-            self.experiences = exps
+            Task {
+                await MainActor.run {
+                    self.experiences = exps
+                }
+            }
         }
 
         func delete(experience: Experience) {

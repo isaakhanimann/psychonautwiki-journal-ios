@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+@MainActor
 class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     @Published var substancesWithColor: [SubstanceWithColor] = []
     private let fetchController: NSFetchedResultsController<Ingestion>?
@@ -30,8 +31,13 @@ class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
         })
     }
 
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        setSubstancesWithColor()
+    nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Task {
+            await MainActor.run(body: {
+                setSubstancesWithColor()
+            })
+
+        }
     }
 }
 
