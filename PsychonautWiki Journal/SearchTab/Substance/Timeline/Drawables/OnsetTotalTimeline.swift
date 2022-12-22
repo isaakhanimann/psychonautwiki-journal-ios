@@ -27,7 +27,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
-        context.drawDot(startX: startX, maxHeight: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(startX: startX, bottomY: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
         let onsetWeight = 0.5
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetWeight) * pixelsPerSec)
         var path0 = Path()

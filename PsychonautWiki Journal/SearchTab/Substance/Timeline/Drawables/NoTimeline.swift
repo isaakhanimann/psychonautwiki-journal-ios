@@ -14,6 +14,6 @@ struct NoTimeline: TimelineDrawable {
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-        context.drawDot(startX: startX, maxHeight: height, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(startX: startX, bottomY: height, dotRadius: 1.5 * lineWidth, color: color)
     }
 }

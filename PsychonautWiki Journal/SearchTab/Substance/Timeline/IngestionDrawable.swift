@@ -12,7 +12,6 @@ struct IngestionDrawable {
     let color: Color
     let ingestionTime: Date
     let roaDuration: RoaDuration?
-    let verticalWeight: Double
     let horizontalWeight: Double
     let distanceFromStart: TimeInterval
     let timelineDrawable: TimelineDrawable
@@ -23,9 +22,8 @@ struct IngestionDrawable {
         self.color = color
         self.ingestionTime = ingestionTime
         self.roaDuration = roaDuration
-        self.verticalWeight = verticalWeight
         self.horizontalWeight = horizontalWeight
-        if let full = roaDuration?.toFullTimeline(peakAndOffsetWeight: horizontalWeight) {
+        if let full = roaDuration?.toFullTimeline(peakAndOffsetWeight: horizontalWeight, verticalWeight: verticalWeight) {
             self.timelineDrawable = full
         } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: horizontalWeight) {
             self.timelineDrawable = onsetComeupPeakTotal

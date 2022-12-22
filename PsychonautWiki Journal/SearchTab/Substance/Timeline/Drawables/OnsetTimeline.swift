@@ -24,7 +24,7 @@ struct OnsetTimeline : TimelineDrawable {
         let weight = 0.5
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
-        context.drawDot(startX: startX, maxHeight: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(startX: startX, bottomY: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: maxHeight))
