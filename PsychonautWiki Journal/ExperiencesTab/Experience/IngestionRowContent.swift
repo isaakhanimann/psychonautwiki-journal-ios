@@ -49,13 +49,16 @@ struct IngestionRowContent: View {
                     }
                     Spacer()
                     VStack(alignment: .trailing) {
-                        if let doseUnwrapped = dose {
-                            Text(administrationRoute.rawValue.localizedCapitalized + " " + (isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
-                        } else {
-                            Text("Unknown Dose")
-                        }
-                        if let numDotsUnwrap = numDots {
-                            DotRows(numDots: numDotsUnwrap)
+                        Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
+                        HStack {
+                            if let doseUnwrapped = dose {
+                                Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
+                            } else {
+                                Text("Unknown Dose")
+                            }
+                            if let numDotsUnwrap = numDots {
+                                DotRows(numDots: numDotsUnwrap)
+                            }
                         }
                     }
                 }
@@ -118,31 +121,32 @@ struct Dot: View {
 
 struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            IngestionRowContent(
-                numDots: 1,
-                substanceColor: .pink,
-                substanceName: "MDMA",
-                dose: 50,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .oral,
-                ingestionTime: Date(),
-                note: ""
-            )
-            IngestionRowContent(
-                numDots: 2,
-                substanceColor: .blue,
-                substanceName: "Cocaine",
-                dose: 30,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .insufflated,
-                ingestionTime: Date(),
-                note: "This is a longer note that might not fit on one line and it needs to be able to handle this"
-            )
+        List {
+            Section {
+                IngestionRowContent(
+                    numDots: 1,
+                    substanceColor: .pink,
+                    substanceName: "MDMA",
+                    dose: 50,
+                    units: "mg",
+                    isEstimate: true,
+                    administrationRoute: .oral,
+                    ingestionTime: Date(),
+                    note: ""
+                )
+                IngestionRowContent(
+                    numDots: 2,
+                    substanceColor: .blue,
+                    substanceName: "Cocaine",
+                    dose: 30,
+                    units: "mg",
+                    isEstimate: true,
+                    administrationRoute: .insufflated,
+                    ingestionTime: Date(),
+                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this"
+                )
+            }
         }
-        .previewLayout(.sizeThatFits)
     }
 }
 
