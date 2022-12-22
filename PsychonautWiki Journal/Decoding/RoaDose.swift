@@ -36,7 +36,7 @@ struct RoaDose: Decodable {
 
     func getNumDots(ingestionDose: Double?, ingestionUnits: String?) -> Int? {
         guard let dose = ingestionDose else { return nil }
-        guard ingestionUnits != units else { return nil }
+        guard ingestionUnits == units else { return nil }
         if let lightMinUnwrap = lightMin,
            dose < lightMinUnwrap {
             return 0

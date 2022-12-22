@@ -82,6 +82,9 @@ struct ExperienceScreen: View {
         .onAppear {
             calculateScreen()
         }
+        .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
+            calculateScreen()
+        }
     }
 
     private func calculateScreen() {
@@ -105,11 +108,12 @@ struct ExperienceScreen: View {
 
     private func calculateCumulativeDoses() {
         let ingestionsBySubstance = Dictionary(grouping: experience.sortedIngestionsUnwrapped, by: { $0.substanceNameUnwrapped })
-        cumulativeDoses = ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
+        let cumu: [CumulativeDose] = ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
             guard ingestions.count > 1 else {return nil}
             guard let color = ingestions.first?.substanceColor else {return nil}
             return CumulativeDose(ingestionsForSubstance: ingestions, substanceName: substanceName, substanceColor: color)
         }
+        cumulativeDoses = cumu
     }
 
 }
@@ -128,12 +132,16 @@ struct CumulativeDose: Identifiable {
         let substance = ingestionsForSubstance.first?.substance
         let ingestionsByRoute = Dictionary(grouping: ingestionsForSubstance, by: { $0.administrationRouteUnwrapped })
         self.cumulativeRoutes = ingestionsByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
-            CumulativeRouteAndDose(route: route, roaDose: substance?.getDose(for: route), ingestionForRoute: ingestions)
+            let roaDose = substance?.getDose(for: route)
+            return CumulativeRouteAndDose(route: route, roaDose: roaDose, ingestionForRoute: ingestions)
         }
     }
 }
 
-struct CumulativeRouteAndDose {
+struct CumulativeRouteAndDose: Identifiable {
+    var id: AdministrationRoute {
+        route
+    }
     let route: AdministrationRoute
     let numDots: Int?
     let isEstimate: Bool
