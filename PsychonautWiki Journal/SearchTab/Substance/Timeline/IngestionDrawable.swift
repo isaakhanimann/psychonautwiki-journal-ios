@@ -23,7 +23,10 @@ struct IngestionDrawable {
         self.ingestionTime = ingestionTime
         self.roaDuration = roaDuration
         self.horizontalWeight = horizontalWeight
-        if let full = roaDuration?.toFullTimeline(peakAndOffsetWeight: horizontalWeight, verticalWeight: verticalWeight) {
+        if let full = roaDuration?.toFullTimeline(
+            peakAndOffsetWeight: horizontalWeight,
+            verticalWeight: verticalWeight
+        ) {
             self.timelineDrawable = full
         } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: horizontalWeight) {
             self.timelineDrawable = onsetComeupPeakTotal
@@ -33,10 +36,15 @@ struct IngestionDrawable {
             self.timelineDrawable = onsetComeupTotal
         } else if let onsetTotal = roaDuration?.toOnsetTotalTimeline(totalWeight: horizontalWeight) {
             self.timelineDrawable = onsetTotal
-        } else if let onsetComeup = roaDuration?.toOnsetComeupTimeline() {
-            self.timelineDrawable = onsetComeup
+        } else if let total = roaDuration?.toTotalTimeline(
+            totalWeight: horizontalWeight,
+            verticalWeight: verticalWeight
+        ) {
+            self.timelineDrawable = total
         } else if let onsetComeupPeak = roaDuration?.toOnsetComeupPeakTimeline(peakWeight: horizontalWeight) {
             self.timelineDrawable = onsetComeupPeak
+        } else if let onsetComeup = roaDuration?.toOnsetComeupTimeline() {
+            self.timelineDrawable = onsetComeup
         } else if let onset = roaDuration?.toOnsetTimeline() {
             self.timelineDrawable = onset
         } else {

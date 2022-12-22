@@ -59,3 +59,47 @@ struct EffectTimeline: View {
         }
     }
 }
+
+
+struct EffectTimeline_Previews: PreviewProvider {
+    static var previews: some View {
+        List {
+            Section {
+                EffectTimeline(
+                    timelineModel: TimelineModel(
+                        everythingForEachLine: [
+                            EverythingForOneLine(
+                                roaDuration: RoaDuration(
+                                    onset: DurationRange(min: 20, max: 40, units: .minutes),
+                                    comeup: DurationRange(min: 30, max: 60, units: .minutes),
+                                    peak: DurationRange(min: 2, max: 3, units: .hours),
+                                    offset: DurationRange(min: 1, max: 2, units: .hours),
+                                    total: nil,
+                                    afterglow: nil
+                                ),
+                                startTime: Date().addingTimeInterval(-3*60*60),
+                                horizontalWeight: 0.5,
+                                verticalWeight: 0.75,
+                                color: .blue
+                            ),
+                            EverythingForOneLine(
+                                roaDuration: RoaDuration(
+                                    onset: nil,
+                                    comeup: nil,
+                                    peak: nil,
+                                    offset: nil,
+                                    total: DurationRange(min: 4, max: 6, units: .hours),
+                                    afterglow: nil
+                                ),
+                                startTime: Date().addingTimeInterval(-2*60*60),
+                                horizontalWeight: 0.5,
+                                verticalWeight: 0.5,
+                                color: .orange
+                            )
+                        ]
+                    )
+                )
+            }
+        }
+    }
+}
