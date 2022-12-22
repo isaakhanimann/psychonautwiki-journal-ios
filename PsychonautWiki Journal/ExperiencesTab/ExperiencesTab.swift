@@ -3,7 +3,6 @@ import SwiftUI
 struct ExperiencesTab: View {
 
     @StateObject var viewModel = ViewModel()
-    @State private var isShowingAddIngestionSheet = false
 
     var body: some View {
         NavigationView {
@@ -13,7 +12,7 @@ struct ExperiencesTab: View {
                     .disableAutocorrection(true)
                 if viewModel.experiences.isEmpty {
                     Button(action: {
-                        isShowingAddIngestionSheet.toggle()
+                        viewModel.isShowingAddIngestionSheet.toggle()
                     }, label: {
                         Label("Add Ingestion", systemImage: "plus")
                     })
@@ -21,15 +20,20 @@ struct ExperiencesTab: View {
                     .padding()
                 }
             }
-            .sheet(isPresented: $isShowingAddIngestionSheet) {
+            .sheet(isPresented: $viewModel.isShowingAddIngestionSheet) {
                 ChooseSubstanceScreen()
             }
             .navigationTitle("Experiences")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup {
+                    Button {
+                        viewModel.isTimeRelative.toggle()
+                    } label: {
+                        Label("Relative Time", systemImage: "timer.circle" + (viewModel.isTimeRelative ? ".fill" : ""))
+                    }
                     if !viewModel.experiences.isEmpty {
                         Button {
-                            isShowingAddIngestionSheet.toggle()
+                            viewModel.isShowingAddIngestionSheet.toggle()
                         } label: {
                             Label("Add Ingestion", systemImage: "plus")
                         }

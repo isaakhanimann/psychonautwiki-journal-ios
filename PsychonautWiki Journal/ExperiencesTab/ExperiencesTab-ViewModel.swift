@@ -2,16 +2,6 @@ import Foundation
 import CoreData
 
 extension ExperiencesTab {
-    struct ExperienceSection: Identifiable, Comparable {
-        static func < (lhs: ExperienceSection, rhs: ExperienceSection) -> Bool {
-            lhs.year > rhs.year
-        }
-        var id: Int {
-            year
-        }
-        let year: Int
-        let experiences: [Experience]
-    }
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var experiences: [Experience] = []
@@ -20,6 +10,8 @@ extension ExperiencesTab {
                 setupFetchRequestPredicateAndFetch()
             }
         }
+        @Published var isShowingAddIngestionSheet = false
+        @Published var isTimeRelative = false
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 
         override init() {

@@ -4,46 +4,83 @@ import Combine
 struct ExperienceRow: View {
 
     @ObservedObject var experience: Experience
+    let isTimeRelative: Bool
 
     var body: some View {
         return NavigationLink(
             destination: ExperienceScreen(experience: experience)
         ) {
-            HStack {
-                Circle()
-                    .fill(
-                        AngularGradient(
-                            gradient: Gradient(
-                                colors: getDoubleColors(from: experience.ingestionColors)),
-                            center: .center
-                        )
-                    )
-                    .frame(width: 35, height: 35)
-                Spacer()
-                    .frame(width: 10)
-                VStack(alignment: .leading) {
-                    Text(experience.titleUnwrapped)
-                        .font(.title2)
-                    if experience.distinctUsedSubstanceNames.isEmpty {
-                        Text("No substance yet")
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text(experience.distinctUsedSubstanceNames, format: .list(type: .and))
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
-            .badge(Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year(.twoDigits)))
+            ExperienceRowContent(
+                ingestionColors: experience.ingestionColors,
+                title: experience.titleUnwrapped,
+                distinctSubstanceNames: experience.distinctUsedSubstanceNames,
+                sortDate: experience.sortDateUnwrapped,
+                isTimeRelative: isTimeRelative
+            )
         }
     }
+}
 
-    private func getDoubleColors(from colors: [Color]) -> [Color] {
-        var doubleColors = colors.flatMap { color in
+struct ExperienceRowContent: View {
+
+    let ingestionColors: [Color]
+    let title: String
+    let distinctSubstanceNames: [String]
+    let sortDate: Date
+    let isTimeRelative: Bool
+
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(
+                    AngularGradient(
+                        gradient: Gradient(
+                            colors: getDoubleColors()),
+                        center: .center
+                    )
+                )
+                .frame(width: 35, height: 35)
+            Spacer()
+                .frame(width: 10)
+            VStack(alignment: .leading) {
+                Text(title)
+                    .font(.headline)
+                if distinctSubstanceNames.isEmpty {
+                    Text("No substance yet")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                } else {
+                    Text(distinctSubstanceNames, format: .list(type: .and))
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .badge(isTimeRelative ? Text(sortDate, style: .relative) : Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits)))
+    }
+
+    private func getDoubleColors() -> [Color] {
+        var doubleColors = ingestionColors.flatMap { color in
             Array(repeating: color, count: 2)
         }
-        if let firstColor = experience.ingestionColors.first {
+        if let firstColor = ingestionColors.first {
             doubleColors.append(firstColor)
         }
         return doubleColors
+    }
+}
+
+struct ExperienceRowContent_Previews: PreviewProvider {
+    static var previews: some View {
+        List {
+            Section {
+                ExperienceRowContent(
+                    ingestionColors: [.blue, .pink],
+                    title: "My title is not is a normal length",
+                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    sortDate: Date() - 5 * 60 * 60 - 30,
+                    isTimeRelative: false
+                )
+            }
+        }
     }
 }
