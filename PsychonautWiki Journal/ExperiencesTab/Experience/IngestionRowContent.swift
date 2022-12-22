@@ -35,12 +35,12 @@ struct IngestionRowContent: View {
     let note: String
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Image(systemName: "circle.fill")
                 .font(.title2)
                 .foregroundColor(substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
-                HStack(alignment: .top) {
+                HStack(alignment: .center) {
                     VStack(alignment: .leading) {
                         Text(substanceName)
                             .font(.headline)
