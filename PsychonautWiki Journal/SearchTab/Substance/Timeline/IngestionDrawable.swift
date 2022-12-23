@@ -50,7 +50,10 @@ struct IngestionDrawable {
             verticalWeight: verticalWeight
         ) {
             self.timelineDrawable = onsetComeupTotal
-        } else if let onsetTotal = roaDuration?.toOnsetTotalTimeline(totalWeight: horizontalWeight) {
+        } else if let onsetTotal = roaDuration?.toOnsetTotalTimeline(
+            totalWeight: horizontalWeight,
+            verticalWeight: verticalWeight
+        ) {
             self.timelineDrawable = onsetTotal
         } else if let total = roaDuration?.toTotalTimeline(
             totalWeight: horizontalWeight,

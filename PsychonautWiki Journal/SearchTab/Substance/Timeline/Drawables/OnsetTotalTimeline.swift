@@ -22,33 +22,44 @@ struct OnsetTotalTimeline: TimelineDrawable {
     let onset: FullDurationRange
     let total: FullDurationRange
     let totalWeight: Double
+    let verticalWeigth: Double
     let percentSmoothness: Double = 0.5
 
-    private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-        let minHeight = lineWidth/2
-        let maxHeight = height - minHeight
-        context.drawDot(startX: startX, bottomY: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
+    private func drawTimeLine(
+        context: GraphicsContext,
+        height: Double,
+        startX: Double,
+        pixelsPerSec: Double,
+        color: Color,
+        lineWidth: Double
+    ) {
+        var top = lineWidth/2
+        if verticalWeigth < 1 {
+            top = ((1-verticalWeigth)*height) + (lineWidth/2)
+        }
+        let bottom = height - lineWidth/2
+        context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         let onsetWeight = 0.5
         let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetWeight) * pixelsPerSec)
         var path0 = Path()
-        path0.move(to: CGPoint(x: startX, y: maxHeight))
-        path0.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
+        path0.move(to: CGPoint(x: startX, y: bottom))
+        path0.addLine(to: CGPoint(x: onsetEndX, y: bottom))
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
-        let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        let totalX = startX + (total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec)
         var path1 = Path()
-        path1.move(to: CGPoint(x: onsetEndX, y: maxHeight))
+        path1.move(to: CGPoint(x: onsetEndX, y: bottom))
         path1.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndX,
             endX: totalX/2,
-            endY: minHeight
+            endY: top
         )
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalX/2,
-            startY: 0,
+            startY: top,
             endX: totalX,
-            endY: maxHeight
+            endY: bottom
         )
         context.stroke(
             path1,
@@ -57,42 +68,51 @@ struct OnsetTotalTimeline: TimelineDrawable {
         )
     }
 
-    private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+    private func drawTimeLineShape(
+        context: GraphicsContext,
+        height: Double,
+        startX: Double,
+        pixelsPerSec: Double,
+        color: Color,
+        lineWidth: Double
+    ) {
+        let top = (1-verticalWeigth)*height
+        let bottom = height
         let onsetEndMinX = startX + (onset.min * pixelsPerSec)
         let onsetEndMaxX = startX + (onset.max * pixelsPerSec)
-        let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        let totalX = startX + (total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec)
         let totalMinX =
-        total.min * pixelsPerSec
-        let totalMaxX =
-        total.max * pixelsPerSec
+        startX + (total.min * pixelsPerSec)
+        let totalMaxX = startX +
+        (total.max * pixelsPerSec)
         var path = Path()
-        path.move(to: CGPoint(x:onsetEndMinX, y: height))
+        path.move(to: CGPoint(x:onsetEndMinX, y: bottom))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndMinX,
             endX: totalX / 2,
-            endY: 0
+            endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalX / 2,
-            startY: 0,
+            startY: top,
             endX: totalMaxX,
-            endY: height
+            endY: bottom
         )
-        path.addLine(to: CGPoint(x: totalMinX, y: height))
+        path.addLine(to: CGPoint(x: totalMinX, y: bottom))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalMinX,
             endX: totalX / 2,
-            endY: 0
+            endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalX / 2,
-            startY: 0,
+            startY: top,
             endX: onsetEndMaxX,
-            endY: height
+            endY: bottom
         )
         path.closeSubpath()
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
@@ -100,9 +120,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetTotalTimeline(totalWeight: Double) -> OnsetTotalTimeline? {
+    func toOnsetTotalTimeline(totalWeight: Double, verticalWeight: Double) -> OnsetTotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange, let fullOnset = onset?.maybeFullDurationRange {
-            return OnsetTotalTimeline(onset: fullOnset, total: fullTotal, totalWeight: totalWeight)
+            return OnsetTotalTimeline(
+                onset: fullOnset,
+                total: fullTotal,
+                totalWeight: totalWeight,
+                verticalWeigth: verticalWeight
+            )
         } else {
             return nil
         }
