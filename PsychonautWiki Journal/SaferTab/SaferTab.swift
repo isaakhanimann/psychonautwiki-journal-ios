@@ -14,7 +14,7 @@ struct SaferTab: View {
                 let title1 = "1. Research"
                 NavigationLink(title1) {
                     List {
-                        Text("In advance research the duration, subjective effects and potential adverse effects which the substance or combination of substances are likely to produce.\nRead the info in here and also the PsychonautWiki article. Its best to cross-reference with other sources (Tripsit, Erowid, Wikipedia, Bluelight, Reddit, etc). There is no rush.")
+                        Text("In advance research the duration, subjective effects and potential adverse effects which the substance or combination of substances are likely to produce.\nRead the info in here and also the PsychonautWiki article. Its best to cross-reference with other sources (Tripsit, Erowid, Wikipedia, Bluelight, Reddit, etc).\nThere is no rush.")
                     }.navigationTitle(title1)
                 }
                 let title2 = "2. Testing"
@@ -22,10 +22,10 @@ struct SaferTab: View {
                     List {
                         Text("Test your substance with anonymous and free drug testing services. If those are not available in your country, use reagent testing kits. Don‘t trust your dealer to sell reliable product. Its better to have a tested stash instead of relying on a source spontaneously.")
                         NavigationLink("Drug Testing Services") {
-                            TestingScreen()
+                            TestingServicesScreen()
                         }
-                        Button("Reagent Testing") {
-                            // Todo: open url
+                        NavigationLink("Reagent Testing") {
+                            ReagentTestingScreen()
                         }
                     }.navigationTitle(title2)
                 }

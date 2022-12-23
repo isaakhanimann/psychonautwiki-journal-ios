@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TestingScreen: View {
+struct TestingServicesScreen: View {
     var body: some View {
         List {
             Section("Austria") {
@@ -144,8 +144,8 @@ struct TestingServiceItem: View {
     }
 }
 
-struct TestingScreen_Previews: PreviewProvider {
+struct TestingServicesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TestingScreen()
+        TestingServicesScreen()
     }
 }
