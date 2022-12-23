@@ -158,6 +158,21 @@ struct EffectTimeline_Previews: PreviewProvider {
                                 verticalWeight: 0.75,
                                 color: .yellow
                             ),
+                            // onset comeup total
+                            EverythingForOneLine(
+                                roaDuration: RoaDuration(
+                                    onset: DurationRange(min: 1, max: 2, units: .hours),
+                                    comeup: DurationRange(min: 1, max: 2, units: .hours),
+                                    peak: nil,
+                                    offset: nil,
+                                    total: DurationRange(min: 6, max: 8, units: .hours),
+                                    afterglow: nil
+                                ),
+                                startTime: Date().addingTimeInterval(-45*60),
+                                horizontalWeight: 0.5,
+                                verticalWeight: 0.9,
+                                color: .cyan
+                            ),
 
                         ]
                     )
