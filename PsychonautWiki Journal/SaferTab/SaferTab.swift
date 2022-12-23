@@ -47,11 +47,18 @@ struct SaferTab: View {
                 let title4 = "4. Set and Setting"
                 NavigationLink(title4) {
                     List {
-                        Text("Set: Make sure your thoughts, desires, feelings, general mood, and any preconceived notions or expectations about what you are about to experience are conducive to the experience. Make sure your body is well. Better not to take it if you feel sick, injured or generally unhealthy.\n\nSetting: An unfamiliar, uncontrollable or otherwise disagreeable social or physical environment may result in an unpleasant or dangerous experience. Choose an environment that provides a sense of safety, familiarity, control, and comfort. For using hallucinogens (psychedelics, dissociatives and deliriants) refer to the safer hallucinogen guide.")
+                        Section("Set") {
+                            Text("Make sure your thoughts, desires, feelings, general mood, and any preconceived notions or expectations about what you are about to experience are conducive to the experience. Make sure your body is well. Better not to take it if you feel sick, injured or generally unhealthy.")
+                        }
+                        Section("Setting") {
+                            Text("An unfamiliar, uncontrollable or otherwise disagreeable social or physical environment may result in an unpleasant or dangerous experience. Choose an environment that provides a sense of safety, familiarity, control, and comfort. For using hallucinogens (psychedelics, dissociatives and deliriants) refer to the safer hallucinogen guide.")
+                        }
                         NavigationLink("Safer Hallucinogen Guide") {
                             SaferHallucinogenScreen()
                         }
-                    }.navigationTitle(title4)
+                    }
+                    .headerProminence(.increased)
+                    .navigationTitle(title4)
                 }
                 let title5 = "5. Combinations"
                 NavigationLink(title5) {
