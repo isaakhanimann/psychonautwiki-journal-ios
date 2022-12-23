@@ -83,6 +83,7 @@
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsTab.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
+		EAC25BFB2955EC900002D68F /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25BFA2955EC900002D68F /* TestingScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferTab.swift */; };
@@ -242,6 +243,7 @@
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTab.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
+		EAC25BFA2955EC900002D68F /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferTab.swift; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 			children = (
 				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EACB0C1D293FA4F500C605E2 /* SaferTab.swift */,
+				EAC25BFA2955EC900002D68F /* TestingScreen.swift */,
 			);
 			path = SaferTab;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
+				EAC25BFB2955EC900002D68F /* TestingScreen.swift in Sources */,
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,
 				EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
