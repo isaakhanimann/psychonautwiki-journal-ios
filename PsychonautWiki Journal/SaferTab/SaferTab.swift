@@ -49,7 +49,7 @@ struct SaferTab: View {
                     List {
                         Text("Set: Make sure your thoughts, desires, feelings, general mood, and any preconceived notions or expectations about what you are about to experience are conducive to the experience. Make sure your body is well. Better not to take it if you feel sick, injured or generally unhealthy.\n\nSetting: An unfamiliar, uncontrollable or otherwise disagreeable social or physical environment may result in an unpleasant or dangerous experience. Choose an environment that provides a sense of safety, familiarity, control, and comfort. For using hallucinogens (psychedelics, dissociatives and deliriants) refer to the safer hallucinogen guide.")
                         NavigationLink("Safer Hallucinogen Guide") {
-                            // Todo:
+                            SaferHallucinogenScreen()
                         }
                     }.navigationTitle(title4)
                 }
@@ -57,34 +57,34 @@ struct SaferTab: View {
                 NavigationLink(title5) {
                     List {
                         Text("Don’t combine drugs, including Alcohol, without research on the combo. The most common cause of substance-related deaths is the combination of depressants (such as opiates, benzodiazepines, or alcohol) with other depressants.")
-                        Button("Swiss Combination Checker") {
-                            let url = "https://combi-checker.ch"
-                            // Todo:
-                        }
-                        Button("Tripsit Combination Checker") {
-                            let url = "https://combo.tripsit.me"
-                            // Todo:
-                        }
+                        Link(
+                            "Swiss Combination Checker",
+                            destination: URL(string: "https://combi-checker.ch")!
+                        )
+                        Link(
+                            "Tripsit Combination Checker",
+                            destination: URL(string: "https://combo.tripsit.me")!
+                        )
                     }.navigationTitle(title5)
                 }
                 let title6 = "6. Administration Routes"
                 NavigationLink(title6) {
                     List {
                         Text("Don’t share snorting equipment (straws, banknotes, bullets) to avoid blood-borne diseases such as Hepatitis C that can be transmitted through blood amounts so small you can’t notice. Injection is the the most dangerous route of administration and highly advised against. If you are determined to inject, don’t share injection materials and refer to the safer injection guide.")
-                        Button("Safer Snorting") {
-                            let url = "https://www.youtube.com/watch?v=31fuvYXxeV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR"
-                            // Todo:
-                        }
-                        Button("Safer Smoking") {
-                            let url = "https://www.youtube.com/watch?v=lBlS2e46CV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR"
-                            // Todo:
-                        }
-                        Button("Safer Injecting") {
-                            let url = "https://www.youtube.com/watch?v=N7HjCPz4A7Y&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR"
-                            // Todo:
-                        }
+                        Link(
+                            "Safer Snorting",
+                            destination: URL(string: "https://www.youtube.com/watch?v=31fuvYXxeV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
+                        )
+                        Link(
+                            "Safer Smoking",
+                            destination: URL(string: "https://www.youtube.com/watch?v=lBlS2e46CV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
+                        )
+                        Link(
+                            "Safer Injecting",
+                            destination: URL(string: "https://www.youtube.com/watch?v=N7HjCPz4A7Y&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
+                        )
                         NavigationLink("Administration Routes Info") {
-                            // Todo:
+                            AdministrationRouteScreen()
                         }
                     }.navigationTitle(title6)
                 }
@@ -111,10 +111,10 @@ struct SaferTab: View {
                     NavigationLink(title10) {
                         List {
                             Text("If someone is unconscious and breathing place them into Recovery Position to prevent death by the suffocation of vomit after a drug overdose.\nHave the contact details of help services to hand in case of urgent need.")
-                            Button("Recovery Position Video") {
-                                let url = "https://www.youtube.com/watch?v=dv3agW-DZ5I"
-                                // Todo:
-                            }
+                            Link(
+                                "Recovery Position Video",
+                                destination: URL(string: "https://www.youtube.com/watch?v=dv3agW-DZ5I")!
+                            )
                         }.navigationTitle(title10)
                     }
                 }

@@ -88,6 +88,8 @@
 		EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */; };
 		EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C01295600F20002D68F /* DosageClassificationScreen.swift */; };
 		EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */; };
+		EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */; };
+		EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferTab.swift */; };
@@ -252,6 +254,8 @@
 		EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageGuideScreen.swift; sourceTree = "<group>"; };
 		EAC25C01295600F20002D68F /* DosageClassificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageClassificationScreen.swift; sourceTree = "<group>"; };
 		EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricDosingScreen.swift; sourceTree = "<group>"; };
+		EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferHallucinogenScreen.swift; sourceTree = "<group>"; };
+		EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRouteScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferTab.swift; sourceTree = "<group>"; };
@@ -529,6 +533,8 @@
 			isa = PBXGroup;
 			children = (
 				EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */,
+				EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */,
+				EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */,
 				EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */,
 				EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */,
 				EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */,
@@ -911,6 +917,7 @@
 				EAE471BE26CBA664009FB0EC /* SettingsScreen.swift in Sources */,
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
+				EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */,
 				EABD922029427A9C0073303A /* DosesScreen.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */,
@@ -930,6 +937,7 @@
 				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
+				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
 				EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
