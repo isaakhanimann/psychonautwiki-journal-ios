@@ -85,6 +85,9 @@
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
 		EAC25BFB2955EC900002D68F /* TestingServicesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */; };
 		EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */; };
+		EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */; };
+		EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C01295600F20002D68F /* DosageClassificationScreen.swift */; };
+		EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferTab.swift */; };
@@ -246,6 +249,9 @@
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingServicesScreen.swift; sourceTree = "<group>"; };
 		EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentTestingScreen.swift; sourceTree = "<group>"; };
+		EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageGuideScreen.swift; sourceTree = "<group>"; };
+		EAC25C01295600F20002D68F /* DosageClassificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageClassificationScreen.swift; sourceTree = "<group>"; };
+		EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricDosingScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferTab.swift; sourceTree = "<group>"; };
@@ -519,6 +525,18 @@
 			path = StatsTab;
 			sourceTree = "<group>";
 		};
+		EAC25BFE2955FCFA0002D68F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */,
+				EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */,
+				EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */,
+				EAC25BFF2955FD190002D68F /* DosageGuideScreen.swift */,
+				EAC25C01295600F20002D68F /* DosageClassificationScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		EACB0C1C293FA48B00C605E2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,8 +617,7 @@
 			children = (
 				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EACB0C1D293FA4F500C605E2 /* SaferTab.swift */,
-				EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */,
-				EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */,
+				EAC25BFE2955FCFA0002D68F /* Screens */,
 			);
 			path = SaferTab;
 			sourceTree = "<group>";
@@ -846,6 +863,7 @@
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EA47E67327CB490300F6E10F /* AllTabs.swift in Sources */,
+				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
@@ -908,6 +926,7 @@
 				EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
+				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
@@ -934,6 +953,7 @@
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
+				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EACB0C1E293FA4F500C605E2 /* SaferTab.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
