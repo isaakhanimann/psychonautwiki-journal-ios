@@ -35,9 +35,15 @@ struct IngestionDrawable {
             verticalWeight: verticalWeight
         ) {
             self.timelineDrawable = full
-        } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: horizontalWeight) {
+        } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(
+            peakAndTotalWeight: horizontalWeight,
+            verticalWeight: verticalWeight
+        ) {
             self.timelineDrawable = onsetComeupPeakTotal
-        } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: horizontalWeight) {
+        } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(
+            peakAndTotalWeight: horizontalWeight,
+            verticalWeight: verticalWeight
+        ) {
             self.timelineDrawable = onsetComeupPeakTotal
         } else if let onsetComeupTotal = roaDuration?.toOnsetComeupTotalTimeline(totalWeight: horizontalWeight) {
             self.timelineDrawable = onsetComeupTotal

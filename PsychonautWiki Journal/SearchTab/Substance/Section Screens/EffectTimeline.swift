@@ -71,7 +71,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                             // full
                             EverythingForOneLine(
                                 roaDuration: RoaDuration(
-                                    onset: DurationRange(min: 20, max: 40, units: .minutes),
+                                    onset: DurationRange(min: 30, max: 60, units: .minutes),
                                     comeup: DurationRange(min: 30, max: 60, units: .minutes),
                                     peak: DurationRange(min: 2, max: 3, units: .hours),
                                     offset: DurationRange(min: 1, max: 2, units: .hours),
@@ -110,9 +110,25 @@ struct EffectTimeline_Previews: PreviewProvider {
                                 ),
                                 startTime: Date().addingTimeInterval(-2*60*60),
                                 horizontalWeight: 0.5,
-                                verticalWeight: 0.5,
+                                verticalWeight: 1,
                                 color: .pink
                             ),
+                            // onset comeup peak total
+                            EverythingForOneLine(
+                                roaDuration: RoaDuration(
+                                    onset: DurationRange(min: 30, max: 60, units: .minutes),
+                                    comeup: DurationRange(min: 1, max: 2, units: .hours),
+                                    peak: DurationRange(min: 1, max: 2, units: .hours),
+                                    offset: nil,
+                                    total: DurationRange(min: 6, max: 8, units: .hours),
+                                    afterglow: nil
+                                ),
+                                startTime: Date().addingTimeInterval(-60*60),
+                                horizontalWeight: 0.5,
+                                verticalWeight: 0.5,
+                                color: .green
+                            ),
+
                         ]
                     )
                 )
