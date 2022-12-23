@@ -17,7 +17,14 @@ struct IngestionDrawable {
     let timelineDrawable: TimelineDrawable
     var insetTimes = 0
 
-    init(startGraph: Date, color: Color, ingestionTime: Date, roaDuration: RoaDuration?, verticalWeight: Double = 1, horizontalWeight: Double = 0.5) {
+    init(
+        startGraph: Date,
+        color: Color,
+        ingestionTime: Date,
+        roaDuration: RoaDuration?,
+        verticalWeight: Double = 1,
+        horizontalWeight: Double = 0.5
+    ) {
         self.distanceFromStart = ingestionTime.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
         self.color = color
         self.ingestionTime = ingestionTime
@@ -43,7 +50,7 @@ struct IngestionDrawable {
             self.timelineDrawable = total
         } else if let onsetComeupPeak = roaDuration?.toOnsetComeupPeakTimeline(peakWeight: horizontalWeight) {
             self.timelineDrawable = onsetComeupPeak
-        } else if let onsetComeup = roaDuration?.toOnsetComeupTimeline() {
+        } else if let onsetComeup = roaDuration?.toOnsetComeupTimeline(verticalWeight: verticalWeight) {
             self.timelineDrawable = onsetComeup
         } else if let onset = roaDuration?.toOnsetTimeline() {
             self.timelineDrawable = onset

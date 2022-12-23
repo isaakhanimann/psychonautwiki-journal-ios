@@ -68,6 +68,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                 EffectTimeline(
                     timelineModel: TimelineModel(
                         everythingForEachLine: [
+                            // full
                             EverythingForOneLine(
                                 roaDuration: RoaDuration(
                                     onset: DurationRange(min: 20, max: 40, units: .minutes),
@@ -82,6 +83,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                                 verticalWeight: 0.75,
                                 color: .blue
                             ),
+                            // total
                             EverythingForOneLine(
                                 roaDuration: RoaDuration(
                                     onset: nil,
@@ -95,7 +97,22 @@ struct EffectTimeline_Previews: PreviewProvider {
                                 horizontalWeight: 0.5,
                                 verticalWeight: 0.5,
                                 color: .orange
-                            )
+                            ),
+                            // onset comeup
+                            EverythingForOneLine(
+                                roaDuration: RoaDuration(
+                                    onset: DurationRange(min: 20, max: 40, units: .minutes),
+                                    comeup: DurationRange(min: 1, max: 2, units: .hours),
+                                    peak: nil,
+                                    offset: nil,
+                                    total: nil,
+                                    afterglow: nil
+                                ),
+                                startTime: Date().addingTimeInterval(-2*60*60),
+                                horizontalWeight: 0.5,
+                                verticalWeight: 0.5,
+                                color: .pink
+                            ),
                         ]
                     )
                 )

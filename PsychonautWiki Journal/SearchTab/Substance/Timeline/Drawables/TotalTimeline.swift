@@ -36,7 +36,12 @@ struct TotalTimeline: TimelineDrawable {
         let bottom = height
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
-        context.drawDot(startX: startX, bottomY: bottom-lineWidth/2, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(
+            startX: startX,
+            bottomY: bottom-lineWidth/2,
+            dotRadius: 1.5 * lineWidth,
+            color: color
+        )
         var path = Path()
         path.move(to: CGPoint(x: startX, y: height))
         path.endSmoothLineTo(
