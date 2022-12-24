@@ -20,6 +20,7 @@
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
+		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -184,6 +185,7 @@
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
+		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -371,6 +373,8 @@
 			children = (
 				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
 				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
+				EA41C6162956C683000DA021 /* InteractionChecker.swift */,
+				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 			);
 			path = Interactions;
 			sourceTree = "<group>";
@@ -712,7 +716,6 @@
 				EAACB08B2947C4040050E002 /* Route */,
 				EA095A1027D9E3D0007D44D6 /* Dose */,
 				EA095A1127D9E3E8007D44D6 /* Time and Color */,
-				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 			);
 			path = "Add Ingestion";
@@ -979,6 +982,7 @@
 				EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */,
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsTab.swift in Sources */,
+				EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
 				EA527A8C294288D6009C142D /* EffectScreen.swift in Sources */,
