@@ -113,7 +113,15 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         } else {
             if prefixResult.count < 3 {
                 let containsResult = getSortedContainsResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
-                return (prefixResult + containsResult).uniqued()
+                return containsResult.sorted { sub1, sub2 in
+                    if prefixResult.contains(sub2) {
+                        return true
+                    } else if prefixResult.contains(sub1) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
             } else {
                 return prefixResult
             }
