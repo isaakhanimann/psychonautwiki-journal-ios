@@ -137,7 +137,6 @@
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
 		EAF76C9427D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */; };
 		EAF76C9927D899E700945587 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9827D899E700945587 /* AlertToast */; };
-		EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */; };
 		EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
 		EAF76CA027D8B72900945587 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9F27D8B72900945587 /* Algorithms */; };
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
@@ -307,7 +306,6 @@
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
 		EAF76C9327D7AEEA00945587 /* ChooseTimeAndColor-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseTimeAndColor-ViewModel.swift"; sourceTree = "<group>"; };
-		EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AcknowledgeInteractions-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
 		EAF76CA527D9081C00945587 /* InteractionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertView.swift; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 			isa = PBXGroup;
 			children = (
 				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
-				EAF76C9A27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift */,
 				EA41C6162956C683000DA021 /* InteractionChecker.swift */,
 				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 			);
@@ -937,7 +934,6 @@
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
-				EAF76C9B27D8ACDF00945587 /* AcknowledgeInteractions-ViewModel.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,

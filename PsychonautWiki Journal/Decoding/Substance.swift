@@ -1,9 +1,16 @@
 import Foundation
 import CoreData
 
-struct Substance: Decodable, Identifiable {
+struct Substance: Decodable, Identifiable, Hashable {
+    static func == (lhs: Substance, rhs: Substance) -> Bool {
+        lhs.name == rhs.name
+    }
+
     var id: String {
         name
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
     let name: String
     let url: URL

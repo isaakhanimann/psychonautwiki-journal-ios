@@ -23,11 +23,11 @@ class RecentSubstancesViewModel: NSObject, ObservableObject, NSFetchedResultsCon
 
     private func setSubstancesWithColor() {
         let ingestions = fetchController?.fetchedObjects ?? []
-        substancesWithColor = ingestions.uniqued(on: { ing in
+        substancesWithColor = ingestions.map({ ing in
             ing.substanceNameUnwrapped
-        }).compactMap({ ing in
-            guard let substance = SubstanceRepo.shared.getSubstance(name: ing.substanceNameUnwrapped) else {return nil}
-            return SubstanceWithColor(substance: substance, color: ing.substanceColor)
+        }).uniqued().compactMap({ substanceName in
+            guard let substance = SubstanceRepo.shared.getSubstance(name: substanceName) else {return nil}
+            return SubstanceWithColor(substance: substance, color: getColor(for: substanceName))
         })
     }
 

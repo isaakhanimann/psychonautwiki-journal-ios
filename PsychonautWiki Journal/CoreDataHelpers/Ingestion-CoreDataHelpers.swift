@@ -47,12 +47,16 @@ extension Ingestion: Comparable {
     }
 
     var substanceColor: SubstanceColor {
-        let fetchRequest = SubstanceCompanion.fetchRequest()
-        fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(
-            format: "substanceName = %@", substanceNameUnwrapped
-        )
-        let maybeColor = try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.color
-        return maybeColor ?? SubstanceColor.purple
+        getColor(for: substanceNameUnwrapped)
     }
+}
+
+func getColor(for substanceName: String) -> SubstanceColor {
+    let fetchRequest = SubstanceCompanion.fetchRequest()
+    fetchRequest.fetchLimit = 1
+    fetchRequest.predicate = NSPredicate(
+        format: "substanceName = %@", substanceName
+    )
+    let maybeColor = try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.color
+    return maybeColor ?? SubstanceColor.purple
 }

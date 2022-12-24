@@ -78,7 +78,7 @@ struct InteractionChecker {
         }
         let range = NSRange(location: 0, length: substance.name.utf16.count)
         let isWildCardMatch = extendedInteractions.contains { interaction in
-            guard let regex = try? NSRegularExpression(pattern: interaction.replacingOccurrences(of: "x", with: "[\\S]*")) else {return false}
+            guard let regex = try? NSRegularExpression(pattern: interaction.replacingOccurrences(of: "x", with: "[\\S]*"), options: .caseInsensitive) else {return false}
             return regex.firstMatch(in: substance.name, options: [], range: range) != nil
         }
         return extendedInteractions.contains(substance.name) || isSubstanceInDangerClass || isWildCardMatch
@@ -163,4 +163,20 @@ struct Interaction {
     let aName: String
     let bName: String
     let interactionType: InteractionType
+}
+
+extension Interaction: Hashable, Identifiable {
+    var id: Int {
+        hashValue
+    }
+
+    func hash(into hasher: inout Hasher) {
+        var hash: String = interactionType.hashValue.formatted()
+        if aName < bName {
+            hash = hash + aName + bName
+        } else {
+            hash = hash + bName + aName
+        }
+        hasher.combine(hash)
+    }
 }

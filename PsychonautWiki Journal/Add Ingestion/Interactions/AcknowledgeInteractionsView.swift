@@ -4,19 +4,53 @@ struct AcknowledgeInteractionsView: View {
 
     let substance: Substance
     let dismiss: () -> Void
-    @StateObject private var viewModel = ViewModel()
+    @State private var isShowingAlert = false
+    @State private var interactions: [Interaction] = []
+
+    var body: some View {
+        AcknowledgeInteractionsContent(
+            substance: substance,
+            dismiss: dismiss,
+            interactions: interactions,
+            isShowingAlert: $isShowingAlert
+        ).task {
+            let recentIngestions = PersistenceController.shared.getRecentIngestions()
+            let names = recentIngestions.map { ing in
+                ing.substanceNameUnwrapped
+            }.uniqued()
+            let interactions = names.compactMap { name in
+                InteractionChecker.getInteractionBetween(aName: substance.name, bName: name)
+            }.uniqued().sorted { int1, int2 in
+                int1.interactionType.dangerCount > int2.interactionType.dangerCount
+            }
+            self.interactions = interactions
+            if !interactions.isEmpty {
+                isShowingAlert = true
+            }
+        }
+    }
+}
+
+struct AcknowledgeInteractionsContent: View {
+    
+    let substance: Substance
+    let dismiss: () -> Void
+    let interactions: [Interaction]
+    @Binding var isShowingAlert: Bool
+
+
 
     var body: some View {
         ZStack {
             regularContent
-                .blur(radius: viewModel.isShowingAlert ? 10 : 0)
-                .allowsHitTesting(viewModel.isShowingAlert ? false : true)
-            if viewModel.isShowingAlert {
-                InteractionAlertView(viewModel: viewModel)
+                .blur(radius: isShowingAlert ? 10 : 0)
+                .allowsHitTesting(!isShowingAlert)
+            if isShowingAlert {
+                InteractionAlertView(
+                    interactions: interactions,
+                    isShowing: $isShowingAlert
+                )
             }
-        }
-        .task {
-            viewModel.checkInteractionsWith(substance: substance)
         }
     }
 
@@ -30,16 +64,14 @@ struct AcknowledgeInteractionsView: View {
                 }
                 EmptySectionForPadding()
             }
-            Button("Next") {
-                viewModel.pressNext()
-            }
-            .buttonStyle(.primary)
+            NavigationLink(
+                destination: ChooseRouteScreen(substance: substance, dismiss: dismiss),
+                label: {
+                    Text("Next")
+                        .primaryButtonText()
+                }
+            )
             .padding()
-            NavigationLink("Next", isActive: $viewModel.isShowingNext) {
-                ChooseRouteScreen(substance: substance, dismiss: dismiss)
-            }
-            .allowsHitTesting(false)
-            .hidden()
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -49,5 +81,16 @@ struct AcknowledgeInteractionsView: View {
             }
         }
         .navigationBarTitle(substance.name + " Interactions")
+    }
+}
+
+struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
+    static var previews: some View {
+        AcknowledgeInteractionsContent(
+            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+            dismiss: {},
+            interactions: [],
+            isShowingAlert: .constant(false)
+        )
     }
 }

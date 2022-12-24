@@ -2,14 +2,17 @@ import SwiftUI
 
 struct InteractionAlertView: View {
 
-    @ObservedObject var viewModel: AcknowledgeInteractionsView.ViewModel
+    let interactions: [Interaction]
+    @Binding var isShowing: Bool
 
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             title
             textBody
-            buttons
-                .padding(.top, 10)
+            Button("Cancel") {
+                isShowing = false
+            }
+            .padding(.top, 10)
         }
         .padding(20)
         .background(.ultraThickMaterial)
@@ -19,9 +22,13 @@ struct InteractionAlertView: View {
     }
 
     var iconColor: Color {
-        if !viewModel.dangerousIngestions.isEmpty {
+        if interactions.contains(where: { int in
+            int.interactionType == .dangerous
+        }) {
             return InteractionType.dangerous.color
-        } else if !viewModel.unsafeIngestions.isEmpty {
+        } else if interactions.contains(where: { int in
+            int.interactionType == .unsafe
+        }) {
             return InteractionType.unsafe.color
         } else {
             return InteractionType.uncertain.color
@@ -42,35 +49,15 @@ struct InteractionAlertView: View {
 
     var textBody: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ForEach(viewModel.dangerousIngestions) { ing in
-                getAlertText(for: ing, of: .dangerous)
-            }
-            ForEach(viewModel.unsafeIngestions) { ing in
-                getAlertText(for: ing, of: .unsafe)
-            }
-            ForEach(viewModel.uncertainIngestions) { ing in
-                getAlertText(for: ing, of: .uncertain)
+            ForEach(interactions) { interaction in
+                getAlertText(for: interaction)
             }
         }
     }
 
-    var buttons: some View {
-        HStack {
-            Button("Cancel") {
-                viewModel.hideAlert()
-            }
-            Spacer()
-            Button("Add Anyway") {
-                viewModel.hideAlert()
-                viewModel.showNext()
-            }
-            .foregroundColor(.red)
-        }
-    }
-
-    func getAlertText(for ingestion: Ingestion, of type: InteractionType) -> Text {
+    func getAlertText(for interaction: Interaction) -> Text {
         var result = Text("")
-        switch type {
+        switch interaction.interactionType {
         case .uncertain:
             result = Text("**Uncertain Interaction**")
         case .unsafe:
@@ -78,23 +65,15 @@ struct InteractionAlertView: View {
         case .dangerous:
             result = Text("**Dangerous Interaction**")
         }
-        result = result + Text(" with **\(ingestion.substanceNameUnwrapped)**")
-        let isIngestionInPast = ingestion.timeUnwrapped < Date()
-        if isIngestionInPast {
-            result = result + Text(" which you took ")
-            result = result + Text(ingestion.timeUnwrapped, style: .relative)
-            result = result + Text(" ago.")
-        } else {
-            result = result + Text(" which you planned on taking in ")
-            result = result + Text(ingestion.timeUnwrapped, style: .relative)
-            result = result + Text(".")
-        }
+        result = result + Text(" between **\(interaction.aName) and \(interaction.bName)**")
         return result
     }
 }
 
 struct InteractionAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionAlertView(viewModel: AcknowledgeInteractionsView.ViewModel())
+        InteractionAlertView(
+            interactions: [Interaction(aName: "Tramadol", bName: "Alcohol", interactionType: .dangerous)],
+            isShowing: .constant(true))
     }
 }

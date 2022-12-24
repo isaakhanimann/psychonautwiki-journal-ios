@@ -94,11 +94,14 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
 
     static func getFilteredSubstancesSorted(substances: [Substance], searchText: String) -> [Substance] {
         let filteredSubstances = getFilteredSubstances(substances: substances, searchText: searchText)
-        let common = filteredSubstances.filter { sub in
-            sub.categories.contains("common")
-        }
-        return (common + filteredSubstances).uniqued { sub in
-            sub.name
+        return filteredSubstances.sorted { sub1, sub2 in
+            if sub1.categories.contains("common") {
+                return true
+            } else if sub2.categories.contains("common") {
+                return false
+            } else {
+                return true
+            }
         }
     }
 
@@ -110,9 +113,7 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         } else {
             if prefixResult.count < 3 {
                 let containsResult = getSortedContainsResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
-                return (prefixResult + containsResult).uniqued { sub in
-                    sub.name
-                }
+                return (prefixResult + containsResult).uniqued()
             } else {
                 return prefixResult
             }
