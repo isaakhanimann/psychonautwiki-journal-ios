@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct SaferTab: View {
+struct SaferScreen: View {
+
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         NavigationView {
             List {
@@ -128,9 +131,9 @@ struct SaferTab: View {
             }
             .navigationTitle("Safer Use")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingsScreen()) {
-                        Label("Settings", systemImage: "gearshape")
+                ToolbarItem {
+                    Button("Done") {
+                        dismiss()
                     }
                 }
             }
@@ -140,6 +143,6 @@ struct SaferTab: View {
 
 struct SaferTab_Previews: PreviewProvider {
     static var previews: some View {
-        SaferTab()
+        SaferScreen()
     }
 }

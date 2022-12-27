@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ExperiencesList: View {
 
-    @ObservedObject var viewModel: ExperiencesTab.ViewModel
+    @ObservedObject var viewModel: HomeScreen.ViewModel
     @Environment(\.isSearching) private var isSearching
 
     var body: some View {

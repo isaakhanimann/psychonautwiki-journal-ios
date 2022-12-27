@@ -101,7 +101,7 @@ struct EditIngestionContent: View {
                 }
             }
         }
-        .navigationTitle("Edit \(substanceName) Ingestion")
+        .navigationTitle("Edit \(substanceName)")
         .toolbar {
             ToolbarItem {
                 Button("Done", action: save)

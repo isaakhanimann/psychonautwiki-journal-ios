@@ -1,9 +1,10 @@
 import SwiftUI
 
-struct SearchTab: View {
+struct SearchScreen: View {
 
     @StateObject var viewModel = SearchViewModel()
     @State private var isShowingAddCustomSubstance = false
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
@@ -16,11 +17,11 @@ struct SearchTab: View {
                 .disableAutocorrection(true)
                 .navigationTitle("Substances")
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .bottomBar) {
                         Button {
                             isShowingAddCustomSubstance.toggle()
                         } label: {
-                            Label("Add custom substance", systemImage: "plus")
+                            Label("Add Custom", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                         }
                     }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -46,6 +47,9 @@ struct SearchTab: View {
                                 Text("Clear")
                             }
 
+                        }
+                        Button("Done") {
+                            dismiss()
                         }
                     }
                 }
