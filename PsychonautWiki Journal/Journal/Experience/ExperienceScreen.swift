@@ -46,12 +46,6 @@ struct ExperienceScreen: View {
                             )
                         }
                     }
-                    Button {
-                        isShowingAddIngestionSheet.toggle()
-                    } label: {
-                        Label("Add Ingestion", systemImage: "plus")
-                            .foregroundColor(.accentColor)
-                    }
                 }
                 if !cumulativeDoses.isEmpty {
                     Section("Cumulative Doses") {
@@ -100,12 +94,9 @@ struct ExperienceScreen: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowingAddIngestionSheet, content: {
-            ChooseSubstanceScreen()
-        })
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
-            ToolbarItemGroup {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     isTimeRelative.toggle()
                 } label: {
@@ -113,6 +104,21 @@ struct ExperienceScreen: View {
                 }
                 NavigationLink("Edit") {
                     EditExperienceScreen(experience: experience)
+                }
+            }
+
+            ToolbarItem(placement: .bottomBar) {
+                let twelveHours: TimeInterval = 12*60*60
+                if let lastIngestionTime = experience.sortedIngestionsUnwrapped.last?.time,
+                   Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
+                    Button {
+                        isShowingAddIngestionSheet.toggle()
+                    } label: {
+                        Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                    }
+                    .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+                        ChooseSubstanceScreen()
+                    })
                 }
             }
         }
