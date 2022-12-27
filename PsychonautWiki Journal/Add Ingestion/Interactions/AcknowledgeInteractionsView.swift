@@ -58,7 +58,12 @@ struct AcknowledgeInteractionsContent: View {
         ZStack(alignment: .bottom) {
             List {
                 if let interactions = substance.interactions {
-                    InteractionSection(interactions: interactions, substanceURL: substance.url)
+                    Section {
+                        InteractionsGroup(
+                            interactions: interactions,
+                            substanceURL: substance.url
+                        )
+                    }
                 } else {
                     Text("There are no documented interactions")
                 }

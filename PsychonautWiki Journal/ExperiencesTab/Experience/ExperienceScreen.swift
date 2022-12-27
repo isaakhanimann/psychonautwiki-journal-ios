@@ -92,6 +92,9 @@ struct ExperienceScreen: View {
                             interactionType: interaction.interactionType
                         )
                     }
+                    NavigationLink("See All") {
+                        GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                    }
                 }
             }
         }
@@ -127,9 +130,10 @@ struct ExperienceScreen: View {
     }
 
     private func setSubstances() {
-        self.substancesUsed = experience.sortedIngestionsUnwrapped.compactMap({ ingestion in
-            ingestion.substance
-        })
+        self.substancesUsed = experience.sortedIngestionsUnwrapped
+            .map { $0.substanceNameUnwrapped }
+            .uniqued()
+            .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
     }
 
     private func calculateTimeline() {
