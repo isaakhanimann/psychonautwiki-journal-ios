@@ -10,7 +10,7 @@ struct ContentView: View {
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
 
     var body: some View {
-        HomeScreen()
+        RootScreen()
             .onOpenURL(perform: { url in
                 viewModel.receiveURL(url: url)
             })

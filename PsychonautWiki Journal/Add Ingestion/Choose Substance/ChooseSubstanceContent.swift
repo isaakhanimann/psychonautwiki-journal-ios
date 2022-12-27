@@ -53,7 +53,7 @@ struct ChooseSubstanceContent: View {
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .disableAutocorrection(true)
-            .navigationBarTitle("Add Ingestion")
+            .navigationBarTitle("New Ingestion")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Cancel") {

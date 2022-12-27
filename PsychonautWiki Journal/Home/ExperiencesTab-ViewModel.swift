@@ -11,8 +11,6 @@ extension HomeScreen {
             }
         }
         @Published var isShowingAddIngestionSheet = false
-        @Published var isShowingSubstances = false
-        @Published var isShowingSafer = false
         @Published var isTimeRelative = false
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 

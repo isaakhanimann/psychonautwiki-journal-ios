@@ -24,6 +24,7 @@
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
 		EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61C295AF236000DA021 /* InteractionsGroup.swift */; };
+		EA41C61F295B5DE4000DA021 /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61E295B5DE4000DA021 /* RootScreen.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -190,6 +191,7 @@
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
 		EA41C61C295AF236000DA021 /* InteractionsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsGroup.swift; sourceTree = "<group>"; };
+		EA41C61E295B5DE4000DA021 /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
+				EA41C61E295B5DE4000DA021 /* RootScreen.swift */,
 				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
 			);
 			path = Content;
@@ -958,6 +961,7 @@
 				EA527A8829428011009C142D /* DurationScreen.swift in Sources */,
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
+				EA41C61F295B5DE4000DA021 /* RootScreen.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
