@@ -49,6 +49,7 @@ struct AcknowledgeInteractionsContent: View {
             if isShowingAlert {
                 InteractionAlertView(
                     interactions: interactions,
+                    substanceName: substance.name,
                     isShowing: $isShowingAlert
                 )
             }
