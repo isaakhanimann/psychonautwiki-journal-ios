@@ -12,7 +12,7 @@ struct ToleranceScreen: View {
 
     var body: some View {
         List {
-            Section {
+            Section(footer: Text("* zero is the time to no tolerance")) {
                 if let full = substance.tolerance?.full {
                     RowLabelView(label: "full", value: full)
                 }
