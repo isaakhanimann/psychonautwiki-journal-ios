@@ -81,6 +81,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let onsetEndMinX = startX + (onset.min * pixelsPerSec)
         let onsetEndMaxX = startX + (onset.max * pixelsPerSec)
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        let halfTotalX = startX + totalX/2
         let totalMinX =
         startX + (total.min * pixelsPerSec)
         let totalMaxX = startX +
@@ -90,12 +91,12 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndMinX,
-            endX: startX + totalX/2,
+            endX: halfTotalX,
             endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + totalX/2,
+            startX: halfTotalX,
             startY: top,
             endX: totalMaxX,
             endY: bottom
@@ -104,12 +105,12 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalMinX,
-            endX: startX + totalX/2,
+            endX: halfTotalX,
             endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + totalX/2,
+            startX: halfTotalX,
             startY: top,
             endX: onsetEndMaxX,
             endY: bottom
