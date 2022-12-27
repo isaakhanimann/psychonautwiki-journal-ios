@@ -106,7 +106,7 @@
 		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
 		EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
-		EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */; };
+		EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */; };
 		EACB6E7927D63F6C00940291 /* RecentSubstancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */; };
 		EACB6E7B27D6456400940291 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E7A27D6456400940291 /* SearchList.swift */; };
 		EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9627D7620800940291 /* Double-Ratio.swift */; };
@@ -131,7 +131,7 @@
 		EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */; };
 		EAE4722226CBA664009FB0EC /* ChooseSubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A726CBA664009FB0EC /* ChooseSubstanceScreen.swift */; };
 		EAE4722326CBA664009FB0EC /* ChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */; };
-		EAE4722526CBA664009FB0EC /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AA26CBA664009FB0EC /* HomeScreen.swift */; };
+		EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AA26CBA664009FB0EC /* JournalScreen.swift */; };
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
@@ -275,7 +275,7 @@
 		EACB6E5327D3473600940291 /* String-Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Regex.swift"; sourceTree = "<group>"; };
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
-		EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperiencesTab-ViewModel.swift"; sourceTree = "<group>"; };
+		EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E7827D63F6C00940291 /* RecentSubstancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSubstancesViewModel.swift; sourceTree = "<group>"; };
 		EACB6E7A27D6456400940291 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		EACB6E9627D7620800940291 /* Double-Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-Ratio.swift"; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		EAE471A626CBA664009FB0EC /* ChooseTimeAndColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTimeAndColor.swift; sourceTree = "<group>"; };
 		EAE471A726CBA664009FB0EC /* ChooseSubstanceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSubstanceScreen.swift; sourceTree = "<group>"; };
 		EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDoseScreen.swift; sourceTree = "<group>"; };
-		EAE471AA26CBA664009FB0EC /* HomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		EAE471AA26CBA664009FB0EC /* JournalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalScreen.swift; sourceTree = "<group>"; };
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
@@ -593,7 +593,7 @@
 				EAE471AC26CBA664009FB0EC /* Reused Styles */,
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
-				EAE4718726CBA664009FB0EC /* Home */,
+				EAE4718726CBA664009FB0EC /* Journal */,
 				EA47E66E27CB475100F6E10F /* Search */,
 				EAE4712A26CBA663009FB0EC /* Safer */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
@@ -678,17 +678,17 @@
 			path = Decoding;
 			sourceTree = "<group>";
 		};
-		EAE4718726CBA664009FB0EC /* Home */ = {
+		EAE4718726CBA664009FB0EC /* Journal */ = {
 			isa = PBXGroup;
 			children = (
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
 				EAE4718826CBA664009FB0EC /* Experience */,
-				EAE471AA26CBA664009FB0EC /* HomeScreen.swift */,
+				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
 				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
-				EACB6E6727D501E900940291 /* ExperiencesTab-ViewModel.swift */,
+				EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
 			);
-			path = Home;
+			path = Journal;
 			sourceTree = "<group>";
 		};
 		EAE4718826CBA664009FB0EC /* Experience */ = {
@@ -899,7 +899,7 @@
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EAACB0952949A6FC0050E002 /* ChooseSubstanceContent.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
-				EAE4722526CBA664009FB0EC /* HomeScreen.swift in Sources */,
+				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
@@ -947,7 +947,7 @@
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
-				EACB6E6827D501E900940291 /* ExperiencesTab-ViewModel.swift in Sources */,
+				EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */,
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,

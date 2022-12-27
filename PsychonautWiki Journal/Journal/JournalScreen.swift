@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeScreen: View {
+struct JournalScreen: View {
 
     @StateObject var viewModel = ViewModel()
 

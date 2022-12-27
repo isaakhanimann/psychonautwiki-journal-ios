@@ -14,7 +14,7 @@ struct RootScreen: View {
         NavigationView {
             List {
                 NavigationLink(
-                    destination: HomeScreen(),
+                    destination: JournalScreen(),
                     isActive: $isShowingHome
                 ) {
                     Label("Journal", systemImage: "house")

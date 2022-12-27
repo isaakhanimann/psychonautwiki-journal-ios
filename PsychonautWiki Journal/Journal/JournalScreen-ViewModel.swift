@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension HomeScreen {
+extension JournalScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var experiences: [Experience] = []
