@@ -10,6 +10,7 @@ import SwiftUI
 struct EffectTimeline: View {
 
     let timelineModel: TimelineModel
+    var height: Double = 200
     private let lineWidth: Double = 5
 
     var body: some View {
@@ -39,7 +40,7 @@ struct EffectTimeline: View {
                         context.stroke(path, with: .foreground, lineWidth: 3)
                     }
                 }
-                .frame(height: 200)
+                .frame(height: height)
             }
             Canvas { context, size in
                 let widthInPixels = size.width - halfLineWidth

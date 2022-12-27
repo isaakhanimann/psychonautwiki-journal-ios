@@ -13,16 +13,20 @@ struct ExperienceScreen: View {
     var body: some View {
         return List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
-                if let timelineModelUnwrap = timelineModel {
-                    Section {
-                        EffectTimeline(timelineModel: timelineModelUnwrap)
-                    } header: {
-                        Text("Effect Timeline")
-                    } footer: {
-                        let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
-                        Text(firstDate, style: .date)
+                Section {
+                    let timelineHeight: Double = 200
+                    if let timelineModelUnwrap = timelineModel {
+                        EffectTimeline(timelineModel: timelineModelUnwrap, height: timelineHeight)
+                    } else {
+                        Canvas {_,_ in }.frame(height: timelineHeight)
                     }
+                } header: {
+                    Text("Effect Timeline")
+                } footer: {
+                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
+                    Text(firstDate, style: .date)
                 }
+
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let route = ing.administrationRouteUnwrapped
