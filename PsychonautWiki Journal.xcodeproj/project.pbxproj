@@ -46,7 +46,7 @@
 		EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
 		EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
-		EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */; };
+		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
 		EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */; };
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
@@ -213,7 +213,7 @@
 		EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExperienceScreen.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
-		EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceView.swift; sourceTree = "<group>"; };
+		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
 		EA8447E627CD175000B10DD3 /* DoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRow.swift; sourceTree = "<group>"; };
 		EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-LinearGradient.swift"; sourceTree = "<group>"; };
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
@@ -407,7 +407,7 @@
 				EA014F9627E5DC6500077FB2 /* Web */,
 				EABD91FE294108100073303A /* Timeline */,
 				EABD921A294276AA0073303A /* Section Screens */,
-				EA8447E327CD14AD00B10DD3 /* SubstanceView.swift */,
+				EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */,
 			);
 			path = Substance;
 			sourceTree = "<group>";
@@ -939,7 +939,7 @@
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
-				EA8447E427CD14AD00B10DD3 /* SubstanceView.swift in Sources */,
+				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
 				EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchTab.swift in Sources */,

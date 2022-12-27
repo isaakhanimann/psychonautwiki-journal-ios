@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SubstanceView: View {
+struct SubstanceScreen: View {
 
     let substance: Substance
 
@@ -83,10 +83,10 @@ struct SubstanceView: View {
     }
 }
 
-struct SubstanceView_Previews: PreviewProvider {
+struct SubstanceScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SubstanceView(
+            SubstanceScreen(
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
             )
         }

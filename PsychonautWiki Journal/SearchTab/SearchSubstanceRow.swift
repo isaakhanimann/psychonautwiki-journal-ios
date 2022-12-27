@@ -14,7 +14,7 @@ struct SearchSubstanceRow: View {
 
     var body: some View {
         NavigationLink {
-            SubstanceView(substance: substance)
+            SubstanceScreen(substance: substance)
         } label: {
             VStack(alignment: .leading) {
                 HStack(spacing: 5) {

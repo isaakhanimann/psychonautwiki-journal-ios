@@ -8,6 +8,7 @@ struct ExperienceScreen: View {
     @State private var timelineModel: TimelineModel?
     @State private var cumulativeDoses: [CumulativeDose] = []
     @State private var interactions: [Interaction] = []
+    @State private var substancesUsed: [Substance] = []
 
     var body: some View {
         return List {
@@ -73,6 +74,15 @@ struct ExperienceScreen: View {
                     }.foregroundColor(.accentColor)
                 }
             }
+            if !substancesUsed.isEmpty {
+                Section("Substances") {
+                    ForEach(substancesUsed) { substance in
+                        NavigationLink(substance.name) {
+                            SubstanceScreen(substance: substance)
+                        }
+                    }
+                }
+            }
             if !interactions.isEmpty {
                 Section("Interactions") {
                     ForEach(interactions) { interaction in
@@ -101,7 +111,7 @@ struct ExperienceScreen: View {
                 }
             }
         }
-        .onAppear {
+        .task {
             calculateScreen()
         }
         .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
@@ -110,9 +120,16 @@ struct ExperienceScreen: View {
     }
 
     private func calculateScreen() {
+        setSubstances()
         calculateTimeline()
         calculateCumulativeDoses()
         findInteractions()
+    }
+
+    private func setSubstances() {
+        self.substancesUsed = experience.sortedIngestionsUnwrapped.compactMap({ ingestion in
+            ingestion.substance
+        })
     }
 
     private func calculateTimeline() {
