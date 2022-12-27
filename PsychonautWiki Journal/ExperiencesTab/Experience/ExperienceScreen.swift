@@ -7,6 +7,7 @@ struct ExperienceScreen: View {
     @State private var isTimeRelative = false
     @State private var timelineModel: TimelineModel?
     @State private var cumulativeDoses: [CumulativeDose] = []
+    @State private var interactions: [Interaction] = []
 
     var body: some View {
         return List {
@@ -72,6 +73,17 @@ struct ExperienceScreen: View {
                     }.foregroundColor(.accentColor)
                 }
             }
+            if !interactions.isEmpty {
+                Section("Interactions") {
+                    ForEach(interactions) { interaction in
+                        InteractionPairRow(
+                            aName: interaction.aName,
+                            bName: interaction.bName,
+                            interactionType: interaction.interactionType
+                        )
+                    }
+                }
+            }
         }
         .sheet(isPresented: $isShowingAddIngestionSheet, content: {
             ChooseSubstanceScreen()
@@ -100,6 +112,7 @@ struct ExperienceScreen: View {
     private func calculateScreen() {
         calculateTimeline()
         calculateCumulativeDoses()
+        findInteractions()
     }
 
     private func calculateTimeline() {
@@ -155,6 +168,24 @@ struct ExperienceScreen: View {
             return CumulativeDose(ingestionsForSubstance: ingestions, substanceName: substanceName, substanceColor: color)
         }
         cumulativeDoses = cumu
+    }
+
+    private func findInteractions() {
+        let substanceNames = experience.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }
+        let allNames = (substanceNames + InteractionChecker.additionalInteractionsToCheck).uniqued()
+        var interactions: [Interaction] = []
+        for subIndex in 0..<allNames.count {
+            let name = allNames[subIndex]
+            let otherNames = allNames.dropFirst(subIndex+1)
+            for otherName in otherNames {
+                if let newInteraction = InteractionChecker.getInteractionBetween(aName: name, bName: otherName) {
+                    interactions.append(newInteraction)
+                }
+            }
+        }
+        self.interactions = interactions.sorted(by: { interaction1, interaction2 in
+            interaction1.interactionType.dangerCount > interaction2.interactionType.dangerCount
+        })
     }
 
 }

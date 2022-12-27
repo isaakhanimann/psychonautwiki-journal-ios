@@ -8,6 +8,16 @@
 import Foundation
 
 struct InteractionChecker {
+
+    static let additionalInteractionsToCheck = [
+        "Alcohol",
+        "Caffeine",
+        "Cannabis",
+        "Grapefruit",
+        "Hormonal birth control",
+        "Nicotine"
+    ]
+
     static func getInteractionBetween(aName: String, bName: String) -> Interaction? {
         let interactionFromAToB = getInteractionFromAToB(aName: aName, bName: bName)
         let interactionFromBToA = getInteractionFromAToB(aName: bName, bName: aName)
