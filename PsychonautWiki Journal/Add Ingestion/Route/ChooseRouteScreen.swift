@@ -20,7 +20,7 @@ struct ChooseRouteScreen: View {
                             dismiss: dismiss
                         )
                     } label: {
-                        Text(route.displayString)
+                        Text(route.clarification)
                             .font(.title)
                             .padding(.vertical, 8)
                     }
@@ -32,7 +32,7 @@ struct ChooseRouteScreen: View {
             Section("Undocumented") {
                 ForEach(otherRoutes, id: \.self) { route in
                     NavigationLink(
-                        route.displayString,
+                        route.clarification,
                         destination: ChooseDoseScreen(
                             substance: substance,
                             administrationRoute: route,

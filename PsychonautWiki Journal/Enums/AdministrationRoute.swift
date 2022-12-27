@@ -19,30 +19,30 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
         self.rawValue
     }
 
-    var displayString: String {
+    var clarification: String {
         switch self {
         case .oral:
-            return "oral (swallowed)"
+            return "swallowed"
         case .sublingual:
-            return "sublingual (under the tongue)"
+            return "under the tongue"
         case .buccal:
-            return "buccal (between gums and cheek)"
+            return "between gums and cheek"
         case .insufflated:
-            return "insufflated (sniffed)"
+            return "sniffed"
         case .rectal:
-            return "rectal"
+            return "up the butt"
         case .transdermal:
-            return "transdermal (through skin)"
+            return "through skin"
         case .subcutaneous:
-            return "subcutaneous (injected)"
+            return "injected below skin"
         case .intramuscular:
-            return "intramuscular (injected)"
+            return "injected into muscle"
         case .intravenous:
-            return "intravenous (injected)"
+            return "injected into vein"
         case .smoked:
-            return "smoked"
+            return "heating/burning"
         case .inhaled:
-            return "inhaled"
+            return "vapor/gas"
         }
     }
 

@@ -13,25 +13,40 @@ struct CustomChooseRouteScreen: View {
     let dismiss: () -> Void
 
     var body: some View {
-        List {
-            Section {
-                ForEach(AdministrationRoute.allCases, id: \.self) { route in
-                    NavigationLink {
-                        CustomChooseDoseScreen(
-                            substanceName: substanceName,
-                            units: units,
-                            administrationRoute: route,
-                            dismiss: dismiss
-                        )
-                    } label: {
-                        Text(route.displayString)
-                            .font(.title2)
-                            .padding(.vertical, 6)
-                    }
-                }
+        VStack {
+            HStack {
+                getRouteBoxFor(route: .oral)
+                getRouteBoxFor(route: .insufflated)
+            }
+            HStack {
+                getRouteBoxFor(route: .smoked)
+                getRouteBoxFor(route: .inhaled)
+            }
+            HStack {
+                getRouteBoxFor(route: .sublingual)
+                getRouteBoxFor(route: .buccal)
+            }
+            HStack {
+                getRouteBoxFor(route: .rectal)
+                getRouteBoxFor(route: .transdermal)
+            }
+            HStack {
+                getRouteBoxFor(route: .subcutaneous)
+                getRouteBoxFor(route: .intravenous)
+            }
+            HStack {
+                getRouteBoxFor(route: .intramuscular)
+                GroupBox{}.hidden().frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .center
+                )
             }
         }
-        .navigationBarTitle("\(substanceName) Route")
+        .padding(.horizontal)
+        .navigationTitle("\(substanceName) Route")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
@@ -40,10 +55,41 @@ struct CustomChooseRouteScreen: View {
             }
         }
     }
+
+    private func getRouteBoxFor(route: AdministrationRoute) -> some View {
+        NavigationLink {
+            CustomChooseDoseScreen(
+                substanceName: substanceName,
+                units: units,
+                administrationRoute: route,
+                dismiss: dismiss
+            )
+        } label: {
+            GroupBox {
+                VStack(alignment: .center) {
+                    Text(route.rawValue.localizedCapitalized)
+                        .font(.headline)
+                    Text(route.clarification)
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+
+                }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .center
+                )
+            }
+        }
+    }
 }
 
 struct CustomChooseRouteScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CustomChooseRouteScreen(substanceName: "Coffee", units: "cups", dismiss: {})
+        NavigationView {
+            CustomChooseRouteScreen(substanceName: "Coffee", units: "cups", dismiss: {})
+        }
     }
 }
