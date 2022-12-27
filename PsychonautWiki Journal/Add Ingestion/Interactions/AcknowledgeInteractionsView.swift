@@ -17,8 +17,9 @@ struct AcknowledgeInteractionsView: View {
             let recentIngestions = PersistenceController.shared.getRecentIngestions()
             let names = recentIngestions.map { ing in
                 ing.substanceNameUnwrapped
-            }.uniqued()
-            let interactions = names.compactMap { name in
+            }
+            let allNames = (names + InteractionChecker.additionalInteractionsToCheck).uniqued()
+            let interactions = allNames.compactMap { name in
                 InteractionChecker.getInteractionBetween(aName: substance.name, bName: name)
             }.uniqued().sorted { int1, int2 in
                 int1.interactionType.dangerCount > int2.interactionType.dangerCount

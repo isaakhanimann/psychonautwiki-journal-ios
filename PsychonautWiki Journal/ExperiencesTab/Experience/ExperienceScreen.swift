@@ -83,18 +83,16 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if !interactions.isEmpty {
-                Section("Interactions") {
-                    ForEach(interactions) { interaction in
-                        InteractionPairRow(
-                            aName: interaction.aName,
-                            bName: interaction.bName,
-                            interactionType: interaction.interactionType
-                        )
-                    }
-                    NavigationLink("See All") {
-                        GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
-                    }
+            Section("Interactions") {
+                ForEach(interactions) { interaction in
+                    InteractionPairRow(
+                        aName: interaction.aName,
+                        bName: interaction.bName,
+                        interactionType: interaction.interactionType
+                    )
+                }
+                NavigationLink("See All Interactions") {
+                    GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
                 }
             }
         }
@@ -192,12 +190,11 @@ struct ExperienceScreen: View {
     }
 
     private func findInteractions() {
-        let substanceNames = experience.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }
-        let allNames = (substanceNames + InteractionChecker.additionalInteractionsToCheck).uniqued()
+        let substanceNames = experience.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
         var interactions: [Interaction] = []
-        for subIndex in 0..<allNames.count {
-            let name = allNames[subIndex]
-            let otherNames = allNames.dropFirst(subIndex+1)
+        for subIndex in 0..<substanceNames.count {
+            let name = substanceNames[subIndex]
+            let otherNames = substanceNames.dropFirst(subIndex+1)
             for otherName in otherNames {
                 if let newInteraction = InteractionChecker.getInteractionBetween(aName: name, bName: otherName) {
                     interactions.append(newInteraction)
