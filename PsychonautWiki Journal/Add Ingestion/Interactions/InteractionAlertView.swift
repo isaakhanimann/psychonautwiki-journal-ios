@@ -66,11 +66,16 @@ struct InteractionAlertView: View {
             let otherSubstances = interactions.flatMap { interaction in
                 [interaction.aName, interaction.bName]
             }.uniqued().filter {$0 != substanceName}
-            let untilLastIndex = max(otherSubstances.count-1, 0)
-            let first = otherSubstances.prefix(untilLastIndex)
-            var otherSubstanceText = first.joined(separator: ", ")
-            if let last = otherSubstances.last {
-               otherSubstanceText += " and " + last + "."
+            var otherSubstanceText = ""
+            if let sub = otherSubstances.first, otherSubstances.count == 1 {
+                otherSubstanceText = sub
+            } else {
+                let untilLastIndex = max(otherSubstances.count-1, 0)
+                let first = otherSubstances.prefix(untilLastIndex)
+                otherSubstanceText = first.joined(separator: ", ")
+                if let last = otherSubstances.last {
+                   otherSubstanceText += " and " + last + "."
+                }
             }
             result = result + " with " + otherSubstanceText
             return result
