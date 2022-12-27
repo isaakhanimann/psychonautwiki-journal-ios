@@ -22,7 +22,10 @@ struct DosesScreen: View {
                 }
             }
             ForEach(substance.doseInfos, id: \.route) { doseInfo in
-                Section(doseInfo.route.rawValue) {
+                Section(
+                    header: Text(doseInfo.route.rawValue),
+                    footer: Text(DosesScreen.getUnitClarification(for: doseInfo.roaDose.units))
+                ) {
                     DoseRow(roaDose: doseInfo.roaDose)
                     if let bio = doseInfo.bioavailability?.displayString {
                         RowLabelView(label: "Bioavailability", value: "\(bio)%")
@@ -30,6 +33,20 @@ struct DosesScreen: View {
                 }
             }
         }.navigationTitle("Dosage")
+    }
+
+    
+
+    static func getUnitClarification(for units: String) -> String {
+        if units == "µg" {
+            return "1 µg = 1/1000 mg = 1/1'000'000 gram"
+        } else if units == "mg" {
+            return "1 mg = 1/1000 gram"
+        } else if units == "mL" {
+            return "1 mL = 1/1000 L"
+        } else {
+            return ""
+        }
     }
 }
 

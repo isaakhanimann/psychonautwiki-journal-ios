@@ -27,6 +27,9 @@ struct ChooseDoseScreen: View {
                         Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
                     }
                 }
+                Section {
+                    Text(Self.doseDisclaimer).font(.footnote)
+                }
                 EmptySectionForPadding()
             }
             NavigationLink(
@@ -96,11 +99,10 @@ struct ChooseDoseScreen: View {
         let roaDose = substance.getDose(for: administrationRoute)
         return Section(
             header: Text("Pure Dose"),
-            footer: Text(roaDose?.units != nil ? Self.doseDisclaimer : "")
+            footer: Text(DosesScreen.getUnitClarification(for: roaDose?.units ?? ""))
         ) {
             if let remark = substance.dosageRemark {
                 Text(remark)
-                    .font(.caption)
                     .foregroundColor(.secondary)
             }
             DoseRow(roaDose: roaDose)
