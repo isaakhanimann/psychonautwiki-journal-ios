@@ -74,10 +74,10 @@ struct InteractionAlertView: View {
                 let first = otherSubstances.prefix(untilLastIndex)
                 otherSubstanceText = first.joined(separator: ", ")
                 if let last = otherSubstances.last {
-                   otherSubstanceText += " and " + last + "."
+                   otherSubstanceText += " and " + last
                 }
             }
-            result = result + " with " + otherSubstanceText
+            result = result + " with " + otherSubstanceText + "."
             return result
         }.joined(separator: "\n")
     }
