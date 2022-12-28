@@ -9,7 +9,13 @@ struct SettingsScreen: View {
             isEyeOpen: $isEyeOpen,
             isImporting: $viewModel.isImporting,
             isExporting: $viewModel.isExporting,
-            journalFile: viewModel.journalFile
+            journalFile: viewModel.journalFile,
+            exportData: {
+                viewModel.exportData()
+            },
+            importData: { data in
+                viewModel.importData(data: data)
+            }
         )
     }
 }
@@ -20,6 +26,9 @@ struct SettingsContent: View {
     @Binding var isImporting: Bool
     @Binding var isExporting: Bool
     var journalFile: JournalFile
+    @EnvironmentObject private var toastViewModel: ToastViewModel
+    let exportData: () -> Void
+    let importData: (Data) -> Void
 
     var body: some View {
         List {
@@ -45,9 +54,12 @@ struct SettingsContent: View {
                 }
             }
 
-            Section("Data") {
+            Section(
+                header: Text("Data"),
+                footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
+            ) {
                 Button {
-                    isExporting.toggle()
+                    exportData()
                 } label: {
                     Label("Export Data", systemImage: "square.and.arrow.up")
                 }.fileExporter(
@@ -57,9 +69,9 @@ struct SettingsContent: View {
                     defaultFilename: "Journal"
                 ) { result in
                     if case .success = result {
-                        print("Export successful")
+                        toastViewModel.showSuccessToast(message: "Export Successful")
                     } else {
-                        print("Export failed")
+                        toastViewModel.showErrorToast(message: "Export Failed")
                     }
                 }
                 Button {
@@ -72,11 +84,10 @@ struct SettingsContent: View {
                 ) { result in
                     do {
                         let selectedFile: URL = try result.get()
-                        guard let message = String(data: try Data(contentsOf: selectedFile), encoding: .utf8) else { return }
-                        print("Import success")
-                        print(message)
+                        let data = try Data(contentsOf: selectedFile)
+                        importData(data)
                     } catch {
-                        print("Import failed")
+                        toastViewModel.showErrorToast(message: "Import Failed")
                     }
                 }
                 Button {
@@ -130,7 +141,9 @@ struct SettingsContent_Previews: PreviewProvider {
                 isEyeOpen: .constant(true),
                 isImporting: .constant(false),
                 isExporting: .constant(false),
-                journalFile: JournalFile()
+                journalFile: JournalFile(),
+                exportData: {},
+                importData: {_ in }
             )
             .accentColor(Color.blue)
         }

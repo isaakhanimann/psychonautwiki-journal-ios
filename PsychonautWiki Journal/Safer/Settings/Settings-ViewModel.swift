@@ -16,11 +16,12 @@ extension SettingsScreen {
         @Published var journalFile = JournalFile()
 
         func exportData() {
-            
+            // Todo: prepare journalFile for export
+            isExporting = true
         }
 
-        func importData() {
-
+        func importData(data: Data) {
+            // Todo: decode journal file from this data and save in core data
         }
 
     }
