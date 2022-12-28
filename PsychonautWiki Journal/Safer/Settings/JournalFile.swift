@@ -103,6 +103,42 @@ struct ExperienceCodable: Codable {
     let text: String
     let creationDate: Date
     let sortDate: Date?
+
+    init(
+        id: Int,
+        title: String,
+        text: String,
+        creationDate: Date,
+        sortDate: Date?
+    ) {
+        self.id = id
+        self.title = title
+        self.text = text
+        self.creationDate = creationDate
+        self.sortDate = sortDate
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case text
+        case creationDate
+        case sortDate
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try values.decode(Int.self, forKey: .id)
+        self.title = try values.decode(String.self, forKey: .title)
+        self.text = try values.decode(String.self, forKey: .text)
+        let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
+        self.creationDate = getDateFromMillis(millis: creationDateMillis)
+        if let sortDateMillis = try values.decodeIfPresent(UInt64.self, forKey: .sortDate) {
+            self.sortDate = getDateFromMillis(millis: sortDateMillis)
+        } else {
+            self.sortDate = nil
+        }
+    }
 }
 
 struct IngestionCodable: Codable {
@@ -116,6 +152,67 @@ struct IngestionCodable: Codable {
     let units: String
     let experienceId: Int
     let notes: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case substanceName
+        case time
+        case creationDate
+        case administrationRoute
+        case dose
+        case isDoseAnEstimate
+        case units
+        case experienceId
+        case notes
+    }
+
+    init(
+        id: Int,
+        substanceName: String,
+        time: Date,
+        creationDate: Date?,
+        administrationRoute: AdministrationRoute,
+        dose: Double?,
+        isDoseAnEstimate: Bool,
+        units: String,
+        experienceId: Int,
+        notes: String
+    ) {
+        self.id = id
+        self.substanceName = substanceName
+        self.time = time
+        self.creationDate = creationDate
+        self.administrationRoute = administrationRoute
+        self.dose = dose
+        self.isDoseAnEstimate = isDoseAnEstimate
+        self.units = units
+        self.experienceId = experienceId
+        self.notes = notes
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try values.decode(Int.self, forKey: .id)
+        self.substanceName = try values.decode(String.self, forKey: .substanceName)
+        let timeMillis = try values.decode(UInt64.self, forKey: .time)
+        self.time = getDateFromMillis(millis: timeMillis)
+        if let creationMillis = try values.decodeIfPresent(UInt64.self, forKey: .creationDate) {
+            self.creationDate = getDateFromMillis(millis: creationMillis)
+        } else {
+            self.creationDate = nil
+        }
+        let routeString = try values.decode(String.self, forKey: .administrationRoute)
+        if let route = AdministrationRoute(rawValue: routeString.lowercased()) {
+            self.administrationRoute = route
+        } else {
+            throw DecodingError.dataCorruptedError(in: try decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
+        }
+        self.dose = try values.decode(Double.self, forKey: .dose)
+        self.isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
+        self.units = try values.decode(String.self, forKey: .units)
+        self.experienceId = try values.decode(Int.self, forKey: .experienceId)
+        self.notes = try values.decode(String.self, forKey: .notes)
+    }
 }
 
 struct CompanionCodable: Codable {
@@ -155,6 +252,11 @@ struct CustomSubstanceCodable: Codable {
     let name: String
     let units: String
     let description: String
+}
+
+fileprivate func getDateFromMillis(millis: UInt64) -> Date {
+    let secondsSince1970: TimeInterval = Double(millis)/1000
+    return Date(timeIntervalSince1970: secondsSince1970)
 }
 
 

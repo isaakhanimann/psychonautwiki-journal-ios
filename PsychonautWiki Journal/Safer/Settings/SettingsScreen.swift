@@ -74,7 +74,7 @@ struct SettingsContent: View {
                 Button {
                     exportData()
                 } label: {
-                    Label("Export Data", systemImage: "square.and.arrow.up")
+                    Label("Export Data", systemImage: "arrow.up.doc")
                 }.fileExporter(
                     isPresented: $isExporting,
                     document: journalFile,
@@ -90,7 +90,7 @@ struct SettingsContent: View {
                 Button {
                     isImporting.toggle()
                 } label: {
-                    Label("Import Data", systemImage: "square.and.arrow.down")
+                    Label("Import Data", systemImage: "arrow.down.doc")
                 }.fileImporter(
                     isPresented: $isImporting,
                     allowedContentTypes: [.json]

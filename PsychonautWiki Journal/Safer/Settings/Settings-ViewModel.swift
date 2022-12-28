@@ -49,6 +49,7 @@ extension SettingsScreen {
                         newIngestion.isEstimate = ingestionCodable.isDoseAnEstimate
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes
+                        newExperience.addToIngestions(newIngestion)
                     }
                 }
                 for companionCodable in file.substanceCompanions {
@@ -64,8 +65,21 @@ extension SettingsScreen {
                 }
                 try context.save()
                 showSuccessToast(message: "Import Successful")
+            } catch DecodingError.keyNotFound(let key, let context) {
+                showErrorToast(message: "Import Failed")
+                print("Missing key '\(key.stringValue)' not found – \(context.debugDescription)")
+            } catch DecodingError.typeMismatch(_, let context) {
+                showErrorToast(message: "Import Failed")
+                print("Type mismatch – \(context.debugDescription)")
+            } catch DecodingError.valueNotFound(let type, let context) {
+                showErrorToast(message: "Import Failed")
+                print("Missing \(type) value – \(context.debugDescription)")
+            } catch DecodingError.dataCorrupted(let context) {
+                showErrorToast(message: "Import Failed")
+                print(context.debugDescription)
             } catch {
                 showErrorToast(message: "Import Failed")
+                print(error.localizedDescription)
             }
         }
 
