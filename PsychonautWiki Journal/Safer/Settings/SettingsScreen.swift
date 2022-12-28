@@ -1,4 +1,5 @@
 import SwiftUI
+import AlertToast
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
@@ -14,7 +15,14 @@ struct SettingsScreen: View {
             },
             importData: { data in
                 viewModel.importData(data: data)
-            }
+            },
+            deleteEverything: {
+                viewModel.deleteEverything()
+            },
+            isShowingErrorToast: $viewModel.isShowingErrorToast,
+            errorToastMessage: $viewModel.errorToastMessage,
+            isShowingSuccessToast: $viewModel.isShowingSuccessToast,
+            successToastMessage: $viewModel.successToastMessage
         )
     }
 }
@@ -28,6 +36,12 @@ struct SettingsContent: View {
     @EnvironmentObject private var toastViewModel: ToastViewModel
     let exportData: () -> Void
     let importData: (Data) -> Void
+    let deleteEverything: () -> Void
+    @State private var isShowingDeleteAlert = false
+    @Binding var isShowingErrorToast: Bool
+    @Binding var errorToastMessage: String
+    @Binding var isShowingSuccessToast: Bool
+    @Binding var successToastMessage: String
 
     var body: some View {
         List {
@@ -90,9 +104,17 @@ struct SettingsContent: View {
                     }
                 }
                 Button {
-                    // Todo:
+                    isShowingDeleteAlert.toggle()
                 } label: {
                     Label("Delete Everything", systemImage: "trash").foregroundColor(.red)
+                }
+                .alert(isPresented: $isShowingDeleteAlert) {
+                    Alert(
+                        title: Text("Delete Everything?"),
+                        message: Text("This will delete all your experiences, ingestions and custom substances."),
+                        primaryButton: .destructive(Text("Delete"), action: deleteEverything),
+                        secondaryButton: .cancel()
+                    )
                 }
             }
             Section {
@@ -103,7 +125,22 @@ struct SettingsContent: View {
                         .foregroundColor(.secondary)
                 }
             }
-        }.navigationTitle("Settings")
+        }
+        .navigationTitle("Settings")
+        .toast(isPresenting: $isShowingErrorToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: .error(.red),
+                title: errorToastMessage
+            )
+        }
+        .toast(isPresenting: $isShowingSuccessToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: .complete(Color.green),
+                title: successToastMessage
+            )
+        }
     }
 
 
@@ -142,7 +179,12 @@ struct SettingsContent_Previews: PreviewProvider {
                 isExporting: .constant(false),
                 journalFile: JournalFile(),
                 exportData: {},
-                importData: {_ in }
+                importData: {_ in },
+                deleteEverything: {},
+                isShowingErrorToast: .constant(false),
+                errorToastMessage: .constant(""),
+                isShowingSuccessToast: .constant(false),
+                successToastMessage: .constant("")
             )
             .accentColor(Color.blue)
         }
