@@ -22,20 +22,19 @@ struct DosesScreen: View {
                 }
             }
             ForEach(substance.doseInfos, id: \.route) { doseInfo in
-                Section(
-                    header: Text(doseInfo.route.rawValue),
-                    footer: Text(DosesScreen.getUnitClarification(for: doseInfo.roaDose.units))
-                ) {
+                Section(doseInfo.route.rawValue) {
                     DoseRow(roaDose: doseInfo.roaDose)
                     if let bio = doseInfo.bioavailability?.displayString {
                         RowLabelView(label: "Bioavailability", value: "\(bio)%")
                     }
                 }
             }
+            Section {
+                Text(DosesScreen.getUnitClarification(for: substance.roas.first?.dose?.units ?? ""))
+            }
         }.navigationTitle("Dosage")
     }
 
-    
 
     static func getUnitClarification(for units: String) -> String {
         if units == "µg" {
