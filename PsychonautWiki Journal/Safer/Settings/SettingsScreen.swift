@@ -1,19 +1,29 @@
 import SwiftUI
 
 struct SettingsScreen: View {
-
     @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @StateObject private var viewModel = ViewModel()
+
+    var body: some View {
+        SettingsContent(
+            isEyeOpen: $isEyeOpen,
+            isImporting: $viewModel.isImporting,
+            isExporting: $viewModel.isExporting,
+            journalFile: viewModel.journalFile
+        )
+    }
+}
+
+struct SettingsContent: View {
+
+    @Binding var isEyeOpen: Bool
+    @Binding var isImporting: Bool
+    @Binding var isExporting: Bool
+    var journalFile: JournalFile
 
     var body: some View {
         List {
             eye
-            Section("Safety") {
-                NavigationLink {
-                    WebViewScreen(articleURL: URL(string: "https://psychonautwiki.org/wiki/Responsible_drug_use")!)
-                } label: {
-                    Label("Responsible Use", systemImage: "brain")
-                }
-            }
             Section("Communication") {
                 ShareButton()
                 RateInAppStoreButton()
@@ -34,6 +44,47 @@ struct SettingsScreen: View {
                     Label("Source Code", systemImage: "doc.text.magnifyingglass")
                 }
             }
+
+            Section("Data") {
+                Button {
+                    isExporting.toggle()
+                } label: {
+                    Label("Export Data", systemImage: "square.and.arrow.up")
+                }.fileExporter(
+                    isPresented: $isExporting,
+                    document: journalFile,
+                    contentType: .json,
+                    defaultFilename: "Journal"
+                ) { result in
+                    if case .success = result {
+                        print("Export successful")
+                    } else {
+                        print("Export failed")
+                    }
+                }
+                Button {
+                    isImporting.toggle()
+                } label: {
+                    Label("Import Data", systemImage: "square.and.arrow.down")
+                }.fileImporter(
+                    isPresented: $isImporting,
+                    allowedContentTypes: [.json]
+                ) { result in
+                    do {
+                        let selectedFile: URL = try result.get()
+                        guard let message = String(data: try Data(contentsOf: selectedFile), encoding: .utf8) else { return }
+                        print("Import success")
+                        print(message)
+                    } catch {
+                        print("Import failed")
+                    }
+                }
+                Button {
+                    // Todo:
+                } label: {
+                    Label("Delete Everything", systemImage: "trash").foregroundColor(.red)
+                }
+            }
             Section {
                 HStack {
                     Text("Version")
@@ -44,6 +95,7 @@ struct SettingsScreen: View {
             }
         }.navigationTitle("Settings")
     }
+
 
     private var eye: some View {
         HStack {
@@ -67,12 +119,20 @@ struct SettingsScreen: View {
         NotificationCenter.default.post(name: Notification.eyeName, object: nil)
         playHapticFeedback()
     }
+
+    
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct SettingsContent_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsScreen()
-            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+        NavigationView {
+            SettingsContent(
+                isEyeOpen: .constant(true),
+                isImporting: .constant(false),
+                isExporting: .constant(false),
+                journalFile: JournalFile()
+            )
             .accentColor(Color.blue)
+        }
     }
 }
