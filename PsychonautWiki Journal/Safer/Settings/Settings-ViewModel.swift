@@ -11,7 +11,6 @@ extension SettingsScreen {
     @MainActor
     class ViewModel: ObservableObject {
 
-        @Published var isImporting = false
         @Published var isExporting = false
         @Published var journalFile = JournalFile()
 

@@ -7,7 +7,6 @@ struct SettingsScreen: View {
     var body: some View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
-            isImporting: $viewModel.isImporting,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,
             exportData: {
@@ -23,7 +22,7 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
-    @Binding var isImporting: Bool
+    @State var isImporting = false
     @Binding var isExporting: Bool
     var journalFile: JournalFile
     @EnvironmentObject private var toastViewModel: ToastViewModel
@@ -139,7 +138,7 @@ struct SettingsContent_Previews: PreviewProvider {
         NavigationView {
             SettingsContent(
                 isEyeOpen: .constant(true),
-                isImporting: .constant(false),
+                isImporting: false,
                 isExporting: .constant(false),
                 journalFile: JournalFile(),
                 exportData: {},
