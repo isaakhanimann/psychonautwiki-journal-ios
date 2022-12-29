@@ -106,15 +106,6 @@ struct ExperienceScreen: View {
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
-                Button {
-                    isTimeRelative.toggle()
-                } label: {
-                    Label("Relative Time", systemImage: "timer.circle" + (isTimeRelative ? ".fill" : ""))
-                }
-                NavigationLink("Edit") {
-                    EditExperienceScreen(experience: experience)
-                }
-                Spacer()
                 let twelveHours: TimeInterval = 12*60*60
                 if let lastIngestionTime = experience.sortedIngestionsUnwrapped.last?.time,
                    Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
@@ -126,6 +117,14 @@ struct ExperienceScreen: View {
                     .sheet(isPresented: $isShowingAddIngestionSheet, content: {
                         ChooseSubstanceScreen()
                     })
+                }
+                Button {
+                    isTimeRelative.toggle()
+                } label: {
+                    Label("Relative Time", systemImage: "timer.circle" + (isTimeRelative ? ".fill" : ""))
+                }
+                NavigationLink("Edit") {
+                    EditExperienceScreen(experience: experience)
                 }
             }
         }
