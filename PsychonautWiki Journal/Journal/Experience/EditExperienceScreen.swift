@@ -10,6 +10,7 @@ import SwiftUI
 struct EditExperienceScreen: View {
 
     let experience: Experience
+    let dismissToJournalScreen: () -> Void
     @State private var title = ""
     @State private var notes = ""
     @Environment(\.dismiss) var dismiss
@@ -38,6 +39,7 @@ struct EditExperienceScreen: View {
         PersistenceController.shared.viewContext.delete(experience)
         PersistenceController.shared.saveViewContext()
         dismiss()
+        dismissToJournalScreen()
     }
 }
 

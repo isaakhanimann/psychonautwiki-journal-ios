@@ -10,6 +10,8 @@ struct ExperienceScreen: View {
     @State private var interactions: [Interaction] = []
     @State private var substancesUsed: [Substance] = []
 
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         return List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
@@ -66,7 +68,7 @@ struct ExperienceScreen: View {
                         .padding(.vertical, 5)
                 } else {
                     NavigationLink {
-                        EditExperienceScreen(experience: experience)
+                        EditExperienceScreen(experience: experience, dismissToJournalScreen: {dismiss()})
                     } label: {
                         Label("Add Note", systemImage: "pencil")
                     }.foregroundColor(.accentColor)
@@ -124,7 +126,7 @@ struct ExperienceScreen: View {
                     Label("Relative Time", systemImage: "timer.circle" + (isTimeRelative ? ".fill" : ""))
                 }
                 NavigationLink("Edit") {
-                    EditExperienceScreen(experience: experience)
+                    EditExperienceScreen(experience: experience, dismissToJournalScreen: {dismiss()})
                 }
             }
         }
