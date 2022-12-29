@@ -32,6 +32,13 @@ struct ExperienceRowContent: View {
     let isTimeRelative: Bool
 
     var body: some View {
+        TimelineView(.everyMinute) { _ in
+            rowWithoutBadge
+                .badge(timeText)
+        }
+    }
+
+    var rowWithoutBadge: some View {
         HStack {
             ZStack {
                 Circle()
@@ -62,7 +69,20 @@ struct ExperienceRowContent: View {
                 }
             }
         }
-        .badge(isTimeRelative ? Text(sortDate, style: .relative) + Text(" ago") : Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits)))
+    }
+
+    var timeText: Text {
+        if isTimeRelative {
+            return Text(getTimeDifferenceText())
+        } else {
+            return Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits))
+        }
+    }
+
+    func getTimeDifferenceText() -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .short
+        return formatter.localizedString(for: sortDate, relativeTo: Date.now)
     }
 
     private func getDoubleColors() -> [Color] {
@@ -86,7 +106,7 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     distinctSubstanceNames: ["MDMA", "LSD"],
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
-                    isTimeRelative: false
+                    isTimeRelative: true
                 )
             }
         }

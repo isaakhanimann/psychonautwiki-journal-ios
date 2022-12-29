@@ -36,7 +36,7 @@ struct JournalScreen: View {
                 Button {
                     viewModel.isFavoriteFilterEnabled.toggle()
                 } label: {
-                    Label("Filter Favorites", systemImage: viewModel.isFavoriteFilterEnabled ? "star.fill" : "star").foregroundColor(.yellow)
+                    Label("Filter Favorites", systemImage: viewModel.isFavoriteFilterEnabled ? "star.fill" : "star")
                 }
             }
 
