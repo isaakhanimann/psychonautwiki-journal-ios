@@ -12,6 +12,11 @@ extension JournalScreen {
         }
         @Published var isShowingAddIngestionSheet = false
         @Published var isTimeRelative = false
+        @Published var isFavoriteFilterEnabled = false {
+            didSet {
+                setupFetchRequestPredicateAndFetch()
+            }
+        }
         private let experienceFetchController: NSFetchedResultsController<Experience>!
 
         override init() {
@@ -33,8 +38,12 @@ extension JournalScreen {
         }
 
         private func setupFetchRequestPredicateAndFetch() {
+            let predicateFavorite = NSPredicate(
+                format: "isFavorite == %@",
+                NSNumber(value: isFavoriteFilterEnabled)
+            )
             if searchText == "" {
-                experienceFetchController?.fetchRequest.predicate = nil
+                experienceFetchController?.fetchRequest.predicate = predicateFavorite
             } else {
                 let predicateTitle = NSPredicate(
                     format: "title CONTAINS[cd] %@",
@@ -46,10 +55,11 @@ extension JournalScreen {
                     #keyPath(Ingestion.substanceName),
                     searchText as CVarArg
                 )
-                let predicateCompound = NSCompoundPredicate(
+                let titleOrSubstancePredicate = NSCompoundPredicate(
                     orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
                 )
-                experienceFetchController?.fetchRequest.predicate = predicateCompound
+                let completePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
+                experienceFetchController?.fetchRequest.predicate = completePredicate
             }
             try? experienceFetchController?.performFetch()
             self.experiences = experienceFetchController?.fetchedObjects ?? []

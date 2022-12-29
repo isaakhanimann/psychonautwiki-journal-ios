@@ -12,12 +12,7 @@ struct JournalScreen: View {
         }
         .navigationTitle("Journal")
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    viewModel.isTimeRelative.toggle()
-                } label: {
-                    Label("Relative Time", systemImage: "timer.circle" + (viewModel.isTimeRelative ? ".fill" : ""))
-                }
+            ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
                     StatsScreen()
                 } label: {
@@ -31,6 +26,17 @@ struct JournalScreen: View {
                     Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }.fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
                     ChooseSubstanceScreen()
+                }
+                Spacer()
+                Button {
+                    viewModel.isTimeRelative.toggle()
+                } label: {
+                    Label("Relative Time", systemImage: "timer.circle" + (viewModel.isTimeRelative ? ".fill" : ""))
+                }
+                Button {
+                    viewModel.isFavoriteFilterEnabled.toggle()
+                } label: {
+                    Label("Filter Favorites", systemImage: viewModel.isFavoriteFilterEnabled ? "star.fill" : "star").foregroundColor(.yellow)
                 }
             }
 
