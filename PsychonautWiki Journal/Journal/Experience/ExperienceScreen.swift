@@ -96,7 +96,16 @@ struct ExperienceScreen: View {
         }
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
+            ToolbarItem {
+                let isFavorite = experience.isFavorite
+                Button {
+                    experience.isFavorite = !isFavorite
+                    try? PersistenceController.shared.viewContext.save()
+                } label: {
+                    Label("Is Favorite", systemImage: isFavorite ? "star.fill" : "star").foregroundColor(.yellow)
+                }
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
                 Button {
                     isTimeRelative.toggle()
                 } label: {
@@ -105,9 +114,7 @@ struct ExperienceScreen: View {
                 NavigationLink("Edit") {
                     EditExperienceScreen(experience: experience)
                 }
-            }
-
-            ToolbarItem(placement: .bottomBar) {
+                Spacer()
                 let twelveHours: TimeInterval = 12*60*60
                 if let lastIngestionTime = experience.sortedIngestionsUnwrapped.last?.time,
                    Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
