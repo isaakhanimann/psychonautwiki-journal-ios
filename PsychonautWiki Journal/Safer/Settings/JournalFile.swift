@@ -12,29 +12,17 @@ import UniformTypeIdentifiers
 struct JournalFile: FileDocument, Codable {
     static var readableContentTypes = [UTType.json]
     static var writableContentTypes = [UTType.json]
-    var ingestions: [IngestionCodable]
     var experiences: [ExperienceCodable]
     var substanceCompanions: [CompanionCodable]
     var customSubstances: [CustomSubstanceCodable]
 
     init(experiences: [Experience] = [], customSubstances: [CustomSubstance] = []) {
-        var ingestionsToStore: [IngestionCodable] = []
         var experiencesToStore: [ExperienceCodable] = []
         var companionsToStore: [CompanionCodable] = []
-        for experienceIndex in 0..<experiences.count {
-            let experience = experiences[experienceIndex]
-            let experienceID = experienceIndex + 1
-            experiencesToStore.append(
-                ExperienceCodable(
-                    id: experienceID,
-                    title: experience.titleUnwrapped,
-                    text: experience.textUnwrapped,
-                    creationDate: experience.creationDateUnwrapped,
-                    sortDate: experience.sortDate
-                )
-            )
+        for experience in experiences {
+            var ingestionsInExperience: [IngestionCodable] = []
             for ingestion in experience.sortedIngestionsUnwrapped {
-                ingestionsToStore.append(
+                ingestionsInExperience.append(
                     IngestionCodable(
                         substanceName: ingestion.substanceNameUnwrapped,
                         time: ingestion.timeUnwrapped,
@@ -43,7 +31,6 @@ struct JournalFile: FileDocument, Codable {
                         dose: ingestion.doseUnwrapped,
                         isDoseAnEstimate: ingestion.isEstimate,
                         units: ingestion.unitsUnwrapped,
-                        experienceId: experienceID,
                         notes: ingestion.noteUnwrapped
                     )
                 )
@@ -59,23 +46,27 @@ struct JournalFile: FileDocument, Codable {
                     )
                 }
             }
-        }
-        self.ingestions = ingestionsToStore
-        self.experiences = experiencesToStore
-        self.substanceCompanions = companionsToStore
-        var customSubstancesToStore: [CustomSubstanceCodable] = []
-        for customSubstanceIndex in 0..<customSubstances.count {
-            let cust = customSubstances[customSubstanceIndex]
-            customSubstancesToStore.append(
-                CustomSubstanceCodable(
-                    id: customSubstanceIndex + 1,
-                    name: cust.nameUnwrapped,
-                    units: cust.unitsUnwrapped,
-                    description: cust.explanationUnwrapped
+            experiencesToStore.append(
+                ExperienceCodable(
+                    title: experience.titleUnwrapped,
+                    text: experience.textUnwrapped,
+                    creationDate: experience.creationDateUnwrapped,
+                    sortDate: experience.sortDate,
+                    isFavorite: experience.isFavorite,
+                    ingestions: ingestionsInExperience
                 )
             )
+
         }
-        self.customSubstances = customSubstancesToStore
+        self.experiences = experiencesToStore
+        self.substanceCompanions = companionsToStore
+        self.customSubstances = customSubstances.map { cust in
+            CustomSubstanceCodable(
+                name: cust.nameUnwrapped,
+                units: cust.unitsUnwrapped,
+                description: cust.explanationUnwrapped
+            )
+        }
     }
 
     // Todo: check if this is necessary
@@ -95,37 +86,40 @@ struct JournalFile: FileDocument, Codable {
 }
 
 struct ExperienceCodable: Codable {
-    let id: Int
     let title: String
     let text: String
     let creationDate: Date
     let sortDate: Date?
+    let isFavorite: Bool
+    let ingestions: [IngestionCodable]
 
     init(
-        id: Int,
         title: String,
         text: String,
         creationDate: Date,
-        sortDate: Date?
+        sortDate: Date?,
+        isFavorite: Bool,
+        ingestions: [IngestionCodable]
     ) {
-        self.id = id
         self.title = title
         self.text = text
         self.creationDate = creationDate
         self.sortDate = sortDate
+        self.isFavorite = isFavorite
+        self.ingestions = ingestions
     }
 
     enum CodingKeys: String, CodingKey {
-        case id
         case title
         case text
         case creationDate
         case sortDate
+        case isFavorite
+        case ingestions
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try values.decode(Int.self, forKey: .id)
         self.title = try values.decode(String.self, forKey: .title)
         self.text = try values.decode(String.self, forKey: .text)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
@@ -135,11 +129,12 @@ struct ExperienceCodable: Codable {
         } else {
             self.sortDate = nil
         }
+        self.isFavorite = (try values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
+        self.ingestions = try values.decode([IngestionCodable].self, forKey: .ingestions)
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(text, forKey: .text)
         try container.encode(UInt64(creationDate.timeIntervalSince1970) * 1000, forKey: .creationDate)
@@ -149,6 +144,8 @@ struct ExperienceCodable: Codable {
             let sortMillis: UInt64? = nil
             try container.encode(sortMillis, forKey: .sortDate)
         }
+        try container.encode(isFavorite, forKey: .isFavorite)
+        try container.encode(ingestions, forKey: .ingestions)
     }
 }
 
@@ -160,7 +157,6 @@ struct IngestionCodable: Codable {
     let dose: Double?
     let isDoseAnEstimate: Bool
     let units: String
-    let experienceId: Int
     let notes: String
 
     enum CodingKeys: String, CodingKey {
@@ -171,7 +167,6 @@ struct IngestionCodable: Codable {
         case dose
         case isDoseAnEstimate
         case units
-        case experienceId
         case notes
     }
 
@@ -183,7 +178,6 @@ struct IngestionCodable: Codable {
         dose: Double?,
         isDoseAnEstimate: Bool,
         units: String,
-        experienceId: Int,
         notes: String
     ) {
         self.substanceName = substanceName
@@ -193,7 +187,6 @@ struct IngestionCodable: Codable {
         self.dose = dose
         self.isDoseAnEstimate = isDoseAnEstimate
         self.units = units
-        self.experienceId = experienceId
         self.notes = notes
     }
 
@@ -216,7 +209,6 @@ struct IngestionCodable: Codable {
         self.dose = try values.decode(Double.self, forKey: .dose)
         self.isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
         self.units = try values.decode(String.self, forKey: .units)
-        self.experienceId = try values.decode(Int.self, forKey: .experienceId)
         self.notes = try values.decode(String.self, forKey: .notes)
     }
 
@@ -234,7 +226,6 @@ struct IngestionCodable: Codable {
         try container.encode(dose, forKey: .dose)
         try container.encode(isDoseAnEstimate, forKey: .isDoseAnEstimate)
         try container.encode(units, forKey: .units)
-        try container.encode(experienceId, forKey: .experienceId)
         try container.encode(notes, forKey: .notes)
     }
 }
@@ -272,7 +263,6 @@ struct CompanionCodable: Codable {
 }
 
 struct CustomSubstanceCodable: Codable {
-    let id: Int
     let name: String
     let units: String
     let description: String

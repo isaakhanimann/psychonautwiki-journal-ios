@@ -15,6 +15,7 @@ struct ExperienceRow: View {
                 title: experience.titleUnwrapped,
                 distinctSubstanceNames: experience.distinctUsedSubstanceNames,
                 sortDate: experience.sortDateUnwrapped,
+                isFavorite: experience.isFavorite,
                 isTimeRelative: isTimeRelative
             )
         }
@@ -27,19 +28,26 @@ struct ExperienceRowContent: View {
     let title: String
     let distinctSubstanceNames: [String]
     let sortDate: Date
+    let isFavorite: Bool
     let isTimeRelative: Bool
 
     var body: some View {
         HStack {
-            Circle()
-                .fill(
-                    AngularGradient(
-                        gradient: Gradient(
-                            colors: getDoubleColors()),
-                        center: .center
+            ZStack {
+                Circle()
+                    .fill(
+                        AngularGradient(
+                            gradient: Gradient(
+                                colors: getDoubleColors()),
+                            center: .center
+                        )
                     )
-                )
-                .frame(width: 35, height: 35)
+                    .frame(width: 35, height: 35)
+                if isFavorite {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                }
+            }
             Spacer()
                 .frame(width: 10)
             VStack(alignment: .leading) {
@@ -77,6 +85,7 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     title: "My title is not is a normal length",
                     distinctSubstanceNames: ["MDMA", "LSD"],
                     sortDate: Date() - 5 * 60 * 60 - 30,
+                    isFavorite: true,
                     isTimeRelative: false
                 )
             }

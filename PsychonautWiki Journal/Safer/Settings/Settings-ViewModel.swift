@@ -38,8 +38,8 @@ extension SettingsScreen {
                     newExperience.text = experienceCodable.text
                     newExperience.creationDate = experienceCodable.creationDate
                     newExperience.sortDate = experienceCodable.sortDate
-                    let ingestionCodablesForExperience = file.ingestions.filter {$0.experienceId == experienceCodable.id}
-                    for ingestionCodable in ingestionCodablesForExperience {
+                    newExperience.isFavorite = experienceCodable.isFavorite
+                    for ingestionCodable in experienceCodable.ingestions {
                         let newIngestion = Ingestion(context: context)
                         newIngestion.substanceName = ingestionCodable.substanceName
                         newIngestion.time = ingestionCodable.time
