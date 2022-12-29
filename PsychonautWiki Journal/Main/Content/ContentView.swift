@@ -14,18 +14,11 @@ struct ContentView: View {
             .onOpenURL(perform: { url in
                 viewModel.receiveURL(url: url)
             })
-            .toast(isPresenting: $toastViewModel.isShowingErrorToast) {
+            .toast(isPresenting: $toastViewModel.isShowingToast) {
                 AlertToast(
                     displayMode: .alert,
-                    type: .error(.red),
-                    title: toastViewModel.errorToastMessage
-                )
-            }
-            .toast(isPresenting: $toastViewModel.isShowingSuccessToast) {
-                AlertToast(
-                    displayMode: .alert,
-                    type: .complete(Color.green),
-                    title: toastViewModel.successToastMessage
+                    type: toastViewModel.isSuccessToast ? .complete(.green): .error(.red),
+                    title: toastViewModel.toastMessage
                 )
             }
             .fullScreenCover(isPresented: $needsToSeeWelcome) {

@@ -19,10 +19,9 @@ struct SettingsScreen: View {
             deleteEverything: {
                 viewModel.deleteEverything()
             },
-            isShowingErrorToast: $viewModel.isShowingErrorToast,
-            errorToastMessage: $viewModel.errorToastMessage,
-            isShowingSuccessToast: $viewModel.isShowingSuccessToast,
-            successToastMessage: $viewModel.successToastMessage
+            isShowingToast: $viewModel.isShowingToast,
+            isSuccessToast: $viewModel.isShowingSuccessToast,
+            toastMessage: $viewModel.toastMessage
         )
     }
 }
@@ -38,10 +37,9 @@ struct SettingsContent: View {
     let importData: (Data) -> Void
     let deleteEverything: () -> Void
     @State private var isShowingDeleteAlert = false
-    @Binding var isShowingErrorToast: Bool
-    @Binding var errorToastMessage: String
-    @Binding var isShowingSuccessToast: Bool
-    @Binding var successToastMessage: String
+    @Binding var isShowingToast: Bool
+    @Binding var isSuccessToast: Bool
+    @Binding var toastMessage: String
 
     var body: some View {
         List {
@@ -127,18 +125,11 @@ struct SettingsContent: View {
             }
         }
         .navigationTitle("Settings")
-        .toast(isPresenting: $isShowingErrorToast) {
+        .toast(isPresenting: $isShowingToast) {
             AlertToast(
                 displayMode: .alert,
-                type: .error(.red),
-                title: errorToastMessage
-            )
-        }
-        .toast(isPresenting: $isShowingSuccessToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: .complete(Color.green),
-                title: successToastMessage
+                type: isSuccessToast ? .complete(.green) : .error(.red),
+                title: toastMessage
             )
         }
     }
@@ -181,10 +172,9 @@ struct SettingsContent_Previews: PreviewProvider {
                 exportData: {},
                 importData: {_ in },
                 deleteEverything: {},
-                isShowingErrorToast: .constant(false),
-                errorToastMessage: .constant(""),
-                isShowingSuccessToast: .constant(false),
-                successToastMessage: .constant("")
+                isShowingToast: .constant(false),
+                isSuccessToast: .constant(false),
+                toastMessage: .constant("")
             )
             .accentColor(Color.blue)
         }

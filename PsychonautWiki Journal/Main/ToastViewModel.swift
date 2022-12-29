@@ -2,18 +2,19 @@ import Foundation
 
 @MainActor
 class ToastViewModel: ObservableObject {
-    @Published var successToastMessage = "Success"
-    @Published var isShowingSuccessToast = false
-    @Published var isShowingErrorToast = false
-    @Published var errorToastMessage = "Error"
+    @Published var toastMessage = ""
+    @Published var isShowingToast = false
+    @Published var isSuccessToast = false
 
-    func showErrorToast(message: String) {
-        errorToastMessage = message
-        isShowingErrorToast = true
+    func showErrorToast(message: String = "Error") {
+        toastMessage = message
+        isShowingToast = true
+        isSuccessToast = false
     }
 
     func showSuccessToast(message: String = "Ingestion Added") {
-        successToastMessage = message
-        isShowingSuccessToast = true
+        toastMessage = message
+        isShowingToast = true
+        isSuccessToast = true
     }
 }

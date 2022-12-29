@@ -14,10 +14,9 @@ extension SettingsScreen {
 
         @Published var isExporting = false
         @Published var journalFile = JournalFile()
-        @Published var isShowingErrorToast = false
-        @Published var errorToastMessage = ""
+        @Published var isShowingToast = false
         @Published var isShowingSuccessToast = false
-        @Published var successToastMessage = ""
+        @Published var toastMessage = ""
 
         func exportData() {
             let experienceFetchRequest = Experience.fetchRequest()
@@ -101,13 +100,14 @@ extension SettingsScreen {
         }
 
         private func showSuccessToast(message: String) {
-            successToastMessage = message
-            isShowingSuccessToast = true
-        }
+            toastMessage = message
+            isShowingToast = true
+            isShowingSuccessToast = true        }
 
         private func showErrorToast(message: String) {
-            errorToastMessage = message
-            isShowingErrorToast = true
+            toastMessage = message
+            isShowingToast = true
+            isShowingSuccessToast = false
         }
     }
 }
