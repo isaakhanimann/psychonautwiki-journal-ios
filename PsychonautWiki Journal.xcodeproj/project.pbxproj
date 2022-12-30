@@ -33,6 +33,9 @@
 		EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */; };
 		EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */; };
 		EA41C62F295EB86C000DA021 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* Utils.swift */; };
+		EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C631295F8921000DA021 /* DailyExperienceChart.swift */; };
+		EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */; };
+		EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -208,6 +211,9 @@
 		EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceOverview.swift; sourceTree = "<group>"; };
 		EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetails.swift; sourceTree = "<group>"; };
 		EA41C62E295EB86C000DA021 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		EA41C631295F8921000DA021 /* DailyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExperienceChart.swift; sourceTree = "<group>"; };
+		EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExperienceChart.swift; sourceTree = "<group>"; };
+		EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyExperienceChart.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -396,6 +402,18 @@
 				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 			);
 			path = Interactions;
+			sourceTree = "<group>";
+		};
+		EA41C630295F88F0000DA021 /* Experience Charts */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */,
+				EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */,
+				EA41C631295F8921000DA021 /* DailyExperienceChart.swift */,
+				EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */,
+				EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */,
+			);
+			path = "Experience Charts";
 			sourceTree = "<group>";
 		};
 		EA460D202763790C002EF80B /* FAQ */ = {
@@ -701,8 +719,7 @@
 			children = (
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
 				EA41C62E295EB86C000DA021 /* Utils.swift */,
-				EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */,
-				EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */,
+				EA41C630295F88F0000DA021 /* Experience Charts */,
 				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
 				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
 				EA41C624295EAFD8000DA021 /* Data.swift */,
@@ -897,8 +914,10 @@
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
+				EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
+				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
@@ -951,6 +970,7 @@
 				EAB165C727E4ED86003DF79D /* ShareButton.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
+				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
