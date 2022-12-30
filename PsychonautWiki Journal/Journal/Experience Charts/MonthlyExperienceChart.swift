@@ -13,7 +13,7 @@ struct MonthlyExperienceChart: View {
 
     let experienceData: ExperienceData
     let isShowingMonthlyAverageLine: Bool
-    let chartHeight: CGFloat = 240
+    var chartHeight: CGFloat = 240
     @State private var selectedElement: SubstanceExperienceCountForMonth? = nil
     @Environment(\.layoutDirection) var layoutDirection
     
@@ -90,7 +90,11 @@ struct MonthlyExperienceChart: View {
                         .gesture(
                             SpatialTapGesture()
                                 .onEnded { value in
-                                    let element = findElement(location: value.location, proxy: proxy, geometry: nthGeometryItem)
+                                    let element = findElement(
+                                        location: value.location,
+                                        proxy: proxy,
+                                        geometry: nthGeometryItem
+                                    )
                                     if selectedElement?.month == element?.month {
                                         // If tapping the same element, clear the selection.
                                         selectedElement = nil
@@ -119,7 +123,7 @@ struct MonthlyExperienceChart: View {
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x
                         let lineX = layoutDirection == .rightToLeft ? nthGeoItem.size.width - midStartPositionX : midStartPositionX
                         let lineHeight = nthGeoItem[proxy.plotAreaFrame].maxY
-                        let boxWidth: CGFloat = 150
+                        let boxWidth: CGFloat = 120
                         let boxOffset = max(0, min(nthGeoItem.size.width - boxWidth, lineX - boxWidth / 2))
                         Rectangle()
                             .fill(.quaternary)

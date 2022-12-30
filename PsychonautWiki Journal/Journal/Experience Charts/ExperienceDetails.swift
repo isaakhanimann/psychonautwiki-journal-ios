@@ -25,31 +25,22 @@ struct ExperienceDetails: View {
                 let chartHeight: CGFloat = 240
                 switch timeRange {
                 case .last30Days:
-                    Text("Total Experiences")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                    Text("\(experienceData.last30DaysTotal, format: .number) Experiences")
-                        .font(.title2.bold())
-                        .foregroundColor(.primary)
-                    DailyExperienceChart(experienceData: experienceData)
-                        .frame(height: chartHeight)
+                    DailyExperienceChart(
+                        experienceData: experienceData,
+                        chartHeight: chartHeight
+                    )
                 case .last12Months:
                     MonthlyExperienceChart(
                         experienceData: experienceData,
-                        isShowingMonthlyAverageLine: isShowingMonthlyAverageLine
+                        isShowingMonthlyAverageLine: isShowingMonthlyAverageLine,
+                        chartHeight: chartHeight
                     )
                 case .years:
-                    Text("Total Experiences")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                    Text("\(experienceData.yearsTotal, format: .number) Experiences")
-                        .font(.title2.bold())
-                        .foregroundColor(.primary)
                     YearlyExperienceChart(
                         experienceData: experienceData,
-                        isShowingYearlyAverageLine: isShowingYearlyAverageLine
+                        isShowingYearlyAverageLine: isShowingYearlyAverageLine,
+                        chartHeight: chartHeight
                     )
-                    .frame(height: chartHeight)
                 }
             }
             .listRowSeparator(.hidden)
