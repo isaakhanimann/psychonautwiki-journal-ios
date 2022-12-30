@@ -14,19 +14,23 @@ struct WebViewScreen: View {
                 WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
             }.toolbar {
                 ToolbarItemGroup {
-                    if !isShowingCopySuccess {
-                        Button {
-                            UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
-                            isShowingCopySuccess = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                isShowingCopySuccess = false
-                            }
-                        } label: {
-                            Label("Copy Link", systemImage: "doc.on.doc")
-                        }
+                    if #available(iOS 16.0, *) {
+                        ShareLink(item: articleURL)
                     } else {
-                        Label("Link Copied", systemImage: "checkmark")
-                            .foregroundColor(.green)
+                        if !isShowingCopySuccess {
+                            Button {
+                                UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
+                                isShowingCopySuccess = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    isShowingCopySuccess = false
+                                }
+                            } label: {
+                                Label("Copy Link", systemImage: "doc.on.doc")
+                            }
+                        } else {
+                            Label("Link Copied", systemImage: "checkmark")
+                                .foregroundColor(.green)
+                        }
                     }
                     Link(destination: articleURL) {
                         Label("Open in Safari", systemImage: "safari")
