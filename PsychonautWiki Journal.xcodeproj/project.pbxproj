@@ -27,6 +27,12 @@
 		EA41C61F295B5DE4000DA021 /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61E295B5DE4000DA021 /* RootScreen.swift */; };
 		EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */; };
 		EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C622295C2BE7000DA021 /* JournalFile.swift */; };
+		EA41C625295EAFD8000DA021 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C624295EAFD8000DA021 /* Data.swift */; };
+		EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C626295EB65C000DA021 /* IngestionOverview.swift */; };
+		EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* IngestionDetails.swift */; };
+		EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */; };
+		EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */; };
+		EA41C62F295EB86C000DA021 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* Utils.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -196,6 +202,12 @@
 		EA41C61E295B5DE4000DA021 /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
 		EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings-ViewModel.swift"; sourceTree = "<group>"; };
 		EA41C622295C2BE7000DA021 /* JournalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalFile.swift; sourceTree = "<group>"; };
+		EA41C624295EAFD8000DA021 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		EA41C626295EB65C000DA021 /* IngestionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionOverview.swift; sourceTree = "<group>"; };
+		EA41C628295EB6E2000DA021 /* IngestionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDetails.swift; sourceTree = "<group>"; };
+		EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceOverview.swift; sourceTree = "<group>"; };
+		EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetails.swift; sourceTree = "<group>"; };
+		EA41C62E295EB86C000DA021 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -688,6 +700,12 @@
 			isa = PBXGroup;
 			children = (
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
+				EA41C62E295EB86C000DA021 /* Utils.swift */,
+				EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */,
+				EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */,
+				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
+				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
+				EA41C624295EAFD8000DA021 /* Data.swift */,
 				EAE4718826CBA664009FB0EC /* Experience */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
 				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
@@ -900,6 +918,7 @@
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
+				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
@@ -912,6 +931,7 @@
 				EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */,
 				EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */,
 				EABD92002941C3740073303A /* AxisDrawable.swift in Sources */,
+				EA41C625295EAFD8000DA021 /* Data.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */,
 				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
@@ -935,9 +955,11 @@
 				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
+				EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
+				EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */,
 				EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* ChooseTimeAndColor.swift in Sources */,
@@ -950,6 +972,7 @@
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPicker.swift in Sources */,
 				EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */,
+				EA41C62F295EB86C000DA021 /* Utils.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
@@ -1000,6 +1023,7 @@
 				EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */,
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
+				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,5 @@
 import SwiftUI
+import Charts
 
 struct StatsScreen: View {
 
@@ -7,38 +8,63 @@ struct StatsScreen: View {
     ) var ingestions: FetchedResults<Ingestion>
 
     var body: some View {
-        List {
-            Section {
-                EffectTimeline(
-                    timelineModel: TimelineModel(
-                        everythingForEachLine: [
-                            // onset comeup peak total
-                            EverythingForOneLine(
-                                roaDuration: RoaDuration(
-                                    onset: DurationRange(min: 30, max: 60, units: .minutes),
-                                    comeup: DurationRange(min: 1, max: 2, units: .hours),
-                                    peak: DurationRange(min: 1, max: 2, units: .hours),
-                                    offset: nil,
-                                    total: DurationRange(min: 6, max: 8, units: .hours),
-                                    afterglow: nil
-                                ),
-                                startTime: Date().addingTimeInterval(-60*60),
-                                horizontalWeight: 0.5,
-                                verticalWeight: 0.5,
-                                color: .green
-                            ),
-
-                        ]
-                    )
-                )
-            }
-        }
-        .navigationTitle("Statistics")
+        //StatsScreenContent()
+        Text("Hello")
     }
 }
 
-struct StatsTab_Previews: PreviewProvider {
-    static var previews: some View {
-        StatsScreen()
-    }
-}
+//struct StatsScreenContent: View {
+//
+//
+//    @State private var timeOption: TimeOption = .month12
+//    var body: some View {
+//        if #available(iOS 16, *) {
+//            VStack {
+//                Picker("Time Range", selection: $timeOption.animation(.easeInOut)) {
+//                    ForEach(TimeOption.allCases) { option in
+//                        Text(option.rawValue).tag(option)
+//                    }
+//                }.pickerStyle(.segmented)
+//                GroupBox("Total Experiences") {
+//                    Chart {
+//                        BarMark(
+//                            x: .value("Month", Date(), unit: .month),
+//                            y: .value("Sales", 5)
+//                        ).foregroundStyle(.green)
+//                    }
+//                }
+//            }.padding(.horizontal)
+//            .navigationTitle("Statistics")
+//        }
+//    }
+//}
+
+//struct SubstanceSummary: Identifiable {
+//    var id: String {
+//        substanceName
+//    }
+//    let substanceName: String
+//    let color: Color
+//    let count: Int
+//    let month: Date
+//}
+//
+//enum TimeOption: String, CaseIterable, Identifiable {
+//    var id: String {
+//        rawValue
+//    }
+//    case days7 = "7D"
+//    case days30 = "30D"
+//    case week20 = "20W"
+//    case month12 = "12M"
+//    case quarter8 = "8Q"
+//    case year10 = "10Y"
+//}
+
+//struct StatsScreenContent_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            StatsScreenContent()
+//        }
+//    }
+//}
