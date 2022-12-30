@@ -111,7 +111,7 @@ struct ChooseDoseScreen: View {
                 doseMaybe: $viewModel.selectedPureDose,
                 selectedUnits: $viewModel.selectedUnits
             )
-            Toggle("Dose is an Estimate", isOn: $viewModel.isEstimate).padding(.bottom, 5)
+            Toggle("Dose is an Estimate", isOn: $viewModel.isEstimate).tint(.accentColor).padding(.bottom, 5)
         }
         .listRowSeparator(.hidden)
     }

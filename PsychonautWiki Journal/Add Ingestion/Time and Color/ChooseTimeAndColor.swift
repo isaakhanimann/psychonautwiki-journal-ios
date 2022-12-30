@@ -23,7 +23,7 @@ struct ChooseTimeAndColor: View {
                     .labelsHidden()
                     .datePickerStyle(.wheel)
                     if let experience = viewModel.closestExperience {
-                        Toggle("Part of \(experience.titleUnwrapped)", isOn: $viewModel.isAddingToFoundExperience)
+                        Toggle("Part of \(experience.titleUnwrapped)", isOn: $viewModel.isAddingToFoundExperience).tint(.accentColor)
                     }
                 }
                 Section("Notes") {

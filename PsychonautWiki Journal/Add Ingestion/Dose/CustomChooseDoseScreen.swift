@@ -39,7 +39,7 @@ struct CustomChooseDoseScreen: View {
                         Text(units)
                     }
                     .font(.title)
-                    Toggle("Dose is an Estimate", isOn: $isEstimate).padding(.bottom, 5)
+                    Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
                 }
                 Section {
                     Button {

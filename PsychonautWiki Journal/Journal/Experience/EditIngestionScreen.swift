@@ -80,7 +80,7 @@ struct EditIngestionContent: View {
                     doseMaybe: $dose,
                     selectedUnits: $units
                 )
-                Toggle("Is an Estimate", isOn: $isEstimate)
+                Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }.listRowSeparator(.hidden)
             Section("Ingestion Time") {
                 DatePicker(
