@@ -211,7 +211,6 @@ struct ExperienceDetails: View {
                                     let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                                     let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                                     let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x
-
                                     let lineX = layoutDirection == .rightToLeft ? nthGeoItem.size.width - midStartPositionX : midStartPositionX
                                     let lineHeight = nthGeoItem[proxy.plotAreaFrame].maxY
                                     let boxWidth: CGFloat = 150
@@ -220,27 +219,21 @@ struct ExperienceDetails: View {
                                         .fill(.quaternary)
                                         .frame(width: 2, height: lineHeight)
                                         .position(x: lineX, y: lineHeight / 2)
-
-                                    VStack(alignment: .leading) {
-                                        Text("\(selectedElement.month, format: .dateTime.year().month())")
-                                            .font(.callout)
-                                            .foregroundStyle(.secondary)
-                                        Text("\(selectedElement.experienceCount, format: .number) Experiences")
-                                            .font(.title2.bold())
-                                            .foregroundColor(.primary)
-                                    }
-                                    .frame(width: boxWidth, alignment: .leading)
-                                    .background {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.background)
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.quaternary.opacity(0.7))
+                                    Text("\(selectedElement.month, format: .dateTime.year().month())")
+                                        .font(.title2.bold())
+                                        .frame(width: boxWidth, alignment: .center)
+                                        .foregroundColor(.primary)
+                                        .background {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(.background)
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(.quaternary.opacity(0.7))
+                                            }
+                                            .padding([.leading, .trailing], -8)
+                                            .padding([.top, .bottom], -4)
                                         }
-                                        .padding([.leading, .trailing], -8)
-                                        .padding([.top, .bottom], -4)
-                                    }
-                                    .offset(x: boxOffset)
+                                        .offset(x: boxOffset)
                                 }
                             }
                         }
