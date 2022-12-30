@@ -53,16 +53,9 @@ struct IngestionDetails: View {
                     .frame(height: 300)
             }
             .listRowSeparator(.hidden)
-
-            Section("Options") {
-                TransactionsLink()
-            }
         }
         .listStyle(.plain)
         .navigationBarTitle("Style", displayMode: .inline)
-        .navigationDestination(for: [Transaction].self) { transactions in
-            TransactionsView(transactions: transactions)
-        }
     }
 }
 

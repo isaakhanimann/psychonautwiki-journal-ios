@@ -10,7 +10,6 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct DailyExperienceChart: View {
-    let showAverageLine: Bool
 
     var body: some View {
         Chart {
@@ -21,19 +20,6 @@ struct DailyExperienceChart: View {
                 )
                 .foregroundStyle(by: .value("Substance", $0.substanceName))
             }
-            .foregroundStyle(showAverageLine ? .gray.opacity(0.3) : .blue)
-
-            if showAverageLine {
-                RuleMark(
-                    y: .value("Average", ExperienceData.last30DaysAverage)
-                )
-                .lineStyle(StrokeStyle(lineWidth: 3))
-                .annotation(position: .top, alignment: .leading) {
-                    Text("Average: \(ExperienceData.last30DaysAverage, format: .number)")
-                        .font(.body.bold())
-                        .foregroundStyle(.blue)
-                }
-            }
         }
         .chartForegroundStyleScale(ExperienceData.substanceColors)
     }
@@ -41,13 +27,32 @@ struct DailyExperienceChart: View {
 
 @available(iOS 16, *)
 struct MonthlyExperienceChart: View {
+    let showAverageLine: Bool
+
     var body: some View {
         Chart(ExperienceData.last12Months, id: \.month) {
-            BarMark(
-                x: .value("Month", $0.month, unit: .month),
-                y: .value("Experiences", $0.experienceCount)
-            )
-            .foregroundStyle(by: .value("Substance", $0.substanceName))
+            if showAverageLine {
+                BarMark(
+                    x: .value("Month", $0.month, unit: .month),
+                    y: .value("Experiences", $0.experienceCount)
+                )
+                .foregroundStyle(.gray.opacity(0.3))
+                RuleMark(
+                    y: .value("Average", ExperienceData.monthlyAverage)
+                )
+                .lineStyle(StrokeStyle(lineWidth: 3))
+                .annotation(position: .top, alignment: .leading) {
+                    Text("Average: \(ExperienceData.monthlyAverage, format: .number)")
+                        .font(.body.bold())
+                        .foregroundStyle(.blue)
+                }
+            } else {
+                BarMark(
+                    x: .value("Month", $0.month, unit: .month),
+                    y: .value("Experiences", $0.experienceCount)
+                )
+                .foregroundStyle(by: .value("Substance", $0.substanceName))
+            }
         }
         .chartXAxis {
             AxisMarks(values: .stride(by: .month)) { _ in
@@ -81,31 +86,27 @@ struct ExperienceDetails: View {
                         .font(.title2.bold())
                         .foregroundColor(.primary)
 
-                    DailyExperienceChart(showAverageLine: showAverageLine)
+                    DailyExperienceChart()
                         .frame(height: 240)
                 case .last12Months:
                     Text("\(ExperienceData.last12MonthsTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
 
-                    MonthlyExperienceChart()
+                    MonthlyExperienceChart(showAverageLine: showAverageLine)
                         .frame(height: 240)
                 }
             }
             .listRowSeparator(.hidden)
 
             Section("Options") {
-                if timeRange == .last30Days {
-                    Toggle("Show Daily Average", isOn: $showAverageLine)
+                if timeRange == .last12Months {
+                    Toggle("Show Monthly Average", isOn: $showAverageLine)
                 }
-                TransactionsLink()
             }
         }
         .listStyle(.plain)
         .navigationBarTitle("Total Sales", displayMode: .inline)
-        .navigationDestination(for: [Transaction].self) { transactions in
-            TransactionsView(transactions: transactions)
-        }
     }
 }
 

@@ -73,9 +73,6 @@ struct ExperienceData {
         last30Days.map { $0.experienceCount }.reduce(0, +)
     }
 
-    static var last30DaysAverage: Double {
-        last30DaysTotal / Double(last30Days.count)
-    }
 
     struct SubstanceExperienceCountForMonth {
         let month: Date
@@ -100,5 +97,9 @@ struct ExperienceData {
     /// Total sales for the last 12 months.
     static var last12MonthsTotal: Double {
         last12Months.map { $0.experienceCount }.reduce(0, +)
+    }
+
+    static var monthlyAverage: Double {
+        last12MonthsTotal / 12.0
     }
 }
