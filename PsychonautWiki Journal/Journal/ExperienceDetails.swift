@@ -24,6 +24,7 @@ struct DailyExperienceChart: View {
             }
         }
         .chartForegroundStyleScale(mapping: experienceData.colorMapping)
+        .chartLegend(position: .bottom, alignment: .leading)
     }
 }
 
@@ -66,6 +67,7 @@ struct MonthlyExperienceChart: View {
             }
         }
         .chartForegroundStyleScale(mapping: experienceData.colorMapping)
+        .chartLegend(position: .bottom, alignment: .leading)
     }
 }
 
@@ -108,6 +110,7 @@ struct YearlyExperienceChart: View {
             }
         }
         .chartForegroundStyleScale(mapping: experienceData.colorMapping)
+        .chartLegend(position: .bottom, alignment: .leading)
     }
 }
 
@@ -158,11 +161,11 @@ struct ExperienceDetails: View {
             .listRowSeparator(.hidden)
             if timeRange == .last12Months {
                 Section("Options") {
-                    Toggle("Show Monthly Average", isOn: $isShowingMonthlyAverageLine)
+                    Toggle("Show Monthly Average", isOn: $isShowingMonthlyAverageLine).tint(.accentColor)
                 }
             } else if timeRange == .years {
                 Section("Options") {
-                    Toggle("Show Yearly Average", isOn: $isShowingYearlyAverageLine)
+                    Toggle("Show Yearly Average", isOn: $isShowingYearlyAverageLine).tint(.accentColor)
                 }
             }
         }
