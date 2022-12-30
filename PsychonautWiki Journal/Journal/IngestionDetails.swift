@@ -67,13 +67,15 @@ struct IngestionDetails: View {
             .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
-        .navigationBarTitle("Style", displayMode: .inline)
+        .navigationTitle("Substances")
     }
 }
 
 @available(iOS 16, *)
 struct IngestionDetails_Previews: PreviewProvider {
     static var previews: some View {
-        IngestionDetails(ingestionData: .mock1)
+        NavigationView {
+            IngestionDetails(ingestionData: .mock1)
+        }
     }
 }

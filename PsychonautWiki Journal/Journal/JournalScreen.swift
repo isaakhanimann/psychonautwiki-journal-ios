@@ -13,10 +13,12 @@ struct JournalScreen: View {
         .navigationTitle("Journal")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    StatsScreen()
-                } label: {
-                    Label("Stats", systemImage: "chart.bar")
+                if #available(iOS 16, *) {
+                    NavigationLink {
+                        StatsScreen()
+                    } label: {
+                        Label("Stats", systemImage: "chart.bar")
+                    }
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {

@@ -110,13 +110,15 @@ struct ExperienceDetails: View {
             }
         }
         .listStyle(.plain)
-        .navigationBarTitle("Total Sales", displayMode: .inline)
+        .navigationTitle("Total Experiences")
     }
 }
 
 @available(iOS 16, *)
 struct ExperienceDetails_Previews: PreviewProvider {
     static var previews: some View {
-        ExperienceDetails(experienceData: .mock1)
+        NavigationView {
+            ExperienceDetails(experienceData: .mock1)
+        }
     }
 }
