@@ -14,9 +14,9 @@ struct ExperienceOverviewChart: View {
     let experienceData: ExperienceData
 
     var body: some View {
-        Chart(experienceData.last30Days) {
+        Chart(experienceData.last12Months, id: \.month) {
             BarMark(
-                x: .value("Day", $0.day, unit: .day),
+                x: .value("Month", $0.month, unit: .month),
                 y: .value("Experiences", $0.experienceCount)
             )
             .foregroundStyle(by: .value("Substance", $0.substanceName))
@@ -38,7 +38,7 @@ struct ExperienceOverview: View {
             Text("Total Experiences")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("\(experienceData.last30DaysTotal, format: .number) Experiences")
+            Text("\(experienceData.last12MonthsTotal, format: .number) Experiences")
                 .font(.title2.bold())
             ExperienceOverviewChart(experienceData: experienceData)
                 .frame(height: 100)

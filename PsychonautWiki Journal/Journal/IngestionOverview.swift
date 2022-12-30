@@ -20,7 +20,7 @@ struct IngestionOverviewChart: View {
                 y: .value("Substance", element.substanceName)
             )
             .foregroundStyle(by: .value("Substance", element.substanceName))
-            .opacity(element.substanceName == ingestionData.last30Days.first!.substanceName ? 1 : 0.5)
+            .opacity(element.substanceName == ingestionData.last12Months.first!.substanceName ? 1 : 0.5)
         }
         .chartForegroundStyleScale(mapping: ingestionData.colorMapping)
         .chartLegend(.hidden)
@@ -38,7 +38,7 @@ struct IngestionOverview: View {
         VStack(alignment: .leading) {
             Text("Most Used Substance")
                 .foregroundStyle(.secondary)
-            Text(ingestionData.last30Days.first!.substanceName)
+            Text(ingestionData.last12Months.first!.substanceName)
                 .font(.title2.bold())
             IngestionOverviewChart(ingestionData: ingestionData)
                 .frame(height: 100)

@@ -73,7 +73,7 @@ struct MonthlyExperienceChart: View {
 struct ExperienceDetails: View {
 
     let experienceData: ExperienceData
-    @State private var timeRange: TimeRange = .last30Days
+    @State private var timeRange: TimeRange = .last12Months
     @State private var showAverageLine: Bool = false
 
     var body: some View {

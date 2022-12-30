@@ -52,26 +52,26 @@ extension IngestionData {
     )
 }
 
+struct SubstanceExperienceCountForDay: Identifiable {
+    var id: String {
+        day.asDateAndTime + substanceName
+    }
+    let day: Date
+    let substanceName: String
+    let experienceCount: Double
+}
+
+struct SubstanceExperienceCountForMonth {
+    let month: Date
+    let substanceName: String
+    let experienceCount: Double
+}
+
 struct ExperienceData {
 
     let last30Days: [SubstanceExperienceCountForDay]
     let last12Months: [SubstanceExperienceCountForMonth]
     let colorMapping: (String) -> Color
-
-    struct SubstanceExperienceCountForDay: Identifiable {
-        var id: String {
-            day.asDateAndTime + substanceName
-        }
-        let day: Date
-        let substanceName: String
-        let experienceCount: Double
-    }
-
-    struct SubstanceExperienceCountForMonth {
-        let month: Date
-        let substanceName: String
-        let experienceCount: Double
-    }
 
     var last30DaysTotal: Double {
         last30Days.map { $0.experienceCount }.reduce(0, +)
