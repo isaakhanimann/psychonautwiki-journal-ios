@@ -11,7 +11,7 @@ import SwiftUI
 @available(iOS 16, *)
 struct IngestionDetailsChart: View {
     let data: [IngestionCount]
-    let color: KeyValuePairs<String,Color>
+    let colorMapping: (String) -> Color
 
 
     var body: some View {
@@ -22,7 +22,7 @@ struct IngestionDetailsChart: View {
             )
             .foregroundStyle(by: .value("Substance", element.substanceName))
         }
-        .chartForegroundStyleScale(color)
+        .chartForegroundStyleScale(mapping: colorMapping)
     }
 }
 
@@ -41,12 +41,12 @@ struct IngestionDetails: View {
         }
     }
 
-    var color: KeyValuePairs<String,Color> {
+    var colorMapping: (String) -> Color {
         switch timeRange {
         case .last30Days:
-            return ingestionData.last30DaysColors
+            return ingestionData.last30DaysColorMapping
         case .last12Months:
-            return ingestionData.last12MonthsColors
+            return ingestionData.last12MonthsColorMapping
         }
     }
 
@@ -61,7 +61,7 @@ struct IngestionDetails: View {
                 Text(data.first?.substanceName ?? "Unknown")
                     .font(.title2.bold())
                     .foregroundColor(.primary)
-                IngestionDetailsChart(data: data, color: color)
+                IngestionDetailsChart(data: data, colorMapping: colorMapping)
                     .frame(height: 300)
             }
             .listRowSeparator(.hidden)

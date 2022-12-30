@@ -21,9 +21,9 @@ struct IngestionCount: Identifiable {
 
 struct IngestionData {
     let last30Days: [IngestionCount]
-    let last30DaysColors: KeyValuePairs<String, Color>
+    let last30DaysColorMapping: (String) -> Color
     let last12Months: [IngestionCount]
-    let last12MonthsColors: KeyValuePairs<String, Color>
+    let last12MonthsColorMapping: (String) -> Color
 }
 
 extension IngestionData {
@@ -34,24 +34,30 @@ extension IngestionData {
             .init(substanceName: "Amphetamine", ingestionCount: 3),
             .init(substanceName: "MDMA", ingestionCount: 1)
         ],
-        last30DaysColors: [
-            "MDMA": Color.pink,
-            "Cannabis": .green,
-            "Cocaine": .blue,
-            "Amphetamine": .cyan,
-        ],
+        last30DaysColorMapping: { substanceName in
+            switch substanceName {
+            case "MDMA": return Color.pink
+            case "Cannabis": return .green
+            case "Cocaine": return .blue
+            case "Amphetamine": return .cyan
+            default: return .red
+            }
+        },
         last12Months: [
             .init(substanceName: "Cannabis", ingestionCount: 55),
             .init(substanceName: "Cocaine", ingestionCount: 10),
             .init(substanceName: "MDMA", ingestionCount: 4),
             .init(substanceName: "Amphetamine", ingestionCount: 3)
         ],
-        last12MonthsColors: [
-            "MDMA": Color.pink,
-            "Cannabis": .green,
-            "Cocaine": .blue,
-            "Amphetamine": .cyan,
-        ]
+        last12MonthsColorMapping: { substanceName in
+            switch substanceName {
+            case "MDMA": return Color.pink
+            case "Cannabis": return .green
+            case "Cocaine": return .blue
+            case "Amphetamine": return .cyan
+            default: return .red
+            }
+        }
     )
 }
 
