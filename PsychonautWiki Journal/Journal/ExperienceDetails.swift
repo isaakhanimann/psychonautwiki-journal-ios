@@ -35,6 +35,7 @@ struct DailyExperienceChart: View {
                 }
             }
         }
+        .chartForegroundStyleScale(ExperienceData.substanceColors)
     }
 }
 
@@ -55,6 +56,7 @@ struct MonthlyExperienceChart: View {
                 AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
             }
         }
+        .chartForegroundStyleScale(ExperienceData.substanceColors)
     }
 }
 

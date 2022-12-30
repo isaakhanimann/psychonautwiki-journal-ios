@@ -42,6 +42,14 @@ struct ExperienceData {
         let experienceCount: Double
     }
 
+    static let substanceColors: KeyValuePairs<String, Color> = [
+        "MDMA": Color.pink,
+        "Cannabis": .green,
+        "Cocaine": .blue,
+        "Amphetamine": .cyan,
+        "LSD": .purple
+    ]
+
     static let last30Days: [SubstanceExperienceCountForDay] = [
         .init(day: date(year: 2022, month: 5, day: 8), substanceName: "MDMA", experienceCount: 0.5),
         .init(day: date(year: 2022, month: 5, day: 8), substanceName: "Cannabis", experienceCount: 0.5),
