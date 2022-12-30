@@ -13,11 +13,27 @@ struct ExperiencesList: View {
                    Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < 12*60*60 {
                     Section("Current") {
                         ExperienceRow(experience: first, isTimeRelative: viewModel.isTimeRelative)
+//                            .swipeActions(allowsFullSwipe: false) {
+//                                Button(role: .destructive) {
+//                                    PersistenceController.shared.viewContext.delete(first)
+//                                    PersistenceController.shared.saveViewContext()
+//                                } label: {
+//                                    Label("Delete", systemImage: "trash.fill")
+//                                }
+//                            }
                     }
                     let rest = viewModel.experiences.suffix(viewModel.experiences.count-1)
                     Section("Previous") {
                         ForEach(rest) { exp in
                             ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
+//                                .swipeActions(allowsFullSwipe: false) {
+//                                    Button(role: .destructive) {
+//                                        PersistenceController.shared.viewContext.delete(exp)
+//                                        PersistenceController.shared.saveViewContext()
+//                                    } label: {
+//                                        Label("Delete", systemImage: "trash.fill")
+//                                    }
+//                                }
                         }
                     }
                 } else {

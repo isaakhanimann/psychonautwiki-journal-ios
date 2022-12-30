@@ -54,7 +54,6 @@ struct ExperienceDetails: View {
                 }
             }
         }
-        .listStyle(.plain)
         .navigationTitle("Total Experiences")
     }
 }

@@ -17,7 +17,14 @@ struct ExperienceRow: View {
                 sortDate: experience.sortDateUnwrapped,
                 isFavorite: experience.isFavorite,
                 isTimeRelative: isTimeRelative
-            )
+            ).swipeActions(allowsFullSwipe: false) {
+                Button(role: .destructive) {
+                    PersistenceController.shared.viewContext.delete(experience)
+                    PersistenceController.shared.saveViewContext()
+                } label: {
+                    Label("Delete", systemImage: "trash.fill")
+                }
+            }
         }
     }
 }
