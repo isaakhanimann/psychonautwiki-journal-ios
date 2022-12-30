@@ -45,7 +45,9 @@ struct SettingsContent: View {
         List {
             eye
             Section("Communication") {
-                ShareButton()
+                if #available(iOS 16.0, *) {
+                    ShareLink("Share With a Friend", item: URL(string: "https://isaakhanimann.github.io")!)
+                }
                 RateInAppStoreButton()
                 Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                     Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
