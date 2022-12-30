@@ -21,9 +21,8 @@ struct IngestionCount: Identifiable {
 
 struct IngestionData {
     let last30Days: [IngestionCount]
-    let last30DaysColorMapping: (String) -> Color
     let last12Months: [IngestionCount]
-    let last12MonthsColorMapping: (String) -> Color
+    let colorMapping: (String) -> Color
 }
 
 extension IngestionData {
@@ -34,27 +33,19 @@ extension IngestionData {
             .init(substanceName: "Amphetamine", ingestionCount: 3),
             .init(substanceName: "MDMA", ingestionCount: 1)
         ],
-        last30DaysColorMapping: { substanceName in
-            switch substanceName {
-            case "MDMA": return Color.pink
-            case "Cannabis": return .green
-            case "Cocaine": return .blue
-            case "Amphetamine": return .cyan
-            default: return .red
-            }
-        },
         last12Months: [
             .init(substanceName: "Cannabis", ingestionCount: 55),
             .init(substanceName: "Cocaine", ingestionCount: 10),
             .init(substanceName: "MDMA", ingestionCount: 4),
             .init(substanceName: "Amphetamine", ingestionCount: 3)
         ],
-        last12MonthsColorMapping: { substanceName in
+        colorMapping: { substanceName in
             switch substanceName {
             case "MDMA": return Color.pink
             case "Cannabis": return .green
             case "Cocaine": return .blue
             case "Amphetamine": return .cyan
+            case "LSD": return .purple
             default: return .red
             }
         }
@@ -64,11 +55,13 @@ extension IngestionData {
 struct ExperienceData {
 
     let last30Days: [SubstanceExperienceCountForDay]
-    let last30DaysColors: KeyValuePairs<String, Color>
     let last12Months: [SubstanceExperienceCountForMonth]
-    let last12MonthsColors: KeyValuePairs<String, Color>
+    let colorMapping: (String) -> Color
 
-    struct SubstanceExperienceCountForDay {
+    struct SubstanceExperienceCountForDay: Identifiable {
+        var id: String {
+            day.asDateAndTime + substanceName
+        }
         let day: Date
         let substanceName: String
         let experienceCount: Double
@@ -112,13 +105,6 @@ extension ExperienceData {
             .init(day: date(year: 2022, month: 5, day: 27), substanceName: "MDMA", experienceCount: 0.25),
             .init(day: date(year: 2022, month: 5, day: 27), substanceName: "Cocaine", experienceCount: 0.25)
         ],
-        last30DaysColors: [
-            "MDMA": Color.pink,
-            "Cannabis": .green,
-            "Cocaine": .blue,
-            "Amphetamine": .cyan,
-            "LSD": .purple
-        ],
         last12Months: [
             .init(month: date(year: 2021, month: 7), substanceName: "MDMA", experienceCount: 1),
             .init(month: date(year: 2021, month: 7), substanceName: "Cocaine", experienceCount: 2),
@@ -131,11 +117,15 @@ extension ExperienceData {
             .init(month: date(year: 2022, month: 1), substanceName: "Cannabis", experienceCount: 5),
             .init(month: date(year: 2022, month: 3), substanceName: "Amphetamine", experienceCount: 3)
         ],
-        last12MonthsColors: [
-            "MDMA": Color.pink,
-            "Cannabis": .green,
-            "Cocaine": .blue,
-            "Amphetamine": .cyan,
-        ]
+        colorMapping: { substanceName in
+            switch substanceName {
+            case "MDMA": return Color.pink
+            case "Cannabis": return .green
+            case "Cocaine": return .blue
+            case "Amphetamine": return .cyan
+            case "LSD": return .purple
+            default: return .red
+            }
+        }
     )
 }

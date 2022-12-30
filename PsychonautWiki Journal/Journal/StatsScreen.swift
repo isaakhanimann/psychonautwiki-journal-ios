@@ -43,20 +43,7 @@ struct StatsScreen: View {
 //                        )
 //                    }
 //                }
-//                let last30DaysColor: KeyValuePairs<String, Color> = experiencesLast30Days.flatMap { ex in
-//                    let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
-//                    let substancesWithColors = distinctSubstanceNames.map { substanceName in
-//                        [substanceName: (getColor(for: substanceName).swiftUIColor ?? Color.red)]
-//                    }
-//                    return substancesWithColors
-//                }
-//                print("hello")
-//                experienceData = ExperienceData(
-//                    last30Days: <#T##[ExperienceData.SubstanceExperienceCountForDay]#>,
-//                    last30DaysColors: <#T##KeyValuePairs<String, Color>#>,
-//                    last12Months: <#T##[ExperienceData.SubstanceExperienceCountForMonth]#>,
-//                    last12MonthsColors: <#T##KeyValuePairs<String, Color>#>
-//                )
+//                    experienceData =
             }
         }
     }

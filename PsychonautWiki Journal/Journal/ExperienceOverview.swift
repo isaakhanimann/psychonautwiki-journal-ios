@@ -14,14 +14,14 @@ struct ExperienceOverviewChart: View {
     let experienceData: ExperienceData
 
     var body: some View {
-        Chart(experienceData.last30Days, id: \.day) {
+        Chart(experienceData.last30Days) {
             BarMark(
                 x: .value("Day", $0.day, unit: .day),
                 y: .value("Experiences", $0.experienceCount)
             )
             .foregroundStyle(by: .value("Substance", $0.substanceName))
         }
-        .chartForegroundStyleScale(experienceData.last30DaysColors)
+        .chartForegroundStyleScale(mapping: experienceData.colorMapping)
         .chartLegend(.hidden)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)

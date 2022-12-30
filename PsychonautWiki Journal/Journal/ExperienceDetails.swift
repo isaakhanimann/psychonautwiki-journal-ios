@@ -15,7 +15,7 @@ struct DailyExperienceChart: View {
 
     var body: some View {
         Chart {
-            ForEach(experienceData.last30Days, id: \.day) {
+            ForEach(experienceData.last30Days) {
                 BarMark(
                     x: .value("Day", $0.day, unit: .day),
                     y: .value("Experiences", $0.experienceCount)
@@ -23,7 +23,7 @@ struct DailyExperienceChart: View {
                 .foregroundStyle(by: .value("Substance", $0.substanceName))
             }
         }
-        .chartForegroundStyleScale(experienceData.last30DaysColors)
+        .chartForegroundStyleScale(mapping: experienceData.colorMapping)
     }
 }
 
@@ -65,7 +65,7 @@ struct MonthlyExperienceChart: View {
                 AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
             }
         }
-        .chartForegroundStyleScale(experienceData.last12MonthsColors)
+        .chartForegroundStyleScale(mapping: experienceData.colorMapping)
     }
 }
 

@@ -10,9 +10,9 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct IngestionDetailsChart: View {
+
     let data: [IngestionCount]
     let colorMapping: (String) -> Color
-
 
     var body: some View {
         Chart(data) { element in
@@ -41,15 +41,6 @@ struct IngestionDetails: View {
         }
     }
 
-    var colorMapping: (String) -> Color {
-        switch timeRange {
-        case .last30Days:
-            return ingestionData.last30DaysColorMapping
-        case .last12Months:
-            return ingestionData.last12MonthsColorMapping
-        }
-    }
-
     var body: some View {
         List {
             VStack(alignment: .leading) {
@@ -61,7 +52,7 @@ struct IngestionDetails: View {
                 Text(data.first?.substanceName ?? "Unknown")
                     .font(.title2.bold())
                     .foregroundColor(.primary)
-                IngestionDetailsChart(data: data, colorMapping: colorMapping)
+                IngestionDetailsChart(data: data, colorMapping: ingestionData.colorMapping)
                     .frame(height: 300)
             }
             .listRowSeparator(.hidden)
