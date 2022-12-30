@@ -29,9 +29,9 @@ struct IngestionDetails: View {
     var data: [(name: String, sales: Int)] {
         switch timeRange {
         case .last30Days:
-            return TopStyleData.last30Days
+            return IngestionData.last30Days
         case .last12Months:
-            return TopStyleData.last12Months
+            return IngestionData.last12Months
         }
     }
 

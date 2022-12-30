@@ -14,21 +14,22 @@ struct DailyExperienceChart: View {
 
     var body: some View {
         Chart {
-            ForEach(SalesData.last30Days, id: \.day) {
+            ForEach(ExperienceData.last30Days, id: \.day) {
                 BarMark(
                     x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
+                    y: .value("Experiences", $0.experienceCount)
                 )
+                .foregroundStyle(by: .value("Substance", $0.substanceName))
             }
             .foregroundStyle(showAverageLine ? .gray.opacity(0.3) : .blue)
 
             if showAverageLine {
                 RuleMark(
-                    y: .value("Average", SalesData.last30DaysAverage)
+                    y: .value("Average", ExperienceData.last30DaysAverage)
                 )
                 .lineStyle(StrokeStyle(lineWidth: 3))
                 .annotation(position: .top, alignment: .leading) {
-                    Text("Average: \(SalesData.last30DaysAverage, format: .number)")
+                    Text("Average: \(ExperienceData.last30DaysAverage, format: .number)")
                         .font(.body.bold())
                         .foregroundStyle(.blue)
                 }
@@ -40,11 +41,12 @@ struct DailyExperienceChart: View {
 @available(iOS 16, *)
 struct MonthlyExperienceChart: View {
     var body: some View {
-        Chart(SalesData.last12Months, id: \.month) {
+        Chart(ExperienceData.last12Months, id: \.month) {
             BarMark(
                 x: .value("Month", $0.month, unit: .month),
-                y: .value("Sales", $0.sales)
+                y: .value("Experiences", $0.experienceCount)
             )
+            .foregroundStyle(by: .value("Substance", $0.substanceName))
         }
         .chartXAxis {
             AxisMarks(values: .stride(by: .month)) { _ in
@@ -67,20 +69,20 @@ struct ExperienceDetails: View {
                 TimeRangePicker(value: $timeRange)
                     .padding(.bottom)
 
-                Text("Total Sales")
+                Text("Total Experiences")
                     .font(.callout)
                     .foregroundStyle(.secondary)
 
                 switch timeRange {
                 case .last30Days:
-                    Text("\(SalesData.last30DaysTotal, format: .number) Pancakes")
+                    Text("\(ExperienceData.last30DaysTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
 
                     DailyExperienceChart(showAverageLine: showAverageLine)
                         .frame(height: 240)
                 case .last12Months:
-                    Text("\(SalesData.last12MonthsTotal, format: .number) Pancakes")
+                    Text("\(ExperienceData.last12MonthsTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
 

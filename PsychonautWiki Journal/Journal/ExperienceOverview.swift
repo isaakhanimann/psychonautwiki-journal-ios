@@ -11,10 +11,10 @@ import SwiftUI
 @available(iOS 16, *)
 struct ExperienceOverviewChart: View {
     var body: some View {
-        Chart(SalesData.last30Days, id: \.day) {
+        Chart(ExperienceData.last30Days, id: \.day) {
             BarMark(
                 x: .value("Day", $0.day, unit: .day),
-                y: .value("Sales", $0.sales)
+                y: .value("Sales", $0.experienceCount)
             )
         }
         .chartXAxis(.hidden)
@@ -29,7 +29,7 @@ struct ExperienceOverview: View {
             Text("Total Experiences")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("\(SalesData.last30DaysTotal, format: .number) Pancakes")
+            Text("\(ExperienceData.last30DaysTotal, format: .number) Pancakes")
                 .font(.title2.bold())
 
             ExperienceOverviewChart()
