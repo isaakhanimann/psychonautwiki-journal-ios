@@ -33,6 +33,28 @@ struct MonthlyExperienceChart: View {
 
     let experienceData: ExperienceData
     let isShowingMonthlyAverageLine: Bool
+    @Binding var selectedElement: SubstanceExperienceCountForMonth?
+
+    func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> SubstanceExperienceCountForMonth? {
+        let relativeXPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
+        if let date = proxy.value(atX: relativeXPosition) as Date? {
+            // Find the closest date element.
+            var minDistance: TimeInterval = .infinity
+            var index: Int? = nil
+            for experienceDataIndex in experienceData.last12Months.indices {
+                let nthExperienceCountDistance = experienceData.last12Months[experienceDataIndex].month.distance(to: date)
+                if abs(nthExperienceCountDistance) < minDistance {
+                    minDistance = abs(nthExperienceCountDistance)
+                    index = experienceDataIndex
+                }
+            }
+            if let index = index {
+                return experienceData.last12Months[index]
+            }
+        }
+        return nil
+    }
+
 
     var body: some View {
         Chart(experienceData.last12Months, id: \.month) {
@@ -68,6 +90,29 @@ struct MonthlyExperienceChart: View {
         }
         .chartForegroundStyleScale(mapping: experienceData.colorMapping)
         .chartLegend(position: .bottom, alignment: .leading)
+        .chartOverlay { proxy in
+            GeometryReader { nthGeometryItem in
+                Rectangle().fill(.clear).contentShape(Rectangle())
+                    .gesture(
+                        SpatialTapGesture()
+                            .onEnded { value in
+                                let element = findElement(location: value.location, proxy: proxy, geometry: nthGeometryItem)
+                                if selectedElement?.month == element?.month {
+                                    // If tapping the same element, clear the selection.
+                                    selectedElement = nil
+                                } else {
+                                    selectedElement = element
+                                }
+                            }
+                            .exclusively(
+                                before: DragGesture()
+                                    .onChanged { value in
+                                        selectedElement = findElement(location: value.location, proxy: proxy, geometry: nthGeometryItem)
+                                    }
+                            )
+                    )
+            }
+        }
     }
 }
 
@@ -122,32 +167,88 @@ struct ExperienceDetails: View {
     @State private var isShowingMonthlyAverageLine: Bool = false
     @State private var isShowingYearlyAverageLine: Bool = false
 
+    @State private var selectedElement: SubstanceExperienceCountForMonth? = nil
+    @Environment(\.layoutDirection) var layoutDirection
+
     var body: some View {
         List {
             VStack(alignment: .leading) {
                 TimeRangePicker(value: $timeRange)
                     .padding(.bottom)
-                Text("Total Experiences")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
                 let chartHeight: CGFloat = 240
                 switch timeRange {
                 case .last30Days:
+                    Text("Total Experiences")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
                     Text("\(experienceData.last30DaysTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
                     DailyExperienceChart(experienceData: experienceData)
                         .frame(height: chartHeight)
                 case .last12Months:
-                    Text("\(experienceData.last12MonthsTotal, format: .number) Experiences")
-                        .font(.title2.bold())
-                        .foregroundColor(.primary)
-                    MonthlyExperienceChart(
-                        experienceData: experienceData,
-                        isShowingMonthlyAverageLine: isShowingMonthlyAverageLine
-                    )
-                    .frame(height: chartHeight)
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            Text("Total Experiences")
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                            Text("\(experienceData.last12MonthsTotal, format: .number) Experiences")
+                                .font(.title2.bold())
+                                .foregroundColor(.primary)
+                        }.opacity(selectedElement == nil ? 1 : 0)
+                        MonthlyExperienceChart(
+                            experienceData: experienceData,
+                            isShowingMonthlyAverageLine: isShowingMonthlyAverageLine,
+                            selectedElement: $selectedElement
+                        )
+                        .frame(height: chartHeight)
+                    }
+                    .chartBackground { proxy in
+                        ZStack(alignment: .topLeading) {
+                            GeometryReader { nthGeoItem in
+                                if let selectedElement = selectedElement {
+                                    let dateInterval = Calendar.current.dateInterval(of: .month, for: selectedElement.month)!
+                                    let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
+                                    let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
+                                    let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x
+
+                                    let lineX = layoutDirection == .rightToLeft ? nthGeoItem.size.width - midStartPositionX : midStartPositionX
+                                    let lineHeight = nthGeoItem[proxy.plotAreaFrame].maxY
+                                    let boxWidth: CGFloat = 150
+                                    let boxOffset = max(0, min(nthGeoItem.size.width - boxWidth, lineX - boxWidth / 2))
+                                    Rectangle()
+                                        .fill(.quaternary)
+                                        .frame(width: 2, height: lineHeight)
+                                        .position(x: lineX, y: lineHeight / 2)
+
+                                    VStack(alignment: .leading) {
+                                        Text("\(selectedElement.month, format: .dateTime.year().month())")
+                                            .font(.callout)
+                                            .foregroundStyle(.secondary)
+                                        Text("\(selectedElement.experienceCount, format: .number) Experiences")
+                                            .font(.title2.bold())
+                                            .foregroundColor(.primary)
+                                    }
+                                    .frame(width: boxWidth, alignment: .leading)
+                                    .background {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.background)
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.quaternary.opacity(0.7))
+                                        }
+                                        .padding([.leading, .trailing], -8)
+                                        .padding([.top, .bottom], -4)
+                                    }
+                                    .offset(x: boxOffset)
+                                }
+                            }
+                        }
+                    }
                 case .years:
+                    Text("Total Experiences")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
                     Text("\(experienceData.yearsTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
