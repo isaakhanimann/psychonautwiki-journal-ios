@@ -39,6 +39,8 @@ struct IngestionDetails: View {
             return ingestionData.last30Days
         case .last12Months:
             return ingestionData.last12Months
+        case .years:
+            return ingestionData.years
         }
     }
 

@@ -26,6 +26,7 @@ struct StatsScreen: View {
                 experienceData = ExperienceData(
                     last30Days: getExperienceCountsLast30Days(),
                     last12Months: getExperienceCountsLast12Months(),
+                    years: getExperienceCountsYears(),
                     colorMapping: { substanceName in
                         getColor(for: substanceName).swiftUIColor
                     }
@@ -33,6 +34,7 @@ struct StatsScreen: View {
                 ingestionData = IngestionData(
                     last30Days: getSortedIngestionCountsLast30Days(),
                     last12Months: getSortedIngestionCountsLast12Months(),
+                    years: getSortedIngestionCountsYears(),
                     colorMapping: { substanceName in
                         getColor(for: substanceName).swiftUIColor
 
@@ -57,7 +59,11 @@ struct StatsScreen: View {
         return getSortedIngestionCounts(for: ingestionsLast12Months)
     }
 
-    private func getSortedIngestionCounts(for ingestions: FetchedResults<Ingestion>.SubSequence) -> [IngestionCount] {
+    private func getSortedIngestionCountsYears() -> [IngestionCount] {
+        return getSortedIngestionCounts(for: ingestions)
+    }
+
+    private func getSortedIngestionCounts(for ingestions: any Sequence<Ingestion>) -> [IngestionCount] {
         return Dictionary(grouping: ingestions) { ing in
             ing.substanceNameUnwrapped
         }.compactMap { (substanceName: String, ingestionsSameSubstance: [Slice<FetchedResults<Ingestion>>.Element]) in
@@ -84,7 +90,7 @@ struct StatsScreen: View {
                 )
             }
         }
-        let last30Days: [SubstanceExperienceCountForDay] = Dictionary(grouping: ungroupedResult) { result in
+        return Dictionary(grouping: ungroupedResult) { result in
             let components = Calendar.current.dateComponents([.year, .month, .day], from: result.day)
             var substanceYearMonthDay = result.substanceName
             if let year = components.year, let month = components.month, let day = components.day {
@@ -100,7 +106,6 @@ struct StatsScreen: View {
                 experienceCount: experienceCount
             )
         }
-        return last30Days
     }
 
     private func getExperienceCountsLast12Months() -> [SubstanceExperienceCountForMonth] {
@@ -117,7 +122,7 @@ struct StatsScreen: View {
                 )
             }
         }
-        let last12Months: [SubstanceExperienceCountForMonth] = Dictionary(grouping: ungroupedResult) { result in
+        return Dictionary(grouping: ungroupedResult) { result in
             let components = Calendar.current.dateComponents([.year, .month], from: result.month)
             var substanceYearMonth = result.substanceName
             if let year = components.year, let month = components.month {
@@ -133,7 +138,35 @@ struct StatsScreen: View {
                 experienceCount: experienceCount
             )
         }
-        return last12Months
+    }
+
+    private func getExperienceCountsYears() -> [SubstanceExperienceCountForYear] {
+        let ungroupedResult = experiences.flatMap { ex in
+            let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
+            return distinctSubstanceNames.map { substanceName in
+                SubstanceExperienceCountForYear(
+                    year: ex.sortDateUnwrapped,
+                    substanceName: substanceName,
+                    experienceCount: 1/Double(distinctSubstanceNames.count)
+                )
+            }
+        }
+        return Dictionary(grouping: ungroupedResult) { result in
+            let components = Calendar.current.dateComponents([.year], from: result.year)
+            var substanceYear = result.substanceName
+            if let year = components.year {
+                substanceYear += String(year)
+            }
+            return substanceYear
+        }.compactMap { (key: _, matchesForSameYear: [SubstanceExperienceCountForYear]) in
+            guard let first = matchesForSameYear.first else {return nil}
+            let experienceCount = matchesForSameYear.map { $0.experienceCount }.reduce(0, +)
+            return SubstanceExperienceCountForYear(
+                year: first.year,
+                substanceName: first.substanceName,
+                experienceCount: experienceCount
+            )
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-func date(year: Int, month: Int, day: Int = 1) -> Date {
+func date(year: Int, month: Int = 1, day: Int = 1) -> Date {
     Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
 }
 
@@ -22,6 +22,7 @@ struct IngestionCount: Identifiable {
 struct IngestionData {
     let last30Days: [IngestionCount]
     let last12Months: [IngestionCount]
+    let years: [IngestionCount]
     let colorMapping: (String) -> Color
 }
 
@@ -38,6 +39,12 @@ extension IngestionData {
             .init(substanceName: "Cocaine", ingestionCount: 10),
             .init(substanceName: "MDMA", ingestionCount: 4),
             .init(substanceName: "Amphetamine", ingestionCount: 3)
+        ],
+        years: [
+            .init(substanceName: "Cannabis", ingestionCount: 60),
+            .init(substanceName: "Cocaine", ingestionCount: 15),
+            .init(substanceName: "MDMA", ingestionCount: 8),
+            .init(substanceName: "Amphetamine", ingestionCount: 8)
         ],
         colorMapping: { substanceName in
             switch substanceName {
@@ -67,10 +74,17 @@ struct SubstanceExperienceCountForMonth {
     let experienceCount: Double
 }
 
+struct SubstanceExperienceCountForYear {
+    let year: Date
+    let substanceName: String
+    let experienceCount: Double
+}
+
 struct ExperienceData {
 
     let last30Days: [SubstanceExperienceCountForDay]
     let last12Months: [SubstanceExperienceCountForMonth]
+    let years: [SubstanceExperienceCountForYear]
     let colorMapping: (String) -> Color
 
     var last30DaysTotal: Double {
@@ -81,10 +95,35 @@ struct ExperienceData {
         last12Months.map { $0.experienceCount }.reduce(0, +)
     }
 
+    var yearsTotal: Double {
+        years.map { $0.experienceCount }.reduce(0, +)
+    }
+
     var monthlyAverage: Double {
         last12MonthsTotal / 12.0
     }
+
+    var yearlyAverage: Double {
+        guard let earliestYear = years.map({$0.year}).min() else {return 0}
+        let numberOfYearsShown = Calendar.current.numberOfYearsBetweenRoundedUp(earliestYear, and: Date.now)
+        guard numberOfYearsShown > 0 else {return 0}
+        return yearsTotal / Double(numberOfYearsShown)
+    }
 }
+
+extension Calendar {
+    func numberOfYearsBetweenRoundedUp(_ from: Date, and to: Date) -> Int {
+        let components = dateComponents([.year, .month], from: from, to: to)
+        let year = components.year!
+        let month = components.month!
+        if month > 0 {
+            return year + 1
+        } else {
+            return year
+        }
+    }
+}
+
 
 extension ExperienceData {
     static let mock1 = ExperienceData(
@@ -116,6 +155,16 @@ extension ExperienceData {
             .init(month: date(year: 2022, month: 1), substanceName: "MDMA", experienceCount: 1),
             .init(month: date(year: 2022, month: 1), substanceName: "Cannabis", experienceCount: 5),
             .init(month: date(year: 2022, month: 3), substanceName: "Amphetamine", experienceCount: 3)
+        ],
+        years: [
+            .init(year: date(year: 2021), substanceName: "MDMA", experienceCount: 3),
+            .init(year: date(year: 2021), substanceName: "Cocaine", experienceCount: 4),
+            .init(year: date(year: 2021), substanceName: "Cannabis", experienceCount: 20),
+            .init(year: date(year: 2021), substanceName: "Amphetamine", experienceCount: 5),
+            .init(year: date(year: 2022), substanceName: "MDMA", experienceCount: 5),
+            .init(year: date(year: 2022), substanceName: "Cannabis", experienceCount: 15),
+            .init(year: date(year: 2022), substanceName: "Amphetamine", experienceCount: 6),
+            .init(year: date(year: 2022), substanceName: "Cocaine", experienceCount: 2)
         ],
         colorMapping: { substanceName in
             switch substanceName {
