@@ -11,13 +11,16 @@ import SwiftUI
 @available(iOS 16, *)
 struct IngestionOverviewChart: View {
     var body: some View {
-        Chart(IngestionData.last12Months, id: \.name) { element in
+        Chart(IngestionData.last12Months) { element in
             BarMark(
-                x: .value("Sales", element.sales),
-                y: .value("Name", element.name)
+                x: .value("Ingestions", element.ingestionCount),
+                y: .value("Substance", element.substanceName)
             )
-            .opacity(element.name == IngestionData.last30Days.first!.name ? 1 : 0.5)
+            .foregroundStyle(by: .value("Substance", element.substanceName))
+            .opacity(element.substanceName == IngestionData.last30Days.first!.substanceName ? 1 : 0.5)
         }
+        .chartForegroundStyleScale(ExperienceData.last12MonthsColors)
+        .chartLegend(.hidden)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
     }
@@ -29,7 +32,7 @@ struct IngestionOverview: View {
         VStack(alignment: .leading) {
             Text("Most Sold Style")
                 .foregroundStyle(.secondary)
-            Text(IngestionData.last30Days.first!.name)
+            Text(IngestionData.last30Days.first!.substanceName)
                 .font(.title2.bold())
             IngestionOverviewChart()
                 .frame(height: 100)

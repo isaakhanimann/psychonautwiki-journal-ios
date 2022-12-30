@@ -11,26 +11,42 @@ func date(year: Int, month: Int, day: Int = 1) -> Date {
     Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
 }
 
-/// Data for the top style charts.
+struct IngestionCount: Identifiable {
+    var id: String {
+        substanceName
+    }
+    let substanceName: String
+    let ingestionCount: Int
+}
+
 struct IngestionData {
-    /// Sales by pancake style for the last 30 days, sorted by amount.
-    static let last30Days = [
-        (name: "Cachapa", sales: 916),
-        (name: "Injera", sales: 850),
-        (name: "Crêpe", sales: 802),
-        (name: "Jian Bing", sales: 753),
-        (name: "Dosa", sales: 654),
-        (name: "American", sales: 618)
+    static let last30Days: [IngestionCount] = [
+        .init(substanceName: "Cannabis", ingestionCount: 15),
+        .init(substanceName: "Cocaine", ingestionCount: 8),
+        .init(substanceName: "Amphetamine", ingestionCount: 3),
+        .init(substanceName: "MDMA", ingestionCount: 1)
+    ]
+
+    static let last30DaysColors: KeyValuePairs<String, Color> = [
+        "MDMA": Color.pink,
+        "Cannabis": .green,
+        "Cocaine": .blue,
+        "Amphetamine": .cyan,
     ]
 
     /// Sales by pancake style for the last 12 months, sorted by amount.
-    static let last12Months = [
-        (name: "Cachapa", sales: 9631),
-        (name: "Crêpe", sales: 7959),
-        (name: "Injera", sales: 7891),
-        (name: "Jian Bing", sales: 7506),
-        (name: "American", sales: 6777),
-        (name: "Dosa", sales: 6325)
+    static let last12Months: [IngestionCount] = [
+        .init(substanceName: "Cannabis", ingestionCount: 55),
+        .init(substanceName: "Cocaine", ingestionCount: 10),
+        .init(substanceName: "MDMA", ingestionCount: 4),
+        .init(substanceName: "Amphetamine", ingestionCount: 3)
+    ]
+
+    static let last12MonthsColors: KeyValuePairs<String, Color> = [
+        "MDMA": Color.pink,
+        "Cannabis": .green,
+        "Cocaine": .blue,
+        "Amphetamine": .cyan,
     ]
 }
 
@@ -42,7 +58,7 @@ struct ExperienceData {
         let experienceCount: Double
     }
 
-    static let substanceColors: KeyValuePairs<String, Color> = [
+    static let last30DaysColors: KeyValuePairs<String, Color> = [
         "MDMA": Color.pink,
         "Cannabis": .green,
         "Cocaine": .blue,
@@ -92,6 +108,13 @@ struct ExperienceData {
         .init(month: date(year: 2022, month: 1), substanceName: "MDMA", experienceCount: 1),
         .init(month: date(year: 2022, month: 1), substanceName: "Cannabis", experienceCount: 5),
         .init(month: date(year: 2022, month: 3), substanceName: "Amphetamine", experienceCount: 3)
+    ]
+
+    static let last12MonthsColors: KeyValuePairs<String, Color> = [
+        "MDMA": Color.pink,
+        "Cannabis": .green,
+        "Cocaine": .blue,
+        "Amphetamine": .cyan,
     ]
 
     /// Total sales for the last 12 months.

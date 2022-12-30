@@ -21,7 +21,7 @@ struct DailyExperienceChart: View {
                 .foregroundStyle(by: .value("Substance", $0.substanceName))
             }
         }
-        .chartForegroundStyleScale(ExperienceData.substanceColors)
+        .chartForegroundStyleScale(ExperienceData.last30DaysColors)
     }
 }
 
@@ -61,7 +61,7 @@ struct MonthlyExperienceChart: View {
                 AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
             }
         }
-        .chartForegroundStyleScale(ExperienceData.substanceColors)
+        .chartForegroundStyleScale(ExperienceData.last12MonthsColors)
     }
 }
 

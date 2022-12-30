@@ -10,15 +10,19 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct IngestionDetailsChart: View {
-    let data: [(name: String, sales: Int)]
+    let data: [IngestionCount]
+    let color: KeyValuePairs<String,Color>
+
 
     var body: some View {
-        Chart(data, id: \.name) { element in
+        Chart(data) { element in
             BarMark(
-                x: .value("Sales", element.sales),
-                y: .value("Name", element.name)
+                x: .value("Ingestions", element.ingestionCount),
+                y: .value("Substance", element.substanceName)
             )
+            .foregroundStyle(by: .value("Substance", element.substanceName))
         }
+        .chartForegroundStyleScale(color)
     }
 }
 
@@ -26,7 +30,7 @@ struct IngestionDetailsChart: View {
 struct IngestionDetails: View {
     @State private var timeRange: TimeRange = .last30Days
 
-    var data: [(name: String, sales: Int)] {
+    var data: [IngestionCount] {
         switch timeRange {
         case .last30Days:
             return IngestionData.last30Days
@@ -35,21 +39,27 @@ struct IngestionDetails: View {
         }
     }
 
+    var color: KeyValuePairs<String,Color> {
+        switch timeRange {
+        case .last30Days:
+            return IngestionData.last30DaysColors
+        case .last12Months:
+            return IngestionData.last12MonthsColors
+        }
+    }
+
     var body: some View {
         List {
             VStack(alignment: .leading) {
                 TimeRangePicker(value: $timeRange)
                     .padding(.bottom)
-
-                Text("Most Sold Style")
+                Text("Most Ingested Substance")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-
-                Text(data.first?.name ?? "Unknown")
+                Text(data.first?.substanceName ?? "Unknown")
                     .font(.title2.bold())
                     .foregroundColor(.primary)
-
-                IngestionDetailsChart(data: data)
+                IngestionDetailsChart(data: data, color: color)
                     .frame(height: 300)
             }
             .listRowSeparator(.hidden)
