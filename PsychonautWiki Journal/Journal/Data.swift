@@ -20,34 +20,39 @@ struct IngestionCount: Identifiable {
 }
 
 struct IngestionData {
-    static let last30Days: [IngestionCount] = [
-        .init(substanceName: "Cannabis", ingestionCount: 15),
-        .init(substanceName: "Cocaine", ingestionCount: 8),
-        .init(substanceName: "Amphetamine", ingestionCount: 3),
-        .init(substanceName: "MDMA", ingestionCount: 1)
-    ]
+    let last30Days: [IngestionCount]
+    let last30DaysColors: KeyValuePairs<String, Color>
+    let last12Months: [IngestionCount]
+    let last12MonthsColors: KeyValuePairs<String, Color>
+}
 
-    static let last30DaysColors: KeyValuePairs<String, Color> = [
-        "MDMA": Color.pink,
-        "Cannabis": .green,
-        "Cocaine": .blue,
-        "Amphetamine": .cyan,
-    ]
-
-    /// Sales by pancake style for the last 12 months, sorted by amount.
-    static let last12Months: [IngestionCount] = [
-        .init(substanceName: "Cannabis", ingestionCount: 55),
-        .init(substanceName: "Cocaine", ingestionCount: 10),
-        .init(substanceName: "MDMA", ingestionCount: 4),
-        .init(substanceName: "Amphetamine", ingestionCount: 3)
-    ]
-
-    static let last12MonthsColors: KeyValuePairs<String, Color> = [
-        "MDMA": Color.pink,
-        "Cannabis": .green,
-        "Cocaine": .blue,
-        "Amphetamine": .cyan,
-    ]
+extension IngestionData {
+    static let mock1 = IngestionData(
+        last30Days: [
+            .init(substanceName: "Cannabis", ingestionCount: 15),
+            .init(substanceName: "Cocaine", ingestionCount: 8),
+            .init(substanceName: "Amphetamine", ingestionCount: 3),
+            .init(substanceName: "MDMA", ingestionCount: 1)
+        ],
+        last30DaysColors: [
+            "MDMA": Color.pink,
+            "Cannabis": .green,
+            "Cocaine": .blue,
+            "Amphetamine": .cyan,
+        ],
+        last12Months: [
+            .init(substanceName: "Cannabis", ingestionCount: 55),
+            .init(substanceName: "Cocaine", ingestionCount: 10),
+            .init(substanceName: "MDMA", ingestionCount: 4),
+            .init(substanceName: "Amphetamine", ingestionCount: 3)
+        ],
+        last12MonthsColors: [
+            "MDMA": Color.pink,
+            "Cannabis": .green,
+            "Cocaine": .blue,
+            "Amphetamine": .cyan,
+        ]
+    )
 }
 
 struct ExperienceData {

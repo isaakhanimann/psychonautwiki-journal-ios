@@ -10,16 +10,19 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct IngestionOverviewChart: View {
+
+    let ingestionData: IngestionData
+
     var body: some View {
-        Chart(IngestionData.last12Months) { element in
+        Chart(ingestionData.last12Months) { element in
             BarMark(
                 x: .value("Ingestions", element.ingestionCount),
                 y: .value("Substance", element.substanceName)
             )
             .foregroundStyle(by: .value("Substance", element.substanceName))
-            .opacity(element.substanceName == IngestionData.last30Days.first!.substanceName ? 1 : 0.5)
+            .opacity(element.substanceName == ingestionData.last30Days.first!.substanceName ? 1 : 0.5)
         }
-        .chartForegroundStyleScale(IngestionData.last12MonthsColors)
+        .chartForegroundStyleScale(ingestionData.last12MonthsColors)
         .chartLegend(.hidden)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
@@ -28,13 +31,16 @@ struct IngestionOverviewChart: View {
 
 @available(iOS 16, *)
 struct IngestionOverview: View {
+
+    let ingestionData: IngestionData
+
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Most Sold Style")
+            Text("Most Used Substance")
                 .foregroundStyle(.secondary)
-            Text(IngestionData.last30Days.first!.substanceName)
+            Text(ingestionData.last30Days.first!.substanceName)
                 .font(.title2.bold())
-            IngestionOverviewChart()
+            IngestionOverviewChart(ingestionData: ingestionData)
                 .frame(height: 100)
         }
     }
@@ -43,7 +49,7 @@ struct IngestionOverview: View {
 @available(iOS 16, *)
 struct IngestionOverview_Previews: PreviewProvider {
     static var previews: some View {
-        IngestionOverview()
+        IngestionOverview(ingestionData: .mock1)
             .padding()
     }
 }
