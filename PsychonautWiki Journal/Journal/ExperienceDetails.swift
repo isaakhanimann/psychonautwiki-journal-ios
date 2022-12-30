@@ -11,9 +11,11 @@ import SwiftUI
 @available(iOS 16, *)
 struct DailyExperienceChart: View {
 
+    let experienceData: ExperienceData
+
     var body: some View {
         Chart {
-            ForEach(ExperienceData.last30Days, id: \.day) {
+            ForEach(experienceData.last30Days, id: \.day) {
                 BarMark(
                     x: .value("Day", $0.day, unit: .day),
                     y: .value("Experiences", $0.experienceCount)
@@ -21,16 +23,18 @@ struct DailyExperienceChart: View {
                 .foregroundStyle(by: .value("Substance", $0.substanceName))
             }
         }
-        .chartForegroundStyleScale(ExperienceData.last30DaysColors)
+        .chartForegroundStyleScale(experienceData.last30DaysColors)
     }
 }
 
 @available(iOS 16, *)
 struct MonthlyExperienceChart: View {
+
+    let experienceData: ExperienceData
     let showAverageLine: Bool
 
     var body: some View {
-        Chart(ExperienceData.last12Months, id: \.month) {
+        Chart(experienceData.last12Months, id: \.month) {
             if showAverageLine {
                 BarMark(
                     x: .value("Month", $0.month, unit: .month),
@@ -38,11 +42,11 @@ struct MonthlyExperienceChart: View {
                 )
                 .foregroundStyle(.gray.opacity(0.3))
                 RuleMark(
-                    y: .value("Average", ExperienceData.monthlyAverage)
+                    y: .value("Average", experienceData.monthlyAverage)
                 )
                 .lineStyle(StrokeStyle(lineWidth: 3))
                 .annotation(position: .top, alignment: .leading) {
-                    Text("Average: \(ExperienceData.monthlyAverage, format: .number)")
+                    Text("Average: \(experienceData.monthlyAverage, format: .number)")
                         .font(.body.bold())
                         .foregroundStyle(.blue)
                 }
@@ -61,12 +65,14 @@ struct MonthlyExperienceChart: View {
                 AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
             }
         }
-        .chartForegroundStyleScale(ExperienceData.last12MonthsColors)
+        .chartForegroundStyleScale(experienceData.last12MonthsColors)
     }
 }
 
 @available(iOS 16, *)
 struct ExperienceDetails: View {
+
+    let experienceData: ExperienceData
     @State private var timeRange: TimeRange = .last30Days
     @State private var showAverageLine: Bool = false
 
@@ -75,30 +81,28 @@ struct ExperienceDetails: View {
             VStack(alignment: .leading) {
                 TimeRangePicker(value: $timeRange)
                     .padding(.bottom)
-
                 Text("Total Experiences")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-
                 switch timeRange {
                 case .last30Days:
-                    Text("\(ExperienceData.last30DaysTotal, format: .number) Experiences")
+                    Text("\(experienceData.last30DaysTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
-
-                    DailyExperienceChart()
+                    DailyExperienceChart(experienceData: experienceData)
                         .frame(height: 240)
                 case .last12Months:
-                    Text("\(ExperienceData.last12MonthsTotal, format: .number) Experiences")
+                    Text("\(experienceData.last12MonthsTotal, format: .number) Experiences")
                         .font(.title2.bold())
                         .foregroundColor(.primary)
-
-                    MonthlyExperienceChart(showAverageLine: showAverageLine)
-                        .frame(height: 240)
+                    MonthlyExperienceChart(
+                        experienceData: experienceData,
+                        showAverageLine: showAverageLine
+                    )
+                    .frame(height: 240)
                 }
             }
             .listRowSeparator(.hidden)
-
             Section("Options") {
                 if timeRange == .last12Months {
                     Toggle("Show Monthly Average", isOn: $showAverageLine)
@@ -113,6 +117,6 @@ struct ExperienceDetails: View {
 @available(iOS 16, *)
 struct ExperienceDetails_Previews: PreviewProvider {
     static var previews: some View {
-        ExperienceDetails()
+        ExperienceDetails(experienceData: .mock1)
     }
 }
