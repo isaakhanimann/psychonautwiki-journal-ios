@@ -23,6 +23,7 @@ struct IngestionDetailsChart: View {
             .foregroundStyle(by: .value("Substance", element.substanceName))
         }
         .chartForegroundStyleScale(mapping: colorMapping)
+        .chartLegend(.hidden)
     }
 }
 
@@ -30,7 +31,7 @@ struct IngestionDetailsChart: View {
 struct IngestionDetails: View {
 
     let ingestionData: IngestionData
-    @State private var timeRange: TimeRange = .last30Days
+    @State private var timeRange: TimeRange = .last12Months
 
     var data: [IngestionCount] {
         switch timeRange {

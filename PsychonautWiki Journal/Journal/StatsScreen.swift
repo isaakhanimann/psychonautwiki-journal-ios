@@ -16,39 +16,63 @@ struct StatsScreen: View {
     @State private var ingestionData: IngestionData? = nil
 
     var body: some View {
-        if let experienceData {
-            List {
-                Section {
-                    NavigationLink {
-                        ExperienceDetails(experienceData: experienceData)
-                    } label: {
-                        ExperienceOverview(experienceData: experienceData)
-                    }
-                }
-//                Section {
-//                    NavigationLink {
-//                        IngestionDetails(ingestionData: ingestionData)
-//                    } label: {
-//                        IngestionOverview(ingestionData: ingestionData)
-//                    }
-//                }
-            }.navigationTitle("Stats")
+        if let experienceData, let ingestionData {
+            StatsScreenContent(
+                experienceData: experienceData,
+                ingestionData: ingestionData
+            )
         } else {
             ProgressView().task {
                 experienceData = ExperienceData(
-                    last30Days: getLast30Days(),
-                    last12Months: getLast12Months(),
+                    last30Days: getExperienceCountsLast30Days(),
+                    last12Months: getExperienceCountsLast12Months(),
                     colorMapping: { substanceName in
                         getColor(for: substanceName).swiftUIColor
+                    }
+                )
+                ingestionData = IngestionData(
+                    last30Days: getSortedIngestionCountsLast30Days(),
+                    last12Months: getSortedIngestionCountsLast12Months(),
+                    colorMapping: { substanceName in
+                        getColor(for: substanceName).swiftUIColor
+
                     }
                 )
             }
         }
     }
 
-    private func getLast30Days() -> [SubstanceExperienceCountForDay] {
+    private func getSortedIngestionCountsLast30Days() -> [IngestionCount] {
+        let ingestionsLast30Days = ingestions.prefix { ing in
+            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 30
+        }
+        return getSortedIngestionCounts(for: ingestionsLast30Days)
+
+    }
+
+    private func getSortedIngestionCountsLast12Months() -> [IngestionCount] {
+        let ingestionsLast12Months = ingestions.prefix { ing in
+            Calendar.current.numberOfMonthsBetween(ing.timeUnwrapped, and: Date()) <= 12
+        }
+        return getSortedIngestionCounts(for: ingestionsLast12Months)
+    }
+
+    private func getSortedIngestionCounts(for ingestions: FetchedResults<Ingestion>.SubSequence) -> [IngestionCount] {
+        return Dictionary(grouping: ingestions) { ing in
+            ing.substanceNameUnwrapped
+        }.compactMap { (substanceName: String, ingestionsSameSubstance: [Slice<FetchedResults<Ingestion>>.Element]) in
+            return IngestionCount(
+                substanceName: substanceName,
+                ingestionCount: ingestionsSameSubstance.count
+            )
+        }.sorted { count1, count2 in
+            count1.ingestionCount > count2.ingestionCount
+        }
+    }
+
+    private func getExperienceCountsLast30Days() -> [SubstanceExperienceCountForDay] {
         let experiencesLast30Days = experiences.prefix { ex in
-            Calendar.current.numberOfDaysBetween(ex.sortDateUnwrapped, and: Date()) < 30
+            Calendar.current.numberOfDaysBetween(ex.sortDateUnwrapped, and: Date()) <= 30
         }
         let ungroupedResult = experiencesLast30Days.flatMap { ex in
             let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
@@ -62,11 +86,11 @@ struct StatsScreen: View {
         }
         let last30Days: [SubstanceExperienceCountForDay] = Dictionary(grouping: ungroupedResult) { result in
             let components = Calendar.current.dateComponents([.year, .month, .day], from: result.day)
-            var substanceYearMonth = result.substanceName
+            var substanceYearMonthDay = result.substanceName
             if let year = components.year, let month = components.month, let day = components.day {
-                substanceYearMonth += String(year) + String(month) + String(day)
+                substanceYearMonthDay += String(year) + String(month) + String(day)
             }
-            return substanceYearMonth
+            return substanceYearMonthDay
         }.compactMap { (key: _, matchesForSameDay: [SubstanceExperienceCountForDay]) in
             guard let first = matchesForSameDay.first else {return nil}
             let experienceCount = matchesForSameDay.map { $0.experienceCount }.reduce(0, +)
@@ -79,9 +103,9 @@ struct StatsScreen: View {
         return last30Days
     }
 
-    private func getLast12Months() -> [SubstanceExperienceCountForMonth] {
+    private func getExperienceCountsLast12Months() -> [SubstanceExperienceCountForMonth] {
         let experiencesLast12Months = experiences.prefix { ex in
-            Calendar.current.numberOfMonthsBetween(ex.sortDateUnwrapped, and: Date()) < 12
+            Calendar.current.numberOfMonthsBetween(ex.sortDateUnwrapped, and: Date()) <= 12
         }
         let ungroupedResult = experiencesLast12Months.flatMap { ex in
             let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
