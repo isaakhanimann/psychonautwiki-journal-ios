@@ -101,6 +101,7 @@ struct EditIngestionContent: View {
                 }
             }
         }
+        .optionalScrollDismissesKeyboard()
         .navigationTitle("Edit \(substanceName)")
         .toolbar {
             ToolbarItem {

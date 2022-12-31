@@ -33,6 +33,7 @@ struct SearchScreen: View {
                 AddCustomSubstanceView()
             }
         }
+        .optionalScrollDismissesKeyboard()
         .searchable(
             text: $viewModel.searchText,
             placement: .navigationBarDrawer(displayMode: .always),

@@ -72,6 +72,7 @@ struct ChooseSubstanceContent: View {
                     }
                 }
             }
+            .optionalScrollDismissesKeyboard()
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .disableAutocorrection(true)
             .navigationBarTitle("New Ingestion")

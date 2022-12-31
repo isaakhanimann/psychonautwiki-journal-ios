@@ -94,6 +94,7 @@ struct FinishIngestionContent: View {
                 }
             }
         }
+        .optionalScrollDismissesKeyboard()
         .navigationBarTitle("Finish")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

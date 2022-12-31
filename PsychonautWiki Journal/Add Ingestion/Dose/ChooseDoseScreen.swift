@@ -45,6 +45,7 @@ struct ChooseDoseScreenContent: View {
                 Text(Self.doseDisclaimer).font(.footnote)
             }
         }
+        .optionalScrollDismissesKeyboard()
         .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
             ToolbarItem(placement: .keyboard) {

@@ -51,12 +51,14 @@ struct EditExperienceContent: View {
                     .autocapitalization(.sentences)
                     .frame(minHeight: 300)
             }
-        }.navigationTitle("Edit Experience")
-            .toolbar {
-                ToolbarItem {
-                    Button("Done", action: save)
-                }
+        }
+        .optionalScrollDismissesKeyboard()
+        .navigationTitle("Edit Experience")
+        .toolbar {
+            ToolbarItem {
+                Button("Done", action: save)
             }
+        }
     }
 }
 

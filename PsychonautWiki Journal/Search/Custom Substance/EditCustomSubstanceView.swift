@@ -29,6 +29,7 @@ struct EditCustomSubstanceView: View {
                 }
             }
         }
+        .optionalScrollDismissesKeyboard()
         .confirmationDialog(
             "Are you sure you want to delete this substance?",
             isPresented: $isShowingConfirmation

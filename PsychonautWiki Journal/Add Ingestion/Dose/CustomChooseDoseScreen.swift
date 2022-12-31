@@ -19,30 +19,29 @@ struct CustomChooseDoseScreen: View {
     @State private var isEstimate = false
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Form {
-                Section {
-                    HStack {
-                        TextField("Enter Dose", text: $doseText)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .onChange(of: doseText) { newValue in
-                                let formatter = NumberFormatter()
-                                formatter.locale = Locale.current
-                                formatter.numberStyle = .decimal
-                                if let doseUnwrapped = formatter.number(from: doseText)?.doubleValue {
-                                    dose = doseUnwrapped
-                                } else {
-                                    dose = nil
-                                }
+        Form {
+            Section {
+                HStack {
+                    TextField("Enter Dose", text: $doseText)
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(.roundedBorder)
+                        .onChange(of: doseText) { newValue in
+                            let formatter = NumberFormatter()
+                            formatter.locale = Locale.current
+                            formatter.numberStyle = .decimal
+                            if let doseUnwrapped = formatter.number(from: doseText)?.doubleValue {
+                                dose = doseUnwrapped
+                            } else {
+                                dose = nil
                             }
-                        Text(units)
-                    }
-                    .font(.title)
-                    Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
+                        }
+                    Text(units)
                 }
+                .font(.title)
+                Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
             }
         }
+        .optionalScrollDismissesKeyboard()
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 Button("Done") {
