@@ -9,7 +9,6 @@ extension FinishIngestionScreen {
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
         @Published var enteredNote = ""
-        @Published var isLoadingCompanions = true
         @Published var isAddingToFoundExperience = true
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
@@ -31,7 +30,6 @@ extension FinishIngestionScreen {
             } else {
                 self.selectedColor = otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
             }
-            isLoadingCompanions = false
             hasInitializedAlready = true
         }
 
