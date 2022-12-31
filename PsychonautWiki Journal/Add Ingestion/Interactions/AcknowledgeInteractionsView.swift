@@ -79,7 +79,6 @@ struct AcknowledgeInteractionsContent: View {
                 } label: {
                     Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }
-
             }
         }
         .navigationBarTitle(substance.name + " Interactions")
