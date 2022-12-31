@@ -28,11 +28,7 @@ struct DurationScreen: View {
                     let isRouteHidden = hiddenRoutes.contains(info.route)
                     HStack(alignment: .center) {
                         if isRouteHidden {
-                            Button {
-                                toggle(route: info.route)
-                            } label: {
-                                Label("Show", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
-                            }
+                            Label("Show", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
                         VStack(alignment: .leading) {
                             HStack {
@@ -49,9 +45,9 @@ struct DurationScreen: View {
                             toggle(route: info.route)
                         } label: {
                             if isRouteHidden {
-                                Label("Show", systemImage: "eye.circle.fill").labelStyle(.iconOnly)
+                                Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
                             } else {
-                                Label("Hide", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
+                                Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                             }
                         }
                     }
