@@ -8,6 +8,8 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
     @Published var filteredSubstances: [Substance] = SubstanceRepo.shared.substances
     @Published var searchText = ""
     @Published var selectedCategories: [String] = []
+    @Published var isShowingAddCustomSubstance = false
+
 
     static let custom = "custom"
 
@@ -159,6 +161,4 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
             return mainPrefixMatches
         }
     }
-
-
 }
