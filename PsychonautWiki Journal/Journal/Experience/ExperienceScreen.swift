@@ -24,8 +24,6 @@ struct ExperienceScreen: View {
                         Canvas {_,_ in }.frame(height: timelineHeight)
                     }
                 } header: {
-                    Text("Effect Timeline")
-                } footer: {
                     let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
                 }
