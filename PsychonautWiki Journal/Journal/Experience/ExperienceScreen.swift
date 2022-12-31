@@ -144,8 +144,7 @@ struct ExperienceScreen: View {
                         Label("Delete Experience", systemImage: "trash")
                     }
                 } label: {
-                    Label("More", systemImage: "ellipsis.circle")
-                }
+                    Label("More", systemImage: isTimeRelative ? "ellipsis.circle.fill" : "ellipsis.circle")                }
                 .alert(isPresented: $isShowingDeleteAlert) {
                     Alert(
                         title: Text("Delete Experience?"),

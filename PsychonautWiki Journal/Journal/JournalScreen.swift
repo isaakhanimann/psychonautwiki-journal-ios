@@ -13,13 +13,30 @@ struct JournalScreen: View {
         .navigationTitle("Journal")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if #available(iOS 16, *) {
-                    NavigationLink {
-                        StatsScreen()
+                Menu {
+                    Button {
+                        viewModel.isTimeRelative.toggle()
                     } label: {
-                        Label("Stats", systemImage: "chart.bar")
+                        if viewModel.isTimeRelative {
+                            Label("Show Relative Time", systemImage: "checkmark")
+                        } else {
+                            Text("Show Relative Time")
+                        }
                     }
+                    Button {
+                        viewModel.isFavoriteFilterEnabled.toggle()
+                    } label: {
+                        if viewModel.isFavoriteFilterEnabled {
+                            Label("Filter Favorites", systemImage: "checkmark")
+                        } else {
+                            Text("Filter Favorites")
+                        }
+                    }
+                } label: {
+                    let isActive = viewModel.isTimeRelative || viewModel.isFavoriteFilterEnabled
+                    Label("More", systemImage: isActive ? "ellipsis.circle.fill" : "ellipsis.circle")
                 }
+
             }
             ToolbarItemGroup(placement: .bottomBar) {
                 Button {
@@ -30,15 +47,12 @@ struct JournalScreen: View {
                     ChooseSubstanceScreen()
                 }
                 Spacer()
-                Button {
-                    viewModel.isTimeRelative.toggle()
-                } label: {
-                    Label("Relative Time", systemImage: "timer.circle" + (viewModel.isTimeRelative ? ".fill" : ""))
-                }
-                Button {
-                    viewModel.isFavoriteFilterEnabled.toggle()
-                } label: {
-                    Label("Filter Favorites", systemImage: viewModel.isFavoriteFilterEnabled ? "star.fill" : "star")
+                if #available(iOS 16, *) {
+                    NavigationLink {
+                        StatsScreen()
+                    } label: {
+                        Label("Stats", systemImage: "chart.bar")
+                    }
                 }
             }
 
