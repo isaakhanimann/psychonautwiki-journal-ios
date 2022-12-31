@@ -29,5 +29,10 @@
     <entity name="SubstanceCompanion" representedClassName="SubstanceCompanion" syncable="YES" codeGenerationType="class">
         <attribute name="colorAsText" optional="YES" attributeType="String"/>
         <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="substanceName"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
 </model>

@@ -17,7 +17,6 @@ struct FinishIngestionScreen: View {
             closestExperience: $viewModel.closestExperience,
             isAddingToFoundExperience: $viewModel.isAddingToFoundExperience,
             enteredNote: $viewModel.enteredNote,
-            doesCompanionExistAlready: $viewModel.doesCompanionExistAlready,
             selectedColor: $viewModel.selectedColor,
             alreadyUsedColors: viewModel.alreadyUsedColors,
             otherColors: viewModel.otherColors,
@@ -46,7 +45,6 @@ struct FinishIngestionContent: View {
     @Binding var closestExperience: Experience?
     @Binding var isAddingToFoundExperience: Bool
     @Binding var enteredNote: String
-    @Binding var doesCompanionExistAlready: Bool
     @Binding var selectedColor: SubstanceColor
     let alreadyUsedColors: Set<SubstanceColor>
     let otherColors: Set<SubstanceColor>
@@ -54,39 +52,38 @@ struct FinishIngestionContent: View {
     let dismiss: () -> Void
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Form {
-                Section("Choose Time") {
-                    DatePicker(
-                        "Ingestion Time",
-                        selection: $selectedTime,
-                        displayedComponents: [.date, .hourAndMinute]
+        Form {
+            Section("Time") {
+                DatePicker(
+                    "Ingestion Time",
+                    selection: $selectedTime,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .labelsHidden()
+                .datePickerStyle(.wheel)
+                if let experience = closestExperience {
+                    Toggle("Part of \(experience.titleUnwrapped)", isOn: $isAddingToFoundExperience).tint(.accentColor)
+                }
+            }
+            Section("Notes") {
+                TextField("Notes", text: $enteredNote)
+                    .autocapitalization(.sentences)
+            }
+            Section("Color") {
+                NavigationLink {
+                    ColorPickerScreen(
+                        selectedColor: $selectedColor,
+                        alreadyUsedColors: alreadyUsedColors,
+                        otherColors: otherColors
                     )
-                    .labelsHidden()
-                    .datePickerStyle(.wheel)
-                    if let experience = closestExperience {
-                        Toggle("Part of \(experience.titleUnwrapped)", isOn: $isAddingToFoundExperience).tint(.accentColor)
-                    }
-                }
-                Section("Notes") {
-                    TextField("Notes", text: $enteredNote)
-                        .autocapitalization(.sentences)
-                }
-                if !doesCompanionExistAlready {
-                    Section("Choose Color") {
-                        ColorPicker(
-                            selectedColor: $selectedColor,
-                            alreadyUsedColors: alreadyUsedColors,
-                            otherColors: otherColors
-                        )
+                } label: {
+                    HStack {
+                        Text("Color")
+                        Spacer()
+                        Image(systemName: "circle.fill").foregroundColor(selectedColor.swiftUIColor)
                     }
                 }
             }
-            Button("Add Ingestion") {
-                addIngestion()
-            }
-            .buttonStyle(.primary)
-            .padding()
         }
         .navigationBarTitle("Finish")
         .toolbar {
@@ -94,6 +91,14 @@ struct FinishIngestionContent: View {
                 Button("Cancel") {
                     dismiss()
                 }
+            }
+            ToolbarItem(placement: .bottomBar) {
+                Button {
+                    addIngestion()
+                } label: {
+                    Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }
+
             }
         }
     }
@@ -107,7 +112,6 @@ struct FinishIngestionContent_Previews: PreviewProvider {
                 closestExperience: .constant(nil),
                 isAddingToFoundExperience: .constant(false),
                 enteredNote: .constant("hello"),
-                doesCompanionExistAlready: .constant(false),
                 selectedColor: .constant(.green),
                 alreadyUsedColors: [.blue, .brown, .pink],
                 otherColors: [.green, .mint, .indigo, .cyan, .purple, .orange, .red, .teal],

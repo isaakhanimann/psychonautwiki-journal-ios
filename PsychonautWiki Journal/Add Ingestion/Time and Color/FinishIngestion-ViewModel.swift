@@ -13,9 +13,11 @@ extension FinishIngestionScreen {
         @Published var isAddingToFoundExperience = true
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
-        @Published var doesCompanionExistAlready = true
+        private var foundCompanion: SubstanceCompanion? = nil
+        private var hasInitializedAlready = false
 
         func initializeColorAndHasCompanion(for substanceName: String) {
+            guard !hasInitializedAlready else {return} // because this function is going to be called again when navigating back from color picker screen
             let fetchRequest = SubstanceCompanion.fetchRequest()
             let companions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
             alreadyUsedColors = Set(companions.map { $0.color })
@@ -24,13 +26,13 @@ extension FinishIngestionScreen {
                 comp.substanceNameUnwrapped == substanceName
             }
             if let companionMatchUnwrap = companionMatch {
-                doesCompanionExistAlready = true
+                foundCompanion = companionMatchUnwrap
                 self.selectedColor = companionMatchUnwrap.color
             } else {
-                doesCompanionExistAlready = false
                 self.selectedColor = otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
             }
             isLoadingCompanions = false
+            hasInitializedAlready = true
         }
 
         func addIngestion(
@@ -70,7 +72,7 @@ extension FinishIngestionScreen {
         ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                maybeCreateCompanion(with: context, substanceName: substanceName)
+                createOrUpdateCompanion(with: context, substanceName: substanceName)
                 createIngestion(
                     with: experience,
                     and: context,
@@ -93,7 +95,7 @@ extension FinishIngestionScreen {
         ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                maybeCreateCompanion(with: context, substanceName: substanceName)
+                createOrUpdateCompanion(with: context, substanceName: substanceName)
                 let experience = Experience(context: context)
                 experience.creationDate = Date()
                 experience.sortDate = selectedTime
@@ -112,8 +114,10 @@ extension FinishIngestionScreen {
             }
         }
 
-        private func maybeCreateCompanion(with context: NSManagedObjectContext, substanceName: String) {
-            if !doesCompanionExistAlready {
+        private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) {
+            if let foundCompanion {
+                foundCompanion.colorAsText = selectedColor.rawValue
+            } else {
                 let companion = SubstanceCompanion(context: context)
                 companion.substanceName = substanceName
                 companion.colorAsText = selectedColor.rawValue
