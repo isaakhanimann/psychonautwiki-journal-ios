@@ -31,7 +31,8 @@ struct FinishIngestionScreen: View {
                 dismiss()
                 toastViewModel.showSuccessToast()
             },
-            dismiss: dismiss
+            dismiss: dismiss,
+            notesInOrder: viewModel.notesInOrder
         ).task {
             viewModel.initializeColorAndHasCompanion(for: substanceName)
         }
@@ -50,6 +51,7 @@ struct FinishIngestionContent: View {
     let otherColors: Set<SubstanceColor>
     let addIngestion: () -> Void
     let dismiss: () -> Void
+    let notesInOrder: [String]
 
     var body: some View {
         Form {
@@ -68,6 +70,13 @@ struct FinishIngestionContent: View {
             Section("Notes") {
                 TextField("Notes", text: $enteredNote)
                     .autocapitalization(.sentences)
+                ForEach(notesInOrder, id: \.self) { note in
+                    Button {
+                        enteredNote = note
+                    } label: {
+                        Label(note, systemImage: "doc.on.doc").lineLimit(1)
+                    }.foregroundColor(.primary)
+                }
             }
             Section("Color") {
                 NavigationLink {
@@ -116,7 +125,12 @@ struct FinishIngestionContent_Previews: PreviewProvider {
                 alreadyUsedColors: [.blue, .brown, .pink],
                 otherColors: [.green, .mint, .indigo, .cyan, .purple, .orange, .red, .teal],
                 addIngestion: {},
-                dismiss: {}
+                dismiss: {},
+                notesInOrder: [
+                    "The first note",
+                    "Second note",
+                    "This is a very long note that does not fit on one line and it should be clipped."
+                ]
             )
         }
     }

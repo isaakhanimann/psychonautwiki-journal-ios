@@ -12,6 +12,7 @@ extension FinishIngestionScreen {
         @Published var isAddingToFoundExperience = true
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
+        @Published var notesInOrder = [String]()
         private var foundCompanion: SubstanceCompanion? = nil
         private var hasInitializedAlready = false
 
@@ -148,6 +149,14 @@ extension FinishIngestionScreen {
         @Published var closestExperience: Experience?
 
         init() {
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
+            ingestionFetchRequest.fetchLimit = 15
+            let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
+            notesInOrder = sortedIngestions.map { ing in
+                ing.noteUnwrapped
+            }.uniqued()
             $selectedTime.map({ date in
                 let fetchRequest = Ingestion.fetchRequest()
                 fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
