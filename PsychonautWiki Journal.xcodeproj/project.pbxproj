@@ -141,7 +141,6 @@
 		EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AA26CBA664009FB0EC /* JournalScreen.swift */; };
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
-		EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
@@ -321,7 +320,6 @@
 		EAE471AA26CBA664009FB0EC /* JournalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalScreen.swift; sourceTree = "<group>"; };
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
-		EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonTextStyle.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
@@ -752,7 +750,6 @@
 			isa = PBXGroup;
 			children = (
 				EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */,
-				EAE471AE26CBA664009FB0EC /* PrimaryButtonTextStyle.swift */,
 			);
 			path = "Reused Styles";
 			sourceTree = "<group>";
@@ -939,7 +936,6 @@
 				EA41C625295EAFD8000DA021 /* Data.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */,
-				EAE4722826CBA664009FB0EC /* PrimaryButtonTextStyle.swift in Sources */,
 				EAC25BFB2955EC900002D68F /* TestingServicesScreen.swift in Sources */,
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,
 				EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */,

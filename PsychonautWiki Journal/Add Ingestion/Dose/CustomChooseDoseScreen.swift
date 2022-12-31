@@ -41,32 +41,7 @@ struct CustomChooseDoseScreen: View {
                     .font(.title)
                     Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
                 }
-                Section {
-                    Button {
-                        dose = nil
-                        isShowingNext = true
-                    } label: {
-                        Label("Use Unknown Dose", systemImage: "exclamationmark.triangle")
-                    }
-                }
-                EmptySectionForPadding()
             }
-            NavigationLink(
-                destination: FinishIngestionScreen(
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate,
-                    dismiss: dismiss
-                ),
-                isActive: $isShowingNext,
-                label: {
-                    Text("Next")
-                        .primaryButtonText()
-                }
-            )
-            .padding()
         }
         .toolbar {
             ToolbarItem(placement: .keyboard) {
@@ -78,6 +53,27 @@ struct CustomChooseDoseScreen: View {
                 Button("Cancel") {
                     dismiss()
                 }
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button {
+                    dose = nil
+                    isShowingNext = true
+                } label: {
+                    Label("Use Unknown Dose", systemImage: "exclamationmark.triangle").labelStyle(.titleAndIcon)
+                }
+                NavigationLink(
+                    destination: FinishIngestionScreen(
+                        substanceName: substanceName,
+                        administrationRoute: administrationRoute,
+                        dose: dose,
+                        units: units,
+                        isEstimate: isEstimate,
+                        dismiss: dismiss
+                    ),
+                    isActive: $isShowingNext
+                ) {
+                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }.disabled(dose==nil)
             }
         }
         .navigationTitle("\(substanceName) Dose")
