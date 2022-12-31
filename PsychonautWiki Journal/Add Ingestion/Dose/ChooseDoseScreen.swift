@@ -86,7 +86,7 @@ struct ChooseDoseScreenContent: View {
                     isActive: $isShowingNext
                 ) {
                     Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
+                }.disabled(selectedPureDose==nil)
             }
         }
     }
