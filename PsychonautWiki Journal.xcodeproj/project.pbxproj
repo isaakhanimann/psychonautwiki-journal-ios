@@ -378,14 +378,14 @@
 			path = Dose;
 			sourceTree = "<group>";
 		};
-		EA095A1127D9E3E8007D44D6 /* Time and Color */ = {
+		EA095A1127D9E3E8007D44D6 /* Finish */ = {
 			isa = PBXGroup;
 			children = (
 				EAE471A626CBA664009FB0EC /* FinishIngestionScreen.swift */,
 				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
 				EAF76C9327D7AEEA00945587 /* FinishIngestion-ViewModel.swift */,
 			);
-			path = "Time and Color";
+			path = Finish;
 			sourceTree = "<group>";
 		};
 		EA095A1227D9E400007D44D6 /* Interactions */ = {
@@ -745,7 +745,7 @@
 				EA095A1227D9E400007D44D6 /* Interactions */,
 				EAACB08B2947C4040050E002 /* Route */,
 				EA095A1027D9E3D0007D44D6 /* Dose */,
-				EA095A1127D9E3E8007D44D6 /* Time and Color */,
+				EA095A1127D9E3E8007D44D6 /* Finish */,
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 			);
 			path = "Add Ingestion";

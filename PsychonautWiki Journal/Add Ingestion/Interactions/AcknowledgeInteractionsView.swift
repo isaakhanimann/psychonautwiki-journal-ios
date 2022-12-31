@@ -57,34 +57,29 @@ struct AcknowledgeInteractionsContent: View {
     }
 
     var regularContent: some View {
-        ZStack(alignment: .bottom) {
-            List {
-                if let interactions = substance.interactions {
-                    Section {
-                        InteractionsGroup(
-                            interactions: interactions,
-                            substanceURL: substance.url
-                        )
-                    }
-                } else {
-                    Text("There are no documented interactions")
-                }
-                EmptySectionForPadding()
+        List {
+            if let interactions = substance.interactions {
+                InteractionsGroup(
+                    interactions: interactions,
+                    substanceURL: substance.url
+                )
+            } else {
+                Text("There are no documented interactions")
             }
-            NavigationLink(
-                destination: ChooseRouteScreen(substance: substance, dismiss: dismiss),
-                label: {
-                    Text("Next")
-                        .primaryButtonText()
-                }
-            )
-            .padding()
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
                     dismiss()
                 }
+            }
+            ToolbarItem(placement: .bottomBar) {
+                NavigationLink {
+                    ChooseRouteScreen(substance: substance, dismiss: dismiss)
+                } label: {
+                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }
+
             }
         }
         .navigationBarTitle(substance.name + " Interactions")
@@ -93,11 +88,13 @@ struct AcknowledgeInteractionsContent: View {
 
 struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
     static var previews: some View {
-        AcknowledgeInteractionsContent(
-            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-            dismiss: {},
-            interactions: [],
-            isShowingAlert: .constant(false)
-        )
+        NavigationView {
+            AcknowledgeInteractionsContent(
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                dismiss: {},
+                interactions: [],
+                isShowingAlert: .constant(false)
+            )
+        }
     }
 }
