@@ -9,6 +9,8 @@ struct ExperienceScreen: View {
     @State private var cumulativeDoses: [CumulativeDose] = []
     @State private var interactions: [Interaction] = []
     @State private var substancesUsed: [Substance] = []
+    @State private var isShowingDeleteAlert = false
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         return List {
@@ -101,6 +103,21 @@ struct ExperienceScreen: View {
                     GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
                 }
             }
+            Section("Delete") {
+                Button {
+                    isShowingDeleteAlert.toggle()
+                } label: {
+                    Label("Delete Experience", systemImage: "trash").foregroundColor(.red)
+                }
+                .alert(isPresented: $isShowingDeleteAlert) {
+                    Alert(
+                        title: Text("Delete Experience?"),
+                        message: Text("This will also delete all of its ingestions."),
+                        primaryButton: .destructive(Text("Delete"), action: delete),
+                        secondaryButton: .cancel()
+                    )
+                }
+            }
         }
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
@@ -142,6 +159,12 @@ struct ExperienceScreen: View {
         .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
             calculateScreen()
         }
+    }
+
+    private func delete() {
+        PersistenceController.shared.viewContext.delete(experience)
+        PersistenceController.shared.saveViewContext()
+        dismiss()
     }
 
     private func calculateScreen() {
