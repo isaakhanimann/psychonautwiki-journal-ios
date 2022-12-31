@@ -19,7 +19,7 @@ struct AddCustomSubstanceView: View {
                 Section("Description") {
                     TextField(
                         "Description",
-                        text: $viewModel.name,
+                        text: $viewModel.explanation,
                         prompt: Text("Enter Description")
                     )
                     .disableAutocorrection(true)

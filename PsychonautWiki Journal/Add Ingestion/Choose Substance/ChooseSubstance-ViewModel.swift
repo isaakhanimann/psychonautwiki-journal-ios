@@ -6,39 +6,51 @@
 //
 
 import Foundation
+import CoreData
 
 extension ChooseSubstanceScreen {
     @MainActor
-    class ViewModel: ObservableObject {
+    class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         
         @Published var searchText = ""
         @Published var filteredSuggestions: [Suggestion] =  []
         @Published var filteredSubstances: [Substance] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
+        @Published var customSubstanceModels: [CustomSubstanceModel]
 
         private let allPossibleSuggestions: [Suggestion]
-        private let customSubstanceModels: [CustomSubstanceModel]
+        private let fetchController: NSFetchedResultsController<CustomSubstance>?
 
-        init() {
+        override init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.fetchLimit = 100
             let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
             self.allPossibleSuggestions = SuggestionsCreator(sortedIngestions: sortedIngestions).suggestions
-            let customFetchRequest = CustomSubstance.fetchRequest()
-            let customSubstances = (try? PersistenceController.shared.viewContext.fetch(customFetchRequest)) ?? []
+            let request = CustomSubstance.fetchRequest()
+            request.sortDescriptors = []
+            fetchController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: PersistenceController.shared.viewContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            try? fetchController?.performFetch()
+            let customSubstances = fetchController?.fetchedObjects ?? []
             self.customSubstanceModels = customSubstances.map { cust in
                 CustomSubstanceModel(name: cust.nameUnwrapped, units: cust.unitsUnwrapped)
             }
+            super.init()
+            fetchController?.delegate = self
             $searchText
                 .map { search in
                     let allSubstances = SubstanceRepo.shared.substances
                     return SearchViewModel.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
                 }.assign(to: &$filteredSubstances)
             $searchText
-                .map { search in
+                .combineLatest($customSubstanceModels) { search, customs in
                     let searchLowerCased = search.lowercased()
-                    return self.customSubstanceModels.filter { custModel in
+                    return customs.filter { custModel in
                         custModel.name.lowercased().contains(searchLowerCased)
                     }
                 }.assign(to: &$filteredCustomSubstances)
@@ -51,6 +63,17 @@ extension ChooseSubstanceScreen {
                     }
                 }
             }.assign(to: &$filteredSuggestions)
+        }
+
+        nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            Task {
+                await MainActor.run(body: {
+                    guard let custs = controller.fetchedObjects as? [CustomSubstance] else {return}
+                    self.customSubstanceModels = custs.map { cust in
+                        CustomSubstanceModel(name: cust.nameUnwrapped, units: cust.unitsUnwrapped)
+                    }
+                })
+            }
         }
     }
 }
