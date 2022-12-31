@@ -10,6 +10,7 @@ struct ExperienceScreen: View {
     @State private var interactions: [Interaction] = []
     @State private var substancesUsed: [Substance] = []
     @State private var isShowingDeleteAlert = false
+    @State private var isShowingEditScreen = false
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -103,11 +104,49 @@ struct ExperienceScreen: View {
                     GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
                 }
             }
-            Section("Delete") {
-                Button {
-                    isShowingDeleteAlert.toggle()
+        }
+        .navigationTitle(experience.titleUnwrapped)
+        .toolbar {
+            ToolbarItemGroup {
+                NavigationLink(
+                    destination: EditExperienceScreen(experience: experience),
+                    isActive: $isShowingEditScreen
+                ) {
+                    EmptyView()
+                }
+                Menu {
+                    Button {
+                        isShowingEditScreen.toggle()
+                    } label: {
+                        Label("Edit Title/Note", systemImage: "pencil")
+                    }
+                    let isFavorite = experience.isFavorite
+                    Button {
+                        experience.isFavorite = !isFavorite
+                        try? PersistenceController.shared.viewContext.save()
+                    } label: {
+                        if isFavorite {
+                            Label("Mark as Favorite", systemImage: "checkmark")
+                        } else {
+                            Text("Mark as Favorite")
+                        }
+                    }
+                    Button {
+                        isTimeRelative.toggle()
+                    } label: {
+                        if isTimeRelative {
+                            Label("Show Relative Time", systemImage: "checkmark")
+                        } else {
+                            Text("Show Relative Time")
+                        }
+                    }
+                    Button(role: .destructive) {
+                        isShowingDeleteAlert.toggle()
+                    } label: {
+                        Label("Delete Experience", systemImage: "trash")
+                    }
                 } label: {
-                    Label("Delete Experience", systemImage: "trash").foregroundColor(.red)
+                    Label("More", systemImage: "ellipsis.circle")
                 }
                 .alert(isPresented: $isShowingDeleteAlert) {
                     Alert(
@@ -116,18 +155,6 @@ struct ExperienceScreen: View {
                         primaryButton: .destructive(Text("Delete"), action: delete),
                         secondaryButton: .cancel()
                     )
-                }
-            }
-        }
-        .navigationTitle(experience.titleUnwrapped)
-        .toolbar {
-            ToolbarItem {
-                let isFavorite = experience.isFavorite
-                Button {
-                    experience.isFavorite = !isFavorite
-                    try? PersistenceController.shared.viewContext.save()
-                } label: {
-                    Label("Is Favorite", systemImage: isFavorite ? "star.fill" : "star").foregroundColor(.yellow)
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
@@ -142,14 +169,7 @@ struct ExperienceScreen: View {
                     .sheet(isPresented: $isShowingAddIngestionSheet, content: {
                         ChooseSubstanceScreen()
                     })
-                }
-                Button {
-                    isTimeRelative.toggle()
-                } label: {
-                    Label("Relative Time", systemImage: "timer.circle" + (isTimeRelative ? ".fill" : ""))
-                }
-                NavigationLink("Edit") {
-                    EditExperienceScreen(experience: experience)
+                    Spacer()
                 }
             }
         }
