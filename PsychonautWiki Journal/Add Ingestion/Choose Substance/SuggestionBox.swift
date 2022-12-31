@@ -19,7 +19,7 @@ struct SuggestionBox: View {
                 ForEach(suggestion.dosesAndUnit) { dose in
                     if let doseUnwrap = dose.dose {
                         NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")") {
-                            ChooseTimeAndColor(
+                            FinishIngestionScreen(
                                 substanceName: suggestion.substanceName,
                                 administrationRoute: suggestion.route,
                                 dose: doseUnwrap,
@@ -30,7 +30,7 @@ struct SuggestionBox: View {
                         }.buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
                     } else {
                         NavigationLink("Unknown") {
-                            ChooseTimeAndColor(
+                            FinishIngestionScreen(
                                 substanceName: suggestion.substanceName,
                                 administrationRoute: suggestion.route,
                                 dose: dose.dose,

@@ -33,7 +33,7 @@ struct ChooseDoseScreen: View {
                 EmptySectionForPadding()
             }
             NavigationLink(
-                destination: ChooseTimeAndColor(
+                destination: FinishIngestionScreen(
                     substanceName: substance.name,
                     administrationRoute: administrationRoute,
                     dose: viewModel.selectedPureDose,

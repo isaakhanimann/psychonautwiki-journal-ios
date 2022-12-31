@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension ChooseTimeAndColor {
+extension FinishIngestionScreen {
 
     @MainActor
     class ViewModel: ObservableObject {
@@ -150,7 +150,7 @@ extension ChooseTimeAndColor {
                 let fetchRequest = Ingestion.fetchRequest()
                 fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
                 fetchRequest.fetchLimit = 1
-                fetchRequest.predicate = ChooseTimeAndColor.ViewModel.getPredicate(from: date)
+                fetchRequest.predicate = FinishIngestionScreen.ViewModel.getPredicate(from: date)
                 return try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.experience
             }).assign(to: &$closestExperience)
         }
