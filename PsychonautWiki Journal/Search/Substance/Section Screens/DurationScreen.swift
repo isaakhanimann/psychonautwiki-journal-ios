@@ -11,7 +11,7 @@ struct DurationScreen: View {
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
-    @State private var selectedRoutes: [AdministrationRoute] = []
+    @State private var hiddenRoutes: [AdministrationRoute] = []
 
     var body: some View {
         List {
@@ -25,15 +25,14 @@ struct DurationScreen: View {
                     EffectTimeline(timelineModel: model)
                 }
                 ForEach(durationInfos, id: \.route) { info in
-                    let isSelected = selectedRoutes.contains(info.route)
+                    let isRouteHidden = hiddenRoutes.contains(info.route)
                     HStack(alignment: .center) {
-                        if !isSelected {
+                        if isRouteHidden {
                             Button {
                                 toggle(route: info.route)
                             } label: {
                                 Label("Show", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
                             }
-
                         }
                         VStack(alignment: .leading) {
                             HStack {
@@ -49,50 +48,43 @@ struct DurationScreen: View {
                         Button {
                             toggle(route: info.route)
                         } label: {
-                            if isSelected {
-                                Label("Hide", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
-                            } else {
+                            if isRouteHidden {
                                 Label("Show", systemImage: "eye.circle.fill").labelStyle(.iconOnly)
+                            } else {
+                                Label("Hide", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
                             }
                         }
                     }
                 }
             }
         }.onAppear {
-            selectAllRoutes()
             updateModel()
         }
         .onChange(of: selectedTime) { _ in
             updateModel()
         }
-        .onChange(of: selectedRoutes) { _ in
+        .onChange(of: hiddenRoutes) { _ in
             updateModel()
         }
         .navigationTitle("Duration")
     }
 
-    private func selectAllRoutes() {
-        selectedRoutes = durationInfos.map { info in
-            info.route
-        }
-    }
-
     private func updateModel() {
-        let selectedDurationInfos = durationInfos.filter { info in
-            selectedRoutes.contains(info.route)
+        let durationsToShow = durationInfos.filter { info in
+            !hiddenRoutes.contains(info.route)
         }
-        timelineModel = TimelineModel(everythingForEachLine: selectedDurationInfos.map({ info in
+        timelineModel = TimelineModel(everythingForEachLine: durationsToShow.map({ info in
             EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
         }))
     }
 
     private func toggle(route: AdministrationRoute) {
-        if selectedRoutes.contains(route) {
-            selectedRoutes.removeAll { sel in
+        if hiddenRoutes.contains(route) {
+            hiddenRoutes.removeAll { sel in
                 sel == route
             }
         } else {
-            selectedRoutes.append(route)
+            hiddenRoutes.append(route)
         }
     }
 }
