@@ -25,25 +25,37 @@ struct DurationScreen: View {
                     EffectTimeline(timelineModel: model)
                 }
                 ForEach(durationInfos, id: \.route) { info in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Image(systemName: "circle.fill")
-                                .font(.title2)
-                                .foregroundColor(info.route.color)
-                            Text(info.route.rawValue.localizedCapitalized).font(.headline)
-                            Spacer()
-                            let isSelected = selectedRoutes.contains(info.route)
-                            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .font(.headline)
-                                .foregroundColor(info.route.color)
-                                .onTapGesture {
-                                    toggle(route: info.route)
-                                }
+                    let isSelected = selectedRoutes.contains(info.route)
+                    HStack(alignment: .center) {
+                        if !isSelected {
+                            Button {
+                                toggle(route: info.route)
+                            } label: {
+                                Label("Show", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
+                            }
+
+                        }
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(info.route.color)
+                                Text(info.route.rawValue.localizedCapitalized).font(.headline)
+                            }
+                            OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
                         }
                     }
-                    OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            toggle(route: info.route)
+                        } label: {
+                            if isSelected {
+                                Label("Hide", systemImage: "eye.slash.circle.fill").labelStyle(.iconOnly)
+                            } else {
+                                Label("Show", systemImage: "eye.circle.fill").labelStyle(.iconOnly)
+                            }
+                        }
+                    }
                 }
             }
         }.onAppear {
