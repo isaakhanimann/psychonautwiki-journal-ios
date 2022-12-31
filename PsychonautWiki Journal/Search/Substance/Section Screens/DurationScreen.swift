@@ -28,7 +28,7 @@ struct DurationScreen: View {
                     let isRouteHidden = hiddenRoutes.contains(info.route)
                     HStack(alignment: .center) {
                         if isRouteHidden {
-                            Label("Show", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
+                            Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
                         VStack(alignment: .leading) {
                             HStack {

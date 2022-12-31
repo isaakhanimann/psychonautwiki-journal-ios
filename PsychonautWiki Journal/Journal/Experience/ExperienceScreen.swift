@@ -11,6 +11,8 @@ struct ExperienceScreen: View {
     @State private var substancesUsed: [Substance] = []
     @State private var isShowingDeleteAlert = false
     @State private var isShowingEditScreen = false
+    @State private var hiddenIngestions: [ObjectIdentifier] = []
+
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -27,9 +29,9 @@ struct ExperienceScreen: View {
                     let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
                 }
-
                 Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
+                        let isIngestionHidden = hiddenIngestions.contains(ing.id)
                         let route = ing.administrationRouteUnwrapped
                         let roaDose = ing.substance?.getDose(for: route)
                         NavigationLink {
@@ -40,12 +42,34 @@ struct ExperienceScreen: View {
                                 route: route
                             )
                         } label: {
-                            IngestionRow(
-                                ingestion: ing,
-                                roaDose: roaDose,
-                                isTimeRelative: isTimeRelative
-                            )
-                            .swipeActions(allowsFullSwipe: false) {
+                            HStack(alignment: .center) {
+                                if isIngestionHidden {
+                                    Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
+                                }
+                                IngestionRow(
+                                    ingestion: ing,
+                                    roaDose: roaDose,
+                                    isTimeRelative: isTimeRelative
+                                )
+                            }
+                            .swipeActions(edge: .leading) {
+                                if isIngestionHidden {
+                                    Button {
+                                        hiddenIngestions.removeAll { id in
+                                            id == ing.id
+                                        }
+                                    } label: {
+                                        Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
+                                    }
+                                } else {
+                                    Button {
+                                        hiddenIngestions.append(ing.id)
+                                    } label: {
+                                        Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
+                                    }
+                                }
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(role: .destructive) {
                                     PersistenceController.shared.viewContext.delete(ing)
                                     PersistenceController.shared.saveViewContext()
@@ -176,6 +200,9 @@ struct ExperienceScreen: View {
         .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
             calculateScreen()
         }
+        .onChange(of: hiddenIngestions) { _ in
+            calculateScreen()
+        }
     }
 
     private func delete() {
@@ -199,14 +226,15 @@ struct ExperienceScreen: View {
     }
 
     private func calculateTimeline() {
-        let dosePairs: [(String, Double)] = experience.sortedIngestionsUnwrapped.compactMap({ ing in
+        let ingestionsToShow = experience.sortedIngestionsUnwrapped.filter {!hiddenIngestions.contains($0.id)}
+        let dosePairs: [(String, Double)] = ingestionsToShow.compactMap({ ing in
             guard let dose = ing.doseUnwrapped else {return nil}
             return (ing.substanceNameUnwrapped, dose)
         })
         let maxDoses = Dictionary(dosePairs) { dose1, dose2 in
             max(dose1, dose2)
         }
-        timelineModel = TimelineModel(everythingForEachLine: experience.sortedIngestionsUnwrapped.map { ingestion in
+        timelineModel = TimelineModel(everythingForEachLine: ingestionsToShow.map { ingestion in
             let substanceName = ingestion.substanceNameUnwrapped
             let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
             let roaDuration = substance?.getDuration(for: ingestion.administrationRouteUnwrapped)
