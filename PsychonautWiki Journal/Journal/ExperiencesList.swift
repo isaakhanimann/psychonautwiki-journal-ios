@@ -8,7 +8,7 @@ struct ExperiencesList: View {
     var body: some View {
         ZStack {
             List {
-                if #available(iOS 16.1, *) {
+                if #available(iOS 16.2, *) {
                     ActivityControls()
                 }
                 if let first = viewModel.experiences.first,

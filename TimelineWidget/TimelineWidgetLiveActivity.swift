@@ -12,20 +12,17 @@ import SwiftUI
 struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Canvas { context, size in
-                    var path = Path()
-                    path.move(to: CGPoint(x: 0, y: 0))
-                    path.addLine(to: CGPoint(x: size.width, y: size.height))
-                    context.stroke(
-                        path,
-                        with: .color(.blue),
-                        lineWidth: 5
-                    )
-                }
+            Canvas { context, size in
+                var path = Path()
+                path.move(to: CGPoint(x: 0, y: 0))
+                path.addLine(to: CGPoint(x: size.width, y: size.height))
+                context.stroke(
+                    path,
+                    with: .color(.blue),
+                    lineWidth: 5
+                )
             }
-            .activityBackgroundTint(Color.cyan)
+            .activityBackgroundTint(Color(uiColor: .systemBackground))
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
@@ -33,10 +30,10 @@ struct TimelineWidgetLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text("Leading" + String(context.state.value))
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text("Trailing" + String(context.state.value))
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     Canvas { context, size in
@@ -51,7 +48,8 @@ struct TimelineWidgetLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                Text("L")
+                let a = String(context.state.value)
+                Text("L" + a)
             } compactTrailing: {
                 Text("T")
             } minimal: {
