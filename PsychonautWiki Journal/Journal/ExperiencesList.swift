@@ -8,6 +8,9 @@ struct ExperiencesList: View {
     var body: some View {
         ZStack {
             List {
+                if #available(iOS 16.1, *) {
+                    ActivityControls()
+                }
                 if let first = viewModel.experiences.first,
                    let lastIngestionTime = first.sortedIngestionsUnwrapped.last?.time,
                    Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < 12*60*60 {

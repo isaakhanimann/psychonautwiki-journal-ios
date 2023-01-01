@@ -45,13 +45,12 @@ struct AxisDrawable {
 
     static func getInstantsBetween(startTime: Date, endTime: Date, stepSizeInHours: Int) -> [Date] {
         let firstDate = startTime.nearestFullHourInTheFuture
-        var fullHours: [Date] = []
         var checkTime = firstDate
-        let oneHour: TimeInterval = 60*60
-        let stepSize: TimeInterval = Double(stepSizeInHours) * oneHour
+        var fullHours: [Date] = []
         while (checkTime < endTime) {
             fullHours.append(checkTime)
-            checkTime = checkTime.addingTimeInterval(stepSize)
+            guard let nextCheckTime = Calendar.current.date(byAdding: .hour, value: stepSizeInHours, to: checkTime) else {break}
+            checkTime =  nextCheckTime
         }
         return fullHours
     }

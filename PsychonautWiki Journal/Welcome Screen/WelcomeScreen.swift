@@ -48,10 +48,15 @@ struct WelcomeScreen: View {
                 Text("More info in Settings")
                     .font(.footnote)
                     .foregroundColor(.secondary)
-                Button("I understand") {
+                Button(action: {
                     isShowingWelcome.toggle()
-                }
-                .buttonStyle(.primary)
+                }, label: {
+                    Text("I understand")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                })
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
             }
             .padding()
             .navigationBarHidden(true)

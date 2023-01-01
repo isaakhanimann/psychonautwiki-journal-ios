@@ -12,6 +12,16 @@
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
+		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
+		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
+		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
+		EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */; };
+		EA085DD729607229001638AC /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD629607229001638AC /* TimelineWidget.swift */; };
+		EA085DD929607229001638AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA085DD829607229001638AC /* Assets.xcassets */; };
+		EA085DDD29607229001638AC /* TimelineWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */; };
+		EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */; };
+		EA085DE729616F8F001638AC /* ActivityControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE629616F8F001638AC /* ActivityControls.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */; };
@@ -141,7 +151,6 @@
 		EAE4722326CBA664009FB0EC /* ChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */; };
 		EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AA26CBA664009FB0EC /* JournalScreen.swift */; };
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
-		EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
@@ -158,6 +167,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EA085DDB29607229001638AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE470FB26CBA57F009FB0EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA085DCB29607229001638AC;
+			remoteInfo = TimelineWidgetExtension;
+		};
 		EACB6E3E27D09C8800940291 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAE470FB26CBA57F009FB0EC /* Project object */;
@@ -168,6 +184,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EA085DDE29607229001638AC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EA085DDD29607229001638AC /* TimelineWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA4910C826DFB4E1001A5316 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +213,16 @@
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
+		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EA085DD229607229001638AC /* TimelineWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetBundle.swift; sourceTree = "<group>"; };
+		EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		EA085DD629607229001638AC /* TimelineWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
+		EA085DD829607229001638AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA085DDA29607229001638AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetAttributes.swift; sourceTree = "<group>"; };
+		EA085DE629616F8F001638AC /* ActivityControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityControls.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphicsContext-DrawDot.swift"; sourceTree = "<group>"; };
@@ -321,7 +358,6 @@
 		EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAE471AA26CBA664009FB0EC /* JournalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalScreen.swift; sourceTree = "<group>"; };
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
-		EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
 		EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeInteractionsView.swift; sourceTree = "<group>"; };
@@ -336,6 +372,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EA085DC929607229001638AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */,
+				EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EACB6E3727D09C8800940291 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,6 +408,19 @@
 				EA014F9927E5E72000077FB2 /* WebViewScreen.swift */,
 			);
 			path = Web;
+			sourceTree = "<group>";
+		};
+		EA085DD129607229001638AC /* TimelineWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EA085DD229607229001638AC /* TimelineWidgetBundle.swift */,
+				EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */,
+				EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */,
+				EA085DD629607229001638AC /* TimelineWidget.swift */,
+				EA085DD829607229001638AC /* Assets.xcassets */,
+				EA085DDA29607229001638AC /* Info.plist */,
+			);
+			path = TimelineWidget;
 			sourceTree = "<group>";
 		};
 		EA095A1027D9E3D0007D44D6 /* Dose */ = {
@@ -477,6 +535,8 @@
 		EAA2EC6826E2064D00B4FACF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA085DCD29607229001638AC /* WidgetKit.framework */,
+				EA085DCF29607229001638AC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -594,6 +654,7 @@
 			children = (
 				EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EACB6E3B27D09C8800940291 /* JournalTests */,
+				EA085DD129607229001638AC /* TimelineWidget */,
 				EAE4710426CBA57F009FB0EC /* Products */,
 				EAA2EC6826E2064D00B4FACF /* Frameworks */,
 			);
@@ -604,6 +665,7 @@
 			children = (
 				EAE4710326CBA57F009FB0EC /* Journal.app */,
 				EACB6E3A27D09C8800940291 /* JournalTests.xctest */,
+				EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -725,6 +787,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */,
+				EA085DE629616F8F001638AC /* ActivityControls.swift */,
 				EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */,
 				EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */,
 				EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */,
@@ -752,7 +815,6 @@
 		EAE471AC26CBA664009FB0EC /* Reused Styles */ = {
 			isa = PBXGroup;
 			children = (
-				EAE471AD26CBA664009FB0EC /* PrimaryButtonStyle.swift */,
 			);
 			path = "Reused Styles";
 			sourceTree = "<group>";
@@ -771,6 +833,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EA085DCB29607229001638AC /* TimelineWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA085DE12960722A001638AC /* Build configuration list for PBXNativeTarget "TimelineWidgetExtension" */;
+			buildPhases = (
+				EA085DC829607229001638AC /* Sources */,
+				EA085DC929607229001638AC /* Frameworks */,
+				EA085DCA29607229001638AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimelineWidgetExtension;
+			productName = TimelineWidgetExtension;
+			productReference = EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EACB6E3927D09C8800940291 /* JournalTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EACB6E4027D09C8800940291 /* Build configuration list for PBXNativeTarget "JournalTests" */;
@@ -797,10 +876,12 @@
 				EAE4710026CBA57F009FB0EC /* Frameworks */,
 				EAE4722B26CBAE31009FB0EC /* Resources */,
 				EA4910C826DFB4E1001A5316 /* Embed Watch Content */,
+				EA085DDE29607229001638AC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EA085DDC29607229001638AC /* PBXTargetDependency */,
 			);
 			name = "PsychonautWiki Journal";
 			packageProductDependencies = (
@@ -818,9 +899,12 @@
 		EAE470FB26CBA57F009FB0EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					EA085DCB29607229001638AC = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					EACB6E3927D09C8800940291 = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = EAE4710226CBA57F009FB0EC;
@@ -850,11 +934,20 @@
 			targets = (
 				EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */,
 				EACB6E3927D09C8800940291 /* JournalTests */,
+				EA085DCB29607229001638AC /* TimelineWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EA085DCA29607229001638AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA085DD929607229001638AC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EACB6E3827D09C8800940291 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -874,6 +967,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EA085DC829607229001638AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA085DD729607229001638AC /* TimelineWidget.swift in Sources */,
+				EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */,
+				EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */,
+				EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EACB6E3627D09C8800940291 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -901,6 +1005,7 @@
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
+				EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
 				EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
@@ -976,6 +1081,7 @@
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */,
 				EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */,
+				EA085DE729616F8F001638AC /* ActivityControls.swift in Sources */,
 				EA41C62F295EB86C000DA021 /* Utils.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
@@ -1008,7 +1114,6 @@
 				EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
-				EAE4722726CBA664009FB0EC /* PrimaryButtonStyle.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */,
@@ -1034,6 +1139,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EA085DDC29607229001638AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA085DCB29607229001638AC /* TimelineWidgetExtension */;
+			targetProxy = EA085DDB29607229001638AC /* PBXContainerItemProxy */;
+		};
 		EACB6E3F27D09C8800940291 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EAE4710226CBA57F009FB0EC /* PsychonautWiki Journal */;
@@ -1042,6 +1152,64 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		EA085DDF29607229001638AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimelineWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TimelineWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.TimelineWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EA085DE029607229001638AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S7AHDRUD6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimelineWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TimelineWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.TimelineWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		EACB6E4127D09C8800940291 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1201,6 +1369,7 @@
 		EAE4711826CBA582009FB0EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
@@ -1227,6 +1396,7 @@
 		EAE4711926CBA582009FB0EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
@@ -1253,6 +1423,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EA085DE12960722A001638AC /* Build configuration list for PBXNativeTarget "TimelineWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA085DDF29607229001638AC /* Debug */,
+				EA085DE029607229001638AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EACB6E4027D09C8800940291 /* Build configuration list for PBXNativeTarget "JournalTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
