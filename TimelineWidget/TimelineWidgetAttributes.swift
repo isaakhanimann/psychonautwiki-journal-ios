@@ -9,8 +9,16 @@ import ActivityKit
 
 struct TimelineWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
+        public static func == (lhs: TimelineWidgetAttributes.ContentState, rhs: TimelineWidgetAttributes.ContentState) -> Bool {
+            lhs.everythingForEachLine == rhs.everythingForEachLine
+        }
+
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(everythingForEachLine.description)
+        }
+
         // Dynamic stateful properties about your activity go here!
-        var value: Int
+        var everythingForEachLine: [EverythingForOneLine]
     }
 
     // Fixed non-changing properties about your activity go here!

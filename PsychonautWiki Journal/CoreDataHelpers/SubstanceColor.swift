@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum SubstanceColor: String, CaseIterable, Identifiable {
+enum SubstanceColor: String, CaseIterable, Identifiable, Codable {
     case blue, brown, cyan, green, indigo, mint, orange, pink, purple, red, teal, yellow
 
     var id: SubstanceColor {

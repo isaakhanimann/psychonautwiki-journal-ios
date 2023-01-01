@@ -34,7 +34,7 @@ struct DurationScreen: View {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .font(.title2)
-                                    .foregroundColor(info.route.color)
+                                    .foregroundColor(info.route.color.swiftUIColor)
                                 Text(info.route.rawValue.localizedCapitalized).font(.headline)
                             }
                             OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
@@ -92,12 +92,4 @@ struct DurationScreen_Previews: PreviewProvider {
     static var previews: some View {
         DurationScreen(durationInfos: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.durationInfos)
     }
-}
-
-struct EverythingForOneLine {
-    let roaDuration: RoaDuration?
-    let startTime: Date
-    let horizontalWeight: Double
-    let verticalWeight: Double
-    let color: Color
 }

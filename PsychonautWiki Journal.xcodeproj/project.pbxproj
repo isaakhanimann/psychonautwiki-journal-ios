@@ -22,6 +22,37 @@
 		EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */; };
 		EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */; };
 		EA085DE729616F8F001638AC /* ActivityControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE629616F8F001638AC /* ActivityControls.swift */; };
+		EA085DFD29619E1E001638AC /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
+		EA085DFE29619E26001638AC /* DurationRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64327CA136C00F6E10F /* DurationRange.swift */; };
+		EA085DFF29619E31001638AC /* Substance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63D27CA136C00F6E10F /* Substance.swift */; };
+		EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* EverythingForOneLine.swift */; };
+		EA085E0229619E5F001638AC /* EverythingForOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* EverythingForOneLine.swift */; };
+		EA085E0329619F3E001638AC /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
+		EA085E0429619F85001638AC /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
+		EA085E0529619F85001638AC /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
+		EA085E0629619F85001638AC /* Roa.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64127CA136C00F6E10F /* Roa.swift */; };
+		EA085E0729619F85001638AC /* RoaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63B27CA136C00F6E10F /* RoaDose.swift */; };
+		EA085E0829619F85001638AC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
+		EA085E0929619F85001638AC /* RoaRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63F27CA136C00F6E10F /* RoaRange.swift */; };
+		EA085E0A29619F85001638AC /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
+		EA085E0B29619F97001638AC /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
+		EA085E0C29619FA3001638AC /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
+		EA085E0D29619FFD001638AC /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
+		EA085E0E2961A0B2001638AC /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
+		EA085E0F2961A1B1001638AC /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
+		EA085E102961A1B4001638AC /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
+		EA085E112961A1C9001638AC /* TimelineDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92052941C4080073303A /* TimelineDrawable.swift */; };
+		EA085E122961A1D5001638AC /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92032941C3C30073303A /* FullTimeline.swift */; };
+		EA085E132961A1F0001638AC /* GraphicsContext-DrawDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */; };
+		EA085E142961A200001638AC /* StrokeStyle-Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920C294202680073303A /* StrokeStyle-Timeline.swift */; };
+		EA085E152961A212001638AC /* TotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92082941EA4B0073303A /* TotalTimeline.swift */; };
+		EA085E162961A212001638AC /* OnsetComeupTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920E294203E70073303A /* OnsetComeupTotalTimeline.swift */; };
+		EA085E172961A212001638AC /* OnsetComeupTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921429421CE60073303A /* OnsetComeupTimeline.swift */; };
+		EA085E182961A212001638AC /* OnsetTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD9212294215FB0073303A /* OnsetTimeline.swift */; };
+		EA085E192961A212001638AC /* OnsetComeupPeakTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92102942131E0073303A /* OnsetComeupPeakTotalTimeline.swift */; };
+		EA085E1A2961A212001638AC /* OnsetTotalTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD920A2941FB160073303A /* OnsetTotalTimeline.swift */; };
+		EA085E1B2961A212001638AC /* NoTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921829422C580073303A /* NoTimeline.swift */; };
+		EA085E1C2961A212001638AC /* OnsetComeupPeakTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921629421E960073303A /* OnsetComeupPeakTimeline.swift */; };
 		EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */; };
 		EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */; };
 		EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */; };
@@ -223,6 +254,7 @@
 		EA085DDA29607229001638AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetAttributes.swift; sourceTree = "<group>"; };
 		EA085DE629616F8F001638AC /* ActivityControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityControls.swift; sourceTree = "<group>"; };
+		EA085E0029619E5B001638AC /* EverythingForOneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingForOneLine.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphicsContext-DrawDot.swift"; sourceTree = "<group>"; };
@@ -600,6 +632,7 @@
 				EA527A8329427E61009C142D /* ToleranceScreen.swift */,
 				EA527A8529427F56009C142D /* ToxicityScreen.swift */,
 				EA527A8729428011009C142D /* DurationScreen.swift */,
+				EA085E0029619E5B001638AC /* EverythingForOneLine.swift */,
 				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
 				EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */,
 				EA527A8929428146009C142D /* InteractionsScreen.swift */,
@@ -971,10 +1004,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA085E0329619F3E001638AC /* SubstanceColor.swift in Sources */,
+				EA085DFD29619E1E001638AC /* RoaDuration.swift in Sources */,
+				EA085E0429619F85001638AC /* Interactions.swift in Sources */,
+				EA085E192961A212001638AC /* OnsetComeupPeakTotalTimeline.swift in Sources */,
+				EA085E0F2961A1B1001638AC /* IngestionDrawable.swift in Sources */,
+				EA085E0529619F85001638AC /* SubstanceFile.swift in Sources */,
+				EA085E0C29619FA3001638AC /* DoseRangeType.swift in Sources */,
+				EA085E112961A1C9001638AC /* TimelineDrawable.swift in Sources */,
 				EA085DD729607229001638AC /* TimelineWidget.swift in Sources */,
+				EA085E0729619F85001638AC /* RoaDose.swift in Sources */,
+				EA085E1B2961A212001638AC /* NoTimeline.swift in Sources */,
+				EA085DFF29619E31001638AC /* Substance.swift in Sources */,
+				EA085E0A29619F85001638AC /* Tolerance.swift in Sources */,
+				EA085E102961A1B4001638AC /* AxisDrawable.swift in Sources */,
+				EA085E0229619E5F001638AC /* EverythingForOneLine.swift in Sources */,
+				EA085E132961A1F0001638AC /* GraphicsContext-DrawDot.swift in Sources */,
+				EA085E152961A212001638AC /* TotalTimeline.swift in Sources */,
+				EA085E0E2961A0B2001638AC /* TimelineModel.swift in Sources */,
+				EA085E1C2961A212001638AC /* OnsetComeupPeakTimeline.swift in Sources */,
+				EA085E172961A212001638AC /* OnsetComeupTimeline.swift in Sources */,
+				EA085E0B29619F97001638AC /* AdministrationRoute.swift in Sources */,
+				EA085E0929619F85001638AC /* RoaRange.swift in Sources */,
 				EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */,
+				EA085E0D29619FFD001638AC /* EffectTimeline.swift in Sources */,
+				EA085DFE29619E26001638AC /* DurationRange.swift in Sources */,
+				EA085E1A2961A212001638AC /* OnsetTotalTimeline.swift in Sources */,
 				EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */,
+				EA085E162961A212001638AC /* OnsetComeupTotalTimeline.swift in Sources */,
+				EA085E0629619F85001638AC /* Roa.swift in Sources */,
 				EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */,
+				EA085E0829619F85001638AC /* Category.swift in Sources */,
+				EA085E142961A200001638AC /* StrokeStyle-Timeline.swift in Sources */,
+				EA085E182961A212001638AC /* OnsetTimeline.swift in Sources */,
+				EA085E122961A1D5001638AC /* FullTimeline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1196,7 @@
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
+				EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

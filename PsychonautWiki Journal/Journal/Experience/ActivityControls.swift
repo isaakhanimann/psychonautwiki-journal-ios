@@ -37,7 +37,7 @@ struct ActivityControls: View {
 
     private func startActivity() {
         let attributes = TimelineWidgetAttributes(name: "Passed from app")
-        let state = TimelineWidgetAttributes.ContentState(value: 19)
+        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: [])
         let content = ActivityContent(state: state, staleDate: nil)
         activity = try? Activity.request(
             attributes: attributes,
@@ -47,7 +47,7 @@ struct ActivityControls: View {
     }
 
     private func updateActivity() {
-        let state = TimelineWidgetAttributes.ContentState(value: 20)
+        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: [])
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         Task {
             await activity?.update(updatedContent)
@@ -55,7 +55,7 @@ struct ActivityControls: View {
     }
 
     private func stopActivity() {
-        let state = TimelineWidgetAttributes.ContentState(value: 21)
+        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: [])
         let finalContent = ActivityContent(state: state, staleDate: nil)
         Task {
             await activity?.end(finalContent, dismissalPolicy: .default)

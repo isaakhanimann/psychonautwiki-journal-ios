@@ -23,33 +23,29 @@ struct TimelineWidgetLiveActivity: Widget {
                 )
             }
             .activityBackgroundTint(Color(uiColor: .systemBackground))
-            .activitySystemActionForegroundColor(Color.black)
+            .activitySystemActionForegroundColor(Color.primary)
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading" + String(context.state.value))
+                    Text("Leading")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing" + String(context.state.value))
+                    Text("Trailing")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Canvas { context, size in
-                        var path = Path()
-                        path.move(to: CGPoint(x: 0, y: 0))
-                        path.addLine(to: CGPoint(x: size.width, y: size.height))
-                        context.stroke(
-                            path,
-                            with: .color(.blue),
-                            lineWidth: 5
+                    GeometryReader { geo in
+                        EffectTimeline(
+                            timelineModel: TimelineModel(everythingForEachLine: context.state.everythingForEachLine),
+                            height: geo.size.height
                         )
                     }
+//                    EffectTimelineFromDataView(everythingForEachLine: context.state.everythingForEachLine)
                 }
             } compactLeading: {
-                let a = String(context.state.value)
-                Text("L" + a)
+                Text("L")
             } compactTrailing: {
                 Text("T")
             } minimal: {
@@ -61,9 +57,31 @@ struct TimelineWidgetLiveActivity: Widget {
     }
 }
 
+struct EffectTimelineFromDataView: View {
+
+    let everythingForEachLine: [EverythingForOneLine]
+
+    @State private var timelineModel: TimelineModel? = nil
+
+    var body: some View {
+        GeometryReader { geo in
+            if let timelineModel {
+                EffectTimeline(
+                    timelineModel: timelineModel,
+                    height: geo.size.height
+                )
+            } else {
+                Text("Nothing")
+            }
+        }.task {
+            timelineModel = TimelineModel(everythingForEachLine: everythingForEachLine)
+        }
+    }
+}
+
 struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = TimelineWidgetAttributes(name: "Me")
-    static let contentState = TimelineWidgetAttributes.ContentState(value: 3)
+    static let contentState = TimelineWidgetAttributes.ContentState(everythingForEachLine: EffectTimeline_Previews.everythingForEachLine)
 
     static var previews: some View {
         attributes

@@ -1,13 +1,13 @@
 import Foundation
 import CoreData
 
-struct DurationRange: Decodable {
+struct DurationRange: Codable {
 
     let min: Double?
     let max: Double?
     let units: Units
 
-    enum Units: String, CaseIterable, Decodable {
+    enum Units: String, CaseIterable, Codable {
         case seconds, minutes, hours, days
     }
 

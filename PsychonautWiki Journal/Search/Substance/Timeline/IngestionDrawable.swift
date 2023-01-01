@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct IngestionDrawable {
-    let color: Color
+    let color: SubstanceColor
     let ingestionTime: Date
     let roaDuration: RoaDuration?
     let horizontalWeight: Double
@@ -19,7 +19,7 @@ struct IngestionDrawable {
 
     init(
         startGraph: Date,
-        color: Color,
+        color: SubstanceColor,
         ingestionTime: Date,
         roaDuration: RoaDuration?,
         verticalWeight: Double = 1,

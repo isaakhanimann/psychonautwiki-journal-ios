@@ -46,7 +46,7 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    var color: Color {
+    var color: SubstanceColor {
         switch self {
         case .oral:
             return .blue

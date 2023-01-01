@@ -3,7 +3,7 @@ import SwiftUI
 struct OneRoaDurationRow: View {
 
     let duration: RoaDuration
-    let color: Color
+    let color: SubstanceColor
 
     var body: some View {
         VStack {
@@ -46,14 +46,14 @@ struct OneRoaDurationRow: View {
 struct DurationChip: View {
     let name: String
     let text: String
-    let color: Color
+    let color: SubstanceColor
 
     var body: some View {
         VStack {
             Text(text)
             Text(name)
         }.padding(5)
-            .background(color.opacity(shapeOpacity))
+            .background(color.swiftUIColor.opacity(shapeOpacity))
             .cornerRadius(12)
             .frame(maxWidth: .infinity)
     }

@@ -266,7 +266,7 @@ struct ExperienceScreen: View {
                 startTime: ingestion.timeUnwrapped,
                 horizontalWeight: horizontalWeight,
                 verticalWeight: verticalWeight,
-                color: ingestion.substanceColor.swiftUIColor
+                color: ingestion.substanceColor
             )
         })
     }

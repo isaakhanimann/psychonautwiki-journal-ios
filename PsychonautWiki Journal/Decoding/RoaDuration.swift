@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-struct RoaDuration: Decodable {
+struct RoaDuration: Codable {
 
     let onset: DurationRange?
     let comeup: DurationRange?
