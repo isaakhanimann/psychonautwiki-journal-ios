@@ -42,7 +42,6 @@ struct TimelineWidgetLiveActivity: Widget {
                             height: geo.size.height
                         )
                     }
-//                    EffectTimelineFromDataView(everythingForEachLine: context.state.everythingForEachLine)
                 }
             } compactLeading: {
                 Text("L")
@@ -53,28 +52,6 @@ struct TimelineWidgetLiveActivity: Widget {
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
-        }
-    }
-}
-
-struct EffectTimelineFromDataView: View {
-
-    let everythingForEachLine: [EverythingForOneLine]
-
-    @State private var timelineModel: TimelineModel? = nil
-
-    var body: some View {
-        GeometryReader { geo in
-            if let timelineModel {
-                EffectTimeline(
-                    timelineModel: timelineModel,
-                    height: geo.size.height
-                )
-            } else {
-                Text("Nothing")
-            }
-        }.task {
-            timelineModel = TimelineModel(everythingForEachLine: everythingForEachLine)
         }
     }
 }

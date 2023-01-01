@@ -15,9 +15,6 @@ struct EffectTimeline: View {
 
     var body: some View {
         let halfLineWidth = lineWidth/2
-        let labelsHeight: Double = 15
-        let spaceBetween: Double = 3
-        let linesHeight = height - spaceBetween - labelsHeight
         VStack(spacing: 0) {
             TimelineView(.everyMinute) { timeline in
                 let timelineDate = timeline.date
@@ -44,8 +41,7 @@ struct EffectTimeline: View {
                     }
                 }
             }
-            .frame(height: linesHeight)
-            Spacer().frame(height: spaceBetween)
+            Spacer().frame(height: 3)
             Canvas { context, size in
                 let widthInPixels = size.width - halfLineWidth
                 let pixelsPerSec = widthInPixels/timelineModel.totalWidth
@@ -61,8 +57,8 @@ struct EffectTimeline: View {
                     )
                 }
             }
-            .frame(height: labelsHeight)
-        }
+            .fixedSize(horizontal: false, vertical: true)
+        }.frame(height: height)
     }
 }
 
