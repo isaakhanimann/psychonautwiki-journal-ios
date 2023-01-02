@@ -12,46 +12,39 @@ import SwiftUI
 struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
-            Canvas { context, size in
-                var path = Path()
-                path.move(to: CGPoint(x: 0, y: 0))
-                path.addLine(to: CGPoint(x: size.width, y: size.height))
-                context.stroke(
-                    path,
-                    with: .color(.blue),
-                    lineWidth: 5
+            let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
+            return GeometryReader { geo in
+                EffectTimeline(
+                    timelineModel: timelineModel,
+                    height: geo.size.height
                 )
             }
-            .activityBackgroundTint(Color(uiColor: .systemBackground))
-            .activitySystemActionForegroundColor(Color.primary)
-
         } dynamicIsland: { context in
-            DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
+            let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
+            return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text(timelineModel.startTime, style: .timer)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     GeometryReader { geo in
                         EffectTimeline(
-                            timelineModel: TimelineModel(everythingForEachLine: context.state.everythingForEachLine),
+                            timelineModel: timelineModel,
                             height: geo.size.height
                         )
                     }
                 }
             } compactLeading: {
-                Text("L")
+                Text(timelineModel.startTime, style: .timer)
             } compactTrailing: {
-                Text("T")
+                Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
             } minimal: {
-                Text("Min")
+                Image(systemName: "eye")
             }
+            .contentMargins(.bottom, 13, for: .expanded)
             .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
         }
     }
 }
