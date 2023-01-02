@@ -60,11 +60,12 @@
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
+		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
+		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
 		EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61C295AF236000DA021 /* InteractionsGroup.swift */; };
-		EA41C61F295B5DE4000DA021 /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61E295B5DE4000DA021 /* RootScreen.swift */; };
 		EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */; };
 		EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C622295C2BE7000DA021 /* JournalFile.swift */; };
 		EA41C625295EAFD8000DA021 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C624295EAFD8000DA021 /* Data.swift */; };
@@ -263,11 +264,11 @@
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
+		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
 		EA41C61C295AF236000DA021 /* InteractionsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsGroup.swift; sourceTree = "<group>"; };
-		EA41C61E295B5DE4000DA021 /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
 		EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings-ViewModel.swift"; sourceTree = "<group>"; };
 		EA41C622295C2BE7000DA021 /* JournalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalFile.swift; sourceTree = "<group>"; };
 		EA41C624295EAFD8000DA021 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -561,7 +562,6 @@
 			isa = PBXGroup;
 			children = (
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
-				EA41C61E295B5DE4000DA021 /* RootScreen.swift */,
 				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
 			);
 			path = Content;
@@ -724,6 +724,7 @@
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
 				EAE4723426CC42F7009FB0EC /* substances.json */,
 				EAC23793276750C500109622 /* Global Functions.swift */,
+				EA4189ED2962E67600DEA663 /* Constants.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
@@ -1032,6 +1033,7 @@
 				EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */,
 				EA085E0D29619FFD001638AC /* EffectTimeline.swift in Sources */,
 				EA085DFE29619E26001638AC /* DurationRange.swift in Sources */,
+				EA4189EF2962E69000DEA663 /* Constants.swift in Sources */,
 				EA085E1A2961A212001638AC /* OnsetTotalTimeline.swift in Sources */,
 				EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */,
 				EA085E162961A212001638AC /* OnsetComeupTotalTimeline.swift in Sources */,
@@ -1129,6 +1131,7 @@
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,
+				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */,
@@ -1166,7 +1169,6 @@
 				EA527A8829428011009C142D /* DurationScreen.swift in Sources */,
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
-				EA41C61F295B5DE4000DA021 /* RootScreen.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,

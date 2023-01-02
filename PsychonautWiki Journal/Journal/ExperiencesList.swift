@@ -4,6 +4,7 @@ struct ExperiencesList: View {
 
     @ObservedObject var viewModel: JournalScreen.ViewModel
     @Environment(\.isSearching) private var isSearching
+    @Binding var isShowingCurrentExperience: Bool
 
     var body: some View {
         ZStack {
@@ -12,7 +13,11 @@ struct ExperiencesList: View {
                    let lastIngestionTime = first.sortedIngestionsUnwrapped.last?.time,
                    Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < 12*60*60 {
                     Section("Current") {
-                        ExperienceRow(experience: first, isTimeRelative: viewModel.isTimeRelative)
+                        CurrentExperienceRow(
+                            experience: first,
+                            isTimeRelative: viewModel.isTimeRelative,
+                            isNavigated: $isShowingCurrentExperience
+                        )
                     }
                     let rest = viewModel.experiences.suffix(viewModel.experiences.count-1)
                     Section("Previous") {

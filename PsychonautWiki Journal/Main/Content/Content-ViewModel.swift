@@ -8,6 +8,12 @@ extension ContentView {
                 UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey)
             }
         }
+        @Published var isShowingHome = true
+        @Published var isShowingSearch = false
+        @Published var isShowingSafer = false
+        @Published var isShowingSettings = false
+        @Published var isShowingCurrentExperience = true
+
         var toastViewModel: ToastViewModel?
 
         init() {
@@ -15,10 +21,18 @@ extension ContentView {
         }
 
         func receiveURL(url: URL) {
-            if !isEyeOpen {
-                isEyeOpen = true
+            if url.absoluteString == OpenExperienceURL {
+                isShowingHome = true
+                isShowingSearch = false
+                isShowingSafer = false
+                isShowingSettings = false
+                isShowingCurrentExperience = true
+            } else {
+                if !isEyeOpen {
+                    isEyeOpen = true
+                }
+                handleUniversalUrl(universalUrl: url)
             }
-            handleUniversalUrl(universalUrl: url)
         }
 
         private func handleUniversalUrl(universalUrl: URL) {

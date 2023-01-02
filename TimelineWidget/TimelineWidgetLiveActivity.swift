@@ -44,7 +44,7 @@ struct TimelineWidgetLiveActivity: Widget {
                 Image(systemName: "eye")
             }
             .contentMargins(.bottom, 13, for: .expanded)
-            .widgetURL(URL(string: "http://www.apple.com"))
+            .widgetURL(URL(string: OpenExperienceURL))
         }
     }
 }
