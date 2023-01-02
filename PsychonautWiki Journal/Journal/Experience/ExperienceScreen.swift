@@ -10,8 +10,8 @@ struct ExperienceScreen: View {
     @State private var interactions: [Interaction] = []
     @State private var substancesUsed: [Substance] = []
     @State private var isShowingDeleteAlert = false
-    @State private var isShowingEditScreen = false
     @State private var hiddenIngestions: [ObjectIdentifier] = []
+    @State private var isEditing = false
 
     @Environment(\.dismiss) var dismiss
 
@@ -97,12 +97,15 @@ struct ExperienceScreen: View {
                 if let notes = experience.textUnwrapped, !notes.isEmpty {
                     Text(notes)
                         .padding(.vertical, 5)
+                        .onTapGesture {
+                            isEditing.toggle()
+                        }
                 } else {
-                    NavigationLink {
-                        EditExperienceScreen(experience: experience)
+                    Button {
+                        isEditing.toggle()
                     } label: {
-                        Label("Add Note", systemImage: "pencil")
-                    }.foregroundColor(.accentColor)
+                        Label("Add Note", systemImage: "plus")
+                    }
                 }
             }
             if !substancesUsed.isEmpty {
@@ -136,6 +139,9 @@ struct ExperienceScreen: View {
             }
         }
         .navigationTitle(experience.titleUnwrapped)
+        .sheet(isPresented: $isEditing) {
+            EditExperienceScreen(experience: experience)
+        }
         .toolbar {
             ToolbarItem {
                 let isFavorite = experience.isFavorite
@@ -162,15 +168,9 @@ struct ExperienceScreen: View {
                     })
                 }
                 Spacer()
-                NavigationLink(
-                    destination: EditExperienceScreen(experience: experience),
-                    isActive: $isShowingEditScreen
-                ) {
-                    EmptyView()
-                }
                 Menu {
                     Button {
-                        isShowingEditScreen.toggle()
+                        isEditing.toggle()
                     } label: {
                         Label("Edit Title/Note", systemImage: "pencil")
                     }
