@@ -45,7 +45,7 @@ extension FinishIngestionScreen {
             context.performAndWait {
                 createOrUpdateCompanion(with: context, substanceName: substanceName)
                 if let experience = closestExperience, isAddingToFoundExperience {
-                    let ingestion = createIngestion(
+                    createIngestion(
                         with: experience,
                         and: context,
                         substanceName: substanceName,
@@ -63,7 +63,7 @@ extension FinishIngestionScreen {
                     experience.sortDate = selectedTime
                     experience.title = selectedTime.asDateString
                     experience.text = ""
-                    let ingestion = createIngestion(
+                    createIngestion(
                         with: experience,
                         and: context,
                         substanceName: substanceName,
@@ -99,7 +99,7 @@ extension FinishIngestionScreen {
             dose: Double?,
             units: String?,
             isEstimate: Bool
-        ) -> Ingestion {
+        ) {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
@@ -112,7 +112,6 @@ extension FinishIngestionScreen {
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
             ingestion.experience = experience
-            return ingestion
         }
 
         @Published var closestExperience: Experience?
