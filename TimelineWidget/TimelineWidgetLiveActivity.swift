@@ -23,10 +23,16 @@ struct TimelineWidgetLiveActivity: Widget {
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text(timelineModel.startTime, style: .timer)
+                    HStack {
+                        Image(systemName: "arrow.backward.to.line")
+                        Text(timelineModel.startTime, style: .timer)
+                    }
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
+                    HStack {
+                        Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
+                        Image(systemName: "arrow.forward.to.line")
+                    }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     GeometryReader { geo in
@@ -37,9 +43,15 @@ struct TimelineWidgetLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                Text(timelineModel.startTime, style: .timer)
+                HStack {
+                    Image(systemName: "arrow.backward.to.line")
+                    Text(timelineModel.startTime, style: .timer)
+                }
             } compactTrailing: {
-                Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
+                HStack {
+                    Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
+                    Image(systemName: "arrow.forward.to.line")
+                }
             } minimal: {
                 Image(systemName: "eye")
             }
