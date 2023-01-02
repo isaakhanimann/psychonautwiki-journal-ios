@@ -24,36 +24,23 @@ struct TimelineWidgetLiveActivity: Widget {
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    HStack {
-                        Image(systemName: "arrow.backward.to.line")
-                        Text(timelineModel.startTime, style: .timer)
-                    }
+                    Text(timelineModel.startTime, style: .relative)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    HStack {
-                        Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
-                        Image(systemName: "arrow.forward.to.line")
-                    }
+                    Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .relative)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    GeometryReader { geo in
-                        EffectTimeline(
-                            timelineModel: timelineModel,
-                            height: geo.size.height,
-                            isShowingCurrentTime: false
-                        )
-                    }
+                    EffectTimeline(
+                        timelineModel: timelineModel,
+                        height: 90,
+                        isShowingCurrentTime: false
+                    )
+
                 }
             } compactLeading: {
-                HStack {
-                    Image(systemName: "arrow.backward.to.line")
-                    Text(timelineModel.startTime, style: .timer)
-                }
+                Text(timelineModel.startTime, style: .relative)
             } compactTrailing: {
-                HStack {
-                    Text(timerInterval: Date.now...Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime))
-                    Image(systemName: "arrow.forward.to.line")
-                }
+                Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .relative)
             } minimal: {
                 Image(systemName: "eye")
             }

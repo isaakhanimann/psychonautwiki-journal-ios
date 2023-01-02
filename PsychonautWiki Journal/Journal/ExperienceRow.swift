@@ -117,16 +117,10 @@ struct ExperienceRowContent: View {
 
     var timeText: Text {
         if isTimeRelative {
-            return Text(getTimeDifferenceText())
+            return Text(sortDate, format: .relative(presentation: .numeric, unitsStyle: .narrow))
         } else {
             return Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits))
         }
-    }
-
-    func getTimeDifferenceText() -> String {
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .short
-        return formatter.localizedString(for: sortDate, relativeTo: Date.now)
     }
 
     private func getDoubleColors() -> [Color] {
