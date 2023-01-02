@@ -212,7 +212,7 @@ struct StatsScreenContent: View {
                 ForEach(ingestionData.years) { ingestionCount in
                     let substanceName = ingestionCount.substanceName
                     NavigationLink {
-                        SubstanceIngestionScreen(substanceName: substanceName)
+                        IngestionsForSubstanceScreen(substanceName: substanceName)
                     } label: {
                         HStack {
                             Image(systemName: "circle.fill").foregroundColor(ingestionData.colorMapping(substanceName))
