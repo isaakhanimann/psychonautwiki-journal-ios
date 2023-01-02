@@ -52,4 +52,14 @@ extension Experience: Comparable {
             ing.substanceNameUnwrapped
         }.uniqued()
     }
+
+    var isCurrent: Bool {
+        let twelveHours: TimeInterval = 12*60*60
+        if let lastIngestionTime = sortedIngestionsUnwrapped.last?.time,
+           Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
+            return true
+        } else {
+            return false
+        }
+    }
 }

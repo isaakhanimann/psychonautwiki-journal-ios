@@ -12,39 +12,51 @@ import ActivityKit
 class ActivityManager: ObservableObject {
 
     static let shared = ActivityManager()
+    let authorizationInfo = ActivityAuthorizationInfo()
 
-    private var activity: Activity<TimelineWidgetAttributes>? = nil
-    private let authorizationInfo = ActivityAuthorizationInfo()
-
-
-    func startActivity(everythingForEachLine: [EverythingForOneLine]) {
+    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine]) {
         if authorizationInfo.areActivitiesEnabled {
-            let attributes = TimelineWidgetAttributes(name: "Passed from app")
-            let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
-            let content = ActivityContent(state: state, staleDate: nil)
-            activity = try? Activity.request(
+            if let first = Activity<TimelineWidgetAttributes>.activities.first {
+                updateActivity(activity: first, everythingForEachLine: everythingForEachLine)
+            } else {
+                startNewActivity(everythingForEachLine: everythingForEachLine)
+            }
+        }
+    }
+
+    private func startNewActivity(everythingForEachLine: [EverythingForOneLine]) {
+        let attributes = TimelineWidgetAttributes(name: "Passed from app")
+        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
+        let content = ActivityContent(state: state, staleDate: nil)
+        do {
+            _ = try Activity.request(
                 attributes: attributes,
                 content: content,
                 pushType: nil
             )
+        } catch {
+            print("Failed to start activity: \(error.localizedDescription)")
         }
     }
 
-    func updateActivity(everythingForEachLine: [EverythingForOneLine]) {
+    private func updateActivity(activity: Activity<TimelineWidgetAttributes>,everythingForEachLine: [EverythingForOneLine]) {
         let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         Task {
-            await activity?.update(updatedContent)
+            await activity.update(updatedContent)
         }
     }
 
-    func stopActivity(everythingForEachLine: [EverythingForOneLine]) {
-        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
-        let finalContent = ActivityContent(state: state, staleDate: nil)
-        Task {
-            await activity?.end(finalContent, dismissalPolicy: .default)
+    func stopAllActivities(everythingForEachLine: [EverythingForOneLine]) {
+        if authorizationInfo.areActivitiesEnabled {
+            let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
+            let finalContent = ActivityContent(state: state, staleDate: nil)
+            Task {
+                for activity in Activity<TimelineWidgetAttributes>.activities {
+                    await activity.end(finalContent, dismissalPolicy: .immediate)
+                    print("Ending the Live Activity: \(activity.id)")
+                }
+            }
         }
     }
-
-
 }

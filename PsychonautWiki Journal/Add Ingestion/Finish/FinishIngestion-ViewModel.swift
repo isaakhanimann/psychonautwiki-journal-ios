@@ -55,7 +55,7 @@ extension FinishIngestionScreen {
                         isEstimate: isEstimate
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
                     }
                 } else {
                     let experience = Experience(context: context)
@@ -73,7 +73,7 @@ extension FinishIngestionScreen {
                         isEstimate: isEstimate
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
                     }
                 }
                 try? context.save()

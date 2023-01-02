@@ -48,32 +48,42 @@ struct ContentScreen: View {
     @Binding var isShowingSettings: Bool
 
     var body: some View {
-        NavigationView {
-            List {
-                NavigationLink(
-                    destination: JournalScreen(isShowingCurrentExperience: $isShowingCurrentExperience),
-                    isActive: $isShowingHome
-                ) {
-                    Label("Journal", systemImage: "house")
-                }
-                NavigationLink(
-                    destination: SearchScreen(),
-                    isActive: $isShowingSearch
-                ) {
-                    Label("Substances", systemImage: "magnifyingglass")
-                }
-                NavigationLink(
-                    destination: SaferScreen(),
-                    isActive: $isShowingSafer
-                ) {
-                    Label("Safer Use", systemImage: "cross")
-                }
-                NavigationLink(
-                    destination: SettingsScreen(),
-                    isActive: $isShowingSettings
-                ) {
-                    Label("Settings", systemImage: "gearshape")
-                }
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                navigationLinks
+            }
+        } else {
+            NavigationView {
+                navigationLinks
+            }.navigationViewStyle(.stack)
+        }
+    }
+
+    var navigationLinks: some View {
+        List {
+            NavigationLink(
+                destination: JournalScreen(isShowingCurrentExperience: $isShowingCurrentExperience),
+                isActive: $isShowingHome
+            ) {
+                Label("Journal", systemImage: "house")
+            }
+            NavigationLink(
+                destination: SearchScreen(),
+                isActive: $isShowingSearch
+            ) {
+                Label("Substances", systemImage: "magnifyingglass")
+            }
+            NavigationLink(
+                destination: SaferScreen(),
+                isActive: $isShowingSafer
+            ) {
+                Label("Safer Use", systemImage: "cross")
+            }
+            NavigationLink(
+                destination: SettingsScreen(),
+                isActive: $isShowingSettings
+            ) {
+                Label("Settings", systemImage: "gearshape")
             }
         }
     }

@@ -126,6 +126,14 @@ struct ExperienceScreen: View {
                     GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
                 }
             }
+            if #available(iOS 16.2, *) {
+                if experience.isCurrent {
+                    LiveActivitySection(
+                        stopLiveActivity: stopLiveActivity,
+                        startLiveActivity: startOrUpdateLiveActivity
+                    )
+                }
+            }
         }
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
@@ -179,9 +187,7 @@ struct ExperienceScreen: View {
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
-                let twelveHours: TimeInterval = 12*60*60
-                if let lastIngestionTime = experience.sortedIngestionsUnwrapped.last?.time,
-                   Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
+                if experience.isCurrent {
                     Button {
                         isShowingAddIngestionSheet.toggle()
                     } label: {
@@ -199,6 +205,11 @@ struct ExperienceScreen: View {
         }
         .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
             calculateScreen()
+            if #available(iOS 16.2, *) {
+                if experience.isCurrent {
+                    startOrUpdateLiveActivity()
+                }
+            }
         }
         .onChange(of: hiddenIngestions) { _ in
             calculateScreen()
@@ -208,6 +219,7 @@ struct ExperienceScreen: View {
     private func delete() {
         PersistenceController.shared.viewContext.delete(experience)
         PersistenceController.shared.saveViewContext()
+        stopLiveActivity()
         dismiss()
     }
 
@@ -216,6 +228,20 @@ struct ExperienceScreen: View {
         calculateTimeline()
         calculateCumulativeDoses()
         findInteractions()
+    }
+
+    private func startOrUpdateLiveActivity() {
+        if #available(iOS 16.2, *) {
+            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+        }
+    }
+
+    private func stopLiveActivity() {
+        if #available(iOS 16.2, *) {
+            if experience.isCurrent {
+                ActivityManager.shared.stopAllActivities(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+            }
+        }
     }
 
     private func setSubstances() {
