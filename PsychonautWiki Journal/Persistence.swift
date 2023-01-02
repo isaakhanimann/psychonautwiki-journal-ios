@@ -31,15 +31,18 @@ struct PersistenceController {
         viewContext.performAndWait {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
-            var substanceNames = Set<String>()
+            var companionsDict: [String: SubstanceCompanion] = [:]
             for ingestion in allIngestions {
                 guard let name = ingestion.substanceName else {continue}
                 guard let colorUnwrap = ingestion.color else {continue}
-                if !substanceNames.contains(name) {
+                if let companion = companionsDict[name] {
+                    ingestion.substanceCompanion = companion
+                } else {
                     let companion = SubstanceCompanion(context: viewContext)
                     companion.substanceName = name
                     companion.colorAsText = colorUnwrap
-                    substanceNames.insert(name)
+                    ingestion.substanceCompanion = companion
+                    companionsDict[name] = companion
                 }
             }
             let experienceFetchRequest = Experience.fetchRequest()

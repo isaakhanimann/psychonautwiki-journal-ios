@@ -25,10 +25,12 @@
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="units" optional="YES" attributeType="String"/>
         <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
+        <relationship name="substanceCompanion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCompanion" inverseName="ingestions" inverseEntity="SubstanceCompanion"/>
     </entity>
     <entity name="SubstanceCompanion" representedClassName="SubstanceCompanion" syncable="YES" codeGenerationType="class">
         <attribute name="colorAsText" optional="YES" attributeType="String"/>
         <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="substanceCompanion" inverseEntity="Ingestion"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="substanceName"/>

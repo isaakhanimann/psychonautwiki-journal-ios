@@ -43,37 +43,39 @@ extension FinishIngestionScreen {
         ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
-                createOrUpdateCompanion(with: context, substanceName: substanceName)
-                if let experience = closestExperience, isAddingToFoundExperience {
+                let companion = createOrUpdateCompanion(with: context, substanceName: substanceName)
+                if let existingExperience = closestExperience, isAddingToFoundExperience {
                     createIngestion(
-                        with: experience,
+                        with: existingExperience,
                         and: context,
                         substanceName: substanceName,
                         administrationRoute: administrationRoute,
                         dose: dose,
                         units: units,
-                        isEstimate: isEstimate
+                        isEstimate: isEstimate,
+                        substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped))
                     }
                 } else {
-                    let experience = Experience(context: context)
-                    experience.creationDate = Date()
-                    experience.sortDate = selectedTime
-                    experience.title = selectedTime.asDateString
-                    experience.text = ""
+                    let newExperience = Experience(context: context)
+                    newExperience.creationDate = Date()
+                    newExperience.sortDate = selectedTime
+                    newExperience.title = selectedTime.asDateString
+                    newExperience.text = ""
                     createIngestion(
-                        with: experience,
+                        with: newExperience,
                         and: context,
                         substanceName: substanceName,
                         administrationRoute: administrationRoute,
                         dose: dose,
                         units: units,
-                        isEstimate: isEstimate
+                        isEstimate: isEstimate,
+                        substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped))
                     }
                 }
                 try? context.save()
@@ -81,13 +83,15 @@ extension FinishIngestionScreen {
         }
 
 
-        private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) {
+        private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) -> SubstanceCompanion {
             if let foundCompanion {
                 foundCompanion.colorAsText = selectedColor.rawValue
+                return foundCompanion
             } else {
                 let companion = SubstanceCompanion(context: context)
                 companion.substanceName = substanceName
                 companion.colorAsText = selectedColor.rawValue
+                return companion
             }
         }
 
@@ -98,7 +102,8 @@ extension FinishIngestionScreen {
             administrationRoute: AdministrationRoute,
             dose: Double?,
             units: String?,
-            isEstimate: Bool
+            isEstimate: Bool,
+            substanceCompanion: SubstanceCompanion
         ) {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
@@ -112,6 +117,7 @@ extension FinishIngestionScreen {
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
             ingestion.experience = experience
+            ingestion.substanceCompanion = substanceCompanion
         }
 
         @Published var closestExperience: Experience?

@@ -31,6 +31,13 @@ extension SettingsScreen {
             do {
                 let file = try JSONDecoder().decode(JournalFile.self, from: data)
                 let context = PersistenceController.shared.viewContext
+                var companionDict: [String: SubstanceCompanion] = [:]
+                for companionCodable in file.substanceCompanions {
+                    let newCompanion = SubstanceCompanion(context: context)
+                    newCompanion.substanceName = companionCodable.substanceName
+                    newCompanion.colorAsText = companionCodable.color.rawValue
+                    companionDict[companionCodable.substanceName] = newCompanion
+                }
                 for experienceCodable in file.experiences {
                     let newExperience = Experience(context: context)
                     newExperience.title = experienceCodable.title
@@ -49,13 +56,18 @@ extension SettingsScreen {
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes
                         newExperience.addToIngestions(newIngestion)
+                        if let companion = companionDict[ingestionCodable.substanceName] {
+                            newIngestion.substanceCompanion = companion
+                        } else {
+                            assertionFailure("Found no corresponding substance companion for ingestion")
+                            let newCompanion = SubstanceCompanion(context: context)
+                            newCompanion.substanceName = ingestionCodable.substanceName
+                            newCompanion.colorAsText = (SubstanceColor.allCases.randomElement() ?? .red).rawValue
+                            companionDict[ingestionCodable.substanceName] = newCompanion
+                        }
                     }
                 }
-                for companionCodable in file.substanceCompanions {
-                    let newCompanion = SubstanceCompanion(context: context)
-                    newCompanion.substanceName = companionCodable.substanceName
-                    newCompanion.colorAsText = companionCodable.color.rawValue
-                }
+
                 for customCodable in file.customSubstances {
                     let newCustom = CustomSubstance(context: context)
                     newCustom.name = customCodable.name
