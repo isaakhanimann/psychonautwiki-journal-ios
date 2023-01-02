@@ -31,7 +31,7 @@ class ActivityManager: ObservableObject {
 
     func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine]) {
         if authorizationInfo.areActivitiesEnabled {
-            if let activity {
+            if let activity, isActivityActive {
                 updateActivity(activity: activity, everythingForEachLine: everythingForEachLine)
             } else {
                 startActivity(everythingForEachLine: everythingForEachLine)
