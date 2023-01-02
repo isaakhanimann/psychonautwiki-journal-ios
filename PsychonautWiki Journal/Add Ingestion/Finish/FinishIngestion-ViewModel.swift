@@ -41,77 +41,45 @@ extension FinishIngestionScreen {
             units: String?,
             isEstimate: Bool
         ) {
-            if let experience = closestExperience, isAddingToFoundExperience {
-                addIngestion(
-                    to: experience,
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate
-                )
-            } else {
-                addIngestionToNewExperience(
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate
-                )
-            }
-        }
-
-        private func addIngestion(
-            to experience: Experience,
-            substanceName: String,
-            administrationRoute: AdministrationRoute,
-            dose: Double?,
-            units: String?,
-            isEstimate: Bool
-        ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
                 createOrUpdateCompanion(with: context, substanceName: substanceName)
-                createIngestion(
-                    with: experience,
-                    and: context,
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate
-                )
+                if let experience = closestExperience, isAddingToFoundExperience {
+                    let ingestion = createIngestion(
+                        with: experience,
+                        and: context,
+                        substanceName: substanceName,
+                        administrationRoute: administrationRoute,
+                        dose: dose,
+                        units: units,
+                        isEstimate: isEstimate
+                    )
+                    if #available(iOS 16.2, *) {
+                        ActivityManager.shared.startActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                    }
+                } else {
+                    let experience = Experience(context: context)
+                    experience.creationDate = Date()
+                    experience.sortDate = selectedTime
+                    experience.title = selectedTime.asDateString
+                    experience.text = ""
+                    let ingestion = createIngestion(
+                        with: experience,
+                        and: context,
+                        substanceName: substanceName,
+                        administrationRoute: administrationRoute,
+                        dose: dose,
+                        units: units,
+                        isEstimate: isEstimate
+                    )
+                    if #available(iOS 16.2, *) {
+                        ActivityManager.shared.startActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                    }
+                }
                 try? context.save()
             }
         }
 
-        private func addIngestionToNewExperience(
-            substanceName: String,
-            administrationRoute: AdministrationRoute,
-            dose: Double?,
-            units: String?,
-            isEstimate: Bool
-        ) {
-            let context = PersistenceController.shared.viewContext
-            context.performAndWait {
-                createOrUpdateCompanion(with: context, substanceName: substanceName)
-                let experience = Experience(context: context)
-                experience.creationDate = Date()
-                experience.sortDate = selectedTime
-                experience.title = selectedTime.asDateString
-                experience.text = ""
-                createIngestion(
-                    with: experience,
-                    and: context,
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate
-                )
-                try? context.save()
-            }
-        }
 
         private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) {
             if let foundCompanion {
@@ -131,7 +99,7 @@ extension FinishIngestionScreen {
             dose: Double?,
             units: String?,
             isEstimate: Bool
-        ) {
+        ) -> Ingestion {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
             ingestion.time = selectedTime
@@ -144,6 +112,7 @@ extension FinishIngestionScreen {
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
             ingestion.experience = experience
+            return ingestion
         }
 
         @Published var closestExperience: Experience?
