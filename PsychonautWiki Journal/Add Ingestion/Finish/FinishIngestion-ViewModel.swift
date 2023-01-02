@@ -56,7 +56,9 @@ extension FinishIngestionScreen {
                         substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped))
+                        if existingExperience.isCurrent {
+                            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped))
+                        }
                     }
                 } else {
                     let newExperience = Experience(context: context)
@@ -75,7 +77,9 @@ extension FinishIngestionScreen {
                         substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped))
+                        if newExperience.isCurrent {
+                            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped))
+                        }
                     }
                 }
                 try? context.save()
