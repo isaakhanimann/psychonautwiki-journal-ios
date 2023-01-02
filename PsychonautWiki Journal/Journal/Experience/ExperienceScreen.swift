@@ -137,7 +137,31 @@ struct ExperienceScreen: View {
         }
         .navigationTitle(experience.titleUnwrapped)
         .toolbar {
-            ToolbarItemGroup {
+            ToolbarItem {
+                let isFavorite = experience.isFavorite
+                Button {
+                    experience.isFavorite = !isFavorite
+                    try? PersistenceController.shared.viewContext.save()
+                } label: {
+                    if isFavorite {
+                        Label("Unfavorite", systemImage: "star.fill")
+                    } else {
+                        Label("Favorite", systemImage: "star")
+                    }
+                }
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
+                if experience.isCurrent {
+                    Button {
+                        isShowingAddIngestionSheet.toggle()
+                    } label: {
+                        Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                    }
+                    .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+                        ChooseSubstanceScreen()
+                    })
+                }
+                Spacer()
                 NavigationLink(
                     destination: EditExperienceScreen(experience: experience),
                     isActive: $isShowingEditScreen
@@ -150,24 +174,13 @@ struct ExperienceScreen: View {
                     } label: {
                         Label("Edit Title/Note", systemImage: "pencil")
                     }
-                    let isFavorite = experience.isFavorite
-                    Button {
-                        experience.isFavorite = !isFavorite
-                        try? PersistenceController.shared.viewContext.save()
-                    } label: {
-                        if isFavorite {
-                            Label("Mark as Favorite", systemImage: "checkmark")
-                        } else {
-                            Text("Mark as Favorite")
-                        }
-                    }
                     Button {
                         isTimeRelative.toggle()
                     } label: {
                         if isTimeRelative {
-                            Label("Show Relative Time", systemImage: "checkmark")
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
                         } else {
-                            Text("Show Relative Time")
+                            Label("Show Relative Time", systemImage: "timer.circle")
                         }
                     }
                     Button(role: .destructive) {
@@ -184,19 +197,6 @@ struct ExperienceScreen: View {
                         primaryButton: .destructive(Text("Delete"), action: delete),
                         secondaryButton: .cancel()
                     )
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                if experience.isCurrent {
-                    Button {
-                        isShowingAddIngestionSheet.toggle()
-                    } label: {
-                        Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                    }
-                    .sheet(isPresented: $isShowingAddIngestionSheet, content: {
-                        ChooseSubstanceScreen()
-                    })
-                    Spacer()
                 }
             }
         }

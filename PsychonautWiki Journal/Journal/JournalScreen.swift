@@ -18,18 +18,18 @@ struct JournalScreen: View {
                             viewModel.isTimeRelative.toggle()
                         } label: {
                             if viewModel.isTimeRelative {
-                                Label("Show Relative Time", systemImage: "checkmark")
+                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
                             } else {
-                                Text("Show Relative Time")
+                                Label("Show Relative Time", systemImage: "timer.circle")
                             }
                         }
                         Button {
                             viewModel.isFavoriteFilterEnabled.toggle()
                         } label: {
                             if viewModel.isFavoriteFilterEnabled {
-                                Label("Filter Favorites", systemImage: "checkmark")
+                                Label("Don't Filter Favorites", systemImage: "star.fill")
                             } else {
-                                Text("Filter Favorites")
+                                Label("Filter Favorites", systemImage: "star")
                             }
                         }
                     } label: {

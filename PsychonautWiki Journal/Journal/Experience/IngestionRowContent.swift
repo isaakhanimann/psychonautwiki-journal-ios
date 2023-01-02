@@ -58,17 +58,17 @@ struct IngestionRowContent: View {
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
-                        HStack {
-                            if let doseUnwrapped = dose {
-                                Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
-                            } else {
-                                Text("Unknown Dose")
-                            }
-                            if let numDotsUnwrap = numDots {
-                                DotRows(numDots: numDotsUnwrap)
-                            }
+                        if let doseUnwrapped = dose {
+                            Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
+                        } else {
+                            Text("Unknown Dose")
                         }
-                    }
+                        if let numDotsUnwrap = numDots {
+                            Spacer().frame(height: 2)
+                            DotRows(numDots: numDotsUnwrap)
+                            Spacer().frame(height: 2)
+                        }
+                    }.font(.headline)
                 }
                 if !note.isEmpty {
                     Text(note)

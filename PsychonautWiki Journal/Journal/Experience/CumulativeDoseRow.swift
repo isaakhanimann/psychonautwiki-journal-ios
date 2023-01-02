@@ -45,7 +45,7 @@ struct RouteItemView: View {
                 if let numDotsUnwrap = routeItem.numDots {
                     DotRows(numDots: numDotsUnwrap)
                 }
-            }
+            }.font(.headline)
         }
     }
 }
