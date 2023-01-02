@@ -63,6 +63,7 @@
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivitySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivitySection.swift */; };
+		EA4189F3296343EC00DEA663 /* SubstanceIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F2296343EC00DEA663 /* SubstanceIngestionScreen.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -267,6 +268,7 @@
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivitySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySection.swift; sourceTree = "<group>"; };
+		EA4189F2296343EC00DEA663 /* SubstanceIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceIngestionScreen.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 			isa = PBXGroup;
 			children = (
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
+				EA4189F2296343EC00DEA663 /* SubstanceIngestionScreen.swift */,
 				EA41C62E295EB86C000DA021 /* Utils.swift */,
 				EA41C630295F88F0000DA021 /* Experience Charts */,
 				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
@@ -1206,6 +1209,7 @@
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
+				EA4189F3296343EC00DEA663 /* SubstanceIngestionScreen.swift in Sources */,
 				EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
