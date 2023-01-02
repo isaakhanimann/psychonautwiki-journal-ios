@@ -17,7 +17,8 @@ struct TimelineWidgetLiveActivity: Widget {
             let bottomPadding = 3.0
             EffectTimeline(
                 timelineModel: timelineModel,
-                height: totalHeight - bottomPadding
+                height: totalHeight - bottomPadding,
+                isShowingCurrentTime: false
             ).padding(.bottom, bottomPadding)
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
@@ -38,7 +39,8 @@ struct TimelineWidgetLiveActivity: Widget {
                     GeometryReader { geo in
                         EffectTimeline(
                             timelineModel: timelineModel,
-                            height: geo.size.height
+                            height: geo.size.height,
+                            isShowingCurrentTime: false
                         )
                     }
                 }
