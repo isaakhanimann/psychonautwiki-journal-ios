@@ -13,12 +13,12 @@ struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
-            return GeometryReader { geo in
-                EffectTimeline(
-                    timelineModel: timelineModel,
-                    height: geo.size.height
-                )
-            }
+            let totalHeight = 160.0 // in the documentation: https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities it says that truncation only happens if the height exceeds 160 points
+            let bottomPadding = 3.0
+            EffectTimeline(
+                timelineModel: timelineModel,
+                height: totalHeight - bottomPadding
+            ).padding(.bottom, bottomPadding)
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             return DynamicIsland {
