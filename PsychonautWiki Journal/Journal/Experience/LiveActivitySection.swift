@@ -13,23 +13,31 @@ struct LiveActivitySection: View {
 
     let stopLiveActivity: () -> Void
     let startLiveActivity: () -> Void
+    @ObservedObject var activityManager = ActivityManager.shared
     @State private var areActivitiesEnabled = false
     @State private var isActivityActive = false
 
     var body: some View {
-        Group {
+        Section("Live Activities") {
             if areActivitiesEnabled {
-                Section("Live Activity") {
-                    if isActivityActive {
-                        Button("Stop Live Activity", action: stopLiveActivity)
-                    } else {
-                        Button("Start Live Activity", action: startLiveActivity)
+                if activityManager.isActivityActive {
+                    Button {
+                        stopLiveActivity()
+                    } label: {
+                        Label("Stop Live Activity", systemImage: "stop")
+                    }
+                } else {
+                    Button {
+                        startLiveActivity()
+                    } label: {
+                        Label("Start Live Activity", systemImage: "play")
                     }
                 }
             } else {
-                Text("not enabled")
+                Text("Enable in Settings")
             }
-        }.task {
+        }
+        .task {
             let authorizationInfo = ActivityManager.shared.authorizationInfo
             self.areActivitiesEnabled = authorizationInfo.areActivitiesEnabled
             for await isEnabled in authorizationInfo.activityEnablementUpdates {

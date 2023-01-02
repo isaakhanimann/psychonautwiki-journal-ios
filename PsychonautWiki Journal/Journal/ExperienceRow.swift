@@ -52,6 +52,11 @@ struct ExperienceRowWithoutNavigation: View {
             isTimeRelative: isTimeRelative
         ).swipeActions(allowsFullSwipe: false) {
             Button(role: .destructive) {
+                if #available(iOS 16.2, *) {
+                    if experience.isCurrent {
+                        ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                    }
+                }
                 PersistenceController.shared.viewContext.delete(experience)
                 PersistenceController.shared.saveViewContext()
             } label: {

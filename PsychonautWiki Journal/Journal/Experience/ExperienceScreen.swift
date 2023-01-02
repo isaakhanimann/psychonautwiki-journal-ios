@@ -239,7 +239,7 @@ struct ExperienceScreen: View {
     private func stopLiveActivity() {
         if #available(iOS 16.2, *) {
             if experience.isCurrent {
-                ActivityManager.shared.stopAllActivities(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
             }
         }
     }
