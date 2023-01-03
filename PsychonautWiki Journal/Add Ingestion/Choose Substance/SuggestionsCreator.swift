@@ -82,7 +82,7 @@ struct DoseAndUnit: Hashable, Identifiable {
 
 struct CustomSubstanceModel: Identifiable {
     var id: String {
-        name
+        name + units // id must be different from just name because else there is a bug when showing both the custom substance and original substance
     }
     let name: String
     let units: String

@@ -36,6 +36,7 @@ struct ChooseDoseScreenContent: View {
     var impureDoseText: String
 
     @State private var isShowingUnknownDoseAlert = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         Form {
@@ -60,7 +61,12 @@ struct ChooseDoseScreenContent: View {
             }
             ToolbarItemGroup(placement: .bottomBar) {
                 Button {
-                    isShowingUnknownDoseAlert.toggle()
+                    if isEyeOpen {
+                        isShowingUnknownDoseAlert.toggle()
+                    } else {
+                        selectedPureDose = nil
+                        isShowingNext = true
+                    }
                 } label: {
                     Label("Use Unknown Dose", systemImage: "exclamationmark.triangle").labelStyle(.titleAndIcon)
                 }

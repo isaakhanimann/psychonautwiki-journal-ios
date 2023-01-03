@@ -38,31 +38,44 @@ extension JournalScreen {
         }
 
         private func setupFetchRequestPredicateAndFetch() {
-            let predicateFavorite = NSPredicate(
-                format: "isFavorite == %@",
-                NSNumber(value: isFavoriteFilterEnabled)
-            )
-            if searchText == "" {
-                experienceFetchController?.fetchRequest.predicate = predicateFavorite
-            } else {
-                let predicateTitle = NSPredicate(
-                    format: "title CONTAINS[cd] %@",
-                    searchText as CVarArg
-                )
-                let predicateSubstance = NSPredicate(
-                    format: "%K.%K CONTAINS[cd] %@",
-                    #keyPath(Experience.ingestions),
-                    #keyPath(Ingestion.substanceName),
-                    searchText as CVarArg
-                )
-                let titleOrSubstancePredicate = NSCompoundPredicate(
-                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
-                )
-                let completePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
-                experienceFetchController?.fetchRequest.predicate = completePredicate
-            }
+            experienceFetchController?.fetchRequest.predicate = getPredicate()
             try? experienceFetchController?.performFetch()
             self.experiences = experienceFetchController?.fetchedObjects ?? []
+        }
+
+        private func getPredicate() -> NSPredicate? {
+            let predicateFavorite = NSPredicate(
+                format: "isFavorite == %@",
+                NSNumber(value: true)
+            )
+            let predicateTitle = NSPredicate(
+                format: "title CONTAINS[cd] %@",
+                searchText as CVarArg
+            )
+            let predicateSubstance = NSPredicate(
+                format: "%K.%K CONTAINS[cd] %@",
+                #keyPath(Experience.ingestions),
+                #keyPath(Ingestion.substanceName),
+                searchText as CVarArg
+            )
+            if isFavoriteFilterEnabled {
+                if searchText.isEmpty {
+                    return predicateFavorite
+                } else {
+                    let titleOrSubstancePredicate = NSCompoundPredicate(
+                        orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                    )
+                    return NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
+                }
+            } else {
+                if searchText.isEmpty {
+                    return nil
+                } else {
+                    return NSCompoundPredicate(
+                        orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                    )
+                }
+            }
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

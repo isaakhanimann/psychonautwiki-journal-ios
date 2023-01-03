@@ -13,15 +13,22 @@ extension ChooseSubstanceScreen {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         
         @Published var searchText = ""
+        @Published var isShowingOpenEyeToast = false
         @Published var filteredSuggestions: [Suggestion] =  []
         @Published var filteredSubstances: [Substance] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
         @Published var customSubstanceModels: [CustomSubstanceModel]
+        @Published var isEyeOpen = false {
+            didSet {
+                UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey2)
+            }
+        }
 
         private let allPossibleSuggestions: [Suggestion]
         private let fetchController: NSFetchedResultsController<CustomSubstance>?
 
         override init() {
+            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.fetchLimit = 100
@@ -43,15 +50,34 @@ extension ChooseSubstanceScreen {
             super.init()
             fetchController?.delegate = self
             $searchText
-                .map { search in
+                .combineLatest($isEyeOpen) { search, isEyeOpen in
                     let allSubstances = SubstanceRepo.shared.substances
-                    return SearchViewModel.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
+                    let originalFiltered = SearchViewModel.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
+                    if isEyeOpen {
+                        return originalFiltered
+                    } else {
+                        let isContainingIllegal = originalFiltered.contains { sub in
+                            !namesOfLegalSubstances.contains(sub.name)
+                        }
+                        if search.count > 4 && isContainingIllegal {
+                            self.openEyeAndAnimate()
+                            return originalFiltered
+                        } else {
+                            return originalFiltered.filter { sub in
+                                namesOfLegalSubstances.contains(sub.name)
+                            }
+                        }
+                    }
                 }.assign(to: &$filteredSubstances)
             $searchText
                 .combineLatest($customSubstanceModels) { search, customs in
-                    let searchLowerCased = search.lowercased()
-                    return customs.filter { custModel in
-                        custModel.name.lowercased().contains(searchLowerCased)
+                    if search.isEmpty {
+                        return customs
+                    } else {
+                        let searchLowerCased = search.lowercased()
+                        return customs.filter { custModel in
+                            custModel.name.lowercased().contains(searchLowerCased)
+                        }
                     }
                 }.assign(to: &$filteredCustomSubstances)
             $filteredSubstances.combineLatest($filteredCustomSubstances) { filteredSubstances, filteredCustom in
@@ -63,6 +89,11 @@ extension ChooseSubstanceScreen {
                     }
                 }
             }.assign(to: &$filteredSuggestions)
+        }
+
+        private func openEyeAndAnimate() {
+            isShowingOpenEyeToast = true
+            isEyeOpen = true
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

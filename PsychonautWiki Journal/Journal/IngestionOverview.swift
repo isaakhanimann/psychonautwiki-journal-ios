@@ -38,8 +38,13 @@ struct IngestionOverview: View {
         VStack(alignment: .leading) {
             Text("Most Used Substance")
                 .foregroundStyle(.secondary)
-            Text(ingestionData.last12Months.first!.substanceName)
-                .font(.title2.bold())
+            if let mostUsedName = ingestionData.last12Months.first?.substanceName {
+                Text(mostUsedName)
+                    .font(.title2.bold())
+            } else {
+                Text("None")
+                    .font(.title2.bold())
+            }
             IngestionOverviewChart(ingestionData: ingestionData)
                 .frame(height: 100)
         }

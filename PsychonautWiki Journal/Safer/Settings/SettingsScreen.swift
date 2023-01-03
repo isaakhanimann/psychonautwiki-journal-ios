@@ -1,13 +1,16 @@
 import SwiftUI
 import AlertToast
+import StoreKit
 
 struct SettingsScreen: View {
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage("hasRatedBefore") var hasRatedBefore: Bool = false
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
+            hasRatedBefore: $hasRatedBefore,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,
             exportData: {
@@ -29,6 +32,7 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
+    @Binding var hasRatedBefore: Bool
     @State var isImporting = false
     @Binding var isExporting: Bool
     var journalFile: JournalFile
@@ -48,22 +52,32 @@ struct SettingsContent: View {
                 if #available(iOS 16.0, *) {
                     ShareLink("Share With a Friend", item: URL(string: "https://isaakhanimann.github.io")!)
                 }
-                RateInAppStoreButton()
+                if isEyeOpen && !hasRatedBefore {
+                    Button {
+                        if let windowScene = UIApplication.shared.currentWindow?.windowScene {
+                            SKStoreReviewController.requestReview(in: windowScene)
+                        }
+                    } label: {
+                        Label("Rate in App Store", systemImage: "star")
+                    }
+                }
                 Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                     Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
                 }
                 Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                     Label("Ask a Question", systemImage: "ellipsis.bubble")
                 }
-                NavigationLink(
-                    destination: FAQView(),
-                    label: {
-                        Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                if isEyeOpen {
+                    NavigationLink(
+                        destination: FAQView(),
+                        label: {
+                            Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                        }
+                    )
+                    .foregroundColor(.accentColor)
+                    Link(destination: URL(string: "https://github.com/isaakhanimann/PsychonautWiki-Journal")!) {
+                        Label("Source Code", systemImage: "doc.text.magnifyingglass")
                     }
-                )
-                .foregroundColor(.accentColor)
-                Link(destination: URL(string: "https://github.com/isaakhanimann/PsychonautWiki-Journal")!) {
-                    Label("Source Code", systemImage: "doc.text.magnifyingglass")
                 }
             }
 
@@ -168,6 +182,7 @@ struct SettingsContent_Previews: PreviewProvider {
         NavigationView {
             SettingsContent(
                 isEyeOpen: .constant(true),
+                hasRatedBefore: .constant(false),
                 isImporting: false,
                 isExporting: .constant(false),
                 journalFile: JournalFile(),

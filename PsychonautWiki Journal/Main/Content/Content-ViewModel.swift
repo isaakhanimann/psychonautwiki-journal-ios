@@ -5,7 +5,7 @@ extension ContentView {
     class ViewModel: ObservableObject {
         @Published var isEyeOpen = false {
             didSet {
-                UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey)
+                UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey2)
             }
         }
         @Published var isShowingHome = true
@@ -17,7 +17,7 @@ extension ContentView {
         var toastViewModel: ToastViewModel?
 
         init() {
-            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey)
+            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
         }
 
         func receiveURL(url: URL) {

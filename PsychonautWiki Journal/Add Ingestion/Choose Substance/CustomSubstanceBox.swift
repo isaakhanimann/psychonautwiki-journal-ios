@@ -28,6 +28,8 @@ struct CustomSubstanceBox: View {
 
 struct CustomSubstanceBox_Previews: PreviewProvider {
     static var previews: some View {
-        CustomSubstanceBox(customSubstanceModel: CustomSubstanceModel(name: "Coffee", units: "cups"), dismiss: {})
+        NavigationView {
+            CustomSubstanceBox(customSubstanceModel: CustomSubstanceModel(name: "Coffee", units: "cups"), dismiss: {}).padding(.horizontal)
+        }
     }
 }

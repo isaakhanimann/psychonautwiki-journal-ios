@@ -11,10 +11,15 @@ struct SubstanceBox: View {
 
     let substance: Substance
     let dismiss: () -> Void
+    let isEyeOpen: Bool
 
     var body: some View {
         NavigationLink {
-            AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+            if isEyeOpen {
+                AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+            } else {
+                ChooseRouteScreen(substance: substance, dismiss: dismiss)
+            }
         } label: {
             GroupBox(substance.name) {
                 if !substance.commonNames.isEmpty {
@@ -38,7 +43,8 @@ struct SubstanceBox_Previews: PreviewProvider {
             LazyVStack {
                 SubstanceBox(
                     substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                    dismiss: {}
+                    dismiss: {},
+                    isEyeOpen: true
                 ).padding(.horizontal)
             }
         }

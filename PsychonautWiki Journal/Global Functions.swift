@@ -10,14 +10,6 @@ func getCurrentAppVersion() -> String {
     return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 }
 
-
-let namesOfUncontrolledSubstances = [
-    "Caffeine",
-    "Myristicin",
-    "Choline Bitartrate",
-    "Citicoline"
-]
-
 func getColor(for substanceName: String) -> SubstanceColor {
     let fetchRequest = SubstanceCompanion.fetchRequest()
     fetchRequest.fetchLimit = 1

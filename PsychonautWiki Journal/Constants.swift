@@ -8,3 +8,11 @@
 import Foundation
 
 let OpenExperienceURL = "open-experience"
+
+let namesOfLegalSubstances = [
+    "Caffeine",
+    "Myristicin",
+    "Choline Bitartrate",
+    "Citicoline",
+    "Tyrosine"
+]

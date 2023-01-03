@@ -12,6 +12,7 @@ struct ExperienceScreen: View {
     @State private var isShowingDeleteAlert = false
     @State private var hiddenIngestions: [ObjectIdentifier] = []
     @State private var isEditing = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     @Environment(\.dismiss) var dismiss
 
@@ -108,25 +109,27 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if !substancesUsed.isEmpty {
-                Section("Substances") {
-                    ForEach(substancesUsed) { substance in
-                        NavigationLink(substance.name) {
-                            SubstanceScreen(substance: substance)
+            if isEyeOpen {
+                if !substancesUsed.isEmpty {
+                    Section("Substances") {
+                        ForEach(substancesUsed) { substance in
+                            NavigationLink(substance.name) {
+                                SubstanceScreen(substance: substance)
+                            }
                         }
                     }
                 }
-            }
-            Section("Interactions") {
-                ForEach(interactions) { interaction in
-                    InteractionPairRow(
-                        aName: interaction.aName,
-                        bName: interaction.bName,
-                        interactionType: interaction.interactionType
-                    )
-                }
-                NavigationLink("See All Interactions") {
-                    GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                Section("Interactions") {
+                    ForEach(interactions) { interaction in
+                        InteractionPairRow(
+                            aName: interaction.aName,
+                            bName: interaction.bName,
+                            interactionType: interaction.interactionType
+                        )
+                    }
+                    NavigationLink("See All Interactions") {
+                        GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                    }
                 }
             }
             if #available(iOS 16.2, *) {

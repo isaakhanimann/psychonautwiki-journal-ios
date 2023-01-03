@@ -3,7 +3,7 @@ import SwiftUI
 struct WelcomeScreen: View {
 
     @Binding var isShowingWelcome: Bool
-    @AppStorage(PersistenceController.isEyeOpenKey) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var imageName: String {
         isEyeOpen ? "Eye Open" : "Eye Closed"
@@ -45,7 +45,7 @@ struct WelcomeScreen: View {
                         }
                     }
                 }
-                Text("More info in Settings")
+                Text("Your data is kept offline at all times")
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 Button(action: {
