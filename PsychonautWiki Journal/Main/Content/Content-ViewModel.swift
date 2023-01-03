@@ -30,30 +30,11 @@ extension ContentView {
             } else {
                 if !isEyeOpen {
                     isEyeOpen = true
+                    self.toastViewModel?.showSuccessToast(message: "Unlocked")
+                } else {
+                    self.toastViewModel?.showSuccessToast(message: "Already Unlocked")
                 }
-                handleUniversalUrl(universalUrl: url)
             }
-        }
-
-        private func handleUniversalUrl(universalUrl: URL) {
-            if let substanceName = getSubstanceName(from: universalUrl) {
-                self.toastViewModel?.showErrorToast(message: "\(substanceName) Not Found")
-            } else {
-                self.toastViewModel?.showErrorToast(message: "No Substance Found")
-            }
-        }
-
-        private func getSubstanceName(from url: URL) -> String? {
-            guard let componentsParsed = URLComponents(
-                url: url,
-                resolvingAgainstBaseURL: false
-            ) else {
-                return nil
-            }
-            guard let queryItemsUnwrapped =  componentsParsed.queryItems else {
-                return nil
-            }
-            return queryItemsUnwrapped.first?.value
         }
     }
 }
