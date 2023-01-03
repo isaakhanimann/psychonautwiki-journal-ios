@@ -64,6 +64,7 @@
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivitySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivitySection.swift */; };
 		EA4189F3296343EC00DEA663 /* IngestionsForSubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */; };
+		EA4189F5296429DF00DEA663 /* ChooseJointDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F4296429DF00DEA663 /* ChooseJointDoseScreen.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -268,6 +269,7 @@
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivitySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySection.swift; sourceTree = "<group>"; };
 		EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsForSubstanceScreen.swift; sourceTree = "<group>"; };
+		EA4189F4296429DF00DEA663 /* ChooseJointDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseJointDoseScreen.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
+				EA4189F4296429DF00DEA663 /* ChooseJointDoseScreen.swift */,
 				EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */,
 				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
@@ -1104,6 +1107,7 @@
 				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
+				EA4189F5296429DF00DEA663 /* ChooseJointDoseScreen.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
