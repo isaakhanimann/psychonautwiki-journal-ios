@@ -164,28 +164,28 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                 Suggestion(
                     substanceName: "Cannabis",
                     substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
-                    units: "mg",
+                    units: "mg (THC)",
                     route: .smoked,
                     substanceColor: .green,
                     dosesAndUnit: [
                         DoseAndUnit(
                             dose: 3,
-                            units: "mg",
+                            units: "mg  (THC)",
                             isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 6,
-                            units: "mg",
+                            units: "mg (THC)",
                             isEstimate: true
                         ),
                         DoseAndUnit(
                             dose: nil,
-                            units: "mg",
+                            units: "mg (THC)",
                             isEstimate: false
                         ),
                         DoseAndUnit(
                             dose: 2.5,
-                            units: "mg",
+                            units: "mg (THC)",
                             isEstimate: false
                         )
                     ]

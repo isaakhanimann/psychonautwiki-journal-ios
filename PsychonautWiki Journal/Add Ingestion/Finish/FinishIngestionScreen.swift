@@ -8,6 +8,7 @@ struct FinishIngestionScreen: View {
     let units: String?
     let isEstimate: Bool
     let dismiss: () -> Void
+    var suggestedNote: String? = nil
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject var viewModel = ViewModel()
 
@@ -34,7 +35,7 @@ struct FinishIngestionScreen: View {
             dismiss: dismiss,
             notesInOrder: viewModel.notesInOrder
         ).task {
-            viewModel.initializeColorAndHasCompanion(for: substanceName)
+            viewModel.initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
         }
     }
 }

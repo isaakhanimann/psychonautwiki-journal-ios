@@ -16,8 +16,11 @@ extension FinishIngestionScreen {
         private var foundCompanion: SubstanceCompanion? = nil
         private var hasInitializedAlready = false
 
-        func initializeColorAndHasCompanion(for substanceName: String) {
+        func initializeColorCompanionAndNote(for substanceName: String, suggestedNote: String?) {
             guard !hasInitializedAlready else {return} // because this function is going to be called again when navigating back from color picker screen
+            if let suggestedNote {
+                enteredNote = suggestedNote
+            }
             let fetchRequest = SubstanceCompanion.fetchRequest()
             let companions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
             alreadyUsedColors = Set(companions.map { $0.color })

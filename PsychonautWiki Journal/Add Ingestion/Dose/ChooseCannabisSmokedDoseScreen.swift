@@ -17,9 +17,18 @@ struct ChooseCannabisSmokedDoseScreen: View {
     @State private var cannabisAmountInMg = 300.0
     @State private var thcContent = 14.0
     @State private var isEstimate = true
+    @State private var pickerOption = PickerOption.joint
 
-    var ingestedTHCDoseInMg: Double {
+    private var ingestedTHCDoseInMg: Double {
         cannabisAmountInMg * Double(pickerOption.percentTransfer)/100 * thcContent / 100
+    }
+
+    private var doseText: String {
+        String(format: "%.1f", ingestedTHCDoseInMg)
+    }
+
+    private var suggestedNote: String {
+        "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent)) % THC) smoked in a \(pickerOption.rawValue)"
     }
 
     enum PickerOption: String, CaseIterable {
@@ -39,14 +48,12 @@ struct ChooseCannabisSmokedDoseScreen: View {
         }
     }
 
-    @State private var pickerOption = PickerOption.joint
-
     var body: some View {
         Form {
-            Section("Ingested THC") {
+            Section("Ingested THC Amount") {
                 VStack(spacing: 5) {
                     let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg (THC)")
-                    Text("\(String(format: "%.1f", ingestedTHCDoseInMg)) mg")
+                    Text("\(doseText) mg")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
                     DoseRow(roaDose: smokedDose)
@@ -121,7 +128,8 @@ struct ChooseCannabisSmokedDoseScreen: View {
                         dose: ingestedTHCDoseInMg,
                         units: "mg (THC)",
                         isEstimate: isEstimate,
-                        dismiss: dismiss
+                        dismiss: dismiss,
+                        suggestedNote: suggestedNote
                     )
                 } label: {
                     Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)

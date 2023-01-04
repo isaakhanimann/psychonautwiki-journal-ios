@@ -51,11 +51,15 @@ struct ChooseRouteScreen: View {
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
         NavigationLink {
-            ChooseDoseScreen(
-                substance: substance,
-                administrationRoute: route,
-                dismiss: dismiss
-            )
+            if substance.name == "Cannabis" && route == .smoked {
+                ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
+            } else {
+                ChooseDoseScreen(
+                    substance: substance,
+                    administrationRoute: route,
+                    dismiss: dismiss
+                )
+            }
         } label: {
             GroupBox {
                 VStack(alignment: .center) {
