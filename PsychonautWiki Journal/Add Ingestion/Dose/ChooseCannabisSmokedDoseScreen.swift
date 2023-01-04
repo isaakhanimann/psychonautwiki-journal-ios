@@ -23,12 +23,16 @@ struct ChooseCannabisSmokedDoseScreen: View {
         cannabisAmountInMg * Double(pickerOption.percentTransfer)/100 * thcContent / 100
     }
 
+    private var doseRounded: Double {
+        Double(round(10 * ingestedTHCDoseInMg) / 10)
+    }
+
     private var doseText: String {
         String(format: "%.1f", ingestedTHCDoseInMg)
     }
 
     private var suggestedNote: String {
-        "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent)) % THC) smoked in a \(pickerOption.rawValue)"
+        "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent))% THC) smoked in a \(pickerOption.rawValue)"
     }
 
     enum PickerOption: String, CaseIterable {
@@ -67,7 +71,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                Text("THC Transfer: ~\(pickerOption.percentTransfer) %").font(.headline.bold())
+                Text("THC Transfer: ~\(pickerOption.percentTransfer)%").font(.headline.bold())
             }
             Section("Cannabis Amount") {
                 VStack {
@@ -98,8 +102,11 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     } maximumValueLabel: {
                         Text("30")
                     }
-                    Text("\(Int(thcContent)) %").font(.title2.bold())
+                    Text("\(Int(thcContent))%").font(.title2.bold())
                 }
+            }
+            if let remark = cannabis.dosageRemark {
+                Text(remark)
             }
         }
         .navigationTitle("Cannabis Smoked")
@@ -125,7 +132,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     FinishIngestionScreen(
                         substanceName: cannabis.name,
                         administrationRoute: .smoked,
-                        dose: ingestedTHCDoseInMg,
+                        dose: doseRounded,
                         units: "mg (THC)",
                         isEstimate: isEstimate,
                         dismiss: dismiss,

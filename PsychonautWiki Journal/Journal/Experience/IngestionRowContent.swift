@@ -59,7 +59,7 @@ struct IngestionRowContent: View {
                     VStack(alignment: .trailing) {
                         Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
                         if let doseUnwrapped = dose {
-                            Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units)
+                            Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
                         } else {
                             Text("Unknown Dose")
                         }
@@ -154,6 +154,18 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                     isTimeRelative: true
+                )
+                IngestionRowContent(
+                    numDots: 2,
+                    substanceColor: .green,
+                    substanceName: "Cannabis",
+                    dose: 10.4,
+                    units: "mg (THC)",
+                    isEstimate: true,
+                    administrationRoute: .smoked,
+                    ingestionTime: Date(),
+                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                    isTimeRelative: false
                 )
             }
         }

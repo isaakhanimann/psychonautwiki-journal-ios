@@ -36,17 +36,17 @@ struct RouteItemView: View {
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
             Text(routeItem.route.rawValue.localizedCapitalized).font(.caption)
-            HStack {
-                if let doseUnwrapped = routeItem.dose {
-                    Text((routeItem.isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + routeItem.units)
-                } else {
-                    Text("Unknown Dose")
-                }
-                if let numDotsUnwrap = routeItem.numDots {
-                    DotRows(numDots: numDotsUnwrap)
-                }
-            }.font(.headline)
-        }
+            if let doseUnwrapped = routeItem.dose {
+                Text((routeItem.isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + routeItem.units).multilineTextAlignment(.trailing)
+            } else {
+                Text("Unknown Dose")
+            }
+            if let numDotsUnwrap = routeItem.numDots {
+                Spacer().frame(height: 2)
+                DotRows(numDots: numDotsUnwrap)
+                Spacer().frame(height: 3)
+            }
+        }.font(.headline)
     }
 }
 
