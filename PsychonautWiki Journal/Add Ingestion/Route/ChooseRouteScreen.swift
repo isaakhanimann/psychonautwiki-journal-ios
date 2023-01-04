@@ -53,6 +53,8 @@ struct ChooseRouteScreen: View {
         NavigationLink {
             if substance.name == "Cannabis" && route == .smoked {
                 ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
+            } else if substance.name == "Alcohol" && route == .oral {
+                ChooseAlcoholDoseScreen(dismiss: dismiss)
             } else {
                 ChooseDoseScreen(
                     substance: substance,

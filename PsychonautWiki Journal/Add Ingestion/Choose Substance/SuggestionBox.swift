@@ -50,6 +50,8 @@ struct SuggestionBox: View {
                         NavigationLink("Other") {
                             if substance.name == "Cannabis" && suggestion.route == .smoked {
                                 ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
+                            } else if substance.name == "Alcohol" && suggestion.route == .oral {
+                                ChooseAlcoholDoseScreen(dismiss: dismiss)
                             } else {
                                 ChooseDoseScreen(
                                     substance: substance,
