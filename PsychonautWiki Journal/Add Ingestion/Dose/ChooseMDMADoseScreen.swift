@@ -101,6 +101,11 @@ struct ChooseMDMADoseScreen: View {
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
             }
+            if #available(iOS 16, *) {
+                Section("Desirable vs Adverse Effects") {
+                    MDMADesirableVsAdverseChart().frame(height: 200)
+                }
+            }
             Section("Pills") {
                 Text("You cannot determine the MDMA content of pills visually. E.g. pills that looked the same had differences of 220 mg in Switzerland in 2021. To determine the contents of your pills you need to test your substances quantitatively in free and anonymous testing centers.")
                 Link("EMCDDA Statistics", destination: URL(string: "https://www.emcdda.europa.eu/data/stats2022/ppp_en")!)
