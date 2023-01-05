@@ -66,6 +66,7 @@
 		EA4189F3296343EC00DEA663 /* IngestionsForSubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */; };
 		EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */; };
 		EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */; };
+		EA4189F92966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -272,6 +273,7 @@
 		EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsForSubstanceScreen.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
 		EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAlcoholDoseScreen.swift; sourceTree = "<group>"; };
+		EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCaffeineDoseScreen.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
 				EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */,
 				EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */,
+				EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */,
 				EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */,
 				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
@@ -1073,6 +1076,7 @@
 				EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
 				EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */,
+				EA4189F92966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift in Sources */,
 				EA527A8A29428146009C142D /* InteractionsScreen.swift in Sources */,
 				EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */,
 				EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */,
