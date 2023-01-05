@@ -15,9 +15,11 @@ struct FinishIngestionScreen: View {
     var body: some View {
         FinishIngestionContent(
             selectedTime: $viewModel.selectedTime,
-            closestExperience: $viewModel.closestExperience,
-            isAddingToFoundExperience: $viewModel.isAddingToFoundExperience,
+            selectedExperience: $viewModel.selectedExperience,
+            experiencesWithinLargerRange: viewModel.experiencesWithinLargerRange,
+            wantsToCreateNewExperience: $viewModel.wantsToCreateNewExperience,
             enteredNote: $viewModel.enteredNote,
+            enteredTitle: $viewModel.enteredTitle,
             selectedColor: $viewModel.selectedColor,
             alreadyUsedColors: viewModel.alreadyUsedColors,
             otherColors: viewModel.otherColors,
@@ -44,9 +46,11 @@ struct FinishIngestionScreen: View {
 struct FinishIngestionContent: View {
 
     @Binding var selectedTime: Date
-    @Binding var closestExperience: Experience?
-    @Binding var isAddingToFoundExperience: Bool
+    @Binding var selectedExperience: Experience?
+    var experiencesWithinLargerRange: [Experience]
+    @Binding var wantsToCreateNewExperience: Bool
     @Binding var enteredNote: String
+    @Binding var enteredTitle: String
     @Binding var selectedColor: SubstanceColor
     let alreadyUsedColors: Set<SubstanceColor>
     let otherColors: Set<SubstanceColor>
@@ -64,10 +68,34 @@ struct FinishIngestionContent: View {
                 )
                 .labelsHidden()
                 .datePickerStyle(.wheel)
-                if let experience = closestExperience {
-                    Toggle("Part of \(experience.titleUnwrapped)", isOn: $isAddingToFoundExperience).tint(.accentColor)
+                if let selectedExperience {
+                    if experiencesWithinLargerRange.count>1 {
+                        if !wantsToCreateNewExperience {
+                            NavigationLink {
+                                ExperiencePickerScreen(
+                                    selectedExperience: $selectedExperience,
+                                    experiences: experiencesWithinLargerRange
+                                )
+                            } label: {
+                                HStack {
+                                    Text("Part of:")
+                                    Spacer()
+                                    Text(selectedExperience.titleUnwrapped)
+                                }
+                            }
+                        }
+                        Toggle("Create New Experience", isOn: $wantsToCreateNewExperience.animation()).tint(.accentColor)
+                    } else {
+                        Toggle("Part of \(selectedExperience.titleUnwrapped)", isOn: $wantsToCreateNewExperience.not).tint(.accentColor)
+                    }
                 }
             }
+            if selectedExperience == nil || wantsToCreateNewExperience {
+                Section("New Experience Title") {
+                    TextField("Title", text: $enteredTitle, prompt: Text("Enter Title"))
+                }
+            }
+
             Section("Notes") {
                 TextField("Notes", text: $enteredNote)
                     .autocapitalization(.sentences)
@@ -115,14 +143,25 @@ struct FinishIngestionContent: View {
     }
 }
 
+extension Binding where Value == Bool {
+    var not: Binding<Value> {
+        Binding<Value>(
+            get: { !self.wrappedValue },
+            set: { self.wrappedValue = !$0 }
+        )
+    }
+}
+
 struct FinishIngestionContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FinishIngestionContent(
                 selectedTime: .constant(Date()),
-                closestExperience: .constant(nil),
-                isAddingToFoundExperience: .constant(false),
+                selectedExperience: .constant(nil),
+                experiencesWithinLargerRange: [],
+                wantsToCreateNewExperience: .constant(false),
                 enteredNote: .constant("hello"),
+                enteredTitle: .constant("This is my title"),
                 selectedColor: .constant(.green),
                 alreadyUsedColors: [.blue, .brown, .pink],
                 otherColors: [.green, .mint, .indigo, .cyan, .purple, .orange, .red, .teal],

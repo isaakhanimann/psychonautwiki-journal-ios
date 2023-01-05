@@ -7,14 +7,23 @@ extension FinishIngestionScreen {
     class ViewModel: ObservableObject {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
-        @Published var selectedTime = Date()
+        @Published var selectedTime = Date() {
+            didSet {
+                if oldValue.asDateString == enteredTitle {
+                    enteredTitle = selectedTime.asDateString
+                }
+            }
+        }
         @Published var enteredNote = ""
-        @Published var isAddingToFoundExperience = true
+        @Published var enteredTitle = ""
+        @Published var wantsToCreateNewExperience = false
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
         @Published var notesInOrder = [String]()
         private var foundCompanion: SubstanceCompanion? = nil
         private var hasInitializedAlready = false
+        @Published var experiencesWithinLargerRange: [Experience] = []
+        @Published var selectedExperience: Experience?
 
         func initializeColorCompanionAndNote(for substanceName: String, suggestedNote: String?) {
             guard !hasInitializedAlready else {return} // because this function is going to be called again when navigating back from color picker screen
@@ -47,7 +56,7 @@ extension FinishIngestionScreen {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
                 let companion = createOrUpdateCompanion(with: context, substanceName: substanceName)
-                if let existingExperience = closestExperience, isAddingToFoundExperience {
+                if let existingExperience = selectedExperience, !wantsToCreateNewExperience {
                     createIngestion(
                         with: existingExperience,
                         and: context,
@@ -67,7 +76,7 @@ extension FinishIngestionScreen {
                     let newExperience = Experience(context: context)
                     newExperience.creationDate = Date()
                     newExperience.sortDate = selectedTime
-                    newExperience.title = selectedTime.asDateString
+                    newExperience.title = enteredTitle
                     newExperience.text = ""
                     createIngestion(
                         with: newExperience,
@@ -127,9 +136,8 @@ extension FinishIngestionScreen {
             ingestion.substanceCompanion = substanceCompanion
         }
 
-        @Published var closestExperience: Experience?
-
         init() {
+            enteredTitle = Date.now.asDateString
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
@@ -139,20 +147,31 @@ extension FinishIngestionScreen {
                 ing.noteUnwrapped
             }.uniqued()
             $selectedTime.map({ date in
-                let fetchRequest = Ingestion.fetchRequest()
-                fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
-                fetchRequest.fetchLimit = 1
+                let fetchRequest = Experience.fetchRequest()
+                fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
                 fetchRequest.predicate = FinishIngestionScreen.ViewModel.getPredicate(from: date)
-                return try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.experience
-            }).assign(to: &$closestExperience)
+                return (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
+            }).assign(to: &$experiencesWithinLargerRange)
+            $selectedTime.combineLatest($experiencesWithinLargerRange) { date, experiences in
+                FinishIngestionScreen.ViewModel.getExperienceClosest(from: experiences, date: date)
+            }.assign(to: &$selectedExperience)
         }
 
-        private static func getPredicate(from date: Date) -> NSCompoundPredicate {
+        private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {
             let halfDay: TimeInterval = 12*60*60
             let startDate = date.addingTimeInterval(-halfDay)
             let endDate = date.addingTimeInterval(halfDay)
-            let laterThanStart = NSPredicate(format: "time > %@", startDate as NSDate)
-            let earlierThanEnd = NSPredicate(format: "time < %@", endDate as NSDate)
+            return experiences.first { exp in
+                startDate < exp.sortDateUnwrapped && exp.sortDateUnwrapped < endDate
+            }
+        }
+
+        private static func getPredicate(from date: Date) -> NSCompoundPredicate {
+            let twoDays: TimeInterval = 48*60*60
+            let startDate = date.addingTimeInterval(-twoDays)
+            let endDate = date.addingTimeInterval(twoDays)
+            let laterThanStart = NSPredicate(format: "sortDate > %@", startDate as NSDate)
+            let earlierThanEnd = NSPredicate(format: "sortDate < %@", endDate as NSDate)
             return NSCompoundPredicate(
                 andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd]
             )
