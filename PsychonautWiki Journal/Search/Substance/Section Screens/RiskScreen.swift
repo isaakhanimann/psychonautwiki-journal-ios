@@ -21,7 +21,9 @@ struct RiskScreen: View {
                     Text(longTerm)
                 }
             }
-        }.navigationTitle("Risks")
+        }
+        .headerProminence(.increased)
+        .navigationTitle("Risks")
     }
 }
 

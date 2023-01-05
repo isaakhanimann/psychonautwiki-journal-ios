@@ -68,7 +68,9 @@
 		EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */; };
 		EA4189F92966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */; };
 		EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */; };
-		EA4189FD2966DA4500DEA663 /* MDMADesirableVsAdverseChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FC2966DA4500DEA663 /* MDMADesirableVsAdverseChart.swift */; };
+		EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */; };
+		EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */; };
+		EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -277,7 +279,9 @@
 		EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAlcoholDoseScreen.swift; sourceTree = "<group>"; };
 		EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCaffeineDoseScreen.swift; sourceTree = "<group>"; };
 		EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMDMADoseScreen.swift; sourceTree = "<group>"; };
-		EA4189FC2966DA4500DEA663 /* MDMADesirableVsAdverseChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMADesirableVsAdverseChart.swift; sourceTree = "<group>"; };
+		EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAOptimalDoseSection.swift; sourceTree = "<group>"; };
+		EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAMaxDoseCalculator.swift; sourceTree = "<group>"; };
+		EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAPillsSection.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -478,7 +482,7 @@
 				EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */,
 				EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */,
 				EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */,
-				EA4189FC2966DA4500DEA663 /* MDMADesirableVsAdverseChart.swift */,
+				EA4189FE296738BC00DEA663 /* MDMA Dose */,
 				EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */,
 				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
@@ -504,6 +508,16 @@
 				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 			);
 			path = Interactions;
+			sourceTree = "<group>";
+		};
+		EA4189FE296738BC00DEA663 /* MDMA Dose */ = {
+			isa = PBXGroup;
+			children = (
+				EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */,
+				EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */,
+				EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */,
+			);
+			path = "MDMA Dose";
 			sourceTree = "<group>";
 		};
 		EA41C630295F88F0000DA021 /* Experience Charts */ = {
@@ -1113,6 +1127,7 @@
 				EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */,
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
+				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
@@ -1151,7 +1166,7 @@
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
-				EA4189FD2966DA4500DEA663 /* MDMADesirableVsAdverseChart.swift in Sources */,
+				EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,
 				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
@@ -1168,6 +1183,7 @@
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
+				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
 				EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchScreen.swift in Sources */,

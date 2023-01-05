@@ -13,26 +13,37 @@ struct DosesScreen: View {
     
     var body: some View {
         List {
-            Section("Disclaimer") {
-                Text(ChooseDoseScreenContent.doseDisclaimer)
-            }
             if let remark = substance.dosageRemark {
                 Section("\(substance.name) Dosing") {
                     Text(remark)
                 }
             }
             ForEach(substance.doseInfos, id: \.route) { doseInfo in
-                Section(doseInfo.route.rawValue) {
+                Section(doseInfo.route.rawValue.localizedCapitalized) {
                     DoseRow(roaDose: doseInfo.roaDose)
                     if let bio = doseInfo.bioavailability?.displayString {
                         RowLabelView(label: "Bioavailability", value: "\(bio)%")
                     }
                 }
             }
+            if substance.name == "MDMA" {
+                Section("Oral Max Dose Calculator") {
+                    MDMAMaxDoseCalculator()
+                }
+                if #available(iOS 16, *) {
+                    MDMAOptimalDoseSection()
+                }
+                MDMAPillsSection()
+            }
             Section {
                 Text(DosesScreen.getUnitClarification(for: substance.roas.first?.dose?.units ?? ""))
             }
-        }.navigationTitle("Dosage")
+            Section("Disclaimer") {
+                Text(ChooseDoseScreenContent.doseDisclaimer)
+            }
+        }
+        .navigationTitle("Dosage")
+        .headerProminence(.increased)
     }
 
 
@@ -51,6 +62,13 @@ struct DosesScreen: View {
 
 struct DosesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+        Group {
+            NavigationView {
+                DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+            }
+            NavigationView {
+                DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
+            }
+        }
     }
 }

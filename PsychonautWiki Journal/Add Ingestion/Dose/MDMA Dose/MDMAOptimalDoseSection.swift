@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 @available(iOS 16.0, *)
-struct MDMADesirableVsAdverseChart: View {
+struct MDMAOptimalDoseSection: View {
 
     private static let desirable = "Desirable"
     private static let adverse = "Adverse"
@@ -48,25 +48,29 @@ struct MDMADesirableVsAdverseChart: View {
     }
 
     var body: some View {
-        Chart(data) { series in
-            ForEach(series.doseEffect, id: \.dose) { doseEffect in
-                LineMark(
-                    x: .value("Dose in mg", doseEffect.dose),
-                    y: .value("Effect in percent", doseEffect.effect)
-                )
+        Section("Desirable vs Adverse Effects") {
+            Text("The optimal single oral dose for an average user may be around 90 mg going by this diagram made by a Dutch street drug testing service.")
+            Chart(data) { series in
+                ForEach(series.doseEffect, id: \.dose) { doseEffect in
+                    LineMark(
+                        x: .value("Dose in mg", doseEffect.dose),
+                        y: .value("Effect in percent", doseEffect.effect)
+                    )
+                }
+                .foregroundStyle(by: .value("Effect", series.effectType))
+                .symbol(by: .value("Effect", series.effectType))
+                .interpolationMethod(.catmullRom)
             }
-            .foregroundStyle(by: .value("Effect", series.effectType))
-            .symbol(by: .value("Effect", series.effectType))
-            .interpolationMethod(.catmullRom)
+            .chartForegroundStyleScale([
+                MDMAOptimalDoseSection.desirable: .green,
+                MDMAOptimalDoseSection.adverse: .red
+            ])
+            .chartSymbolScale([
+                MDMAOptimalDoseSection.desirable: .circle,
+                MDMAOptimalDoseSection.adverse: .cross
+            ])
+            .frame(height: 200)
         }
-        .chartForegroundStyleScale([
-            MDMADesirableVsAdverseChart.desirable: .green,
-            MDMADesirableVsAdverseChart.adverse: .red
-        ])
-        .chartSymbolScale([
-            MDMADesirableVsAdverseChart.desirable: .circle,
-            MDMADesirableVsAdverseChart.adverse: .cross
-        ])
     }
 }
 
@@ -74,7 +78,7 @@ struct MDMADesirableVsAdverseChart: View {
 struct MDMADesirableVsAdverseChart_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            MDMADesirableVsAdverseChart().frame(height: 200)
+            MDMAOptimalDoseSection()
         }
     }
 }
