@@ -16,7 +16,6 @@ struct ChooseAlcoholDoseScreen: View {
     @State private var drinkAmountInCl = 5.0
     @State private var alcoholContentInPercent = 5.0
     @State private var isEstimate = true
-    @State private var pickerOption = PickerOption.beer
     let units = "mL EtOH"
 
     private var ingestedAlcoholDoseInMl: Double {
@@ -35,23 +34,6 @@ struct ChooseAlcoholDoseScreen: View {
         "\(Int(drinkAmountInCl)) cL with \(Int(alcoholContentInPercent))% Alcohol"
     }
 
-    enum PickerOption: String, CaseIterable {
-        case beer = "Beer"
-        case wine = "Wine"
-        case spirit = "Spirits"
-
-        var alcoholContentInPercent: Int {
-            switch self {
-            case .beer:
-                return 5
-            case .wine:
-                return 12
-            case .spirit:
-                return 40
-            }
-        }
-    }
-
     var body: some View {
         Form {
             Section("Ingested Alcohol Amount") {
@@ -66,6 +48,7 @@ struct ChooseAlcoholDoseScreen: View {
             }
             Section {
                 VStack {
+                    Text("\(Int(drinkAmountInCl)) cL").font(.title2.bold())
                     Slider(
                         value: $drinkAmountInCl,
                         in: 1...20,
@@ -77,7 +60,6 @@ struct ChooseAlcoholDoseScreen: View {
                     } maximumValueLabel: {
                         Text("20")
                     }
-                    Text("\(Int(drinkAmountInCl)) cL").font(.title2.bold())
                 }
             } header: {
                 Text("Drink Size")
@@ -85,16 +67,8 @@ struct ChooseAlcoholDoseScreen: View {
                 Text("1 cL = 1/10 L")
             }
             Section("Alcohol Content") {
-                Picker("Form", selection: $pickerOption) {
-                    ForEach(PickerOption.allCases, id: \.self) { option in
-                        Text(option.rawValue).tag(option)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .onChange(of: pickerOption) { newValue in
-                    alcoholContentInPercent = Double(newValue.alcoholContentInPercent)
-                }
                 VStack {
+                    Text("\(Int(alcoholContentInPercent))%").font(.title2.bold())
                     Slider(
                         value: $alcoholContentInPercent,
                         in: 1...80,
@@ -106,9 +80,16 @@ struct ChooseAlcoholDoseScreen: View {
                     } maximumValueLabel: {
                         Text("80")
                     }
-                    Text("\(Int(alcoholContentInPercent))%").font(.title2.bold())
                 }
-            }.listRowSeparator(.hidden)
+                Button("Average Beer") {
+                    alcoholContentInPercent = 5                }
+                Button("Average Wine") {
+                    alcoholContentInPercent = 12
+                }
+                Button("Average Spirit") {
+                    alcoholContentInPercent = 40
+                }
+            }
             if let remark = alcohol.dosageRemark {
                 Text(remark)
             }

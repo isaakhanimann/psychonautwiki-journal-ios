@@ -75,6 +75,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
             }
             Section("Cannabis Amount") {
                 VStack {
+                    Text("\(Int(cannabisAmountInMg)) mg").font(.title2.bold())
                     Slider(
                         value: $cannabisAmountInMg,
                         in: 10...1000,
@@ -86,11 +87,11 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     } maximumValueLabel: {
                         Text("1'000")
                     }
-                    Text("\(Int(cannabisAmountInMg)) mg").font(.title2.bold())
                 }
             }.listRowSeparator(.hidden)
             Section("THC Content") {
                 VStack {
+                    Text("\(Int(thcContent))%").font(.title2.bold())
                     Slider(
                         value: $thcContent,
                         in: 1...30,
@@ -102,7 +103,6 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     } maximumValueLabel: {
                         Text("30")
                     }
-                    Text("\(Int(thcContent))%").font(.title2.bold())
                 }
             }
             if let remark = cannabis.dosageRemark {
