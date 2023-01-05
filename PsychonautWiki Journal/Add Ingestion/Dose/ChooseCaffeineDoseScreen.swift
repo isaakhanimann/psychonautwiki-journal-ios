@@ -28,7 +28,7 @@ struct ChooseCaffeineDoseScreen: View {
 
     var body: some View {
         Form {
-            Section("Ingested Caffeine Amount") {
+            Section {
                 VStack(spacing: 5) {
                     let doseType = oralDose.getRangeType(for: caffeineDoseInMg, with: units)
                     Text("\(doseText) mg")
