@@ -19,4 +19,16 @@ extension Date {
         formatter.dateFormat = "d MMM y HH:mm"
         return formatter.string(from: self)
     }
+
+    var asYear: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter.string(from: self)
+    }
+
+    var asYearAndMonth: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM"
+        return formatter.string(from: self)
+    }
 }

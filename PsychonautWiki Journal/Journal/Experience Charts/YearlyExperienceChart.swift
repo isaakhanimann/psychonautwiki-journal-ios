@@ -63,7 +63,7 @@ struct YearlyExperienceChart: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 3))
                     .annotation(position: .top, alignment: .leading) {
-                        Text("Average: \(experienceData.yearlyAverage, format: .number)")
+                        Text("Average: \(experienceData.yearlyAverage, specifier: "%.1f")")
                             .font(.body.bold())
                             .foregroundStyle(.blue)
                     }

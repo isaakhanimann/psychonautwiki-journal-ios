@@ -100,27 +100,33 @@ struct ExperienceData {
     }
 
     var monthlyAverage: Double {
-        last12MonthsTotal / 12.0
+        var dates = last12Months.map({$0.month})
+        guard let minDate = dates.min() else {return 0}
+        guard let maxDate = dates.max() else {return 0}
+        guard var fillDate = Calendar.current.date(byAdding: .month, value: 1, to: minDate) else {return 0}
+        while fillDate < maxDate {
+            dates.append(fillDate)
+            guard let newFill = Calendar.current.date(byAdding: .month, value: 1, to: fillDate) else {return 0}
+            fillDate = newFill
+        }
+        let numberOfMonthsShown = dates.map({$0.asYearAndMonth}).uniqued().count
+        guard numberOfMonthsShown > 0 else {return 0}
+        return last12MonthsTotal / Double(numberOfMonthsShown)
     }
 
     var yearlyAverage: Double {
-        guard let earliestYear = years.map({$0.year}).min() else {return 0}
-        let numberOfYearsShown = Calendar.current.numberOfYearsBetweenRoundedUp(earliestYear, and: Date.now)
+        var dates = years.map({$0.year})
+        guard let minDate = dates.min() else {return 0}
+        guard let maxDate = dates.max() else {return 0}
+        guard var fillDate = Calendar.current.date(byAdding: .year, value: 1, to: minDate) else {return 0}
+        while fillDate < maxDate {
+            dates.append(fillDate)
+            guard let newFill = Calendar.current.date(byAdding: .year, value: 1, to: fillDate) else {return 0}
+            fillDate = newFill
+        }
+        let numberOfYearsShown = dates.map({$0.asYear}).uniqued().count
         guard numberOfYearsShown > 0 else {return 0}
         return yearsTotal / Double(numberOfYearsShown)
-    }
-}
-
-extension Calendar {
-    func numberOfYearsBetweenRoundedUp(_ from: Date, and to: Date) -> Int {
-        let components = dateComponents([.year, .month], from: from, to: to)
-        let year = components.year!
-        let month = components.month!
-        if month > 0 {
-            return year + 1
-        } else {
-            return year
-        }
     }
 }
 
