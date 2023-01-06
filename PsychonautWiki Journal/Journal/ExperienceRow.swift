@@ -11,37 +11,25 @@ struct ExperienceRow: View {
         return NavigationLink(
             destination: ExperienceScreen(experience: experience)
         ) {
-            ExperienceRowWithoutNavigation(
-                experience: experience,
+            ExperienceRowContent(
+                ingestionColors: experience.ingestionColors,
+                title: experience.titleUnwrapped,
+                distinctSubstanceNames: experience.distinctUsedSubstanceNames,
+                sortDate: experience.sortDateUnwrapped,
+                isFavorite: experience.isFavorite,
                 isTimeRelative: isTimeRelative
-            )
-        }
-    }
-}
-
-struct ExperienceRowWithoutNavigation: View {
-    @ObservedObject var experience: Experience
-    let isTimeRelative: Bool
-
-    var body: some View {
-        ExperienceRowContent(
-            ingestionColors: experience.ingestionColors,
-            title: experience.titleUnwrapped,
-            distinctSubstanceNames: experience.distinctUsedSubstanceNames,
-            sortDate: experience.sortDateUnwrapped,
-            isFavorite: experience.isFavorite,
-            isTimeRelative: isTimeRelative
-        ).swipeActions(allowsFullSwipe: false) {
-            Button(role: .destructive) {
-                if #available(iOS 16.2, *) {
-                    if experience.isCurrent {
-                        ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+            ).swipeActions(allowsFullSwipe: false) {
+                Button(role: .destructive) {
+                    if #available(iOS 16.2, *) {
+                        if experience.isCurrent {
+                            ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                        }
                     }
+                    PersistenceController.shared.viewContext.delete(experience)
+                    PersistenceController.shared.saveViewContext()
+                } label: {
+                    Label("Delete", systemImage: "trash.fill")
                 }
-                PersistenceController.shared.viewContext.delete(experience)
-                PersistenceController.shared.saveViewContext()
-            } label: {
-                Label("Delete", systemImage: "trash.fill")
             }
         }
     }

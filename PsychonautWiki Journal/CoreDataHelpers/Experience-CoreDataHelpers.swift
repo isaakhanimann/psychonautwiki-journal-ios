@@ -9,10 +9,6 @@ extension Experience: Comparable {
         sortDate ?? creationDateUnwrapped
     }
 
-    var timeOfFirstIngestion: Date? {
-        sortedIngestionsUnwrapped.first?.timeUnwrapped
-    }
-
     var year: Int {
         Calendar.current.component(.year, from: sortDateUnwrapped)
     }
