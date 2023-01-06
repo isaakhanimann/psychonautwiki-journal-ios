@@ -12,7 +12,6 @@ struct ContentView: View {
 
     var body: some View {
         ContentScreen(
-            isShowingCurrentExperience: $viewModel.isShowingCurrentExperience,
             isShowingHome: $viewModel.isShowingHome,
             isShowingSearch: $viewModel.isShowingSearch,
             isShowingSafer: $viewModel.isShowingSafer,
@@ -44,7 +43,6 @@ struct ContentView: View {
 }
 
 struct ContentScreen: View {
-    @Binding var isShowingCurrentExperience: Bool
     @Binding var isShowingHome: Bool
     @Binding var isShowingSearch: Bool
     @Binding var isShowingSafer: Bool
@@ -55,7 +53,7 @@ struct ContentScreen: View {
         NavigationView {
             List {
                 NavigationLink(
-                    destination: JournalScreen(isShowingCurrentExperience: $isShowingCurrentExperience),
+                    destination: JournalScreen(),
                     isActive: $isShowingHome
                 ) {
                     Label("Journal", systemImage: "house")
@@ -89,7 +87,6 @@ struct ContentScreen: View {
 struct ContentScreen_Previews: PreviewProvider {
     static var previews: some View {
         ContentScreen(
-            isShowingCurrentExperience: .constant(false),
             isShowingHome: .constant(false),
             isShowingSearch: .constant(false),
             isShowingSafer: .constant(false),

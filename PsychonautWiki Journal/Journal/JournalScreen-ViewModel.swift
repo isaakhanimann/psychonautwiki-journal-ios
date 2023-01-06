@@ -4,7 +4,8 @@ import CoreData
 extension JournalScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-        @Published var experiences: [Experience] = []
+        @Published var currentExperiences: [Experience] = []
+        @Published var previousExperiences: [Experience] = []
         @Published var searchText = "" {
             didSet {
                 setupFetchRequestPredicateAndFetch()
@@ -31,16 +32,25 @@ extension JournalScreen {
             experienceFetchController.delegate = self
             do {
                 try experienceFetchController.performFetch()
-                self.experiences = experienceFetchController?.fetchedObjects ?? []
+                let experiences = experienceFetchController?.fetchedObjects ?? []
+                splitExperiencesInCurrentAndPrevious(experiences: experiences)
             } catch {
                 NSLog("Error: could not fetch Experiences")
             }
         }
 
+        private func splitExperiencesInCurrentAndPrevious(experiences: [Experience]) {
+            self.currentExperiences = experiences.prefix(while: { exp in
+                exp.isCurrent
+            })
+            self.previousExperiences = experiences.suffix(experiences.count-currentExperiences.count)
+        }
+
         private func setupFetchRequestPredicateAndFetch() {
             experienceFetchController?.fetchRequest.predicate = getPredicate()
             try? experienceFetchController?.performFetch()
-            self.experiences = experienceFetchController?.fetchedObjects ?? []
+            let experiences = experienceFetchController?.fetchedObjects ?? []
+            splitExperiencesInCurrentAndPrevious(experiences: experiences)
         }
 
         private func getPredicate() -> NSPredicate? {
@@ -82,7 +92,7 @@ extension JournalScreen {
             guard let exps = controller.fetchedObjects as? [Experience] else {return}
             Task {
                 await MainActor.run {
-                    self.experiences = exps
+                    splitExperiencesInCurrentAndPrevious(experiences: exps)
                 }
             }
         }

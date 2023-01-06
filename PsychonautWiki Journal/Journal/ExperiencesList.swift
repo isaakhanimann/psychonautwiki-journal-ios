@@ -4,36 +4,31 @@ struct ExperiencesList: View {
 
     @ObservedObject var viewModel: JournalScreen.ViewModel
     @Environment(\.isSearching) private var isSearching
-    @Binding var isShowingCurrentExperience: Bool
 
     var body: some View {
         ZStack {
             List {
-                if let first = viewModel.experiences.first,
-                   let lastIngestionTime = first.sortedIngestionsUnwrapped.last?.time,
-                   Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < 12*60*60 {
+                if !viewModel.currentExperiences.isEmpty {
                     Section("Current") {
-                        CurrentExperienceRow(
-                            experience: first,
-                            isTimeRelative: viewModel.isTimeRelative,
-                            isNavigated: $isShowingCurrentExperience
-                        )
+                        ForEach(viewModel.currentExperiences) { exp in
+                            ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
+                        }
+
                     }
-                    let rest = viewModel.experiences.suffix(viewModel.experiences.count-1)
-                    if !rest.isEmpty {
+                    if !viewModel.previousExperiences.isEmpty {
                         Section("Previous") {
-                            ForEach(rest) { exp in
+                            ForEach(viewModel.previousExperiences) { exp in
                                 ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
                             }
                         }
                     }
                 } else {
-                    ForEach(viewModel.experiences) { exp in
+                    ForEach(viewModel.previousExperiences) { exp in
                         ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
                     }
                 }
             }
-            if viewModel.experiences.isEmpty {
+            if viewModel.currentExperiences.isEmpty && viewModel.previousExperiences.isEmpty {
                 if isSearching {
                     Text("No Results")
                         .foregroundColor(.secondary)

@@ -12,7 +12,6 @@ extension ContentView {
         @Published var isShowingSearch = false
         @Published var isShowingSafer = false
         @Published var isShowingSettings = false
-        @Published var isShowingCurrentExperience = true
 
         var toastViewModel: ToastViewModel?
 
@@ -26,7 +25,6 @@ extension ContentView {
                 isShowingSearch = false
                 isShowingSafer = false
                 isShowingSettings = false
-                isShowingCurrentExperience = true
             } else {
                 if !isEyeOpen {
                     isEyeOpen = true

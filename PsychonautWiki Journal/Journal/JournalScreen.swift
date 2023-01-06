@@ -3,10 +3,9 @@ import SwiftUI
 struct JournalScreen: View {
 
     @StateObject var viewModel = ViewModel()
-    @Binding var isShowingCurrentExperience: Bool
 
     var body: some View {
-        ExperiencesList(viewModel: viewModel, isShowingCurrentExperience: $isShowingCurrentExperience)
+        ExperiencesList(viewModel: viewModel)
             .optionalScrollDismissesKeyboard()
             .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
             .disableAutocorrection(true)

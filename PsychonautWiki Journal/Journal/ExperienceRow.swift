@@ -19,25 +19,6 @@ struct ExperienceRow: View {
     }
 }
 
-struct CurrentExperienceRow: View {
-
-    @ObservedObject var experience: Experience
-    let isTimeRelative: Bool
-    @Binding var isNavigated: Bool
-
-    var body: some View {
-        return NavigationLink(
-            destination: ExperienceScreen(experience: experience),
-            isActive: $isNavigated
-        ) {
-            ExperienceRowWithoutNavigation(
-                experience: experience,
-                isTimeRelative: isTimeRelative
-            )
-        }
-    }
-}
-
 struct ExperienceRowWithoutNavigation: View {
     @ObservedObject var experience: Experience
     let isTimeRelative: Bool
