@@ -523,6 +523,15 @@
 			path = "MDMA Dose";
 			sourceTree = "<group>";
 		};
+		EA418A052968D62F00DEA663 /* Ingestion Charts */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
+				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
+			);
+			path = "Ingestion Charts";
+			sourceTree = "<group>";
+		};
 		EA41C630295F88F0000DA021 /* Experience Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,8 +851,7 @@
 				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
 				EA41C62E295EB86C000DA021 /* Utils.swift */,
 				EA41C630295F88F0000DA021 /* Experience Charts */,
-				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
-				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
+				EA418A052968D62F00DEA663 /* Ingestion Charts */,
 				EA41C624295EAFD8000DA021 /* Data.swift */,
 				EAE4718826CBA664009FB0EC /* Experience */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,

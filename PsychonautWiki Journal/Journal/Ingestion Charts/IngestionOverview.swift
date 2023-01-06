@@ -36,7 +36,7 @@ struct IngestionOverview: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Most Used Substance")
+            Text("Most Used Substance Last 12 Months")
                 .foregroundStyle(.secondary)
             if let mostUsedName = ingestionData.last12Months.first?.substanceName {
                 Text(mostUsedName)

@@ -35,7 +35,7 @@ struct ExperienceOverview: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Total Experiences")
+            Text("Total Experiences Last 12 Months")
                 .font(.callout)
                 .foregroundStyle(.secondary)
             Text("\(experienceData.last12MonthsTotal, format: .number) Experiences")
