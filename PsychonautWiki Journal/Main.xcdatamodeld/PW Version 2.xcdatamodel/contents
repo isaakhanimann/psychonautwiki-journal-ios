@@ -12,6 +12,13 @@
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ExperienceLocation" inverseName="experience" inverseEntity="ExperienceLocation"/>
+    </entity>
+    <entity name="ExperienceLocation" representedClassName="ExperienceLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="location" inverseEntity="Experience"/>
     </entity>
     <entity name="Ingestion" representedClassName="Ingestion" syncable="YES" codeGenerationType="class">
         <attribute name="administrationRoute" optional="YES" attributeType="String"/>

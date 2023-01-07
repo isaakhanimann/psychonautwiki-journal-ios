@@ -1,10 +1,11 @@
 import Foundation
 import CoreData
+import CoreLocation
 
 extension FinishIngestionScreen {
 
     @MainActor
-    class ViewModel: ObservableObject {
+    class ViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
@@ -134,7 +135,9 @@ extension FinishIngestionScreen {
             ingestion.substanceCompanion = substanceCompanion
         }
 
-        init() {
+        override init() {
+            super.init()
+            manager.delegate = self
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
@@ -173,5 +176,80 @@ extension FinishIngestionScreen {
                 andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd]
             )
         }
+
+        let manager = CLLocationManager()
+
+        var currentLocation: CLLocationCoordinate2D?
+        @Published var selectedLocation: Location? = nil
+        @Published var authorizationStatus: CLAuthorizationStatus?
+        @Published var suggestedPlacemarks: [CLPlacemark] = []
+
+        func requestLocation() {
+            manager.requestLocation()
+        }
+
+        func requestPermission() {
+            manager.requestWhenInUseAuthorization()
+        }
+
+        nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            Task {
+                guard let foundLocation = locations.first else { return }
+                let place = await getPlacemark(from: foundLocation)
+                DispatchQueue.main.async {
+                    self.currentLocation = foundLocation.coordinate
+                    self.selectedLocation = Location(
+                        name: place?.locality ?? "",
+                        longitude: foundLocation.coordinate.longitude,
+                        latitude: foundLocation.coordinate.latitude
+                    )
+
+                }
+            }
+        }
+
+        nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            assertionFailure("Isaak location manager \(error)")
+        }
+
+        nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            DispatchQueue.main.async {
+                self.authorizationStatus = manager.authorizationStatus
+            }
+        }
+
+        func findPlacemarks(with query: String) {
+            Task {
+                let geoCoder = CLGeocoder()
+                do {
+                    let places = try await geoCoder.geocodeAddressString(query)
+                    DispatchQueue.main.async {
+                        self.suggestedPlacemarks = places
+                    }
+                } catch {
+                    assertionFailure("Failed to find location: \(error)")
+                    DispatchQueue.main.async {
+                        self.suggestedPlacemarks = []
+                    }
+                }
+            }
+        }
+
+        private func getPlacemark(from location: CLLocation) async -> CLPlacemark? {
+            let geocoder = CLGeocoder()
+            do {
+                let placemarks = try await geocoder.reverseGeocodeLocation(location)
+                return placemarks.first
+            } catch {
+                assertionFailure("Failed to get placemark: \(error)")
+                return nil
+            }
+        }
     }
+}
+
+struct Location {
+    let name: String
+    let longitude: Double?
+    let latitude: Double?
 }
