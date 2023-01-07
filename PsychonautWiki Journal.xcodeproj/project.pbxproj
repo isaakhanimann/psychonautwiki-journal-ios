@@ -74,6 +74,7 @@
 		EA418A0429675FE800DEA663 /* ExperiencePickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */; };
 		EA418A072969740D00DEA663 /* IngestionNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */; };
 		EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */; };
+		EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0C29697EB200DEA663 /* ExperienceTitleScreen.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -288,6 +289,7 @@
 		EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencePickerScreen.swift; sourceTree = "<group>"; };
 		EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionNoteScreen.swift; sourceTree = "<group>"; };
 		EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngestionNote-ViewModel.swift"; sourceTree = "<group>"; };
+		EA418A0C29697EB200DEA663 /* ExperienceTitleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceTitleScreen.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -541,18 +543,19 @@
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
 				EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */,
-				EA418A09296974B300DEA663 /* Note */,
+				EA418A0C29697EB200DEA663 /* ExperienceTitleScreen.swift */,
+				EA418A09296974B300DEA663 /* Ingestion Note */,
 			);
 			path = Other;
 			sourceTree = "<group>";
 		};
-		EA418A09296974B300DEA663 /* Note */ = {
+		EA418A09296974B300DEA663 /* Ingestion Note */ = {
 			isa = PBXGroup;
 			children = (
 				EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */,
 				EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */,
 			);
-			path = Note;
+			path = "Ingestion Note";
 			sourceTree = "<group>";
 		};
 		EA41C630295F88F0000DA021 /* Experience Charts */ = {
@@ -1172,6 +1175,7 @@
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
+				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,

@@ -59,11 +59,10 @@ struct FinishIngestionContent: View {
     let addIngestion: () -> Void
     let dismiss: () -> Void
     let notesInOrder: [String]
-    @State private var isShowingIngestionNoteSheet = false
 
     var body: some View {
         Form {
-            Section("Time") {
+            Section("Ingestion Time") {
                 DatePicker(
                     "Ingestion Time",
                     selection: $selectedTime,
@@ -95,41 +94,26 @@ struct FinishIngestionContent: View {
             }
             if selectedExperience == nil || wantsToCreateNewExperience {
                 Section("New Experience") {
-                    if #available(iOS 16.0, *) {
-                        TextField(
-                            "Experience Title",
-                            text: $enteredTitle,
-                            prompt: Text("Enter Title"),
-                            axis: .vertical
-                        )
-                        .lineLimit(2)
-                        .submitLabel(.done)
-                    } else {
-                        TextField("Experience Title", text: $enteredTitle, prompt: Text("Enter Title"))
-                            .submitLabel(.done)
+                    NavigationLink {
+                        ExperienceTitleScreen(title: $enteredTitle)
+                    } label: {
+                        if enteredTitle.isEmpty {
+                            Label("Add Title", systemImage: "plus")
+                        } else {
+                            Text(enteredTitle).lineLimit(1)
+                        }
                     }
                 }
             }
 
             Section("Ingestion Note") {
-                if enteredNote.isEmpty {
-                    Button {
-                        isShowingIngestionNoteSheet.toggle()
-                    } label: {
+                NavigationLink {
+                    IngestionNoteScreen(note: $enteredNote)
+                } label: {
+                    if enteredNote.isEmpty {
                         Label("Add Note", systemImage: "plus")
-                    }
-                } else {
-                    HStack {
+                    } else {
                         Text(enteredNote).lineLimit(1)
-                        Spacer()
-                        Button {
-                            isShowingIngestionNoteSheet.toggle()
-                        } label: {
-                            Label("Edit", systemImage: "pencil").labelStyle(.iconOnly)
-                        }
-                        .sheet(isPresented: $isShowingIngestionNoteSheet) {
-                            IngestionNoteScreen(note: $enteredNote)
-                        }
                     }
                 }
             }
@@ -149,7 +133,6 @@ struct FinishIngestionContent: View {
                 }
             }
         }
-        .optionalScrollDismissesKeyboard()
         .navigationBarTitle("Finish")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
