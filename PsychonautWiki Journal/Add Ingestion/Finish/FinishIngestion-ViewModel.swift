@@ -7,13 +7,7 @@ extension FinishIngestionScreen {
     class ViewModel: ObservableObject {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
-        @Published var selectedTime = Date() {
-            didSet {
-                if oldValue.asDateString == enteredTitle {
-                    enteredTitle = selectedTime.asDateString
-                }
-            }
-        }
+        @Published var selectedTime = Date()
         @Published var enteredNote = ""
         @Published var enteredTitle = ""
         @Published var wantsToCreateNewExperience = false
@@ -76,7 +70,11 @@ extension FinishIngestionScreen {
                     let newExperience = Experience(context: context)
                     newExperience.creationDate = Date()
                     newExperience.sortDate = selectedTime
-                    newExperience.title = enteredTitle
+                    var title = selectedTime.asDateString
+                    if !enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                        title = enteredTitle
+                    }
+                    newExperience.title = title
                     newExperience.text = ""
                     createIngestion(
                         with: newExperience,
@@ -137,7 +135,6 @@ extension FinishIngestionScreen {
         }
 
         init() {
-            enteredTitle = Date.now.asDateString
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")

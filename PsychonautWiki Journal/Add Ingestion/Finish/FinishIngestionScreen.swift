@@ -91,8 +91,8 @@ struct FinishIngestionContent: View {
                 }
             }
             if selectedExperience == nil || wantsToCreateNewExperience {
-                Section("New Experience Title") {
-                    TextField("Title", text: $enteredTitle, prompt: Text("Enter Title"))
+                Section("New Experience") {
+                    TextField("Experience Title", text: $enteredTitle, prompt: Text("Enter Title"))
                 }
             }
 
