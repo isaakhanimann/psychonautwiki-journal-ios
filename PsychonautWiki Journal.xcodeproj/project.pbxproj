@@ -72,6 +72,8 @@
 		EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */; };
 		EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */; };
 		EA418A0429675FE800DEA663 /* ExperiencePickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */; };
+		EA418A072969740D00DEA663 /* IngestionNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */; };
+		EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -284,6 +286,8 @@
 		EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAMaxDoseCalculator.swift; sourceTree = "<group>"; };
 		EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAPillsSection.swift; sourceTree = "<group>"; };
 		EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencePickerScreen.swift; sourceTree = "<group>"; };
+		EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionNoteScreen.swift; sourceTree = "<group>"; };
+		EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngestionNote-ViewModel.swift"; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -496,9 +500,8 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A626CBA664009FB0EC /* FinishIngestionScreen.swift */,
-				EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */,
-				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
 				EAF76C9327D7AEEA00945587 /* FinishIngestion-ViewModel.swift */,
+				EA418A082969747500DEA663 /* Other */,
 			);
 			path = Finish;
 			sourceTree = "<group>";
@@ -530,6 +533,26 @@
 				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
 			);
 			path = "Ingestion Charts";
+			sourceTree = "<group>";
+		};
+		EA418A082969747500DEA663 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
+				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
+				EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */,
+				EA418A09296974B300DEA663 /* Note */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		EA418A09296974B300DEA663 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				EA418A062969740D00DEA663 /* IngestionNoteScreen.swift */,
+				EA418A0A296974D800DEA663 /* IngestionNote-ViewModel.swift */,
+			);
+			path = Note;
 			sourceTree = "<group>";
 		};
 		EA41C630295F88F0000DA021 /* Experience Charts */ = {
@@ -887,7 +910,6 @@
 				EAACB08B2947C4040050E002 /* Route */,
 				EA095A1027D9E3D0007D44D6 /* Dose */,
 				EA095A1127D9E3E8007D44D6 /* Finish */,
-				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 			);
 			path = "Add Ingestion";
 			sourceTree = "<group>";
@@ -1216,6 +1238,7 @@
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceScreen.swift in Sources */,
+				EA418A072969740D00DEA663 /* IngestionNoteScreen.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,
 				EA527A8829428011009C142D /* DurationScreen.swift in Sources */,
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
@@ -1253,6 +1276,7 @@
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
+				EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */,
 				EA4189F3296343EC00DEA663 /* IngestionsForSubstanceScreen.swift in Sources */,
 				EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */,
 			);

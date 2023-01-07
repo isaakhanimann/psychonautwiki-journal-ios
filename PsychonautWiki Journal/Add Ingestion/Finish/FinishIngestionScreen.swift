@@ -14,6 +14,7 @@ struct FinishIngestionScreen: View {
 
     var body: some View {
         FinishIngestionContent(
+            substanceName: substanceName,
             selectedTime: $viewModel.selectedTime,
             selectedExperience: $viewModel.selectedExperience,
             experiencesWithinLargerRange: viewModel.experiencesWithinLargerRange,
@@ -45,6 +46,7 @@ struct FinishIngestionScreen: View {
 
 struct FinishIngestionContent: View {
 
+    let substanceName: String
     @Binding var selectedTime: Date
     @Binding var selectedExperience: Experience?
     var experiencesWithinLargerRange: [Experience]
@@ -57,6 +59,7 @@ struct FinishIngestionContent: View {
     let addIngestion: () -> Void
     let dismiss: () -> Void
     let notesInOrder: [String]
+    @State private var isShowingIngestionNoteSheet = false
 
     var body: some View {
         Form {
@@ -92,22 +95,45 @@ struct FinishIngestionContent: View {
             }
             if selectedExperience == nil || wantsToCreateNewExperience {
                 Section("New Experience") {
-                    TextField("Experience Title", text: $enteredTitle, prompt: Text("Enter Title"))
+                    if #available(iOS 16.0, *) {
+                        TextField(
+                            "Experience Title",
+                            text: $enteredTitle,
+                            prompt: Text("Enter Title"),
+                            axis: .vertical
+                        )
+                        .lineLimit(2)
+                        .submitLabel(.done)
+                    } else {
+                        TextField("Experience Title", text: $enteredTitle, prompt: Text("Enter Title"))
+                            .submitLabel(.done)
+                    }
                 }
             }
 
-            Section("Notes") {
-                TextField("Notes", text: $enteredNote)
-                    .autocapitalization(.sentences)
-                ForEach(notesInOrder, id: \.self) { note in
+            Section("Ingestion Note") {
+                if enteredNote.isEmpty {
                     Button {
-                        enteredNote = note
+                        isShowingIngestionNoteSheet.toggle()
                     } label: {
-                        Label(note, systemImage: "doc.on.doc").lineLimit(1)
-                    }.foregroundColor(.primary)
+                        Label("Add Note", systemImage: "plus")
+                    }
+                } else {
+                    HStack {
+                        Text(enteredNote).lineLimit(1)
+                        Spacer()
+                        Button {
+                            isShowingIngestionNoteSheet.toggle()
+                        } label: {
+                            Label("Edit", systemImage: "pencil").labelStyle(.iconOnly)
+                        }
+                        .sheet(isPresented: $isShowingIngestionNoteSheet) {
+                            IngestionNoteScreen(note: $enteredNote)
+                        }
+                    }
                 }
             }
-            Section("Color") {
+            Section("\(substanceName) Color") {
                 NavigationLink {
                     ColorPickerScreen(
                         selectedColor: $selectedColor,
@@ -116,7 +142,7 @@ struct FinishIngestionContent: View {
                     )
                 } label: {
                     HStack {
-                        Text("Color")
+                        Text("\(substanceName) Color")
                         Spacer()
                         Image(systemName: "circle.fill").foregroundColor(selectedColor.swiftUIColor)
                     }
@@ -156,6 +182,7 @@ struct FinishIngestionContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FinishIngestionContent(
+                substanceName: "MDMA",
                 selectedTime: .constant(Date()),
                 selectedExperience: .constant(nil),
                 experiencesWithinLargerRange: [],
