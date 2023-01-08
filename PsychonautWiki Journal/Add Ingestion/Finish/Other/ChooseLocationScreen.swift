@@ -18,6 +18,7 @@ struct ChooseLocationScreen: View {
             selectedLocation: $viewModel.selectedLocation,
             selectedLocationName: $viewModel.selectedLocationName,
             authorizationStatus: viewModel.authorizationStatus,
+            isSearchingForLocations: viewModel.isSearchingForLocations,
             searchSuggestedLocations: viewModel.searchSuggestedLocations,
             searchLocations: { query in
                 viewModel.searchLocations(with: query)
@@ -36,17 +37,21 @@ struct ChooseLocationScreenContent: View {
     @Binding var selectedLocation: Location?
     @Binding var selectedLocationName: String
     let authorizationStatus: CLAuthorizationStatus?
+    let isSearchingForLocations: Bool
     let searchSuggestedLocations: [Location]
     let searchLocations: (String) -> Void
     @State private var searchText = ""
 
     var body: some View {
         List {
-            if !searchSuggestedLocations.isEmpty {
+            if isSearchingForLocations {
+                ProgressView()
+            } else if !searchSuggestedLocations.isEmpty {
                 Section {
                     ForEach(searchSuggestedLocations) { location in
                         Button {
                             selectedLocation = location
+                            selectedLocationName = location.name
                         } label: {
                             Label(location.name, systemImage: "location")
                         }
@@ -113,6 +118,7 @@ struct ChooseLocationScreen_Previews: PreviewProvider {
                 ),
                 selectedLocationName: .constant(""),
                 authorizationStatus: .denied,
+                isSearchingForLocations: false,
                 searchSuggestedLocations: [
                     Location(name: "Zurich", longitude: 2, latitude: 2),
                     Location(name: "Madrid", longitude: 2, latitude: 2),

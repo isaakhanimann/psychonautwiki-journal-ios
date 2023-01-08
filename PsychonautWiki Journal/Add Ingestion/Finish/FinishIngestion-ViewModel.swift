@@ -184,7 +184,7 @@ extension FinishIngestionScreen {
         @Published var authorizationStatus: CLAuthorizationStatus?
         @Published var searchSuggestedLocations: [Location] = []
         @Published var selectedLocationName = ""
-
+        @Published var isSearchingForLocations = false
 
         func requestLocation() {
             manager.requestLocation()
@@ -230,6 +230,7 @@ extension FinishIngestionScreen {
         }
 
         func searchLocations(with query: String) {
+            isSearchingForLocations = true
             Task {
                 let geoCoder = CLGeocoder()
                 do {
@@ -242,11 +243,13 @@ extension FinishIngestionScreen {
                                 latitude: place.location?.coordinate.latitude
                             )
                         })
+                        self.isSearchingForLocations = false
                     }
                 } catch {
                     assertionFailure("Failed to find location: \(error)")
                     DispatchQueue.main.async {
                         self.searchSuggestedLocations = []
+                        self.isSearchingForLocations = true
                     }
                 }
             }
