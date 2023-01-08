@@ -182,7 +182,9 @@ extension FinishIngestionScreen {
         var currentLocation: CLLocationCoordinate2D?
         @Published var selectedLocation: Location? = nil
         @Published var authorizationStatus: CLAuthorizationStatus?
-        @Published var suggestedPlacemarks: [CLPlacemark] = []
+        @Published var searchSuggestedLocations: [Location] = []
+        @Published var selectedLocationName = ""
+
 
         func requestLocation() {
             manager.requestLocation()
@@ -198,12 +200,13 @@ extension FinishIngestionScreen {
                 let place = await getPlacemark(from: foundLocation)
                 DispatchQueue.main.async {
                     self.currentLocation = foundLocation.coordinate
+                    let locationName = place?.locality ?? "Unknown"
                     self.selectedLocation = Location(
-                        name: place?.locality ?? "",
+                        name: locationName,
                         longitude: foundLocation.coordinate.longitude,
                         latitude: foundLocation.coordinate.latitude
                     )
-
+                    self.selectedLocationName = locationName
                 }
             }
         }
@@ -215,21 +218,35 @@ extension FinishIngestionScreen {
         nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
             DispatchQueue.main.async {
                 self.authorizationStatus = manager.authorizationStatus
+                if manager.authorizationStatus == .authorizedWhenInUse {
+                    manager.requestLocation()
+                }
             }
         }
 
-        func findPlacemarks(with query: String) {
+        func selectLocation(location: Location) {
+            selectedLocation = location
+            selectedLocationName = location.name
+        }
+
+        func searchLocations(with query: String) {
             Task {
                 let geoCoder = CLGeocoder()
                 do {
                     let places = try await geoCoder.geocodeAddressString(query)
                     DispatchQueue.main.async {
-                        self.suggestedPlacemarks = places
+                        self.searchSuggestedLocations = places.map({ place in
+                            Location(
+                                name: place.locality ?? "Unknown",
+                                longitude: place.location?.coordinate.longitude,
+                                latitude: place.location?.coordinate.latitude
+                            )
+                        })
                     }
                 } catch {
                     assertionFailure("Failed to find location: \(error)")
                     DispatchQueue.main.async {
-                        self.suggestedPlacemarks = []
+                        self.searchSuggestedLocations = []
                     }
                 }
             }
@@ -248,7 +265,10 @@ extension FinishIngestionScreen {
     }
 }
 
-struct Location {
+struct Location: Identifiable {
+    var id: String {
+        name + (longitude?.description ?? "") + (latitude?.description ?? "")
+    }
     let name: String
     let longitude: Double?
     let latitude: Double?
