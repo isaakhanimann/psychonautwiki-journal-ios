@@ -56,20 +56,6 @@ struct FinishIngestionScreen: View {
                             Text(viewModel.enteredTitle).lineLimit(1)
                         }
                     }
-                    if let status = locationManager.authorizationStatus {
-                        if status == .notDetermined {
-                            Text("not determined")
-                        }
-                        if status == .authorizedWhenInUse {
-                            Text("authorizedwheninuse")
-                        }
-                        if status == .denied {
-                            Text("denied")
-                        }
-                        if status == .restricted {
-                            Text("restricted")
-                        }
-                    }
                     NavigationLink {
                         ChooseLocationScreen(locationManager: locationManager)
                     } label: {

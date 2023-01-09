@@ -17,7 +17,8 @@ struct ExperienceRow: View {
                 distinctSubstanceNames: experience.distinctUsedSubstanceNames,
                 sortDate: experience.sortDateUnwrapped,
                 isFavorite: experience.isFavorite,
-                isTimeRelative: isTimeRelative
+                isTimeRelative: isTimeRelative,
+                locationName: experience.location?.name
             ).swipeActions(allowsFullSwipe: false) {
                 Button(role: .destructive) {
                     if #available(iOS 16.2, *) {
@@ -43,42 +44,45 @@ struct ExperienceRowContent: View {
     let sortDate: Date
     let isFavorite: Bool
     let isTimeRelative: Bool
+    let locationName: String?
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
-            rowWithoutBadge
-                .badge(timeText)
-        }
-    }
-
-    var rowWithoutBadge: some View {
-        HStack {
-            ZStack {
-                Circle()
-                    .fill(
-                        AngularGradient(
-                            gradient: Gradient(
-                                colors: getDoubleColors()),
-                            center: .center
+            HStack {
+                ZStack {
+                    Circle()
+                        .fill(
+                            AngularGradient(
+                                gradient: Gradient(
+                                    colors: getDoubleColors()),
+                                center: .center
+                            )
                         )
-                    )
-                    .frame(width: 35, height: 35)
-                if isFavorite {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
+                        .frame(width: 35, height: 35)
+                    if isFavorite {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                    }
                 }
-            }
-            Spacer()
-                .frame(width: 10)
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.headline)
-                if distinctSubstanceNames.isEmpty {
-                    Text("No substance")
-                        .font(.subheadline)
-                } else {
-                    Text(distinctSubstanceNames, format: .list(type: .and))
-                        .font(.subheadline)
+                Spacer()
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.headline)
+                    if distinctSubstanceNames.isEmpty {
+                        Text("No substance")
+                            .font(.subheadline)
+                    } else {
+                        Text(distinctSubstanceNames, format: .list(type: .and))
+                            .font(.subheadline)
+                    }
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 3) {
+                    timeText.foregroundColor(.secondary)
+                    if let locationName {
+                        LocationChip(name: locationName)
+                    }
                 }
             }
         }
@@ -103,17 +107,52 @@ struct ExperienceRowContent: View {
     }
 }
 
+struct LocationChip: View {
+    let name: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: "location")
+            Text(name)
+        }
+        .font(.caption)
+        .padding(.horizontal, 7)
+        .padding(.vertical, 3)
+        .background(Color(.systemGray5))
+        .cornerRadius(12)
+    }
+}
+
 struct ExperienceRowContent_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
+                    title: "My title",
+                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    sortDate: Date() - 5 * 60 * 60 - 30,
+                    isFavorite: true,
+                    isTimeRelative: true,
+                    locationName: "Schürwies 4"
+                )
+                ExperienceRowContent(
+                    ingestionColors: [.blue, .pink],
+                    title: "My title",
+                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    sortDate: Date() - 5 * 60 * 60 - 30,
+                    isFavorite: true,
+                    isTimeRelative: true,
+                    locationName: nil
+                )
+                ExperienceRowContent(
+                    ingestionColors: [.blue, .pink],
                     title: "My title is not is a normal length",
                     distinctSubstanceNames: ["MDMA", "LSD"],
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
-                    isTimeRelative: true
+                    isTimeRelative: true,
+                    locationName: nil
                 )
             }
         }

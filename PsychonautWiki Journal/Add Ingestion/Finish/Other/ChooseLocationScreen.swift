@@ -21,9 +21,11 @@ struct ChooseLocationScreen: View {
             authorizationStatus: locationManager.authorizationStatus,
             isLoadingLocationResults: locationManager.isSearchingForLocations,
             currentLocation: locationManager.currentLocation,
-            searchSuggestedLocations: locationManager.searchSuggestedLocations
+            searchSuggestedLocations: locationManager.searchSuggestedLocations,
+            experienceLocations: locationManager.experienceLocations
         )
         .searchable(text: $locationManager.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Location")
+        .disableAutocorrection(true)
         .onSubmit(of: .search) {
             locationManager.searchLocations()
         }
@@ -44,8 +46,14 @@ struct ChooseLocationScreenContent: View {
     let isLoadingLocationResults: Bool
     let currentLocation: Location?
     let searchSuggestedLocations: [Location]
+    let experienceLocations: [Location]
     @Environment(\.isSearching) private var isSearching
     @Environment(\.dismissSearch) private var dismissSearch
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    )
+
 
     var body: some View {
         List {
@@ -83,24 +91,36 @@ struct ChooseLocationScreenContent: View {
                             )
                         }
                     if let lat = selectedLocation?.latitude, let long = selectedLocation?.longitude {
+                        let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         ZStack(alignment: .topTrailing) {
-                            Map(
-                                coordinateRegion: .constant(
-                                    MKCoordinateRegion(
-                                        center: CLLocationCoordinate2D(latitude: lat, longitude: long),
-                                        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                                    )
-                                ),
-                                interactionModes: []
-                            )
+                            Map(coordinateRegion: $region, annotationItems: [pinLocation]) {
+                                MapMarker(coordinate: $0)
+                            }
+                            .onAppear {
+                                region = MKCoordinateRegion(
+                                    center: pinLocation,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                                )
+                            }
                             .frame(height: 200)
                             .cornerRadius(10)
                             Button {
                                 selectedLocation = Location(name: selectedLocationName, longitude: nil, latitude: nil)
                             } label: {
                                 Label("Delete Coordinates", systemImage: "x.circle").labelStyle(.iconOnly)
-                            }
-
+                            }.padding(3)
+                        }
+                    }
+                }
+            }
+            if !experienceLocations.isEmpty {
+                Section("Previous") {
+                    ForEach(experienceLocations) { location in
+                        Button {
+                            selectedLocation = location
+                            selectedLocationName = location.name
+                        } label: {
+                            Label(location.name, systemImage: "clock.arrow.circlepath")
                         }
                     }
                 }
@@ -115,6 +135,12 @@ struct ChooseLocationScreenContent: View {
     }
 }
 
+                            extension CLLocationCoordinate2D: Identifiable {
+                                public var id: String {
+                                    "\(latitude)-\(longitude)"
+                                }
+                            }
+
 struct ChooseLocationScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -128,9 +154,13 @@ struct ChooseLocationScreen_Previews: PreviewProvider {
                 isLoadingLocationResults: false,
                 currentLocation: nil,
                 searchSuggestedLocations: [
-                    Location(name: "Zurich", longitude: 2, latitude: 2),
-                    Location(name: "Madrid", longitude: 2, latitude: 2),
-                    Location(name: "Prag", longitude: 2, latitude: 2)
+                    Location(name: "Street Name 1", longitude: 2, latitude: 2),
+                    Location(name: "Street Name 2", longitude: 2, latitude: 2),
+                    Location(name: "Street Name 3", longitude: 2, latitude: 2)
+                ],
+                experienceLocations: [
+                    Location(name: "Home", longitude: 2, latitude: 2),
+                    Location(name: "Festival", longitude: 2, latitude: 2)
                 ]
             )
         }
