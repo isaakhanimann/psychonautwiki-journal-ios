@@ -62,23 +62,16 @@ struct ChooseLocationScreenContent: View {
     var body: some View {
         List {
             if isSearching {
-                if let currentLocation {
-                    Button {
-                        selectedLocation = currentLocation
-                        selectedLocationName = currentLocation.name
-                        dismissSearch()
-                    } label: {
-                        Label("Current Location", systemImage: "location")
-                    }
-                }
                 if isLoadingLocationResults {
                     ProgressView()
                 } else if !searchSuggestedLocations.isEmpty {
                     ForEach(searchSuggestedLocations) { location in
                         Button {
-                            selectedLocation = location
-                            selectedLocationName = location.name
-                            dismissSearch()
+                            withAnimation {
+                                selectedLocation = location
+                                selectedLocationName = location.name
+                                dismissSearch()
+                            }
                         } label: {
                             Label(location.name, systemImage: "location")
                         }
@@ -88,11 +81,13 @@ struct ChooseLocationScreenContent: View {
                 Section("Selected Location") {
                     TextField("Name", text: $selectedLocationName, prompt: Text("Enter Name"))
                         .onChange(of: selectedLocationName) { name in
-                            selectedLocation = Location(
-                                name: name,
-                                longitude: selectedLocation?.longitude,
-                                latitude: selectedLocation?.latitude
-                            )
+                            withAnimation {
+                                selectedLocation = Location(
+                                    name: name,
+                                    longitude: selectedLocation?.longitude,
+                                    latitude: selectedLocation?.latitude
+                                )
+                            }
                         }
                     if let lat = selectedLocation?.latitude, let long = selectedLocation?.longitude {
                         let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -108,7 +103,9 @@ struct ChooseLocationScreenContent: View {
                             }
                             .frame(height: 200)
                             Button {
-                                selectedLocation = Location(name: selectedLocationName, longitude: nil, latitude: nil)
+                                withAnimation {
+                                    selectedLocation = Location(name: selectedLocationName, longitude: nil, latitude: nil)
+                                }
                             } label: {
                                 Label("Delete Coordinates", systemImage: "x.circle").labelStyle(.iconOnly)
                             }
@@ -120,11 +117,24 @@ struct ChooseLocationScreenContent: View {
                 }
             }
             if !experienceLocations.isEmpty {
-                Section("Previous") {
+                Section("Suggestions") {
+                    if let currentLocation {
+                        Button {
+                            withAnimation {
+                                selectedLocation = currentLocation
+                                selectedLocationName = currentLocation.name
+                                dismissSearch()
+                            }
+                        } label: {
+                            Label("Current Location", systemImage: "location")
+                        }
+                    }
                     ForEach(experienceLocations) { location in
                         Button {
-                            selectedLocation = location
-                            selectedLocationName = location.name
+                            withAnimation {
+                                selectedLocation = location
+                                selectedLocationName = location.name
+                            }
                         } label: {
                             Label(location.name, systemImage: "clock.arrow.circlepath")
                         }

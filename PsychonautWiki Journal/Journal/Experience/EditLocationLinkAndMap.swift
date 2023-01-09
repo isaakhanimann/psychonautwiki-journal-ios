@@ -26,6 +26,7 @@ struct EditLocationLinkAndMap: View {
                             longitude: experienceLocation.longitudeUnwrapped,
                             latitude: experienceLocation.latitudeUnwrapped
                         )
+                        locationManager.selectedLocationName = experienceLocation.nameUnwrapped
                     }
                     .onDisappear {
                         experienceLocation.name = locationManager.selectedLocation?.name
