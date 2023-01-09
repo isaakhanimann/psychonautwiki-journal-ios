@@ -107,9 +107,18 @@ struct ChooseLocationScreenContent: View {
                                     selectedLocation = Location(name: selectedLocationName, longitude: nil, latitude: nil)
                                 }
                             } label: {
-                                Label("Delete Coordinates", systemImage: "x.circle").labelStyle(.iconOnly)
+                                ZStack {
+                                    Circle()
+                                        .fill(Color(.systemGray5))
+                                        .frame(width: 25)
+                                    Image(systemName: "xmark")
+                                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding(8)
+                                .contentShape(Circle())
                             }
-                            .padding(3)
+                            .accessibilityLabel(Text("Delete Coordinates"))
                         }
                         .listRowInsets(EdgeInsets())
 
