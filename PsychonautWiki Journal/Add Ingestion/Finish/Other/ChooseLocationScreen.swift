@@ -12,7 +12,6 @@ import MapKit
 struct ChooseLocationScreen: View {
 
     @ObservedObject var locationManager: LocationManager
-    var deleteAssociatedLocation: (() -> Void)? = nil
 
     var body: some View {
         ChooseLocationScreenContent(
@@ -23,8 +22,7 @@ struct ChooseLocationScreen: View {
             isLoadingLocationResults: locationManager.isSearchingForLocations,
             currentLocation: locationManager.currentLocation,
             searchSuggestedLocations: locationManager.searchSuggestedLocations,
-            experienceLocations: locationManager.experienceLocations,
-            deleteAssociatedLocation: deleteAssociatedLocation
+            experienceLocations: locationManager.experienceLocations
         )
         .searchable(
             text: $locationManager.searchText,
@@ -53,10 +51,8 @@ struct ChooseLocationScreenContent: View {
     let currentLocation: Location?
     let searchSuggestedLocations: [Location]
     let experienceLocations: [Location]
-    var deleteAssociatedLocation: (() -> Void)?
     @Environment(\.isSearching) private var isSearching
     @Environment(\.dismissSearch) private var dismissSearch
-    @Environment(\.dismiss) var dismiss
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
         span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
@@ -86,11 +82,15 @@ struct ChooseLocationScreenContent: View {
                     TextField("Name", text: $selectedLocationName, prompt: Text("Enter Name"))
                         .onChange(of: selectedLocationName) { name in
                             withAnimation {
-                                selectedLocation = Location(
-                                    name: name,
-                                    longitude: selectedLocation?.longitude,
-                                    latitude: selectedLocation?.latitude
-                                )
+                                if !name.isEmpty {
+                                    selectedLocation = Location(
+                                        name: name,
+                                        longitude: selectedLocation?.longitude,
+                                        latitude: selectedLocation?.latitude
+                                    )
+                                } else {
+                                    selectedLocation = nil
+                                }
                             }
                         }
                     if let lat = selectedLocation?.latitude, let long = selectedLocation?.longitude {
@@ -125,7 +125,15 @@ struct ChooseLocationScreenContent: View {
                             .accessibilityLabel(Text("Delete Coordinates"))
                         }
                         .listRowInsets(EdgeInsets())
-
+                    }
+                    if let selectedLocationUnwrap = selectedLocation {
+                        Text("Location name is: \(selectedLocationUnwrap.name)")
+                        Button {
+                            selectedLocationName = ""
+                            selectedLocation = nil
+                        } label: {
+                            Label("Delete Location", systemImage: "trash").foregroundColor(.red)
+                        }
                     }
                 }
             }
@@ -159,18 +167,6 @@ struct ChooseLocationScreenContent: View {
                     Text("The app does not have access to your location. Enable it in settings to add locations to your experiences automatically.")
                 }
             }
-            if let deleteAssociatedLocation {
-                Section {
-                    Button {
-                        // must delete first and dismiss after because else the deletion might be cancelled
-                        deleteAssociatedLocation()
-                        dismiss()
-                    } label: {
-                        Label("Delete Location", systemImage: "trash").foregroundColor(.red)
-                    }
-
-                }
-            }
         }
         .navigationTitle("Experience Location")
     }
@@ -202,8 +198,7 @@ struct ChooseLocationScreen_Previews: PreviewProvider {
                 experienceLocations: [
                     Location(name: "Home", longitude: 2, latitude: 2),
                     Location(name: "Festival", longitude: 2, latitude: 2)
-                ],
-                deleteAssociatedLocation: {}
+                ]
             )
         }
     }

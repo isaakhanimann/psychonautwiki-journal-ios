@@ -19,10 +19,7 @@ struct EditLocationLinkAndMap: View {
 
     var body: some View {
         NavigationLink {
-            ChooseLocationScreen(locationManager: locationManager, deleteAssociatedLocation: {
-                PersistenceController.shared.viewContext.delete(experienceLocation)
-                PersistenceController.shared.saveViewContext()
-            })
+            ChooseLocationScreen(locationManager: locationManager)
             .onAppear {
                 locationManager.selectedLocation = Location(
                     name: experienceLocation.nameUnwrapped,
@@ -32,9 +29,13 @@ struct EditLocationLinkAndMap: View {
                 locationManager.selectedLocationName = experienceLocation.nameUnwrapped
             }
             .onDisappear {
-                experienceLocation.name = locationManager.selectedLocation?.name
-                experienceLocation.latitude = locationManager.selectedLocation?.latitude ?? 0
-                experienceLocation.longitude = locationManager.selectedLocation?.longitude ?? 0
+                if let selectedLocation = locationManager.selectedLocation {
+                    experienceLocation.name = selectedLocation.name
+                    experienceLocation.latitude = selectedLocation.latitude ?? 0
+                    experienceLocation.longitude = selectedLocation.longitude ?? 0
+                } else {
+                    PersistenceController.shared.viewContext.delete(experienceLocation)
+                }
                 PersistenceController.shared.saveViewContext()
             }
         } label: {
