@@ -8,18 +8,29 @@ struct ExperienceRow: View {
     let isTimeRelative: Bool
 
     var body: some View {
-        return NavigationLink(
+        NavigationLink(
             destination: ExperienceScreen(experience: experience)
         ) {
-            ExperienceRowContent(
-                ingestionColors: experience.ingestionColors,
-                title: experience.titleUnwrapped,
-                distinctSubstanceNames: experience.distinctUsedSubstanceNames,
-                sortDate: experience.sortDateUnwrapped,
-                isFavorite: experience.isFavorite,
-                isTimeRelative: isTimeRelative,
-                locationName: experience.location?.name
-            ).swipeActions(allowsFullSwipe: false) {
+            Group {
+                if let location = experience.location {
+                    ExperienceRowObservedLocation(
+                        experience: experience,
+                        location: location,
+                        isTimeRelative: isTimeRelative
+                    )
+                } else {
+                    ExperienceRowContent(
+                        ingestionColors: experience.ingestionColors,
+                        title: experience.titleUnwrapped,
+                        distinctSubstanceNames: experience.distinctUsedSubstanceNames,
+                        sortDate: experience.sortDateUnwrapped,
+                        isFavorite: experience.isFavorite,
+                        isTimeRelative: isTimeRelative,
+                        locationName: nil
+                    )
+                }
+            }
+            .swipeActions(allowsFullSwipe: false) {
                 Button(role: .destructive) {
                     if #available(iOS 16.2, *) {
                         if experience.isCurrent {
@@ -33,6 +44,24 @@ struct ExperienceRow: View {
                 }
             }
         }
+    }
+}
+
+struct ExperienceRowObservedLocation: View {
+    @ObservedObject var experience: Experience
+    @ObservedObject var location: ExperienceLocation
+    let isTimeRelative: Bool
+
+    var body: some View {
+        ExperienceRowContent(
+            ingestionColors: experience.ingestionColors,
+            title: experience.titleUnwrapped,
+            distinctSubstanceNames: experience.distinctUsedSubstanceNames,
+            sortDate: experience.sortDateUnwrapped,
+            isFavorite: experience.isFavorite,
+            isTimeRelative: isTimeRelative,
+            locationName: location.name
+        )
     }
 }
 
