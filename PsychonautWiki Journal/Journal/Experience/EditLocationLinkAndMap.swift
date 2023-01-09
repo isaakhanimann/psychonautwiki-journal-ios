@@ -18,39 +18,42 @@ struct EditLocationLinkAndMap: View {
     )
 
     var body: some View {
-            NavigationLink {
-                ChooseLocationScreen(locationManager: locationManager)
-                    .onAppear {
-                        locationManager.selectedLocation = Location(
-                            name: experienceLocation.nameUnwrapped,
-                            longitude: experienceLocation.longitudeUnwrapped,
-                            latitude: experienceLocation.latitudeUnwrapped
-                        )
-                        locationManager.selectedLocationName = experienceLocation.nameUnwrapped
-                    }
-                    .onDisappear {
-                        experienceLocation.name = locationManager.selectedLocation?.name
-                        experienceLocation.latitude = locationManager.selectedLocation?.latitude ?? 0
-                        experienceLocation.longitude = locationManager.selectedLocation?.longitude ?? 0
-                        PersistenceController.shared.saveViewContext()
-                    }
-            } label: {
-                Label(experienceLocation.nameUnwrapped, systemImage: "location")
+        NavigationLink {
+            ChooseLocationScreen(locationManager: locationManager, deleteAssociatedLocation: {
+                PersistenceController.shared.viewContext.delete(experienceLocation)
+                PersistenceController.shared.saveViewContext()
+            })
+            .onAppear {
+                locationManager.selectedLocation = Location(
+                    name: experienceLocation.nameUnwrapped,
+                    longitude: experienceLocation.longitudeUnwrapped,
+                    latitude: experienceLocation.latitudeUnwrapped
+                )
+                locationManager.selectedLocationName = experienceLocation.nameUnwrapped
             }
-            if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
-                let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                Map(coordinateRegion: $region, annotationItems: [pinLocation]) {
-                    MapMarker(coordinate: $0)
-                }
-                .onAppear {
-                    region = MKCoordinateRegion(
-                        center: pinLocation,
-                        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                    )
-                }
-                .frame(height: 200)
-                .listRowInsets(EdgeInsets())
+            .onDisappear {
+                experienceLocation.name = locationManager.selectedLocation?.name
+                experienceLocation.latitude = locationManager.selectedLocation?.latitude ?? 0
+                experienceLocation.longitude = locationManager.selectedLocation?.longitude ?? 0
+                PersistenceController.shared.saveViewContext()
             }
+        } label: {
+            Label(experienceLocation.nameUnwrapped, systemImage: "location")
+        }
+        if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
+            let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            Map(coordinateRegion: $region, annotationItems: [pinLocation]) {
+                MapMarker(coordinate: $0)
+            }
+            .onAppear {
+                region = MKCoordinateRegion(
+                    center: pinLocation,
+                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                )
+            }
+            .frame(height: 200)
+            .listRowInsets(EdgeInsets())
+        }
         
     }
 }
