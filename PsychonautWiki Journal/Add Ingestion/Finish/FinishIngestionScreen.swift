@@ -11,6 +11,7 @@ struct FinishIngestionScreen: View {
     var suggestedNote: String? = nil
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject var viewModel = ViewModel()
+    @StateObject var locationManager = LocationManager()
 
     var body: some View {
         Form {
@@ -55,7 +56,7 @@ struct FinishIngestionScreen: View {
                             Text(viewModel.enteredTitle).lineLimit(1)
                         }
                     }
-                    if let status = viewModel.authorizationStatus {
+                    if let status = locationManager.authorizationStatus {
                         if status == .notDetermined {
                             Text("not determined")
                         }
@@ -70,9 +71,9 @@ struct FinishIngestionScreen: View {
                         }
                     }
                     NavigationLink {
-                        ChooseLocationScreen(viewModel: viewModel)
+                        ChooseLocationScreen(locationManager: locationManager)
                     } label: {
-                        if let locationName = viewModel.selectedLocation?.name {
+                        if let locationName = locationManager.selectedLocation?.name {
                             Label(locationName, systemImage: "location")
                         } else {
                             Label("Add Location", systemImage: "plus")
@@ -124,7 +125,8 @@ struct FinishIngestionScreen: View {
                         administrationRoute: administrationRoute,
                         dose: dose,
                         units: units,
-                        isEstimate: isEstimate
+                        isEstimate: isEstimate,
+                        location: locationManager.selectedLocation
                     )
                     dismiss()
                     toastViewModel.showSuccessToast()

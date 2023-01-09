@@ -1,11 +1,10 @@
 import Foundation
 import CoreData
-import CoreLocation
 
 extension FinishIngestionScreen {
 
     @MainActor
-    class ViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    class ViewModel: ObservableObject {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
@@ -46,7 +45,8 @@ extension FinishIngestionScreen {
             administrationRoute: AdministrationRoute,
             dose: Double?,
             units: String?,
-            isEstimate: Bool
+            isEstimate: Bool,
+            location: Location?
         ) {
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
@@ -77,6 +77,14 @@ extension FinishIngestionScreen {
                     }
                     newExperience.title = title
                     newExperience.text = ""
+                    if let location {
+                        let newLocation = ExperienceLocation(context: context)
+                        newLocation.name = location.name
+                        newLocation.latitude = location.latitude ?? 0
+                        newLocation.longitude = location.longitude ?? 0
+                        newLocation.experience = newExperience
+                    }
+
                     createIngestion(
                         with: newExperience,
                         and: context,
@@ -135,9 +143,7 @@ extension FinishIngestionScreen {
             ingestion.substanceCompanion = substanceCompanion
         }
 
-        override init() {
-            super.init()
-            manager.delegate = self
+        init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
@@ -176,103 +182,5 @@ extension FinishIngestionScreen {
                 andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd]
             )
         }
-
-        let manager = CLLocationManager()
-
-        var currentLocation: CLLocationCoordinate2D?
-        @Published var selectedLocation: Location? = nil
-        @Published var authorizationStatus: CLAuthorizationStatus?
-        @Published var searchSuggestedLocations: [Location] = []
-        @Published var selectedLocationName = ""
-        @Published var isSearchingForLocations = false
-
-        func requestLocation() {
-            manager.requestLocation()
-        }
-
-        func requestPermission() {
-            manager.requestWhenInUseAuthorization()
-        }
-
-        nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            Task {
-                guard let foundLocation = locations.first else { return }
-                let place = await getPlacemark(from: foundLocation)
-                DispatchQueue.main.async {
-                    self.currentLocation = foundLocation.coordinate
-                    let locationName = place?.locality ?? "Unknown"
-                    self.selectedLocation = Location(
-                        name: locationName,
-                        longitude: foundLocation.coordinate.longitude,
-                        latitude: foundLocation.coordinate.latitude
-                    )
-                    self.selectedLocationName = locationName
-                }
-            }
-        }
-
-        nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            assertionFailure("Isaak location manager \(error)")
-        }
-
-        nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-            DispatchQueue.main.async {
-                self.authorizationStatus = manager.authorizationStatus
-                if manager.authorizationStatus == .authorizedWhenInUse {
-                    manager.requestLocation()
-                }
-            }
-        }
-
-        func selectLocation(location: Location) {
-            selectedLocation = location
-            selectedLocationName = location.name
-        }
-
-        func searchLocations(with query: String) {
-            isSearchingForLocations = true
-            Task {
-                let geoCoder = CLGeocoder()
-                do {
-                    let places = try await geoCoder.geocodeAddressString(query)
-                    DispatchQueue.main.async {
-                        self.searchSuggestedLocations = places.map({ place in
-                            Location(
-                                name: place.locality ?? "Unknown",
-                                longitude: place.location?.coordinate.longitude,
-                                latitude: place.location?.coordinate.latitude
-                            )
-                        })
-                        self.isSearchingForLocations = false
-                    }
-                } catch {
-                    assertionFailure("Failed to find location: \(error)")
-                    DispatchQueue.main.async {
-                        self.searchSuggestedLocations = []
-                        self.isSearchingForLocations = true
-                    }
-                }
-            }
-        }
-
-        private func getPlacemark(from location: CLLocation) async -> CLPlacemark? {
-            let geocoder = CLGeocoder()
-            do {
-                let placemarks = try await geocoder.reverseGeocodeLocation(location)
-                return placemarks.first
-            } catch {
-                assertionFailure("Failed to get placemark: \(error)")
-                return nil
-            }
-        }
     }
-}
-
-struct Location: Identifiable {
-    var id: String {
-        name + (longitude?.description ?? "") + (latitude?.description ?? "")
-    }
-    let name: String
-    let longitude: Double?
-    let latitude: Double?
 }
