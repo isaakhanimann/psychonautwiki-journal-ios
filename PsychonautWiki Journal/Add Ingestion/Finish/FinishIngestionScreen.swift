@@ -15,7 +15,7 @@ struct FinishIngestionScreen: View {
 
     var body: some View {
         Form {
-            Section("Ingestion Time") {
+            Section("Ingestion") {
                 DatePicker(
                     "Ingestion Time",
                     selection: $viewModel.selectedTime,
@@ -44,6 +44,15 @@ struct FinishIngestionScreen: View {
                         Toggle("Part of \(selectedExperience.titleUnwrapped)", isOn: $viewModel.wantsToCreateNewExperience.not).tint(.accentColor)
                     }
                 }
+                NavigationLink {
+                    IngestionNoteScreen(note: $viewModel.enteredNote)
+                } label: {
+                    if viewModel.enteredNote.isEmpty {
+                        Label("Add Note", systemImage: "plus")
+                    } else {
+                        Text(viewModel.enteredNote).lineLimit(1)
+                    }
+                }
             }
             if viewModel.selectedExperience == nil || viewModel.wantsToCreateNewExperience {
                 Section("New Experience") {
@@ -64,17 +73,6 @@ struct FinishIngestionScreen: View {
                         } else {
                             Label("Add Location", systemImage: "plus")
                         }
-                    }
-                }
-            }
-            Section("Ingestion Note") {
-                NavigationLink {
-                    IngestionNoteScreen(note: $viewModel.enteredNote)
-                } label: {
-                    if viewModel.enteredNote.isEmpty {
-                        Label("Add Note", systemImage: "plus")
-                    } else {
-                        Text(viewModel.enteredNote).lineLimit(1)
                     }
                 }
             }

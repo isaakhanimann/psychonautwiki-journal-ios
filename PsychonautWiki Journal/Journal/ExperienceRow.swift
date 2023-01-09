@@ -78,10 +78,15 @@ struct ExperienceRowContent: View {
                     }
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 3) {
+                VStack(alignment: .trailing) {
                     timeText.foregroundColor(.secondary)
                     if let locationName {
-                        LocationChip(name: locationName)
+                        HStack {
+                            Image(systemName: "location")
+                            Text(locationName)
+                        }
+                        .font(.callout)
+                        .foregroundColor(.secondary)
                     }
                 }
             }
@@ -104,22 +109,6 @@ struct ExperienceRowContent: View {
             doubleColors.append(firstColor)
         }
         return doubleColors
-    }
-}
-
-struct LocationChip: View {
-    let name: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: "location")
-            Text(name)
-        }
-        .font(.caption)
-        .padding(.horizontal, 7)
-        .padding(.vertical, 3)
-        .background(Color(.systemGray5))
-        .cornerRadius(12)
     }
 }
 
