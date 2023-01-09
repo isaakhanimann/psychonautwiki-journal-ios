@@ -79,6 +79,7 @@
 		EA418A2D296C00BF00DEA663 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A2C296C00BF00DEA663 /* LocationManager.swift */; };
 		EA418A2F296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A2E296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift */; };
 		EA418A31296C056500DEA663 /* Array-Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A30296C056500DEA663 /* Array-Unique.swift */; };
+		EA418A33296C755400DEA663 /* EditLocationLinkAndMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -298,6 +299,7 @@
 		EA418A2C296C00BF00DEA663 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EA418A2E296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperienceLocation-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EA418A30296C056500DEA663 /* Array-Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Unique.swift"; sourceTree = "<group>"; };
+		EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationLinkAndMap.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -904,6 +906,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */,
+				EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */,
 				EA4189F02963219100DEA663 /* LiveActivitySection.swift */,
 				EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */,
 				EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */,
@@ -1234,6 +1237,7 @@
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
 				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,
+				EA418A33296C755400DEA663 /* EditLocationLinkAndMap.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
 				EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA418A2D296C00BF00DEA663 /* LocationManager.swift in Sources */,

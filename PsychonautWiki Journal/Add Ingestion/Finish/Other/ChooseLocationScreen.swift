@@ -24,7 +24,11 @@ struct ChooseLocationScreen: View {
             searchSuggestedLocations: locationManager.searchSuggestedLocations,
             experienceLocations: locationManager.experienceLocations
         )
-        .searchable(text: $locationManager.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Location")
+        .searchable(
+            text: $locationManager.searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: "Search Location"
+        )
         .disableAutocorrection(true)
         .onSubmit(of: .search) {
             locationManager.searchLocations()
@@ -103,13 +107,15 @@ struct ChooseLocationScreenContent: View {
                                 )
                             }
                             .frame(height: 200)
-                            .cornerRadius(10)
                             Button {
                                 selectedLocation = Location(name: selectedLocationName, longitude: nil, latitude: nil)
                             } label: {
                                 Label("Delete Coordinates", systemImage: "x.circle").labelStyle(.iconOnly)
-                            }.padding(3)
+                            }
+                            .padding(3)
                         }
+                        .listRowInsets(EdgeInsets())
+
                     }
                 }
             }
@@ -135,11 +141,11 @@ struct ChooseLocationScreenContent: View {
     }
 }
 
-                            extension CLLocationCoordinate2D: Identifiable {
-                                public var id: String {
-                                    "\(latitude)-\(longitude)"
-                                }
-                            }
+extension CLLocationCoordinate2D: Identifiable {
+    public var id: String {
+        "\(latitude)-\(longitude)"
+    }
+}
 
 struct ChooseLocationScreen_Previews: PreviewProvider {
     static var previews: some View {

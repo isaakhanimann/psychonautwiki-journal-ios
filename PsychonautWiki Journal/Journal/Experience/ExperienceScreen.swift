@@ -13,8 +13,8 @@ struct ExperienceScreen: View {
     @State private var hiddenIngestions: [ObjectIdentifier] = []
     @State private var isEditing = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-
     @Environment(\.dismiss) var dismiss
+    @StateObject var locationManager = LocationManager()
 
     var body: some View {
         return List {
@@ -129,6 +129,31 @@ struct ExperienceScreen: View {
                     }
                     NavigationLink("See All Interactions") {
                         GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                    }
+                }
+            }
+            Section("Location") {
+                if let location = experience.location {
+                    EditLocationLinkAndMap(experienceLocation: location, locationManager: locationManager)
+                } else {
+                    NavigationLink {
+                        ChooseLocationScreen(locationManager: locationManager)
+                            .onAppear {
+                                locationManager.selectedLocation = nil
+                                locationManager.selectedLocationName = ""
+                            }
+                            .onDisappear {
+                                if let selectedLocation = locationManager.selectedLocation {
+                                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
+                                    newLocation.name = selectedLocation.name
+                                    newLocation.latitude = selectedLocation.latitude ?? 0
+                                    newLocation.longitude = selectedLocation.longitude ?? 0
+                                    newLocation.experience = experience
+                                }
+                                PersistenceController.shared.saveViewContext()
+                            }
+                    } label: {
+                        Label("Add Location", systemImage: "plus")
                     }
                 }
             }
