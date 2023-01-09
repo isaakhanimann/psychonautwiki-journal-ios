@@ -798,6 +798,7 @@
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* Journal */,
 				EA47E66E27CB475100F6E10F /* Search */,
+				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAE4712A26CBA663009FB0EC /* Safer */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
 				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
@@ -824,7 +825,6 @@
 		EAE4712A26CBA663009FB0EC /* Safer */ = {
 			isa = PBXGroup;
 			children = (
-				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
 				EAC25BFE2955FCFA0002D68F /* Screens */,
 			);

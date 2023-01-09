@@ -66,6 +66,13 @@ extension SettingsScreen {
                             companionDict[ingestionCodable.substanceName] = newCompanion
                         }
                     }
+                    if let location = experienceCodable.location {
+                        let newLocation = ExperienceLocation(context: context)
+                        newLocation.name = location.name
+                        newLocation.latitude = location.latitude ?? 0
+                        newLocation.longitude = location.longitude ?? 0
+                        newLocation.experience = newExperience
+                    }
                 }
 
                 for customCodable in file.customSubstances {

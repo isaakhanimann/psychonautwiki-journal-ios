@@ -53,7 +53,8 @@ struct JournalFile: FileDocument, Codable {
                     creationDate: experience.creationDateUnwrapped,
                     sortDate: experience.sortDate,
                     isFavorite: experience.isFavorite,
-                    ingestions: ingestionsInExperience
+                    ingestions: ingestionsInExperience,
+                    experienceLocation: experience.location
                 )
             )
 
@@ -92,6 +93,7 @@ struct ExperienceCodable: Codable {
     let sortDate: Date?
     let isFavorite: Bool
     let ingestions: [IngestionCodable]
+    let location: LocationCodable?
 
     init(
         title: String,
@@ -99,7 +101,8 @@ struct ExperienceCodable: Codable {
         creationDate: Date,
         sortDate: Date?,
         isFavorite: Bool,
-        ingestions: [IngestionCodable]
+        ingestions: [IngestionCodable],
+        experienceLocation: ExperienceLocation?
     ) {
         self.title = title
         self.text = text
@@ -107,6 +110,15 @@ struct ExperienceCodable: Codable {
         self.sortDate = sortDate
         self.isFavorite = isFavorite
         self.ingestions = ingestions
+        if let experienceLocation {
+            self.location = LocationCodable(
+                name: experienceLocation.nameUnwrapped,
+                latitude: experienceLocation.latitudeUnwrapped,
+                longitude: experienceLocation.longitudeUnwrapped
+            )
+        } else {
+            self.location = nil
+        }
     }
 
     enum CodingKeys: String, CodingKey {
@@ -116,6 +128,7 @@ struct ExperienceCodable: Codable {
         case sortDate
         case isFavorite
         case ingestions
+        case location
     }
 
     init(from decoder: Decoder) throws {
@@ -131,6 +144,7 @@ struct ExperienceCodable: Codable {
         }
         self.isFavorite = (try values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
         self.ingestions = try values.decode([IngestionCodable].self, forKey: .ingestions)
+        self.location = try values.decodeIfPresent(LocationCodable.self, forKey: .location)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -146,7 +160,14 @@ struct ExperienceCodable: Codable {
         }
         try container.encode(isFavorite, forKey: .isFavorite)
         try container.encode(ingestions, forKey: .ingestions)
+        try container.encode(location, forKey: .location)
     }
+}
+
+struct LocationCodable: Codable {
+    let name: String
+    let latitude: Double?
+    let longitude: Double?
 }
 
 struct IngestionCodable: Codable {
