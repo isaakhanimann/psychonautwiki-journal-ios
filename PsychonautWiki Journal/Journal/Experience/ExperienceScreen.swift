@@ -22,8 +22,8 @@ struct ExperienceScreen: View {
                 Section {
                     VStack(alignment: .leading) {
                         let timelineHeight: Double = 200
-                        if let timelineModelUnwrap = timelineModel {
-                            EffectTimeline(timelineModel: timelineModelUnwrap, height: timelineHeight)
+                        if let timelineModel {
+                            EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
                         } else {
                             Canvas {_,_ in }.frame(height: timelineHeight)
                         }

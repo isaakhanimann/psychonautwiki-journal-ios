@@ -55,7 +55,10 @@ struct RoaDose: Decodable {
         } else if let heavyMinUnwrap = heavyMin {
             if heavyMinUnwrap <= dose {
                 let timesHeavy = Int(floor(dose/heavyMinUnwrap))
-                let rest = dose.remainder(dividingBy: heavyMinUnwrap)
+                var rest = dose.remainder(dividingBy: heavyMinUnwrap)
+                if rest < 0 {
+                    rest += heavyMinUnwrap
+                }
                 return (timesHeavy * 4) + getNumDotsUpTo4(dose: rest)
             } else {
                 return Int(floor(dose/heavyMinUnwrap))
