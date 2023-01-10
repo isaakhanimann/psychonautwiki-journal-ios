@@ -44,8 +44,10 @@ struct CustomChooseDoseScreen: View {
         .optionalScrollDismissesKeyboard()
         .toolbar {
             ToolbarItem(placement: .keyboard) {
-                Button("Done") {
+                Button {
                     hideKeyboard()
+                } label: {
+                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {

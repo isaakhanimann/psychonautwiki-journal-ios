@@ -50,8 +50,10 @@ struct ChooseDoseScreenContent: View {
         .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
             ToolbarItem(placement: .keyboard) {
-                Button("Done") {
+                Button {
                     hideKeyboard()
+                } label: {
+                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
