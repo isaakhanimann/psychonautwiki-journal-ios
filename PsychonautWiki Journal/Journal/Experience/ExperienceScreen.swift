@@ -88,11 +88,23 @@ struct ExperienceScreen: View {
                 if !cumulativeDoses.isEmpty {
                     Section("Cumulative Dose") {
                         ForEach(cumulativeDoses) { cumulative in
-                            CumulativeDoseRow(
-                                substanceName: cumulative.substanceName,
-                                substanceColor: cumulative.substanceColor,
-                                cumulativeRoutes: cumulative.cumulativeRoutes
-                            )
+                            if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
+                                NavigationLink {
+                                    DosesScreen(substance: substance)
+                                } label: {
+                                    CumulativeDoseRow(
+                                        substanceName: cumulative.substanceName,
+                                        substanceColor: cumulative.substanceColor,
+                                        cumulativeRoutes: cumulative.cumulativeRoutes
+                                    )
+                                }
+                            } else {
+                                CumulativeDoseRow(
+                                    substanceName: cumulative.substanceName,
+                                    substanceColor: cumulative.substanceColor,
+                                    cumulativeRoutes: cumulative.cumulativeRoutes
+                                )
+                            }
                         }
                     }
 
