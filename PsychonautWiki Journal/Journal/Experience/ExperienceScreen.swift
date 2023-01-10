@@ -35,15 +35,15 @@ struct ExperienceScreen: View {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = hiddenIngestions.contains(ing.id)
                         let route = ing.administrationRouteUnwrapped
-                        let roaDose = ing.substance?.getDose(for: route)
+                        let substance = ing.substance
                         NavigationLink {
                             EditIngestionScreen(
                                 ingestion: ing,
                                 substanceName: ing.substanceNameUnwrapped,
-                                roaDose: roaDose,
-                                route: route
+                                substance: substance
                             )
                         } label: {
+                            let roaDose = substance?.getDose(for: route)
                             HStack(alignment: .center) {
                                 if isIngestionHidden {
                                     Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)

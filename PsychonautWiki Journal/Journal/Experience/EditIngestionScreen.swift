@@ -11,20 +11,20 @@ struct EditIngestionScreen: View {
 
     let ingestion: Ingestion
     let substanceName: String
-    let roaDose: RoaDose?
-    let route: AdministrationRoute
+    let substance: Substance?
     @State private var time = Date()
     @State private var dose: Double? = nil
     @State private var units: String? = "mg"
     @State private var isEstimate = false
     @State private var note = ""
+    @State private var route = AdministrationRoute.oral
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         EditIngestionContent(
             substanceName: substanceName,
-            roaDose: roaDose,
-            route: route,
+            roaDose: substance?.getDose(for: route),
+            route: $route,
             time: $time,
             dose: $dose,
             units: $units,
@@ -38,6 +38,7 @@ struct EditIngestionScreen: View {
             units = ingestion.units
             isEstimate = ingestion.isEstimate
             note = ingestion.noteUnwrapped
+            route = ingestion.administrationRouteUnwrapped
         }
     }
 
@@ -47,6 +48,7 @@ struct EditIngestionScreen: View {
         ingestion.units = units
         ingestion.isEstimate = isEstimate
         ingestion.note = note
+        ingestion.administrationRoute = route.rawValue
         PersistenceController.shared.saveViewContext()
         dismiss()
     }
@@ -62,7 +64,7 @@ struct EditIngestionContent: View {
 
     let substanceName: String
     let roaDose: RoaDose?
-    let route: AdministrationRoute
+    @Binding var route: AdministrationRoute
     @Binding var time: Date
     @Binding var dose: Double?
     @Binding var units: String?
@@ -73,6 +75,13 @@ struct EditIngestionContent: View {
 
     var body: some View {
         Form {
+            Section("Administration Route") {
+                Picker("Route", selection: $route) {
+                    ForEach(AdministrationRoute.allCases) { oneRoute in
+                        Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
+                    }
+                }
+            }
             Section("\(route.rawValue.localizedCapitalized) Dose") {
                 DoseRow(roaDose: roaDose)
                 DosePicker(
@@ -101,6 +110,7 @@ struct EditIngestionContent: View {
                 }
             }
         }
+        .headerProminence(.increased)
         .optionalScrollDismissesKeyboard()
         .navigationTitle("Edit \(substanceName)")
         .toolbar {
@@ -117,7 +127,7 @@ struct EditIngestionScreen_Previews: PreviewProvider {
             EditIngestionContent(
                 substanceName: "MDMA",
                 roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
-                route: .oral,
+                route: .constant(.oral),
                 time: .constant(Date()),
                 dose: .constant(50),
                 units: .constant("mg"),
