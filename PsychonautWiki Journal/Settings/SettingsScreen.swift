@@ -57,7 +57,7 @@ struct SettingsContent: View {
                 if isFaceIDAvailable {
                     Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
                 } else {
-                    Text("Enable Face ID in Settings to unlock the app.")
+                    Text("Enable Face ID for Journal in settings to lock the app.")
                 }
             }
             Section("Communication") {

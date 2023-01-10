@@ -20,13 +20,6 @@ struct PsychonautWiki_JournalApp: App {
             }
         }
         .onChange(of: scenePhase) { phase in
-            if phase == .inactive {
-                print("Inactive")
-            } else if phase == .active {
-                print("Active")
-            } else if phase == .background {
-                print("Background")
-            }
             authenticator.onChange(of: phase)
         }
     }
