@@ -141,10 +141,7 @@ struct ChooseDoseScreenContent: View {
 
     var doseSection: some View {
         let roaDose = substance.getDose(for: administrationRoute)
-        return Section(
-            header: Text("Pure Dose"),
-            footer: Text(DosesScreen.getUnitClarification(for: roaDose?.units ?? ""))
-        ) {
+        return Section {
             if let remark = substance.dosageRemark {
                 Text(remark)
                     .foregroundColor(.secondary)
@@ -156,6 +153,15 @@ struct ChooseDoseScreenContent: View {
                 selectedUnits: $selectedUnits
             )
             Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
+        } header: {
+            Text("Pure Dose")
+        } footer: {
+            if let units = roaDose?.units,
+               let clarification = DosesScreen.getUnitClarification(for: units) {
+                Section {
+                    Text(clarification)
+                }
+            }
         }
         .listRowSeparator(.hidden)
     }

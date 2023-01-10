@@ -35,8 +35,11 @@ struct DosesScreen: View {
                 }
                 MDMAPillsSection()
             }
-            Section {
-                Text(DosesScreen.getUnitClarification(for: substance.roas.first?.dose?.units ?? ""))
+            if let units = substance.roas.first?.dose?.units,
+               let clarification = DosesScreen.getUnitClarification(for: units) {
+                Section {
+                    Text(clarification)
+                }
             }
             Section("Disclaimer") {
                 Text(ChooseDoseScreenContent.doseDisclaimer)
@@ -47,7 +50,7 @@ struct DosesScreen: View {
     }
 
 
-    static func getUnitClarification(for units: String) -> String {
+    static func getUnitClarification(for units: String) -> String? {
         if units == "µg" {
             return "1 µg = 1/1000 mg = 1/1'000'000 gram"
         } else if units == "mg" {
@@ -55,7 +58,7 @@ struct DosesScreen: View {
         } else if units == "mL" {
             return "1 mL = 1/1000 L"
         } else {
-            return ""
+            return nil
         }
     }
 }
