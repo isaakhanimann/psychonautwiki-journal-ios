@@ -21,8 +21,14 @@ struct DurationScreen: View {
                     selection: $selectedTime,
                     displayedComponents: [.hourAndMinute]
                 )
-                if let model = timelineModel {
-                    EffectTimeline(timelineModel: model)
+                VStack(alignment: .leading) {
+                    if let timelineModel {
+                        EffectTimeline(timelineModel: timelineModel)
+                    }
+                    Text("* Heavy doses can have longer durations.").font(.footnote).maybeCondensed()
+                    if durationInfos.contains(where: {$0.route == .oral}) {
+                        Text("* A full stomach delays the onset of oral doses by 3 hours.").font(.footnote).maybeCondensed()
+                    }
                 }
                 ForEach(durationInfos, id: \.route) { info in
                     let isRouteHidden = hiddenRoutes.contains(info.route)

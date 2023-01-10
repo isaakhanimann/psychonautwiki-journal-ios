@@ -20,11 +20,17 @@ struct ExperienceScreen: View {
         return List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section {
-                    let timelineHeight: Double = 200
-                    if let timelineModelUnwrap = timelineModel {
-                        EffectTimeline(timelineModel: timelineModelUnwrap, height: timelineHeight)
-                    } else {
-                        Canvas {_,_ in }.frame(height: timelineHeight)
+                    VStack(alignment: .leading) {
+                        let timelineHeight: Double = 200
+                        if let timelineModelUnwrap = timelineModel {
+                            EffectTimeline(timelineModel: timelineModelUnwrap, height: timelineHeight)
+                        } else {
+                            Canvas {_,_ in }.frame(height: timelineHeight)
+                        }
+                        Text("* Heavy doses can have longer durations.").font(.footnote).maybeCondensed()
+                        if experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}) {
+                            Text("* A full stomach delays the onset of oral doses by 3 hours.").font(.footnote).maybeCondensed()
+                        }
                     }
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = hiddenIngestions.contains(ing.id)
@@ -80,7 +86,7 @@ struct ExperienceScreen: View {
                     Text(firstDate, style: .date)
                 }
                 if !cumulativeDoses.isEmpty {
-                    Section("Cumulative Doses") {
+                    Section("Cumulative Dose") {
                         ForEach(cumulativeDoses) { cumulative in
                             CumulativeDoseRow(
                                 substanceName: cumulative.substanceName,
