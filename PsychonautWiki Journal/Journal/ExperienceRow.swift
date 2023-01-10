@@ -110,11 +110,11 @@ struct ExperienceRowContent: View {
                 VStack(alignment: .trailing) {
                     timeText.foregroundColor(.secondary)
                     if let locationName {
-                        HStack {
+                        HStack(spacing: 2) {
                             Image(systemName: "location")
-                            Text(locationName)
+                            Text(locationName).lineLimit(1)
                         }
-                        .font(.callout)
+                        .font(.caption)
                         .foregroundColor(.secondary)
                     }
                 }
@@ -152,7 +152,7 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
-                    locationName: "Schürwies 4"
+                    locationName: "Longer location name"
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
