@@ -104,16 +104,27 @@ struct FinishIngestionScreen: View {
             }
             ToolbarItem(placement: .bottomBar) {
                 Button {
-                    viewModel.addIngestion(
-                        substanceName: substanceName,
-                        administrationRoute: administrationRoute,
-                        dose: dose,
-                        units: units,
-                        isEstimate: isEstimate,
-                        location: locationManager.selectedLocation
-                    )
-                    dismiss()
-                    toastViewModel.showSuccessToast()
+                    Task {
+                        do {
+                            try await viewModel.addIngestion(
+                                substanceName: substanceName,
+                                administrationRoute: administrationRoute,
+                                dose: dose,
+                                units: units,
+                                isEstimate: isEstimate,
+                                location: locationManager.selectedLocation
+                            )
+                            Task { @MainActor in
+                                self.toastViewModel.showSuccessToast()
+                                self.dismiss()
+                            }
+                        } catch {
+                            Task { @MainActor in
+                                self.toastViewModel.showErrorToast(message: "Failed Ingestion")
+                                self.dismiss()
+                            }
+                        }
+                    }
                 } label: {
                     Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }

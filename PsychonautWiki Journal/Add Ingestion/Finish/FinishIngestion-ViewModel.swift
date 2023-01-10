@@ -47,12 +47,12 @@ extension FinishIngestionScreen {
             units: String?,
             isEstimate: Bool,
             location: Location?
-        ) {
+        ) async throws {
             let context = PersistenceController.shared.viewContext
-            context.performAndWait {
-                let companion = createOrUpdateCompanion(with: context, substanceName: substanceName)
-                if let existingExperience = selectedExperience, !wantsToCreateNewExperience {
-                    createIngestion(
+            try await context.perform {
+                let companion = self.createOrUpdateCompanion(with: context, substanceName: substanceName)
+                if let existingExperience = self.selectedExperience, !self.wantsToCreateNewExperience {
+                    self.createIngestion(
                         with: existingExperience,
                         and: context,
                         substanceName: substanceName,
@@ -70,10 +70,10 @@ extension FinishIngestionScreen {
                 } else {
                     let newExperience = Experience(context: context)
                     newExperience.creationDate = Date()
-                    newExperience.sortDate = selectedTime
-                    var title = selectedTime.asDateString
-                    if !enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
-                        title = enteredTitle
+                    newExperience.sortDate = self.selectedTime
+                    var title = self.selectedTime.asDateString
+                    if !self.enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                        title = self.enteredTitle
                     }
                     newExperience.title = title
                     newExperience.text = ""
@@ -84,8 +84,7 @@ extension FinishIngestionScreen {
                         newLocation.longitude = location.longitude ?? 0
                         newLocation.experience = newExperience
                     }
-
-                    createIngestion(
+                    self.createIngestion(
                         with: newExperience,
                         and: context,
                         substanceName: substanceName,
@@ -101,7 +100,7 @@ extension FinishIngestionScreen {
                         }
                     }
                 }
-                try? context.save()
+                try context.save()
             }
         }
 
