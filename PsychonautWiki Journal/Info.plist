@@ -6,6 +6,8 @@
 	<string>Location will only be used to add locations to your experiences automatically.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Authenticate yourself to see your journal.</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(MY_BUNDLE_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>

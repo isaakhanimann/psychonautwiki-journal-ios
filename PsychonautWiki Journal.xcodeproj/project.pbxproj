@@ -80,6 +80,7 @@
 		EA418A2F296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A2E296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift */; };
 		EA418A31296C056500DEA663 /* Array-Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A30296C056500DEA663 /* Array-Unique.swift */; };
 		EA418A33296C755400DEA663 /* EditLocationLinkAndMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */; };
+		EA418A37296CDEDE00DEA663 /* LockScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA418A36296CDEDE00DEA663 /* LockScreen.swift */; };
 		EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C6162956C683000DA021 /* InteractionChecker.swift */; };
 		EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C618295AE60C000DA021 /* InteractionPairRow.swift */; };
 		EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */; };
@@ -300,6 +301,7 @@
 		EA418A2E296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperienceLocation-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EA418A30296C056500DEA663 /* Array-Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Unique.swift"; sourceTree = "<group>"; };
 		EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationLinkAndMap.swift; sourceTree = "<group>"; };
+		EA418A36296CDEDE00DEA663 /* LockScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreen.swift; sourceTree = "<group>"; };
 		EA41C6162956C683000DA021 /* InteractionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionChecker.swift; sourceTree = "<group>"; };
 		EA41C618295AE60C000DA021 /* InteractionPairRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionPairRow.swift; sourceTree = "<group>"; };
 		EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoThroughAllInteractionsScreen.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 			children = (
 				EA8AEA7027E1CC5100B30A16 /* Content */,
 				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EA418A36296CDEDE00DEA663 /* LockScreen.swift */,
 				EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */,
 				EA968AFC2962C9B000779DD9 /* ActivityManager.swift */,
 			);
@@ -642,6 +645,7 @@
 		EA8AEA7027E1CC5100B30A16 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
 				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
 			);
@@ -794,7 +798,6 @@
 				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4716E26CBA664009FB0EC /* Decoding */,
 				EAE471AC26CBA664009FB0EC /* Reused Styles */,
-				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* Journal */,
 				EA47E66E27CB475100F6E10F /* Search */,
@@ -1278,6 +1281,7 @@
 				EABD921929422C580073303A /* NoTimeline.swift in Sources */,
 				EA418A31296C056500DEA663 /* Array-Unique.swift in Sources */,
 				EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */,
+				EA418A37296CDEDE00DEA663 /* LockScreen.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,

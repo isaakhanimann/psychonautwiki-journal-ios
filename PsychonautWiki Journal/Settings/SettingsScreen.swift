@@ -4,12 +4,14 @@ import StoreKit
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.hasToUnlockAppKey) var hasToUnlockApp: Bool = false
     @AppStorage("hasRatedBefore") var hasRatedBefore: Bool = false
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
+            hasToUnlockApp: $hasToUnlockApp,
             hasRatedBefore: $hasRatedBefore,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,
@@ -32,6 +34,7 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
+    @Binding var hasToUnlockApp: Bool
     @Binding var hasRatedBefore: Bool
     @State var isImporting = false
     @Binding var isExporting: Bool
@@ -48,6 +51,9 @@ struct SettingsContent: View {
     var body: some View {
         List {
             eye
+            Section("Privacy") {
+                Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
+            }
             Section("Communication") {
                 if #available(iOS 16.0, *) {
                     ShareLink("Share With a Friend", item: URL(string: "https://isaakhanimann.github.io")!)
@@ -182,6 +188,7 @@ struct SettingsContent_Previews: PreviewProvider {
         NavigationView {
             SettingsContent(
                 isEyeOpen: .constant(true),
+                hasToUnlockApp: .constant(false),
                 hasRatedBefore: .constant(false),
                 isImporting: false,
                 isExporting: .constant(false),
