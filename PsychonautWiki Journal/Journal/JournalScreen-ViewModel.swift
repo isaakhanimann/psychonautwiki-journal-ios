@@ -18,7 +18,7 @@ extension JournalScreen {
                 setupFetchRequestPredicateAndFetch()
             }
         }
-        private let experienceFetchController: NSFetchedResultsController<Experience>!
+        private let experienceFetchController: NSFetchedResultsController<Experience>?
 
         override init() {
             let fetchRequest = Experience.fetchRequest()
@@ -29,9 +29,9 @@ extension JournalScreen {
                 sectionNameKeyPath: nil, cacheName: nil
             )
             super.init()
-            experienceFetchController.delegate = self
+            experienceFetchController?.delegate = self
             do {
-                try experienceFetchController.performFetch()
+                try experienceFetchController?.performFetch()
                 let experiences = experienceFetchController?.fetchedObjects ?? []
                 splitExperiencesInCurrentAndPrevious(experiences: experiences)
             } catch {

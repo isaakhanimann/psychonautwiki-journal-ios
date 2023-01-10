@@ -20,7 +20,7 @@ struct IngestionOverviewChart: View {
                 y: .value("Substance", element.substanceName)
             )
             .foregroundStyle(by: .value("Substance", element.substanceName))
-            .opacity(element.substanceName == ingestionData.last12Months.first!.substanceName ? 1 : 0.5)
+            .opacity(element.substanceName == ingestionData.last12Months.first?.substanceName ? 1 : 0.5)
         }
         .chartForegroundStyleScale(mapping: ingestionData.colorMapping)
         .chartLegend(.hidden)

@@ -93,8 +93,8 @@ struct DailyExperienceChart: View {
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
-                    if let selectedElement = selectedElement {
-                        let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day)!
+                    if let selectedElement = selectedElement,
+                       let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day) {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

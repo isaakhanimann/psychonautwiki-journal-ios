@@ -32,7 +32,7 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
     }
 
     @Published private var customSubstances: [CustomSubstance] = []
-    private let fetchController: NSFetchedResultsController<CustomSubstance>!
+    private let fetchController: NSFetchedResultsController<CustomSubstance>?
 
     var customFilteredWithCategories: [CustomSubstance] {
         if selectedCategories.isEmpty {
@@ -67,9 +67,9 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
             cacheName: nil
         )
         super.init()
-        fetchController.delegate = self
+        fetchController?.delegate = self
         do {
-            try fetchController.performFetch()
+            try fetchController?.performFetch()
             self.customSubstances = fetchController?.fetchedObjects ?? []
         } catch {
             NSLog("Error: could not fetch CustomSubstances")

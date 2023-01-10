@@ -180,7 +180,6 @@
 		EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
 		EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */; };
 		EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9627D7620800940291 /* Double-Ratio.swift */; };
-		EACB6E9C27D77A6C00940291 /* NearestHourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
@@ -404,7 +403,6 @@
 		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
 		EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E9627D7620800940291 /* Double-Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-Ratio.swift"; sourceTree = "<group>"; };
-		EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestHourTests.swift; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
@@ -767,7 +765,6 @@
 			children = (
 				EACB6E5127D2592800940291 /* FileTests.swift */,
 				EACB6E5627D3483900940291 /* RegexTests.swift */,
-				EACB6E9B27D77A6C00940291 /* NearestHourTests.swift */,
 			);
 			path = JournalTests;
 			sourceTree = "<group>";
@@ -1140,7 +1137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EACB6E5227D2592800940291 /* FileTests.swift in Sources */,
-				EACB6E9C27D77A6C00940291 /* NearestHourTests.swift in Sources */,
 				EACB6E5727D3483900940291 /* RegexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
