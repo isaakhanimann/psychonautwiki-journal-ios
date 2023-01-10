@@ -26,11 +26,6 @@ struct ExperienceScreen: View {
                     } else {
                         Canvas {_,_ in }.frame(height: timelineHeight)
                     }
-                } header: {
-                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
-                    Text(firstDate, style: .date)
-                }
-                Section("Ingestions") {
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = hiddenIngestions.contains(ing.id)
                         let route = ing.administrationRouteUnwrapped
@@ -80,6 +75,9 @@ struct ExperienceScreen: View {
                             }
                         }
                     }
+                } header: {
+                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
+                    Text(firstDate, style: .date)
                 }
                 if !cumulativeDoses.isEmpty {
                     Section("Cumulative Doses") {
@@ -111,24 +109,22 @@ struct ExperienceScreen: View {
             }
             if isEyeOpen {
                 if !substancesUsed.isEmpty {
-                    Section("Substances") {
+                    Section("Substance Info") {
                         ForEach(substancesUsed) { substance in
                             NavigationLink(substance.name) {
                                 SubstanceScreen(substance: substance)
                             }
                         }
-                    }
-                }
-                Section("Interactions") {
-                    ForEach(interactions) { interaction in
-                        InteractionPairRow(
-                            aName: interaction.aName,
-                            bName: interaction.bName,
-                            interactionType: interaction.interactionType
-                        )
-                    }
-                    NavigationLink("See All Interactions") {
-                        GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                        ForEach(interactions) { interaction in
+                            InteractionPairRow(
+                                aName: interaction.aName,
+                                bName: interaction.bName,
+                                interactionType: interaction.interactionType
+                            )
+                        }
+                        NavigationLink("See All Interactions") {
+                            GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                        }
                     }
                 }
             }
@@ -166,6 +162,7 @@ struct ExperienceScreen: View {
                 }
             }
         }
+        .headerProminence(.increased)
         .navigationTitle(experience.titleUnwrapped)
         .sheet(isPresented: $isEditing) {
             EditExperienceScreen(experience: experience)
