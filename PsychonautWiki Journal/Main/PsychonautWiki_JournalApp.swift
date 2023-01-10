@@ -1,54 +1,33 @@
 import SwiftUI
-import LocalAuthentication
 
 @main
 struct PsychonautWiki_JournalApp: App {
 
     @StateObject private var toastViewModel = ToastViewModel()
+    @StateObject private var authenticator = Authenticator()
     @Environment(\.scenePhase) private var scenePhase
-    @AppStorage(PersistenceController.hasToUnlockAppKey) var hasToUnlockApp: Bool = false
-    @State private var isUnlocked = false
 
     var body: some Scene {
         WindowGroup {
-            if isUnlocked {
+            if authenticator.isUnlocked {
                 ContentView()
                     .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                     .environmentObject(toastViewModel)
+                    .environmentObject(authenticator)
                     .accentColor(Color.blue)
             } else {
-                LockScreen()
+                LockScreen(isFaceIDEnabled: authenticator.isFaceIDEnabled)
             }
         }
         .onChange(of: scenePhase) { phase in
-            if hasToUnlockApp {
-                if phase == .background || phase == .inactive {
-                    isUnlocked = false
-                } else if phase == .active && !isUnlocked {
-                    authenticate()
-                }
-            } else {
-                isUnlocked = true
+            if phase == .inactive {
+                print("Inactive")
+            } else if phase == .active {
+                print("Active")
+            } else if phase == .background {
+                print("Background")
             }
-        }
-    }
-
-    func authenticate() {
-        let context = LAContext()
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Authenticate yourself to see your journal."
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                if success {
-                    Task { @MainActor in
-                        isUnlocked = true
-                    }
-                } else {
-                    // error
-                }
-            }
-        } else {
-            // no biometrics
+            authenticator.onChange(of: phase)
         }
     }
 }

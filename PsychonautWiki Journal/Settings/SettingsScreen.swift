@@ -4,14 +4,15 @@ import StoreKit
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-    @AppStorage(PersistenceController.hasToUnlockAppKey) var hasToUnlockApp: Bool = false
     @AppStorage("hasRatedBefore") var hasRatedBefore: Bool = false
     @StateObject private var viewModel = ViewModel()
+    @EnvironmentObject var authenticator: Authenticator
 
     var body: some View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
-            hasToUnlockApp: $hasToUnlockApp,
+            isFaceIDAvailable: authenticator.isFaceIDEnabled,
+            hasToUnlockApp: $authenticator.hasToUnlockApp,
             hasRatedBefore: $hasRatedBefore,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,
@@ -34,6 +35,7 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
+    var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @Binding var hasRatedBefore: Bool
     @State var isImporting = false
@@ -52,7 +54,11 @@ struct SettingsContent: View {
         List {
             eye
             Section("Privacy") {
-                Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
+                if isFaceIDAvailable {
+                    Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
+                } else {
+                    Text("Enable Face ID in Settings to unlock the app.")
+                }
             }
             Section("Communication") {
                 if #available(iOS 16.0, *) {
@@ -188,6 +194,7 @@ struct SettingsContent_Previews: PreviewProvider {
         NavigationView {
             SettingsContent(
                 isEyeOpen: .constant(true),
+                isFaceIDAvailable: true,
                 hasToUnlockApp: .constant(false),
                 hasRatedBefore: .constant(false),
                 isImporting: false,

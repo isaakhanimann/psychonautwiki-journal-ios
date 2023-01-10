@@ -10,7 +10,6 @@ struct PersistenceController {
     static let needsToSeeWelcomeKey = "needsToSeeWelcome"
     static let isEyeOpenKey1 = "isEyeOpen"
     static let isEyeOpenKey2 = "isEyeOpen2"
-    static let hasToUnlockAppKey = "hasToUnlockApp"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     var viewContext: NSManagedObjectContext {
         container.viewContext
