@@ -12,11 +12,14 @@ struct ChooseDoseScreen: View {
             substance: substance,
             administrationRoute: administrationRoute,
             dismiss: dismiss,
+            purity: $viewModel.purity,
             selectedPureDose: $viewModel.selectedPureDose,
             selectedUnits: $viewModel.selectedUnits,
             isEstimate: $viewModel.isEstimate,
             isShowingNext: $viewModel.isShowingNext,
-            impureDoseText: viewModel.impureDoseText)
+            impureDoseText: viewModel.impureDoseText,
+            impureDoseRounded: viewModel.impureDoseRounded
+        )
         .task {
             let routeUnits = substance.getDose(for: administrationRoute)?.units
             viewModel.initializeUnits(routeUnits: routeUnits)
@@ -29,11 +32,13 @@ struct ChooseDoseScreenContent: View {
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
+    @Binding var purity: Double
     @Binding var selectedPureDose: Double?
     @Binding var selectedUnits: String?
     @Binding var isEstimate: Bool
     @Binding var isShowingNext: Bool
     var impureDoseText: String
+    var impureDoseRounded: Double?
 
     @State private var isShowingUnknownDoseAlert = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -47,6 +52,7 @@ struct ChooseDoseScreenContent: View {
             }
         }
         .optionalScrollDismissesKeyboard()
+        .headerProminence(.increased)
         .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
             ToolbarItem(placement: .keyboard) {
@@ -90,7 +96,8 @@ struct ChooseDoseScreenContent: View {
                         dose: selectedPureDose,
                         units: selectedUnits,
                         isEstimate: isEstimate,
-                        dismiss: dismiss
+                        dismiss: dismiss,
+                        suggestedNote: suggestedNote
                     ),
                     isActive: $isShowingNext
                 ) {
@@ -100,31 +107,34 @@ struct ChooseDoseScreenContent: View {
         }
     }
 
-    static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
-
-    @State private var purityText = "100"
-    var purity: Double? {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale.current
-        formatter.numberStyle = .decimal
-        return formatter.number(from: purityText)?.doubleValue
+    var suggestedNote: String? {
+        guard let impureDoseRounded, let selectedUnits, impureDoseRounded != 100 else {return nil}
+        return "\(impureDoseRounded.formatted()) \(selectedUnits) with \(Int(purity))% purity"
     }
+
+    static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
     private var puritySection: some View {
         Section("Purity") {
             VStack {
-                HStack {
-                    TextField("Enter Purity", text: $purityText)
-                        .keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
-                    Text("%")
+                Text("\(Int(purity))%").font(.title2.bold())
+                Slider(
+                    value: $purity,
+                    in: 1...100,
+                    step: 1
+                ) {
+                    Text("Purity")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("100")
                 }
-                HStack {
-                    Text("Raw Amount")
-                    Spacer()
-                    Text(impureDoseText)
-                        .foregroundColor(.secondary)
-                }
+            }
+            HStack {
+                Text("Raw Amount")
+                Spacer()
+                Text(impureDoseText)
+                    .font(.title2.bold())
             }
         }
     }
@@ -155,9 +165,10 @@ struct ChooseDoseScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ChooseDoseScreenContent(
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
                 administrationRoute: .oral,
                 dismiss: {},
+                purity: .constant(100),
                 selectedPureDose: .constant(20),
                 selectedUnits: .constant("mg"),
                 isEstimate: .constant(false),
