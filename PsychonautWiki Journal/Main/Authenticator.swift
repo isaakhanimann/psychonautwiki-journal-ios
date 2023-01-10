@@ -25,14 +25,14 @@ class Authenticator: ObservableObject {
     }
 
     func onChange(of scenePhase: ScenePhase) {
-        // when the system shows the Face ID prompt the app moves to the background.
-        // therefore this code gets executed before it is unlocked and after
-        if scenePhase == .active && !isUnlocked {
+        if scenePhase == .active {
             let context = LAContext()
             var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 isFaceIDEnabled = true
-                if hasToUnlockApp {
+                // when the system shows the Face ID prompt the app moves to the background.
+                // therefore this code gets executed before it is unlocked and after
+                if hasToUnlockApp && !isUnlocked {
                     authenticate(with: context)
                 }
             } else {
