@@ -43,38 +43,33 @@ struct IngestionRowContent: View {
                 .font(.title2)
                 .foregroundColor(substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
-                HStack(alignment: .center) {
-                    VStack(alignment: .leading) {
-                        Text(substanceName)
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                        if isTimeRelative {
-                            Text(ingestionTime, style: .relative) + Text(" ago")
-                        } else {
-                            Text(ingestionTime, style: .time)
-                        }
-
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
-                        if let doseUnwrapped = dose {
-                            Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
-                        } else {
-                            Text("Unknown Dose")
-                        }
-                        if let numDotsUnwrap = numDots {
-                            Spacer().frame(height: 2)
-                            DotRows(numDots: numDotsUnwrap)
-                            Spacer().frame(height: 2)
-                        }
-                    }.font(.headline)
+                Text(substanceName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                if isTimeRelative {
+                    Text(ingestionTime, style: .relative) + Text(" ago")
+                } else {
+                    Text(ingestionTime, style: .time)
                 }
                 if !note.isEmpty {
                     Text(note)
                         .foregroundColor(.secondary)
                 }
             }
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
+                if let doseUnwrapped = dose {
+                    Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
+                } else {
+                    Text("Unknown Dose")
+                }
+                if let numDotsUnwrap = numDots {
+                    Spacer().frame(height: 2)
+                    DotRows(numDots: numDotsUnwrap)
+                    Spacer().frame(height: 2)
+                }
+            }.font(.headline)
         }
     }
 }
