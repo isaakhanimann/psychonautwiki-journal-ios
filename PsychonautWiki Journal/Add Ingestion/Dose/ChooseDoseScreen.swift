@@ -131,9 +131,13 @@ struct ChooseDoseScreenContent: View {
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
     private var puritySection: some View {
-        Section("Purity") {
+        Section("Purity Adjusted Dose") {
             VStack {
-                Text("\(Int(purity))%").font(.title2.bold())
+                Text(impureDoseText)
+                    .font(.title2.bold())
+                Text("\(Int(purity))%")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
                 Slider(
                     value: $purity,
                     in: 1...100,
@@ -145,12 +149,6 @@ struct ChooseDoseScreenContent: View {
                 } maximumValueLabel: {
                     Text("100")
                 }
-            }
-            HStack {
-                Text("Raw Amount")
-                Spacer()
-                Text(impureDoseText)
-                    .font(.title2.bold())
             }
         }
     }
