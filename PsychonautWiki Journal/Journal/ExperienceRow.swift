@@ -114,15 +114,15 @@ struct ExperienceRowContent: View {
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.headline)
-                    if distinctSubstanceNames.isEmpty {
-                        Text("No substance")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text(distinctSubstanceNames, format: .list(type: .and))
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                    Group {
+                        if distinctSubstanceNames.isEmpty {
+                            Text("No substance")
+                        } else {
+                            Text(distinctSubstanceNames, format: .list(type: .and))
+                        }
                     }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {

@@ -55,8 +55,6 @@ struct WebViewScreen: View {
             }
             if isWebViewLoading {
                 ProgressView()
-                    .scaleEffect(1.5)
-                    .tint(.accentColor)
             }
         }
     }
