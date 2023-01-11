@@ -129,7 +129,6 @@ This route is strongly associated with substances such as heroin and cocaine, bu
 """)
             }
         }
-        .headerProminence(.increased)
         .navigationTitle("Administration Routes")
     }
 }

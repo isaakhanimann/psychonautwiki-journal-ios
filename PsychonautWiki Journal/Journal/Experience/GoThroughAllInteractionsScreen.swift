@@ -33,7 +33,7 @@ struct GoThroughAllInteractionsScreen: View {
                         Text("No documented interactions")
                     }
                 }
-            }.headerProminence(.increased)
+            }
         }.navigationTitle("Interactions")
     }
 }

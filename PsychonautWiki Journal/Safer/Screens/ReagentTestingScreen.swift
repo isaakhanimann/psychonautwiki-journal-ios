@@ -23,7 +23,7 @@ struct ReagentTestingScreen: View {
             Section("Kit Sellers") {
                 Link("DanceSafe", destination: URL(string: "https://dancesafe.org/testing-kit-instructions/")!)
                 Link("Bunk Police", destination: URL(string: "https://bunkpolice.com")!)
-            }.headerProminence(.increased)
+            }
         }.navigationTitle("Reagent Testing")
     }
 }

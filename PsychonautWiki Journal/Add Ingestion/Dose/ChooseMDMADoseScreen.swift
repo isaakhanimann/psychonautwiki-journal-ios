@@ -64,7 +64,6 @@ struct ChooseMDMADoseScreen: View {
             MDMAPillsSection()
         }
         .navigationTitle("MDMA Dosage")
-        .headerProminence(.increased)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

@@ -104,7 +104,6 @@ struct ChooseAlcoholDoseScreen: View {
             }
         }
         .navigationTitle("Alcohol Dosage")
-        .headerProminence(.increased)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

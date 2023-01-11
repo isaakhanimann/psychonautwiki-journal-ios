@@ -80,7 +80,6 @@ struct ChooseCaffeineDoseScreen: View {
             }
         }
         .navigationTitle("Caffeine Dosage")
-        .headerProminence(.increased)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

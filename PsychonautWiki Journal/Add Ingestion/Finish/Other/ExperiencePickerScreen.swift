@@ -27,7 +27,7 @@ struct ExperiencePickerScreen: View {
                 ForEach(experiences) { exp in
                     button(for: exp)
                 }
-            }.headerProminence(.increased)
+            }
         }.navigationTitle("Choose Experience")
     }
 

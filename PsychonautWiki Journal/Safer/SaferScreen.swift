@@ -66,7 +66,6 @@ struct SaferScreen: View {
                         SaferHallucinogenScreen()
                     }
                 }
-                .headerProminence(.increased)
                 .navigationTitle(title4)
             }
             let title5 = "5. Combinations"

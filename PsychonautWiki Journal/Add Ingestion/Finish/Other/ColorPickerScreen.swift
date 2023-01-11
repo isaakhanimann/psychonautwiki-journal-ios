@@ -30,14 +30,14 @@ struct ColorPickerScreen: View {
                     ForEach(Array(otherColors)) { color in
                         button(for: color)
                     }
-                }.headerProminence(.increased)
+                }
             }
             if !alreadyUsedColors.isEmpty {
                 Section("Used Colors") {
                     ForEach(Array(alreadyUsedColors)) { color in
                         button(for: color)
                     }
-                }.headerProminence(.increased)
+                }
             }
         }.navigationTitle("Choose Color")
     }

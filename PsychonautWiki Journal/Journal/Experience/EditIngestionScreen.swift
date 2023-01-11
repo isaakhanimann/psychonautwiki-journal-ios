@@ -119,7 +119,6 @@ struct EditIngestionContent: View {
                 }
             }
         }
-        .headerProminence(.increased)
         .optionalScrollDismissesKeyboard()
         .navigationTitle("Edit \(substanceName)")
         .toolbar {

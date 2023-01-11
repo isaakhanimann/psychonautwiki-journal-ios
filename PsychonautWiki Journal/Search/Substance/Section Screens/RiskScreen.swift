@@ -31,7 +31,6 @@ struct RiskScreen: View {
                 }
             }
         }
-        .headerProminence(.increased)
         .navigationTitle("Risks")
     }
 }

@@ -55,7 +55,6 @@ struct DosesScreen: View {
             }
         }
         .navigationTitle("Dosage")
-        .headerProminence(.increased)
     }
 
 

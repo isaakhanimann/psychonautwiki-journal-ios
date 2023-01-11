@@ -119,7 +119,6 @@ struct ChooseCannabisSmokedDoseScreen: View {
             }
         }
         .navigationTitle("Cannabis Smoked")
-        .headerProminence(.increased)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {

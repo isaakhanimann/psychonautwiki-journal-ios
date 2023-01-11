@@ -68,7 +68,6 @@ struct ChooseDoseScreenContent: View {
             }
         }
         .optionalScrollDismissesKeyboard()
-        .headerProminence(.increased)
         .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
             ToolbarItem(placement: .keyboard) {

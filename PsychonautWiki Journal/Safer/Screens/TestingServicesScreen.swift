@@ -133,7 +133,6 @@ struct TestingServicesScreen: View {
                 }.foregroundColor(.red)
             }
         }
-        .headerProminence(.increased)
         .navigationTitle("Testing Services")
     }
 }

@@ -197,7 +197,6 @@ struct ExperienceScreen: View {
                 }
             }
         }
-        .headerProminence(.increased)
         .navigationTitle(experience.titleUnwrapped)
         .sheet(isPresented: $isEditing) {
             EditExperienceScreen(experience: experience)

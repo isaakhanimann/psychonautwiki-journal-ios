@@ -28,6 +28,7 @@ struct PsychonautWiki_JournalApp: App {
         WindowGroup {
             if authenticator.isUnlocked {
                 ContentView()
+                    .headerProminence(.increased)
                     .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                     .environmentObject(toastViewModel)
                     .environmentObject(authenticator)
