@@ -131,7 +131,6 @@ struct ExperienceRowContent: View {
                             Text(locationName).lineLimit(1)
                         }
                         .font(.caption)
-                        .foregroundColor(.secondary)
                     }
                 }
             }
