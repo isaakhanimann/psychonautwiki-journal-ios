@@ -150,14 +150,15 @@ struct ExperienceScreen: View {
                             }
                         }
                         ForEach(interactions) { interaction in
-                            InteractionPairRow(
-                                aName: interaction.aName,
-                                bName: interaction.bName,
-                                interactionType: interaction.interactionType
-                            )
-                        }
-                        NavigationLink("See All Interactions") {
-                            GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                            NavigationLink {
+                                GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                            } label: {
+                                InteractionPairRow(
+                                    aName: interaction.aName,
+                                    bName: interaction.bName,
+                                    interactionType: interaction.interactionType
+                                )
+                            }
                         }
                     }
                 }
