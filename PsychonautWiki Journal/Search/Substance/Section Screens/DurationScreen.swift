@@ -25,11 +25,17 @@ struct DurationScreen: View {
     var body: some View {
         List {
             Section {
-                DatePicker(
-                    "Start Time",
-                    selection: $selectedTime,
-                    displayedComponents: [.hourAndMinute]
-                )
+                HStack {
+                    DatePicker(
+                        "Start Time",
+                        selection: $selectedTime,
+                        displayedComponents: [.hourAndMinute]
+                    )
+                    Button("Now") {
+                        selectedTime = .now
+                    }
+                    .buttonStyle(.bordered)
+                }
                 VStack(alignment: .leading) {
                     if let timelineModel {
                         EffectTimeline(timelineModel: timelineModel)
