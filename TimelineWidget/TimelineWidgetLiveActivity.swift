@@ -23,12 +23,15 @@ struct TimelineWidgetLiveActivity: Widget {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             let totalHeight = 160.0 // in the documentation: https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities it says that truncation only happens if the height exceeds 160 points
-            let bottomPadding = 3.0
+            let verticalPadding = 15.0
             EffectTimeline(
                 timelineModel: timelineModel,
-                height: totalHeight - bottomPadding,
-                isShowingCurrentTime: false
-            ).padding(.bottom, bottomPadding)
+                height: totalHeight - verticalPadding,
+                isShowingCurrentTime: false,
+                spaceToLabels: 7
+            )
+            .padding(.vertical, verticalPadding)
+            .padding(.horizontal, 10)
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             return DynamicIsland {
@@ -42,8 +45,10 @@ struct TimelineWidgetLiveActivity: Widget {
                     EffectTimeline(
                         timelineModel: timelineModel,
                         height: 90,
-                        isShowingCurrentTime: false
+                        isShowingCurrentTime: false,
+                        spaceToLabels: 7
                     )
+                    .padding(.horizontal, 5)
 
                 }
             } compactLeading: {

@@ -21,6 +21,7 @@ struct EffectTimeline: View {
     let timelineModel: TimelineModel
     var height: Double = 200
     var isShowingCurrentTime = true
+    var spaceToLabels = 3.0
     private let lineWidth: Double = 5
 
     var body: some View {
@@ -51,7 +52,7 @@ struct EffectTimeline: View {
                     }
                 }
             }
-            Spacer().frame(height: 3)
+            Spacer().frame(height: spaceToLabels)
             Canvas { context, size in
                 let widthInPixels = size.width - halfLineWidth
                 let pixelsPerSec = widthInPixels/timelineModel.totalWidth
