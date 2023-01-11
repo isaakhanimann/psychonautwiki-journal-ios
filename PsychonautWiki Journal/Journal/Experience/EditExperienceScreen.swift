@@ -64,7 +64,6 @@ struct EditExperienceContent: View {
                         .frame(minHeight: 300)
                 }
             }
-            .optionalScrollDismissesKeyboard()
             .navigationTitle("Edit Experience")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
