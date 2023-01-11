@@ -62,11 +62,13 @@ struct IngestionRowContent: View {
                 Text(substanceName)
                     .font(.headline)
                     .foregroundColor(.primary)
-                if isTimeRelative {
-                    Text(ingestionTime, style: .relative) + Text(" ago")
-                } else {
-                    Text(ingestionTime, style: .time)
-                }
+                Group {
+                    if isTimeRelative {
+                        Text(ingestionTime, style: .relative) + Text(" ago")
+                    } else {
+                        Text(ingestionTime, style: .time)
+                    }
+                }.foregroundColor(.secondary)
                 if !note.isEmpty {
                     Text(note)
                         .foregroundColor(.secondary)

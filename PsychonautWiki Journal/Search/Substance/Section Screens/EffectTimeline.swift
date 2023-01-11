@@ -21,7 +21,7 @@ struct EffectTimeline: View {
     let timelineModel: TimelineModel
     var height: Double = 200
     var isShowingCurrentTime = true
-    var spaceToLabels = 3.0
+    var spaceToLabels = 5.0
     private let lineWidth: Double = 5
 
     var body: some View {
