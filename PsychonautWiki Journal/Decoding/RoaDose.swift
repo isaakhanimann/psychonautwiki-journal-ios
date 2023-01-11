@@ -42,15 +42,15 @@ struct RoaDose: Decodable {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose <= commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose <= strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose <= heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             if heavyMinUnwrap <= dose {
@@ -74,15 +74,15 @@ struct RoaDose: Decodable {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose <= commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose <= strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose <= heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             return Int(floor(dose / heavyMinUnwrap))
