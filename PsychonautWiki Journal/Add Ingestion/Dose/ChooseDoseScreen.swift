@@ -183,18 +183,24 @@ struct ChooseDoseScreenContent: View {
 
 struct ChooseDoseScreenContent_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ChooseDoseScreenContent(
-                substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
-                administrationRoute: .oral,
-                dismiss: {},
-                purity: .constant(100),
-                selectedPureDose: .constant(20),
-                selectedUnits: .constant("mg"),
-                isEstimate: .constant(false),
-                isShowingNext: .constant(false),
-                impureDoseText: "20 mg"
-            )
+        Group {
+            ForEach(previewDeviceNames, id: \.self) { name in
+                NavigationView {
+                    ChooseDoseScreenContent(
+                        substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
+                        administrationRoute: .oral,
+                        dismiss: {},
+                        purity: .constant(100),
+                        selectedPureDose: .constant(20),
+                        selectedUnits: .constant("mg"),
+                        isEstimate: .constant(false),
+                        isShowingNext: .constant(false),
+                        impureDoseText: "20 mg"
+                    )
+                }
+                .previewDevice(PreviewDevice(rawValue: name))
+                .previewDisplayName(name)
+            }
         }
     }
 }

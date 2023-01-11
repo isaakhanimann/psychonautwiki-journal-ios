@@ -101,9 +101,19 @@ struct InteractionAlertView: View {
 
 struct InteractionAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionAlertView(
-            interactions: [Interaction(aName: "Tramadol", bName: "Alcohol", interactionType: .dangerous)],
-            substanceName: "Tramadol",
-            isShowing: .constant(true))
+        Group {
+            ForEach(previewDeviceNames, id: \.self) { name in
+                InteractionAlertView(
+                    interactions: [
+                        Interaction(aName: "Tramadol", bName: "Alcohol", interactionType: .dangerous),
+                        Interaction(aName: "Tramadol", bName: "Cannabis", interactionType: .uncertain)
+                    ],
+                    substanceName: "Tramadol",
+                    isShowing: .constant(true)
+                )
+                .previewDevice(PreviewDevice(rawValue: name))
+                .previewDisplayName(name)
+            }
+        }
     }
 }

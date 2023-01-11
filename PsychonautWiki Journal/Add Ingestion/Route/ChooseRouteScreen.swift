@@ -88,7 +88,7 @@ struct ChooseRouteScreen: View {
                     Text(route.rawValue.localizedCapitalized)
                         .font(.headline)
                     Text(route.clarification)
-                        .font(.subheadline)
+                        .font(.footnote)
                         .multilineTextAlignment(.center)
 
                 }
@@ -107,11 +107,17 @@ struct ChooseRouteScreen: View {
 struct ChooseRouteView_Previews: PreviewProvider {
 
     static var previews: some View {
-        NavigationView {
-            ChooseRouteScreen(
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                dismiss: {}
-            )
+        Group {
+            ForEach(previewDeviceNames, id: \.self) { name in
+                NavigationView {
+                    ChooseRouteScreen(
+                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                        dismiss: {}
+                    )
+                }
+                .previewDevice(PreviewDevice(rawValue: name))
+                .previewDisplayName(name)
+            }
         }
     }
 }
