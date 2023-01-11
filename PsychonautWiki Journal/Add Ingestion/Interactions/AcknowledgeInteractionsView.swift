@@ -101,15 +101,22 @@ struct AcknowledgeInteractionsContent: View {
     }
 }
 
+
 struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            AcknowledgeInteractionsContent(
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                dismiss: {},
-                interactions: [],
-                isShowingAlert: .constant(false)
-            )
+        Group {
+            ForEach(previewDeviceNames, id: \.self) { name in
+                NavigationView {
+                    AcknowledgeInteractionsContent(
+                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                        dismiss: {},
+                        interactions: [],
+                        isShowingAlert: .constant(false)
+                    )
+                }
+                .previewDevice(PreviewDevice(rawValue: name))
+                .previewDisplayName(name)
+            }
         }
     }
 }
