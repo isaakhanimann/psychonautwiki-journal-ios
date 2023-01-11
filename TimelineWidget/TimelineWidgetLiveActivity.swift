@@ -49,7 +49,6 @@ struct TimelineWidgetLiveActivity: Widget {
                         spaceToLabels: 7
                     )
                     .padding(.horizontal, 5)
-
                 }
             } compactLeading: {
                 Text(timelineModel.startTime, style: .relative)

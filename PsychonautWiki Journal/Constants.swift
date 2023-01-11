@@ -16,7 +16,7 @@
 
 import Foundation
 
-let OpenExperienceURL = "open-experience"
+let OpenJournalURL = "open-journal"
 
 let namesOfLegalSubstances = [
     "Caffeine",

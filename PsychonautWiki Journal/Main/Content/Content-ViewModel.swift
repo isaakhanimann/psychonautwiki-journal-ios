@@ -36,7 +36,7 @@ extension ContentView {
         }
 
         func receiveURL(url: URL) {
-            if url.absoluteString == OpenExperienceURL {
+            if url.absoluteString == OpenJournalURL {
                 isShowingHome = true
                 isShowingSearch = false
                 isShowingSafer = false
