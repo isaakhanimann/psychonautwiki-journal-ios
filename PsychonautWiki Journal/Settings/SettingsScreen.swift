@@ -103,7 +103,7 @@ struct SettingsContent: View {
                         }
                     )
                     .foregroundColor(.accentColor)
-                    Link(destination: URL(string: "https://github.com/isaakhanimann/PsychonautWiki-Journal")!) {
+                    Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
                         Label("Source Code", systemImage: "doc.text.magnifyingglass")
                     }
                 }
