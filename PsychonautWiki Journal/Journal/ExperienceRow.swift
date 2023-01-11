@@ -125,8 +125,9 @@ struct ExperienceRowContent: View {
                     }
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 4) {
+                VStack(alignment: .trailing) {
                     timeText.foregroundColor(.secondary)
+                    Spacer()
                     if let locationName {
                         HStack(spacing: 2) {
                             Image(systemName: "location")
@@ -135,7 +136,7 @@ struct ExperienceRowContent: View {
                         .font(.caption)
                     }
                 }
-            }
+            }.fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -172,9 +173,9 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     locationName: "Longer location name"
                 )
                 ExperienceRowContent(
-                    ingestionColors: [.blue, .pink],
+                    ingestionColors: [.blue, .pink, .purple, .yellow],
                     title: "My title",
-                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    distinctSubstanceNames: ["MDMA", "LSD", "Cocaine", "Amphetamine"],
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
