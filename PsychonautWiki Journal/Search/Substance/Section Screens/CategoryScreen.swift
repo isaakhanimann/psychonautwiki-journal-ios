@@ -39,14 +39,15 @@ struct CategoryScreen: View {
 
                 }
             }
-        }.navigationTitle("Categories")
-            .onAppear {
-                categories = substance.categories.compactMap { name in
-                    SubstanceRepo.shared.categories.first(where: { cat in
-                        cat.name == name
-                    })
-                }
+        }
+        .navigationTitle("Categories")
+        .onAppear {
+            categories = substance.categories.compactMap { name in
+                SubstanceRepo.shared.categories.first(where: { cat in
+                    cat.name == name
+                })
             }
+        }
     }
 }
 

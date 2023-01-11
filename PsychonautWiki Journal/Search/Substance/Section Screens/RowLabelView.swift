@@ -26,6 +26,7 @@ struct RowLabelView: View {
             Text(label+" ")
             Spacer()
             Text(value)
+                .multilineTextAlignment(.trailing)
                 .foregroundColor(.secondary)
         }
     }
