@@ -44,6 +44,7 @@ struct ExperiencesList: View {
                     }
                 }
             }
+            .headerProminence(.increased)
             if viewModel.currentExperiences.isEmpty && viewModel.previousExperiences.isEmpty {
                 if isSearching {
                     Text("No Results")
