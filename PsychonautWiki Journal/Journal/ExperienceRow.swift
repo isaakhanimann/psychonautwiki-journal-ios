@@ -125,7 +125,7 @@ struct ExperienceRowContent: View {
                     }
                 }
                 Spacer()
-                VStack(alignment: .trailing) {
+                VStack(alignment: .trailing, spacing: 4) {
                     timeText.foregroundColor(.secondary)
                     if let locationName {
                         HStack(spacing: 2) {
