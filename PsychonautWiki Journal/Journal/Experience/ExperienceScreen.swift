@@ -202,7 +202,7 @@ struct ExperienceScreen: View {
             EditExperienceScreen(experience: experience)
         }
         .toolbar {
-            ToolbarItem {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 let isFavorite = experience.isFavorite
                 Button {
                     experience.isFavorite = !isFavorite
@@ -213,6 +213,11 @@ struct ExperienceScreen: View {
                     } else {
                         Label("Favorite", systemImage: "star")
                     }
+                }
+                Button {
+                    isEditing.toggle()
+                } label: {
+                    Label("Edit Title/Note", systemImage: "pencil")
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
@@ -226,29 +231,20 @@ struct ExperienceScreen: View {
                         ChooseSubstanceScreen()
                     })
                 }
-                Spacer()
-                Menu {
-                    Button {
-                        isEditing.toggle()
-                    } label: {
-                        Label("Edit Title/Note", systemImage: "pencil")
-                    }
-                    Button {
-                        isTimeRelative.toggle()
-                    } label: {
-                        if isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
-                        }
-                    }
-                    Button(role: .destructive) {
-                        isShowingDeleteAlert.toggle()
-                    } label: {
-                        Label("Delete Experience", systemImage: "trash")
-                    }
+                Button {
+                    isTimeRelative.toggle()
                 } label: {
-                    Label("More", systemImage: isTimeRelative ? "ellipsis.circle.fill" : "ellipsis.circle")                }
+                    if isTimeRelative {
+                        Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                    } else {
+                        Label("Show Relative Time", systemImage: "timer.circle")
+                    }
+                }
+                Button(role: .destructive) {
+                    isShowingDeleteAlert.toggle()
+                } label: {
+                    Label("Delete Experience", systemImage: "trash")
+                }
                 .alert(isPresented: $isShowingDeleteAlert) {
                     Alert(
                         title: Text("Delete Experience?"),
