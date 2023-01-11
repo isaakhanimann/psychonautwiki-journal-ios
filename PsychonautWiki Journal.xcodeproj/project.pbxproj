@@ -797,7 +797,6 @@
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4716E26CBA664009FB0EC /* Decoding */,
-				EAE471AC26CBA664009FB0EC /* Reused Styles */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* Journal */,
 				EA47E66E27CB475100F6E10F /* Search */,
@@ -933,13 +932,6 @@
 				EA095A1127D9E3E8007D44D6 /* Finish */,
 			);
 			path = "Add Ingestion";
-			sourceTree = "<group>";
-		};
-		EAE471AC26CBA664009FB0EC /* Reused Styles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Reused Styles";
 			sourceTree = "<group>";
 		};
 		EAF76CA727D90CE500945587 /* Enums */ = {
