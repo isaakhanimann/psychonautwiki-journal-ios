@@ -117,9 +117,11 @@ struct ExperienceRowContent: View {
                     if distinctSubstanceNames.isEmpty {
                         Text("No substance")
                             .font(.subheadline)
+                            .foregroundColor(.secondary)
                     } else {
                         Text(distinctSubstanceNames, format: .list(type: .and))
                             .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
                 }
                 Spacer()
