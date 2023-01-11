@@ -61,7 +61,7 @@ struct IngestionDetails: View {
                 Text("Most Used Substance")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                Text(data.first?.substanceName ?? "Unknown")
+                Text(data.first?.substanceName ?? "None")
                     .font(.title2.bold())
                     .foregroundColor(.primary)
                 IngestionDetailsChart(data: data, colorMapping: ingestionData.colorMapping)
