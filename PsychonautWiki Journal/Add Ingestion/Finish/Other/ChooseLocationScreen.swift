@@ -135,8 +135,7 @@ struct ChooseLocationScreenContent: View {
                         }
                         .listRowInsets(EdgeInsets())
                     }
-                    if let selectedLocationUnwrap = selectedLocation {
-                        Text("Location name is: \(selectedLocationUnwrap.name)")
+                    if selectedLocation != nil {
                         Button {
                             selectedLocationName = ""
                             selectedLocation = nil
