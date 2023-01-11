@@ -45,14 +45,12 @@ struct MDMAMaxDoseCalculator: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
             Text(suggestedDoseText).font(.title.bold())
-            Spacer().frame(height: 15)
             Picker("Gender", selection: $gender) {
                 Text("Male").tag(Gender.male)
                 Text("Female").tag(Gender.female)
             }.pickerStyle(.segmented)
-            Spacer().frame(height: 15)
             Text("\(Int(bodyWeightInKg)) kg").font(.title2.bold())
             Slider(
                 value: $bodyWeightInKg,
