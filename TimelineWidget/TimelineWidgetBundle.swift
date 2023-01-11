@@ -20,7 +20,6 @@ import SwiftUI
 @main
 struct TimelineWidgetBundle: WidgetBundle {
     var body: some Widget {
-        TimelineWidget()
         TimelineWidgetLiveActivity()
     }
 }

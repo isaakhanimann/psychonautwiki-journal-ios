@@ -16,7 +16,6 @@
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
 		EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */; };
-		EA085DD729607229001638AC /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD629607229001638AC /* TimelineWidget.swift */; };
 		EA085DD929607229001638AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA085DD829607229001638AC /* Assets.xcassets */; };
 		EA085DDD29607229001638AC /* TimelineWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */; };
@@ -269,7 +268,6 @@
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		EA085DD229607229001638AC /* TimelineWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetBundle.swift; sourceTree = "<group>"; };
 		EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetLiveActivity.swift; sourceTree = "<group>"; };
-		EA085DD629607229001638AC /* TimelineWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		EA085DD829607229001638AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA085DDA29607229001638AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetAttributes.swift; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 				EA085DD229607229001638AC /* TimelineWidgetBundle.swift */,
 				EA085DD429607229001638AC /* TimelineWidgetLiveActivity.swift */,
 				EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */,
-				EA085DD629607229001638AC /* TimelineWidget.swift */,
 				EA085DD829607229001638AC /* Assets.xcassets */,
 				EA085DDA29607229001638AC /* Info.plist */,
 			);
@@ -1094,7 +1091,6 @@
 				EA085E0529619F85001638AC /* SubstanceFile.swift in Sources */,
 				EA085E0C29619FA3001638AC /* DoseRangeType.swift in Sources */,
 				EA085E112961A1C9001638AC /* TimelineDrawable.swift in Sources */,
-				EA085DD729607229001638AC /* TimelineWidget.swift in Sources */,
 				EA085E0729619F85001638AC /* RoaDose.swift in Sources */,
 				EA085E1B2961A212001638AC /* NoTimeline.swift in Sources */,
 				EA085DFF29619E31001638AC /* Substance.swift in Sources */,
