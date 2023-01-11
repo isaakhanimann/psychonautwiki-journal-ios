@@ -42,17 +42,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }).unique
     }
 
-    func requestLocation() {
-        manager.requestLocation()
-    }
-
     func requestPermission() {
         manager.requestWhenInUseAuthorization()
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Task {
-            guard let foundCLLocation = locations.first else { return }
+            guard let foundCLLocation = locations.last else { return }
             let place = await getPlacemark(from: foundCLLocation)
             DispatchQueue.main.async {
                 let locationName = place?.name ?? "Unknown"
@@ -62,8 +58,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     latitude: foundCLLocation.coordinate.latitude
                 )
                 self.currentLocation = location
-                self.selectedLocation = location
-                self.selectedLocationName = locationName
             }
         }
     }

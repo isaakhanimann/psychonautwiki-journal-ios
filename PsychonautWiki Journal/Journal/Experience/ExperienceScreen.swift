@@ -30,7 +30,7 @@ struct ExperienceScreen: View {
     @State private var isEditing = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @Environment(\.dismiss) var dismiss
-    @StateObject var locationManager = LocationManager()
+    @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
         return List {

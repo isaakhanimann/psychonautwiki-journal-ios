@@ -26,8 +26,8 @@ struct FinishIngestionScreen: View {
     let dismiss: () -> Void
     var suggestedNote: String? = nil
     @EnvironmentObject private var toastViewModel: ToastViewModel
-    @StateObject var viewModel = ViewModel()
-    @StateObject var locationManager = LocationManager()
+    @StateObject private var viewModel = ViewModel()
+    @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
         Form {
@@ -110,6 +110,8 @@ struct FinishIngestionScreen: View {
         }
         .navigationBarTitle("Finish")
         .task {
+            guard !viewModel.isInitialized else {return} // because this function is going to be called again when navigating back from color picker screen
+            locationManager.selectedLocation = locationManager.currentLocation
             viewModel.initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
         }
         .toolbar {

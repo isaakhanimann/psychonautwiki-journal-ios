@@ -31,12 +31,11 @@ extension FinishIngestionScreen {
         @Published var otherColors = Set<SubstanceColor>()
         @Published var notesInOrder = [String]()
         private var foundCompanion: SubstanceCompanion? = nil
-        private var hasInitializedAlready = false
+        @Published var isInitialized = false
         @Published var experiencesWithinLargerRange: [Experience] = []
         @Published var selectedExperience: Experience?
 
         func initializeColorCompanionAndNote(for substanceName: String, suggestedNote: String?) {
-            guard !hasInitializedAlready else {return} // because this function is going to be called again when navigating back from color picker screen
             if let suggestedNote {
                 enteredNote = suggestedNote
             }
@@ -53,7 +52,7 @@ extension FinishIngestionScreen {
             } else {
                 self.selectedColor = otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
             }
-            hasInitializedAlready = true
+            isInitialized = true
         }
 
         func addIngestion(

@@ -20,6 +20,7 @@ import SwiftUI
 struct PsychonautWiki_JournalApp: App {
 
     @StateObject private var toastViewModel = ToastViewModel()
+    @StateObject private var locationManager = LocationManager()
     @StateObject private var authenticator = Authenticator()
     @Environment(\.scenePhase) private var scenePhase
 
@@ -30,6 +31,7 @@ struct PsychonautWiki_JournalApp: App {
                     .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                     .environmentObject(toastViewModel)
                     .environmentObject(authenticator)
+                    .environmentObject(locationManager)
                     .accentColor(Color.blue)
             } else {
                 LockScreen(isFaceIDEnabled: authenticator.isFaceIDEnabled)
