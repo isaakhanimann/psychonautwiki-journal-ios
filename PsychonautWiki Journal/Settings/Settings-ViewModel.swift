@@ -103,10 +103,10 @@ extension SettingsScreen {
                 print("Missing \(type) value – \(context.debugDescription)")
             } catch DecodingError.dataCorrupted(let context) {
                 showErrorToast(message: "Import Failed")
-                print(context.debugDescription)
+                print("Data corrupted – \(context.debugDescription)")
             } catch {
                 showErrorToast(message: "Import Failed")
-                print(error.localizedDescription)
+                print("Some other decoding error – \(error.localizedDescription)")
             }
         }
 

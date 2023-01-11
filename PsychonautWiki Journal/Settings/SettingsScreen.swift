@@ -139,10 +139,16 @@ struct SettingsContent: View {
                 ) { result in
                     do {
                         let selectedFile: URL = try result.get()
-                        let data = try Data(contentsOf: selectedFile)
-                        importData(data)
+                        if selectedFile.startAccessingSecurityScopedResource() {
+                            let data = try Data(contentsOf: selectedFile)
+                            importData(data)
+                        } else {
+                            toastViewModel.showErrorToast(message: "Permission Denied")
+                        }
+                        selectedFile.stopAccessingSecurityScopedResource()
                     } catch {
                         toastViewModel.showErrorToast(message: "Import Failed")
+                        print("Error getting data: \(error.localizedDescription)")
                     }
                 }
                 Button {
