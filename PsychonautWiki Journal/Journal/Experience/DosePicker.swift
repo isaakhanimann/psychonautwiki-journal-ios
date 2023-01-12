@@ -21,8 +21,10 @@ struct DosePicker: View {
     let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
     @Binding var selectedUnits: String?
+    var focusOnAppear = false
     @State private var doseText = ""
     @State private var dose: Double = 0
+    @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,6 +39,9 @@ struct DosePicker: View {
             doseTextFieldWithUnit
         }
         .task {
+            if focusOnAppear {
+                isDoseFieldFocused = true
+            }
             if let doseUnwrapped = doseMaybe {
                 doseText = doseUnwrapped.formatted()
                 dose = doseUnwrapped
@@ -54,6 +59,7 @@ struct DosePicker: View {
     private var doseTextFieldWithUnit: some View {
         HStack {
             TextField("Enter Dose", text: $doseText)
+                .focused($isDoseFieldFocused)
                 .keyboardType(.decimalPad)
                 .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseType.color)

@@ -55,7 +55,6 @@ struct ChooseDoseScreenContent: View {
     @Binding var isShowingNext: Bool
     var impureDoseText: String
     var impureDoseRounded: Double?
-
     @State private var isShowingUnknownDoseAlert = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -70,12 +69,18 @@ struct ChooseDoseScreenContent: View {
         .optionalScrollDismissesKeyboard()
         .navigationBarTitle("\(substance.name) Dose")
         .toolbar {
-            ToolbarItem(placement: .keyboard) {
+            ToolbarItemGroup(placement: .keyboard) {
                 Button {
                     hideKeyboard()
                 } label: {
                     Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
                 }
+                Button {
+                    isShowingNext = true
+                } label: {
+                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }
+
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Cancel") {
@@ -163,7 +168,8 @@ struct ChooseDoseScreenContent: View {
             DosePicker(
                 roaDose: roaDose,
                 doseMaybe: $selectedPureDose,
-                selectedUnits: $selectedUnits
+                selectedUnits: $selectedUnits,
+                focusOnAppear: true
             )
             Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
         } header: {
