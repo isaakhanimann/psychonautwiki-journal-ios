@@ -54,7 +54,10 @@ struct SubstanceScreen: View {
                 }
                 if let toxicities = substance.toxicities, !toxicities.isEmpty {
                     NavigationLink("Toxicity") {
-                        ToxicityScreen(toxicities: toxicities)
+                        ToxicityScreen(
+                            toxicities: toxicities,
+                            substanceURL: substance.url
+                        )
                     }
                 }
                 let durationInfos = substance.durationInfos

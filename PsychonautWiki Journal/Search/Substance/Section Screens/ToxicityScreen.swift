@@ -18,12 +18,20 @@ import SwiftUI
 
 struct ToxicityScreen: View {
     let toxicities: [String]
+    let substanceURL: URL
 
     var body: some View {
         List {
             Section {
                 ForEach(toxicities, id: \.self) { toxicity in
                     Text(toxicity)
+                }
+                if let toxicityURL = URL(string: substanceURL.absoluteString + "#Toxicity_and_harm_potential") {
+                    NavigationLink {
+                        WebViewScreen(articleURL: toxicityURL)
+                    } label: {
+                        Label("More Info", systemImage: "info.circle")
+                    }
                 }
             }
         }
@@ -32,6 +40,12 @@ struct ToxicityScreen: View {
 
 struct ToxicityScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ToxicityScreen(toxicities: SubstanceRepo.shared.getSubstance(name: "MDMA")!.toxicities)
+        NavigationView {
+            let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
+            ToxicityScreen(
+                toxicities: substance.toxicities,
+                substanceURL: substance.url
+            )
+        }
     }
 }
