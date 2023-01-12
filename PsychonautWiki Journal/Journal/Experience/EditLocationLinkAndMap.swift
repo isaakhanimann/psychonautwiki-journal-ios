@@ -61,7 +61,7 @@ struct EditLocationLinkAndMap: View {
                     span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
                 )
             }
-            .frame(height: 200)
+            .frame(height: 300)
             .listRowInsets(EdgeInsets())
         }
         
