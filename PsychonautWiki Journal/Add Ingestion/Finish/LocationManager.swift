@@ -21,7 +21,7 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     let manager = CLLocationManager()
-    var currentLocation: Location?
+    @Published var currentLocation: Location?
     @Published var selectedLocation: Location? = nil
     @Published var authorizationStatus: CLAuthorizationStatus?
     @Published var searchSuggestedLocations: [Location] = []
@@ -46,6 +46,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
     }
 
+    func maybeRequestLocation() {
+        if authorizationStatus == .authorizedWhenInUse {
+            manager.requestLocation()
+        }
+    }
+
     nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Task {
             guard let foundCLLocation = locations.last else { return }
@@ -58,20 +64,31 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     latitude: foundCLLocation.coordinate.latitude
                 )
                 self.currentLocation = location
+                if self.shouldUpdateSelectedLocation {
+                    self.selectLocation(location: location)
+                    self.shouldUpdateSelectedLocation = false
+                }
             }
         }
     }
+
 
     nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         assertionFailure("Isaak location manager \(error)")
     }
 
+    private var shouldUpdateSelectedLocation = false
+
     nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         DispatchQueue.main.async {
-            self.authorizationStatus = manager.authorizationStatus
-            if manager.authorizationStatus == .authorizedWhenInUse {
+            let before = self.authorizationStatus
+            let after = manager.authorizationStatus
+            let didJustNowGivePermission = before == CLAuthorizationStatus.notDetermined && after == .authorizedWhenInUse
+            if didJustNowGivePermission {
                 manager.requestLocation()
+                self.shouldUpdateSelectedLocation = true
             }
+            self.authorizationStatus = after
         }
     }
 

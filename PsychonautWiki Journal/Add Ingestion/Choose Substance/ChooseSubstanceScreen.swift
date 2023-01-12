@@ -20,6 +20,7 @@ import AlertToast
 struct ChooseSubstanceScreen: View {
     @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
         ChooseSubstanceContent(
@@ -30,7 +31,9 @@ struct ChooseSubstanceScreen: View {
             filteredSubstances: viewModel.filteredSubstances,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
             dismiss: {dismiss()}
-        )
+        ).task {
+            locationManager.maybeRequestLocation() // because we might need current location on finish screen
+        }
     }
 }
 

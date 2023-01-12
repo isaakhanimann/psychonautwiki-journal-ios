@@ -110,7 +110,7 @@ struct SettingsContent: View {
             }
 
             Section(
-                header: Text("Data"),
+                header: Text("Journal Data"),
                 footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
             ) {
                 Button {

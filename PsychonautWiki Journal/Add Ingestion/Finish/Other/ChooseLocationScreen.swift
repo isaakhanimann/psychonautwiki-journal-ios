@@ -46,6 +46,7 @@ struct ChooseLocationScreen: View {
             if locationManager.authorizationStatus == .notDetermined {
                 locationManager.requestPermission()
             }
+            locationManager.maybeRequestLocation()
         }
     }
 }
@@ -145,7 +146,7 @@ struct ChooseLocationScreenContent: View {
                     }
                 }
             }
-            if !experienceLocations.isEmpty {
+            if !experienceLocations.isEmpty || currentLocation != nil {
                 Section("Suggestions") {
                     if let currentLocation {
                         Button {
