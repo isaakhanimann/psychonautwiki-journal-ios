@@ -29,21 +29,19 @@ struct JournalScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
-                        viewModel.isTimeRelative.toggle()
-                    } label: {
-                        if viewModel.isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
-                        }
-                    }
-                    Button {
                         viewModel.isFavoriteFilterEnabled.toggle()
                     } label: {
                         if viewModel.isFavoriteFilterEnabled {
                             Label("Don't Filter Favorites", systemImage: "star.fill")
                         } else {
                             Label("Filter Favorites", systemImage: "star")
+                        }
+                    }
+                    if #available(iOS 16, *) {
+                        NavigationLink {
+                            StatsScreen()
+                        } label: {
+                            Label("Stats", systemImage: "chart.bar")
                         }
                     }
                 }
@@ -56,15 +54,16 @@ struct JournalScreen: View {
                         ChooseSubstanceScreen()
                     }
                     Spacer()
-                    if #available(iOS 16, *) {
-                        NavigationLink {
-                            StatsScreen()
-                        } label: {
-                            Label("Stats", systemImage: "chart.bar")
+                    Button {
+                        viewModel.isTimeRelative.toggle()
+                    } label: {
+                        if viewModel.isTimeRelative {
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                        } else {
+                            Label("Show Relative Time", systemImage: "timer.circle")
                         }
                     }
                 }
-
             }
     }
 }
