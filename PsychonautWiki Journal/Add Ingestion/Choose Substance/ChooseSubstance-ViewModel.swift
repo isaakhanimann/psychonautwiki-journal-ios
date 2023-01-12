@@ -40,7 +40,7 @@ extension ChooseSubstanceScreen {
             self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
-            ingestionFetchRequest.fetchLimit = 100
+            ingestionFetchRequest.fetchLimit = 300
             let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
             self.allPossibleSuggestions = SuggestionsCreator(sortedIngestions: sortedIngestions).suggestions
             let request = CustomSubstance.fetchRequest()
