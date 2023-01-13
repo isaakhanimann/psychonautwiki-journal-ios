@@ -149,6 +149,31 @@ struct ExperienceScreen: View {
                     }
                 }
             }
+            Section("Location") {
+                if let location = experience.location {
+                    EditLocationLinkAndMap(experienceLocation: location, locationManager: locationManager)
+                } else {
+                    NavigationLink {
+                        ChooseLocationScreen(locationManager: locationManager)
+                            .onAppear {
+                                locationManager.selectedLocation = nil
+                                locationManager.selectedLocationName = ""
+                            }
+                            .onDisappear {
+                                if let selectedLocation = locationManager.selectedLocation {
+                                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
+                                    newLocation.name = selectedLocation.name
+                                    newLocation.latitude = selectedLocation.latitude ?? 0
+                                    newLocation.longitude = selectedLocation.longitude ?? 0
+                                    newLocation.experience = experience
+                                }
+                                PersistenceController.shared.saveViewContext()
+                            }
+                    } label: {
+                        Label("Add Location", systemImage: "plus")
+                    }
+                }
+            }
             if isEyeOpen {
                 if !substancesUsed.isEmpty {
                     Section("Info") {
@@ -175,31 +200,6 @@ struct ExperienceScreen: View {
                                 Label("Safer Hallucinogens", systemImage: "cross")
                             }
                         }
-                    }
-                }
-            }
-            Section("Location") {
-                if let location = experience.location {
-                    EditLocationLinkAndMap(experienceLocation: location, locationManager: locationManager)
-                } else {
-                    NavigationLink {
-                        ChooseLocationScreen(locationManager: locationManager)
-                            .onAppear {
-                                locationManager.selectedLocation = nil
-                                locationManager.selectedLocationName = ""
-                            }
-                            .onDisappear {
-                                if let selectedLocation = locationManager.selectedLocation {
-                                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
-                                    newLocation.name = selectedLocation.name
-                                    newLocation.latitude = selectedLocation.latitude ?? 0
-                                    newLocation.longitude = selectedLocation.longitude ?? 0
-                                    newLocation.experience = experience
-                                }
-                                PersistenceController.shared.saveViewContext()
-                            }
-                    } label: {
-                        Label("Add Location", systemImage: "plus")
                     }
                 }
             }
