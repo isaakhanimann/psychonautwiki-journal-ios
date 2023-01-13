@@ -41,15 +41,11 @@ struct QuestionAndAnswer: Identifiable, Hashable {
         ),
         QuestionAndAnswer(
             question: "How is the timeline drawn?",
-            answer: "The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If not all of these durations are defined the timeline for this substance cannot be drawn."
+            answer: "The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If some of the durations are missing it draws a dotted line. E.g. if the onset and total time is given it draws a line along the bottom for the onset and then it draws a dotted curve to the end of the total time."
         ),
         QuestionAndAnswer(
-            question: "Why does the timeline not add up the curves for the same substance?",
+            question: "Why does the timeline not cumulate the curves of different ingestions together?",
             answer: "One can not add two curves together because one ingestion might build up tolerance, influencing the curve of the other ingestion. The curve can only be drawn based on data that is available through PsychonautWiki."
-        ),
-        QuestionAndAnswer(
-            question: "Why does the timeline not show cumulative timelines of different substances?",
-            answer: "Because the curve can only be drawn based on data that is available through PsychonautWiki."
         )
     ]
 }
