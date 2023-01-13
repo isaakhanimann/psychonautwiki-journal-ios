@@ -62,6 +62,7 @@
 		EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A029714B2F00B3A474 /* TestingScreen.swift */; };
 		EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */; };
 		EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */; };
+		EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -286,6 +287,7 @@
 		EA2A69A029714B2F00B3A474 /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
 		EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDoseScreen.swift; sourceTree = "<group>"; };
 		EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferRoutesScreen.swift; sourceTree = "<group>"; };
+		EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-SectionHeaderStyle.swift"; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsForSubstanceScreen.swift; sourceTree = "<group>"; };
@@ -852,6 +854,7 @@
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
 				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
+				EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */,
 				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
 				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
 				EACB6E5327D3473600940291 /* String-Regex.swift */,
@@ -1165,6 +1168,7 @@
 				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
+				EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */,
 				EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */,
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
 				EABD92042941C3C30073303A /* FullTimeline.swift in Sources */,

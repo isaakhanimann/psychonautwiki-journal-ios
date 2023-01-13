@@ -52,38 +52,39 @@ struct ChooseSubstanceContent: View {
             ScrollView {
                 LazyVStack(alignment: .leading) {
                     if !filteredSuggestions.isEmpty {
-                        Section("Quick Logging") {
-                            ForEach(filteredSuggestions) { suggestion in
-                                SuggestionBox(suggestion: suggestion, dismiss: dismiss)
-                            }
-                        }.padding(.horizontal)
+                        Text("Quick Logging").sectionHeaderStyle()
+                        ForEach(filteredSuggestions) { suggestion in
+                            SuggestionBox(suggestion: suggestion, dismiss: dismiss)
+                        }
                         Spacer().frame(height: 20)
                     }
                     if !filteredSubstances.isEmpty {
                         if filteredSuggestions.isEmpty {
-                            Section {
-                                ForEach(filteredSubstances) { substance in
-                                    SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
-                                }
-                            }.padding(.horizontal)
+                            ForEach(filteredSubstances) { substance in
+                                SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
+                            }
                         } else {
-                            Section("All Substances") {
-                                ForEach(filteredSubstances) { substance in
-                                    SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
-                                }
-                            }.padding(.horizontal)
+                            Text("Regular Logging").sectionHeaderStyle()
+                            ForEach(filteredSubstances) { substance in
+                                SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
+                            }
                         }
-
-                        Spacer().frame(height: 20)
                     }
-                    if filteredCustomSubstances.isEmpty {
-                        customSubstancesGroup.padding(.horizontal)
-                    } else {
-                        Section("Custom Substances") {
-                            customSubstancesGroup
-                        }.padding(.horizontal)
+                    ForEach(filteredCustomSubstances) { custom in
+                        CustomSubstanceBox(
+                            customSubstanceModel: custom,
+                            dismiss: dismiss
+                        )
                     }
-                }
+                    Button {
+                        isShowingAddCustomSheet.toggle()
+                    } label: {
+                        Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                    }
+                    .sheet(isPresented: $isShowingAddCustomSheet) {
+                        AddCustomSubstanceView()
+                    }
+                }.padding(.horizontal)
             }
             .optionalScrollDismissesKeyboard()
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -101,25 +102,6 @@ struct ChooseSubstanceContent: View {
                     displayMode: .alert,
                     type: .image("Eye Open", .red)
                 )
-            }
-        }
-    }
-
-    var customSubstancesGroup: some View {
-        Group {
-            ForEach(filteredCustomSubstances) { custom in
-                CustomSubstanceBox(
-                    customSubstanceModel: custom,
-                    dismiss: dismiss
-                )
-            }
-            Button {
-                isShowingAddCustomSheet.toggle()
-            } label: {
-                Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-            }
-            .sheet(isPresented: $isShowingAddCustomSheet) {
-                AddCustomSubstanceView()
             }
         }
     }
@@ -231,7 +213,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                             ]
                         )
                     ],
-                    filteredSubstances: SubstanceRepo.shared.substances,
+                    filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
                     filteredCustomSubstances: [CustomSubstanceModel(name: "Coffee", units: "cups")],
                     dismiss: {}
                 )

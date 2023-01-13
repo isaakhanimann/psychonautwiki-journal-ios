@@ -121,12 +121,6 @@ struct ChooseRouteScreen: View {
     }
 }
 
-public extension Text {
-    func sectionHeaderStyle() -> some View {
-        self.font(.title3.bold())
-    }
-}
-
 struct ChooseRouteView_Previews: PreviewProvider {
 
     static var previews: some View {
