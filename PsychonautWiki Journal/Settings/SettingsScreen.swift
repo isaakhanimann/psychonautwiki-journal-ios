@@ -61,7 +61,7 @@ struct SettingsContent: View {
     let exportData: () -> Void
     let importData: (Data) -> Void
     let deleteEverything: () -> Void
-    @State private var isShowingDeleteAlert = false
+    @State private var isShowingDeleteConfirmation = false
     @Binding var isShowingToast: Bool
     @Binding var isSuccessToast: Bool
     @Binding var toastMessage: String
@@ -151,18 +151,24 @@ struct SettingsContent: View {
                     }
                 }
                 Button {
-                    isShowingDeleteAlert.toggle()
+                    isShowingDeleteConfirmation.toggle()
                 } label: {
                     Label("Delete Everything", systemImage: "trash").foregroundColor(.red)
                 }
-                .alert(isPresented: $isShowingDeleteAlert) {
-                    Alert(
-                        title: Text("Delete Everything?"),
-                        message: Text("This will delete all your experiences, ingestions and custom substances."),
-                        primaryButton: .destructive(Text("Delete"), action: deleteEverything),
-                        secondaryButton: .cancel()
-                    )
-                }
+                .confirmationDialog(
+                    "Delete Everything?",
+                    isPresented: $isShowingDeleteConfirmation,
+                    titleVisibility: .visible,
+                    actions: {
+                        Button("Delete", role: .destructive) {
+                            deleteEverything()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    },
+                    message: {
+                        Text("This will delete all your experiences, ingestions and custom substances.")
+                    }
+                )
             }
             Section {
                 HStack {
