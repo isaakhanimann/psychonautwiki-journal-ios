@@ -33,6 +33,7 @@ struct IngestionDetailsChart: View {
         }
         .chartForegroundStyleScale(mapping: colorMapping)
         .chartLegend(.hidden)
+        .chartXAxisLabel("Ingestion Count")
     }
 }
 
