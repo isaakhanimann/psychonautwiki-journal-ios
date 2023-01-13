@@ -22,18 +22,10 @@ extension JournalScreen {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var currentExperiences: [Experience] = []
         @Published var previousExperiences: [Experience] = []
-        @Published var searchText = "" {
-            didSet {
-                setupFetchRequestPredicateAndFetch()
-            }
-        }
+        @Published var searchText = ""
         @Published var isShowingAddIngestionSheet = false
         @Published var isTimeRelative = false
-        @Published var isFavoriteFilterEnabled = false {
-            didSet {
-                setupFetchRequestPredicateAndFetch()
-            }
-        }
+        @Published var isFavoriteFilterEnabled = false
         private let experienceFetchController: NSFetchedResultsController<Experience>?
 
         override init() {
@@ -62,7 +54,7 @@ extension JournalScreen {
             self.previousExperiences = experiences.suffix(experiences.count-currentExperiences.count)
         }
 
-        private func setupFetchRequestPredicateAndFetch() {
+        func setupFetchRequestPredicateAndFetch() {
             experienceFetchController?.fetchRequest.predicate = getPredicate()
             try? experienceFetchController?.performFetch()
             let experiences = experienceFetchController?.fetchedObjects ?? []

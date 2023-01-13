@@ -20,20 +20,12 @@ import SwiftUI
 @MainActor
 class Authenticator: ObservableObject {
 
-    private static let hasToUnlockKey = "hasToUnlockApp"
-    @Published var hasToUnlockApp = false {
-        didSet {
-            UserDefaults.standard.set(hasToUnlockApp, forKey: Authenticator.hasToUnlockKey)
-        }
-    }
+    static let hasToUnlockKey = "hasToUnlockApp"
     @Published var isUnlocked = false
     @Published var isFaceIDEnabled = true
 
-    init() {
-        self.hasToUnlockApp = UserDefaults.standard.bool(forKey: Authenticator.hasToUnlockKey)
-    }
-
     func onChange(of scenePhase: ScenePhase) {
+        let hasToUnlockApp = UserDefaults.standard.bool(forKey: Authenticator.hasToUnlockKey)
         if scenePhase == .active {
             let context = LAContext()
             var error: NSError?

@@ -27,11 +27,7 @@ extension ChooseSubstanceScreen {
         @Published var filteredSubstances: [Substance] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
         @Published var customSubstanceModels: [CustomSubstanceModel]
-        @Published var isEyeOpen = false {
-            didSet {
-                UserDefaults.standard.set(isEyeOpen, forKey: PersistenceController.isEyeOpenKey2)
-            }
-        }
+        @Published var isEyeOpen = false
 
         private let allPossibleSuggestions: [Suggestion]
         private let fetchController: NSFetchedResultsController<CustomSubstance>?
@@ -105,8 +101,9 @@ extension ChooseSubstanceScreen {
         }
 
         private func openEyeAndAnimate() {
-            isShowingOpenEyeToast = true
             isEyeOpen = true
+            UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
+            isShowingOpenEyeToast = true
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

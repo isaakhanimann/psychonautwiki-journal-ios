@@ -21,6 +21,7 @@ import StoreKit
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage("hasRatedBefore") var hasRatedBefore: Bool = false
+    @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
 
@@ -28,7 +29,7 @@ struct SettingsScreen: View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
-            hasToUnlockApp: $authenticator.hasToUnlockApp,
+            hasToUnlockApp: $hasToUnlockApp,
             hasRatedBefore: $hasRatedBefore,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,

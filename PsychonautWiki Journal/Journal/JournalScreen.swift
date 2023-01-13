@@ -26,6 +26,12 @@ struct JournalScreen: View {
             .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
             .disableAutocorrection(true)
             .navigationTitle("Journal")
+            .onChange(of: viewModel.searchText, perform: { newValue in
+                viewModel.setupFetchRequestPredicateAndFetch()
+            })
+            .onChange(of: viewModel.isFavoriteFilterEnabled, perform: { newValue in
+                viewModel.setupFetchRequestPredicateAndFetch()
+            })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
