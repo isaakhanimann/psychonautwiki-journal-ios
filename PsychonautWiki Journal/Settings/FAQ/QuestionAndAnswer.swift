@@ -17,7 +17,6 @@
 import Foundation
 
 struct QuestionAndAnswer: Identifiable, Hashable {
-    // swiftlint:disable identifier_name
     let id = UUID()
     let question: String
     let answer: String

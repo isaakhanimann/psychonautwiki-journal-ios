@@ -154,7 +154,7 @@ struct ChooseDoseScreenContent: View {
     }
 
     var suggestedNote: String? {
-        guard let impureDoseRounded, let selectedUnits, impureDoseRounded != 100 else {return nil}
+        guard let impureDoseRounded, let selectedUnits, purity != 100 else {return nil}
         return "\(impureDoseRounded.formatted()) \(selectedUnits) with \(Int(purity))% purity"
     }
 
