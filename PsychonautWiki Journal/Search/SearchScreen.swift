@@ -62,7 +62,9 @@ struct SearchScreen: View {
                 Menu(content: {
                     ForEach(viewModel.allCategories, id: \.self) { cat in
                         Button {
-                            viewModel.toggleCategory(category: cat)
+                            withAnimation {
+                                viewModel.toggleCategory(category: cat)
+                            }
                         } label: {
                             if viewModel.selectedCategories.contains(cat) {
                                 Label(cat, systemImage: "checkmark")
@@ -76,7 +78,9 @@ struct SearchScreen: View {
                 })
                 if !viewModel.selectedCategories.isEmpty {
                     Button {
-                        viewModel.clearCategories()
+                        withAnimation {
+                            viewModel.clearCategories()
+                        }
                     } label: {
                         Text("Clear")
                     }
