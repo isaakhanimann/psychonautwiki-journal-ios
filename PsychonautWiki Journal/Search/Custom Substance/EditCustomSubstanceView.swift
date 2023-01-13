@@ -22,27 +22,19 @@ struct EditCustomSubstanceView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingConfirmation = false
     @State private var units = ""
+    @State private var name = ""
     @State private var description = ""
 
     var body: some View {
         List {
+            Section("Name") {
+                TextField("Name", text: $name)
+            }
             Section("Units") {
                 TextField("Units", text: $units)
             }
             Section("Description") {
                 TextField("Description", text: $description)
-            }
-            Section {
-                HStack {
-                    Spacer()
-                    Button {
-                        isShowingConfirmation.toggle()
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                    .foregroundColor(.red)
-                    Spacer()
-                }
             }
         }
         .optionalScrollDismissesKeyboard()
@@ -58,19 +50,26 @@ struct EditCustomSubstanceView: View {
             Button("Cancel", role: .cancel) {}
         }
         .onAppear {
+            name = customSubstance.nameUnwrapped
             units = customSubstance.unitsUnwrapped
             description = customSubstance.explanationUnwrapped
         }
+        .onDisappear {
+            if !units.isEmpty {
+                customSubstance.name = name
+                customSubstance.units = units
+                customSubstance.explanation = description
+                PersistenceController.shared.saveViewContext()
+            }
+        }
         .toolbar {
             ToolbarItem {
-                Button("Done") {
-                    if !units.isEmpty {
-                        customSubstance.units = units
-                        customSubstance.explanation = description
-                        PersistenceController.shared.saveViewContext()
-                    }
-                    dismiss()
+                Button {
+                    isShowingConfirmation.toggle()
+                } label: {
+                    Label("Delete", systemImage: "trash")
                 }
+                .foregroundColor(.red)
             }
         }
         .navigationTitle(customSubstance.nameUnwrapped)
