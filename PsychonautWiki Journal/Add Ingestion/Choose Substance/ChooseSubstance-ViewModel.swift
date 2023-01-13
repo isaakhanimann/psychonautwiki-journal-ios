@@ -54,7 +54,11 @@ extension ChooseSubstanceScreen {
             try? fetchController?.performFetch()
             let customSubstances = fetchController?.fetchedObjects ?? []
             self.customSubstanceModels = customSubstances.map { cust in
-                CustomSubstanceModel(name: cust.nameUnwrapped, units: cust.unitsUnwrapped)
+                CustomSubstanceModel(
+                    name: cust.nameUnwrapped,
+                    description: cust.explanationUnwrapped,
+                    units: cust.unitsUnwrapped
+                )
             }
             super.init()
             fetchController?.delegate = self
@@ -110,7 +114,11 @@ extension ChooseSubstanceScreen {
                 await MainActor.run(body: {
                     guard let custs = controller.fetchedObjects as? [CustomSubstance] else {return}
                     self.customSubstanceModels = custs.map { cust in
-                        CustomSubstanceModel(name: cust.nameUnwrapped, units: cust.unitsUnwrapped)
+                        CustomSubstanceModel(
+                            name: cust.nameUnwrapped,
+                            description: cust.explanationUnwrapped,
+                            units: cust.unitsUnwrapped
+                        )
                     }
                 })
             }

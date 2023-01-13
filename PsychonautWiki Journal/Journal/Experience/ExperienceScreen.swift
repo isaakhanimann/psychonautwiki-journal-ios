@@ -56,7 +56,8 @@ struct ExperienceScreen: View {
                             EditIngestionScreen(
                                 ingestion: ing,
                                 substanceName: ing.substanceNameUnwrapped,
-                                substance: substance
+                                substance: substance,
+                                isEyeOpen: isEyeOpen
                             )
                         } label: {
                             let roaDose = substance?.getDose(for: route)
@@ -67,7 +68,8 @@ struct ExperienceScreen: View {
                                 IngestionRow(
                                     ingestion: ing,
                                     roaDose: roaDose,
-                                    isTimeRelative: isTimeRelative
+                                    isTimeRelative: isTimeRelative,
+                                    isEyeOpen: isEyeOpen
                                 )
                             }
                             .swipeActions(edge: .leading) {

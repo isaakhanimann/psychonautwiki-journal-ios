@@ -20,16 +20,42 @@ struct CustomSubstanceBox: View {
 
     let customSubstanceModel: CustomSubstanceModel
     let dismiss: () -> Void
+    let isEyeOpen: Bool
 
     var body: some View {
         NavigationLink {
-            CustomChooseRouteScreen(
-                substanceName: customSubstanceModel.name,
-                units: customSubstanceModel.units,
-                dismiss: dismiss
-            )
+            if isEyeOpen {
+                CustomChooseRouteScreen(
+                    substanceName: customSubstanceModel.name,
+                    units: customSubstanceModel.units,
+                    dismiss: dismiss
+                )
+            } else {
+                CustomChooseDoseScreen(
+                    substanceName: customSubstanceModel.name,
+                    units: customSubstanceModel.units,
+                    administrationRoute: .oral,
+                    dismiss: dismiss
+                )
+            }
         } label: {
-            GroupBox(customSubstanceModel.name) {}
+            GroupBox {
+                if !customSubstanceModel.description.isEmpty {
+                    HStack {
+                        Text(customSubstanceModel.description)
+                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                }
+            } label: {
+                HStack {
+                    Text(customSubstanceModel.name)
+                    Spacer()
+                    Text("custom").font(.subheadline).foregroundColor(.secondary)
+                }
+            }
         }
 
     }
@@ -38,7 +64,15 @@ struct CustomSubstanceBox: View {
 struct CustomSubstanceBox_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CustomSubstanceBox(customSubstanceModel: CustomSubstanceModel(name: "Coffee", units: "cups"), dismiss: {}).padding(.horizontal)
+            CustomSubstanceBox(
+                customSubstanceModel: CustomSubstanceModel(
+                    name: "Coffee",
+                    description: "The bitter drink",
+                    units: "cups"
+                ),
+                dismiss: {},
+                isEyeOpen: true
+            ).padding(.horizontal)
         }
     }
 }

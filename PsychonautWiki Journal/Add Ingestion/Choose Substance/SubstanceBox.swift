@@ -27,7 +27,11 @@ struct SubstanceBox: View {
             if isEyeOpen {
                 AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
             } else {
-                ChooseRouteScreen(substance: substance, dismiss: dismiss)
+                ChooseDoseScreen(
+                    substance: substance,
+                    administrationRoute: .oral,
+                    dismiss: dismiss
+                )
             }
         } label: {
             GroupBox(substance.name) {

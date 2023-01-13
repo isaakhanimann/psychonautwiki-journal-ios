@@ -21,7 +21,8 @@ struct SuggestionBox: View {
 
     let suggestion: Suggestion
     let dismiss: () -> Void
-    
+    let isEyeOpen: Bool
+
     var body: some View {
         GroupBox {
             WrappingHStack(
@@ -85,8 +86,9 @@ struct SuggestionBox: View {
                 }
             }
         } label: {
+            let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
             Label(
-                "\(suggestion.substanceName) \(suggestion.route.rawValue.localizedCapitalized)",
+                "\(suggestion.substanceName) \(route)",
                 systemImage: "circle.fill"
             )
             .foregroundColor(suggestion.substanceColor.swiftUIColor)
@@ -123,7 +125,9 @@ struct SuggestionBox_Previews: PreviewProvider {
                             )
                         ]
                     ),
-                    dismiss: {})
+                    dismiss: {},
+                    isEyeOpen: true
+                )
                 SuggestionBox(
                     suggestion: Suggestion(
                         substanceName: "Cannabis",
@@ -154,7 +158,9 @@ struct SuggestionBox_Previews: PreviewProvider {
                             )
                         ]
                     ),
-                    dismiss: {})
+                    dismiss: {},
+                    isEyeOpen: true
+                )
             }.padding(.horizontal)
         }
     }

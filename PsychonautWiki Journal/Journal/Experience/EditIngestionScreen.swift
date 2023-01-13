@@ -21,6 +21,7 @@ struct EditIngestionScreen: View {
     let ingestion: Ingestion
     let substanceName: String
     let substance: Substance?
+    let isEyeOpen: Bool
     @State private var time = Date()
     @State private var dose: Double? = nil
     @State private var units: String? = "mg"
@@ -40,7 +41,8 @@ struct EditIngestionScreen: View {
             isEstimate: $isEstimate,
             note: $note,
             save: save,
-            delete: delete
+            delete: delete,
+            isEyeOpen: isEyeOpen
         ).onAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
@@ -81,13 +83,16 @@ struct EditIngestionContent: View {
     @Binding var note: String
     let save: () -> Void
     let delete: () -> Void
+    let isEyeOpen: Bool
 
     var body: some View {
         Form {
-            Section("Administration Route") {
-                Picker("Route", selection: $route) {
-                    ForEach(AdministrationRoute.allCases) { oneRoute in
-                        Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
+            if isEyeOpen {
+                Section("Administration Route") {
+                    Picker("Route", selection: $route) {
+                        ForEach(AdministrationRoute.allCases) { oneRoute in
+                            Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
+                        }
                     }
                 }
             }
@@ -140,7 +145,8 @@ struct EditIngestionScreen_Previews: PreviewProvider {
                 isEstimate: .constant(false),
                 note: .constant("These are my notes"),
                 save: {},
-                delete: {}
+                delete: {},
+                isEyeOpen: true
             )
         }
     }

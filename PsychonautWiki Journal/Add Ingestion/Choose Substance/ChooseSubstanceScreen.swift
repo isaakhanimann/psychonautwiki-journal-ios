@@ -54,7 +54,11 @@ struct ChooseSubstanceContent: View {
                     if !filteredSuggestions.isEmpty {
                         Text("Quick Logging").sectionHeaderStyle()
                         ForEach(filteredSuggestions) { suggestion in
-                            SuggestionBox(suggestion: suggestion, dismiss: dismiss)
+                            SuggestionBox(
+                                suggestion: suggestion,
+                                dismiss: dismiss,
+                                isEyeOpen: isEyeOpen
+                            )
                         }
                         Spacer().frame(height: 20)
                     }
@@ -73,7 +77,8 @@ struct ChooseSubstanceContent: View {
                     ForEach(filteredCustomSubstances) { custom in
                         CustomSubstanceBox(
                             customSubstanceModel: custom,
-                            dismiss: dismiss
+                            dismiss: dismiss,
+                            isEyeOpen: isEyeOpen
                         )
                     }
                     Button {
@@ -214,7 +219,13 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                         )
                     ],
                     filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
-                    filteredCustomSubstances: [CustomSubstanceModel(name: "Coffee", units: "cups")],
+                    filteredCustomSubstances: [
+                        CustomSubstanceModel(
+                        name: "Coffee",
+                        description: "The bitter drink",
+                        units: "cups"
+                    )
+                    ],
                     dismiss: {}
                 )
                 .previewDevice(PreviewDevice(rawValue: name))

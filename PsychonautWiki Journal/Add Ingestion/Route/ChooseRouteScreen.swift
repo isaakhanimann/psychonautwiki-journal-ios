@@ -20,7 +20,6 @@ struct ChooseRouteScreen: View {
 
     let substance: Substance
     let dismiss: () -> Void
-    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -55,20 +54,18 @@ struct ChooseRouteScreen: View {
                     }
                 }
             }
-            if isEyeOpen {
-                NavigationLink {
-                    SaferRoutesScreen()
-                } label: {
-                    GroupBox {
-                        Label("Safer Routes", systemImage: "info.circle")
-                            .font(.headline)
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: .infinity,
-                                minHeight: 0,
-                                alignment: .center
-                            )
-                    }
+            NavigationLink {
+                SaferRoutesScreen()
+            } label: {
+                GroupBox {
+                    Label("Safer Routes", systemImage: "info.circle")
+                        .font(.headline)
+                        .frame(
+                            minWidth: 0,
+                            maxWidth: .infinity,
+                            minHeight: 0,
+                            alignment: .center
+                        )
                 }
             }
         }

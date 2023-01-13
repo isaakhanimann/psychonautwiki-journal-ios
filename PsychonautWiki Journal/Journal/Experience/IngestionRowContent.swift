@@ -22,10 +22,14 @@ struct IngestionRow: View {
     @ObservedObject var ingestion: Ingestion
     let roaDose: RoaDose?
     let isTimeRelative: Bool
+    let isEyeOpen: Bool
 
     var body: some View {
         IngestionRowContent(
-            numDots: roaDose?.getNumDots(ingestionDose: ingestion.doseUnwrapped, ingestionUnits: ingestion.unitsUnwrapped),
+            numDots: roaDose?.getNumDots(
+                ingestionDose: ingestion.doseUnwrapped,
+                ingestionUnits: ingestion.unitsUnwrapped
+            ),
             substanceColor: ingestion.substanceColor,
             substanceName: ingestion.substanceNameUnwrapped,
             dose: ingestion.doseUnwrapped,
@@ -34,7 +38,8 @@ struct IngestionRow: View {
             administrationRoute: ingestion.administrationRouteUnwrapped,
             ingestionTime: ingestion.timeUnwrapped,
             note: ingestion.noteUnwrapped,
-            isTimeRelative: isTimeRelative
+            isTimeRelative: isTimeRelative,
+            isEyeOpen: isEyeOpen
         )
     }
 }
@@ -52,6 +57,7 @@ struct IngestionRowContent: View {
     let ingestionTime: Date
     let note: String
     let isTimeRelative: Bool
+    let isEyeOpen: Bool
 
     var body: some View {
         HStack(alignment: .center) {
@@ -76,7 +82,9 @@ struct IngestionRowContent: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
+                if isEyeOpen {
+                    Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
+                }
                 if let doseUnwrapped = dose {
                     Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
                 } else {
@@ -154,7 +162,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .oral,
                     ingestionTime: Date(),
                     note: "",
-                    isTimeRelative: false
+                    isTimeRelative: false,
+                    isEyeOpen: true
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -166,7 +175,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .insufflated,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    isTimeRelative: true
+                    isTimeRelative: true,
+                    isEyeOpen: true
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -178,7 +188,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .smoked,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    isTimeRelative: false
+                    isTimeRelative: false,
+                    isEyeOpen: true
                 )
             }
         }
