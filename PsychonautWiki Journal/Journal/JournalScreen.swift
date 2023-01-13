@@ -27,7 +27,7 @@ struct JournalScreen: View {
             .disableAutocorrection(true)
             .navigationTitle("Journal")
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         viewModel.isFavoriteFilterEnabled.toggle()
                     } label: {
@@ -35,13 +35,6 @@ struct JournalScreen: View {
                             Label("Don't Filter Favorites", systemImage: "star.fill")
                         } else {
                             Label("Filter Favorites", systemImage: "star")
-                        }
-                    }
-                    if #available(iOS 16, *) {
-                        NavigationLink {
-                            StatsScreen()
-                        } label: {
-                            Label("Stats", systemImage: "chart.bar")
                         }
                     }
                 }
@@ -61,6 +54,13 @@ struct JournalScreen: View {
                             Label("Show Absolute Time", systemImage: "timer.circle.fill")
                         } else {
                             Label("Show Relative Time", systemImage: "timer.circle")
+                        }
+                    }
+                    if #available(iOS 16, *) {
+                        NavigationLink {
+                            StatsScreen()
+                        } label: {
+                            Label("Stats", systemImage: "chart.bar")
                         }
                     }
                 }
