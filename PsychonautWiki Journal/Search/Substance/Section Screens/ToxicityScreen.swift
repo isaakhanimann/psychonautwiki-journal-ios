@@ -34,7 +34,7 @@ struct ToxicityScreen: View {
                     }
                 }
             }
-        }
+        }.navigationTitle("Toxicity")
     }
 }
 
