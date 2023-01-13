@@ -38,6 +38,7 @@ struct ChooseRouteScreen: View {
                     }
                 }
             }
+            Spacer().frame(height: 20)
             Text("Undocumented Routes").sectionHeaderStyle()
             let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !documentedRoutes.contains(route)
