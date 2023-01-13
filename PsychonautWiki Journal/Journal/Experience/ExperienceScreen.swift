@@ -25,7 +25,7 @@ struct ExperienceScreen: View {
     @State private var cumulativeDoses: [CumulativeDose] = []
     @State private var interactions: [Interaction] = []
     @State private var substancesUsed: [Substance] = []
-    @State private var isShowingDeleteAlert = false
+    @State private var isShowingDeleteConfirmation = false
     @State private var hiddenIngestions: [ObjectIdentifier] = []
     @State private var isEditing = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -250,18 +250,24 @@ struct ExperienceScreen: View {
                     }
                 }
                 Button(role: .destructive) {
-                    isShowingDeleteAlert.toggle()
+                    isShowingDeleteConfirmation.toggle()
                 } label: {
                     Label("Delete Experience", systemImage: "trash")
                 }
-                .alert(isPresented: $isShowingDeleteAlert) {
-                    Alert(
-                        title: Text("Delete Experience?"),
-                        message: Text("This will also delete all of its ingestions."),
-                        primaryButton: .destructive(Text("Delete"), action: delete),
-                        secondaryButton: .cancel()
-                    )
-                }
+                .confirmationDialog(
+                    "Delete Experience?",
+                    isPresented: $isShowingDeleteConfirmation,
+                    titleVisibility: .visible,
+                    actions: {
+                        Button("Delete", role: .destructive) {
+                            delete()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    },
+                    message: {
+                        Text("This will also delete all of its ingestions.")
+                    }
+                )
             }
         }
         .task {

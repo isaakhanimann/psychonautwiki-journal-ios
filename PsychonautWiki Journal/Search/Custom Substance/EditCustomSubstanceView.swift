@@ -30,11 +30,11 @@ struct EditCustomSubstanceView: View {
             Section("Name") {
                 TextField("Name", text: $name)
             }
-            Section("Units") {
-                TextField("Units", text: $units)
-            }
             Section("Description") {
                 TextField("Description", text: $description)
+            }
+            Section("Units") {
+                TextField("Units", text: $units)
             }
         }
         .optionalScrollDismissesKeyboard()
