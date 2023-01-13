@@ -26,12 +26,14 @@ struct CustomChooseDoseScreen: View {
     @State private var isShowingNext = false
     @State private var dose: Double? = nil
     @State private var isEstimate = false
+    @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
         Form {
             Section {
                 HStack {
                     TextField("Enter Dose", text: $doseText)
+                        .focused($isDoseFieldFocused)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(.roundedBorder)
                         .onChange(of: doseText) { newValue in
@@ -47,16 +49,34 @@ struct CustomChooseDoseScreen: View {
                     Text(units)
                 }
                 .font(.title)
-                Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
+                Toggle("Dose is an Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .padding(.bottom, 5)
             }
+        }
+        .task {
+            isDoseFieldFocused = true
         }
         .optionalScrollDismissesKeyboard()
         .toolbar {
-            ToolbarItem(placement: .keyboard) {
+            ToolbarItemGroup(placement: .keyboard) {
                 Button {
                     hideKeyboard()
                 } label: {
-                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
+                    Label(
+                        "Hide Keyboard",
+                        systemImage: "keyboard.chevron.compact.down"
+                    ).labelStyle(.iconOnly)
+                }
+                Button {
+                    isShowingNext = true
+                } label: {
+                    Label(
+                        "Next",
+                        systemImage: "chevron.forward.circle.fill"
+                    )
+                    .labelStyle(.titleAndIcon)
+                    .font(.headline)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {

@@ -143,7 +143,7 @@ struct ExperienceScreen: View {
             }
             if isEyeOpen {
                 if !substancesUsed.isEmpty {
-                    Section("Substance Info") {
+                    Section("Info") {
                         ForEach(substancesUsed) { substance in
                             NavigationLink(substance.name) {
                                 SubstanceScreen(substance: substance)
