@@ -236,7 +236,7 @@ struct ExperienceScreen: View {
                     } label: {
                         Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                     }
-                    .sheet(isPresented: $isShowingAddIngestionSheet, content: {
+                    .fullScreenCover(isPresented: $isShowingAddIngestionSheet, content: {
                         ChooseSubstanceScreen()
                     })
                 }
