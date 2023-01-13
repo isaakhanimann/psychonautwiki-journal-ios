@@ -59,6 +59,8 @@
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
+		EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A029714B2F00B3A474 /* TestingScreen.swift */; };
+		EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -280,6 +282,8 @@
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
+		EA2A69A029714B2F00B3A474 /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
+		EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDoseScreen.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionsForSubstanceScreen.swift; sourceTree = "<group>"; };
@@ -736,6 +740,8 @@
 			isa = PBXGroup;
 			children = (
 				EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */,
+				EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */,
+				EA2A69A029714B2F00B3A474 /* TestingScreen.swift */,
 				EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */,
 				EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */,
 				EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */,
@@ -1133,6 +1139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */,
 				EABD921C294276DC0073303A /* SummaryScreen.swift in Sources */,
 				EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
@@ -1263,6 +1270,7 @@
 				EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
+				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
 				EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */,
 				EA418A0429675FE800DEA663 /* ExperiencePickerScreen.swift in Sources */,
