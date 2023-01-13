@@ -70,10 +70,15 @@ struct ChooseDoseScreenContent: View {
                     Text("The nicotine inhaled by the average smoker per cigarette is indicated on the package. The nicotine content of the cigarette itself is much higher as on average only about 10% of the cigarette’s nicotine is inhaled.\nMore nicotine is inhaled when taking larger and more frequent puffs or by blocking the cigarette filter ventilation holes.\nNicotine yields from electronic cigarettes are also highly correlated with the device type and brand, liquid nicotine concentration, and PG/VG ratio, and to a lower significance with electrical power. Nicotine yields from 15 puffs may vary 50-fold.")
                 }
             }
-            if roaDose?.shouldUseVolumetricDosing ?? false {
-                Section {
-                    NavigationLink("Volumetric Dosing") {
-                        VolumetricDosingScreen()
+            if isEyeOpen {
+                Section("Info") {
+                    NavigationLink("Dosage Clarification") {
+                        DosageClassificationScreen()
+                    }
+                    if roaDose?.shouldUseVolumetricDosing ?? false {
+                        NavigationLink("Volumetric Dosing") {
+                            VolumetricDosingScreen()
+                        }
                     }
                 }
             }
