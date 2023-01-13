@@ -61,26 +61,8 @@ struct SaferScreen: View {
                     )
                 }.navigationTitle(title5)
             }
-            let title6 = "Administration Routes"
-            NavigationLink(title6) {
-                List {
-                    Text("Don’t share snorting equipment (straws, banknotes, bullets) to avoid blood-borne diseases such as Hepatitis C that can be transmitted through blood amounts so small you can’t notice. Injection is the the most dangerous route of administration and highly advised against. If you are determined to inject, don’t share injection materials and refer to the safer injection guide.")
-                    Link(
-                        "Safer Snorting",
-                        destination: URL(string: "https://www.youtube.com/watch?v=31fuvYXxeV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
-                    )
-                    Link(
-                        "Safer Smoking",
-                        destination: URL(string: "https://www.youtube.com/watch?v=lBlS2e46CV0&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
-                    )
-                    Link(
-                        "Safer Injecting",
-                        destination: URL(string: "https://www.youtube.com/watch?v=N7HjCPz4A7Y&list=PLkC348-BeCu6Ut-iJy8xp9_LLKXoMMroR")!
-                    )
-                    NavigationLink("Administration Routes Info") {
-                        AdministrationRouteScreen()
-                    }
-                }.navigationTitle(title6)
+            NavigationLink("Administration Routes") {
+                SaferRoutesScreen()
             }
             Group {
                 let title7 = "Allergy Tests"

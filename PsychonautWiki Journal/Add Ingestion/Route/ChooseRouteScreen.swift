@@ -20,10 +20,11 @@ struct ChooseRouteScreen: View {
 
     let substance: Substance
     let dismiss: () -> Void
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Documented Routes")
+            Text("Documented Routes").sectionHeaderStyle()
             let documentedRoutes = substance.administrationRoutesUnwrapped
             let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
             ForEach(0..<numRows, id: \.self) { index in
@@ -37,7 +38,7 @@ struct ChooseRouteScreen: View {
                     }
                 }
             }
-            Text("Undocumented Routes")
+            Text("Undocumented Routes").sectionHeaderStyle()
             let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !documentedRoutes.contains(route)
             }
@@ -50,6 +51,22 @@ struct ChooseRouteScreen: View {
                     if secondIndex < otherRoutes.count {
                         let route2 = otherRoutes[secondIndex]
                         getRouteBoxFor(route: route2)
+                    }
+                }
+            }
+            if isEyeOpen {
+                NavigationLink {
+                    SaferRoutesScreen()
+                } label: {
+                    GroupBox {
+                        Label("Safer Routes", systemImage: "info.circle")
+                            .font(.headline)
+                            .frame(
+                                minWidth: 0,
+                                maxWidth: .infinity,
+                                minHeight: 0,
+                                alignment: .center
+                            )
                     }
                 }
             }
@@ -101,6 +118,12 @@ struct ChooseRouteScreen: View {
                 )
             }
         }
+    }
+}
+
+public extension Text {
+    func sectionHeaderStyle() -> some View {
+        self.font(.title3.bold())
     }
 }
 

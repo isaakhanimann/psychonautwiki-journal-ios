@@ -20,6 +20,7 @@ struct CustomChooseRouteScreen: View {
     let substanceName: String
     let units: String
     let dismiss: () -> Void
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         VStack {
@@ -45,14 +46,33 @@ struct CustomChooseRouteScreen: View {
             }
             HStack {
                 getRouteBoxFor(route: .intramuscular)
-                GroupBox{}.hidden().frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity,
-                    alignment: .center
-                )
+                if isEyeOpen {
+                    NavigationLink {
+                        SaferRoutesScreen()
+                    } label: {
+                        GroupBox {
+                            Label("Safer Routes", systemImage: "info.circle")
+                                .font(.headline)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity,
+                                    minHeight: 0,
+                                    maxHeight: .infinity,
+                                    alignment: .center
+                                )
+                        }
+                    }
+                } else {
+                    GroupBox{}.hidden().frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        minHeight: 0,
+                        maxHeight: .infinity,
+                        alignment: .center
+                    )
+                }
             }
+
         }
         .padding(.horizontal)
         .navigationTitle("\(substanceName) Routes")
