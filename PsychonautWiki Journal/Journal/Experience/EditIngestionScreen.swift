@@ -121,10 +121,8 @@ struct EditIngestionContent: View {
         }
         .optionalScrollDismissesKeyboard()
         .navigationTitle("Edit \(substanceName)")
-        .toolbar {
-            ToolbarItem {
-                Button("Done", action: save)
-            }
+        .onDisappear {
+            save()
         }
     }
 }
