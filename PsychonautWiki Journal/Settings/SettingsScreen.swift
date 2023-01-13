@@ -68,7 +68,6 @@ struct SettingsContent: View {
 
     var body: some View {
         List {
-            eye
             Section("Privacy") {
                 if isFaceIDAvailable {
                     Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
@@ -173,6 +172,7 @@ struct SettingsContent: View {
                         .foregroundColor(.secondary)
                 }
             }
+            eye
         }
         .navigationTitle("Settings")
         .toast(isPresenting: $isShowingToast) {
