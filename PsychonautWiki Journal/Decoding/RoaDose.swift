@@ -25,6 +25,23 @@ struct RoaDose: Decodable {
     let strongMin: Double?
     let heavyMin: Double?
 
+    var shouldUseVolumetricDosing: Bool {
+        if units == "µg" {
+            return true
+        } else if units == "mg" {
+            if let commonMin, commonMin < 20 {
+                return true
+            }
+            if let strongMin, strongMin < 20 {
+                return true
+            }
+            if let heavyMin, heavyMin < 20 {
+                return true
+            }
+        }
+        return false
+    }
+
     func getRangeType(for dose: Double, with doseUnits: String) -> DoseRangeType {
         guard self.units == doseUnits else {return .none}
         if let lightMinUnwrap = lightMin,

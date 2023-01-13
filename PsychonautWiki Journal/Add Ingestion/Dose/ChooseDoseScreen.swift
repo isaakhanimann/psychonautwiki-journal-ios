@@ -57,18 +57,28 @@ struct ChooseDoseScreenContent: View {
     var impureDoseRounded: Double?
     @State private var isShowingUnknownDoseAlert = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    var roaDose: RoaDose? {
+        substance.getDose(for: administrationRoute)
+    }
 
     var body: some View {
         Form {
             doseSection
             puritySection
             if substance.name == "Nicotine" {
-                Section {
+                Section("Nicotine Content vs Dose") {
                     Text("The nicotine inhaled by the average smoker per cigarette is indicated on the package. The nicotine content of the cigarette itself is much higher as on average only about 10% of the cigarette’s nicotine is inhaled.\nMore nicotine is inhaled when taking larger and more frequent puffs or by blocking the cigarette filter ventilation holes.\nNicotine yields from electronic cigarettes are also highly correlated with the device type and brand, liquid nicotine concentration, and PG/VG ratio, and to a lower significance with electrical power. Nicotine yields from 15 puffs may vary 50-fold.")
                 }
             }
-            Section {
-                Text(Self.doseDisclaimer).font(.footnote)
+            if roaDose?.shouldUseVolumetricDosing ?? false {
+                Section {
+                    NavigationLink("Volumetric Dosing") {
+                        VolumetricDosingScreen()
+                    }
+                }
+            }
+            Section("Disclaimer") {
+                Text(Self.doseDisclaimer)
             }
         }
         .optionalScrollDismissesKeyboard()
@@ -163,7 +173,6 @@ struct ChooseDoseScreenContent: View {
     }
 
     var doseSection: some View {
-        let roaDose = substance.getDose(for: administrationRoute)
         return Section {
             if let remark = substance.dosageRemark {
                 Text(remark)
