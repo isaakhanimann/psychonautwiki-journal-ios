@@ -111,34 +111,37 @@ struct ExperienceRowContent: View {
                 }
                 Spacer()
                     .frame(width: 10)
-                VStack(alignment: .leading) {
-                    Text(title)
-                        .font(.headline)
-                    Group {
-                        if distinctSubstanceNames.isEmpty {
-                            Text("No substance")
-                        } else {
-                            Text(distinctSubstanceNames, format: .list(type: .and))
+                VStack {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(title)
+                            .font(.headline)
+                        Spacer()
+                        timeText
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    HStack(alignment: .bottom) {
+                        Group {
+                            if distinctSubstanceNames.isEmpty {
+                                Text("No substance")
+                            } else {
+                                Text(distinctSubstanceNames, format: .list(type: .and))
+                            }
+                        }
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        Spacer()
+                        if let locationName {
+                            HStack(spacing: 2) {
+                                Image(systemName: "location")
+                                Text(locationName).lineLimit(1)
+                            }
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                         }
                     }
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
                 }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    timeText
-                    Spacer()
-                    if let locationName {
-                        HStack(spacing: 2) {
-                            Image(systemName: "location")
-                            Text(locationName).lineLimit(1)
-                        }
-
-                    }
-                }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            }.fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 
