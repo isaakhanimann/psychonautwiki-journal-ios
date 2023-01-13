@@ -87,10 +87,10 @@ struct SaferScreen: View {
                 NavigationLink(title10) {
                     List {
                         Text("If someone is unconscious and breathing place them into Recovery Position to prevent death by the suffocation of vomit after a drug overdose.\nHave the contact details of help services to hand in case of urgent need.")
-                        Link(
-                            "Recovery Position Video",
-                            destination: URL(string: "https://www.youtube.com/watch?v=dv3agW-DZ5I")!
-                        )
+                        Link(destination: URL(string: "https://www.youtube.com/watch?v=dv3agW-DZ5I")!
+                        ) {
+                            Label("Recovery Position Video", systemImage: "play")
+                        }
                     }.navigationTitle(title10)
                 }
             }
