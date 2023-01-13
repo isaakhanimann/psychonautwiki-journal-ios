@@ -97,6 +97,14 @@ struct ExperienceScreen: View {
                             }
                         }
                     }
+                    if #available(iOS 16.2, *) {
+                        if experience.isCurrent {
+                            LiveActivityButton(
+                                stopLiveActivity: stopLiveActivity,
+                                startLiveActivity: startOrUpdateLiveActivity
+                            )
+                        }
+                    }
                 } header: {
                     let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
@@ -186,14 +194,6 @@ struct ExperienceScreen: View {
                     } label: {
                         Label("Add Location", systemImage: "plus")
                     }
-                }
-            }
-            if #available(iOS 16.2, *) {
-                if experience.isCurrent {
-                    LiveActivitySection(
-                        stopLiveActivity: stopLiveActivity,
-                        startLiveActivity: startOrUpdateLiveActivity
-                    )
                 }
             }
         }

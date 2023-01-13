@@ -18,7 +18,7 @@ import SwiftUI
 import ActivityKit
 
 @available(iOS 16.2, *)
-struct LiveActivitySection: View {
+struct LiveActivityButton: View {
 
     let stopLiveActivity: () -> Void
     let startLiveActivity: () -> Void
@@ -27,7 +27,7 @@ struct LiveActivitySection: View {
     @State private var isActivityActive = false
 
     var body: some View {
-        Section("Live Activities") {
+        Group {
             if areActivitiesEnabled {
                 if activityManager.isActivityActive {
                     Button {
@@ -64,7 +64,7 @@ struct LiveActivitySection: View {
 struct LiveActivitySection_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            LiveActivitySection(stopLiveActivity: {}, startLiveActivity: {})
+            LiveActivityButton(stopLiveActivity: {}, startLiveActivity: {})
         }
     }
 }
