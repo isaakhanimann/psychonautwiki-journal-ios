@@ -152,6 +152,10 @@ struct Substance: Decodable, Identifiable, Hashable {
             }
         })
     }
+
+    var isHallucinogen: Bool {
+        categories.contains("psychedelic") || categories.contains("dissociative") || categories.contains("deliriant") || categories.contains("hallucinogen")
+    }
 }
 
 struct DurationInfo {

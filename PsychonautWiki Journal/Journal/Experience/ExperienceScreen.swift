@@ -168,6 +168,13 @@ struct ExperienceScreen: View {
                                 )
                             }
                         }
+                        if substancesUsed.contains(where: {$0.isHallucinogen}) {
+                            NavigationLink {
+                                SaferHallucinogenScreen()
+                            } label: {
+                                Label("Safer Hallucinogens", systemImage: "cross")
+                            }
+                        }
                     }
                 }
             }
