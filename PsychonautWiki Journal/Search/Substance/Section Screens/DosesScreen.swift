@@ -23,7 +23,7 @@ struct DosesScreen: View {
     var body: some View {
         List {
             if let remark = substance.dosageRemark {
-                Section("\(substance.name) Dosing") {
+                Section {
                     Text(remark)
                 }
             }
