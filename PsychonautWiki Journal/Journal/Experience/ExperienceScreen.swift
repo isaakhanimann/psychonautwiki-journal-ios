@@ -275,11 +275,6 @@ struct ExperienceScreen: View {
         }
         .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
             calculateScreen()
-            if #available(iOS 16.2, *) {
-                if experience.isCurrent {
-                    startOrUpdateLiveActivity()
-                }
-            }
         }
         .onChange(of: hiddenIngestions) { _ in
             calculateScreen()
@@ -298,6 +293,11 @@ struct ExperienceScreen: View {
         calculateTimeline()
         calculateCumulativeDoses()
         findInteractions()
+        if #available(iOS 16.2, *) {
+            if experience.isCurrent {
+                startOrUpdateLiveActivity()
+            }
+        }
     }
 
     private func startOrUpdateLiveActivity() {
@@ -324,7 +324,8 @@ struct ExperienceScreen: View {
     private func calculateTimeline() {
         let ingestionsToShow = experience.sortedIngestionsUnwrapped.filter {!hiddenIngestions.contains($0.id)}
         let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
-        timelineModel = TimelineModel(everythingForEachLine: everythingForEachLine)
+        let model = TimelineModel(everythingForEachLine: everythingForEachLine)
+        timelineModel = model
     }
 
     private func calculateCumulativeDoses() {
