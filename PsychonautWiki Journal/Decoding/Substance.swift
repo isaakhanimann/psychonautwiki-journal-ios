@@ -67,11 +67,13 @@ struct Substance: Decodable, Identifiable, Hashable {
     }
 
     init(from decoder: Decoder) throws {
+        // need custom decoder because some keys might be missing so we need decodeIfPresent
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
         self.commonNames = try container.decode([String].self, forKey: .commonNames)
         self.isApproved = try container.decode(Bool.self, forKey: .isApproved)
+        self.roas = try container.decode([Roa].self, forKey: .roas)
         self.tolerance = try? container.decodeIfPresent(Tolerance.self, forKey: .tolerance)
         self.crossTolerances = (try? container.decodeIfPresent([String].self, forKey: .crossTolerances)) ?? []
         self.addictionPotential = try? container.decodeIfPresent(
@@ -87,7 +89,6 @@ struct Substance: Decodable, Identifiable, Hashable {
             forKey: .categories
         )) ?? []
         self.interactions = try? container.decodeIfPresent(Interactions.self, forKey: .interactions)
-        self.roas = (try? container.decodeIfPresent([Roa].self, forKey: .roas)) ?? []
         self.summary = try? container.decodeIfPresent(String.self, forKey: .summary)
         self.effectsSummary = try? container.decodeIfPresent(String.self, forKey: .effectsSummary)
         self.dosageRemark = try? container.decodeIfPresent(String.self, forKey: .dosageRemark)
