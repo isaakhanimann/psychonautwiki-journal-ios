@@ -23,11 +23,6 @@ struct TimelineWidgetLiveActivity: Widget {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
             VStack(spacing: 0) {
-                ProgressView(
-                    timerInterval: timelineModel.startTime...timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth),
-                    countsDown: false
-                )
-                .progressViewStyle(.linear)
                 GeometryReader { geo in
                     EffectTimeline(
                         timelineModel: timelineModel,
@@ -36,9 +31,17 @@ struct TimelineWidgetLiveActivity: Widget {
                         spaceToLabels: 7
                     )
                 }
+                .padding(.bottom, 3)
+                ProgressView(
+                    timerInterval: timelineModel.startTime...timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth),
+                    countsDown: false
+                )
+                .progressViewStyle(.linear)
             }
-            .padding(.vertical, 8)
+            .padding(.top, 8)
+            .padding(.bottom, 6)
             .padding(.horizontal, 10)
+            .activityBackgroundTint(Color(.systemBackground))
             .frame(height: 160) // in the documentation: https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities it says that truncation only happens if the height exceeds 160 points
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
