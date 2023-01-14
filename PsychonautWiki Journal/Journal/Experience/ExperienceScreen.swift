@@ -111,7 +111,7 @@ struct ExperienceScreen: View {
                     let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
                 }
-                if !cumulativeDoses.isEmpty {
+                if !cumulativeDoses.isEmpty && isEyeOpen {
                     Section("Cumulative Dose") {
                         ForEach(cumulativeDoses) { cumulative in
                             if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
