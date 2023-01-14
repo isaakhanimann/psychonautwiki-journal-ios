@@ -1,0 +1,219 @@
+{
+	"roas": [
+        {
+          "name": "insufflated",
+          "dose": {
+            "units": "mg",
+            "lightMin": 5,
+            "commonMin": 10,
+            "strongMin": 30,
+            "heavyMin": 60
+          },
+          "duration": {
+            "onset": {
+              "min": 3,
+              "max": 5,
+              "units": "minutes"
+            },
+            "comeup": {
+              "min": 3,
+              "max": 5,
+              "units": "minutes"
+            },
+            "peak": {
+              "min": 1.5,
+              "max": 3,
+              "units": "hours"
+            },
+            "offset": {
+              "min": 2,
+              "max": 4,
+              "units": "hours"
+            },
+            "total": {
+              "min": 4,
+              "max": 7,
+              "units": "hours"
+            },
+            "afterglow": {
+              "min": 6,
+              "max": 24,
+              "units": "hours"
+            }
+          },
+          "bioavailability": null
+        },
+        {
+          "name": "intravenous",
+          "dose": {
+            "units": "mg",
+            "lightMin": 5,
+            "commonMin": 10,
+            "strongMin": 30,
+            "heavyMin": 40
+          },
+          "duration": {
+            "onset": {
+              "min": 15,
+              "max": 30,
+              "units": "seconds"
+            },
+            "comeup": {
+              "min": 1,
+              "max": 2,
+              "units": "minutes"
+            },
+            "peak": {
+              "min": 1,
+              "max": 3,
+              "units": "hours"
+            },
+            "offset": {
+              "min": 3,
+              "max": 4,
+              "units": "hours"
+            },
+            "total": {
+              "min": 4,
+              "max": 8,
+              "units": "hours"
+            },
+            "afterglow": {
+              "min": 12,
+              "max": 24,
+              "units": "Hours#"
+            }
+          },
+          "bioavailability": null
+        },
+        {
+          "name": "oral",
+          "dose": {
+            "units": "mg",
+            "lightMin": 5,
+            "commonMin": 10,
+            "strongMin": 25,
+            "heavyMin": 50
+          },
+          "duration": {
+            "onset": {
+              "min": 15,
+              "max": 45,
+              "units": "minutes"
+            },
+            "comeup": {
+              "min": 1,
+              "max": 3,
+              "units": "hours"
+            },
+            "peak": {
+              "min": 3,
+              "max": 5,
+              "units": "hours"
+            },
+            "offset": {
+              "min": 3,
+              "max": 4,
+              "units": "hours"
+            },
+            "total": {
+              "min": 8,
+              "max": 12,
+              "units": "hours"
+            },
+            "afterglow": {
+              "min": 12,
+              "max": 24,
+              "units": "hours"
+            }
+          },
+          "bioavailability": null
+        },
+        {
+          "name": "rectal",
+          "dose": {
+            "units": "mg",
+            "lightMin": 5,
+            "commonMin": 10,
+            "strongMin": 30,
+            "heavyMin": 40
+          },
+          "duration": {
+            "onset": {
+              "min": 5,
+              "max": 15,
+              "units": "minutes"
+            },
+            "comeup": {
+              "min": 3,
+              "max": 5,
+              "units": "minutes"
+            },
+            "peak": {
+              "min": 2,
+              "max": 4,
+              "units": "hours"
+            },
+            "offset": {
+              "min": 3,
+              "max": 5,
+              "units": "hours"
+            },
+            "total": {
+              "min": 6,
+              "max": 10,
+              "units": "hours"
+            },
+            "afterglow": {
+              "min": 12,
+              "max": 24,
+              "units": "hours"
+            }
+          },
+          "bioavailability": null
+        },
+        {
+          "name": "smoked",
+          "dose": {
+            "units": "mg",
+            "lightMin": 5,
+            "commonMin": 10,
+            "strongMin": 20,
+            "heavyMin": 60
+          },
+          "duration": {
+            "onset": {
+              "min": 7,
+              "max": 10,
+              "units": "seconds"
+            },
+            "comeup": {
+              "min": 5,
+              "max": 10,
+              "units": "seconds"
+            },
+            "peak": {
+              "min": 1,
+              "max": 3,
+              "units": "hours"
+            },
+            "offset": {
+              "min": 1,
+              "max": 3,
+              "units": "hours"
+            },
+            "total": {
+              "min": 2,
+              "max": 6,
+              "units": "hours"
+            },
+            "afterglow": {
+              "min": 2,
+              "max": 24,
+              "units": "hours"
+            }
+          },
+          "bioavailability": null
+        }
+      ]
+}
