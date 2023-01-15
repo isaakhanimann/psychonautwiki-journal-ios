@@ -19,11 +19,11 @@ import SwiftUI
 struct LockScreen: View {
     var isFaceIDEnabled: Bool
     var body: some View {
-        VStack {
-            Image(decorative: "Eye Open")
+        VStack(spacing: 0) {
+            Image(decorative: "LaunchScreenEye")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 130, height: 130, alignment: .center)
+                .frame(width: 150, height: 150, alignment: .top)
             if !isFaceIDEnabled {
                 Spacer().frame(height: 20)
                 Text("Face ID is disabled.\nEnable it for Journal in settings to unlock the app.")
@@ -33,6 +33,7 @@ struct LockScreen: View {
                     .padding(.horizontal, 25)
             }
         }
+        .ignoresSafeArea()
     }
 }
 

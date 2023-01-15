@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location will only be used to add locations to your experiences automatically.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Authenticate yourself to see your journal.</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(MY_BUNDLE_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -28,6 +24,10 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Authenticate yourself to see your journal.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location will only be used to add locations to your experiences automatically.</string>
 	<key>NSSupport</key>
 	<string></string>
 	<key>NSSupportsLiveActivities</key>
@@ -41,13 +41,8 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>LaunchScreenBackground</string>
-		<key>UIImageName</key>
-		<string>LaunchScreen</string>
-	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen.storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
