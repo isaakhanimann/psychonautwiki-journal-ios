@@ -39,7 +39,9 @@ struct ExperienceScreen: View {
                         } else {
                             Canvas {_,_ in }.frame(height: timelineHeight)
                         }
-                        TimelineDisclaimers(isShowingOralDisclaimer: experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}))
+                        if isEyeOpen {
+                            TimelineDisclaimers(isShowingOralDisclaimer: experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}))
+                        }
                     }
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)

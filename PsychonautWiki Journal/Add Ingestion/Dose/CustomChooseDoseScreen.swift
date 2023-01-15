@@ -85,11 +85,9 @@ struct CustomChooseDoseScreen: View {
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
-                Button {
+                Button("Use Unknown Dose") {
                     dose = nil
                     isShowingNext = true
-                } label: {
-                    Label("Use Unknown Dose", systemImage: "exclamationmark.triangle").labelStyle(.titleAndIcon)
                 }
                 NavigationLink(
                     destination: FinishIngestionScreen(

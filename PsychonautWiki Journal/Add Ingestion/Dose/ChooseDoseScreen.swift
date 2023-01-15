@@ -89,9 +89,9 @@ struct ChooseDoseScreenContent: View {
                         }
                     }
                 }
-            }
-            Section("Disclaimer") {
-                Text(Self.doseDisclaimer)
+                Section("Disclaimer") {
+                    Text(Self.doseDisclaimer)
+                }
             }
         }
         .optionalScrollDismissesKeyboard()
@@ -116,15 +116,13 @@ struct ChooseDoseScreenContent: View {
                 }
             }
             ToolbarItemGroup(placement: .bottomBar) {
-                Button {
+                Button("Use Unknown Dose") {
                     if isEyeOpen {
                         isShowingUnknownDoseAlert.toggle()
                     } else {
                         selectedPureDose = nil
                         isShowingNext = true
                     }
-                } label: {
-                    Label("Use Unknown Dose", systemImage: "exclamationmark.triangle").labelStyle(.titleAndIcon)
                 }
                 .alert("Unknown Danger", isPresented: $isShowingUnknownDoseAlert) {
                     Button("Log Anyway", role: .destructive) {
