@@ -39,10 +39,7 @@ struct ExperienceScreen: View {
                         } else {
                             Canvas {_,_ in }.frame(height: timelineHeight)
                         }
-                        Text("* Heavy doses can have longer durations.").font(.footnote).maybeCondensed()
-                        if experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}) {
-                            Text("* A full stomach delays the onset of oral doses by 3 hours.").font(.footnote).maybeCondensed()
-                        }
+                        TimelineDisclaimers(isShowingOralDisclaimer: experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}))
                     }
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
