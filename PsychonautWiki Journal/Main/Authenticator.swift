@@ -23,10 +23,12 @@ class Authenticator: ObservableObject {
     static let hasToUnlockKey = "hasToUnlockApp"
     @Published var isUnlocked = false
     @Published var isFaceIDEnabled = true
+    @Published var isStartingUp = true
 
     func onChange(of scenePhase: ScenePhase) {
         let hasToUnlockApp = UserDefaults.standard.bool(forKey: Authenticator.hasToUnlockKey)
         if scenePhase == .active {
+            isStartingUp = false
             let context = LAContext()
             var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {

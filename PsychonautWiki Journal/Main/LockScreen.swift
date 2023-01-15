@@ -17,10 +17,11 @@
 import SwiftUI
 
 struct LockScreen: View {
-    var isFaceIDEnabled: Bool
+    let isEyeOpen: Bool
+    let isFaceIDEnabled: Bool
     var body: some View {
         VStack(spacing: 0) {
-            Image(decorative: "Eye Closed")
+            Image(decorative: isEyeOpen ? "Eye Open" : "Eye Closed")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 150, height: 150, alignment: .top)
@@ -39,6 +40,6 @@ struct LockScreen: View {
 
 struct LockScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LockScreen(isFaceIDEnabled: false)
+        LockScreen(isEyeOpen: false, isFaceIDEnabled: false)
     }
 }

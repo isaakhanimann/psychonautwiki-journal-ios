@@ -26,16 +26,20 @@ struct PsychonautWiki_JournalApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if authenticator.isUnlocked {
-                ContentView()
-                    .headerProminence(.increased)
-                    .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
-                    .environmentObject(toastViewModel)
-                    .environmentObject(authenticator)
-                    .environmentObject(locationManager)
-                    .accentColor(Color.blue)
+            if authenticator.isStartingUp {
+                LockScreen(isEyeOpen: true, isFaceIDEnabled: true)
             } else {
-                LockScreen(isFaceIDEnabled: authenticator.isFaceIDEnabled)
+                if authenticator.isUnlocked {
+                    ContentView()
+                        .headerProminence(.increased)
+                        .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+                        .environmentObject(toastViewModel)
+                        .environmentObject(authenticator)
+                        .environmentObject(locationManager)
+                        .accentColor(Color.blue)
+                } else {
+                    LockScreen(isEyeOpen: false, isFaceIDEnabled: authenticator.isFaceIDEnabled)
+                }
             }
         }
         .onChange(of: scenePhase) { phase in
