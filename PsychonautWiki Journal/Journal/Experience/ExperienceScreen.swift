@@ -21,16 +21,12 @@ struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionSheet = false
     @State private var isTimeRelative = false
-    @State private var timelineModel: TimelineModel?
-    @State private var cumulativeDoses: [CumulativeDose] = []
-    @State private var interactions: [Interaction] = []
-    @State private var substancesUsed: [Substance] = []
     @State private var isShowingDeleteConfirmation = false
-    @State private var hiddenIngestions: [ObjectIdentifier] = []
     @State private var isEditing = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         return List {
@@ -38,7 +34,7 @@ struct ExperienceScreen: View {
                 Section {
                     VStack(alignment: .leading) {
                         let timelineHeight: Double = 200
-                        if let timelineModel {
+                        if let timelineModel = viewModel.timelineModel {
                             EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
                         } else {
                             Canvas {_,_ in }.frame(height: timelineHeight)
@@ -49,7 +45,7 @@ struct ExperienceScreen: View {
                         }
                     }
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
-                        let isIngestionHidden = hiddenIngestions.contains(ing.id)
+                        let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
                         let route = ing.administrationRouteUnwrapped
                         let substance = ing.substance
                         NavigationLink {
@@ -75,15 +71,13 @@ struct ExperienceScreen: View {
                             .swipeActions(edge: .leading) {
                                 if isIngestionHidden {
                                     Button {
-                                        hiddenIngestions.removeAll { id in
-                                            id == ing.id
-                                        }
+                                        viewModel.showIngestion(id: ing.id)
                                     } label: {
                                         Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
                                     }
                                 } else {
                                     Button {
-                                        hiddenIngestions.append(ing.id)
+                                        viewModel.hideIngestion(id: ing.id)
                                     } label: {
                                         Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                                     }
@@ -102,8 +96,12 @@ struct ExperienceScreen: View {
                     if #available(iOS 16.2, *) {
                         if experience.isCurrent {
                             LiveActivityButton(
-                                stopLiveActivity: stopLiveActivity,
-                                startLiveActivity: startOrUpdateLiveActivity
+                                stopLiveActivity: {
+                                    viewModel.stopLiveActivity()
+                                },
+                                startLiveActivity: {
+                                    viewModel.startOrUpdateLiveActivity()
+                                }
                             )
                         }
                     }
@@ -111,9 +109,9 @@ struct ExperienceScreen: View {
                     let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
                     Text(firstDate, style: .date)
                 }
-                if !cumulativeDoses.isEmpty && isEyeOpen {
+                if !viewModel.cumulativeDoses.isEmpty && isEyeOpen {
                     Section("Cumulative Dose") {
-                        ForEach(cumulativeDoses) { cumulative in
+                        ForEach(viewModel.cumulativeDoses) { cumulative in
                             if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
                                 NavigationLink {
                                     DosesScreen(substance: substance)
@@ -177,16 +175,16 @@ struct ExperienceScreen: View {
                 }
             }
             if isEyeOpen {
-                if !substancesUsed.isEmpty {
+                if !viewModel.substancesUsed.isEmpty {
                     Section("Info") {
-                        ForEach(substancesUsed) { substance in
+                        ForEach(viewModel.substancesUsed) { substance in
                             NavigationLink(substance.name) {
                                 SubstanceScreen(substance: substance)
                             }
                         }
-                        ForEach(interactions) { interaction in
+                        ForEach(viewModel.interactions) { interaction in
                             NavigationLink {
-                                GoThroughAllInteractionsScreen(substancesToCheck: substancesUsed)
+                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
                             } label: {
                                 InteractionPairRow(
                                     aName: interaction.aName,
@@ -195,7 +193,7 @@ struct ExperienceScreen: View {
                                 )
                             }
                         }
-                        if substancesUsed.contains(where: {$0.isHallucinogen}) {
+                        if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
                             NavigationLink {
                                 SaferHallucinogenScreen()
                             } label: {
@@ -271,157 +269,14 @@ struct ExperienceScreen: View {
             }
         }
         .task {
-            calculateScreen()
-        }
-        .onChange(of: experience.sortedIngestionsUnwrapped) { _ in
-            calculateScreen()
-        }
-        .onChange(of: hiddenIngestions) { _ in
-            calculateScreen()
+            viewModel.setupFetchRequestPredicateAndFetch(experience: experience)
         }
     }
 
     private func delete() {
         PersistenceController.shared.viewContext.delete(experience)
         PersistenceController.shared.saveViewContext()
-        stopLiveActivity()
+        viewModel.stopLiveActivity()
         dismiss()
-    }
-
-    private func calculateScreen() {
-        setSubstances()
-        calculateTimeline()
-        calculateCumulativeDoses()
-        findInteractions()
-        if #available(iOS 16.2, *) {
-            if experience.isCurrent {
-                startOrUpdateLiveActivity()
-            }
-        }
-    }
-
-    private func startOrUpdateLiveActivity() {
-        if #available(iOS 16.2, *) {
-            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
-        }
-    }
-
-    private func stopLiveActivity() {
-        if #available(iOS 16.2, *) {
-            if experience.isCurrent {
-                ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
-            }
-        }
-    }
-
-    private func setSubstances() {
-        self.substancesUsed = experience.sortedIngestionsUnwrapped
-            .map { $0.substanceNameUnwrapped }
-            .uniqued()
-            .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
-    }
-
-    private func calculateTimeline() {
-        let ingestionsToShow = experience.sortedIngestionsUnwrapped.filter {!hiddenIngestions.contains($0.id)}
-        let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
-        let model = TimelineModel(everythingForEachLine: everythingForEachLine)
-        timelineModel = model
-    }
-
-    private func calculateCumulativeDoses() {
-        let ingestionsBySubstance = Dictionary(grouping: experience.sortedIngestionsUnwrapped, by: { $0.substanceNameUnwrapped })
-        let cumu: [CumulativeDose] = ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
-            guard ingestions.count > 1 else {return nil}
-            guard let color = ingestions.first?.substanceColor else {return nil}
-            return CumulativeDose(ingestionsForSubstance: ingestions, substanceName: substanceName, substanceColor: color)
-        }
-        cumulativeDoses = cumu
-    }
-
-    private func findInteractions() {
-        let substanceNames = experience.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
-        var interactions: [Interaction] = []
-        for subIndex in 0..<substanceNames.count {
-            let name = substanceNames[subIndex]
-            let otherNames = substanceNames.dropFirst(subIndex+1)
-            for otherName in otherNames {
-                if let newInteraction = InteractionChecker.getInteractionBetween(aName: name, bName: otherName) {
-                    interactions.append(newInteraction)
-                }
-            }
-        }
-        self.interactions = interactions.sorted(by: { interaction1, interaction2 in
-            interaction1.interactionType.dangerCount > interaction2.interactionType.dangerCount
-        })
-    }
-
-}
-
-struct CumulativeDose: Identifiable {
-    var id: String {
-        substanceName
-    }
-    let substanceName: String
-    let substanceColor: SubstanceColor
-    let cumulativeRoutes: [CumulativeRouteAndDose]
-
-    init(ingestionsForSubstance: [Ingestion], substanceName: String, substanceColor: SubstanceColor) {
-        self.substanceName = substanceName
-        self.substanceColor = substanceColor
-        let substance = ingestionsForSubstance.first?.substance
-        let ingestionsByRoute = Dictionary(grouping: ingestionsForSubstance, by: { $0.administrationRouteUnwrapped })
-        self.cumulativeRoutes = ingestionsByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
-            let roaDose = substance?.getDose(for: route)
-            return CumulativeRouteAndDose(route: route, roaDose: roaDose, ingestionForRoute: ingestions)
-        }
-    }
-}
-
-struct CumulativeRouteAndDose: Identifiable {
-    var id: AdministrationRoute {
-        route
-    }
-    let route: AdministrationRoute
-    let numDots: Int?
-    let isEstimate: Bool
-    let dose: Double?
-    let units: String
-
-    init(route: AdministrationRoute, roaDose: RoaDose?, ingestionForRoute: [Ingestion]) {
-        self.route = route
-        let units = ingestionForRoute.first?.units ?? "unknown"
-        self.units = units
-        var totalDose = 0.0
-        var isOneDoseUnknown = false
-        var isOneDoseAnEstimate = false
-        for ingestion in ingestionForRoute {
-            if let doseUnwrap = ingestion.doseUnwrapped, ingestion.unitsUnwrapped == units {
-                totalDose += doseUnwrap
-                if ingestion.isEstimate {
-                    isOneDoseAnEstimate = true
-                }
-            } else {
-                isOneDoseUnknown = true
-                break
-            }
-        }
-        if isOneDoseUnknown {
-            self.dose = nil
-            self.isEstimate = isOneDoseAnEstimate
-            self.numDots = nil
-        } else {
-            self.dose = totalDose
-            self.isEstimate = isOneDoseAnEstimate
-            self.numDots = roaDose?.getNumDots(ingestionDose: totalDose, ingestionUnits: units)
-        }
-
-    }
-
-    init(route: AdministrationRoute, numDots: Int?, isEstimate: Bool, dose: Double?, units: String) {
-        self.route = route
-        self.numDots = numDots
-        self.isEstimate = isEstimate
-        self.dose = dose
-        self.units = units
     }
 }
