@@ -24,11 +24,11 @@ struct InteractionPairRow: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Text(aName)
+            Text(aName).lineLimit(1)
             Spacer()
             Image(systemName: "arrow.left.arrow.right")
             Spacer()
-            Text(bName)
+            Text(bName).lineLimit(1)
             Spacer()
             ForEach(0..<interactionType.dangerCount, id: \.self) { _ in
                 Image(systemName: "exclamationmark.triangle")
