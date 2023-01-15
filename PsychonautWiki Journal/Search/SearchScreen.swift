@@ -49,6 +49,7 @@ struct SearchScreen: View {
                 AddCustomSubstanceView()
             }
         }
+        .listStyle(.plain)
         .optionalScrollDismissesKeyboard()
         .searchable(
             text: $viewModel.searchText,

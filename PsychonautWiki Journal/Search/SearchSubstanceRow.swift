@@ -76,6 +76,6 @@ struct SearchSubstanceRow_Previews: PreviewProvider {
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                 color: nil
             )
-        }
+        }.listStyle(.plain)
     }
 }
