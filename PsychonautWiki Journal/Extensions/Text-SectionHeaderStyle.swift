@@ -18,6 +18,6 @@ import SwiftUI
 
 public extension Text {
     func sectionHeaderStyle() -> some View {
-        self.font(.headline)
+        self.font(.title3.bold())
     }
 }
