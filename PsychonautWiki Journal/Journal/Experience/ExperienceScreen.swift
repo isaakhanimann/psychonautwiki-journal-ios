@@ -235,13 +235,15 @@ struct ExperienceScreen: View {
                         ChooseSubstanceScreen()
                     })
                 }
-                Button {
-                    isTimeRelative.toggle()
-                } label: {
-                    if isTimeRelative {
-                        Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                    } else {
-                        Label("Show Relative Time", systemImage: "timer.circle")
+                if #available(iOS 16, *) {
+                    Button {
+                        isTimeRelative.toggle()
+                    } label: {
+                        if isTimeRelative {
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                        } else {
+                            Label("Show Relative Time", systemImage: "timer.circle")
+                        }
                     }
                 }
                 Button(role: .destructive) {

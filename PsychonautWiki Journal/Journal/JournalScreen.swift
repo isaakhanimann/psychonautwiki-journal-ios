@@ -53,16 +53,16 @@ struct JournalScreen: View {
                         ChooseSubstanceScreen()
                     }
                     Spacer()
-                    Button {
-                        viewModel.isTimeRelative.toggle()
-                    } label: {
-                        if viewModel.isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
-                        }
-                    }
                     if #available(iOS 16, *) {
+                        Button {
+                            viewModel.isTimeRelative.toggle()
+                        } label: {
+                            if viewModel.isTimeRelative {
+                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                            } else {
+                                Label("Show Relative Time", systemImage: "timer.circle")
+                            }
+                        }
                         NavigationLink {
                             StatsScreen()
                         } label: {
