@@ -23,34 +23,38 @@ struct ChooseRouteScreen: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Documented Routes").sectionHeaderStyle()
             let documentedRoutes = substance.administrationRoutesUnwrapped
-            let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
-            ForEach(0..<numRows, id: \.self) { index in
-                HStack {
-                    let route1 = documentedRoutes[index*2]
-                    getRouteBoxFor(route: route1)
-                    let secondIndex = index*2+1
-                    if secondIndex < documentedRoutes.count {
-                        let route2 = documentedRoutes[secondIndex]
-                        getRouteBoxFor(route: route2)
+            if !documentedRoutes.isEmpty {
+                Text("Documented Routes").sectionHeaderStyle()
+                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
+                ForEach(0..<numRows, id: \.self) { index in
+                    HStack {
+                        let route1 = documentedRoutes[index*2]
+                        getRouteBoxFor(route: route1)
+                        let secondIndex = index*2+1
+                        if secondIndex < documentedRoutes.count {
+                            let route2 = documentedRoutes[secondIndex]
+                            getRouteBoxFor(route: route2)
+                        }
                     }
                 }
+                Spacer().frame(height: 20)
             }
-            Spacer().frame(height: 20)
-            Text("Undocumented Routes").sectionHeaderStyle()
             let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !documentedRoutes.contains(route)
             }
-            let numOtherRows = Int(ceil(Double(otherRoutes.count)/2.0))
-            ForEach(0..<numOtherRows, id: \.self) { index in
-                HStack {
-                    let route1 = otherRoutes[index*2]
-                    getRouteBoxFor(route: route1)
-                    let secondIndex = index*2+1
-                    if secondIndex < otherRoutes.count {
-                        let route2 = otherRoutes[secondIndex]
-                        getRouteBoxFor(route: route2)
+            if !otherRoutes.isEmpty {
+                Text("Undocumented Routes").sectionHeaderStyle()
+                let numOtherRows = Int(ceil(Double(otherRoutes.count)/2.0))
+                ForEach(0..<numOtherRows, id: \.self) { index in
+                    HStack {
+                        let route1 = otherRoutes[index*2]
+                        getRouteBoxFor(route: route1)
+                        let secondIndex = index*2+1
+                        if secondIndex < otherRoutes.count {
+                            let route2 = otherRoutes[secondIndex]
+                            getRouteBoxFor(route: route2)
+                        }
                     }
                 }
             }
