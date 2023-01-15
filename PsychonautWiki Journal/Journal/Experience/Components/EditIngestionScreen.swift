@@ -118,7 +118,16 @@ struct EditIngestionContent: View {
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)
             }
-            Section("Delete") {
+        }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button {
+                    hideKeyboard()
+                } label: {
+                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: delete) {
                     Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
                 }
