@@ -74,11 +74,12 @@ struct IngestionRowContent: View {
                     } else {
                         Text(ingestionTime, style: .time)
                     }
-                }.foregroundColor(.secondary)
-                if !note.isEmpty {
-                    Text(note)
-                        .foregroundColor(.secondary)
+                    if !note.isEmpty {
+                        Text(note)
+                    }
                 }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
             Spacer()
             VStack(alignment: .trailing) {
