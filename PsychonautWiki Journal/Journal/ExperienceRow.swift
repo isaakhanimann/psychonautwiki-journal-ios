@@ -103,7 +103,7 @@ struct ExperienceRowContent: View {
                                 center: .center
                             )
                         )
-                        .frame(width: 35, height: 35)
+                        .frame(width: 30, height: 30)
                     if isFavorite {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
