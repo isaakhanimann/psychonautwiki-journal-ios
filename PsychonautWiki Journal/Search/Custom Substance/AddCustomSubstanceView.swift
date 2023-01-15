@@ -61,7 +61,7 @@ struct AddCustomSubstanceView: View {
                     }
                 }
             }
-        }
+        }.navigationViewStyle(.stack)
     }
 }
 
