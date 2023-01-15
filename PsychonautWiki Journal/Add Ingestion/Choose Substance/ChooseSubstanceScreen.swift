@@ -102,7 +102,7 @@ struct ChooseSubstanceContent: View {
                     }
                 }
             }
-            .toast(isPresenting: $isShowingOpenEyeToast) {
+            .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
                 AlertToast(
                     displayMode: .alert,
                     type: .image("Eye Open", .red)
