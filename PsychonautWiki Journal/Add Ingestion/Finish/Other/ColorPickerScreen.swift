@@ -25,7 +25,7 @@ struct ColorPickerScreen: View {
 
     var body: some View {
         List {
-            if !alreadyUsedColors.isEmpty {
+            if !otherColors.isEmpty {
                 Section("Free Colors") {
                     ForEach(Array(otherColors)) { color in
                         button(for: color)
