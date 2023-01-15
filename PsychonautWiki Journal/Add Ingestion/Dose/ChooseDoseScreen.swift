@@ -163,11 +163,10 @@ struct ChooseDoseScreenContent: View {
     private var puritySection: some View {
         Section("Purity Adjusted Dose") {
             VStack {
+                Text("Purity: \(Int(purity))%")
+                    .font(.title2.bold())
                 Text(impureDoseText)
                     .font(.title2.bold())
-                Text("\(Int(purity))%")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
                 Slider(
                     value: $purity,
                     in: 1...100,
