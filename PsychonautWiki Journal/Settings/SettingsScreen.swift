@@ -121,7 +121,7 @@ struct SettingsContent: View {
                     isPresented: $isExporting,
                     document: journalFile,
                     contentType: .json,
-                    defaultFilename: "Journal"
+                    defaultFilename: "Journal \(Date().asDateString)"
                 ) { result in
                     if case .success = result {
                         toastViewModel.showSuccessToast(message: "Export Successful")
