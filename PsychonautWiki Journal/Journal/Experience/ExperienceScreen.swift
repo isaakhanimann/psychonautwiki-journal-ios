@@ -192,6 +192,11 @@ struct ExperienceScreen: View {
                                 )
                             }
                         }
+                        if viewModel.interactions.isEmpty {
+                            NavigationLink("See Interactions") {
+                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                            }
+                        }
                         if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
                             NavigationLink {
                                 SaferHallucinogenScreen()
