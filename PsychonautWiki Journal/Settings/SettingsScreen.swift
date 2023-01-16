@@ -117,39 +117,11 @@ struct SettingsContent: View {
                     exportData()
                 } label: {
                     Label("Export Data", systemImage: "arrow.up.doc")
-                }.fileExporter(
-                    isPresented: $isExporting,
-                    document: journalFile,
-                    contentType: .json,
-                    defaultFilename: "Journal \(Date().asDateString)"
-                ) { result in
-                    if case .success = result {
-                        toastViewModel.showSuccessToast(message: "Export Successful")
-                    } else {
-                        toastViewModel.showErrorToast(message: "Export Failed")
-                    }
                 }
                 Button {
                     isImporting.toggle()
                 } label: {
                     Label("Import Data", systemImage: "arrow.down.doc")
-                }.fileImporter(
-                    isPresented: $isImporting,
-                    allowedContentTypes: [.json]
-                ) { result in
-                    do {
-                        let selectedFile: URL = try result.get()
-                        if selectedFile.startAccessingSecurityScopedResource() {
-                            let data = try Data(contentsOf: selectedFile)
-                            importData(data)
-                        } else {
-                            toastViewModel.showErrorToast(message: "Permission Denied")
-                        }
-                        selectedFile.stopAccessingSecurityScopedResource()
-                    } catch {
-                        toastViewModel.showErrorToast(message: "Import Failed")
-                        print("Error getting data: \(error.localizedDescription)")
-                    }
                 }
                 Button {
                     isShowingDeleteConfirmation.toggle()
@@ -180,6 +152,36 @@ struct SettingsContent: View {
                 }
             }
             eye
+        }
+        .fileImporter(
+            isPresented: $isImporting,
+            allowedContentTypes: [.json]
+        ) { result in
+            do {
+                let selectedFile: URL = try result.get()
+                if selectedFile.startAccessingSecurityScopedResource() {
+                    let data = try Data(contentsOf: selectedFile)
+                    importData(data)
+                } else {
+                    toastViewModel.showErrorToast(message: "Permission Denied")
+                }
+                selectedFile.stopAccessingSecurityScopedResource()
+            } catch {
+                toastViewModel.showErrorToast(message: "Import Failed")
+                print("Error getting data: \(error.localizedDescription)")
+            }
+        }
+        .fileExporter(
+            isPresented: $isExporting,
+            document: journalFile,
+            contentType: .json,
+            defaultFilename: "Journal \(Date().asDateString)"
+        ) { result in
+            if case .success = result {
+                toastViewModel.showSuccessToast(message: "Export Successful")
+            } else {
+                toastViewModel.showErrorToast(message: "Export Failed")
+            }
         }
         .navigationTitle("Settings")
         .toast(isPresenting: $isShowingToast) {
