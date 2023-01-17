@@ -20,7 +20,35 @@ struct SubstanceScreen: View {
 
     let substance: Substance
 
+    @State private var isShowingAddIngestionSheet = false
+
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    addIngestionButton
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    addIngestionButton
+                }
+            }
+        }
+    }
+
+    private var addIngestionButton: some View {
+        Button {
+            isShowingAddIngestionSheet.toggle()
+        } label: {
+            Label("New Ingestion", systemImage: "plus.circle.fill")
+                .labelStyle(.titleAndIcon)
+                .font(.headline)
+        }
+    }
+
+    private var screen: some View {
         List {
             Group { // group is here because we cannot have more than 10 subviews
                 if let articleURL = substance.url {
@@ -95,6 +123,13 @@ struct SubstanceScreen: View {
                     NavigationLink("Addiction Potential") {
                         AddictionScreen(addictionPotential: addictionPotential)
                     }
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
+            NavigationView {
+                AcknowledgeInteractionsView(substance: substance) {
+                    isShowingAddIngestionSheet.toggle()
                 }
             }
         }
