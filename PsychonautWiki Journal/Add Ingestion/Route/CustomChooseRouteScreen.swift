@@ -72,7 +72,7 @@ struct CustomChooseRouteScreen: View {
                     )
                 }
             }
-
+            .padding(.bottom)
         }
         .padding(.horizontal)
         .navigationTitle("\(substanceName) Routes")
