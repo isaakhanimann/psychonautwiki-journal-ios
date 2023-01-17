@@ -29,7 +29,101 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        return List {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    favoriteButton
+                    editTitleButton
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    if experience.isCurrent {
+                        addIngestionButton
+                    }
+                    Button {
+                        isTimeRelative.toggle()
+                    } label: {
+                        if isTimeRelative {
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                        } else {
+                            Label("Show Relative Time", systemImage: "timer.circle")
+                        }
+                    }
+                    deleteExperienceButton
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    editTitleButton
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    favoriteButton
+                    deleteExperienceButton
+                    if experience.isCurrent {
+                        addIngestionButton
+                    }
+                }
+            }
+        }
+    }
+
+    private var favoriteButton: some View {
+        let isFavorite = experience.isFavorite
+        return Button {
+            experience.isFavorite = !isFavorite
+            try? PersistenceController.shared.viewContext.save()
+        } label: {
+            if isFavorite {
+                Label("Unfavorite", systemImage: "star.fill")
+            } else {
+                Label("Favorite", systemImage: "star")
+            }
+        }
+    }
+
+    private var editTitleButton: some View {
+        Button {
+            isEditing.toggle()
+        } label: {
+            Label("Edit Title/Note", systemImage: "pencil")
+        }
+    }
+
+    private var addIngestionButton: some View {
+        Button {
+            isShowingAddIngestionSheet.toggle()
+        } label: {
+            Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+        }
+        .fullScreenCover(isPresented: $isShowingAddIngestionSheet, content: {
+            ChooseSubstanceScreen()
+        })
+    }
+
+    private var deleteExperienceButton: some View {
+        Button(role: .destructive) {
+            isShowingDeleteConfirmation.toggle()
+        } label: {
+            Label("Delete Experience", systemImage: "trash")
+        }
+        .confirmationDialog(
+            "Delete Experience?",
+            isPresented: $isShowingDeleteConfirmation,
+            titleVisibility: .visible,
+            actions: {
+                Button("Delete", role: .destructive) {
+                    delete()
+                }
+                Button("Cancel", role: .cancel) {}
+            },
+            message: {
+                Text("This will also delete all of its ingestions.")
+            }
+        )
+    }
+
+    private var screen: some View {
+        List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section {
                     VStack(alignment: .leading) {
@@ -211,68 +305,6 @@ struct ExperienceScreen: View {
         .navigationTitle(experience.titleUnwrapped)
         .sheet(isPresented: $isEditing) {
             EditExperienceScreen(experience: experience)
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                let isFavorite = experience.isFavorite
-                Button {
-                    experience.isFavorite = !isFavorite
-                    try? PersistenceController.shared.viewContext.save()
-                } label: {
-                    if isFavorite {
-                        Label("Unfavorite", systemImage: "star.fill")
-                    } else {
-                        Label("Favorite", systemImage: "star")
-                    }
-                }
-                Button {
-                    isEditing.toggle()
-                } label: {
-                    Label("Edit Title/Note", systemImage: "pencil")
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                if experience.isCurrent {
-                    Button {
-                        isShowingAddIngestionSheet.toggle()
-                    } label: {
-                        Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                    }
-                    .fullScreenCover(isPresented: $isShowingAddIngestionSheet, content: {
-                        ChooseSubstanceScreen()
-                    })
-                }
-                if #available(iOS 16, *) {
-                    Button {
-                        isTimeRelative.toggle()
-                    } label: {
-                        if isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
-                        }
-                    }
-                }
-                Button(role: .destructive) {
-                    isShowingDeleteConfirmation.toggle()
-                } label: {
-                    Label("Delete Experience", systemImage: "trash")
-                }
-                .confirmationDialog(
-                    "Delete Experience?",
-                    isPresented: $isShowingDeleteConfirmation,
-                    titleVisibility: .visible,
-                    actions: {
-                        Button("Delete", role: .destructive) {
-                            delete()
-                        }
-                        Button("Cancel", role: .cancel) {}
-                    },
-                    message: {
-                        Text("This will also delete all of its ingestions.")
-                    }
-                )
-            }
         }
         .task {
             viewModel.setupFetchRequestPredicateAndFetch(experience: experience)

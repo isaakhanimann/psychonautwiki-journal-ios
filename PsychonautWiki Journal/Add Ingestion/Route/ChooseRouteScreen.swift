@@ -71,12 +71,13 @@ struct ChooseRouteScreen: View {
                             alignment: .center
                         )
                 }
+                .padding(.bottom)
             }
         }
         .padding(.horizontal)
         .navigationBarTitle("\(substance.name) Routes")
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
                     dismiss()
                 }

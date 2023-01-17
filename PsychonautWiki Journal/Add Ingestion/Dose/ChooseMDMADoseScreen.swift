@@ -33,6 +33,61 @@ struct ChooseMDMADoseScreen: View {
     }
 
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    unknownDoseLink
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink {
+            FinishIngestionScreen(
+                substanceName: mdma.name,
+                administrationRoute: .oral,
+                dose: doseRounded,
+                units: units,
+                isEstimate: isEstimate,
+                dismiss: dismiss
+            )
+        } label: {
+            NextLabel()
+        }
+    }
+
+    private var unknownDoseLink: some View {
+        NavigationLink("Unknown Dose") {
+            FinishIngestionScreen(
+                substanceName: mdma.name,
+                administrationRoute: .oral,
+                dose: nil,
+                units: units,
+                isEstimate: false,
+                dismiss: dismiss
+            )
+        }
+    }
+
+    private var screen: some View {
         Form {
             Section("Max Dose Calculator") {
                 MDMAMaxDoseCalculator()
@@ -60,41 +115,12 @@ struct ChooseMDMADoseScreen: View {
             }
             if #available(iOS 16, *) {
                 MDMAOptimalDoseSection()
+            } else {
+                unknownDoseLink
             }
             MDMAPillsSection()
         }
         .navigationTitle("MDMA Dosage")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                NavigationLink("Unknown Dose") {
-                    FinishIngestionScreen(
-                        substanceName: mdma.name,
-                        administrationRoute: .oral,
-                        dose: nil,
-                        units: units,
-                        isEstimate: false,
-                        dismiss: dismiss
-                    )
-                }
-                NavigationLink {
-                    FinishIngestionScreen(
-                        substanceName: mdma.name,
-                        administrationRoute: .oral,
-                        dose: doseRounded,
-                        units: units,
-                        isEstimate: isEstimate,
-                        dismiss: dismiss
-                    )
-                } label: {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-            }
-        }
     }
 }
 

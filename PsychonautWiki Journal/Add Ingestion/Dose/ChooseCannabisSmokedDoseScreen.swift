@@ -62,6 +62,62 @@ struct ChooseCannabisSmokedDoseScreen: View {
     }
 
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    unknownDoseLink
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink {
+            FinishIngestionScreen(
+                substanceName: cannabis.name,
+                administrationRoute: .smoked,
+                dose: doseRounded,
+                units: "mg (THC)",
+                isEstimate: isEstimate,
+                dismiss: dismiss,
+                suggestedNote: suggestedNote
+            )
+        } label: {
+            NextLabel()
+        }
+    }
+
+    private var unknownDoseLink: some View {
+        NavigationLink("Unknown Dose") {
+            FinishIngestionScreen(
+                substanceName: cannabis.name,
+                administrationRoute: .smoked,
+                dose: nil,
+                units: "mg (THC)",
+                isEstimate: false,
+                dismiss: dismiss
+            )
+        }
+    }
+
+    private var screen: some View {
         Form {
             Section("Ingested THC Amount") {
                 VStack(spacing: 5) {
@@ -114,43 +170,16 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     }
                 }
             }
+            if #unavailable(iOS 16) {
+                Section {
+                    unknownDoseLink
+                }
+            }
             if let remark = cannabis.dosageRemark {
                 Text(remark)
             }
         }
         .navigationTitle("Cannabis Smoked")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                NavigationLink("Unknown Dose") {
-                    FinishIngestionScreen(
-                        substanceName: cannabis.name,
-                        administrationRoute: .smoked,
-                        dose: nil,
-                        units: "mg (THC)",
-                        isEstimate: false,
-                        dismiss: dismiss
-                    )
-                }
-                NavigationLink {
-                    FinishIngestionScreen(
-                        substanceName: cannabis.name,
-                        administrationRoute: .smoked,
-                        dose: doseRounded,
-                        units: "mg (THC)",
-                        isEstimate: isEstimate,
-                        dismiss: dismiss,
-                        suggestedNote: suggestedNote
-                    )
-                } label: {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-            }
-        }
     }
 }
 

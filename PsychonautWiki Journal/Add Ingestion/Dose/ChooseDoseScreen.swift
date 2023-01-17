@@ -62,6 +62,77 @@ struct ChooseDoseScreenContent: View {
     }
 
     var body: some View {
+        if #available(iOS 16.0, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    Button {
+                        isShowingNext = true
+                    } label: {
+                        NextLabel()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    unknownDoseLink
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    Button {
+                        isShowingNext = true
+                    } label: {
+                        NextLabel()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink(
+            destination: FinishIngestionScreen(
+                substanceName: substance.name,
+                administrationRoute: administrationRoute,
+                dose: selectedPureDose,
+                units: selectedUnits,
+                isEstimate: isEstimate,
+                dismiss: dismiss,
+                suggestedNote: suggestedNote
+            ),
+            isActive: $isShowingNext
+        ) {
+            NextLabel()
+        }.disabled(selectedPureDose==nil)
+    }
+
+    private var unknownDoseLink: some View {
+        Button("Use Unknown Dose") {
+            if isEyeOpen {
+                isShowingUnknownDoseAlert.toggle()
+            } else {
+                selectedPureDose = nil
+                isShowingNext = true
+            }
+        }
+    }
+
+    private var screen: some View {
         Form {
             doseSection
             if isEyeOpen {
@@ -93,64 +164,25 @@ struct ChooseDoseScreenContent: View {
                     Text(Self.doseDisclaimer)
                 }
             }
+            if #unavailable(iOS 16) {
+                Section {
+                    unknownDoseLink
+                }
+            }
+        }
+        .alert("Unknown Danger", isPresented: $isShowingUnknownDoseAlert) {
+            Button("Log Anyway", role: .destructive) {
+                selectedPureDose = nil
+                isShowingNext = true
+            }
+            Button("Cancel", role: .cancel) {
+                isShowingUnknownDoseAlert.toggle()
+            }
+        } message: {
+            Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
         }
         .optionalScrollDismissesKeyboard()
         .navigationBarTitle("\(substance.name) Dose")
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Button {
-                    hideKeyboard()
-                } label: {
-                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
-                }
-                Button {
-                    isShowingNext = true
-                } label: {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button("Use Unknown Dose") {
-                    if isEyeOpen {
-                        isShowingUnknownDoseAlert.toggle()
-                    } else {
-                        selectedPureDose = nil
-                        isShowingNext = true
-                    }
-                }
-                .alert("Unknown Danger", isPresented: $isShowingUnknownDoseAlert) {
-                    Button("Log Anyway", role: .destructive) {
-                        selectedPureDose = nil
-                        isShowingNext = true
-                    }
-                    Button("Cancel", role: .cancel) {
-                        isShowingUnknownDoseAlert.toggle()
-                    }
-                } message: {
-                    Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
-                }
-                NavigationLink(
-                    destination: FinishIngestionScreen(
-                        substanceName: substance.name,
-                        administrationRoute: administrationRoute,
-                        dose: selectedPureDose,
-                        units: selectedUnits,
-                        isEstimate: isEstimate,
-                        dismiss: dismiss,
-                        suggestedNote: suggestedNote
-                    ),
-                    isActive: $isShowingNext
-                ) {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }.disabled(selectedPureDose==nil)
-            }
-        }
     }
 
     var suggestedNote: String? {

@@ -96,7 +96,7 @@ struct ChooseSubstanceContent: View {
             .disableAutocorrection(true)
             .navigationBarTitle("New Ingestion")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         dismiss()
                     }

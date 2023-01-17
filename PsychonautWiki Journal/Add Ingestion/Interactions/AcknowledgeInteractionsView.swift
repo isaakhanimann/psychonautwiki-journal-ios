@@ -55,9 +55,41 @@ struct AcknowledgeInteractionsContent: View {
     let interactions: [Interaction]
     @Binding var isShowingAlert: Bool
 
-
-
     var body: some View {
+        if #available(iOS 16.0, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink {
+            ChooseRouteScreen(substance: substance, dismiss: dismiss)
+        } label: {
+            NextLabel()
+        }
+    }
+
+    var screen: some View {
         ZStack {
             regularContent
                 .blur(radius: isShowingAlert ? 10 : 0)
@@ -81,20 +113,6 @@ struct AcknowledgeInteractionsContent: View {
                 )
             } else {
                 Text("There are no documented interactions")
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItem(placement: .bottomBar) {
-                NavigationLink {
-                    ChooseRouteScreen(substance: substance, dismiss: dismiss)
-                } label: {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
             }
         }
         .navigationBarTitle(substance.name + " Interactions")

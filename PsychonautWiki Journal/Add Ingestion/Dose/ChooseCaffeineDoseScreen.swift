@@ -36,6 +36,61 @@ struct ChooseCaffeineDoseScreen: View {
     }
 
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    unknownDoseLink
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink {
+            FinishIngestionScreen(
+                substanceName: caffeine.name,
+                administrationRoute: .oral,
+                dose: doseRounded,
+                units: units,
+                isEstimate: isEstimate,
+                dismiss: dismiss
+            )
+        } label: {
+            NextLabel()
+        }
+    }
+
+    private var unknownDoseLink: some View {
+        NavigationLink("Unknown Dose") {
+            FinishIngestionScreen(
+                substanceName: caffeine.name,
+                administrationRoute: .oral,
+                dose: nil,
+                units: units,
+                isEstimate: false,
+                dismiss: dismiss
+            )
+        }
+    }
+
+    var screen: some View {
         Form {
             Section {
                 VStack(spacing: 5) {
@@ -75,42 +130,16 @@ struct ChooseCaffeineDoseScreen: View {
                     caffeineDoseInMg = 250
                 }
             }
+            if #unavailable(iOS 16) {
+                Section {
+                    unknownDoseLink
+                }
+            }
             if let remark = caffeine.dosageRemark {
                 Text(remark)
             }
         }
         .navigationTitle("Caffeine Dosage")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                NavigationLink("Unknown Dose") {
-                    FinishIngestionScreen(
-                        substanceName: caffeine.name,
-                        administrationRoute: .oral,
-                        dose: nil,
-                        units: units,
-                        isEstimate: false,
-                        dismiss: dismiss
-                    )
-                }
-                NavigationLink {
-                    FinishIngestionScreen(
-                        substanceName: caffeine.name,
-                        administrationRoute: .oral,
-                        dose: doseRounded,
-                        units: units,
-                        isEstimate: isEstimate,
-                        dismiss: dismiss
-                    )
-                } label: {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-            }
-        }
     }
 }
 

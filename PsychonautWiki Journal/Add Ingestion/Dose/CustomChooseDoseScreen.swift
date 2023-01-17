@@ -29,6 +29,72 @@ struct CustomChooseDoseScreen: View {
     @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    Button {
+                        isShowingNext = true
+                    } label: {
+                        NextLabel()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    unknownDoseLink
+                    nextLink
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    Button {
+                        isShowingNext = true
+                    } label: {
+                        NextLabel()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    nextLink
+                }
+            }
+        }
+    }
+
+    private var nextLink: some View {
+        NavigationLink(
+            destination: FinishIngestionScreen(
+                substanceName: substanceName,
+                administrationRoute: administrationRoute,
+                dose: dose,
+                units: units,
+                isEstimate: isEstimate,
+                dismiss: dismiss
+            ),
+            isActive: $isShowingNext
+        ) {
+            NextLabel()
+        }.disabled(dose==nil)
+    }
+
+    private var unknownDoseLink: some View {
+        Button("Use Unknown Dose") {
+            dose = nil
+            isShowingNext = true
+        }
+    }
+
+    private var screen: some View {
         Form {
             Section {
                 HStack {
@@ -53,57 +119,16 @@ struct CustomChooseDoseScreen: View {
                     .tint(.accentColor)
                     .padding(.bottom, 5)
             }
+            if #unavailable(iOS 16) {
+                Section {
+                    unknownDoseLink
+                }
+            }
         }
         .task {
             isDoseFieldFocused = true
         }
         .optionalScrollDismissesKeyboard()
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Button {
-                    hideKeyboard()
-                } label: {
-                    Label(
-                        "Hide Keyboard",
-                        systemImage: "keyboard.chevron.compact.down"
-                    ).labelStyle(.iconOnly)
-                }
-                Button {
-                    isShowingNext = true
-                } label: {
-                    Label(
-                        "Next",
-                        systemImage: "chevron.forward.circle.fill"
-                    )
-                    .labelStyle(.titleAndIcon)
-                    .font(.headline)
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button("Use Unknown Dose") {
-                    dose = nil
-                    isShowingNext = true
-                }
-                NavigationLink(
-                    destination: FinishIngestionScreen(
-                        substanceName: substanceName,
-                        administrationRoute: administrationRoute,
-                        dose: dose,
-                        units: units,
-                        isEstimate: isEstimate,
-                        dismiss: dismiss
-                    ),
-                    isActive: $isShowingNext
-                ) {
-                    Label("Next", systemImage: "chevron.forward.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }.disabled(dose==nil)
-            }
-        }
         .navigationTitle("\(substanceName) Dose")
     }
 }

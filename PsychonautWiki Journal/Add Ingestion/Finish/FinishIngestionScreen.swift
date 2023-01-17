@@ -30,6 +30,60 @@ struct FinishIngestionScreen: View {
     @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
+        if #available(iOS 16, *) {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    doneButton
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    doneButton
+                }
+            }
+        }
+    }
+
+    var doneButton: some View {
+        Button {
+            Task {
+                do {
+                    try await viewModel.addIngestion(
+                        substanceName: substanceName,
+                        administrationRoute: administrationRoute,
+                        dose: dose,
+                        units: units,
+                        isEstimate: isEstimate,
+                        location: locationManager.selectedLocation
+                    )
+                    Task { @MainActor in
+                        self.toastViewModel.showSuccessToast()
+                        self.dismiss()
+                    }
+                } catch {
+                    Task { @MainActor in
+                        self.toastViewModel.showErrorToast(message: "Failed Ingestion")
+                        self.dismiss()
+                    }
+                }
+            }
+        } label: {
+            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+        }
+    }
+
+    var screen: some View {
         Form {
             Section("Ingestion") {
                 DatePicker(
@@ -113,41 +167,6 @@ struct FinishIngestionScreen: View {
             guard !viewModel.isInitialized else {return} // because this function is going to be called again when navigating back from color picker screen
             locationManager.selectedLocation = locationManager.currentLocation
             viewModel.initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-            ToolbarItem(placement: .bottomBar) {
-                Button {
-                    Task {
-                        do {
-                            try await viewModel.addIngestion(
-                                substanceName: substanceName,
-                                administrationRoute: administrationRoute,
-                                dose: dose,
-                                units: units,
-                                isEstimate: isEstimate,
-                                location: locationManager.selectedLocation
-                            )
-                            Task { @MainActor in
-                                self.toastViewModel.showSuccessToast()
-                                self.dismiss()
-                            }
-                        } catch {
-                            Task { @MainActor in
-                                self.toastViewModel.showErrorToast(message: "Failed Ingestion")
-                                self.dismiss()
-                            }
-                        }
-                    }
-                } label: {
-                    Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-
-            }
         }
     }
 }
