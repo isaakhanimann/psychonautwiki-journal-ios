@@ -18,6 +18,7 @@ import SwiftUI
 
 struct MDMAMaxDoseCalculator: View {
 
+    let onChangeOfMax: (Double) -> Void
     @State private var bodyWeightInKg = 75.0
     @State private var gender = Gender.male
     private var suggestedMaxDoseInMg: Double {
@@ -64,13 +65,19 @@ struct MDMAMaxDoseCalculator: View {
                 Text("150")
             }
         }
+        .onChange(of: bodyWeightInKg) { newValue in
+            onChangeOfMax(suggestedMaxDoseRounded)
+        }
+        .onChange(of: gender) { newValue in
+            onChangeOfMax(suggestedMaxDoseRounded)
+        }
     }
 }
 
 struct MDMAMaxRecommendedSection_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            MDMAMaxDoseCalculator()
+            MDMAMaxDoseCalculator(onChangeOfMax: {_ in })
         }
     }
 }

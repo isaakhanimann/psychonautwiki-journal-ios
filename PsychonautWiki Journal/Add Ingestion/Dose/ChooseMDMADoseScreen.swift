@@ -22,15 +22,10 @@ struct ChooseMDMADoseScreen: View {
     private var oralDose: RoaDose {
         mdma.getDose(for: .oral)!
     }
-    @State private var mdmaDoseInMg = 100.0
+    @State private var mdmaDoseInMg: Double? = 113.0
     @State private var isEstimate = false
     private let units = "mg"
-    private var doseRounded: Double {
-        round(mdmaDoseInMg)
-    }
-    private var doseText: String {
-        String(Int(doseRounded))
-    }
+    @State private var doseText = "113"
 
     var body: some View {
         if #available(iOS 16, *) {
@@ -64,7 +59,7 @@ struct ChooseMDMADoseScreen: View {
             FinishIngestionScreen(
                 substanceName: mdma.name,
                 administrationRoute: .oral,
-                dose: doseRounded,
+                dose: mdmaDoseInMg,
                 units: units,
                 isEstimate: isEstimate,
                 dismiss: dismiss
@@ -90,25 +85,28 @@ struct ChooseMDMADoseScreen: View {
     private var screen: some View {
         Form {
             Section("Max Dose Calculator") {
-                MDMAMaxDoseCalculator()
+                MDMAMaxDoseCalculator { newMaxDose in
+                    mdmaDoseInMg = newMaxDose
+                    doseText = newMaxDose.formatted()
+                }
             }
             Section("Choose Dose") {
-                VStack(spacing: 5) {
-                    let doseType = oralDose.getRangeType(for: mdmaDoseInMg, with: units)
-                    Text("\(doseText) mg")
-                        .font(.title.bold())
-                        .foregroundColor(doseType.color)
+                VStack(alignment: .leading, spacing: 5) {
                     DoseRow(roaDose: oralDose)
-                    Slider(
-                        value: $mdmaDoseInMg,
-                        in: 10...400,
-                        step: 10
-                    ) {
-                        Text("Drink Size")
-                    } minimumValueLabel: {
-                        Text("10")
-                    } maximumValueLabel: {
-                        Text("400")
+                    DynamicDoseRangeView(roaDose: oralDose, dose: mdmaDoseInMg)
+                    HStack {
+                        TextField("Enter Dose", text: $doseText)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .foregroundColor(doseType.color)
+                        Text(units)
+                    }
+                    .font(.title)
+                    .onChange(of: doseText) { _ in
+                        let formatter = NumberFormatter()
+                        formatter.locale = Locale.current
+                        formatter.numberStyle = .decimal
+                        mdmaDoseInMg = formatter.number(from: doseText)?.doubleValue
                     }
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
@@ -121,6 +119,11 @@ struct ChooseMDMADoseScreen: View {
             MDMAPillsSection()
         }
         .navigationTitle("MDMA Dosage")
+    }
+
+    var doseType: DoseRangeType {
+        guard let mdmaDoseInMg else { return .none}
+        return oralDose.getRangeType(for: mdmaDoseInMg, with: units)
     }
 }
 

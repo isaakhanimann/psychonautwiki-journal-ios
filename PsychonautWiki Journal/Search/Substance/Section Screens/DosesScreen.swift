@@ -37,7 +37,7 @@ struct DosesScreen: View {
             }
             if substance.name == "MDMA" {
                 Section("Oral Max Dose Calculator") {
-                    MDMAMaxDoseCalculator()
+                    MDMAMaxDoseCalculator(onChangeOfMax: {_ in })
                 }
                 if #available(iOS 16, *) {
                     MDMAOptimalDoseSection()

@@ -23,7 +23,6 @@ struct DosePicker: View {
     @Binding var selectedUnits: String?
     var focusOnAppear = false
     @State private var doseText = ""
-    @State private var dose: Double = 0
     @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
@@ -34,7 +33,7 @@ struct DosePicker: View {
                     .padding(.bottom, 10)
             }
             if areUnitsDefined {
-                dynamicDoseRangeView
+                DynamicDoseRangeView(roaDose: roaDose, dose: doseMaybe)
             }
             doseTextFieldWithUnit
         }
@@ -42,17 +41,15 @@ struct DosePicker: View {
             if focusOnAppear {
                 isDoseFieldFocused = true
             }
-            if let doseUnwrapped = doseMaybe {
-                doseText = doseUnwrapped.formatted()
-                dose = doseUnwrapped
+            if let doseMaybe {
+                doseText = doseMaybe.formatted()
             }
         }
     }
 
     var doseType: DoseRangeType {
-        guard let selectedUnits = selectedUnits else {
-            return .none
-        }
+        guard let selectedUnits = selectedUnits else {return .none}
+        guard let dose = doseMaybe else {return .none}
         return roaDose?.getRangeType(for: dose, with: selectedUnits) ?? .none
     }
 
@@ -70,16 +67,17 @@ struct DosePicker: View {
             let formatter = NumberFormatter()
             formatter.locale = Locale.current
             formatter.numberStyle = .decimal
-            if let doseUnwrapped = formatter.number(from: doseText)?.doubleValue {
-                dose = doseUnwrapped
-                doseMaybe = doseUnwrapped
-            } else {
-                doseMaybe = nil
-            }
+            doseMaybe = formatter.number(from: doseText)?.doubleValue
         }
     }
+}
 
-    private var dynamicDoseRangeView: some View {
+struct DynamicDoseRangeView: View {
+    let roaDose: RoaDose?
+    let dose: Double?
+
+    var body: some View {
+        guard let dose else { return Text(" ")}
         let units = roaDose?.units ?? ""
         if let threshold = roaDose?.lightMin,
            threshold > dose {
