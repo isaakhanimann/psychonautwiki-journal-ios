@@ -88,18 +88,16 @@ extension ExperienceScreen {
             }
         }
 
+        @available(iOS 16.2, *)
         func startOrUpdateLiveActivity() {
-            if #available(iOS 16.2, *) {
-                Task { @MainActor in
-                    ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
-                }
+            Task { @MainActor in
+                ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
             }
         }
 
+        @available(iOS 16.2, *)
         func stopLiveActivity() {
-            if #available(iOS 16.2, *) {
-                ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
-            }
+            ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
         }
 
         private func setSubstances() {

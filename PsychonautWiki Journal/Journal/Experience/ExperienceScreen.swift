@@ -314,7 +314,9 @@ struct ExperienceScreen: View {
     private func delete() {
         PersistenceController.shared.viewContext.delete(experience)
         PersistenceController.shared.saveViewContext()
-        viewModel.stopLiveActivity()
+        if #available(iOS 16.2, *) {
+            viewModel.stopLiveActivity()
+        }
         dismiss()
     }
 }
