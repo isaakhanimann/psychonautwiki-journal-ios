@@ -53,7 +53,6 @@ struct StatsScreen: View {
                     years: getSortedIngestionCountsYears(),
                     colorMapping: { substanceName in
                         getColor(for: substanceName).swiftUIColor
-
                     }
                 )
             }

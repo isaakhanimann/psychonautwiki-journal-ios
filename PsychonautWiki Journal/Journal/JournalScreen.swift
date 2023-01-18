@@ -19,6 +19,7 @@ import SwiftUI
 struct JournalScreen: View {
 
     @StateObject var viewModel = ViewModel()
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         if #available(iOS 16, *) {
@@ -36,6 +37,13 @@ struct JournalScreen: View {
                             Label("Show Absolute Time", systemImage: "timer.circle.fill")
                         } else {
                             Label("Show Relative Time", systemImage: "timer.circle")
+                        }
+                    }
+                    if isEyeOpen {
+                        NavigationLink {
+                            SearchScreen()
+                        } label: {
+                            Label("Substances", systemImage: "magnifyingglass")
                         }
                     }
                     NavigationLink {
