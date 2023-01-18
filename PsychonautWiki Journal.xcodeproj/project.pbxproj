@@ -775,6 +775,22 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		EAC39DC029784D0D0012823D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
+				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
+				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
+				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
+				EA41C62E295EB86C000DA021 /* Utils.swift */,
+				EA41C630295F88F0000DA021 /* Experience Charts */,
+				EA418A052968D62F00DEA663 /* Ingestion Charts */,
+				EA41C624295EAFD8000DA021 /* Data.swift */,
+				EAE4718826CBA664009FB0EC /* Experience */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		EACB0C1C293FA48B00C605E2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,17 +933,9 @@
 		EAE4718726CBA664009FB0EC /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
-				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
-				EA41C62E295EB86C000DA021 /* Utils.swift */,
-				EA41C630295F88F0000DA021 /* Experience Charts */,
-				EA418A052968D62F00DEA663 /* Ingestion Charts */,
-				EA41C624295EAFD8000DA021 /* Data.swift */,
-				EAE4718826CBA664009FB0EC /* Experience */,
+				EAC39DC029784D0D0012823D /* Other */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
-				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
 				EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */,
-				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
