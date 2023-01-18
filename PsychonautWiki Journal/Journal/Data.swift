@@ -198,6 +198,70 @@ struct ExperienceData {
         guard numberOfYearsShown > 0 else {return 0}
         return yearsTotal / Double(numberOfYearsShown)
     }
+
+    func getSubstanceExperienceCounts(in timeRange: TimeRange) -> [SubstanceExperienceCount] {
+        switch timeRange {
+        case .last30Days:
+            let dict = Dictionary(grouping: last30Days) { elem in
+                elem.substanceName
+            }
+            return dict.map { (name: String, counts: [SubstanceExperienceCountForDay]) in
+                SubstanceExperienceCount(
+                    substanceName: name,
+                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    color: colorMapping(name)
+                )
+            }
+            .filter({ elem in
+                elem.experienceCount > 0
+            })
+            .sorted()
+        case .last12Months:
+            let dict = Dictionary(grouping: last12Months) { elem in
+                elem.substanceName
+            }
+            return dict.map { (name: String, counts: [SubstanceExperienceCountForMonth]) in
+                SubstanceExperienceCount(
+                    substanceName: name,
+                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    color: colorMapping(name)
+                )
+            }
+            .filter({ elem in
+                elem.experienceCount > 0
+            })
+            .sorted()
+        case .years:
+            let dict = Dictionary(grouping: years) { elem in
+                elem.substanceName
+            }
+            return dict.map { (name: String, counts: [SubstanceExperienceCountForYear]) in
+                SubstanceExperienceCount(
+                    substanceName: name,
+                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    color: colorMapping(name)
+                )
+            }
+            .filter({ elem in
+                elem.experienceCount > 0
+            })
+            .sorted()
+        }
+    }
+
+}
+
+struct SubstanceExperienceCount: Identifiable,  Comparable {
+    static func < (lhs: SubstanceExperienceCount, rhs: SubstanceExperienceCount) -> Bool {
+        lhs.experienceCount > rhs.experienceCount
+    }
+
+    var id: String {
+        substanceName
+    }
+    let substanceName: String
+    let experienceCount: Double
+    let color: Color
 }
 
 
