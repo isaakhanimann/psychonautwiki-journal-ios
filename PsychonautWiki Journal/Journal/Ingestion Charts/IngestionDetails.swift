@@ -38,10 +38,10 @@ struct IngestionDetails: View {
     var body: some View {
         List {
             TimeRangePicker(value: $timeRange)
-                .padding(.bottom, 8)
+                .padding(.vertical, 5)
             if let maxCount = data.first?.ingestionCount {
                 ForEach(data) { elem in
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 3) {
                         HStack {
                             Text(elem.substanceName)
                                 .font(.headline)
