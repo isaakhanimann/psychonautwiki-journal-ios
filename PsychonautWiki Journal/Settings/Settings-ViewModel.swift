@@ -38,6 +38,7 @@ extension SettingsScreen {
 
         func importData(data: Data) {
             do {
+                try PersistenceController.shared.deleteEverything()
                 let file = try JSONDecoder().decode(JournalFile.self, from: data)
                 let context = PersistenceController.shared.viewContext
                 var companionDict: [String: SubstanceCompanion] = [:]
@@ -105,22 +106,15 @@ extension SettingsScreen {
                 showErrorToast(message: "Import Failed")
                 print("Data corrupted – \(context.debugDescription)")
             } catch {
+                let desc = error.localizedDescription
+                print("Some other error – \(desc)")
                 showErrorToast(message: "Import Failed")
-                print("Some other decoding error – \(error.localizedDescription)")
             }
         }
 
         func deleteEverything() {
-            let context = PersistenceController.shared.viewContext
             do {
-                let batchDeleteExperiences = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Experience"))
-                try context.execute(batchDeleteExperiences)
-                let batchDeleteIngestions = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Ingestion"))
-                try context.execute(batchDeleteIngestions)
-                let batchDeleteCustoms = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "CustomSubstance"))
-                try context.execute(batchDeleteCustoms)
-                let batchDeleteCompanions = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "SubstanceCompanion"))
-                try context.execute(batchDeleteCompanions)
+                try PersistenceController.shared.deleteEverything()
                 showSuccessToast(message: "Delete Successful")
             } catch {
                 showErrorToast(message: "Delete Failed")

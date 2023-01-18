@@ -31,8 +31,10 @@ struct PersistenceController {
         container.viewContext
     }
 
+    private static let modelName = "Main"
+
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Main")
+        container = NSPersistentContainer(name: PersistenceController.modelName)
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -42,6 +44,38 @@ struct PersistenceController {
             }
         }
         viewContext.automaticallyMergesChangesFromParent = true
+    }
+
+    enum DeleteError: Error {
+        case noUrlFound
+    }
+
+    func deleteEverything() throws {
+        let experienceDeleteRequest = Experience.fetchRequest()
+        experienceDeleteRequest.includesPropertyValues = false
+        let experiences = try viewContext.fetch(experienceDeleteRequest)
+        for exp in experiences {
+            viewContext.delete(exp)
+        }
+        let ingestionDeleteRequest = Ingestion.fetchRequest()
+        ingestionDeleteRequest.includesPropertyValues = false
+        let ingestions = try viewContext.fetch(ingestionDeleteRequest)
+        for ing in ingestions {
+            viewContext.delete(ing)
+        }
+        let customDeleteRequest = CustomSubstance.fetchRequest()
+        customDeleteRequest.includesPropertyValues = false
+        let customs = try viewContext.fetch(customDeleteRequest)
+        for cust in customs {
+            viewContext.delete(cust)
+        }
+        let companionDeleteRequest = SubstanceCompanion.fetchRequest()
+        companionDeleteRequest.includesPropertyValues = false
+        let companions = try viewContext.fetch(companionDeleteRequest)
+        for com in companions {
+            viewContext.delete(com)
+        }
+        try viewContext.save()
     }
 
     func migrate() {

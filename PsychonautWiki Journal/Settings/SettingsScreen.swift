@@ -66,6 +66,7 @@ struct SettingsContent: View {
     @Binding var isShowingToast: Bool
     @Binding var isSuccessToast: Bool
     @Binding var toastMessage: String
+    @State private var isShowingImportAlert = false
 
     var body: some View {
         List {
@@ -119,10 +120,24 @@ struct SettingsContent: View {
                     Label("Export Data", systemImage: "arrow.up.doc")
                 }
                 Button {
-                    isImporting.toggle()
+                    isShowingImportAlert.toggle()
                 } label: {
                     Label("Import Data", systemImage: "arrow.down.doc")
                 }
+                .confirmationDialog(
+                    "Are you sure?",
+                    isPresented: $isShowingImportAlert,
+                    titleVisibility: .visible,
+                    actions: {
+                        Button("Import", role: .destructive) {
+                            isImporting.toggle()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    },
+                    message: {
+                        Text("Importing will delete all the data currently in the app and replace it with the imported data.")
+                    }
+                )
                 Button {
                     isShowingDeleteConfirmation.toggle()
                 } label: {
