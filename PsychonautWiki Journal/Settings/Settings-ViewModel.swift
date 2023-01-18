@@ -38,8 +38,8 @@ extension SettingsScreen {
 
         func importData(data: Data) {
             do {
-                try PersistenceController.shared.deleteEverything()
                 let file = try JSONDecoder().decode(JournalFile.self, from: data)
+                try PersistenceController.shared.deleteEverything()
                 let context = PersistenceController.shared.viewContext
                 var companionDict: [String: SubstanceCompanion] = [:]
                 for companionCodable in file.substanceCompanions {
