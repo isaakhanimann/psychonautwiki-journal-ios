@@ -40,11 +40,7 @@ struct JournalScreen: View {
                         }
                     }
                     if isEyeOpen {
-                        NavigationLink {
-                            SearchScreen()
-                        } label: {
-                            Label("Substances", systemImage: "magnifyingglass")
-                        }
+                        searchScreenLink
                     }
                     NavigationLink {
                         StatsScreen()
@@ -58,10 +54,21 @@ struct JournalScreen: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     favoriteButton
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     newIngestionButton
+                    if isEyeOpen {
+                        searchScreenLink
+                    }
                 }
             }
+        }
+    }
+
+    private var searchScreenLink: some View {
+        NavigationLink {
+            SearchScreen()
+        } label: {
+            Label("Substances", systemImage: "magnifyingglass")
         }
     }
 
