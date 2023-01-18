@@ -54,7 +54,7 @@ struct IngestionDetails: View {
                         GeometryReader { geometry in
                             Rectangle()
                                 .fill(ingestionData.colorMapping(elem.substanceName))
-                                .cornerRadius(8, corners: [.topRight, .bottomRight])
+                                .cornerRadius(5, corners: [.topRight, .bottomRight])
                                 .frame(
                                     width: geometry.size.width*widthRatio
                                 )
@@ -63,7 +63,7 @@ struct IngestionDetails: View {
                     }
                 }
             } else {
-                Text("No Ingestions")
+                Text("No Ingestions").font(.headline)
             }
         }
         .navigationTitle("Substances")
