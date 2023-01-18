@@ -126,16 +126,11 @@ struct ExperienceScreen: View {
         List {
             if !experience.sortedIngestionsUnwrapped.isEmpty {
                 Section {
-                    VStack(alignment: .leading) {
-                        let timelineHeight: Double = 200
-                        if let timelineModel = viewModel.timelineModel {
-                            EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
-                        } else {
-                            Canvas {_,_ in }.frame(height: timelineHeight)
-                        }
-                        if isEyeOpen {
-                            TimelineDisclaimers(isShowingOralDisclaimer: experience.sortedIngestionsUnwrapped.contains(where: {$0.administrationRouteUnwrapped == .oral}))
-                        }
+                    let timelineHeight: Double = 200
+                    if let timelineModel = viewModel.timelineModel {
+                        EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
+                    } else {
+                        Canvas {_,_ in }.frame(height: timelineHeight)
                     }
                     ForEach(experience.sortedIngestionsUnwrapped) { ing in
                         let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
@@ -199,8 +194,18 @@ struct ExperienceScreen: View {
                         }
                     }
                 } header: {
-                    let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
-                    Text(firstDate, style: .date)
+                    HStack {
+                        let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
+                        Text(firstDate, style: .date)
+                        if isEyeOpen {
+                            Spacer()
+                            NavigationLink {
+                                ExplainExperienceSectionScreen()
+                            } label: {
+                                Label("Info", systemImage: "info.circle").labelStyle(.iconOnly)
+                            }
+                        }
+                    }
                 }
                 if !viewModel.cumulativeDoses.isEmpty && isEyeOpen {
                     Section("Cumulative Dose") {

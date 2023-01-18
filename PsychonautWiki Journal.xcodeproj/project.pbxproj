@@ -173,6 +173,7 @@
 		EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */; };
 		EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */; };
 		EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC1297881E90012823D /* EditColorsScreen.swift */; };
+		EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -408,6 +409,7 @@
 		EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferHallucinogenScreen.swift; sourceTree = "<group>"; };
 		EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRouteScreen.swift; sourceTree = "<group>"; };
 		EAC39DC1297881E90012823D /* EditColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorsScreen.swift; sourceTree = "<group>"; };
+		EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainExperienceSectionScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 			isa = PBXGroup;
 			children = (
 				EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */,
+				EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */,
 				EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */,
 				EAE480922973EF5900B600EF /* CumulativeDose.swift */,
 				EA4189F02963219100DEA663 /* LiveActivityButton.swift */,
@@ -1359,6 +1362,7 @@
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
+				EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */,
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
 				EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */,
 				EA4189F3296343EC00DEA663 /* IngestionsForSubstanceScreen.swift in Sources */,

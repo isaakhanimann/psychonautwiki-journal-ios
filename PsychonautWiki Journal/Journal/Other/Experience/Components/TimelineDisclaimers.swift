@@ -16,16 +16,20 @@
 
 import SwiftUI
 
+let HEAVY_DOSE_DISCLAIMER = "Heavy doses can have longer durations."
+let FULL_STOMACH_DISCLAIMER = "A full stomach may delay the onset of oral doses by ~3 hours."
+let CAPSULE_DISCLAIMER = "Hard (two-piece) capsules may need up to one hour to dissolve fully."
+
 struct TimelineDisclaimers: View {
 
     let isShowingOralDisclaimer: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("* Heavy doses can have longer durations.")
+            Text("* \(HEAVY_DOSE_DISCLAIMER)")
             if isShowingOralDisclaimer {
-                Text("* A full stomach may delay the onset of oral doses by ~3 hours.")
-                Text("* Hard (two-piece) capsules may need up to one hour to dissolve fully.")
+                Text("* \(FULL_STOMACH_DISCLAIMER)")
+                Text("* \(CAPSULE_DISCLAIMER)")
             }
         }.font(.footnote).maybeCondensed()
     }
