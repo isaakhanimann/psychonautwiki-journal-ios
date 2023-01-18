@@ -25,7 +25,7 @@ extension SubstanceCompanion {
         }
     }
 
-    var substanceNameUnwrapped: String? {
+    var substanceNameUnwrapped: String {
         substanceName ?? "Unknown"
     }
 }

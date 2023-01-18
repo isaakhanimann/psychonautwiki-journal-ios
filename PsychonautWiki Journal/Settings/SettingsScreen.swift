@@ -159,6 +159,14 @@ struct SettingsContent: View {
                 )
             }
             Section {
+                NavigationLink {
+                    EditColorsScreen()
+                } label: {
+                    Label("Edit Substance Colors", systemImage: "circle")
+                }
+                .foregroundColor(.accentColor)
+            }
+            Section {
                 HStack {
                     Text("Version")
                     Spacer()

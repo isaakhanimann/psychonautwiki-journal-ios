@@ -172,6 +172,7 @@
 		EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */; };
 		EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */; };
 		EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */; };
+		EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC1297881E90012823D /* EditColorsScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -406,6 +407,7 @@
 		EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricDosingScreen.swift; sourceTree = "<group>"; };
 		EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferHallucinogenScreen.swift; sourceTree = "<group>"; };
 		EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRouteScreen.swift; sourceTree = "<group>"; };
+		EAC39DC1297881E90012823D /* EditColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorsScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				EAE4712B26CBA663009FB0EC /* SettingsScreen.swift */,
 				EA41C622295C2BE7000DA021 /* JournalFile.swift */,
 				EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */,
+				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1205,6 +1208,7 @@
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
 				EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
+				EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */,
 				EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
