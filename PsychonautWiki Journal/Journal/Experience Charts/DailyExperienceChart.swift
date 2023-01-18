@@ -21,6 +21,7 @@ import Charts
 struct DailyExperienceChart: View {
 
     let experienceData: ExperienceData
+    let colorMapping: (String) -> Color
     var chartHeight: CGFloat = 240
     @State private var selectedElement: SubstanceExperienceCountForDay? = nil
     @Environment(\.layoutDirection) var layoutDirection
@@ -68,8 +69,7 @@ struct DailyExperienceChart: View {
                     .foregroundStyle(by: .value("Substance", $0.substanceName))
                 }
             }
-            .chartForegroundStyleScale(mapping: experienceData.colorMapping)
-            .chartLegend(position: .bottom, alignment: .leading)
+            .chartForegroundStyleScale(mapping: colorMapping)
             .chartOverlay { proxy in
                 GeometryReader { nthGeometryItem in
                     Rectangle().fill(.clear).contentShape(Rectangle())
@@ -141,7 +141,10 @@ struct DailyExperienceChart: View {
 struct DailyExperienceChart_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            DailyExperienceChart(experienceData: .mock1)
+            DailyExperienceChart(
+                experienceData: .mock1,
+                colorMapping: ExperienceData.mock1.colorMapping
+            )
         }
     }
 }

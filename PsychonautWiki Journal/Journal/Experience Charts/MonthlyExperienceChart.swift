@@ -22,6 +22,8 @@ struct MonthlyExperienceChart: View {
 
     let experienceData: ExperienceData
     let isShowingMonthlyAverageLine: Bool
+    let colorMapping: (String) -> Color
+
     var chartHeight: CGFloat = 240
     @State private var selectedElement: SubstanceExperienceCountForMonth? = nil
     @Environment(\.layoutDirection) var layoutDirection
@@ -91,7 +93,7 @@ struct MonthlyExperienceChart: View {
                     AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
                 }
             }
-            .chartForegroundStyleScale(mapping: experienceData.colorMapping)
+            .chartForegroundStyleScale(mapping: colorMapping)
             .chartLegend(position: .bottom, alignment: .leading)
             .chartOverlay { proxy in
                 GeometryReader { nthGeometryItem in
@@ -166,7 +168,8 @@ struct MonthlyExperienceChart_Previews: PreviewProvider {
         List {
             MonthlyExperienceChart(
                 experienceData: .mock1,
-                isShowingMonthlyAverageLine: false
+                isShowingMonthlyAverageLine: false,
+                colorMapping: ExperienceData.mock1.colorMapping
             )
         }
     }

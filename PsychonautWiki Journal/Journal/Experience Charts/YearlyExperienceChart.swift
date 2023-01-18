@@ -22,6 +22,7 @@ struct YearlyExperienceChart: View {
 
     let experienceData: ExperienceData
     let isShowingYearlyAverageLine: Bool
+    let colorMapping: (String) -> Color
     var chartHeight: CGFloat = 240
     @State private var selectedElement: SubstanceExperienceCountForYear? = nil
     @Environment(\.layoutDirection) var layoutDirection
@@ -91,7 +92,7 @@ struct YearlyExperienceChart: View {
                     AxisValueLabel(format: .dateTime.year(), centered: true)
                 }
             }
-            .chartForegroundStyleScale(mapping: experienceData.colorMapping)
+            .chartForegroundStyleScale(mapping: colorMapping)
             .chartLegend(position: .bottom, alignment: .leading)
             .chartOverlay { proxy in
                 GeometryReader { nthGeometryItem in
@@ -166,7 +167,8 @@ struct YearlyExperienceChart_Previews: PreviewProvider {
         List {
             YearlyExperienceChart(
                 experienceData: .mock1,
-                isShowingYearlyAverageLine: false
+                isShowingYearlyAverageLine: false,
+                colorMapping: ExperienceData.mock1.colorMapping
             )
         }
     }
