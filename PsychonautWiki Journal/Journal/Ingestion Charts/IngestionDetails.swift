@@ -17,25 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
-struct IngestionDetailsChart: View {
-
-    let data: [IngestionCount]
-    let colorMapping: (String) -> Color
-
-    var body: some View {
-        Chart(data) { element in
-            BarMark(
-                x: .value("Ingestions", element.ingestionCount),
-                y: .value("Substance", element.substanceName)
-            )
-            .foregroundStyle(by: .value("Substance", element.substanceName))
-        }
-        .chartForegroundStyleScale(mapping: colorMapping)
-        .chartLegend(.hidden)
-        .chartXAxisLabel("Ingestion Count")
-    }
-}
 
 @available(iOS 16, *)
 struct IngestionDetails: View {
@@ -56,22 +37,53 @@ struct IngestionDetails: View {
 
     var body: some View {
         List {
-            VStack(alignment: .leading) {
-                TimeRangePicker(value: $timeRange)
-                    .padding(.bottom)
-                Text("Most Used Substance")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                Text(data.first?.substanceName ?? "None")
-                    .font(.title2.bold())
-                    .foregroundColor(.primary)
-                IngestionDetailsChart(data: data, colorMapping: ingestionData.colorMapping)
-                    .frame(height: 300)
+            TimeRangePicker(value: $timeRange)
+                .padding(.bottom, 8)
+            if let maxCount = data.first?.ingestionCount {
+                ForEach(data) { elem in
+                    VStack(alignment: .leading, spacing: 5) {
+                        HStack {
+                            Text(elem.substanceName)
+                                .font(.headline)
+                            Spacer()
+                            Text("\(elem.ingestionCount) Ingestions")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        let widthRatio = Double(elem.ingestionCount) / Double(maxCount)
+                        GeometryReader { geometry in
+                            Rectangle()
+                                .fill(ingestionData.colorMapping(elem.substanceName))
+                                .cornerRadius(8, corners: [.topRight, .bottomRight])
+                                .frame(
+                                    width: geometry.size.width*widthRatio
+                                )
+                        }
+                        .frame(height: 20)
+                    }
+                }
+            } else {
+                Text("No Ingestions")
             }
-            .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
         .navigationTitle("Substances")
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
 
@@ -79,7 +91,7 @@ struct IngestionDetails: View {
 struct IngestionDetails_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            IngestionDetails(ingestionData: .mock1)
+            IngestionDetails(ingestionData: .mock2)
         }
     }
 }

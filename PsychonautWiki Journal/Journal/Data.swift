@@ -66,6 +66,67 @@ extension IngestionData {
             }
         }
     )
+    static let mock2 = IngestionData(
+        last30Days: [
+            .init(substanceName: "Cannabis", ingestionCount: 15),
+            .init(substanceName: "Cocaine", ingestionCount: 8),
+            .init(substanceName: "Amphetamine", ingestionCount: 3),
+            .init(substanceName: "MDMA", ingestionCount: 1)
+        ],
+        last12Months: [
+            .init(substanceName: "Cannabis", ingestionCount: 55),
+            .init(substanceName: "Cocaine", ingestionCount: 10),
+            .init(substanceName: "MDMA", ingestionCount: 4),
+            .init(substanceName: "Substance 1", ingestionCount: 4),
+            .init(substanceName: "Substance 2", ingestionCount: 4),
+            .init(substanceName: "Substance 3", ingestionCount: 4),
+            .init(substanceName: "Substance 4", ingestionCount: 4),
+            .init(substanceName: "Substance 5", ingestionCount: 4),
+            .init(substanceName: "Substance 6", ingestionCount: 4),
+            .init(substanceName: "Substance 7", ingestionCount: 4),
+            .init(substanceName: "Substance 8", ingestionCount: 4),
+            .init(substanceName: "Substance 9", ingestionCount: 4),
+            .init(substanceName: "Substance 10", ingestionCount: 4),
+            .init(substanceName: "Substance 11", ingestionCount: 4),
+            .init(substanceName: "Substance 12", ingestionCount: 4),
+            .init(substanceName: "Substance 13", ingestionCount: 4),
+            .init(substanceName: "Substance 14", ingestionCount: 4),
+            .init(substanceName: "Substance 15", ingestionCount: 4),
+            .init(substanceName: "Substance 16", ingestionCount: 4),
+            .init(substanceName: "Substance 17", ingestionCount: 4),
+            .init(substanceName: "Substance 18", ingestionCount: 4),
+            .init(substanceName: "Substance 19", ingestionCount: 4),
+            .init(substanceName: "Substance 20", ingestionCount: 4),
+            .init(substanceName: "Substance 21", ingestionCount: 4),
+            .init(substanceName: "Substance 22", ingestionCount: 4),
+            .init(substanceName: "Substance 23", ingestionCount: 4),
+            .init(substanceName: "Substance 24", ingestionCount: 4),
+            .init(substanceName: "Substance 25", ingestionCount: 4),
+            .init(substanceName: "Substance 26", ingestionCount: 4),
+            .init(substanceName: "Substance 27", ingestionCount: 4),
+            .init(substanceName: "Substance 28", ingestionCount: 4),
+            .init(substanceName: "Substance 29", ingestionCount: 4),
+            .init(substanceName: "Substance 30", ingestionCount: 4),
+            .init(substanceName: "Substance 31", ingestionCount: 4),
+            .init(substanceName: "Amphetamine", ingestionCount: 3)
+        ],
+        years: [
+            .init(substanceName: "Cannabis", ingestionCount: 60),
+            .init(substanceName: "Cocaine", ingestionCount: 15),
+            .init(substanceName: "MDMA", ingestionCount: 8),
+            .init(substanceName: "Amphetamine", ingestionCount: 8)
+        ],
+        colorMapping: { substanceName in
+            switch substanceName {
+            case "MDMA": return Color.pink
+            case "Cannabis": return .green
+            case "Cocaine": return .blue
+            case "Amphetamine": return .cyan
+            case "LSD": return .purple
+            default: return SubstanceColor.allCases.randomElement()!.swiftUIColor
+            }
+        }
+    )
 }
 
 struct SubstanceExperienceCountForDay: Identifiable {
