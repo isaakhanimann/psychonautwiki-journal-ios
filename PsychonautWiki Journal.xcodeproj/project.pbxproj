@@ -174,6 +174,8 @@
 		EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */; };
 		EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC1297881E90012823D /* EditColorsScreen.swift */; };
 		EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */; };
+		EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC52979347B0012823D /* EditLocationScreen.swift */; };
+		EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC7297934FE0012823D /* AddLocationScreen.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -410,6 +412,8 @@
 		EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRouteScreen.swift; sourceTree = "<group>"; };
 		EAC39DC1297881E90012823D /* EditColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorsScreen.swift; sourceTree = "<group>"; };
 		EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainExperienceSectionScreen.swift; sourceTree = "<group>"; };
+		EAC39DC52979347B0012823D /* EditLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationScreen.swift; sourceTree = "<group>"; };
+		EAC39DC7297934FE0012823D /* AddLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationScreen.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
@@ -973,6 +977,8 @@
 			isa = PBXGroup;
 			children = (
 				EA418A32296C755400DEA663 /* EditLocationLinkAndMap.swift */,
+				EAC39DC52979347B0012823D /* EditLocationScreen.swift */,
+				EAC39DC7297934FE0012823D /* AddLocationScreen.swift */,
 				EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */,
 				EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */,
 				EAE480922973EF5900B600EF /* CumulativeDose.swift */,
@@ -1242,6 +1248,8 @@
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
+				EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */,
+				EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,

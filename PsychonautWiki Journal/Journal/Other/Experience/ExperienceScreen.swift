@@ -18,11 +18,21 @@ import SwiftUI
 
 struct ExperienceScreen: View {
 
+    enum SheetOption: Identifiable, Hashable {
+        case titleAndNote
+        case editLocation(experienceLocation: ExperienceLocation)
+        case addLocation
+
+        var id: Self {
+            return self
+        }
+    }
+
     @ObservedObject var experience: Experience
-    @State private var isShowingAddIngestionSheet = false
+    @State private var isShowingAddIngestionFullScreen = false
     @State private var isTimeRelative = false
     @State private var isShowingDeleteConfirmation = false
-    @State private var isEditing = false
+    @State private var sheetToShow: SheetOption? = nil
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
@@ -33,11 +43,11 @@ struct ExperienceScreen: View {
             screen.toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     favoriteButton
-                    editTitleButton
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
                     if experience.isCurrent {
                         addIngestionButton
+                        Spacer()
                     }
                     Button {
                         isTimeRelative.toggle()
@@ -48,6 +58,13 @@ struct ExperienceScreen: View {
                             Label("Show Relative Time", systemImage: "timer.circle")
                         }
                     }
+                    Spacer()
+                    if experience.location == nil {
+                        addLocationButton
+                        Spacer()
+                    }
+                    editTitleButton
+                    Spacer()
                     deleteExperienceButton
                 }
             }
@@ -55,6 +72,10 @@ struct ExperienceScreen: View {
             screen.toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     editTitleButton
+                    if experience.location == nil {
+                        addLocationButton
+                        Spacer()
+                    }
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     favoriteButton
@@ -83,19 +104,27 @@ struct ExperienceScreen: View {
 
     private var editTitleButton: some View {
         Button {
-            isEditing.toggle()
+            sheetToShow = .titleAndNote
         } label: {
             Label("Edit Title/Note", systemImage: "pencil")
         }
     }
 
+    private var addLocationButton: some View {
+        Button {
+            sheetToShow = .addLocation
+        } label: {
+            Label("Add Location", systemImage: "location")
+        }
+    }
+
     private var addIngestionButton: some View {
         Button {
-            isShowingAddIngestionSheet.toggle()
+            isShowingAddIngestionFullScreen.toggle()
         } label: {
             Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
-        .fullScreenCover(isPresented: $isShowingAddIngestionSheet, content: {
+        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
             ChooseSubstanceScreen()
         })
     }
@@ -232,46 +261,23 @@ struct ExperienceScreen: View {
 
                 }
             }
-            Section("Notes") {
-                if let notes = experience.textUnwrapped, !notes.isEmpty {
+            if let notes = experience.textUnwrapped, !notes.isEmpty {
+                Section("Notes") {
                     Text(notes)
                         .padding(.vertical, 5)
                         .onTapGesture {
-                            isEditing.toggle()
+                            sheetToShow = .titleAndNote
                         }
-                } else {
-                    Button {
-                        isEditing.toggle()
-                    } label: {
-                        Label("Add Note", systemImage: "plus")
+                }
+            }
+            if let location = experience.location {
+                Section("Location") {
+                    EditLocationLinkAndMap(experienceLocation: location) {
+                        sheetToShow = .editLocation(experienceLocation: location)
                     }
                 }
             }
-            Section("Location") {
-                if let location = experience.location {
-                    EditLocationLinkAndMap(experienceLocation: location, locationManager: locationManager)
-                } else {
-                    NavigationLink {
-                        ChooseLocationScreen(locationManager: locationManager)
-                            .onAppear {
-                                locationManager.selectedLocation = nil
-                                locationManager.selectedLocationName = ""
-                            }
-                            .onDisappear {
-                                if let selectedLocation = locationManager.selectedLocation {
-                                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
-                                    newLocation.name = selectedLocation.name
-                                    newLocation.latitude = selectedLocation.latitude ?? 0
-                                    newLocation.longitude = selectedLocation.longitude ?? 0
-                                    newLocation.experience = experience
-                                }
-                                PersistenceController.shared.saveViewContext()
-                            }
-                    } label: {
-                        Label("Add Location", systemImage: "plus")
-                    }
-                }
-            }
+
             if isEyeOpen {
                 if !viewModel.substancesUsed.isEmpty {
                     Section("Info") {
@@ -308,9 +314,16 @@ struct ExperienceScreen: View {
             }
         }
         .navigationTitle(experience.titleUnwrapped)
-        .sheet(isPresented: $isEditing) {
-            EditExperienceScreen(experience: experience)
-        }
+        .sheet(item: $sheetToShow, content: { sheet in
+            switch sheet {
+            case .addLocation:
+                AddLocationScreen(locationManager: locationManager, experience: experience)
+            case .editLocation(let experienceLocation):
+                EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
+            case .titleAndNote:
+                EditExperienceScreen(experience: experience)
+            }
+        })
         .task {
             viewModel.setupFetchRequestPredicateAndFetch(experience: experience)
         }

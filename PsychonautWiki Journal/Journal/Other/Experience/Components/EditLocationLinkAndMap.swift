@@ -20,33 +20,15 @@ import MapKit
 struct EditLocationLinkAndMap: View {
 
     @ObservedObject var experienceLocation: ExperienceLocation
-    @ObservedObject var locationManager: LocationManager
+    let showEditLocation: () -> Void
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
 
     var body: some View {
-        NavigationLink {
-            ChooseLocationScreen(locationManager: locationManager)
-            .onAppear {
-                locationManager.selectedLocation = Location(
-                    name: experienceLocation.nameUnwrapped,
-                    longitude: experienceLocation.longitudeUnwrapped,
-                    latitude: experienceLocation.latitudeUnwrapped
-                )
-                locationManager.selectedLocationName = experienceLocation.nameUnwrapped
-            }
-            .onDisappear {
-                if let selectedLocation = locationManager.selectedLocation {
-                    experienceLocation.name = selectedLocation.name
-                    experienceLocation.latitude = selectedLocation.latitude ?? 0
-                    experienceLocation.longitude = selectedLocation.longitude ?? 0
-                } else {
-                    PersistenceController.shared.viewContext.delete(experienceLocation)
-                }
-                PersistenceController.shared.saveViewContext()
-            }
+        Button {
+            showEditLocation()
         } label: {
             Label(experienceLocation.nameUnwrapped, systemImage: "location")
         }
@@ -64,6 +46,5 @@ struct EditLocationLinkAndMap: View {
             .frame(height: 300)
             .listRowInsets(EdgeInsets())
         }
-        
     }
 }
