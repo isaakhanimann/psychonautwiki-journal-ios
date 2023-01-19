@@ -127,9 +127,9 @@ struct EditIngestionContent: View {
                     Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .destructiveAction) {
                 Button(action: delete) {
-                    Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
+                    Label("Delete Ingestion", systemImage: "trash")
                 }
             }
         }

@@ -47,12 +47,12 @@ struct AddCustomSubstanceView: View {
             .optionalScrollDismissesKeyboard()
             .navigationTitle("Create Custom")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     if viewModel.isEverythingNeededDefined {
                         Button("Done") {
                             viewModel.saveCustom()

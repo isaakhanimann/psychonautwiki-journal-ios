@@ -72,7 +72,7 @@ struct ChooseDoseScreenContent: View {
                         NextLabel()
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
@@ -92,12 +92,12 @@ struct ChooseDoseScreenContent: View {
                         NextLabel()
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     nextLink
                 }
             }
@@ -135,6 +135,11 @@ struct ChooseDoseScreenContent: View {
     private var screen: some View {
         Form {
             doseSection
+            if #unavailable(iOS 16) {
+                Section {
+                    unknownDoseLink
+                }
+            }
             if isEyeOpen {
                 puritySection
             }
@@ -162,11 +167,6 @@ struct ChooseDoseScreenContent: View {
                 }
                 Section("Disclaimer") {
                     Text(Self.doseDisclaimer)
-                }
-            }
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
                 }
             }
         }
