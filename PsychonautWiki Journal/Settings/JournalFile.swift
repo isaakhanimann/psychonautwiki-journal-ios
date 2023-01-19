@@ -236,7 +236,7 @@ struct IngestionCodable: Codable {
         } else {
             throw DecodingError.dataCorruptedError(in: try decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
         }
-        self.dose = try values.decode(Double.self, forKey: .dose)
+        self.dose = try values.decodeIfPresent(Double.self, forKey: .dose)
         self.isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
         self.units = try values.decode(String.self, forKey: .units)
         self.notes = try values.decode(String.self, forKey: .notes)

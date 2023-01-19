@@ -100,8 +100,9 @@ extension SettingsScreen {
                 showErrorToast(message: "Import Failed")
                 print("Type mismatch – \(context.debugDescription)")
             } catch DecodingError.valueNotFound(let type, let context) {
+                let error = "Missing \(type) value – \(context.debugDescription) - codingPath: \(context.codingPath)"
+                print(error)
                 showErrorToast(message: "Import Failed")
-                print("Missing \(type) value – \(context.debugDescription)")
             } catch DecodingError.dataCorrupted(let context) {
                 showErrorToast(message: "Import Failed")
                 print("Data corrupted – \(context.debugDescription)")
