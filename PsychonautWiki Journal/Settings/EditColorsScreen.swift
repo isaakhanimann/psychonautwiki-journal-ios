@@ -34,24 +34,29 @@ struct EditColorsScreen: View {
 
     var body: some View {
         List {
-            if substanceCompanions.isEmpty {
-                Text("No Ingestions Added Yet")
-            } else {
-                ForEach(substanceCompanions) { companion in
-                    NavigationLink {
-                        CompanionColorPickerScreen(
-                            companion: companion,
-                            alreadyUsedColors: alreadyUsedColors,
-                            otherColors: otherColors
-                        )
-                    } label: {
-                        CompanionRow(
-                            name: companion.substanceNameUnwrapped,
-                            color: companion.color.swiftUIColor
-                        )
+            Section {
+                if substanceCompanions.isEmpty {
+                    Text("No Ingestions Added Yet")
+                } else {
+                    ForEach(substanceCompanions) { companion in
+                        NavigationLink {
+                            CompanionColorPickerScreen(
+                                companion: companion,
+                                alreadyUsedColors: alreadyUsedColors,
+                                otherColors: otherColors
+                            )
+                        } label: {
+                            CompanionRow(
+                                name: companion.substanceNameUnwrapped,
+                                color: companion.color.swiftUIColor
+                            )
+                        }
                     }
                 }
+            } footer: {
+                Text("Color changes might not propagate everywhere immediately.")
             }
+
         }.navigationTitle("Edit Colors")
     }
 }

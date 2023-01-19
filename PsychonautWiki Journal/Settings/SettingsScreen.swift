@@ -162,7 +162,7 @@ struct SettingsContent: View {
                 NavigationLink {
                     EditColorsScreen()
                 } label: {
-                    Label("Edit Substance Colors", systemImage: "circle")
+                    Label("Edit Substance Colors", systemImage: "paintpalette")
                 }
                 .foregroundColor(.accentColor)
             }

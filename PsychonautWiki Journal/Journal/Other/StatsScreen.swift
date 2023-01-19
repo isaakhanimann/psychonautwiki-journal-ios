@@ -236,11 +236,6 @@ struct StatsScreenContent: View {
                     }
                 }
             }
-            Section {
-                NavigationLink("Edit Substance Colors") {
-                    EditColorsScreen()
-                }
-            }
         }.navigationTitle("Stats")
     }
 }
