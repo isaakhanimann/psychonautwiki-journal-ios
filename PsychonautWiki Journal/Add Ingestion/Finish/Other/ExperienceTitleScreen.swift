@@ -22,19 +22,28 @@ struct ExperienceTitleScreen: View {
     @FocusState private var textFieldIsFocused: Bool
 
     var body: some View {
-        Form {
-            TextField("Enter Title", text: $title)
-                .onSubmit {
-                    dismiss()
+        NavigationView {
+            Form {
+                TextField("Enter Title", text: $title)
+                    .onSubmit {
+                        dismiss()
+                    }
+                    .submitLabel(.done)
+                    .focused($textFieldIsFocused)
+                    .autocapitalization(.sentences)
+            }
+            .optionalScrollDismissesKeyboard()
+            .navigationTitle("Experience Title")
+            .onAppear {
+                textFieldIsFocused = true
+            }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        dismiss()
+                    }
                 }
-                .submitLabel(.done)
-                .focused($textFieldIsFocused)
-                .autocapitalization(.sentences)
-        }
-        .optionalScrollDismissesKeyboard()
-        .navigationTitle("Experience Title")
-        .onAppear {
-            textFieldIsFocused = true
+            }
         }
     }
 }

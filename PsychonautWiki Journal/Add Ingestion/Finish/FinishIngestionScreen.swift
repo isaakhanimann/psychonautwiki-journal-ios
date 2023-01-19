@@ -18,6 +18,16 @@ import SwiftUI
 
 struct FinishIngestionScreen: View {
 
+    enum SheetOption: Identifiable {
+        case editTitle
+        case editNote
+        case editLocation
+
+        var id: Self {
+            self
+        }
+    }
+
     let substanceName: String
     let administrationRoute: AdministrationRoute
     let dose: Double?
@@ -28,6 +38,7 @@ struct FinishIngestionScreen: View {
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject private var locationManager: LocationManager
+    @State private var sheetToShow: SheetOption? = nil
 
     var body: some View {
         if #available(iOS 16, *) {
@@ -114,29 +125,29 @@ struct FinishIngestionScreen: View {
                         Toggle("Part of \(selectedExperience.titleUnwrapped)", isOn: $viewModel.wantsToCreateNewExperience.not).tint(.accentColor)
                     }
                 }
-                NavigationLink {
-                    IngestionNoteScreen(note: $viewModel.enteredNote)
+                Button {
+                    sheetToShow = .editNote
                 } label: {
                     if viewModel.enteredNote.isEmpty {
                         Label("Add Note", systemImage: "plus")
                     } else {
-                        Text(viewModel.enteredNote).lineLimit(1)
+                        Label(viewModel.enteredNote, systemImage: "pencil").lineLimit(1)
                     }
                 }
             }
             if viewModel.selectedExperience == nil || viewModel.wantsToCreateNewExperience {
                 Section("New Experience") {
-                    NavigationLink {
-                        ExperienceTitleScreen(title: $viewModel.enteredTitle)
+                    Button {
+                        sheetToShow = .editTitle
                     } label: {
                         if viewModel.enteredTitle.isEmpty {
                             Label("Add Title", systemImage: "plus")
                         } else {
-                            Text(viewModel.enteredTitle).lineLimit(1)
+                            Label(viewModel.enteredTitle, systemImage: "pencil").lineLimit(1)
                         }
                     }
-                    NavigationLink {
-                        ChooseLocationScreen(locationManager: locationManager)
+                    Button {
+                        sheetToShow = .editLocation
                     } label: {
                         if let locationName = locationManager.selectedLocation?.name {
                             Label(locationName, systemImage: "location")
@@ -163,9 +174,20 @@ struct FinishIngestionScreen: View {
             }
         }
         .navigationBarTitle("Finish")
+        .sheet(item: $sheetToShow, content: { sheet in
+            switch sheet {
+            case .editTitle:
+                ExperienceTitleScreen(title: $viewModel.enteredTitle)
+            case .editNote:
+                IngestionNoteScreen(note: $viewModel.enteredNote)
+            case .editLocation:
+                ChooseLocationScreen(locationManager: locationManager)
+            }
+        })
         .task {
             guard !viewModel.isInitialized else {return} // because this function is going to be called again when navigating back from color picker screen
             locationManager.selectedLocation = locationManager.currentLocation
+            locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
             viewModel.initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
         }
     }

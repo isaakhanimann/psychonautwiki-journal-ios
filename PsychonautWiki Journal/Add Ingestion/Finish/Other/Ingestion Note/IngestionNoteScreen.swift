@@ -24,30 +24,39 @@ struct IngestionNoteScreen: View {
     @FocusState private var textFieldIsFocused: Bool
     
     var body: some View {
-        Form {
-            TextField("Enter Note", text: $note)
-                .onSubmit {
-                    dismiss()
-                }
-                .submitLabel(.done)
-                .focused($textFieldIsFocused)
-                .autocapitalization(.sentences)
-            if !viewModel.suggestedNotesInOrder.isEmpty {
-                Section("Suggestions") {
-                    ForEach(viewModel.suggestedNotesInOrder, id: \.self) { suggestedNote in
-                        Button {
-                            note = suggestedNote
-                        } label: {
-                            Label(suggestedNote, systemImage: "doc.on.doc").lineLimit(1)
-                        }.foregroundColor(.primary)
+        NavigationView {
+            Form {
+                TextField("Enter Note", text: $note)
+                    .onSubmit {
+                        dismiss()
+                    }
+                    .submitLabel(.done)
+                    .focused($textFieldIsFocused)
+                    .autocapitalization(.sentences)
+                if !viewModel.suggestedNotesInOrder.isEmpty {
+                    Section("Suggestions") {
+                        ForEach(viewModel.suggestedNotesInOrder, id: \.self) { suggestedNote in
+                            Button {
+                                note = suggestedNote
+                            } label: {
+                                Label(suggestedNote, systemImage: "doc.on.doc").lineLimit(1)
+                            }.foregroundColor(.primary)
+                        }
                     }
                 }
             }
-        }
-        .optionalScrollDismissesKeyboard()
-        .navigationTitle("Ingestion Note")
-        .onAppear {
-            textFieldIsFocused = true
+            .optionalScrollDismissesKeyboard()
+            .navigationTitle("Ingestion Note")
+            .onAppear {
+                textFieldIsFocused = true
+            }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

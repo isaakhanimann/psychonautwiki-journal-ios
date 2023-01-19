@@ -21,32 +21,43 @@ import MapKit
 struct ChooseLocationScreen: View {
 
     @ObservedObject var locationManager: LocationManager
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ChooseLocationScreenContent(
-            selectedLocation: $locationManager.selectedLocation,
-            selectedLocationName: $locationManager.selectedLocationName,
-            searchText: $locationManager.searchText,
-            authorizationStatus: locationManager.authorizationStatus,
-            isLoadingLocationResults: locationManager.isSearchingForLocations,
-            currentLocation: locationManager.currentLocation,
-            searchSuggestedLocations: locationManager.searchSuggestedLocations,
-            experienceLocations: locationManager.experienceLocations
-        )
-        .searchable(
-            text: $locationManager.searchText,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: "Search Location"
-        )
-        .disableAutocorrection(true)
-        .onSubmit(of: .search) {
-            locationManager.searchLocations()
-        }
-        .task {
-            if locationManager.authorizationStatus == .notDetermined {
-                locationManager.requestPermission()
+        NavigationView {
+            ChooseLocationScreenContent(
+                selectedLocation: $locationManager.selectedLocation,
+                selectedLocationName: $locationManager.selectedLocationName,
+                searchText: $locationManager.searchText,
+                authorizationStatus: locationManager.authorizationStatus,
+                isLoadingLocationResults: locationManager.isSearchingForLocations,
+                currentLocation: locationManager.currentLocation,
+                searchSuggestedLocations: locationManager.searchSuggestedLocations,
+                experienceLocations: locationManager.experienceLocations
+            )
+            .searchable(
+                text: $locationManager.searchText,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: "Search Location"
+            )
+            .disableAutocorrection(true)
+            .onSubmit(of: .search) {
+                locationManager.searchLocations()
             }
-            locationManager.maybeRequestLocation()
+            .task {
+                if locationManager.authorizationStatus == .notDetermined {
+                    locationManager.requestPermission()
+                }
+                locationManager.maybeRequestLocation()
+            }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
+            .navigationTitle("Experience Location")
         }
     }
 }
@@ -110,10 +121,14 @@ struct ChooseLocationScreenContent: View {
                                 MapMarker(coordinate: $0)
                             }
                             .onAppear {
-                                region = MKCoordinateRegion(
-                                    center: pinLocation,
-                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                                )
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                                    withAnimation {
+                                        region = MKCoordinateRegion(
+                                            center: pinLocation,
+                                            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                                        )
+                                    }
+                                }
                             }
                             .frame(height: 200)
                             Button {
@@ -177,7 +192,6 @@ struct ChooseLocationScreenContent: View {
                 }
             }
         }
-        .navigationTitle("Experience Location")
     }
 }
 
@@ -189,26 +203,24 @@ extension CLLocationCoordinate2D: Identifiable {
 
 struct ChooseLocationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ChooseLocationScreenContent(
-                selectedLocation: .constant(
-                    Location(name: "Zurich", longitude: 2, latitude: 2)
-                ),
-                selectedLocationName: .constant(""),
-                searchText: .constant(""),
-                authorizationStatus: .denied,
-                isLoadingLocationResults: false,
-                currentLocation: nil,
-                searchSuggestedLocations: [
-                    Location(name: "Street Name 1", longitude: 2, latitude: 2),
-                    Location(name: "Street Name 2", longitude: 2, latitude: 2),
-                    Location(name: "Street Name 3", longitude: 2, latitude: 2)
-                ],
-                experienceLocations: [
-                    Location(name: "Home", longitude: 2, latitude: 2),
-                    Location(name: "Festival", longitude: 2, latitude: 2)
-                ]
-            )
-        }
+        ChooseLocationScreenContent(
+            selectedLocation: .constant(
+                Location(name: "Zurich", longitude: 2, latitude: 2)
+            ),
+            selectedLocationName: .constant(""),
+            searchText: .constant(""),
+            authorizationStatus: .denied,
+            isLoadingLocationResults: false,
+            currentLocation: nil,
+            searchSuggestedLocations: [
+                Location(name: "Street Name 1", longitude: 2, latitude: 2),
+                Location(name: "Street Name 2", longitude: 2, latitude: 2),
+                Location(name: "Street Name 3", longitude: 2, latitude: 2)
+            ],
+            experienceLocations: [
+                Location(name: "Home", longitude: 2, latitude: 2),
+                Location(name: "Festival", longitude: 2, latitude: 2)
+            ]
+        )
     }
 }

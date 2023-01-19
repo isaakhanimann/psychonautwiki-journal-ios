@@ -20,11 +20,9 @@ struct EditLocationScreen: View {
 
     @ObservedObject var experienceLocation: ExperienceLocation
     @ObservedObject var locationManager: LocationManager
-    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
-            ChooseLocationScreen(locationManager: locationManager)
+        ChooseLocationScreen(locationManager: locationManager)
             .onAppear {
                 locationManager.selectedLocation = Location(
                     name: experienceLocation.nameUnwrapped,
@@ -43,13 +41,5 @@ struct EditLocationScreen: View {
                 }
                 PersistenceController.shared.saveViewContext()
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
-        }
     }
 }

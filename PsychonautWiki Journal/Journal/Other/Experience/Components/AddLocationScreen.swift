@@ -23,29 +23,20 @@ struct AddLocationScreen: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        NavigationView {
-            ChooseLocationScreen(locationManager: locationManager)
-                .onAppear {
-                    locationManager.selectedLocation = nil
-                    locationManager.selectedLocationName = ""
+        ChooseLocationScreen(locationManager: locationManager)
+            .onAppear {
+                locationManager.selectedLocation = nil
+                locationManager.selectedLocationName = ""
+            }
+            .onDisappear {
+                if let selectedLocation = locationManager.selectedLocation {
+                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
+                    newLocation.name = selectedLocation.name
+                    newLocation.latitude = selectedLocation.latitude ?? 0
+                    newLocation.longitude = selectedLocation.longitude ?? 0
+                    newLocation.experience = experience
                 }
-                .onDisappear {
-                    if let selectedLocation = locationManager.selectedLocation {
-                        let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
-                        newLocation.name = selectedLocation.name
-                        newLocation.latitude = selectedLocation.latitude ?? 0
-                        newLocation.longitude = selectedLocation.longitude ?? 0
-                        newLocation.experience = experience
-                    }
-                    PersistenceController.shared.saveViewContext()
-                }
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Done") {
-                            dismiss()
-                        }
-                    }
-                }
-        }
+                PersistenceController.shared.saveViewContext()
+            }
     }
 }
