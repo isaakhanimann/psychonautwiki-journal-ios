@@ -53,10 +53,7 @@ struct EditColorsScreen: View {
                         }
                     }
                 }
-            } footer: {
-                Text("Color changes might not propagate everywhere immediately.")
             }
-
         }.navigationTitle("Edit Colors")
     }
 }
