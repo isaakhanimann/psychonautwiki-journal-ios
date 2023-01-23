@@ -38,13 +38,10 @@ struct ChooseCaffeineDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -112,6 +109,7 @@ struct ChooseCaffeineDoseScreen: View {
                     }
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                unknownDoseLink
             }
             Section("Average Drinks") {
                 Button("240 mL Coffee") {
@@ -128,11 +126,6 @@ struct ChooseCaffeineDoseScreen: View {
                 }
                 Button("240 mL Energy Drink Strong") {
                     caffeineDoseInMg = 250
-                }
-            }
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
                 }
             }
             if let remark = caffeine.dosageRemark {

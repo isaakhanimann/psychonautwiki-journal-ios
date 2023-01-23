@@ -72,13 +72,10 @@ struct ChooseDoseScreenContent: View {
                         NextLabel()
                     }
                 }
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -135,11 +132,6 @@ struct ChooseDoseScreenContent: View {
     private var screen: some View {
         Form {
             doseSection
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
-                }
-            }
             if isEyeOpen {
                 puritySection
             }
@@ -227,7 +219,8 @@ struct ChooseDoseScreenContent: View {
                 selectedUnits: $selectedUnits,
                 focusOnAppear: true
             )
-            Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor).padding(.bottom, 5)
+            Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
+            unknownDoseLink
         } header: {
             Text("Pure Dose")
         } footer: {

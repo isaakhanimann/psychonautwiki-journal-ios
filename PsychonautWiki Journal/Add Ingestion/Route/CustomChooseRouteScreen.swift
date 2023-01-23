@@ -23,6 +23,27 @@ struct CustomChooseRouteScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
+        if #available(iOS 16.0, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    Spacer()
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    var screen: some View {
         VStack {
             HStack {
                 getRouteBoxFor(route: .oral)
@@ -76,13 +97,6 @@ struct CustomChooseRouteScreen: View {
         }
         .padding(.horizontal)
         .navigationTitle("\(substanceName) Routes")
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {

@@ -64,13 +64,10 @@ struct ChooseCannabisSmokedDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -128,6 +125,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     DoseRow(roaDose: smokedDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                unknownDoseLink
             }
             Section {
                 Picker("Form", selection: $pickerOption) {
@@ -168,11 +166,6 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     } maximumValueLabel: {
                         Text("30")
                     }
-                }
-            }
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
                 }
             }
             if let remark = cannabis.dosageRemark {

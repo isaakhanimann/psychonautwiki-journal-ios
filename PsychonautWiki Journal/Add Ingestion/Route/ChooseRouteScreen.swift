@@ -22,24 +22,29 @@ struct ChooseRouteScreen: View {
     let dismiss: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            let documentedRoutes = substance.administrationRoutesUnwrapped
-            if !documentedRoutes.isEmpty {
-                Text("Documented Routes").sectionHeaderStyle()
-                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
-                ForEach(0..<numRows, id: \.self) { index in
-                    HStack {
-                        let route1 = documentedRoutes[index*2]
-                        getRouteBoxFor(route: route1)
-                        let secondIndex = index*2+1
-                        if secondIndex < documentedRoutes.count {
-                            let route2 = documentedRoutes[secondIndex]
-                            getRouteBoxFor(route: route2)
-                        }
+        if #available(iOS 16.0, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    Spacer()
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
-                Spacer().frame(height: 20)
             }
+        }
+    }
+
+    var screen: some View {
+        VStack(alignment: .leading) {
+            let documentedRoutes = substance.administrationRoutesUnwrapped
             let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !documentedRoutes.contains(route)
             }
@@ -73,16 +78,24 @@ struct ChooseRouteScreen: View {
                 }
                 .padding(.bottom)
             }
-        }
-        .padding(.horizontal)
-        .navigationBarTitle("\(substance.name) Routes")
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    dismiss()
+            if !documentedRoutes.isEmpty {
+                Text("Documented Routes").sectionHeaderStyle()
+                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
+                ForEach(0..<numRows, id: \.self) { index in
+                    HStack {
+                        let route1 = documentedRoutes[index*2]
+                        getRouteBoxFor(route: route1)
+                        let secondIndex = index*2+1
+                        if secondIndex < documentedRoutes.count {
+                            let route2 = documentedRoutes[secondIndex]
+                            getRouteBoxFor(route: route2)
+                        }
+                    }
                 }
             }
         }
+        .padding(.horizontal)
+        .navigationBarTitle("\(substance.name) Routes")
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {

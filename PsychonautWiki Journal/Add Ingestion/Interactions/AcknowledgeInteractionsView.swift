@@ -58,12 +58,11 @@ struct AcknowledgeInteractionsContent: View {
     var body: some View {
         if #available(iOS 16.0, *) {
             screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItem(placement: .bottomBar) {
+                    Spacer()
                     nextLink
                 }
             }

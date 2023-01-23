@@ -30,13 +30,10 @@ struct ChooseMDMADoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -110,11 +107,10 @@ struct ChooseMDMADoseScreen: View {
                     }
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                unknownDoseLink
             }
             if #available(iOS 16, *) {
                 MDMAOptimalDoseSection()
-            } else {
-                unknownDoseLink
             }
             MDMAPillsSection()
         }
