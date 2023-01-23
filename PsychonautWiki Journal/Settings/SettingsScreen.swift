@@ -16,11 +16,9 @@
 
 import SwiftUI
 import AlertToast
-import StoreKit
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-    @AppStorage("hasRatedBefore") var hasRatedBefore: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -30,7 +28,6 @@ struct SettingsScreen: View {
             isEyeOpen: $isEyeOpen,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
-            hasRatedBefore: $hasRatedBefore,
             isExporting: $viewModel.isExporting,
             journalFile: viewModel.journalFile,
             exportData: {
@@ -54,7 +51,6 @@ struct SettingsContent: View {
     @Binding var isEyeOpen: Bool
     var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
-    @Binding var hasRatedBefore: Bool
     @State var isImporting = false
     @Binding var isExporting: Bool
     var journalFile: JournalFile
@@ -80,15 +76,6 @@ struct SettingsContent: View {
             Section("Communication") {
                 if #available(iOS 16.0, *) {
                     ShareLink("Share With a Friend", item: URL(string: "https://isaakhanimann.github.io")!)
-                }
-                if isEyeOpen && !hasRatedBefore {
-                    Button {
-                        if let windowScene = UIApplication.shared.currentWindow?.windowScene {
-                            SKStoreReviewController.requestReview(in: windowScene)
-                        }
-                    } label: {
-                        Label("Rate in App Store", systemImage: "star")
-                    }
                 }
                 Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                     Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
@@ -250,7 +237,6 @@ struct SettingsContent_Previews: PreviewProvider {
                 isEyeOpen: .constant(true),
                 isFaceIDAvailable: true,
                 hasToUnlockApp: .constant(false),
-                hasRatedBefore: .constant(false),
                 isImporting: false,
                 isExporting: .constant(false),
                 journalFile: JournalFile(),

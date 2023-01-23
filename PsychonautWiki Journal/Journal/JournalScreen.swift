@@ -15,11 +15,14 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import StoreKit
 
 struct JournalScreen: View {
 
     @StateObject var viewModel = ViewModel()
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
+
 
     var body: some View {
         if #available(iOS 16, *) {
@@ -106,5 +109,23 @@ struct JournalScreen: View {
             .onChange(of: viewModel.isFavoriteFilterEnabled, perform: { newValue in
                 viewModel.setupFetchRequestPredicateAndFetch()
             })
+            .task {
+                maybeRequestAppRating()
+            }
+    }
+
+    private func maybeRequestAppRating() {
+        if #available(iOS 16.2, *) {
+            if openUntilRatedCount < 10 {
+                openUntilRatedCount += 1
+            } else if openUntilRatedCount == 10 {
+                if isEyeOpen && viewModel.previousExperiences.count > 5 {
+                    if let windowScene = UIApplication.shared.currentWindow?.windowScene {
+                        SKStoreReviewController.requestReview(in: windowScene)
+                    }
+                    openUntilRatedCount += 1
+                }
+            }
+        }
     }
 }
