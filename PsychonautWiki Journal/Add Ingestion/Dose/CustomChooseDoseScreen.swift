@@ -39,13 +39,10 @@ struct CustomChooseDoseScreen: View {
                         NextLabel()
                     }
                 }
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -117,12 +114,7 @@ struct CustomChooseDoseScreen: View {
                 .font(.title)
                 Toggle("Dose is an Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
-                    .padding(.bottom, 5)
-            }
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
-                }
+                unknownDoseLink
             }
         }
         .task {

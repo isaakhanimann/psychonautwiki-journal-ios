@@ -46,13 +46,10 @@ struct ChooseAlcoholDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    unknownDoseLink
                     nextLink
                 }
             }
@@ -110,6 +107,7 @@ struct ChooseAlcoholDoseScreen: View {
                     DoseRow(roaDose: oralDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                unknownDoseLink
             }
             Section {
                 VStack {
@@ -153,11 +151,6 @@ struct ChooseAlcoholDoseScreen: View {
                 }
                 Button("Average Spirit") {
                     alcoholContentInPercent = 40
-                }
-            }
-            if #unavailable(iOS 16) {
-                Section {
-                    unknownDoseLink
                 }
             }
             if let remark = alcohol.dosageRemark {

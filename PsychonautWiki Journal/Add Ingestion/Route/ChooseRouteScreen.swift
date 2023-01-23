@@ -22,6 +22,27 @@ struct ChooseRouteScreen: View {
     let dismiss: () -> Void
 
     var body: some View {
+        if #available(iOS 16.0, *) {
+            screen.toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    Spacer()
+                }
+            }
+        } else {
+            screen.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    var screen: some View {
         VStack(alignment: .leading) {
             let documentedRoutes = substance.administrationRoutesUnwrapped
             if !documentedRoutes.isEmpty {
@@ -76,13 +97,6 @@ struct ChooseRouteScreen: View {
         }
         .padding(.horizontal)
         .navigationBarTitle("\(substance.name) Routes")
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
