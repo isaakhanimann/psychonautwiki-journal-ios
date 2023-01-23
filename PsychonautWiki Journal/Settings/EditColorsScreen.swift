@@ -68,7 +68,7 @@ struct CompanionColorPickerScreen: View {
     var body: some View {
         List {
             if !otherColors.isEmpty {
-                Section("Free Colors") {
+                Section("Unused Colors") {
                     ForEach(Array(otherColors)) { color in
                         button(for: color)
                     }
