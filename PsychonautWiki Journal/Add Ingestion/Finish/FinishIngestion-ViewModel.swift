@@ -177,18 +177,25 @@ extension FinishIngestionScreen {
         }
 
         private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {
-            let halfDay: TimeInterval = 12*60*60
-            let startDate = date.addingTimeInterval(-halfDay)
-            let endDate = date.addingTimeInterval(halfDay)
+            let shortInterval: TimeInterval = 12*60*60
+            let shortRange = date.addingTimeInterval(-shortInterval)...date.addingTimeInterval(shortInterval)
+            let veryShortInterval: TimeInterval = 8*60*60
+            let veryShortRange = date.addingTimeInterval(-veryShortInterval)...date.addingTimeInterval(veryShortInterval)
             return experiences.first { exp in
-                startDate < exp.sortDateUnwrapped && exp.sortDateUnwrapped < endDate
+                let experienceStart = exp.sortedIngestionsUnwrapped.first?.time ?? exp.sortDateUnwrapped
+                let lastIngestionTime = exp.sortedIngestionsUnwrapped.last?.time ?? exp.sortDateUnwrapped
+                if shortRange.contains(experienceStart) {
+                    return true
+                } else {
+                    return veryShortRange.contains(lastIngestionTime)
+                }
             }
         }
 
         private static func getPredicate(from date: Date) -> NSCompoundPredicate {
-            let twoDays: TimeInterval = 48*60*60
-            let startDate = date.addingTimeInterval(-twoDays)
-            let endDate = date.addingTimeInterval(twoDays)
+            let longInterval: TimeInterval = 60*60*60
+            let startDate = date.addingTimeInterval(-longInterval)
+            let endDate = date.addingTimeInterval(longInterval)
             let laterThanStart = NSPredicate(format: "sortDate > %@", startDate as NSDate)
             let earlierThanEnd = NSPredicate(format: "sortDate < %@", endDate as NSDate)
             return NSCompoundPredicate(
