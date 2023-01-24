@@ -102,25 +102,22 @@ struct FinishIngestionScreen: View {
                 )
                 .labelsHidden()
                 .datePickerStyle(.wheel)
-                if let selectedExperience = viewModel.selectedExperience {
-                    if viewModel.experiencesWithinLargerRange.count>1 {
-                        if !viewModel.wantsToCreateNewExperience {
-                            NavigationLink {
-                                ExperiencePickerScreen(
-                                    selectedExperience: $viewModel.selectedExperience,
-                                    experiences: viewModel.experiencesWithinLargerRange
-                                )
-                            } label: {
-                                HStack {
-                                    Text("Part of:")
-                                    Spacer()
-                                    Text(selectedExperience.titleUnwrapped)
-                                }
+                if viewModel.experiencesWithinLargerRange.count>0 {
+                    NavigationLink {
+                        ExperiencePickerScreen(
+                            selectedExperience: $viewModel.selectedExperience,
+                            experiences: viewModel.experiencesWithinLargerRange
+                        )
+                    } label: {
+                        HStack {
+                            Text("Part of:")
+                            Spacer()
+                            if let exp = viewModel.selectedExperience {
+                                Text(exp.titleUnwrapped)
+                            } else {
+                                Text("New Experience")
                             }
                         }
-                        Toggle("Create New Experience", isOn: $viewModel.wantsToCreateNewExperience.animation()).tint(.accentColor)
-                    } else {
-                        Toggle("Part of \(selectedExperience.titleUnwrapped)", isOn: $viewModel.wantsToCreateNewExperience.not).tint(.accentColor)
                     }
                 }
                 Button {
@@ -133,7 +130,7 @@ struct FinishIngestionScreen: View {
                     }
                 }
             }
-            if viewModel.selectedExperience == nil || viewModel.wantsToCreateNewExperience {
+            if viewModel.selectedExperience == nil {
                 Section("New Experience") {
                     Button {
                         sheetToShow = .editTitle

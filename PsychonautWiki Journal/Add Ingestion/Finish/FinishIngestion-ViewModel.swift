@@ -26,7 +26,6 @@ extension FinishIngestionScreen {
         @Published var selectedTime = Date()
         @Published var enteredNote = ""
         @Published var enteredTitle = ""
-        @Published var wantsToCreateNewExperience = false
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
         @Published var notesInOrder = [String]()
@@ -66,7 +65,7 @@ extension FinishIngestionScreen {
             let context = PersistenceController.shared.viewContext
             try await context.perform {
                 let companion = self.createOrUpdateCompanion(with: context, substanceName: substanceName)
-                if let existingExperience = self.selectedExperience, !self.wantsToCreateNewExperience {
+                if let existingExperience = self.selectedExperience {
                     self.createIngestion(
                         with: existingExperience,
                         and: context,

@@ -23,29 +23,41 @@ struct ExperiencePickerScreen: View {
 
     var body: some View {
         List {
-            Section {
+            Section("Create New") {
+                Button {
+                    selectedExperience = nil
+                    dismiss()
+                } label: {
+                    let label = "Create New Experience"
+                    if selectedExperience == nil {
+                        HStack {
+                            Text(label)
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    } else {
+                        Text(label)
+                    }
+                }
+            }
+            Section("Close Experiences") {
                 ForEach(experiences) { exp in
-                    button(for: exp)
+                    Button {
+                        selectedExperience = exp
+                        dismiss()
+                    } label: {
+                        if selectedExperience == exp {
+                            HStack {
+                                Text(exp.titleUnwrapped)
+                                Spacer()
+                                Image(systemName: "checkmark")
+                            }
+                        } else {
+                            Text(exp.titleUnwrapped)
+                        }
+                    }
                 }
             }
         }.navigationTitle("Choose Experience")
-    }
-
-    private func button(for exp: Experience) -> some View {
-        Button {
-            selectedExperience = exp
-            dismiss()
-        } label: {
-            if selectedExperience == exp {
-                HStack {
-                    Text(exp.titleUnwrapped)
-                    Spacer()
-                    Image(systemName: "checkmark")
-                }
-            } else {
-                Text(exp.titleUnwrapped)
-            }
-        }
-
     }
 }
