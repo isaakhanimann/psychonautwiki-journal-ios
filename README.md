@@ -13,11 +13,7 @@ Users can also log their ingestions, make notes and get an overview of their exp
 </a>
 
 <p>
-<img src="README Assets/App Screens/screenshot1.jpeg" width="19%">
-<img src="README Assets/App Screens/screenshot2.jpeg" width="19%">
-<img src="README Assets/App Screens/screenshot3.jpeg" width="19%">
-<img src="README Assets/App Screens/screenshot4.jpeg" width="19%">
-<img src="README Assets/App Screens/screenshot5.jpeg" width="19%">
+<img src="README Assets/presentation.png" width="100%">
 </p>
 
 ## Contribution Guide
