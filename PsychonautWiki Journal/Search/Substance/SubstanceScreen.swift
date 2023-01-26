@@ -50,6 +50,27 @@ struct SubstanceScreen: View {
 
     private var screen: some View {
         List {
+            if !substance.isApproved {
+                Section("Info Not PW Approved") {
+                    sectionContent
+                }
+            } else {
+                Section {
+                    sectionContent
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
+            NavigationView {
+                AcknowledgeInteractionsView(substance: substance) {
+                    isShowingAddIngestionSheet.toggle()
+                }
+            }
+        }
+        .navigationTitle(substance.name)
+    }
+    private var sectionContent: some View {
+        Group {
             Group { // group is here because we cannot have more than 10 subviews
                 if let articleURL = substance.url {
                     NavigationLink {
@@ -126,14 +147,6 @@ struct SubstanceScreen: View {
                 }
             }
         }
-        .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
-            NavigationView {
-                AcknowledgeInteractionsView(substance: substance) {
-                    isShowingAddIngestionSheet.toggle()
-                }
-            }
-        }
-        .navigationTitle(substance.name)
     }
 }
 

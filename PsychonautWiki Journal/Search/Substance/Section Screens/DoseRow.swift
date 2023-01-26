@@ -36,7 +36,8 @@ struct DoseRow: View {
         || roaDose?.commonMin != nil
         || roaDose?.strongMin != nil
         || roaDose?.heavyMin != nil
-        if showDoseRow && roaDose?.units != nil {
+        || roaDose?.units != nil
+        if showDoseRow  {
             HStack(alignment: .top, spacing: 0) {
                 if let lightMin = roaDose?.lightMin {
                     Spacer(minLength: 0)
