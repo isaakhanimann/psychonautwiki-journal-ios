@@ -30,6 +30,10 @@ struct ChooseMDMADoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    nextLink
+                }
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
@@ -39,6 +43,10 @@ struct ChooseMDMADoseScreen: View {
             }
         } else {
             screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    nextLink
+                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -67,7 +75,7 @@ struct ChooseMDMADoseScreen: View {
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Unknown Dose") {
+        NavigationLink("Use Unknown Dose") {
             FinishIngestionScreen(
                 substanceName: mdma.name,
                 administrationRoute: .oral,
@@ -114,6 +122,7 @@ struct ChooseMDMADoseScreen: View {
             }
             MDMAPillsSection()
         }
+        .optionalScrollDismissesKeyboard()
         .navigationTitle("MDMA Dosage")
     }
 
