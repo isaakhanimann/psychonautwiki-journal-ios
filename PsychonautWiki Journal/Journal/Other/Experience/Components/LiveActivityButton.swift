@@ -42,8 +42,8 @@ struct LiveActivityButton: View {
                         Label("Start Live Activity", systemImage: "play")
                     }
                 }
-            } else {
-                Text("Enable in Settings")
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                Text("Enable Live Activities in Settings").foregroundColor(.secondary)
             }
         }
         .task {
