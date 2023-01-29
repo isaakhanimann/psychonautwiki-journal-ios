@@ -12,6 +12,9 @@ Users can also log their ingestions, make notes and get an overview of their exp
 <img alt='Download on the App Store' src='README Assets/badge-appstore.svg' width='25%'/>
 </a>
 
+**Triple tap on the closed eye in settings to see all PsychonautWiki substances.**
+
+
 <p>
 <img src="README Assets/presentation.png" width="100%">
 </p>
