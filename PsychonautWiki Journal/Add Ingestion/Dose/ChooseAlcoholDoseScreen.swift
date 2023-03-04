@@ -25,14 +25,18 @@ struct ChooseAlcoholDoseScreen: View {
     @State private var drinkAmountInCl = 5.0
     @State private var alcoholContentInPercent = 5.0
     @State private var isEstimate = true
-    let units = "mL EtOH"
+    let units = "g"
 
     private var ingestedAlcoholDoseInMl: Double {
         drinkAmountInCl * 100 * alcoholContentInPercent / 100
     }
 
+    private var ingestedAlcoholDoseInGrams: Double {
+        ingestedAlcoholDoseInMl * 0.8
+    }
+
     private var doseRounded: Double {
-        round(ingestedAlcoholDoseInMl)
+        round(ingestedAlcoholDoseInGrams)
     }
 
     private var doseText: String {
@@ -100,8 +104,8 @@ struct ChooseAlcoholDoseScreen: View {
         Form {
             Section("Ingested Alcohol Amount") {
                 VStack(spacing: 5) {
-                    let doseType = oralDose.getRangeType(for: ingestedAlcoholDoseInMl, with: units)
-                    Text("\(doseText) mL")
+                    let doseType = oralDose.getRangeType(for: ingestedAlcoholDoseInGrams, with: units)
+                    Text("\(doseText) \(units)")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
                     DoseRow(roaDose: oralDose)
