@@ -59,7 +59,7 @@ struct InteractionAlertView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 50, height: 50)
                 .foregroundColor(iconColor)
-            Text("Interaction Detected")
+            Text("Interaction Warning")
                 .font(.title.bold())
         }
     }
