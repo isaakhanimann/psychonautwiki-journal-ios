@@ -34,7 +34,7 @@ struct AddRatingScreen: View {
                     .labelsHidden()
                     .datePickerStyle(.wheel)
                 }
-                Section("Rating Picker") {
+                Section("Shulgin Rating") {
                     Picker("Shulgin Rating", selection: $selectedRating) {
                         ForEach(ShulginRating.allCases, id: \.self) { option in
                             Text(option.stringRepresentation)
@@ -44,7 +44,7 @@ struct AddRatingScreen: View {
                 Section("Shulgin Rating Explanation") {
                     ForEach(ShulginRating.allCases, id: \.self) { option in
                         VStack(alignment: .leading) {
-                            Text(option.stringRepresentation).font(.title)
+                            Text(option.stringRepresentation).font(.headline)
                             Text(option.description).foregroundColor(.secondary)
                         }
                     }
