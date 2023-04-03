@@ -118,7 +118,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
             ForEach(previewDeviceNames, id: \.self) { name in
                 ChooseSubstanceContent(
                     searchText: .constant(""),
-                    isShowingOpenEyeToast: .constant(true),
+                    isShowingOpenEyeToast: .constant(false),
                     isEyeOpen: true,
                     filteredSuggestions: [
                         Suggestion(
@@ -132,11 +132,6 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     dose: 20,
                                     units: "mg",
                                     isEstimate: true
-                                ),
-                                DoseAndUnit(
-                                    dose: nil,
-                                    units: "mg",
-                                    isEstimate: false
                                 ),
                                 DoseAndUnit(
                                     dose: 30,

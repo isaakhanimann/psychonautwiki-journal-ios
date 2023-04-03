@@ -261,7 +261,8 @@ struct ExperienceScreen: View {
 
                 }
             }
-            if let notes = experience.textUnwrapped, !notes.isEmpty {
+            let notes = experience.textUnwrapped
+            if !notes.isEmpty {
                 Section("Notes") {
                     Text(notes)
                         .padding(.vertical, 5)

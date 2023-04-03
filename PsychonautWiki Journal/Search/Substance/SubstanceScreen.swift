@@ -72,12 +72,10 @@ struct SubstanceScreen: View {
     private var sectionContent: some View {
         Group {
             Group { // group is here because we cannot have more than 10 subviews
-                if let articleURL = substance.url {
-                    NavigationLink {
-                        WebViewScreen(articleURL: articleURL)
-                    } label: {
-                        Label("Article", systemImage: "link")
-                    }
+                NavigationLink {
+                    WebViewScreen(articleURL: substance.url)
+                } label: {
+                    Label("Article", systemImage: "link")
                 }
                 if let summary = substance.summary {
                     NavigationLink("Summary") {
@@ -101,10 +99,10 @@ struct SubstanceScreen: View {
                         ToleranceScreen(substance: substance)
                     }
                 }
-                if let toxicities = substance.toxicities, !toxicities.isEmpty {
+                if !substance.toxicities.isEmpty {
                     NavigationLink("Toxicity") {
                         ToxicityScreen(
-                            toxicities: toxicities,
+                            toxicities: substance.toxicities,
                             substanceURL: substance.url
                         )
                     }

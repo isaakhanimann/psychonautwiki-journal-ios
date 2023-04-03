@@ -847,7 +847,6 @@
 			children = (
 				EAF76CA727D90CE500945587 /* Enums */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
-				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4716E26CBA664009FB0EC /* Decoding */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* Journal */,
@@ -855,6 +854,7 @@
 				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAE4712A26CBA663009FB0EC /* Safer */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
+				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
 				EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */,
 				EAE4718026CBA664009FB0EC /* Persistence.swift */,
 				EAE4723426CC42F7009FB0EC /* substances.json */,
