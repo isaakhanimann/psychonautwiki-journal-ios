@@ -114,6 +114,7 @@
 		EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64127CA136C00F6E10F /* Roa.swift */; };
 		EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64327CA136C00F6E10F /* DurationRange.swift */; };
 		EA47E67027CB477000F6E10F /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66F27CB477000F6E10F /* SearchScreen.swift */; };
+		EA48F85629DB0EFE007DA8C5 /* ShulginRatingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -351,6 +352,7 @@
 		EA47E64327CA136C00F6E10F /* DurationRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationRange.swift; sourceTree = "<group>"; };
 		EA47E66F27CB477000F6E10F /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
 		EA48B9A626E80F21003BF667 /* Angle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
+		EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShulginRatingSection.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */,
+				EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */,
 				EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */,
 				EAE4808F2973DDF400B600EF /* Components */,
 			);
@@ -1305,6 +1308,7 @@
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
 				EABD92112942131E0073303A /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA418A2D296C00BF00DEA663 /* LocationManager.swift in Sources */,
+				EA48F85629DB0EFE007DA8C5 /* ShulginRatingSection.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchScreen.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */,
