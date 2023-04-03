@@ -17,9 +17,18 @@
 import SwiftUI
 
 struct ShulginRatingSection: View {
+
+    @State private var isShowingSheet = false
+
     var body: some View {
         Section("Shulgin Rating") {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Button {
+                isShowingSheet.toggle()
+            } label: {
+                Label("Add Rating", systemImage: "plus")
+            }
+        }.sheet(isPresented: $isShowingSheet) {
+            AddRatingScreen()
         }
     }
 }
