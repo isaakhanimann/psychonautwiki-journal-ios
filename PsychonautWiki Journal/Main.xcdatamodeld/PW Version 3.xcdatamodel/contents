@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CustomSubstance" representedClassName="CustomSubstance" syncable="YES" codeGenerationType="class">
+        <attribute name="explanation" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="sortDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="experience" inverseEntity="Ingestion"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ExperienceLocation" inverseName="experience" inverseEntity="ExperienceLocation"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ShulginRating" inverseName="experience" inverseEntity="ShulginRating"/>
+    </entity>
+    <entity name="ExperienceLocation" representedClassName="ExperienceLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="location" inverseEntity="Experience"/>
+    </entity>
+    <entity name="Ingestion" representedClassName="Ingestion" syncable="YES" codeGenerationType="class">
+        <attribute name="administrationRoute" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dose" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isEstimate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="units" optional="YES" attributeType="String"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ingestions" inverseEntity="Experience"/>
+        <relationship name="substanceCompanion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubstanceCompanion" inverseName="ingestions" inverseEntity="SubstanceCompanion"/>
+    </entity>
+    <entity name="ShulginRating" representedClassName="ShulginRating" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="option" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience" inverseName="ratings" inverseEntity="Experience"/>
+    </entity>
+    <entity name="SubstanceCompanion" representedClassName="SubstanceCompanion" syncable="YES" codeGenerationType="class">
+        <attribute name="colorAsText" optional="YES" attributeType="String"/>
+        <attribute name="substanceName" optional="YES" attributeType="String"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="substanceCompanion" inverseEntity="Ingestion"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="substanceName"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>

@@ -115,7 +115,7 @@
 		EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64327CA136C00F6E10F /* DurationRange.swift */; };
 		EA47E67027CB477000F6E10F /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E66F27CB477000F6E10F /* SearchScreen.swift */; };
 		EA48F85629DB0EFE007DA8C5 /* ShulginRatingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */; };
-		EA48F85829DB12A5007DA8C5 /* ShulginRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85729DB12A5007DA8C5 /* ShulginRating.swift */; };
+		EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */; };
 		EA48F85A29DB182C007DA8C5 /* AddRatingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
@@ -355,8 +355,9 @@
 		EA47E66F27CB477000F6E10F /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
 		EA48B9A626E80F21003BF667 /* Angle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShulginRatingSection.swift; sourceTree = "<group>"; };
-		EA48F85729DB12A5007DA8C5 /* ShulginRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShulginRating.swift; sourceTree = "<group>"; };
+		EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShulginRatingOption.swift; sourceTree = "<group>"; };
 		EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingScreen.swift; sourceTree = "<group>"; };
+		EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 3.xcdatamodel"; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -653,7 +654,7 @@
 		EA48F85C29DB1894007DA8C5 /* Rating */ = {
 			isa = PBXGroup;
 			children = (
-				EA48F85729DB12A5007DA8C5 /* ShulginRating.swift */,
+				EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */,
 				EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */,
 				EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */,
 			);
@@ -1339,7 +1340,7 @@
 				EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */,
 				EA41C62F295EB86C000DA021 /* Utils.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
-				EA48F85829DB12A5007DA8C5 /* ShulginRating.swift in Sources */,
+				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
 				EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
@@ -1781,11 +1782,12 @@
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */,
 				EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */,
 				EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */,
 				EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */,
 			);
-			currentVersion = EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */;
+			currentVersion = EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */;
 			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

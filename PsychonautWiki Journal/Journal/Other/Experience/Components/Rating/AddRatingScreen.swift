@@ -20,7 +20,7 @@ struct AddRatingScreen: View {
     
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
-    @State private var selectedRating = ShulginRating.twoPlus
+    @State private var selectedRating = ShulginRatingOption.twoPlus
 
     var body: some View {
         NavigationView {
@@ -36,13 +36,13 @@ struct AddRatingScreen: View {
                 }
                 Section("Shulgin Rating") {
                     Picker("Shulgin Rating", selection: $selectedRating) {
-                        ForEach(ShulginRating.allCases, id: \.self) { option in
+                        ForEach(ShulginRatingOption.allCases, id: \.self) { option in
                             Text(option.stringRepresentation)
                         }
                     }.pickerStyle(.segmented)
                 }
                 Section("Shulgin Rating Explanation") {
-                    ForEach(ShulginRating.allCases, id: \.self) { option in
+                    ForEach(ShulginRatingOption.allCases, id: \.self) { option in
                         VStack(alignment: .leading) {
                             Text(option.stringRepresentation).font(.headline)
                             Text(option.description).foregroundColor(.secondary)
