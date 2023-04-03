@@ -118,6 +118,8 @@
 		EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */; };
 		EA48F85A29DB182C007DA8C5 /* AddRatingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */; };
 		EA48F85F29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85E29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift */; };
+		EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F86029DB2B1B007DA8C5 /* RatingScreenContent.swift */; };
+		EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F86229DB2B37007DA8C5 /* EditRatingScreen.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -360,6 +362,8 @@
 		EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingScreen.swift; sourceTree = "<group>"; };
 		EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 3.xcdatamodel"; sourceTree = "<group>"; };
 		EA48F85E29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShulginRating-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EA48F86029DB2B1B007DA8C5 /* RatingScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingScreenContent.swift; sourceTree = "<group>"; };
+		EA48F86229DB2B37007DA8C5 /* EditRatingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRatingScreen.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -659,6 +663,8 @@
 				EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */,
 				EA48F85529DB0EFE007DA8C5 /* ShulginRatingSection.swift */,
 				EA48F85929DB182C007DA8C5 /* AddRatingScreen.swift */,
+				EA48F86029DB2B1B007DA8C5 /* RatingScreenContent.swift */,
+				EA48F86229DB2B37007DA8C5 /* EditRatingScreen.swift */,
 			);
 			path = Rating;
 			sourceTree = "<group>";
@@ -1242,6 +1248,7 @@
 				EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */,
 				EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
+				EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
@@ -1372,6 +1379,7 @@
 				EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
+				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
 				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
 				EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */,

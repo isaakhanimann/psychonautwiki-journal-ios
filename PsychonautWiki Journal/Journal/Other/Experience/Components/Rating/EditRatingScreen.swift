@@ -16,12 +16,12 @@
 
 import SwiftUI
 
-struct AddRatingScreen: View {
-    
+struct EditRatingScreen: View {
+
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
-
+    
     var body: some View {
         RatingScreenContent(
             selectedTime: $selectedTime,
