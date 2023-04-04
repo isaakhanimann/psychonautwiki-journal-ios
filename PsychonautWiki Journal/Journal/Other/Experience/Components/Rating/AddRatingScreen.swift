@@ -17,7 +17,8 @@
 import SwiftUI
 
 struct AddRatingScreen: View {
-    
+
+    let experience: Experience
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
@@ -30,8 +31,25 @@ struct AddRatingScreen: View {
                 dismiss()
             },
             tapDone: {
+                save()
                 dismiss()
             }
-        )
+        ).onAppear {
+            if experience.isCurrent {
+                selectedTime = Date()
+            } else {
+                selectedTime = experience.sortDateUnwrapped.addingTimeInterval(30*60)
+            }
+        }
+    }
+
+    func save() {
+        let context = PersistenceController.shared.viewContext
+        let newRating = ShulginRating(context: context)
+        newRating.creationDate = Date()
+        newRating.time = selectedTime
+        newRating.option = selectedRating.rawValue
+        newRating.experience = experience
+        try? context.save()
     }
 }

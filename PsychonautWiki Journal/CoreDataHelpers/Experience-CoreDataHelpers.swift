@@ -51,6 +51,11 @@ extension Experience: Comparable {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
+    var sortedRatingsUnwrapped: [ShulginRating] {
+        (ratings?.allObjects as? [ShulginRating] ?? []).sorted()
+    }
+
+
     var ingestionColors: [Color] {
         var colors = [Color]()
         for ingestion in sortedIngestionsUnwrapped {

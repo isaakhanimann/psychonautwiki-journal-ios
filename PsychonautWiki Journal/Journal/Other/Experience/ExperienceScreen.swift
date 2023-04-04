@@ -271,14 +271,7 @@ struct ExperienceScreen: View {
                         }
                 }
             }
-            if let location = experience.location {
-                Section("Location") {
-                    EditLocationLinkAndMap(experienceLocation: location) {
-                        sheetToShow = .editLocation(experienceLocation: location)
-                    }
-                }
-            }
-
+            ShulginRatingSection(experience: experience)
             if isEyeOpen {
                 if !viewModel.substancesUsed.isEmpty {
                     Section("Info") {
@@ -310,6 +303,13 @@ struct ExperienceScreen: View {
                                 Label("Safer Hallucinogens", systemImage: "cross")
                             }
                         }
+                    }
+                }
+            }
+            if let location = experience.location {
+                Section("Location") {
+                    EditLocationLinkAndMap(experienceLocation: location) {
+                        sheetToShow = .editLocation(experienceLocation: location)
                     }
                 }
             }

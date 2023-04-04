@@ -16,7 +16,11 @@
 
 import Foundation
 
-extension ShulginRating {
+extension ShulginRating: Comparable {
+
+    public static func < (lhs: ShulginRating, rhs: ShulginRating) -> Bool {
+        lhs.timeUnwrapped < rhs.timeUnwrapped
+    }
 
     var timeUnwrapped: Date {
         time ?? Date()

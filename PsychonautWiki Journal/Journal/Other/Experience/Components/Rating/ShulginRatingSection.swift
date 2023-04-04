@@ -18,25 +18,50 @@ import SwiftUI
 
 struct ShulginRatingSection: View {
 
+    @ObservedObject var experience: Experience
     @State private var isShowingSheet = false
+    @State private var sheet: SheetOption? = nil
+
+    enum SheetOption: Identifiable {
+        var id: String {
+            switch(self) {
+            case .addRating:
+                return "addRating"
+            case let .editRating(rating):
+                return rating.creationDateUnwrapped.description
+            }
+        }
+
+        case addRating, editRating(ShulginRating)
+    }
 
     var body: some View {
         Section("Shulgin Rating") {
+            ForEach(experience.sortedRatingsUnwrapped) { rating in
+                Button {
+                    sheet = .editRating(rating)
+                } label: {
+                    HStack {
+                        Text(rating.timeUnwrapped, style: .time)
+                        Spacer()
+                        Text(rating.optionUnwrapped.stringRepresentation)
+                    }
+                }
+            }
             Button {
-                isShowingSheet.toggle()
+                sheet = .addRating
             } label: {
                 Label("Add Rating", systemImage: "plus")
             }
-        }.sheet(isPresented: $isShowingSheet) {
-            AddRatingScreen()
+        }.sheet(item: $sheet) { option in
+            switch(option) {
+            case .addRating:
+                AddRatingScreen(experience: experience)
+            case let .editRating(rating):
+                EditRatingScreen(rating: rating)
+            }
         }
     }
 }
 
-struct ShulginRatingSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            ShulginRatingSection()
-        }
-    }
-}
+

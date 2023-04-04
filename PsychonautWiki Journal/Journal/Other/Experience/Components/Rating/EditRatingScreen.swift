@@ -18,6 +18,7 @@ import SwiftUI
 
 struct EditRatingScreen: View {
 
+    @ObservedObject var rating: ShulginRating
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
@@ -30,8 +31,17 @@ struct EditRatingScreen: View {
                 dismiss()
             },
             tapDone: {
+                save()
                 dismiss()
             }
-        )
+        ).onAppear {
+            selectedTime = rating.timeUnwrapped
+            selectedRating = rating.optionUnwrapped
+        }
+    }
+
+    func save() {
+        rating.time = selectedTime
+        rating.option = selectedRating.rawValue
     }
 }
