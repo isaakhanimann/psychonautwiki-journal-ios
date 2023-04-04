@@ -20,48 +20,37 @@ struct ShulginRatingSection: View {
 
     @ObservedObject var experience: Experience
     @State private var isShowingSheet = false
-    @State private var sheet: SheetOption? = nil
-
-    enum SheetOption: Identifiable {
-        var id: String {
-            switch(self) {
-            case .addRating:
-                return "addRating"
-            case let .editRating(rating):
-                return rating.creationDateUnwrapped.description
-            }
-        }
-
-        case addRating, editRating(ShulginRating)
-    }
 
     var body: some View {
         Section("Shulgin Rating") {
             ForEach(experience.sortedRatingsUnwrapped) { rating in
-                Button {
-                    sheet = .editRating(rating)
+                NavigationLink {
+                    EditRatingScreen(rating: rating)
                 } label: {
-                    HStack {
-                        Text(rating.timeUnwrapped, style: .time)
-                        Spacer()
-                        Text(rating.optionUnwrapped.stringRepresentation)
-                    }
+                    RatingRow(rating: rating)
                 }
             }
             Button {
-                sheet = .addRating
+                isShowingSheet.toggle()
             } label: {
                 Label("Add Rating", systemImage: "plus")
             }
-        }.sheet(item: $sheet) { option in
-            switch(option) {
-            case .addRating:
-                AddRatingScreen(experience: experience)
-            case let .editRating(rating):
-                EditRatingScreen(rating: rating)
-            }
         }
+        .sheet(isPresented: $isShowingSheet, content: {
+            AddRatingScreen(experience: experience)
+        })
     }
 }
 
+struct RatingRow: View {
 
+    @ObservedObject var rating: ShulginRating
+
+    var body: some View {
+        HStack {
+            Text(rating.timeUnwrapped, style: .time)
+            Spacer()
+            Text(rating.optionUnwrapped.stringRepresentation)
+        }
+    }
+}

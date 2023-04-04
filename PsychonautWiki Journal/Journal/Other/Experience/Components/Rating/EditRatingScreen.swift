@@ -26,22 +26,32 @@ struct EditRatingScreen: View {
     var body: some View {
         RatingScreenContent(
             selectedTime: $selectedTime,
-            selectedRating: $selectedRating,
-            dismiss: {
-                dismiss()
-            },
-            tapDone: {
-                save()
-                dismiss()
-            }
+            selectedRating: $selectedRating
         ).onAppear {
             selectedTime = rating.timeUnwrapped
             selectedRating = rating.optionUnwrapped
+        }
+        .onDisappear {
+            save()
+        }
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                Button(action: delete) {
+                    Label("Delete Rating", systemImage: "trash")
+                }
+            }
         }
     }
 
     func save() {
         rating.time = selectedTime
         rating.option = selectedRating.rawValue
+        PersistenceController.shared.saveViewContext()
+    }
+
+    func delete() {
+        PersistenceController.shared.viewContext.delete(rating)
+        PersistenceController.shared.saveViewContext()
+        dismiss()
     }
 }

@@ -24,17 +24,27 @@ struct AddRatingScreen: View {
     @State private var selectedRating = ShulginRatingOption.twoPlus
 
     var body: some View {
-        RatingScreenContent(
-            selectedTime: $selectedTime,
-            selectedRating: $selectedRating,
-            dismiss: {
-                dismiss()
-            },
-            tapDone: {
-                save()
-                dismiss()
+        NavigationView {
+            RatingScreenContent(
+                selectedTime: $selectedTime,
+                selectedRating: $selectedRating
+            )
+            .navigationTitle("Add Rating")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        save()
+                        dismiss()
+                    }
+                }
             }
-        ).onAppear {
+        }
+        .onAppear {
             if experience.isCurrent {
                 selectedTime = Date()
             } else {

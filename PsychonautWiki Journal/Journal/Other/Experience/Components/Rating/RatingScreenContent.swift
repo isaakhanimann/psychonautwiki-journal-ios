@@ -20,51 +20,34 @@ struct RatingScreenContent: View {
 
     @Binding var selectedTime: Date
     @Binding var selectedRating: ShulginRatingOption
-    let dismiss: () -> Void
-    let tapDone: () -> Void
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section("Time") {
-                    DatePicker(
-                        "Ingestion Time",
-                        selection: $selectedTime,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .labelsHidden()
-                    .datePickerStyle(.wheel)
-                }
-                Section {
-                    Picker("Shulgin Rating", selection: $selectedRating) {
-                        ForEach(ShulginRatingOption.allCases, id: \.self) { option in
-                            Text(option.stringRepresentation)
-                        }
-                    }.pickerStyle(.segmented)
-                } header: {
-                    Text("Shulgin Rating")
-                } footer: {
-                    Text("++++ is not on the quantitative potency scale")
-                }
-                Section("Shulgin Rating Explanation") {
-                    ForEach(ShulginRatingOption.allCases, id: \.self) { option in
-                        VStack(alignment: .leading) {
-                            Text(option.stringRepresentation).font(.headline)
-                            Text(option.description).foregroundColor(.secondary)
-                        }
-                    }
-                }
+        Form {
+            Section("Time") {
+                DatePicker(
+                    "Ingestion Time",
+                    selection: $selectedTime,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .labelsHidden()
+                .datePickerStyle(.wheel)
             }
-            .navigationTitle("Add Rating")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+            Section {
+                Picker("Shulgin Rating", selection: $selectedRating) {
+                    ForEach(ShulginRatingOption.allCases, id: \.self) { option in
+                        Text(option.stringRepresentation)
                     }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        tapDone()
+                }.pickerStyle(.segmented)
+            } header: {
+                Text("Shulgin Rating")
+            } footer: {
+                Text("++++ is not on the quantitative potency scale")
+            }
+            Section("Shulgin Rating Explanation") {
+                ForEach(ShulginRatingOption.allCases, id: \.self) { option in
+                    VStack(alignment: .leading) {
+                        Text(option.stringRepresentation).font(.headline)
+                        Text(option.description).foregroundColor(.secondary)
                     }
                 }
             }
@@ -76,9 +59,7 @@ struct EditRatingScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         RatingScreenContent(
             selectedTime: .constant(.now),
-            selectedRating: .constant(.plus),
-            dismiss: {},
-            tapDone: {}
+            selectedRating: .constant(.plus)
         )
     }
 }
