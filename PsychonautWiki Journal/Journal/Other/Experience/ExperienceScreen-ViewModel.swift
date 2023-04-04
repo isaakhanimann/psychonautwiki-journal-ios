@@ -22,46 +22,84 @@ extension ExperienceScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
-        private let fetchController: NSFetchedResultsController<Ingestion>
+        private let ingestionFetchController: NSFetchedResultsController<Ingestion>
+        private let ratingFetchController: NSFetchedResultsController<ShulginRating>
         @Published var timelineModel: TimelineModel?
         @Published var cumulativeDoses: [CumulativeDose] = []
         @Published var interactions: [Interaction] = []
         @Published var substancesUsed: [Substance] = []
         @Published var hiddenIngestions: [ObjectIdentifier] = []
         @Published var sortedIngestions: [Ingestion] = []
+        @Published var sortedRatings: [ShulginRating] = []
+
+        var everythingForEachRating: [EverythingForOneRating] {
+            sortedRatings.map({ shulgin in
+                EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+            })
+        }
 
 
         override init() {
-            let fetchRequest = Ingestion.fetchRequest()
-            fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: true) ]
-            fetchController = NSFetchedResultsController(
-                fetchRequest: fetchRequest,
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: true) ]
+            ingestionFetchController = NSFetchedResultsController(
+                fetchRequest: ingestionFetchRequest,
+                managedObjectContext: PersistenceController.shared.viewContext,
+                sectionNameKeyPath: nil, cacheName: nil
+            )
+            let ratingFetchRequest = ShulginRating.fetchRequest()
+            ratingFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \ShulginRating.time, ascending: true) ]
+            ratingFetchController = NSFetchedResultsController(
+                fetchRequest: ratingFetchRequest,
                 managedObjectContext: PersistenceController.shared.viewContext,
                 sectionNameKeyPath: nil, cacheName: nil
             )
             super.init()
-            fetchController.delegate = self
+            ingestionFetchController.delegate = self
+            ratingFetchController.delegate = self
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            guard let ings = controller.fetchedObjects as? [Ingestion] else {return}
-            Task { @MainActor in
-                sortedIngestions = ings
-                calculateScreen()
+            if let ings = controller.fetchedObjects as? [Ingestion] {
+                Task { @MainActor in
+                    sortedIngestions = ings
+                    calculateScreen()
+                }
+            }
+            if let ratings = controller.fetchedObjects as? [ShulginRating] {
+                Task { @MainActor in
+                    sortedRatings = ratings
+                    calculateScreen()
+                }
             }
         }
 
-        func setupFetchRequestPredicateAndFetch(experience: Experience) {
+        func reloadScreen(experience: Experience) {
+            reloadIngestions(experience: experience)
+            reloadRatings(experience: experience)
+            calculateScreen()
+        }
+
+        private func reloadIngestions(experience: Experience) {
             let predicate = NSPredicate(
                 format: "%K == %@",
                 #keyPath(Ingestion.experience.creationDate),
                 experience.creationDateUnwrapped as NSDate
             )
-            fetchController.fetchRequest.predicate = predicate
-            try? fetchController.performFetch()
-            let ings = fetchController.fetchedObjects ?? []
-            sortedIngestions = ings
-            calculateScreen()
+            ingestionFetchController.fetchRequest.predicate = predicate
+            try? ingestionFetchController.performFetch()
+            sortedIngestions = ingestionFetchController.fetchedObjects ?? []
+        }
+
+        private func reloadRatings(experience: Experience) {
+            let predicate = NSPredicate(
+                format: "%K == %@",
+                #keyPath(ShulginRating.experience.creationDate),
+                experience.creationDateUnwrapped as NSDate
+            )
+            ratingFetchController.fetchRequest.predicate = predicate
+            try? ratingFetchController.performFetch()
+            sortedRatings = ratingFetchController.fetchedObjects ?? []
         }
 
         func showIngestion(id: ObjectIdentifier) {
@@ -91,13 +129,19 @@ extension ExperienceScreen {
         @available(iOS 16.2, *)
         func startOrUpdateLiveActivity() {
             Task { @MainActor in
-                ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
+                ActivityManager.shared.startOrUpdateActivity(
+                    everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
+                    everythingForEachRating: everythingForEachRating
+                )
             }
         }
 
         @available(iOS 16.2, *)
         func stopLiveActivity() {
-            ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: sortedIngestions))
+            ActivityManager.shared.stopActivity(
+                everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
+                everythingForEachRating: everythingForEachRating
+            )
         }
 
         private func setSubstances() {
@@ -110,7 +154,10 @@ extension ExperienceScreen {
         private func calculateTimeline() {
             let ingestionsToShow = sortedIngestions.filter {!hiddenIngestions.contains($0.id)}
             let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
-            let model = TimelineModel(everythingForEachLine: everythingForEachLine)
+            let model = TimelineModel(
+                everythingForEachLine: everythingForEachLine,
+                everythingForEachRating: everythingForEachRating
+            )
             timelineModel = model
         }
 

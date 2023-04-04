@@ -16,7 +16,7 @@
 
 import Foundation
 
-enum ShulginRatingOption: String, CaseIterable {
+enum ShulginRatingOption: String, CaseIterable, Codable {
     case minus, plusMinus, plus, twoPlus, threePlus, fourPlus
 
     var stringRepresentation: String {

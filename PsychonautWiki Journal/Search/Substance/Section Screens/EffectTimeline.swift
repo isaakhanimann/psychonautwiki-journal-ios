@@ -42,6 +42,33 @@ struct EffectTimeline: View {
                             lineWidth: lineWidth
                         )
                     })
+                    timelineModel.ratingDrawables.forEach { ratingDrawable in
+                        let x = (ratingDrawable.distanceFromStart * pixelsPerSec) + halfLineWidth
+                        var path = Path()
+                        path.move(to: CGPoint(x: x, y: 0))
+                        let halfHeight = size.height/2
+                        let padding: Double = 25
+                        path.addLine(to: CGPoint(x: x, y: halfHeight-padding))
+                        switch ratingDrawable.option {
+                        case .minus, .plusMinus, .plus:
+                            context.draw(
+                                Text(ratingDrawable.option.stringRepresentation),
+                                at: CGPoint(x: x, y: halfHeight),
+                                anchor: .center
+                            )
+                        case .twoPlus, .threePlus, .fourPlus:
+                            context.rotate(by: .degrees(90))
+                            context.draw(
+                                Text(ratingDrawable.option.stringRepresentation),
+                                at: CGPoint(x: halfHeight, y: -x-halfLineWidth/2),
+                                anchor: .center
+                            )
+                            context.rotate(by: .degrees(-90))
+                        }
+                        path.move(to: CGPoint(x: x, y: halfHeight+padding))
+                        path.addLine(to: CGPoint(x: x, y: size.height))
+                        context.stroke(path, with: .foreground, lineWidth: 2)
+                    }
                     let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2*60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth) && isShowingCurrentTime
                     if shouldDrawCurrentTime {
                         let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate)*pixelsPerSec) + halfLineWidth
@@ -81,13 +108,25 @@ struct EffectTimeline_Previews: PreviewProvider {
             Section {
                 EffectTimeline(
                     timelineModel: TimelineModel(
-                        everythingForEachLine: everythingForEachLine
+                        everythingForEachLine: everythingForEachLine,
+                        everythingForEachRating: everythingForEachRating
                     ),
                     height: 200
                 )
             }
         }
     }
+
+    static let everythingForEachRating: [EverythingForOneRating] = [
+        EverythingForOneRating(
+            time: Date().addingTimeInterval(-2*60*60),
+            option: .fourPlus
+        ),
+        EverythingForOneRating(
+            time: Date().addingTimeInterval(-1*60*60),
+            option: .plus
+        )
+    ]
 
     static let everythingForEachLine: [EverythingForOneLine] = [
         // full

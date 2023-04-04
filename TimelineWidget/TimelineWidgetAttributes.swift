@@ -28,6 +28,7 @@ struct TimelineWidgetAttributes: ActivityAttributes {
 
         // Dynamic stateful properties about your activity go here!
         var everythingForEachLine: [EverythingForOneLine]
+        var everythingForEachRating: [EverythingForOneRating]
     }
 
     // Fixed non-changing properties about your activity go here!

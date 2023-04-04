@@ -38,19 +38,22 @@ class ActivityManager: ObservableObject {
 
     }
 
-    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine]) {
+    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
         if authorizationInfo.areActivitiesEnabled {
             if let activity, isActivityActive {
-                updateActivity(activity: activity, everythingForEachLine: everythingForEachLine)
+                updateActivity(activity: activity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             } else {
-                startActivity(everythingForEachLine: everythingForEachLine)
+                startActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             }
         }
     }
 
-    private func startActivity(everythingForEachLine: [EverythingForOneLine]) {
+    private func startActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
         let attributes = TimelineWidgetAttributes(name: "Passed from app")
-        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
+        let state = TimelineWidgetAttributes.ContentState(
+            everythingForEachLine: everythingForEachLine,
+            everythingForEachRating: everythingForEachRating
+        )
         let content = ActivityContent(state: state, staleDate: nil)
         do {
             let newActivity = try Activity.request(
@@ -69,17 +72,17 @@ class ActivityManager: ObservableObject {
         }
     }
 
-    private func updateActivity(activity: Activity<TimelineWidgetAttributes>, everythingForEachLine: [EverythingForOneLine]) {
-        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
+    private func updateActivity(activity: Activity<TimelineWidgetAttributes>, everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         Task {
             await activity.update(updatedContent)
         }
     }
 
-    func stopActivity(everythingForEachLine: [EverythingForOneLine]) {
+    func stopActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
         if authorizationInfo.areActivitiesEnabled {
-            let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine)
+            let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             let finalContent = ActivityContent(state: state, staleDate: nil)
             Task {
                 await activity?.end(finalContent, dismissalPolicy: .immediate)

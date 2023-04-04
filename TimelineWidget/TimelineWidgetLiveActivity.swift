@@ -21,7 +21,10 @@ import SwiftUI
 struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
-            let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
+            let timelineModel = TimelineModel(
+                everythingForEachLine: context.state.everythingForEachLine,
+                everythingForEachRating: context.state.everythingForEachRating
+            )
             VStack(spacing: 0) {
                 GeometryReader { geo in
                     EffectTimeline(
@@ -47,7 +50,10 @@ struct TimelineWidgetLiveActivity: Widget {
             .widgetURL(URL(string: OpenJournalURL))
             .frame(height: 160) // in the documentation: https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities it says that truncation only happens if the height exceeds 160 points
         } dynamicIsland: { context in
-            let timelineModel = TimelineModel(everythingForEachLine: context.state.everythingForEachLine)
+            let timelineModel = TimelineModel(
+                everythingForEachLine: context.state.everythingForEachLine,
+                everythingForEachRating: context.state.everythingForEachRating
+            )
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
                     Text(timelineModel.startTime, style: .relative)
@@ -80,7 +86,10 @@ struct TimelineWidgetLiveActivity: Widget {
 
 struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = TimelineWidgetAttributes(name: "Me")
-    static let contentState = TimelineWidgetAttributes.ContentState(everythingForEachLine: EffectTimeline_Previews.everythingForEachLine)
+    static let contentState = TimelineWidgetAttributes.ContentState(
+        everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
+        everythingForEachRating: EffectTimeline_Previews.everythingForEachRating
+    )
 
     static var previews: some View {
         attributes

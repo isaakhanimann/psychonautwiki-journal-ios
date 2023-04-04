@@ -50,7 +50,12 @@ struct ExperienceRow: View {
                 Button(role: .destructive) {
                     if #available(iOS 16.2, *) {
                         if experience.isCurrent {
-                            ActivityManager.shared.stopActivity(everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped))
+                            ActivityManager.shared.stopActivity(
+                                everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped),
+                                everythingForEachRating: experience.sortedRatingsUnwrapped.map({ shulgin in
+                                    EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                                })
+                            )
                         }
                     }
                     PersistenceController.shared.viewContext.delete(experience)

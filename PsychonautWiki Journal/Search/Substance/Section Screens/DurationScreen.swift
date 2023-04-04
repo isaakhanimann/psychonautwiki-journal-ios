@@ -87,9 +87,11 @@ struct DurationScreen: View {
         let durationsToShow = durationInfos.filter { info in
             !hiddenRoutes.contains(info.route)
         }
-        timelineModel = TimelineModel(everythingForEachLine: durationsToShow.map({ info in
-            EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
-        }))
+        timelineModel = TimelineModel(
+            everythingForEachLine: durationsToShow.map({ info in
+                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
+            }),
+            everythingForEachRating: [])
     }
 
     private func toggle(route: AdministrationRoute) {

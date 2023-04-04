@@ -326,7 +326,7 @@ struct ExperienceScreen: View {
             }
         })
         .task {
-            viewModel.setupFetchRequestPredicateAndFetch(experience: experience)
+            viewModel.reloadScreen(experience: experience)
         }
     }
 

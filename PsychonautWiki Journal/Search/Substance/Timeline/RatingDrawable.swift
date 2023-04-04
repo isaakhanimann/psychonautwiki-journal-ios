@@ -1,9 +1,9 @@
-// Copyright (c) 2022. Isaak Hanimann.
+// Copyright (c) 2023. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at
+// the Free Software Foundation, either version 3 of the License, or (at 
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,15 +16,19 @@
 
 import SwiftUI
 
-protocol TimelineDrawable {
-    var width: TimeInterval {get}
+struct RatingDrawable {
 
-    func drawTimeLineWithShape(
-        context: GraphicsContext,
-        height: Double,
-        startX: Double,
-        pixelsPerSec: Double,
-        color: Color,
-        lineWidth: Double
-    )
+    let time: Date
+    let option: ShulginRatingOption
+    let distanceFromStart: TimeInterval
+
+    init(
+        startGraph: Date,
+        time: Date,
+        option: ShulginRatingOption
+    ) {
+        self.time = time
+        self.option = option
+        self.distanceFromStart = time.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
+    }
 }

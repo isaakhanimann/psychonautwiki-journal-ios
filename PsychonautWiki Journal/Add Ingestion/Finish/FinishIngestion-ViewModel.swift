@@ -78,7 +78,12 @@ extension FinishIngestionScreen {
                     )
                     if #available(iOS 16.2, *) {
                         if existingExperience.isCurrent {
-                            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped))
+                            ActivityManager.shared.startOrUpdateActivity(
+                                everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
+                                everythingForEachRating: existingExperience.sortedRatingsUnwrapped.map({ shulgin in
+                                    EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                                })
+                            )
                         }
                     }
                 } else {
@@ -110,7 +115,10 @@ extension FinishIngestionScreen {
                     )
                     if #available(iOS 16.2, *) {
                         if newExperience.isCurrent {
-                            ActivityManager.shared.startOrUpdateActivity(everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped))
+                            ActivityManager.shared.startOrUpdateActivity(
+                                everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped),
+                                everythingForEachRating: []
+                            )
                         }
                     }
                 }

@@ -21,12 +21,14 @@ struct TimelineModel {
     let startTime: Date
     let totalWidth: TimeInterval
     let ingestionDrawables: [IngestionDrawable]
+    let ratingDrawables: [RatingDrawable]
     let axisDrawable: AxisDrawable
 
-    init(everythingForEachLine: [EverythingForOneLine]) {
-        let startTime = everythingForEachLine.map({ one in
+    init(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+        let potentialStartTimes = everythingForEachLine.map({ one in
             one.startTime
-        }).min() ?? Date()
+        }) + everythingForEachRating.map { $0.time }
+        let startTime = potentialStartTimes.min() ?? Date()
         self.startTime = startTime
         let drawablesWithoutInsets = everythingForEachLine.map { one in
             IngestionDrawable(
@@ -39,10 +41,15 @@ struct TimelineModel {
             )
         }
         self.ingestionDrawables = drawablesWithoutInsets
+        let ratingDrawables = everythingForEachRating.map({ rating in
+            RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
+        })
+        self.ratingDrawables = ratingDrawables
         let twoHours: TimeInterval = 2 * 60 * 60
-        let maxWidth: TimeInterval = drawablesWithoutInsets.map({ draw in
+        let potentialTotalWidth = drawablesWithoutInsets.map({ draw in
             draw.distanceFromStart + draw.timelineDrawable.width
-        }).max() ?? twoHours
+        }) + ratingDrawables.map { $0.distanceFromStart }
+        let maxWidth: TimeInterval = potentialTotalWidth.max() ?? twoHours
         self.totalWidth = maxWidth
         self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
