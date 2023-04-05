@@ -34,7 +34,9 @@ struct LockScreen: View {
                     .padding(.horizontal, 25)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        .background(Color(UIColor.systemBackground))
     }
 }
 
