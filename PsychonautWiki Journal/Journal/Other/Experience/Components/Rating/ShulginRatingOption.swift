@@ -16,7 +16,29 @@
 
 import Foundation
 
-enum ShulginRatingOption: String, CaseIterable, Codable {
+enum ShulginRatingOption: String, CaseIterable, Codable, Comparable {
+
+    static func < (lhs: ShulginRatingOption, rhs: ShulginRatingOption) -> Bool {
+        lhs.value < rhs.value
+    }
+
+    var value: Int {
+        switch self {
+        case .minus:
+            return 0
+        case .plusMinus:
+            return 1
+        case .plus:
+            return 2
+        case .twoPlus:
+            return 3
+        case .threePlus:
+            return 4
+        case .fourPlus:
+            return 5
+        }
+    }
+
     case minus, plusMinus, plus, twoPlus, threePlus, fourPlus
 
     var stringRepresentation: String {

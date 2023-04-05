@@ -23,7 +23,7 @@ struct ShulginRatingSection: View {
 
     var body: some View {
         Section("Shulgin Rating") {
-            ForEach(experience.sortedRatingsUnwrapped) { rating in
+            ForEach(experience.ratingsSortedByTimeUnwrapped) { rating in
                 NavigationLink {
                     EditRatingScreen(rating: rating)
                 } label: {

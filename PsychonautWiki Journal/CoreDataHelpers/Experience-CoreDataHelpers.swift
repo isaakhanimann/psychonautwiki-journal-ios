@@ -51,8 +51,14 @@ extension Experience: Comparable {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
-    var sortedRatingsUnwrapped: [ShulginRating] {
+    var ratingsSortedByTimeUnwrapped: [ShulginRating] {
         (ratings?.allObjects as? [ShulginRating] ?? []).sorted()
+    }
+
+    var maxRating: ShulginRatingOption? {
+        ratingsSortedByTimeUnwrapped.map { rating in
+            rating.optionUnwrapped
+        }.max()
     }
 
 

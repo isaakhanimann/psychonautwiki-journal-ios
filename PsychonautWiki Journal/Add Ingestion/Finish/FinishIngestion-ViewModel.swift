@@ -80,7 +80,7 @@ extension FinishIngestionScreen {
                         if existingExperience.isCurrent {
                             ActivityManager.shared.startOrUpdateActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
-                                everythingForEachRating: existingExperience.sortedRatingsUnwrapped.map({ shulgin in
+                                everythingForEachRating: existingExperience.ratingsSortedByTimeUnwrapped.map({ shulgin in
                                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                                 })
                             )

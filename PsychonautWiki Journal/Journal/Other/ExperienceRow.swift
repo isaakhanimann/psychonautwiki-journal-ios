@@ -32,7 +32,8 @@ struct ExperienceRow: View {
                     ExperienceRowObservedLocation(
                         experience: experience,
                         location: location,
-                        isTimeRelative: isTimeRelative
+                        isTimeRelative: isTimeRelative,
+                        rating: experience.maxRating
                     )
                 } else {
                     ExperienceRowContent(
@@ -42,7 +43,8 @@ struct ExperienceRow: View {
                         sortDate: experience.sortDateUnwrapped,
                         isFavorite: experience.isFavorite,
                         isTimeRelative: isTimeRelative,
-                        locationName: nil
+                        locationName: nil,
+                        rating: experience.maxRating
                     )
                 }
             }
@@ -52,7 +54,7 @@ struct ExperienceRow: View {
                         if experience.isCurrent {
                             ActivityManager.shared.stopActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped),
-                                everythingForEachRating: experience.sortedRatingsUnwrapped.map({ shulgin in
+                                everythingForEachRating: experience.ratingsSortedByTimeUnwrapped.map({ shulgin in
                                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                                 })
                             )
@@ -72,6 +74,7 @@ struct ExperienceRowObservedLocation: View {
     @ObservedObject var experience: Experience
     @ObservedObject var location: ExperienceLocation
     let isTimeRelative: Bool
+    let rating: ShulginRatingOption?
 
     var body: some View {
         ExperienceRowContent(
@@ -81,7 +84,8 @@ struct ExperienceRowObservedLocation: View {
             sortDate: experience.sortDateUnwrapped,
             isFavorite: experience.isFavorite,
             isTimeRelative: isTimeRelative,
-            locationName: location.name
+            locationName: location.name,
+            rating: rating
         )
     }
 }
@@ -95,6 +99,7 @@ struct ExperienceRowContent: View {
     let isFavorite: Bool
     let isTimeRelative: Bool
     let locationName: String?
+    let rating: ShulginRatingOption?
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
@@ -116,35 +121,32 @@ struct ExperienceRowContent: View {
                 }
                 Spacer()
                     .frame(width: 10)
-                VStack {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text(title)
-                            .font(.headline)
-                        Spacer()
-                        timeText
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    HStack(alignment: .bottom) {
-                        Group {
-                            if distinctSubstanceNames.isEmpty {
-                                Text("No substance")
-                            } else {
-                                Text(distinctSubstanceNames, format: .list(type: .and))
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.headline)
+                    Group {
+                        if distinctSubstanceNames.isEmpty {
+                            Text("No substance")
+                        } else {
+                            Text(distinctSubstanceNames, format: .list(type: .and))
+                        }
+                        if let rating {
+                            Text(rating.stringRepresentation)
+                        }
+                        HStack {
+                            timeText
+                            Spacer()
+                            if let locationName {
+                                HStack(spacing: 2) {
+                                    Image(systemName: "location")
+                                    Text(locationName).lineLimit(1)
+                                }
                             }
                         }
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        Spacer()
-                        if let locationName {
-                            HStack(spacing: 2) {
-                                Image(systemName: "location")
-                                Text(locationName).lineLimit(1)
-                            }
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        }
                     }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
                 }
             }
         }
@@ -175,12 +177,13 @@ struct ExperienceRowContent_Previews: PreviewProvider {
             Section {
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
-                    title: "My title",
+                    title: "My slightly longer title",
                     distinctSubstanceNames: ["MDMA", "LSD"],
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
-                    isTimeRelative: true,
-                    locationName: "Longer location name"
+                    isTimeRelative: false,
+                    locationName: "Longer location name",
+                    rating: .threePlus
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink, .purple, .yellow],
@@ -189,7 +192,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
-                    locationName: "Longer location name"
+                    locationName: "Longer location name",
+                    rating: .threePlus
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -198,7 +202,18 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
-                    locationName: nil
+                    locationName: nil,
+                    rating: nil
+                )
+                ExperienceRowContent(
+                    ingestionColors: [.blue, .pink],
+                    title: "My title short",
+                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    sortDate: Date() - 5 * 60 * 60 - 30,
+                    isFavorite: true,
+                    isTimeRelative: true,
+                    locationName: nil,
+                    rating: nil
                 )
                 ExperienceRowContent(
                     ingestionColors: [],
@@ -207,7 +222,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: false,
                     isTimeRelative: false,
-                    locationName: nil
+                    locationName: nil,
+                    rating: .threePlus
                 )
             }
         }
