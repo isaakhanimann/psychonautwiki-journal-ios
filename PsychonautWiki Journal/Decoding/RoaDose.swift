@@ -49,15 +49,15 @@ struct RoaDose: Decodable {
             return .thresh
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose <= commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return .light
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose <= strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return .common
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose <= heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return .strong
         } else if let heavyMinUnwrap = heavyMin,
                   heavyMinUnwrap <= dose {
