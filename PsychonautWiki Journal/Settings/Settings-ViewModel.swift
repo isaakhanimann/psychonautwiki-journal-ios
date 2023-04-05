@@ -76,6 +76,13 @@ extension SettingsScreen {
                             companionDict[ingestionCodable.substanceName] = newCompanion
                         }
                     }
+                    for ratingCodable in experienceCodable.ratings {
+                        let newRating = ShulginRating(context: context)
+                        newRating.creationDate = ratingCodable.creationDate
+                        newRating.time = ratingCodable.time
+                        newRating.option = ratingCodable.option.rawValue
+                        newRating.experience = newExperience
+                    }
                     if let location = experienceCodable.location {
                         let newLocation = ExperienceLocation(context: context)
                         newLocation.name = location.name
@@ -84,7 +91,6 @@ extension SettingsScreen {
                         newLocation.experience = newExperience
                     }
                 }
-
                 for customCodable in file.customSubstances {
                     let newCustom = CustomSubstance(context: context)
                     newCustom.name = customCodable.name

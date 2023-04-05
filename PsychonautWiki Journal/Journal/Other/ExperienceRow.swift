@@ -186,6 +186,16 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     rating: .threePlus
                 )
                 ExperienceRowContent(
+                    ingestionColors: [.blue, .pink],
+                    title: "My slightly longer title",
+                    distinctSubstanceNames: ["MDMA", "LSD"],
+                    sortDate: Date() - 5 * 60 * 60 - 30,
+                    isFavorite: true,
+                    isTimeRelative: false,
+                    locationName: nil,
+                    rating: .threePlus
+                )
+                ExperienceRowContent(
                     ingestionColors: [.blue, .pink, .purple, .yellow],
                     title: "My title",
                     distinctSubstanceNames: ["MDMA", "LSD", "Cocaine", "Amphetamine"],

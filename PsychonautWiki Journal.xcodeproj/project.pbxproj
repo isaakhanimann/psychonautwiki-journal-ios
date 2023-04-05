@@ -125,6 +125,12 @@
 		EA48F86829DC1B69007DA8C5 /* ShulginRatingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F85729DB12A5007DA8C5 /* ShulginRatingOption.swift */; };
 		EA48F86A29DC26A6007DA8C5 /* EverythingForOneRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */; };
 		EA48F86B29DC287E007DA8C5 /* EverythingForOneRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */; };
+		EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88729DD4FD6007DA8C5 /* ExperienceCodable.swift */; };
+		EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88929DD501F007DA8C5 /* LocationCodable.swift */; };
+		EA48F88C29DD503D007DA8C5 /* IngestionCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88B29DD503D007DA8C5 /* IngestionCodable.swift */; };
+		EA48F88E29DD5053007DA8C5 /* CompanionCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */; };
+		EA48F89029DD5076007DA8C5 /* CustomSubstanceCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */; };
+		EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -371,6 +377,12 @@
 		EA48F86229DB2B37007DA8C5 /* EditRatingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRatingScreen.swift; sourceTree = "<group>"; };
 		EA48F86529DC1AE9007DA8C5 /* RatingDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDrawable.swift; sourceTree = "<group>"; };
 		EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingForOneRating.swift; sourceTree = "<group>"; };
+		EA48F88729DD4FD6007DA8C5 /* ExperienceCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceCodable.swift; sourceTree = "<group>"; };
+		EA48F88929DD501F007DA8C5 /* LocationCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCodable.swift; sourceTree = "<group>"; };
+		EA48F88B29DD503D007DA8C5 /* IngestionCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionCodable.swift; sourceTree = "<group>"; };
+		EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionCodable.swift; sourceTree = "<group>"; };
+		EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceCodable.swift; sourceTree = "<group>"; };
+		EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCodable.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -685,6 +697,20 @@
 			path = "Edit Ingestion";
 			sourceTree = "<group>";
 		};
+		EA48F88629DD4FC2007DA8C5 /* Codables */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C622295C2BE7000DA021 /* JournalFile.swift */,
+				EA48F88729DD4FD6007DA8C5 /* ExperienceCodable.swift */,
+				EA48F88929DD501F007DA8C5 /* LocationCodable.swift */,
+				EA48F88B29DD503D007DA8C5 /* IngestionCodable.swift */,
+				EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */,
+				EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */,
+				EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */,
+			);
+			path = Codables;
+			sourceTree = "<group>";
+		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,8 +882,8 @@
 			isa = PBXGroup;
 			children = (
 				EA460D202763790C002EF80B /* FAQ */,
+				EA48F88629DD4FC2007DA8C5 /* Codables */,
 				EAE4712B26CBA663009FB0EC /* SettingsScreen.swift */,
-				EA41C622295C2BE7000DA021 /* JournalFile.swift */,
 				EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */,
 				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
 			);
@@ -1295,6 +1321,7 @@
 				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
 				EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */,
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
+				EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
 				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
@@ -1312,6 +1339,7 @@
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,
+				EA48F88C29DD503D007DA8C5 /* IngestionCodable.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
 				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
@@ -1324,12 +1352,14 @@
 				EAC25BFB2955EC900002D68F /* TestingServicesScreen.swift in Sources */,
 				EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */,
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,
+				EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */,
 				EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
 				EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsScreen.swift in Sources */,
+				EA48F89029DD5076007DA8C5 /* CustomSubstanceCodable.swift in Sources */,
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
 				EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */,
@@ -1348,6 +1378,7 @@
 				EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
+				EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */,
 				EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */,
@@ -1367,6 +1398,7 @@
 				EA418A2D296C00BF00DEA663 /* LocationManager.swift in Sources */,
 				EA48F85629DB0EFE007DA8C5 /* ShulginRatingSection.swift in Sources */,
 				EA47E67027CB477000F6E10F /* SearchScreen.swift in Sources */,
+				EA48F88E29DD5053007DA8C5 /* CompanionCodable.swift in Sources */,
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */,
 				EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */,

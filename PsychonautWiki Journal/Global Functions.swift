@@ -35,3 +35,8 @@ func getColor(for substanceName: String) -> SubstanceColor {
     let maybeColor = try? PersistenceController.shared.viewContext.fetch(fetchRequest).first?.color
     return maybeColor ?? SubstanceColor.purple
 }
+
+func getDateFromMillis(millis: UInt64) -> Date {
+    let secondsSince1970: TimeInterval = Double(millis)/1000
+    return Date(timeIntervalSince1970: secondsSince1970)
+}
