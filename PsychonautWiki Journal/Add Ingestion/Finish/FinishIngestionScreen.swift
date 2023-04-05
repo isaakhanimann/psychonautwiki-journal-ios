@@ -106,6 +106,7 @@ struct FinishIngestionScreen: View {
                     NavigationLink {
                         ExperiencePickerScreen(
                             selectedExperience: $viewModel.selectedExperience,
+                            wantsToForceNewExperience: $viewModel.wantsToForceNewExperience,
                             experiences: viewModel.experiencesWithinLargerRange
                         )
                     } label: {

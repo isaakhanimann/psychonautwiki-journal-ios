@@ -33,6 +33,33 @@ extension FinishIngestionScreen {
         @Published var isInitialized = false
         @Published var experiencesWithinLargerRange: [Experience] = []
         @Published var selectedExperience: Experience?
+        @Published var wantsToForceNewExperience = false
+
+        init() {
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
+            ingestionFetchRequest.fetchLimit = 15
+            let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
+            notesInOrder = sortedIngestions.map { ing in
+                ing.noteUnwrapped
+            }.uniqued()
+            $selectedTime.map({ date in
+                let fetchRequest = Experience.fetchRequest()
+                fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
+                fetchRequest.predicate = FinishIngestionScreen.ViewModel.getPredicate(from: date)
+                return (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
+            }).assign(to: &$experiencesWithinLargerRange)
+            $selectedTime.combineLatest($experiencesWithinLargerRange) { date, experiences in
+                FinishIngestionScreen.ViewModel.getExperienceClosest(from: experiences, date: date)
+            }.combineLatest($wantsToForceNewExperience) { experience, wantsToForceNew in
+                if wantsToForceNew {
+                    return nil
+                } else {
+                    return experience
+                }
+            }.assign(to: &$selectedExperience)
+        }
 
         func initializeColorCompanionAndNote(for substanceName: String, suggestedNote: String?) {
             if let suggestedNote {
@@ -162,26 +189,6 @@ extension FinishIngestionScreen {
             ingestion.color = selectedColor.rawValue
             ingestion.experience = experience
             ingestion.substanceCompanion = substanceCompanion
-        }
-
-        init() {
-            let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
-            ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
-            ingestionFetchRequest.fetchLimit = 15
-            let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
-            notesInOrder = sortedIngestions.map { ing in
-                ing.noteUnwrapped
-            }.uniqued()
-            $selectedTime.map({ date in
-                let fetchRequest = Experience.fetchRequest()
-                fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
-                fetchRequest.predicate = FinishIngestionScreen.ViewModel.getPredicate(from: date)
-                return (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-            }).assign(to: &$experiencesWithinLargerRange)
-            $selectedTime.combineLatest($experiencesWithinLargerRange) { date, experiences in
-                FinishIngestionScreen.ViewModel.getExperienceClosest(from: experiences, date: date)
-            }.assign(to: &$selectedExperience)
         }
 
         private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {

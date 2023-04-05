@@ -18,6 +18,7 @@ import SwiftUI
 
 struct ExperiencePickerScreen: View {
     @Binding var selectedExperience: Experience?
+    @Binding var wantsToForceNewExperience: Bool
     let experiences: [Experience]
     @Environment(\.dismiss) var dismiss
 
@@ -26,6 +27,7 @@ struct ExperiencePickerScreen: View {
             Section("Create New") {
                 Button {
                     selectedExperience = nil
+                    wantsToForceNewExperience = true
                     dismiss()
                 } label: {
                     let label = "Create New Experience"
@@ -44,6 +46,7 @@ struct ExperiencePickerScreen: View {
                 ForEach(experiences) { exp in
                     Button {
                         selectedExperience = exp
+                        wantsToForceNewExperience = false
                         dismiss()
                     } label: {
                         if selectedExperience == exp {
