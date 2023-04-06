@@ -222,7 +222,7 @@ struct ChooseDoseScreenContent: View {
             Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
             unknownDoseLink
         } header: {
-            Text("Pure Dose")
+            Text("Pure \(administrationRoute.rawValue.capitalized) Dose")
         } footer: {
             if let units = roaDose?.units,
                let clarification = DosesScreen.getUnitClarification(for: units) {
