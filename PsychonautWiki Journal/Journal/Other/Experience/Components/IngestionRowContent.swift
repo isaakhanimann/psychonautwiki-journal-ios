@@ -184,7 +184,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     substanceColor: .green,
                     substanceName: "Cannabis",
                     dose: 10.4,
-                    units: "mg (THC)",
+                    units: "mg",
                     isEstimate: true,
                     administrationRoute: .smoked,
                     ingestionTime: Date(),

@@ -136,7 +136,7 @@ struct StatsIngestionRow_Previews: PreviewProvider {
                 numDots: 2,
                 substanceName: "Cannabis",
                 dose: 30,
-                units: "mg (THC)",
+                units: "mg",
                 isEstimate: true,
                 administrationRoute: .smoked,
                 ingestionTime: Date(),

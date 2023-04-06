@@ -91,7 +91,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                 substanceName: cannabis.name,
                 administrationRoute: .smoked,
                 dose: doseRounded,
-                units: "mg (THC)",
+                units: "mg",
                 isEstimate: isEstimate,
                 dismiss: dismiss,
                 suggestedNote: suggestedNote
@@ -107,7 +107,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                 substanceName: cannabis.name,
                 administrationRoute: .smoked,
                 dose: nil,
-                units: "mg (THC)",
+                units: "mg",
                 isEstimate: false,
                 dismiss: dismiss
             )
@@ -118,7 +118,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
         Form {
             Section("Ingested THC Amount") {
                 VStack(spacing: 5) {
-                    let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg (THC)")
+                    let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg")
                     Text("\(doseText) mg")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
