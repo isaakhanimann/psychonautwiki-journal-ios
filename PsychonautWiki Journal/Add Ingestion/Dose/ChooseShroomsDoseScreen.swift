@@ -156,7 +156,7 @@ struct ChooseShroomsDoseScreen: View {
                     psilocybinContentInPercent = 1
                     psilocybinContentInPercentText = "1"
                 }
-                Button("Dried Psilocybe cubensis ~0.1%") {
+                Button("Fresh Psilocybe cubensis ~0.1%") {
                     psilocybinContentInPercent = 0.1
                     psilocybinContentInPercentText = "0.1"
                 }
