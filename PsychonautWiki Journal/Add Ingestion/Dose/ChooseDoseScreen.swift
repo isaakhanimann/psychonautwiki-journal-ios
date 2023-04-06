@@ -208,6 +208,9 @@ struct ChooseDoseScreenContent: View {
 
     var doseSection: some View {
         return Section {
+            if !substance.isApproved {
+                Text("Info is not approved by PsychonautWiki administrators.")
+            }
             if let remark = substance.dosageRemark {
                 Text(remark)
                     .foregroundColor(.secondary)
