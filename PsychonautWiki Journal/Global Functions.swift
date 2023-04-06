@@ -40,3 +40,10 @@ func getDateFromMillis(millis: UInt64) -> Date {
     let secondsSince1970: TimeInterval = Double(millis)/1000
     return Date(timeIntervalSince1970: secondsSince1970)
 }
+
+func getDouble(from text: String) -> Double? {
+    let formatter = NumberFormatter()
+    formatter.locale = Locale.current
+    formatter.numberStyle = .decimal
+    return formatter.number(from: text)?.doubleValue
+}

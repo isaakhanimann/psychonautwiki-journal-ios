@@ -63,11 +63,8 @@ struct DosePicker: View {
             Text(selectedUnits ?? "")
         }
         .font(.title)
-        .onChange(of: doseText) { _ in
-            let formatter = NumberFormatter()
-            formatter.locale = Locale.current
-            formatter.numberStyle = .decimal
-            doseMaybe = formatter.number(from: doseText)?.doubleValue
+        .onChange(of: doseText) { text in
+            doseMaybe = getDouble(from: text)
         }
     }
 }

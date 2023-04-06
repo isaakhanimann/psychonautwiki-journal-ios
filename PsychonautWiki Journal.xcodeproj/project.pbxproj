@@ -131,6 +131,7 @@
 		EA48F88E29DD5053007DA8C5 /* CompanionCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */; };
 		EA48F89029DD5076007DA8C5 /* CustomSubstanceCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */; };
 		EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */; };
+		EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -383,6 +384,7 @@
 		EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionCodable.swift; sourceTree = "<group>"; };
 		EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceCodable.swift; sourceTree = "<group>"; };
 		EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCodable.swift; sourceTree = "<group>"; };
+		EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseShroomsDoseScreen.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 			children = (
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
 				EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */,
+				EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */,
 				EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */,
 				EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */,
 				EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */,
@@ -1367,6 +1370,7 @@
 				EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
+				EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
 				EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */,

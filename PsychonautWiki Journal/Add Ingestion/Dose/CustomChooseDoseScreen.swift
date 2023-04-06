@@ -99,15 +99,8 @@ struct CustomChooseDoseScreen: View {
                         .focused($isDoseFieldFocused)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(.roundedBorder)
-                        .onChange(of: doseText) { newValue in
-                            let formatter = NumberFormatter()
-                            formatter.locale = Locale.current
-                            formatter.numberStyle = .decimal
-                            if let doseUnwrapped = formatter.number(from: doseText)?.doubleValue {
-                                dose = doseUnwrapped
-                            } else {
-                                dose = nil
-                            }
+                        .onChange(of: doseText) { text in
+                            dose = getDouble(from: text)
                         }
                     Text(units)
                 }

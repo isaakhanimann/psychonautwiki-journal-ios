@@ -108,6 +108,8 @@ struct ChooseRouteScreen: View {
                 ChooseCaffeineDoseScreen(dismiss: dismiss)
             } else if substance.name == "MDMA" && route == .oral {
                 ChooseMDMADoseScreen(dismiss: dismiss)
+            } else if substance.name == "Psilocybin mushrooms" && route == .oral {
+                ChooseShroomsDoseScreen(dismiss: dismiss)
             } else {
                 ChooseDoseScreen(
                     substance: substance,

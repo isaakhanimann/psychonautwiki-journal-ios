@@ -66,6 +66,8 @@ struct SuggestionBox: View {
                                 ChooseCaffeineDoseScreen(dismiss: dismiss)
                             } else if substance.name == "MDMA" && suggestion.route == .oral {
                                 ChooseMDMADoseScreen(dismiss: dismiss)
+                            } else if substance.name == "Psilocybin mushrooms" && suggestion.route == .oral {
+                                ChooseShroomsDoseScreen(dismiss: dismiss)
                             } else {
                                 ChooseDoseScreen(
                                     substance: substance,

@@ -107,11 +107,8 @@ struct ChooseMDMADoseScreen: View {
                         Text(units)
                     }
                     .font(.title)
-                    .onChange(of: doseText) { _ in
-                        let formatter = NumberFormatter()
-                        formatter.locale = Locale.current
-                        formatter.numberStyle = .decimal
-                        mdmaDoseInMg = formatter.number(from: doseText)?.doubleValue
+                    .onChange(of: doseText) { text in
+                        mdmaDoseInMg = getDouble(from: text)
                     }
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
