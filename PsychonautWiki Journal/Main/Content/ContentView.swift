@@ -25,6 +25,7 @@ struct ContentView: View {
     @AppStorage(PersistenceController.isEyeOpenKey1) var isEyeOpen1: Bool = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen2: Bool = false
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
+    @AppStorage("hasBeenMigrated3") var hasBeenMigrated3: Bool = false
 
     var body: some View {
         ContentScreen(
@@ -47,12 +48,16 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $needsToSeeWelcome) {
             WelcomeScreen(isShowingWelcome: $needsToSeeWelcome)
         }
-        .task {
+        .onAppear {
             viewModel.toastViewModel = toastViewModel
             if !hasBeenMigrated2 {
-                PersistenceController.shared.migrate()
+                PersistenceController.shared.migrateCompanionsAndExperienceSortDates()
                 hasBeenMigrated2 = true
                 isEyeOpen2 = isEyeOpen1
+            }
+            if !hasBeenMigrated3 {
+                PersistenceController.shared.migrateIngestionNamesAndUnits()
+                hasBeenMigrated3 = true
             }
         }
     }

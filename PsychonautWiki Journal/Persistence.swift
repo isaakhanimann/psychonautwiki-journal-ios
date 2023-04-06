@@ -78,7 +78,7 @@ struct PersistenceController {
         try viewContext.save()
     }
 
-    func migrate() {
+    func migrateCompanionsAndExperienceSortDates() {
         viewContext.performAndWait {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
@@ -100,6 +100,25 @@ struct PersistenceController {
             let allExperiences = (try? viewContext.fetch(experienceFetchRequest)) ?? []
             for experience in allExperiences {
                 experience.sortDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.creationDate
+            }
+            try? viewContext.save()
+        }
+    }
+
+    func migrateIngestionNamesAndUnits() {
+        viewContext.performAndWait {
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
+            for ingestion in allIngestions {
+                if ingestion.substanceName == "Psilocybin Mushrooms" {
+                    ingestion.substanceName = "Psilocybin mushrooms"
+                }
+                if ingestion.units == "mg (THC)" {
+                    ingestion.units = "mg"
+                }
+                if ingestion.units == "70" {
+                    ingestion.units = "mg"
+                }
             }
             try? viewContext.save()
         }
