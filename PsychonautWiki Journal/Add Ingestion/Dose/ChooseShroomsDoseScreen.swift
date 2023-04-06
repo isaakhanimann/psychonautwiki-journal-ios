@@ -29,7 +29,6 @@ struct ChooseShroomsDoseScreen: View {
     @State private var psilocybinContentInPercentText = "1"
     @State private var psilocybinContentInPercent: Double? = 1.0
     @State private var isEstimate = false
-    @State private var pickerOption = PickerOption.dried
     @State private var shroomWeightText = ""
     @State private var shroomWeightInGrams: Double? = nil
 
