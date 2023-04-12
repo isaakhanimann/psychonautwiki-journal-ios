@@ -28,8 +28,8 @@ struct InteractionChecker {
     ]
 
     static func getInteractionBetween(aName: String, bName: String) -> Interaction? {
-        let interactionFromAToB = getInteractionFromAToB(aName: aName, bName: bName)
-        let interactionFromBToA = getInteractionFromAToB(aName: bName, bName: aName)
+        let interactionFromAToB = getInteraction(fromName: aName, toName: bName)
+        let interactionFromBToA = getInteraction(fromName: bName, toName: aName)
         if let interactionFromAToB, let interactionFromBToA {
             let isAtoB = interactionFromAToB.dangerCount >= interactionFromBToA.dangerCount
             let interactionType = isAtoB ? interactionFromAToB : interactionFromBToA
@@ -55,28 +55,26 @@ struct InteractionChecker {
         }
     }
 
-    private static func getInteractionFromAToB(
-        aName: String,
-        bName: String
-    ) -> InteractionType? {
-        guard let substanceA = SubstanceRepo.shared.getSubstance(name: aName) else {return nil}
-        guard let interactions = substanceA.interactions else {return nil}
-        if let substanceB = SubstanceRepo.shared.getSubstance(name: bName) {
-            if (doInteractionsContainSubstance(interactions: interactions.dangerous, substance: substanceB)) {
-                return InteractionType.dangerous
-            } else if (doInteractionsContainSubstance(interactions: interactions.unsafe, substance: substanceB)) {
-                return InteractionType.unsafe
-            } else if (doInteractionsContainSubstance(interactions: interactions.uncertain, substance: substanceB)) {
-                return InteractionType.uncertain
-            } else {
-                return nil
+    private static func getInteraction(fromName: String, toName: String) -> InteractionType? {
+        guard let substance = SubstanceRepo.shared.getSubstance(name: fromName) else {return nil}
+        guard let interactions = substance.interactions else {return nil}
+        if let toSubstance = SubstanceRepo.shared.getSubstance(name: toName) {
+            if let directInteraction = getDirectInteraction(interactions: interactions, substanceName: toName) {
+                return directInteraction
             }
+            if let wildCardInteraction = getWildCardInteraction(interactions: interactions, substanceName: toName) {
+                return wildCardInteraction
+            }
+            if let classInteraction = getClassInteraction(interactions: interactions, substance: toSubstance) {
+                return classInteraction
+            }
+            return nil
         } else {
-            if (interactions.dangerous.contains(bName)) {
+            if (interactions.dangerous.contains(toName)) {
                 return InteractionType.dangerous
-            } else if (interactions.unsafe.contains(bName)) {
+            } else if (interactions.unsafe.contains(toName)) {
                 return InteractionType.unsafe
-            } else if (interactions.uncertain.contains(bName)) {
+            } else if (interactions.uncertain.contains(toName)) {
                 return InteractionType.uncertain
             } else {
                 return nil
@@ -84,25 +82,78 @@ struct InteractionChecker {
         }
     }
 
-    private static func doInteractionsContainSubstance(
+    private static func getDirectInteraction(
+        interactions: Interactions,
+        substanceName: String
+    ) -> InteractionType? {
+        if isDirectMatch(interactions: interactions.dangerous, substanceName: substanceName) {
+            return .dangerous
+        } else if isDirectMatch(interactions: interactions.unsafe, substanceName: substanceName) {
+            return .unsafe
+        } else if isDirectMatch(interactions: interactions.uncertain, substanceName: substanceName) {
+            return .uncertain
+        } else {
+            return nil
+        }
+    }
+
+    private static func isDirectMatch(interactions: [String], substanceName: String) -> Bool {
+        let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
+        return extendedInteractions.contains(substanceName)
+    }
+
+    private static func getClassInteraction(interactions: Interactions, substance: Substance) -> InteractionType? {
+        let categories = substance.categories
+        if isClassMatch(interactions: interactions.dangerous, categories: categories) {
+            return .dangerous
+        } else if isClassMatch(interactions: interactions.unsafe, categories: categories) {
+            return .unsafe
+        } else if isClassMatch(interactions: interactions.uncertain, categories: categories) {
+            return .uncertain
+        } else {
+            return nil
+        }
+    }
+
+    private static func isClassMatch(
         interactions: [String],
-        substance: Substance
+        categories: [String]
     ) -> Bool {
         let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
         let isSubstanceInDangerClass =
-        substance.categories.contains { categoryName in
+        categories.contains { categoryName in
             extendedInteractions.contains { interactionName in
                 interactionName.localizedCaseInsensitiveContains(categoryName)
             }
         }
-        let isWildCardMatch = extendedInteractions.contains { interaction in
-            checkIfWildCardMatch(wordWithXToReplace: interaction, matchWith: substance.name)
-        }
-        return extendedInteractions.contains(substance.name) || isSubstanceInDangerClass || isWildCardMatch
+        return isSubstanceInDangerClass
     }
 
-    static func checkIfWildCardMatch(wordWithXToReplace: String, matchWith unchangedWord: String) -> Bool {
-        let modifiedPattern = "^" + wordWithXToReplace.replacingOccurrences(of: "x", with: "[\\S]*") + "$"
+    private static func getWildCardInteraction(interactions: Interactions, substanceName: String) -> InteractionType? {
+        if isWildCardMatchWithAnyInteraction(interactions: interactions.dangerous, substanceName: substanceName) {
+            return .dangerous
+        } else if isWildCardMatchWithAnyInteraction(interactions: interactions.unsafe, substanceName: substanceName) {
+            return .unsafe
+        } else if isWildCardMatchWithAnyInteraction(interactions: interactions.uncertain, substanceName: substanceName) {
+            return .uncertain
+        } else {
+            return nil
+        }
+    }
+
+    private static func isWildCardMatchWithAnyInteraction(
+        interactions: [String],
+        substanceName: String
+    ) -> Bool {
+        let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
+        return extendedInteractions.contains { interaction in
+            hasXAndMatches(wordWithX: interaction, matchWith: substanceName)
+        }
+    }
+
+    static func hasXAndMatches(wordWithX: String, matchWith unchangedWord: String) -> Bool {
+        guard wordWithX.contains("x") else {return false}
+        let modifiedPattern = "^" + wordWithX.replacingOccurrences(of: "x", with: "[\\S]*") + "$"
         guard let regex = try? NSRegularExpression(pattern: modifiedPattern, options: .caseInsensitive) else {return false}
         let range = NSRange(location: 0, length: unchangedWord.utf16.count)
         return regex.firstMatch(in: unchangedWord, options: [], range: range) != nil
