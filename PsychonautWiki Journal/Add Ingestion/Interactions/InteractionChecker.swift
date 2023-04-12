@@ -28,28 +28,28 @@ struct InteractionChecker {
     ]
 
     static func getInteractionBetween(aName: String, bName: String) -> Interaction? {
-        let interactionFromAToB = getInteraction(fromName: aName, toName: bName)
-        let interactionFromBToA = getInteraction(fromName: bName, toName: aName)
-        if let interactionFromAToB, let interactionFromBToA {
-            let isAtoB = interactionFromAToB.dangerCount >= interactionFromBToA.dangerCount
-            let interactionType = isAtoB ? interactionFromAToB : interactionFromBToA
+        if let interactionType = getInteractionTypeBetween(aName: aName, bName: bName) {
             return Interaction(
                 aName: aName,
                 bName: bName,
                 interactionType: interactionType
             )
+        } else {
+            return nil
+        }
+    }
+
+    static func getInteractionTypeBetween(aName: String, bName: String) -> InteractionType? {
+        let interactionFromAToB = getInteraction(fromName: aName, toName: bName)
+        let interactionFromBToA = getInteraction(fromName: bName, toName: aName)
+        if let interactionFromAToB, let interactionFromBToA {
+            let isAtoB = interactionFromAToB.dangerCount >= interactionFromBToA.dangerCount
+            let interactionType = isAtoB ? interactionFromAToB : interactionFromBToA
+            return interactionType
         } else if let interactionFromAToB {
-            return Interaction(
-                aName: aName,
-                bName: bName,
-                interactionType: interactionFromAToB
-            )
+            return interactionFromAToB
         } else if let interactionFromBToA {
-            return Interaction(
-                aName: aName,
-                bName: bName,
-                interactionType: interactionFromBToA
-            )
+            return interactionFromBToA
         } else {
             return nil
         }

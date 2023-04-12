@@ -21,16 +21,16 @@ final class InteractionTests: XCTestCase {
 
     func testInteractions() throws {
         XCTAssertFalse(InteractionChecker.hasXAndMatches(wordWithX: "Dox", matchWith: "Oxycodone"))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "MDMA", bName: "Tramadol"), Interaction(aName: "MDMA", bName: "Tramadol", interactionType: .dangerous))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "MDMA", bName: "Alcohol"), Interaction(aName: "MDMA", bName: "Alcohol", interactionType: .uncertain))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "MDMA", bName: "Caffeine"), Interaction(aName: "MDMA", bName: "Caffeine", interactionType: .uncertain))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Nothing", bName: "MDMA"), nil)
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Oxycodone", bName: "MDMA"), nil)
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Amphetamine", bName: "Dextromethorphan"), Interaction(aName: "Amphetamine", bName: "Dextromethorphan", interactionType: .unsafe))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Amphetamine", bName: "DOM"), Interaction(aName: "Amphetamine", bName: "DOM", interactionType: .unsafe))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Heroin", bName: "Cocaine"), Interaction(aName: "Heroin", bName: "Cocaine", interactionType: .dangerous))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Heroin", bName: "Grapefruit"), Interaction(aName: "Heroin", bName: "Grapefruit", interactionType: .dangerous))
-        XCTAssertEqual(InteractionChecker.getInteractionBetween(aName: "Heroin", bName: "Nothing"), nil)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "MDMA", bName: "Tramadol"), .dangerous)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "MDMA", bName: "Alcohol"), .uncertain)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "MDMA", bName: "Caffeine"), .uncertain)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Nothing", bName: "MDMA"), nil)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Oxycodone", bName: "MDMA"), nil)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Amphetamine", bName: "Dextromethorphan"), .unsafe)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Amphetamine", bName: "DOM"), .unsafe)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Cocaine"), .dangerous)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Grapefruit"), .dangerous)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Nothing"), nil)
     }
 
 }
