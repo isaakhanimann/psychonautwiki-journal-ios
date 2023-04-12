@@ -95,12 +95,17 @@ struct InteractionChecker {
                 interactionName.localizedCaseInsensitiveContains(categoryName)
             }
         }
-        let range = NSRange(location: 0, length: substance.name.utf16.count)
         let isWildCardMatch = extendedInteractions.contains { interaction in
-            guard let regex = try? NSRegularExpression(pattern: interaction.replacingOccurrences(of: "x", with: "[\\S]*"), options: .caseInsensitive) else {return false}
-            return regex.firstMatch(in: substance.name, options: [], range: range) != nil
+            checkIfWildCardMatch(wordWithXToReplace: interaction, matchWith: substance.name)
         }
         return extendedInteractions.contains(substance.name) || isSubstanceInDangerClass || isWildCardMatch
+    }
+
+    static func checkIfWildCardMatch(wordWithXToReplace: String, matchWith unchangedWord: String) -> Bool {
+        let modifiedPattern = "^" + wordWithXToReplace.replacingOccurrences(of: "x", with: "[\\S]*") + "$"
+        guard let regex = try? NSRegularExpression(pattern: modifiedPattern, options: .caseInsensitive) else {return false}
+        let range = NSRange(location: 0, length: unchangedWord.utf16.count)
+        return regex.firstMatch(in: unchangedWord, options: [], range: range) != nil
     }
 
     private static func replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: [String]) -> [String] {
