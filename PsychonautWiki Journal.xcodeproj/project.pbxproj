@@ -133,6 +133,7 @@
 		EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */; };
 		EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */; };
 		EA48F89829E6E27C007DA8C5 /* InteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */; };
+		EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -387,6 +388,7 @@
 		EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCodable.swift; sourceTree = "<group>"; };
 		EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseShroomsDoseScreen.swift; sourceTree = "<group>"; };
 		EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionTests.swift; sourceTree = "<group>"; };
+		EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CaseInsensitiveContains.swift"; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -987,6 +989,7 @@
 				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
 				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
 				EACB6E5327D3473600940291 /* String-Regex.swift */,
+				EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */,
 				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
 				EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */,
 			);
@@ -1330,6 +1333,7 @@
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
 				EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
+				EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */,
 				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,

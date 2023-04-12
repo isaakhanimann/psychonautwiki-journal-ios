@@ -123,7 +123,7 @@ struct InteractionChecker {
         let isSubstanceInDangerClass =
         categories.contains { categoryName in
             extendedInteractions.contains { interactionName in
-                interactionName.localizedCaseInsensitiveContains(categoryName)
+                interactionName.caseInsensitiveContains(categoryName)
             }
         }
         return isSubstanceInDangerClass
