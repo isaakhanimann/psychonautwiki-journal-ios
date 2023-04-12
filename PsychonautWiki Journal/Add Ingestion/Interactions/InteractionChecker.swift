@@ -98,7 +98,7 @@ struct InteractionChecker {
     }
 
     private static func isDirectMatch(interactions: [String], substanceName: String) -> Bool {
-        let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
+        let extendedInteractions = extendAndCleanInteractions(interactions: interactions)
         return extendedInteractions.contains(substanceName)
     }
 
@@ -119,7 +119,7 @@ struct InteractionChecker {
         interactions: [String],
         categories: [String]
     ) -> Bool {
-        let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
+        let extendedInteractions = extendAndCleanInteractions(interactions: interactions)
         let isSubstanceInDangerClass =
         categories.contains { categoryName in
             extendedInteractions.contains { interactionName in
@@ -145,7 +145,7 @@ struct InteractionChecker {
         interactions: [String],
         substanceName: String
     ) -> Bool {
-        let extendedInteractions = replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: interactions)
+        let extendedInteractions = extendAndCleanInteractions(interactions: interactions)
         return extendedInteractions.contains { interaction in
             hasXAndMatches(wordWithX: interaction, matchWith: substanceName)
         }
@@ -159,13 +159,15 @@ struct InteractionChecker {
         return regex.firstMatch(in: unchangedWord, options: [], range: range) != nil
     }
 
-    private static func replaceSubstitutedAmphetaminesAndSerotoninReleasers(interactions: [String]) -> [String] {
+    private static func extendAndCleanInteractions(interactions: [String]) -> [String] {
         interactions.flatMap { name in
             switch (name) {
             case "Substituted amphetamines":
                 return substitutedAmphetamines
             case "Serotonin releasers":
                 return serotoninReleasers
+            case "Tricyclic antidepressants": // remove because we don't want to match "depressant" with it and there is no substance that belongs to that class
+                return []
             default:
                 return [name]
             }

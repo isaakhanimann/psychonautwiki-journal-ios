@@ -31,6 +31,7 @@ final class InteractionTests: XCTestCase {
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Cocaine"), .dangerous)
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Grapefruit"), .dangerous)
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Heroin", bName: "Nothing"), nil)
+        XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Pregabalin", bName: "LSD"), nil)
     }
 
 }
