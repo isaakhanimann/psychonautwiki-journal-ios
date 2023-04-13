@@ -209,38 +209,38 @@ struct EffectTimeline_Previews: PreviewProvider {
 //            verticalWeight: 0.5,
 //            color: .purple
 //        ),
-        // onset comeup peak
-        EverythingForOneLine(
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-30*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.75,
-            color: .yellow
-        ),
-//        // onset comeup total
+//        // onset comeup peak
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
-//                onset: DurationRange(min: 1, max: 2, units: .hours),
+//                onset: DurationRange(min: 30, max: 60, units: .minutes),
 //                comeup: DurationRange(min: 1, max: 2, units: .hours),
-//                peak: nil,
+//                peak: DurationRange(min: 1, max: 2, units: .hours),
 //                offset: nil,
-//                total: DurationRange(min: 6, max: 8, units: .hours),
+//                total: nil,
 //                afterglow: nil
 //            ),
 //            onsetDelayInHours: 3,
-//            startTime: Date().addingTimeInterval(-45*60),
+//            startTime: Date().addingTimeInterval(-30*60),
 //            horizontalWeight: 0.5,
-//            verticalWeight: 0.9,
-//            color: .cyan
+//            verticalWeight: 0.75,
+//            color: .yellow
 //        ),
+        // onset comeup total
+        EverythingForOneLine(
+            roaDuration: RoaDuration(
+                onset: DurationRange(min: 1, max: 2, units: .hours),
+                comeup: DurationRange(min: 1, max: 2, units: .hours),
+                peak: nil,
+                offset: nil,
+                total: DurationRange(min: 6, max: 8, units: .hours),
+                afterglow: nil
+            ),
+            onsetDelayInHours: 3,
+            startTime: Date().addingTimeInterval(-45*60),
+            horizontalWeight: 0.5,
+            verticalWeight: 0.9,
+            color: .cyan
+        ),
 //        // onset total
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
