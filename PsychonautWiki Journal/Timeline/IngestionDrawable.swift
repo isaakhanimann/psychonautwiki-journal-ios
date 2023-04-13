@@ -20,7 +20,7 @@ struct IngestionDrawable {
     let color: SubstanceColor
     let ingestionTime: Date
     let roaDuration: RoaDuration?
-    let onsetDelayInHours: Int
+    let onsetDelayInHours: Double
     let horizontalWeight: Double
     let distanceFromStart: TimeInterval
     let timelineDrawable: TimelineDrawable
@@ -31,7 +31,7 @@ struct IngestionDrawable {
         color: SubstanceColor,
         ingestionTime: Date,
         roaDuration: RoaDuration?,
-        onsetDelayInHours: Int,
+        onsetDelayInHours: Double,
         verticalWeight: Double = 1,
         horizontalWeight: Double = 0.5
     ) {
@@ -43,48 +43,48 @@ struct IngestionDrawable {
         if let full = roaDuration?.toFullTimeline(
             peakAndOffsetWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = full
         } else if let onsetComeupPeakTotal = roaDuration?.toOnsetComeupPeakTotalTimeline(
             peakAndTotalWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = onsetComeupPeakTotal
         } else if let onsetComeupTotal = roaDuration?.toOnsetComeupTotalTimeline(
             totalWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = onsetComeupTotal
         } else if let onsetTotal = roaDuration?.toOnsetTotalTimeline(
             totalWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = onsetTotal
         } else if let total = roaDuration?.toTotalTimeline(
             totalWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = total
         } else if let onsetComeupPeak = roaDuration?.toOnsetComeupPeakTimeline(
             peakWeight: horizontalWeight,
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = onsetComeupPeak
         } else if let onsetComeup = roaDuration?.toOnsetComeupTimeline(
             verticalWeight: verticalWeight,
-            onsetDelayInHours: Double(onsetDelayInHours)
+            onsetDelayInHours: onsetDelayInHours
         ) {
             self.timelineDrawable = onsetComeup
-        } else if let onset = roaDuration?.toOnsetTimeline(onsetDelayInHours: Double(onsetDelayInHours)) {
+        } else if let onset = roaDuration?.toOnsetTimeline(onsetDelayInHours: onsetDelayInHours) {
             self.timelineDrawable = onset
         } else {
-            self.timelineDrawable = NoTimeline(onsetDelayInHours: Double(onsetDelayInHours))
+            self.timelineDrawable = NoTimeline(onsetDelayInHours: onsetDelayInHours)
         }
         self.onsetDelayInHours = onsetDelayInHours
     }

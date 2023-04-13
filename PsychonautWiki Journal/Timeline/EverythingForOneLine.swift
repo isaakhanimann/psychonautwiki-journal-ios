@@ -22,7 +22,7 @@ struct EverythingForOneLine: Codable, Equatable {
     }
 
     let roaDuration: RoaDuration?
-    let onsetDelayInHours: Int
+    let onsetDelayInHours: Double
     let startTime: Date
     let horizontalWeight: Double
     let verticalWeight: Double

@@ -17,7 +17,7 @@
 import Foundation
 
 enum StomachFullness: String, CaseIterable, Identifiable, Codable {
-    case empty, full, veryFull
+    case empty, halfFull, full, veryFull
 
     var id: StomachFullness {
         self
@@ -27,6 +27,8 @@ enum StomachFullness: String, CaseIterable, Identifiable, Codable {
         switch self {
         case .empty:
             return "Empty"
+        case .halfFull:
+            return "Half Full"
         case .full:
             return "Full"
         case .veryFull:
@@ -34,10 +36,12 @@ enum StomachFullness: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    var onsetDelayForOralInHours: Int {
+    var onsetDelayForOralInHours: Double {
         switch self {
         case .empty:
             return 0
+        case .halfFull:
+            return 1.5
         case .full:
             return 3
         case .veryFull:

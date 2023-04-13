@@ -80,7 +80,7 @@ struct IngestionRowContent: View {
                         Text(note)
                     }
                     if let stomachFullness, administrationRoute == .oral {
-                        Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours) hours delay")
+                        Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
                     }
                 }
                 .font(.subheadline)

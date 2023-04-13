@@ -160,7 +160,7 @@ struct FinishIngestionScreen: View {
                             Text(option.text)
                         }
                     }.pickerStyle(.segmented)
-                    Text("Onset delayed by ~\(viewModel.selectedStomachFullness.onsetDelayForOralInHours) hours.")
+                    Text("Onset delayed by ~\(viewModel.selectedStomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
                 }.listRowSeparator(.hidden)
             }
             Section("\(substanceName) Color") {
