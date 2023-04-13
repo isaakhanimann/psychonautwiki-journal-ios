@@ -39,7 +39,8 @@ struct JournalFile: FileDocument, Codable {
                         dose: ingestion.doseUnwrapped,
                         isDoseAnEstimate: ingestion.isEstimate,
                         units: ingestion.unitsUnwrapped,
-                        notes: ingestion.noteUnwrapped
+                        notes: ingestion.noteUnwrapped,
+                        stomachFullness: ingestion.stomachFullnessUnwrapped
                     )
                 )
                 let doesCompanionAlreadyExist = companionsToStore.contains { com in

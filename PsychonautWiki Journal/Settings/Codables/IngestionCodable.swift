@@ -25,6 +25,7 @@ struct IngestionCodable: Codable {
     let isDoseAnEstimate: Bool
     let units: String
     let notes: String
+    let stomachFullness: StomachFullness?
 
     enum CodingKeys: String, CodingKey {
         case substanceName
@@ -35,6 +36,7 @@ struct IngestionCodable: Codable {
         case isDoseAnEstimate
         case units
         case notes
+        case stomachFullness
     }
 
     init(
@@ -45,7 +47,8 @@ struct IngestionCodable: Codable {
         dose: Double?,
         isDoseAnEstimate: Bool,
         units: String,
-        notes: String
+        notes: String,
+        stomachFullness: StomachFullness?
     ) {
         self.substanceName = substanceName
         self.time = time
@@ -55,6 +58,7 @@ struct IngestionCodable: Codable {
         self.isDoseAnEstimate = isDoseAnEstimate
         self.units = units
         self.notes = notes
+        self.stomachFullness = stomachFullness
     }
 
     init(from decoder: Decoder) throws {
@@ -77,6 +81,16 @@ struct IngestionCodable: Codable {
         self.isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
         self.units = try values.decode(String.self, forKey: .units)
         self.notes = try values.decode(String.self, forKey: .notes)
+        if let fullnessString = try values.decodeIfPresent(String.self, forKey: .stomachFullness) {
+            if let fullness = StomachFullness(rawValue: fullnessString.lowercased()) {
+                self.stomachFullness = fullness
+            } else {
+                self.stomachFullness = nil
+            }
+        } else {
+            self.stomachFullness = nil
+        }
+
     }
 
     func encode(to encoder: Encoder) throws {
@@ -94,5 +108,6 @@ struct IngestionCodable: Codable {
         try container.encode(isDoseAnEstimate, forKey: .isDoseAnEstimate)
         try container.encode(units, forKey: .units)
         try container.encode(notes, forKey: .notes)
+        try container.encode(stomachFullness?.rawValue.uppercased(), forKey: .stomachFullness)
     }
 }

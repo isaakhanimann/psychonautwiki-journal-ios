@@ -65,6 +65,7 @@ extension SettingsScreen {
                         newIngestion.isEstimate = ingestionCodable.isDoseAnEstimate
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes
+                        newIngestion.stomachFullness = ingestionCodable.stomachFullness?.rawValue
                         newExperience.addToIngestions(newIngestion)
                         if let companion = companionDict[ingestionCodable.substanceName] {
                             newIngestion.substanceCompanion = companion
