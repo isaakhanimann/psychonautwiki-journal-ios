@@ -26,6 +26,7 @@ extension FinishIngestionScreen {
         @Published var selectedTime = Date()
         @Published var enteredNote = ""
         @Published var enteredTitle = ""
+        @Published var selectedStomachFullness = StomachFullness.empty
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
         @Published var notesInOrder = [String]()
@@ -187,6 +188,11 @@ extension FinishIngestionScreen {
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
+            if administrationRoute == .oral {
+                ingestion.stomachFullness = selectedStomachFullness.rawValue
+            } else {
+                ingestion.stomachFullness = nil
+            }
             ingestion.experience = experience
             ingestion.substanceCompanion = substanceCompanion
         }

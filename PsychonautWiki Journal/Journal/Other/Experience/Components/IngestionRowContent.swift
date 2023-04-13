@@ -39,7 +39,8 @@ struct IngestionRow: View {
             ingestionTime: ingestion.timeUnwrapped,
             note: ingestion.noteUnwrapped,
             isTimeRelative: isTimeRelative,
-            isEyeOpen: isEyeOpen
+            isEyeOpen: isEyeOpen,
+            stomachFullness: ingestion.stomachFullnessUnwrapped
         )
     }
 }
@@ -58,6 +59,7 @@ struct IngestionRowContent: View {
     let note: String
     let isTimeRelative: Bool
     let isEyeOpen: Bool
+    let stomachFullness: StomachFullness?
 
     var body: some View {
         HStack(alignment: .center) {
@@ -76,6 +78,9 @@ struct IngestionRowContent: View {
                     }
                     if !note.isEmpty {
                         Text(note)
+                    }
+                    if let stomachFullness, administrationRoute == .oral {
+                        Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours) hours delay")
                     }
                 }
                 .font(.subheadline)
@@ -164,7 +169,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     ingestionTime: Date(),
                     note: "",
                     isTimeRelative: false,
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    stomachFullness: .full
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -177,7 +183,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                     isTimeRelative: true,
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    stomachFullness: nil
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -190,7 +197,8 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                     isTimeRelative: false,
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    stomachFullness: nil
                 )
             }
         }

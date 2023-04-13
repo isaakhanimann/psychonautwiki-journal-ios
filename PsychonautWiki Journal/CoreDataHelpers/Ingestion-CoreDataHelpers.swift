@@ -43,6 +43,10 @@ extension Ingestion: Comparable {
         AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
     }
 
+    var stomachFullnessUnwrapped: StomachFullness? {
+        StomachFullness(rawValue: stomachFullness ?? "")
+    }
+
     var doseUnwrapped: Double? {
         if dose == 0 {
             return nil

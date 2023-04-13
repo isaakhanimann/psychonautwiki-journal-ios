@@ -153,6 +153,16 @@ struct FinishIngestionScreen: View {
                     }
                 }
             }
+            if administrationRoute == .oral {
+                Section("Stomach Fullness") {
+                    Picker("Stomach Fullness", selection: $viewModel.selectedStomachFullness) {
+                        ForEach(StomachFullness.allCases) { option in
+                            Text(option.text)
+                        }
+                    }.pickerStyle(.segmented)
+                    Text("Onset delayed by ~\(viewModel.selectedStomachFullness.onsetDelayForOralInHours) hours.")
+                }.listRowSeparator(.hidden)
+            }
             Section("\(substanceName) Color") {
                 NavigationLink {
                     ColorPickerScreen(
