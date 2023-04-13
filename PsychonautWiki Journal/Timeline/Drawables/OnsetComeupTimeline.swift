@@ -25,10 +25,15 @@ struct OnsetComeupTimeline : TimelineDrawable {
 
     let onset: FullDurationRange
     let comeup: FullDurationRange
+    let onsetDelayInHours: Double
     let verticalWeight: Double
 
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
+    }
+
     var width: TimeInterval {
-        onset.max + comeup.max
+        onsetDelayInSeconds + onset.max + comeup.max
     }
 
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -39,7 +44,7 @@ struct OnsetComeupTimeline : TimelineDrawable {
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: weight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
@@ -50,9 +55,9 @@ struct OnsetComeupTimeline : TimelineDrawable {
 
     private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         var path = Path()
-        let onsetStartMinX = startX + (onset.min * pixelsPerSec)
+        let onsetStartMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
         let comeupEndMinX = onsetStartMinX + (comeup.min * pixelsPerSec)
-        let onsetStartMaxX = startX + (onset.max * pixelsPerSec)
+        let onsetStartMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let comeupEndMaxX =
         onsetStartMaxX + (comeup.max * pixelsPerSec)
         let bottom = height
@@ -67,12 +72,13 @@ struct OnsetComeupTimeline : TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetComeupTimeline(verticalWeight: Double) -> OnsetComeupTimeline? {
+    func toOnsetComeupTimeline(verticalWeight: Double, onsetDelayInHours: Double) -> OnsetComeupTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange {
             return OnsetComeupTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,
+                onsetDelayInHours: onsetDelayInHours,
                 verticalWeight: verticalWeight
             )
         } else {

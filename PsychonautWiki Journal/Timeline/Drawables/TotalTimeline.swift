@@ -56,12 +56,14 @@ struct TotalTimeline: TimelineDrawable {
             dotRadius: 1.5 * lineWidth,
             color: color
         )
-        var filledPath = Path()
-        let filledPathY = height - lineWidth/2
-        filledPath.move(to: CGPoint(x: startX, y: filledPathY))
         let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
-        filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
-        context.stroke(filledPath, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        if onsetDelayInHours > 0 {
+            var filledPath = Path()
+            let filledPathY = height - lineWidth/2
+            filledPath.move(to: CGPoint(x: startX, y: filledPathY))
+            filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
+            context.stroke(filledPath, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        }
         var dottedPath = Path()
         dottedPath.move(to: CGPoint(x: onsetStartX, y: height))
         dottedPath.endSmoothLineTo(
