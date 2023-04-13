@@ -19,7 +19,7 @@ import SwiftUI
 
 struct NoTimeline: TimelineDrawable {
     var width: TimeInterval {
-        30*60
+        6*60*60 // 6 hours
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
