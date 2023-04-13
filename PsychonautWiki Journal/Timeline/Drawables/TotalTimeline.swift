@@ -20,7 +20,11 @@ import SwiftUI
 struct TotalTimeline: TimelineDrawable {
 
     var width: TimeInterval {
-        total.max
+        onsetDelayInSeconds + total.max
+    }
+
+    var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -29,6 +33,7 @@ struct TotalTimeline: TimelineDrawable {
     }
 
     let total: FullDurationRange
+    let onsetDelayInHours: Double
     let totalWeight: Double
     let verticalWeight: Double
     let percentSmoothness: Double = 0.5
@@ -51,23 +56,29 @@ struct TotalTimeline: TimelineDrawable {
             dotRadius: 1.5 * lineWidth,
             color: color
         )
-        var path = Path()
-        path.move(to: CGPoint(x: startX, y: height))
-        path.endSmoothLineTo(
+        var filledPath = Path()
+        let filledPathY = height - lineWidth/2
+        filledPath.move(to: CGPoint(x: startX, y: filledPathY))
+        let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
+        filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
+        context.stroke(filledPath, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        var dottedPath = Path()
+        dottedPath.move(to: CGPoint(x: onsetStartX, y: height))
+        dottedPath.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX,
-            endX: startX + (totalMinX / 2),
+            startX: onsetStartX,
+            endX: onsetStartX + (totalMinX / 2),
             endY: top
         )
-        path.startSmoothLineTo(
+        dottedPath.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + (totalMinX / 2),
+            startX: onsetStartX + (totalMinX / 2),
             startY: top,
-            endX: startX + totalX,
+            endX: onsetStartX + totalX,
             endY: bottom
         )
         context.stroke(
-            path,
+            dottedPath,
             with: .color(color),
             style: StrokeStyle.getDotted(lineWidth: lineWidth)
         )
@@ -85,22 +96,23 @@ struct TotalTimeline: TimelineDrawable {
         let bottom = height
         let totalMinX = total.min * pixelsPerSec
         let totalMaxX = total.max * pixelsPerSec
+        let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
         var path = Path()
-        path.move(to: CGPoint(x: startX + (totalMinX / 2), y: top))
+        path.move(to: CGPoint(x: onsetStartX + (totalMinX / 2), y: top))
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + (totalMinX / 2),
+            startX: onsetStartX + (totalMinX / 2),
             startY: top,
-            endX: startX + totalMaxX,
+            endX: onsetStartX + totalMaxX,
             endY: bottom
         )
-        path.addLine(to: CGPoint(x: startX + totalMaxX, y: bottom))
+        path.addLine(to: CGPoint(x: onsetStartX + totalMaxX, y: bottom))
         // path bottom back
-        path.addLine(to: CGPoint(x: startX + totalMinX, y: bottom))
+        path.addLine(to: CGPoint(x: onsetStartX + totalMinX, y: bottom))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + totalMinX,
-            endX: startX + (totalMinX / 2),
+            startX: onsetStartX + totalMinX,
+            endX: onsetStartX + (totalMinX / 2),
             endY: top
         )
         path.closeSubpath()
@@ -109,10 +121,11 @@ struct TotalTimeline: TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toTotalTimeline(totalWeight: Double, verticalWeight: Double) -> TotalTimeline? {
+    func toTotalTimeline(totalWeight: Double, verticalWeight: Double, onsetDelayInHours: Double) -> TotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange {
             return TotalTimeline(
                 total: fullTotal,
+                onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
                 verticalWeight: verticalWeight
             )

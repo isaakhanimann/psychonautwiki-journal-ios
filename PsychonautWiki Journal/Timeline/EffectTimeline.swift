@@ -109,7 +109,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                 EffectTimeline(
                     timelineModel: TimelineModel(
                         everythingForEachLine: everythingForEachLine,
-                        everythingForEachRating: everythingForEachRating
+                        everythingForEachRating: []
                     ),
                     height: 200
                 )
@@ -129,38 +129,38 @@ struct EffectTimeline_Previews: PreviewProvider {
     ]
 
     static let everythingForEachLine: [EverythingForOneLine] = [
-        // full
-        EverythingForOneLine(
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 30, max: 60, units: .minutes),
-                peak: DurationRange(min: 2, max: 3, units: .hours),
-                offset: DurationRange(min: 1, max: 2, units: .hours),
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-3*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.75,
-            color: .blue
-        ),
-//        // total
+//        // full
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
-//                onset: nil,
-//                comeup: nil,
-//                peak: nil,
-//                offset: nil,
-//                total: DurationRange(min: 4, max: 6, units: .hours),
+//                onset: DurationRange(min: 30, max: 60, units: .minutes),
+//                comeup: DurationRange(min: 30, max: 60, units: .minutes),
+//                peak: DurationRange(min: 2, max: 3, units: .hours),
+//                offset: DurationRange(min: 1, max: 2, units: .hours),
+//                total: nil,
 //                afterglow: nil
 //            ),
 //            onsetDelayInHours: 3,
-//            startTime: Date().addingTimeInterval(-2*60*60),
+//            startTime: Date().addingTimeInterval(-3*60*60),
 //            horizontalWeight: 0.5,
-//            verticalWeight: 0.5,
-//            color: .orange
+//            verticalWeight: 0.75,
+//            color: .blue
 //        ),
+        // total
+        EverythingForOneLine(
+            roaDuration: RoaDuration(
+                onset: nil,
+                comeup: nil,
+                peak: nil,
+                offset: nil,
+                total: DurationRange(min: 4, max: 6, units: .hours),
+                afterglow: nil
+            ),
+            onsetDelayInHours: 3,
+            startTime: Date().addingTimeInterval(-2*60*60),
+            horizontalWeight: 0.5,
+            verticalWeight: 0.5,
+            color: .orange
+        ),
 //        // onset comeup
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
