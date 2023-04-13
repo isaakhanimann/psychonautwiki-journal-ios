@@ -18,11 +18,26 @@ import Foundation
 import SwiftUI
 
 struct NoTimeline: TimelineDrawable {
+
+    let onsetDelayInHours: Double
+
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
+    }
+
     var width: TimeInterval {
-        6*60*60 // 6 hours
+        onsetDelayInSeconds + 5*60*60
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         context.drawDot(startX: startX, bottomY: height, dotRadius: 1.5 * lineWidth, color: color)
+        if onsetDelayInHours > 0 {
+            let maxHeight = height - lineWidth/2
+            let onsetEndX = startX + onsetDelayInSeconds * pixelsPerSec
+            var path = Path()
+            path.move(to: CGPoint(x: startX, y: maxHeight))
+            path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
+            context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        }
     }
 }

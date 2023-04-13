@@ -257,5 +257,14 @@ struct EffectTimeline_Previews: PreviewProvider {
             verticalWeight: 0.3,
             color: .brown
         ),
+        // no timeline
+        EverythingForOneLine(
+            roaDuration: nil,
+            onsetDelayInHours: 3,
+            startTime: Date().addingTimeInterval(-60*60),
+            horizontalWeight: 0.5,
+            verticalWeight: 0.3,
+            color: .brown
+        ),
     ]
 }

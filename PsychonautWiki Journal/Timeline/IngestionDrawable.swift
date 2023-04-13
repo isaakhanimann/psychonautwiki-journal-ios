@@ -84,7 +84,7 @@ struct IngestionDrawable {
         } else if let onset = roaDuration?.toOnsetTimeline(onsetDelayInHours: Double(onsetDelayInHours)) {
             self.timelineDrawable = onset
         } else {
-            self.timelineDrawable = NoTimeline()
+            self.timelineDrawable = NoTimeline(onsetDelayInHours: Double(onsetDelayInHours))
         }
         self.onsetDelayInHours = onsetDelayInHours
     }
