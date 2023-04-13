@@ -36,6 +36,7 @@ struct TimelineModel {
                 color: one.color,
                 ingestionTime: one.startTime,
                 roaDuration: one.roaDuration,
+                onsetDelayInHours: one.onsetDelayInHours,
                 verticalWeight: one.verticalWeight,
                 horizontalWeight: one.horizontalWeight
             )

@@ -89,7 +89,14 @@ struct DurationScreen: View {
         }
         timelineModel = TimelineModel(
             everythingForEachLine: durationsToShow.map({ info in
-                EverythingForOneLine(roaDuration: info.roaDuration, startTime: selectedTime, horizontalWeight: 0.5, verticalWeight: 1, color: info.route.color)
+                EverythingForOneLine(
+                    roaDuration: info.roaDuration,
+                    onsetDelayInHours: 0,
+                    startTime: selectedTime,
+                    horizontalWeight: 0.5,
+                    verticalWeight: 1,
+                    color: info.route.color
+                )
             }),
             everythingForEachRating: [])
     }
