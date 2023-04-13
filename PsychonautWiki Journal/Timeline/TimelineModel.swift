@@ -28,9 +28,7 @@ struct TimelineModel {
         let potentialStartTimes = everythingForEachLine.map({ one in
             one.startTime
         }) + everythingForEachRating.map { $0.time }
-        let minTime = potentialStartTimes.min() ?? Date()
-        let timePadding: TimeInterval = 10*60
-        let startTime = minTime.addingTimeInterval(-timePadding)
+        let startTime = potentialStartTimes.min() ?? Date()
         self.startTime = startTime
         let drawablesWithoutInsets = everythingForEachLine.map { one in
             IngestionDrawable(
@@ -52,8 +50,7 @@ struct TimelineModel {
             draw.distanceFromStart + draw.timelineDrawable.width
         }) + ratingDrawables.map { $0.distanceFromStart }
         let maxWidth: TimeInterval = potentialTotalWidth.max() ?? twoHours
-        let totalWidth = maxWidth + timePadding
-        self.totalWidth = totalWidth
-        self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: totalWidth)
+        self.totalWidth = maxWidth
+        self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
 }

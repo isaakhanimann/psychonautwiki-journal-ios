@@ -722,7 +722,6 @@
 			isa = PBXGroup;
 			children = (
 				EA014F9627E5DC6500077FB2 /* Web */,
-				EABD91FE294108100073303A /* Timeline */,
 				EABD921A294276AA0073303A /* Section Screens */,
 				EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */,
 			);
@@ -800,6 +799,9 @@
 			isa = PBXGroup;
 			children = (
 				EABD92072941EA1A0073303A /* Drawables */,
+				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
+				EA085E0029619E5B001638AC /* EverythingForOneLine.swift */,
+				EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */,
 				EABD91FC294105830073303A /* TimelineModel.swift */,
 				EABD92012941C3A30073303A /* IngestionDrawable.swift */,
 				EA48F86529DC1AE9007DA8C5 /* RatingDrawable.swift */,
@@ -837,9 +839,6 @@
 				EA527A8329427E61009C142D /* ToleranceScreen.swift */,
 				EA527A8529427F56009C142D /* ToxicityScreen.swift */,
 				EA527A8729428011009C142D /* DurationScreen.swift */,
-				EA085E0029619E5B001638AC /* EverythingForOneLine.swift */,
-				EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */,
-				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
 				EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */,
 				EA527A8929428146009C142D /* InteractionsScreen.swift */,
 				EA41C61C295AF236000DA021 /* InteractionsGroup.swift */,
@@ -937,6 +936,7 @@
 				EAE4716E26CBA664009FB0EC /* Decoding */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EAE4718726CBA664009FB0EC /* Journal */,
+				EABD91FE294108100073303A /* Timeline */,
 				EA47E66E27CB475100F6E10F /* Search */,
 				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAE4712A26CBA663009FB0EC /* Safer */,
