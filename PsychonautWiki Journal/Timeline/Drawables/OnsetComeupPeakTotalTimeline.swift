@@ -21,7 +21,7 @@ import SwiftUI
 struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
 
     var width: TimeInterval {
-        total.max
+        onsetDelayInSeconds + total.max
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -35,6 +35,11 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
     let total: FullDurationRange
     let peakAndTotalWeight: Double
     let verticalWeight: Double
+    let onsetDelayInHours: Double
+
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
+    }
 
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         var top = lineWidth/2
@@ -44,7 +49,7 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         let onsetAndComeupWeight = 0.5
-        let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetAndComeupWeight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: onsetAndComeupWeight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateAtValueInSeconds(weight: onsetAndComeupWeight) * pixelsPerSec)
         let peakEndX = comeupEndX + (peak.interpolateAtValueInSeconds(weight: peakAndTotalWeight) * pixelsPerSec)
         var path0 = Path()
@@ -55,7 +60,7 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         var path1 = Path()
         path1.move(to: CGPoint(x: peakEndX, y: top))
-        let offsetEndX = startX + (total.interpolateAtValueInSeconds(weight: peakAndTotalWeight) * pixelsPerSec)
+        let offsetEndX = startX + (onsetDelayInSeconds + total.interpolateAtValueInSeconds(weight: peakAndTotalWeight)) * pixelsPerSec
         path1.addLine(to: CGPoint(x: offsetEndX, y: bottom))
         context.stroke(
             path1,
@@ -66,11 +71,11 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
 
     private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         // path over top
-        let onsetStartMinX = startX + (onset.min * pixelsPerSec)
+        let onsetStartMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
         let comeupEndMinX = onsetStartMinX + (comeup.min * pixelsPerSec)
         let peakEndMaxX =
-        startX + ((onset.max + comeup.max + peak.max) * pixelsPerSec)
-        let offsetEndMaxX = startX + (total.max * pixelsPerSec)
+        startX + (onsetDelayInSeconds + onset.max + comeup.max + peak.max) * pixelsPerSec
+        let offsetEndMaxX = startX + (onsetDelayInSeconds + total.max) * pixelsPerSec
         var top = lineWidth/2
         if verticalWeight < 1 {
             top = ((1-verticalWeight) * height) - lineWidth/2
@@ -82,13 +87,13 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         path.addLine(to: CGPoint(x: peakEndMaxX, y: top))
         path.addLine(to: CGPoint(x: offsetEndMaxX, y: bottom))
         // path bottom back
-        let onsetStartMaxX = startX + (onset.max * pixelsPerSec)
+        let onsetStartMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let comeupEndMaxX =
         onsetStartMaxX + (comeup.max * pixelsPerSec)
         let peakEndMinX =
-        startX + ((onset.min + comeup.min + peak.min) * pixelsPerSec)
+        startX + (onsetDelayInSeconds + onset.min + comeup.min + peak.min) * pixelsPerSec
         let offsetEndMinX =
-        startX + (total.min * pixelsPerSec)
+        startX + (onsetDelayInSeconds + total.min) * pixelsPerSec
         path.addLine(to: CGPoint(x: offsetEndMinX, y: bottom))
         path.addLine(to: CGPoint(x: peakEndMinX, y: top))
         path.addLine(to: CGPoint(x: comeupEndMaxX, y: top))
@@ -99,7 +104,7 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: Double, verticalWeight: Double) -> OnsetComeupPeakTotalTimeline? {
+    func toOnsetComeupPeakTotalTimeline(peakAndTotalWeight: Double, verticalWeight: Double, onsetDelayInHours: Double) -> OnsetComeupPeakTotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange,
            let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
@@ -110,7 +115,8 @@ extension RoaDuration {
                 peak: fullPeak,
                 total: fullTotal,
                 peakAndTotalWeight: peakAndTotalWeight,
-                verticalWeight: verticalWeight
+                verticalWeight: verticalWeight,
+                onsetDelayInHours: onsetDelayInHours
             )
         } else {
             return nil
