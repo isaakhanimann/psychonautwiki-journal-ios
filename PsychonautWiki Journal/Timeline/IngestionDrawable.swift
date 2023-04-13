@@ -78,7 +78,7 @@ struct IngestionDrawable {
             onsetDelayInHours: Double(onsetDelayInHours)
         ) {
             self.timelineDrawable = onsetComeup
-        } else if let onset = roaDuration?.toOnsetTimeline() {
+        } else if let onset = roaDuration?.toOnsetTimeline(onsetDelayInHours: Double(onsetDelayInHours)) {
             self.timelineDrawable = onset
         } else {
             self.timelineDrawable = NoTimeline()

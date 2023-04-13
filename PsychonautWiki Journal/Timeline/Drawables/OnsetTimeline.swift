@@ -24,9 +24,14 @@ struct OnsetTimeline : TimelineDrawable {
     }
 
     let onset: FullDurationRange
+    let onsetDelayInHours: Double
+
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
+    }
 
     var width: TimeInterval {
-        onset.max
+        onsetDelayInSeconds + onset.max
     }
 
     private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -34,7 +39,7 @@ struct OnsetTimeline : TimelineDrawable {
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
         context.drawDot(startX: startX, bottomY: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: weight)) * pixelsPerSec
         var path = Path()
         path.move(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))
@@ -43,8 +48,8 @@ struct OnsetTimeline : TimelineDrawable {
 
     private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
         var path = Path()
-        let onsetEndMinX = startX + (onset.min * pixelsPerSec)
-        let onsetEndMaxX = startX + (onset.max * pixelsPerSec)
+        let onsetEndMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
+        let onsetEndMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let shapeHeight = 3 * lineWidth
         path.move(to: CGPoint(x: onsetEndMinX, y: height))
         path.addLine(to: CGPoint(x: onsetEndMaxX, y: height))
@@ -56,10 +61,11 @@ struct OnsetTimeline : TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetTimeline() -> OnsetTimeline? {
+    func toOnsetTimeline(onsetDelayInHours: Double) -> OnsetTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange {
             return OnsetTimeline(
-                onset: fullOnset
+                onset: fullOnset,
+                onsetDelayInHours: onsetDelayInHours
             )
         } else {
             return nil

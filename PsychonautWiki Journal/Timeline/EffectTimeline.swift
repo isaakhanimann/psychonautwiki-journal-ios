@@ -177,38 +177,38 @@ struct EffectTimeline_Previews: PreviewProvider {
 //            verticalWeight: 1,
 //            color: .pink
 //        ),
-        // onset comeup peak total
-        EverythingForOneLine(
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .green
-        ),
-//        // onset
+//        // onset comeup peak total
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
 //                onset: DurationRange(min: 30, max: 60, units: .minutes),
-//                comeup: nil,
-//                peak: nil,
+//                comeup: DurationRange(min: 1, max: 2, units: .hours),
+//                peak: DurationRange(min: 1, max: 2, units: .hours),
 //                offset: nil,
-//                total: nil,
+//                total: DurationRange(min: 6, max: 8, units: .hours),
 //                afterglow: nil
 //            ),
 //            onsetDelayInHours: 3,
-//            startTime: Date(),
+//            startTime: Date().addingTimeInterval(-60*60),
 //            horizontalWeight: 0.5,
 //            verticalWeight: 0.5,
-//            color: .purple
+//            color: .green
 //        ),
+        // onset
+        EverythingForOneLine(
+            roaDuration: RoaDuration(
+                onset: DurationRange(min: 1, max: 3, units: .hours),
+                comeup: nil,
+                peak: nil,
+                offset: nil,
+                total: nil,
+                afterglow: nil
+            ),
+            onsetDelayInHours: 3,
+            startTime: Date(),
+            horizontalWeight: 0.5,
+            verticalWeight: 0.5,
+            color: .purple
+        ),
 //        // onset comeup peak
 //        EverythingForOneLine(
 //            roaDuration: RoaDuration(
