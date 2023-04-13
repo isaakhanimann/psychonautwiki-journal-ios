@@ -20,7 +20,7 @@ import SwiftUI
 struct OnsetTotalTimeline: TimelineDrawable {
 
     var width: TimeInterval {
-        total.max
+        onsetDelayInSeconds + total.max
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -30,9 +30,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
 
     let onset: FullDurationRange
     let total: FullDurationRange
+    let onsetDelayInHours: Double
     let totalWeight: Double
     let verticalWeigth: Double
     let percentSmoothness: Double = 0.5
+
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
+    }
 
     private func drawTimeLine(
         context: GraphicsContext,
@@ -49,7 +54,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         let onsetWeight = 0.5
-        let onsetEndX = startX + (onset.interpolateAtValueInSeconds(weight: onsetWeight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: onsetWeight)) * pixelsPerSec
         var path0 = Path()
         path0.move(to: CGPoint(x: startX, y: bottom))
         path0.addLine(to: CGPoint(x: onsetEndX, y: bottom))
@@ -60,14 +65,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path1.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndX,
-            endX: startX + totalX/2,
+            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
             endY: top
         )
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + totalX/2,
+            startX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
             startY: top,
-            endX: startX + totalX,
+            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX,
             endY: bottom
         )
         context.stroke(
@@ -87,14 +92,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
     ) {
         let top = (1-verticalWeigth)*height
         let bottom = height
-        let onsetEndMinX = startX + (onset.min * pixelsPerSec)
-        let onsetEndMaxX = startX + (onset.max * pixelsPerSec)
+        let onsetEndMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
+        let onsetEndMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
-        let halfTotalX = startX + totalX/2
+        let halfTotalX = startX + onsetDelayInSeconds*pixelsPerSec + totalX/2
         let totalMinX =
-        startX + (total.min * pixelsPerSec)
+        startX + (onsetDelayInSeconds + total.min) * pixelsPerSec
         let totalMaxX = startX +
-        (total.max * pixelsPerSec)
+        (onsetDelayInSeconds + total.max) * pixelsPerSec
         var path = Path()
         path.move(to: CGPoint(x:onsetEndMinX, y: bottom))
         path.endSmoothLineTo(
@@ -130,11 +135,12 @@ struct OnsetTotalTimeline: TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetTotalTimeline(totalWeight: Double, verticalWeight: Double) -> OnsetTotalTimeline? {
+    func toOnsetTotalTimeline(totalWeight: Double, verticalWeight: Double, onsetDelayInHours: Double) -> OnsetTotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange, let fullOnset = onset?.maybeFullDurationRange {
             return OnsetTotalTimeline(
                 onset: fullOnset,
                 total: fullTotal,
+                onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
                 verticalWeigth: verticalWeight
             )
