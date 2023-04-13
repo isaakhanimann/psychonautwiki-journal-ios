@@ -40,6 +40,7 @@ struct InteractionChecker {
     }
 
     static func getInteractionTypeBetween(aName: String, bName: String) -> InteractionType? {
+        guard aName != bName else {return nil}
         let interactionFromAToB = getInteraction(fromName: aName, toName: bName)
         let interactionFromBToA = getInteraction(fromName: bName, toName: aName)
         if let interactionFromAToB, let interactionFromBToA {
