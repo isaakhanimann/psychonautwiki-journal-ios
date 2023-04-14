@@ -28,6 +28,7 @@ struct EditIngestionScreen: View {
     @State private var isEstimate = false
     @State private var note = ""
     @State private var route = AdministrationRoute.oral
+    @State private var stomachFullness = StomachFullness.empty
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -40,6 +41,7 @@ struct EditIngestionScreen: View {
             units: $units,
             isEstimate: $isEstimate,
             note: $note,
+            stomachFullness: $stomachFullness,
             save: save,
             delete: delete,
             isEyeOpen: isEyeOpen
@@ -50,6 +52,9 @@ struct EditIngestionScreen: View {
             isEstimate = ingestion.isEstimate
             note = ingestion.noteUnwrapped
             route = ingestion.administrationRouteUnwrapped
+            if let fullness = ingestion.stomachFullnessUnwrapped {
+                stomachFullness = fullness
+            }
         }
     }
 
@@ -60,6 +65,9 @@ struct EditIngestionScreen: View {
         ingestion.isEstimate = isEstimate
         ingestion.note = note
         ingestion.administrationRoute = route.rawValue
+        if route == .oral {
+            ingestion.stomachFullness = stomachFullness.rawValue
+        }
         PersistenceController.shared.saveViewContext()
         dismiss()
     }
@@ -81,6 +89,7 @@ struct EditIngestionContent: View {
     @Binding var units: String?
     @Binding var isEstimate: Bool
     @Binding var note: String
+    @Binding var stomachFullness: StomachFullness
     let save: () -> Void
     let delete: () -> Void
     let isEyeOpen: Bool
@@ -94,6 +103,9 @@ struct EditIngestionContent: View {
                             Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
                         }
                     }
+                }
+                if route == .oral {
+                    EditStomachFullnessSection(stomachFullness: $stomachFullness)
                 }
             }
             Section("\(route.rawValue.localizedCapitalized) Dose") {
@@ -153,6 +165,7 @@ struct EditIngestionScreen_Previews: PreviewProvider {
                 units: .constant("mg"),
                 isEstimate: .constant(false),
                 note: .constant("These are my notes"),
+                stomachFullness: .constant(.full),
                 save: {},
                 delete: {},
                 isEyeOpen: true
