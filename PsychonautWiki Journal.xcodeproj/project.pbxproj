@@ -136,6 +136,7 @@
 		EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */; };
 		EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */; };
 		EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */; };
+		EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -393,6 +394,7 @@
 		EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CaseInsensitiveContains.swift"; sourceTree = "<group>"; };
 		EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StomachFullness.swift; sourceTree = "<group>"; };
 		EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStomachFullnessSection.swift; sourceTree = "<group>"; };
+		EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeSaferUseScreen.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				EA095A1127D9E3E8007D44D6 /* Finish */,
 				EA26B2BE2976C0D600A1051A /* NextLabel.swift */,
 				EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */,
+				EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */,
 			);
 			path = "Add Ingestion";
 			sourceTree = "<group>";
@@ -1374,6 +1377,7 @@
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
+				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
 				EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */,
 				EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */,

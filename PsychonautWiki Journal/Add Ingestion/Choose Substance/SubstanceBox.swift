@@ -25,7 +25,11 @@ struct SubstanceBox: View {
     var body: some View {
         NavigationLink {
             if isEyeOpen {
-                AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+                if !substance.saferUse.isEmpty {
+                    AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
+                } else {
+                    AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+                }
             } else {
                 ChooseDoseScreen(
                     substance: substance,
