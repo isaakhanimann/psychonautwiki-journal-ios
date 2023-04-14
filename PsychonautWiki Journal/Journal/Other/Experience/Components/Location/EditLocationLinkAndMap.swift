@@ -20,31 +20,42 @@ import MapKit
 struct EditLocationLinkAndMap: View {
 
     @ObservedObject var experienceLocation: ExperienceLocation
-    let showEditLocation: () -> Void
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
 
     var body: some View {
-        Button {
-            showEditLocation()
-        } label: {
-            Label(experienceLocation.nameUnwrapped, systemImage: "location")
-        }
-        if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
-            let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            Map(coordinateRegion: $region, annotationItems: [pinLocation]) {
-                MapMarker(coordinate: $0)
+        HStack {
+            Label(experienceLocation.nameUnwrapped, systemImage: "mappin")
+            if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
+                Spacer()
+                Button {
+                    openLocationInAppleMaps(latitude: lat, longitude: long, name: experienceLocation.nameUnwrapped)
+                } label: {
+                    let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    Map(coordinateRegion: $region, interactionModes: [], annotationItems: [pinLocation]) {
+                        MapMarker(coordinate: $0)
+                    }
+                    .onAppear {
+                        region = MKCoordinateRegion(
+                            center: pinLocation,
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                        )
+                    }
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(10)
+                }
             }
-            .onAppear {
-                region = MKCoordinateRegion(
-                    center: pinLocation,
-                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                )
-            }
-            .frame(height: 300)
-            .listRowInsets(EdgeInsets())
         }
     }
+
+    func openLocationInAppleMaps(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
+        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = name
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault])
+    }
+
 }

@@ -94,7 +94,7 @@ struct ChooseLocationScreenContent: View {
                                 dismissSearch()
                             }
                         } label: {
-                            Label(location.name, systemImage: "location")
+                            Label(location.name, systemImage: "mappin")
                         }
                     }
                 }

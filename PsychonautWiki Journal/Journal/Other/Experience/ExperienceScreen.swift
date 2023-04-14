@@ -114,7 +114,7 @@ struct ExperienceScreen: View {
         Button {
             sheetToShow = .addLocation
         } label: {
-            Label("Add Location", systemImage: "location")
+            Label("Add Location", systemImage: "mappin")
         }
     }
 
@@ -307,9 +307,17 @@ struct ExperienceScreen: View {
                 }
             }
             if let location = experience.location {
-                Section("Location") {
-                    EditLocationLinkAndMap(experienceLocation: location) {
-                        sheetToShow = .editLocation(experienceLocation: location)
+                Section {
+                    EditLocationLinkAndMap(experienceLocation: location)
+                } header: {
+                    HStack {
+                        Text("Location")
+                        Spacer()
+                        Button {
+                            sheetToShow = .editLocation(experienceLocation: location)
+                        } label: {
+                            Label("Edit", systemImage: "pencil").labelStyle(.iconOnly)
+                        }
                     }
                 }
             }

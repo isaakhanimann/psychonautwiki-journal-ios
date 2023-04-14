@@ -146,7 +146,7 @@ struct FinishIngestionScreen: View {
                         sheetToShow = .editLocation
                     } label: {
                         if let locationName = locationManager.selectedLocation?.name {
-                            Label(locationName, systemImage: "location")
+                            Label(locationName, systemImage: "mappin")
                         } else {
                             Label("Add Location", systemImage: "plus")
                         }
