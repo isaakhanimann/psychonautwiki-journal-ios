@@ -19,6 +19,9 @@ import SwiftUI
 struct ShulginRatingSection: View {
 
     @ObservedObject var experience: Experience
+    let timeDisplayStyle: TimeDisplayStyle
+    let firstIngestionTime: Date?
+
     @State private var isShowingSheet = false
 
     var body: some View {
@@ -27,7 +30,11 @@ struct ShulginRatingSection: View {
                 NavigationLink {
                     EditRatingScreen(rating: rating)
                 } label: {
-                    RatingRow(rating: rating)
+                    RatingRow(
+                        rating: rating,
+                        timeDisplayStyle: timeDisplayStyle,
+                        firstIngestionTime: firstIngestionTime
+                    )
                 }
             }
             Button {
@@ -45,10 +52,18 @@ struct ShulginRatingSection: View {
 struct RatingRow: View {
 
     @ObservedObject var rating: ShulginRating
+    let timeDisplayStyle: TimeDisplayStyle
+    let firstIngestionTime: Date?
 
     var body: some View {
         HStack {
-            Text(rating.timeUnwrapped, style: .time)
+            if timeDisplayStyle == .relativeToNow {
+                Text(rating.timeUnwrapped, style: .relative) + Text(" ago")
+            } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)))
+            } else {
+                Text(rating.timeUnwrapped, style: .time)
+            }
             Spacer()
             Text(rating.optionUnwrapped.stringRepresentation)
         }

@@ -281,7 +281,11 @@ struct ExperienceScreen: View {
                         }
                 }
             }
-            ShulginRatingSection(experience: experience)
+            ShulginRatingSection(
+                experience: experience,
+                timeDisplayStyle: timeDisplayStyle,
+                firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
+            )
             if isEyeOpen {
                 if !viewModel.substancesUsed.isEmpty {
                     Section("Info") {
