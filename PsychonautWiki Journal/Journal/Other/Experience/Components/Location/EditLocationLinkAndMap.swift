@@ -29,6 +29,7 @@ struct EditLocationLinkAndMap: View {
             } label: {
                 MapWithPinView(latitude: lat, longitude: long)
                     .frame(height: 100)
+                    .allowsHitTesting(false)
             }
             .listRowInsets(EdgeInsets())
         }
@@ -39,7 +40,7 @@ struct EditLocationLinkAndMap: View {
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = name
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault])
+        mapItem.openInMaps()
     }
 
 }
