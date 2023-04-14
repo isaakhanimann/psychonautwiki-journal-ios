@@ -20,33 +20,17 @@ import MapKit
 struct EditLocationLinkAndMap: View {
 
     @ObservedObject var experienceLocation: ExperienceLocation
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
 
     var body: some View {
-        HStack {
-            Label(experienceLocation.nameUnwrapped, systemImage: "mappin")
-            if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
-                Spacer()
-                Button {
-                    openLocationInAppleMaps(latitude: lat, longitude: long, name: experienceLocation.nameUnwrapped)
-                } label: {
-                    let pinLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    Map(coordinateRegion: $region, interactionModes: [], annotationItems: [pinLocation]) {
-                        MapMarker(coordinate: $0)
-                    }
-                    .onAppear {
-                        region = MKCoordinateRegion(
-                            center: pinLocation,
-                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                        )
-                    }
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(10)
-                }
+        Label(experienceLocation.nameUnwrapped, systemImage: "mappin")
+        if let lat = experienceLocation.latitudeUnwrapped, let long = experienceLocation.longitudeUnwrapped {
+            Button {
+                openLocationInAppleMaps(latitude: lat, longitude: long, name: experienceLocation.nameUnwrapped)
+            } label: {
+                MapWithPinView(latitude: lat, longitude: long)
+                    .frame(height: 100)
             }
+            .listRowInsets(EdgeInsets())
         }
     }
 
@@ -59,3 +43,22 @@ struct EditLocationLinkAndMap: View {
     }
 
 }
+
+struct MapWithPinView: View {
+    @State private var region: MKCoordinateRegion
+    let pinCoordinate: CLLocationCoordinate2D
+
+    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        _region = State(initialValue: MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)))
+        pinCoordinate = coordinate
+    }
+
+    var body: some View {
+        Map(coordinateRegion: $region, interactionModes: [], annotationItems: [pinCoordinate]) {
+            MapMarker(coordinate: $0)
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+
