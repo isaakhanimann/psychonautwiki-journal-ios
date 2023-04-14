@@ -30,7 +30,7 @@ struct ExperienceScreen: View {
 
     @ObservedObject var experience: Experience
     @State private var isShowingAddIngestionFullScreen = false
-    @State private var isTimeRelative = false
+    @State private var timeDisplayStyle = TimeDisplayStyle.regular
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -48,17 +48,26 @@ struct ExperienceScreen: View {
                     if experience.isCurrent {
                         addIngestionButton
                         Spacer()
-                        Button {
-                            isTimeRelative.toggle()
-                        } label: {
-                            if isTimeRelative {
-                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                            } else {
-                                Label("Show Relative Time", systemImage: "timer.circle")
+
+                    }
+                    Menu(content: {
+                        ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
+                            Button {
+                                withAnimation {
+                                    timeDisplayStyle = option
+                                }
+                            } label: {
+                                if timeDisplayStyle == option {
+                                    Label(option.text, systemImage: "checkmark")
+                                } else {
+                                    Text(option.text)
+                                }
                             }
                         }
-                        Spacer()
-                    }
+                    }, label: {
+                        Label("Time", systemImage: "timer")
+                    })
+                    Spacer()
                     if experience.location == nil {
                         addLocationButton
                         Spacer()
@@ -180,8 +189,9 @@ struct ExperienceScreen: View {
                                 }
                                 IngestionRow(
                                     ingestion: ing,
+                                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
                                     roaDose: roaDose,
-                                    isTimeRelative: isTimeRelative,
+                                    timeDisplayStyle: timeDisplayStyle,
                                     isEyeOpen: isEyeOpen
                                 )
                             }

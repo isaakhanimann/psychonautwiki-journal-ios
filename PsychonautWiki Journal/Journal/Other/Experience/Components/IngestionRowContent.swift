@@ -20,8 +20,9 @@ import SwiftUI
 struct IngestionRow: View {
 
     @ObservedObject var ingestion: Ingestion
+    let firstIngestionTime: Date?
     let roaDose: RoaDose?
-    let isTimeRelative: Bool
+    let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
 
     var body: some View {
@@ -38,9 +39,10 @@ struct IngestionRow: View {
             administrationRoute: ingestion.administrationRouteUnwrapped,
             ingestionTime: ingestion.timeUnwrapped,
             note: ingestion.noteUnwrapped,
-            isTimeRelative: isTimeRelative,
+            timeDisplayStyle: timeDisplayStyle,
             isEyeOpen: isEyeOpen,
-            stomachFullness: ingestion.stomachFullnessUnwrapped
+            stomachFullness: ingestion.stomachFullnessUnwrapped,
+            firstIngestionTime: firstIngestionTime
         )
     }
 }
@@ -57,9 +59,10 @@ struct IngestionRowContent: View {
     let administrationRoute: AdministrationRoute
     let ingestionTime: Date
     let note: String
-    let isTimeRelative: Bool
+    let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let stomachFullness: StomachFullness?
+    let firstIngestionTime: Date?
 
     var body: some View {
         HStack(alignment: .center) {
@@ -71,8 +74,10 @@ struct IngestionRowContent: View {
                     .font(.headline)
                     .foregroundColor(.primary)
                 Group {
-                    if isTimeRelative {
+                    if timeDisplayStyle == .relativeToNow {
                         Text(ingestionTime, style: .relative) + Text(" ago")
+                    } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                        Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
                     } else {
                         Text(ingestionTime, style: .time)
                     }
@@ -168,9 +173,10 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .oral,
                     ingestionTime: Date(),
                     note: "",
-                    isTimeRelative: false,
+                    timeDisplayStyle: .regular,
                     isEyeOpen: true,
-                    stomachFullness: .full
+                    stomachFullness: .full,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -182,9 +188,10 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .insufflated,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    isTimeRelative: true,
+                    timeDisplayStyle: .regular,
                     isEyeOpen: true,
-                    stomachFullness: nil
+                    stomachFullness: nil,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -196,9 +203,10 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .smoked,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    isTimeRelative: false,
+                    timeDisplayStyle: .regular,
                     isEyeOpen: true,
-                    stomachFullness: nil
+                    stomachFullness: nil,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
             }
         }
