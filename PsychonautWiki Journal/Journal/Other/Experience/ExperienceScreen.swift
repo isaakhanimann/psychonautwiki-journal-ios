@@ -48,17 +48,17 @@ struct ExperienceScreen: View {
                     if experience.isCurrent {
                         addIngestionButton
                         Spacer()
-                    }
-                    Button {
-                        isTimeRelative.toggle()
-                    } label: {
-                        if isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
+                        Button {
+                            isTimeRelative.toggle()
+                        } label: {
+                            if isTimeRelative {
+                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                            } else {
+                                Label("Show Relative Time", systemImage: "timer.circle")
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
                     if experience.location == nil {
                         addLocationButton
                         Spacer()
