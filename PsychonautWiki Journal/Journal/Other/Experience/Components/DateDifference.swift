@@ -28,7 +28,7 @@ struct DateDifference {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.year, .month, .day, .hour, .minute, .second]
         formatter.maximumUnitCount = 2
-        formatter.unitsStyle = .full
+        formatter.unitsStyle = .abbreviated
         return formatter.string(from: dateComponents) ?? ""
     }
 }

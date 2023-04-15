@@ -65,48 +65,51 @@ struct IngestionRowContent: View {
     let firstIngestionTime: Date?
 
     var body: some View {
-        HStack(alignment: .center) {
-            Image(systemName: "circle.fill")
-                .font(.title2)
-                .foregroundColor(substanceColor.swiftUIColor)
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: "circle.fill")
+                    .font(.title2)
+                    .foregroundColor(substanceColor.swiftUIColor)
                 Text(substanceName)
                     .font(.headline)
                     .foregroundColor(.primary)
+                Spacer()
                 Group {
                     if timeDisplayStyle == .relativeToNow {
-                        Text(ingestionTime, style: .relative) + Text(" ago")
+                        Text(ingestionTime, style: .relative)
                     } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                         Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
                     } else {
                         Text(ingestionTime, style: .time)
                     }
-                    if !note.isEmpty {
-                        Text(note)
-                    }
-                    if let stomachFullness, administrationRoute == .oral {
-                        Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
-                    }
                 }
                 .font(.subheadline)
-                .foregroundColor(.secondary)
             }
-            Spacer()
-            VStack(alignment: .trailing) {
-                if isEyeOpen {
-                    Text(administrationRoute.rawValue.localizedCapitalized).font(.caption)
+            Group {
+                if !note.isEmpty {
+                    Text(note)
                 }
+                if let stomachFullness, administrationRoute == .oral {
+                    Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
+                }
+            }
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+            HStack {
                 if let doseUnwrapped = dose {
                     Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
                 } else {
                     Text("Unknown Dose")
                 }
-                if let numDotsUnwrap = numDots {
-                    Spacer().frame(height: 2)
-                    DotRows(numDots: numDotsUnwrap)
-                    Spacer().frame(height: 2)
+                if isEyeOpen {
+                    Text(administrationRoute.rawValue.localizedCapitalized)
                 }
-            }.font(.headline)
+                if let numDotsUnwrap = numDots {
+                    Spacer()
+                    DotRows(numDots: numDotsUnwrap)
+                }
+            }
+            .font(.subheadline.weight(.semibold))
         }
     }
 }
@@ -164,16 +167,16 @@ struct IngestionRowContent_Previews: PreviewProvider {
         List {
             Section {
                 IngestionRowContent(
-                    numDots: 1,
-                    substanceColor: .pink,
-                    substanceName: "MDMA",
+                    numDots: 4,
+                    substanceColor: .cyan,
+                    substanceName: "Methamphetamine",
                     dose: 50,
                     units: "mg",
-                    isEstimate: true,
+                    isEstimate: false,
                     administrationRoute: .oral,
                     ingestionTime: Date(),
                     note: "",
-                    timeDisplayStyle: .regular,
+                    timeDisplayStyle: .relativeToNow,
                     isEyeOpen: true,
                     stomachFullness: .full,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
@@ -188,7 +191,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .insufflated,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    timeDisplayStyle: .regular,
+                    timeDisplayStyle: .relativeToStart,
                     isEyeOpen: true,
                     stomachFullness: nil,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
@@ -202,10 +205,25 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEstimate: true,
                     administrationRoute: .smoked,
                     ingestionTime: Date(),
-                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                    note: "",
                     timeDisplayStyle: .regular,
                     isEyeOpen: true,
                     stomachFullness: nil,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                )
+                IngestionRowContent(
+                    numDots: 1,
+                    substanceColor: .pink,
+                    substanceName: "MDMA",
+                    dose: 50,
+                    units: "mg",
+                    isEstimate: false,
+                    administrationRoute: .oral,
+                    ingestionTime: Date(),
+                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                    timeDisplayStyle: .regular,
+                    isEyeOpen: true,
+                    stomachFullness: .full,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
             }
