@@ -103,53 +103,67 @@ struct ExperienceRowContent: View {
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
-            HStack {
-                ZStack {
-                    Circle()
-                        .fill(
-                            AngularGradient(
-                                gradient: Gradient(
-                                    colors: getDoubleColors()),
-                                center: .center
+            VStack(alignment: .leading) {
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                AngularGradient(
+                                    gradient: Gradient(
+                                        colors: getDoubleColors()),
+                                    center: .center
+                                )
                             )
-                        )
-                        .frame(width: 33, height: 33)
-                    if isFavorite {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
+                            .frame(width: 33, height: 33)
+                        if isFavorite {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                        }
                     }
-                }
-                Spacer()
-                    .frame(width: 10)
-                VStack(alignment: .leading) {
+                    Spacer().frame(width: 10)
                     Text(title)
                         .font(.headline)
-                    Group {
-                        if distinctSubstanceNames.isEmpty {
-                            Text("No substance")
-                        } else {
-                            Text(distinctSubstanceNames, format: .list(type: .and))
-                        }
-                        if let rating {
-                            Text(rating.stringRepresentation)
-                        }
-                        HStack {
-                            timeText
-                            Spacer()
-                            if let locationName {
-                                HStack(spacing: 2) {
-                                    Image(systemName: "mappin")
-                                    Text(locationName).lineLimit(1)
-                                }
-                            }
-                        }
-                    }
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-
                 }
+                Group {
+                    if distinctSubstanceNames.isEmpty {
+                        Text("No substance")
+                    } else {
+                        Text(distinctSubstanceNames, format: .list(type: .and))
+                    }
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                Spacer().frame(height: 5)
+                HStack {
+                    if let rating {
+                        Text(rating.stringRepresentation)
+                    }
+                    Spacer()
+                    if let locationName {
+                        smallDot
+                        Spacer()
+                        HStack(spacing: 2) {
+                            Image(systemName: "mappin")
+                            Text(locationName).lineLimit(1)
+                        }
+                        Spacer()
+                        smallDot
+                    }
+                    Spacer()
+                    timeText
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
+
         }
+    }
+
+    var smallDot: some View {
+        Image(systemName: "circle.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 5, height: 5)
     }
 
     var timeText: Text {
@@ -202,7 +216,7 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
-                    locationName: "Longer location name",
+                    locationName: "Short location",
                     rating: .threePlus
                 )
                 ExperienceRowContent(
@@ -222,7 +236,7 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     sortDate: Date() - 5 * 60 * 60 - 30,
                     isFavorite: true,
                     isTimeRelative: true,
-                    locationName: nil,
+                    locationName: "Home",
                     rating: nil
                 )
                 ExperienceRowContent(
