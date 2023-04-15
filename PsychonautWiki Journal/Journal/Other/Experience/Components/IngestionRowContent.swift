@@ -85,16 +85,6 @@ struct IngestionRowContent: View {
                 }
                 .font(.subheadline)
             }
-            Group {
-                if !note.isEmpty {
-                    Text(note)
-                }
-                if let stomachFullness, administrationRoute == .oral {
-                    Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
-                }
-            }
-            .font(.subheadline)
-            .foregroundColor(.secondary)
             HStack {
                 if let doseUnwrapped = dose {
                     Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
@@ -110,6 +100,16 @@ struct IngestionRowContent: View {
                 }
             }
             .font(.subheadline.weight(.semibold))
+            Group {
+                if !note.isEmpty {
+                    Text(note)
+                }
+                if let stomachFullness, administrationRoute == .oral {
+                    Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
+                }
+            }
+            .font(.subheadline)
+            .foregroundColor(.secondary)
         }
     }
 }
@@ -221,6 +221,21 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     administrationRoute: .oral,
                     ingestionTime: Date(),
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                    timeDisplayStyle: .regular,
+                    isEyeOpen: true,
+                    stomachFullness: .full,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                )
+                IngestionRowContent(
+                    numDots: nil,
+                    substanceColor: .purple,
+                    substanceName: "Customsubstance",
+                    dose: 50,
+                    units: "mg",
+                    isEstimate: false,
+                    administrationRoute: .oral,
+                    ingestionTime: Date(),
+                    note: "",
                     timeDisplayStyle: .regular,
                     isEyeOpen: true,
                     stomachFullness: .full,
