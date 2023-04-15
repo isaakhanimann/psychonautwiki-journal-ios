@@ -124,30 +124,26 @@ struct ExperienceRowContent: View {
                     Text(title)
                         .font(.headline)
                 }
-                Group {
+                HStack {
                     if distinctSubstanceNames.isEmpty {
                         Text("No substance")
                     } else {
                         Text(distinctSubstanceNames, format: .list(type: .and))
+                    }
+                    Spacer()
+                    if let rating {
+                        Text(rating.stringRepresentation)
                     }
                 }
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 Spacer().frame(height: 5)
                 HStack {
-                    if let rating {
-                        Text(rating.stringRepresentation)
-                    }
-                    Spacer()
                     if let locationName {
-                        smallDot
-                        Spacer()
                         HStack(spacing: 2) {
                             Image(systemName: "mappin")
                             Text(locationName).lineLimit(1)
                         }
-                        Spacer()
-                        smallDot
                     }
                     Spacer()
                     timeText
@@ -157,13 +153,6 @@ struct ExperienceRowContent: View {
             }
 
         }
-    }
-
-    var smallDot: some View {
-        Image(systemName: "circle.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 5, height: 5)
     }
 
     var timeText: Text {
