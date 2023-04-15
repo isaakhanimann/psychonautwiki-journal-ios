@@ -22,14 +22,15 @@ struct CumulativeDoseRow: View {
     let cumulativeRoutes: [CumulativeRouteAndDose]
 
     var body: some View {
-        HStack {
-            Image(systemName: "circle.fill")
-                .font(.title2)
-                .foregroundColor(substanceColor.swiftUIColor)
-            Text(substanceName)
-                .font(.headline)
-                .foregroundColor(.primary)
-            Spacer()
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: "circle.fill")
+                    .font(.title2)
+                    .foregroundColor(substanceColor.swiftUIColor)
+                Text(substanceName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+            }
             VStack(alignment: .trailing, spacing: 4) {
                 ForEach(cumulativeRoutes) { routeItem in
                     RouteItemView(routeItem: routeItem)
@@ -43,19 +44,18 @@ struct RouteItemView: View {
     let routeItem: CumulativeRouteAndDose
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 0) {
-            Text(routeItem.route.rawValue.localizedCapitalized).font(.caption)
+        HStack {
             if let doseUnwrapped = routeItem.dose {
                 Text((routeItem.isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + routeItem.units).multilineTextAlignment(.trailing)
             } else {
                 Text("Unknown Dose")
             }
+            Text(routeItem.route.rawValue.localizedCapitalized)
+            Spacer()
             if let numDotsUnwrap = routeItem.numDots {
-                Spacer().frame(height: 2)
                 DotRows(numDots: numDotsUnwrap)
-                Spacer().frame(height: 3)
             }
-        }.font(.headline)
+        }.font(.subheadline.weight(.semibold))
     }
 }
 
