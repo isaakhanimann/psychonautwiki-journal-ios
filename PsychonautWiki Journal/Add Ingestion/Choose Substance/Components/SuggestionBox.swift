@@ -45,9 +45,6 @@ struct SuggestionBox: View {
                         )
                     }
                     .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
-                    .simultaneousGesture(TapGesture().onEnded{
-                        checkInteractions(suggestion.substanceName)
-                    })
                 } else {
                     NavigationLink("Unknown") {
                         FinishIngestionScreen(
@@ -60,9 +57,6 @@ struct SuggestionBox: View {
                         )
                     }
                     .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
-                        .simultaneousGesture(TapGesture().onEnded{
-                            checkInteractions(suggestion.substanceName)
-                        })
                 }
                 if index == suggestion.dosesAndUnit.count-1 {
                     if let substance = suggestion.substance {
@@ -86,9 +80,6 @@ struct SuggestionBox: View {
                             }
                         }
                         .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
-                        .simultaneousGesture(TapGesture().onEnded{
-                            checkInteractions(suggestion.substanceName)
-                        })
                     } else {
                         NavigationLink("Other") {
                             CustomChooseDoseScreen(
@@ -98,9 +89,6 @@ struct SuggestionBox: View {
                                 dismiss: dismiss)
                         }
                         .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
-                            .simultaneousGesture(TapGesture().onEnded{
-                                checkInteractions(suggestion.substanceName)
-                            })
                     }
                 }
             }
@@ -112,6 +100,9 @@ struct SuggestionBox: View {
             )
             .foregroundColor(suggestion.substanceColor.swiftUIColor)
         }
+        .simultaneousGesture(TapGesture().onEnded{
+            checkInteractions(suggestion.substanceName)
+        })
     }
 }
 
