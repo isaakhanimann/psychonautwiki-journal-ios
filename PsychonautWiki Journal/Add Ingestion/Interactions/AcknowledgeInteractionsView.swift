@@ -20,31 +20,12 @@ struct AcknowledgeInteractionsView: View {
 
     let substance: Substance
     let dismiss: () -> Void
-    @State private var isShowingAlert = false
-    @State private var interactions: [Interaction] = []
 
     var body: some View {
         AcknowledgeInteractionsContent(
             substance: substance,
-            dismiss: dismiss,
-            interactions: interactions,
-            isShowingAlert: $isShowingAlert
-        ).task {
-            let recentIngestions = PersistenceController.shared.getRecentIngestions()
-            let names = recentIngestions.map { ing in
-                ing.substanceNameUnwrapped
-            }
-            let allNames = (names + InteractionChecker.additionalInteractionsToCheck).uniqued()
-            let interactions = allNames.compactMap { name in
-                InteractionChecker.getInteractionBetween(aName: substance.name, bName: name)
-            }.uniqued().sorted { int1, int2 in
-                int1.interactionType.dangerCount > int2.interactionType.dangerCount
-            }
-            self.interactions = interactions
-            if !interactions.isEmpty {
-                isShowingAlert = true
-            }
-        }
+            dismiss: dismiss
+        )
     }
 }
 
@@ -52,8 +33,6 @@ struct AcknowledgeInteractionsContent: View {
     
     let substance: Substance
     let dismiss: () -> Void
-    let interactions: [Interaction]
-    @Binding var isShowingAlert: Bool
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -80,30 +59,7 @@ struct AcknowledgeInteractionsContent: View {
         }
     }
 
-    private var nextLink: some View {
-        NavigationLink {
-            ChooseRouteScreen(substance: substance, dismiss: dismiss)
-        } label: {
-            NextLabel()
-        }
-    }
-
-    var screen: some View {
-        ZStack {
-            regularContent
-                .blur(radius: isShowingAlert ? 10 : 0)
-                .allowsHitTesting(!isShowingAlert)
-            if isShowingAlert {
-                InteractionAlertView(
-                    interactions: interactions,
-                    substanceName: substance.name,
-                    isShowing: $isShowingAlert
-                )
-            }
-        }
-    }
-
-    var regularContent: some View {
+    private var screen: some View {
         List {
             if let interactions = substance.interactions {
                 InteractionsGroup(
@@ -116,6 +72,14 @@ struct AcknowledgeInteractionsContent: View {
         }
         .navigationBarTitle(substance.name + " Interactions")
     }
+
+    private var nextLink: some View {
+        NavigationLink {
+            ChooseRouteScreen(substance: substance, dismiss: dismiss)
+        } label: {
+            NextLabel()
+        }
+    }
 }
 
 
@@ -126,9 +90,7 @@ struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
                 NavigationView {
                     AcknowledgeInteractionsContent(
                         substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                        dismiss: {},
-                        interactions: [],
-                        isShowingAlert: .constant(false)
+                        dismiss: {}
                     )
                 }
                 .previewDevice(PreviewDevice(rawValue: name))

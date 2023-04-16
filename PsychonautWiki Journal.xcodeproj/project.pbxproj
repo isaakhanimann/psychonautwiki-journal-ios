@@ -256,7 +256,6 @@
 		EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C9C27D8B10500945587 /* InteractionType.swift */; };
 		EAF76CA027D8B72900945587 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EAF76C9F27D8B72900945587 /* Algorithms */; };
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
-		EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA527D9081C00945587 /* InteractionAlertView.swift */; };
 		EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
 		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
 		EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */; };
@@ -525,7 +524,6 @@
 		EAF76C9327D7AEEA00945587 /* FinishIngestion-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinishIngestion-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76C9C27D8B10500945587 /* InteractionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionType.swift; sourceTree = "<group>"; };
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
-		EAF76CA527D9081C00945587 /* InteractionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAlertView.swift; sourceTree = "<group>"; };
 		EAF76CA827D90CF900945587 /* SubstanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceColor.swift; sourceTree = "<group>"; };
 		EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRoute.swift; sourceTree = "<group>"; };
 		EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content-ViewModel.swift"; sourceTree = "<group>"; };
@@ -616,7 +614,6 @@
 			children = (
 				EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */,
 				EA41C6162956C683000DA021 /* InteractionChecker.swift */,
-				EAF76CA527D9081C00945587 /* InteractionAlertView.swift */,
 			);
 			path = Interactions;
 			sourceTree = "<group>";
@@ -1480,7 +1477,6 @@
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */,
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
-				EAF76CA627D9081C00945587 /* InteractionAlertView.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
