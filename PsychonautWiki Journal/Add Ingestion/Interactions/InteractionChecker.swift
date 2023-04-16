@@ -237,7 +237,11 @@ struct InteractionChecker {
 
 }
 
-struct Interaction {
+struct Interaction: Comparable {
+    static func < (lhs: Interaction, rhs: Interaction) -> Bool {
+        lhs.interactionType.dangerCount > rhs.interactionType.dangerCount
+    }
+
     let aName: String
     let bName: String
     let interactionType: InteractionType

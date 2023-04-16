@@ -127,7 +127,15 @@ struct ChooseSubstanceContent: View {
             }
         }
         .hud(isPresented: $hudState.isPresented) {
-            Text(hudState.text)
+            VStack {
+                Text(hudState.substanceName).font(.title)
+                ForEach(hudState.interactions) { interaction in
+                    HStack {
+                        DangerTriangles(interactionType: interaction.interactionType)
+                        Text(interaction.name)
+                    }
+                }
+            }
         }
     }
 
@@ -139,9 +147,7 @@ struct ChooseSubstanceContent: View {
         let allNames = (names + InteractionChecker.additionalInteractionsToCheck).uniqued()
         let interactions = allNames.compactMap { name in
             InteractionChecker.getInteractionBetween(aName: substanceName, bName: name)
-        }.uniqued().sorted { int1, int2 in
-            int1.interactionType.dangerCount > int2.interactionType.dangerCount
-        }
+        }.uniqued().sorted()
         if !interactions.isEmpty {
             hudState.show(substanceName: "MDMA", interactions: interactions)
         }

@@ -19,32 +19,29 @@ import SwiftUI
 struct InteractionsGroup: View {
     let interactions: Interactions
     let substanceURL: URL
+    private let iconName = "exclamationmark.triangle"
 
     var body: some View {
         Group {
-            let iconName = "exclamationmark.triangle"
             ForEach(interactions.dangerous, id: \.self) { name in
-                HStack(spacing: 0) {
+                HStack {
                     Text(name)
                     Spacer()
-                    Image(systemName: iconName)
-                    Image(systemName: iconName)
-                    Image(systemName: iconName)
+                    DangerTriangles(interactionType: .dangerous)
                 }
             }.foregroundColor(InteractionType.dangerous.color)
             ForEach(interactions.unsafe, id: \.self) { name in
-                HStack(spacing: 0) {
+                HStack {
                     Text(name)
                     Spacer()
-                    Image(systemName: iconName)
-                    Image(systemName: iconName)
+                    DangerTriangles(interactionType: .unsafe)
                 }
             }.foregroundColor(InteractionType.unsafe.color)
             ForEach(interactions.uncertain, id: \.self) { name in
-                HStack(spacing: 0) {
+                HStack {
                     Text(name)
                     Spacer()
-                    Image(systemName: iconName)
+                    DangerTriangles(interactionType: .uncertain)
                 }
             }.foregroundColor(InteractionType.uncertain.color)
             if let interactionURL = URL(string: substanceURL.absoluteString + "#Dangerous_interactions") {

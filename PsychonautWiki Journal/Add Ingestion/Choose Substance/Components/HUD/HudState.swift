@@ -18,12 +18,22 @@ import SwiftUI
 
 final class HudState: ObservableObject {
     @Published var isPresented: Bool = false
-    private(set) var text: String = ""
+    @Published var substanceName: String = ""
+    @Published var interactions: [InteractionWith] = []
     private var dismissWork: DispatchWorkItem?
 
     func show(substanceName: String, interactions: [Interaction]) {
         dismissWork?.cancel()
-        self.text = HudState.getText(substanceName: substanceName, interactions: interactions)
+        self.substanceName = substanceName
+        self.interactions = interactions.compactMap({ i in
+            if i.aName != substanceName {
+                return InteractionWith(name: i.aName, interactionType: i.interactionType)
+            } else if i.bName != substanceName {
+                return InteractionWith(name: i.bName, interactionType: i.interactionType)
+            } else {
+                return nil
+            }
+        })
         withAnimation {
             isPresented = true
         }
@@ -35,37 +45,12 @@ final class HudState: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: dismissWork!)
     }
 
-    static func getText(substanceName: String, interactions: [Interaction]) -> String {
-        let grouped = Dictionary(grouping: interactions, by: {$0.interactionType})
-        let sortedGrouped = grouped.sorted { interaction1, interaction2 in
-            interaction1.0.dangerCount > interaction2.0.dangerCount
+    struct InteractionWith: Identifiable {
+        var id: String {
+            name + "\(interactionType.dangerCount)"
         }
-        return sortedGrouped.map { (type: InteractionType, interactions: [Interaction]) in
-            var result = ""
-            switch type {
-            case .uncertain:
-                result = "Uncertain interaction"
-            case .unsafe:
-                result = "Unsafe interaction"
-            case .dangerous:
-                result = "Dangerous interaction"
-            }
-            let otherSubstances = interactions.flatMap { interaction in
-                [interaction.aName, interaction.bName]
-            }.uniqued().filter {$0 != substanceName}
-            var otherSubstanceText = ""
-            if let sub = otherSubstances.first, otherSubstances.count == 1 {
-                otherSubstanceText = sub
-            } else {
-                let untilLastIndex = max(otherSubstances.count-1, 0)
-                let first = otherSubstances.prefix(untilLastIndex)
-                otherSubstanceText = first.joined(separator: ", ")
-                if let last = otherSubstances.last {
-                    otherSubstanceText += " and " + last
-                }
-            }
-            result = result + " with " + otherSubstanceText + "."
-            return result
-        }.joined(separator: "\n")
+
+        let name: String
+        let interactionType: InteractionType
     }
 }
