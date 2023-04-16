@@ -17,16 +17,14 @@
 import SwiftUI
 
 struct HUD<Content: View>: View {
-  @ViewBuilder let content: Content
+    @ViewBuilder let content: Content
+    @Environment(\.colorScheme) var colorScheme
 
-  var body: some View {
-    content
-      .padding(.horizontal, 12)
-      .padding(16)
-      .background(
-        Capsule()
-          .foregroundColor(Color.white)
-          .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
-      )
-  }
+    var body: some View {
+        content
+            .padding(.horizontal, 12)
+            .padding(16)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+            .shadow(color: Color(colorScheme == .dark ? .white : .black).opacity(0.16), radius: 12, x: 0, y: 5)
+    }
 }

@@ -122,17 +122,18 @@ struct ChooseSubstanceContent: View {
                     type: .image("Eye Open", .red)
                 )
             }
-            .onDisappear {
-                checkInteractions(with: "MDMA")
-            }
         }
         .hud(isPresented: $hudState.isPresented) {
             VStack {
-                Text(hudState.substanceName).font(.title)
-                ForEach(hudState.interactions) { interaction in
-                    HStack {
-                        DangerTriangles(interactionType: interaction.interactionType)
-                        Text(interaction.name)
+                Text("\(hudState.substanceName) Interactions")
+                    .font(.title2)
+                Spacer().frame(height: 3)
+                VStack(alignment: .leading) {
+                    ForEach(hudState.interactions) { interaction in
+                        HStack {
+                            DangerTriangles(interactionType: interaction.interactionType)
+                            Text(interaction.name)
+                        }
                     }
                 }
             }
@@ -140,6 +141,7 @@ struct ChooseSubstanceContent: View {
     }
 
     private func checkInteractions(with substanceName: String) {
+        guard isEyeOpen else {return}
         let recentIngestions = PersistenceController.shared.getRecentIngestions()
         let names = recentIngestions.map { ing in
             ing.substanceNameUnwrapped
@@ -149,7 +151,7 @@ struct ChooseSubstanceContent: View {
             InteractionChecker.getInteractionBetween(aName: substanceName, bName: name)
         }.uniqued().sorted()
         if !interactions.isEmpty {
-            hudState.show(substanceName: "MDMA", interactions: interactions)
+            hudState.show(substanceName: substanceName, interactions: interactions)
         }
     }
 }

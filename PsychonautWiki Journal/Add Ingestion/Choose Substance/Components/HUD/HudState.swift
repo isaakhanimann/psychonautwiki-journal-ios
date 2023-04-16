@@ -24,18 +24,18 @@ final class HudState: ObservableObject {
 
     func show(substanceName: String, interactions: [Interaction]) {
         dismissWork?.cancel()
-        self.substanceName = substanceName
-        self.interactions = interactions.compactMap({ i in
-            if i.aName != substanceName {
-                return InteractionWith(name: i.aName, interactionType: i.interactionType)
-            } else if i.bName != substanceName {
-                return InteractionWith(name: i.bName, interactionType: i.interactionType)
-            } else {
-                return nil
-            }
-        })
         withAnimation {
-            isPresented = true
+            self.substanceName = substanceName
+            self.interactions = interactions.compactMap({ i in
+                if i.aName != substanceName {
+                    return InteractionWith(name: i.aName, interactionType: i.interactionType)
+                } else if i.bName != substanceName {
+                    return InteractionWith(name: i.bName, interactionType: i.interactionType)
+                } else {
+                    return nil
+                }
+            })
+            self.isPresented = true
         }
         dismissWork = DispatchWorkItem { [weak self] in
             withAnimation {
