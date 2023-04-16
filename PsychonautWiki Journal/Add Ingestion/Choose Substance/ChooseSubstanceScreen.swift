@@ -46,6 +46,7 @@ struct ChooseSubstanceContent: View {
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: ()->Void
     @State private var isShowingAddCustomSheet = false
+    @StateObject private var hudState = HudState()
 
     var body: some View {
         NavigationView {
@@ -57,7 +58,8 @@ struct ChooseSubstanceContent: View {
                             SuggestionBox(
                                 suggestion: suggestion,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen
+                                isEyeOpen: isEyeOpen,
+                                checkInteractions: checkInteractions
                             )
                         }
                         Spacer().frame(height: 20)
@@ -65,12 +67,22 @@ struct ChooseSubstanceContent: View {
                     if !filteredSubstances.isEmpty {
                         if filteredSuggestions.isEmpty {
                             ForEach(filteredSubstances) { substance in
-                                SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
+                                SubstanceBox(
+                                    substance: substance,
+                                    dismiss: dismiss,
+                                    isEyeOpen: isEyeOpen,
+                                    checkInteractions: checkInteractions
+                                )
                             }
                         } else {
                             Text("Regular Logging").sectionHeaderStyle()
                             ForEach(filteredSubstances) { substance in
-                                SubstanceBox(substance: substance, dismiss: dismiss, isEyeOpen: isEyeOpen)
+                                SubstanceBox(
+                                    substance: substance,
+                                    dismiss: dismiss,
+                                    isEyeOpen: isEyeOpen,
+                                    checkInteractions: checkInteractions
+                                )
                             }
                         }
                     }
@@ -108,6 +120,28 @@ struct ChooseSubstanceContent: View {
                     type: .image("Eye Open", .red)
                 )
             }
+            .onDisappear {
+                checkInteractions(with: "MDMA")
+            }
+        }
+        .hud(isPresented: $hudState.isPresented) {
+            Text(hudState.text)
+        }
+    }
+
+    private func checkInteractions(with substanceName: String) {
+        let recentIngestions = PersistenceController.shared.getRecentIngestions()
+        let names = recentIngestions.map { ing in
+            ing.substanceNameUnwrapped
+        }
+        let allNames = (names + InteractionChecker.additionalInteractionsToCheck).uniqued()
+        let interactions = allNames.compactMap { name in
+            InteractionChecker.getInteractionBetween(aName: substanceName, bName: name)
+        }.uniqued().sorted { int1, int2 in
+            int1.interactionType.dangerCount > int2.interactionType.dangerCount
+        }
+        if !interactions.isEmpty {
+            hudState.show(substanceName: "MDMA", interactions: interactions)
         }
     }
 }

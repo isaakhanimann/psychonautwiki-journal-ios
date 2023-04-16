@@ -21,6 +21,7 @@ struct SubstanceBox: View {
     let substance: Substance
     let dismiss: () -> Void
     let isEyeOpen: Bool
+    let checkInteractions: (String) -> Void
 
     var body: some View {
         NavigationLink {
@@ -50,7 +51,9 @@ struct SubstanceBox: View {
                 }
             }
         }
-
+        .simultaneousGesture(TapGesture().onEnded{
+            checkInteractions(substance.name)
+        })
     }
 }
 
@@ -61,7 +64,8 @@ struct SubstanceBox_Previews: PreviewProvider {
                 SubstanceBox(
                     substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                     dismiss: {},
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    checkInteractions: { _ in }
                 ).padding(.horizontal)
             }
         }

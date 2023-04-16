@@ -22,6 +22,7 @@ struct SuggestionBox: View {
     let suggestion: Suggestion
     let dismiss: () -> Void
     let isEyeOpen: Bool
+    let checkInteractions: (String) -> Void
 
     var body: some View {
         GroupBox {
@@ -42,7 +43,11 @@ struct SuggestionBox: View {
                             isEstimate: dose.isEstimate,
                             dismiss: dismiss
                         )
-                    }.buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                    }
+                    .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                    .simultaneousGesture(TapGesture().onEnded{
+                        checkInteractions(suggestion.substanceName)
+                    })
                 } else {
                     NavigationLink("Unknown") {
                         FinishIngestionScreen(
@@ -53,7 +58,11 @@ struct SuggestionBox: View {
                             isEstimate: dose.isEstimate,
                             dismiss: dismiss
                         )
-                    }.buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                    }
+                    .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                        .simultaneousGesture(TapGesture().onEnded{
+                            checkInteractions(suggestion.substanceName)
+                        })
                 }
                 if index == suggestion.dosesAndUnit.count-1 {
                     if let substance = suggestion.substance {
@@ -75,7 +84,11 @@ struct SuggestionBox: View {
                                     dismiss: dismiss
                                 )
                             }
-                        }.buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        }
+                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        .simultaneousGesture(TapGesture().onEnded{
+                            checkInteractions(suggestion.substanceName)
+                        })
                     } else {
                         NavigationLink("Other") {
                             CustomChooseDoseScreen(
@@ -83,7 +96,11 @@ struct SuggestionBox: View {
                                 units: suggestion.units,
                                 administrationRoute: suggestion.route,
                                 dismiss: dismiss)
-                        }.buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        }
+                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                            .simultaneousGesture(TapGesture().onEnded{
+                                checkInteractions(suggestion.substanceName)
+                            })
                     }
                 }
             }
@@ -128,7 +145,8 @@ struct SuggestionBox_Previews: PreviewProvider {
                         ]
                     ),
                     dismiss: {},
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    checkInteractions: {_ in }
                 )
                 SuggestionBox(
                     suggestion: Suggestion(
@@ -161,7 +179,8 @@ struct SuggestionBox_Previews: PreviewProvider {
                         ]
                     ),
                     dismiss: {},
-                    isEyeOpen: true
+                    isEyeOpen: true,
+                    checkInteractions: {_ in }
                 )
             }.padding(.horizontal)
         }
