@@ -18,13 +18,13 @@ import SwiftUI
 
 struct Hud<Content: View>: View {
     @ViewBuilder let content: Content
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         content
             .padding(.horizontal, 12)
-            .padding(16)
+            .padding(10)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
-            .shadow(color: Color(colorScheme == .dark ? .white : .black).opacity(0.16), radius: 12, x: 0, y: 5)
+            .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
+            .padding(.horizontal, 20)
     }
 }

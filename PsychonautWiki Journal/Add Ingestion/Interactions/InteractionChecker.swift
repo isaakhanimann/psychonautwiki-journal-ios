@@ -24,7 +24,16 @@ struct InteractionChecker {
         "Cannabis",
         "Grapefruit",
         "Hormonal birth control",
-        "Nicotine"
+        "Nicotine",
+        "Lithium",
+        "MAOI",
+        "SSRIs",
+        "SNRIs",
+        "5-Hydroxytryptophan",
+        "Tricyclic antidepressants",
+        "Benzodiazepines",
+        "Antibiotics",
+        "Antihistamine"
     ]
 
     static func getInteractionBetween(aName: String, bName: String) -> Interaction? {

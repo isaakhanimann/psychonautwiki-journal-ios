@@ -27,8 +27,8 @@ struct QuestionAndAnswer: Identifiable, Hashable {
             answer: "Either the info is not annotated correctly in the article, the PsychonautWiki API does not parse the info correctly or the app does not import the info from the API correctly. In any case please report the bug through the app."
         ),
         QuestionAndAnswer(
-            question: "When does the app detect interactions?",
-            answer: "If there is an interaction with a substance that was taken less than 2 days ago or there is an interaction with Alcohol, Caffeine, Grapefruit, Hormonal birth control or Nicotine."
+            question: "When does the app show an interaction warning?",
+            answer: "If there is an interaction with a substance that was logged less than 2 days ago or there is an interaction with any of the following: \(InteractionChecker.additionalInteractionsToCheck.joined(separator: ", "))."
         ),
         QuestionAndAnswer(
             question: "How can one change or add info on a substance (duration, dose, interactions and effects)?",

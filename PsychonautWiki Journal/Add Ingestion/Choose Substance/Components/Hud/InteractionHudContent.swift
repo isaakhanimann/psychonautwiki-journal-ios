@@ -23,22 +23,19 @@ struct InteractionHudContent: View {
     var body: some View {
         VStack {
             Text("\(substanceName) Interactions")
-                .font(.title3.weight(.bold))
+                .font(.headline)
                 .multilineTextAlignment(.center)
-            Spacer().frame(height: 3)
-            HStack {
-                VStack(alignment: .trailing) {
-                    ForEach(interactions) { interaction in
+            Spacer().frame(height: 2)
+            VStack(alignment: .leading) {
+                ForEach(interactions) { interaction in
+                    HStack {
+                        Text(interaction.name).foregroundColor(interaction.interactionType.color)
+                        Spacer()
                         DangerTriangles(interactionType: interaction.interactionType)
                     }
                 }
-                VStack(alignment: .leading) {
-                    ForEach(interactions) { interaction in
-                        Text(interaction.name).foregroundColor(interaction.interactionType.color)
-                    }
-                }
             }
-            .font(.headline)
+            .font(.subheadline.bold())
         }
     }
 }
@@ -46,12 +43,13 @@ struct InteractionHudContent: View {
 struct InteractionHudContent_Previews: PreviewProvider {
     static var previews: some View {
         Hud {
-            InteractionHudContent(substanceName: "My Substance Long Name", interactions: [
-                InteractionWith(name: "MDMA", interactionType: .dangerous),
-                InteractionWith(name: "Amphetamine", interactionType: .dangerous),
-                InteractionWith(name: "Ketamine", interactionType: .unsafe),
-                InteractionWith(name: "Alcohol", interactionType: .unsafe),
-                InteractionWith(name: "Cannabis", interactionType: .uncertain)
+            InteractionHudContent(substanceName: "MDMA", interactions: [
+                InteractionWith(name: "MAOI", interactionType: .dangerous),
+                InteractionWith(name: "5-Hydroxytryptophan", interactionType: .dangerous),
+                InteractionWith(name: "SSRIs", interactionType: .unsafe),
+                InteractionWith(name: "SNRIs", interactionType: .unsafe),
+                InteractionWith(name: "Alcohol", interactionType: .uncertain),
+                InteractionWith(name: "Caffeine", interactionType: .uncertain)
             ])
         }
     }
