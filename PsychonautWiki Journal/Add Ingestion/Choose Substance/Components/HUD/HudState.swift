@@ -19,12 +19,20 @@ import SwiftUI
 final class HudState: ObservableObject {
     @Published var isPresented: Bool = false
     private(set) var text: String = ""
+    private var dismissWork: DispatchWorkItem?
 
     func show(substanceName: String, interactions: [Interaction]) {
+        dismissWork?.cancel()
         self.text = HudState.getText(substanceName: substanceName, interactions: interactions)
         withAnimation {
             isPresented = true
         }
+        dismissWork = DispatchWorkItem { [weak self] in
+            withAnimation {
+                self?.isPresented = false
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: dismissWork!)
     }
 
     static func getText(substanceName: String, interactions: [Interaction]) -> String {
