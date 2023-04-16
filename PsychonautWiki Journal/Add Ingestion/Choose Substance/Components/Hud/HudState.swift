@@ -44,13 +44,4 @@ final class HudState: ObservableObject {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: dismissWork!)
     }
-
-    struct InteractionWith: Identifiable {
-        var id: String {
-            name + "\(interactionType.dangerCount)"
-        }
-
-        let name: String
-        let interactionType: InteractionType
-    }
 }

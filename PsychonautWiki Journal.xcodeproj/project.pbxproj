@@ -143,6 +143,8 @@
 		EA48F8AC29EBD62D007DA8C5 /* View-Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */; };
 		EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AD29EBDA54007DA8C5 /* HudState.swift */; };
 		EA48F8B029EBEE4B007DA8C5 /* DangerTriangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */; };
+		EA48F8B229EBFB3C007DA8C5 /* InteractionHudContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */; };
+		EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -407,6 +409,8 @@
 		EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Hud.swift"; sourceTree = "<group>"; };
 		EA48F8AD29EBDA54007DA8C5 /* HudState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudState.swift; sourceTree = "<group>"; };
 		EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerTriangles.swift; sourceTree = "<group>"; };
+		EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionHudContent.swift; sourceTree = "<group>"; };
+		EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionWith.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -740,7 +744,7 @@
 		EA48F8A529EBD592007DA8C5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EA48F8A629EBD5C3007DA8C5 /* HUD */,
+				EA48F8A629EBD5C3007DA8C5 /* Hud */,
 				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
 				EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */,
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
@@ -750,14 +754,16 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		EA48F8A629EBD5C3007DA8C5 /* HUD */ = {
+		EA48F8A629EBD5C3007DA8C5 /* Hud */ = {
 			isa = PBXGroup;
 			children = (
 				EA48F8A929EBD5F4007DA8C5 /* Hud.swift */,
+				EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */,
 				EA48F8AD29EBDA54007DA8C5 /* HudState.swift */,
+				EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */,
 				EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */,
 			);
-			path = HUD;
+			path = Hud;
 			sourceTree = "<group>";
 		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
@@ -1411,6 +1417,7 @@
 				EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
+				EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
@@ -1429,6 +1436,7 @@
 				EA48F8AA29EBD5F4007DA8C5 /* Hud.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
+				EA48F8B229EBFB3C007DA8C5 /* InteractionHudContent.swift in Sources */,
 				EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRowContent.swift in Sources */,

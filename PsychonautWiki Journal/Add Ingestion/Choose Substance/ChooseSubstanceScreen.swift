@@ -124,19 +124,10 @@ struct ChooseSubstanceContent: View {
             }
         }
         .hud(isPresented: $hudState.isPresented) {
-            VStack {
-                Text("\(hudState.substanceName) Interactions")
-                    .font(.title2)
-                Spacer().frame(height: 3)
-                VStack(alignment: .leading) {
-                    ForEach(hudState.interactions) { interaction in
-                        HStack {
-                            DangerTriangles(interactionType: interaction.interactionType)
-                            Text(interaction.name)
-                        }
-                    }
-                }
-            }
+            InteractionHudContent(
+                substanceName: hudState.substanceName,
+                interactions: hudState.interactions
+            )
         }
     }
 

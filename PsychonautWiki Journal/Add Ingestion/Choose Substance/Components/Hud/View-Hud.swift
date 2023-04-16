@@ -16,15 +16,18 @@
 
 import SwiftUI
 
-struct HUD<Content: View>: View {
-    @ViewBuilder let content: Content
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-        content
-            .padding(.horizontal, 12)
-            .padding(16)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
-            .shadow(color: Color(colorScheme == .dark ? .white : .black).opacity(0.16), radius: 12, x: 0, y: 5)
+extension View {
+    func hud<Content: View>(
+        isPresented: Binding<Bool>,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        ZStack(alignment: .top) {
+            self
+            if isPresented.wrappedValue {
+                Hud(content: content)
+                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                    .zIndex(1)
+            }
+        }
     }
 }

@@ -14,20 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
+import Foundation
 
-extension View {
-    func hud<Content: View>(
-        isPresented: Binding<Bool>,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        ZStack(alignment: .top) {
-            self
-            if isPresented.wrappedValue {
-                HUD(content: content)
-                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                    .zIndex(1)
-            }
-        }
+struct InteractionWith: Identifiable {
+    var id: String {
+        name + "\(interactionType.dangerCount)"
     }
+
+    let name: String
+    let interactionType: InteractionType
 }
