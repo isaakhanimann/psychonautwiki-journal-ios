@@ -22,7 +22,6 @@ struct SuggestionBox: View {
     let suggestion: Suggestion
     let dismiss: () -> Void
     let isEyeOpen: Bool
-    let checkInteractions: (String) -> Void
 
     var body: some View {
         GroupBox {
@@ -100,9 +99,6 @@ struct SuggestionBox: View {
             )
             .foregroundColor(suggestion.substanceColor.swiftUIColor)
         }
-        .simultaneousGesture(TapGesture().onEnded{
-            checkInteractions(suggestion.substanceName)
-        })
     }
 }
 
@@ -136,8 +132,7 @@ struct SuggestionBox_Previews: PreviewProvider {
                         ]
                     ),
                     dismiss: {},
-                    isEyeOpen: true,
-                    checkInteractions: {_ in }
+                    isEyeOpen: true
                 )
                 SuggestionBox(
                     suggestion: Suggestion(
@@ -170,8 +165,7 @@ struct SuggestionBox_Previews: PreviewProvider {
                         ]
                     ),
                     dismiss: {},
-                    isEyeOpen: true,
-                    checkInteractions: {_ in }
+                    isEyeOpen: true
                 )
             }.padding(.horizontal)
         }

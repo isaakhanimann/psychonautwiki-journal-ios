@@ -58,9 +58,11 @@ struct ChooseSubstanceContent: View {
                             SuggestionBox(
                                 suggestion: suggestion,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen,
-                                checkInteractions: checkInteractions
+                                isEyeOpen: isEyeOpen
                             )
+                            .simultaneousGesture(TapGesture().onEnded{
+                                checkInteractions(with: suggestion.substanceName)
+                            })
                         }
                         Spacer().frame(height: 20)
                     }
