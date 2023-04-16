@@ -21,11 +21,12 @@ struct SubstanceBox: View {
     let substance: Substance
     let dismiss: () -> Void
     let isEyeOpen: Bool
+    let isSkippingInteractionChecks: Bool
     let checkInteractions: (String) -> Void
 
     var body: some View {
         NavigationLink {
-            if isEyeOpen {
+            if isEyeOpen && !isSkippingInteractionChecks {
                 if !substance.saferUse.isEmpty {
                     AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
                 } else {
@@ -65,6 +66,7 @@ struct SubstanceBox_Previews: PreviewProvider {
                     substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                     dismiss: {},
                     isEyeOpen: true,
+                    isSkippingInteractionChecks: true,
                     checkInteractions: { _ in }
                 ).padding(.horizontal)
             }

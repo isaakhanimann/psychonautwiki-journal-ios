@@ -21,12 +21,14 @@ struct ChooseSubstanceScreen: View {
     @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
+    @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
 
     var body: some View {
         ChooseSubstanceContent(
             searchText: $viewModel.searchText,
             isShowingOpenEyeToast: $viewModel.isShowingOpenEyeToast,
             isEyeOpen: viewModel.isEyeOpen,
+            isSkippingInteractionChecks: isSkippingInteractionChecks,
             filteredSuggestions: viewModel.filteredSuggestions,
             filteredSubstances: viewModel.filteredSubstances,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
@@ -41,6 +43,7 @@ struct ChooseSubstanceContent: View {
     @Binding var searchText: String
     @Binding var isShowingOpenEyeToast: Bool
     let isEyeOpen: Bool
+    let isSkippingInteractionChecks: Bool
     let filteredSuggestions: [Suggestion]
     let filteredSubstances: [Substance]
     let filteredCustomSubstances: [CustomSubstanceModel]
@@ -73,6 +76,7 @@ struct ChooseSubstanceContent: View {
                                     substance: substance,
                                     dismiss: dismiss,
                                     isEyeOpen: isEyeOpen,
+                                    isSkippingInteractionChecks: isSkippingInteractionChecks,
                                     checkInteractions: checkInteractions
                                 )
                             }
@@ -83,6 +87,7 @@ struct ChooseSubstanceContent: View {
                                     substance: substance,
                                     dismiss: dismiss,
                                     isEyeOpen: isEyeOpen,
+                                    isSkippingInteractionChecks: isSkippingInteractionChecks,
                                     checkInteractions: checkInteractions
                                 )
                             }
@@ -133,6 +138,7 @@ struct ChooseSubstanceContent: View {
 
     private func checkInteractions(with substanceName: String) {
         guard isEyeOpen else {return}
+        guard !isSkippingInteractionChecks else {return}
         let recentIngestions = PersistenceController.shared.getRecentIngestions()
         let names = recentIngestions.map { ing in
             ing.substanceNameUnwrapped
@@ -155,6 +161,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     searchText: .constant(""),
                     isShowingOpenEyeToast: .constant(false),
                     isEyeOpen: true,
+                    isSkippingInteractionChecks: false,
                     filteredSuggestions: [
                         Suggestion(
                             substanceName: "MDMA",

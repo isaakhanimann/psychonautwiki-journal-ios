@@ -19,6 +19,7 @@ import AlertToast
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -26,6 +27,7 @@ struct SettingsScreen: View {
     var body: some View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
+            isSkippingInteractionChecks: $isSkippingInteractionChecks,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -49,6 +51,7 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
+    @Binding var isSkippingInteractionChecks: Bool
     var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -96,7 +99,6 @@ struct SettingsContent: View {
                     }
                 }
             }
-
             Section(
                 header: Text("Journal Data"),
                 footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
@@ -152,6 +154,9 @@ struct SettingsContent: View {
                     Label("Edit Substance Colors", systemImage: "paintpalette")
                 }
                 .foregroundColor(.accentColor)
+                if isEyeOpen {
+                    Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
+                }
             }
             Section {
                 HStack {
@@ -235,6 +240,7 @@ struct SettingsContent_Previews: PreviewProvider {
         NavigationView {
             SettingsContent(
                 isEyeOpen: .constant(true),
+                isSkippingInteractionChecks: .constant(false),
                 isFaceIDAvailable: true,
                 hasToUnlockApp: .constant(false),
                 isImporting: false,
