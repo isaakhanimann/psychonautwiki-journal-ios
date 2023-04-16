@@ -47,10 +47,11 @@ struct TimelineModel {
         })
         self.ratingDrawables = ratingDrawables
         let sixHours: TimeInterval = 6 * 60 * 60
-        let potentialTotalWidth = drawablesWithoutInsets.map({ draw in
+        let widthOfTimelinesAndRatings = drawablesWithoutInsets.map({ draw in
             draw.distanceFromStart + draw.timelineDrawable.width
         }) + ratingDrawables.map { $0.distanceFromStart }
-        let maxWidth: TimeInterval = potentialTotalWidth.max() ?? sixHours
+        let quarterHour: TimeInterval = 15 * 60
+        let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours) + quarterHour
         self.totalWidth = maxWidth
         self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
