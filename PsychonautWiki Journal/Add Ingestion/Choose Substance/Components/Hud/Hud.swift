@@ -23,7 +23,7 @@ struct Hud<Content: View>: View {
         content
             .padding(.horizontal, 12)
             .padding(10)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10))
             .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
             .padding(.horizontal, 20)
     }
