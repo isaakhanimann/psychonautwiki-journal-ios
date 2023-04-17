@@ -112,20 +112,68 @@ struct ChooseCaffeineDoseScreen: View {
                 unknownDoseLink
             }
             Section("Average Drinks") {
-                Button("240 mL Coffee") {
-                    caffeineDoseInMg = 90
+                Group {
+                    Button("Caffe Nero Espresso (45 mg)") {
+                        caffeineDoseInMg = 45
+                    }
+                    Button("Costa Espresso (100 mg)") {
+                        caffeineDoseInMg = 100
+                    }
+                    Button("Gregs Espresso (75 mg)") {
+                        caffeineDoseInMg = 75
+                    }
+                    Button("Pret Espresso (180 mg)") {
+                        caffeineDoseInMg = 180
+                    }
+                    Button("Starbucks Espresso (33 mg)") {
+                        caffeineDoseInMg = 33
+                    }
                 }
-                Button("350 mL Caffeinated Soft Drink") {
+                Group {
+                    Button("Caffe Nero Cappuccino (115 mg)") {
+                        caffeineDoseInMg = 115
+                    }
+                    Button("Costa Cappuccino (325 mg)") {
+                        caffeineDoseInMg = 325
+                    }
+                    Button("Gregs Cappuccino (197 mg)") {
+                        caffeineDoseInMg = 197
+                    }
+                    Button("Pret Cappuccino (180 mg)") {
+                        caffeineDoseInMg = 180
+                    }
+                    Button("Starbucks Cappuccino (66 mg)") {
+                        caffeineDoseInMg = 66
+                    }
+                }
+                Group {
+                    Button("Greggs Filter/Brewed Coffee (225 mg)") {
+                        caffeineDoseInMg = 225
+                    }
+                    Button("Pret Filter/Brewed Coffee (271 mg)") {
+                        caffeineDoseInMg = 271
+                    }
+                    Button("Starbucks Filter/Brewed Coffee (102 mg)") {
+                        caffeineDoseInMg = 102
+                    }
+                }
+                Button("Tea (75 mg)") {
+                    caffeineDoseInMg = 75
+                }
+                Button("Caffeinated Soft Drink (35 mg)") {
                     caffeineDoseInMg = 35
                 }
-                Button("240 mL Black/Green Tea") {
+                Button("Typical Energy Drink (80 mg)") {
+                    caffeineDoseInMg = 80
+                }
+                Button("Energy Drink Light (40 mg)") {
                     caffeineDoseInMg = 40
                 }
-                Button("240 mL Energy Drink Light") {
-                    caffeineDoseInMg = 40
-                }
-                Button("240 mL Energy Drink Strong") {
+                Button("Energy Drink Strong (250 mg)") {
                     caffeineDoseInMg = 250
+                }
+                Button("45g Dark Chocolate bar (18 mg)") {
+                    caffeineDoseInMg = 18
                 }
             }
             if let remark = caffeine.dosageRemark {
