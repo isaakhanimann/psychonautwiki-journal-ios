@@ -42,6 +42,6 @@ final class HudState: ObservableObject {
                 self?.isPresented = false
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: dismissWork!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: dismissWork!)
     }
 }
