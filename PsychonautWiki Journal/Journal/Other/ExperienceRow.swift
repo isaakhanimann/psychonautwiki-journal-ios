@@ -157,9 +157,9 @@ struct ExperienceRowContent: View {
 
     var timeText: Text {
         if isTimeRelative {
-            return Text(sortDate, format: .relative(presentation: .numeric, unitsStyle: .narrow))
+            return Text(sortDate, format: .relative(presentation: .numeric, unitsStyle: .wide))
         } else {
-            return Text(sortDate, format: Date.FormatStyle().day().month().year(.twoDigits))
+            return Text(sortDate, format: Date.FormatStyle().day().month().year())
         }
     }
 

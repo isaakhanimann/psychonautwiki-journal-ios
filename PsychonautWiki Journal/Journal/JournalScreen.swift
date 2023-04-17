@@ -23,7 +23,6 @@ struct JournalScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
 
-
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
