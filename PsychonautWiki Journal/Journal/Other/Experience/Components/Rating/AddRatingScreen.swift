@@ -22,28 +22,52 @@ struct AddRatingScreen: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
+    @EnvironmentObject private var toastViewModel: ToastViewModel
 
     var body: some View {
         NavigationView {
-            RatingScreenContent(
-                selectedTime: $selectedTime,
-                selectedRating: $selectedRating
-            )
-            .navigationTitle("Add Rating")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+            if #available(iOS 16, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                        doneButton
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        save()
-                        dismiss()
+            } else {
+                screen.toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        doneButton
                     }
                 }
             }
+
         }
+    }
+
+    var doneButton: some View {
+        Button {
+            save()
+            toastViewModel.showSuccessToast(message: "Rating Added")
+            dismiss()
+        } label: {
+            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+        }
+    }
+
+
+    var screen: some View {
+        RatingScreenContent(
+            selectedTime: $selectedTime,
+            selectedRating: $selectedRating
+        )
+        .navigationTitle("Add Rating")
         .onAppear {
             if experience.isCurrent {
                 selectedTime = Date()

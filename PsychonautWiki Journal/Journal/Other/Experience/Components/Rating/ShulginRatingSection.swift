@@ -66,6 +66,6 @@ struct RatingRow: View {
             }
             Spacer()
             Text(rating.optionUnwrapped.stringRepresentation)
-        }
+        }.font(.headline)
     }
 }

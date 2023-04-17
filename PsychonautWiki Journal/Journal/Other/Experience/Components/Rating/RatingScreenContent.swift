@@ -32,21 +32,22 @@ struct RatingScreenContent: View {
                 .labelsHidden()
                 .datePickerStyle(.wheel)
             }
-            Section {
+            Section("Shulgin Rating") {
                 Picker("Shulgin Rating", selection: $selectedRating) {
                     ForEach(ShulginRatingOption.allCases, id: \.self) { option in
-                        Text(option.stringRepresentation)
+                        HStack {
+                            Text(option.stringRepresentation).font(.title3)
+                            Text("(\(option.shortDescription))").foregroundColor(.secondary).font(.caption)
+                        }
                     }
-                }.pickerStyle(.segmented)
-            } header: {
-                Text("Shulgin Rating")
-            } footer: {
-                Text("++++ is not on the quantitative potency scale")
+                }
+                .pickerStyle(.inline)
+                .labelsHidden()
             }
             Section("Shulgin Rating Explanation") {
                 ForEach(ShulginRatingOption.allCases, id: \.self) { option in
                     VStack(alignment: .leading) {
-                        Text(option.stringRepresentation).font(.headline)
+                        Text(option.stringRepresentation).font(.title3)
                         Text(option.description).foregroundColor(.secondary)
                     }
                 }

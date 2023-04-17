@@ -74,4 +74,21 @@ enum ShulginRatingOption: String, CaseIterable, Codable, Comparable {
             return "A rare and precious transcendental state, which has been called a \"peak experience,\" a \"religious experience,\" \"divine transformation,\" a \"state of Samadhi\" and many other names in other cultures. It is not connected to the +1, +2, and +3 of the measuring of a drug's intensity. It is a state of bliss, a participation mystique, a connectedness with both the interior and exterior universes, which has come about after the ingestion of a psychedelic drug, but which is not necessarily repeatable with a subsequent ingestion of that same drug. If a drug (or technique or process) were ever to be discovered which would consistently produce a plus four experience in all human beings, it is conceivable that it would signal the ultimate evolution, and perhaps the end, of the human experiment."
         }
     }
+
+    var shortDescription: String {
+        switch self {
+        case .minus:
+            return "no effects"
+        case .plusMinus:
+            return "maybe false positive"
+        case .plus:
+            return "certainly active, nature not yet apparent"
+        case .twoPlus:
+            return "nature apparent, effects may be repressible"
+        case .threePlus:
+            return "totally engaged, ignoring no longer an option"
+        case .fourPlus:
+            return "rare and precious transcendental state"
+        }
+    }
 }
