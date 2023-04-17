@@ -23,6 +23,7 @@ struct IngestionsForSubstanceScreen: View {
     let substance: Substance?
     let isTimeRelative = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
 
     init(substanceName: String) {
         self.substanceName = substanceName
@@ -46,7 +47,8 @@ struct IngestionsForSubstanceScreen: View {
                 ingestionTime: ingestion.timeUnwrapped,
                 note: ingestion.noteUnwrapped,
                 isTimeRelative: isTimeRelative,
-                isEyeOpen: isEyeOpen
+                isEyeOpen: isEyeOpen,
+                isHidingDosageDots: isHidingDosageDots
             )
         }.navigationTitle(substanceName)
     }
@@ -64,6 +66,7 @@ struct StatsIngestionRow: View {
     let note: String
     let isTimeRelative: Bool
     let isEyeOpen: Bool
+    let isHidingDosageDots: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -89,7 +92,7 @@ struct StatsIngestionRow: View {
                     } else {
                         Text("Unknown Dose")
                     }
-                    if let numDotsUnwrap = numDots {
+                    if let numDotsUnwrap = numDots, !isHidingDosageDots {
                         Spacer().frame(height: 2)
                         DotRows(numDots: numDotsUnwrap)
                         Spacer().frame(height: 2)
@@ -118,7 +121,8 @@ struct StatsIngestionRow_Previews: PreviewProvider {
                 ingestionTime: Date(),
                 note: "",
                 isTimeRelative: false,
-                isEyeOpen: true
+                isEyeOpen: true,
+                isHidingDosageDots: false
             )
             StatsIngestionRow(
                 numDots: 2,
@@ -130,7 +134,8 @@ struct StatsIngestionRow_Previews: PreviewProvider {
                 ingestionTime: Date(),
                 note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                 isTimeRelative: false,
-                isEyeOpen: true
+                isEyeOpen: true,
+                isHidingDosageDots: false
             )
             StatsIngestionRow(
                 numDots: 2,
@@ -142,7 +147,8 @@ struct StatsIngestionRow_Previews: PreviewProvider {
                 ingestionTime: Date(),
                 note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                 isTimeRelative: false,
-                isEyeOpen: true
+                isEyeOpen: true,
+                isHidingDosageDots: false
             )
         }
     }

@@ -26,7 +26,8 @@ struct PersistenceController {
     static let needsToSeeWelcomeKey = "needsToSeeWelcome"
     static let isEyeOpenKey1 = "isEyeOpen"
     static let isEyeOpenKey2 = "isEyeOpen2"
-    static let isSkippingInteractionChecksKey = "isSkippingInteractionChecksKey"
+    static let isSkippingInteractionChecksKey = "isSkippingInteractionChecks"
+    static let isHidingDosageDotsKey = "isHidingDosageDots"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     var viewContext: NSManagedObjectContext {
         container.viewContext

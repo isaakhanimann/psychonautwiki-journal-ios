@@ -24,6 +24,7 @@ struct IngestionRow: View {
     let roaDose: RoaDose?
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
+    let isHidingDosageDots: Bool
 
     var body: some View {
         IngestionRowContent(
@@ -41,6 +42,7 @@ struct IngestionRow: View {
             note: ingestion.noteUnwrapped,
             timeDisplayStyle: timeDisplayStyle,
             isEyeOpen: isEyeOpen,
+            isHidingDosageDots: isHidingDosageDots,
             stomachFullness: ingestion.stomachFullnessUnwrapped,
             firstIngestionTime: firstIngestionTime
         )
@@ -61,6 +63,7 @@ struct IngestionRowContent: View {
     let note: String
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
+    let isHidingDosageDots: Bool
     let stomachFullness: StomachFullness?
     let firstIngestionTime: Date?
 
@@ -109,7 +112,7 @@ struct IngestionRowContent: View {
                             Text(administrationRoute.rawValue.localizedCapitalized)
                         }
                         Spacer()
-                        if let numDotsUnwrap = numDots {
+                        if let numDotsUnwrap = numDots, !isHidingDosageDots {
                             DotRows(numDots: numDotsUnwrap)
                         }
                     }
@@ -194,6 +197,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "",
                     timeDisplayStyle: .relativeToNow,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: .full,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -209,6 +213,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "",
                     timeDisplayStyle: .relativeToStart,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: nil,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -224,6 +229,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                     timeDisplayStyle: .relativeToStart,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: nil,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -239,6 +245,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "",
                     timeDisplayStyle: .relativeToNow,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: nil,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -254,6 +261,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "",
                     timeDisplayStyle: .regular,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: nil,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -269,6 +277,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
                     timeDisplayStyle: .regular,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: .full,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )
@@ -284,6 +293,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     note: "",
                     timeDisplayStyle: .regular,
                     isEyeOpen: true,
+                    isHidingDosageDots: false,
                     stomachFullness: .full,
                     firstIngestionTime: Date().addingTimeInterval(-60*60)
                 )

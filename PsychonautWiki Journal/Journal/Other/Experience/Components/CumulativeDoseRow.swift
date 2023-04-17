@@ -20,6 +20,7 @@ struct CumulativeDoseRow: View {
     let substanceName: String
     let substanceColor: SubstanceColor
     let cumulativeRoutes: [CumulativeRouteAndDose]
+    let isHidingDosageDots: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,7 +34,7 @@ struct CumulativeDoseRow: View {
             }
             VStack(alignment: .trailing, spacing: 4) {
                 ForEach(cumulativeRoutes) { routeItem in
-                    RouteItemView(routeItem: routeItem)
+                    RouteItemView(routeItem: routeItem, isHidingDosageDots: isHidingDosageDots)
                 }
             }
         }
@@ -42,6 +43,7 @@ struct CumulativeDoseRow: View {
 
 struct RouteItemView: View {
     let routeItem: CumulativeRouteAndDose
+    let isHidingDosageDots: Bool
 
     var body: some View {
         HStack {
@@ -52,7 +54,7 @@ struct RouteItemView: View {
             }
             Text(routeItem.route.rawValue.localizedCapitalized)
             Spacer()
-            if let numDotsUnwrap = routeItem.numDots {
+            if let numDotsUnwrap = routeItem.numDots, !isHidingDosageDots {
                 DotRows(numDots: numDotsUnwrap)
             }
         }.font(.subheadline.weight(.semibold))
@@ -81,7 +83,8 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             dose: 20,
                             units: "mg"
                         )
-                    ]
+                    ],
+                    isHidingDosageDots: false
                 )
                 CumulativeDoseRow(
                     substanceName: "Amphetamine",
@@ -101,7 +104,8 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             dose: nil,
                             units: "mg"
                         )
-                    ]
+                    ],
+                    isHidingDosageDots: false
                 )
             }
         }

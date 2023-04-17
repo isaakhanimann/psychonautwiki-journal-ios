@@ -20,6 +20,7 @@ import AlertToast
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
+    @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -28,6 +29,7 @@ struct SettingsScreen: View {
         SettingsContent(
             isEyeOpen: $isEyeOpen,
             isSkippingInteractionChecks: $isSkippingInteractionChecks,
+            isHidingDosageDots: $isHidingDosageDots,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -52,6 +54,7 @@ struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
     @Binding var isSkippingInteractionChecks: Bool
+    @Binding var isHidingDosageDots: Bool
     var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -156,6 +159,7 @@ struct SettingsContent: View {
                 .foregroundColor(.accentColor)
                 if isEyeOpen {
                     Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
+                    Toggle("Hide Dosage Dots", isOn: $isHidingDosageDots).tint(Color.accentColor)
                 }
             }
             Section {
@@ -241,6 +245,7 @@ struct SettingsContent_Previews: PreviewProvider {
             SettingsContent(
                 isEyeOpen: .constant(true),
                 isSkippingInteractionChecks: .constant(false),
+                isHidingDosageDots: .constant(false),
                 isFaceIDAvailable: true,
                 hasToUnlockApp: .constant(false),
                 isImporting: false,

@@ -34,6 +34,7 @@ struct ExperienceScreen: View {
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = ViewModel()
@@ -192,7 +193,8 @@ struct ExperienceScreen: View {
                                     firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
                                     roaDose: roaDose,
                                     timeDisplayStyle: timeDisplayStyle,
-                                    isEyeOpen: isEyeOpen
+                                    isEyeOpen: isEyeOpen,
+                                    isHidingDosageDots: isHidingDosageDots
                                 )
                             }
                             .swipeActions(edge: .leading) {
@@ -256,14 +258,16 @@ struct ExperienceScreen: View {
                                     CumulativeDoseRow(
                                         substanceName: cumulative.substanceName,
                                         substanceColor: cumulative.substanceColor,
-                                        cumulativeRoutes: cumulative.cumulativeRoutes
+                                        cumulativeRoutes: cumulative.cumulativeRoutes,
+                                        isHidingDosageDots: isHidingDosageDots
                                     )
                                 }
                             } else {
                                 CumulativeDoseRow(
                                     substanceName: cumulative.substanceName,
                                     substanceColor: cumulative.substanceColor,
-                                    cumulativeRoutes: cumulative.cumulativeRoutes
+                                    cumulativeRoutes: cumulative.cumulativeRoutes,
+                                    isHidingDosageDots: isHidingDosageDots
                                 )
                             }
                         }
