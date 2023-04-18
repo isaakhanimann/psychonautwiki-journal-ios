@@ -20,6 +20,7 @@ struct DurationScreen: View {
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
+    @State private var stomachFullness = StomachFullness.empty
     @State private var hiddenRoutes: [AdministrationRoute] = []
 
     var body: some View {
@@ -56,6 +57,16 @@ struct DurationScreen: View {
                                 Text(info.route.rawValue.localizedCapitalized).font(.headline)
                             }
                             OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
+                            if info.route == .oral {
+                                Spacer().frame(height: 5)
+                                Text("Stomach Fullness:").font(.subheadline.weight(.bold))
+                                Picker("Stomach Fullness", selection: $stomachFullness) {
+                                    ForEach(StomachFullness.allCases) { option in
+                                        Text(option.text)
+                                    }
+                                }.pickerStyle(.segmented)
+                                Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
+                            }
                         }
                     }
                     .swipeActions(edge: .leading) {
@@ -80,6 +91,9 @@ struct DurationScreen: View {
         .onChange(of: hiddenRoutes) { _ in
             updateModel()
         }
+        .onChange(of: stomachFullness) { _ in
+            updateModel()
+        }
         .navigationTitle("Duration")
     }
 
@@ -91,14 +105,15 @@ struct DurationScreen: View {
             everythingForEachLine: durationsToShow.map({ info in
                 EverythingForOneLine(
                     roaDuration: info.roaDuration,
-                    onsetDelayInHours: 0,
+                    onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0,
                     startTime: selectedTime,
                     horizontalWeight: 0.5,
                     verticalWeight: 1,
                     color: info.route.color
                 )
             }),
-            everythingForEachRating: [])
+            everythingForEachRating: []
+        )
     }
 
     private func toggle(route: AdministrationRoute) {
