@@ -31,7 +31,6 @@ struct InteractionChecker {
         "SNRIs",
         "5-Hydroxytryptophan",
         "Tricyclic antidepressants",
-        "Benzodiazepines",
         "Antibiotics",
         "Antihistamine"
     ]
