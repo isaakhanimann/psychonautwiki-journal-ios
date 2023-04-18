@@ -1,9 +1,9 @@
-// Copyright (c) 2022. Isaak Hanimann.
+// Copyright (c) 2023. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at
+// the Free Software Foundation, either version 3 of the License, or (at 
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,50 +17,6 @@
 import SwiftUI
 import CoreLocation
 import MapKit
-
-struct ChooseLocationScreen: View {
-
-    @ObservedObject var locationManager: LocationManager
-    @Environment(\.dismiss) var dismiss
-
-    var body: some View {
-        NavigationView {
-            ChooseLocationScreenContent(
-                selectedLocation: $locationManager.selectedLocation,
-                selectedLocationName: $locationManager.selectedLocationName,
-                searchText: $locationManager.searchText,
-                authorizationStatus: locationManager.authorizationStatus,
-                isLoadingLocationResults: locationManager.isSearchingForLocations,
-                currentLocation: locationManager.currentLocation,
-                searchSuggestedLocations: locationManager.searchSuggestedLocations,
-                experienceLocations: locationManager.experienceLocations
-            )
-            .searchable(
-                text: $locationManager.searchText,
-                placement: .navigationBarDrawer(displayMode: .always),
-                prompt: "Search Location"
-            )
-            .disableAutocorrection(true)
-            .onSubmit(of: .search) {
-                locationManager.searchLocations()
-            }
-            .task {
-                if locationManager.authorizationStatus == .notDetermined {
-                    locationManager.requestPermission()
-                }
-                locationManager.maybeRequestLocation()
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
-            .navigationTitle("Experience Location")
-        }
-    }
-}
 
 struct ChooseLocationScreenContent: View {
 
@@ -109,8 +65,6 @@ struct ChooseLocationScreenContent: View {
                                         longitude: selectedLocation?.longitude,
                                         latitude: selectedLocation?.latitude
                                     )
-                                } else {
-                                    selectedLocation = nil
                                 }
                             }
                         }
@@ -201,7 +155,7 @@ extension CLLocationCoordinate2D: Identifiable {
     }
 }
 
-struct ChooseLocationScreen_Previews: PreviewProvider {
+struct ChooseLocationScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         ChooseLocationScreenContent(
             selectedLocation: .constant(

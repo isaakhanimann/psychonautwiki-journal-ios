@@ -145,6 +145,7 @@
 		EA48F8B029EBEE4B007DA8C5 /* DangerTriangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */; };
 		EA48F8B229EBFB3C007DA8C5 /* InteractionHudContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */; };
 		EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */; };
+		EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -410,6 +411,7 @@
 		EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerTriangles.swift; sourceTree = "<group>"; };
 		EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionHudContent.swift; sourceTree = "<group>"; };
 		EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionWith.swift; sourceTree = "<group>"; };
+		EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationScreenContent.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -642,7 +644,7 @@
 			children = (
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
 				EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */,
-				EA418A2A2969C36100DEA663 /* ChooseLocationScreen.swift */,
+				EA48F8B729EE8A15007DA8C5 /* Choose Location */,
 				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
 				EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */,
 				EA418A0C29697EB200DEA663 /* ExperienceTitleScreen.swift */,
@@ -761,6 +763,15 @@
 				EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */,
 			);
 			path = Hud;
+			sourceTree = "<group>";
+		};
+		EA48F8B729EE8A15007DA8C5 /* Choose Location */ = {
+			isa = PBXGroup;
+			children = (
+				EA418A2A2969C36100DEA663 /* ChooseLocationScreen.swift */,
+				EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */,
+			);
+			path = "Choose Location";
 			sourceTree = "<group>";
 		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
@@ -1455,6 +1466,7 @@
 				EAE4809529740E8300B600EF /* TimelineDisclaimers.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* FinishIngestionScreen.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
+				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
 				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,
