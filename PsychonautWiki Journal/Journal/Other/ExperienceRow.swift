@@ -121,8 +121,13 @@ struct ExperienceRowContent: View {
                         }
                     }
                     Spacer().frame(width: 10)
-                    Text(title)
-                        .font(.headline)
+                    VStack(alignment: .leading) {
+                        timeText
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Text(title)
+                            .font(.headline)
+                    }
                 }
                 HStack {
                     if distinctSubstanceNames.isEmpty {
@@ -131,25 +136,28 @@ struct ExperienceRowContent: View {
                         Text(distinctSubstanceNames, format: .list(type: .and))
                     }
                     Spacer()
-                    if let rating {
+                    if let rating, locationName == nil {
                         Text(rating.stringRepresentation)
                     }
                 }
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 Spacer().frame(height: 5)
-                HStack {
-                    if let locationName {
+                if let locationName {
+                    HStack {
                         HStack(spacing: 2) {
                             Image(systemName: "mappin")
                             Text(locationName).lineLimit(1)
                         }
+                        Spacer()
+                        if let rating {
+                            Text(rating.stringRepresentation)
+                        }
                     }
-                    Spacer()
-                    timeText
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
                 }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+
             }
 
         }
@@ -159,7 +167,7 @@ struct ExperienceRowContent: View {
         if isTimeRelative {
             return Text(sortDate, format: .relative(presentation: .numeric, unitsStyle: .wide))
         } else {
-            return Text(sortDate, format: Date.FormatStyle().day().month().year())
+            return Text(sortDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
         }
     }
 
