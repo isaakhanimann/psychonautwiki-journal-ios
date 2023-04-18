@@ -23,18 +23,18 @@ struct CumulativeDoseRow: View {
     let isHidingDosageDots: Bool
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "circle.fill")
-                    .font(.title2)
-                    .foregroundColor(substanceColor.swiftUIColor)
+        HStack {
+            Image(systemName: "circle.fill")
+                .font(.title2)
+                .foregroundColor(substanceColor.swiftUIColor)
+            VStack(alignment: .leading) {
                 Text(substanceName)
                     .font(.headline)
                     .foregroundColor(.primary)
-            }
-            VStack(alignment: .trailing, spacing: 4) {
-                ForEach(cumulativeRoutes) { routeItem in
-                    RouteItemView(routeItem: routeItem, isHidingDosageDots: isHidingDosageDots)
+                VStack {
+                    ForEach(cumulativeRoutes) { routeItem in
+                        RouteItemView(routeItem: routeItem, isHidingDosageDots: isHidingDosageDots)
+                    }
                 }
             }
         }
