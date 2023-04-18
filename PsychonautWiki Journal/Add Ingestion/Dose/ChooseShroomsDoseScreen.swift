@@ -62,6 +62,10 @@ struct ChooseShroomsDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    nextLink
+                }
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
@@ -71,6 +75,10 @@ struct ChooseShroomsDoseScreen: View {
             }
         } else {
             screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    nextLink
+                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -165,6 +173,7 @@ struct ChooseShroomsDoseScreen: View {
                 Text(remark)
             }
         }
+        .optionalScrollDismissesKeyboard()
         .navigationTitle("Psilocybin mushrooms")
     }
 
