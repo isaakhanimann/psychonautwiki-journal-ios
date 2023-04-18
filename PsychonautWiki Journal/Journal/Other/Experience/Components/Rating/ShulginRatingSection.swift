@@ -19,6 +19,7 @@ import SwiftUI
 struct ShulginRatingSection: View {
 
     @ObservedObject var experience: Experience
+    @ObservedObject var viewModel: ExperienceScreen.ViewModel
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
 
@@ -30,11 +31,40 @@ struct ShulginRatingSection: View {
                 NavigationLink {
                     EditRatingScreen(rating: rating)
                 } label: {
-                    RatingRow(
-                        rating: rating,
-                        timeDisplayStyle: timeDisplayStyle,
-                        firstIngestionTime: firstIngestionTime
-                    )
+                    let isRatingHidden = viewModel.hiddenRatings.contains(rating.id)
+                    HStack(alignment: .center) {
+                        if isRatingHidden {
+                            Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
+                        }
+                        RatingRow(
+                            rating: rating,
+                            timeDisplayStyle: timeDisplayStyle,
+                            firstIngestionTime: firstIngestionTime
+                        )
+                    }
+                    .swipeActions(edge: .leading) {
+                        if isRatingHidden {
+                            Button {
+                                viewModel.showRating(id: rating.id)
+                            } label: {
+                                Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
+                            }
+                        } else {
+                            Button {
+                                viewModel.hideRating(id: rating.id)
+                            } label: {
+                                Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
+                            }
+                        }
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            PersistenceController.shared.viewContext.delete(rating)
+                            PersistenceController.shared.saveViewContext()
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                    }
                 }
             }
             Button {

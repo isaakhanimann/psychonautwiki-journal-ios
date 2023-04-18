@@ -29,13 +29,16 @@ extension ExperienceScreen {
         @Published var interactions: [Interaction] = []
         @Published var substancesUsed: [Substance] = []
         @Published var hiddenIngestions: [ObjectIdentifier] = []
+        @Published var hiddenRatings: [ObjectIdentifier] = []
         @Published var sortedIngestions: [Ingestion] = []
         @Published var sortedRatings: [ShulginRating] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
-            sortedRatings.map({ shulgin in
-                EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
-            })
+            sortedRatings
+                .filter {!hiddenRatings.contains($0.id)}
+                .map({ shulgin in
+                    EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                })
         }
 
 
@@ -111,6 +114,18 @@ extension ExperienceScreen {
 
         func hideIngestion(id: ObjectIdentifier) {
             hiddenIngestions.append(id)
+            calculateTimeline()
+        }
+
+        func showRating(id: ObjectIdentifier) {
+            hiddenRatings.removeAll { hiddenID in
+                hiddenID == id
+            }
+            calculateTimeline()
+        }
+
+        func hideRating(id: ObjectIdentifier) {
+            hiddenRatings.append(id)
             calculateTimeline()
         }
 

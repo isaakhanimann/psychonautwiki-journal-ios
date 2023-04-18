@@ -287,6 +287,7 @@ struct ExperienceScreen: View {
             }
             ShulginRatingSection(
                 experience: experience,
+                viewModel: viewModel,
                 timeDisplayStyle: timeDisplayStyle,
                 firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
             )
