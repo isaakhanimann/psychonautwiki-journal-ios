@@ -47,7 +47,13 @@ struct AddRatingScreen: View {
                     }
                 }
             }
-
+        }
+        .onAppear {
+            if experience.isCurrent {
+                selectedTime = Date()
+            } else {
+                selectedTime = experience.sortDateUnwrapped.addingTimeInterval(30*60)
+            }
         }
     }
 
@@ -68,13 +74,6 @@ struct AddRatingScreen: View {
             selectedRating: $selectedRating
         )
         .navigationTitle("Add Rating")
-        .onAppear {
-            if experience.isCurrent {
-                selectedTime = Date()
-            } else {
-                selectedTime = experience.sortDateUnwrapped.addingTimeInterval(30*60)
-            }
-        }
     }
 
     func save() {
