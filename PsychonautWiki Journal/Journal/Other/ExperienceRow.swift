@@ -122,9 +122,15 @@ struct ExperienceRowContent: View {
                     }
                     Spacer().frame(width: 10)
                     VStack(alignment: .leading) {
-                        timeText
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundColor(.secondary)
+                        HStack {
+                            timeText
+                            Spacer()
+                            if let rating, locationName == nil {
+                                Text(rating.stringRepresentation)
+                            }
+                        }
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundColor(.secondary)
                         Text(title)
                             .font(.headline)
                     }
@@ -135,23 +141,13 @@ struct ExperienceRowContent: View {
                     } else {
                         Text(distinctSubstanceNames, format: .list(type: .and))
                     }
-                    Spacer()
-                    if let rating, locationName == nil {
-                        Text(rating.stringRepresentation)
-                    }
                 }
                 .foregroundColor(.secondary)
                 Spacer().frame(height: 5)
                 if let locationName {
-                    HStack {
-                        HStack(spacing: 2) {
-                            Image(systemName: "mappin")
-                            Text(locationName).lineLimit(1)
-                        }
-                        Spacer()
-                        if let rating {
-                            Text(rating.stringRepresentation)
-                        }
+                    HStack(spacing: 2) {
+                        Image(systemName: "mappin")
+                        Text(locationName).lineLimit(1)
                     }
                     .foregroundColor(.secondary)
                 }
