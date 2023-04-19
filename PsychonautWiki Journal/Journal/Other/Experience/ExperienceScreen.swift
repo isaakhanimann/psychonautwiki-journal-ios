@@ -167,7 +167,11 @@ struct ExperienceScreen: View {
                 Section {
                     let timelineHeight: Double = 200
                     if let timelineModel = viewModel.timelineModel {
-                        EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
+                        NavigationLink {
+                            TimelineScreen(timelineModel: timelineModel)
+                        } label: {
+                            EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
+                        }
                     } else {
                         Canvas {_,_ in }.frame(height: timelineHeight)
                     }

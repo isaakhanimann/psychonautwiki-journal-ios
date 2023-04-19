@@ -109,7 +109,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                 EffectTimeline(
                     timelineModel: TimelineModel(
                         everythingForEachLine: everythingForEachLine,
-                        everythingForEachRating: []
+                        everythingForEachRating: everythingForEachRating
                     ),
                     height: 200
                 )
