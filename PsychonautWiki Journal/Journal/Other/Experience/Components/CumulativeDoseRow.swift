@@ -53,11 +53,11 @@ struct RouteItemView: View {
 
     var body: some View {
         HStack {
-            let routeText = isEyeOpen ? routeItem.route.rawValue.localizedCapitalized : ""
+            let routeText = isEyeOpen ? routeItem.route.rawValue : ""
             if let doseUnwrapped = routeItem.dose {
                 Text("\(routeItem.isEstimate ? "~": "")\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
             } else {
-                Text("Unknown Dose \(routeText)")
+                Text("Unknown dose \(routeText)")
             }
             Spacer()
             if let numDotsUnwrap = routeItem.numDots, !isHidingDosageDots {
