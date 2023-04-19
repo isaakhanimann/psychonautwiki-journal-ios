@@ -136,7 +136,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
 struct Location: Identifiable, Equatable {
     var id: String {
-        name + (longitude?.description ?? "") + (latitude?.description ?? "")
+        name
+    }
+
+    static func ==(lhs: Location, rhs: Location) -> Bool {
+        return lhs.id == rhs.id
     }
     let name: String
     let longitude: Double?

@@ -42,15 +42,17 @@ struct ChooseLocationScreenContent: View {
                 if isLoadingLocationResults {
                     ProgressView()
                 } else if !searchSuggestedLocations.isEmpty {
-                    ForEach(searchSuggestedLocations) { location in
-                        Button {
-                            withAnimation {
-                                selectedLocation = location
-                                selectedLocationName = location.name
-                                dismissSearch()
+                    Section("Search Results") {
+                        ForEach(searchSuggestedLocations) { location in
+                            Button {
+                                withAnimation {
+                                    selectedLocation = location
+                                    selectedLocationName = location.name
+                                    dismissSearch()
+                                }
+                            } label: {
+                                Label(location.name, systemImage: "mappin")
                             }
-                        } label: {
-                            Label(location.name, systemImage: "mappin")
                         }
                     }
                 }
@@ -114,28 +116,27 @@ struct ChooseLocationScreenContent: View {
                         }
                     }
                 }
-            }
-            if !experienceLocations.isEmpty || currentLocation != nil {
-                Section("Suggestions") {
-                    if let currentLocation {
-                        Button {
-                            withAnimation {
-                                selectedLocation = currentLocation
-                                selectedLocationName = currentLocation.name
-                                dismissSearch()
+                if !experienceLocations.isEmpty || currentLocation != nil {
+                    Section("Suggestions") {
+                        if let currentLocation {
+                            Button {
+                                withAnimation {
+                                    selectedLocation = currentLocation
+                                    selectedLocationName = currentLocation.name
+                                }
+                            } label: {
+                                Label("Current Location", systemImage: "location")
                             }
-                        } label: {
-                            Label("Current Location", systemImage: "location")
                         }
-                    }
-                    ForEach(experienceLocations) { location in
-                        Button {
-                            withAnimation {
-                                selectedLocation = location
-                                selectedLocationName = location.name
+                        ForEach(experienceLocations) { location in
+                            Button {
+                                withAnimation {
+                                    selectedLocation = location
+                                    selectedLocationName = location.name
+                                }
+                            } label: {
+                                Label(location.name, systemImage: "clock.arrow.circlepath")
                             }
-                        } label: {
-                            Label(location.name, systemImage: "clock.arrow.circlepath")
                         }
                     }
                 }
