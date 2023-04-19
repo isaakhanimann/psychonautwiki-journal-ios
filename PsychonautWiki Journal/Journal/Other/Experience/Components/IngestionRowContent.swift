@@ -116,7 +116,7 @@ struct IngestionRowContent: View {
                             DotRows(numDots: numDotsUnwrap)
                         }
                     }
-                    .font(.subheadline.weight(.semibold))
+                    .font(.headline)
                 }
             }
             Group {

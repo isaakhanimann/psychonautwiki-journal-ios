@@ -123,7 +123,7 @@ struct ExperienceRowContent: View {
                     Spacer().frame(width: 10)
                     VStack(alignment: .leading) {
                         timeText
-                            .font(.subheadline)
+                            .font(.subheadline.weight(.semibold))
                             .foregroundColor(.secondary)
                         Text(title)
                             .font(.headline)
@@ -140,7 +140,6 @@ struct ExperienceRowContent: View {
                         Text(rating.stringRepresentation)
                     }
                 }
-                .font(.subheadline)
                 .foregroundColor(.secondary)
                 Spacer().frame(height: 5)
                 if let locationName {
@@ -154,12 +153,9 @@ struct ExperienceRowContent: View {
                             Text(rating.stringRepresentation)
                         }
                     }
-                    .font(.subheadline)
                     .foregroundColor(.secondary)
                 }
-
             }
-
         }
     }
 
