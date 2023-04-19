@@ -23,28 +23,49 @@ struct ExperienceTitleScreen: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                TextField("Enter Title", text: $title)
-                    .onSubmit {
-                        dismiss()
+            if #available(iOS 16, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
                     }
-                    .submitLabel(.done)
-                    .focused($textFieldIsFocused)
-                    .autocapitalization(.sentences)
-            }
-            .optionalScrollDismissesKeyboard()
-            .navigationTitle("Experience Title")
-            .onAppear {
-                textFieldIsFocused = true
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Done") {
-                        dismiss()
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        doneButton
+                    }
+                }
+            } else {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        doneButton
                     }
                 }
             }
         }
+        .onAppear {
+            textFieldIsFocused = true
+        }
+    }
+
+    private var doneButton: some View {
+        DoneButton {
+            dismiss()
+        }
+    }
+
+    private var screen: some View {
+        Form {
+            TextField("Enter Title", text: $title)
+                .onSubmit {
+                    dismiss()
+                }
+                .submitLabel(.done)
+                .focused($textFieldIsFocused)
+                .autocapitalization(.sentences)
+        }
+        .optionalScrollDismissesKeyboard()
+        .navigationTitle("Experience Title")
     }
 }
 

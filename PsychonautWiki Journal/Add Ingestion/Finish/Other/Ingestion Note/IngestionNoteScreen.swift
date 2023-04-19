@@ -25,39 +25,60 @@ struct IngestionNoteScreen: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                TextField("Enter Note", text: $note)
-                    .onSubmit {
-                        dismiss()
+            if #available(iOS 16, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
                     }
-                    .submitLabel(.done)
-                    .focused($textFieldIsFocused)
-                    .autocapitalization(.sentences)
-                if !viewModel.suggestedNotesInOrder.isEmpty {
-                    Section("Suggestions") {
-                        ForEach(viewModel.suggestedNotesInOrder, id: \.self) { suggestedNote in
-                            Button {
-                                note = suggestedNote
-                            } label: {
-                                Label(suggestedNote, systemImage: "doc.on.doc").lineLimit(1)
-                            }.foregroundColor(.primary)
-                        }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        doneButton
                     }
                 }
-            }
-            .optionalScrollDismissesKeyboard()
-            .navigationTitle("Ingestion Note")
-            .onAppear {
-                textFieldIsFocused = true
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Done") {
-                        dismiss()
+            } else {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        doneButton
                     }
                 }
             }
         }
+        .onAppear {
+            textFieldIsFocused = true
+        }
+    }
+
+    private var doneButton: some View {
+        DoneButton {
+            dismiss()
+        }
+    }
+
+    private var screen: some View {
+        Form {
+            TextField("Enter Note", text: $note)
+                .onSubmit {
+                    dismiss()
+                }
+                .submitLabel(.done)
+                .focused($textFieldIsFocused)
+                .autocapitalization(.sentences)
+            if !viewModel.suggestedNotesInOrder.isEmpty {
+                Section("Suggestions") {
+                    ForEach(viewModel.suggestedNotesInOrder, id: \.self) { suggestedNote in
+                        Button {
+                            note = suggestedNote
+                        } label: {
+                            Label(suggestedNote, systemImage: "doc.on.doc").lineLimit(1)
+                        }.foregroundColor(.primary)
+                    }
+                }
+            }
+        }
+        .optionalScrollDismissesKeyboard()
+        .navigationTitle("Ingestion Note")
     }
 }
 
