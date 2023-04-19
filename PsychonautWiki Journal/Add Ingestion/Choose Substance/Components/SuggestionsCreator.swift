@@ -18,6 +18,7 @@ import Foundation
 
 class SuggestionsCreator {
     var suggestions: [Suggestion] = []
+    private let maxNumberOfSuggestions = 10
 
     init(sortedIngestions: [Ingestion]) {
         sortedIngestions.forEach { ingestion in
@@ -37,7 +38,7 @@ class SuggestionsCreator {
 
     private func maybeAdd(ingestion: Ingestion, to suggestion: Suggestion) {
         let doseAndUnit = DoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped, isEstimate: ingestion.isEstimate)
-        if !suggestion.dosesAndUnit.contains(doseAndUnit) {
+        if !suggestion.dosesAndUnit.contains(doseAndUnit) && suggestion.dosesAndUnit.count < maxNumberOfSuggestions {
             suggestion.dosesAndUnit.append(doseAndUnit)
         }
     }
