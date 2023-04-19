@@ -103,13 +103,11 @@ struct IngestionRowContent: View {
                         .font(.subheadline)
                     }
                     HStack {
+                        let routeText = isEyeOpen ? administrationRoute.rawValue.localizedCapitalized : ""
                         if let doseUnwrapped = dose {
-                            Text((isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + units).multilineTextAlignment(.trailing)
+                            Text("\(isEstimate ? "~": "") \(doseUnwrapped.formatted()) \(units) \(routeText)").multilineTextAlignment(.trailing)
                         } else {
-                            Text("Unknown Dose")
-                        }
-                        if isEyeOpen {
-                            Text(administrationRoute.rawValue.localizedCapitalized)
+                            Text("Unknown Dose \(routeText)")
                         }
                         Spacer()
                         if let numDotsUnwrap = numDots, !isHidingDosageDots {

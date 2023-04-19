@@ -263,7 +263,8 @@ struct ExperienceScreen: View {
                                         substanceName: cumulative.substanceName,
                                         substanceColor: cumulative.substanceColor,
                                         cumulativeRoutes: cumulative.cumulativeRoutes,
-                                        isHidingDosageDots: isHidingDosageDots
+                                        isHidingDosageDots: isHidingDosageDots,
+                                        isEyeOpen: isEyeOpen
                                     )
                                 }
                             } else {
@@ -271,7 +272,8 @@ struct ExperienceScreen: View {
                                     substanceName: cumulative.substanceName,
                                     substanceColor: cumulative.substanceColor,
                                     cumulativeRoutes: cumulative.cumulativeRoutes,
-                                    isHidingDosageDots: isHidingDosageDots
+                                    isHidingDosageDots: isHidingDosageDots,
+                                    isEyeOpen: isEyeOpen
                                 )
                             }
                         }

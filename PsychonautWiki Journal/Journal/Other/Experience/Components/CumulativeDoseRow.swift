@@ -21,6 +21,7 @@ struct CumulativeDoseRow: View {
     let substanceColor: SubstanceColor
     let cumulativeRoutes: [CumulativeRouteAndDose]
     let isHidingDosageDots: Bool
+    let isEyeOpen: Bool
 
     var body: some View {
         HStack {
@@ -33,7 +34,11 @@ struct CumulativeDoseRow: View {
                     .foregroundColor(.primary)
                 VStack {
                     ForEach(cumulativeRoutes) { routeItem in
-                        RouteItemView(routeItem: routeItem, isHidingDosageDots: isHidingDosageDots)
+                        RouteItemView(
+                            routeItem: routeItem,
+                            isHidingDosageDots: isHidingDosageDots,
+                            isEyeOpen: isEyeOpen
+                        )
                     }
                 }
             }
@@ -44,15 +49,16 @@ struct CumulativeDoseRow: View {
 struct RouteItemView: View {
     let routeItem: CumulativeRouteAndDose
     let isHidingDosageDots: Bool
+    let isEyeOpen: Bool
 
     var body: some View {
         HStack {
+            let routeText = isEyeOpen ? routeItem.route.rawValue.localizedCapitalized : ""
             if let doseUnwrapped = routeItem.dose {
-                Text((routeItem.isEstimate ? "~": "") + doseUnwrapped.formatted() + " " + routeItem.units).multilineTextAlignment(.trailing)
+                Text("\(routeItem.isEstimate ? "~": "") \(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
             } else {
-                Text("Unknown Dose")
+                Text("Unknown Dose \(routeText)")
             }
-            Text(routeItem.route.rawValue.localizedCapitalized)
             Spacer()
             if let numDotsUnwrap = routeItem.numDots, !isHidingDosageDots {
                 DotRows(numDots: numDotsUnwrap)
@@ -84,7 +90,8 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             units: "mg"
                         )
                     ],
-                    isHidingDosageDots: false
+                    isHidingDosageDots: false,
+                    isEyeOpen: true
                 )
                 CumulativeDoseRow(
                     substanceName: "Amphetamine",
@@ -105,7 +112,8 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             units: "mg"
                         )
                     ],
-                    isHidingDosageDots: false
+                    isHidingDosageDots: false,
+                    isEyeOpen: true
                 )
             }
         }
