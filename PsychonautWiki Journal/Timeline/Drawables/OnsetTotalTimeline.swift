@@ -20,7 +20,7 @@ import SwiftUI
 struct OnsetTotalTimeline: TimelineDrawable {
 
     var width: TimeInterval {
-        onsetDelayInSeconds + total.max
+        onsetDelayInSeconds + onset.max + total.max
     }
 
     func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
@@ -65,14 +65,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path1.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndX,
-            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
+            endX: onsetEndX + totalX/2,
             endY: top
         )
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
+            startX: onsetEndX + totalX/2,
             startY: top,
-            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX,
+            endX: onsetEndX + totalX,
             endY: bottom
         )
         context.stroke(
@@ -93,13 +93,13 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let top = (1-verticalWeigth)*height
         let bottom = height
         let onsetEndMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
+        let onsetEndAverageX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: 0.5)) * pixelsPerSec
         let onsetEndMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
-        let halfTotalX = startX + onsetDelayInSeconds*pixelsPerSec + totalX/2
+        let halfTotalX = onsetEndAverageX + totalX/2
         let totalMinX =
         startX + (onsetDelayInSeconds + total.min) * pixelsPerSec
-        let totalMaxX = startX +
-        (onsetDelayInSeconds + total.max) * pixelsPerSec
+        let totalMaxX = onsetEndMaxX + total.max * pixelsPerSec
         var path = Path()
         path.move(to: CGPoint(x:onsetEndMinX, y: bottom))
         path.endSmoothLineTo(
