@@ -241,7 +241,7 @@ struct ExperienceScreen: View {
                 } header: {
                     HStack {
                         let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
-                        Text(firstDate, style: .date)
+                        Text(firstDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                         if isEyeOpen {
                             Spacer()
                             NavigationLink {

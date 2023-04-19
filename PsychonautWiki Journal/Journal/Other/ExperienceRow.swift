@@ -133,7 +133,7 @@ struct ExperienceRowContent: View {
                             }
                         }
                         .foregroundColor(.secondary)
-                        .font(.subheadline.weight(.semibold))
+                        .font(.footnote.weight(.bold))
                         Text(title)
                             .font(.headline)
                     }
