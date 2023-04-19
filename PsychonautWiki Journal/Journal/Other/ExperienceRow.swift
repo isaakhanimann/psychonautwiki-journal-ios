@@ -146,8 +146,8 @@ struct ExperienceRowContent: View {
                 if let locationName {
                     HStack {
                         HStack(spacing: 2) {
-                            Text(locationName).lineLimit(1)
                             Image(systemName: "mappin")
+                            Text(locationName).lineLimit(1)
                         }
                         Spacer()
                         if let rating {
