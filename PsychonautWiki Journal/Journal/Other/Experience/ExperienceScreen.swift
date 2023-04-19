@@ -283,12 +283,19 @@ struct ExperienceScreen: View {
             }
             let notes = experience.textUnwrapped
             if !notes.isEmpty {
-                Section("Notes") {
+                Section {
                     Text(notes)
                         .padding(.vertical, 5)
-                        .onTapGesture {
+                } header: {
+                    HStack {
+                        Text("Notes")
+                        Spacer()
+                        Button {
                             sheetToShow = .titleAndNote
+                        } label: {
+                            Label("Edit", systemImage: "pencil").labelStyle(.iconOnly)
                         }
+                    }
                 }
             }
             ShulginRatingSection(

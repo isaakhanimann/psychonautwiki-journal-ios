@@ -53,27 +53,57 @@ struct EditExperienceContent: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                Section("Title") {
-                    TextField("Enter Title", text: $title)
-                        .autocapitalization(.sentences)
+            if #available(iOS 16, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                        doneButton
+                    }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                        doneButton
+                    }
                 }
-                Section("Notes") {
-                    TextEditor(text: $notes)
-                        .autocapitalization(.sentences)
-                        .frame(minHeight: 300)
-                }
-            }
-            .navigationTitle("Edit Experience")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel", action: dismiss)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done", action: save)
+            } else {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                        doneButton
+                    }
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        doneButton
+                    }
                 }
             }
         }
+    }
+
+    private var doneButton: some View {
+        DoneButton {
+            save()
+        }
+    }
+
+    private var screen: some View {
+        Form {
+            Section("Title") {
+                TextField("Enter Title", text: $title)
+                    .autocapitalization(.sentences)
+            }
+            Section("Notes") {
+                TextEditor(text: $notes)
+                    .autocapitalization(.sentences)
+                    .frame(minHeight: 300)
+            }
+        }
+        .navigationTitle("Edit Experience")
     }
 }
 
