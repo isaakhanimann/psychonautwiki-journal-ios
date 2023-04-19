@@ -60,17 +60,18 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path0.addLine(to: CGPoint(x: onsetEndX, y: bottom))
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        let topPointX = onsetEndX + (total.interpolateAtValueInSeconds(weight: totalWeight) - onset.interpolateAtValueInSeconds(weight: onsetWeight))/2 * pixelsPerSec
         var path1 = Path()
         path1.move(to: CGPoint(x: onsetEndX, y: bottom))
         path1.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndX,
-            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
+            endX: topPointX,
             endY: top
         )
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: startX + onsetDelayInSeconds*pixelsPerSec + totalX/2,
+            startX: topPointX,
             startY: top,
             endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX,
             endY: bottom
@@ -93,24 +94,26 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let top = (1-verticalWeigth)*height
         let bottom = height
         let onsetEndMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
+        let onsetWeight = 0.5
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: onsetWeight)) * pixelsPerSec
         let onsetEndMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
         let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
-        let halfTotalX = startX + onsetDelayInSeconds*pixelsPerSec + totalX/2
         let totalMinX =
         startX + (onsetDelayInSeconds + total.min) * pixelsPerSec
         let totalMaxX = startX +
         (onsetDelayInSeconds + total.max) * pixelsPerSec
+        let topPointX = onsetEndX + (total.interpolateAtValueInSeconds(weight: totalWeight) - onset.interpolateAtValueInSeconds(weight: onsetWeight))/2 * pixelsPerSec
         var path = Path()
         path.move(to: CGPoint(x:onsetEndMinX, y: bottom))
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetEndMinX,
-            endX: halfTotalX,
+            endX: topPointX,
             endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: halfTotalX,
+            startX: topPointX,
             startY: top,
             endX: totalMaxX,
             endY: bottom
@@ -119,12 +122,12 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path.endSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: totalMinX,
-            endX: halfTotalX,
+            endX: topPointX,
             endY: top
         )
         path.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
-            startX: halfTotalX,
+            startX: topPointX,
             startY: top,
             endX: onsetEndMaxX,
             endY: bottom
