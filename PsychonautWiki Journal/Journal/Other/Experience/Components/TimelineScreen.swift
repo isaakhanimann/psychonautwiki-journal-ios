@@ -19,38 +19,52 @@ import SwiftUI
 struct TimelineScreen: View {
     let timelineModel: TimelineModel
     @State private var zoomLevel = 1.0
-    @State private var deviceOrientation = UIDeviceOrientation.portrait
-
-    var isOrientationLandscape: Bool {
-        deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight
-    }
+    @State private var isOrientationLandscape = false
 
     var body: some View {
         VStack {
             GeometryReader { geo in
                 ScrollView(.horizontal, showsIndicators: true) {
-                    EffectTimeline(timelineModel: timelineModel, height: isOrientationLandscape ? geo.size.height : 300)
-                        .frame(width: geo.size.width * zoomLevel)
-                        .padding(.bottom)
+                    VStack {
+                        Spacer()
+                        EffectTimeline(timelineModel: timelineModel, height: isOrientationLandscape ? geo.size.height : 300)
+                            .frame(width: geo.size.width * zoomLevel)
+                        Spacer()
+                    }
                 }
             }
             Slider(value: $zoomLevel, in: 1...6) {
                 Text("Zoom Level")
             }
+            .padding(.bottom, isOrientationLandscape ? 0 : 100)
         }
-        .padding(.top)
         .padding(.horizontal)
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            deviceOrientation = UIDevice.current.orientation
+            checkCurrentOrientation()
+        }
+        .onAppear {
+            checkCurrentOrientation()
+        }
+        .navigationTitle("Effect Timeline")
+    }
+
+    private func checkCurrentOrientation() {
+        let deviceOrientation = UIDevice.current.orientation
+        if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
+            isOrientationLandscape = true
+        } else if deviceOrientation == .portrait || deviceOrientation == .portraitUpsideDown {
+            isOrientationLandscape = false
         }
     }
 }
 
 struct TimelineScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TimelineScreen(timelineModel: TimelineModel(
-            everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
-            everythingForEachRating: EffectTimeline_Previews.everythingForEachRating
-        ))
+        NavigationView {
+            TimelineScreen(timelineModel: TimelineModel(
+                everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
+                everythingForEachRating: EffectTimeline_Previews.everythingForEachRating
+            ))
+        }
     }
 }

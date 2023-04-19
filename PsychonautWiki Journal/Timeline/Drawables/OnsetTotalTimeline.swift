@@ -97,7 +97,6 @@ struct OnsetTotalTimeline: TimelineDrawable {
         let onsetWeight = 0.5
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: onsetWeight)) * pixelsPerSec
         let onsetEndMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
-        let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
         let totalMinX =
         startX + (onsetDelayInSeconds + total.min) * pixelsPerSec
         let totalMaxX = startX +
