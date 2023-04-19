@@ -28,7 +28,7 @@ struct EditLocationLinkAndMap: View {
                 openLocationInAppleMaps(latitude: lat, longitude: long, name: experienceLocation.nameUnwrapped)
             } label: {
                 MapWithPinView(latitude: lat, longitude: long)
-                    .frame(height: 100)
+                    .frame(height: 150)
                     .allowsHitTesting(false)
             }
             .listRowInsets(EdgeInsets())
