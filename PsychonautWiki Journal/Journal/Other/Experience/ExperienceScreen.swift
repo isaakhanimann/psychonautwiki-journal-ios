@@ -298,12 +298,14 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            ShulginRatingSection(
-                experience: experience,
-                viewModel: viewModel,
-                timeDisplayStyle: timeDisplayStyle,
-                firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
-            )
+            if isEyeOpen {
+                ShulginRatingSection(
+                    experience: experience,
+                    viewModel: viewModel,
+                    timeDisplayStyle: timeDisplayStyle,
+                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
+                )
+            }
             if isEyeOpen {
                 if !viewModel.substancesUsed.isEmpty {
                     Section("Info") {
