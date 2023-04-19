@@ -61,6 +61,7 @@
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
 		EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2BE2976C0D600A1051A /* NextLabel.swift */; };
 		EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */; };
+		EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */; };
 		EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A029714B2F00B3A474 /* TestingScreen.swift */; };
 		EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */; };
 		EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */; };
@@ -330,6 +331,7 @@
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
 		EA26B2BE2976C0D600A1051A /* NextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLabel.swift; sourceTree = "<group>"; };
 		EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardButton.swift; sourceTree = "<group>"; };
+		EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		EA2A69A029714B2F00B3A474 /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
 		EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDoseScreen.swift; sourceTree = "<group>"; };
 		EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferRoutesScreen.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 				EA095A1027D9E3D0007D44D6 /* Dose */,
 				EA095A1127D9E3E8007D44D6 /* Finish */,
 				EA26B2BE2976C0D600A1051A /* NextLabel.swift */,
+				EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */,
 				EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */,
 				EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */,
 			);
@@ -1513,6 +1516,7 @@
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
+				EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */,
 				EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */,
 				EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,

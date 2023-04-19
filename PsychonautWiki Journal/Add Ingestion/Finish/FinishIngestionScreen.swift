@@ -65,7 +65,7 @@ struct FinishIngestionScreen: View {
     }
 
     var doneButton: some View {
-        Button {
+        DoneButton {
             Task {
                 do {
                     try await viewModel.addIngestion(
@@ -87,8 +87,6 @@ struct FinishIngestionScreen: View {
                     }
                 }
             }
-        } label: {
-            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
     }
 
@@ -180,7 +178,7 @@ struct FinishIngestionScreen: View {
             case .editNote:
                 IngestionNoteScreen(note: $viewModel.enteredNote)
             case .editLocation:
-                ChooseLocationScreen(locationManager: locationManager)
+                ChooseLocationScreen(locationManager: locationManager, onDone: {})
             }
         })
         .task {

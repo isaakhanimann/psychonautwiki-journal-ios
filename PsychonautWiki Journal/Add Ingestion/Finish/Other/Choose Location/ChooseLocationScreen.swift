@@ -19,44 +19,78 @@ import SwiftUI
 struct ChooseLocationScreen: View {
 
     @ObservedObject var locationManager: LocationManager
+    let onDone: () -> Void
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
-            ChooseLocationScreenContent(
-                selectedLocation: $locationManager.selectedLocation,
-                selectedLocationName: $locationManager.selectedLocationName,
-                searchText: $locationManager.searchText,
-                authorizationStatus: locationManager.authorizationStatus,
-                isLoadingLocationResults: locationManager.isSearchingForLocations,
-                currentLocation: locationManager.currentLocation,
-                searchSuggestedLocations: locationManager.searchSuggestedLocations,
-                experienceLocations: locationManager.experienceLocations
-            )
-            .searchable(
-                text: $locationManager.searchText,
-                placement: .navigationBarDrawer(displayMode: .always),
-                prompt: "Search Location"
-            )
-            .disableAutocorrection(true)
-            .onSubmit(of: .search) {
-                locationManager.searchLocations()
-            }
-            .task {
-                if locationManager.authorizationStatus == .notDetermined {
-                    locationManager.requestPermission()
+            if #available(iOS 16, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                        doneButton
+                    }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                        doneButton
+                    }
                 }
-                locationManager.maybeRequestLocation()
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Done") {
-                        dismiss()
+            } else {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        HideKeyboardButton()
+                        doneButton
+                    }
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        doneButton
                     }
                 }
             }
-            .navigationTitle("Experience Location")
         }
+        .task {
+            if locationManager.authorizationStatus == .notDetermined {
+                locationManager.requestPermission()
+            }
+            locationManager.maybeRequestLocation()
+        }
+    }
+
+    var doneButton: some View {
+        DoneButton {
+            onDone()
+            dismiss()
+        }
+    }
+
+    var screen: some View {
+        ChooseLocationScreenContent(
+            selectedLocation: $locationManager.selectedLocation,
+            selectedLocationName: $locationManager.selectedLocationName,
+            searchText: $locationManager.searchText,
+            authorizationStatus: locationManager.authorizationStatus,
+            isLoadingLocationResults: locationManager.isSearchingForLocations,
+            currentLocation: locationManager.currentLocation,
+            searchSuggestedLocations: locationManager.searchSuggestedLocations,
+            experienceLocations: locationManager.experienceLocations
+        )
+        .searchable(
+            text: $locationManager.searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: "Search Location"
+        )
+        .disableAutocorrection(true)
+        .optionalScrollDismissesKeyboard()
+        .onSubmit(of: .search) {
+            locationManager.searchLocations()
+        }
+        .navigationTitle("Experience Location")
     }
 }
 

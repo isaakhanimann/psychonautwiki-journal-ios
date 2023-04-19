@@ -20,23 +20,26 @@ struct AddLocationScreen: View {
 
     @ObservedObject var locationManager: LocationManager
     @ObservedObject var experience: Experience
-    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ChooseLocationScreen(locationManager: locationManager)
-            .onAppear {
-                locationManager.selectedLocation = nil
-                locationManager.selectedLocationName = ""
-            }
-            .onDisappear {
-                if let selectedLocation = locationManager.selectedLocation {
-                    let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
-                    newLocation.name = selectedLocation.name
-                    newLocation.latitude = selectedLocation.latitude ?? 0
-                    newLocation.longitude = selectedLocation.longitude ?? 0
-                    newLocation.experience = experience
-                }
-                PersistenceController.shared.saveViewContext()
-            }
+        ChooseLocationScreen(
+            locationManager: locationManager,
+            onDone: onDone
+        )
+        .onAppear {
+            locationManager.selectedLocation = nil
+            locationManager.selectedLocationName = ""
+        }
+    }
+
+    private func onDone() {
+        if let selectedLocation = locationManager.selectedLocation {
+            let newLocation = ExperienceLocation(context: PersistenceController.shared.viewContext)
+            newLocation.name = selectedLocation.name
+            newLocation.latitude = selectedLocation.latitude ?? 0
+            newLocation.longitude = selectedLocation.longitude ?? 0
+            newLocation.experience = experience
+            PersistenceController.shared.saveViewContext()
+        }
     }
 }
