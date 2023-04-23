@@ -25,17 +25,22 @@ class ActivityManager: ObservableObject {
     let authorizationInfo = ActivityAuthorizationInfo()
     @Published var activity: Activity<TimelineWidgetAttributes>? = nil
     @Published var isActivityActive = false
+    private var activityStateTask: Task<Void, Never>?
 
     init() {
         if let first = Activity<TimelineWidgetAttributes>.activities.first {
+            self.isActivityActive = first.activityState == .active
             self.activity = first
-            Task {
+            self.activityStateTask = Task {
                 for await activityState in first.activityStateUpdates {
                     self.isActivityActive = activityState == .active
                 }
             }
         }
+    }
 
+    deinit {
+        activityStateTask?.cancel()
     }
 
     func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
@@ -62,7 +67,7 @@ class ActivityManager: ObservableObject {
                 pushType: nil
             )
             self.activity = newActivity
-            Task {
+            self.activityStateTask = Task {
                 for await activityState in newActivity.activityStateUpdates {
                     self.isActivityActive = activityState == .active
                 }
@@ -85,7 +90,9 @@ class ActivityManager: ObservableObject {
             let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             let finalContent = ActivityContent(state: state, staleDate: nil)
             Task {
-                await activity?.end(finalContent, dismissalPolicy: .immediate)
+                for activity in Activity<TimelineWidgetAttributes>.activities {
+                    await activity.end(finalContent, dismissalPolicy: .immediate)
+                }
             }
         }
     }
