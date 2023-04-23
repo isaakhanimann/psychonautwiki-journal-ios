@@ -22,13 +22,13 @@ struct ChooseAlcoholDoseScreen: View {
     var oralDose: RoaDose {
         alcohol.getDose(for: .oral)!
     }
-    @State private var drinkAmountInCl = 5.0
+    @State private var drinkAmountInDL = 5.0
     @State private var alcoholContentInPercent = 5.0
     @State private var isEstimate = true
     let units = "g"
 
     private var ingestedAlcoholDoseInMl: Double {
-        drinkAmountInCl * 100 * alcoholContentInPercent / 100
+        drinkAmountInDL * 100 * alcoholContentInPercent / 100
     }
 
     private var ingestedAlcoholDoseInGrams: Double {
@@ -44,7 +44,7 @@ struct ChooseAlcoholDoseScreen: View {
     }
 
     private var suggestedNote: String {
-        "\(Int(drinkAmountInCl)) cL with \(Int(alcoholContentInPercent))% Alcohol"
+        "\(Int(drinkAmountInDL)) dL with \(Int(alcoholContentInPercent))% Alcohol"
     }
 
     var body: some View {
@@ -115,9 +115,9 @@ struct ChooseAlcoholDoseScreen: View {
             }
             Section {
                 VStack {
-                    Text("\(Int(drinkAmountInCl)) cL").font(.title2.bold())
+                    Text("\(Int(drinkAmountInDL)) dL").font(.title2.bold())
                     Slider(
-                        value: $drinkAmountInCl,
+                        value: $drinkAmountInDL,
                         in: 1...20,
                         step: 1
                     ) {
@@ -131,7 +131,7 @@ struct ChooseAlcoholDoseScreen: View {
             } header: {
                 Text("Drink Size")
             } footer: {
-                Text("1 cL = 1/10 L")
+                Text("1 dL = 1/10 L = 100 mL")
             }
             Section("Alcohol Content") {
                 VStack {
