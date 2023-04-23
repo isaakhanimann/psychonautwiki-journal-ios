@@ -151,7 +151,7 @@ struct FinishIngestionScreen: View {
                     }
                     if #available(iOS 16.2, *) {
                         let isTimeRecentOrFuture = Date().timeIntervalSinceReferenceDate - viewModel.selectedTime.timeIntervalSinceReferenceDate < 12*60*60
-                        if !ActivityManager.shared.isActivityActive && isTimeRecentOrFuture {
+                        if ActivityManager.shared.authorizationInfo.areActivitiesEnabled && !ActivityManager.shared.isActivityActive && isTimeRecentOrFuture {
                             Toggle("Start Live Activity", isOn: $viewModel.wantsToStartLiveActivity).tint(.accentColor)
                         }
                     }
