@@ -28,7 +28,7 @@ struct ChooseAlcoholDoseScreen: View {
     let units = "g"
 
     private var ingestedAlcoholDoseInMl: Double {
-        drinkAmountInDL * 100 * alcoholContentInPercent / 100
+        drinkAmountInDL * alcoholContentInPercent
     }
 
     private var ingestedAlcoholDoseInGrams: Double {
