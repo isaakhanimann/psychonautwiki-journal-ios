@@ -135,7 +135,7 @@ extension ExperienceScreen {
             calculateTimeline()
             findInteractions()
             if #available(iOS 16.2, *) {
-                if let lastTime = sortedIngestions.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) {
+                if let lastTime = sortedIngestions.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
                     startOrUpdateLiveActivity()
                 }
             }

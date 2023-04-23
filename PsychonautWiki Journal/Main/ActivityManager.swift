@@ -23,16 +23,14 @@ class ActivityManager: ObservableObject {
 
     static let shared = ActivityManager()
     let authorizationInfo = ActivityAuthorizationInfo()
-    @Published var activity: Activity<TimelineWidgetAttributes>? = nil
     @Published var isActivityActive = false
     private var activityStateTask: Task<Void, Never>?
 
     init() {
-        if let first = Activity<TimelineWidgetAttributes>.activities.first {
-            self.isActivityActive = first.activityState == .active
-            self.activity = first
+        if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first {
+            self.isActivityActive = firstActivity.activityState == .active
             self.activityStateTask = Task {
-                for await activityState in first.activityStateUpdates {
+                for await activityState in firstActivity.activityStateUpdates {
                     self.isActivityActive = activityState == .active
                 }
             }
@@ -45,8 +43,8 @@ class ActivityManager: ObservableObject {
 
     func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
         if authorizationInfo.areActivitiesEnabled {
-            if let activity, isActivityActive {
-                updateActivity(activity: activity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+            if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first, firstActivity.activityState == .active {
+                updateActivity(activity: firstActivity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             } else {
                 startActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             }
@@ -66,7 +64,6 @@ class ActivityManager: ObservableObject {
                 content: content,
                 pushType: nil
             )
-            self.activity = newActivity
             self.activityStateTask = Task {
                 for await activityState in newActivity.activityStateUpdates {
                     self.isActivityActive = activityState == .active

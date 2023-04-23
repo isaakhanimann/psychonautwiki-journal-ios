@@ -24,7 +24,6 @@ struct LiveActivityButton: View {
     let startLiveActivity: () -> Void
     @ObservedObject var activityManager = ActivityManager.shared
     @State private var areActivitiesEnabled = false
-    @State private var isActivityActive = false
 
     var body: some View {
         Group {
@@ -51,10 +50,6 @@ struct LiveActivityButton: View {
             self.areActivitiesEnabled = authorizationInfo.areActivitiesEnabled
             for await isEnabled in authorizationInfo.activityEnablementUpdates {
                 self.areActivitiesEnabled = isEnabled
-            }
-            guard let first = Activity<TimelineWidgetAttributes>.activities.first else {return}
-            for await stateUpdate in first.activityStateUpdates {
-                self.isActivityActive = stateUpdate == ActivityState.active
             }
         }
     }
