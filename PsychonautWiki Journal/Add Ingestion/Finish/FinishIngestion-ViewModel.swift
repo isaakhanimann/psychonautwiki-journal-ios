@@ -35,6 +35,7 @@ extension FinishIngestionScreen {
         @Published var experiencesWithinLargerRange: [Experience] = []
         @Published var selectedExperience: Experience?
         @Published var wantsToForceNewExperience = false
+        @Published var wantsToStartLiveActivity = true
 
         init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
@@ -105,7 +106,7 @@ extension FinishIngestionScreen {
                         substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        if existingExperience.isCurrent {
+                        if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
                             ActivityManager.shared.startOrUpdateActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
                                 everythingForEachRating: existingExperience.ratingsSortedByTimeUnwrapped.map({ shulgin in
@@ -142,7 +143,7 @@ extension FinishIngestionScreen {
                         substanceCompanion: companion
                     )
                     if #available(iOS 16.2, *) {
-                        if newExperience.isCurrent {
+                        if newExperience.isCurrent && self.wantsToStartLiveActivity {
                             ActivityManager.shared.startOrUpdateActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped),
                                 everythingForEachRating: []
