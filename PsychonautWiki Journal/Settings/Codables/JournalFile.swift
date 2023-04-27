@@ -87,18 +87,18 @@ struct JournalFile: FileDocument, Codable {
         }
     }
 
-    // Todo: check if this is necessary
     init(configuration: ReadConfiguration) throws {
         if let data = configuration.file.regularFileContents {
-            self = try JSONDecoder().decode(Self.self, from: data)
+            let decoder = JSONDecoder()
+            self = try decoder.decode(Self.self, from: data)
         } else {
             throw CocoaError(.fileReadCorruptFile)
         }
     }
 
-    // Todo: check if this is necessary
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = try JSONEncoder().encode(self)
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(self)
         return FileWrapper(regularFileWithContents: data)
     }
 }

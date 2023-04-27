@@ -20,4 +20,37 @@ struct RatingCodable: Codable {
     let creationDate: Date
     let time: Date
     let option: ShulginRatingOption
+
+    init(
+        creationDate: Date,
+        time: Date,
+        option: ShulginRatingOption
+    ) {
+        self.creationDate = creationDate
+        self.time = time
+        self.option = option
+    }
+
+
+    enum CodingKeys: String, CodingKey {
+        case creationDate
+        case time
+        case option
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
+        self.creationDate = getDateFromMillis(millis: creationDateMillis)
+        let timeMillis = try values.decode(UInt64.self, forKey: .time)
+        self.time = getDateFromMillis(millis: timeMillis)
+        self.option = try values.decode(ShulginRatingOption.self, forKey: .option)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(UInt64(creationDate.timeIntervalSince1970) * 1000, forKey: .creationDate)
+        try container.encode(UInt64(time.timeIntervalSince1970) * 1000, forKey: .time)
+        try container.encode(option, forKey: .option)
+    }
 }
