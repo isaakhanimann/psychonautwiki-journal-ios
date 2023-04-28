@@ -107,7 +107,7 @@ struct IngestionRowContent: View {
                         if let doseUnwrapped = dose {
                             Text("\(isEstimate ? "~": "")\(doseUnwrapped.formatted()) \(units) \(routeText)").multilineTextAlignment(.trailing)
                         } else {
-                            Text("Unknown dose \(routeText)")
+                            Text(routeText.localizedCapitalized)
                         }
                         Spacer()
                         if let numDotsUnwrap = numDots, !isHidingDosageDots {
@@ -204,6 +204,22 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     substanceColor: .blue,
                     substanceName: "Cocaine",
                     dose: 30,
+                    units: "mg",
+                    isEstimate: true,
+                    administrationRoute: .insufflated,
+                    ingestionTime: Date(),
+                    note: "",
+                    timeDisplayStyle: .relativeToStart,
+                    isEyeOpen: true,
+                    isHidingDosageDots: false,
+                    stomachFullness: nil,
+                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                )
+                IngestionRowContent(
+                    numDots: nil,
+                    substanceColor: .blue,
+                    substanceName: "Cocaine",
+                    dose: nil,
                     units: "mg",
                     isEstimate: true,
                     administrationRoute: .insufflated,
