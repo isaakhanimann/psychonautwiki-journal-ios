@@ -53,80 +53,29 @@ struct ChooseSubstanceContent: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    if !filteredSuggestions.isEmpty {
-                        Text("Quick Logging").sectionHeaderStyle()
-                        ForEach(filteredSuggestions) { suggestion in
-                            SuggestionBox(
-                                suggestion: suggestion,
-                                dismiss: dismiss,
-                                isEyeOpen: isEyeOpen
-                            )
-                            .simultaneousGesture(TapGesture().onEnded{
-                                checkInteractions(with: suggestion.substanceName)
-                            })
-                        }
-                        Spacer().frame(height: 20)
-                    }
-                    if !filteredSubstances.isEmpty {
-                        if filteredSuggestions.isEmpty {
-                            ForEach(filteredSubstances) { substance in
-                                SubstanceBox(
-                                    substance: substance,
-                                    dismiss: dismiss,
-                                    isEyeOpen: isEyeOpen,
-                                    isSkippingInteractionChecks: isSkippingInteractionChecks,
-                                    checkInteractions: checkInteractions
-                                )
-                            }
-                        } else {
-                            Text("Regular Logging").sectionHeaderStyle()
-                            ForEach(filteredSubstances) { substance in
-                                SubstanceBox(
-                                    substance: substance,
-                                    dismiss: dismiss,
-                                    isEyeOpen: isEyeOpen,
-                                    isSkippingInteractionChecks: isSkippingInteractionChecks,
-                                    checkInteractions: checkInteractions
-                                )
-                            }
+            if #available(iOS 16.0, *) {
+                screen.toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Cancel") {
+                            dismiss()
                         }
                     }
-                    ForEach(filteredCustomSubstances) { custom in
-                        CustomSubstanceBox(
-                            customSubstanceModel: custom,
-                            dismiss: dismiss,
-                            isEyeOpen: isEyeOpen
-                        )
-                    }
-                    Button {
-                        isShowingAddCustomSheet.toggle()
-                    } label: {
-                        Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                    }
-                    .sheet(isPresented: $isShowingAddCustomSheet) {
-                        AddCustomSubstanceView()
-                    }
-                }.padding(.horizontal)
-            }
-            .optionalScrollDismissesKeyboard()
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .disableAutocorrection(true)
-            .navigationBarTitle("New Ingestion")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                }
+            } else {
+                screen.toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
                 }
             }
-            .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
-                AlertToast(
-                    displayMode: .alert,
-                    type: .image("Eye Open", .red)
-                )
-            }
+        }
+        .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
+            AlertToast(
+                displayMode: .alert,
+                type: .image("Eye Open", .red)
+            )
         }
         .hud(isPresented: $hudState.isPresented) {
             InteractionHudContent(
@@ -134,6 +83,70 @@ struct ChooseSubstanceContent: View {
                 interactions: hudState.interactions
             )
         }
+    }
+
+    private var screen: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                if !filteredSuggestions.isEmpty {
+                    Text("Quick Logging").sectionHeaderStyle()
+                    ForEach(filteredSuggestions) { suggestion in
+                        SuggestionBox(
+                            suggestion: suggestion,
+                            dismiss: dismiss,
+                            isEyeOpen: isEyeOpen
+                        )
+                        .simultaneousGesture(TapGesture().onEnded{
+                            checkInteractions(with: suggestion.substanceName)
+                        })
+                    }
+                    Spacer().frame(height: 20)
+                }
+                if !filteredSubstances.isEmpty {
+                    if filteredSuggestions.isEmpty {
+                        ForEach(filteredSubstances) { substance in
+                            SubstanceBox(
+                                substance: substance,
+                                dismiss: dismiss,
+                                isEyeOpen: isEyeOpen,
+                                isSkippingInteractionChecks: isSkippingInteractionChecks,
+                                checkInteractions: checkInteractions
+                            )
+                        }
+                    } else {
+                        Text("Regular Logging").sectionHeaderStyle()
+                        ForEach(filteredSubstances) { substance in
+                            SubstanceBox(
+                                substance: substance,
+                                dismiss: dismiss,
+                                isEyeOpen: isEyeOpen,
+                                isSkippingInteractionChecks: isSkippingInteractionChecks,
+                                checkInteractions: checkInteractions
+                            )
+                        }
+                    }
+                }
+                ForEach(filteredCustomSubstances) { custom in
+                    CustomSubstanceBox(
+                        customSubstanceModel: custom,
+                        dismiss: dismiss,
+                        isEyeOpen: isEyeOpen
+                    )
+                }
+                Button {
+                    isShowingAddCustomSheet.toggle()
+                } label: {
+                    Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }
+                .sheet(isPresented: $isShowingAddCustomSheet) {
+                    AddCustomSubstanceView()
+                }
+            }.padding(.horizontal)
+        }
+        .optionalScrollDismissesKeyboard()
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .disableAutocorrection(true)
+        .navigationBarTitle("New Ingestion")
     }
 
     private func checkInteractions(with substanceName: String) {
