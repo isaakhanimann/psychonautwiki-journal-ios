@@ -23,7 +23,9 @@ struct ChooseAlcoholDoseScreen: View {
         alcohol.getDose(for: .oral)!
     }
     @State private var drinkAmountInDL = 5.0
+    @State private var drinkAmountInDLText = "5"
     @State private var alcoholContentInPercent = 5.0
+    @State private var alcoholContentInPercentText = "5"
     @State private var isEstimate = true
     let units = "g"
 
@@ -50,6 +52,10 @@ struct ChooseAlcoholDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    nextLink
+                }
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
@@ -115,7 +121,17 @@ struct ChooseAlcoholDoseScreen: View {
             }
             Section {
                 VStack {
-                    Text("\(Int(drinkAmountInDL)) dL").font(.title2.bold())
+                    HStack {
+                        TextField("Drink Size", text: $drinkAmountInDLText)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .onChange(of: drinkAmountInDLText) { newValue in
+                                if let convertedValue = getDouble(from: newValue) {
+                                    drinkAmountInDL = convertedValue
+                                }
+                            }
+                        Text("dL")
+                    }.font(.title2.bold())
                     Slider(
                         value: $drinkAmountInDL,
                         in: 1...20,
@@ -127,6 +143,9 @@ struct ChooseAlcoholDoseScreen: View {
                     } maximumValueLabel: {
                         Text("20")
                     }
+                    .onChange(of: drinkAmountInDL) { newValue in
+                        drinkAmountInDLText = newValue.formatted()
+                    }
                 }
             } header: {
                 Text("Drink Size")
@@ -135,7 +154,17 @@ struct ChooseAlcoholDoseScreen: View {
             }
             Section("Alcohol Content") {
                 VStack {
-                    Text("\(Int(alcoholContentInPercent))%").font(.title2.bold())
+                    HStack {
+                        TextField("Drink Size", text: $alcoholContentInPercentText)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .onChange(of: alcoholContentInPercentText) { newValue in
+                                if let convertedValue = getDouble(from: newValue) {
+                                    alcoholContentInPercent = convertedValue
+                                }
+                            }
+                        Text("%")
+                    }.font(.title2.bold())
                     Slider(
                         value: $alcoholContentInPercent,
                         in: 1...80,
@@ -146,6 +175,9 @@ struct ChooseAlcoholDoseScreen: View {
                         Text("1")
                     } maximumValueLabel: {
                         Text("80")
+                    }
+                    .onChange(of: alcoholContentInPercent) { newValue in
+                        alcoholContentInPercentText = newValue.formatted()
                     }
                 }
                 Button("Average Beer") {
@@ -162,6 +194,7 @@ struct ChooseAlcoholDoseScreen: View {
             }
         }
         .navigationTitle("Alcohol Dosage")
+        .optionalScrollDismissesKeyboard()
     }
 }
 
