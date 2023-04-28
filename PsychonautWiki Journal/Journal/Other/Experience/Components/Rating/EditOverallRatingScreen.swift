@@ -16,21 +16,16 @@
 
 import SwiftUI
 
-struct EditRatingScreen: View {
-
+struct EditOverallRatingScreen: View {
     @ObservedObject var rating: ShulginRating
     @Environment(\.dismiss) var dismiss
-    @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
 
     var body: some View {
-        RatingScreenContent(
-            selectedTime: $selectedTime,
-            selectedRating: $selectedRating,
-            canDefineOverall: false,
-            isOverallRating: .constant(false)
-        ).onAppear {
-            selectedTime = rating.timeUnwrapped
+        List {
+            SelectRatingSection(selectedRating: $selectedRating)
+            RatingExplanationSection()
+        }.onAppear {
             selectedRating = rating.optionUnwrapped
         }
         .onDisappear {
@@ -46,7 +41,6 @@ struct EditRatingScreen: View {
     }
 
     func save() {
-        rating.time = selectedTime
         rating.option = selectedRating.rawValue
         PersistenceController.shared.saveViewContext()
     }

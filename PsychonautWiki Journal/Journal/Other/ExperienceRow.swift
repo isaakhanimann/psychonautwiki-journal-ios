@@ -44,7 +44,7 @@ struct ExperienceRow: View {
                         isFavorite: experience.isFavorite,
                         isTimeRelative: isTimeRelative,
                         locationName: nil,
-                        rating: experience.maxRating
+                        rating: experience.overallRating?.optionUnwrapped ?? experience.maxRating
                     )
                 }
             }
@@ -54,7 +54,7 @@ struct ExperienceRow: View {
                         if experience.isCurrent {
                             ActivityManager.shared.stopActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped),
-                                everythingForEachRating: experience.ratingsSortedByTimeUnwrapped.map({ shulgin in
+                                everythingForEachRating: experience.ratingsWithTimeSorted.map({ shulgin in
                                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                                 })
                             )

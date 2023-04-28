@@ -31,10 +31,10 @@ extension ExperienceScreen {
         @Published var hiddenIngestions: [ObjectIdentifier] = []
         @Published var hiddenRatings: [ObjectIdentifier] = []
         @Published var sortedIngestions: [Ingestion] = []
-        @Published var sortedRatings: [ShulginRating] = []
+        @Published var sortedRatingsWithTime: [ShulginRating] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
-            sortedRatings
+            sortedRatingsWithTime
                 .filter {!hiddenRatings.contains($0.id)}
                 .map({ shulgin in
                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
@@ -71,7 +71,9 @@ extension ExperienceScreen {
             }
             if let ratings = controller.fetchedObjects as? [ShulginRating] {
                 Task { @MainActor in
-                    sortedRatings = ratings
+                    sortedRatingsWithTime = ratings.filter({ rating in
+                        rating.time != nil
+                    })
                     calculateScreen()
                 }
             }
@@ -102,7 +104,9 @@ extension ExperienceScreen {
             )
             ratingFetchController.fetchRequest.predicate = predicate
             try? ratingFetchController.performFetch()
-            sortedRatings = ratingFetchController.fetchedObjects ?? []
+            sortedRatingsWithTime = (ratingFetchController.fetchedObjects ?? []).filter({ rating in
+                rating.time != nil
+            })
         }
 
         func showIngestion(id: ObjectIdentifier) {

@@ -27,7 +27,7 @@ struct ShulginRatingSection: View {
 
     var body: some View {
         Section("Shulgin Rating") {
-            ForEach(experience.ratingsSortedByTimeUnwrapped) { rating in
+            ForEach(experience.ratingsWithTimeSorted) { rating in
                 NavigationLink {
                     EditRatingScreen(rating: rating)
                 } label: {
@@ -67,6 +67,25 @@ struct ShulginRatingSection: View {
                     }
                 }
             }
+            if let overallRating = experience.overallRating {
+                NavigationLink {
+                    EditOverallRatingScreen(rating: overallRating)
+                } label: {
+                    RatingRow(
+                        rating: overallRating,
+                        timeDisplayStyle: timeDisplayStyle,
+                        firstIngestionTime: firstIngestionTime
+                    ).swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            PersistenceController.shared.viewContext.delete(overallRating)
+                            PersistenceController.shared.saveViewContext()
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                    }
+                }
+
+            }
             Button {
                 isShowingSheet.toggle()
             } label: {
@@ -74,7 +93,7 @@ struct ShulginRatingSection: View {
             }
         }
         .sheet(isPresented: $isShowingSheet, content: {
-            AddRatingScreen(experience: experience)
+            AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
         })
     }
 }
@@ -87,12 +106,16 @@ struct RatingRow: View {
 
     var body: some View {
         HStack {
-            if timeDisplayStyle == .relativeToNow {
-                Text(rating.timeUnwrapped, style: .relative) + Text(" ago")
-            } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)))
+            if let ratingTime = rating.time {
+                if timeDisplayStyle == .relativeToNow {
+                    Text(ratingTime, style: .relative) + Text(" ago")
+                } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                    Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ratingTime)))
+                } else {
+                    Text(ratingTime, style: .time)
+                }
             } else {
-                Text(rating.timeUnwrapped, style: .time)
+                Text("Overall Rating")
             }
             Spacer()
             Text(rating.optionUnwrapped.stringRepresentation)

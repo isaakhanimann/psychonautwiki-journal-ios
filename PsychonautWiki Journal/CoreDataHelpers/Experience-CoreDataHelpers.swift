@@ -51,16 +51,27 @@ extension Experience: Comparable {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
-    var ratingsSortedByTimeUnwrapped: [ShulginRating] {
-        (ratings?.allObjects as? [ShulginRating] ?? []).sorted()
+    private var ratingsUnwrapped: [ShulginRating] {
+        ratings?.allObjects as? [ShulginRating] ?? []
+    }
+
+    var ratingsWithTimeSorted: [ShulginRating] {
+        ratingsUnwrapped.filter({ rating in
+            rating.time != nil
+        }).sorted()
     }
 
     var maxRating: ShulginRatingOption? {
-        ratingsSortedByTimeUnwrapped.map { rating in
+        ratingsUnwrapped.map { rating in
             rating.optionUnwrapped
         }.max()
     }
 
+    var overallRating: ShulginRating? {
+        ratingsUnwrapped.first { rating in
+            rating.time == nil
+        }
+    }
 
     var ingestionColors: [Color] {
         var colors = [Color]()

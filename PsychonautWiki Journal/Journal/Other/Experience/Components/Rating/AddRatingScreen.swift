@@ -19,9 +19,11 @@ import SwiftUI
 struct AddRatingScreen: View {
 
     let experience: Experience
+    let canDefineOverall: Bool
     @Environment(\.dismiss) var dismiss
     @State private var selectedTime = Date.now
     @State private var selectedRating = ShulginRatingOption.twoPlus
+    @State private var isOverallRating = false
     @EnvironmentObject private var toastViewModel: ToastViewModel
 
     var body: some View {
@@ -71,7 +73,9 @@ struct AddRatingScreen: View {
     var screen: some View {
         RatingScreenContent(
             selectedTime: $selectedTime,
-            selectedRating: $selectedRating
+            selectedRating: $selectedRating,
+            canDefineOverall: canDefineOverall,
+            isOverallRating: $isOverallRating
         )
         .navigationTitle("Add Rating")
     }
@@ -80,7 +84,11 @@ struct AddRatingScreen: View {
         let context = PersistenceController.shared.viewContext
         let newRating = ShulginRating(context: context)
         newRating.creationDate = Date()
-        newRating.time = selectedTime
+        if canDefineOverall && isOverallRating {
+            newRating.time = nil
+        } else {
+            newRating.time = selectedTime
+        }
         newRating.option = selectedRating.rawValue
         newRating.experience = experience
         try? context.save()
