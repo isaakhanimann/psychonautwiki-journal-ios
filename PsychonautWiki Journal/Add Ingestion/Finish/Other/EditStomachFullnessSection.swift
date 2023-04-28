@@ -24,11 +24,16 @@ struct EditStomachFullnessSection: View {
         Section("Stomach Fullness") {
             Picker("Stomach Fullness", selection: $stomachFullness) {
                 ForEach(StomachFullness.allCases) { option in
-                    Text(option.text)
+                    HStack {
+                        Text(option.text)
+                        Spacer()
+                        Text("~\(option.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay").foregroundColor(.secondary)
+                    }
                 }
-            }.pickerStyle(.segmented)
-            Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
-        }.listRowSeparator(.hidden)
+            }
+            .pickerStyle(.inline)
+            .labelsHidden()
+        }
     }
 }
 
