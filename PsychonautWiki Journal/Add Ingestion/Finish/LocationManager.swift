@@ -101,23 +101,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         isSearchingForLocations = true
         Task {
             let geoCoder = CLGeocoder()
-            do {
-                let places = try await geoCoder.geocodeAddressString(searchText)
-                DispatchQueue.main.async {
-                    self.searchSuggestedLocations = places.map({ place in
-                        Location(
-                            name: place.name ?? "Unknown",
-                            longitude: place.location?.coordinate.longitude,
-                            latitude: place.location?.coordinate.latitude
-                        )
-                    })
-                    self.isSearchingForLocations = false
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.searchSuggestedLocations = []
-                    self.isSearchingForLocations = true
-                }
+            var foundLocations: [Location] = []
+            if let places = try? await geoCoder.geocodeAddressString(searchText) {
+                foundLocations = places.map({ place in
+                    Location(
+                        name: place.name ?? "Unknown",
+                        longitude: place.location?.coordinate.longitude,
+                        latitude: place.location?.coordinate.latitude
+                    )
+                })
+            }
+            DispatchQueue.main.async {
+                self.searchSuggestedLocations = foundLocations
+                self.isSearchingForLocations = false
             }
         }
     }

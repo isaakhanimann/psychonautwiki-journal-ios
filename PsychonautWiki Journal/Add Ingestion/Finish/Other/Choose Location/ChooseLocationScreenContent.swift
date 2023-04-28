@@ -35,23 +35,26 @@ struct ChooseLocationScreenContent: View {
         span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
     )
 
-
     var body: some View {
         List {
             if isSearching {
                 if isLoadingLocationResults {
                     ProgressView()
-                } else if !searchSuggestedLocations.isEmpty {
-                    Section("Search Results") {
-                        ForEach(searchSuggestedLocations) { location in
-                            Button {
-                                withAnimation {
-                                    selectedLocation = location
-                                    selectedLocationName = location.name
-                                    dismissSearch()
+                } else {
+                    Section {
+                        if searchSuggestedLocations.isEmpty {
+                            Text("No Results")
+                        } else {
+                            ForEach(searchSuggestedLocations) { location in
+                                Button {
+                                    withAnimation {
+                                        selectedLocation = location
+                                        selectedLocationName = location.name
+                                        dismissSearch()
+                                    }
+                                } label: {
+                                    Label(location.name, systemImage: "mappin")
                                 }
-                            } label: {
-                                Label(location.name, systemImage: "mappin")
                             }
                         }
                     }
