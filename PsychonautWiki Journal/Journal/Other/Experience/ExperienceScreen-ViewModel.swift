@@ -22,6 +22,7 @@ extension ExperienceScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
 
+        var experience: Experience? = nil
         private let ingestionFetchController: NSFetchedResultsController<Ingestion>
         private let ratingFetchController: NSFetchedResultsController<ShulginRating>
         @Published var timelineModel: TimelineModel?
@@ -63,18 +64,9 @@ extension ExperienceScreen {
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            if let ings = controller.fetchedObjects as? [Ingestion] {
-                Task { @MainActor in
-                    sortedIngestions = ings
-                    calculateScreen()
-                }
-            }
-            if let ratings = controller.fetchedObjects as? [ShulginRating] {
-                Task { @MainActor in
-                    sortedRatingsWithTime = ratings.filter({ rating in
-                        rating.time != nil
-                    })
-                    calculateScreen()
+            Task { @MainActor in
+                if let experience {
+                    reloadScreen(experience: experience)
                 }
             }
         }

@@ -368,6 +368,7 @@ struct ExperienceScreen: View {
             }
         })
         .task {
+            viewModel.experience = experience
             viewModel.reloadScreen(experience: experience)
         }
     }
