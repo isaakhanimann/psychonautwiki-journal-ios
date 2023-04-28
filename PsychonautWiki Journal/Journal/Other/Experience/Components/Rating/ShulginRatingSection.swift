@@ -112,7 +112,7 @@ struct RatingRow: View {
                 } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                     Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ratingTime)))
                 } else {
-                    Text(ratingTime, style: .time)
+                    Text(ratingTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                 }
             } else {
                 Text("Overall Rating")

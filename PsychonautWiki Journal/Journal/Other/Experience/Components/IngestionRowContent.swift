@@ -97,7 +97,8 @@ struct IngestionRowContent: View {
                             } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                                 Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
                             } else {
-                                Text(ingestionTime, style: .time)
+                                Text(ingestionTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+
                             }
                         }
                         .font(.subheadline)
