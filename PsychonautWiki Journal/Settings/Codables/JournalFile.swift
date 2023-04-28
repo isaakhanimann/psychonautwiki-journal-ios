@@ -55,10 +55,10 @@ struct JournalFile: FileDocument, Codable {
                     )
                 }
             }
-            let ratings = experience.ratingsWithTimeSorted.map { shulginRating in
+            let ratings = experience.ratingsUnwrapped.map { shulginRating in
                 RatingCodable(
                     creationDate: shulginRating.creationDateUnwrapped,
-                    time: shulginRating.timeUnwrapped,
+                    time: shulginRating.time,
                     option: shulginRating.optionUnwrapped
                 )
             }

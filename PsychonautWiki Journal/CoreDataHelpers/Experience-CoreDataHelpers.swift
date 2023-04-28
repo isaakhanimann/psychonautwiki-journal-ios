@@ -51,7 +51,7 @@ extension Experience: Comparable {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
 
-    private var ratingsUnwrapped: [ShulginRating] {
+    var ratingsUnwrapped: [ShulginRating] {
         ratings?.allObjects as? [ShulginRating] ?? []
     }
 
