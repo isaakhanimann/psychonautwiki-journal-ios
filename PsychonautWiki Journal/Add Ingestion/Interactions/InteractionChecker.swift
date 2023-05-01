@@ -67,28 +67,18 @@ struct InteractionChecker {
     private static func getInteraction(fromName: String, toName: String) -> InteractionType? {
         guard let substance = SubstanceRepo.shared.getSubstance(name: fromName) else {return nil}
         guard let interactions = substance.interactions else {return nil}
+        if let directInteraction = getDirectInteraction(interactions: interactions, substanceName: toName) {
+            return directInteraction
+        }
+        if let wildCardInteraction = getWildCardInteraction(interactions: interactions, substanceName: toName) {
+            return wildCardInteraction
+        }
         if let toSubstance = SubstanceRepo.shared.getSubstance(name: toName) {
-            if let directInteraction = getDirectInteraction(interactions: interactions, substanceName: toName) {
-                return directInteraction
-            }
-            if let wildCardInteraction = getWildCardInteraction(interactions: interactions, substanceName: toName) {
-                return wildCardInteraction
-            }
             if let classInteraction = getClassInteraction(interactions: interactions, substance: toSubstance) {
                 return classInteraction
             }
-            return nil
-        } else {
-            if (interactions.dangerous.contains(toName)) {
-                return InteractionType.dangerous
-            } else if (interactions.unsafe.contains(toName)) {
-                return InteractionType.unsafe
-            } else if (interactions.uncertain.contains(toName)) {
-                return InteractionType.uncertain
-            } else {
-                return nil
-            }
         }
+        return nil
     }
 
     private static func getDirectInteraction(
