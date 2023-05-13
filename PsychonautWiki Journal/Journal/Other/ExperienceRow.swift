@@ -114,30 +114,17 @@ struct ExperienceRowContent: View {
                                     center: .center
                                 )
                             )
-                            .frame(width: 33, height: 33)
+                            .frame(width: 30, height: 30)
                         if isFavorite {
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)
                         }
                     }
-                    Spacer().frame(width: 10)
-                    VStack(alignment: .leading) {
-                        HStack {
-                            timeText
-                            Spacer()
-                            if let locationName {
-                                HStack(spacing: 2) {
-                                    Image(systemName: "mappin")
-                                    Text(locationName).lineLimit(1)
-                                }
-                            }
-                        }
-                        .foregroundColor(.secondary)
-                        .font(.footnote.weight(.bold))
-                        Text(title)
-                            .font(.headline)
-                    }
+                    Spacer().frame(width: 8)
+                    Text(title)
+                        .font(.headline)
                 }
+                Spacer().frame(height: 4)
                 HStack {
                     if distinctSubstanceNames.isEmpty {
                         Text("No substance")
@@ -147,6 +134,17 @@ struct ExperienceRowContent: View {
                     Spacer()
                     if let rating {
                         Text(rating.stringRepresentation)
+                    }
+                }
+                .foregroundColor(.secondary)
+                HStack {
+                    timeText
+                    Spacer()
+                    if let locationName {
+                        HStack(spacing: 2) {
+                            Image(systemName: "mappin")
+                            Text(locationName).lineLimit(1)
+                        }
                     }
                 }
                 .foregroundColor(.secondary)
@@ -238,6 +236,6 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     rating: .threePlus
                 )
             }
-        }
+        }.listStyle(.plain)
     }
 }
