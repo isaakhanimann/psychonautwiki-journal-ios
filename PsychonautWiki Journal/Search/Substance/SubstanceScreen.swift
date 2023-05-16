@@ -34,6 +34,7 @@ struct SubstanceScreen: View {
                 }
             }
         }
+        .font(.headline)
         .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
             NavigationView {
                 AcknowledgeInteractionsView(substance: substance) {

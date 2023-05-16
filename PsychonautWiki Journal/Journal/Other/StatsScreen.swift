@@ -236,7 +236,7 @@ struct StatsScreenContent: View {
                             Text(substanceName)
                         }
                     }
-                }
+                }.font(.headline)
             }
         }.navigationTitle("Stats")
     }
