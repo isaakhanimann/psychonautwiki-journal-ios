@@ -25,40 +25,34 @@ struct JournalScreen: View {
 
     var body: some View {
         NavigationView {
-            screen
+            AddIngestionFab {
+                viewModel.isShowingAddIngestionSheet.toggle()
+            } screen: {
+                screen
+            }
+            .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
+                ChooseSubstanceScreen()
+            }
             .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: SettingsScreen()) {
-                            Label("Settings", systemImage: "gearshape")
-                        }
-                        favoriteButton
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination: SettingsScreen()) {
+                        Label("Settings", systemImage: "gearshape")
                     }
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        newIngestionButton
-                        Button {
-                            viewModel.isTimeRelative.toggle()
-                        } label: {
-                            if viewModel.isTimeRelative {
-                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                            } else {
-                                Label("Show Relative Time", systemImage: "timer.circle")
-                            }
-                        }
-                        if isEyeOpen {
-                            searchScreenLink
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    favoriteButton
+                    Button {
+                        viewModel.isTimeRelative.toggle()
+                    } label: {
+                        if viewModel.isTimeRelative {
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                        } else {
+                            Label("Show Relative Time", systemImage: "timer.circle")
                         }
                     }
                 }
-                .navigationTitle("Journal")
-        }
-    }
-
-
-    private var searchScreenLink: some View {
-        NavigationLink {
-            SearchScreen()
-        } label: {
-            Label("Substances", systemImage: "magnifyingglass")
+            }
+            .navigationTitle("Journal")
         }
     }
 
@@ -67,8 +61,6 @@ struct JournalScreen: View {
             viewModel.isShowingAddIngestionSheet.toggle()
         } label: {
             Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-        }.fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
-            ChooseSubstanceScreen()
         }
     }
 

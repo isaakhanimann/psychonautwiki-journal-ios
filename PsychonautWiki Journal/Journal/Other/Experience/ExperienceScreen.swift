@@ -40,20 +40,24 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        screen.toolbar {
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                editTitleButton
-                if experience.location == nil {
-                    addLocationButton
-                    Spacer()
+        Group {
+            if experience.isCurrent {
+                AddIngestionFab {
+                    isShowingAddIngestionFullScreen.toggle()
+                } screen: {
+                    screen
                 }
+                .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
+                    ChooseSubstanceScreen()
+                })
+            } else {
+                screen
             }
+        }
+        .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 favoriteButton
                 deleteExperienceButton
-                if experience.isCurrent {
-                    addIngestionButton
-                }
                 Menu(content: {
                     ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
                         Button {
@@ -71,9 +75,9 @@ struct ExperienceScreen: View {
                 }, label: {
                     Label("Time", systemImage: "timer")
                 })
+                editTitleButton
                 if experience.location == nil {
                     addLocationButton
-                    Spacer()
                 }
             }
         }
@@ -107,17 +111,6 @@ struct ExperienceScreen: View {
         } label: {
             Label("Add Location", systemImage: "mappin")
         }
-    }
-
-    private var addIngestionButton: some View {
-        Button {
-            isShowingAddIngestionFullScreen.toggle()
-        } label: {
-            Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-        }
-        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
-            ChooseSubstanceScreen()
-        })
     }
 
     private var deleteExperienceButton: some View {

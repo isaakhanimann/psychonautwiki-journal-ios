@@ -162,6 +162,7 @@
 		EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9129428B02009C142D /* AddictionScreen.swift */; };
 		EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
 		EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */; };
+		EA6048252A140E25005C6A4B /* AddIngestionFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048242A140E25005C6A4B /* AddIngestionFab.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -432,6 +433,7 @@
 		EA527A9129428B02009C142D /* AddictionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddictionScreen.swift; sourceTree = "<group>"; };
 		EA527A9329428CD8009C142D /* EffectTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTimeline.swift; sourceTree = "<group>"; };
 		EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExperienceScreen.swift; sourceTree = "<group>"; };
+		EA6048242A140E25005C6A4B /* AddIngestionFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionFab.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
 				EA41C62E295EB86C000DA021 /* Utils.swift */,
 				EA41C624295EAFD8000DA021 /* Data.swift */,
+				EA6048242A140E25005C6A4B /* AddIngestionFab.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1563,6 +1566,7 @@
 				EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */,
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */,
+				EA6048252A140E25005C6A4B /* AddIngestionFab.swift in Sources */,
 				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */,
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
