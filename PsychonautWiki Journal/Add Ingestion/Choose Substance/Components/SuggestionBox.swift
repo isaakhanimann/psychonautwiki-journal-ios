@@ -100,7 +100,7 @@ struct SuggestionBox: View {
                 )
                 .foregroundColor(suggestion.substanceColor.swiftUIColor)
                 Spacer()
-                Text(suggestion.lastTimeUsed, format: .relative(presentation: .numeric, unitsStyle: .wide))
+                Text(suggestion.lastTimeUsed, style: .relative) + Text(" ago")
             }
         }
     }

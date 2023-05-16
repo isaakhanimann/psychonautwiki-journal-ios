@@ -93,7 +93,7 @@ struct IngestionRowContent: View {
                         Spacer()
                         Group {
                             if timeDisplayStyle == .relativeToNow {
-                                Text(ingestionTime, style: .relative)
+                                Text(ingestionTime, style: .relative) + Text(" ago")
                             } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                                 Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
                             } else {
