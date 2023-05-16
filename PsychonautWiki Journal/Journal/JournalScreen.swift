@@ -24,47 +24,35 @@ struct JournalScreen: View {
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    favoriteButton
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    newIngestionButton
-                    Spacer()
-                    Button {
-                        viewModel.isTimeRelative.toggle()
-                    } label: {
-                        if viewModel.isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
+        NavigationView {
+            screen
+            .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: SettingsScreen()) {
+                            Label("Settings", systemImage: "gearshape")
+                        }
+                        favoriteButton
+                    }
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        newIngestionButton
+                        Button {
+                            viewModel.isTimeRelative.toggle()
+                        } label: {
+                            if viewModel.isTimeRelative {
+                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                            } else {
+                                Label("Show Relative Time", systemImage: "timer.circle")
+                            }
+                        }
+                        if isEyeOpen {
+                            searchScreenLink
                         }
                     }
-                    if isEyeOpen {
-                        searchScreenLink
-                    }
-                    NavigationLink {
-                        StatsScreen()
-                    } label: {
-                        Label("Stats", systemImage: "chart.bar")
-                    }
                 }
-            }
-        } else {
-            screen.toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    favoriteButton
-                }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    newIngestionButton
-                    if isEyeOpen {
-                        searchScreenLink
-                    }
-                }
-            }
+                .navigationTitle("Journal")
         }
     }
+
 
     private var searchScreenLink: some View {
         NavigationLink {
@@ -101,7 +89,6 @@ struct JournalScreen: View {
             .optionalScrollDismissesKeyboard()
             .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
             .disableAutocorrection(true)
-            .navigationTitle("Journal")
             .onChange(of: viewModel.searchText, perform: { newValue in
                 viewModel.setupFetchRequestPredicateAndFetch()
             })

@@ -264,7 +264,6 @@
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
 		EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
 		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
-		EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */; };
 		EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -538,7 +537,6 @@
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
 		EAF76CA827D90CF900945587 /* SubstanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceColor.swift; sourceTree = "<group>"; };
 		EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRoute.swift; sourceTree = "<group>"; };
-		EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content-ViewModel.swift"; sourceTree = "<group>"; };
 		EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseDose-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -835,7 +833,6 @@
 			children = (
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
-				EAF76CBD27D91F5500945587 /* Content-ViewModel.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1554,7 +1551,6 @@
 				EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
-				EAF76CBE27D91F5500945587 /* Content-ViewModel.swift in Sources */,
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
 				EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */,

@@ -40,59 +40,40 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    favoriteButton
-                }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    if experience.isCurrent {
-                        addIngestionButton
-                        Spacer()
-
-                    }
-                    Menu(content: {
-                        ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                            Button {
-                                withAnimation {
-                                    timeDisplayStyle = option
-                                }
-                            } label: {
-                                if timeDisplayStyle == option {
-                                    Label(option.text, systemImage: "checkmark")
-                                } else {
-                                    Text(option.text)
-                                }
-                            }
-                        }
-                    }, label: {
-                        Label("Time", systemImage: "timer")
-                    })
+        screen.toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                editTitleButton
+                if experience.location == nil {
+                    addLocationButton
                     Spacer()
-                    if experience.location == nil {
-                        addLocationButton
-                        Spacer()
-                    }
-                    editTitleButton
-                    Spacer()
-                    deleteExperienceButton
                 }
             }
-        } else {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    editTitleButton
-                    if experience.location == nil {
-                        addLocationButton
-                        Spacer()
-                    }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                favoriteButton
+                deleteExperienceButton
+                if experience.isCurrent {
+                    addIngestionButton
                 }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    favoriteButton
-                    deleteExperienceButton
-                    if experience.isCurrent {
-                        addIngestionButton
+                Menu(content: {
+                    ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
+                        Button {
+                            withAnimation {
+                                timeDisplayStyle = option
+                            }
+                        } label: {
+                            if timeDisplayStyle == option {
+                                Label(option.text, systemImage: "checkmark")
+                            } else {
+                                Text(option.text)
+                            }
+                        }
                     }
+                }, label: {
+                    Label("Time", systemImage: "timer")
+                })
+                if experience.location == nil {
+                    addLocationButton
+                    Spacer()
                 }
             }
         }

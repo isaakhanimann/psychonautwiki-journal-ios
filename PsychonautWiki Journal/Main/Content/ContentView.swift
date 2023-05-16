@@ -20,99 +20,78 @@ import AlertToast
 struct ContentView: View {
 
     @AppStorage(PersistenceController.needsToSeeWelcomeKey) var needsToSeeWelcome: Bool = true
-    @StateObject private var viewModel = ViewModel()
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey1) var isEyeOpen1: Bool = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen2: Bool = false
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
     @AppStorage("hasBeenMigrated3") var hasBeenMigrated3: Bool = false
+    @State private var isShowingJournal = true
 
     var body: some View {
-        ContentScreen(
-            isShowingHome: $viewModel.isShowingHome,
-            isShowingSearch: $viewModel.isShowingSearch,
-            isShowingSafer: $viewModel.isShowingSafer,
-            isShowingSettings: $viewModel.isShowingSettings,
-            isEyeOpen: isEyeOpen2
-        )
-        .onOpenURL { url in
-            viewModel.receiveURL(url: url)
-        }
-        .toast(isPresenting: $toastViewModel.isShowingToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: toastViewModel.isSuccessToast ? .complete(.green): .error(.red),
-                title: toastViewModel.toastMessage
-            )
-        }
-        .fullScreenCover(isPresented: $needsToSeeWelcome) {
-            WelcomeScreen(isShowingWelcome: $needsToSeeWelcome)
-        }
-        .onAppear {
-            viewModel.toastViewModel = toastViewModel
-            if !hasBeenMigrated2 {
-                PersistenceController.shared.migrateCompanionsAndExperienceSortDates()
-                hasBeenMigrated2 = true
-                isEyeOpen2 = isEyeOpen1
+        ContentScreen(isEyeOpen: isEyeOpen2)
+            .onOpenURL { url in
+                if url.absoluteString == OpenJournalURL {
+                    isShowingJournal = true
+                } else {
+                    if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
+                        UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
+                        toastViewModel.showSuccessToast(message: "Unlocked")
+                    } else {
+                        toastViewModel.showSuccessToast(message: "Already Unlocked")
+                    }
+                }
             }
-            if !hasBeenMigrated3 {
-                PersistenceController.shared.migrateIngestionNamesAndUnits()
-                hasBeenMigrated3 = true
+            .toast(isPresenting: $toastViewModel.isShowingToast) {
+                AlertToast(
+                    displayMode: .alert,
+                    type: toastViewModel.isSuccessToast ? .complete(.green): .error(.red),
+                    title: toastViewModel.toastMessage
+                )
             }
-        }
+            .fullScreenCover(isPresented: $needsToSeeWelcome) {
+                WelcomeScreen(isShowingWelcome: $needsToSeeWelcome)
+            }
+            .onAppear {
+                if !hasBeenMigrated2 {
+                    PersistenceController.shared.migrateCompanionsAndExperienceSortDates()
+                    hasBeenMigrated2 = true
+                    isEyeOpen2 = isEyeOpen1
+                }
+                if !hasBeenMigrated3 {
+                    PersistenceController.shared.migrateIngestionNamesAndUnits()
+                    hasBeenMigrated3 = true
+                }
+            }
     }
 }
 
 struct ContentScreen: View {
-    @Binding var isShowingHome: Bool
-    @Binding var isShowingSearch: Bool
-    @Binding var isShowingSafer: Bool
-    @Binding var isShowingSettings: Bool
     let isEyeOpen: Bool
 
     var body: some View {
-        NavigationView {
-            List {
-                NavigationLink(
-                    destination: JournalScreen(),
-                    isActive: $isShowingHome
-                ) {
-                    Label("Journal", systemImage: "house")
+        if isEyeOpen {
+            TabView {
+                JournalScreen()
+                    .tabItem {
+                        Label("Journal", systemImage: "house")
+                    }
+                if #available(iOS 16, *) {
+                    StatsScreen()
+                        .tabItem {
+                            Label("Stats", systemImage: "chart.bar")
+                        }
                 }
-                if isEyeOpen {
-                    NavigationLink(
-                        destination: SearchScreen(),
-                        isActive: $isShowingSearch
-                    ) {
+                SearchScreen()
+                    .tabItem {
                         Label("Substances", systemImage: "magnifyingglass")
                     }
-                    NavigationLink(
-                        destination: SaferScreen(),
-                        isActive: $isShowingSafer
-                    ) {
+                SaferScreen()
+                    .tabItem {
                         Label("Safer Use", systemImage: "cross")
                     }
-                }
-                NavigationLink(
-                    destination: SettingsScreen(),
-                    isActive: $isShowingSettings
-                ) {
-                    Label("Settings", systemImage: "gearshape")
-                }
             }
-        }.navigationViewStyle(.stack)
-    }
-}
-
-
-struct ContentScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentScreen(
-            isShowingHome: .constant(false),
-            isShowingSearch: .constant(false),
-            isShowingSafer: .constant(false),
-            isShowingSettings: .constant(false),
-            isEyeOpen: false
-        )
+        } else {
+            JournalScreen()
+        }
     }
 }
