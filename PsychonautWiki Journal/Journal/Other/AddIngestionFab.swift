@@ -19,12 +19,7 @@ import SwiftUI
 struct AddIngestionFab<Screen: View>: View {
 
     let onTap: () -> Void
-    let screen: Screen
-
-    init(onTap: @escaping () -> Void, @ViewBuilder screen: () -> Screen) {
-        self.onTap = onTap
-        self.screen = screen()
-    }
+    @ViewBuilder let screen: Screen
 
     var body: some View {
         ZStack {
