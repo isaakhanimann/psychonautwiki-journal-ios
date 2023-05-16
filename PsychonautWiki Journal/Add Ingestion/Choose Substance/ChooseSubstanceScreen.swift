@@ -193,7 +193,8 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     units: "mg",
                                     isEstimate: false
                                 )
-                            ]
+                            ],
+                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
                             substanceName: "MDMA",
@@ -217,7 +218,8 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     units: "mg",
                                     isEstimate: false
                                 )
-                            ]
+                            ],
+                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
                             substanceName: "Cannabis",
@@ -246,7 +248,8 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     units: "mg",
                                     isEstimate: false
                                 )
-                            ]
+                            ],
+                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
                             substanceName: "Coffee",
@@ -265,7 +268,8 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     units: "cups",
                                     isEstimate: false
                                 ),
-                            ]
+                            ],
+                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         )
                     ],
                     filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),

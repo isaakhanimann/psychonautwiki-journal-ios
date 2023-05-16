@@ -163,6 +163,9 @@
 		EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
 		EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */; };
 		EA6048252A140E25005C6A4B /* AddIngestionFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048242A140E25005C6A4B /* AddIngestionFab.swift */; };
+		EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048262A1411C0005C6A4B /* Suggestion.swift */; };
+		EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */; };
+		EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -434,6 +437,9 @@
 		EA527A9329428CD8009C142D /* EffectTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTimeline.swift; sourceTree = "<group>"; };
 		EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExperienceScreen.swift; sourceTree = "<group>"; };
 		EA6048242A140E25005C6A4B /* AddIngestionFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionFab.swift; sourceTree = "<group>"; };
+		EA6048262A1411C0005C6A4B /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
+		EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseAndUnit.swift; sourceTree = "<group>"; };
+		EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceModel.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -766,6 +772,7 @@
 			children = (
 				EA48F8A629EBD5C3007DA8C5 /* Hud */,
 				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
+				EA60482C2A1411EF005C6A4B /* Suggestion */,
 				EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */,
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
@@ -793,6 +800,16 @@
 				EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */,
 			);
 			path = "Choose Location";
+			sourceTree = "<group>";
+		};
+		EA60482C2A1411EF005C6A4B /* Suggestion */ = {
+			isa = PBXGroup;
+			children = (
+				EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */,
+				EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */,
+				EA6048262A1411C0005C6A4B /* Suggestion.swift */,
+			);
+			path = Suggestion;
 			sourceTree = "<group>";
 		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
@@ -1494,6 +1511,7 @@
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
+				EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */,
 				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,
 				EA418A33296C755400DEA663 /* EditLocationLinkAndMap.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,
@@ -1519,6 +1537,7 @@
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
 				EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */,
+				EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */,
 				EA095A0F27D9DCAE007D44D6 /* UnitsPicker.swift in Sources */,
 				EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */,
 				EA418A2F296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift in Sources */,
@@ -1531,6 +1550,7 @@
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
 				EAE480912973DE3600B600EF /* ExperienceScreen-ViewModel.swift in Sources */,
+				EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,

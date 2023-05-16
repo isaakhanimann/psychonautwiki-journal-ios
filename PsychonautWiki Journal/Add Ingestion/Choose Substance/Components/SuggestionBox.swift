@@ -92,12 +92,16 @@ struct SuggestionBox: View {
                 }
             }
         } label: {
-            let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
-            Label(
-                "\(suggestion.substanceName) \(route)",
-                systemImage: "circle.fill"
-            )
-            .foregroundColor(suggestion.substanceColor.swiftUIColor)
+            HStack {
+                let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
+                Label(
+                    "\(suggestion.substanceName) \(route)",
+                    systemImage: "circle.fill"
+                )
+                .foregroundColor(suggestion.substanceColor.swiftUIColor)
+                Spacer()
+                Text(suggestion.lastTimeUsed, format: .relative(presentation: .numeric, unitsStyle: .wide))
+            }
         }
     }
 }
@@ -129,7 +133,8 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 units: "mg",
                                 isEstimate: false
                             )
-                        ]
+                        ],
+                        lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                     ),
                     dismiss: {},
                     isEyeOpen: true
@@ -162,7 +167,8 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 units: "mg",
                                 isEstimate: false
                             )
-                        ]
+                        ],
+                        lastTimeUsed: Date.now.addingTimeInterval(-3*60*60)
                     ),
                     dismiss: {},
                     isEyeOpen: true

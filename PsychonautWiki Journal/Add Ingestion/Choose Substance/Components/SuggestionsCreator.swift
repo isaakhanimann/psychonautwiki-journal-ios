@@ -21,80 +21,31 @@ class SuggestionsCreator {
     private let maxNumberOfSuggestions = 10
 
     init(sortedIngestions: [Ingestion]) {
-        sortedIngestions.forEach { ingestion in
-            maybeAddSuggestion(from: ingestion)
+        let bySubstance = Dictionary(grouping: sortedIngestions, by: { ingestion in
+            ingestion.substanceNameUnwrapped
+        })
+        suggestions = bySubstance.flatMap { (substanceName: String, value: [Ingestion]) in
+            Dictionary(grouping: value, by: { ingestion in
+                ingestion.administrationRouteUnwrapped
+            }).map { (route: AdministrationRoute, groupedBySubstanceAndRoute: [Ingestion]) in
+                let firstIngestion = groupedBySubstanceAndRoute.first
+                return Suggestion(
+                    substanceName: substanceName,
+                    substance: SubstanceRepo.shared.getSubstance(name: substanceName),
+                    units: firstIngestion?.unitsUnwrapped ?? "",
+                    route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
+                    substanceColor: firstIngestion?.substanceColor ?? .red,
+                    dosesAndUnit: Array(groupedBySubstanceAndRoute
+                        .map({ ing in
+                            DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped, isEstimate: ing.isEstimate)
+                        })
+                            .uniqued()
+                            .prefix(maxNumberOfSuggestions)),
+                    lastTimeUsed: groupedBySubstanceAndRoute.map({$0.timeUnwrapped}).max() ?? .now
+                )
+            }
+        }.sorted { sug1, sug2 in
+            sug1.lastTimeUsed > sug2.lastTimeUsed
         }
     }
-
-    private func maybeAddSuggestion(from ingestion: Ingestion) {
-        if let foundSuggestion = suggestions.first(where: { sugg in
-            sugg.substanceName == ingestion.substanceNameUnwrapped && sugg.route == ingestion.administrationRouteUnwrapped
-        }) {
-            maybeAdd(ingestion: ingestion, to: foundSuggestion)
-        } else {
-            addNewSuggestion(from: ingestion)
-        }
-    }
-
-    private func maybeAdd(ingestion: Ingestion, to suggestion: Suggestion) {
-        let doseAndUnit = DoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped, isEstimate: ingestion.isEstimate)
-        if !suggestion.dosesAndUnit.contains(doseAndUnit) && suggestion.dosesAndUnit.count < maxNumberOfSuggestions {
-            suggestion.dosesAndUnit.append(doseAndUnit)
-        }
-    }
-
-    private func addNewSuggestion(from ingestion: Ingestion) {
-        let substanceName = ingestion.substanceNameUnwrapped
-        let units = ingestion.unitsUnwrapped
-        suggestions.append(
-            Suggestion(
-                substanceName: substanceName,
-                substance: SubstanceRepo.shared.getSubstance(name: substanceName),
-                units: units,
-                route: ingestion.administrationRouteUnwrapped,
-                substanceColor: ingestion.substanceColor,
-                dosesAndUnit: [DoseAndUnit(dose: ingestion.doseUnwrapped, units: units, isEstimate: ingestion.isEstimate)]
-            )
-        )
-    }
-}
-
-
-class Suggestion: Identifiable {
-    var id: String {
-        substanceName + route.rawValue
-    }
-    let substanceName: String
-    let substance: Substance?
-    let units: String
-    let route: AdministrationRoute
-    let substanceColor: SubstanceColor
-    var dosesAndUnit: [DoseAndUnit]
-
-    init(substanceName: String, substance: Substance?, units: String, route: AdministrationRoute, substanceColor: SubstanceColor, dosesAndUnit: [DoseAndUnit]) {
-        self.substanceName = substanceName
-        self.substance = substance
-        self.units = units
-        self.route = route
-        self.substanceColor = substanceColor
-        self.dosesAndUnit = dosesAndUnit
-    }
-}
-
-struct DoseAndUnit: Hashable, Identifiable {
-    var id: String {
-        (dose?.description ?? "") + (units ?? "")
-    }
-    let dose: Double?
-    let units: String?
-    let isEstimate: Bool
-}
-
-struct CustomSubstanceModel: Identifiable {
-    var id: String {
-        name + units // id must be different from just name because else there is a bug when showing both the custom substance and original substance
-    }
-    let name: String
-    let description: String
-    let units: String
 }
