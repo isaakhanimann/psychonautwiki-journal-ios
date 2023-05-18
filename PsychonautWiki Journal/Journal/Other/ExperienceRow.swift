@@ -103,51 +103,49 @@ struct ExperienceRowContent: View {
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
-            VStack(alignment: .leading) {
-                HStack {
-                    ZStack {
-                        Circle()
-                            .fill(
-                                AngularGradient(
-                                    gradient: Gradient(
-                                        colors: getDoubleColors()),
-                                    center: .center
-                                )
-                            )
-                            .frame(width: 30, height: 30)
+            HStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(
+                        LinearGradient(gradient: Gradient(colors: ingestionColors), startPoint: .top, endPoint: .bottom)
+                    )
+                    .frame(width: 20)
+                    .padding(.vertical, 8)
+                Spacer().frame(width: 8)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(title)
+                            .font(.headline)
+                        Spacer()
                         if isFavorite {
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)
                         }
                     }
-                    Spacer().frame(width: 8)
-                    Text(title)
-                        .font(.headline)
-                }
-                Spacer().frame(height: 4)
-                HStack {
-                    if distinctSubstanceNames.isEmpty {
-                        Text("No substance")
-                    } else {
-                        Text(distinctSubstanceNames, format: .list(type: .and))
-                    }
-                    Spacer()
-                    if let rating {
-                        Text(rating.stringRepresentation)
-                    }
-                }
-                .foregroundColor(.secondary)
-                HStack {
-                    timeText
-                    Spacer()
-                    if let locationName {
-                        HStack(spacing: 2) {
-                            Image(systemName: "mappin")
-                            Text(locationName).lineLimit(1)
+                    Spacer().frame(height: 4)
+                    HStack {
+                        if distinctSubstanceNames.isEmpty {
+                            Text("No substance")
+                        } else {
+                            Text(distinctSubstanceNames, format: .list(type: .and))
+                        }
+                        Spacer()
+                        if let rating {
+                            Text(rating.stringRepresentation)
                         }
                     }
+                    .foregroundColor(.secondary)
+                    HStack {
+                        timeText
+                        Spacer()
+                        if let locationName {
+                            HStack(spacing: 2) {
+                                Image(systemName: "mappin")
+                                Text(locationName).lineLimit(1)
+                            }
+                        }
+                    }
+                    .foregroundColor(.secondary)
                 }
-                .foregroundColor(.secondary)
             }
         }
     }
@@ -158,16 +156,6 @@ struct ExperienceRowContent: View {
         } else {
             return Text(sortDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
         }
-    }
-
-    private func getDoubleColors() -> [Color] {
-        var doubleColors = ingestionColors.flatMap { color in
-            Array(repeating: color, count: 2)
-        }
-        if let firstColor = ingestionColors.first {
-            doubleColors.append(firstColor)
-        }
-        return doubleColors
     }
 }
 
