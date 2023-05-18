@@ -124,13 +124,13 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
     }
 
     private static func getFilteredSubstances(substances: [Substance], searchText: String) -> [Substance] {
-        let lowerCaseSearchText = searchText.lowercased()
-        let prefixResult = getSortedPrefixResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
+        let cleanedSearchText = searchText.cleanSearch
+        let prefixResult = getSortedPrefixResults(substances: substances, lowerCaseSearchText: cleanedSearchText)
         if searchText.count < 3 {
             return prefixResult
         } else {
             if prefixResult.count < 3 {
-                let containsResult = getSortedContainsResults(substances: substances, lowerCaseSearchText: lowerCaseSearchText)
+                let containsResult = getSortedContainsResults(substances: substances, cleanSearch: cleanedSearchText)
                 return containsResult.sorted { sub1, sub2 in
                     if prefixResult.contains(sub2) {
                         return true
@@ -162,15 +162,15 @@ class SearchViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDel
         }
     }
 
-    private static func getSortedContainsResults(substances: [Substance], lowerCaseSearchText: String) -> [Substance] {
+    private static func getSortedContainsResults(substances: [Substance], cleanSearch: String) -> [Substance] {
         let mainPrefixMatches =  substances.filter { sub in
-            sub.name.lowercased().contains(lowerCaseSearchText)
+            sub.name.cleanSearch.contains(cleanSearch)
         }
         if mainPrefixMatches.isEmpty {
             return substances.filter { sub in
                 let names = sub.commonNames + [sub.name]
                 return names.contains { name in
-                    name.lowercased().contains(lowerCaseSearchText)
+                    name.cleanSearch.contains(cleanSearch)
                 }
             }
         } else {

@@ -166,6 +166,7 @@
 		EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048262A1411C0005C6A4B /* Suggestion.swift */; };
 		EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */; };
 		EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */; };
+		EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482D2A162225005C6A4B /* String-CleanSearch.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -440,6 +441,7 @@
 		EA6048262A1411C0005C6A4B /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseAndUnit.swift; sourceTree = "<group>"; };
 		EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceModel.swift; sourceTree = "<group>"; };
+		EA60482D2A162225005C6A4B /* String-CleanSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CleanSearch.swift"; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -1067,6 +1069,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */,
+				EA60482D2A162225005C6A4B /* String-CleanSearch.swift */,
 				EA418A30296C056500DEA663 /* Array-Unique.swift */,
 				EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
@@ -1471,6 +1474,7 @@
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
+				EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */,
 				EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */,
 				EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsScreen.swift in Sources */,
