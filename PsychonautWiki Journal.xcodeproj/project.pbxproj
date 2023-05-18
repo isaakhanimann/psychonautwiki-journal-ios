@@ -814,6 +814,19 @@
 			path = Suggestion;
 			sourceTree = "<group>";
 		};
+		EA60482F2A1623EC005C6A4B /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C630295F88F0000DA021 /* Experience Charts */,
+				EA418A052968D62F00DEA663 /* Ingestion Charts */,
+				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
+				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
+				EA41C62E295EB86C000DA021 /* Utils.swift */,
+				EA41C624295EAFD8000DA021 /* Data.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,15 +976,9 @@
 		EAC39DC029784D0D0012823D /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				EA41C630295F88F0000DA021 /* Experience Charts */,
-				EA418A052968D62F00DEA663 /* Ingestion Charts */,
 				EAE4718826CBA664009FB0EC /* Experience */,
 				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
 				EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */,
-				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
-				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
-				EA41C62E295EB86C000DA021 /* Utils.swift */,
-				EA41C624295EAFD8000DA021 /* Data.swift */,
 				EA6048242A140E25005C6A4B /* AddIngestionFab.swift */,
 			);
 			path = Other;
@@ -1028,10 +1035,10 @@
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4716E26CBA664009FB0EC /* Decoding */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
+				EA60482F2A1623EC005C6A4B /* Stats */,
 				EAE4718726CBA664009FB0EC /* Journal */,
 				EABD91FE294108100073303A /* Timeline */,
 				EA47E66E27CB475100F6E10F /* Search */,
-				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAE4712A26CBA663009FB0EC /* Safer */,
 				EA8AEA6F27E1CC3A00B30A16 /* Main */,
 				EAE4715E26CBA664009FB0EC /* CoreDataHelpers */,
@@ -1126,6 +1133,7 @@
 		EAE4718726CBA664009FB0EC /* Journal */ = {
 			isa = PBXGroup;
 			children = (
+				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAC39DC029784D0D0012823D /* Other */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
 				EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */,
