@@ -106,11 +106,15 @@ struct ExperienceRowContent: View {
             HStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(
-                        LinearGradient(gradient: Gradient(colors: ingestionColors), startPoint: .top, endPoint: .bottom)
+                        LinearGradient(
+                            gradient: Gradient(colors: ingestionColors),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
                     )
                     .frame(width: 20)
                     .padding(.vertical, 8)
-                Spacer().frame(width: 8)
+                Spacer().frame(width: 10)
                 VStack(alignment: .leading) {
                     HStack {
                         Text(title)
@@ -121,19 +125,21 @@ struct ExperienceRowContent: View {
                                 .foregroundColor(.yellow)
                         }
                     }
-                    Spacer().frame(height: 4)
                     HStack {
-                        if distinctSubstanceNames.isEmpty {
-                            Text("No substance")
-                        } else {
-                            Text(distinctSubstanceNames, format: .list(type: .and))
-                        }
+                        Group {
+                            if distinctSubstanceNames.isEmpty {
+                                Text("No substance")
+                            } else {
+                                Text(distinctSubstanceNames, format: .list(type: .and))
+                            }
+                        }.font(.subheadline)
                         Spacer()
                         if let rating {
                             Text(rating.stringRepresentation)
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
                         }
                     }
-                    .foregroundColor(.secondary)
                     HStack {
                         timeText
                         Spacer()
@@ -145,6 +151,7 @@ struct ExperienceRowContent: View {
                         }
                     }
                     .foregroundColor(.secondary)
+                    .font(.footnote)
                 }
             }
         }
