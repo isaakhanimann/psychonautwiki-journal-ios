@@ -56,29 +56,33 @@ struct ExperienceScreen: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                favoriteButton
-                deleteExperienceButton
                 Menu(content: {
-                    ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                        Button {
-                            withAnimation {
-                                timeDisplayStyle = option
-                            }
-                        } label: {
-                            if timeDisplayStyle == option {
-                                Label(option.text, systemImage: "checkmark")
-                            } else {
-                                Text(option.text)
+                    Menu {
+                        ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
+                            Button {
+                                withAnimation {
+                                    timeDisplayStyle = option
+                                }
+                            } label: {
+                                if timeDisplayStyle == option {
+                                    Label(option.text, systemImage: "checkmark")
+                                } else {
+                                    Text(option.text)
+                                }
                             }
                         }
+                    } label: {
+                        Label("Time Display", systemImage: "timer")
                     }
+                    favoriteButton
+                    editTitleButton
+                    if experience.location == nil {
+                        addLocationButton
+                    }
+                    deleteExperienceButton
                 }, label: {
-                    Label("Time", systemImage: "timer")
+                    Label("More", systemImage: "ellipsis.circle")
                 })
-                editTitleButton
-                if experience.location == nil {
-                    addLocationButton
-                }
             }
         }
     }
@@ -92,7 +96,7 @@ struct ExperienceScreen: View {
             if isFavorite {
                 Label("Unfavorite", systemImage: "star.fill")
             } else {
-                Label("Favorite", systemImage: "star")
+                Label("Make Favorite", systemImage: "star")
             }
         }
     }
