@@ -169,6 +169,7 @@
 		EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482D2A162225005C6A4B /* String-CleanSearch.swift */; };
 		EA6048312A166FD9005C6A4B /* SprayCalculatorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */; };
 		EA6048342A16C70A005C6A4B /* Spray-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */; };
+		EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048362A16CE9F005C6A4B /* AddSprayScreen.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -447,6 +448,7 @@
 		EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprayCalculatorScreen.swift; sourceTree = "<group>"; };
 		EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 4.xcdatamodel"; sourceTree = "<group>"; };
 		EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spray-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		EA6048362A16CE9F005C6A4B /* AddSprayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSprayScreen.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -832,6 +834,15 @@
 			path = Stats;
 			sourceTree = "<group>";
 		};
+		EA6048352A16CE82005C6A4B /* Spray */ = {
+			isa = PBXGroup;
+			children = (
+				EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */,
+				EA6048362A16CE9F005C6A4B /* AddSprayScreen.swift */,
+			);
+			path = Spray;
+			sourceTree = "<group>";
+		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,7 +1084,7 @@
 			children = (
 				EAC25BFE2955FCFA0002D68F /* Screens */,
 				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
-				EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */,
+				EA6048352A16CE82005C6A4B /* Spray */,
 			);
 			path = Safer;
 			sourceTree = "<group>";
@@ -1488,6 +1499,7 @@
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
+				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
 				EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */,
