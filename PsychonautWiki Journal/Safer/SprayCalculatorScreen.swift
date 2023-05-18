@@ -18,10 +18,6 @@ import SwiftUI
 
 struct SprayCalculatorScreen: View {
 
-    enum WeightUnit: String, CaseIterable {
-        case mg, ug
-    }
-
     @State private var units = WeightUnit.mg
     @State private var perSprayText = ""
     @State private var perSpray: Double? = nil
@@ -43,48 +39,69 @@ struct SprayCalculatorScreen: View {
     }
 
     var body: some View {
+        SprayCalculatorScreenContent(
+            units: $units,
+            perSprayText: $perSprayText,
+            liquidAmountInMLText: $liquidAmountInMLText,
+            numSpraysText: $numSpraysText
+        ).onChange(of: perSprayText) { newValue in
+            perSpray = getDouble(from: newValue)
+        }
+        .onChange(of: liquidAmountInMLText) { newValue in
+            liquidAmountInML = getDouble(from: newValue)
+        }
+        .onChange(of: numSpraysText) { newValue in
+            numSprays = getDouble(from: newValue)
+        }
+    }
+}
+
+enum WeightUnit: String, CaseIterable {
+    case mg, ug
+}
+
+struct SprayCalculatorScreenContent: View {
+
+    @Binding var units: WeightUnit
+    @Binding var perSprayText: String
+    @Binding var liquidAmountInMLText: String
+    @Binding var numSpraysText: String
+
+    var body: some View {
         List {
             Section("How much do you want per spray?") {
-                Picker("Units", selection: $units) {
-                    ForEach(WeightUnit.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                    }
+                HStack {
+                    TextField("Per Spray", text: $perSprayText)
+                        .keyboardType(.decimalPad)
+                    Picker("Units", selection: $units) {
+                        ForEach(WeightUnit.allCases, id: \.self) { option in
+                            Text(option.rawValue)
+                        }
+                    }.labelsHidden()
                 }
-                TextField("Per Spray", text: $perSprayText)
-                    .keyboardType(.decimalPad)
-                    .onChange(of: perSprayText) { newValue in
-                        perSpray = getDouble(from: newValue)
-                    }
             }
             Section("How much liquid do you want to use?") {
                 HStack {
                     TextField("Liquid Amount", text: $liquidAmountInMLText)
                         .keyboardType(.decimalPad)
-                        .onChange(of: liquidAmountInMLText) { newValue in
-                            liquidAmountInML = getDouble(from: newValue)
-                        }
                     Text("ml")
                 }
             }
             Section {
                 TextField("Number of sprays", text: $numSpraysText)
                     .keyboardType(.decimalPad)
-                    .onChange(of: numSpraysText) { newValue in
-                        numSprays = getDouble(from: newValue)
-                    }
-                if let mlPerSpray {
-                    Text("\(mlPerSpray.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) ml/spray")
-                }
+
+                Text(" ml/spray")
             } header: {
-                Text("How many sprays are in \(liquidAmountInML == nil ? "..." : liquidAmountInMLText) ml?")
+                Text("Spray size")
             } footer: {
                 Text("Note: fill it into the spray bottle and count the number of sprays. Its recommended to have small spray bottles (5ml) and fill it completely so the last couple of sprays still work.")
             }
-            if let amountResult, liquidAmountInML != nil {
-                Section("Result") {
-                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
-                }
-            }
+//            if let amountResult, liquidAmountInML != nil {
+//                Section("Result") {
+//                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
+//                }
+//            }
             Section {
                 Text("""
 Its better to use nose spray than to snort powder because it damages the nasal mucous less. To not damage the nasal mucous and have a similar short onset and effectiveness of insufflation use rectal administration (link).
@@ -98,7 +115,12 @@ However substances are the most stable in their crystaline form and degrade more
 struct SprayCalculatorScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SprayCalculatorScreen().headerProminence(.increased)
+            SprayCalculatorScreenContent(
+                units: .constant(.mg),
+                perSprayText: .constant(""),
+                liquidAmountInMLText: .constant(""),
+                numSpraysText: .constant("")
+            ).headerProminence(.increased)
         }
     }
 }

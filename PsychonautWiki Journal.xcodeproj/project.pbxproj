@@ -168,6 +168,7 @@
 		EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */; };
 		EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482D2A162225005C6A4B /* String-CleanSearch.swift */; };
 		EA6048312A166FD9005C6A4B /* SprayCalculatorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */; };
+		EA6048342A16C70A005C6A4B /* Spray-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -444,6 +445,8 @@
 		EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceModel.swift; sourceTree = "<group>"; };
 		EA60482D2A162225005C6A4B /* String-CleanSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CleanSearch.swift"; sourceTree = "<group>"; };
 		EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprayCalculatorScreen.swift; sourceTree = "<group>"; };
+		EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 4.xcdatamodel"; sourceTree = "<group>"; };
+		EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spray-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -1068,8 +1071,8 @@
 		EAE4712A26CBA663009FB0EC /* Safer */ = {
 			isa = PBXGroup;
 			children = (
-				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
 				EAC25BFE2955FCFA0002D68F /* Screens */,
+				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
 				EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */,
 			);
 			path = Safer;
@@ -1104,6 +1107,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */,
+				EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */,
 				EA48F85E29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift */,
 				EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */,
 				EA418A2E296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift */,
@@ -1615,6 +1619,7 @@
 				EA4189F3296343EC00DEA663 /* IngestionsForSubstanceScreen.swift in Sources */,
 				EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */,
 				EA116CD829FBA2E4007D8BF6 /* EditOverallRatingScreen.swift in Sources */,
+				EA6048342A16C70A005C6A4B /* Spray-CoreDataHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1992,12 +1997,13 @@
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */,
 				EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */,
 				EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */,
 				EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */,
 				EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */,
 			);
-			currentVersion = EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */;
+			currentVersion = EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */;
 			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
