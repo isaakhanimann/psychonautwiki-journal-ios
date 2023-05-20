@@ -23,7 +23,7 @@ struct SprayCalculatorScreen: View {
     var body: some View {
         SprayCalculatorScreenContent(
             units: $viewModel.units,
-            perSpray: $viewModel.weightPerSprayText,
+            weightPerSpray: $viewModel.weightPerSprayText,
             liquidAmountInMl: $viewModel.liquidAmountInMlText,
             totalWeight: $viewModel.totalWeightText,
             purityInPercent: $viewModel.purityInPercentText,
@@ -47,7 +47,7 @@ struct SprayCalculatorScreen: View {
 struct SprayCalculatorScreenContent: View {
 
     @Binding var units: WeightUnit
-    @Binding var perSpray: String
+    @Binding var weightPerSpray: String
     @Binding var liquidAmountInMl: String
     @Binding var totalWeight: String
     @Binding var purityInPercent: String
@@ -61,13 +61,14 @@ struct SprayCalculatorScreenContent: View {
 
     var body: some View {
         List {
-            Section("How much do you want per spray?") {
+            Section("Weight per spray") {
                 HStack {
-                    TextField("Per Spray", text: $perSpray)
+                    TextField("Weight per Spray", text: $weightPerSpray)
+                        .font(.title)
                         .keyboardType(.decimalPad)
                     Picker("Units", selection: $units) {
                         ForEach(WeightUnit.allCases, id: \.self) { option in
-                            Text(option.rawValue)
+                            Text(option.rawValue).font(.title)
                         }
                     }.labelsHidden()
                 }
@@ -102,28 +103,29 @@ struct SprayCalculatorScreenContent: View {
                 }
             }
             Section("Result") {
-                HStack(alignment: .top) {
-                    TextField("Liquid", text: $liquidAmountInMl)
-                        .keyboardType(.decimalPad)
-                    Text("ml")
-                    Image(systemName: "arrow.left.arrow.right")
+                VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        TextField("Substance", text: $totalWeight)
+                        TextField("Liquid", text: $liquidAmountInMl)
+                            .keyboardType(.decimalPad)
+                        Text("ml")
+                    }.font(.title)
+                    Image(systemName: "arrow.up.arrow.down")
+                    HStack {
+                        TextField("Weight", text: $totalWeight)
                             .keyboardType(.decimalPad)
                         Text(units.rawValue)
+                    }.font(.title)
+                    HStack {
+                        Image(systemName: "arrow.down")
+                        TextField("Purity", text: $purityInPercent)
+                            .keyboardType(.decimalPad)
+                        Text("%")
+                    }
+                    if let doseAdjustedToPurity {
+                        Text("\(doseAdjustedToPurity.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue)").font(.title)
                     }
                 }
             }
-            Section("Purity Adjusted") {
-                HStack {
-                    TextField("Purity", text: $purityInPercent)
-                        .keyboardType(.decimalPad)
-                    Text("%")
-                }
-                if let doseAdjustedToPurity {
-                    Text("\(totalWeight) \(units.rawValue) pure is \(doseAdjustedToPurity.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) at \(purityInPercent)%")
-                }
-            }.listRowSeparator(.hidden)
             Section {
                 Text("""
 Volumetric dosing substances.
@@ -152,7 +154,7 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
         NavigationView {
             SprayCalculatorScreenContent(
                 units: .constant(.mg),
-                perSpray: .constant(""),
+                weightPerSpray: .constant(""),
                 liquidAmountInMl: .constant(""),
                 totalWeight: .constant(""),
                 purityInPercent: .constant("90"),
