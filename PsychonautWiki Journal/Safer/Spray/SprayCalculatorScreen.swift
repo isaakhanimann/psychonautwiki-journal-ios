@@ -18,69 +18,41 @@ import SwiftUI
 
 struct SprayCalculatorScreen: View {
 
-    @State private var units = WeightUnit.mg
-    @State private var perSprayText = ""
-    @State private var perSpray: Double? = nil
-    @State private var liquidAmountInMLText = ""
-    @State private var liquidAmountInML: Double? = nil
-    
-    var sprayModels: [SprayModel] {
-        []
-    }
-    @State private var selectedSpray: SprayModel? = nil
-    @State private var isShowingAddSpray = false
-    @State private var isShowingEditSpray = false
-
-//    var mlPerSpray: Double? {
-//        guard let numSprays else {return nil}
-//        guard let liquidAmountInML else {return nil}
-//        return liquidAmountInML/numSprays
-//    }
-//
-//    var amountResult: Double? {
-//        guard let perSpray else {return nil}
-//        guard let numSprays else {return nil}
-//        return perSpray * numSprays
-//    }
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         SprayCalculatorScreenContent(
-            units: $units,
-            perSprayText: $perSprayText,
-            liquidAmountInMLText: $liquidAmountInMLText,
-            sprayModels: [],
-            selectedSpray: $selectedSpray,
+            units: $viewModel.units,
+            perSpray: $viewModel.perSprayText,
+            liquidAmountInMl: $viewModel.liquidAmountInMlText,
+            purityInPercent: $viewModel.purityInPercentText,
+            sprayModels: viewModel.sprayModels,
+            selectedSpray: $viewModel.selectedSpray,
             addSpray: {
-                isShowingAddSpray.toggle()
+                viewModel.isShowingAddSpray.toggle()
             },
             editSprays: {
-                isShowingEditSpray.toggle()
+                viewModel.isShowingEditSpray.toggle()
             }
-        ).onChange(of: perSprayText) { newValue in
-            perSpray = getDouble(from: newValue)
+        ).onChange(of: viewModel.perSprayText) { newValue in
+            viewModel.perSpray = getDouble(from: newValue)
+        }.onChange(of: viewModel.liquidAmountInMlText) { newValue in
+            viewModel.liquidAmountInMl = getDouble(from: newValue)
+        }.onChange(of: viewModel.purityInPercentText) { newValue in
+            viewModel.purityInPercent = getDouble(from: newValue)
         }
-        .onChange(of: liquidAmountInMLText) { newValue in
-            liquidAmountInML = getDouble(from: newValue)
+        .sheet(isPresented: $viewModel.isShowingAddSpray) {
+            AddSprayScreen()
         }
-        
     }
-}
-
-enum WeightUnit: String, CaseIterable {
-    case mg, ug
-}
-
-struct SprayModel {
-    let name: String
-    let numSprays: Double
-    let contentInMl: Double
 }
 
 struct SprayCalculatorScreenContent: View {
 
     @Binding var units: WeightUnit
-    @Binding var perSprayText: String
-    @Binding var liquidAmountInMLText: String
+    @Binding var perSpray: String
+    @Binding var liquidAmountInMl: String
+    @Binding var purityInPercent: String
     let sprayModels: [SprayModel]
     @Binding var selectedSpray: SprayModel?
     let addSpray: () -> Void
@@ -90,7 +62,7 @@ struct SprayCalculatorScreenContent: View {
         List {
             Section("How much do you want per spray?") {
                 HStack {
-                    TextField("Per Spray", text: $perSprayText)
+                    TextField("Per Spray", text: $perSpray)
                         .keyboardType(.decimalPad)
                     Picker("Units", selection: $units) {
                         ForEach(WeightUnit.allCases, id: \.self) { option in
@@ -99,23 +71,36 @@ struct SprayCalculatorScreenContent: View {
                     }.labelsHidden()
                 }
             }
-            Section("How much liquid do you want to use?") {
-                HStack {
-                    TextField("Liquid Amount", text: $liquidAmountInMLText)
-                        .keyboardType(.decimalPad)
-                    Text("ml")
-                }
-            }
             Section {
                 Button(action: addSpray) {
                     Label("Add Spray", systemImage: "plus")
                 }
             } header: {
                 HStack {
-                    Text("Spray")
+                    Text("Spray Size")
                     Spacer()
                     if !sprayModels.isEmpty {
                         Button("Edit Sprays", action: editSprays)
+                    }
+                }
+            }
+            Section("Result") {
+                HStack(alignment: .top) {
+                    TextField("Liquid", text: $liquidAmountInMl)
+                        .keyboardType(.decimalPad)
+                    Text("ml")
+                    Image(systemName: "arrow.left.arrow.right")
+                    VStack {
+                        HStack {
+                            TextField("Substance", text: $liquidAmountInMl)
+                                .keyboardType(.decimalPad)
+                            Text(units.rawValue)
+                        }
+                        HStack {
+                            TextField("Purity", text: $purityInPercent)
+                                .keyboardType(.decimalPad)
+                            Text("%")
+                        }
                     }
                 }
             }
@@ -124,7 +109,13 @@ struct SprayCalculatorScreenContent: View {
 //                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
 //                }
 //            }
-            
+            Section {
+                Text("""
+Volumetric dosing substances.
+Its better to use nose spray than to snort powder because it damages the nasal mucous less. To not damage the nasal mucous and have a similar short onset and effectiveness of insufflation use rectal administration (link).
+However substances are the most stable in their crystaline form and degrade more quickly if dissolved in liquid, which might be relevant to you if you plan on storing it for months or years.
+""")
+            }
         }
         .navigationTitle("Spray Calculator")
     }
@@ -135,8 +126,9 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
         NavigationView {
             SprayCalculatorScreenContent(
                 units: .constant(.mg),
-                perSprayText: .constant(""),
-                liquidAmountInMLText: .constant(""),
+                perSpray: .constant(""),
+                liquidAmountInMl: .constant(""),
+                purityInPercent: .constant("90"),
                 sprayModels: [],
                 selectedSpray: .constant(nil),
                 addSpray: {},

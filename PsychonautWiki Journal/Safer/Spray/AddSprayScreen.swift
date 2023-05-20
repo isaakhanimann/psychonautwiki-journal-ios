@@ -18,30 +18,71 @@ import SwiftUI
 
 struct AddSprayScreen: View {
 
+    @State private var name = ""
+    @State private var sizeInMlText = ""
+    @State private var sizeInMl: Double? = nil
     @State private var numSpraysText = ""
     @State private var numSprays: Double? = nil
+    @State private var isPreferred = false
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         List {
-            Text("Note: fill it into the spray bottle and count the number of sprays. Its recommended to have small spray bottles (5ml) and fill it completely so the last couple of sprays still work.")
-            TextField("Number of sprays", text: $numSpraysText)
-                .keyboardType(.decimalPad)
-            Section {
-                Text("""
-Its better to use nose spray than to snort powder because it damages the nasal mucous less. To not damage the nasal mucous and have a similar short onset and effectiveness of insufflation use rectal administration (link).
-However substances are the most stable in their crystaline form and degrade more quickly if dissolved in liquid, which might be relevant to you if you plan on storing it for months or years.
-""")
+            Section("Name") {
+                TextField("Spray Name", text: $name)
+                Toggle("Preferred", isOn: $isPreferred)
             }
-
+            Section {
+                HStack {
+                    TextField("Volume", text: $sizeInMlText)
+                        .keyboardType(.decimalPad)
+                    Text("ml")
+                }
+                TextField("Number of sprays", text: $numSpraysText)
+                    .keyboardType(.decimalPad)
+            } header: {
+                Text("Size")
+            } footer: {
+                Text("Note: fill it into the spray bottle and count the number of sprays. To make sure the last couple of sprays still work properly use a small spray bottle (5ml) and fill it completely.")
+            }
         }
+        .navigationTitle("Add Spray")
         .onChange(of: numSpraysText) { newValue in
             numSprays = getDouble(from: newValue)
         }
+        .onChange(of: sizeInMlText) { newValue in
+            sizeInMl = getDouble(from: newValue)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if let sizeInMl, let numSprays, !name.isEmpty {
+                    Button {
+                        save(sizeInMl: sizeInMl, numSprays: numSprays)
+                        dismiss()
+                    } label: {
+                        Label("Save", systemImage: "checkmark.circle")
+                    }
+                }
+            }
+        }
     }
+
+    private func save(sizeInMl: Double, numSprays: Double) {
+        let spray = Spray(context: PersistenceController.shared.viewContext)
+        spray.creationDate = Date()
+        spray.name = name
+        spray.contentInMl = sizeInMl
+        spray.numSprays = numSprays
+        spray.isPreferred = isPreferred
+        try? PersistenceController.shared.viewContext.save()
+    }
+
 }
 
 struct AddSprayScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddSprayScreen()
+        NavigationView {
+            AddSprayScreen().headerProminence(.increased)
+        }
     }
 }

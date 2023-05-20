@@ -16,13 +16,8 @@
 
 import Foundation
 
-extension Spray {
-
-    var nameUnwrapped: String {
-        name ?? ""
-    }
-
-    var creationDateUnwrapped: Date {
-        creationDate ?? .now
-    }
+struct SprayModel {
+    let name: String
+    let numSprays: Double
+    let contentInMl: Double
 }
