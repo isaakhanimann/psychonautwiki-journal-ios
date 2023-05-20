@@ -60,7 +60,7 @@ struct AddSprayScreen: View {
                             save(sizeInMl: sizeInMl, numSprays: numSprays)
                             dismiss()
                         } label: {
-                            Label("Save", systemImage: "checkmark.circle").labelStyle(.titleAndIcon)
+                            Label("Save", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon)
                         }
                     }
                 }
