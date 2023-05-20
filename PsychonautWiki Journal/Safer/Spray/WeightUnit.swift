@@ -17,5 +17,5 @@
 import Foundation
 
 enum WeightUnit: String, CaseIterable {
-    case mg, ug
+    case mg, µg
 }
