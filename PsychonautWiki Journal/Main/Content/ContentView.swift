@@ -68,33 +68,43 @@ struct ContentView: View {
 struct ContentScreen: View {
     let isEyeOpen: Bool
 
+    enum TabScreen {
+    case stats, journal, substances, safer, settings
+    }
+    @State private var selection = TabScreen.journal
+
+
     var body: some View {
-        if isEyeOpen {
-            TabView {
-                JournalScreen()
+        TabView(selection: $selection) {
+            if #available(iOS 16, *) {
+                StatsScreen()
                     .tabItem {
-                        Label("Journal", systemImage: "house")
+                        Label("Stats", systemImage: "chart.bar")
                     }
-                if #available(iOS 16, *) {
-                    StatsScreen()
-                        .tabItem {
-                            Label("Stats", systemImage: "chart.bar")
-                        }
+                    .tag(TabScreen.stats)
+            }
+            JournalScreen()
+                .tabItem {
+                    Label("Journal", systemImage: "square.stack")
                 }
+                .tag(TabScreen.journal)
+            if isEyeOpen {
                 SearchScreen()
                     .tabItem {
                         Label("Substances", systemImage: "magnifyingglass")
                     }
+                    .tag(TabScreen.substances)
                 SaferScreen()
                     .tabItem {
-                        Label("Safer Use", systemImage: "cross")
+                        Label("Safer", systemImage: "cross.case")
                     }
-                SettingsScreen()
-                    .tabItem {
-                        Label("Settings", systemImage: "gearshape")                    }
+                    .tag(TabScreen.safer)
             }
-        } else {
-            JournalScreen()
+            SettingsScreen()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
+                .tag(TabScreen.settings)
         }
     }
 }
