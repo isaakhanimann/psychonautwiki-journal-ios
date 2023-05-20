@@ -32,7 +32,8 @@ struct SprayCalculatorScreen: View {
             addSpray: {
                 viewModel.isShowingAddSpray.toggle()
             },
-            deleteSprays: viewModel.deleteSprays
+            deleteSprays: viewModel.deleteSprays,
+            doseAdjustedToPurity: viewModel.doseAdjustedToPurity
         )
         .sheet(isPresented: $viewModel.isShowingAddSpray) {
             AddSprayScreen()
@@ -54,6 +55,7 @@ struct SprayCalculatorScreenContent: View {
     @Binding var selectedSpray: SprayModel?
     let addSpray: () -> Void
     let deleteSprays: (IndexSet) -> Void
+    let doseAdjustedToPurity: Double?
     @Environment(\.editMode) private var editMode
     @Environment(\.colorScheme) var colorScheme
 
@@ -105,25 +107,23 @@ struct SprayCalculatorScreenContent: View {
                         .keyboardType(.decimalPad)
                     Text("ml")
                     Image(systemName: "arrow.left.arrow.right")
-                    VStack {
-                        HStack {
-                            TextField("Substance", text: $totalWeight)
-                                .keyboardType(.decimalPad)
-                            Text(units.rawValue)
-                        }
-                        HStack {
-                            TextField("Purity", text: $purityInPercent)
-                                .keyboardType(.decimalPad)
-                            Text("%")
-                        }
+                    HStack {
+                        TextField("Substance", text: $totalWeight)
+                            .keyboardType(.decimalPad)
+                        Text(units.rawValue)
                     }
                 }
             }
-            //            if let amountResult, liquidAmountInML != nil {
-            //                Section("Result") {
-            //                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
-            //                }
-            //            }
+            Section("Purity Adjusted") {
+                HStack {
+                    TextField("Purity", text: $purityInPercent)
+                        .keyboardType(.decimalPad)
+                    Text("%")
+                }
+                if let doseAdjustedToPurity {
+                    Text("\(totalWeight) \(units.rawValue) pure is \(doseAdjustedToPurity.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) at \(purityInPercent)%")
+                }
+            }.listRowSeparator(.hidden)
             Section {
                 Text("""
 Volumetric dosing substances.
@@ -159,7 +159,8 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
                 sprayModels: sprays,
                 selectedSpray: .constant(sprays.first),
                 addSpray: {},
-                deleteSprays: {_ in }
+                deleteSprays: {_ in },
+                doseAdjustedToPurity: 211
             ).headerProminence(.increased)
         }
     }

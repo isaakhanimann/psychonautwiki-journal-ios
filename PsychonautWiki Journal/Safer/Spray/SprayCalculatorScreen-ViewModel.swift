@@ -60,6 +60,10 @@ extension SprayCalculatorScreen {
         var totalWeight: Double? {
             getDouble(from: totalWeightText)
         }
+        var doseAdjustedToPurity: Double? {
+            guard let totalWeight, let purityInPercent else {return nil}
+            return totalWeight*100/purityInPercent
+        }
 
         private func maybeUpdateTotalWeight() {
             if let liquidAmountInMl, let selectedSpray, let weightPerSpray {
