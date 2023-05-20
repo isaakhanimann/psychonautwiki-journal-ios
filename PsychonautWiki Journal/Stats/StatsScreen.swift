@@ -33,32 +33,40 @@ struct StatsScreen: View {
 
     var body: some View {
         NavigationView {
-            if let experienceData, let ingestionData {
-                StatsScreenContent(
-                    experienceData: experienceData,
-                    ingestionData: ingestionData
-                )
-            } else {
-                ProgressView().task {
-                    experienceData = ExperienceData(
-                        last30Days: getExperienceCountsLast30Days(),
-                        last12Months: getExperienceCountsLast12Months(),
-                        years: getExperienceCountsYears(),
-                        colorMapping: { substanceName in
-                            getColor(for: substanceName).swiftUIColor
-                        }
+            Group {
+                if let experienceData, let ingestionData {
+                    StatsScreenContent(
+                        experienceData: experienceData,
+                        ingestionData: ingestionData
                     )
-                    ingestionData = IngestionData(
-                        last30Days: getSortedIngestionCountsLast30Days(),
-                        last12Months: getSortedIngestionCountsLast12Months(),
-                        years: getSortedIngestionCountsYears(),
-                        colorMapping: { substanceName in
-                            getColor(for: substanceName).swiftUIColor
-                        }
-                    )
+                } else {
+                    ProgressView().task {
+                        calculateStats()
+                    }
                 }
+            }.onChange(of: ingestions.count) { newValue in
+                calculateStats()
             }
         }
+    }
+
+    private func calculateStats() {
+        experienceData = ExperienceData(
+            last30Days: getExperienceCountsLast30Days(),
+            last12Months: getExperienceCountsLast12Months(),
+            years: getExperienceCountsYears(),
+            colorMapping: { substanceName in
+                getColor(for: substanceName).swiftUIColor
+            }
+        )
+        ingestionData = IngestionData(
+            last30Days: getSortedIngestionCountsLast30Days(),
+            last12Months: getSortedIngestionCountsLast12Months(),
+            years: getSortedIngestionCountsYears(),
+            colorMapping: { substanceName in
+                getColor(for: substanceName).swiftUIColor
+            }
+        )
     }
 
     private func getSortedIngestionCountsLast30Days() -> [IngestionCount] {
