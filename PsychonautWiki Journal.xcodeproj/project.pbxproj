@@ -1061,6 +1061,7 @@
 				EAE4716E26CBA664009FB0EC /* Decoding */,
 				EAE471A326CBA664009FB0EC /* Add Ingestion */,
 				EA60482F2A1623EC005C6A4B /* Stats */,
+				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAE4718726CBA664009FB0EC /* Journal */,
 				EABD91FE294108100073303A /* Timeline */,
 				EA47E66E27CB475100F6E10F /* Search */,
@@ -1160,7 +1161,6 @@
 		EAE4718726CBA664009FB0EC /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				EACB0C1C293FA48B00C605E2 /* Settings */,
 				EAC39DC029784D0D0012823D /* Other */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
 				EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */,

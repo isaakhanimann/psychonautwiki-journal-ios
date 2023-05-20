@@ -89,6 +89,9 @@ struct ContentScreen: View {
                     .tabItem {
                         Label("Safer Use", systemImage: "cross")
                     }
+                SettingsScreen()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape")                    }
             }
         } else {
             JournalScreen()

@@ -34,11 +34,6 @@ struct JournalScreen: View {
                 ChooseSubstanceScreen()
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: SettingsScreen()) {
-                        Label("Settings", systemImage: "gearshape")
-                    }
-                }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     favoriteButton
                     Button {
