@@ -275,7 +275,6 @@
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
 		EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
 		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
-		EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -560,7 +559,6 @@
 		EAF76CA327D8F72700945587 /* ExperiencesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesList.swift; sourceTree = "<group>"; };
 		EAF76CA827D90CF900945587 /* SubstanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceColor.swift; sourceTree = "<group>"; };
 		EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRoute.swift; sourceTree = "<group>"; };
-		EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseDose-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,15 +615,13 @@
 		EA095A1027D9E3D0007D44D6 /* Dose */ = {
 			isa = PBXGroup;
 			children = (
+				EA4189FE296738BC00DEA663 /* MDMA Dose */,
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
 				EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */,
 				EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */,
 				EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */,
 				EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */,
-				EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */,
-				EA4189FE296738BC00DEA663 /* MDMA Dose */,
 				EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */,
-				EAF76CBF27D9568D00945587 /* ChooseDose-ViewModel.swift */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
 			);
 			path = Dose;
@@ -664,6 +660,7 @@
 		EA4189FE296738BC00DEA663 /* MDMA Dose */ = {
 			isa = PBXGroup;
 			children = (
+				EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */,
 				EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */,
 				EA418A0129673FFF00DEA663 /* MDMAPillsSection.swift */,
 				EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */,
@@ -1614,7 +1611,6 @@
 				EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */,
 				EA418A37296CDEDE00DEA663 /* LockScreen.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
-				EAF76CC027D9568D00945587 /* ChooseDose-ViewModel.swift in Sources */,
 				EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,

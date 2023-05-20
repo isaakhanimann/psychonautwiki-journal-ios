@@ -21,24 +21,29 @@ struct ChooseDoseScreen: View {
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
-    @StateObject private var viewModel = ViewModel()
+    @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
+    @State private var selectedPureDose: Double?
+    @State private var isEstimate = false
+    @State private var isShowingNext = false
+
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         ChooseDoseScreenContent(
             substance: substance,
             administrationRoute: administrationRoute,
             dismiss: dismiss,
-            purity: $viewModel.purity,
-            selectedPureDose: $viewModel.selectedPureDose,
-            selectedUnits: $viewModel.selectedUnits,
-            isEstimate: $viewModel.isEstimate,
-            isShowingNext: $viewModel.isShowingNext,
-            impureDoseText: viewModel.impureDoseText,
-            impureDoseRounded: viewModel.impureDoseRounded
+            isEyeOpen: isEyeOpen,
+            selectedPureDose: $selectedPureDose,
+            selectedUnits: $selectedUnits,
+            isEstimate: $isEstimate,
+            isShowingNext: $isShowingNext
         )
         .task {
             let routeUnits = substance.getDose(for: administrationRoute)?.units
-            viewModel.initializeUnits(routeUnits: routeUnits)
+            if let routeUnits {
+                selectedUnits = routeUnits
+            }
         }
     }
 }
@@ -48,18 +53,16 @@ struct ChooseDoseScreenContent: View {
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
-    @Binding var purity: Double
+    let isEyeOpen: Bool
     @Binding var selectedPureDose: Double?
     @Binding var selectedUnits: String?
     @Binding var isEstimate: Bool
     @Binding var isShowingNext: Bool
-    var impureDoseText: String
-    var impureDoseRounded: Double?
     @State private var isShowingUnknownDoseAlert = false
-    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
     }
+
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -132,9 +135,6 @@ struct ChooseDoseScreenContent: View {
     private var screen: some View {
         Form {
             doseSection
-            if isEyeOpen {
-                puritySection
-            }
             if substance.name == "Nicotine" {
                 Section("Nicotine Content vs Dose") {
                     Text("The nicotine inhaled by the average smoker per cigarette is indicated on the package. The nicotine content of the cigarette itself is much higher as on average only about 10% of the cigarette’s nicotine is inhaled.\nMore nicotine is inhaled when taking larger and more frequent puffs or by blocking the cigarette filter ventilation holes.\nNicotine yields from electronic cigarettes are also highly correlated with the device type and brand, liquid nicotine concentration, and PG/VG ratio, and to a lower significance with electrical power. Nicotine yields from 15 puffs may vary 50-fold.")
@@ -178,32 +178,20 @@ struct ChooseDoseScreenContent: View {
     }
 
     var suggestedNote: String? {
-        guard let impureDoseRounded, let selectedUnits, purity != 100 else {return nil}
-        return "\(impureDoseRounded.formatted()) \(selectedUnits) with \(Int(purity))% purity"
+        guard let impureDose, let selectedUnits, purityInPercent != 100 && purityInPercent != nil else {return nil}
+        return "\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits) with \(purityText)% purity"
     }
 
     static let doseDisclaimer = "Dosage information is gathered from users and various resources. It is not a recommendation and should be verified with other sources for accuracy. Always start with lower doses due to differences between individual body weight, tolerance, metabolism, and personal sensitivity."
 
-    private var puritySection: some View {
-        Section("Purity Adjusted Dose") {
-            VStack {
-                Text("\(Int(purity))%")
-                    .font(.title2.bold())
-                Text(impureDoseText)
-                    .font(.title2.bold())
-                Slider(
-                    value: $purity,
-                    in: 1...100,
-                    step: 1
-                ) {
-                    Text("Purity")
-                } minimumValueLabel: {
-                    Text("1")
-                } maximumValueLabel: {
-                    Text("100")
-                }
-            }
-        }
+    @State private var purityText = ""
+    var purityInPercent: Double? {
+        getDouble(from: purityText)
+    }
+    private var impureDose: Double? {
+        guard let selectedPureDose = selectedPureDose else { return nil }
+        guard let purityInPercent, purityInPercent != 0 else { return nil }
+        return selectedPureDose/purityInPercent * 100
     }
 
     var doseSection: some View {
@@ -222,6 +210,17 @@ struct ChooseDoseScreenContent: View {
                 selectedUnits: $selectedUnits,
                 focusOnAppear: true
             )
+            if isEyeOpen {
+                HStack {
+                    Image(systemName: "arrow.down")
+                    TextField("Purity", text: $purityText).keyboardType(.decimalPad)
+                    Spacer()
+                    Text("%")
+                }
+                if let impureDose {
+                    Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits ?? "")").font(.title)
+                }
+            }
             Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
             unknownDoseLink
         } header: {
@@ -247,12 +246,11 @@ struct ChooseDoseScreenContent_Previews: PreviewProvider {
                         substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
                         administrationRoute: .oral,
                         dismiss: {},
-                        purity: .constant(100),
+                        isEyeOpen: true,
                         selectedPureDose: .constant(20),
                         selectedUnits: .constant("mg"),
                         isEstimate: .constant(false),
-                        isShowingNext: .constant(false),
-                        impureDoseText: "20 mg"
+                        isShowingNext: .constant(false)
                     )
                 }
                 .previewDevice(PreviewDevice(rawValue: name))
