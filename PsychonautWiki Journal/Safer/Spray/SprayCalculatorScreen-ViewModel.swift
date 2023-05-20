@@ -32,7 +32,6 @@ extension SprayCalculatorScreen {
         @Published var purityInPercentText = ""
         @Published var purityInPercent: Double? = nil
         @Published var isShowingAddSpray = false
-        @Published var isShowingEditSpray = false
 
 
         //    var mlPerSpray: Double? {
@@ -75,17 +74,42 @@ extension SprayCalculatorScreen {
 
         private func assignToSprayModels(sprays: [Spray]) {
             sprayModels = sprays.map({ spray in
-                SprayModel(id: spray.id,name: spray.nameUnwrapped, numSprays: spray.numSprays, contentInMl: spray.contentInMl)
+                SprayModel(name: spray.nameUnwrapped, numSprays: spray.numSprays, contentInMl: spray.contentInMl, spray: spray)
             })
-            selectedSpray = sprayModels.first
+            if let sel = sprays.first(where: { spray in
+                spray.isPreferred
+            }) {
+                selectedSpray = SprayModel(name: sel.nameUnwrapped, numSprays: sel.numSprays, contentInMl: sel.contentInMl, spray: sel)
+            } else {
+                selectedSpray = sprayModels.first
+            }
         }
 
-        func selectSpray(sprayModel: SprayModel) {
-
+        func saveSelect() {
+            let sprays = sprayModels.compactMap { $0.spray }
+            sprays.forEach { spray in
+                spray.isPreferred = false
+            }
+            if let selectedSpray = selectedSpray?.spray {
+                selectedSpray.isPreferred = true
+            }
+            let context = PersistenceController.shared.viewContext
+            if context.hasChanges {
+                try? context.save()
+            }
         }
 
-        func deleteSpray(sprayModel: SprayModel) {
-
+        func deleteSprays(at offsets: IndexSet) {
+            let context = PersistenceController.shared.viewContext
+            let spraysToDelete = offsets.compactMap { sprayModels[$0].spray }
+            for spray in spraysToDelete {
+                context.delete(spray)
+            }
+            do {
+                try context.save()
+            } catch {
+                assertionFailure("Failed to delete sprays")
+            }
         }
     }
 }

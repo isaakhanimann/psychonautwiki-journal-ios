@@ -31,9 +31,7 @@ struct SprayCalculatorScreen: View {
             addSpray: {
                 viewModel.isShowingAddSpray.toggle()
             },
-            editSprays: {
-                viewModel.isShowingEditSpray.toggle()
-            }
+            deleteSprays: viewModel.deleteSprays
         ).onChange(of: viewModel.perSprayText) { newValue in
             viewModel.perSpray = getDouble(from: newValue)
         }.onChange(of: viewModel.liquidAmountInMlText) { newValue in
@@ -43,6 +41,9 @@ struct SprayCalculatorScreen: View {
         }
         .sheet(isPresented: $viewModel.isShowingAddSpray) {
             AddSprayScreen()
+        }
+        .onDisappear {
+            viewModel.saveSelect()
         }
     }
 }
@@ -56,7 +57,9 @@ struct SprayCalculatorScreenContent: View {
     let sprayModels: [SprayModel]
     @Binding var selectedSpray: SprayModel?
     let addSpray: () -> Void
-    let editSprays: () -> Void
+    let deleteSprays: (IndexSet) -> Void
+    @Environment(\.editMode) private var editMode
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         List {
@@ -72,26 +75,31 @@ struct SprayCalculatorScreenContent: View {
                 }
             }
             Section {
-                Picker("Sprays", selection: $selectedSpray) {
-                    ForEach(sprayModels) { model in
+                ForEach(sprayModels) { model in
+                    Button {
+                        selectedSpray = model
+                    } label: {
                         HStack {
-                            Text(model.name).font(.headline)
+                            Text(model.name).font(.headline).foregroundColor(colorScheme == .dark ? Color.white : .black)
                             Text("\(model.contentInMl.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) ml = \(model.numSprays.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) sprays").foregroundColor(.secondary)
-                        }.tag(model as SprayModel?)
+                            Spacer()
+                            if selectedSpray == model {
+                                Image(systemName: "checkmark").font(.headline).foregroundColor(.blue)
+                            }
+                        }
                     }
-                    Text("No selection").tag(nil as SprayModel?)
                 }
-                .labelsHidden()
-                .pickerStyle(.inline)
-                Button(action: addSpray) {
-                    Label("Add Spray", systemImage: "plus")
+                .onDelete(perform: deleteSprays)
+                if editMode?.wrappedValue.isEditing == true || sprayModels.isEmpty {
+                    addSprayButton
                 }
+
             } header: {
                 HStack {
                     Text("Spray Size")
                     Spacer()
                     if !sprayModels.isEmpty {
-                        Button("Edit", action: editSprays)
+                        EditButton()
                     }
                 }
             }
@@ -115,11 +123,11 @@ struct SprayCalculatorScreenContent: View {
                     }
                 }
             }
-//            if let amountResult, liquidAmountInML != nil {
-//                Section("Result") {
-//                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
-//                }
-//            }
+            //            if let amountResult, liquidAmountInML != nil {
+            //                Section("Result") {
+            //                    Text("You need to put \(amountResult.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue) into \(liquidAmountInMLText) ml.").font(.title)
+            //                }
+            //            }
             Section {
                 Text("""
 Volumetric dosing substances.
@@ -130,20 +138,20 @@ However substances are the most stable in their crystaline form and degrade more
         }
         .navigationTitle("Spray Calculator")
     }
+
+    private var addSprayButton: some View {
+        Button(action: addSpray) {
+            Label("Add Spray", systemImage: "plus")
+        }
+    }
 }
 
 struct SprayCalculatorScreen_Previews: PreviewProvider {
-    class MyClass {
-        let num: Int
-        init(num: Int) {
-            self.num = num
-        }
-    }
 
     static var previews: some View {
         let sprays = [
-            SprayModel(id: ObjectIdentifier(MyClass(num: 0)), name: "Small Spray", numSprays: 32, contentInMl: 5),
-            SprayModel(id: ObjectIdentifier(MyClass(num: 1)), name: "Big Spray", numSprays: 50, contentInMl: 10)
+            SprayModel(name: "Small Spray", numSprays: 32, contentInMl: 5, spray: nil),
+            SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil)
         ]
         NavigationView {
             SprayCalculatorScreenContent(
@@ -152,9 +160,9 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
                 liquidAmountInMl: .constant(""),
                 purityInPercent: .constant("90"),
                 sprayModels: sprays,
-                selectedSpray: .constant(nil),
+                selectedSpray: .constant(sprays.first),
                 addSpray: {},
-                editSprays: {}
+                deleteSprays: {_ in }
             ).headerProminence(.increased)
         }
     }
