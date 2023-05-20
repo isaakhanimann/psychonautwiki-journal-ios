@@ -1093,8 +1093,8 @@
 			isa = PBXGroup;
 			children = (
 				EAC25BFE2955FCFA0002D68F /* Screens */,
-				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
 				EA6048352A16CE82005C6A4B /* Spray */,
+				EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */,
 			);
 			path = Safer;
 			sourceTree = "<group>";

@@ -16,7 +16,8 @@
 
 import Foundation
 
-struct SprayModel {
+struct SprayModel: Identifiable, Hashable {
+    let id: ObjectIdentifier
     let name: String
     let numSprays: Double
     let contentInMl: Double

@@ -72,6 +72,17 @@ struct SprayCalculatorScreenContent: View {
                 }
             }
             Section {
+                Picker("Sprays", selection: $selectedSpray) {
+                    ForEach(sprayModels) { model in
+                        HStack {
+                            Text(model.name).font(.headline)
+                            Text("\(model.contentInMl.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) ml = \(model.numSprays.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) sprays").foregroundColor(.secondary)
+                        }.tag(model as SprayModel?)
+                    }
+                    Text("No selection").tag(nil as SprayModel?)
+                }
+                .labelsHidden()
+                .pickerStyle(.inline)
                 Button(action: addSpray) {
                     Label("Add Spray", systemImage: "plus")
                 }
@@ -80,7 +91,7 @@ struct SprayCalculatorScreenContent: View {
                     Text("Spray Size")
                     Spacer()
                     if !sprayModels.isEmpty {
-                        Button("Edit Sprays", action: editSprays)
+                        Button("Edit", action: editSprays)
                     }
                 }
             }
@@ -122,14 +133,25 @@ However substances are the most stable in their crystaline form and degrade more
 }
 
 struct SprayCalculatorScreen_Previews: PreviewProvider {
+    class MyClass {
+        let num: Int
+        init(num: Int) {
+            self.num = num
+        }
+    }
+
     static var previews: some View {
+        let sprays = [
+            SprayModel(id: ObjectIdentifier(MyClass(num: 0)), name: "Small Spray", numSprays: 32, contentInMl: 5),
+            SprayModel(id: ObjectIdentifier(MyClass(num: 1)), name: "Big Spray", numSprays: 50, contentInMl: 10)
+        ]
         NavigationView {
             SprayCalculatorScreenContent(
                 units: .constant(.mg),
                 perSpray: .constant(""),
                 liquidAmountInMl: .constant(""),
                 purityInPercent: .constant("90"),
-                sprayModels: [],
+                sprayModels: sprays,
                 selectedSpray: .constant(nil),
                 addSpray: {},
                 editSprays: {}

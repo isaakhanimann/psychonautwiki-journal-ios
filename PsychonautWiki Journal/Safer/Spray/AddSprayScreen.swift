@@ -27,40 +27,42 @@ struct AddSprayScreen: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        List {
-            Section("Name") {
-                TextField("Spray Name", text: $name)
-                Toggle("Preferred", isOn: $isPreferred)
-            }
-            Section {
-                HStack {
-                    TextField("Volume", text: $sizeInMlText)
-                        .keyboardType(.decimalPad)
-                    Text("ml")
+        NavigationView {
+            List {
+                Section("Name") {
+                    TextField("Spray Name", text: $name)
+                    Toggle("Preferred", isOn: $isPreferred)
                 }
-                TextField("Number of sprays", text: $numSpraysText)
-                    .keyboardType(.decimalPad)
-            } header: {
-                Text("Size")
-            } footer: {
-                Text("Note: fill it into the spray bottle and count the number of sprays. To make sure the last couple of sprays still work properly use a small spray bottle (5ml) and fill it completely.")
+                Section {
+                    HStack {
+                        TextField("Volume", text: $sizeInMlText)
+                            .keyboardType(.decimalPad)
+                        Text("ml")
+                    }
+                    TextField("Number of sprays", text: $numSpraysText)
+                        .keyboardType(.decimalPad)
+                } header: {
+                    Text("Size")
+                } footer: {
+                    Text("Note: fill it into the spray bottle and count the number of sprays. To make sure the last couple of sprays still work properly use a small spray bottle (5ml) and fill it completely.")
+                }
             }
-        }
-        .navigationTitle("Add Spray")
-        .onChange(of: numSpraysText) { newValue in
-            numSprays = getDouble(from: newValue)
-        }
-        .onChange(of: sizeInMlText) { newValue in
-            sizeInMl = getDouble(from: newValue)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                if let sizeInMl, let numSprays, !name.isEmpty {
-                    Button {
-                        save(sizeInMl: sizeInMl, numSprays: numSprays)
-                        dismiss()
-                    } label: {
-                        Label("Save", systemImage: "checkmark.circle")
+            .navigationTitle("Add Spray")
+            .onChange(of: numSpraysText) { newValue in
+                numSprays = getDouble(from: newValue)
+            }
+            .onChange(of: sizeInMlText) { newValue in
+                sizeInMl = getDouble(from: newValue)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if let sizeInMl, let numSprays, !name.isEmpty {
+                        Button {
+                            save(sizeInMl: sizeInMl, numSprays: numSprays)
+                            dismiss()
+                        } label: {
+                            Label("Save", systemImage: "checkmark.circle").labelStyle(.titleAndIcon)
+                        }
                     }
                 }
             }
@@ -74,7 +76,11 @@ struct AddSprayScreen: View {
         spray.contentInMl = sizeInMl
         spray.numSprays = numSprays
         spray.isPreferred = isPreferred
-        try? PersistenceController.shared.viewContext.save()
+        do {
+            try PersistenceController.shared.viewContext.save()
+        } catch {
+            assertionFailure("Failed to save spray")
+        }
     }
 
 }

@@ -57,15 +57,27 @@ extension SprayCalculatorScreen {
             )
             super.init()
             sprayFetchController.delegate = self
+            do {
+                try sprayFetchController.performFetch()
+                let sprays = sprayFetchController.fetchedObjects ?? []
+                assignToSprayModels(sprays: sprays)
+            } catch {
+                NSLog("Error: could not fetch CustomSubstances")
+            }
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             guard let sprays = controller.fetchedObjects as? [Spray] else {return}
             Task { @MainActor in
-                self.sprayModels = sprays.map({ spray in
-                    SprayModel(name: spray.nameUnwrapped, numSprays: spray.numSprays, contentInMl: spray.contentInMl)
-                })
+                assignToSprayModels(sprays: sprays)
             }
+        }
+
+        private func assignToSprayModels(sprays: [Spray]) {
+            sprayModels = sprays.map({ spray in
+                SprayModel(id: spray.id,name: spray.nameUnwrapped, numSprays: spray.numSprays, contentInMl: spray.contentInMl)
+            })
+            selectedSpray = sprayModels.first
         }
 
         func selectSpray(sprayModel: SprayModel) {
