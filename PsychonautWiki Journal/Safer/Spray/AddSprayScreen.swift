@@ -31,7 +31,6 @@ struct AddSprayScreen: View {
             List {
                 Section("Name") {
                     TextField("Spray Name", text: $name)
-                    Toggle("Preferred", isOn: $isPreferred)
                 }
                 Section {
                     HStack {
@@ -75,7 +74,7 @@ struct AddSprayScreen: View {
         spray.name = name
         spray.contentInMl = sizeInMl
         spray.numSprays = numSprays
-        spray.isPreferred = isPreferred
+        spray.isPreferred = true
         do {
             try PersistenceController.shared.viewContext.save()
         } catch {
