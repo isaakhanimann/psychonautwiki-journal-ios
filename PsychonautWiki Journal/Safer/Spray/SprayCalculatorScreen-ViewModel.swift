@@ -23,28 +23,65 @@ extension SprayCalculatorScreen {
 
         private let sprayFetchController: NSFetchedResultsController<Spray>
         @Published var sprayModels: [SprayModel] = []
-        @Published var selectedSpray: SprayModel? = nil
+        @Published var selectedSpray: SprayModel? = nil {
+            didSet {
+                maybeUpdateTotalWeight()
+            }
+        }
         @Published var units = WeightUnit.mg
-        @Published var perSprayText = ""
-        @Published var perSpray: Double? = nil
-        @Published var liquidAmountInMlText = ""
-        @Published var liquidAmountInMl: Double? = nil
+        @Published var weightPerSprayText = "" {
+            didSet {
+                maybeUpdateTotalWeight()
+            }
+        }
+        @Published var liquidAmountInMlText = "" {
+            didSet {
+                maybeUpdateTotalWeight()
+            }
+        }
+        @Published var totalWeightText = "" {
+            didSet {
+                maybeUpdateLiquidVolume()
+            }
+        }
+
         @Published var purityInPercentText = ""
-        @Published var purityInPercent: Double? = nil
         @Published var isShowingAddSpray = false
 
+        var weightPerSpray: Double? {
+            getDouble(from: weightPerSprayText)
+        }
+        var liquidAmountInMl: Double? {
+            getDouble(from: liquidAmountInMlText)
+        }
+        var purityInPercent: Double? {
+            getDouble(from: purityInPercentText)
+        }
+        var totalWeight: Double? {
+            getDouble(from: totalWeightText)
+        }
 
-        //    var mlPerSpray: Double? {
-        //        guard let numSprays else {return nil}
-        //        guard let liquidAmountInML else {return nil}
-        //        return liquidAmountInML/numSprays
-        //    }
-        //
-        //    var amountResult: Double? {
-        //        guard let perSpray else {return nil}
-        //        guard let numSprays else {return nil}
-        //        return perSpray * numSprays
-        //    }
+        private func maybeUpdateTotalWeight() {
+            if let liquidAmountInMl, let selectedSpray, let weightPerSpray {
+                let numSprays = liquidAmountInMl*selectedSpray.numSprays/selectedSpray.contentInMl
+                let result = numSprays * weightPerSpray
+                let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
+                if resultText != totalWeightText {
+                    totalWeightText = resultText
+                }
+            }
+        }
+
+        private func maybeUpdateLiquidVolume() {
+            if let totalWeight, let selectedSpray, let weightPerSpray {
+                let numSprays = totalWeight/weightPerSpray
+                let result = numSprays*selectedSpray.contentInMl/selectedSpray.numSprays
+                let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
+                if resultText != liquidAmountInMlText {
+                    liquidAmountInMlText = resultText
+                }
+            }
+        }
 
         override init() {
             let sprayFetchRequest = Spray.fetchRequest()

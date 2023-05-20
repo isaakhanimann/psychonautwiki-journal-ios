@@ -23,8 +23,9 @@ struct SprayCalculatorScreen: View {
     var body: some View {
         SprayCalculatorScreenContent(
             units: $viewModel.units,
-            perSpray: $viewModel.perSprayText,
+            perSpray: $viewModel.weightPerSprayText,
             liquidAmountInMl: $viewModel.liquidAmountInMlText,
+            totalWeight: $viewModel.totalWeightText,
             purityInPercent: $viewModel.purityInPercentText,
             sprayModels: viewModel.sprayModels,
             selectedSpray: $viewModel.selectedSpray,
@@ -32,13 +33,7 @@ struct SprayCalculatorScreen: View {
                 viewModel.isShowingAddSpray.toggle()
             },
             deleteSprays: viewModel.deleteSprays
-        ).onChange(of: viewModel.perSprayText) { newValue in
-            viewModel.perSpray = getDouble(from: newValue)
-        }.onChange(of: viewModel.liquidAmountInMlText) { newValue in
-            viewModel.liquidAmountInMl = getDouble(from: newValue)
-        }.onChange(of: viewModel.purityInPercentText) { newValue in
-            viewModel.purityInPercent = getDouble(from: newValue)
-        }
+        )
         .sheet(isPresented: $viewModel.isShowingAddSpray) {
             AddSprayScreen()
         }
@@ -53,6 +48,7 @@ struct SprayCalculatorScreenContent: View {
     @Binding var units: WeightUnit
     @Binding var perSpray: String
     @Binding var liquidAmountInMl: String
+    @Binding var totalWeight: String
     @Binding var purityInPercent: String
     let sprayModels: [SprayModel]
     @Binding var selectedSpray: SprayModel?
@@ -111,7 +107,7 @@ struct SprayCalculatorScreenContent: View {
                     Image(systemName: "arrow.left.arrow.right")
                     VStack {
                         HStack {
-                            TextField("Substance", text: $liquidAmountInMl)
+                            TextField("Substance", text: $totalWeight)
                                 .keyboardType(.decimalPad)
                             Text(units.rawValue)
                         }
@@ -158,6 +154,7 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
                 units: .constant(.mg),
                 perSpray: .constant(""),
                 liquidAmountInMl: .constant(""),
+                totalWeight: .constant(""),
                 purityInPercent: .constant("90"),
                 sprayModels: sprays,
                 selectedSpray: .constant(sprays.first),
