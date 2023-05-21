@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct AddictionScreen: View {
+    let substanceName: String
     let addictionPotential: String
     
     var body: some View {
@@ -24,12 +25,16 @@ struct AddictionScreen: View {
             Section {
                 Text(addictionPotential)
             }
-        }.navigationTitle("Addiction Potential")
+        }.navigationTitle("\(substanceName) Addiction Potential")
     }
 }
 
 struct AddictionScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddictionScreen(addictionPotential: SubstanceRepo.shared.getSubstance(name: "MDMA")!.addictionPotential!)
+        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
+        AddictionScreen(
+            substanceName: substance.name,
+            addictionPotential: substance.addictionPotential!
+        )
     }
 }

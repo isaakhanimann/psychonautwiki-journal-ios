@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct DurationScreen: View {
+    let substanceName: String
     let durationInfos: [DurationInfo]
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
@@ -94,7 +95,7 @@ struct DurationScreen: View {
         .onChange(of: stomachFullness) { _ in
             updateModel()
         }
-        .navigationTitle("Duration")
+        .navigationTitle("\(substanceName) Duration")
     }
 
     private func updateModel() {
@@ -132,6 +133,7 @@ struct DurationScreen: View {
 
 struct DurationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DurationScreen(durationInfos: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.durationInfos)
+        let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
+        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos)
     }
 }

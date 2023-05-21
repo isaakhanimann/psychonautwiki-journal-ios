@@ -65,7 +65,7 @@ struct SubstanceScreen: View {
                 }
                 if let summary = substance.summary {
                     NavigationLink("Summary") {
-                        SummaryScreen(summary: summary)
+                        SummaryScreen(substanceName: substance.name, summary: summary)
                     }
                 }
                 if !substance.categories.isEmpty {
@@ -88,6 +88,7 @@ struct SubstanceScreen: View {
                 if !substance.toxicities.isEmpty {
                     NavigationLink("Toxicity") {
                         ToxicityScreen(
+                            substanceName: substance.name,
                             toxicities: substance.toxicities,
                             substanceURL: substance.url
                         )
@@ -96,7 +97,10 @@ struct SubstanceScreen: View {
                 let durationInfos = substance.durationInfos
                 if !durationInfos.isEmpty {
                     NavigationLink("Duration") {
-                        DurationScreen(durationInfos: durationInfos)
+                        DurationScreen(
+                            substanceName: substance.name,
+                            durationInfos: durationInfos
+                        )
                     }
                 }
             }
@@ -104,6 +108,7 @@ struct SubstanceScreen: View {
                 if let interactions = substance.interactions {
                     NavigationLink("Interactions") {
                         InteractionsScreen(
+                            substanceName: substance.name,
                             interactions: interactions,
                             substanceURL: substance.url
                         )
@@ -111,7 +116,7 @@ struct SubstanceScreen: View {
                 }
                 if let effects = substance.effectsSummary {
                     NavigationLink("Effects") {
-                        EffectScreen(effect: effects)
+                        EffectScreen(substanceName: substance.name, effect: effects)
                     }
                 }
                 if substance.generalRisks != nil || substance.longtermRisks != nil {
@@ -121,12 +126,15 @@ struct SubstanceScreen: View {
                 }
                 if !substance.saferUse.isEmpty {
                     NavigationLink("Safer Use") {
-                        SaferUseScreen(saferUse: substance.saferUse)
+                        SaferUseScreen(substance: substance)
                     }
                 }
                 if let addictionPotential = substance.addictionPotential {
                     NavigationLink("Addiction Potential") {
-                        AddictionScreen(addictionPotential: addictionPotential)
+                        AddictionScreen(
+                            substanceName: substance.name,
+                            addictionPotential: addictionPotential
+                        )
                     }
                 }
             }

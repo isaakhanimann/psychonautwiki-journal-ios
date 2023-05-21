@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct SummaryScreen: View {
+    let substanceName: String
     let summary: String
 
     var body: some View {
@@ -24,15 +25,17 @@ struct SummaryScreen: View {
             Section {
                 Text(summary)
             }
-        }.navigationTitle("Summary")
+        }.navigationTitle("\(substanceName) Summary")
     }
 }
 
 struct SummaryScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
+            let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
             SummaryScreen(
-                summary: SubstanceRepo.shared.getSubstance(name: "MDMA")!.summary!
+                substanceName: substance.name,
+                summary: substance.summary!
             )
         }
     }

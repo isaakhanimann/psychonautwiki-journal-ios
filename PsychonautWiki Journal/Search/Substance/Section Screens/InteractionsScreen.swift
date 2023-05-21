@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct InteractionsScreen: View {
+    let substanceName: String
     let interactions: Interactions
     let substanceURL: URL
 
@@ -29,15 +30,17 @@ struct InteractionsScreen: View {
                 )
             }
         }
-        .navigationTitle("Interactions")
+        .navigationTitle("\(substanceName) Interactions")
     }
 }
 
 struct InteractionsScreen_Previews: PreviewProvider {
     static var previews: some View {
+        let substance = SubstanceRepo.shared.getSubstance(name:"MDMA")!
         InteractionsScreen(
-            interactions: SubstanceRepo.shared.getSubstance(name:"MDMA")!.interactions!,
-            substanceURL: URL(string: "www.apple.com")!
+            substanceName: substance.name,
+            interactions: substance.interactions!,
+            substanceURL: substance.url
         )
     }
 }

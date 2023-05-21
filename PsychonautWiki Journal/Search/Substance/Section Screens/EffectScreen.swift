@@ -17,18 +17,20 @@
 import SwiftUI
 
 struct EffectScreen: View {
+    let substanceName: String
     let effect: String
     var body: some View {
         List {
             Section {
                 Text(effect)
             }
-        }.navigationTitle("Effects")
+        }.navigationTitle("\(substanceName) Effects")
     }
 }
 
 struct EffectScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EffectScreen(effect: SubstanceRepo.shared.getSubstance(name: "MDMA")!.effectsSummary!)
+        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
+        EffectScreen(substanceName: substance.name ,effect: substance.effectsSummary!)
     }
 }

@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct ToxicityScreen: View {
+    let substanceName: String
     let toxicities: [String]
     let substanceURL: URL
 
@@ -34,7 +35,7 @@ struct ToxicityScreen: View {
                     }
                 }
             }
-        }.navigationTitle("Toxicity")
+        }.navigationTitle("\(substanceName) Toxicity")
     }
 }
 
@@ -43,6 +44,7 @@ struct ToxicityScreen_Previews: PreviewProvider {
         NavigationView {
             let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
             ToxicityScreen(
+                substanceName: substance.name,
                 toxicities: substance.toxicities,
                 substanceURL: substance.url
             )

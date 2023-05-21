@@ -17,20 +17,20 @@
 import SwiftUI
 
 struct SaferUseScreen: View {
-    let saferUse: [String]
+    let substance: Substance
     var body: some View {
         List {
             Section {
-                ForEach(saferUse, id: \.self) { point in
+                ForEach(substance.saferUse, id: \.self) { point in
                     Text(point)
                 }
             }
-        }.navigationTitle("Safer Use")
+        }.navigationTitle("\(substance.name) Safer Use")
     }
 }
 
 struct SaferUseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SaferUseScreen(saferUse: SubstanceRepo.shared.getSubstance(name: "MDMA")!.saferUse)
+        SaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
     }
 }

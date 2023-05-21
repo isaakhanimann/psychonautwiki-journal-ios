@@ -31,7 +31,7 @@ struct RiskScreen: View {
                 }
             }
         }
-        .navigationTitle("Risks")
+        .navigationTitle("\(substance.name) Risks")
     }
 }
 

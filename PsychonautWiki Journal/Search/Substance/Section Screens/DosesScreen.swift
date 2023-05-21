@@ -54,7 +54,7 @@ struct DosesScreen: View {
                 Text(ChooseDoseScreenContent.doseDisclaimer)
             }
         }
-        .navigationTitle("Dosage")
+        .navigationTitle("\(substance.name) Dosage")
     }
 
 

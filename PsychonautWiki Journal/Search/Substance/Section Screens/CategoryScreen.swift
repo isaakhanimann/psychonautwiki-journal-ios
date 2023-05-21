@@ -40,7 +40,7 @@ struct CategoryScreen: View {
                 }
             }
         }
-        .navigationTitle("Categories")
+        .navigationTitle("\(substance.name) Categories")
         .onAppear {
             categories = substance.categories.compactMap { name in
                 SubstanceRepo.shared.categories.first(where: { cat in
