@@ -61,7 +61,7 @@ struct SprayCalculatorScreenContent: View {
 
     var body: some View {
         List {
-            Section("Weight per spray") {
+            Section("Solute weight per spray") {
                 HStack {
                     TextField("Weight per Spray", text: $weightPerSpray)
                         .font(.title)
@@ -72,6 +72,7 @@ struct SprayCalculatorScreenContent: View {
                         }
                     }.labelsHidden()
                 }
+                .padding(.vertical, 3)
             }
             Section {
                 ForEach(sprayModels) { model in
@@ -105,13 +106,13 @@ struct SprayCalculatorScreenContent: View {
             Section("Result") {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        TextField("Liquid", text: $liquidAmountInMl)
+                        TextField("Liquid Volume", text: $liquidAmountInMl)
                             .keyboardType(.decimalPad)
                         Text("ml")
                     }.font(.title)
                     Image(systemName: "arrow.up.arrow.down")
                     HStack {
-                        TextField("Weight", text: $totalWeight)
+                        TextField("Solute Weight", text: $totalWeight)
                             .keyboardType(.decimalPad)
                         Text(units.rawValue)
                     }.font(.title)
@@ -135,6 +136,12 @@ Look up the solubility of the substance you want to dissolve in water/ethanol to
 To prevent degradation by temperature use ethanol or a water/ethanol mix as the solvent such that it can be put in the freezer without freezing. However don't use ethanol for nasal sprays as this can damage the nasal mucosa.
 Powders for nasal delivery have higher bioavailiability than liquids because of increased stability and residence time on nasal mucosa.
 """)
+            }
+        }
+        .optionalScrollDismissesKeyboard()
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                HideKeyboardButton()
             }
         }
         .navigationTitle("Spray Calculator")

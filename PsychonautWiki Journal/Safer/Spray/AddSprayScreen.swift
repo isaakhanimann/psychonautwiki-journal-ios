@@ -31,20 +31,26 @@ struct AddSprayScreen: View {
             List {
                 Section("Name") {
                     TextField("Spray Name", text: $name)
+                        .font(.title)
+                        .padding(.vertical, 3)
                 }
                 Section {
-                    HStack {
-                        TextField("Volume", text: $sizeInMlText)
+                    VStack {
+                        HStack {
+                            TextField("Volume", text: $sizeInMlText)
+                                .keyboardType(.decimalPad)
+                            Text("ml")
+                        }
+                        .font(.title)
+                        TextField("Number of sprays", text: $numSpraysText)
+                            .font(.title)
                             .keyboardType(.decimalPad)
-                        Text("ml")
-                    }
-                    TextField("Number of sprays", text: $numSpraysText)
-                        .keyboardType(.decimalPad)
+                    }.padding(.vertical, 3)
                 } header: {
                     Text("Size")
                 } footer: {
                     Text("Note: fill it into the spray bottle and count the number of sprays. To make sure the last couple of sprays still work properly use a small spray bottle (5ml) and fill it completely.")
-                }
+                }.listRowSeparator(.hidden)
             }
             .navigationTitle("Add Spray")
             .onChange(of: numSpraysText) { newValue in
