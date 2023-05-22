@@ -147,7 +147,7 @@ struct SettingsContent: View {
                             Button("Cancel", role: .cancel) {}
                         },
                         message: {
-                            Text("This will delete all your experiences, ingestions and custom substances.")
+                            Text("This will delete all your experiences, ingestions, custom substances and sprays.")
                         }
                     )
                 }

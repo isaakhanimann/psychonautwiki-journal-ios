@@ -77,6 +77,12 @@ struct PersistenceController {
         for com in companions {
             viewContext.delete(com)
         }
+        let sprayDeleteRequest = Spray.fetchRequest()
+        sprayDeleteRequest.includesPropertyValues = false
+        let sprays = try viewContext.fetch(sprayDeleteRequest)
+        for spray in sprays {
+            viewContext.delete(spray)
+        }
         try viewContext.save()
     }
 
