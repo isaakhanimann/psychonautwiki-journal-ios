@@ -133,6 +133,7 @@ Note that substances are the most stable in their salt form and degrade more qui
 Don't use tap water because it can become stale and the chlorine inside it breaks down some substances (e.g. LSD). Use distilled water instead.
 Look up the solubility of the substance you want to dissolve in water/ethanol to make sure it will dissolve fully. Most if not all common substances in their salt form are more than soluble enough.
 To prevent degradation by temperature use ethanol or a water/ethanol mix as the solvent such that it can be put in the freezer without freezing. However don't use ethanol for nasal sprays as this can damage the nasal mucosa.
+Powders for nasal delivery have higher bioavailiability than liquids because of increased stability and residence time on nasal mucosa.
 """)
             }
         }
