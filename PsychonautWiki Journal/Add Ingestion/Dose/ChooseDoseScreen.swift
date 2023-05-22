@@ -141,6 +141,9 @@ struct ChooseDoseScreenContent: View {
                 }
             }
             if isEyeOpen {
+                if administrationRoute == .smoked && substance.categories.contains("opioid") {
+                    ChasingTheDragonSection()
+                }
                 Section("Info") {
                     if administrationRoute == .smoked || administrationRoute == .inhaled {
                         Text("Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")

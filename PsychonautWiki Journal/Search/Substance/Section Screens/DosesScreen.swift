@@ -50,6 +50,9 @@ struct DosesScreen: View {
                     Text(clarification)
                 }
             }
+            if substance.roas.contains(where: {$0.name == .smoked}) && substance.categories.contains("opioid") {
+                ChasingTheDragonSection()
+            }
             Section("Disclaimer") {
                 Text(ChooseDoseScreenContent.doseDisclaimer)
             }
