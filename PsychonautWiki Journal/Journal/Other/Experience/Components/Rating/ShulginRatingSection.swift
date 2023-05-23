@@ -23,8 +23,6 @@ struct ShulginRatingSection: View {
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
 
-    @State private var isShowingSheet = false
-
     var body: some View {
         Section("Shulgin Rating") {
             ForEach(experience.ratingsWithTimeSorted) { rating in
@@ -86,15 +84,7 @@ struct ShulginRatingSection: View {
                 }
 
             }
-            Button {
-                isShowingSheet.toggle()
-            } label: {
-                Label("Add Rating", systemImage: "plus")
-            }
         }
-        .sheet(isPresented: $isShowingSheet, content: {
-            AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
-        })
     }
 }
 

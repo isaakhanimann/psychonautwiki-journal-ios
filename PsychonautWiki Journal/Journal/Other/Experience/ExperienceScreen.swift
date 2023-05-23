@@ -22,6 +22,7 @@ struct ExperienceScreen: View {
         case titleAndNote
         case editLocation(experienceLocation: ExperienceLocation)
         case addLocation
+        case addRating
 
         var id: Self {
             return self
@@ -33,6 +34,7 @@ struct ExperienceScreen: View {
     @State private var timeDisplayStyle = TimeDisplayStyle.regular
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
+
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @Environment(\.dismiss) var dismiss
@@ -76,6 +78,11 @@ struct ExperienceScreen: View {
                     }
                     favoriteButton
                     editTitleButton
+                    Button {
+                        sheetToShow = .addRating
+                    } label: {
+                        Label("Add Rating", systemImage: "plusminus")
+                    }
                     if experience.location == nil {
                         addLocationButton
                     }
@@ -276,7 +283,7 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if isEyeOpen {
+            if isEyeOpen && !experience.ratingsUnwrapped.isEmpty {
                 ShulginRatingSection(
                     experience: experience,
                     viewModel: viewModel,
@@ -343,6 +350,8 @@ struct ExperienceScreen: View {
                 EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
             case .titleAndNote:
                 EditExperienceScreen(experience: experience)
+            case .addRating:
+                AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
             }
         })
         .task {
