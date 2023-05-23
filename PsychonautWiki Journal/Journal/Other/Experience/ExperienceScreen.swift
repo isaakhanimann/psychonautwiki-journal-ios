@@ -42,56 +42,58 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        Group {
-            if experience.isCurrent {
-                AddIngestionFab {
-                    isShowingAddIngestionFullScreen.toggle()
-                } screen: {
-                    screen
-                }
-                .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
-                    ChooseSubstanceScreen()
-                })
-            } else {
-                screen
-            }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Menu(content: {
-                    Menu {
-                        ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                            Button {
-                                withAnimation {
-                                    timeDisplayStyle = option
-                                }
-                            } label: {
-                                if timeDisplayStyle == option {
-                                    Label(option.text, systemImage: "checkmark")
-                                } else {
-                                    Text(option.text)
+        ZStack {
+            screen
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Menu(content: {
+                        Menu {
+                            ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
+                                Button {
+                                    withAnimation {
+                                        timeDisplayStyle = option
+                                    }
+                                } label: {
+                                    if timeDisplayStyle == option {
+                                        Label(option.text, systemImage: "checkmark")
+                                    } else {
+                                        Text(option.text)
+                                    }
                                 }
                             }
+                        } label: {
+                            Label("Time Display", systemImage: "timer")
                         }
-                    } label: {
-                        Label("Time Display", systemImage: "timer")
-                    }
-                    favoriteButton
-                    editTitleButton
-                    Button {
-                        sheetToShow = .addRating
-                    } label: {
-                        Label("Add Rating", systemImage: "plusminus")
-                    }
-                    if experience.location == nil {
-                        addLocationButton
-                    }
-                    deleteExperienceButton
-                }, label: {
-                    Label("More", systemImage: "ellipsis.circle")
-                })
+                        favoriteButton
+                        editTitleButton
+                        Button {
+                            sheetToShow = .addRating
+                        } label: {
+                            Label("Add Rating", systemImage: "plusminus")
+                        }
+                        Button {
+                            isShowingAddIngestionFullScreen.toggle()
+                        } label: {
+                            Label("Add Ingestion", systemImage: "plus")
+                        }
+                        if experience.location == nil {
+                            addLocationButton
+                        }
+                        deleteExperienceButton
+                    }, label: {
+                        Label("More", systemImage: "ellipsis.circle.fill")
+                            .labelStyle(.iconOnly)
+                            .font(.system(size: 40))
+                    })
+                    .padding(30)
+                }
             }
         }
+        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
+            ChooseSubstanceScreen()
+        })
     }
 
     private var favoriteButton: some View {
