@@ -96,7 +96,7 @@ struct ExperienceScreen: View {
             if isFavorite {
                 Label("Unfavorite", systemImage: "star.fill")
             } else {
-                Label("Make Favorite", systemImage: "star")
+                Label("Mark Favorite", systemImage: "star")
             }
         }
     }
