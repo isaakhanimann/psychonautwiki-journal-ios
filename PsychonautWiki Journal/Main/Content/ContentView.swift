@@ -68,43 +68,43 @@ struct ContentView: View {
 struct ContentScreen: View {
     let isEyeOpen: Bool
 
-    enum TabScreen {
-    case stats, journal, substances, safer, settings
+    enum Tab {
+        case stats, journal, substances, safer, settings
     }
-    @State private var selection = TabScreen.journal
+    @State private var selectedTab = Tab.journal
 
 
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $selectedTab) {
             if #available(iOS 16, *) {
                 StatsScreen()
                     .tabItem {
                         Label("Stats", systemImage: "chart.bar")
                     }
-                    .tag(TabScreen.stats)
+                    .tag(Tab.stats)
             }
             JournalScreen()
                 .tabItem {
                     Label("Journal", systemImage: "square.stack")
                 }
-                .tag(TabScreen.journal)
+                .tag(Tab.journal)
             if isEyeOpen {
                 SearchScreen()
                     .tabItem {
                         Label("Substances", systemImage: "magnifyingglass")
                     }
-                    .tag(TabScreen.substances)
+                    .tag(Tab.substances)
                 SaferScreen()
                     .tabItem {
                         Label("Safer", systemImage: "cross.case")
                     }
-                    .tag(TabScreen.safer)
+                    .tag(Tab.safer)
             }
             SettingsScreen()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
-                .tag(TabScreen.settings)
+                .tag(Tab.settings)
         }
     }
 }
