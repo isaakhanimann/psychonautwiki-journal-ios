@@ -1674,7 +1674,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimelineWidget/Info.plist;
@@ -1686,7 +1686,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.TimelineWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1703,7 +1703,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimelineWidget/Info.plist;
@@ -1715,7 +1715,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.TimelineWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1889,7 +1889,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
@@ -1899,7 +1899,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.3;
 				MY_BUNDLE_DISPLAY_NAME = Debug;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug";
 				PRODUCT_NAME = Journal;
@@ -1916,7 +1916,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PsychonautWiki Journal/PsychonautWiki Journal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
@@ -1926,7 +1926,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.3;
 				MY_BUNDLE_DISPLAY_NAME = Journal;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = Journal;
