@@ -16,36 +16,29 @@
 
 import SwiftUI
 
-struct AddIngestionFab<Screen: View>: View {
+struct SmallFabLabel: View {
 
-    let onTap: () -> Void
-    @ViewBuilder let screen: Screen
+    let labelText: String
+    let systemImage: String
+    @Environment(\.colorScheme) var colorScheme
+
+    init(_ labelText: String, systemImage: String) {
+        self.labelText = labelText
+        self.systemImage = systemImage
+    }
 
     var body: some View {
-        ZStack {
-            screen
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button {
-                        onTap()
-                    } label: {
-                        Label("New Ingestion", systemImage: "plus.circle.fill")
-                            .labelStyle(.iconOnly)
-                            .font(.system(size: 60))
-                    }
-                    .padding(30)
-                }
-            }
-        }
+        Label(labelText, systemImage: systemImage)
+            .labelStyle(.iconOnly)
+            .font(.system(size: 45))
     }
 }
 
-struct AddIngestionFab_Previews: PreviewProvider {
+struct SmallFab_Previews: PreviewProvider {
     static var previews: some View {
-        AddIngestionFab(onTap: {}) {
-            Text("Hello")
+        ZStack {
+            Color.green
+            SmallFabLabel("Edit Title/Note", systemImage: "pencil.circle.fill")
         }
     }
 }

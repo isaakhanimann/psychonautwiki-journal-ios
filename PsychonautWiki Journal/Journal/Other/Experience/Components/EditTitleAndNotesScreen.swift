@@ -16,7 +16,7 @@
 
 import SwiftUI
 
-struct EditExperienceScreen: View {
+struct EditTitleAndNotesScreen: View {
 
     let experience: Experience
     @State private var title = ""
@@ -24,7 +24,7 @@ struct EditExperienceScreen: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        EditExperienceContent(
+        EditTitleAndNotesContent(
             title: $title,
             notes: $notes,
             save: save,
@@ -44,7 +44,7 @@ struct EditExperienceScreen: View {
     }
 }
 
-struct EditExperienceContent: View {
+struct EditTitleAndNotesContent: View {
 
     @Binding var title: String
     @Binding var notes: String
@@ -103,13 +103,13 @@ struct EditExperienceContent: View {
                     .frame(minHeight: 300)
             }
         }
-        .navigationTitle("Edit Experience")
+        .navigationTitle("Edit Title/Notes")
     }
 }
 
-struct EditExperienceContent_Previews: PreviewProvider {
+struct EditTitleAndNotesContent_Previews: PreviewProvider {
     static var previews: some View {
-        EditExperienceContent(
+        EditTitleAndNotesContent(
             title: .constant("This is my title"),
             notes: .constant("These are my notes. They can be very long and should work with many lines. If this should be editable then create a view inside this preview struct that has state."),
             save: {},

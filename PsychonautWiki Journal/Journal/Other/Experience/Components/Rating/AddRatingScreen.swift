@@ -77,7 +77,7 @@ struct AddRatingScreen: View {
             canDefineOverall: canDefineOverall,
             isOverallRating: $isOverallRating
         )
-        .navigationTitle("Add Rating")
+        .navigationTitle("Add Shulgin Rating")
     }
 
     func save() {

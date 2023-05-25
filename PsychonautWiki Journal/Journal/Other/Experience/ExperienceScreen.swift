@@ -48,7 +48,16 @@ struct ExperienceScreen: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Menu(content: {
+                    VStack(spacing: 7) {
+                        Button {
+                            if let location = experience.location {
+                                sheetToShow = .editLocation(experienceLocation: location)
+                            } else {
+                                sheetToShow = .addLocation
+                            }
+                        } label: {
+                            SmallFabLabel("Add or Edit Location", systemImage: "mappin.circle.fill")
+                        }
                         Menu {
                             ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
                                 Button {
@@ -64,36 +73,40 @@ struct ExperienceScreen: View {
                                 }
                             }
                         } label: {
-                            Label("Time Display", systemImage: "timer")
+                            SmallFabLabel("Time Display", systemImage: "timer.circle.fill")
                         }
-                        favoriteButton
-                        editTitleButton
                         Button {
-                            sheetToShow = .addRating
+                            sheetToShow = .titleAndNote
                         } label: {
-                            Label("Add Rating", systemImage: "plusminus")
+                            SmallFabLabel("Edit Title/Note", systemImage: "pencil.circle.fill")
+                        }
+                        if isEyeOpen {
+                            Button {
+                                sheetToShow = .addRating
+                            } label: {
+                                SmallFabLabel("Add Rating", systemImage: "bolt.circle.fill")
+                            }
                         }
                         Button {
                             isShowingAddIngestionFullScreen.toggle()
                         } label: {
-                            Label("Add Ingestion", systemImage: "plus")
+                            SmallFabLabel("Add Ingestion", systemImage: "plus.circle.fill")
                         }
-                        if experience.location == nil {
-                            addLocationButton
-                        }
-                        deleteExperienceButton
-                    }, label: {
-                        Label("More", systemImage: "ellipsis.circle.fill")
-                            .labelStyle(.iconOnly)
-                            .font(.system(size: 40))
-                    })
-                    .padding(30)
+                    }
+                    .padding(.vertical, 30)
+                    .padding(.trailing, 5)
                 }
             }
         }
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
             ChooseSubstanceScreen()
         })
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                favoriteButton
+                deleteExperienceButton
+            }
+        }
     }
 
     private var favoriteButton: some View {
@@ -107,22 +120,6 @@ struct ExperienceScreen: View {
             } else {
                 Label("Mark Favorite", systemImage: "star")
             }
-        }
-    }
-
-    private var editTitleButton: some View {
-        Button {
-            sheetToShow = .titleAndNote
-        } label: {
-            Label("Edit Title/Note", systemImage: "pencil")
-        }
-    }
-
-    private var addLocationButton: some View {
-        Button {
-            sheetToShow = .addLocation
-        } label: {
-            Label("Add Location", systemImage: "mappin")
         }
     }
 
@@ -285,7 +282,7 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if isEyeOpen && !experience.ratingsUnwrapped.isEmpty {
+            if !experience.ratingsUnwrapped.isEmpty {
                 ShulginRatingSection(
                     experience: experience,
                     viewModel: viewModel,
@@ -328,18 +325,8 @@ struct ExperienceScreen: View {
                 }
             }
             if let location = experience.location {
-                Section {
+                Section("Location") {
                     EditLocationLinkAndMap(experienceLocation: location)
-                } header: {
-                    HStack {
-                        Text("Location")
-                        Spacer()
-                        Button {
-                            sheetToShow = .editLocation(experienceLocation: location)
-                        } label: {
-                            Label("Edit", systemImage: "pencil").labelStyle(.iconOnly)
-                        }
-                    }
                 }
             }
         }
@@ -351,7 +338,7 @@ struct ExperienceScreen: View {
             case .editLocation(let experienceLocation):
                 EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
             case .titleAndNote:
-                EditExperienceScreen(experience: experience)
+                EditTitleAndNotesScreen(experience: experience)
             case .addRating:
                 AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
             }

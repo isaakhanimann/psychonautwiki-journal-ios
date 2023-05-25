@@ -161,7 +161,7 @@
 		EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8F29428A6C009C142D /* SaferUseScreen.swift */; };
 		EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9129428B02009C142D /* AddictionScreen.swift */; };
 		EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A9329428CD8009C142D /* EffectTimeline.swift */; };
-		EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */; };
+		EA557B392942A1A2005740B4 /* EditTitleAndNotesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA557B382942A1A2005740B4 /* EditTitleAndNotesScreen.swift */; };
 		EA6048252A140E25005C6A4B /* AddIngestionFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048242A140E25005C6A4B /* AddIngestionFab.swift */; };
 		EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048262A1411C0005C6A4B /* Suggestion.swift */; };
 		EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */; };
@@ -174,6 +174,7 @@
 		EA60483B2A188FDB005C6A4B /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60483A2A188FDB005C6A4B /* WeightUnit.swift */; };
 		EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60483C2A188FFB005C6A4B /* SprayModel.swift */; };
 		EA60483F2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */; };
+		EA6048432A1FD41D005C6A4B /* SmallFabLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048422A1FD41D005C6A4B /* SmallFabLabel.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -442,7 +443,7 @@
 		EA527A8F29428A6C009C142D /* SaferUseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferUseScreen.swift; sourceTree = "<group>"; };
 		EA527A9129428B02009C142D /* AddictionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddictionScreen.swift; sourceTree = "<group>"; };
 		EA527A9329428CD8009C142D /* EffectTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTimeline.swift; sourceTree = "<group>"; };
-		EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExperienceScreen.swift; sourceTree = "<group>"; };
+		EA557B382942A1A2005740B4 /* EditTitleAndNotesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleAndNotesScreen.swift; sourceTree = "<group>"; };
 		EA6048242A140E25005C6A4B /* AddIngestionFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionFab.swift; sourceTree = "<group>"; };
 		EA6048262A1411C0005C6A4B /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseAndUnit.swift; sourceTree = "<group>"; };
@@ -456,6 +457,7 @@
 		EA60483A2A188FDB005C6A4B /* WeightUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
 		EA60483C2A188FFB005C6A4B /* SprayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprayModel.swift; sourceTree = "<group>"; };
 		EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChasingTheDragonSection.swift; sourceTree = "<group>"; };
+		EA6048422A1FD41D005C6A4B /* SmallFabLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallFabLabel.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -1201,11 +1203,12 @@
 				EA48F86429DC061A007DA8C5 /* Edit Ingestion */,
 				EA48F85C29DB1894007DA8C5 /* Rating */,
 				EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */,
+				EA6048422A1FD41D005C6A4B /* SmallFabLabel.swift */,
 				EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */,
 				EAE480922973EF5900B600EF /* CumulativeDose.swift */,
 				EA4189F02963219100DEA663 /* LiveActivityButton.swift */,
 				EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */,
-				EA557B382942A1A2005740B4 /* EditExperienceScreen.swift */,
+				EA557B382942A1A2005740B4 /* EditTitleAndNotesScreen.swift */,
 				EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */,
 				EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */,
 				EAE4718926CBA664009FB0EC /* IngestionRowContent.swift */,
@@ -1512,7 +1515,7 @@
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
-				EA557B392942A1A2005740B4 /* EditExperienceScreen.swift in Sources */,
+				EA557B392942A1A2005740B4 /* EditTitleAndNotesScreen.swift in Sources */,
 				EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */,
 				EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */,
 				EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */,
@@ -1612,6 +1615,7 @@
 				EA418A0429675FE800DEA663 /* ExperiencePickerScreen.swift in Sources */,
 				EABD921929422C580073303A /* NoTimeline.swift in Sources */,
 				EA418A31296C056500DEA663 /* Array-Unique.swift in Sources */,
+				EA6048432A1FD41D005C6A4B /* SmallFabLabel.swift in Sources */,
 				EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */,
 				EA418A37296CDEDE00DEA663 /* LockScreen.swift in Sources */,
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
