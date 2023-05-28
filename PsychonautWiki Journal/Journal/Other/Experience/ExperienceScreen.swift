@@ -42,61 +42,60 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             screen
-            VStack {
+            HStack {
                 Spacer()
-                HStack {
-                    Spacer()
-                    VStack(spacing: 7) {
+                Button {
+                    if let location = experience.location {
+                        sheetToShow = .editLocation(experienceLocation: location)
+                    } else {
+                        sheetToShow = .addLocation
+                    }
+                } label: {
+                    SmallFabLabel("Add or Edit Location", systemImage: "mappin.circle.fill")
+                }
+                Spacer()
+                Menu {
+                    ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
                         Button {
-                            if let location = experience.location {
-                                sheetToShow = .editLocation(experienceLocation: location)
+                            withAnimation {
+                                timeDisplayStyle = option
+                            }
+                        } label: {
+                            if timeDisplayStyle == option {
+                                Label(option.text, systemImage: "checkmark")
                             } else {
-                                sheetToShow = .addLocation
+                                Text(option.text)
                             }
-                        } label: {
-                            SmallFabLabel("Add or Edit Location", systemImage: "mappin.circle.fill")
-                        }
-                        Menu {
-                            ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                                Button {
-                                    withAnimation {
-                                        timeDisplayStyle = option
-                                    }
-                                } label: {
-                                    if timeDisplayStyle == option {
-                                        Label(option.text, systemImage: "checkmark")
-                                    } else {
-                                        Text(option.text)
-                                    }
-                                }
-                            }
-                        } label: {
-                            SmallFabLabel("Time Display", systemImage: "timer.circle.fill")
-                        }
-                        Button {
-                            sheetToShow = .titleAndNote
-                        } label: {
-                            SmallFabLabel("Edit Title/Note", systemImage: "pencil.circle.fill")
-                        }
-                        if isEyeOpen {
-                            Button {
-                                sheetToShow = .addRating
-                            } label: {
-                                SmallFabLabel("Add Rating", systemImage: "bolt.circle.fill")
-                            }
-                        }
-                        Button {
-                            isShowingAddIngestionFullScreen.toggle()
-                        } label: {
-                            SmallFabLabel("Add Ingestion", systemImage: "plus.circle.fill")
                         }
                     }
-                    .padding(.vertical, 30)
-                    .padding(.trailing, 5)
+                } label: {
+                    SmallFabLabel("Time Display", systemImage: "timer.circle.fill")
                 }
+                Spacer()
+                Button {
+                    sheetToShow = .titleAndNote
+                } label: {
+                    SmallFabLabel("Edit Title/Note", systemImage: "pencil.circle.fill")
+                }
+                Spacer()
+                if isEyeOpen {
+                    Button {
+                        sheetToShow = .addRating
+                    } label: {
+                        SmallFabLabel("Add Rating", systemImage: "bolt.circle.fill")
+                    }
+                    Spacer()
+                }
+                Button {
+                    isShowingAddIngestionFullScreen.toggle()
+                } label: {
+                    SmallFabLabel("Add Ingestion", systemImage: "plus.circle.fill")
+                }
+                Spacer()
             }
+            .padding(.bottom, 10)
         }
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
             ChooseSubstanceScreen()
@@ -329,6 +328,7 @@ struct ExperienceScreen: View {
                     EditLocationLinkAndMap(experienceLocation: location)
                 }
             }
+            spaceForButtons
         }
         .navigationTitle(experience.titleUnwrapped)
         .sheet(item: $sheetToShow, content: { sheet in
@@ -347,6 +347,10 @@ struct ExperienceScreen: View {
             viewModel.experience = experience
             viewModel.reloadScreen(experience: experience)
         }
+    }
+
+    private var spaceForButtons: some View {
+        HStack {}.listRowBackground(Color.clear)
     }
 
     private func delete() {
