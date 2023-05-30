@@ -34,6 +34,7 @@ struct ExperienceScreen: View {
     @State private var timeDisplayStyle = TimeDisplayStyle.regular
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
+    @State private var isShowingActionSheet = false
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
@@ -42,20 +43,22 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            screen
-            HStack {
-                Spacer()
-                Button {
-                    if let location = experience.location {
-                        sheetToShow = .editLocation(experienceLocation: location)
-                    } else {
-                        sheetToShow = .addLocation
-                    }
-                } label: {
-                    SmallFabLabel("Add or Edit Location", systemImage: "mappin.circle.fill")
-                }
-                Spacer()
+        FloatingActionButton(
+            title: "More",
+            systemImage: "ellipsis",
+            onTap: {
+                isShowingActionSheet.toggle()
+            },
+            screen: {
+                screen
+            }
+        )
+        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
+            ChooseSubstanceScreen()
+        })
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                favoriteButton
                 Menu {
                     ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
                         Button {
@@ -71,39 +74,35 @@ struct ExperienceScreen: View {
                         }
                     }
                 } label: {
-                    SmallFabLabel("Time Display", systemImage: "timer.circle.fill")
+                    Label("Time Display", systemImage: "timer")
                 }
-                Spacer()
-                Button {
-                    sheetToShow = .titleAndNote
-                } label: {
-                    SmallFabLabel("Edit Title/Note", systemImage: "pencil.circle.fill")
-                }
-                Spacer()
-                if isEyeOpen {
-                    Button {
-                        sheetToShow = .addRating
-                    } label: {
-                        SmallFabLabel("Add Rating", systemImage: "bolt.circle.fill")
-                    }
-                    Spacer()
-                }
-                Button {
-                    isShowingAddIngestionFullScreen.toggle()
-                } label: {
-                    SmallFabLabel("Add Ingestion", systemImage: "plus.circle.fill")
-                }
-                Spacer()
-            }
-            .padding(.bottom, 10)
-        }
-        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
-            ChooseSubstanceScreen()
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                favoriteButton
                 deleteExperienceButton
+            }
+        }
+        .confirmationDialog("Select an option", isPresented: $isShowingActionSheet, titleVisibility: .hidden) {
+            if experience.location == nil {
+                Button {
+                    sheetToShow = .addLocation
+                } label: {
+                    Label("Add Location", systemImage: "mappin")
+                }
+            }
+            Button {
+                sheetToShow = .titleAndNote
+            } label: {
+                Label("Edit Title/Note", systemImage: "pencil")
+            }
+            if isEyeOpen {
+                Button {
+                    sheetToShow = .addRating
+                } label: {
+                    Label("Add Rating", systemImage: "bolt")
+                }
+            }
+            Button {
+                isShowingAddIngestionFullScreen.toggle()
+            } label: {
+                Label("Add Ingestion", systemImage: "plus")
             }
         }
     }
@@ -324,11 +323,21 @@ struct ExperienceScreen: View {
                 }
             }
             if let location = experience.location {
-                Section("Location") {
+                Section {
                     EditLocationLinkAndMap(experienceLocation: location)
+                } header: {
+                    HStack {
+                        Text("Location")
+                        Spacer()
+                        Button {
+                            sheetToShow = .editLocation(experienceLocation: location)
+                        } label: {
+                            Label("Edit Location", systemImage: "pencil")
+                                .labelStyle(.iconOnly)
+                        }
+                    }
                 }
             }
-            spaceForButtons
         }
         .navigationTitle(experience.titleUnwrapped)
         .sheet(item: $sheetToShow, content: { sheet in
@@ -347,10 +356,6 @@ struct ExperienceScreen: View {
             viewModel.experience = experience
             viewModel.reloadScreen(experience: experience)
         }
-    }
-
-    private var spaceForButtons: some View {
-        HStack {}.listRowBackground(Color.clear)
     }
 
     private func delete() {

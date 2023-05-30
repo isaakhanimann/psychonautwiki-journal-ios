@@ -25,29 +25,31 @@ struct JournalScreen: View {
 
     var body: some View {
         NavigationView {
-            AddIngestionFab {
-                viewModel.isShowingAddIngestionSheet.toggle()
-            } screen: {
-                screen
-            }
-            .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
-                ChooseSubstanceScreen()
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    favoriteButton
-                    Button {
-                        viewModel.isTimeRelative.toggle()
-                    } label: {
-                        if viewModel.isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
+            FloatingActionButton(
+                title: "New Ingestion",
+                systemImage: "plus") {
+                    viewModel.isShowingAddIngestionSheet.toggle()
+                } screen: {
+                    screen
+                }
+                .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
+                    ChooseSubstanceScreen()
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        favoriteButton
+                        Button {
+                            viewModel.isTimeRelative.toggle()
+                        } label: {
+                            if viewModel.isTimeRelative {
+                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                            } else {
+                                Label("Show Relative Time", systemImage: "timer.circle")
+                            }
                         }
                     }
                 }
-            }
-            .navigationTitle("Journal")
+                .navigationTitle("Journal")
         }
     }
 
