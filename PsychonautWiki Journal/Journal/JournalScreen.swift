@@ -25,31 +25,33 @@ struct JournalScreen: View {
 
     var body: some View {
         NavigationView {
-            FloatingActionButton(
-                title: "New Ingestion",
-                systemImage: "plus") {
+            FabPosition {
+                Button {
                     viewModel.isShowingAddIngestionSheet.toggle()
-                } screen: {
-                    screen
+                } label: {
+                    Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
-                .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
-                    ChooseSubstanceScreen()
-                }
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        favoriteButton
-                        Button {
-                            viewModel.isTimeRelative.toggle()
-                        } label: {
-                            if viewModel.isTimeRelative {
-                                Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                            } else {
-                                Label("Show Relative Time", systemImage: "timer.circle")
-                            }
+            } screen: {
+                screen
+            }
+            .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
+                ChooseSubstanceScreen()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    favoriteButton
+                    Button {
+                        viewModel.isTimeRelative.toggle()
+                    } label: {
+                        if viewModel.isTimeRelative {
+                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
+                        } else {
+                            Label("Show Relative Time", systemImage: "timer.circle")
                         }
                     }
                 }
-                .navigationTitle("Journal")
+            }
+            .navigationTitle("Journal")
         }
     }
 

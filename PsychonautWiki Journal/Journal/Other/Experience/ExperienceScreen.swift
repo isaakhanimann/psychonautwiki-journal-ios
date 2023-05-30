@@ -34,7 +34,6 @@ struct ExperienceScreen: View {
     @State private var timeDisplayStyle = TimeDisplayStyle.regular
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
-    @State private var isShowingActionSheet = false
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
@@ -43,16 +42,44 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        FloatingActionButton(
-            title: "More",
-            systemImage: "ellipsis",
-            onTap: {
-                isShowingActionSheet.toggle()
-            },
-            screen: {
-                screen
+        FabPosition {
+            Menu {
+                Button {
+                    isShowingAddIngestionFullScreen.toggle()
+                } label: {
+                    Label("Add Ingestion", systemImage: "plus")
+                }
+                if isEyeOpen {
+                    Button {
+                        sheetToShow = .addRating
+                    } label: {
+                        Label("Add Rating", systemImage: "bolt.fill")
+                    }
+                }
+                Button {
+                    sheetToShow = .titleAndNote
+                } label: {
+                    Label("Edit Title/Note", systemImage: "pencil")
+                }
+                if experience.location == nil {
+                    Button {
+                        sheetToShow = .addLocation
+                    } label: {
+                        Label("Add Location", systemImage: "mappin")
+                    }
+                }
+                Button(role: .destructive) {
+                    isShowingDeleteConfirmation.toggle()
+                } label: {
+                    Label("Delete Experience", systemImage: "trash")
+                }
+            } label: {
+                Label("More", systemImage: "ellipsis").labelStyle(FabLabelStyle())
             }
-        )
+
+        } screen: {
+            screen
+        }
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
             ChooseSubstanceScreen()
         })
@@ -76,56 +103,7 @@ struct ExperienceScreen: View {
                 } label: {
                     Label("Time Display", systemImage: "timer")
                 }
-                deleteExperienceButton
             }
-        }
-        .confirmationDialog("Select an option", isPresented: $isShowingActionSheet, titleVisibility: .hidden) {
-            if experience.location == nil {
-                Button {
-                    sheetToShow = .addLocation
-                } label: {
-                    Label("Add Location", systemImage: "mappin")
-                }
-            }
-            Button {
-                sheetToShow = .titleAndNote
-            } label: {
-                Label("Edit Title/Note", systemImage: "pencil")
-            }
-            if isEyeOpen {
-                Button {
-                    sheetToShow = .addRating
-                } label: {
-                    Label("Add Rating", systemImage: "bolt")
-                }
-            }
-            Button {
-                isShowingAddIngestionFullScreen.toggle()
-            } label: {
-                Label("Add Ingestion", systemImage: "plus")
-            }
-        }
-    }
-
-    private var favoriteButton: some View {
-        let isFavorite = experience.isFavorite
-        return Button {
-            experience.isFavorite = !isFavorite
-            try? PersistenceController.shared.viewContext.save()
-        } label: {
-            if isFavorite {
-                Label("Unfavorite", systemImage: "star.fill")
-            } else {
-                Label("Mark Favorite", systemImage: "star")
-            }
-        }
-    }
-
-    private var deleteExperienceButton: some View {
-        Button(role: .destructive) {
-            isShowingDeleteConfirmation.toggle()
-        } label: {
-            Label("Delete Experience", systemImage: "trash")
         }
         .confirmationDialog(
             "Delete Experience?",
@@ -141,6 +119,20 @@ struct ExperienceScreen: View {
                 Text("This will also delete all of its ingestions.")
             }
         )
+    }
+
+    private var favoriteButton: some View {
+        let isFavorite = experience.isFavorite
+        return Button {
+            experience.isFavorite = !isFavorite
+            try? PersistenceController.shared.viewContext.save()
+        } label: {
+            if isFavorite {
+                Label("Unfavorite", systemImage: "star.fill")
+            } else {
+                Label("Mark Favorite", systemImage: "star")
+            }
+        }
     }
 
     private var screen: some View {

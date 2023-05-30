@@ -16,52 +16,18 @@
 
 import SwiftUI
 
-struct FloatingActionButton<Screen: View>: View {
-
-    let title: String
-    let systemImage: String
-    let onTap: () -> Void
-    @ViewBuilder let screen: Screen
-
-    var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            screen
-            Button {
-                onTap()
-            } label: {
-                Label(title, systemImage: systemImage)
-            }
-            .buttonStyle(CircleButtonStyle())
-            .padding(30)
-        }
-    }
-}
-
-struct CircleButtonStyle: ButtonStyle {
+struct FabLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             Circle()
                 .fill(Color.accentColor)
                 .frame(width: 50, height: 50)
                 .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
-
-            configuration.label
+            Label(configuration)
                 .labelStyle(.iconOnly)
                 .font(.title.weight(.bold))
                 .foregroundColor(.white)
 
-        }
-    }
-}
-
-struct AddIngestionFab_Previews: PreviewProvider {
-    static var previews: some View {
-        FloatingActionButton(
-            title: "New Ingestion",
-            systemImage: "plus",
-            onTap: {}
-        ) {
-            Color.gray.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
