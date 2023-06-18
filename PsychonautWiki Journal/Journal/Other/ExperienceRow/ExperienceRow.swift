@@ -104,16 +104,7 @@ struct ExperienceRowContent: View {
     var body: some View {
         TimelineView(.everyMinute) { _ in
             HStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: ingestionColors),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .frame(width: 20)
-                    .padding(.vertical, 8)
+                ExperienceColorRectangle(colors: ingestionColors)
                 Spacer().frame(width: 10)
                 VStack(alignment: .leading) {
                     HStack {
@@ -141,7 +132,7 @@ struct ExperienceRowContent: View {
                         }
                     }
                     HStack {
-                        timeText
+                        ExperienceTimeText(time: sortDate, isTimeRelative: isTimeRelative)
                         Spacer()
                         if let locationName {
                             HStack(spacing: 2) {
@@ -154,14 +145,6 @@ struct ExperienceRowContent: View {
                     .font(.footnote)
                 }
             }
-        }
-    }
-
-    var timeText: Text {
-        if isTimeRelative {
-            return Text(sortDate, format: .relative(presentation: .numeric, unitsStyle: .wide))
-        } else {
-            return Text(sortDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
         }
     }
 }
