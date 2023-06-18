@@ -79,12 +79,9 @@ struct IngestionRowContent: View {
     }
 
     var rowContent: some View {
-        VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "circle.fill")
-                    .font(.title2)
-                    .foregroundColor(substanceColor.swiftUIColor)
-                VStack {
+                ColorRectangle(color: substanceColor.swiftUIColor)
+                VStack(alignment: .leading) {
                     HStack {
                         Text(substanceName)
                             .lineLimit(1)
@@ -115,70 +112,22 @@ struct IngestionRowContent: View {
                             DotRows(numDots: numDotsUnwrap)
                         }
                     }
-                    .font(.headline)
-                }
-            }
-            Group {
-                if !note.isEmpty {
-                    Text(note)
-                }
-                if let stomachFullness, administrationRoute == .oral {
-                    Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
-                }
-            }
-            .font(.subheadline)
-            .foregroundColor(.secondary)
-        }
-    }
-}
-
-struct DotRows: View {
-
-    let numDots: Int
-
-    var body: some View {
-        VStack(spacing: 0) {
-            if (numDots==0) {
-                HStack(spacing: 0) {
-                    ForEach((1...4), id: \.self) {_ in
-                        Dot(isFull: false)
-                    }
-                }
-            } else {
-                let numFullRows = numDots/4
-                let dotsInLastRow = numDots % 4
-                if (numFullRows > 0) {
-                    ForEach((1...numFullRows), id: \.self) {_ in
-                        HStack(spacing: 0) {
-                            ForEach(1...4, id: \.self) {_ in
-                                Dot(isFull: true)
-                            }
+                    .font(.subheadline)
+                    Group {
+                        if !note.isEmpty {
+                            Text(note)
+                        }
+                        if let stomachFullness, administrationRoute == .oral {
+                            Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
                         }
                     }
-                }
-                if (dotsInLastRow > 0) {
-                    HStack(spacing: 0) {
-                        ForEach((1...dotsInLastRow), id: \.self) {_ in
-                            Dot(isFull: true)
-                        }
-                        let numEmpty = 4 - dotsInLastRow
-                        ForEach((1...numEmpty), id: \.self) {_ in
-                            Dot(isFull: false)
-                        }
-                    }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
                 }
             }
         }
-    }
 }
 
-struct Dot: View {
-    let isFull: Bool
-    var body: some View {
-        Image(systemName: isFull ? "circle.fill" : "circle")
-            .font(.caption2)
-    }
-}
 
 struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
