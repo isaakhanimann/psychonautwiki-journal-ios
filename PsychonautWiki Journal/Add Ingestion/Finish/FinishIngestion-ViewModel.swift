@@ -107,12 +107,14 @@ extension FinishIngestionScreen {
                     )
                     if #available(iOS 16.2, *) {
                         if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
-                            ActivityManager.shared.startOrUpdateActivity(
-                                everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
-                                everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
-                                    EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
-                                })
-                            )
+                            Task {
+                                await ActivityManager.shared.startOrUpdateActivity(
+                                    everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
+                                    everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
+                                        EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                                    })
+                                )
+                            }
                         }
                     }
                 } else {
@@ -144,10 +146,12 @@ extension FinishIngestionScreen {
                     )
                     if #available(iOS 16.2, *) {
                         if newExperience.isCurrent && self.wantsToStartLiveActivity {
-                            ActivityManager.shared.startOrUpdateActivity(
-                                everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped),
-                                everythingForEachRating: []
-                            )
+                            Task {
+                                await ActivityManager.shared.startOrUpdateActivity(
+                                    everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped),
+                                    everythingForEachRating: []
+                                )
+                            }
                         }
                     }
                 }

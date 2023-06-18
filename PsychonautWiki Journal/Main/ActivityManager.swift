@@ -29,9 +29,9 @@ class ActivityManager: ObservableObject {
     init() {
         if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first {
             self.isActivityActive = firstActivity.activityState == .active
-            self.activityStateTask = Task {
+            self.activityStateTask = Task { [weak self] in
                 for await activityState in firstActivity.activityStateUpdates {
-                    self.isActivityActive = activityState == .active
+                    self?.isActivityActive = activityState == .active
                 }
             }
         }
@@ -41,11 +41,12 @@ class ActivityManager: ObservableObject {
         activityStateTask?.cancel()
     }
 
-    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
         if authorizationInfo.areActivitiesEnabled {
             if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first, firstActivity.activityState == .active {
-                updateActivity(activity: firstActivity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+                await updateActivity(activity: firstActivity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             } else {
+                await stopActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
                 startActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             }
         }
@@ -64,9 +65,9 @@ class ActivityManager: ObservableObject {
                 content: content,
                 pushType: nil
             )
-            self.activityStateTask = Task {
+            self.activityStateTask = Task { [weak self] in
                 for await activityState in newActivity.activityStateUpdates {
-                    self.isActivityActive = activityState == .active
+                    self?.isActivityActive = activityState == .active
                 }
             }
         } catch {
@@ -74,22 +75,18 @@ class ActivityManager: ObservableObject {
         }
     }
 
-    private func updateActivity(activity: Activity<TimelineWidgetAttributes>, everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+    private func updateActivity(activity: Activity<TimelineWidgetAttributes>, everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
         let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
         let updatedContent = ActivityContent(state: state, staleDate: nil)
-        Task {
-            await activity.update(updatedContent)
-        }
+        await activity.update(updatedContent)
     }
 
-    func stopActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+    func stopActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
         if authorizationInfo.areActivitiesEnabled {
             let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
             let finalContent = ActivityContent(state: state, staleDate: nil)
-            Task {
-                for activity in Activity<TimelineWidgetAttributes>.activities {
-                    await activity.end(finalContent, dismissalPolicy: .immediate)
-                }
+            for activity in Activity<TimelineWidgetAttributes>.activities {
+                await activity.end(finalContent, dismissalPolicy: .immediate)
             }
         }
     }

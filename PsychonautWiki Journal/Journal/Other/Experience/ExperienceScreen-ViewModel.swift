@@ -138,8 +138,8 @@ extension ExperienceScreen {
 
         @available(iOS 16.2, *)
         func startOrUpdateLiveActivity() {
-            Task { @MainActor in
-                ActivityManager.shared.startOrUpdateActivity(
+            Task {
+                await ActivityManager.shared.startOrUpdateActivity(
                     everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
                     everythingForEachRating: everythingForEachRating
                 )
@@ -148,10 +148,12 @@ extension ExperienceScreen {
 
         @available(iOS 16.2, *)
         func stopLiveActivity() {
-            ActivityManager.shared.stopActivity(
-                everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
-                everythingForEachRating: everythingForEachRating
-            )
+            Task {
+                await ActivityManager.shared.stopActivity(
+                    everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
+                    everythingForEachRating: everythingForEachRating
+                )
+            }
         }
 
         private func setSubstances() {
