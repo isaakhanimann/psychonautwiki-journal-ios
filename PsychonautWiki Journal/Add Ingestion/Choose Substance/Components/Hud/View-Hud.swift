@@ -24,9 +24,13 @@ extension View {
         ZStack(alignment: .top) {
             self
             if isPresented.wrappedValue {
-                Hud(content: content)
-                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                    .zIndex(1)
+                Hud(content: content, dismiss: {
+                    withAnimation {
+                        isPresented.wrappedValue = false
+                    }
+                })
+                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                .zIndex(1)
             }
         }
     }

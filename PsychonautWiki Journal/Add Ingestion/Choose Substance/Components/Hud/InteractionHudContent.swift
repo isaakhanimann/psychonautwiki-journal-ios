@@ -42,7 +42,7 @@ struct InteractionHudContent: View {
 
 struct InteractionHudContent_Previews: PreviewProvider {
     static var previews: some View {
-        Hud {
+        Hud(content: {
             InteractionHudContent(substanceName: "MDMA", interactions: [
                 InteractionWith(name: "MAOI", interactionType: .dangerous),
                 InteractionWith(name: "5-Hydroxytryptophan", interactionType: .dangerous),
@@ -51,6 +51,6 @@ struct InteractionHudContent_Previews: PreviewProvider {
                 InteractionWith(name: "Alcohol", interactionType: .uncertain),
                 InteractionWith(name: "Caffeine", interactionType: .uncertain)
             ])
-        }
+        }, dismiss: {})
     }
 }

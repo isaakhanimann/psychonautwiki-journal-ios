@@ -18,6 +18,9 @@ import SwiftUI
 
 struct Hud<Content: View>: View {
     @ViewBuilder let content: Content
+    let dismiss: () -> Void
+    @State private var swipeStart: CGFloat = 0
+    @State private var swipeEnd: CGFloat = 0
 
     var body: some View {
         content
@@ -26,5 +29,17 @@ struct Hud<Content: View>: View {
             .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10))
             .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
             .padding(.horizontal, 20)
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        self.swipeStart = gesture.startLocation.y
+                        self.swipeEnd = gesture.location.y
+                    }
+                    .onEnded { _ in
+                        if self.swipeStart > self.swipeEnd {
+                            dismiss()
+                        }
+                    }
+            )
     }
 }
