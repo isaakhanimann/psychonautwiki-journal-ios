@@ -134,6 +134,7 @@ struct TestingServicesScreen: View {
             }
         }
         .navigationTitle("Testing Services")
+        .dismissWhenTabTapped()
     }
 }
 

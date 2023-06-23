@@ -46,6 +46,7 @@ struct TimelineScreen: View {
             checkCurrentOrientation()
         }
         .navigationTitle("Effect Timeline")
+        .dismissWhenTabTapped()
     }
 
     private func checkCurrentOrientation() {

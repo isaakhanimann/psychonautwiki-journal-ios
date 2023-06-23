@@ -19,7 +19,7 @@ import SwiftUI
 
 
 @available(iOS 16, *)
-struct ExperienceDetails: View {
+struct ExperienceDetailsScreen: View {
 
     let experienceData: ExperienceData
     @State private var timeRange: TimeRange = .last12Months
@@ -112,6 +112,7 @@ struct ExperienceDetails: View {
             }
         }
         .navigationTitle("Total Experiences")
+        .dismissWhenTabTapped()
     }
 
     private func getColor(name: String) -> Color {
@@ -130,7 +131,7 @@ struct ExperienceDetails: View {
 struct ExperienceDetails_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ExperienceDetails(experienceData: .mock1)
+            ExperienceDetailsScreen(experienceData: .mock1)
         }
     }
 }

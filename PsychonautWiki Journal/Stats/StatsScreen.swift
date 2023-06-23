@@ -221,14 +221,14 @@ struct StatsScreenContent: View {
         List {
             Section {
                 NavigationLink {
-                    ExperienceDetails(experienceData: experienceData)
+                    ExperienceDetailsScreen(experienceData: experienceData)
                 } label: {
                     ExperienceOverview(experienceData: experienceData)
                 }
             }
             Section {
                 NavigationLink {
-                    IngestionDetails(ingestionData: ingestionData)
+                    IngestionDetailsScreen(ingestionData: ingestionData)
                 } label: {
                     IngestionOverview(ingestionData: ingestionData)
                 }

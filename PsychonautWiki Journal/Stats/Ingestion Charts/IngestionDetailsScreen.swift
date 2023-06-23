@@ -19,7 +19,7 @@ import SwiftUI
 
 
 @available(iOS 16, *)
-struct IngestionDetails: View {
+struct IngestionDetailsScreen: View {
 
     let ingestionData: IngestionData
     @State private var timeRange: TimeRange = .last12Months
@@ -67,6 +67,7 @@ struct IngestionDetails: View {
             }
         }
         .navigationTitle("Substances")
+        .dismissWhenTabTapped()
     }
 }
 
@@ -91,7 +92,7 @@ struct RoundedCorner: Shape {
 struct IngestionDetails_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            IngestionDetails(ingestionData: .mock2)
+            IngestionDetailsScreen(ingestionData: .mock2)
         }
     }
 }

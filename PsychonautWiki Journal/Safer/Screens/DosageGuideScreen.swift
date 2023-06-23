@@ -106,6 +106,7 @@ Effective doses can be divided into five categories: threshold, light, common, s
             }
         }
         .navigationTitle("Dosage Guide")
+        .dismissWhenTabTapped()
     }
 }
 

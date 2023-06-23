@@ -42,6 +42,7 @@ struct SubstanceScreen: View {
                 }
             }
         }
+        .dismissWhenTabTapped()
         .navigationTitle(substance.name)
     }
 

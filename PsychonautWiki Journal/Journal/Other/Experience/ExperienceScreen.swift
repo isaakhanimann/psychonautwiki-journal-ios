@@ -332,6 +332,7 @@ struct ExperienceScreen: View {
             }
         }
         .navigationTitle(experience.titleUnwrapped)
+        .dismissWhenTabTapped()
         .sheet(item: $sheetToShow, content: { sheet in
             switch sheet {
             case .addLocation:

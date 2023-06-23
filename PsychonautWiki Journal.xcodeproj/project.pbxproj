@@ -99,9 +99,9 @@
 		EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C622295C2BE7000DA021 /* JournalFile.swift */; };
 		EA41C625295EAFD8000DA021 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C624295EAFD8000DA021 /* Data.swift */; };
 		EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C626295EB65C000DA021 /* IngestionOverview.swift */; };
-		EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* IngestionDetails.swift */; };
+		EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */; };
 		EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */; };
-		EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */; };
+		EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */; };
 		EA41C62F295EB86C000DA021 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* Utils.swift */; };
 		EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C631295F8921000DA021 /* DailyExperienceChart.swift */; };
 		EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */; };
@@ -200,6 +200,9 @@
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
 		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
+		EAB8EF452A45FE6300542253 /* ContentScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */; };
+		EAB8EF472A46004B00542253 /* ScreenDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* ScreenDismisser.swift */; };
+		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
 		EABD92002941C3740073303A /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
 		EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
@@ -387,9 +390,9 @@
 		EA41C622295C2BE7000DA021 /* JournalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalFile.swift; sourceTree = "<group>"; };
 		EA41C624295EAFD8000DA021 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EA41C626295EB65C000DA021 /* IngestionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionOverview.swift; sourceTree = "<group>"; };
-		EA41C628295EB6E2000DA021 /* IngestionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDetails.swift; sourceTree = "<group>"; };
+		EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDetailsScreen.swift; sourceTree = "<group>"; };
 		EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceOverview.swift; sourceTree = "<group>"; };
-		EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetails.swift; sourceTree = "<group>"; };
+		EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetailsScreen.swift; sourceTree = "<group>"; };
 		EA41C62E295EB86C000DA021 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		EA41C631295F8921000DA021 /* DailyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExperienceChart.swift; sourceTree = "<group>"; };
 		EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExperienceChart.swift; sourceTree = "<group>"; };
@@ -489,6 +492,9 @@
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
 		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
+		EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentScreen-ViewModel.swift"; sourceTree = "<group>"; };
+		EAB8EF462A46004B00542253 /* ScreenDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismisser.swift; sourceTree = "<group>"; };
+		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
 		EABD91FF2941C3740073303A /* AxisDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDrawable.swift; sourceTree = "<group>"; };
 		EABD92012941C3A30073303A /* IngestionDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDrawable.swift; sourceTree = "<group>"; };
@@ -687,7 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
-				EA41C628295EB6E2000DA021 /* IngestionDetails.swift */,
+				EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */,
 			);
 			path = "Ingestion Charts";
 			sourceTree = "<group>";
@@ -719,7 +725,7 @@
 			isa = PBXGroup;
 			children = (
 				EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */,
-				EA41C62C295EB7C2000DA021 /* ExperienceDetails.swift */,
+				EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */,
 				EA41C631295F8921000DA021 /* DailyExperienceChart.swift */,
 				EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */,
 				EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */,
@@ -942,6 +948,9 @@
 			children = (
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
+				EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */,
+				EAB8EF462A46004B00542253 /* ScreenDismisser.swift */,
+				EAB8EF482A4600D800542253 /* DismissModifier.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1492,6 +1501,7 @@
 				EA6048452A25C28F005C6A4B /* FabLabelStyle.swift in Sources */,
 				EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */,
 				EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */,
+				EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
@@ -1515,6 +1525,7 @@
 				EAF76C9427D7AEEA00945587 /* FinishIngestion-ViewModel.swift in Sources */,
 				EABD921E294278240073303A /* CategoryScreen.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */,
+				EAB8EF452A45FE6300542253 /* ContentScreen-ViewModel.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseScreen.swift in Sources */,
 				EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
@@ -1590,13 +1601,13 @@
 				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
-				EA41C629295EB6E2000DA021 /* IngestionDetails.swift in Sources */,
+				EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */,
 				EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
-				EA41C62D295EB7C2000DA021 /* ExperienceDetails.swift in Sources */,
+				EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */,
 				EA60483B2A188FDB005C6A4B /* WeightUnit.swift in Sources */,
 				EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */,
 				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
@@ -1678,6 +1689,7 @@
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
 				EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
+				EAB8EF472A46004B00542253 /* ScreenDismisser.swift in Sources */,
 				EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,

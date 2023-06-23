@@ -145,6 +145,7 @@ Powders for nasal delivery have higher bioavailiability than liquids because of 
             }
         }
         .navigationTitle("Spray Calculator")
+        .dismissWhenTabTapped()
     }
 
     private var addSprayButton: some View {

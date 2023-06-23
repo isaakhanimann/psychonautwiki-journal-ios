@@ -73,6 +73,7 @@ However, experienced users generally advise trying to wait out difficult parts o
             }
         }
         .navigationTitle("Safer Hallucinogens")
+        .dismissWhenTabTapped()
     }
 }
 

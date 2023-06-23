@@ -58,6 +58,7 @@ struct DosesScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Dosage")
+        .dismissWhenTabTapped()
     }
 
 

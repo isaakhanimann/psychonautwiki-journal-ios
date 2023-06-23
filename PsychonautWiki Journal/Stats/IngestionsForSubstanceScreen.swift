@@ -50,7 +50,9 @@ struct IngestionsForSubstanceScreen: View {
                 isEyeOpen: isEyeOpen,
                 isHidingDosageDots: isHidingDosageDots
             )
-        }.navigationTitle(substanceName)
+        }
+        .navigationTitle(substanceName)
+        .dismissWhenTabTapped()
     }
 }
 

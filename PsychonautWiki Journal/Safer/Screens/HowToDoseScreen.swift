@@ -29,7 +29,9 @@ struct HowToDoseScreen: View {
             NavigationLink("Volumetric Liquid Dosing") {
                 VolumetricDosingScreen()
             }
-        }.navigationTitle("Dosage")
+        }
+        .navigationTitle("Dosage")
+        .dismissWhenTabTapped()
     }
 }
 

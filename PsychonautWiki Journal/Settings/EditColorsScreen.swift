@@ -81,7 +81,9 @@ struct CompanionColorPickerScreen: View {
                     }
                 }
             }
-        }.navigationTitle("Choose Color")
+        }
+        .navigationTitle("Choose Color")
+        .dismissWhenTabTapped()
     }
 
     private func button(for color: SubstanceColor) -> some View {

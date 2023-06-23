@@ -35,7 +35,9 @@ struct SaferRoutesScreen: View {
             NavigationLink("Administration Routes Info") {
                 AdministrationRouteScreen()
             }
-        }.navigationTitle("Safer Routes")
+        }
+        .navigationTitle("Safer Routes")
+        .dismissWhenTabTapped()
     }
 }
 

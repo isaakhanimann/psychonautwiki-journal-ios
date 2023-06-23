@@ -69,7 +69,9 @@ Users should also be aware that the line between a heavy dose and overdose is of
 The desire or compulsion to regularly take heavy doses (\"chronic use\") may also be an indicator of tolerance, addiction or other mental health problems.
 """)
             }
-        }.navigationTitle("Dosage Classification")
+        }
+        .navigationTitle("Dosage Classification")
+        .dismissWhenTabTapped()
     }
 }
 

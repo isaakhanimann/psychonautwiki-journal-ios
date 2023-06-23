@@ -41,6 +41,7 @@ struct CategoryScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Categories")
+        .dismissWhenTabTapped()
         .onAppear {
             categories = substance.categories.compactMap { name in
                 SubstanceRepo.shared.categories.first(where: { cat in

@@ -43,6 +43,8 @@ struct EditRatingScreen: View {
                 }
             }
         }
+        .navigationTitle("Edit Rating")
+        .dismissWhenTabTapped()
     }
 
     func save() {

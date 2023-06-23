@@ -96,6 +96,7 @@ struct DurationScreen: View {
             updateModel()
         }
         .navigationTitle("\(substanceName) Duration")
+        .dismissWhenTabTapped()
     }
 
     private func updateModel() {

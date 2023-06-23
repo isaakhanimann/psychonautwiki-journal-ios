@@ -16,26 +16,19 @@
 
 import SwiftUI
 
-struct TestingScreen: View {
-    var body: some View {
-        List {
-            Text("Test your substance with anonymous and free drug testing services. If those are not available in your country, use reagent testing kits. Don‘t trust your dealer to sell reliable product. Its better to have a tested stash instead of relying on a source spontaneously.")
-            NavigationLink("Drug Testing Services") {
-                TestingServicesScreen()
+struct DismissModifier: ViewModifier {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var screenDismisser: ScreenDismisser
+
+    func body(content: Content) -> some View {
+        content.onReceive(screenDismisser.$isThereAChange) { value in
+                self.presentationMode.wrappedValue.dismiss()
             }
-            NavigationLink("Reagent Testing") {
-                ReagentTestingScreen()
-            }
-        }
-        .navigationTitle("Testing")
-        .dismissWhenTabTapped()
     }
 }
 
-struct TestingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            TestingScreen()
-        }
+extension View {
+    func dismissWhenTabTapped() -> some View {
+        self.modifier(DismissModifier())
     }
 }

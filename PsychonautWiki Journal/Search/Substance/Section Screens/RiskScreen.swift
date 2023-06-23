@@ -32,6 +32,7 @@ struct RiskScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Risks")
+        .dismissWhenTabTapped()
     }
 }
 

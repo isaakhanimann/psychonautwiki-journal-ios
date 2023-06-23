@@ -26,7 +26,9 @@ Many psychoactive substances, including benzodiazepines and certain psychedelics
 
 Search the internet to determine what solvent to use. All substances should dissolve in alcohol, but many substances will not dissolve in water.
 """)
-        }.navigationTitle("Volumetric Dosing")
+        }
+        .navigationTitle("Volumetric Dosing")
+        .dismissWhenTabTapped()
     }
 }
 

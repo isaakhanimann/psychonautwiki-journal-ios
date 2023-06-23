@@ -36,7 +36,9 @@ struct ToleranceScreen: View {
                     Text("Cross tolerance with \(crossTolerances)")
                 }
             }
-        }.navigationTitle("\(substance.name) Tolerance")
+        }
+        .navigationTitle("\(substance.name) Tolerance")
+        .dismissWhenTabTapped()
     }
 }
 

@@ -45,7 +45,8 @@ struct EditIngestionScreen: View {
             save: save,
             delete: delete,
             isEyeOpen: isEyeOpen
-        ).onAppear {
+        )
+        .onAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
             units = ingestion.units

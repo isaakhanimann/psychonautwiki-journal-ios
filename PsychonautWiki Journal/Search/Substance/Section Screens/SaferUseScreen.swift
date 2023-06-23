@@ -25,7 +25,9 @@ struct SaferUseScreen: View {
                     Text(point)
                 }
             }
-        }.navigationTitle("\(substance.name) Safer Use")
+        }
+        .navigationTitle("\(substance.name) Safer Use")
+        .dismissWhenTabTapped()
     }
 }
 

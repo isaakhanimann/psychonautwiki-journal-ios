@@ -26,6 +26,7 @@ struct FAQView: View {
             }
         }
         .navigationTitle("FAQ")
+        .dismissWhenTabTapped()
     }
 }
 

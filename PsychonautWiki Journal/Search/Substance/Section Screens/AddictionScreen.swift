@@ -25,7 +25,9 @@ struct AddictionScreen: View {
             Section {
                 Text(addictionPotential)
             }
-        }.navigationTitle("\(substanceName) Addiction Potential")
+        }
+        .navigationTitle("\(substanceName) Addiction Potential")
+        .dismissWhenTabTapped()
     }
 }
 

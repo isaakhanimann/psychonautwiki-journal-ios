@@ -35,7 +35,9 @@ struct ToxicityScreen: View {
                     }
                 }
             }
-        }.navigationTitle("\(substanceName) Toxicity")
+        }
+        .navigationTitle("\(substanceName) Toxicity")
+        .dismissWhenTabTapped()
     }
 }
 

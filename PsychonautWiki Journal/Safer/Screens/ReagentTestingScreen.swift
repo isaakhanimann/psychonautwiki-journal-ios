@@ -24,7 +24,9 @@ struct ReagentTestingScreen: View {
                 Link("DanceSafe", destination: URL(string: "https://dancesafe.org/testing-kit-instructions/")!)
                 Link("Bunk Police", destination: URL(string: "https://bunkpolice.com")!)
             }
-        }.navigationTitle("Reagent Testing")
+        }
+        .navigationTitle("Reagent Testing")
+        .dismissWhenTabTapped()
     }
 }
 
