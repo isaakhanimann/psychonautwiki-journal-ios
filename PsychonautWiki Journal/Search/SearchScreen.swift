@@ -57,6 +57,9 @@ struct SearchScreen: View {
                 placement: .navigationBarDrawer(displayMode: .always),
                 prompt: Text("Search Substance")
             )
+            .onSameTabTap {
+                print("Hello")
+            }
             .disableAutocorrection(true)
             .navigationTitle("Substances")
             .toolbar {
