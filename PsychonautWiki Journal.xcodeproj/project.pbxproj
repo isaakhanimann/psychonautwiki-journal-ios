@@ -203,6 +203,7 @@
 		EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* TabBarObserver.swift */; };
 		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */; };
+		EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
 		EABD92002941C3740073303A /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
 		EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
@@ -495,6 +496,7 @@
 		EAB8EF462A46004B00542253 /* TabBarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarObserver.swift; sourceTree = "<group>"; };
 		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameTabTapModifier.swift; sourceTree = "<group>"; };
+		EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceSearchBar.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
 		EABD91FF2941C3740073303A /* AxisDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDrawable.swift; sourceTree = "<group>"; };
 		EABD92012941C3A30073303A /* IngestionDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDrawable.swift; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				EA8447E527CD14C000B10DD3 /* Substance */,
 				EAB165A527E35C0C003DF79D /* Custom Substance */,
 				EA47E66F27CB477000F6E10F /* SearchScreen.swift */,
+				EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */,
 				EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 			);
@@ -1679,6 +1682,7 @@
 				EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */,
 				EA116CDD29FBA3D9007D8BF6 /* RatingExplanationSection.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
+				EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */,
 				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
 				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
