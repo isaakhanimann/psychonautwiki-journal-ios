@@ -83,6 +83,7 @@ struct SubstanceSearchBar: View {
                 }.padding(.horizontal, horizontalPadding)
             }
         }
+        .animation(.default, value: isFocused.wrappedValue)
     }
 
     var backgroundColor: Color {
