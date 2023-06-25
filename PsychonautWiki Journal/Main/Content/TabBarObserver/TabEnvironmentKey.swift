@@ -14,8 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
+import SwiftUI
 
-class TabBarObserver: ObservableObject {
-    @Published var selectedTab = Tab.journal
+struct TabEnvironmentKey: EnvironmentKey {
+    static let defaultValue: Tab = .journal
+}
+
+extension EnvironmentValues {
+    var currentTab: Tab {
+        get { self[TabEnvironmentKey.self] }
+        set { self[TabEnvironmentKey.self] = newValue }
+    }
 }

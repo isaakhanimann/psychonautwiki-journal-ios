@@ -17,13 +17,15 @@
 import SwiftUI
 
 struct DismissModifier: ViewModifier {
+
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.currentTab) var currentTab
     @EnvironmentObject var tabBarObserver: TabBarObserver
     
     func body(content: Content) -> some View {
-        content.onReceive(tabBarObserver.$tapOption) { option in
-            if option == .sameTab {
-                self.presentationMode.wrappedValue.dismiss()
+        content.onReceive(tabBarObserver.$selectedTab) { selectedTab in
+            if selectedTab == currentTab {
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }

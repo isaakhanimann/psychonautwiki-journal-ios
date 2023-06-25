@@ -204,6 +204,8 @@
 		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */; };
 		EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */; };
+		EAB8EF542A48D82000542253 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF532A48D82000542253 /* Tab.swift */; };
+		EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF552A48D88E00542253 /* TabEnvironmentKey.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
 		EABD92002941C3740073303A /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
 		EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD92012941C3A30073303A /* IngestionDrawable.swift */; };
@@ -497,6 +499,8 @@
 		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameTabTapModifier.swift; sourceTree = "<group>"; };
 		EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceSearchBar.swift; sourceTree = "<group>"; };
+		EAB8EF532A48D82000542253 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		EAB8EF552A48D88E00542253 /* TabEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEnvironmentKey.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
 		EABD91FF2941C3740073303A /* AxisDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDrawable.swift; sourceTree = "<group>"; };
 		EABD92012941C3A30073303A /* IngestionDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDrawable.swift; sourceTree = "<group>"; };
@@ -988,6 +992,8 @@
 			isa = PBXGroup;
 			children = (
 				EAB8EF462A46004B00542253 /* TabBarObserver.swift */,
+				EAB8EF552A48D88E00542253 /* TabEnvironmentKey.swift */,
+				EAB8EF532A48D82000542253 /* Tab.swift */,
 				EAB8EF482A4600D800542253 /* DismissModifier.swift */,
 				EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */,
 			);
@@ -1584,6 +1590,7 @@
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
+				EAB8EF542A48D82000542253 /* Tab.swift in Sources */,
 				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditTitleAndNotesScreen.swift in Sources */,
@@ -1651,6 +1658,7 @@
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */,
+				EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */,
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,

@@ -16,6 +16,6 @@
 
 import Foundation
 
-class TabBarObserver: ObservableObject {
-    @Published var selectedTab = Tab.journal
+enum Tab {
+    case stats, journal, substances, safer, settings
 }

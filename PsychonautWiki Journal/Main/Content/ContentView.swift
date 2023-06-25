@@ -65,10 +65,6 @@ struct ContentView: View {
     }
 }
 
-enum Tab {
-    case stats, journal, substances, safer, settings
-}
-
 struct ContentScreen: View {
     let isEyeOpen: Bool
 
@@ -82,29 +78,34 @@ struct ContentScreen: View {
                         Label("Stats", systemImage: "chart.bar")
                     }
                     .tag(Tab.stats)
+                    .environment(\.currentTab, Tab.stats)
             }
             JournalScreen()
                 .tabItem {
                     Label("Journal", systemImage: "square.stack")
                 }
                 .tag(Tab.journal)
+                .environment(\.currentTab, Tab.journal)
             if isEyeOpen {
                 SearchScreen()
                     .tabItem {
                         Label("Substances", systemImage: "magnifyingglass")
                     }
                     .tag(Tab.substances)
+                    .environment(\.currentTab, Tab.substances)
                 SaferScreen()
                     .tabItem {
                         Label("Safer", systemImage: "cross.case")
                     }
                     .tag(Tab.safer)
+                    .environment(\.currentTab, Tab.safer)
             }
             SettingsScreen()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .tag(Tab.settings)
+                .environment(\.currentTab, Tab.settings)
         }.environmentObject(tabBarObserver)
     }
 }
