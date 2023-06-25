@@ -24,27 +24,15 @@ struct SearchScreen: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                HStack {
-                    SubstanceSearchBar(
-                        text: $viewModel.searchText,
-                        isFocused: $isSearchFocused,
-                        allCategories: viewModel.allCategories,
-                        toggleCategory: { cat in
-                            viewModel.toggleCategory(category: cat)
-                        },
-                        selectedCategories: viewModel.selectedCategories
-                    )
-                    if !viewModel.selectedCategories.isEmpty {
-                        Button {
-                            withAnimation {
-                                viewModel.clearCategories()
-                            }
-                        } label: {
-                            Text("Clear")
-                        }
-
-                    }
-                }
+                SubstanceSearchBar(
+                    text: $viewModel.searchText,
+                    isFocused: $isSearchFocused,
+                    allCategories: viewModel.allCategories,
+                    toggleCategory: { cat in
+                        viewModel.toggleCategory(category: cat)
+                    },
+                    selectedCategories: viewModel.selectedCategories
+                )
                 List {
                     ForEach(viewModel.filteredSubstances) { sub in
                         SearchSubstanceRow(substance: sub, color: nil)
@@ -78,6 +66,7 @@ struct SearchScreen: View {
             }
             .onSameTabTap {
                 viewModel.searchText = ""
+                viewModel.clearCategories()
                 isSearchFocused = true
             }
         }
