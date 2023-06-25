@@ -17,5 +17,20 @@
 import Foundation
 
 class TabBarObserver: ObservableObject {
+    @Published var tapOption = TabTapOption.sameTab
     @Published var selectedTab = Tab.journal
+    private var previousTab: Tab?
+
+    enum TabTapOption {
+        case otherTab, sameTab
+    }
+
+    init() {
+        $selectedTab.map { newTab in
+            let tapOption = self.previousTab == newTab ? TabTapOption.sameTab : TabTapOption.otherTab
+            self.previousTab = newTab
+            return tapOption
+        }
+        .assign(to: &$tapOption)
+    }
 }

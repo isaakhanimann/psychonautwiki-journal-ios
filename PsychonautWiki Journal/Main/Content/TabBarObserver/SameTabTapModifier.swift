@@ -24,8 +24,8 @@ struct SameTabTapModifier: ViewModifier {
     @Environment(\.currentTab) var currentTab
 
     func body(content: Content) -> some View {
-        content.onReceive(tabBarObserver.$selectedTab) { selectedTab in
-            if selectedTab == currentTab {
+        content.onReceive(tabBarObserver.$tapOption) { option in
+            if option == .sameTab && tabBarObserver.selectedTab == currentTab {
                 perform()
             }
         }
