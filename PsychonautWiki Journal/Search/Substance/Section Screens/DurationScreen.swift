@@ -50,13 +50,9 @@ struct DurationScreen: View {
                         if isRouteHidden {
                             Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
+                        ColorRectangle(color: info.route.color.swiftUIColor)
                         VStack(alignment: .leading) {
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                    .font(.title2)
-                                    .foregroundColor(info.route.color.swiftUIColor)
-                                Text(info.route.rawValue.localizedCapitalized).font(.headline)
-                            }
+                            Text(info.route.rawValue.localizedCapitalized).font(.headline)
                             OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
                             if info.route == .oral {
                                 Spacer().frame(height: 5)
@@ -135,6 +131,6 @@ struct DurationScreen: View {
 struct DurationScreen_Previews: PreviewProvider {
     static var previews: some View {
         let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
-        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos)
+        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
     }
 }
