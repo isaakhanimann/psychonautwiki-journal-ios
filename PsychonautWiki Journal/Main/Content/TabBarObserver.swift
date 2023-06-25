@@ -16,10 +16,21 @@
 
 import Foundation
 
-class ScreenDismisser: ObservableObject {
-    @Published var isThereAChange: Bool = false
+class TabBarObserver: ObservableObject {
+    @Published var tapOption = TabTapOption.sameTab
+    @Published var selectedTab = Tab.journal
+    @Published var previousTab: Tab?
 
-    func dismiss() {
-        isThereAChange.toggle()
+    enum TabTapOption {
+        case otherTab, sameTab
+    }
+
+    init() {
+        $selectedTab.map { newTab in
+            let tapOption = self.previousTab == newTab ? TabTapOption.sameTab : TabTapOption.otherTab
+            self.previousTab = newTab
+            return tapOption
+        }
+        .assign(to: &$tapOption)
     }
 }

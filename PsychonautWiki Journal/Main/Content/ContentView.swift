@@ -72,11 +72,10 @@ enum Tab {
 struct ContentScreen: View {
     let isEyeOpen: Bool
 
-    @StateObject private var viewModel = ViewModel()
-    @StateObject private var screenDismisser = ScreenDismisser()
+    @StateObject private var tabBarObserver = TabBarObserver()
 
     var body: some View {
-        TabView(selection: $viewModel.selectedTab) {
+        TabView(selection: $tabBarObserver.selectedTab) {
             if #available(iOS 16, *) {
                 StatsScreen()
                     .tabItem {
@@ -106,11 +105,6 @@ struct ContentScreen: View {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .tag(Tab.settings)
-        }.onReceive(viewModel.$selectedTab) { newTab in
-            if viewModel.previousTab == viewModel.selectedTab {
-                screenDismisser.dismiss()
-            }
-            viewModel.previousTab = viewModel.selectedTab
-        }.environmentObject(screenDismisser)
+        }.environmentObject(tabBarObserver)
     }
 }

@@ -200,8 +200,7 @@
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
 		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
 		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
-		EAB8EF452A45FE6300542253 /* ContentScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */; };
-		EAB8EF472A46004B00542253 /* ScreenDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* ScreenDismisser.swift */; };
+		EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* TabBarObserver.swift */; };
 		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
 		EABD92002941C3740073303A /* AxisDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FF2941C3740073303A /* AxisDrawable.swift */; };
@@ -492,8 +491,7 @@
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
 		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
 		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
-		EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentScreen-ViewModel.swift"; sourceTree = "<group>"; };
-		EAB8EF462A46004B00542253 /* ScreenDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDismisser.swift; sourceTree = "<group>"; };
+		EAB8EF462A46004B00542253 /* TabBarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarObserver.swift; sourceTree = "<group>"; };
 		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
 		EABD91FF2941C3740073303A /* AxisDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDrawable.swift; sourceTree = "<group>"; };
@@ -948,8 +946,7 @@
 			children = (
 				EAE4711B26CBA663009FB0EC /* Welcome Screen */,
 				EAE4712926CBA663009FB0EC /* ContentView.swift */,
-				EAB8EF442A45FE6300542253 /* ContentScreen-ViewModel.swift */,
-				EAB8EF462A46004B00542253 /* ScreenDismisser.swift */,
+				EAB8EF462A46004B00542253 /* TabBarObserver.swift */,
 				EAB8EF482A4600D800542253 /* DismissModifier.swift */,
 			);
 			path = Content;
@@ -1525,7 +1522,6 @@
 				EAF76C9427D7AEEA00945587 /* FinishIngestion-ViewModel.swift in Sources */,
 				EABD921E294278240073303A /* CategoryScreen.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */,
-				EAB8EF452A45FE6300542253 /* ContentScreen-ViewModel.swift in Sources */,
 				EAE4722326CBA664009FB0EC /* ChooseDoseScreen.swift in Sources */,
 				EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
@@ -1689,7 +1685,7 @@
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
 				EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
-				EAB8EF472A46004B00542253 /* ScreenDismisser.swift in Sources */,
+				EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */,
 				EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */,
 				EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */,
 				EAE471DE26CBA664009FB0EC /* Main.xcdatamodeld in Sources */,
