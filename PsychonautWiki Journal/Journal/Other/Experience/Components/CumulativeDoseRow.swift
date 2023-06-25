@@ -25,9 +25,7 @@ struct CumulativeDoseRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "circle.fill")
-                .font(.title2)
-                .foregroundColor(substanceColor.swiftUIColor)
+            ColorRectangle(color: substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
                 Text(substanceName)
                     .font(.headline)
