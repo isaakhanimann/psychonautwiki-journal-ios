@@ -78,11 +78,13 @@ struct FinishIngestionScreen: View {
                     )
                     Task { @MainActor in
                         self.toastViewModel.showSuccessToast()
+                        self.generateSuccessHaptic()
                         self.dismiss()
                     }
                 } catch {
                     Task { @MainActor in
                         self.toastViewModel.showErrorToast(message: "Failed Ingestion")
+                        self.generateFailedHaptic()
                         self.dismiss()
                     }
                 }
@@ -196,6 +198,16 @@ struct FinishIngestionScreen: View {
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
             viewModel.initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
         }
+    }
+
+    func generateSuccessHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+
+    func generateFailedHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
     }
 }
 
