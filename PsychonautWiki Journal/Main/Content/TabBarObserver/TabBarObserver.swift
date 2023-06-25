@@ -19,7 +19,7 @@ import Foundation
 class TabBarObserver: ObservableObject {
     @Published var tapOption = TabTapOption.sameTab
     @Published var selectedTab = Tab.journal
-    @Published var previousTab: Tab?
+    private var previousTab: Tab?
 
     enum TabTapOption {
         case otherTab, sameTab
