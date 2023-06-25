@@ -35,7 +35,7 @@ struct SearchScreen: View {
                 )
                 List {
                     ForEach(viewModel.filteredSubstances) { sub in
-                        SearchSubstanceRow(substance: sub, color: nil)
+                        SearchSubstanceRow(substance: sub)
                     }
                     ForEach(viewModel.filteredCustomSubstances) { cust in
                         NavigationLink {

@@ -19,26 +19,16 @@ import WrappingHStack
 
 struct SearchSubstanceRow: View {
     let substance: Substance
-    let color: Color?
 
     var body: some View {
         NavigationLink {
             SubstanceScreen(substance: substance)
         } label: {
             VStack(alignment: .leading) {
-                HStack(spacing: 5) {
-                    if let colorUnwrap = color {
-                        Image(systemName: "circle.fill")
-                            .font(.title2)
-                            .foregroundColor(colorUnwrap)
-                    }
-                    VStack(alignment: .leading) {
-                        Text(substance.name).font(.headline)
-                        let commonNames = substance.commonNames.joined(separator: ", ")
-                        if !commonNames.isEmpty {
-                            Text(commonNames).font(.subheadline).foregroundColor(.secondary)
-                        }
-                    }
+                Text(substance.name).font(.headline)
+                let commonNames = substance.commonNames.joined(separator: ", ")
+                if !commonNames.isEmpty {
+                    Text(commonNames).font(.subheadline).foregroundColor(.secondary)
                 }
                 Spacer().frame(height: 5)
                 WrappingHStack(
@@ -72,10 +62,7 @@ struct Chip: View {
 struct SearchSubstanceRow_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            SearchSubstanceRow(
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                color: nil
-            )
+            SearchSubstanceRow(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
         }.listStyle(.plain)
     }
 }
