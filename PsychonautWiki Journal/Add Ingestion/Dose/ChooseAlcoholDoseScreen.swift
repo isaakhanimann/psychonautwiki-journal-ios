@@ -46,7 +46,7 @@ struct ChooseAlcoholDoseScreen: View {
     }
 
     private var suggestedNote: String {
-        "\(Int(drinkAmountInDL)) dL with \(Int(alcoholContentInPercent))% Alcohol"
+        "\(drinkAmountInDL.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) dL with \(alcoholContentInPercent.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2))% Alcohol"
     }
 
     var body: some View {
@@ -106,6 +106,24 @@ struct ChooseAlcoholDoseScreen: View {
         }
     }
 
+    struct Preset: Identifiable, Hashable {
+        let id = UUID()
+        let title: String
+        let drinkAmountInDL: Double
+        let alcoholContentInPercent: Double
+    }
+
+    private static let presets = [
+        Preset(title: "1 shot (40%)", drinkAmountInDL: 0.44, alcoholContentInPercent: 40),
+        Preset(title: "2 shots (40%)", drinkAmountInDL: 0.88, alcoholContentInPercent: 40),
+        Preset(title: "3.3 dL beer (5%)", drinkAmountInDL: 3.3, alcoholContentInPercent: 5),
+        Preset(title: "5 dL beer (5%)", drinkAmountInDL: 5, alcoholContentInPercent: 5),
+        Preset(title: "Small glass of wine (1 dL, 12%)", drinkAmountInDL: 1, alcoholContentInPercent: 12),
+        Preset(title: "Big glass of wine (2 dL, 12%)", drinkAmountInDL: 2, alcoholContentInPercent: 12)
+    ]
+
+    @State private var presetSelection = presets.first!
+
     private var screen: some View {
         Form {
             Section("Ingested Alcohol Amount") {
@@ -118,6 +136,17 @@ struct ChooseAlcoholDoseScreen: View {
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
                 unknownDoseLink
+            }
+            Section("Presets") {
+                ForEach(ChooseAlcoholDoseScreen.presets) { preset in
+                    Button(preset.title) {
+                        alcoholContentInPercent = preset.alcoholContentInPercent
+                        drinkAmountInDL = preset.drinkAmountInDL
+                    }
+                }
+            }.onChange(of: presetSelection) { preset in
+                drinkAmountInDL = preset.drinkAmountInDL
+                alcoholContentInPercent = preset.alcoholContentInPercent
             }
             Section {
                 VStack {
@@ -180,14 +209,6 @@ struct ChooseAlcoholDoseScreen: View {
                         alcoholContentInPercentText = newValue.formatted()
                     }
                 }
-                Button("Average Beer") {
-                    alcoholContentInPercent = 5                }
-                Button("Average Wine") {
-                    alcoholContentInPercent = 12
-                }
-                Button("Average Spirit") {
-                    alcoholContentInPercent = 40
-                }
             }
             if let remark = alcohol.dosageRemark {
                 Text(remark)
@@ -202,6 +223,6 @@ struct ChooseAlcoholDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ChooseAlcoholDoseScreen(dismiss: {})
-        }
+        }.headerProminence(.increased)
     }
 }
