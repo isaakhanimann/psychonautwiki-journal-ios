@@ -61,7 +61,7 @@ struct RouteItemView: View {
             if let numDotsUnwrap = routeItem.numDots, !isHidingDosageDots {
                 DotRows(numDots: numDotsUnwrap)
             }
-        }.font(.headline)
+        }.font(.subheadline)
     }
 }
 
