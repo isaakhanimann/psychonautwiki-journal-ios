@@ -82,7 +82,7 @@ struct SettingsContent: View {
                 }
                 Section("Communication") {
                     if #available(iOS 16.0, *) {
-                        ShareLink("Share With a Friend", item: URL(string: "https://isaakhanimann.github.io")!)
+                        ShareLink("Share With a Friend", item: URL(string: "https://psychonautwiki.org/wiki/PsychonautWiki_Journal")!)
                     }
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
