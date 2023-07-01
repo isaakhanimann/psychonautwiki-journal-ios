@@ -30,6 +30,7 @@ struct ShareScreen: View {
         }
         .font(.headline)
         .navigationTitle("Share App")
+        .dismissWhenTabTapped()
     }
 }
 
@@ -42,5 +43,6 @@ struct ShareScreen_Previews: PreviewProvider {
             ShareScreen()
                 .headerProminence(.increased)
         }
+        .environmentObject(TabBarObserver())
     }
 }

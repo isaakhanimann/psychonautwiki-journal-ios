@@ -199,6 +199,7 @@
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
 		EAA9C3722A50690C00869E5A /* ToleranceChart-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */; };
 		EAA9C3752A50762500869E5A /* TimeRangePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3742A50762500869E5A /* TimeRangePicker.swift */; };
+		EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -502,6 +503,7 @@
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
 		EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToleranceChart-ViewModel.swift"; sourceTree = "<group>"; };
 		EAA9C3742A50762500869E5A /* TimeRangePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRangePicker.swift; sourceTree = "<group>"; };
+		EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartScreen.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 				EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */,
 				EAA9C36D2A50679100869E5A /* ToleranceType.swift */,
 				EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */,
+				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
 			);
 			path = Tolerance;
 			sourceTree = "<group>";
@@ -1695,6 +1698,7 @@
 				EA48F85F29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift in Sources */,
 				EA418A39296CEEBD00DEA663 /* Authenticator.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* FinishIngestionScreen.swift in Sources */,
+				EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,

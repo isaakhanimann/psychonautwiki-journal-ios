@@ -16,25 +16,26 @@
 
 import SwiftUI
 
-struct ShareAndroidAppScreen: View {
+struct ToleranceChartScreen: View {
+
+    @State private var sinceDate = Date().addingTimeInterval(-3*30*24*60*60)
+
     var body: some View {
         List {
-            let playStoreLink = "https://play.google.com/store/apps/details?id=com.isaakhanimann.journal"
-            QRCodeView(url: playStoreLink)
-            if #available(iOS 16.0, *) {
-                ShareLink("Share play store link", item: URL(string: playStoreLink)!)
-            }
+            DatePicker(
+                    "Start Date",
+                    selection: $sinceDate,
+                    displayedComponents: [.date]
+            )
         }
-        .navigationTitle("Android App")
-        .dismissWhenTabTapped()
+        .navigationTitle("Tolerance")
     }
 }
 
-struct ShareAndroidAppScreen_Previews: PreviewProvider {
+struct ToleranceChartScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShareAndroidAppScreen()
+            ToleranceChartScreen()
         }
-        .environmentObject(TabBarObserver())
     }
 }

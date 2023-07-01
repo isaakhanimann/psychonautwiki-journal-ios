@@ -24,7 +24,9 @@ struct ShareiOSAppScreen: View {
             if #available(iOS 16.0, *) {
                 ShareLink("Share app store link", item: URL(string: appStoreLink)!)
             }
-        }.navigationTitle("iOS App")
+        }
+        .navigationTitle("iOS App")
+        .dismissWhenTabTapped()
     }
 }
 
@@ -33,5 +35,6 @@ struct ShareiOSAppScreen_Previews: PreviewProvider {
         NavigationView {
             ShareiOSAppScreen()
         }
+        .environmentObject(TabBarObserver())
     }
 }
