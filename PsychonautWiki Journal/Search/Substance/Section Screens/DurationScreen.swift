@@ -100,6 +100,17 @@ struct DurationScreen: View {
         .onChange(of: stomachFullness) { _ in
             updateModel()
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    List {
+                        TimelineExplanationTexts()
+                    }.navigationTitle("Timeline Info")
+                } label: {
+                    Label("Info", systemImage: "info.circle")
+                }
+            }
+        }
         .navigationTitle("\(substanceName) Duration")
         .dismissWhenTabTapped()
     }
@@ -139,7 +150,9 @@ struct DurationScreen: View {
 
 struct DurationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
-        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
+        NavigationView {
+            let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
+            DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
+        }
     }
 }
