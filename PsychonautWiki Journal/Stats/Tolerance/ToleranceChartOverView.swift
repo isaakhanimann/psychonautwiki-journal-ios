@@ -15,24 +15,72 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import Charts
 
 @available(iOS 16, *)
 struct ToleranceChartOverView: View {
-
+    
     let toleranceWindows: [ToleranceWindow]
+
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack(alignment: .leading) {
             Text("Current Tolerance")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("High tolerance to ... and light tolerance to ...")
+            title
                 .font(.title2.bold())
-            ToleranceChart(toleranceWindows: toleranceWindows)
-                .chartLegend(.hidden)
-                .chartXAxis(.hidden)
-                .chartYAxis(.hidden)
-                .frame(height: 100)
+            Chart {
+                ForEach(toleranceWindows) { window in
+                    BarMark(
+                        xStart: .value("Start Time", window.start),
+                        xEnd: .value("End Time", window.end),
+                        y: .value("Substance", window.substanceName)
+                    )
+                    .foregroundStyle(window.barColor)
+                }
+                RuleMark(x: .value("Current Time", Date.now))
+                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+            }
+            .chartLegend(.hidden)
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .frame(height: 100)
         }
+    }
+
+    var title: Text {
+        let fullToleranceNames = getSubstanceNamesWithFullTolerance()
+        let halfToleranceNames = getSubstanceNamesWithHalfTolerance()
+        if fullToleranceNames.isEmpty {
+            if halfToleranceNames.isEmpty {
+                return Text("Zero tolerance")
+            } else {
+                return Text("Light tolerance to ") + Text(halfToleranceNames, format: .list(type: .and))
+            }
+        } else {
+            if halfToleranceNames.isEmpty {
+                return Text("High tolerance to ") + Text(fullToleranceNames, format: .list(type: .and))
+            } else {
+                return Text("High tolerance to ") + Text(fullToleranceNames, format: .list(type: .and)) + Text(" and light tolerance to ") + Text(halfToleranceNames, format: .list(type: .and))
+            }
+        }
+    }
+    
+    private func getSubstanceNamesWithFullTolerance() -> [String] {
+        toleranceWindows.filter { window in
+            window.toleranceType == .full && window.start <= Date.now && window.end >= Date.now
+        }.map { window in
+            window.substanceName
+        }.uniqued()
+    }
+    
+    private func getSubstanceNamesWithHalfTolerance() -> [String] {
+        toleranceWindows.filter { window in
+            window.toleranceType == .half && window.start <= Date.now && window.end >= Date.now
+        }.map { window in
+            window.substanceName
+        }.uniqued()
     }
 }

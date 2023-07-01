@@ -21,15 +21,20 @@ import Charts
 struct ToleranceChart: View {
 
     let toleranceWindows: [ToleranceWindow]
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        Chart(toleranceWindows) { window in
-            BarMark(
-                xStart: .value("Start Time", window.start),
-                xEnd: .value("End Time", window.end),
-                y: .value("Substance", window.substanceName)
-            )
-            .foregroundStyle(window.barColor)
+        Chart {
+            ForEach(toleranceWindows) { window in
+                BarMark(
+                    xStart: .value("Start Time", window.start),
+                    xEnd: .value("End Time", window.end),
+                    y: .value("Substance", window.substanceName)
+                )
+                .foregroundStyle(window.barColor)
+            }
+            RuleMark(x: .value("Current Time", Date.now))
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
         }
     }
 }
