@@ -221,6 +221,13 @@ struct StatsScreenContent: View {
         List {
             Section {
                 NavigationLink {
+                    ToleranceChartScreen()
+                } label: {
+                    Text("Tolerance")
+                }
+            }
+            Section {
+                NavigationLink {
                     ExperienceDetailsScreen(experienceData: experienceData)
                 } label: {
                     ExperienceOverview(experienceData: experienceData)

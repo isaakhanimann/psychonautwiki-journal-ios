@@ -197,7 +197,7 @@
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
-		EAA9C3722A50690C00869E5A /* ToleranceChart-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */; };
+		EAA9C3722A50690C00869E5A /* ToleranceChartScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChartScreen-ViewModel.swift */; };
 		EAA9C3752A50762500869E5A /* TimeRangePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3742A50762500869E5A /* TimeRangePicker.swift */; };
 		EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
@@ -501,7 +501,7 @@
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
-		EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToleranceChart-ViewModel.swift"; sourceTree = "<group>"; };
+		EAA9C3712A50690C00869E5A /* ToleranceChartScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToleranceChartScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EAA9C3742A50762500869E5A /* TimeRangePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRangePicker.swift; sourceTree = "<group>"; };
 		EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartScreen.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
@@ -957,11 +957,11 @@
 		EA6D44EB2A50470000BF2E8A /* Tolerance */ = {
 			isa = PBXGroup;
 			children = (
+				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
+				EAA9C3712A50690C00869E5A /* ToleranceChartScreen-ViewModel.swift */,
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
-				EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */,
 				EAA9C36D2A50679100869E5A /* ToleranceType.swift */,
 				EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */,
-				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
 			);
 			path = Tolerance;
 			sourceTree = "<group>";
@@ -1729,7 +1729,7 @@
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
-				EAA9C3722A50690C00869E5A /* ToleranceChart-ViewModel.swift in Sources */,
+				EAA9C3722A50690C00869E5A /* ToleranceChartScreen-ViewModel.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
 				EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */,

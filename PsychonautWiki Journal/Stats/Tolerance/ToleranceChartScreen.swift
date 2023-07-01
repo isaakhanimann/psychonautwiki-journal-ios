@@ -16,9 +16,22 @@
 
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct ToleranceChartScreen: View {
 
     @State private var sinceDate = Date().addingTimeInterval(-3*30*24*60*60)
+    @StateObject private var viewModel = ViewModel()
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
+    ) var ingestions: FetchedResults<Ingestion>
+
+    @FetchRequest(
+        sortDescriptors: []
+    ) var substanceCompanions: FetchedResults<SubstanceCompanion>
+
+    @State private var experienceData: ExperienceData? = nil
+    @State private var ingestionData: IngestionData? = nil
 
     var body: some View {
         List {
@@ -27,15 +40,24 @@ struct ToleranceChartScreen: View {
                     selection: $sinceDate,
                     displayedComponents: [.date]
             )
+            ToleranceChart(toleranceWindows: viewModel.toleranceWindows)
+                .frame(minHeight: 500)
         }
         .navigationTitle("Tolerance")
+        .onAppear(perform: calculateScreen)
+        .onChange(of: ingestions.count) { _ in
+            calculateScreen()
+        }
+        .onChange(of: sinceDate) { _ in
+            calculateScreen()
+        }
+    }
+
+    func calculateScreen() {
+        let relevantIngestions = ingestions.prefix { ing in
+            ing.timeUnwrapped > sinceDate
+        }
+        viewModel.setToleranceWindows(from: Array(relevantIngestions), substanceCompanions: Array(substanceCompanions))
     }
 }
 
-struct ToleranceChartScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ToleranceChartScreen()
-        }
-    }
-}
