@@ -151,7 +151,7 @@ struct SettingsContent: View {
                         }
                     )
                 }
-                Section {
+                Section("UI") {
                     NavigationLink {
                         EditColorsScreen()
                     } label: {
