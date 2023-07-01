@@ -25,28 +25,30 @@ struct ToleranceChartOverView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Current Tolerance")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            title
-                .font(.title2.bold())
-            Chart {
-                ForEach(toleranceWindows) { window in
-                    BarMark(
-                        xStart: .value("Start Time", window.start),
-                        xEnd: .value("End Time", window.end),
-                        y: .value("Substance", window.substanceName)
-                    )
-                    .foregroundStyle(window.barColor)
+        TimelineView(.everyMinute) { context in
+            VStack(alignment: .leading) {
+                Text("Current Tolerance")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                title
+                    .font(.title2.bold())
+                Chart {
+                    ForEach(toleranceWindows) { window in
+                        BarMark(
+                            xStart: .value("Start Time", window.start),
+                            xEnd: .value("End Time", window.end),
+                            y: .value("Substance", window.substanceName)
+                        )
+                        .foregroundStyle(window.barColor)
+                    }
+                    RuleMark(x: .value("Current Time", context.date))
+                        .foregroundStyle(colorScheme == .dark ? .white : .black)
                 }
-                RuleMark(x: .value("Current Time", Date.now))
-                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+                .chartLegend(.hidden)
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
+                .frame(height: 100)
             }
-            .chartLegend(.hidden)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: 100)
         }
     }
 

@@ -19,22 +19,24 @@ import Charts
 
 @available(iOS 16.0, *)
 struct ToleranceChart: View {
-
+    
     let toleranceWindows: [ToleranceWindow]
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
-        Chart {
-            ForEach(toleranceWindows) { window in
-                BarMark(
-                    xStart: .value("Start Time", window.start),
-                    xEnd: .value("End Time", window.end),
-                    y: .value("Substance", window.substanceName)
-                )
-                .foregroundStyle(window.barColor)
+        TimelineView(.everyMinute) { context in
+            Chart {
+                ForEach(toleranceWindows) { window in
+                    BarMark(
+                        xStart: .value("Start Time", window.start),
+                        xEnd: .value("End Time", window.end),
+                        y: .value("Substance", window.substanceName)
+                    )
+                    .foregroundStyle(window.barColor)
+                }
+                RuleMark(x: .value("Current Time", context.date))
+                    .foregroundStyle(colorScheme == .dark ? .white : .black)
             }
-            RuleMark(x: .value("Current Time", Date.now))
-                .foregroundStyle(colorScheme == .dark ? .white : .black)
         }
     }
 }
@@ -63,7 +65,7 @@ struct ToleranceChart_Previews: PreviewProvider {
                             end: getDate(year: 2023, month: 2, day: 30)!,
                             toleranceType: .half,
                             substanceColor: .blue)
-            ])
-            .padding(.horizontal)
+        ])
+        .padding(.horizontal)
     }
 }
