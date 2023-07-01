@@ -184,6 +184,7 @@
 		EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */; };
 		EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */; };
 		EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */; };
+		EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -481,6 +482,7 @@
 		EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareiOSAppScreen.swift; sourceTree = "<group>"; };
 		EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAndroidAppScreen.swift; sourceTree = "<group>"; };
+		EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChart.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -890,6 +892,7 @@
 		EA60482F2A1623EC005C6A4B /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				EA6D44EB2A50470000BF2E8A /* Tolerance */,
 				EA41C630295F88F0000DA021 /* Experience Charts */,
 				EA418A052968D62F00DEA663 /* Ingestion Charts */,
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
@@ -939,6 +942,14 @@
 				EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		EA6D44EB2A50470000BF2E8A /* Tolerance */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
+			);
+			path = Tolerance;
 			sourceTree = "<group>";
 		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
@@ -1593,6 +1604,7 @@
 				EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EA55CEBE2A3F298E00FE1A44 /* ColorRectangle.swift in Sources */,
+				EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */,
 				EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */,
 				EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,

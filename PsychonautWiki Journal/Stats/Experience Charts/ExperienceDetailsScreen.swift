@@ -133,5 +133,6 @@ struct ExperienceDetails_Previews: PreviewProvider {
         NavigationView {
             ExperienceDetailsScreen(experienceData: .mock1)
         }
+        .environmentObject(TabBarObserver())
     }
 }
