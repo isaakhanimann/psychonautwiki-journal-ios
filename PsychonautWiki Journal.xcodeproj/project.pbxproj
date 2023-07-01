@@ -180,6 +180,10 @@
 		EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60483C2A188FFB005C6A4B /* SprayModel.swift */; };
 		EA60483F2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */; };
 		EA6048452A25C28F005C6A4B /* FabLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048442A25C28F005C6A4B /* FabLabelStyle.swift */; };
+		EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */; };
+		EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */; };
+		EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */; };
+		EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
@@ -474,6 +478,10 @@
 		EA60483C2A188FFB005C6A4B /* SprayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprayModel.swift; sourceTree = "<group>"; };
 		EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChasingTheDragonSection.swift; sourceTree = "<group>"; };
 		EA6048442A25C28F005C6A4B /* FabLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabLabelStyle.swift; sourceTree = "<group>"; };
+		EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreen.swift; sourceTree = "<group>"; };
+		EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareiOSAppScreen.swift; sourceTree = "<group>"; };
+		EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAndroidAppScreen.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -915,6 +923,26 @@
 			path = Fab;
 			sourceTree = "<group>";
 		};
+		EA6D44E12A4FF8B700BF2E8A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
+				EA6D44E42A4FFD7800BF2E8A /* Share */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EA6D44E42A4FFD7800BF2E8A /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */,
+				EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */,
+				EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */,
+				EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,9 +1117,9 @@
 			children = (
 				EA460D202763790C002EF80B /* FAQ */,
 				EA48F88629DD4FC2007DA8C5 /* Codables */,
+				EA6D44E12A4FF8B700BF2E8A /* Components */,
 				EAE4712B26CBA663009FB0EC /* SettingsScreen.swift */,
 				EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */,
-				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1506,6 +1534,7 @@
 				EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */,
 				EABD921C294276DC0073303A /* SummaryScreen.swift in Sources */,
 				EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */,
+				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
 				EA6048392A188BFF005C6A4B /* SprayCalculatorScreen-ViewModel.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
 				EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */,
@@ -1520,7 +1549,9 @@
 				EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */,
 				EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
+				EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */,
 				EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */,
+				EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */,
@@ -1536,6 +1567,7 @@
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
 				EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */,
+				EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */,
 				EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */,
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
 				EABD92042941C3C30073303A /* FullTimeline.swift in Sources */,
