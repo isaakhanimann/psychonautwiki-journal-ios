@@ -40,16 +40,6 @@ struct ToleranceChart_Previews: PreviewProvider {
         ToleranceChart(toleranceWindows: [
             ToleranceWindow(substanceName: "MDMA",
                             start: getDate(year: 2023, month: 2, day: 1)!,
-                            end: getDate(year: 2023, month: 3, day: 1)!,
-                            toleranceType: .full,
-                            substanceColor: .pink),
-            ToleranceWindow(substanceName: "MDMA",
-                            start: getDate(year: 2023, month: 3, day: 1)!,
-                            end: getDate(year: 2023, month: 4, day: 1)!,
-                            toleranceType: .half,
-                            substanceColor: .pink),
-            ToleranceWindow(substanceName: "MDMA",
-                            start: getDate(year: 2023, month: 3, day: 1)!,
                             end: getDate(year: 2023, month: 4, day: 1)!,
                             toleranceType: .full,
                             substanceColor: .pink),
@@ -70,14 +60,5 @@ struct ToleranceChart_Previews: PreviewProvider {
                             substanceColor: .blue)
             ])
             .padding(.horizontal)
-    }
-
-    private static func getDate(year: Int, month: Int, day: Int) -> Date? {
-        let calendar = Calendar.current
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        dateComponents.day = day
-        return calendar.date(from: dateComponents)
     }
 }

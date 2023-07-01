@@ -41,6 +41,15 @@ func getDateFromMillis(millis: UInt64) -> Date {
     return Date(timeIntervalSince1970: secondsSince1970)
 }
 
+func getDate(year: Int, month: Int, day: Int) -> Date? {
+    let calendar = Calendar.current
+    var dateComponents = DateComponents()
+    dateComponents.year = year
+    dateComponents.month = month
+    dateComponents.day = day
+    return calendar.date(from: dateComponents)
+}
+
 func getDouble(from text: String) -> Double? {
     let formatter = NumberFormatter()
     formatter.locale = Locale.current

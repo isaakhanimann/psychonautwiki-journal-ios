@@ -20,7 +20,7 @@ import SwiftUI
 struct ToleranceChartScreen: View {
 
     @State private var sinceDate = Date().addingTimeInterval(-3*30*24*60*60)
-    @StateObject private var viewModel = ViewModel()
+    @State private var toleranceWindows: [ToleranceWindow] = []
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
@@ -40,8 +40,7 @@ struct ToleranceChartScreen: View {
                     selection: $sinceDate,
                     displayedComponents: [.date]
             )
-            ToleranceChart(toleranceWindows: viewModel.toleranceWindows)
-                .frame(minHeight: 500)
+            ToleranceChart(toleranceWindows: toleranceWindows)
         }
         .padding(.all)
         .navigationTitle("Tolerance")
@@ -59,7 +58,6 @@ struct ToleranceChartScreen: View {
         let relevantIngestions = ingestions.prefix { ing in
             ing.timeUnwrapped > sinceDate
         }
-        viewModel.setToleranceWindows(from: Array(relevantIngestions), substanceCompanions: Array(substanceCompanions))
+        toleranceWindows = ToleranceChartCalculator.getToleranceWindows(from: Array(relevantIngestions), substanceCompanions: Array(substanceCompanions))
     }
 }
-

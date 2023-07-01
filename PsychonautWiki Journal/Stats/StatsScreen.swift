@@ -28,8 +28,13 @@ struct StatsScreen: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
     ) var experiences: FetchedResults<Experience>
 
+    @FetchRequest(
+        sortDescriptors: []
+    ) var substanceCompanions: FetchedResults<SubstanceCompanion>
+
     @State private var experienceData: ExperienceData? = nil
     @State private var ingestionData: IngestionData? = nil
+    @State private var toleranceWindows: [ToleranceWindow] = []
 
     var body: some View {
         NavigationView {
@@ -37,7 +42,8 @@ struct StatsScreen: View {
                 if let experienceData, let ingestionData {
                     StatsScreenContent(
                         experienceData: experienceData,
-                        ingestionData: ingestionData
+                        ingestionData: ingestionData,
+                        toleranceWindows: toleranceWindows
                     )
                 } else {
                     ProgressView().task {
@@ -67,6 +73,14 @@ struct StatsScreen: View {
                 getColor(for: substanceName).swiftUIColor
             }
         )
+        let ingestionsLast90Days = ingestions.prefix { ing in
+            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 90
+        }
+        toleranceWindows = ToleranceChartCalculator.getToleranceWindows(
+            from: Array(ingestionsLast90Days),
+            substanceCompanions: Array(substanceCompanions)
+        )
+
     }
 
     private func getSortedIngestionCountsLast30Days() -> [IngestionCount] {
@@ -216,6 +230,7 @@ struct StatsScreenContent: View {
 
     let experienceData: ExperienceData
     let ingestionData: IngestionData
+    let toleranceWindows: [ToleranceWindow]
 
     var body: some View {
         List {
@@ -223,7 +238,7 @@ struct StatsScreenContent: View {
                 NavigationLink {
                     ToleranceChartScreen()
                 } label: {
-                    Text("Tolerance")
+                    ToleranceChartOverView(toleranceWindows: toleranceWindows)
                 }
             }
             Section {
@@ -263,7 +278,29 @@ struct StatsScreenContent_Previews: PreviewProvider {
         NavigationView {
             StatsScreenContent(
                 experienceData: .mock1,
-                ingestionData: .mock1
+                ingestionData: .mock1,
+                toleranceWindows: [
+                    ToleranceWindow(substanceName: "MDMA",
+                                    start: getDate(year: 2023, month: 2, day: 1)!,
+                                    end: getDate(year: 2023, month: 4, day: 1)!,
+                                    toleranceType: .full,
+                                    substanceColor: .pink),
+                    ToleranceWindow(substanceName: "MDMA",
+                                    start: getDate(year: 2023, month: 4, day: 1)!,
+                                    end: getDate(year: 2023, month: 5, day: 1)!,
+                                    toleranceType: .half,
+                                    substanceColor: .pink),
+                    ToleranceWindow(substanceName: "Ketamine",
+                                    start: getDate(year: 2023, month: 2, day: 10)!,
+                                    end: getDate(year: 2023, month: 2, day: 20)!,
+                                    toleranceType: .full,
+                                    substanceColor: .blue),
+                    ToleranceWindow(substanceName: "Ketamine",
+                                    start: getDate(year: 2023, month: 2, day: 20)!,
+                                    end: getDate(year: 2023, month: 2, day: 30)!,
+                                    toleranceType: .half,
+                                    substanceColor: .blue)
+                    ]
             )
         }
     }
