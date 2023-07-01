@@ -34,7 +34,7 @@ struct ToleranceChartScreen: View {
     @State private var ingestionData: IngestionData? = nil
 
     var body: some View {
-        List {
+        VStack {
             DatePicker(
                     "Start Date",
                     selection: $sinceDate,
@@ -43,6 +43,7 @@ struct ToleranceChartScreen: View {
             ToleranceChart(toleranceWindows: viewModel.toleranceWindows)
                 .frame(minHeight: 500)
         }
+        .padding(.all)
         .navigationTitle("Tolerance")
         .onAppear(perform: calculateScreen)
         .onChange(of: ingestions.count) { _ in
@@ -51,6 +52,7 @@ struct ToleranceChartScreen: View {
         .onChange(of: sinceDate) { _ in
             calculateScreen()
         }
+        .dismissWhenTabTapped()
     }
 
     func calculateScreen() {
