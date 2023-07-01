@@ -31,7 +31,10 @@ struct SearchScreen: View {
                     toggleCategory: { cat in
                         viewModel.toggleCategory(category: cat)
                     },
-                    selectedCategories: viewModel.selectedCategories
+                    selectedCategories: viewModel.selectedCategories,
+                    clearCategories: {
+                        viewModel.clearCategories()
+                    }
                 )
                 List {
                     ForEach(viewModel.filteredSubstances) { sub in

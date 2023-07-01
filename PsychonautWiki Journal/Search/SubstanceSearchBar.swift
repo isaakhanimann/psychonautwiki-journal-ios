@@ -23,6 +23,7 @@ struct SubstanceSearchBar: View {
     let allCategories: [String]
     let toggleCategory: (String) -> Void
     let selectedCategories: [String]
+    let clearCategories: () -> Void
 
     @Environment(\.colorScheme) var colorScheme
     private let horizontalPadding: CGFloat = 16
@@ -79,6 +80,7 @@ struct SubstanceSearchBar: View {
                 Button("Cancel") {
                     withAnimation {
                         text = ""
+                        clearCategories()
                         isFocused.wrappedValue = false
                     }
                 }.padding(.horizontal, horizontalPadding)
@@ -107,7 +109,8 @@ struct SubstanceSearchBar_Previews: PreviewProvider {
                 isFocused: $isSearchFocused,
                 allCategories: ["psychedelic", "opioid"],
                 toggleCategory: { _ in },
-                selectedCategories: []
+                selectedCategories: [],
+                clearCategories: {}
             )
         }
     }
