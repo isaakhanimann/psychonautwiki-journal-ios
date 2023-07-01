@@ -42,7 +42,16 @@ struct LiveActivityButton: View {
                     }
                 }
             } else if UIDevice.current.userInterfaceIdiom == .phone {
-                Text("Enable Live Activities in Settings").foregroundColor(.secondary)
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    Button {
+                        Task {
+                            await UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Label("Enable Live Activities", systemImage: "gearshape")
+                    }
+
+                }
             }
         }
         .task {
