@@ -42,7 +42,7 @@ struct DurationScreen: View {
                     if let timelineModel {
                         EffectTimeline(timelineModel: timelineModel)
                     }
-                    TimelineDisclaimers(isShowingOralDisclaimer: durationInfos.contains(where: {$0.route == .oral}))
+                    Text(TimelineDisclaimers.heavyDose).font(.footnote)
                 }
                 ForEach(durationInfos, id: \.route) { info in
                     let isRouteHidden = hiddenRoutes.contains(info.route)
@@ -54,15 +54,24 @@ struct DurationScreen: View {
                         VStack(alignment: .leading) {
                             Text(info.route.rawValue.localizedCapitalized).font(.headline)
                             OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
+                            Text(TimelineDisclaimers.capsule).font(.footnote)
                             if info.route == .oral {
                                 Spacer().frame(height: 5)
-                                Text("Stomach Fullness:").font(.subheadline.weight(.bold))
-                                Picker("Stomach Fullness", selection: $stomachFullness) {
-                                    ForEach(StomachFullness.allCases) { option in
-                                        Text(option.text)
-                                    }
-                                }.pickerStyle(.segmented)
-                                Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
+                                VStack(alignment: .leading) {
+                                    Text("Stomach Fullness").font(.subheadline.weight(.bold))
+                                    Picker("Stomach Fullness", selection: $stomachFullness) {
+                                        ForEach(StomachFullness.allCases) { option in
+                                            Text(option.text)
+                                        }
+                                    }.pickerStyle(.segmented)
+                                    Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 8)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(uiColor: UIColor.systemGray6))
+                                )
                             }
                         }
                     }

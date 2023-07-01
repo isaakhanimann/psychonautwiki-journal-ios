@@ -20,9 +20,9 @@ struct ExplainExperienceSectionScreen: View {
     var body: some View {
         List {
             Section("Caution") {
-                Text(HEAVY_DOSE_DISCLAIMER)
-                Text(FULL_STOMACH_DISCLAIMER)
-                Text(CAPSULE_DISCLAIMER)
+                Text(TimelineDisclaimers.heavyDose)
+                Text(TimelineDisclaimers.fullStomach)
+                Text(TimelineDisclaimers.capsule)
             }
             Section("Timeline") {
                 Text("The timeline shows the effect of ingestions over time.")

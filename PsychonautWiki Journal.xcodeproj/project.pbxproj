@@ -281,7 +281,6 @@
 		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EAE480912973DE3600B600EF /* ExperienceScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */; };
 		EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE480922973EF5900B600EF /* CumulativeDose.swift */; };
-		EAE4809529740E8300B600EF /* TimelineDisclaimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */; };
 		EAE48097297433D100B600EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE48096297433D100B600EF /* LaunchScreen.storyboard */; };
 		EAE4809929743ACE00B600EF /* LaunchScreenEye.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE4809829743ACE00B600EF /* LaunchScreenEye.png */; };
 		EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76C8F27D7A5A000945587 /* AcknowledgeInteractionsView.swift */; };
@@ -583,7 +582,6 @@
 		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
 		EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperienceScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EAE480922973EF5900B600EF /* CumulativeDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDose.swift; sourceTree = "<group>"; };
-		EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDisclaimers.swift; sourceTree = "<group>"; };
 		EAE48096297433D100B600EF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAE4809829743ACE00B600EF /* LaunchScreenEye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenEye.png; sourceTree = "<group>"; };
 		EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PsychonautWiki Journal.entitlements"; sourceTree = "<group>"; };
@@ -1306,7 +1304,6 @@
 				EA48F85C29DB1894007DA8C5 /* Rating */,
 				EA55CEB72A3F28D700FE1A44 /* Ingestion */,
 				EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */,
-				EAE4809429740E8300B600EF /* TimelineDisclaimers.swift */,
 				EAE480922973EF5900B600EF /* CumulativeDose.swift */,
 				EA4189F02963219100DEA663 /* LiveActivityButton.swift */,
 				EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */,
@@ -1663,7 +1660,6 @@
 				EA418A2B2969C36100DEA663 /* ChooseLocationScreen.swift in Sources */,
 				EA48F85F29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift in Sources */,
 				EA418A39296CEEBD00DEA663 /* Authenticator.swift in Sources */,
-				EAE4809529740E8300B600EF /* TimelineDisclaimers.swift in Sources */,
 				EAE4722126CBA664009FB0EC /* FinishIngestionScreen.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
