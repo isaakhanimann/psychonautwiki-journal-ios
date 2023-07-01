@@ -24,7 +24,6 @@ extension FinishIngestionScreen {
 
         @Published var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         @Published var selectedTime = Date()
-        @Published var isNowSelected = true
         @Published var enteredNote = ""
         @Published var enteredTitle = ""
         @Published var selectedStomachFullness = StomachFullness.empty
@@ -121,11 +120,7 @@ extension FinishIngestionScreen {
                 } else {
                     let newExperience = Experience(context: context)
                     newExperience.creationDate = Date()
-                    if self.isNowSelected {
-                        newExperience.sortDate = Date()
-                    } else {
-                        newExperience.sortDate = self.selectedTime
-                    }
+                    newExperience.sortDate = self.selectedTime
                     var title = self.selectedTime.asDateString
                     if !self.enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
                         title = self.enteredTitle
@@ -189,11 +184,7 @@ extension FinishIngestionScreen {
         ) {
             let ingestion = Ingestion(context: context)
             ingestion.identifier = UUID()
-            if isNowSelected {
-                ingestion.time = Date()
-            } else {
-                ingestion.time = selectedTime
-            }
+            ingestion.time = selectedTime
             ingestion.creationDate = Date()
             ingestion.dose = dose ?? 0
             ingestion.units = units

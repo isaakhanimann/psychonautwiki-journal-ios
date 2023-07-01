@@ -94,17 +94,14 @@ struct FinishIngestionScreen: View {
 
     var screen: some View {
         Form {
-            Section("Ingestion") {
-                Toggle("Log Now", isOn: $viewModel.isNowSelected.animation()).tint(.accentColor)
-                if !viewModel.isNowSelected {
-                    DatePicker(
-                        "Ingestion Time",
-                        selection: $viewModel.selectedTime,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .labelsHidden()
-                    .datePickerStyle(.wheel)
-                }
+            Section {
+                DatePicker(
+                    "Ingestion Time",
+                    selection: $viewModel.selectedTime,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .labelsHidden()
+                .datePickerStyle(.wheel)
                 if viewModel.experiencesWithinLargerRange.count>0 {
                     NavigationLink {
                         ExperiencePickerScreen(
@@ -131,6 +128,16 @@ struct FinishIngestionScreen: View {
                         Label("Add Note", systemImage: "plus")
                     } else {
                         Label(viewModel.enteredNote, systemImage: "pencil").lineLimit(1)
+                    }
+                }
+            } header: {
+                HStack {
+                    Text("Ingestion")
+                    Spacer()
+                    Button("Reset time") {
+                        withAnimation {
+                            viewModel.selectedTime = Date.now
+                        }
                     }
                 }
             }
