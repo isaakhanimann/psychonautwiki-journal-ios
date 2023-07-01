@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
+import Foundation
 
 enum TimeRange {
     case last30Days
@@ -22,16 +22,5 @@ enum TimeRange {
     case years
 }
 
-struct TimeRangePicker: View {
-    @Binding var value: TimeRange
 
-    var body: some View {
-        Picker("Time Range", selection: $value.animation(.easeInOut)) {
-            Text("30 Days").tag(TimeRange.last30Days)
-            Text("12 Months").tag(TimeRange.last12Months)
-            Text("Years").tag(TimeRange.years)
-        }
-        .pickerStyle(.segmented)
-    }
-}
 

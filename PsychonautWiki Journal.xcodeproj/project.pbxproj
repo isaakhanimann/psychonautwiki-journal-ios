@@ -102,7 +102,7 @@
 		EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */; };
 		EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */; };
 		EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */; };
-		EA41C62F295EB86C000DA021 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* Utils.swift */; };
+		EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* TimeRange.swift */; };
 		EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C631295F8921000DA021 /* DailyExperienceChart.swift */; };
 		EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */; };
 		EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */; };
@@ -197,6 +197,8 @@
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
+		EAA9C3722A50690C00869E5A /* ToleranceChart-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */; };
+		EAA9C3752A50762500869E5A /* TimeRangePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3742A50762500869E5A /* TimeRangePicker.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -402,7 +404,7 @@
 		EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDetailsScreen.swift; sourceTree = "<group>"; };
 		EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceOverview.swift; sourceTree = "<group>"; };
 		EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetailsScreen.swift; sourceTree = "<group>"; };
-		EA41C62E295EB86C000DA021 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		EA41C62E295EB86C000DA021 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		EA41C631295F8921000DA021 /* DailyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExperienceChart.swift; sourceTree = "<group>"; };
 		EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExperienceChart.swift; sourceTree = "<group>"; };
 		EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyExperienceChart.swift; sourceTree = "<group>"; };
@@ -498,6 +500,8 @@
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
+		EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToleranceChart-ViewModel.swift"; sourceTree = "<group>"; };
+		EAA9C3742A50762500869E5A /* TimeRangePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRangePicker.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -899,9 +903,9 @@
 				EA6D44EB2A50470000BF2E8A /* Tolerance */,
 				EA41C630295F88F0000DA021 /* Experience Charts */,
 				EA418A052968D62F00DEA663 /* Ingestion Charts */,
+				EAA9C3732A50759100869E5A /* TimeRange */,
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
 				EA4189F2296343EC00DEA663 /* IngestionsForSubstanceScreen.swift */,
-				EA41C62E295EB86C000DA021 /* Utils.swift */,
 				EA41C624295EAFD8000DA021 /* Data.swift */,
 			);
 			path = Stats;
@@ -952,6 +956,7 @@
 			isa = PBXGroup;
 			children = (
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
+				EAA9C3712A50690C00869E5A /* ToleranceChart-ViewModel.swift */,
 				EAA9C36D2A50679100869E5A /* ToleranceType.swift */,
 				EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */,
 			);
@@ -1010,6 +1015,15 @@
 				EA085DCF29607229001638AC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAA9C3732A50759100869E5A /* TimeRange */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C62E295EB86C000DA021 /* TimeRange.swift */,
+				EAA9C3742A50762500869E5A /* TimeRangePicker.swift */,
+			);
+			path = TimeRange;
 			sourceTree = "<group>";
 		};
 		EAACB08B2947C4040050E002 /* Route */ = {
@@ -1697,9 +1711,10 @@
 				EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */,
 				EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */,
 				EA0CAAAF295473C900095A33 /* GraphicsContext-DrawDot.swift in Sources */,
+				EAA9C3752A50762500869E5A /* TimeRangePicker.swift in Sources */,
 				EA60483F2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift in Sources */,
 				EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */,
-				EA41C62F295EB86C000DA021 /* Utils.swift in Sources */,
+				EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
 				EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */,
@@ -1710,6 +1725,7 @@
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
+				EAA9C3722A50690C00869E5A /* ToleranceChart-ViewModel.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
 				EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */,
