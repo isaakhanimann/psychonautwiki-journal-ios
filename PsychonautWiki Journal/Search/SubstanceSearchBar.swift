@@ -37,6 +37,7 @@ struct SubstanceSearchBar: View {
                 )
                 .focused(isFocused)
                 .disableAutocorrection(true)
+                .submitLabel(.search)
                 if !text.isEmpty {
                     Image(systemName: "xmark.circle.fill")
                         .imageScale(.medium)
