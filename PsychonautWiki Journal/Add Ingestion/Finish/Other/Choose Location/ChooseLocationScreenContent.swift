@@ -145,9 +145,20 @@ struct ChooseLocationScreenContent: View {
                 }
             }
             if authorizationStatus != .authorizedWhenInUse {
-                Section {
-                    Text("The app does not have access to your location. Enable it in settings to add locations to your experiences automatically.")
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    Section {
+                        Button {
+                            Task {
+                                await UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Label("Enable Location Access", systemImage: "gearshape")
+                        }
+                    } footer: {
+                        Text("Enable location access in settings to add locations to your experiences automatically.")
+                    }
                 }
+
             }
         }
     }
