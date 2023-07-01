@@ -58,13 +58,13 @@ struct DurationScreen: View {
                             if info.route == .oral {
                                 Spacer().frame(height: 5)
                                 VStack(alignment: .leading) {
-                                    Text("Stomach Fullness").font(.subheadline.weight(.bold))
+                                    Text("Stomach Fullness").font(.subheadline.weight(.medium))
                                     Picker("Stomach Fullness", selection: $stomachFullness) {
                                         ForEach(StomachFullness.allCases) { option in
                                             Text(option.text)
                                         }
                                     }.pickerStyle(.segmented)
-                                    Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.")
+                                    Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.").font(.footnote)
                                 }
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 8)
