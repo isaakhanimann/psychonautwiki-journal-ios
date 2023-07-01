@@ -195,6 +195,8 @@
 		EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
 		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
+		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
+		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -494,6 +496,8 @@
 		EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getEverythingForEachLine.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
 		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
+		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -948,6 +952,8 @@
 			isa = PBXGroup;
 			children = (
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
+				EAA9C36D2A50679100869E5A /* ToleranceType.swift */,
+				EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */,
 			);
 			path = Tolerance;
 			sourceTree = "<group>";
@@ -1590,6 +1596,7 @@
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
 				EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */,
 				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
+				EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */,
 				EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */,
 				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
@@ -1660,6 +1667,7 @@
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */,
+				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
 				EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,

@@ -20,63 +20,51 @@ import Charts
 @available(iOS 16.0, *)
 struct ToleranceChart: View {
 
-    enum ToleranceType {
-        case full, half
-    }
-
-    struct ToleranceWindow: Identifiable {
-        let id = UUID()
-        let substanceName: String
-        let start: Date
-        let end: Date
-        let toleranceType: ToleranceType
-    }
-
-
-    let data: [ToleranceWindow] = [
-        ToleranceWindow(substanceName: "MDMA",
-                        start: getDate(year: 2023, month: 2, day: 1)!,
-                        end: getDate(year: 2023, month: 3, day: 1)!,
-                        toleranceType: .full),
-        ToleranceWindow(substanceName: "MDMA",
-                        start: getDate(year: 2023, month: 3, day: 1)!,
-                        end: getDate(year: 2023, month: 4, day: 1)!,
-                        toleranceType: .half),
-        ToleranceWindow(substanceName: "MDMA",
-                        start: getDate(year: 2023, month: 5, day: 1)!,
-                        end: getDate(year: 2023, month: 6, day: 1)!,
-                        toleranceType: .full),
-        ToleranceWindow(substanceName: "Ketamine",
-                        start: getDate(year: 2023, month: 2, day: 10)!,
-                        end: getDate(year: 2023, month: 2, day: 20)!,
-                        toleranceType: .full),
-        ToleranceWindow(substanceName: "Ketamine",
-                        start: getDate(year: 2023, month: 2, day: 20)!,
-                        end: getDate(year: 2023, month: 2, day: 30)!,
-                        toleranceType: .half)
-        ]
+    let toleranceWindows: [ToleranceWindow]
 
     var body: some View {
-        Chart(data) { window in
+        Chart(toleranceWindows) { window in
             BarMark(
                 xStart: .value("Start Time", window.start),
                 xEnd: .value("End Time", window.end),
                 y: .value("Substance", window.substanceName)
             )
-            .foregroundStyle(getColor(for: window))
+            .foregroundStyle(window.barColor)
         }
     }
+}
 
-    private func getColor(for toleranceWindow: ToleranceWindow) -> Color {
-        var color = Color.pink
-        if toleranceWindow.substanceName == "Ketamine" {
-            color = .blue
-        }
-        if toleranceWindow.toleranceType == .half {
-            return color.opacity(0.5)
-        } else {
-            return color
-        }
+@available(iOS 16.0, *)
+struct ToleranceChart_Previews: PreviewProvider {
+    static var previews: some View {
+        ToleranceChart(toleranceWindows: [
+            ToleranceWindow(substanceName: "MDMA",
+                            start: getDate(year: 2023, month: 2, day: 1)!,
+                            end: getDate(year: 2023, month: 3, day: 1)!,
+                            toleranceType: .full,
+                            substanceColor: .pink),
+            ToleranceWindow(substanceName: "MDMA",
+                            start: getDate(year: 2023, month: 3, day: 1)!,
+                            end: getDate(year: 2023, month: 4, day: 1)!,
+                            toleranceType: .half,
+                            substanceColor: .pink),
+            ToleranceWindow(substanceName: "MDMA",
+                            start: getDate(year: 2023, month: 5, day: 1)!,
+                            end: getDate(year: 2023, month: 6, day: 1)!,
+                            toleranceType: .full,
+                            substanceColor: .pink),
+            ToleranceWindow(substanceName: "Ketamine",
+                            start: getDate(year: 2023, month: 2, day: 10)!,
+                            end: getDate(year: 2023, month: 2, day: 20)!,
+                            toleranceType: .full,
+                            substanceColor: .blue),
+            ToleranceWindow(substanceName: "Ketamine",
+                            start: getDate(year: 2023, month: 2, day: 20)!,
+                            end: getDate(year: 2023, month: 2, day: 30)!,
+                            toleranceType: .half,
+                            substanceColor: .blue)
+            ])
+            .padding(.horizontal)
     }
 
     private static func getDate(year: Int, month: Int, day: Int) -> Date? {
@@ -86,12 +74,5 @@ struct ToleranceChart: View {
         dateComponents.month = month
         dateComponents.day = day
         return calendar.date(from: dateComponents)
-    }
-}
-
-@available(iOS 16.0, *)
-struct ToleranceChart_Previews: PreviewProvider {
-    static var previews: some View {
-        ToleranceChart()
     }
 }
