@@ -55,18 +55,11 @@ struct ToleranceChartOverView: View {
     var title: Text {
         let fullToleranceNames = getSubstanceNamesWithFullTolerance()
         let halfToleranceNames = getSubstanceNamesWithHalfTolerance()
-        if fullToleranceNames.isEmpty {
-            if halfToleranceNames.isEmpty {
-                return Text("Zero tolerance")
-            } else {
-                return Text("Light tolerance to ") + Text(halfToleranceNames, format: .list(type: .and))
-            }
+        let allToleranceNames = fullToleranceNames + halfToleranceNames
+        if allToleranceNames.isEmpty {
+            return Text("Zero tolerance")
         } else {
-            if halfToleranceNames.isEmpty {
-                return Text("High tolerance to ") + Text(fullToleranceNames, format: .list(type: .and))
-            } else {
-                return Text("High tolerance to ") + Text(fullToleranceNames, format: .list(type: .and)) + Text(" and light tolerance to ") + Text(halfToleranceNames, format: .list(type: .and))
-            }
+            return Text(allToleranceNames, format: .list(type: .and))
         }
     }
     
