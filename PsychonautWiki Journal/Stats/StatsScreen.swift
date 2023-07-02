@@ -35,6 +35,7 @@ struct StatsScreen: View {
     @State private var experienceData: ExperienceData? = nil
     @State private var ingestionData: IngestionData? = nil
     @State private var toleranceWindows: [ToleranceWindow] = []
+    @State private var substancesInIngestionsButNotChart: [String] = []
 
     var body: some View {
         NavigationView {
@@ -43,7 +44,8 @@ struct StatsScreen: View {
                     StatsScreenContent(
                         experienceData: experienceData,
                         ingestionData: ingestionData,
-                        toleranceWindows: toleranceWindows
+                        toleranceWindows: toleranceWindows,
+                        substancesInIngestionsButNotChart: substancesInIngestionsButNotChart
                     )
                 } else {
                     ProgressView().task {
@@ -80,7 +82,10 @@ struct StatsScreen: View {
             from: Array(ingestionsLast90Days),
             substanceCompanions: Array(substanceCompanions)
         )
-
+        let substancesInIngestions = Set(ingestionsLast90Days.map({$0.substanceNameUnwrapped}))
+        let substancesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
+        let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substancesInToleranceWindows)
+        substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
     }
 
     private func getSortedIngestionCountsLast30Days() -> [IngestionCount] {
@@ -231,6 +236,7 @@ struct StatsScreenContent: View {
     let experienceData: ExperienceData
     let ingestionData: IngestionData
     let toleranceWindows: [ToleranceWindow]
+    let substancesInIngestionsButNotChart: [String]
 
     var body: some View {
         List {
@@ -240,6 +246,8 @@ struct StatsScreenContent: View {
                 } label: {
                     ToleranceChartOverView(toleranceWindows: toleranceWindows)
                 }
+            } footer: {
+                Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info.")
             }
             Section {
                 NavigationLink {
@@ -287,7 +295,8 @@ struct StatsScreenContent_Previews: PreviewProvider {
                                     end: getDate(year: 2023, month: 2, day: 30)!,
                                     toleranceType: .half,
                                     substanceColor: .blue)
-                    ]
+                ],
+                substancesInIngestionsButNotChart: ["2C-B", "DMT"]
             )
         }
     }
