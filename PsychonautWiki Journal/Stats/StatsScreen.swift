@@ -255,19 +255,6 @@ struct StatsScreenContent: View {
                     IngestionOverview(ingestionData: ingestionData)
                 }
             }
-            Section {
-                ForEach(ingestionData.years) { ingestionCount in
-                    let substanceName = ingestionCount.substanceName
-                    NavigationLink {
-                        IngestionsForSubstanceScreen(substanceName: substanceName)
-                    } label: {
-                        HStack {
-                            Image(systemName: "circle.fill").foregroundColor(ingestionData.colorMapping(substanceName))
-                            Text(substanceName)
-                        }
-                    }
-                }.font(.headline)
-            }
         }.navigationTitle("Stats")
     }
 }
