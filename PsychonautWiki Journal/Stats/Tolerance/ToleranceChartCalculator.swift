@@ -28,7 +28,7 @@ struct ToleranceChartCalculator {
         let substanceAndDays = getSubstanceAndDayPairs(groupedIngestions: groupedIngestions)
         let substanceIntervals = getSubstanceIntervals(from: substanceAndDays)
         let substanceIntervalsGroupedBySubstance = getSubstanceIntervalsGroupedBySubstance(substanceIntervals: substanceIntervals)
-        let mergedSubstanceIntervals = getMergedSubstanceIntervals(groupedSubstanceIntervals: substanceIntervalsGroupedBySubstance)
+        let mergedSubstanceIntervals = getMergedSubstanceIntervals(intervalsGroupedBySubstance: substanceIntervalsGroupedBySubstance)
         let toleranceWindows = getToleranceWindows(from: mergedSubstanceIntervals, substanceCompanions: substanceCompanions)
         return toleranceWindows
     }
@@ -51,8 +51,8 @@ struct ToleranceChartCalculator {
         }
     }
 
-    private static func getMergedSubstanceIntervals(groupedSubstanceIntervals: Dictionary<String, [SubstanceInterval]>) -> [SubstanceInterval] {
-        groupedSubstanceIntervals.flatMap { substanceName, intervals in
+    private static func getMergedSubstanceIntervals(intervalsGroupedBySubstance: Dictionary<String, [SubstanceInterval]>) -> [SubstanceInterval] {
+        let groupedBySubstance = intervalsGroupedBySubstance.map { substanceName, intervals in
             let fullToleranceIntervals = intervals.filter { $0.toleranceType == .full }.map { $0.dateInterval }
             let halfToleranceIntervals = intervals.filter { $0.toleranceType == .half }.map { $0.dateInterval }
             let mergedFullIntervals = mergeDateIntervals(fullToleranceIntervals)
@@ -72,6 +72,16 @@ struct ToleranceChartCalculator {
             }
             return resultFull + resultHalf
         }
+        let sortedGroups = groupedBySubstance.sorted { (lhs: [SubstanceInterval], rhs: [SubstanceInterval]) in
+            guard let maxLeft = lhs.filter({$0.toleranceType == .full}).max(by: { leftInterval, rightInterval in
+                leftInterval.dateInterval.end < rightInterval.dateInterval.end
+            }) else {return true}
+            guard let maxRight = rhs.filter({$0.toleranceType == .full}).max(by: { leftInterval, rightInterval in
+                leftInterval.dateInterval.end < rightInterval.dateInterval.end
+            }) else {return true}
+            return maxLeft.dateInterval.end < maxRight.dateInterval.end
+        }
+        return sortedGroups.flatMap { $0 }
     }
 
     private static func subtractIntervals(_ intervals: [DateInterval], subtracting: [DateInterval]) -> [DateInterval] {
