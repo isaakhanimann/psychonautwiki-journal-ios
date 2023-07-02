@@ -22,6 +22,7 @@ struct ToleranceChart: View {
     
     let toleranceWindows: [ToleranceWindow]
     @Environment(\.colorScheme) var colorScheme
+    let height: CGFloat
     
     var body: some View {
         TimelineView(.everyMinute) { context in
@@ -36,7 +37,7 @@ struct ToleranceChart: View {
                 }
                 RuleMark(x: .value("Current Time", context.date))
                     .foregroundStyle(colorScheme == .dark ? .white : .black)
-            }
+            }.frame(height: height)
         }
     }
 }
@@ -44,28 +45,7 @@ struct ToleranceChart: View {
 @available(iOS 16.0, *)
 struct ToleranceChart_Previews: PreviewProvider {
     static var previews: some View {
-        ToleranceChart(toleranceWindows: [
-            ToleranceWindow(substanceName: "MDMA",
-                            start: getDate(year: 2023, month: 2, day: 1)!,
-                            end: getDate(year: 2023, month: 4, day: 1)!,
-                            toleranceType: .full,
-                            substanceColor: .pink),
-            ToleranceWindow(substanceName: "MDMA",
-                            start: getDate(year: 2023, month: 4, day: 1)!,
-                            end: getDate(year: 2023, month: 5, day: 1)!,
-                            toleranceType: .half,
-                            substanceColor: .pink),
-            ToleranceWindow(substanceName: "Ketamine",
-                            start: getDate(year: 2023, month: 2, day: 10)!,
-                            end: getDate(year: 2023, month: 2, day: 20)!,
-                            toleranceType: .full,
-                            substanceColor: .blue),
-            ToleranceWindow(substanceName: "Ketamine",
-                            start: getDate(year: 2023, month: 2, day: 20)!,
-                            end: getDate(year: 2023, month: 2, day: 30)!,
-                            toleranceType: .half,
-                            substanceColor: .blue)
-        ])
+        ToleranceChart(toleranceWindows: ToleranceChartPreviewDataProvider.mock1, height: 100)
         .padding(.horizontal)
     }
 }

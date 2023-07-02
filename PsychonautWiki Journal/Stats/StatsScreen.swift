@@ -247,7 +247,9 @@ struct StatsScreenContent: View {
                     ToleranceChartOverView(toleranceWindows: toleranceWindows)
                 }
             } footer: {
-                Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info.")
+                if !substancesInIngestionsButNotChart.isEmpty {
+                    Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info.")
+                }
             }
             Section {
                 NavigationLink {
@@ -274,28 +276,7 @@ struct StatsScreenContent_Previews: PreviewProvider {
             StatsScreenContent(
                 experienceData: .mock1,
                 ingestionData: .mock1,
-                toleranceWindows: [
-                    ToleranceWindow(substanceName: "MDMA",
-                                    start: getDate(year: 2023, month: 2, day: 1)!,
-                                    end: getDate(year: 2023, month: 4, day: 1)!,
-                                    toleranceType: .full,
-                                    substanceColor: .pink),
-                    ToleranceWindow(substanceName: "MDMA",
-                                    start: getDate(year: 2023, month: 4, day: 1)!,
-                                    end: getDate(year: 2023, month: 5, day: 1)!,
-                                    toleranceType: .half,
-                                    substanceColor: .pink),
-                    ToleranceWindow(substanceName: "Ketamine",
-                                    start: getDate(year: 2023, month: 2, day: 10)!,
-                                    end: getDate(year: 2023, month: 2, day: 20)!,
-                                    toleranceType: .full,
-                                    substanceColor: .blue),
-                    ToleranceWindow(substanceName: "Ketamine",
-                                    start: getDate(year: 2023, month: 2, day: 20)!,
-                                    end: getDate(year: 2023, month: 2, day: 30)!,
-                                    toleranceType: .half,
-                                    substanceColor: .blue)
-                ],
+                toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
                 substancesInIngestionsButNotChart: ["2C-B", "DMT"]
             )
         }

@@ -200,6 +200,8 @@
 		EAA9C3752A50762500869E5A /* TimeRangePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3742A50762500869E5A /* TimeRangePicker.swift */; };
 		EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */; };
 		EAA9C3792A50A54E00869E5A /* ToleranceChartOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3782A50A54E00869E5A /* ToleranceChartOverView.swift */; };
+		EAA9C37B2A51F7BC00869E5A /* ToleranceChartScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */; };
+		EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C37C2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -504,6 +506,8 @@
 		EAA9C3742A50762500869E5A /* TimeRangePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRangePicker.swift; sourceTree = "<group>"; };
 		EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartScreen.swift; sourceTree = "<group>"; };
 		EAA9C3782A50A54E00869E5A /* ToleranceChartOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartOverView.swift; sourceTree = "<group>"; };
+		EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartScreenContent.swift; sourceTree = "<group>"; };
+		EAA9C37C2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartPreviewDataProvider.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -957,9 +961,11 @@
 			isa = PBXGroup;
 			children = (
 				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
+				EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */,
 				EAA9C3782A50A54E00869E5A /* ToleranceChartOverView.swift */,
 				EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */,
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
+				EAA9C37C2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift */,
 				EAA9C36D2A50679100869E5A /* ToleranceType.swift */,
 				EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */,
 			);
@@ -1682,6 +1688,7 @@
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
 				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
+				EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */,
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
@@ -1758,6 +1765,7 @@
 				EA55CEBB2A3F292B00FE1A44 /* Dot.swift in Sources */,
 				EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */,
 				EA116CDD29FBA3D9007D8BF6 /* RatingExplanationSection.swift in Sources */,
+				EAA9C37B2A51F7BC00869E5A /* ToleranceChartScreenContent.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
 				EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */,
 				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
