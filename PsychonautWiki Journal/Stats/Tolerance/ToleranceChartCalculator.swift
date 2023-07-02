@@ -108,20 +108,27 @@ struct ToleranceChartCalculator {
 
     private static func getSubstanceIntervals(from substanceAndDayPairs: [SubstanceAndDay]) -> [SubstanceInterval] {
         substanceAndDayPairs.flatMap { pair in
-            let halfTolerance: TimeInterval = 5*24*60*60
-            let zeroTolerance: TimeInterval = 10*24*60*60
-            let startOfHalfTolerance = pair.day.addingTimeInterval(halfTolerance)
-            let startOfZeroTolerance = pair.day.addingTimeInterval(zeroTolerance)
-            return [
-                SubstanceInterval(
+            let tolerance = SubstanceRepo.shared.getSubstance(name: pair.substanceName)?.tolerance
+            var result = [SubstanceInterval]()
+            var startOfHalfTolerance = pair.day
+            let hoursToSeconds: Double = 60*60
+            if let halfToleranceInHours = tolerance?.halfToleranceInHours {
+                let halfTolerance: TimeInterval = halfToleranceInHours * hoursToSeconds
+                startOfHalfTolerance = pair.day.addingTimeInterval(halfTolerance)
+                result.append(SubstanceInterval(
                     substanceName: pair.substanceName,
                     dateInterval: DateInterval(start: pair.day, end: startOfHalfTolerance),
-                    toleranceType: .full),
-                SubstanceInterval(
+                    toleranceType: .full))
+            }
+            if let zeroToleranceInHours = tolerance?.zeroToleranceInHours {
+                let zeroTolerance: TimeInterval = zeroToleranceInHours * hoursToSeconds
+                let startOfZeroTolerance = pair.day.addingTimeInterval(zeroTolerance)
+                result.append(SubstanceInterval(
                     substanceName: pair.substanceName,
                     dateInterval: DateInterval(start: startOfHalfTolerance, end: startOfZeroTolerance),
-                    toleranceType: .half)
-            ]
+                    toleranceType: .half))
+            }
+            return result
         }
     }
 
