@@ -81,12 +81,14 @@ struct SettingsContent: View {
                     }
                 }
                 Section("Communication") {
-                    NavigationLink {
-                        ShareScreen()
-                    } label: {
-                        Label("Share App", systemImage: "person.2")
+                    if isEyeOpen {
+                        NavigationLink {
+                            ShareScreen()
+                        } label: {
+                            Label("Share App", systemImage: "person.2")
+                        }
+                        .foregroundColor(.accentColor)
                     }
-                    .foregroundColor(.accentColor)
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
                     }

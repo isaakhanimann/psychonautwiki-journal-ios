@@ -19,6 +19,14 @@ import SwiftUI
 struct ShareiOSAppScreen: View {
     var body: some View {
         List {
+            HStack {
+                Text("To unlock all substances triple tap the closed eye in settings.")
+                Spacer()
+                Image("Eye Closed")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60, height: 60)
+            }
             let appStoreLink = "https://apps.apple.com/ch/app/psychonautwiki-journal/id1582059415"
             QRCodeView(url: appStoreLink)
             if #available(iOS 16.0, *) {
