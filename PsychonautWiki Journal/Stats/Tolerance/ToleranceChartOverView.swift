@@ -47,7 +47,7 @@ struct ToleranceChartOverView: View {
                 .chartLegend(.hidden)
                 .chartXAxis(.hidden)
                 .chartYAxis(.hidden)
-                .frame(height: 100)
+                .frame(height: chartHeight)
             }
         }
     }
@@ -60,6 +60,15 @@ struct ToleranceChartOverView: View {
             return Text("Zero tolerance")
         } else {
             return Text(allToleranceNames, format: .list(type: .and))
+        }
+    }
+
+    var chartHeight: CGFloat {
+        let numberOfRows = toleranceWindows.map({$0.substanceName}).uniqued().count
+        if numberOfRows < 5 {
+            return CGFloat(numberOfRows*20)
+        } else {
+            return 100
         }
     }
     
