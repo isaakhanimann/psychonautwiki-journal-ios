@@ -204,6 +204,8 @@
 		EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C37C2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift */; };
 		EAA9C3812A5478F700869E5A /* AddToleranceIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3802A5478F700869E5A /* AddToleranceIngestionScreen.swift */; };
 		EAA9C3832A5479AE00869E5A /* SearchLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3822A5479AE00869E5A /* SearchLogic.swift */; };
+		EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C38B2A54825C00869E5A /* ChooseDateScreen.swift */; };
+		EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C38F2A548B9600869E5A /* SubstanceAndDay.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -217,7 +219,7 @@
 		EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* TabBarObserver.swift */; };
 		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */; };
-		EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */; };
+		EAB8EF502A489DDA00542253 /* SubstanceSearchBarWithFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4F2A489DDA00542253 /* SubstanceSearchBarWithFilter.swift */; };
 		EAB8EF542A48D82000542253 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF532A48D82000542253 /* Tab.swift */; };
 		EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF552A48D88E00542253 /* TabEnvironmentKey.swift */; };
 		EABD91FD294105830073303A /* TimelineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD91FC294105830073303A /* TimelineModel.swift */; };
@@ -512,6 +514,8 @@
 		EAA9C37C2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartPreviewDataProvider.swift; sourceTree = "<group>"; };
 		EAA9C3802A5478F700869E5A /* AddToleranceIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToleranceIngestionScreen.swift; sourceTree = "<group>"; };
 		EAA9C3822A5479AE00869E5A /* SearchLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLogic.swift; sourceTree = "<group>"; };
+		EAA9C38B2A54825C00869E5A /* ChooseDateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateScreen.swift; sourceTree = "<group>"; };
+		EAA9C38F2A548B9600869E5A /* SubstanceAndDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceAndDay.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -525,7 +529,7 @@
 		EAB8EF462A46004B00542253 /* TabBarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarObserver.swift; sourceTree = "<group>"; };
 		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameTabTapModifier.swift; sourceTree = "<group>"; };
-		EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceSearchBar.swift; sourceTree = "<group>"; };
+		EAB8EF4F2A489DDA00542253 /* SubstanceSearchBarWithFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceSearchBarWithFilter.swift; sourceTree = "<group>"; };
 		EAB8EF532A48D82000542253 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		EAB8EF552A48D88E00542253 /* TabEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEnvironmentKey.swift; sourceTree = "<group>"; };
 		EABD91FC294105830073303A /* TimelineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineModel.swift; sourceTree = "<group>"; };
@@ -780,7 +784,7 @@
 				EA8447E527CD14C000B10DD3 /* Substance */,
 				EAB165A527E35C0C003DF79D /* Custom Substance */,
 				EA47E66F27CB477000F6E10F /* SearchScreen.swift */,
-				EAB8EF4F2A489DDA00542253 /* SubstanceSearchBar.swift */,
+				EAB8EF4F2A489DDA00542253 /* SubstanceSearchBarWithFilter.swift */,
 				EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */,
 				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 				EAA9C3822A5479AE00869E5A /* SearchLogic.swift */,
@@ -969,7 +973,8 @@
 				EAA9C37F2A54787C00869E5A /* Screen */,
 				EAA9C3782A50A54E00869E5A /* ToleranceChartOverView.swift */,
 				EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */,
-				EAA9C3802A5478F700869E5A /* AddToleranceIngestionScreen.swift */,
+				EAA9C38F2A548B9600869E5A /* SubstanceAndDay.swift */,
+				EAA9C3842A547B3500869E5A /* Add Tolerance Ingestion */,
 			);
 			path = Tolerance;
 			sourceTree = "<group>";
@@ -1055,6 +1060,15 @@
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		EAA9C3842A547B3500869E5A /* Add Tolerance Ingestion */ = {
+			isa = PBXGroup;
+			children = (
+				EAA9C3802A5478F700869E5A /* AddToleranceIngestionScreen.swift */,
+				EAA9C38B2A54825C00869E5A /* ChooseDateScreen.swift */,
+			);
+			path = "Add Tolerance Ingestion";
 			sourceTree = "<group>";
 		};
 		EAACB08B2947C4040050E002 /* Route */ = {
@@ -1622,6 +1636,7 @@
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
 				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
+				EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */,
 				EA48F8AC29EBD62D007DA8C5 /* View-Hud.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
@@ -1759,6 +1774,7 @@
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
+				EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */,
 				EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
@@ -1791,7 +1807,7 @@
 				EA116CDD29FBA3D9007D8BF6 /* RatingExplanationSection.swift in Sources */,
 				EAA9C37B2A51F7BC00869E5A /* ToleranceChartScreenContent.swift in Sources */,
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
-				EAB8EF502A489DDA00542253 /* SubstanceSearchBar.swift in Sources */,
+				EAB8EF502A489DDA00542253 /* SubstanceSearchBarWithFilter.swift in Sources */,
 				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
 				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,

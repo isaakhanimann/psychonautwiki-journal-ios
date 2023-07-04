@@ -14,20 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
+import Foundation
 
-struct AddToleranceIngestionScreen: View {
-    var body: some View {
-        NavigationView {
-            List {
-                
-            }
-        }
-    }
-}
-
-struct AddToleranceIngestionScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddToleranceIngestionScreen()
-    }
+struct SubstanceAndDay {
+    let substanceName: String
+    let day: Date
 }

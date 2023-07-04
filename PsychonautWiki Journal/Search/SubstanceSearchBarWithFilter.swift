@@ -16,7 +16,7 @@
 
 import SwiftUI
 
-struct SubstanceSearchBar: View {
+struct SubstanceSearchBarWithFilter: View {
 
     @Binding var text: String
     var isFocused: FocusState<Bool>.Binding
@@ -104,7 +104,7 @@ struct SubstanceSearchBar_Previews: PreviewProvider {
         @FocusState private var isSearchFocused: Bool
 
         var body: some View {
-            SubstanceSearchBar(
+            SubstanceSearchBarWithFilter(
                 text: .constant("d"),
                 isFocused: $isSearchFocused,
                 allCategories: ["psychedelic", "opioid"],

@@ -78,8 +78,11 @@ struct StatsScreen: View {
         let ingestionsLast90Days = ingestions.prefix { ing in
             Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 90
         }
+        let substanceDays = ingestionsLast90Days.map { ing in
+            SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
+        }
         toleranceWindows = ToleranceChartCalculator.getToleranceWindows(
-            from: Array(ingestionsLast90Days),
+            from: substanceDays,
             substanceCompanions: Array(substanceCompanions)
         )
         let substancesInIngestions = Set(ingestionsLast90Days.map({$0.substanceNameUnwrapped}))

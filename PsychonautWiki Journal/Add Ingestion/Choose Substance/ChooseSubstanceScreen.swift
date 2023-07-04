@@ -18,7 +18,7 @@ import SwiftUI
 import AlertToast
 
 struct ChooseSubstanceScreen: View {
-    @StateObject var viewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
     @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false

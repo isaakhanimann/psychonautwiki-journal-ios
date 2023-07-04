@@ -24,7 +24,7 @@ struct SearchScreen: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                SubstanceSearchBar(
+                SubstanceSearchBarWithFilter(
                     text: $viewModel.searchText,
                     isFocused: $isSearchFocused,
                     allCategories: viewModel.allCategories,

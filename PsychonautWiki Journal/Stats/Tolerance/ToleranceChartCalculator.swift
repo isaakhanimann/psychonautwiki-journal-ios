@@ -18,19 +18,24 @@ import SwiftUI
 
 struct ToleranceChartCalculator {
 
-    struct SubstanceAndDay {
-        let substanceName: String
-        let day: Date
-    }
-
-    static func getToleranceWindows(from ingestions: [Ingestion], substanceCompanions: [SubstanceCompanion]) -> [ToleranceWindow] {
-        let groupedIngestions = getIngestionsGroupedByDay(ingestions: ingestions)
-        let substanceAndDays = getSubstanceAndDayPairs(groupedIngestions: groupedIngestions)
-        let substanceIntervals = getSubstanceIntervals(from: substanceAndDays)
+    static func getToleranceWindows(from substanceAndDays: [SubstanceAndDay], substanceCompanions: [SubstanceCompanion]) -> [ToleranceWindow] {
+        let cleanedSubstanceAndDays = removeMultipleSubstancesInADay(substanceAndDays: substanceAndDays)
+        let substanceIntervals = getSubstanceIntervals(from: cleanedSubstanceAndDays)
         let substanceIntervalsGroupedBySubstance = getSubstanceIntervalsGroupedBySubstance(substanceIntervals: substanceIntervals)
         let mergedSubstanceIntervals = getMergedSubstanceIntervals(intervalsGroupedBySubstance: substanceIntervalsGroupedBySubstance)
         let toleranceWindows = getToleranceWindows(from: mergedSubstanceIntervals, substanceCompanions: substanceCompanions)
         return toleranceWindows
+    }
+
+    private static func removeMultipleSubstancesInADay(substanceAndDays: [SubstanceAndDay]) -> [SubstanceAndDay] {
+        Dictionary(grouping: substanceAndDays, by: { ing in
+            dateWithoutTime(from: ing.day)
+        }).flatMap { day, substances in
+            let substanceNames = Set(substances.map {$0.substanceName})
+            return substanceNames.map { name in
+                SubstanceAndDay(substanceName: name, day: day)
+            }
+        }
     }
 
     private static func getToleranceWindows(from substanceIntervals: [SubstanceInterval], substanceCompanions: [SubstanceCompanion]) -> [ToleranceWindow] {
@@ -168,23 +173,6 @@ struct ToleranceChartCalculator {
             }
         }
         return mergedIntervals
-    }
-
-    private static func getIngestionsGroupedByDay(ingestions: [Ingestion]) -> Dictionary<Date, [Ingestion]> {
-        Dictionary(grouping: ingestions, by: { ing in
-            dateWithoutTime(from: ing.timeUnwrapped)
-        })
-    }
-
-    private static func getSubstanceAndDayPairs(groupedIngestions: Dictionary<Date, [Ingestion]>) -> [SubstanceAndDay] {
-        groupedIngestions.flatMap { day, ingestions in
-            let substanceNames = Set(ingestions.map { ing in
-                ing.substanceNameUnwrapped
-            })
-            return substanceNames.map { name in
-                SubstanceAndDay(substanceName: name, day: day)
-            }
-        }
     }
 
     private static func dateWithoutTime(from date: Date) -> Date {
