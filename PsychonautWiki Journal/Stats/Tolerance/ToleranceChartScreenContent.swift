@@ -24,17 +24,15 @@ struct ToleranceChartScreenContent: View {
     let substancesInIngestionsButNotChart: [String]
     let numberOfSubstancesInChart: Int
 
-    private let chartExplanation = "Opaque color marks the period right after an ingestion where your tolerance to that particular substance might be high. More transparent color ranges afterwards indicate the period where there is still a light tolerance. After that you have zero tolerance again which means the dose needs to be adjusted like the first time you consumed it. Cross tolerances are not considered in this chart. The start date indicates the earliest date from which ingestions are considered. The vertical rule mark indicates the current time. This information is just a guideline. Tolerance decreases gradually. For many substances full tolerance develops after prolonged and repeated use and in case of repeated heavy doses it might take longer for the tolerance to reset. It is always safer, especially after a break to start using a low dose. Read the PsychonautWiki article on the specific substance for more info."
+    private let chartExplanation = "Marked by an opaque hue, the phase directly succeeding consumption reflects an elevated tolerance to the particular substance. The subsequent lighter shade indicates a reduced tolerance level. This is followed by a return to zero tolerance, necessitating dosage adjustments akin to initial consumption.\n\nThis chart does not factor in cross tolerances.\n\nThe start date denotes the earliest ingestion taken into consideration.\nThe vertical line corresponds to the present time.\n\nThis chart is intended to provide basic guidance. For many substances full tolerance only develops after prolonged and repeated use. In the scenario of repeated heavy doses, it may require a lengthier duration for tolerance to fully reset. It is safer to begin with a small dose, especially after a break in consumption. For more detailed information to the tolerance of the substance in question, read the PsychonautWiki article."
 
     var body: some View {
         List {
             Section {
                 NavigationLink {
-                    VStack {
+                    List {
                         Text(chartExplanation)
-                        Spacer()
                     }
-                    .padding(.all)
                     .navigationTitle("Chart Explanation")
                 } label: {
                     Text(chartExplanation)
