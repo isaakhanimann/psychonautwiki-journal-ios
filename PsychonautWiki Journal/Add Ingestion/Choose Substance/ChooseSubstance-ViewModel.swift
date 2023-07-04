@@ -61,7 +61,7 @@ extension ChooseSubstanceScreen {
             $searchText
                 .combineLatest($isEyeOpen) { search, isEyeOpen in
                     let allSubstances = SubstanceRepo.shared.substances
-                    let originalFiltered = SearchViewModel.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
+                    let originalFiltered = SearchLogic.getFilteredSubstancesSorted(substances: allSubstances, searchText: search)
                     if isEyeOpen {
                         return originalFiltered
                     } else {
