@@ -21,23 +21,32 @@ import Charts
 struct ToleranceChart: View {
     
     let toleranceWindows: [ToleranceWindow]
+    let numberOfRows: Int
     @Environment(\.colorScheme) var colorScheme
-    let height: CGFloat
-    
+
     var body: some View {
         TimelineView(.everyMinute) { context in
-            Chart {
-                ForEach(toleranceWindows) { window in
-                    BarMark(
-                        xStart: .value("Start Time", window.start),
-                        xEnd: .value("End Time", window.end),
-                        y: .value("Substance", window.substanceName)
-                    )
-                    .foregroundStyle(window.barColor)
-                }
-                RuleMark(x: .value("Current Time", context.date))
-                    .foregroundStyle(colorScheme == .dark ? .white : .black)
-            }.frame(height: height)
+            if numberOfRows < 8 {
+                getChart(with: context.date)
+                    .frame(height: CGFloat(numberOfRows) * 60)
+            } else {
+                getChart(with: context.date)
+            }
+        }
+    }
+
+    func getChart(with date: Date) -> some View {
+        Chart {
+            ForEach(toleranceWindows) { window in
+                BarMark(
+                    xStart: .value("Start Time", window.start),
+                    xEnd: .value("End Time", window.end),
+                    y: .value("Substance", window.substanceName)
+                )
+                .foregroundStyle(window.barColor)
+            }
+            RuleMark(x: .value("Current Time", date))
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
         }
     }
 }
@@ -45,7 +54,8 @@ struct ToleranceChart: View {
 @available(iOS 16.0, *)
 struct ToleranceChart_Previews: PreviewProvider {
     static var previews: some View {
-        ToleranceChart(toleranceWindows: ToleranceChartPreviewDataProvider.mock1, height: 100)
+        ToleranceChart(toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
+                       numberOfRows: 2)
         .padding(.horizontal)
     }
 }
