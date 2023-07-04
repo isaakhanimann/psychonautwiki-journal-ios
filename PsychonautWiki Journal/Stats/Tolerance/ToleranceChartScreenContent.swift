@@ -34,6 +34,7 @@ struct ToleranceChartScreenContent: View {
                         .padding(.horizontal)
                 }
                 .navigationTitle("Chart Explanation")
+                .dismissWhenTabTapped()
             } label: {
                 Label("Chart Explanation", systemImage: "info.circle")
             }
