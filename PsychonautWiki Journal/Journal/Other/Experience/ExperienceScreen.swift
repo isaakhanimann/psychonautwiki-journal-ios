@@ -37,6 +37,7 @@ struct ExperienceScreen: View {
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
+    @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = ViewModel()
@@ -282,7 +283,7 @@ struct ExperienceScreen: View {
                 )
             }
             if #available(iOS 16.0, *) {
-                if !viewModel.toleranceWindows.isEmpty {
+                if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience {
                     Section("Tolerance") {
                         ToleranceChart(
                             toleranceWindows: viewModel.toleranceWindows,

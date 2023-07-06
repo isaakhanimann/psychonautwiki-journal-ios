@@ -21,6 +21,7 @@ struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
+    @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -30,6 +31,7 @@ struct SettingsScreen: View {
             isEyeOpen: $isEyeOpen,
             isSkippingInteractionChecks: $isSkippingInteractionChecks,
             isHidingDosageDots: $isHidingDosageDots,
+            isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -55,6 +57,7 @@ struct SettingsContent: View {
     @Binding var isEyeOpen: Bool
     @Binding var isSkippingInteractionChecks: Bool
     @Binding var isHidingDosageDots: Bool
+    @Binding var isHidingToleranceChartInExperience: Bool
     var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -166,6 +169,7 @@ struct SettingsContent: View {
                     if isEyeOpen {
                         Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
                         Toggle("Hide Dosage Dots", isOn: $isHidingDosageDots).tint(Color.accentColor)
+                        Toggle("Hide Tolerance Chart", isOn: $isHidingToleranceChartInExperience).tint(Color.accentColor)
                     }
                 }
                 Section {
@@ -252,6 +256,7 @@ struct SettingsContent_Previews: PreviewProvider {
             isEyeOpen: .constant(true),
             isSkippingInteractionChecks: .constant(false),
             isHidingDosageDots: .constant(false),
+            isHidingToleranceChartInExperience: .constant(false),
             isFaceIDAvailable: true,
             hasToUnlockApp: .constant(false),
             isImporting: false,
