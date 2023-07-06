@@ -283,13 +283,28 @@ struct ExperienceScreen: View {
                 )
             }
             if #available(iOS 16.0, *) {
-                if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience {
-                    Section("Tolerance") {
+                if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
+                    Section {
                         ToleranceChart(
                             toleranceWindows: viewModel.toleranceWindows,
                             numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
                             isShowingCurrentTime: experience.isCurrent
                         )
+                    } header: {
+                        HStack {
+                            Text("Tolerance")
+                            Spacer()
+                            NavigationLink {
+                                ToleranceChartExplanationScreen()
+                            } label: {
+                                Label("Chart Explanation", systemImage: "info.circle")
+                                    .labelStyle(.iconOnly)
+                            }
+                        }
+                    } footer: {
+                        if !viewModel.substancesInIngestionsButNotChart.isEmpty {
+                            MissingToleranceText(substanceNames: viewModel.substancesInIngestionsButNotChart)
+                        }
                     }
                 }
             }

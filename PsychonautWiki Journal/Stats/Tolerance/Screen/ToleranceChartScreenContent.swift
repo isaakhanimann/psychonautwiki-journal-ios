@@ -25,17 +25,10 @@ struct ToleranceChartScreenContent: View {
     let numberOfSubstancesInChart: Int
     let onAddTap: () -> Void
 
-    private let chartExplanation = "Marked by an opaque hue, the phase directly succeeding consumption reflects an elevated tolerance to the particular substance. The subsequent lighter shade indicates a reduced tolerance level. This is followed by a return to zero tolerance, necessitating dosage adjustments akin to initial consumption.\n\nThis chart does not factor in cross tolerances.\n\nThe start date denotes the earliest ingestion taken into consideration.\nThe vertical line corresponds to the present time.\n\nThis chart is intended to provide basic guidance. For many substances full tolerance only develops after prolonged and repeated use. In the scenario of repeated heavy doses, it may require a lengthier duration for tolerance to fully reset. It is safer to begin with a small dose, especially after a break in consumption. For more detailed information to the tolerance of the substance in question, read the PsychonautWiki article."
-
     var body: some View {
         VStack(alignment: .leading) {
             NavigationLink {
-                ScrollView {
-                    Text(chartExplanation)
-                        .padding(.horizontal)
-                }
-                .navigationTitle("Chart Explanation")
-                .dismissWhenTabTapped()
+                ToleranceChartExplanationScreen()
             } label: {
                 Label("Chart Explanation", systemImage: "info.circle")
             }
@@ -50,7 +43,7 @@ struct ToleranceChartScreenContent: View {
                 isShowingCurrentTime: true
             )
             if !substancesInIngestionsButNotChart.isEmpty {
-                (Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info."))
+                MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
                     .font(.footnote)
                     .foregroundColor(.secondary)
             }

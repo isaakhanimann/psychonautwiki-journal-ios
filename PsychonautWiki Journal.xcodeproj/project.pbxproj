@@ -206,6 +206,8 @@
 		EAA9C3832A5479AE00869E5A /* SearchLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3822A5479AE00869E5A /* SearchLogic.swift */; };
 		EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C38B2A54825C00869E5A /* ChooseDateScreen.swift */; };
 		EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C38F2A548B9600869E5A /* SubstanceAndDay.swift */; };
+		EAA9C3922A57203800869E5A /* MissingToleranceText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3912A57203800869E5A /* MissingToleranceText.swift */; };
+		EAA9C3942A57214A00869E5A /* ToleranceChartExplanationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -516,6 +518,8 @@
 		EAA9C3822A5479AE00869E5A /* SearchLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLogic.swift; sourceTree = "<group>"; };
 		EAA9C38B2A54825C00869E5A /* ChooseDateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateScreen.swift; sourceTree = "<group>"; };
 		EAA9C38F2A548B9600869E5A /* SubstanceAndDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceAndDay.swift; sourceTree = "<group>"; };
+		EAA9C3912A57203800869E5A /* MissingToleranceText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingToleranceText.swift; sourceTree = "<group>"; };
+		EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartExplanationScreen.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -1057,6 +1061,8 @@
 			children = (
 				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
 				EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */,
+				EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */,
+				EAA9C3912A57203800869E5A /* MissingToleranceText.swift */,
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
 			);
 			path = Screen;
@@ -1606,6 +1612,7 @@
 			files = (
 				EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */,
 				EABD921C294276DC0073303A /* SummaryScreen.swift in Sources */,
+				EAA9C3942A57214A00869E5A /* ToleranceChartExplanationScreen.swift in Sources */,
 				EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */,
 				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
 				EA6048392A188BFF005C6A4B /* SprayCalculatorScreen-ViewModel.swift in Sources */,
@@ -1674,6 +1681,7 @@
 				EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */,
 				EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */,
 				EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */,
+				EAA9C3922A57203800869E5A /* MissingToleranceText.swift in Sources */,
 				EABD92022941C3A30073303A /* IngestionDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,

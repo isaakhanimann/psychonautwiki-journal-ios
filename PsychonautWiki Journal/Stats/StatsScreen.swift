@@ -96,7 +96,6 @@ struct StatsScreen: View {
             Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 30
         }
         return getSortedIngestionCounts(for: ingestionsLast30Days)
-
     }
 
     private func getSortedIngestionCountsLast12Months() -> [IngestionCount] {
@@ -251,7 +250,7 @@ struct StatsScreenContent: View {
                 }
             } footer: {
                 if !substancesInIngestionsButNotChart.isEmpty {
-                    Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info.")
+                    MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
                 }
             }
             Section {

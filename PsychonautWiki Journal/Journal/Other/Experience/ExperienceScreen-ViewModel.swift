@@ -34,6 +34,7 @@ extension ExperienceScreen {
         @Published var sortedRatingsWithTime: [ShulginRating] = []
         @Published var toleranceWindows: [ToleranceWindow] = []
         @Published var numberOfSubstancesInToleranceChart = 0
+        @Published var substancesInIngestionsButNotChart: [String] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
             sortedRatingsWithTime
@@ -93,6 +94,9 @@ extension ExperienceScreen {
             )
             let substanceNamesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
             numberOfSubstancesInToleranceChart = substanceNamesInChart.count
+            let substancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
+            let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substanceNamesInChart)
+            substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
         }
 
         private func reloadIngestions(experience: Experience) {
