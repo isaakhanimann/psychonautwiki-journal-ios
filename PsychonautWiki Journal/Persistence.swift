@@ -150,11 +150,20 @@ struct PersistenceController {
         return experiences.sorted().first
     }
 
-    func getRecentIngestions() -> [Ingestion] {
+    func getIngestions(since date: Date) -> [Ingestion] {
         let fetchRequest = Ingestion.fetchRequest()
-        let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
-        fetchRequest.predicate = NSPredicate(format: "time > %@", twoDaysAgo as NSDate)
+        fetchRequest.predicate = NSPredicate(format: "time > %@", date as NSDate)
         return (try? viewContext.fetch(fetchRequest)) ?? []
     }
 
+    func getIngestionsBetween(startDate: Date, endDate: Date) -> [Ingestion] {
+        let fetchRequest = Ingestion.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(time >= %@) AND (time <= %@)", startDate as NSDate, endDate as NSDate)
+        return (try? viewContext.fetch(fetchRequest)) ?? []
+    }
+
+    func getSubstanceCompanions() -> [SubstanceCompanion] {
+        let fetchRequest = SubstanceCompanion.fetchRequest()
+        return (try? viewContext.fetch(fetchRequest)) ?? []
+    }
 }

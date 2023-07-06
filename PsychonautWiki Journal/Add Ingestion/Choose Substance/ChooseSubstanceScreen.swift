@@ -152,7 +152,8 @@ struct ChooseSubstanceContent: View {
     private func checkInteractions(with substanceName: String) {
         guard isEyeOpen else {return}
         guard !isSkippingInteractionChecks else {return}
-        let recentIngestions = PersistenceController.shared.getRecentIngestions()
+        let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
+        let recentIngestions = PersistenceController.shared.getIngestions(since: twoDaysAgo)
         let names = recentIngestions.map { ing in
             ing.substanceNameUnwrapped
         }

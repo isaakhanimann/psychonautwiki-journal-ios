@@ -32,6 +32,8 @@ extension ExperienceScreen {
         @Published var hiddenRatings: [ObjectIdentifier] = []
         @Published var sortedIngestions: [Ingestion] = []
         @Published var sortedRatingsWithTime: [ShulginRating] = []
+        @Published var toleranceWindows: [ToleranceWindow] = []
+        @Published var numberOfSubstancesInToleranceChart = 0
 
         var everythingForEachRating: [EverythingForOneRating] {
             sortedRatingsWithTime
@@ -74,6 +76,23 @@ extension ExperienceScreen {
             reloadIngestions(experience: experience)
             reloadRatings(experience: experience)
             calculateScreen()
+            calculateChartData()
+        }
+
+        private func calculateChartData() {
+            let lastIngestionDate = sortedIngestions.last?.timeUnwrapped ?? Date.now
+            let threeMonthsBefore = lastIngestionDate.addingTimeInterval(-3*30*24*60*60)
+            let ingestionsForChart = PersistenceController.shared.getIngestionsBetween(startDate: threeMonthsBefore, endDate: lastIngestionDate)
+            let substanceDays = ingestionsForChart.map { ing in
+                SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
+            }
+            let substanceCompanions = PersistenceController.shared.getSubstanceCompanions()
+            toleranceWindows = ToleranceChartCalculator.getToleranceWindows(
+                from: substanceDays,
+                substanceCompanions: Array(substanceCompanions)
+            )
+            let substanceNamesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
+            numberOfSubstancesInToleranceChart = substanceNamesInChart.count
         }
 
         private func reloadIngestions(experience: Experience) {

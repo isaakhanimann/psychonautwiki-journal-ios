@@ -119,6 +119,7 @@ struct ExperienceScreen: View {
                 Text("This will also delete all of its ingestions.")
             }
         )
+
     }
 
     private var favoriteButton: some View {
@@ -279,6 +280,17 @@ struct ExperienceScreen: View {
                     timeDisplayStyle: timeDisplayStyle,
                     firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
                 )
+            }
+            if #available(iOS 16.0, *) {
+                if !viewModel.toleranceWindows.isEmpty {
+                    Section("Tolerance") {
+                        ToleranceChart(
+                            toleranceWindows: viewModel.toleranceWindows,
+                            numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
+                            isShowingCurrentTime: experience.isCurrent
+                        )
+                    }
+                }
             }
             if isEyeOpen {
                 if !viewModel.substancesUsed.isEmpty {

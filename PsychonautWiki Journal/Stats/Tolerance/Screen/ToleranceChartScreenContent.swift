@@ -44,7 +44,11 @@ struct ToleranceChartScreenContent: View {
                 selection: $sinceDate,
                 displayedComponents: [.date]
             )
-            ToleranceChart(toleranceWindows: toleranceWindows, numberOfRows: numberOfSubstancesInChart)
+            ToleranceChart(
+                toleranceWindows: toleranceWindows,
+                numberOfRows: numberOfSubstancesInChart,
+                isShowingCurrentTime: true
+            )
             if !substancesInIngestionsButNotChart.isEmpty {
                 (Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and)) + Text(" because of missing tolerance info."))
                     .font(.footnote)
