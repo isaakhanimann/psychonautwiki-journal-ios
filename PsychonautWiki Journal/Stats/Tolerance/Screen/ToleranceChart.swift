@@ -22,7 +22,7 @@ struct ToleranceChart: View {
     
     let toleranceWindows: [ToleranceWindow]
     let numberOfRows: Int
-    let isShowingCurrentTime: Bool
+    let timeOption: ToleranceTimeOption
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -46,10 +46,31 @@ struct ToleranceChart: View {
                 )
                 .foregroundStyle(window.barColor)
             }
-            if isShowingCurrentTime {
-                RuleMark(x: .value("Current Time", date))
-                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+            switch timeOption {
+            case .onlyIfCurrentTimeInChart:
+                if isCurrentTimeInChart {
+                    currentTimeRuleMark
+                }
+            case .alwaysShow:
+                currentTimeRuleMark
             }
+        }
+    }
+
+    var currentTimeRuleMark: some ChartContent {
+        RuleMark(x: .value("Current Time", Date.now))
+            .foregroundStyle(colorScheme == .dark ? .white : .black)
+    }
+
+    var isCurrentTimeInChart: Bool {
+        let starts = toleranceWindows.map { $0.start }
+        let ends = toleranceWindows.map { $0.end }
+        if let startChart = starts.min(),
+           let endChart = ends.max(),
+           startChart <= Date.now && Date.now <= endChart {
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -60,7 +81,7 @@ struct ToleranceChart_Previews: PreviewProvider {
         ToleranceChart(
             toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
             numberOfRows: 2,
-            isShowingCurrentTime: true
+            timeOption: .alwaysShow
         )
         .padding(.horizontal)
     }

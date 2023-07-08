@@ -23,7 +23,7 @@ struct ToleranceChartExplanationScreen: View {
             Text(chartExplanation)
                 .padding(.horizontal)
         }
-        .navigationTitle("Chart Explanation")
+        .navigationTitle("Chart Limitations")
         .dismissWhenTabTapped()
     }
 

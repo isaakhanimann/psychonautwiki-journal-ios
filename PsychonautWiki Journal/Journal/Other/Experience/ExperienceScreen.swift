@@ -288,7 +288,7 @@ struct ExperienceScreen: View {
                         ToleranceChart(
                             toleranceWindows: viewModel.toleranceWindows,
                             numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
-                            isShowingCurrentTime: experience.isCurrent
+                            timeOption: .onlyIfCurrentTimeInChart
                         )
                     } header: {
                         HStack {
@@ -297,7 +297,7 @@ struct ExperienceScreen: View {
                             NavigationLink {
                                 ToleranceChartExplanationScreen()
                             } label: {
-                                Label("Chart Explanation", systemImage: "info.circle")
+                                Label("Chart Limitations", systemImage: "info.circle")
                                     .labelStyle(.iconOnly)
                             }
                         }

@@ -30,7 +30,7 @@ struct ToleranceChartScreenContent: View {
             NavigationLink {
                 ToleranceChartExplanationScreen()
             } label: {
-                Label("Chart Explanation", systemImage: "info.circle")
+                Label("Chart Limitations", systemImage: "info.circle")
             }
             DatePicker(
                 "Start Date",
@@ -40,7 +40,7 @@ struct ToleranceChartScreenContent: View {
             ToleranceChart(
                 toleranceWindows: toleranceWindows,
                 numberOfRows: numberOfSubstancesInChart,
-                isShowingCurrentTime: true
+                timeOption: .alwaysShow
             )
             if !substancesInIngestionsButNotChart.isEmpty {
                 MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
