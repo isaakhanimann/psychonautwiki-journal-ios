@@ -15,36 +15,25 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
-import CoreImage.CIFilterBuiltins
 
-
-struct ShareScreen: View {
+struct ShareIOSorAndroidScreen: View {
     var body: some View {
         List {
-            NavigationLink("iOS") {
-                ShareiOSAppScreen()
-            }
-            NavigationLink("Android") {
-                ShareAndroidAppScreen()
-            }
-            NavigationLink("iOS or Android") {
-                ShareIOSorAndroidScreen()
+            let link = "https://psychonautwiki.org/wiki/PsychonautWiki_Journal"
+            QRCodeView(url: link)
+            if #available(iOS 16.0, *) {
+                ShareLink("Share Link", item: URL(string: link)!)
             }
         }
-        .font(.headline)
-        .navigationTitle("Share App")
+        .navigationTitle("iOS or Android")
         .dismissWhenTabTapped()
     }
 }
 
-
-
-
-struct ShareScreen_Previews: PreviewProvider {
+struct ShareIOSorAndroidScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ShareScreen()
-                .headerProminence(.increased)
+            ShareIOSorAndroidScreen()
         }
         .environmentObject(TabBarObserver())
     }

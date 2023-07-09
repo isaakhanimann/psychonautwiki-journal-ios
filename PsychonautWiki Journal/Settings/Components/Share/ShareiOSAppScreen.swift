@@ -20,7 +20,7 @@ struct ShareiOSAppScreen: View {
     var body: some View {
         List {
             HStack {
-                Text("To unlock all substances triple tap the closed eye in settings.")
+                Text("After download triple tap the closed eye in settings to unlock all substances.")
                 Spacer()
                 Image("Eye Closed")
                     .resizable()
