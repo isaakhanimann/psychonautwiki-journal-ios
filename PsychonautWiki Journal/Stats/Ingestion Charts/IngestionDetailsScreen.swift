@@ -93,6 +93,7 @@ struct IngestionDetails_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             IngestionDetailsScreen(ingestionData: .mock2)
+                .environmentObject(TabBarObserver())
         }
     }
 }

@@ -55,7 +55,16 @@ struct IngestionOverview: View {
                     .font(.title2.bold())
             }
             IngestionOverviewChart(ingestionData: ingestionData)
-                .frame(height: 100)
+                .frame(height: chartHeight)
+        }
+    }
+
+    var chartHeight: CGFloat {
+        let numberOfRows = ingestionData.last12Months.count
+        if numberOfRows < 5 {
+            return CGFloat(numberOfRows*20)
+        } else {
+            return 100
         }
     }
 }
