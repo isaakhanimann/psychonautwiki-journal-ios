@@ -38,6 +38,7 @@ struct ExperienceScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
+    @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = ViewModel()
@@ -318,36 +319,34 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if isEyeOpen {
-                if !viewModel.substancesUsed.isEmpty {
-                    Section("Info") {
-                        ForEach(viewModel.substancesUsed) { substance in
-                            NavigationLink(substance.name) {
-                                SubstanceScreen(substance: substance)
-                            }
+            if isEyeOpen && !isHidingSubstanceInfoInExperience && !viewModel.substancesUsed.isEmpty{
+                Section("Info") {
+                    ForEach(viewModel.substancesUsed) { substance in
+                        NavigationLink(substance.name) {
+                            SubstanceScreen(substance: substance)
                         }
-                        ForEach(viewModel.interactions) { interaction in
-                            NavigationLink {
-                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
-                            } label: {
-                                InteractionPairRow(
-                                    aName: interaction.aName,
-                                    bName: interaction.bName,
-                                    interactionType: interaction.interactionType
-                                )
-                            }
+                    }
+                    ForEach(viewModel.interactions) { interaction in
+                        NavigationLink {
+                            GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                        } label: {
+                            InteractionPairRow(
+                                aName: interaction.aName,
+                                bName: interaction.bName,
+                                interactionType: interaction.interactionType
+                            )
                         }
-                        if viewModel.interactions.isEmpty {
-                            NavigationLink("See Interactions") {
-                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
-                            }
+                    }
+                    if viewModel.interactions.isEmpty {
+                        NavigationLink("See Interactions") {
+                            GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
                         }
-                        if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
-                            NavigationLink {
-                                SaferHallucinogenScreen()
-                            } label: {
-                                Label("Safer Hallucinogens", systemImage: "cross")
-                            }
+                    }
+                    if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
+                        NavigationLink {
+                            SaferHallucinogenScreen()
+                        } label: {
+                            Label("Safer Hallucinogens", systemImage: "cross")
                         }
                     }
                 }

@@ -29,6 +29,7 @@ struct PersistenceController {
     static let isSkippingInteractionChecksKey = "isSkippingInteractionChecks"
     static let isHidingDosageDotsKey = "isHidingDosageDots"
     static let isHidingToleranceChartInExperienceKey = "isHidingToleranceChartInExperience"
+    static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     var viewContext: NSManagedObjectContext {
         container.viewContext

@@ -22,6 +22,7 @@ struct SettingsScreen: View {
     @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
+    @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -32,6 +33,7 @@ struct SettingsScreen: View {
             isSkippingInteractionChecks: $isSkippingInteractionChecks,
             isHidingDosageDots: $isHidingDosageDots,
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
+            isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -58,6 +60,7 @@ struct SettingsContent: View {
     @Binding var isSkippingInteractionChecks: Bool
     @Binding var isHidingDosageDots: Bool
     @Binding var isHidingToleranceChartInExperience: Bool
+    @Binding var isHidingSubstanceInfoInExperience: Bool
     var isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -170,6 +173,7 @@ struct SettingsContent: View {
                         Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
                         Toggle("Hide Dosage Dots", isOn: $isHidingDosageDots).tint(Color.accentColor)
                         Toggle("Hide Tolerance Chart", isOn: $isHidingToleranceChartInExperience).tint(Color.accentColor)
+                        Toggle("Hide Substance Info", isOn: $isHidingSubstanceInfoInExperience).tint(Color.accentColor)
                     }
                 }
                 Section {
@@ -257,6 +261,7 @@ struct SettingsContent_Previews: PreviewProvider {
             isSkippingInteractionChecks: .constant(false),
             isHidingDosageDots: .constant(false),
             isHidingToleranceChartInExperience: .constant(false),
+            isHidingSubstanceInfoInExperience: .constant(false),
             isFaceIDAvailable: true,
             hasToUnlockApp: .constant(false),
             isImporting: false,
