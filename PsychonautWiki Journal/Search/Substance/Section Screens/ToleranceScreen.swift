@@ -44,6 +44,6 @@ struct ToleranceScreen: View {
 
 struct ToleranceScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ToleranceScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+        ToleranceScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!).environmentObject(TabBarObserver())
     }
 }

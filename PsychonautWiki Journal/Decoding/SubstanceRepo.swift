@@ -44,6 +44,10 @@ class SubstanceRepo {
         substancesDict[name]
     }
 
+    func getSubstances<C: Collection>(names: C) -> [Substance] where C.Element == String {
+        substances.filter({names.contains($0.name)})
+    }
+
     static private func getInitialData() -> Data {
         let fileName = "substances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {

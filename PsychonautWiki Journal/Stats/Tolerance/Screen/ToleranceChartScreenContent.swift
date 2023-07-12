@@ -24,13 +24,24 @@ struct ToleranceChartScreenContent: View {
     let substancesInIngestionsButNotChart: [String]
     let numberOfSubstancesInChart: Int
     let onAddTap: () -> Void
+    let substances: [Substance]
 
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationLink {
-                ToleranceChartExplanationScreen()
-            } label: {
-                Label("Chart Limitations", systemImage: "info.circle")
+            HStack {
+                NavigationLink {
+                    ToleranceChartExplanationScreen()
+                } label: {
+                    Label("Chart Limitations", systemImage: "info.circle")
+                        .labelStyle(.titleOnly)
+                }
+                Spacer()
+                NavigationLink {
+                    ToleranceTextsScreen(substances: substances)
+                } label: {
+                    Label("Tolerance Texts", systemImage: "info.circle")
+                        .labelStyle(.titleOnly)
+                }
             }
             DatePicker(
                 "Start Date",
@@ -70,7 +81,8 @@ struct ToleranceChartScreenContent_Previews: PreviewProvider {
                 sinceDate: .constant(Date()),
                 substancesInIngestionsButNotChart: ["2C-B", "DMT"],
                 numberOfSubstancesInChart: 2,
-                onAddTap: {}
+                onAddTap: {},
+                substances: SubstanceRepo.shared.getSubstances(names: ["MDMA", "Ketamine"])
             )
         }
     }

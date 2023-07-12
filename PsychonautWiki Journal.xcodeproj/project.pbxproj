@@ -12,6 +12,7 @@
 		EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */; };
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
+		EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */; };
 		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
@@ -357,6 +358,7 @@
 		EA014F9D27E5F5F200077FB2 /* RowLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLabelView.swift; sourceTree = "<group>"; };
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
+		EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceTextsScreen.swift; sourceTree = "<group>"; };
 		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -1068,6 +1070,7 @@
 			children = (
 				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
 				EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */,
+				EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */,
 				EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */,
 				EAA9C3912A57203800869E5A /* MissingToleranceText.swift */,
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
@@ -1725,6 +1728,7 @@
 				EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EAB8EF542A48D82000542253 /* Tab.swift in Sources */,
+				EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */,
 				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditTitleAndNotesScreen.swift in Sources */,

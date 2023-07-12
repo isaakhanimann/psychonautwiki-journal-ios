@@ -25,6 +25,7 @@ struct ToleranceChartScreen: View {
     @State private var numberOfSubstancesInChart = 0
     @State private var isPresentingSheet = false
     @State private var additionalSubstanceDays: [SubstanceAndDay] = []
+    @State private var substancesInChart: [Substance] = []
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
@@ -39,7 +40,8 @@ struct ToleranceChartScreen: View {
                                     sinceDate: $sinceDate,
                                     substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
                                     numberOfSubstancesInChart: numberOfSubstancesInChart,
-                                    onAddTap: {isPresentingSheet.toggle()}
+                                    onAddTap: {isPresentingSheet.toggle()},
+                                    substances: substancesInChart
         )
         .onAppear(perform: calculateScreen)
         .onChange(of: ingestions.count) { _ in
@@ -68,10 +70,11 @@ struct ToleranceChartScreen: View {
             SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
         }
         toleranceWindows = ToleranceChartCalculator.getToleranceWindows(from: persisted + additionalSubstanceDays, substanceCompanions: Array(substanceCompanions))
-        let substancesInIngestions = Set(relevantIngestions.map({$0.substanceNameUnwrapped}))
-        let substancesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
-        numberOfSubstancesInChart = substancesInToleranceWindows.count
-        let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substancesInToleranceWindows)
+        let substanceNamesInIngestions = Set(relevantIngestions.map({$0.substanceNameUnwrapped}))
+        let substanceNamesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
+        substancesInChart = SubstanceRepo.shared.getSubstances(names: substanceNamesInToleranceWindows)
+        numberOfSubstancesInChart = substanceNamesInToleranceWindows.count
+        let substancesWithoutToleranceWindows = substanceNamesInIngestions.subtracting(substanceNamesInToleranceWindows)
         substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
     }
 }
