@@ -71,13 +71,14 @@ struct ExperienceCodable: Codable {
         self.text = try values.decode(String.self, forKey: .text)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
         self.creationDate = getDateFromMillis(millis: creationDateMillis)
+        self.isFavorite = (try values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
+        let ingestionCodables = try values.decode([IngestionCodable].self, forKey: .ingestions)
+        self.ingestions = ingestionCodables
         if let sortDateMillis = try values.decodeIfPresent(UInt64.self, forKey: .sortDate) {
             self.sortDate = getDateFromMillis(millis: sortDateMillis)
         } else {
-            self.sortDate = nil
+            self.sortDate = ingestionCodables.map({$0.time}).min()
         }
-        self.isFavorite = (try values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
-        self.ingestions = try values.decode([IngestionCodable].self, forKey: .ingestions)
         self.ratings = (try values.decodeIfPresent([RatingCodable].self, forKey: .ratings)) ?? []
         self.location = try values.decodeIfPresent(LocationCodable.self, forKey: .location)
     }

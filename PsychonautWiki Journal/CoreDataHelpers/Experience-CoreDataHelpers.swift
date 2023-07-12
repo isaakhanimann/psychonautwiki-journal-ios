@@ -22,7 +22,7 @@ extension Experience: Comparable {
     }
 
     var sortDateUnwrapped: Date {
-        sortDate ?? creationDateUnwrapped
+        sortDate ?? sortedIngestionsUnwrapped.first?.time ?? creationDateUnwrapped
     }
 
     var year: Int {
