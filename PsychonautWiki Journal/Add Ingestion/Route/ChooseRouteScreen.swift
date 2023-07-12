@@ -45,6 +45,21 @@ struct ChooseRouteScreen: View {
     var screen: some View {
         VStack(alignment: .leading) {
             let documentedRoutes = substance.administrationRoutesUnwrapped
+            if !documentedRoutes.isEmpty {
+                Text("Documented Routes").sectionHeaderStyle()
+                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
+                ForEach(0..<numRows, id: \.self) { index in
+                    HStack {
+                        let route1 = documentedRoutes[index*2]
+                        getRouteBoxFor(route: route1)
+                        let secondIndex = index*2+1
+                        if secondIndex < documentedRoutes.count {
+                            let route2 = documentedRoutes[secondIndex]
+                            getRouteBoxFor(route: route2)
+                        }
+                    }
+                }
+            }
             let otherRoutes = AdministrationRoute.allCases.filter { route in
                 !documentedRoutes.contains(route)
             }
@@ -77,21 +92,6 @@ struct ChooseRouteScreen: View {
                         )
                 }
                 .padding(.bottom)
-            }
-            if !documentedRoutes.isEmpty {
-                Text("Documented Routes").sectionHeaderStyle()
-                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
-                ForEach(0..<numRows, id: \.self) { index in
-                    HStack {
-                        let route1 = documentedRoutes[index*2]
-                        getRouteBoxFor(route: route1)
-                        let secondIndex = index*2+1
-                        if secondIndex < documentedRoutes.count {
-                            let route2 = documentedRoutes[secondIndex]
-                            getRouteBoxFor(route: route2)
-                        }
-                    }
-                }
             }
         }
         .padding(.horizontal)
