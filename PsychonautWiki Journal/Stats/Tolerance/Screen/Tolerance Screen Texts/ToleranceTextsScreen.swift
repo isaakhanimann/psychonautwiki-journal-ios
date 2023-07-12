@@ -18,24 +18,29 @@ import SwiftUI
 
 struct ToleranceTextsScreen: View {
 
-    let substances: [Substance]
+    let substances: [SubstanceWithToleranceAndColor]
 
     var body: some View {
         List {
             ForEach(substances) { substance in
-                Section(substance.name) {
-                    if let full = substance.tolerance?.full {
+                Section {
+                    if let full = substance.full {
                         RowLabelView(label: "full", value: full)
                     }
-                    if let half = substance.tolerance?.half {
+                    if let half = substance.half {
                         RowLabelView(label: "half", value: half)
                     }
-                    if let zero = substance.tolerance?.zero {
+                    if let zero = substance.zero {
                         RowLabelView(label: "zero", value: zero)
                     }
                     let crossTolerances = substance.crossTolerances.joined(separator: ", ")
                     if !crossTolerances.isEmpty {
                         Text("Cross tolerance with \(crossTolerances)")
+                    }
+                } header: {
+                    HStack {
+                        Image(systemName: "circle.fill").foregroundColor(substance.color.swiftUIColor)
+                        Text(substance.substanceName)
                     }
                 }
             }
@@ -50,7 +55,17 @@ struct ToleranceTextsScreen_Previews: PreviewProvider {
                 guard let tolerance = sub.tolerance else { return false }
                 return tolerance.halfToleranceInHours != nil && tolerance.zeroToleranceInHours != nil
             }.shuffled().prefix(5))
-            ToleranceTextsScreen(substances: substances)
+            let substancsWith = substances.map { sub in
+                SubstanceWithToleranceAndColor(
+                    substanceName: sub.name,
+                    full: sub.tolerance?.full,
+                    half: sub.tolerance?.half,
+                    zero: sub.tolerance?.zero,
+                    crossTolerances: sub.crossTolerances,
+                    color: SubstanceColor.allCases.randomElement() ?? .blue
+                )
+            }
+            ToleranceTextsScreen(substances: substancsWith)
                 .environmentObject(TabBarObserver())
                 .headerProminence(.increased)
         }

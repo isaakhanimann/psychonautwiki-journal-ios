@@ -24,7 +24,7 @@ struct ToleranceChartScreenContent: View {
     let substancesInIngestionsButNotChart: [String]
     let numberOfSubstancesInChart: Int
     let onAddTap: () -> Void
-    let substances: [Substance]
+    let substances: [SubstanceWithToleranceAndColor]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -82,7 +82,7 @@ struct ToleranceChartScreenContent_Previews: PreviewProvider {
                 substancesInIngestionsButNotChart: ["2C-B", "DMT"],
                 numberOfSubstancesInChart: 2,
                 onAddTap: {},
-                substances: SubstanceRepo.shared.getSubstances(names: ["MDMA", "Ketamine"])
+                substances: []
             )
         }
     }

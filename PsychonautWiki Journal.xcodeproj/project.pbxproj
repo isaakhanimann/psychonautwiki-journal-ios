@@ -13,6 +13,7 @@
 		EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */; };
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
 		EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */; };
+		EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */; };
 		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
@@ -359,6 +360,7 @@
 		EA014FA327EA1AD300077FB2 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
 		EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceTextsScreen.swift; sourceTree = "<group>"; };
+		EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceWithToleranceAndColor.swift; sourceTree = "<group>"; };
 		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -666,6 +668,15 @@
 				EA014F9927E5E72000077FB2 /* WebViewScreen.swift */,
 			);
 			path = Web;
+			sourceTree = "<group>";
+		};
+		EA039AC12A5F10DE006DFAFE /* Tolerance Screen Texts */ = {
+			isa = PBXGroup;
+			children = (
+				EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */,
+				EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */,
+			);
+			path = "Tolerance Screen Texts";
 			sourceTree = "<group>";
 		};
 		EA085DD129607229001638AC /* TimelineWidget */ = {
@@ -1070,7 +1081,7 @@
 			children = (
 				EAA9C3762A50802C00869E5A /* ToleranceChartScreen.swift */,
 				EAA9C37A2A51F7BC00869E5A /* ToleranceChartScreenContent.swift */,
-				EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */,
+				EA039AC12A5F10DE006DFAFE /* Tolerance Screen Texts */,
 				EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */,
 				EAA9C3912A57203800869E5A /* MissingToleranceText.swift */,
 				EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */,
@@ -1806,6 +1817,7 @@
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
 				EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */,
+				EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */,
 				EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */,
 				EAA9C39B2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
