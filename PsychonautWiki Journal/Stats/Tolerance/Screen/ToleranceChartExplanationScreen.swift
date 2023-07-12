@@ -36,11 +36,9 @@ struct ToleranceChartExplanationScreen: View {
     private let limitations = """
 This chart represents the time it would take for a full tolerance, established at the time of ingestion, to decrease to half and ultimately to none.
 
-The chart assumes instant full tolerance with each ingestion, acting as a basic reference. However, with most substances, full tolerance doesn't happen immediately but builds up with prolonged and repeated use. For more nuanced details regarding the tolerance of a specific substance, refer to the corresponding article on PsychonautWiki.
+The chart assumes instant full tolerance with each ingestion, acting as a basic reference. However for many substances, full tolerance doesn't happen immediately but builds up with prolonged and repeated use. For more nuanced details regarding the tolerance of a specific substance, refer to the corresponding article on PsychonautWiki.
 
 Other influencing factors, like the doses consumed and potential cross-tolerances, are not considered.
-
-If heavy doses of specific substances were frequently consumed, the time required to reset tolerance could be extended in some cases. However it is generally safer to start with a minimal dose, especially after a break from use.
 """
 
     private let visualization = """
