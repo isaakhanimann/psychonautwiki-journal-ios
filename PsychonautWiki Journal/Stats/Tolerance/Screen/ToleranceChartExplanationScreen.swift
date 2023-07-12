@@ -19,15 +19,37 @@ import SwiftUI
 struct ToleranceChartExplanationScreen: View {
 
     var body: some View {
-        ScrollView {
-            Text(chartExplanation)
-                .padding(.horizontal)
+        List {
+            Section("Limitations") {
+                Text(limitations)
+            }
+
+            Section("Understanding the Visualization") {
+                Text(visualization)
+            }
+
         }
         .navigationTitle("Chart Limitations")
         .dismissWhenTabTapped()
     }
 
-    private let chartExplanation = "Marked by an opaque hue, the phase directly succeeding consumption reflects an elevated tolerance to the particular substance. The subsequent lighter shade indicates a reduced tolerance level. This is followed by a return to zero tolerance, necessitating dosage adjustments akin to initial consumption.\n\nThis chart does not factor in cross tolerances.\n\nThe start date denotes the earliest ingestion taken into consideration.\nThe vertical line corresponds to the present time.\n\nThis chart is intended to provide basic guidance. For many substances full tolerance only develops after prolonged and repeated use. In the scenario of repeated heavy doses, it may require a lengthier duration for tolerance to fully reset. It is safer to begin with a small dose, especially after a break in consumption. For more detailed information to the tolerance of the substance in question, read the PsychonautWiki article."
+    private let limitations = """
+This chart represents the time it would take for a full tolerance, established at the time of ingestion, to decrease to half and ultimately to none.
+
+The chart assumes instant full tolerance with each ingestion, acting as a basic reference. However, with most substances, full tolerance doesn't happen immediately but builds up with prolonged and repeated use. For more nuanced details regarding the tolerance of a specific substance, refer to the corresponding article on PsychonautWiki.
+
+Other influencing factors, like the doses consumed and potential cross-tolerances, are not considered.
+
+If heavy doses of specific substances were frequently consumed, the time required to reset tolerance could be extended in some cases. However it is generally safer to start with a minimal dose, especially after a break from use.
+"""
+
+    private let visualization = """
+Marked by an opaque hue, the phase directly succeeding consumption reflects an elevated tolerance to the particular substance. The subsequent lighter shade indicates a reduced tolerance level. This is followed by a return to zero tolerance, necessitating dosage adjustments akin to initial consumption.
+
+The 'start date' denotes the earliest ingestion taken into consideration.
+
+The vertical line marks the present time.
+"""
 
 }
 
@@ -35,6 +57,8 @@ struct ToleranceChartExplanationScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ToleranceChartExplanationScreen()
+                .environmentObject(TabBarObserver())
+                .headerProminence(.increased)
         }
     }
 }

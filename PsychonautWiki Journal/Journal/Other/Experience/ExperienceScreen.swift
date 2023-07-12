@@ -297,8 +297,9 @@ struct ExperienceScreen: View {
                             NavigationLink {
                                 ToleranceChartExplanationScreen()
                             } label: {
-                                Label("Chart Limitations", systemImage: "info.circle")
-                                    .labelStyle(.iconOnly)
+                                Label("Limitations", systemImage: "info.circle")
+                                    .labelStyle(.titleOnly)
+                                    .font(.callout)
                             }
                         }
                     } footer: {
