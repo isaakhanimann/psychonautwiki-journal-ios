@@ -250,7 +250,7 @@ struct StatsScreenContent: View {
                 }
             } footer: {
                 if !substancesInIngestionsButNotChart.isEmpty {
-                    MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
+                    Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
                 }
             }
             Section {
