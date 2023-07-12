@@ -54,10 +54,12 @@ struct ToleranceChartScreenContent: View {
                 } label: {
                     Label("Chart Limitations", systemImage: "info.circle")
                 }
-                NavigationLink {
-                    ToleranceTextsScreen(substances: substances)
-                } label: {
-                    Label("Tolerance Info", systemImage: "doc.plaintext")
+                if !substances.isEmpty {
+                    NavigationLink {
+                        ToleranceTextsScreen(substances: substances)
+                    } label: {
+                        Label("Tolerance Info", systemImage: "doc.plaintext")
+                    }
                 }
             }
         }

@@ -127,7 +127,7 @@ struct ToleranceChartCalculator {
             var result = [SubstanceInterval]()
             var startOfHalfTolerance = pair.day
             let hoursToSeconds: Double = 60*60
-            if let halfToleranceInHours = tolerance?.halfToleranceInHours {
+            if let halfToleranceInHours = tolerance?.halfToleranceInHours, halfToleranceInHours > 24 {
                 let halfTolerance: TimeInterval = halfToleranceInHours * hoursToSeconds
                 startOfHalfTolerance = pair.day.addingTimeInterval(halfTolerance)
                 result.append(SubstanceInterval(
@@ -135,7 +135,7 @@ struct ToleranceChartCalculator {
                     dateInterval: DateInterval(start: pair.day, end: startOfHalfTolerance),
                     toleranceType: .full))
             }
-            if let zeroToleranceInHours = tolerance?.zeroToleranceInHours {
+            if let zeroToleranceInHours = tolerance?.zeroToleranceInHours, zeroToleranceInHours > 24 {
                 let zeroTolerance: TimeInterval = zeroToleranceInHours * hoursToSeconds
                 let startOfZeroTolerance = pair.day.addingTimeInterval(zeroTolerance)
                 result.append(SubstanceInterval(
