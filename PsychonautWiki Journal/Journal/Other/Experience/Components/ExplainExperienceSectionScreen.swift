@@ -24,7 +24,7 @@ struct ExplainExperienceSectionScreen: View {
                 Text(TimelineDisclaimers.fullStomach)
                 Text(TimelineDisclaimers.capsule)
             }
-            Section("Timeline") {
+            Section("Understanding the Timeline") {
                 TimelineExplanationTexts()
                 if #available(iOS 16.2, *) {
                     Text("The start live activity button shows the timeline on the lockscreen.")
@@ -33,7 +33,9 @@ struct ExplainExperienceSectionScreen: View {
             Section("Dosage Dots") {
                 Text("The dots below the dose of an ingestion indicate the strength of the dose. 0 dots means the dose is below threshold, 1 light, 2 common, 3 strong and 4 heavy. More than 4 dots appear when a dose is heavy and the remainder from subtracting the start of the heavy dose range classifies as a light, common, strong or heavy.")
             }
-        }.navigationTitle("Info")
+        }
+        .navigationTitle("Timeline Limitations")
+        .dismissWhenTabTapped()
     }
 }
 
@@ -52,6 +54,8 @@ struct ExplainExperienceSectionScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ExplainExperienceSectionScreen()
+                .environmentObject(TabBarObserver())
+                .headerProminence(.increased)
         }
     }
 }

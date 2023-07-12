@@ -223,7 +223,7 @@ struct ExperienceScreen: View {
                             NavigationLink {
                                 ExplainExperienceSectionScreen()
                             } label: {
-                                Label("Info", systemImage: "info.circle").labelStyle(.iconOnly)
+                                limitationsLabel
                             }
                         }
                     }
@@ -297,9 +297,7 @@ struct ExperienceScreen: View {
                             NavigationLink {
                                 ToleranceChartExplanationScreen()
                             } label: {
-                                Label("Limitations", systemImage: "info.circle")
-                                    .labelStyle(.titleOnly)
-                                    .font(.callout)
+                                limitationsLabel
                             }
                         }
                     } footer: {
@@ -378,6 +376,12 @@ struct ExperienceScreen: View {
             viewModel.experience = experience
             viewModel.reloadScreen(experience: experience)
         }
+    }
+
+    private var limitationsLabel: some View {
+        Label("Limitations", systemImage: "info.circle")
+            .labelStyle(.titleOnly)
+            .font(.callout)
     }
 
     private func delete() {
