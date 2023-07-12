@@ -27,12 +27,8 @@ struct ToleranceChart: View {
 
     var body: some View {
         TimelineView(.everyMinute) { context in
-            if numberOfRows < 8 {
-                getChart(with: context.date)
-                    .frame(height: CGFloat(numberOfRows) * 60)
-            } else {
-                getChart(with: context.date)
-            }
+            getChart(with: context.date)
+                .frame(height: CGFloat(numberOfRows) * 60)
         }
     }
 

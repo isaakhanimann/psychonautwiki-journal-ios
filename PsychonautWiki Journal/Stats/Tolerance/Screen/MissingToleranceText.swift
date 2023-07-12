@@ -21,7 +21,7 @@ struct MissingToleranceText: View {
     let substanceNames: [String]
 
     var body: some View {
-        Text("Excluding ") + Text(substanceNames, format: .list(type: .and)) + Text(" because of missing tolerance info.")
+        Text("Excluding ") + Text(substanceNames, format: .list(type: .and)) + Text(" because of missing tolerance info")
     }
 }
 

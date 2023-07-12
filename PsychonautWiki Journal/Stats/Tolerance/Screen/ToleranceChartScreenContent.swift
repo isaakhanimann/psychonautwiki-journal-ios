@@ -27,40 +27,40 @@ struct ToleranceChartScreenContent: View {
     let substances: [SubstanceWithToleranceAndColor]
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
+        List {
+            Section {
+                DatePicker(
+                    "Start Date",
+                    selection: $sinceDate,
+                    displayedComponents: [.date]
+                )
+            }
+            Section {
+                ToleranceChart(
+                    toleranceWindows: toleranceWindows,
+                    numberOfRows: numberOfSubstancesInChart,
+                    timeOption: .alwaysShow
+                )
+            } footer: {
+                if !substancesInIngestionsButNotChart.isEmpty {
+                    MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
+            }
+            Section {
                 NavigationLink {
                     ToleranceChartExplanationScreen()
                 } label: {
                     Label("Chart Limitations", systemImage: "info.circle")
-                        .labelStyle(.titleOnly)
                 }
-                Spacer()
                 NavigationLink {
                     ToleranceTextsScreen(substances: substances)
                 } label: {
-                    Label("More Info", systemImage: "doc.plaintext")
-                        .labelStyle(.iconOnly)
+                    Label("Tolerance Info", systemImage: "doc.plaintext")
                 }
             }
-            DatePicker(
-                "Start Date",
-                selection: $sinceDate,
-                displayedComponents: [.date]
-            )
-            ToleranceChart(
-                toleranceWindows: toleranceWindows,
-                numberOfRows: numberOfSubstancesInChart,
-                timeOption: .alwaysShow
-            )
-            if !substancesInIngestionsButNotChart.isEmpty {
-                MissingToleranceText(substanceNames: substancesInIngestionsButNotChart)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-            }
-            Spacer()
         }
-        .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: onAddTap) {
