@@ -301,8 +301,19 @@ struct ExperienceScreen: View {
                             }
                         }
                     } footer: {
-                        if !viewModel.substancesInIngestionsButNotChart.isEmpty {
-                            MissingToleranceText(substanceNames: viewModel.substancesInIngestionsButNotChart)
+                        HStack {
+                            if !viewModel.namesOfSubstancesInIngestionsButNotChart.isEmpty {
+                                MissingToleranceText(substanceNames: viewModel.namesOfSubstancesInIngestionsButNotChart)
+                            }
+                            Spacer()
+                            if !viewModel.substancesInChart.isEmpty {
+                                NavigationLink {
+                                    ToleranceTextsScreen(substances: viewModel.substancesInChart)
+                                } label: {
+                                    Label("More", systemImage: "doc.plaintext")
+                                        .labelStyle(.iconOnly)
+                                }
+                            }
                         }
                     }
                 }

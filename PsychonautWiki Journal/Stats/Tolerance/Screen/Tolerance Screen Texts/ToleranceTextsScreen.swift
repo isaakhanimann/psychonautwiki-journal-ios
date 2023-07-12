@@ -56,14 +56,7 @@ struct ToleranceTextsScreen_Previews: PreviewProvider {
                 return tolerance.halfToleranceInHours != nil && tolerance.zeroToleranceInHours != nil
             }.shuffled().prefix(5))
             let substancsWith = substances.map { sub in
-                SubstanceWithToleranceAndColor(
-                    substanceName: sub.name,
-                    full: sub.tolerance?.full,
-                    half: sub.tolerance?.half,
-                    zero: sub.tolerance?.zero,
-                    crossTolerances: sub.crossTolerances,
-                    color: SubstanceColor.allCases.randomElement() ?? .blue
-                )
+                sub.toSubstanceWithToleranceAndColor(substanceColor: SubstanceColor.allCases.randomElement() ?? .red)
             }
             ToleranceTextsScreen(substances: substancsWith)
                 .environmentObject(TabBarObserver())

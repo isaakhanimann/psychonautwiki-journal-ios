@@ -34,7 +34,8 @@ extension ExperienceScreen {
         @Published var sortedRatingsWithTime: [ShulginRating] = []
         @Published var toleranceWindows: [ToleranceWindow] = []
         @Published var numberOfSubstancesInToleranceChart = 0
-        @Published var substancesInIngestionsButNotChart: [String] = []
+        @Published var substancesInChart: [SubstanceWithToleranceAndColor] = []
+        @Published var namesOfSubstancesInIngestionsButNotChart: [String] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
             sortedRatingsWithTime
@@ -92,11 +93,14 @@ extension ExperienceScreen {
                 from: substanceDays,
                 substanceCompanions: Array(substanceCompanions)
             )
-            let substanceNamesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
-            numberOfSubstancesInToleranceChart = substanceNamesInChart.count
-            let substancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
-            let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substanceNamesInChart)
-            substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
+            let namesOfSubstancesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
+            substancesInChart = SubstanceRepo.shared.getSubstances(names: namesOfSubstancesInChart).map({ sub in
+                sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red)
+            })
+            numberOfSubstancesInToleranceChart = namesOfSubstancesInChart.count
+            let namesOfSubstancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
+            let namesOfSubstancesWithoutToleranceWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesInChart)
+            namesOfSubstancesInIngestionsButNotChart = Array(namesOfSubstancesWithoutToleranceWindows)
         }
 
         private func reloadIngestions(experience: Experience) {

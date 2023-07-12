@@ -27,3 +27,16 @@ struct SubstanceWithToleranceAndColor: Identifiable {
     let crossTolerances: [String]
     let color: SubstanceColor
 }
+
+extension Substance {
+    func toSubstanceWithToleranceAndColor(substanceColor: SubstanceColor) -> SubstanceWithToleranceAndColor {
+        SubstanceWithToleranceAndColor(
+            substanceName: name,
+            full: tolerance?.full,
+            half: tolerance?.half,
+            zero: tolerance?.zero,
+            crossTolerances: crossTolerances,
+            color: substanceColor
+        )
+    }
+}

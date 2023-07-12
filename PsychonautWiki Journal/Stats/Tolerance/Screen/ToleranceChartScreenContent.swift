@@ -39,8 +39,8 @@ struct ToleranceChartScreenContent: View {
                 NavigationLink {
                     ToleranceTextsScreen(substances: substances)
                 } label: {
-                    Label("Tolerance Texts", systemImage: "info.circle")
-                        .labelStyle(.titleOnly)
+                    Label("More Info", systemImage: "doc.plaintext")
+                        .labelStyle(.iconOnly)
                 }
             }
             DatePicker(

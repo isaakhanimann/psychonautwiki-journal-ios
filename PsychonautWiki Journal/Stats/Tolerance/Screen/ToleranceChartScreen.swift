@@ -73,14 +73,7 @@ struct ToleranceChartScreen: View {
         let substanceNamesInIngestions = Set(relevantIngestions.map({$0.substanceNameUnwrapped}))
         let substanceNamesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
         substancesInChart = SubstanceRepo.shared.getSubstances(names: substanceNamesInToleranceWindows).map({ sub in
-            SubstanceWithToleranceAndColor(
-                substanceName: sub.name,
-                full: sub.tolerance?.full,
-                half: sub.tolerance?.half,
-                zero: sub.tolerance?.zero,
-                crossTolerances: sub.crossTolerances,
-                color: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red
-            )
+            sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red)
         })
         numberOfSubstancesInChart = substanceNamesInToleranceWindows.count
         let substancesWithoutToleranceWindows = substanceNamesInIngestions.subtracting(substanceNamesInToleranceWindows)
