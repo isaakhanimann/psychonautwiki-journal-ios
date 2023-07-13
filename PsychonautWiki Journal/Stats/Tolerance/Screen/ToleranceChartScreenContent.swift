@@ -77,15 +77,27 @@ struct ToleranceChartScreenContent: View {
 @available(iOS 16.0, *)
 struct ToleranceChartScreenContent_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ToleranceChartScreenContent(
-                toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
-                sinceDate: .constant(Date()),
-                substancesInIngestionsButNotChart: ["2C-B", "DMT"],
-                numberOfSubstancesInChart: 2,
-                onAddTap: {},
-                substances: []
-            )
+        Group {
+            NavigationView {
+                ToleranceChartScreenContent(
+                    toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
+                    sinceDate: .constant(Date()),
+                    substancesInIngestionsButNotChart: ["2C-B", "DMT"],
+                    numberOfSubstancesInChart: 2,
+                    onAddTap: {},
+                    substances: []
+                )
+            }
+            NavigationView {
+                ToleranceChartScreenContent(
+                    toleranceWindows: [],
+                    sinceDate: .constant(Date()),
+                    substancesInIngestionsButNotChart: [],
+                    numberOfSubstancesInChart: 0,
+                    onAddTap: {},
+                    substances: []
+                )
+            }
         }
     }
 }

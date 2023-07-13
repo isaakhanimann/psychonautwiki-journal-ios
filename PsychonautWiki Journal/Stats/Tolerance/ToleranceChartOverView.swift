@@ -32,22 +32,24 @@ struct ToleranceChartOverView: View {
                     .foregroundStyle(.secondary)
                 title
                     .font(.title2.bold())
-                Chart {
-                    ForEach(toleranceWindows) { window in
-                        BarMark(
-                            xStart: .value("Start Time", window.start),
-                            xEnd: .value("End Time", window.end),
-                            y: .value("Substance", window.substanceName)
-                        )
-                        .foregroundStyle(window.barColor)
+                if !toleranceWindows.isEmpty {
+                    Chart {
+                        ForEach(toleranceWindows) { window in
+                            BarMark(
+                                xStart: .value("Start Time", window.start),
+                                xEnd: .value("End Time", window.end),
+                                y: .value("Substance", window.substanceName)
+                            )
+                            .foregroundStyle(window.barColor)
+                        }
+                        RuleMark(x: .value("Current Time", context.date))
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     }
-                    RuleMark(x: .value("Current Time", context.date))
-                        .foregroundStyle(colorScheme == .dark ? .white : .black)
+                    .chartLegend(.hidden)
+                    .chartXAxis(.hidden)
+                    .chartYAxis(.hidden)
+                    .frame(height: chartHeight)
                 }
-                .chartLegend(.hidden)
-                .chartXAxis(.hidden)
-                .chartYAxis(.hidden)
-                .frame(height: chartHeight)
             }
         }
     }

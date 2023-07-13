@@ -26,9 +26,16 @@ struct ToleranceChart: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        TimelineView(.everyMinute) { context in
-            getChart(with: context.date)
-                .frame(height: CGFloat(numberOfRows) * 60)
+        Group {
+            if toleranceWindows.isEmpty {
+                Text("No ingestions with tolerance info")
+                    .foregroundColor(.secondary)
+            } else {
+                TimelineView(.everyMinute) { context in
+                    getChart(with: context.date)
+                        .frame(height: CGFloat(numberOfRows) * 60)
+                }
+            }
         }
     }
 
@@ -74,11 +81,19 @@ struct ToleranceChart: View {
 @available(iOS 16.0, *)
 struct ToleranceChart_Previews: PreviewProvider {
     static var previews: some View {
-        ToleranceChart(
-            toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
-            numberOfRows: 2,
-            timeOption: .alwaysShow
-        )
-        .padding(.horizontal)
+        Group {
+            ToleranceChart(
+                toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
+                numberOfRows: 2,
+                timeOption: .alwaysShow
+            )
+            .padding(.horizontal)
+            ToleranceChart(
+                toleranceWindows: [],
+                numberOfRows: 0,
+                timeOption: .alwaysShow
+            )
+            .padding(.horizontal)
+        }
     }
 }
