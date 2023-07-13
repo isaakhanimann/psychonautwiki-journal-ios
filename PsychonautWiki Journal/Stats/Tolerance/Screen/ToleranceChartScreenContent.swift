@@ -39,7 +39,8 @@ struct ToleranceChartScreenContent: View {
                 ToleranceChart(
                     toleranceWindows: toleranceWindows,
                     numberOfRows: numberOfSubstancesInChart,
-                    timeOption: .alwaysShow
+                    timeOption: .alwaysShow,
+                    experienceStartDate: nil
                 )
             } footer: {
                 if !substancesInIngestionsButNotChart.isEmpty {

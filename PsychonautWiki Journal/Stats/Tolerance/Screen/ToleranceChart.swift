@@ -23,6 +23,7 @@ struct ToleranceChart: View {
     let toleranceWindows: [ToleranceWindow]
     let numberOfRows: Int
     let timeOption: ToleranceTimeOption
+    let experienceStartDate: Date?
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -57,6 +58,10 @@ struct ToleranceChart: View {
             case .alwaysShow:
                 currentTimeRuleMark
             }
+            if let experienceStartDate, fabs(experienceStartDate.timeIntervalSinceNow) > 10*60*60 {
+                RuleMark(x: .value("Experience Time", experienceStartDate))
+                    .foregroundStyle(.primary)
+            }
         }
     }
 
@@ -85,13 +90,15 @@ struct ToleranceChart_Previews: PreviewProvider {
             ToleranceChart(
                 toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
                 numberOfRows: 2,
-                timeOption: .alwaysShow
+                timeOption: .alwaysShow,
+                experienceStartDate: nil
             )
             .padding(.horizontal)
             ToleranceChart(
                 toleranceWindows: [],
                 numberOfRows: 0,
-                timeOption: .alwaysShow
+                timeOption: .alwaysShow,
+                experienceStartDate: nil
             )
             .padding(.horizontal)
         }
