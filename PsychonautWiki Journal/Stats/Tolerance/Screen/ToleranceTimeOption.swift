@@ -17,5 +17,6 @@
 import Foundation
 
 enum ToleranceTimeOption {
-    case onlyIfCurrentTimeInChart, alwaysShow
+    case onlyIfCurrentTimeInChart
+    case alwaysShow
 }

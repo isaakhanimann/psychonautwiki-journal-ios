@@ -55,12 +55,12 @@ struct ToleranceChart: View {
                 if isCurrentTimeInChart {
                     currentTimeRuleMark
                 }
+                if let experienceStartDate, fabs(experienceStartDate.timeIntervalSinceNow) > 24*60*60 {
+                    RuleMark(x: .value("Experience Time", experienceStartDate))
+                        .foregroundStyle(Color.gray)
+                }
             case .alwaysShow:
                 currentTimeRuleMark
-            }
-            if let experienceStartDate, fabs(experienceStartDate.timeIntervalSinceNow) > 10*60*60 {
-                RuleMark(x: .value("Experience Time", experienceStartDate))
-                    .foregroundStyle(.primary)
             }
         }
     }
