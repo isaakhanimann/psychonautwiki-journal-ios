@@ -46,7 +46,7 @@ struct DurationScreen: View {
                 }
                 ForEach(durationInfos, id: \.route) { info in
                     let isRouteHidden = hiddenRoutes.contains(info.route)
-                    HStack(alignment: .center) {
+                    HStack(alignment: .center, spacing: 8) {
                         if isRouteHidden {
                             Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
