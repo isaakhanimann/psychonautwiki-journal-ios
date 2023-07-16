@@ -36,6 +36,7 @@ struct StatsScreen: View {
     @State private var ingestionData: IngestionData? = nil
     @State private var toleranceWindows: [ToleranceWindow] = []
     @State private var substancesInIngestionsButNotChart: [String] = []
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         NavigationView {
@@ -45,7 +46,8 @@ struct StatsScreen: View {
                         experienceData: experienceData,
                         ingestionData: ingestionData,
                         toleranceWindows: toleranceWindows,
-                        substancesInIngestionsButNotChart: substancesInIngestionsButNotChart
+                        substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
+                        isEyeOpen: isEyeOpen
                     )
                 } else {
                     ProgressView().task {
@@ -239,18 +241,21 @@ struct StatsScreenContent: View {
     let ingestionData: IngestionData
     let toleranceWindows: [ToleranceWindow]
     let substancesInIngestionsButNotChart: [String]
+    let isEyeOpen: Bool
 
     var body: some View {
         List {
-            Section {
-                NavigationLink {
-                    ToleranceChartScreen()
-                } label: {
-                    ToleranceChartOverView(toleranceWindows: toleranceWindows)
-                }
-            } footer: {
-                if !substancesInIngestionsButNotChart.isEmpty {
-                    Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
+            if isEyeOpen {
+                Section {
+                    NavigationLink {
+                        ToleranceChartScreen()
+                    } label: {
+                        ToleranceChartOverView(toleranceWindows: toleranceWindows)
+                    }
+                } footer: {
+                    if !substancesInIngestionsButNotChart.isEmpty {
+                        Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
+                    }
                 }
             }
             Section {
@@ -279,7 +284,8 @@ struct StatsScreenContent_Previews: PreviewProvider {
                 experienceData: .mock1,
                 ingestionData: .mock1,
                 toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
-                substancesInIngestionsButNotChart: ["2C-B", "DMT"]
+                substancesInIngestionsButNotChart: ["2C-B", "DMT"],
+                isEyeOpen: true
             )
         }
     }

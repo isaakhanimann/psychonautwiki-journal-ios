@@ -36,7 +36,7 @@ struct EditColorsScreen: View {
         List {
             Section {
                 if substanceCompanions.isEmpty {
-                    Text("No Ingestions Added Yet")
+                    Text("No colors added yet")
                 } else {
                     ForEach(substanceCompanions) { companion in
                         NavigationLink {

@@ -162,14 +162,14 @@ struct SettingsContent: View {
                         }
                     )
                 }
-                Section("UI") {
-                    NavigationLink {
-                        EditColorsScreen()
-                    } label: {
-                        Label("Edit Substance Colors", systemImage: "paintpalette")
-                    }
-                    .foregroundColor(.accentColor)
-                    if isEyeOpen {
+                if isEyeOpen {
+                    Section("UI") {
+                        NavigationLink {
+                            EditColorsScreen()
+                        } label: {
+                            Label("Edit Substance Colors", systemImage: "paintpalette")
+                        }
+                        .foregroundColor(.accentColor)
                         Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
                         Toggle("Hide Dosage Dots", isOn: $isHidingDosageDots).tint(Color.accentColor)
                         Toggle("Hide Tolerance Chart", isOn: $isHidingToleranceChartInExperience).tint(Color.accentColor)
