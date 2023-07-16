@@ -54,11 +54,10 @@ struct DurationScreen: View {
                         VStack(alignment: .leading) {
                             Text(info.route.rawValue.localizedCapitalized).font(.headline)
                             OneRoaDurationRow(duration: info.roaDuration, color: info.route.color)
-                            Text(TimelineDisclaimers.capsule).font(.footnote)
                             if info.route == .oral {
                                 Spacer().frame(height: 5)
                                 VStack(alignment: .leading) {
-                                    Text("Stomach Fullness").font(.subheadline.weight(.medium))
+                                    Text("Stomach Fullness Delay").font(.footnote.weight(.medium))
                                     Picker("Stomach Fullness", selection: $stomachFullness) {
                                         ForEach(StomachFullness.allCases) { option in
                                             Text(option.text)
@@ -73,6 +72,7 @@ struct DurationScreen: View {
                                         .fill(Color(uiColor: UIColor.systemGray6))
                                 )
                             }
+                            Text(TimelineDisclaimers.capsule).font(.footnote)
                         }
                     }
                     .swipeActions(edge: .leading) {
