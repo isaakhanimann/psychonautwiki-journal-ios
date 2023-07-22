@@ -14,31 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
+import Foundation
 
-struct ToleranceWindow: Identifiable {
-
-    let id = UUID()
-    let substanceName: String
-    let start: Date
-    let end: Date
-    let toleranceType: ToleranceType
-    let barColor: Color
-
-    init(substanceName: String, start: Date, end: Date, toleranceType: ToleranceType, substanceColor: Color) {
-        self.substanceName = substanceName
-        self.start = start
-        self.end = end
-        self.toleranceType = toleranceType
-        switch toleranceType {
-        case .full:
-            self.barColor = substanceColor
-        case .half:
-            self.barColor = substanceColor.opacity(0.5)
-        }
-    }
-
-    func contains(date: Date) -> Bool {
-        start <= date && end >= date
+extension Date {
+    func getDateWithoutTime() -> Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: self)
+        return calendar.date(from: components) ?? self
     }
 }

@@ -14,6 +14,7 @@
 		EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */; };
 		EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */; };
 		EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */; };
+		EA039AC52A6BAA10006DFAFE /* Date-Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC42A6BAA10006DFAFE /* Date-Format.swift */; };
 		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
@@ -361,6 +362,7 @@
 		EA014FAF27EC6E0400077FB2 /* UnitPickerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerOptions.swift; sourceTree = "<group>"; };
 		EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceTextsScreen.swift; sourceTree = "<group>"; };
 		EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceWithToleranceAndColor.swift; sourceTree = "<group>"; };
+		EA039AC42A6BAA10006DFAFE /* Date-Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Format.swift"; sourceTree = "<group>"; };
 		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -1324,6 +1326,7 @@
 				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
 				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
+				EA039AC42A6BAA10006DFAFE /* Date-Format.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
 				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
@@ -1765,6 +1768,7 @@
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
 				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
+				EA039AC52A6BAA10006DFAFE /* Date-Format.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,

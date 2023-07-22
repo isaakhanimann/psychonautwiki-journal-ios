@@ -290,7 +290,7 @@ struct ExperienceScreen: View {
                             toleranceWindows: viewModel.toleranceWindows,
                             numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
                             timeOption: .onlyIfCurrentTimeInChart,
-                            experienceStartDate: experience.sortDateUnwrapped
+                            experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
                         )
                     } header: {
                         HStack {

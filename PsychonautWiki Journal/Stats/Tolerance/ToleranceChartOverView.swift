@@ -76,7 +76,7 @@ struct ToleranceChartOverView: View {
     
     private func getSubstanceNamesWithFullTolerance() -> [String] {
         toleranceWindows.filter { window in
-            window.toleranceType == .full && window.start <= Date.now && window.end >= Date.now
+            window.toleranceType == .full && window.contains(date: Date.now)
         }.map { window in
             window.substanceName
         }.uniqued()
@@ -84,7 +84,7 @@ struct ToleranceChartOverView: View {
     
     private func getSubstanceNamesWithHalfTolerance() -> [String] {
         toleranceWindows.filter { window in
-            window.toleranceType == .half && window.start <= Date.now && window.end >= Date.now
+            window.toleranceType == .half && window.contains(date: Date.now)
         }.map { window in
             window.substanceName
         }.uniqued()

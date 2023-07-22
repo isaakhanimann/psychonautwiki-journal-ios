@@ -29,7 +29,7 @@ struct ToleranceChartCalculator {
 
     private static func removeMultipleSubstancesInADay(substanceAndDays: [SubstanceAndDay]) -> [SubstanceAndDay] {
         Dictionary(grouping: substanceAndDays, by: { ing in
-            dateWithoutTime(from: ing.day)
+            ing.day.getDateWithoutTime()
         }).flatMap { day, substances in
             let substanceNames = Set(substances.map {$0.substanceName})
             return substanceNames.map { name in
@@ -173,11 +173,5 @@ struct ToleranceChartCalculator {
             }
         }
         return mergedIntervals
-    }
-
-    private static func dateWithoutTime(from date: Date) -> Date {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
-        return calendar.date(from: components) ?? date
     }
 }

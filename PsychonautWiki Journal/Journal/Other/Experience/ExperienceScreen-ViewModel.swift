@@ -89,10 +89,11 @@ extension ExperienceScreen {
                 SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
             }
             let substanceCompanions = PersistenceController.shared.getSubstanceCompanions()
-            toleranceWindows = ToleranceChartCalculator.getToleranceWindows(
+            let allWindowsInLast3Months = ToleranceChartCalculator.getToleranceWindows(
                 from: substanceDays,
                 substanceCompanions: Array(substanceCompanions)
             )
+            self.toleranceWindows = getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: allWindowsInLast3Months)
             let namesOfSubstancesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
             substancesInChart = SubstanceRepo.shared.getSubstances(names: namesOfSubstancesInChart).map({ sub in
                 sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red)
@@ -101,6 +102,18 @@ extension ExperienceScreen {
             let namesOfSubstancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
             let namesOfSubstancesWithoutToleranceWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesInChart)
             namesOfSubstancesInIngestionsButNotChart = Array(namesOfSubstancesWithoutToleranceWindows)
+        }
+
+        private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {
+            let time = experience?.sortDateUnwrapped ?? sortedIngestions.first?.time ?? Date.now
+            let dateWithoutTime = time.getDateWithoutTime()
+            let filteredWindows = windows.filter { win in
+                win.contains(date: dateWithoutTime)
+            }
+            let substancesInFilteredWindows = Set(filteredWindows.map({$0.substanceName}))
+            return windows.filter { win in
+                substancesInFilteredWindows.contains(win.substanceName)
+            }
         }
 
         private func reloadIngestions(experience: Experience) {
