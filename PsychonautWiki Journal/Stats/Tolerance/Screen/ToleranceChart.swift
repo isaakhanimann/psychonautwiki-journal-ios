@@ -66,7 +66,7 @@ struct ToleranceChart: View {
     }
 
     var currentTimeRuleMark: some ChartContent {
-        RuleMark(x: .value("Current Time", Date.now))
+        RuleMark(x: .value("Current Time", Date.now.getDateWithoutTime()))
             .foregroundStyle(colorScheme == .dark ? .white : .black)
     }
 
