@@ -34,8 +34,6 @@ struct ToleranceChartScreenContent: View {
                     selection: $sinceDate,
                     displayedComponents: [.date]
                 )
-            }
-            Section {
                 ToleranceChart(
                     toleranceWindows: toleranceWindows,
                     numberOfRows: numberOfSubstancesInChart,
@@ -49,6 +47,7 @@ struct ToleranceChartScreenContent: View {
                         .foregroundColor(.secondary)
                 }
             }
+            .listRowSeparator(.hidden)
             Section {
                 NavigationLink {
                     ToleranceChartExplanationScreen()
