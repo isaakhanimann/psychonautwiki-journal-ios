@@ -20,21 +20,21 @@ import Combine
 class TabBarObserver: ObservableObject {
 
     let tabTapSubject = PassthroughSubject<TabTapOption, Never>() // PassthroughSubject is needed such that onReceive is not executed every time a new subscriber subscribes to it. This happens if the SameTabTapModifier is on a screen that appears.
-    @Published var tapOption = TabTapOption.sameTab
-    @Published var selectedTab = Tab.journal
-    private var previousTab: Tab?
+
+    var selectedTab: Tab {
+        get { _selectedTab }
+        set {
+            _selectedTab = newValue
+            let tapOption = _previousTab == newValue ? TabTapOption.sameTab : TabTapOption.otherTab
+            _previousTab = newValue
+            tabTapSubject.send(tapOption)
+        }
+    }
+
+    private var _previousTab: Tab?
+    private var _selectedTab: Tab = .journal
 
     enum TabTapOption {
         case otherTab, sameTab
-    }
-
-    init() {
-        $selectedTab.map { newTab in
-            let tapOption = self.previousTab == newTab ? TabTapOption.sameTab : TabTapOption.otherTab
-            self.previousTab = newTab
-            self.tabTapSubject.send(tapOption)
-            return tapOption
-        }
-        .assign(to: &$tapOption)
     }
 }

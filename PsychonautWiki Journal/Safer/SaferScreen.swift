@@ -26,7 +26,9 @@ struct SaferScreen: View {
                     NavigationLink(title1) {
                         List {
                             Text("In advance research the duration, subjective effects and potential adverse effects which the substance or combination of substances are likely to produce.\nRead the info in here and also the PsychonautWiki article. Its best to cross-reference with other sources (Tripsit, Erowid, Wikipedia, Bluelight, Reddit, etc).\nThere is no rush.")
-                        }.navigationTitle(title1)
+                        }
+                        .navigationTitle(title1)
+                        .dismissWhenTabTapped()
                     }
                     NavigationLink("Testing") {
                         TestingScreen()
@@ -48,6 +50,7 @@ struct SaferScreen: View {
                             }
                         }
                         .navigationTitle(title4)
+                        .dismissWhenTabTapped()
                     }
                     let title5 = "Combinations"
                     NavigationLink(title5) {
@@ -61,7 +64,9 @@ struct SaferScreen: View {
                                 "Tripsit Combination Checker",
                                 destination: URL(string: "https://combo.tripsit.me")!
                             )
-                        }.navigationTitle(title5)
+                        }
+                        .navigationTitle(title5)
+                            .dismissWhenTabTapped()
                     }
                     NavigationLink("Administration Routes") {
                         SaferRoutesScreen()
@@ -71,19 +76,25 @@ struct SaferScreen: View {
                         NavigationLink(title7) {
                             List {
                                 Text("Simply dose a minuscule amount of the substance (e.g. 1/10 to 1/4 of a regular dose) and wait several hours to verify that you do not exhibit an unusual or idiosyncratic response.")
-                            }.navigationTitle(title7)
+                            }
+                            .navigationTitle(title7)
+                            .dismissWhenTabTapped()
                         }
                         let title8 = "Reflection"
                         NavigationLink(title8) {
                             List {
                                 Text("Carefully monitor the frequency and intensity of any substance use to ensure it is not sliding into abuse and addiction. In particular, many stimulants, opioids, and depressants are known to be highly addictive.")
-                            }.navigationTitle(title8)
+                            }
+                            .navigationTitle(title8)
+                            .dismissWhenTabTapped()
                         }
                         let title9 = "Safety of Others"
                         NavigationLink(title9) {
                             List {
                                 Text("Don’t drive, operate heavy machinery, or otherwise be directly or indirectly responsible for the safety or care of another person while intoxicated.")
-                            }.navigationTitle(title9)
+                            }
+                            .navigationTitle(title9)
+                            .dismissWhenTabTapped()
                         }
                         let title10 = "Recovery Position"
                         NavigationLink(title10) {
@@ -93,7 +104,9 @@ struct SaferScreen: View {
                                 ) {
                                     Label("Recovery Position Video", systemImage: "play")
                                 }
-                            }.navigationTitle(title10)
+                            }
+                            .navigationTitle(title10)
+                            .dismissWhenTabTapped()
                         }
                     }
                 }
