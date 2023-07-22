@@ -15,6 +15,8 @@
 		EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */; };
 		EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */; };
 		EA039AC52A6BAA10006DFAFE /* Date-Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC42A6BAA10006DFAFE /* Date-Format.swift */; };
+		EA039AC72A6C6657006DFAFE /* View-ColorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC62A6C6657006DFAFE /* View-ColorBackground.swift */; };
+		EA039ACA2A6C6691006DFAFE /* DurationChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC92A6C6691006DFAFE /* DurationChip.swift */; };
 		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
@@ -363,6 +365,8 @@
 		EA039ABF2A5E75CE006DFAFE /* ToleranceTextsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceTextsScreen.swift; sourceTree = "<group>"; };
 		EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceWithToleranceAndColor.swift; sourceTree = "<group>"; };
 		EA039AC42A6BAA10006DFAFE /* Date-Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Format.swift"; sourceTree = "<group>"; };
+		EA039AC62A6C6657006DFAFE /* View-ColorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-ColorBackground.swift"; sourceTree = "<group>"; };
+		EA039AC92A6C6691006DFAFE /* DurationChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationChip.swift; sourceTree = "<group>"; };
 		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -679,6 +683,17 @@
 				EA039AC22A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift */,
 			);
 			path = "Tolerance Screen Texts";
+			sourceTree = "<group>";
+		};
+		EA039AC82A6C6672006DFAFE /* Duration */ = {
+			isa = PBXGroup;
+			children = (
+				EA527A8729428011009C142D /* DurationScreen.swift */,
+				EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */,
+				EA039AC62A6C6657006DFAFE /* View-ColorBackground.swift */,
+				EA039AC92A6C6691006DFAFE /* DurationChip.swift */,
+			);
+			path = Duration;
 			sourceTree = "<group>";
 		};
 		EA085DD129607229001638AC /* TimelineWidget */ = {
@@ -1178,14 +1193,13 @@
 		EABD921A294276AA0073303A /* Section Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EA039AC82A6C6672006DFAFE /* Duration */,
 				EABD921B294276DC0073303A /* SummaryScreen.swift */,
 				EABD921F29427A9C0073303A /* DosesScreen.swift */,
 				EA8447E627CD175000B10DD3 /* DoseRow.swift */,
 				EABD921D294278240073303A /* CategoryScreen.swift */,
 				EA527A8329427E61009C142D /* ToleranceScreen.swift */,
 				EA527A8529427F56009C142D /* ToxicityScreen.swift */,
-				EA527A8729428011009C142D /* DurationScreen.swift */,
-				EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */,
 				EA527A8929428146009C142D /* InteractionsScreen.swift */,
 				EA41C61C295AF236000DA021 /* InteractionsGroup.swift */,
 				EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */,
@@ -1767,6 +1781,7 @@
 				EA55CEB92A3F290900FE1A44 /* DotRows.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
+				EA039ACA2A6C6691006DFAFE /* DurationChip.swift in Sources */,
 				EA4189EE2962E67600DEA663 /* Constants.swift in Sources */,
 				EA039AC52A6BAA10006DFAFE /* Date-Format.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
@@ -1842,6 +1857,7 @@
 				EAE480912973DE3600B600EF /* ExperienceScreen-ViewModel.swift in Sources */,
 				EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */,
 				EA55CEB42A3F278A00FE1A44 /* ExperienceTimeText.swift in Sources */,
+				EA039AC72A6C6657006DFAFE /* View-ColorBackground.swift in Sources */,
 				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
