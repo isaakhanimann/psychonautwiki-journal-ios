@@ -71,8 +71,8 @@ struct DurationScreen: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(Color(uiColor: UIColor.systemGray6))
                                 )
+                                Text(TimelineDisclaimers.capsule).font(.footnote)
                             }
-                            Text(TimelineDisclaimers.capsule).font(.footnote)
                         }
                     }
                     .swipeActions(edge: .leading) {
