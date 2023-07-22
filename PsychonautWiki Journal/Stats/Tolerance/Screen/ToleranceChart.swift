@@ -26,6 +26,16 @@ struct ToleranceChart: View {
     let experienceStartDate: Date?
     @Environment(\.colorScheme) var colorScheme
 
+    private var chartHeight: CGFloat {
+        if numberOfRows < 4 {
+            return CGFloat(numberOfRows) * 55
+        } else if numberOfRows < 7 {
+            return CGFloat(numberOfRows) * 50
+        } else {
+            return CGFloat(numberOfRows) * 45
+        }
+    }
+
     var body: some View {
         Group {
             if toleranceWindows.isEmpty {
@@ -34,7 +44,7 @@ struct ToleranceChart: View {
             } else {
                 TimelineView(.everyMinute) { context in
                     getChart(with: context.date)
-                        .frame(height: CGFloat(numberOfRows) * 60)
+                        .frame(height: chartHeight)
                 }
             }
         }
