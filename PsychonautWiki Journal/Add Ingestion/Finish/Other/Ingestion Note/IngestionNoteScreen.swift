@@ -45,6 +45,7 @@ struct IngestionNoteScreen: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .onAppear {
             textFieldIsFocused = true
         }

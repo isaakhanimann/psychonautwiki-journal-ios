@@ -43,6 +43,7 @@ struct ExperienceTitleScreen: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .onAppear {
             textFieldIsFocused = true
         }

@@ -26,57 +26,54 @@ struct WelcomeScreen: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                ScrollView {
-                    Image(decorative: imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 130, height: 130, alignment: .center)
-                        .padding(.leading, 10)
-                        .onTapGesture(count: 3, perform: toggleEye)
-                    VStack(spacing: 20) {
-                        (Text("Welcome to ") + Text("PsychonautWiki Journal").foregroundColor(.accentColor))
-                            .multilineTextAlignment(.center)
-                            .font(.largeTitle.bold())
+        VStack(spacing: 20) {
+            ScrollView {
+                Image(decorative: imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 130, height: 130, alignment: .center)
+                    .padding(.leading, 10)
+                    .onTapGesture(count: 3, perform: toggleEye)
+                VStack(spacing: 20) {
+                    (Text("Welcome to ") + Text("PsychonautWiki Journal").foregroundColor(.accentColor))
+                        .multilineTextAlignment(.center)
+                        .font(.largeTitle.bold())
 
-                        ForEach(features) { feature in
-                            HStack {
-                                Image(systemName: feature.image)
-                                    .frame(width: 44)
-                                    .font(.title)
-                                    .foregroundColor(.accentColor)
-                                    .accessibilityHidden(true)
+                    ForEach(features) { feature in
+                        HStack {
+                            Image(systemName: feature.image)
+                                .frame(width: 44)
+                                .font(.title)
+                                .foregroundColor(.accentColor)
+                                .accessibilityHidden(true)
 
-                                VStack(alignment: .leading) {
-                                    Text(feature.title)
-                                        .font(.headline)
+                            VStack(alignment: .leading) {
+                                Text(feature.title)
+                                    .font(.headline)
 
-                                    Text(feature.description)
-                                        .foregroundColor(.secondary)
-                                }
-                                .accessibilityElement(children: .combine)
+                                Text(feature.description)
+                                    .foregroundColor(.secondary)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .accessibilityElement(children: .combine)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                Text("Your data is kept offline at all times")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                Button(action: {
-                    isShowingWelcome.toggle()
-                }, label: {
-                    Text("I understand")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                })
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
             }
-            .padding()
-            .navigationBarHidden(true)
+            Text("Your data is kept offline at all times")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            Button(action: {
+                isShowingWelcome.toggle()
+            }, label: {
+                Text("I understand")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+            })
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
+        .padding()
     }
 
     private func toggleEye() {

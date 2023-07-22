@@ -73,5 +73,6 @@ struct SearchScreen: View {
                 isSearchFocused = true
             }
         }
+        .navigationViewStyle(.stack)
     }
 }

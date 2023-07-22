@@ -225,6 +225,7 @@ struct SettingsContent: View {
                 )
             }
         }
+        .navigationViewStyle(.stack)
     }
 
 

@@ -72,6 +72,7 @@ struct AddSprayScreen: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     private func save(sizeInMl: Double, numSprays: Double) {

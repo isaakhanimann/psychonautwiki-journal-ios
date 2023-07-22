@@ -53,6 +53,7 @@ struct JournalScreen: View {
             }
             .navigationTitle("Journal")
         }
+        .navigationViewStyle(.stack)
     }
 
     private var newIngestionButton: some View {

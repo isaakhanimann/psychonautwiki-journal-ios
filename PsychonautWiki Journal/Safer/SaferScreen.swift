@@ -106,6 +106,7 @@ struct SaferScreen: View {
             .font(.headline)
             .navigationTitle("Safer Use")
         }
+        .navigationViewStyle(.stack)
     }
 }
 

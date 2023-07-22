@@ -41,6 +41,7 @@ struct SubstanceScreen: View {
                     isShowingAddIngestionSheet.toggle()
                 }
             }
+            .navigationViewStyle(.stack)
         }
         .dismissWhenTabTapped()
         .navigationTitle(substance.name)

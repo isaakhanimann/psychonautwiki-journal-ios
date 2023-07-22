@@ -54,6 +54,7 @@ struct ChooseLocationScreen: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .task {
             if locationManager.authorizationStatus == .notDetermined {
                 locationManager.requestPermission()

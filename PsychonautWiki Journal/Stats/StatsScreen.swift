@@ -58,6 +58,7 @@ struct StatsScreen: View {
                 calculateStats()
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     private func calculateStats() {

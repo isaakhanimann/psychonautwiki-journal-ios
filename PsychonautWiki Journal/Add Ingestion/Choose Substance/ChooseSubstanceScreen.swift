@@ -71,6 +71,7 @@ struct ChooseSubstanceContent: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
             AlertToast(
                 displayMode: .alert,
