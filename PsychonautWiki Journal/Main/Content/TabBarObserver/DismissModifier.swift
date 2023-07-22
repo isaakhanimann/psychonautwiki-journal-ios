@@ -23,7 +23,7 @@ struct DismissModifier: ViewModifier {
     @EnvironmentObject var tabBarObserver: TabBarObserver
     
     func body(content: Content) -> some View {
-        content.onReceive(tabBarObserver.$tapOption) { option in
+        content.onReceive(tabBarObserver.tabTapSubject) { option in
             if option == .sameTab && tabBarObserver.selectedTab == currentTab {
                 presentationMode.wrappedValue.dismiss()
             }

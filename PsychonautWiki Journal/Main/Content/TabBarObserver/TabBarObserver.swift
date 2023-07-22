@@ -15,8 +15,11 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import Foundation
+import Combine
 
 class TabBarObserver: ObservableObject {
+
+    let tabTapSubject = PassthroughSubject<TabTapOption, Never>() // PassthroughSubject is needed such that onReceive is not executed every time a new subscriber subscribes to it. This happens if the SameTabTapModifier is on a screen that appears.
     @Published var tapOption = TabTapOption.sameTab
     @Published var selectedTab = Tab.journal
     private var previousTab: Tab?
@@ -29,6 +32,7 @@ class TabBarObserver: ObservableObject {
         $selectedTab.map { newTab in
             let tapOption = self.previousTab == newTab ? TabTapOption.sameTab : TabTapOption.otherTab
             self.previousTab = newTab
+            self.tabTapSubject.send(tapOption)
             return tapOption
         }
         .assign(to: &$tapOption)
