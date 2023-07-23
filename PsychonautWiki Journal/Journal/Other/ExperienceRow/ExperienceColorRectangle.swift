@@ -21,7 +21,7 @@ struct ExperienceColorRectangle: View {
     let colors: [Color]
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 5)
+        RoundedRectangle(cornerRadius: 3)
             .fill(
                 LinearGradient(
                     gradient: Gradient(colors: colors),
@@ -29,7 +29,7 @@ struct ExperienceColorRectangle: View {
                     endPoint: .bottom
                 )
             )
-            .frame(width: 20)
+            .frame(width: 10)
             .padding(.vertical, 8)
     }
 }

@@ -21,9 +21,9 @@ struct ColorRectangle: View {
     let color: Color
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 5)
+        RoundedRectangle(cornerRadius: 2)
             .fill(color)
-            .frame(width: 15)
+            .frame(width: 6)
             .padding(.vertical, 8)
     }
 }

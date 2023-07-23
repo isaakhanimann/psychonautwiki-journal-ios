@@ -25,14 +25,14 @@ struct ExperiencesList: View {
         ZStack {
             List {
                 if !viewModel.currentExperiences.isEmpty {
-                    Section("Current") {
+                    Section("Current Experience") {
                         ForEach(viewModel.currentExperiences) { exp in
                             ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
                         }
 
                     }
                     if !viewModel.previousExperiences.isEmpty {
-                        Section("Previous") {
+                        Section("Previous Experiences") {
                             ForEach(viewModel.previousExperiences) { exp in
                                 ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
                             }
