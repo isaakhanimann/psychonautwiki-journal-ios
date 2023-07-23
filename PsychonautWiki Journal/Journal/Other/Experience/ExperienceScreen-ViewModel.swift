@@ -35,7 +35,7 @@ extension ExperienceScreen {
         @Published var toleranceWindows: [ToleranceWindow] = []
         @Published var numberOfSubstancesInToleranceChart = 0
         @Published var substancesInChart: [SubstanceWithToleranceAndColor] = []
-        @Published var namesOfSubstancesInIngestionsButNotChart: [String] = []
+        @Published var namesOfSubstancesWithMissingTolerance: [String] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
             sortedRatingsWithTime
@@ -100,8 +100,9 @@ extension ExperienceScreen {
             })
             numberOfSubstancesInToleranceChart = namesOfSubstancesInChart.count
             let namesOfSubstancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
-            let namesOfSubstancesWithoutToleranceWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesInChart)
-            namesOfSubstancesInIngestionsButNotChart = Array(namesOfSubstancesWithoutToleranceWindows)
+            let namesOfSubstancesWithWindows = Set(allWindowsInLast3Months.map({$0.substanceName}))
+            let namesOfSubstancesWithoutWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesWithWindows)
+            namesOfSubstancesWithMissingTolerance = Array(namesOfSubstancesWithoutWindows)
         }
 
         private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {

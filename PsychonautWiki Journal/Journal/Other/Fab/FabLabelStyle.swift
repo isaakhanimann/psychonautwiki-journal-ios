@@ -21,11 +21,11 @@ struct FabLabelStyle: LabelStyle {
         ZStack {
             Circle()
                 .fill(Color.accentColor)
-                .frame(width: 50, height: 50)
+                .frame(width: 60, height: 60)
                 .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
             Label(configuration)
                 .labelStyle(.iconOnly)
-                .font(.title.weight(.bold))
+                .font(.largeTitle.weight(.bold))
                 .foregroundColor(.white)
 
         }

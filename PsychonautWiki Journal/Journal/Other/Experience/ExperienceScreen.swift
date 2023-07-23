@@ -304,8 +304,8 @@ struct ExperienceScreen: View {
                         }
                     } footer: {
                         HStack {
-                            if !viewModel.namesOfSubstancesInIngestionsButNotChart.isEmpty {
-                                MissingToleranceText(substanceNames: viewModel.namesOfSubstancesInIngestionsButNotChart)
+                            if !viewModel.namesOfSubstancesWithMissingTolerance.isEmpty {
+                                Text("Excluding ") + Text(viewModel.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
                             }
                             Spacer()
                             if !viewModel.substancesInChart.isEmpty {
