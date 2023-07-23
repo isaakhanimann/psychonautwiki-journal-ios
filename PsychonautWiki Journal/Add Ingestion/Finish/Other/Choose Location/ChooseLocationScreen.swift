@@ -24,33 +24,18 @@ struct ChooseLocationScreen: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 16, *) {
-                screen.toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        HideKeyboardButton()
-                        doneButton
-                    }
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                        doneButton
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
+                    doneButton
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
-            } else {
-                screen.toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        HideKeyboardButton()
-                        doneButton
-                    }
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                    }
-                    ToolbarItem(placement: .primaryAction) {
-                        doneButton
-                    }
+                ToolbarItem(placement: .primaryAction) {
+                    doneButton
                 }
             }
         }

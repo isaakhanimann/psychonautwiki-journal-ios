@@ -23,23 +23,12 @@ struct ExperienceTitleScreen: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 16, *) {
-                screen.toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        HideKeyboardButton()
-                    }
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        doneButton
-                    }
+            screen.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HideKeyboardButton()
                 }
-            } else {
-                screen.toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        HideKeyboardButton()
-                    }
-                    ToolbarItem(placement: .primaryAction) {
-                        doneButton
-                    }
+                ToolbarItem(placement: .primaryAction) {
+                    doneButton
                 }
             }
         }

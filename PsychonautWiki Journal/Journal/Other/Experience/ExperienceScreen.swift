@@ -102,7 +102,7 @@ struct ExperienceScreen: View {
                             Button {
                                 sheetToShow = .titleAndNote
                             } label: {
-                                Label("Edit Title/Note", systemImage: "pencil")
+                                Label("Edit Title & Notes", systemImage: "pencil")
                             }
                         }
                         if experience.location == nil {
@@ -291,7 +291,7 @@ struct ExperienceScreen: View {
                     Button {
                         sheetToShow = .titleAndNote
                     } label: {
-                        Label("Edit Title/Notes", systemImage: "pencil")
+                        Label("Edit Title & Notes", systemImage: "pencil")
                     }
                 }
             } else if !notes.isEmpty {

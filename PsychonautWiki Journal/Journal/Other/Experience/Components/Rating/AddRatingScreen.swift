@@ -28,25 +28,14 @@ struct AddRatingScreen: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 16, *) {
-                screen.toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                        doneButton
+            screen.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
-            } else {
-                screen.toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                    }
-                    ToolbarItem(placement: .primaryAction) {
-                        doneButton
-                    }
+                ToolbarItem(placement: .primaryAction) {
+                    doneButton
                 }
             }
         }

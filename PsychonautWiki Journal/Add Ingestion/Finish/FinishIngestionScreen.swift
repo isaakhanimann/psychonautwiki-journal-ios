@@ -172,7 +172,7 @@ struct FinishIngestionScreen: View {
             if administrationRoute == .oral {
                 EditStomachFullnessSection(stomachFullness: $viewModel.selectedStomachFullness)
             }
-            Section("\(substanceName) Color") {
+            Section {
                 NavigationLink {
                     ColorPickerScreen(
                         selectedColor: $viewModel.selectedColor,
@@ -188,7 +188,7 @@ struct FinishIngestionScreen: View {
                 }
             }
         }
-        .navigationBarTitle("Finish")
+        .navigationBarTitle("Finish Ingestion")
         .sheet(item: $sheetToShow, content: { sheet in
             switch sheet {
             case .editTitle:
