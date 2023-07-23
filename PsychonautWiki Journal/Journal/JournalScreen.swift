@@ -40,14 +40,29 @@ struct JournalScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     favoriteButton
-                    Button {
-                        viewModel.isTimeRelative.toggle()
-                    } label: {
-                        if viewModel.isTimeRelative {
-                            Label("Show Absolute Time", systemImage: "timer.circle.fill")
-                        } else {
-                            Label("Show Relative Time", systemImage: "timer.circle")
+                    Menu {
+                        Button {
+                            viewModel.isTimeRelative = false
+                        } label: {
+                            let option = TimeDisplayStyle.regular
+                            if viewModel.isTimeRelative {
+                                Text(option.text)
+                            } else {
+                                Label(option.text, systemImage: "checkmark")
+                            }
                         }
+                        Button {
+                            viewModel.isTimeRelative = true
+                        } label: {
+                            let option = TimeDisplayStyle.relativeToNow
+                            if viewModel.isTimeRelative {
+                                Label(option.text, systemImage: "checkmark")
+                            } else {
+                                Text(option.text)
+                            }
+                        }
+                    } label: {
+                        Label("Time Display", systemImage: "timer")
                     }
                 }
             }

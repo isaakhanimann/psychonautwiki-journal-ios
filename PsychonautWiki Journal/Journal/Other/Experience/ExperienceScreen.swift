@@ -44,83 +44,98 @@ struct ExperienceScreen: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        FabPosition {
-            Menu {
-                Button {
-                    isShowingAddIngestionFullScreen.toggle()
-                } label: {
-                    Label("Add Ingestion", systemImage: "plus")
-                }
-                if isEyeOpen {
-                    Button {
-                        sheetToShow = .addRating
-                    } label: {
-                        Label("Add Rating", systemImage: "bolt.fill")
-                    }
-                }
-                Button {
-                    sheetToShow = .titleAndNote
-                } label: {
-                    Label("Edit Title/Note", systemImage: "pencil")
-                }
-                if experience.location == nil {
-                    Button {
-                        sheetToShow = .addLocation
-                    } label: {
-                        Label("Add Location", systemImage: "mappin")
-                    }
-                }
-                Button(role: .destructive) {
-                    isShowingDeleteConfirmation.toggle()
-                } label: {
-                    Label("Delete Experience", systemImage: "trash")
-                }
-            } label: {
-                Label("More", systemImage: "ellipsis").labelStyle(FabLabelStyle())
-            }
-
-        } screen: {
-            screen
-        }
-        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
-            ChooseSubstanceScreen()
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                favoriteButton
-                Menu {
-                    ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                        Button {
-                            withAnimation {
-                                timeDisplayStyle = option
+        screen
+            .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
+                ChooseSubstanceScreen()
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    favoriteButton
+                    Menu {
+                        if experience.isCurrent {
+                            ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
+                                Button {
+                                    withAnimation {
+                                        timeDisplayStyle = option
+                                    }
+                                } label: {
+                                    if timeDisplayStyle == option {
+                                        Label(option.text, systemImage: "checkmark")
+                                    } else {
+                                        Text(option.text)
+                                    }
+                                }
                             }
-                        } label: {
-                            if timeDisplayStyle == option {
-                                Label(option.text, systemImage: "checkmark")
-                            } else {
-                                Text(option.text)
+                        } else {
+                            ForEach([TimeDisplayStyle.regular, .relativeToStart], id: \.self) { option in
+                                Button {
+                                    withAnimation {
+                                        timeDisplayStyle = option
+                                    }
+                                } label: {
+                                    if timeDisplayStyle == option {
+                                        Label(option.text, systemImage: "checkmark")
+                                    } else {
+                                        Text(option.text)
+                                    }
+                                }
                             }
                         }
+
+                    } label: {
+                        Label("Time Display", systemImage: "timer")
                     }
-                } label: {
-                    Label("Time Display", systemImage: "timer")
+                    Menu {
+                        if !experience.isCurrent {
+                            Button {
+                                isShowingAddIngestionFullScreen.toggle()
+                            } label: {
+                                Label("Add Ingestion", systemImage: "plus")
+                            }
+                            if isEyeOpen && experience.ratingsUnwrapped.isEmpty {
+                                Button {
+                                    sheetToShow = .addRating
+                                } label: {
+                                    Label("Add Rating", systemImage: "plus")
+                                }
+                            }
+                            Button {
+                                sheetToShow = .titleAndNote
+                            } label: {
+                                Label("Edit Title/Note", systemImage: "pencil")
+                            }
+                        }
+                        if experience.location == nil {
+                            Button {
+                                sheetToShow = .addLocation
+                            } label: {
+                                Label("Add Location", systemImage: "plus")
+                            }
+                        }
+                        Button(role: .destructive) {
+                            isShowingDeleteConfirmation.toggle()
+                        } label: {
+                            Label("Delete Experience", systemImage: "trash")
+                        }
+                    } label: {
+                        Label("More", systemImage: "ellipsis.circle")
+                    }
                 }
             }
-        }
-        .confirmationDialog(
-            "Delete Experience?",
-            isPresented: $isShowingDeleteConfirmation,
-            titleVisibility: .visible,
-            actions: {
-                Button("Delete", role: .destructive) {
-                    delete()
+            .confirmationDialog(
+                "Delete Experience?",
+                isPresented: $isShowingDeleteConfirmation,
+                titleVisibility: .visible,
+                actions: {
+                    Button("Delete", role: .destructive) {
+                        delete()
+                    }
+                    Button("Cancel", role: .cancel) {}
+                },
+                message: {
+                    Text("This will also delete all of its ingestions.")
                 }
-                Button("Cancel", role: .cancel) {}
-            },
-            message: {
-                Text("This will also delete all of its ingestions.")
-            }
-        )
+            )
 
     }
 
@@ -203,6 +218,14 @@ struct ExperienceScreen: View {
                             }
                         }
                     }
+                    if experience.isCurrent {
+                        Button {
+                            isShowingAddIngestionFullScreen.toggle()
+                        } label: {
+                            Label("Add Ingestion", systemImage: "plus")
+                        }
+
+                    }
                     if #available(iOS 16.2, *) {
                         if experience.isCurrent {
                             LiveActivityButton(
@@ -259,7 +282,19 @@ struct ExperienceScreen: View {
                 }
             }
             let notes = experience.textUnwrapped
-            if !notes.isEmpty {
+            if experience.isCurrent {
+                Section("Notes") {
+                    if !notes.isEmpty {
+                        Text(notes)
+                            .padding(.vertical, 5)
+                    }
+                    Button {
+                        sheetToShow = .titleAndNote
+                    } label: {
+                        Label("Edit Title/Notes", systemImage: "pencil")
+                    }
+                }
+            } else if !notes.isEmpty {
                 Section {
                     Text(notes)
                         .padding(.vertical, 5)
@@ -275,12 +310,16 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            if !experience.ratingsUnwrapped.isEmpty {
+
+            if isEyeOpen && (!experience.ratingsUnwrapped.isEmpty || experience.isCurrent) {
                 ShulginRatingSection(
                     experience: experience,
                     viewModel: viewModel,
                     timeDisplayStyle: timeDisplayStyle,
-                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
+                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
+                    addRating: {
+                        sheetToShow = .addRating
+                    }
                 )
             }
             if #available(iOS 16.0, *) {
