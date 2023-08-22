@@ -22,10 +22,9 @@ struct ShulginRatingSection: View {
     @ObservedObject var viewModel: ExperienceScreen.ViewModel
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
-    let addRating: () -> Void
 
     var body: some View {
-        Section {
+        Section("Shulgin Rating") {
             ForEach(experience.ratingsWithTimeSorted) { rating in
                 NavigationLink {
                     EditRatingScreen(rating: rating)
@@ -84,21 +83,6 @@ struct ShulginRatingSection: View {
                     }
                 }
 
-            }
-            if experience.isCurrent {
-                Button(action: addRating) {
-                    Label("Add Rating", systemImage: "plus")
-                }
-            }
-        } header: {
-            HStack {
-                Text("Shulgin Rating")
-                Spacer()
-                if !experience.isCurrent {
-                    Button(action: addRating) {
-                        Label("Add Rating", systemImage: "plus").labelStyle(.iconOnly)
-                    }
-                }
             }
         }
     }
