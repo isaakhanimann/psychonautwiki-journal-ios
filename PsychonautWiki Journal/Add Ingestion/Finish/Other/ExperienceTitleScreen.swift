@@ -53,6 +53,7 @@ struct ExperienceTitleScreen: View {
                 .submitLabel(.done)
                 .focused($textFieldIsFocused)
                 .autocapitalization(.sentences)
+                .autocorrectionDisabled()
         }
         .optionalScrollDismissesKeyboard()
         .navigationTitle("Experience Title")

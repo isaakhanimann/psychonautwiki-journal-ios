@@ -16,89 +16,67 @@
 
 import SwiftUI
 
-struct EditTitleAndNotesScreen: View {
+struct EditNotesScreen: View {
 
     let experience: Experience
-    @State private var title = ""
+
+    @FocusState private var isTextFieldFocused: Bool
     @State private var notes = ""
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        EditTitleAndNotesContent(
-            title: $title,
+        EditNotesContent(
             notes: $notes,
+            isTextFieldFocused: $isTextFieldFocused,
             save: save,
             dismiss: {dismiss()}
         )
         .onAppear {
-            title = experience.titleUnwrapped
             notes = experience.textUnwrapped
+            if experience.textUnwrapped.isEmpty {
+                isTextFieldFocused = true
+            }
         }
     }
 
     private func save() {
-        experience.title = title
         experience.text = notes
         PersistenceController.shared.saveViewContext()
         dismiss()
     }
 }
 
-struct EditTitleAndNotesContent: View {
+struct EditNotesContent: View {
 
-    @Binding var title: String
     @Binding var notes: String
+    let isTextFieldFocused: FocusState<Bool>.Binding
     let save: () -> Void
     let dismiss: () -> Void
 
     var body: some View {
         NavigationView {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    doneButton
-                }
+            Form {
+                TextEditor(text: $notes)
+                    .focused(isTextFieldFocused)
+                    .autocapitalization(.sentences)
+                    .frame(minHeight: 300)
+            }
+            .optionalScrollDismissesKeyboard()
+            .navigationTitle("Edit Notes")
+            .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    doneButton
+                    DoneButton {
+                        save()
+                    }
                 }
             }
         }
     }
-
-    private var doneButton: some View {
-        DoneButton {
-            save()
-        }
-    }
-
-    private var screen: some View {
-        Form {
-            Section("Title") {
-                TextField("Enter Title", text: $title)
-                    .autocapitalization(.sentences)
-            }
-            Section("Notes") {
-                TextEditor(text: $notes)
-                    .autocapitalization(.sentences)
-                    .frame(minHeight: 300)
-            }
-        }
-        .navigationTitle("Edit Title & Notes")
-    }
 }
 
-struct EditTitleAndNotesContent_Previews: PreviewProvider {
-    static var previews: some View {
-        EditTitleAndNotesContent(
-            title: .constant("This is my title"),
-            notes: .constant("These are my notes. They can be very long and should work with many lines. If this should be editable then create a view inside this preview struct that has state."),
-            save: {},
-            dismiss: {}
-        )
-    }
-}
+// previews don't work because can't pass FocusState

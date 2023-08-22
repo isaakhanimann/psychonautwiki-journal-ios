@@ -19,7 +19,8 @@ import SwiftUI
 struct ExperienceScreen: View {
 
     enum SheetOption: Identifiable, Hashable {
-        case titleAndNote
+        case editTitle
+        case editNotes
         case editLocation(experienceLocation: ExperienceLocation)
         case addLocation
         case addRating
@@ -95,9 +96,14 @@ struct ExperienceScreen: View {
                 }
                 Menu {
                     Button {
-                        sheetToShow = .titleAndNote
+                        sheetToShow = .editNotes
                     } label: {
-                        Label("Edit Title & Notes", systemImage: "pencil")
+                        Label("Edit Notes", systemImage: "pencil")
+                    }
+                    Button {
+                        sheetToShow = .editTitle
+                    } label: {
+                        Label("Edit Title", systemImage: "pencil")
                     }
                     let isFavorite = experience.isFavorite
                     Button {
@@ -278,7 +284,7 @@ struct ExperienceScreen: View {
                         Text(notes)
                             .padding(.vertical, 5)
                             .onTapGesture {
-                                sheetToShow = .titleAndNote
+                                sheetToShow = .editNotes
                             }
                     }
                 }
@@ -385,8 +391,10 @@ struct ExperienceScreen: View {
                 AddLocationScreen(locationManager: locationManager, experience: experience)
             case .editLocation(let experienceLocation):
                 EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
-            case .titleAndNote:
-                EditTitleAndNotesScreen(experience: experience)
+            case .editNotes:
+                EditNotesScreen(experience: experience)
+            case .editTitle:
+                EditTitleScreen(experience: experience)
             case .addRating:
                 AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
             }
