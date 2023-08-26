@@ -44,7 +44,8 @@ struct ExperienceRow: View {
                         isFavorite: experience.isFavorite,
                         isTimeRelative: isTimeRelative,
                         locationName: nil,
-                        rating: experience.overallRating?.optionUnwrapped ?? experience.maxRating
+                        rating: experience.overallRating?.optionUnwrapped ?? experience.maxRating,
+                        isCurrent: experience.isCurrent
                     )
                 }
             }
@@ -87,7 +88,8 @@ struct ExperienceRowObservedLocation: View {
             isFavorite: experience.isFavorite,
             isTimeRelative: isTimeRelative,
             locationName: location.name,
-            rating: rating
+            rating: rating,
+            isCurrent: experience.isCurrent
         )
     }
 }
@@ -102,6 +104,7 @@ struct ExperienceRowContent: View {
     let isTimeRelative: Bool
     let locationName: String?
     let rating: ShulginRatingOption?
+    let isCurrent: Bool
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
@@ -134,7 +137,11 @@ struct ExperienceRowContent: View {
                         }
                     }
                     HStack {
-                        ExperienceTimeText(time: sortDate, isTimeRelative: isTimeRelative)
+                        ExperienceTimeText(
+                            time: sortDate,
+                            isTimeRelative: isTimeRelative,
+                            isCurrent: isCurrent
+                        )
                         Spacer()
                         if let locationName {
                             HStack(spacing: 2) {
@@ -163,7 +170,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: true,
                     isTimeRelative: false,
                     locationName: "Longer location name",
-                    rating: .threePlus
+                    rating: .threePlus,
+                    isCurrent: true
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -173,7 +181,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: true,
                     isTimeRelative: false,
                     locationName: nil,
-                    rating: .threePlus
+                    rating: .threePlus,
+                    isCurrent: false
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink, .purple, .yellow],
@@ -183,7 +192,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: true,
                     isTimeRelative: true,
                     locationName: "Short location",
-                    rating: .threePlus
+                    rating: .threePlus,
+                    isCurrent: false
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -193,7 +203,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: true,
                     isTimeRelative: true,
                     locationName: nil,
-                    rating: nil
+                    rating: nil,
+                    isCurrent: false
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -203,7 +214,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: true,
                     isTimeRelative: true,
                     locationName: "Home",
-                    rating: nil
+                    rating: nil,
+                    isCurrent: false
                 )
                 ExperienceRowContent(
                     ingestionColors: [],
@@ -213,7 +225,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isFavorite: false,
                     isTimeRelative: false,
                     locationName: nil,
-                    rating: .threePlus
+                    rating: .threePlus,
+                    isCurrent: false
                 )
             }
         }.listStyle(.plain)

@@ -20,18 +20,23 @@ struct ExperienceTimeText: View {
 
     let time: Date
     let isTimeRelative: Bool
+    let isCurrent: Bool
 
     var body: some View {
-        if isTimeRelative {
-            return Text(time, format: .relative(presentation: .numeric, unitsStyle: .wide))
+        if isCurrent {
+            return Text("Active since ") + Text(time, style: .relative)
         } else {
-            return Text(time, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+            if isTimeRelative {
+                return Text(time, format: .relative(presentation: .numeric, unitsStyle: .wide))
+            } else {
+                return Text(time, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+            }
         }
     }
 }
 
 struct ExperienceTimeText_Previews: PreviewProvider {
     static var previews: some View {
-        ExperienceTimeText(time: Date() - 5 * 60 * 60 - 30, isTimeRelative: false)
+        ExperienceTimeText(time: Date() - 5 * 60 * 60 - 30, isTimeRelative: false, isCurrent: true)
     }
 }
