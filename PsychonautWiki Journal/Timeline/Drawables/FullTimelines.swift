@@ -159,8 +159,7 @@ struct FullTimelines: TimelineDrawable {
     ) {
         let halfLineWidth = lineWidth/2
         let paddingTop = halfLineWidth
-        let dotRadius = 1.5*lineWidth
-        let paddingBottom = dotRadius
+        let paddingBottom = halfLineWidth
         let heightBetween = height-paddingTop-paddingBottom
         guard let firstPoint = finalPoints.first else {return}
         var path = Path()
@@ -173,15 +172,15 @@ struct FullTimelines: TimelineDrawable {
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         // draw shape
         guard let lastX = finalPoints.last?.x else {return}
-        let lineBottomY = height-dotRadius+halfLineWidth
-        path.addLine(to: CGPoint(x: lastX*pixelsPerSec, y: lineBottomY))
-        path.addLine(to: CGPoint(x: firstPoint.x*pixelsPerSec, y: lineBottomY))
+        path.addLine(to: CGPoint(x: lastX*pixelsPerSec, y: height))
+        path.addLine(to: CGPoint(x: firstPoint.x*pixelsPerSec, y: height))
         path.closeSubpath()
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
         // draw dots
         for point in finalPoints {
             if point.isIngestionPoint {
                 let pointHeight = point.y*heightBetween + paddingBottom
+                let dotRadius = 1.5*lineWidth
                 context.drawDot(
                     startX: point.x*pixelsPerSec,
                     bottomY: height - pointHeight,
