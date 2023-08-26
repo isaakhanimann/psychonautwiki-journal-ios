@@ -19,10 +19,12 @@ import SwiftUI
 struct ExplainExperienceSectionScreen: View {
     var body: some View {
         List {
-            Section("Caution") {
-                Text(TimelineDisclaimers.heavyDose)
-                Text(TimelineDisclaimers.fullStomach)
-                Text(TimelineDisclaimers.capsule)
+            Section("Simplifying Assumptions") {
+                Text("To be able to draw the timeline with the given data multiple often false simplifying assumptions are made:")
+                Text("\"Taking e.g. x amount now will give the same effect as taking x amount later. There is no immediate tolerance.\"")
+                Text("\"Taking twice the dose will give twice the effect.\"")
+                Text("\"Duration ranges from PsychonautWiki can be applied for all kinds of dosages.\"")
+                Text("\"Oral ingestions are always on an empty stomach and therefore not delayed (by up to 4 hours).\"")
             }
             Section("Understanding the Timeline") {
                 TimelineExplanationTexts()
@@ -34,7 +36,7 @@ struct ExplainExperienceSectionScreen: View {
                 Text("The dots below the dose of an ingestion indicate the strength of the dose. 0 dots means the dose is below threshold, 1 light, 2 common, 3 strong and 4 heavy. More than 4 dots appear when a dose is heavy and the remainder from subtracting the start of the heavy dose range classifies as a light, common, strong or heavy.")
             }
         }
-        .navigationTitle("Timeline Limitations")
+        .navigationTitle("Timeline Info")
         .dismissWhenTabTapped()
     }
 }
@@ -42,9 +44,11 @@ struct ExplainExperienceSectionScreen: View {
 struct TimelineExplanationTexts: View {
     var body: some View {
         Group {
-            Text("The timeline shows the effect of ingestions over time.")
-            Text("The onset duration range from PsychonautWiki defines when the curve starts going up, the comeup how long it goes up for, the peak how long it stays up and the offset how long it takes to come down to baseline. The peak and offset durations are linearly interpolated based on the dose if possible, else it just chooses the middle value of the range. If some of the durations are missing it draws a dotted line. E.g. if the onset and total time is given it draws a line along the bottom for the onset and then it draws a dotted curve to the end of the total time.")
-            Text("The height of a curve indicates how big the dose is relative to other ingestions of the same substance within the experience. If there is only one ingestion it takes the full height.")
+            Text("The timeline is drawn based on the onset, comeup, peak and offset (and sometimes total) from PsychonautWiki.")
+            Text("In the ideal case all 4 durations (onset, comeup, peak and offset) are defined and the full timeline is drawn as averageOnset -> averageComeup -> weightedPeak -> weightedOffset, where \"weighted\" means that the given range has been linearly interpolated with the dose, so if a threshold dose was taken it takes the minimum of the range, if a heavy dose was taken it takes the max and for everything in between it linearly interpolates.")
+            Text("The timelines from ingestions with the same substance where substances have onset, comeup, peak and offset defined are combined into a cumulative timeline by simply putting the individual lines on top of each other. This is not done for ingestions where either the onset, comeup, peak or offset duration is missing.")
+            Text("If any of the 4 durations are missing but the total duration is given, then the first defined durations are drawn and as soon as a missing duration is encountered it uses the total to infer the end of the timeline and draws a dotted line to the end. If the total is not given it just stops drawing the line. So if there is no timeline or part of the timeline is missing that means that the duration is not defined in PsychonautWiki. If you add the missing durations in PsychonautWiki, the full timeline will be shown in the next update.")
+            Text("The vertical trajectory of dotted lines is unknown. So if you see a dotted line that means it is not known how the effect develops over that timeframe. The only thing that is known is where the line will end.")
             Text("By swiping an ingestion row to the right one can hide an ingestion from the timeline, to make the other curves more visible.")
         }
     }
