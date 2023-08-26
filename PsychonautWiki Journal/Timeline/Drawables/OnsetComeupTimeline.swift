@@ -36,11 +36,15 @@ struct OnsetComeupTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
+        let halfLineWidth = lineWidth/2
+        let paddingTop = halfLineWidth
+        let paddingBottom = halfLineWidth
+        let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * height
+            top = (1-verticalWeight) * heightBetween
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
@@ -51,6 +55,10 @@ struct OnsetComeupTimeline : TimelineDrawable {
         path.addLine(to: CGPoint(x: onsetEndX, y: bottom))
         path.addLine(to: CGPoint(x: comeupEndX, y: top))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        path.addLine(to: CGPoint(x: comeupEndX, y: height))
+        path.addLine(to: CGPoint(x: startX, y: height))
+        path.closeSubpath()
+        context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 
     private var onsetDelayInSeconds: TimeInterval {

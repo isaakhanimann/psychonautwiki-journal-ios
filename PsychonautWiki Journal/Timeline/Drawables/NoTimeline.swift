@@ -38,9 +38,10 @@ struct NoTimeline: TimelineDrawable {
         lineWidth: Double
     ) {
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        context.drawDot(startX: startX, bottomY: height, dotRadius: 1.5 * lineWidth, color: color)
+        let halfLineWidth = lineWidth/2
+        context.drawDot(startX: startX, bottomY: height-halfLineWidth, dotRadius: 1.5 * lineWidth, color: color)
         if onsetDelayInHours > 0 {
-            let maxHeight = height - lineWidth/2
+            let maxHeight = height - halfLineWidth
             let onsetEndX = startX + onsetDelayInSeconds * pixelsPerSec
             var path = Path()
             path.move(to: CGPoint(x: startX, y: maxHeight))

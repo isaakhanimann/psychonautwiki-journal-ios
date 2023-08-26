@@ -38,13 +38,17 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
+        let halfLineWidth = lineWidth/2
+        let paddingTop = halfLineWidth
+        let paddingBottom = halfLineWidth
+        let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * height
+            top = (1-verticalWeight) * heightBetween
         }
-        let bottom = height - lineWidth/2
+        let bottom = height - paddingTop
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
@@ -55,6 +59,10 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         path.addLine(to: CGPoint(x: comeupEndX, y: top))
         path.addLine(to: CGPoint(x: peakEndX, y: top))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        path.addLine(to: CGPoint(x: peakEndX, y: height))
+        path.addLine(to: CGPoint(x: startX, y: height))
+        path.closeSubpath()
+        context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 
 

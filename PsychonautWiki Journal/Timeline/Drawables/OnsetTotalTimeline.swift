@@ -38,10 +38,14 @@ struct OnsetTotalTimeline: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
+        let halfLineWidth = lineWidth/2
+        let paddingTop = halfLineWidth
+        let paddingBottom = halfLineWidth
+        let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         var top = lineWidth/2
         if verticalWeigth < 1 {
-            top = ((1-verticalWeigth)*height) + (lineWidth/2)
+            top = ((1-verticalWeigth)*heightBetween) + (lineWidth/2)
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
@@ -61,11 +65,12 @@ struct OnsetTotalTimeline: TimelineDrawable {
             endX: topPointX,
             endY: top
         )
+        let totalEndX = startX + onsetDelayInSeconds*pixelsPerSec + totalX
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: topPointX,
             startY: top,
-            endX: startX + onsetDelayInSeconds*pixelsPerSec + totalX,
+            endX: totalEndX,
             endY: bottom
         )
         context.stroke(
@@ -73,6 +78,11 @@ struct OnsetTotalTimeline: TimelineDrawable {
             with: .color(color),
             style: StrokeStyle.getDotted(lineWidth: lineWidth)
         )
+        path0.addPath(path1)
+        path0.addLine(to: CGPoint(x: totalEndX, y: height))
+        path0.addLine(to: CGPoint(x: startX, y: height))
+        path0.closeSubpath()
+        context.fill(path0, with: .color(color.opacity(shapeOpacity)))
     }
 
     private var onsetDelayInSeconds: TimeInterval {

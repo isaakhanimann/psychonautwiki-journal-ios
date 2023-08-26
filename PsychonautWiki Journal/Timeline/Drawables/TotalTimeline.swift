@@ -46,7 +46,7 @@ struct TotalTimeline: TimelineDrawable {
         let paddingBottom = halfLineWidth
         let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let top = (1-verticalWeight)*heightBetween
+        let top = (1-verticalWeight)*heightBetween + paddingTop
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(

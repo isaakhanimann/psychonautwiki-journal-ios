@@ -34,7 +34,11 @@ struct GroupDrawable {
     ) {
         self.color = color
         guard let roaDuration else {
-            timelineDrawables = []
+            timelineDrawables = weightedLines.map { weightedLine in
+                NoTimeline(
+                    onsetDelayInHours: weightedLine.onsetDelayInHours,
+                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+            }
             return
         }
         if let fulls = roaDuration.toFullTimelines(weightedLines: weightedLines, graphStartTime: startGraph) {
@@ -114,7 +118,11 @@ struct GroupDrawable {
                                     if !onsets.isEmpty {
                                         timelineDrawables = onsets
                                     } else {
-                                        timelineDrawables = []
+                                        timelineDrawables = weightedLines.map { weightedLine in
+                                            NoTimeline(
+                                                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                                        }
                                     }
                                 }
                             }
