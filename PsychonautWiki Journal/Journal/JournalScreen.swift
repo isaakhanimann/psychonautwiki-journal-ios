@@ -19,7 +19,60 @@ import StoreKit
 
 struct JournalScreen: View {
 
-    @StateObject var viewModel = ViewModel()
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
+    ) var experiences: FetchedResults<Experience>
+
+
+    @State private var searchText = ""
+    private var query: Binding<String> {
+        Binding {
+            searchText
+        } set: { newValue in
+            searchText = newValue
+            setPredicate()
+        }
+    }
+
+    private func setPredicate() {
+        let predicateFavorite = NSPredicate(
+            format: "isFavorite == %@",
+            NSNumber(value: true)
+        )
+        let predicateTitle = NSPredicate(
+            format: "title CONTAINS[cd] %@",
+            searchText as CVarArg
+        )
+        let predicateSubstance = NSPredicate(
+            format: "%K.%K CONTAINS[cd] %@",
+            #keyPath(Experience.ingestions),
+            #keyPath(Ingestion.substanceName),
+            searchText as CVarArg
+        )
+        if isFavoriteFilterEnabled {
+            if searchText.isEmpty {
+                experiences.nsPredicate = predicateFavorite
+            } else {
+                let titleOrSubstancePredicate = NSCompoundPredicate(
+                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                )
+                experiences.nsPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
+            }
+        } else {
+            if searchText.isEmpty {
+                experiences.nsPredicate = nil
+            } else {
+                experiences.nsPredicate = NSCompoundPredicate(
+                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                )
+            }
+        }
+    }
+
+    @State private var isShowingAddIngestionSheet = false
+    @State private var isTimeRelative = false
+    @State private var isFavoriteFilterEnabled = false
+
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
 
@@ -27,14 +80,14 @@ struct JournalScreen: View {
         NavigationView {
             FabPosition {
                 Button {
-                    viewModel.isShowingAddIngestionSheet.toggle()
+                    isShowingAddIngestionSheet.toggle()
                 } label: {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
             } screen: {
                 screen
             }
-            .fullScreenCover(isPresented: $viewModel.isShowingAddIngestionSheet) {
+            .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
                 ChooseSubstanceScreen()
             }
             .toolbar {
@@ -42,20 +95,20 @@ struct JournalScreen: View {
                     favoriteButton
                     Menu {
                         Button {
-                            viewModel.isTimeRelative = false
+                            isTimeRelative = false
                         } label: {
                             let option = TimeDisplayStyle.regular
-                            if viewModel.isTimeRelative {
+                            if isTimeRelative {
                                 Text(option.text)
                             } else {
                                 Label(option.text, systemImage: "checkmark")
                             }
                         }
                         Button {
-                            viewModel.isTimeRelative = true
+                            isTimeRelative = true
                         } label: {
                             let option = TimeDisplayStyle.relativeToNow
-                            if viewModel.isTimeRelative {
+                            if isTimeRelative {
                                 Label(option.text, systemImage: "checkmark")
                             } else {
                                 Text(option.text)
@@ -73,7 +126,7 @@ struct JournalScreen: View {
 
     private var newIngestionButton: some View {
         Button {
-            viewModel.isShowingAddIngestionSheet.toggle()
+            isShowingAddIngestionSheet.toggle()
         } label: {
             Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
@@ -81,30 +134,30 @@ struct JournalScreen: View {
 
     private var favoriteButton: some View {
         Button {
-            viewModel.isFavoriteFilterEnabled.toggle()
+            isFavoriteFilterEnabled.toggle()
         } label: {
-            if viewModel.isFavoriteFilterEnabled {
+            if isFavoriteFilterEnabled {
                 Label("Don't Filter Favorites", systemImage: "star.fill")
             } else {
                 Label("Filter Favorites", systemImage: "star")
             }
         }
+        .onChange(of: isFavoriteFilterEnabled) { newValue in
+            setPredicate()
+        }
     }
 
     private var screen: some View {
-        ExperiencesList(viewModel: viewModel)
-            .optionalScrollDismissesKeyboard()
-            .searchable(text: $viewModel.searchText, prompt: "Search by title or substance")
-            .disableAutocorrection(true)
-            .onChange(of: viewModel.searchText, perform: { newValue in
-                viewModel.setupFetchRequestPredicateAndFetch()
-            })
-            .onChange(of: viewModel.isFavoriteFilterEnabled, perform: { newValue in
-                viewModel.setupFetchRequestPredicateAndFetch()
-            })
-            .task {
-                maybeRequestAppRating()
-            }
+        ExperiencesList(
+            experiences: experiences,
+            isFavoriteFilterEnabled: isFavoriteFilterEnabled,
+            isTimeRelative: isTimeRelative)
+        .optionalScrollDismissesKeyboard()
+        .searchable(text: query, prompt: "Search by title or substance")
+        .disableAutocorrection(true)
+        .task {
+            maybeRequestAppRating()
+        }
     }
 
     private func maybeRequestAppRating() {
@@ -112,7 +165,7 @@ struct JournalScreen: View {
             if openUntilRatedCount < 10 {
                 openUntilRatedCount += 1
             } else if openUntilRatedCount == 10 {
-                if isEyeOpen && viewModel.previousExperiences.count > 5 {
+                if isEyeOpen && experiences.count > 5 {
                     if let windowScene = UIApplication.shared.currentWindow?.windowScene {
                         SKStoreReviewController.requestReview(in: windowScene)
                     }

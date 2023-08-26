@@ -142,134 +142,134 @@ struct EffectTimeline_Previews: PreviewProvider {
             verticalWeight: 0.75,
             color: .blue
         ),
-        // total
-        EverythingForOneLine(
-            substanceName: "b",
-            roaDuration: RoaDuration(
-                onset: nil,
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 4, max: 6, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-2*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .orange
-        ),
-        // onset comeup
-        EverythingForOneLine(
-            substanceName: "c",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 20, max: 40, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: nil,
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-2*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 1,
-            color: .pink
-        ),
-        // onset comeup peak total
-        EverythingForOneLine(
-            substanceName: "d",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .green
-        ),
-        // onset
-        EverythingForOneLine(
-            substanceName: "e",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 3, units: .hours),
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date(),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .purple
-        ),
-        // onset comeup peak
-        EverythingForOneLine(
-            substanceName: "f",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-30*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.75,
-            color: .yellow
-        ),
-        // onset comeup total
-        EverythingForOneLine(
-            substanceName: "g",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 2, units: .hours),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-45*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.9,
-            color: .cyan
-        ),
-        // onset total
-        EverythingForOneLine(
-            substanceName: "h",
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 2, units: .hours),
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 1,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.3,
-            color: .brown
-        ),
-        // no timeline
-        EverythingForOneLine(
-            substanceName: "i",
-            roaDuration: nil,
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.3,
-            color: .brown
-        ),
+//        // total
+//        EverythingForOneLine(
+//            substanceName: "b",
+//            roaDuration: RoaDuration(
+//                onset: nil,
+//                comeup: nil,
+//                peak: nil,
+//                offset: nil,
+//                total: DurationRange(min: 4, max: 6, units: .hours),
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-2*60*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.5,
+//            color: .orange
+//        ),
+//        // onset comeup
+//        EverythingForOneLine(
+//            substanceName: "c",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 20, max: 40, units: .minutes),
+//                comeup: DurationRange(min: 1, max: 2, units: .hours),
+//                peak: nil,
+//                offset: nil,
+//                total: nil,
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-2*60*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 1,
+//            color: .pink
+//        ),
+//        // onset comeup peak total
+//        EverythingForOneLine(
+//            substanceName: "d",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 30, max: 60, units: .minutes),
+//                comeup: DurationRange(min: 1, max: 2, units: .hours),
+//                peak: DurationRange(min: 1, max: 2, units: .hours),
+//                offset: nil,
+//                total: DurationRange(min: 6, max: 8, units: .hours),
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-60*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.5,
+//            color: .green
+//        ),
+//        // onset
+//        EverythingForOneLine(
+//            substanceName: "e",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 1, max: 3, units: .hours),
+//                comeup: nil,
+//                peak: nil,
+//                offset: nil,
+//                total: nil,
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date(),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.5,
+//            color: .purple
+//        ),
+//        // onset comeup peak
+//        EverythingForOneLine(
+//            substanceName: "f",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 30, max: 60, units: .minutes),
+//                comeup: DurationRange(min: 1, max: 2, units: .hours),
+//                peak: DurationRange(min: 1, max: 2, units: .hours),
+//                offset: nil,
+//                total: nil,
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-30*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.75,
+//            color: .yellow
+//        ),
+//        // onset comeup total
+//        EverythingForOneLine(
+//            substanceName: "g",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 1, max: 2, units: .hours),
+//                comeup: DurationRange(min: 1, max: 2, units: .hours),
+//                peak: nil,
+//                offset: nil,
+//                total: DurationRange(min: 6, max: 8, units: .hours),
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-45*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.9,
+//            color: .cyan
+//        ),
+//        // onset total
+//        EverythingForOneLine(
+//            substanceName: "h",
+//            roaDuration: RoaDuration(
+//                onset: DurationRange(min: 1, max: 2, units: .hours),
+//                comeup: nil,
+//                peak: nil,
+//                offset: nil,
+//                total: DurationRange(min: 6, max: 8, units: .hours),
+//                afterglow: nil
+//            ),
+//            onsetDelayInHours: 1,
+//            startTime: Date().addingTimeInterval(-60*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.3,
+//            color: .brown
+//        ),
+//        // no timeline
+//        EverythingForOneLine(
+//            substanceName: "i",
+//            roaDuration: nil,
+//            onsetDelayInHours: 3,
+//            startTime: Date().addingTimeInterval(-60*60),
+//            horizontalWeight: 0.5,
+//            verticalWeight: 0.3,
+//            color: .brown
+//        ),
     ]
 }

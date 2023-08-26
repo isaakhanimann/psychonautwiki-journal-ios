@@ -278,7 +278,6 @@
 		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
 		EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
-		EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */; };
 		EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9627D7620800940291 /* Double-Ratio.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
@@ -600,7 +599,6 @@
 		EACB6E5327D3473600940291 /* String-Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Regex.swift"; sourceTree = "<group>"; };
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
-		EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EACB6E9627D7620800940291 /* Double-Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-Ratio.swift"; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1400,7 +1398,6 @@
 			children = (
 				EAC39DC029784D0D0012823D /* Other */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
-				EACB6E6727D501E900940291 /* JournalScreen-ViewModel.swift */,
 				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
 			);
 			path = Journal;
@@ -1840,7 +1837,6 @@
 				EA4B8A092A969B0E009918DE /* FullTimelines.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
-				EACB6E6827D501E900940291 /* JournalScreen-ViewModel.swift in Sources */,
 				EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */,
 				EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,

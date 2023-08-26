@@ -18,38 +18,23 @@ import SwiftUI
 
 struct ExperiencesList: View {
 
-    @ObservedObject var viewModel: JournalScreen.ViewModel
+    let experiences: FetchedResults<Experience>
+    let isFavoriteFilterEnabled: Bool
+    let isTimeRelative: Bool
+
     @Environment(\.isSearching) private var isSearching
 
     var body: some View {
         ZStack {
-            List {
-                if !viewModel.currentExperiences.isEmpty {
-                    Section("Current Experience") {
-                        ForEach(viewModel.currentExperiences) { exp in
-                            ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
-                        }
-
-                    }
-                    if !viewModel.previousExperiences.isEmpty {
-                        Section("Previous Experiences") {
-                            ForEach(viewModel.previousExperiences) { exp in
-                                ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
-                            }
-                        }
-                    }
-                } else {
-                    ForEach(viewModel.previousExperiences) { exp in
-                        ExperienceRow(experience: exp, isTimeRelative: viewModel.isTimeRelative)
-                    }
-                }
+            List(experiences) { experience in
+                ExperienceRow(experience: experience, isTimeRelative: isTimeRelative)
             }
             .listStyle(.plain)
-            if viewModel.currentExperiences.isEmpty && viewModel.previousExperiences.isEmpty {
+            if experiences.isEmpty {
                 if isSearching {
                     Text("No Results")
                         .foregroundColor(.secondary)
-                } else if viewModel.isFavoriteFilterEnabled {
+                } else if isFavoriteFilterEnabled {
                     Text("No Favorites")
                         .foregroundColor(.secondary)
                 } else {
