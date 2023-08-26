@@ -47,10 +47,12 @@ struct ExperienceScreen: View {
 
     var body: some View {
         FabPosition {
-            Button {
-                isShowingAddIngestionFullScreen.toggle()
-            } label: {
-                Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
+            if experience.isCurrent {
+                Button {
+                    isShowingAddIngestionFullScreen.toggle()
+                } label: {
+                    Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
+                }
             }
         } screen: {
             screen
