@@ -20,9 +20,15 @@ import SwiftUI
 struct TimelineModel {
     let startTime: Date
     let totalWidth: TimeInterval
-    let ingestionDrawables: [IngestionDrawable]
+    let groupDrawables: [GroupDrawable]
     let ratingDrawables: [RatingDrawable]
     let axisDrawable: AxisDrawable
+
+    struct SubstanceGroup {
+        let color: SubstanceColor
+        let roaDuration: RoaDuration?
+        let weightedLines: [WeightedLine]
+    }
 
     init(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
         let potentialStartTimes = everythingForEachLine.map({ one in
@@ -30,28 +36,41 @@ struct TimelineModel {
         }) + everythingForEachRating.map { $0.time }
         let startTime = potentialStartTimes.min() ?? Date()
         self.startTime = startTime
-        let drawablesWithoutInsets = everythingForEachLine.map { one in
-            IngestionDrawable(
-                startGraph: startTime,
-                color: one.color,
-                ingestionTime: one.startTime,
-                roaDuration: one.roaDuration,
-                onsetDelayInHours: one.onsetDelayInHours,
-                verticalWeight: one.verticalWeight,
-                horizontalWeight: one.horizontalWeight
+        let substanceDict = Dictionary(grouping: everythingForEachLine) { oneLine in
+            oneLine.substanceName
+        }
+        let substanceGroups: [SubstanceGroup] = substanceDict.compactMap { substanceName, lines in
+            guard let line = lines.first else {return nil}
+            return SubstanceGroup(
+                color: line.color,
+                roaDuration: line.roaDuration,
+                weightedLines: lines.map { l in
+                    WeightedLine(
+                        startTime: l.startTime,
+                        horizontalWeight: l.horizontalWeight,
+                        height: l.verticalWeight,
+                        onsetDelayInHours: l.onsetDelayInHours
+                    )
+                }
             )
         }
-        self.ingestionDrawables = drawablesWithoutInsets
+        let groupDrawables = substanceGroups.map { group in
+            GroupDrawable(
+                startGraph: startTime,
+                color: group.color,
+                roaDuration: group.roaDuration,
+                weightedLines: group.weightedLines)
+        }
+        self.groupDrawables = groupDrawables
         let ratingDrawables = everythingForEachRating.map({ rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
         })
         self.ratingDrawables = ratingDrawables
         let sixHours: TimeInterval = 6 * 60 * 60
-        let widthOfTimelinesAndRatings = drawablesWithoutInsets.map({ draw in
-            draw.distanceFromStart + draw.timelineDrawable.width
+        let widthOfTimelinesAndRatings = groupDrawables.map({ group in
+            group.endRelativeToStartInSeconds
         }) + ratingDrawables.map { $0.distanceFromStart }
-        let quarterHour: TimeInterval = 15 * 60
-        let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours) + quarterHour
+        let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours)
         self.totalWidth = maxWidth
         self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }

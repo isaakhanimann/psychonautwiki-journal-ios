@@ -122,6 +122,7 @@ struct DurationScreen: View {
         timelineModel = TimelineModel(
             everythingForEachLine: durationsToShow.map({ info in
                 EverythingForOneLine(
+                    substanceName: info.route.rawValue,
                     roaDuration: info.roaDuration,
                     onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0,
                     startTime: selectedTime,

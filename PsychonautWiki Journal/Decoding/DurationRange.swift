@@ -98,8 +98,8 @@ struct FullDurationRange {
     let min: TimeInterval
     let max: TimeInterval
 
-    func interpolateAtValueInSeconds(weight: Double) -> TimeInterval {
+    func interpolateLinearly(at weightBetween0And1: Double) -> TimeInterval {
         let diff = max - min
-        return min + (diff * weight)
+        return min + (diff * weightBetween0And1)
     }
 }

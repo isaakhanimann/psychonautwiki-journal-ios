@@ -18,25 +18,25 @@ import Foundation
 import SwiftUI
 
 struct OnsetComeupTimeline : TimelineDrawable {
-    func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-        drawTimeLine(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
-        drawTimeLineShape(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
-    }
 
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let onsetDelayInHours: Double
     let verticalWeight: Double
+    let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
-    private var onsetDelayInSeconds: TimeInterval {
-        onsetDelayInHours * 60 * 60
+    var endOfLineRelativeToStartInSeconds: TimeInterval {
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max
     }
 
-    var width: TimeInterval {
-        onsetDelayInSeconds + onset.max + comeup.max
-    }
-
-    private func drawTimeLine(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+    func draw(
+        context: GraphicsContext,
+        height: Double,
+        pixelsPerSec: Double,
+        color: Color,
+        lineWidth: Double
+    ) {
+        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
@@ -44,8 +44,8 @@ struct OnsetComeupTimeline : TimelineDrawable {
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateAtValueInSeconds(weight: weight)) * pixelsPerSec
-        let comeupEndX = onsetEndX + (comeup.interpolateAtValueInSeconds(weight: weight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
+        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
         path.addLine(to: CGPoint(x: onsetEndX, y: bottom))
@@ -53,33 +53,25 @@ struct OnsetComeupTimeline : TimelineDrawable {
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
     }
 
-    private func drawTimeLineShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-        var path = Path()
-        let onsetStartMinX = startX + (onsetDelayInSeconds + onset.min) * pixelsPerSec
-        let comeupEndMinX = onsetStartMinX + (comeup.min * pixelsPerSec)
-        let onsetStartMaxX = startX + (onsetDelayInSeconds + onset.max) * pixelsPerSec
-        let comeupEndMaxX =
-        onsetStartMaxX + (comeup.max * pixelsPerSec)
-        let bottom = height
-        let top = (1-verticalWeight) * height
-        path.move(to: CGPoint(x: onsetStartMinX, y: bottom))
-        path.addLine(to: CGPoint(x: comeupEndMinX, y: top))
-        path.addLine(to: CGPoint(x: comeupEndMaxX, y: top))
-        path.addLine(to: CGPoint(x: onsetStartMaxX, y: bottom))
-        path.closeSubpath()
-        context.fill(path, with: .color(color.opacity(shapeOpacity)))
+    private var onsetDelayInSeconds: TimeInterval {
+        onsetDelayInHours * 60 * 60
     }
 }
 
 extension RoaDuration {
-    func toOnsetComeupTimeline(verticalWeight: Double, onsetDelayInHours: Double) -> OnsetComeupTimeline? {
+    func toOnsetComeupTimeline(
+        verticalWeight: Double,
+        onsetDelayInHours: Double,
+        ingestionTimeRelativeToStartInSeconds: TimeInterval
+    ) -> OnsetComeupTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange {
             return OnsetComeupTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,
                 onsetDelayInHours: onsetDelayInHours,
-                verticalWeight: verticalWeight
+                verticalWeight: verticalWeight,
+                ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {
             return nil

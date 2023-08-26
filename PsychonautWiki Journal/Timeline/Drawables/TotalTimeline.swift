@@ -19,37 +19,33 @@ import SwiftUI
 
 struct TotalTimeline: TimelineDrawable {
 
-    var width: TimeInterval {
-        onsetDelayInSeconds + total.max
+    let total: FullDurationRange
+    let onsetDelayInHours: Double
+    let totalWeight: Double
+    let verticalWeight: Double
+    let ingestionTimeRelativeToStartInSeconds: TimeInterval
+    let percentSmoothness: Double = 0.5
+
+    var endOfLineRelativeToStartInSeconds: TimeInterval {
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.max
     }
 
     var onsetDelayInSeconds: TimeInterval {
         onsetDelayInHours * 60 * 60
     }
 
-    func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
-        drawTimeLine(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
-        drawTimeLineShape(context: context, height: height, startX: startX, pixelsPerSec: pixelsPerSec, color: color, lineWidth: lineWidth)
-    }
-
-    let total: FullDurationRange
-    let onsetDelayInHours: Double
-    let totalWeight: Double
-    let verticalWeight: Double
-    let percentSmoothness: Double = 0.5
-
-    private func drawTimeLine(
+    func draw(
         context: GraphicsContext,
         height: Double,
-        startX: Double,
         pixelsPerSec: Double,
         color: Color,
         lineWidth: Double
     ) {
+        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         let top = (1-verticalWeight)*height
         let bottom = height
         let totalMinX = total.min * pixelsPerSec
-        let totalX = total.interpolateAtValueInSeconds(weight: totalWeight) * pixelsPerSec
+        let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(
             startX: startX,
             bottomY: bottom-lineWidth/2,
@@ -85,51 +81,22 @@ struct TotalTimeline: TimelineDrawable {
             style: StrokeStyle.getDotted(lineWidth: lineWidth)
         )
     }
-
-    private func drawTimeLineShape(
-        context: GraphicsContext,
-        height: Double,
-        startX: Double,
-        pixelsPerSec: Double,
-        color: Color,
-        lineWidth: Double
-    ) {
-        let top = (1-verticalWeight)*height
-        let bottom = height
-        let totalMinX = total.min * pixelsPerSec
-        let totalMaxX = total.max * pixelsPerSec
-        let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
-        var path = Path()
-        path.move(to: CGPoint(x: onsetStartX + (totalMinX / 2), y: top))
-        path.startSmoothLineTo(
-            smoothnessBetween0And1: percentSmoothness,
-            startX: onsetStartX + (totalMinX / 2),
-            startY: top,
-            endX: onsetStartX + totalMaxX,
-            endY: bottom
-        )
-        path.addLine(to: CGPoint(x: onsetStartX + totalMaxX, y: bottom))
-        // path bottom back
-        path.addLine(to: CGPoint(x: onsetStartX + totalMinX, y: bottom))
-        path.endSmoothLineTo(
-            smoothnessBetween0And1: percentSmoothness,
-            startX: onsetStartX + totalMinX,
-            endX: onsetStartX + (totalMinX / 2),
-            endY: top
-        )
-        path.closeSubpath()
-        context.fill(path, with: .color(color.opacity(shapeOpacity)))
-    }
 }
 
 extension RoaDuration {
-    func toTotalTimeline(totalWeight: Double, verticalWeight: Double, onsetDelayInHours: Double) -> TotalTimeline? {
+    func toTotalTimeline(
+        totalWeight: Double,
+        verticalWeight: Double,
+        onsetDelayInHours: Double,
+        ingestionTimeRelativeToStartInSeconds: TimeInterval
+    ) -> TotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange {
             return TotalTimeline(
                 total: fullTotal,
                 onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
-                verticalWeight: verticalWeight
+                verticalWeight: verticalWeight,
+                ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {
             return nil

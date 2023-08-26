@@ -20,7 +20,7 @@ struct EverythingForOneLine: Codable, Equatable {
     static func == (lhs: EverythingForOneLine, rhs: EverythingForOneLine) -> Bool {
         lhs.startTime == rhs.startTime
     }
-
+    let substanceName: String
     let roaDuration: RoaDuration?
     let onsetDelayInHours: Double
     let startTime: Date

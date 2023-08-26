@@ -52,6 +52,7 @@ func getEverythingForEachLine(from ingestions: [Ingestion]) -> [EverythingForOne
             verticalWeight = dose/max
         }
         return EverythingForOneLine(
+            substanceName: ingestion.substanceNameUnwrapped,
             roaDuration: roaDuration,
             onsetDelayInHours: ingestion.stomachFullnessUnwrapped?.onsetDelayForOralInHours ?? 0,
             startTime: ingestion.timeUnwrapped,

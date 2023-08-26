@@ -20,16 +20,24 @@ import SwiftUI
 struct NoTimeline: TimelineDrawable {
 
     let onsetDelayInHours: Double
+    let ingestionTimeRelativeToStartInSeconds: TimeInterval
+
+    var endOfLineRelativeToStartInSeconds: TimeInterval {
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds
+    }
 
     private var onsetDelayInSeconds: TimeInterval {
         onsetDelayInHours * 60 * 60
     }
 
-    var width: TimeInterval {
-        onsetDelayInSeconds + 5*60*60
-    }
-
-    func drawTimeLineWithShape(context: GraphicsContext, height: Double, startX: Double, pixelsPerSec: Double, color: Color, lineWidth: Double) {
+    func draw(
+        context: GraphicsContext,
+        height: Double,
+        pixelsPerSec: Double,
+        color: Color,
+        lineWidth: Double
+    ) {
+        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         context.drawDot(startX: startX, bottomY: height, dotRadius: 1.5 * lineWidth, color: color)
         if onsetDelayInHours > 0 {
             let maxHeight = height - lineWidth/2
