@@ -18,7 +18,7 @@ import SwiftUI
 
 struct GroupDrawable {
 
-    let color: SubstanceColor
+    private let color: SubstanceColor
 
     private let timelineDrawables: [TimelineDrawable]
 
@@ -33,11 +33,100 @@ struct GroupDrawable {
         weightedLines: [WeightedLine]
     ) {
         self.color = color
-        if let fulls = roaDuration?.toFullTimelines(weightedLines: weightedLines, graphStartTime: startGraph) {
+        guard let roaDuration else {
+            timelineDrawables = []
+            return
+        }
+        if let fulls = roaDuration.toFullTimelines(weightedLines: weightedLines, graphStartTime: startGraph) {
             timelineDrawables = [fulls]
         } else {
-            timelineDrawables = []
+            let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
+                roaDuration.toOnsetComeupPeakTotalTimeline(
+                    peakAndTotalWeight: weightedLine.horizontalWeight,
+                    verticalWeight: weightedLine.height,
+                    onsetDelayInHours: weightedLine.onsetDelayInHours,
+                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                )
+            }
+            if !onsetComeupPeakTotals.isEmpty {
+                timelineDrawables = onsetComeupPeakTotals
+            } else {
+                let onsetComeupTotals = weightedLines.compactMap { weightedLine in
+                    roaDuration.toOnsetComeupTotalTimeline(
+                        totalWeight: weightedLine.horizontalWeight,
+                        verticalWeight: weightedLine.height,
+                        onsetDelayInHours: weightedLine.onsetDelayInHours,
+                        ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                    )
+                }
+                if !onsetComeupTotals.isEmpty {
+                    timelineDrawables = onsetComeupTotals
+                } else {
+                    let onsetTotals = weightedLines.compactMap { weightedLine in
+                        roaDuration.toOnsetTotalTimeline(
+                            totalWeight: weightedLine.horizontalWeight,
+                            verticalWeight: weightedLine.height,
+                            onsetDelayInHours: weightedLine.onsetDelayInHours,
+                            ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                        )
+                    }
+                    if !onsetTotals.isEmpty {
+                        timelineDrawables = onsetTotals
+                    } else {
+                        let totals = weightedLines.compactMap { weightedLine in
+                            roaDuration.toTotalTimeline(
+                                totalWeight: weightedLine.horizontalWeight,
+                                verticalWeight: weightedLine.height,
+                                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                            )
+                        }
+                        if !totals.isEmpty {
+                            timelineDrawables = totals
+                        } else {
+                            let onsetComeupPeaks = weightedLines.compactMap { weightedLine in
+                                roaDuration.toOnsetComeupPeakTimeline(
+                                    peakWeight: weightedLine.horizontalWeight,
+                                    verticalWeight: weightedLine.height,
+                                    onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                                )
+                            }
+                            if !onsetComeupPeaks.isEmpty {
+                                timelineDrawables = onsetComeupPeaks
+                            } else {
+                                let onsetComeups = weightedLines.compactMap { weightedLine in
+                                    roaDuration.toOnsetComeupTimeline(
+                                        verticalWeight: weightedLine.height,
+                                        onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                        ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                                    )
+                                }
+                                if !onsetComeups.isEmpty {
+                                    timelineDrawables = onsetComeups
+                                } else {
+                                    let onsets = weightedLines.compactMap { weightedLine in
+                                        roaDuration.toOnsetTimeline(
+                                            onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                            ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                                        )
+                                    }
+                                    if !onsets.isEmpty {
+                                        timelineDrawables = onsets
+                                    } else {
+                                        timelineDrawables = []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    private static func getDistanceFromStartGraphInSeconds(graphStartTime: Date, time: Date) -> TimeInterval {
+        time.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970
     }
 
     func draw(
@@ -53,5 +142,5 @@ struct GroupDrawable {
                     color: color.swiftUIColor,
                     lineWidth: lineWidth)
             }
-    }
+        }
 }

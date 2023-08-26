@@ -41,23 +41,26 @@ struct TotalTimeline: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
+        let halfLineWidth = lineWidth/2
+        let paddingTop = halfLineWidth
+        let paddingBottom = halfLineWidth
+        let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let top = (1-verticalWeight)*height
-        let bottom = height
+        let top = (1-verticalWeight)*heightBetween
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(
             startX: startX,
-            bottomY: bottom-lineWidth/2,
+            bottomY: height-lineWidth/2,
             dotRadius: 1.5 * lineWidth,
             color: color
         )
         let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
+        var filledPath = Path()
+        let filledPathY = height - lineWidth/2
+        filledPath.move(to: CGPoint(x: startX, y: filledPathY))
+        filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
         if onsetDelayInHours > 0 {
-            var filledPath = Path()
-            let filledPathY = height - lineWidth/2
-            filledPath.move(to: CGPoint(x: startX, y: filledPathY))
-            filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
             context.stroke(filledPath, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         }
         var dottedPath = Path()
@@ -68,18 +71,24 @@ struct TotalTimeline: TimelineDrawable {
             endX: onsetStartX + (totalMinX / 2),
             endY: top
         )
+        let totalEndX = onsetStartX + totalX
         dottedPath.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: onsetStartX + (totalMinX / 2),
             startY: top,
-            endX: onsetStartX + totalX,
-            endY: bottom
+            endX: totalEndX,
+            endY: height-paddingBottom
         )
         context.stroke(
             dottedPath,
             with: .color(color),
             style: StrokeStyle.getDotted(lineWidth: lineWidth)
         )
+        filledPath.addPath(dottedPath)
+        filledPath.addLine(to: CGPoint(x: totalEndX, y: height))
+        filledPath.addLine(to: CGPoint(x: startX, y: height))
+        filledPath.closeSubpath()
+        context.fill(filledPath, with: .color(color.opacity(shapeOpacity)))
     }
 }
 
