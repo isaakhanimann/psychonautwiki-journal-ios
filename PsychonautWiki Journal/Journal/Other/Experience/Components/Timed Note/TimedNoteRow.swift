@@ -47,20 +47,21 @@ private struct TimedNoteRowContent: View {
         HStack {
             TimedNoteDottedLine(color: color.swiftUIColor)
             VStack(alignment: .leading) {
-                Group {
-                    if timeDisplayStyle == .relativeToNow {
-                        Text(time, style: .relative) + Text(" ago")
-                    } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                        Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: time)))
-                    } else {
-                        Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                timeText.font(.headline) + Text(isPartOfTimeline ? "" : " (not part of timeline)").font(.footnote).foregroundColor(.secondary)
 
-                    }
-                }
-                .font(.headline)
-                .foregroundColor(.primary)
                 Text(note).font(.subheadline)
             }
+        }
+    }
+
+    private var timeText: Text {
+        if timeDisplayStyle == .relativeToNow {
+            return Text(time, style: .relative) + Text(" ago")
+        } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+            return Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: time)))
+        } else {
+            return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+
         }
     }
 }
@@ -73,6 +74,14 @@ struct TimedNoteRow_Previews: PreviewProvider {
                 note: "My note",
                 color: .blue,
                 isPartOfTimeline: true,
+                timeDisplayStyle: .regular,
+                firstIngestionTime: nil
+            )
+            TimedNoteRowContent(
+                time: .now,
+                note: "My note",
+                color: .blue,
+                isPartOfTimeline: false,
                 timeDisplayStyle: .regular,
                 firstIngestionTime: nil
             )
