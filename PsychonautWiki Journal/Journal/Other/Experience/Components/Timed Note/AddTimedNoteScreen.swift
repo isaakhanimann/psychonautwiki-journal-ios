@@ -75,7 +75,6 @@ struct AddTimedNoteScreen: View {
     }
 
     func save() {
-        guard !note.isEmpty else {return}
         let context = PersistenceController.shared.viewContext
         let newNote = TimedNote(context: context)
         newNote.creationDate = Date()

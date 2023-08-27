@@ -44,12 +44,9 @@ struct TimedNoteDrawable {
         var path = Path()
         path.move(to: CGPoint(x: x, y: height))
         path.addLine(to: CGPoint(x: x, y: 0))
-        context.stroke(path, with: .color(color.swiftUIColor), style: StrokeStyle(
-            lineWidth: lineWidth,
-            lineCap: .round,
-            lineJoin: .round,
-            dash: [5, 8],
-            dashPhase: 0
-        ))
+        context.stroke(
+            path,
+            with: .color(color.swiftUIColor),
+            style: StrokeStyle.getTimedNoteStokeStyle())
     }
 }

@@ -30,4 +30,16 @@ extension StrokeStyle {
             dashPhase: 0
         )
     }
+
+    static let timedNoteLineWidth: Double = 3
+
+    static func getTimedNoteStokeStyle() -> StrokeStyle {
+        return StrokeStyle(
+            lineWidth: timedNoteLineWidth,
+            lineCap: .round,
+            lineJoin: .round,
+            dash: [5, 8],
+            dashPhase: 0
+        )
+    }
 }

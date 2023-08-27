@@ -67,7 +67,6 @@ struct EditTimedNoteScreen: View {
     }
 
     func save() {
-        guard !note.isEmpty else {return}
         timedNote.time = time
         timedNote.note = note
         timedNote.colorAsText = color.rawValue
