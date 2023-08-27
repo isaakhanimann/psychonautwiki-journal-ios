@@ -478,6 +478,7 @@
 		EA4B8A042A952C4B009918DE /* EditTitleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleScreen.swift; sourceTree = "<group>"; };
 		EA4B8A062A969301009918DE /* WeightedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedLine.swift; sourceTree = "<group>"; };
 		EA4B8A082A969B0E009918DE /* FullTimelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimelines.swift; sourceTree = "<group>"; };
+		EA4B8A102A9B1D10009918DE /* PW Version 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 5.xcdatamodel"; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -2295,13 +2296,14 @@
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA4B8A102A9B1D10009918DE /* PW Version 5.xcdatamodel */,
 				EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */,
 				EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */,
 				EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */,
 				EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */,
 				EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */,
 			);
-			currentVersion = EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */;
+			currentVersion = EA4B8A102A9B1D10009918DE /* PW Version 5.xcdatamodel */;
 			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
