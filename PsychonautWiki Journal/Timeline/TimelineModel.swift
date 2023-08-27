@@ -22,6 +22,7 @@ struct TimelineModel {
     let totalWidth: TimeInterval
     let groupDrawables: [GroupDrawable]
     let ratingDrawables: [RatingDrawable]
+    let timedNoteDrawables: [TimedNoteDrawable]
     let axisDrawable: AxisDrawable
 
     struct SubstanceGroup {
@@ -30,10 +31,14 @@ struct TimelineModel {
         let weightedLines: [WeightedLine]
     }
 
-    init(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+    init(
+        everythingForEachLine: [EverythingForOneLine],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) {
         let potentialStartTimes = everythingForEachLine.map({ one in
             one.startTime
-        }) + everythingForEachRating.map { $0.time }
+        }) + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
         let startTime = potentialStartTimes.min() ?? Date()
         self.startTime = startTime
         let substanceDict = Dictionary(grouping: everythingForEachLine) { oneLine in
@@ -66,10 +71,14 @@ struct TimelineModel {
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
         })
         self.ratingDrawables = ratingDrawables
+        let timedNoteDrawables = everythingForEachTimedNote.map({ timedNote in
+            TimedNoteDrawable(startGraph: startTime, time: timedNote.time, color: timedNote.color)
+        })
+        self.timedNoteDrawables = timedNoteDrawables
         let sixHours: TimeInterval = 6 * 60 * 60
         let widthOfTimelinesAndRatings = groupDrawables.map({ group in
             group.endRelativeToStartInSeconds
-        }) + ratingDrawables.map { $0.distanceFromStart }
+        }) + ratingDrawables.map { $0.distanceFromStart } + timedNoteDrawables.map { $0.distanceFromStart }
         let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours)
         self.totalWidth = maxWidth
         self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)

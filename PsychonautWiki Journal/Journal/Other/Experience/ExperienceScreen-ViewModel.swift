@@ -24,6 +24,7 @@ extension ExperienceScreen {
         var experience: Experience? = nil
         private let ingestionFetchController: NSFetchedResultsController<Ingestion>
         private let ratingFetchController: NSFetchedResultsController<ShulginRating>
+        private let timedNotesFetchController: NSFetchedResultsController<TimedNote>
         @Published var timelineModel: TimelineModel?
         @Published var cumulativeDoses: [CumulativeDose] = []
         @Published var interactions: [Interaction] = []
@@ -32,6 +33,7 @@ extension ExperienceScreen {
         @Published var hiddenRatings: [ObjectIdentifier] = []
         @Published var sortedIngestions: [Ingestion] = []
         @Published var sortedRatingsWithTime: [ShulginRating] = []
+        @Published var timedNotesForTimeline: [EverythingForOneTimedNote] = []
         @Published var toleranceWindows: [ToleranceWindow] = []
         @Published var numberOfSubstancesInToleranceChart = 0
         @Published var substancesInChart: [SubstanceWithToleranceAndColor] = []
@@ -44,7 +46,6 @@ extension ExperienceScreen {
                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                 })
         }
-
 
         override init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
@@ -61,9 +62,17 @@ extension ExperienceScreen {
                 managedObjectContext: PersistenceController.shared.viewContext,
                 sectionNameKeyPath: nil, cacheName: nil
             )
+            let timedNotesFetchRequest = TimedNote.fetchRequest()
+            timedNotesFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \TimedNote.time, ascending: true) ]
+            timedNotesFetchController = NSFetchedResultsController(
+                fetchRequest: timedNotesFetchRequest,
+                managedObjectContext: PersistenceController.shared.viewContext,
+                sectionNameKeyPath: nil, cacheName: nil
+            )
             super.init()
             ingestionFetchController.delegate = self
             ratingFetchController.delegate = self
+            timedNotesFetchController.delegate = self
         }
 
         nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -77,6 +86,7 @@ extension ExperienceScreen {
         func reloadScreen(experience: Experience) {
             reloadIngestions(experience: experience)
             reloadRatings(experience: experience)
+            reloadTimedNotes(experience: experience)
             calculateScreen()
             calculateChartData()
         }
@@ -141,6 +151,21 @@ extension ExperienceScreen {
             })
         }
 
+        private func reloadTimedNotes(experience: Experience) {
+            let predicate = NSPredicate(
+                format: "%K == %@",
+                #keyPath(TimedNote.experience.creationDate),
+                experience.creationDateUnwrapped as NSDate
+            )
+            timedNotesFetchController.fetchRequest.predicate = predicate
+            try? timedNotesFetchController.performFetch()
+            timedNotesForTimeline = (timedNotesFetchController.fetchedObjects ?? []).filter({$0.isPartOfTimeline}).map({ timedNote in
+                EverythingForOneTimedNote(
+                    time: timedNote.timeUnwrapped,
+                    color: timedNote.color)
+            })
+        }
+
         func showIngestion(id: ObjectIdentifier) {
             hiddenIngestions.removeAll { hiddenID in
                 hiddenID == id
@@ -182,7 +207,8 @@ extension ExperienceScreen {
             Task {
                 await ActivityManager.shared.startOrUpdateActivity(
                     everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
-                    everythingForEachRating: everythingForEachRating
+                    everythingForEachRating: everythingForEachRating,
+                    everythingForEachTimedNote: timedNotesForTimeline
                 )
             }
         }
@@ -192,7 +218,8 @@ extension ExperienceScreen {
             Task {
                 await ActivityManager.shared.stopActivity(
                     everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
-                    everythingForEachRating: everythingForEachRating
+                    everythingForEachRating: everythingForEachRating,
+                    everythingForEachTimedNote: timedNotesForTimeline
                 )
             }
         }
@@ -209,7 +236,8 @@ extension ExperienceScreen {
             let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
             let model = TimelineModel(
                 everythingForEachLine: everythingForEachLine,
-                everythingForEachRating: everythingForEachRating
+                everythingForEachRating: everythingForEachRating,
+                everythingForEachTimedNote: timedNotesForTimeline
             )
             timelineModel = model
         }

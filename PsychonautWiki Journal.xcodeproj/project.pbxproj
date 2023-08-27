@@ -165,6 +165,10 @@
 		EA4B8A192A9B2A89009918DE /* TimedNoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A182A9B2A89009918DE /* TimedNoteRow.swift */; };
 		EA4B8A1B2A9B2ECF009918DE /* TimedNoteDottedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A1A2A9B2ECF009918DE /* TimedNoteDottedLine.swift */; };
 		EA4B8A1D2A9B3540009918DE /* EditTimedNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A1C2A9B3540009918DE /* EditTimedNoteScreen.swift */; };
+		EA4B8A1F2A9B3E0E009918DE /* EverythingForOneTimedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */; };
+		EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */; };
+		EA4B8A222A9B3FB2009918DE /* TimedNoteDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */; };
+		EA4B8A232A9B3FE9009918DE /* EverythingForOneTimedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -491,6 +495,8 @@
 		EA4B8A182A9B2A89009918DE /* TimedNoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedNoteRow.swift; sourceTree = "<group>"; };
 		EA4B8A1A2A9B2ECF009918DE /* TimedNoteDottedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedNoteDottedLine.swift; sourceTree = "<group>"; };
 		EA4B8A1C2A9B3540009918DE /* EditTimedNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimedNoteScreen.swift; sourceTree = "<group>"; };
+		EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingForOneTimedNote.swift; sourceTree = "<group>"; };
+		EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedNoteDrawable.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -1191,10 +1197,12 @@
 				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
 				EA085E0029619E5B001638AC /* EverythingForOneLine.swift */,
 				EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */,
+				EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */,
 				EABD91FC294105830073303A /* TimelineModel.swift */,
 				EABD92012941C3A30073303A /* GroupDrawable.swift */,
 				EA4B8A062A969301009918DE /* WeightedLine.swift */,
 				EA48F86529DC1AE9007DA8C5 /* RatingDrawable.swift */,
+				EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */,
 				EABD91FF2941C3740073303A /* AxisDrawable.swift */,
 			);
 			path = Timeline;
@@ -1636,6 +1644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA085E0329619F3E001638AC /* SubstanceColor.swift in Sources */,
+				EA4B8A232A9B3FE9009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA085DFD29619E1E001638AC /* RoaDuration.swift in Sources */,
 				EA085E0429619F85001638AC /* Interactions.swift in Sources */,
 				EA085E192961A212001638AC /* OnsetComeupPeakTotalTimeline.swift in Sources */,
@@ -1643,6 +1652,7 @@
 				EA085E0C29619FA3001638AC /* DoseRangeType.swift in Sources */,
 				EA4B8A0D2A9A1601009918DE /* OnsetComeupTotalTimeline.swift in Sources */,
 				EA085E112961A1C9001638AC /* TimelineDrawable.swift in Sources */,
+				EA4B8A222A9B3FB2009918DE /* TimedNoteDrawable.swift in Sources */,
 				EA48F86829DC1B69007DA8C5 /* ShulginRatingOption.swift in Sources */,
 				EA085E0729619F85001638AC /* RoaDose.swift in Sources */,
 				EA085E1B2961A212001638AC /* NoTimeline.swift in Sources */,
@@ -1825,6 +1835,7 @@
 				EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */,
+				EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */,
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
 				EAA9C3962A5944EB00869E5A /* ToleranceTimeOption.swift in Sources */,
 				EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */,
@@ -1863,6 +1874,7 @@
 				EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */,
 				EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
+				EA4B8A1F2A9B3E0E009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
 				EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */,
 				EA4B8A092A969B0E009918DE /* FullTimelines.swift in Sources */,

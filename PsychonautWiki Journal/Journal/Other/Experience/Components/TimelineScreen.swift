@@ -64,7 +64,8 @@ struct TimelineScreen_Previews: PreviewProvider {
         NavigationView {
             TimelineScreen(timelineModel: TimelineModel(
                 everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
-                everythingForEachRating: EffectTimeline_Previews.everythingForEachRating
+                everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
+                everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote
             ))
         }
     }

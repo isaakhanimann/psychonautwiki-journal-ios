@@ -131,7 +131,8 @@ struct DurationScreen: View {
                     color: info.route.color
                 )
             }),
-            everythingForEachRating: []
+            everythingForEachRating: [],
+            everythingForEachTimedNote: []
         )
     }
 

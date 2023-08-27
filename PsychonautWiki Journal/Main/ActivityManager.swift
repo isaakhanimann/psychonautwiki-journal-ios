@@ -41,22 +41,41 @@ class ActivityManager: ObservableObject {
         activityStateTask?.cancel()
     }
 
-    func startOrUpdateActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
+    func startOrUpdateActivity(
+        everythingForEachLine: [EverythingForOneLine],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) async {
         if authorizationInfo.areActivitiesEnabled {
             if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first, firstActivity.activityState == .active {
-                await updateActivity(activity: firstActivity, everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+                await updateActivity(
+                    activity: firstActivity,
+                    everythingForEachLine: everythingForEachLine,
+                    everythingForEachRating: everythingForEachRating,
+                    everythingForEachTimedNote: everythingForEachTimedNote)
             } else {
-                await stopActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
-                startActivity(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+                await stopActivity(
+                    everythingForEachLine: everythingForEachLine,
+                    everythingForEachRating: everythingForEachRating,
+                    everythingForEachTimedNote: everythingForEachTimedNote)
+                startActivity(
+                    everythingForEachLine: everythingForEachLine,
+                    everythingForEachRating: everythingForEachRating,
+                    everythingForEachTimedNote: everythingForEachTimedNote)
             }
         }
     }
 
-    private func startActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) {
+    private func startActivity(
+        everythingForEachLine: [EverythingForOneLine],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) {
         let attributes = TimelineWidgetAttributes(name: "Passed from app")
         let state = TimelineWidgetAttributes.ContentState(
             everythingForEachLine: everythingForEachLine,
-            everythingForEachRating: everythingForEachRating
+            everythingForEachRating: everythingForEachRating,
+            everythingForEachTimedNote: everythingForEachTimedNote
         )
         let content = ActivityContent(state: state, staleDate: nil)
         do {
@@ -75,15 +94,30 @@ class ActivityManager: ObservableObject {
         }
     }
 
-    private func updateActivity(activity: Activity<TimelineWidgetAttributes>, everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
-        let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+    private func updateActivity(
+        activity: Activity<TimelineWidgetAttributes>,
+        everythingForEachLine: [EverythingForOneLine],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) async {
+        let state = TimelineWidgetAttributes.ContentState(
+            everythingForEachLine: everythingForEachLine,
+            everythingForEachRating: everythingForEachRating,
+            everythingForEachTimedNote: everythingForEachTimedNote)
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         await activity.update(updatedContent)
     }
 
-    func stopActivity(everythingForEachLine: [EverythingForOneLine], everythingForEachRating: [EverythingForOneRating]) async {
+    func stopActivity(
+        everythingForEachLine: [EverythingForOneLine],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) async {
         if authorizationInfo.areActivitiesEnabled {
-            let state = TimelineWidgetAttributes.ContentState(everythingForEachLine: everythingForEachLine, everythingForEachRating: everythingForEachRating)
+            let state = TimelineWidgetAttributes.ContentState(
+                everythingForEachLine: everythingForEachLine,
+                everythingForEachRating: everythingForEachRating,
+                everythingForEachTimedNote: everythingForEachTimedNote)
             let finalContent = ActivityContent(state: state, staleDate: nil)
             for activity in Activity<TimelineWidgetAttributes>.activities {
                 await activity.end(finalContent, dismissalPolicy: .immediate)

@@ -57,7 +57,14 @@ struct ExperienceRow: View {
                                 await ActivityManager.shared.stopActivity(
                                     everythingForEachLine: getEverythingForEachLine(from: experience.ingestionsSorted),
                                     everythingForEachRating: experience.ratingsWithTimeSorted.map({ shulgin in
-                                        EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                                        EverythingForOneRating(
+                                            time: shulgin.timeUnwrapped,
+                                            option: shulgin.optionUnwrapped)
+                                    }),
+                                    everythingForEachTimedNote: experience.timedNotesSorted.filter({$0.isPartOfTimeline}).map({ timedNote in
+                                        EverythingForOneTimedNote(
+                                            time: timedNote.timeUnwrapped,
+                                            color: timedNote.color)
                                     })
                                 )
                             }

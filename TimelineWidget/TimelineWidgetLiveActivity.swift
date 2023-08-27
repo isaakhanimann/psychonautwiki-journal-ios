@@ -23,7 +23,8 @@ struct TimelineWidgetLiveActivity: Widget {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
             let timelineModel = TimelineModel(
                 everythingForEachLine: context.state.everythingForEachLine,
-                everythingForEachRating: context.state.everythingForEachRating
+                everythingForEachRating: context.state.everythingForEachRating,
+                everythingForEachTimedNote: context.state.everythingForEachTimedNote
             )
             VStack(spacing: 0) {
                 GeometryReader { geo in
@@ -52,7 +53,8 @@ struct TimelineWidgetLiveActivity: Widget {
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(
                 everythingForEachLine: context.state.everythingForEachLine,
-                everythingForEachRating: context.state.everythingForEachRating
+                everythingForEachRating: context.state.everythingForEachRating,
+                everythingForEachTimedNote: context.state.everythingForEachTimedNote
             )
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -88,7 +90,8 @@ struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = TimelineWidgetAttributes(name: "Me")
     static let contentState = TimelineWidgetAttributes.ContentState(
         everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
-        everythingForEachRating: EffectTimeline_Previews.everythingForEachRating
+        everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
+        everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote
     )
 
     static var previews: some View {

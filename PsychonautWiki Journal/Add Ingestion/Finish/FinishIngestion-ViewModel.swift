@@ -111,7 +111,14 @@ extension FinishIngestionScreen {
                                 await ActivityManager.shared.startOrUpdateActivity(
                                     everythingForEachLine: getEverythingForEachLine(from: existingExperience.ingestionsSorted),
                                     everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
-                                        EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                                        EverythingForOneRating(
+                                            time: shulgin.timeUnwrapped,
+                                            option: shulgin.optionUnwrapped)
+                                    }),
+                                    everythingForEachTimedNote: existingExperience.timedNotesSorted.filter({$0.isPartOfTimeline}).map({ timedNote in
+                                        EverythingForOneTimedNote(
+                                            time: timedNote.timeUnwrapped,
+                                            color: timedNote.color)
                                     })
                                 )
                             }
@@ -149,7 +156,8 @@ extension FinishIngestionScreen {
                             Task {
                                 await ActivityManager.shared.startOrUpdateActivity(
                                     everythingForEachLine: getEverythingForEachLine(from: newExperience.ingestionsSorted),
-                                    everythingForEachRating: []
+                                    everythingForEachRating: [],
+                                    everythingForEachTimedNote: []
                                 )
                             }
                         }
