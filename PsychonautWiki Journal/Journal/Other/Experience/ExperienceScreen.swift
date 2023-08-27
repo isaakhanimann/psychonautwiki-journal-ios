@@ -161,7 +161,7 @@ struct ExperienceScreen: View {
 
     private var screen: some View {
         List {
-            if !experience.sortedIngestionsUnwrapped.isEmpty {
+            if !experience.ingestionsSorted.isEmpty {
                 Section {
                     let timelineHeight: Double = 200
                     if let timelineModel = viewModel.timelineModel {
@@ -173,7 +173,7 @@ struct ExperienceScreen: View {
                     } else {
                         Canvas {_,_ in }.frame(height: timelineHeight)
                     }
-                    ForEach(experience.sortedIngestionsUnwrapped) { ing in
+                    ForEach(experience.ingestionsSorted) { ing in
                         let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
                         let route = ing.administrationRouteUnwrapped
                         let substance = ing.substance
@@ -192,7 +192,7 @@ struct ExperienceScreen: View {
                                 }
                                 IngestionRow(
                                     ingestion: ing,
-                                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped,
+                                    firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped,
                                     roaDose: roaDose,
                                     timeDisplayStyle: timeDisplayStyle,
                                     isEyeOpen: isEyeOpen,
@@ -238,7 +238,7 @@ struct ExperienceScreen: View {
                     }
                 } header: {
                     HStack {
-                        let firstDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.sortDateUnwrapped
+                        let firstDate = experience.ingestionsSorted.first?.time ?? experience.sortDateUnwrapped
                         Text(firstDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                         if isEyeOpen {
                             Spacer()
@@ -297,7 +297,7 @@ struct ExperienceScreen: View {
                     experience: experience,
                     viewModel: viewModel,
                     timeDisplayStyle: timeDisplayStyle,
-                    firstIngestionTime: experience.sortedIngestionsUnwrapped.first?.timeUnwrapped
+                    firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
                 )
             }
             if #available(iOS 16.0, *) {

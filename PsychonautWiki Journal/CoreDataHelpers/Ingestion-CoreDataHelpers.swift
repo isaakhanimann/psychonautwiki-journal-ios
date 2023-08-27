@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
-import SwiftUI
 import CoreData
 
 extension Ingestion: Comparable {
@@ -60,10 +58,11 @@ extension Ingestion: Comparable {
     }
 
     var unitsUnwrapped: String {
-        if let unwrap = units {
-            return unwrap
+        if let units {
+            return units
+        } else {
+            return ""
         }
-        return ""
     }
 
     var substanceColor: SubstanceColor {

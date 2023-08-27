@@ -29,7 +29,7 @@ struct JournalFile: FileDocument, Codable {
         var companionsToStore: [CompanionCodable] = []
         for experience in experiences {
             var ingestionsInExperience: [IngestionCodable] = []
-            for ingestion in experience.sortedIngestionsUnwrapped {
+            for ingestion in experience.ingestionsSorted {
                 ingestionsInExperience.append(
                     IngestionCodable(
                         substanceName: ingestion.substanceNameUnwrapped,

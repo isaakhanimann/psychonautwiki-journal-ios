@@ -109,7 +109,7 @@ struct PersistenceController {
             let experienceFetchRequest = Experience.fetchRequest()
             let allExperiences = (try? viewContext.fetch(experienceFetchRequest)) ?? []
             for experience in allExperiences {
-                experience.sortDate = experience.sortedIngestionsUnwrapped.first?.time ?? experience.creationDate
+                experience.sortDate = experience.ingestionsSorted.first?.time ?? experience.creationDate
             }
             try? viewContext.save()
         }

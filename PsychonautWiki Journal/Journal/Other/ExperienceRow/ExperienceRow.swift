@@ -55,7 +55,7 @@ struct ExperienceRow: View {
                         if experience.isCurrent {
                             Task {
                                 await ActivityManager.shared.stopActivity(
-                                    everythingForEachLine: getEverythingForEachLine(from: experience.sortedIngestionsUnwrapped),
+                                    everythingForEachLine: getEverythingForEachLine(from: experience.ingestionsSorted),
                                     everythingForEachRating: experience.ratingsWithTimeSorted.map({ shulgin in
                                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                                     })

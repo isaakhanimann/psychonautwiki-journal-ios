@@ -109,7 +109,7 @@ extension FinishIngestionScreen {
                         if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
                             Task {
                                 await ActivityManager.shared.startOrUpdateActivity(
-                                    everythingForEachLine: getEverythingForEachLine(from: existingExperience.sortedIngestionsUnwrapped),
+                                    everythingForEachLine: getEverythingForEachLine(from: existingExperience.ingestionsSorted),
                                     everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
                                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                                     })
@@ -148,7 +148,7 @@ extension FinishIngestionScreen {
                         if newExperience.isCurrent && self.wantsToStartLiveActivity {
                             Task {
                                 await ActivityManager.shared.startOrUpdateActivity(
-                                    everythingForEachLine: getEverythingForEachLine(from: newExperience.sortedIngestionsUnwrapped),
+                                    everythingForEachLine: getEverythingForEachLine(from: newExperience.ingestionsSorted),
                                     everythingForEachRating: []
                                 )
                             }
@@ -208,8 +208,8 @@ extension FinishIngestionScreen {
             let veryShortInterval: TimeInterval = 8*60*60
             let veryShortRange = date.addingTimeInterval(-veryShortInterval)...date.addingTimeInterval(veryShortInterval)
             return experiences.first { exp in
-                let experienceStart = exp.sortedIngestionsUnwrapped.first?.time ?? exp.sortDateUnwrapped
-                let lastIngestionTime = exp.sortedIngestionsUnwrapped.last?.time ?? exp.sortDateUnwrapped
+                let experienceStart = exp.ingestionsSorted.first?.time ?? exp.sortDateUnwrapped
+                let lastIngestionTime = exp.ingestionsSorted.last?.time ?? exp.sortDateUnwrapped
                 if shortRange.contains(experienceStart) {
                     return true
                 } else {

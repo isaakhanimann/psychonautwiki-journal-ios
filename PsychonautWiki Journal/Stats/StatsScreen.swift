@@ -130,7 +130,7 @@ struct StatsScreen: View {
             Calendar.current.numberOfDaysBetween(ex.sortDateUnwrapped, and: Date()) <= 30
         }
         let ungroupedResult = experiencesLast30Days.flatMap { ex in
-            let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
+            let distinctSubstanceNames = ex.ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForDay(
                     day: ex.sortDateUnwrapped,
@@ -162,7 +162,7 @@ struct StatsScreen: View {
             Calendar.current.numberOfMonthsBetween(ex.sortDateUnwrapped, and: Date()) <= 12
         }
         let ungroupedResult = experiencesLast12Months.flatMap { ex in
-            let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
+            let distinctSubstanceNames = ex.ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForMonth(
                     month: ex.sortDateUnwrapped,
@@ -191,7 +191,7 @@ struct StatsScreen: View {
 
     private func getExperienceCountsYears() -> [SubstanceExperienceCountForYear] {
         let ungroupedResult = experiences.flatMap { ex in
-            let distinctSubstanceNames = ex.sortedIngestionsUnwrapped.map { $0.substanceNameUnwrapped }.uniqued()
+            let distinctSubstanceNames = ex.ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForYear(
                     year: ex.sortDateUnwrapped,

@@ -22,7 +22,7 @@ extension Experience: Comparable {
     }
 
     var sortDateUnwrapped: Date {
-        sortedIngestionsUnwrapped.first?.time ?? sortDate ?? creationDateUnwrapped
+        ingestionsSorted.first?.time ?? sortDate ?? creationDateUnwrapped
     }
 
     var year: Int {
@@ -47,9 +47,14 @@ extension Experience: Comparable {
         return formatter.string(from: creationDateUnwrapped)
     }
 
-    var sortedIngestionsUnwrapped: [Ingestion] {
+    var ingestionsSorted: [Ingestion] {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }
+
+    var timedNotesSorted: [TimedNote] {
+        (timedNotes?.allObjects as? [TimedNote] ?? []).sorted()
+    }
+
 
     var ratingsUnwrapped: [ShulginRating] {
         ratings?.allObjects as? [ShulginRating] ?? []
@@ -75,21 +80,21 @@ extension Experience: Comparable {
 
     var ingestionColors: [Color] {
         var colors = [Color]()
-        for ingestion in sortedIngestionsUnwrapped {
+        for ingestion in ingestionsSorted {
             colors.append(ingestion.substanceColor.swiftUIColor)
         }
         return colors
     }
 
     var distinctUsedSubstanceNames: [String] {
-        sortedIngestionsUnwrapped.map { ing in
+        ingestionsSorted.map { ing in
             ing.substanceNameUnwrapped
         }.uniqued()
     }
 
     var isCurrent: Bool {
         let twelveHours: TimeInterval = 12*60*60
-        if let lastIngestionTime = sortedIngestionsUnwrapped.last?.time,
+        if let lastIngestionTime = ingestionsSorted.last?.time,
            Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
             return true
         } else {
