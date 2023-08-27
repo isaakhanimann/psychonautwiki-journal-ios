@@ -24,6 +24,7 @@ struct ExperienceScreen: View {
         case editLocation(experienceLocation: ExperienceLocation)
         case addLocation
         case addRating
+        case addTimedNote
 
         var id: Self {
             return self
@@ -134,10 +135,19 @@ struct ExperienceScreen: View {
                     Label("Edit", systemImage: "pencil")
                 }
                 if isEyeOpen {
-                    Button {
-                        sheetToShow = .addRating
+                    Menu {
+                        Button {
+                            sheetToShow = .addRating
+                        } label: {
+                            Label("Add Rating", systemImage: "plus.forwardslash.minus")
+                        }
+                        Button {
+                            sheetToShow = .addTimedNote
+                        } label: {
+                            Label("Add Timed Note", systemImage: "note.text")
+                        }
                     } label: {
-                        Label("Add Rating", systemImage: "plus")
+                        Label("Add", systemImage: "plus")
                     }
                 }
             }
@@ -192,7 +202,7 @@ struct ExperienceScreen: View {
                                 }
                                 IngestionRow(
                                     ingestion: ing,
-                                    firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped,
+                                    firstIngestionTime: experience.ingestionsSorted.first?.time,
                                     roaDose: roaDose,
                                     timeDisplayStyle: timeDisplayStyle,
                                     isEyeOpen: isEyeOpen,
@@ -282,12 +292,21 @@ struct ExperienceScreen: View {
             let notes = experience.textUnwrapped
             if !notes.isEmpty {
                 Section("Notes") {
-                    if !notes.isEmpty {
-                        Text(notes)
-                            .padding(.vertical, 5)
-                            .onTapGesture {
-                                sheetToShow = .editNotes
-                            }
+                    Text(notes)
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            sheetToShow = .editNotes
+                        }
+                }
+            }
+            let timedNotesSorted = experience.timedNotesSorted
+            if !timedNotesSorted.isEmpty {
+                Section("Timed Notes") {
+                    ForEach(timedNotesSorted) { timedNote in
+                        TimedNoteRow(
+                            timedNote: timedNote,
+                            timeDisplayStyle: timeDisplayStyle,
+                            firstIngestionTime: experience.ingestionsSorted.first?.time)
                     }
                 }
             }
@@ -399,6 +418,8 @@ struct ExperienceScreen: View {
                 EditTitleScreen(experience: experience)
             case .addRating:
                 AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
+            case .addTimedNote:
+                AddTimedNoteScreen(experience: experience)
             }
         })
         .task {
