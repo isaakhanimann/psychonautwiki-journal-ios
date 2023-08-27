@@ -31,7 +31,7 @@ struct TimedNoteScreenContent: View {
                 TextEditor(text: $note)
                     .focused(isTextFieldFocused)
                     .autocapitalization(.sentences)
-                    .frame(minHeight: 200)
+                    .frame(minHeight: 100)
             }
             Section {
                 DatePicker(

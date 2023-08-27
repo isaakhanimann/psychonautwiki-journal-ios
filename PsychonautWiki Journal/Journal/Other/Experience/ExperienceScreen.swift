@@ -303,10 +303,15 @@ struct ExperienceScreen: View {
             if !timedNotesSorted.isEmpty {
                 Section("Timed Notes") {
                     ForEach(timedNotesSorted) { timedNote in
-                        TimedNoteRow(
-                            timedNote: timedNote,
-                            timeDisplayStyle: timeDisplayStyle,
-                            firstIngestionTime: experience.ingestionsSorted.first?.time)
+                        NavigationLink {
+                            EditTimedNoteScreen(timedNote: timedNote, experience: experience)
+                        } label: {
+                            TimedNoteRow(
+                                timedNote: timedNote,
+                                timeDisplayStyle: timeDisplayStyle,
+                                firstIngestionTime: experience.ingestionsSorted.first?.time)
+                        }
+
                     }
                 }
             }
