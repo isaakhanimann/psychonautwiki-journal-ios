@@ -22,6 +22,7 @@ struct FinishIngestionScreen: View {
         case editTitle
         case editNote
         case editLocation
+        case editConsumer
 
         var id: Self {
             self
@@ -172,6 +173,16 @@ struct FinishIngestionScreen: View {
             if administrationRoute == .oral {
                 EditStomachFullnessSection(stomachFullness: $viewModel.selectedStomachFullness)
             }
+            Section("Consumer") {
+                HStack {
+                    Text("Consumer")
+                    Spacer()
+                    let displayedName = viewModel.isConsumerMe ? "Me" : viewModel.consumerName
+                    Button(displayedName) {
+                        sheetToShow = .editConsumer
+                    }
+                }
+            }
             Section {
                 NavigationLink {
                     ColorPickerScreen(
@@ -197,6 +208,8 @@ struct FinishIngestionScreen: View {
                 IngestionNoteScreen(note: $viewModel.enteredNote)
             case .editLocation:
                 ChooseLocationScreen(locationManager: locationManager, onDone: {})
+            case .editConsumer:
+                EditConsumerScreen(consumerName: $viewModel.consumerName)
             }
         })
         .task {

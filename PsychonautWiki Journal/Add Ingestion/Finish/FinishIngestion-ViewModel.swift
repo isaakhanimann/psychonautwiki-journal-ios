@@ -26,6 +26,7 @@ extension FinishIngestionScreen {
         @Published var selectedTime = Date()
         @Published var enteredNote = ""
         @Published var enteredTitle = ""
+        @Published var consumerName = ""
         @Published var selectedStomachFullness = StomachFullness.empty
         @Published var alreadyUsedColors = Set<SubstanceColor>()
         @Published var otherColors = Set<SubstanceColor>()
@@ -36,6 +37,10 @@ extension FinishIngestionScreen {
         @Published var selectedExperience: Experience?
         @Published var wantsToForceNewExperience = false
         @Published var wantsToStartLiveActivity = true
+
+        var isConsumerMe: Bool {
+            consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
+        }
 
         init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
@@ -201,6 +206,9 @@ extension FinishIngestionScreen {
             ingestion.administrationRoute = administrationRoute.rawValue
             ingestion.substanceName = substanceName
             ingestion.color = selectedColor.rawValue
+            if !isConsumerMe {
+                ingestion.consumerName = consumerName
+            }
             if administrationRoute == .oral {
                 ingestion.stomachFullness = selectedStomachFullness.rawValue
             } else {
