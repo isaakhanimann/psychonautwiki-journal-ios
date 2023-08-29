@@ -19,8 +19,6 @@ import SwiftUI
 struct EditIngestionScreen: View {
 
     let ingestion: Ingestion
-    let substanceName: String
-    let substance: Substance?
     let isEyeOpen: Bool
     @State private var time = Date()
     @State private var dose: Double? = nil
@@ -33,8 +31,8 @@ struct EditIngestionScreen: View {
 
     var body: some View {
         EditIngestionContent(
-            substanceName: substanceName,
-            roaDose: substance?.getDose(for: route),
+            substanceName: ingestion.substanceNameUnwrapped,
+            roaDose: ingestion.substance?.getDose(for: route),
             route: $route,
             time: $time,
             dose: $dose,

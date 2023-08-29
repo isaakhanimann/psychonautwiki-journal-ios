@@ -21,17 +21,13 @@ struct IngestionRow: View {
 
     @ObservedObject var ingestion: Ingestion
     let firstIngestionTime: Date?
-    let roaDose: RoaDose?
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
 
     var body: some View {
         IngestionRowContent(
-            numDots: roaDose?.getNumDots(
-                ingestionDose: ingestion.doseUnwrapped,
-                ingestionUnits: ingestion.unitsUnwrapped
-            ),
+            numDots: ingestion.numberOfDots,
             substanceColor: ingestion.substanceColor,
             substanceName: ingestion.substanceNameUnwrapped,
             dose: ingestion.doseUnwrapped,

@@ -57,6 +57,13 @@ extension Ingestion: Comparable {
         SubstanceRepo.shared.getSubstance(name: substanceNameUnwrapped)
     }
 
+    var numberOfDots: Int? {
+        substance?.getDose(for: administrationRouteUnwrapped)?.getNumDots(
+            ingestionDose: doseUnwrapped,
+            ingestionUnits: unitsUnwrapped
+        )
+    }
+
     var unitsUnwrapped: String {
         if let units {
             return units

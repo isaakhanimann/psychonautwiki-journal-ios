@@ -31,16 +31,17 @@ extension ExperienceScreen {
         @Published var substancesUsed: [Substance] = []
         @Published var hiddenIngestions: [ObjectIdentifier] = []
         @Published var hiddenRatings: [ObjectIdentifier] = []
-        @Published var sortedIngestions: [Ingestion] = []
-        @Published var sortedRatingsWithTime: [ShulginRating] = []
+        @Published var ingestionsSorted: [Ingestion] = []
+        @Published var ratingsWithTimeSorted: [ShulginRating] = []
         @Published var timedNotesForTimeline: [EverythingForOneTimedNote] = []
         @Published var toleranceWindows: [ToleranceWindow] = []
         @Published var numberOfSubstancesInToleranceChart = 0
         @Published var substancesInChart: [SubstanceWithToleranceAndColor] = []
         @Published var namesOfSubstancesWithMissingTolerance: [String] = []
+        @Published var consumers: [ConsumerWithIngestions] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
-            sortedRatingsWithTime
+            ratingsWithTimeSorted
                 .filter {!hiddenRatings.contains($0.id)}
                 .map({ shulgin in
                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
@@ -92,7 +93,7 @@ extension ExperienceScreen {
         }
 
         private func calculateChartData() {
-            let lastIngestionDate = sortedIngestions.last?.timeUnwrapped ?? Date.now
+            let lastIngestionDate = ingestionsSorted.last?.timeUnwrapped ?? Date.now
             let threeMonthsBefore = lastIngestionDate.addingTimeInterval(-3*30*24*60*60)
             let ingestionsForChart = PersistenceController.shared.getIngestionsBetween(startDate: threeMonthsBefore, endDate: lastIngestionDate)
             let substanceDays = ingestionsForChart.map { ing in
@@ -116,7 +117,7 @@ extension ExperienceScreen {
         }
 
         private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {
-            let time = experience?.sortDateUnwrapped ?? sortedIngestions.first?.time ?? Date.now
+            let time = experience?.sortDateUnwrapped ?? ingestionsSorted.first?.time ?? Date.now
             let dateWithoutTime = time.getDateWithoutTime()
             let filteredWindows = windows.filter { win in
                 win.contains(date: dateWithoutTime)
@@ -135,7 +136,22 @@ extension ExperienceScreen {
             )
             ingestionFetchController.fetchRequest.predicate = predicate
             try? ingestionFetchController.performFetch()
-            sortedIngestions = ingestionFetchController.fetchedObjects ?? []
+            let allIngestions = ingestionFetchController.fetchedObjects ?? []
+            splitIngestions(allIngestions: allIngestions)
+        }
+
+        private func splitIngestions(allIngestions: [Ingestion]) {
+            let ingestionsByConsumer = Dictionary(grouping: allIngestions, by: {$0.consumerName})
+            var consumers = [ConsumerWithIngestions]()
+            for (consumerName, ingestions) in ingestionsByConsumer {
+                if let consumerName, !consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                    let newConsumer = ConsumerWithIngestions(consumerName: consumerName, ingestionsSorted: ingestions.sorted())
+                    consumers.append(newConsumer)
+                } else {
+                    ingestionsSorted = ingestions.sorted()
+                }
+            }
+            self.consumers = consumers.sorted()
         }
 
         private func reloadRatings(experience: Experience) {
@@ -146,7 +162,7 @@ extension ExperienceScreen {
             )
             ratingFetchController.fetchRequest.predicate = predicate
             try? ratingFetchController.performFetch()
-            sortedRatingsWithTime = (ratingFetchController.fetchedObjects ?? []).filter({ rating in
+            ratingsWithTimeSorted = (ratingFetchController.fetchedObjects ?? []).filter({ rating in
                 rating.time != nil
             })
         }
@@ -196,7 +212,7 @@ extension ExperienceScreen {
             calculateTimeline()
             findInteractions()
             if #available(iOS 16.2, *) {
-                if let lastTime = sortedIngestions.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
+                if let lastTime = ingestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
                     startOrUpdateLiveActivity()
                 }
             }
@@ -206,7 +222,7 @@ extension ExperienceScreen {
         func startOrUpdateLiveActivity() {
             Task {
                 await ActivityManager.shared.startOrUpdateActivity(
-                    everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
+                    everythingForEachLine: getEverythingForEachLine(from: ingestionsSorted),
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: timedNotesForTimeline
                 )
@@ -217,7 +233,7 @@ extension ExperienceScreen {
         func stopLiveActivity() {
             Task {
                 await ActivityManager.shared.stopActivity(
-                    everythingForEachLine: getEverythingForEachLine(from: sortedIngestions),
+                    everythingForEachLine: getEverythingForEachLine(from: ingestionsSorted),
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: timedNotesForTimeline
                 )
@@ -225,14 +241,14 @@ extension ExperienceScreen {
         }
 
         private func setSubstances() {
-            self.substancesUsed = sortedIngestions
+            self.substancesUsed = ingestionsSorted
                 .map { $0.substanceNameUnwrapped }
                 .uniqued()
                 .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
         }
 
         private func calculateTimeline() {
-            let ingestionsToShow = sortedIngestions.filter {!hiddenIngestions.contains($0.id)}
+            let ingestionsToShow = ingestionsSorted.filter {!hiddenIngestions.contains($0.id)}
             let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
             let model = TimelineModel(
                 everythingForEachLine: everythingForEachLine,
@@ -243,7 +259,7 @@ extension ExperienceScreen {
         }
 
         private func calculateCumulativeDoses() {
-            let ingestionsBySubstance = Dictionary(grouping: sortedIngestions, by: { $0.substanceNameUnwrapped })
+            let ingestionsBySubstance = Dictionary(grouping: ingestionsSorted, by: { $0.substanceNameUnwrapped })
             let cumu: [CumulativeDose] = ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
                 guard ingestions.count > 1 else {return nil}
                 guard let color = ingestions.first?.substanceColor else {return nil}
@@ -253,7 +269,7 @@ extension ExperienceScreen {
         }
 
         private func findInteractions() {
-            let substanceNames = sortedIngestions.map { $0.substanceNameUnwrapped }.uniqued()
+            let substanceNames = ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             var interactions: [Interaction] = []
             for subIndex in 0..<substanceNames.count {
                 let name = substanceNames[subIndex]

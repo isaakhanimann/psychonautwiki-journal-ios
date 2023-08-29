@@ -169,6 +169,7 @@
 		EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */; };
 		EA4B8A222A9B3FB2009918DE /* TimedNoteDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */; };
 		EA4B8A232A9B3FE9009918DE /* EverythingForOneTimedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */; };
+		EA4B8A252A9CFD34009918DE /* ConsumerWithIngestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A242A9CFD34009918DE /* ConsumerWithIngestions.swift */; };
 		EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */; };
 		EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8329427E61009C142D /* ToleranceScreen.swift */; };
 		EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA527A8529427F56009C142D /* ToxicityScreen.swift */; };
@@ -497,6 +498,7 @@
 		EA4B8A1C2A9B3540009918DE /* EditTimedNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimedNoteScreen.swift; sourceTree = "<group>"; };
 		EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingForOneTimedNote.swift; sourceTree = "<group>"; };
 		EA4B8A202A9B3EBC009918DE /* TimedNoteDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedNoteDrawable.swift; sourceTree = "<group>"; };
+		EA4B8A242A9CFD34009918DE /* ConsumerWithIngestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerWithIngestions.swift; sourceTree = "<group>"; };
 		EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngestionScreen.swift; sourceTree = "<group>"; };
 		EA527A8329427E61009C142D /* ToleranceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceScreen.swift; sourceTree = "<group>"; };
 		EA527A8529427F56009C142D /* ToxicityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicityScreen.swift; sourceTree = "<group>"; };
@@ -1443,6 +1445,7 @@
 				EAE4808F2973DDF400B600EF /* Components */,
 				EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */,
 				EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */,
+				EA4B8A242A9CFD34009918DE /* ConsumerWithIngestions.swift */,
 			);
 			path = Experience;
 			sourceTree = "<group>";
@@ -1854,6 +1857,7 @@
 				EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
+				EA4B8A252A9CFD34009918DE /* ConsumerWithIngestions.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
 				EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */,

@@ -185,17 +185,12 @@ struct ExperienceScreen: View {
                     }
                     ForEach(experience.ingestionsSorted) { ing in
                         let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
-                        let route = ing.administrationRouteUnwrapped
-                        let substance = ing.substance
                         NavigationLink {
                             EditIngestionScreen(
                                 ingestion: ing,
-                                substanceName: ing.substanceNameUnwrapped,
-                                substance: substance,
                                 isEyeOpen: isEyeOpen
                             )
                         } label: {
-                            let roaDose = substance?.getDose(for: route)
                             HStack(alignment: .center) {
                                 if isIngestionHidden {
                                     Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
@@ -203,7 +198,6 @@ struct ExperienceScreen: View {
                                 IngestionRow(
                                     ingestion: ing,
                                     firstIngestionTime: experience.ingestionsSorted.first?.time,
-                                    roaDose: roaDose,
                                     timeDisplayStyle: timeDisplayStyle,
                                     isEyeOpen: isEyeOpen,
                                     isHidingDosageDots: isHidingDosageDots
