@@ -171,63 +171,17 @@ struct ExperienceScreen: View {
 
     private var screen: some View {
         List {
-            if !experience.ingestionsSorted.isEmpty {
+            if !viewModel.ingestionsSorted.isEmpty {
                 Section {
-                    let timelineHeight: Double = 200
-                    if let timelineModel = viewModel.timelineModel {
-                        NavigationLink {
-                            TimelineScreen(timelineModel: timelineModel)
-                        } label: {
-                            EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
-                        }
-                    } else {
-                        Canvas {_,_ in }.frame(height: timelineHeight)
-                    }
-                    ForEach(experience.ingestionsSorted) { ing in
-                        let isIngestionHidden = viewModel.hiddenIngestions.contains(ing.id)
-                        NavigationLink {
-                            EditIngestionScreen(
-                                ingestion: ing,
-                                isEyeOpen: isEyeOpen
-                            )
-                        } label: {
-                            HStack(alignment: .center) {
-                                if isIngestionHidden {
-                                    Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
-                                }
-                                IngestionRow(
-                                    ingestion: ing,
-                                    firstIngestionTime: experience.ingestionsSorted.first?.time,
-                                    timeDisplayStyle: timeDisplayStyle,
-                                    isEyeOpen: isEyeOpen,
-                                    isHidingDosageDots: isHidingDosageDots
-                                )
-                            }
-                            .swipeActions(edge: .leading) {
-                                if isIngestionHidden {
-                                    Button {
-                                        viewModel.showIngestion(id: ing.id)
-                                    } label: {
-                                        Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
-                                    }
-                                } else {
-                                    Button {
-                                        viewModel.hideIngestion(id: ing.id)
-                                    } label: {
-                                        Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
-                                    }
-                                }
-                            }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button(role: .destructive) {
-                                    PersistenceController.shared.viewContext.delete(ing)
-                                    PersistenceController.shared.saveViewContext()
-                                } label: {
-                                    Label("Delete", systemImage: "trash.fill")
-                                }
-                            }
-                        }
-                    }
+                    TimelineSection(
+                        timelineModel: viewModel.timelineModel,
+                        hiddenIngestions: viewModel.hiddenIngestions,
+                        ingestionsSorted: viewModel.ingestionsSorted,
+                        timeDisplayStyle: timeDisplayStyle,
+                        isEyeOpen: isEyeOpen,
+                        isHidingDosageDots: isHidingDosageDots,
+                        showIngestion: {viewModel.showIngestion(id: $0)},
+                        hideIngestion: {viewModel.hideIngestion(id: $0)})
                     if #available(iOS 16.2, *) {
                         if experience.isCurrent {
                             LiveActivityButton(
@@ -353,6 +307,19 @@ struct ExperienceScreen: View {
                             }
                         }
                     }
+                }
+            }
+            ForEach(viewModel.consumers) { consumer in
+                Section(consumer.consumerName) {
+                    TimelineSection(
+                        timelineModel: consumer.timelineModel,
+                        hiddenIngestions: viewModel.hiddenIngestions,
+                        ingestionsSorted: consumer.ingestionsSorted,
+                        timeDisplayStyle: timeDisplayStyle,
+                        isEyeOpen: isEyeOpen,
+                        isHidingDosageDots: isHidingDosageDots,
+                        showIngestion: {viewModel.showIngestion(id: $0)},
+                        hideIngestion: {viewModel.hideIngestion(id: $0)})
                 }
             }
             if isEyeOpen && !isHidingSubstanceInfoInExperience && !viewModel.substancesUsed.isEmpty{

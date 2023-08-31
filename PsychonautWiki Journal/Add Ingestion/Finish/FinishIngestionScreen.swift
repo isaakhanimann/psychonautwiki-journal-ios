@@ -131,6 +131,14 @@ struct FinishIngestionScreen: View {
                         Label(viewModel.enteredNote, systemImage: "pencil").lineLimit(1)
                     }
                 }
+                HStack {
+                    let displayedName = viewModel.isConsumerMe ? "Me" : viewModel.consumerName
+                    Text("Consumer: \(displayedName)")
+                    Spacer()
+                    Button("Choose other") {
+                        sheetToShow = .editConsumer
+                    }
+                }
             } header: {
                 HStack {
                     Text("Ingestion")
@@ -172,16 +180,6 @@ struct FinishIngestionScreen: View {
             }
             if administrationRoute == .oral {
                 EditStomachFullnessSection(stomachFullness: $viewModel.selectedStomachFullness)
-            }
-            Section("Consumer") {
-                HStack {
-                    Text("Consumer")
-                    Spacer()
-                    let displayedName = viewModel.isConsumerMe ? "Me" : viewModel.consumerName
-                    Button(displayedName) {
-                        sheetToShow = .editConsumer
-                    }
-                }
             }
             Section {
                 NavigationLink {

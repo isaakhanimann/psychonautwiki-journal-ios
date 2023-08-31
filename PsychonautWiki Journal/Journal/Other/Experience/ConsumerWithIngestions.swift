@@ -18,12 +18,19 @@ import Foundation
 
 struct ConsumerWithIngestions: Identifiable, Comparable {
 
-    public static func < (lhs: ConsumerWithIngestions, rhs: ConsumerWithIngestions) -> Bool {
-        lhs.consumerName < rhs.consumerName
-    }
+    let consumerName: String
+    let ingestionsSorted: [Ingestion]
+    let timelineModel: TimelineModel
+
     var id: String {
         consumerName
     }
-    let consumerName: String
-    let ingestionsSorted: [Ingestion]
+
+    static func == (lhs: ConsumerWithIngestions, rhs: ConsumerWithIngestions) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    public static func < (lhs: ConsumerWithIngestions, rhs: ConsumerWithIngestions) -> Bool {
+        lhs.consumerName < rhs.consumerName
+    }
 }

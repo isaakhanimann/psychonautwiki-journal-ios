@@ -39,6 +39,7 @@ extension ExperienceScreen {
         @Published var substancesInChart: [SubstanceWithToleranceAndColor] = []
         @Published var namesOfSubstancesWithMissingTolerance: [String] = []
         @Published var consumers: [ConsumerWithIngestions] = []
+        private var allIngestions: [Ingestion] = []
 
         var everythingForEachRating: [EverythingForOneRating] {
             ratingsWithTimeSorted
@@ -136,16 +137,20 @@ extension ExperienceScreen {
             )
             ingestionFetchController.fetchRequest.predicate = predicate
             try? ingestionFetchController.performFetch()
-            let allIngestions = ingestionFetchController.fetchedObjects ?? []
-            splitIngestions(allIngestions: allIngestions)
+            allIngestions = ingestionFetchController.fetchedObjects ?? []
+            splitIngestions()
         }
 
-        private func splitIngestions(allIngestions: [Ingestion]) {
+        private func splitIngestions() {
             let ingestionsByConsumer = Dictionary(grouping: allIngestions, by: {$0.consumerName})
             var consumers = [ConsumerWithIngestions]()
             for (consumerName, ingestions) in ingestionsByConsumer {
                 if let consumerName, !consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
-                    let newConsumer = ConsumerWithIngestions(consumerName: consumerName, ingestionsSorted: ingestions.sorted())
+                    let newConsumer = ConsumerWithIngestions(
+                        consumerName: consumerName,
+                        ingestionsSorted: ingestions.sorted(),
+                        timelineModel: getTimelineModel(from: ingestions)
+                    )
                     consumers.append(newConsumer)
                 } else {
                     ingestionsSorted = ingestions.sorted()
@@ -247,15 +252,19 @@ extension ExperienceScreen {
                 .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
         }
 
-        private func calculateTimeline() {
-            let ingestionsToShow = ingestionsSorted.filter {!hiddenIngestions.contains($0.id)}
+        private func getTimelineModel(from ingestions: [Ingestion]) -> TimelineModel {
+            let ingestionsToShow = ingestions.filter {!hiddenIngestions.contains($0.id)}
             let everythingForEachLine = getEverythingForEachLine(from: ingestionsToShow)
-            let model = TimelineModel(
+            return TimelineModel(
                 everythingForEachLine: everythingForEachLine,
                 everythingForEachRating: everythingForEachRating,
                 everythingForEachTimedNote: timedNotesForTimeline
             )
-            timelineModel = model
+        }
+
+        private func calculateTimeline() {
+            splitIngestions()
+            timelineModel = getTimelineModel(from: ingestionsSorted)
         }
 
         private func calculateCumulativeDoses() {
