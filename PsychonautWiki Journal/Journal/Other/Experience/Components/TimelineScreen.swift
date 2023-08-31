@@ -37,6 +37,7 @@ struct TimelineScreen: View {
                 Text("Zoom Level")
             }
             .padding(.bottom, isOrientationLandscape ? 0 : 100)
+            .padding(.horizontal, 30)
         }
         .padding(.horizontal)
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
