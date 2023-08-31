@@ -45,8 +45,14 @@ private struct TimedNoteRowContent: View {
 
     var body: some View {
         HStack {
-            TimedNoteDottedLine(color: color.swiftUIColor)
-                .padding(.vertical, 8)
+            Group {
+                if isPartOfTimeline {
+                    TimedNoteDottedLine(color: color.swiftUIColor)
+                } else {
+                    Spacer().frame(width: StrokeStyle.timedNoteLineWidth)
+                }
+            }
+            .padding(.vertical, 8)
             VStack(alignment: .leading) {
                 timeText.font(.headline) + Text(isPartOfTimeline ? "" : " (not part of timeline)").font(.footnote).foregroundColor(.secondary)
 

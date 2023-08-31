@@ -132,11 +132,13 @@ struct FinishIngestionScreen: View {
                     }
                 }
                 HStack {
-                    let displayedName = viewModel.isConsumerMe ? "Me" : viewModel.consumerName
-                    Text("Consumer: \(displayedName)")
+                    Text("Consumer")
                     Spacer()
-                    Button("Choose other") {
+                    Button {
                         sheetToShow = .editConsumer
+                    } label: {
+                        let displayedName = viewModel.isConsumerMe ? "Me" : viewModel.consumerName
+                        Label(displayedName, systemImage: "person")
                     }
                 }
             } header: {
