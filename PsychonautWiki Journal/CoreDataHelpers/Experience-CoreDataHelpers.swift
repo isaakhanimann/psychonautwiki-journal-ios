@@ -47,6 +47,12 @@ extension Experience: Comparable {
         return formatter.string(from: creationDateUnwrapped)
     }
 
+    var myIngestionsSorted: [Ingestion] {
+        ingestionsSorted.filter { ing in
+            ing.consumerName == nil || ing.consumerName == ""
+        }
+    }
+
     var ingestionsSorted: [Ingestion] {
         (ingestions?.allObjects as? [Ingestion] ?? []).sorted()
     }

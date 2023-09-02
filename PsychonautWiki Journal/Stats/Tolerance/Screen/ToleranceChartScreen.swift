@@ -28,7 +28,8 @@ struct ToleranceChartScreen: View {
     @State private var substancesInChart: [SubstanceWithToleranceAndColor] = []
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)],
+        predicate: NSPredicate(format: "consumerName=nil OR consumerName=''")
     ) var ingestions: FetchedResults<Ingestion>
 
     @FetchRequest(
