@@ -32,18 +32,69 @@ struct ExperienceScreen: View {
     }
 
     @ObservedObject var experience: Experience
+
     @State private var isShowingAddIngestionFullScreen = false
     @State private var timeDisplayStyle = TimeDisplayStyle.regular
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
-
+    @State private var hiddenIngestions: [ObjectIdentifier] = []
+    @State private var hiddenRatings: [ObjectIdentifier] = []
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
-    @StateObject private var viewModel = ViewModel()
+
+    private func showIngestion(id: ObjectIdentifier) {
+        hiddenIngestions.removeAll { hiddenID in
+            hiddenID == id
+        }
+    }
+
+    private func hideIngestion(id: ObjectIdentifier) {
+        hiddenIngestions.append(id)
+    }
+
+    private func showRating(id: ObjectIdentifier) {
+        hiddenRatings.removeAll { hiddenID in
+            hiddenID == id
+        }
+    }
+
+    private func hideRating(id: ObjectIdentifier) {
+        hiddenRatings.append(id)
+    }
+
+    func check() {
+        if #available(iOS 16.2, *) {
+//            if let lastTime = ingestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
+//                startOrUpdateLiveActivity()
+//            }
+        }
+    }
+
+    @available(iOS 16.2, *)
+    func startOrUpdateLiveActivity() {
+//        Task {
+//            await ActivityManager.shared.startOrUpdateActivity(
+//                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter {!hiddenIngestions.contains($0.id)}),
+//                everythingForEachRating: everythingForEachRating,
+//                everythingForEachTimedNote: experience.timedNotesForTimeline
+//            )
+//        }
+    }
+
+    @available(iOS 16.2, *)
+    func stopLiveActivity() {
+//        Task {
+//            await ActivityManager.shared.stopActivity(
+//                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted),
+//                everythingForEachRating: everythingForEachRating,
+//                everythingForEachTimedNote: experience.timedNotesForTimeline
+//            )
+//        }
+    }
 
 
     var body: some View {
@@ -57,34 +108,33 @@ struct ExperienceScreen: View {
             }
         } screen: {
             List {
-                if !viewModel.ingestionsSorted.isEmpty {
+                if !experience.myIngestionsSorted.isEmpty {
                     Section {
                         TimelineSection(
-                            timelineModel: viewModel.timelineModel,
-                            hiddenIngestions: viewModel.hiddenIngestions,
-                            ingestionsSorted: viewModel.ingestionsSorted,
+                            timelineModel: experience.getMyTimeLineModel(hiddenIngestions: hiddenIngestions, hiddenRatings: hiddenRatings),
+                            hiddenIngestions: hiddenIngestions,
+                            ingestionsSorted: experience.ingestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            showIngestion: {viewModel.showIngestion(id: $0)},
-                            hideIngestion: {viewModel.hideIngestion(id: $0)}
+                            showIngestion: {showIngestion(id: $0)},
+                            hideIngestion: {hideIngestion(id: $0)}
                         )
                         if #available(iOS 16.2, *) {
                             if experience.isCurrent {
                                 LiveActivityButton(
                                     stopLiveActivity: {
-                                        viewModel.stopLiveActivity()
+                                        stopLiveActivity()
                                     },
                                     startLiveActivity: {
-                                        viewModel.startOrUpdateLiveActivity()
+                                        startOrUpdateLiveActivity()
                                     }
                                 )
                             }
                         }
                     } header: {
                         HStack {
-                            let firstDate = experience.ingestionsSorted.first?.time ?? experience.sortDateUnwrapped
-                            Text(firstDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+                            Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                             if isEyeOpen {
                                 Spacer()
                                 NavigationLink {
@@ -95,9 +145,9 @@ struct ExperienceScreen: View {
                             }
                         }
                     }
-                    if !viewModel.cumulativeDoses.isEmpty && isEyeOpen {
+                    if !experience.cumulativeDoses.isEmpty && isEyeOpen {
                         Section("Cumulative Dose") {
-                            ForEach(viewModel.cumulativeDoses) { cumulative in
+                            ForEach(experience.cumulativeDoses) { cumulative in
                                 if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
                                     NavigationLink {
                                         DosesScreen(substance: substance)
@@ -153,17 +203,19 @@ struct ExperienceScreen: View {
                 if isEyeOpen && !experience.ratingsUnwrapped.isEmpty {
                     ShulginRatingSection(
                         experience: experience,
-                        viewModel: viewModel,
+                        hiddenRatings: hiddenRatings,
+                        showRating: showRating,
+                        hideRating: hideRating,
                         timeDisplayStyle: timeDisplayStyle,
                         firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
                     )
                 }
                 if #available(iOS 16.0, *) {
-                    if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
+                    if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
                         Section {
                             ToleranceChart(
-                                toleranceWindows: viewModel.toleranceWindows,
-                                numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
+                                toleranceWindows: experience.chartData.toleranceWindows,
+                                numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
                                 timeOption: .onlyIfCurrentTimeInChart,
                                 experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
                             )
@@ -179,13 +231,13 @@ struct ExperienceScreen: View {
                             }
                         } footer: {
                             HStack {
-                                if !viewModel.namesOfSubstancesWithMissingTolerance.isEmpty {
-                                    Text("Excluding ") + Text(viewModel.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
+                                if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
+                                    Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
                                 }
                                 Spacer()
-                                if !viewModel.substancesInChart.isEmpty {
+                                if !experience.chartData.substancesInChart.isEmpty {
                                     NavigationLink {
-                                        ToleranceTextsScreen(substances: viewModel.substancesInChart)
+                                        ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
                                     } label: {
                                         Label("More", systemImage: "doc.plaintext")
                                             .labelStyle(.iconOnly)
@@ -195,30 +247,30 @@ struct ExperienceScreen: View {
                         }
                     }
                 }
-                ForEach(viewModel.consumers) { consumer in
+                ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions)) { consumer in
                     Section(consumer.consumerName) {
                         TimelineSection(
                             timelineModel: consumer.timelineModel,
-                            hiddenIngestions: viewModel.hiddenIngestions,
+                            hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: consumer.ingestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            showIngestion: {viewModel.showIngestion(id: $0)},
-                            hideIngestion: {viewModel.hideIngestion(id: $0)}
+                            showIngestion: {showIngestion(id: $0)},
+                            hideIngestion: {hideIngestion(id: $0)}
                         )
                     }
                 }
-                if isEyeOpen && !isHidingSubstanceInfoInExperience && !viewModel.substancesUsed.isEmpty{
+                if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty{
                     Section("Info") {
-                        ForEach(viewModel.substancesUsed) { substance in
+                        ForEach(experience.substancesUsed) { substance in
                             NavigationLink(substance.name) {
                                 SubstanceScreen(substance: substance)
                             }
                         }
-                        ForEach(viewModel.interactions) { interaction in
+                        ForEach(experience.interactions) { interaction in
                             NavigationLink {
-                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
                             } label: {
                                 InteractionPairRow(
                                     aName: interaction.aName,
@@ -227,12 +279,12 @@ struct ExperienceScreen: View {
                                 )
                             }
                         }
-                        if viewModel.interactions.isEmpty {
+                        if experience.interactions.isEmpty {
                             NavigationLink("See Interactions") {
-                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
                             }
                         }
-                        if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
+                        if experience.substancesUsed.contains(where: {$0.isHallucinogen}) {
                             NavigationLink {
                                 SaferHallucinogenScreen()
                             } label: {
@@ -275,10 +327,6 @@ struct ExperienceScreen: View {
                     AddTimedNoteScreen(experience: experience)
                 }
             })
-            .task {
-                viewModel.experience = experience
-                viewModel.reloadScreen(experience: experience)
-            }
         }
         .navigationTitle(experience.titleUnwrapped)
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
@@ -320,7 +368,7 @@ struct ExperienceScreen: View {
         PersistenceController.shared.viewContext.delete(experience)
         PersistenceController.shared.saveViewContext()
         if #available(iOS 16.2, *) {
-            viewModel.stopLiveActivity()
+            stopLiveActivity()
         }
         dismiss()
     }

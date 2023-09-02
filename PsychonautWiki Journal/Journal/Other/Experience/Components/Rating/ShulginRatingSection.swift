@@ -19,7 +19,9 @@ import SwiftUI
 struct ShulginRatingSection: View {
 
     @ObservedObject var experience: Experience
-    @ObservedObject var viewModel: ExperienceScreen.ViewModel
+    let hiddenRatings: [ObjectIdentifier]
+    let showRating: (ObjectIdentifier) -> Void
+    let hideRating: (ObjectIdentifier) -> Void
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
 
@@ -29,7 +31,7 @@ struct ShulginRatingSection: View {
                 NavigationLink {
                     EditRatingScreen(rating: rating)
                 } label: {
-                    let isRatingHidden = viewModel.hiddenRatings.contains(rating.id)
+                    let isRatingHidden = hiddenRatings.contains(rating.id)
                     HStack(alignment: .center) {
                         if isRatingHidden {
                             Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
@@ -43,13 +45,13 @@ struct ShulginRatingSection: View {
                     .swipeActions(edge: .leading) {
                         if isRatingHidden {
                             Button {
-                                viewModel.showRating(id: rating.id)
+                                showRating(rating.id)
                             } label: {
                                 Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
                             }
                         } else {
                             Button {
-                                viewModel.hideRating(id: rating.id)
+                                hideRating(rating.id)
                             } label: {
                                 Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                             }

@@ -49,7 +49,11 @@ extension Experience: Comparable {
 
     var myIngestionsSorted: [Ingestion] {
         ingestionsSorted.filter { ing in
-            ing.consumerName == nil || ing.consumerName == ""
+            if let consumerName = ing.consumerName {
+                return consumerName.trimmingCharacters(in: .whitespaces).isEmpty
+            } else {
+                return true
+            }
         }
     }
 
@@ -105,6 +109,146 @@ extension Experience: Comparable {
             return true
         } else {
             return false
+        }
+    }
+
+    var timedNotesForTimeline: [EverythingForOneTimedNote] {
+        timedNotesSorted.map { timedNote in
+            EverythingForOneTimedNote(
+                time: timedNote.timeUnwrapped,
+                color: timedNote.color)
+        }
+    }
+
+    var otherIngestions: [Ingestion] {
+        ingestionsSorted.filter { ing in
+            !myIngestionsSorted.contains(ing)
+        }.sorted()
+    }
+
+    var cumulativeDoses: [CumulativeDose] {
+        let ingestionsBySubstance = Dictionary(grouping: ingestionsSorted, by: { $0.substanceNameUnwrapped })
+        return ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
+            guard ingestions.count > 1 else {return nil}
+            guard let color = ingestions.first?.substanceColor else {return nil}
+            return CumulativeDose(ingestionsForSubstance: ingestions, substanceName: substanceName, substanceColor: color)
+        }
+    }
+
+    var interactions: [Interaction] {
+        let substanceNames = ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
+        var interactions: [Interaction] = []
+        for subIndex in 0..<substanceNames.count {
+            let name = substanceNames[subIndex]
+            let otherNames = substanceNames.dropFirst(subIndex+1)
+            for otherName in otherNames {
+                if let newInteraction = InteractionChecker.getInteractionBetween(aName: name, bName: otherName) {
+                    interactions.append(newInteraction)
+                }
+            }
+        }
+        return interactions.sorted(by: { interaction1, interaction2 in
+            interaction1.interactionType.dangerCount > interaction2.interactionType.dangerCount
+        })
+    }
+
+    var substancesUsed: [Substance] {
+        ingestionsSorted
+            .map { $0.substanceNameUnwrapped }
+            .uniqued()
+            .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
+    }
+
+    func getMyTimeLineModel(hiddenIngestions: [ObjectIdentifier], hiddenRatings: [ObjectIdentifier]) -> TimelineModel {
+        getTimelineModel(
+            from: myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) },
+            everythingForEachRating: ratingsWithTimeSorted
+                .filter {!hiddenRatings.contains($0.id)}
+                .map({ shulgin in
+                    EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                }),
+            everythingForEachTimedNote: timedNotesForTimeline
+        )
+    }
+
+    func getConsumers(hiddenIngestions: [ObjectIdentifier]) -> [ConsumerWithIngestions] {
+        let ingestionsByConsumer = Dictionary(grouping: otherIngestions, by: {$0.consumerName})
+        var consumers = [ConsumerWithIngestions]()
+        for (consumerName, ingestions) in ingestionsByConsumer {
+            if let consumerName, !consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                let newConsumer = ConsumerWithIngestions(
+                    consumerName: consumerName,
+                    ingestionsSorted: ingestions.sorted(),
+                    timelineModel: getTimelineModel(
+                        from: ingestions.filter { !hiddenIngestions.contains($0.id)},
+                        everythingForEachRating: [],
+                        everythingForEachTimedNote: []
+                    )
+                )
+                consumers.append(newConsumer)
+            }
+        }
+        return consumers.sorted()
+    }
+
+    private func getTimelineModel(
+        from ingestions: [Ingestion],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) -> TimelineModel {
+        let everythingForEachLine = getEverythingForEachLine(from: ingestions)
+        return TimelineModel(
+            everythingForEachLine: getEverythingForEachLine(from: ingestions),
+            everythingForEachRating: everythingForEachRating,
+            everythingForEachTimedNote: everythingForEachTimedNote
+        )
+    }
+
+    struct ChartData {
+        let toleranceWindows: [ToleranceWindow]
+        let substancesInChart: [SubstanceWithToleranceAndColor]
+        let numberOfSubstancesInToleranceChart: Int
+        let namesOfSubstancesWithMissingTolerance: [String]
+    }
+
+    var chartData: ChartData {
+        let lastIngestionDate = ingestionsSorted.last?.timeUnwrapped ?? Date.now
+        let threeMonthsBefore = lastIngestionDate.addingTimeInterval(-3*30*24*60*60)
+        let ingestionsForChart = PersistenceController.shared.getIngestionsBetween(startDate: threeMonthsBefore, endDate: lastIngestionDate)
+        let substanceDays = ingestionsForChart.map { ing in
+            SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
+        }
+        let substanceCompanions = PersistenceController.shared.getSubstanceCompanions()
+        let allWindowsInLast3Months = ToleranceChartCalculator.getToleranceWindows(
+            from: substanceDays,
+            substanceCompanions: Array(substanceCompanions)
+        )
+        let toleranceWindows = getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: allWindowsInLast3Months)
+        let namesOfSubstancesInChart = toleranceWindows.map({$0.substanceName}).uniqued()
+        let substancesInChart = SubstanceRepo.shared.getSubstances(names: namesOfSubstancesInChart).map({ sub in
+            sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red)
+        })
+        let numberOfSubstancesInToleranceChart = namesOfSubstancesInChart.count
+        let namesOfSubstancesInIngestions = Set(ingestionsForChart.map({$0.substanceNameUnwrapped}))
+        let namesOfSubstancesWithWindows = Set(allWindowsInLast3Months.map({$0.substanceName}))
+        let namesOfSubstancesWithoutWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesWithWindows)
+        let namesOfSubstancesWithMissingTolerance = Array(namesOfSubstancesWithoutWindows)
+        return ChartData(
+            toleranceWindows: toleranceWindows,
+            substancesInChart: substancesInChart,
+            numberOfSubstancesInToleranceChart: numberOfSubstancesInToleranceChart,
+            namesOfSubstancesWithMissingTolerance: namesOfSubstancesWithMissingTolerance
+        )
+    }
+
+    private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {
+        let dateWithoutTime = sortDateUnwrapped.getDateWithoutTime()
+        let filteredWindows = windows.filter { win in
+            win.contains(date: dateWithoutTime)
+        }
+        let substancesInFilteredWindows = Set(filteredWindows.map({$0.substanceName}))
+        return windows.filter { win in
+            substancesInFilteredWindows.contains(win.substanceName)
         }
     }
 }

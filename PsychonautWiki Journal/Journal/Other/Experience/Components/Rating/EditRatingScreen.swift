@@ -50,6 +50,7 @@ struct EditRatingScreen: View {
     func save() {
         rating.time = selectedTime
         rating.option = selectedRating.rawValue
+        rating.experience?.objectWillChange.send()
         PersistenceController.shared.saveViewContext()
     }
 

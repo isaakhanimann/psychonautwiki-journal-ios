@@ -317,7 +317,6 @@
 		EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */; };
 		EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE4712726CBA663009FB0EC /* Assets.xcassets */; };
 		EAE4723526CC42F7009FB0EC /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
-		EAE480912973DE3600B600EF /* ExperienceScreen-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */; };
 		EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE480922973EF5900B600EF /* CumulativeDose.swift */; };
 		EAE48097297433D100B600EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE48096297433D100B600EF /* LaunchScreen.storyboard */; };
 		EAE4809929743ACE00B600EF /* LaunchScreenEye.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE4809829743ACE00B600EF /* LaunchScreenEye.png */; };
@@ -654,7 +653,6 @@
 		EAE471AA26CBA664009FB0EC /* JournalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalScreen.swift; sourceTree = "<group>"; };
 		EAE471AB26CBA664009FB0EC /* ExperienceRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceRow.swift; sourceTree = "<group>"; };
 		EAE4723426CC42F7009FB0EC /* substances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = substances.json; sourceTree = "<group>"; };
-		EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExperienceScreen-ViewModel.swift"; sourceTree = "<group>"; };
 		EAE480922973EF5900B600EF /* CumulativeDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDose.swift; sourceTree = "<group>"; };
 		EAE48096297433D100B600EF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAE4809829743ACE00B600EF /* LaunchScreenEye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenEye.png; sourceTree = "<group>"; };
@@ -1451,7 +1449,6 @@
 			children = (
 				EAE4808F2973DDF400B600EF /* Components */,
 				EAE4718B26CBA664009FB0EC /* ExperienceScreen.swift */,
-				EAE480902973DE3600B600EF /* ExperienceScreen-ViewModel.swift */,
 				EA4B8A242A9CFD34009918DE /* ConsumerWithIngestions.swift */,
 			);
 			path = Experience;
@@ -1921,7 +1918,6 @@
 				EA527A8829428011009C142D /* DurationScreen.swift in Sources */,
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
-				EAE480912973DE3600B600EF /* ExperienceScreen-ViewModel.swift in Sources */,
 				EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */,
 				EA55CEB42A3F278A00FE1A44 /* ExperienceTimeText.swift in Sources */,
 				EA039AC72A6C6657006DFAFE /* View-ColorBackground.swift in Sources */,

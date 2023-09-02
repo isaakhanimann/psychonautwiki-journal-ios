@@ -71,6 +71,7 @@ struct EditTimedNoteScreen: View {
         timedNote.note = note
         timedNote.colorAsText = color.rawValue
         timedNote.isPartOfTimeline = isPartOfTimeline
+        timedNote.experience?.objectWillChange.send()
         PersistenceController.shared.saveViewContext()
     }
 

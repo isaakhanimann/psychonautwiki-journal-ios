@@ -68,6 +68,7 @@ struct EditIngestionScreen: View {
             ingestion.stomachFullness = stomachFullness.rawValue
         }
         PersistenceController.shared.saveViewContext()
+        ingestion.experience?.objectWillChange.send()
         dismiss()
     }
 
