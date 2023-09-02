@@ -114,7 +114,7 @@ extension FinishIngestionScreen {
                         if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
                             Task {
                                 await ActivityManager.shared.startOrUpdateActivity(
-                                    everythingForEachLine: getEverythingForEachLine(from: existingExperience.ingestionsSorted),
+                                    everythingForEachLine: getEverythingForEachLine(from: existingExperience.myIngestionsSorted),
                                     everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
                                         EverythingForOneRating(
                                             time: shulgin.timeUnwrapped,
@@ -160,7 +160,7 @@ extension FinishIngestionScreen {
                         if newExperience.isCurrent && self.wantsToStartLiveActivity {
                             Task {
                                 await ActivityManager.shared.startOrUpdateActivity(
-                                    everythingForEachLine: getEverythingForEachLine(from: newExperience.ingestionsSorted),
+                                    everythingForEachLine: getEverythingForEachLine(from: newExperience.myIngestionsSorted),
                                     everythingForEachRating: [],
                                     everythingForEachTimedNote: []
                                 )

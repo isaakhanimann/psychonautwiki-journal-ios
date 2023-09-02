@@ -18,19 +18,6 @@ import SwiftUI
 
 struct ExperienceScreen: View {
 
-    enum SheetOption: Identifiable, Hashable {
-        case editTitle
-        case editNotes
-        case editLocation(experienceLocation: ExperienceLocation)
-        case addLocation
-        case addRating
-        case addTimedNote
-
-        var id: Self {
-            return self
-        }
-    }
-
     @ObservedObject var experience: Experience
 
     @State private var isShowingAddIngestionFullScreen = false
@@ -46,54 +33,79 @@ struct ExperienceScreen: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
 
+    enum SheetOption: Identifiable, Hashable {
+        case editTitle
+        case editNotes
+        case editLocation(experienceLocation: ExperienceLocation)
+        case addLocation
+        case addRating
+        case addTimedNote
+
+        var id: Self {
+            return self
+        }
+    }
+
     private func showIngestion(id: ObjectIdentifier) {
         hiddenIngestions.removeAll { hiddenID in
             hiddenID == id
         }
+        updateActivityIfActive()
     }
 
     private func hideIngestion(id: ObjectIdentifier) {
         hiddenIngestions.append(id)
+        updateActivityIfActive()
     }
 
     private func showRating(id: ObjectIdentifier) {
         hiddenRatings.removeAll { hiddenID in
             hiddenID == id
         }
+        updateActivityIfActive()
     }
 
     private func hideRating(id: ObjectIdentifier) {
         hiddenRatings.append(id)
+        updateActivityIfActive()
     }
 
-    func check() {
+    func updateActivityIfActive() {
         if #available(iOS 16.2, *) {
-//            if let lastTime = ingestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
-//                startOrUpdateLiveActivity()
-//            }
+            if let lastTime = experience.myIngestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
+                startOrUpdateLiveActivity()
+            }
         }
     }
 
     @available(iOS 16.2, *)
     func startOrUpdateLiveActivity() {
-//        Task {
-//            await ActivityManager.shared.startOrUpdateActivity(
-//                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter {!hiddenIngestions.contains($0.id)}),
-//                everythingForEachRating: everythingForEachRating,
-//                everythingForEachTimedNote: experience.timedNotesForTimeline
-//            )
-//        }
+        Task {
+            await ActivityManager.shared.startOrUpdateActivity(
+                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
+                everythingForEachRating: experience.ratingsWithTimeSorted
+                    .filter {!hiddenRatings.contains($0.id)}
+                    .map({ shulgin in
+                        EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                    }),
+                everythingForEachTimedNote: experience.timedNotesForTimeline
+            )
+        }
     }
 
     @available(iOS 16.2, *)
     func stopLiveActivity() {
-//        Task {
-//            await ActivityManager.shared.stopActivity(
-//                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted),
-//                everythingForEachRating: everythingForEachRating,
-//                everythingForEachTimedNote: experience.timedNotesForTimeline
-//            )
-//        }
+        Task {
+            await ActivityManager.shared.stopActivity(
+                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
+                everythingForEachRating: experience.ratingsWithTimeSorted
+                    .filter {!hiddenRatings.contains($0.id)}
+                    .map({ shulgin in
+                        EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
+                    }),
+                everythingForEachTimedNote: experience.timedNotesForTimeline
+            )
+        }
     }
 
 
@@ -113,12 +125,13 @@ struct ExperienceScreen: View {
                         TimelineSection(
                             timelineModel: experience.getMyTimeLineModel(hiddenIngestions: hiddenIngestions, hiddenRatings: hiddenRatings),
                             hiddenIngestions: hiddenIngestions,
-                            ingestionsSorted: experience.ingestionsSorted,
+                            ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: {showIngestion(id: $0)},
-                            hideIngestion: {hideIngestion(id: $0)}
+                            hideIngestion: {hideIngestion(id: $0)},
+                            updateActivityIfActive: updateActivityIfActive
                         )
                         if #available(iOS 16.2, *) {
                             if experience.isCurrent {
@@ -257,7 +270,8 @@ struct ExperienceScreen: View {
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: {showIngestion(id: $0)},
-                            hideIngestion: {hideIngestion(id: $0)}
+                            hideIngestion: {hideIngestion(id: $0)},
+                            updateActivityIfActive: {}
                         )
                     }
                 }

@@ -26,6 +26,7 @@ struct TimelineSection: View {
     let isHidingDosageDots: Bool
     let showIngestion: (ObjectIdentifier) -> Void
     let hideIngestion: (ObjectIdentifier) -> Void
+    let updateActivityIfActive: () -> Void
 
     var body: some View {
         Group {
@@ -45,7 +46,9 @@ struct TimelineSection: View {
                     EditIngestionScreen(
                         ingestion: ing,
                         isEyeOpen: isEyeOpen
-                    )
+                    ).onDisappear {
+                        updateActivityIfActive()
+                    }
                 } label: {
                     HStack(alignment: .center) {
                         if isIngestionHidden {
@@ -78,6 +81,7 @@ struct TimelineSection: View {
                         Button(role: .destructive) {
                             PersistenceController.shared.viewContext.delete(ing)
                             PersistenceController.shared.saveViewContext()
+                            updateActivityIfActive()
                         } label: {
                             Label("Delete", systemImage: "trash.fill")
                         }
