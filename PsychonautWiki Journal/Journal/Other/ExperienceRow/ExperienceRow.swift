@@ -45,7 +45,8 @@ struct ExperienceRow: View {
                         isTimeRelative: isTimeRelative,
                         locationName: nil,
                         rating: experience.overallRating?.optionUnwrapped ?? experience.maxRating,
-                        isCurrent: experience.isCurrent
+                        isCurrent: experience.isCurrent,
+                        consumerNames: experience.consumerNames
                     )
                 }
             }
@@ -96,7 +97,8 @@ struct ExperienceRowObservedLocation: View {
             isTimeRelative: isTimeRelative,
             locationName: location.name,
             rating: rating,
-            isCurrent: experience.isCurrent
+            isCurrent: experience.isCurrent,
+            consumerNames: experience.consumerNames
         )
     }
 }
@@ -112,6 +114,7 @@ struct ExperienceRowContent: View {
     let locationName: String?
     let rating: ShulginRatingOption?
     let isCurrent: Bool
+    let consumerNames: [String]
 
     var body: some View {
         TimelineView(.everyMinute) { _ in
@@ -142,6 +145,13 @@ struct ExperienceRowContent: View {
                                 .foregroundColor(.secondary)
                                 .font(.footnote)
                         }
+                    }
+                    if !consumerNames.isEmpty {
+                        Group {
+                            Text("With ") + Text(consumerNames, format: .list(type: .and))
+                        }
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
                     }
                     HStack {
                         ExperienceTimeText(
@@ -178,7 +188,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: false,
                     locationName: "Longer location name",
                     rating: .threePlus,
-                    isCurrent: true
+                    isCurrent: true,
+                    consumerNames: ["Dave", "Carlo"]
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -189,7 +200,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: false,
                     locationName: nil,
                     rating: .threePlus,
-                    isCurrent: false
+                    isCurrent: false,
+                    consumerNames: []
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink, .purple, .yellow],
@@ -200,7 +212,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: true,
                     locationName: "Short location",
                     rating: .threePlus,
-                    isCurrent: false
+                    isCurrent: false,
+                    consumerNames: []
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -211,7 +224,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: true,
                     locationName: nil,
                     rating: nil,
-                    isCurrent: false
+                    isCurrent: false,
+                    consumerNames: []
                 )
                 ExperienceRowContent(
                     ingestionColors: [.blue, .pink],
@@ -222,7 +236,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: true,
                     locationName: "Home",
                     rating: nil,
-                    isCurrent: false
+                    isCurrent: false,
+                    consumerNames: []
                 )
                 ExperienceRowContent(
                     ingestionColors: [],
@@ -233,7 +248,8 @@ struct ExperienceRowContent_Previews: PreviewProvider {
                     isTimeRelative: false,
                     locationName: nil,
                     rating: .threePlus,
-                    isCurrent: false
+                    isCurrent: false,
+                    consumerNames: []
                 )
             }
         }.listStyle(.plain)

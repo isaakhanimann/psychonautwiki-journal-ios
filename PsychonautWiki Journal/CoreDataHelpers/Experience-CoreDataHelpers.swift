@@ -65,6 +65,15 @@ extension Experience: Comparable {
         (timedNotes?.allObjects as? [TimedNote] ?? []).sorted()
     }
 
+    var consumerNames: [String] {
+        ingestionsSorted.compactMap { ing in
+            if let consumerName = ing.consumerName, !consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                return consumerName
+            } else {
+                return nil
+            }
+        }.uniqued()
+    }
 
     var ratingsUnwrapped: [ShulginRating] {
         ratings?.allObjects as? [ShulginRating] ?? []
@@ -196,7 +205,6 @@ extension Experience: Comparable {
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote]
     ) -> TimelineModel {
-        let everythingForEachLine = getEverythingForEachLine(from: ingestions)
         return TimelineModel(
             everythingForEachLine: getEverythingForEachLine(from: ingestions),
             everythingForEachRating: everythingForEachRating,
