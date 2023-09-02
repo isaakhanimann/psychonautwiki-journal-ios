@@ -56,7 +56,229 @@ struct ExperienceScreen: View {
                 }
             }
         } screen: {
-            screen
+            List {
+                if !viewModel.ingestionsSorted.isEmpty {
+                    Section {
+                        TimelineSection(
+                            timelineModel: viewModel.timelineModel,
+                            hiddenIngestions: viewModel.hiddenIngestions,
+                            ingestionsSorted: viewModel.ingestionsSorted,
+                            timeDisplayStyle: timeDisplayStyle,
+                            isEyeOpen: isEyeOpen,
+                            isHidingDosageDots: isHidingDosageDots,
+                            showIngestion: {viewModel.showIngestion(id: $0)},
+                            hideIngestion: {viewModel.hideIngestion(id: $0)}
+                        )
+                        if #available(iOS 16.2, *) {
+                            if experience.isCurrent {
+                                LiveActivityButton(
+                                    stopLiveActivity: {
+                                        viewModel.stopLiveActivity()
+                                    },
+                                    startLiveActivity: {
+                                        viewModel.startOrUpdateLiveActivity()
+                                    }
+                                )
+                            }
+                        }
+                    } header: {
+                        HStack {
+                            let firstDate = experience.ingestionsSorted.first?.time ?? experience.sortDateUnwrapped
+                            Text(firstDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+                            if isEyeOpen {
+                                Spacer()
+                                NavigationLink {
+                                    ExplainExperienceSectionScreen()
+                                } label: {
+                                    limitationsLabel
+                                }
+                            }
+                        }
+                    }
+                    if !viewModel.cumulativeDoses.isEmpty && isEyeOpen {
+                        Section("Cumulative Dose") {
+                            ForEach(viewModel.cumulativeDoses) { cumulative in
+                                if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
+                                    NavigationLink {
+                                        DosesScreen(substance: substance)
+                                    } label: {
+                                        CumulativeDoseRow(
+                                            substanceName: cumulative.substanceName,
+                                            substanceColor: cumulative.substanceColor,
+                                            cumulativeRoutes: cumulative.cumulativeRoutes,
+                                            isHidingDosageDots: isHidingDosageDots,
+                                            isEyeOpen: isEyeOpen
+                                        )
+                                    }
+                                } else {
+                                    CumulativeDoseRow(
+                                        substanceName: cumulative.substanceName,
+                                        substanceColor: cumulative.substanceColor,
+                                        cumulativeRoutes: cumulative.cumulativeRoutes,
+                                        isHidingDosageDots: isHidingDosageDots,
+                                        isEyeOpen: isEyeOpen
+                                    )
+                                }
+                            }
+                        }
+
+                    }
+                }
+                let notes = experience.textUnwrapped
+                if !notes.isEmpty {
+                    Section("Notes") {
+                        Text(notes)
+                            .padding(.vertical, 5)
+                            .onTapGesture {
+                                sheetToShow = .editNotes
+                            }
+                    }
+                }
+                let timedNotesSorted = experience.timedNotesSorted
+                if !timedNotesSorted.isEmpty {
+                    Section("Timed Notes") {
+                        ForEach(timedNotesSorted) { timedNote in
+                            NavigationLink {
+                                EditTimedNoteScreen(timedNote: timedNote, experience: experience)
+                            } label: {
+                                TimedNoteRow(
+                                    timedNote: timedNote,
+                                    timeDisplayStyle: timeDisplayStyle,
+                                    firstIngestionTime: experience.ingestionsSorted.first?.time)
+                            }
+
+                        }
+                    }
+                }
+                if isEyeOpen && !experience.ratingsUnwrapped.isEmpty {
+                    ShulginRatingSection(
+                        experience: experience,
+                        viewModel: viewModel,
+                        timeDisplayStyle: timeDisplayStyle,
+                        firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
+                    )
+                }
+                if #available(iOS 16.0, *) {
+                    if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
+                        Section {
+                            ToleranceChart(
+                                toleranceWindows: viewModel.toleranceWindows,
+                                numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
+                                timeOption: .onlyIfCurrentTimeInChart,
+                                experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
+                            )
+                        } header: {
+                            HStack {
+                                Text("Tolerance")
+                                Spacer()
+                                NavigationLink {
+                                    ToleranceChartExplanationScreen()
+                                } label: {
+                                    limitationsLabel
+                                }
+                            }
+                        } footer: {
+                            HStack {
+                                if !viewModel.namesOfSubstancesWithMissingTolerance.isEmpty {
+                                    Text("Excluding ") + Text(viewModel.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
+                                }
+                                Spacer()
+                                if !viewModel.substancesInChart.isEmpty {
+                                    NavigationLink {
+                                        ToleranceTextsScreen(substances: viewModel.substancesInChart)
+                                    } label: {
+                                        Label("More", systemImage: "doc.plaintext")
+                                            .labelStyle(.iconOnly)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ForEach(viewModel.consumers) { consumer in
+                    Section(consumer.consumerName) {
+                        TimelineSection(
+                            timelineModel: consumer.timelineModel,
+                            hiddenIngestions: viewModel.hiddenIngestions,
+                            ingestionsSorted: consumer.ingestionsSorted,
+                            timeDisplayStyle: timeDisplayStyle,
+                            isEyeOpen: isEyeOpen,
+                            isHidingDosageDots: isHidingDosageDots,
+                            showIngestion: {viewModel.showIngestion(id: $0)},
+                            hideIngestion: {viewModel.hideIngestion(id: $0)}
+                        )
+                    }
+                }
+                if isEyeOpen && !isHidingSubstanceInfoInExperience && !viewModel.substancesUsed.isEmpty{
+                    Section("Info") {
+                        ForEach(viewModel.substancesUsed) { substance in
+                            NavigationLink(substance.name) {
+                                SubstanceScreen(substance: substance)
+                            }
+                        }
+                        ForEach(viewModel.interactions) { interaction in
+                            NavigationLink {
+                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                            } label: {
+                                InteractionPairRow(
+                                    aName: interaction.aName,
+                                    bName: interaction.bName,
+                                    interactionType: interaction.interactionType
+                                )
+                            }
+                        }
+                        if viewModel.interactions.isEmpty {
+                            NavigationLink("See Interactions") {
+                                GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
+                            }
+                        }
+                        if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
+                            NavigationLink {
+                                SaferHallucinogenScreen()
+                            } label: {
+                                Label("Safer Hallucinogens", systemImage: "cross")
+                            }
+                        }
+                    }
+                }
+                if let location = experience.location {
+                    Section {
+                        EditLocationLinkAndMap(experienceLocation: location)
+                    } header: {
+                        HStack {
+                            Text("Location")
+                            Spacer()
+                            Button {
+                                sheetToShow = .editLocation(experienceLocation: location)
+                            } label: {
+                                Label("Edit Location", systemImage: "pencil")
+                                    .labelStyle(.iconOnly)
+                            }
+                        }
+                    }
+                }
+            }
+            .dismissWhenTabTapped()
+            .sheet(item: $sheetToShow, content: { sheet in
+                switch sheet {
+                case .addLocation:
+                    AddLocationScreen(locationManager: locationManager, experience: experience)
+                case .editLocation(let experienceLocation):
+                    EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
+                case .editNotes:
+                    EditNotesScreen(experience: experience)
+                case .editTitle:
+                    EditTitleScreen(experience: experience)
+                case .addRating:
+                    AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
+                case .addTimedNote:
+                    AddTimedNoteScreen(experience: experience)
+                }
+            })
+            .task {
+                viewModel.experience = experience
+                viewModel.reloadScreen(experience: experience)
+            }
         }
         .navigationTitle(experience.titleUnwrapped)
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
@@ -64,92 +286,11 @@ struct ExperienceScreen: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Menu {
-                    if experience.isCurrent {
-                        ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                            Button {
-                                withAnimation {
-                                    timeDisplayStyle = option
-                                }
-                            } label: {
-                                if timeDisplayStyle == option {
-                                    Label(option.text, systemImage: "checkmark")
-                                } else {
-                                    Text(option.text)
-                                }
-                            }
-                        }
-                    } else {
-                        ForEach([TimeDisplayStyle.regular, .relativeToStart], id: \.self) { option in
-                            Button {
-                                withAnimation {
-                                    timeDisplayStyle = option
-                                }
-                            } label: {
-                                if timeDisplayStyle == option {
-                                    Label(option.text, systemImage: "checkmark")
-                                } else {
-                                    Text(option.text)
-                                }
-                            }
-                        }
-                    }
-                } label: {
-                    Label("Time Display", systemImage: "timer")
-                }
-                Menu {
-                    Button {
-                        sheetToShow = .editNotes
-                    } label: {
-                        Label("Edit Notes", systemImage: "pencil")
-                    }
-                    Button {
-                        sheetToShow = .editTitle
-                    } label: {
-                        Label("Edit Title", systemImage: "pencil")
-                    }
-                    let isFavorite = experience.isFavorite
-                    Button {
-                        experience.isFavorite = !isFavorite
-                        try? PersistenceController.shared.viewContext.save()
-                    } label: {
-                        if isFavorite {
-                            Label("Unfavorite", systemImage: "star.fill")
-                        } else {
-                            Label("Mark Favorite", systemImage: "star")
-                        }
-                    }
-                    if experience.location == nil {
-                        Button {
-                            sheetToShow = .addLocation
-                        } label: {
-                            Label("Add Location", systemImage: "plus")
-                        }
-                    }
-                    Button(role: .destructive) {
-                        isShowingDeleteConfirmation.toggle()
-                    } label: {
-                        Label("Delete Experience", systemImage: "trash")
-                    }
-                } label: {
-                    Label("Edit", systemImage: "pencil")
-                }
-                if isEyeOpen {
-                    Menu {
-                        Button {
-                            sheetToShow = .addRating
-                        } label: {
-                            Label("Add Rating", systemImage: "plus.forwardslash.minus")
-                        }
-                        Button {
-                            sheetToShow = .addTimedNote
-                        } label: {
-                            Label("Add Timed Note", systemImage: "note.text")
-                        }
-                    } label: {
-                        Label("Add", systemImage: "plus")
-                    }
-                }
+                ExperienceToolbarContent(
+                    experience: experience,
+                    timeDisplayStyle: $timeDisplayStyle,
+                    sheetToShow: $sheetToShow,
+                    isShowingDeleteConfirmation: $isShowingDeleteConfirmation)
             }
         }
         .confirmationDialog(
@@ -167,231 +308,6 @@ struct ExperienceScreen: View {
             }
         )
 
-    }
-
-    private var screen: some View {
-        List {
-            if !viewModel.ingestionsSorted.isEmpty {
-                Section {
-                    TimelineSection(
-                        timelineModel: viewModel.timelineModel,
-                        hiddenIngestions: viewModel.hiddenIngestions,
-                        ingestionsSorted: viewModel.ingestionsSorted,
-                        timeDisplayStyle: timeDisplayStyle,
-                        isEyeOpen: isEyeOpen,
-                        isHidingDosageDots: isHidingDosageDots,
-                        showIngestion: {viewModel.showIngestion(id: $0)},
-                        hideIngestion: {viewModel.hideIngestion(id: $0)})
-                    if #available(iOS 16.2, *) {
-                        if experience.isCurrent {
-                            LiveActivityButton(
-                                stopLiveActivity: {
-                                    viewModel.stopLiveActivity()
-                                },
-                                startLiveActivity: {
-                                    viewModel.startOrUpdateLiveActivity()
-                                }
-                            )
-                        }
-                    }
-                } header: {
-                    HStack {
-                        let firstDate = experience.ingestionsSorted.first?.time ?? experience.sortDateUnwrapped
-                        Text(firstDate, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
-                        if isEyeOpen {
-                            Spacer()
-                            NavigationLink {
-                                ExplainExperienceSectionScreen()
-                            } label: {
-                                limitationsLabel
-                            }
-                        }
-                    }
-                }
-                if !viewModel.cumulativeDoses.isEmpty && isEyeOpen {
-                    Section("Cumulative Dose") {
-                        ForEach(viewModel.cumulativeDoses) { cumulative in
-                            if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
-                                NavigationLink {
-                                    DosesScreen(substance: substance)
-                                } label: {
-                                    CumulativeDoseRow(
-                                        substanceName: cumulative.substanceName,
-                                        substanceColor: cumulative.substanceColor,
-                                        cumulativeRoutes: cumulative.cumulativeRoutes,
-                                        isHidingDosageDots: isHidingDosageDots,
-                                        isEyeOpen: isEyeOpen
-                                    )
-                                }
-                            } else {
-                                CumulativeDoseRow(
-                                    substanceName: cumulative.substanceName,
-                                    substanceColor: cumulative.substanceColor,
-                                    cumulativeRoutes: cumulative.cumulativeRoutes,
-                                    isHidingDosageDots: isHidingDosageDots,
-                                    isEyeOpen: isEyeOpen
-                                )
-                            }
-                        }
-                    }
-
-                }
-            }
-            let notes = experience.textUnwrapped
-            if !notes.isEmpty {
-                Section("Notes") {
-                    Text(notes)
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            sheetToShow = .editNotes
-                        }
-                }
-            }
-            let timedNotesSorted = experience.timedNotesSorted
-            if !timedNotesSorted.isEmpty {
-                Section("Timed Notes") {
-                    ForEach(timedNotesSorted) { timedNote in
-                        NavigationLink {
-                            EditTimedNoteScreen(timedNote: timedNote, experience: experience)
-                        } label: {
-                            TimedNoteRow(
-                                timedNote: timedNote,
-                                timeDisplayStyle: timeDisplayStyle,
-                                firstIngestionTime: experience.ingestionsSorted.first?.time)
-                        }
-
-                    }
-                }
-            }
-
-            if isEyeOpen && !experience.ratingsUnwrapped.isEmpty {
-                ShulginRatingSection(
-                    experience: experience,
-                    viewModel: viewModel,
-                    timeDisplayStyle: timeDisplayStyle,
-                    firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
-                )
-            }
-            if #available(iOS 16.0, *) {
-                if !viewModel.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
-                    Section {
-                        ToleranceChart(
-                            toleranceWindows: viewModel.toleranceWindows,
-                            numberOfRows: viewModel.numberOfSubstancesInToleranceChart,
-                            timeOption: .onlyIfCurrentTimeInChart,
-                            experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
-                        )
-                    } header: {
-                        HStack {
-                            Text("Tolerance")
-                            Spacer()
-                            NavigationLink {
-                                ToleranceChartExplanationScreen()
-                            } label: {
-                                limitationsLabel
-                            }
-                        }
-                    } footer: {
-                        HStack {
-                            if !viewModel.namesOfSubstancesWithMissingTolerance.isEmpty {
-                                Text("Excluding ") + Text(viewModel.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
-                            }
-                            Spacer()
-                            if !viewModel.substancesInChart.isEmpty {
-                                NavigationLink {
-                                    ToleranceTextsScreen(substances: viewModel.substancesInChart)
-                                } label: {
-                                    Label("More", systemImage: "doc.plaintext")
-                                        .labelStyle(.iconOnly)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            ForEach(viewModel.consumers) { consumer in
-                Section(consumer.consumerName) {
-                    TimelineSection(
-                        timelineModel: consumer.timelineModel,
-                        hiddenIngestions: viewModel.hiddenIngestions,
-                        ingestionsSorted: consumer.ingestionsSorted,
-                        timeDisplayStyle: timeDisplayStyle,
-                        isEyeOpen: isEyeOpen,
-                        isHidingDosageDots: isHidingDosageDots,
-                        showIngestion: {viewModel.showIngestion(id: $0)},
-                        hideIngestion: {viewModel.hideIngestion(id: $0)})
-                }
-            }
-            if isEyeOpen && !isHidingSubstanceInfoInExperience && !viewModel.substancesUsed.isEmpty{
-                Section("Info") {
-                    ForEach(viewModel.substancesUsed) { substance in
-                        NavigationLink(substance.name) {
-                            SubstanceScreen(substance: substance)
-                        }
-                    }
-                    ForEach(viewModel.interactions) { interaction in
-                        NavigationLink {
-                            GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
-                        } label: {
-                            InteractionPairRow(
-                                aName: interaction.aName,
-                                bName: interaction.bName,
-                                interactionType: interaction.interactionType
-                            )
-                        }
-                    }
-                    if viewModel.interactions.isEmpty {
-                        NavigationLink("See Interactions") {
-                            GoThroughAllInteractionsScreen(substancesToCheck: viewModel.substancesUsed)
-                        }
-                    }
-                    if viewModel.substancesUsed.contains(where: {$0.isHallucinogen}) {
-                        NavigationLink {
-                            SaferHallucinogenScreen()
-                        } label: {
-                            Label("Safer Hallucinogens", systemImage: "cross")
-                        }
-                    }
-                }
-            }
-            if let location = experience.location {
-                Section {
-                    EditLocationLinkAndMap(experienceLocation: location)
-                } header: {
-                    HStack {
-                        Text("Location")
-                        Spacer()
-                        Button {
-                            sheetToShow = .editLocation(experienceLocation: location)
-                        } label: {
-                            Label("Edit Location", systemImage: "pencil")
-                                .labelStyle(.iconOnly)
-                        }
-                    }
-                }
-            }
-        }
-        .dismissWhenTabTapped()
-        .sheet(item: $sheetToShow, content: { sheet in
-            switch sheet {
-            case .addLocation:
-                AddLocationScreen(locationManager: locationManager, experience: experience)
-            case .editLocation(let experienceLocation):
-                EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
-            case .editNotes:
-                EditNotesScreen(experience: experience)
-            case .editTitle:
-                EditTitleScreen(experience: experience)
-            case .addRating:
-                AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
-            case .addTimedNote:
-                AddTimedNoteScreen(experience: experience)
-            }
-        })
-        .task {
-            viewModel.experience = experience
-            viewModel.reloadScreen(experience: experience)
-        }
     }
 
     private var limitationsLabel: some View {
