@@ -96,19 +96,14 @@ struct EditIngestionContent: View {
 
     var body: some View {
         Form {
-            if isEyeOpen {
-                Section("Administration Route") {
-                    Picker("Route", selection: $route) {
+            Section("\(route.rawValue.localizedCapitalized) Dose") {
+                if isEyeOpen {
+                    Picker("Administration route", selection: $route) {
                         ForEach(AdministrationRoute.allCases) { oneRoute in
                             Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
                         }
                     }
                 }
-                if route == .oral {
-                    EditStomachFullnessSection(stomachFullness: $stomachFullness)
-                }
-            }
-            Section("\(route.rawValue.localizedCapitalized) Dose") {
                 DoseRow(roaDose: roaDose)
                 DosePicker(
                     roaDose: roaDose,
@@ -117,6 +112,10 @@ struct EditIngestionContent: View {
                 )
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }.listRowSeparator(.hidden)
+            Section("Notes") {
+                TextField("Enter Note", text: $note)
+                    .autocapitalization(.sentences)
+            }
             Section("Ingestion Time") {
                 DatePicker(
                     "Enter Ingestion Time",
@@ -126,9 +125,8 @@ struct EditIngestionContent: View {
                 .labelsHidden()
                 .datePickerStyle(.wheel)
             }
-            Section("Notes") {
-                TextField("Enter Note", text: $note)
-                    .autocapitalization(.sentences)
+            if route == .oral && isEyeOpen {
+                EditStomachFullnessSection(stomachFullness: $stomachFullness)
             }
         }
         .toolbar {
