@@ -215,4 +215,4 @@ extension RoaDuration {
     }
 }
 
-let shapeOpacity = 0.25
+let shapeOpacity = 0.2
