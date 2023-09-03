@@ -25,6 +25,7 @@ struct EditIngestionScreen: View {
     @State private var units: String? = "mg"
     @State private var isEstimate = false
     @State private var note = ""
+    @State private var consumerName = ""
     @State private var route = AdministrationRoute.oral
     @State private var stomachFullness = StomachFullness.empty
     @Environment(\.dismiss) var dismiss
@@ -40,6 +41,7 @@ struct EditIngestionScreen: View {
             isEstimate: $isEstimate,
             note: $note,
             stomachFullness: $stomachFullness,
+            consumerName: $consumerName,
             save: save,
             delete: delete,
             isEyeOpen: isEyeOpen
@@ -50,6 +52,7 @@ struct EditIngestionScreen: View {
             units = ingestion.units
             isEstimate = ingestion.isEstimate
             note = ingestion.noteUnwrapped
+            consumerName = ingestion.consumerName ?? ""
             route = ingestion.administrationRouteUnwrapped
             if let fullness = ingestion.stomachFullnessUnwrapped {
                 stomachFullness = fullness
@@ -63,6 +66,11 @@ struct EditIngestionScreen: View {
         ingestion.units = units
         ingestion.isEstimate = isEstimate
         ingestion.note = note
+        if consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
+            ingestion.consumerName = nil
+        } else {
+            ingestion.consumerName = consumerName
+        }
         ingestion.administrationRoute = route.rawValue
         if route == .oral {
             ingestion.stomachFullness = stomachFullness.rawValue
@@ -90,9 +98,16 @@ struct EditIngestionContent: View {
     @Binding var isEstimate: Bool
     @Binding var note: String
     @Binding var stomachFullness: StomachFullness
+    @Binding var consumerName: String
     let save: () -> Void
     let delete: () -> Void
     let isEyeOpen: Bool
+
+    @State private var isConsumerSheetPresented = false
+
+    private var isConsumerMe: Bool {
+        consumerName.trimmingCharacters(in: .whitespaces).isEmpty
+    }
 
     var body: some View {
         Form {
@@ -125,10 +140,23 @@ struct EditIngestionContent: View {
                 .labelsHidden()
                 .datePickerStyle(.wheel)
             }
+            HStack {
+                Text("Consumer")
+                Spacer()
+                Button {
+                    isConsumerSheetPresented.toggle()
+                } label: {
+                    let displayedName = isConsumerMe ? "Me" : consumerName
+                    Label(displayedName, systemImage: "person")
+                }
+            }
             if route == .oral && isEyeOpen {
                 EditStomachFullnessSection(stomachFullness: $stomachFullness)
             }
         }
+        .sheet(isPresented: $isConsumerSheetPresented, content: {
+            EditConsumerScreen(consumerName: $consumerName)
+        })
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 Button {
@@ -164,6 +192,7 @@ struct EditIngestionScreen_Previews: PreviewProvider {
                 isEstimate: .constant(false),
                 note: .constant("These are my notes"),
                 stomachFullness: .constant(.full),
+                consumerName: .constant("Marc"),
                 save: {},
                 delete: {},
                 isEyeOpen: true
