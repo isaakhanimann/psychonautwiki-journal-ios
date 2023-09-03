@@ -17,15 +17,30 @@
 import Foundation
 
 struct SearchLogic {
-    static func getFilteredSubstancesSorted(substances: [Substance], searchText: String) -> [Substance] {
+    static func getFilteredSubstancesSorted(substances: [Substance], searchText: String, namesToSortBy: [String]) -> [Substance] {
         let filteredSubstances = getFilteredSubstances(substances: substances, searchText: searchText)
         return filteredSubstances.sorted { sub1, sub2 in
-            if sub1.categories.contains("common") {
-                return true
-            } else if sub2.categories.contains("common") {
-                return false
+            let indexOf1 = namesToSortBy.firstIndex(of: sub1.name)
+            let indexOf2 = namesToSortBy.firstIndex(of: sub2.name)
+            // true means sub1 first, false means sub2 first
+            if let indexOf1 {
+                if let indexOf2 {
+                    return indexOf1 < indexOf2
+                } else {
+                    return true
+                }
             } else {
-                return true
+                if indexOf2 != nil {
+                    return false
+                } else {
+                    if sub1.categories.contains("common") {
+                        return true
+                    } else if sub2.categories.contains("common") {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
             }
         }
     }

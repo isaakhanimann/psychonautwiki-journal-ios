@@ -28,6 +28,10 @@ struct SearchScreen: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \CustomSubstance.name, ascending: true)]
     ) private var customSubstances: FetchedResults<CustomSubstance>
 
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
+    ) private var ingestions: FetchedResults<Ingestion>
+
     private static let custom = "custom"
 
     let allCategories = [custom] + SubstanceRepo.shared.categories.map { cat in
@@ -58,7 +62,7 @@ struct SearchScreen: View {
         }
     }
 
-    var filteredCustomSubstances: [CustomSubstance] {
+    var customSubstancesFiltered: [CustomSubstance] {
         let lowerCaseSearchText = searchText.lowercased()
         if searchText.count < 3 {
             return customFilteredWithCategories.filter { cust in
@@ -71,13 +75,19 @@ struct SearchScreen: View {
         }
     }
 
-    var filteredSubstances: [Substance] {
+    var substancesFilteredAndSorted: [Substance] {
         let substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
             selectedCategories.allSatisfy { selected in
                 sub.categories.contains(selected)
             }
         }
-        return SearchLogic.getFilteredSubstancesSorted(substances: substancesFilteredWithCategoriesOnly, searchText: searchText)
+        let substanceNamesInOrder = ingestions.prefix(500).map { ing in
+            ing.substanceNameUnwrapped
+        }.uniqued()
+        return SearchLogic.getFilteredSubstancesSorted(
+            substances: substancesFilteredWithCategoriesOnly,
+            searchText: searchText,
+            namesToSortBy: substanceNamesInOrder)
     }
 
     var body: some View {
@@ -96,10 +106,10 @@ struct SearchScreen: View {
                     }
                 )
                 List {
-                    ForEach(filteredSubstances) { sub in
+                    ForEach(substancesFilteredAndSorted) { sub in
                         SearchSubstanceRow(substance: sub)
                     }
-                    ForEach(filteredCustomSubstances) { cust in
+                    ForEach(customSubstancesFiltered) { cust in
                         NavigationLink {
                             EditCustomSubstanceView(customSubstance: cust)
                         } label: {
@@ -110,7 +120,7 @@ struct SearchScreen: View {
                             }
                         }
                     }
-                    if filteredSubstances.isEmpty && filteredCustomSubstances.isEmpty {
+                    if substancesFilteredAndSorted.isEmpty && customSubstancesFiltered.isEmpty {
                         Text("No Results")
                             .foregroundColor(.secondary)
                     }
