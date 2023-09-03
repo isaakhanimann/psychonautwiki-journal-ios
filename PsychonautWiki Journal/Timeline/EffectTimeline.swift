@@ -23,10 +23,13 @@ struct EffectTimeline: View {
     var isShowingCurrentTime = true
     var spaceToLabels = 5.0
     private let lineWidth: Double = 5
+    private var halfLineWidth: Double {
+        lineWidth/2
+    }
 
     var body: some View {
-        let halfLineWidth = lineWidth/2
         VStack(spacing: 0) {
+            timeLabels
             TimelineView(.everyMinute) { timeline in
                 let timelineDate = timeline.date
                 Canvas { context, size in
@@ -62,24 +65,28 @@ struct EffectTimeline: View {
                     }
                 }
             }
-            Spacer().frame(height: spaceToLabels)
-            Canvas { context, size in
-                let widthInPixels = size.width - halfLineWidth
-                let pixelsPerSec = widthInPixels/timelineModel.totalWidth
-                let fullHours = timelineModel.axisDrawable.getFullHours(
-                    pixelsPerSec: pixelsPerSec,
-                    widthInPixels: widthInPixels
-                )
-                fullHours.forEach { fullHour in
-                    context.draw(
-                        Text(fullHour.label).font(.caption),
-                        at: CGPoint(x: fullHour.distanceFromStart + halfLineWidth, y: size.height/2),
-                        anchor: .center
-                    )
-                }
-            }
-            .fixedSize(horizontal: false, vertical: true)
+            .padding(.vertical, spaceToLabels)
+            timeLabels
         }.frame(height: height)
+    }
+
+    private var timeLabels: some View {
+        Canvas { context, size in
+            let widthInPixels = size.width - halfLineWidth
+            let pixelsPerSec = widthInPixels/timelineModel.totalWidth
+            let fullHours = timelineModel.axisDrawable.getFullHours(
+                pixelsPerSec: pixelsPerSec,
+                widthInPixels: widthInPixels
+            )
+            fullHours.forEach { fullHour in
+                context.draw(
+                    Text(fullHour.label).font(.caption),
+                    at: CGPoint(x: fullHour.distanceFromStart + halfLineWidth, y: size.height/2),
+                    anchor: .center
+                )
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
