@@ -65,7 +65,9 @@ struct TimelineModel {
                 color: group.color,
                 roaDuration: group.roaDuration,
                 weightedLines: group.weightedLines)
-        }
+        }.sorted { lhs, rhs in
+            lhs.endRelativeToStartInSeconds < rhs.endRelativeToStartInSeconds
+        } // sort makes sure that lines are always drawn in the same order such that lines with a later endpoint are drawn on top.
         self.groupDrawables = groupDrawables
         let ratingDrawables = everythingForEachRating.map({ rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
