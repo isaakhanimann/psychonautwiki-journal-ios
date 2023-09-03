@@ -208,6 +208,14 @@ struct ExperienceScreen: View {
                                     timedNote: timedNote,
                                     timeDisplayStyle: timeDisplayStyle,
                                     firstIngestionTime: experience.ingestionsSorted.first?.time)
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button(role: .destructive) {
+                                        PersistenceController.shared.viewContext.delete(timedNote)
+                                        PersistenceController.shared.saveViewContext()
+                                    } label: {
+                                        Label("Delete", systemImage: "trash.fill")
+                                    }
+                                }
                             }
 
                         }
