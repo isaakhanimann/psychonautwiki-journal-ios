@@ -41,9 +41,7 @@ struct SubstanceSearchBarWithFilter: View {
                 .submitLabel(.search)
                 if !text.isEmpty {
                     Image(systemName: "xmark.circle.fill")
-                        .imageScale(.medium)
                         .foregroundColor(Color(.systemGray))
-                        .padding(3)
                         .onTapGesture {
                             withAnimation {
                                 text = ""
