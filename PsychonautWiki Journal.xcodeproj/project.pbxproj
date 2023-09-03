@@ -216,7 +216,6 @@
 		EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFC2962C9B000779DD9 /* ActivityManager.swift */; };
 		EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
-		EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */; };
 		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
 		EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */; };
@@ -549,7 +548,6 @@
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getEverythingForEachLine.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
-		EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
 		EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartCalculator.swift; sourceTree = "<group>"; };
@@ -855,7 +853,6 @@
 				EA47E66F27CB477000F6E10F /* SearchScreen.swift */,
 				EAB8EF4F2A489DDA00542253 /* SubstanceSearchBarWithFilter.swift */,
 				EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */,
-				EA9AE85D27CB89ED00D4D468 /* SearchViewModel.swift */,
 				EAA9C3822A5479AE00869E5A /* SearchLogic.swift */,
 			);
 			path = Search;
@@ -1921,7 +1918,6 @@
 				EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */,
 				EA55CEB42A3F278A00FE1A44 /* ExperienceTimeText.swift in Sources */,
 				EA039AC72A6C6657006DFAFE /* View-ColorBackground.swift in Sources */,
-				EA9AE85E27CB89ED00D4D468 /* SearchViewModel.swift in Sources */,
 				EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */,
 				EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */,
 				EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */,

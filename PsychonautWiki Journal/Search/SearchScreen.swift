@@ -18,29 +18,88 @@ import SwiftUI
 
 struct SearchScreen: View {
 
-    @StateObject private var viewModel = SearchViewModel()
     @FocusState private var isSearchFocused: Bool
+
+    @State private var searchText = ""
+    @State private var selectedCategories: [String] = []
+    @State private var isShowingAddCustomSubstance = false
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \CustomSubstance.name, ascending: true)]
+    ) private var customSubstances: FetchedResults<CustomSubstance>
+
+    private static let custom = "custom"
+
+    let allCategories = [custom] + SubstanceRepo.shared.categories.map { cat in
+        cat.name
+    }
+
+    func toggleCategory(category: String) {
+        if selectedCategories.contains(category) {
+            selectedCategories.removeAll { cat in
+                cat == category
+            }
+        } else {
+            selectedCategories.append(category)
+        }
+    }
+
+    func clearCategories() {
+        selectedCategories.removeAll()
+    }
+
+    var customFilteredWithCategories: [CustomSubstance] {
+        if selectedCategories.isEmpty {
+            return Array(customSubstances)
+        } else if selectedCategories.contains(SearchScreen.custom) {
+            return Array(customSubstances)
+        } else {
+            return []
+        }
+    }
+
+    var filteredCustomSubstances: [CustomSubstance] {
+        let lowerCaseSearchText = searchText.lowercased()
+        if searchText.count < 3 {
+            return customFilteredWithCategories.filter { cust in
+                cust.nameUnwrapped.lowercased().hasPrefix(lowerCaseSearchText)
+            }
+        } else {
+            return customFilteredWithCategories.filter { cust in
+                cust.nameUnwrapped.lowercased().contains(lowerCaseSearchText)
+            }
+        }
+    }
+
+    var filteredSubstances: [Substance] {
+        let substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
+            selectedCategories.allSatisfy { selected in
+                sub.categories.contains(selected)
+            }
+        }
+        return SearchLogic.getFilteredSubstancesSorted(substances: substancesFilteredWithCategoriesOnly, searchText: searchText)
+    }
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 SubstanceSearchBarWithFilter(
-                    text: $viewModel.searchText,
+                    text: $searchText,
                     isFocused: $isSearchFocused,
-                    allCategories: viewModel.allCategories,
+                    allCategories: allCategories,
                     toggleCategory: { cat in
-                        viewModel.toggleCategory(category: cat)
+                        toggleCategory(category: cat)
                     },
-                    selectedCategories: viewModel.selectedCategories,
+                    selectedCategories: selectedCategories,
                     clearCategories: {
-                        viewModel.clearCategories()
+                        clearCategories()
                     }
                 )
                 List {
-                    ForEach(viewModel.filteredSubstances) { sub in
+                    ForEach(filteredSubstances) { sub in
                         SearchSubstanceRow(substance: sub)
                     }
-                    ForEach(viewModel.filteredCustomSubstances) { cust in
+                    ForEach(filteredCustomSubstances) { cust in
                         NavigationLink {
                             EditCustomSubstanceView(customSubstance: cust)
                         } label: {
@@ -51,16 +110,16 @@ struct SearchScreen: View {
                             }
                         }
                     }
-                    if viewModel.filteredSubstances.isEmpty && viewModel.filteredCustomSubstances.isEmpty {
+                    if filteredSubstances.isEmpty && filteredCustomSubstances.isEmpty {
                         Text("No Results")
                             .foregroundColor(.secondary)
                     }
                     Button {
-                        viewModel.isShowingAddCustomSubstance.toggle()
+                        isShowingAddCustomSubstance.toggle()
                     } label: {
                         Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                     }
-                    .sheet(isPresented: $viewModel.isShowingAddCustomSubstance) {
+                    .sheet(isPresented: $isShowingAddCustomSubstance) {
                         AddCustomSubstanceView()
                     }
                 }
@@ -68,8 +127,8 @@ struct SearchScreen: View {
                 .optionalScrollDismissesKeyboard()
             }
             .onSameTabTap {
-                viewModel.searchText = ""
-                viewModel.clearCategories()
+                searchText = ""
+                clearCategories()
                 isSearchFocused = true
             }
         }
