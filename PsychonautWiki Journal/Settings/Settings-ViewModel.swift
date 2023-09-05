@@ -66,6 +66,7 @@ extension SettingsScreen {
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes
                         newIngestion.stomachFullness = ingestionCodable.stomachFullness?.rawValue
+                        newIngestion.consumerName = ingestionCodable.consumerName
                         newExperience.addToIngestions(newIngestion)
                         if let companion = companionDict[ingestionCodable.substanceName] {
                             newIngestion.substanceCompanion = companion
