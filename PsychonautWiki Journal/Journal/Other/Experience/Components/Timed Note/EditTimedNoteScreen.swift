@@ -47,7 +47,7 @@ struct EditTimedNoteScreen: View {
                 note = timedNote.noteUnwrapped
                 color = timedNote.color
                 isPartOfTimeline = timedNote.isPartOfTimeline
-                alreadyUsedColors = Set(experience.timedNotesSorted.map({$0.color}))
+                alreadyUsedColors = Set(experience.timedNotesForTimeline.map({$0.color}))
                 otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
                 isFirstAppear = false
             }

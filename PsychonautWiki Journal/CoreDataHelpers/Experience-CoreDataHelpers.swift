@@ -122,7 +122,7 @@ extension Experience: Comparable {
     }
 
     var timedNotesForTimeline: [EverythingForOneTimedNote] {
-        timedNotesSorted.map { timedNote in
+        timedNotesSorted.filter({$0.isPartOfTimeline}).map { timedNote in
             EverythingForOneTimedNote(
                 time: timedNote.timeUnwrapped,
                 color: timedNote.color)

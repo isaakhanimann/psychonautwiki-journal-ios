@@ -56,7 +56,7 @@ struct AddTimedNoteScreen: View {
         .onAppear {
             isTextFieldFocused = true
             isPartOfTimeline = experience.isCurrent
-            alreadyUsedColors = Set(experience.timedNotesSorted.map({$0.color}))
+            alreadyUsedColors = Set(experience.timedNotesForTimeline.map({$0.color}))
             otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
             if let otherColor = otherColors.randomElement() {
                 color = otherColor
