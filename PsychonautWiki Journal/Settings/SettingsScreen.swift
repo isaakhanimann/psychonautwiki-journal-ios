@@ -24,10 +24,25 @@ struct SettingsScreen: View {
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
+    @AppStorage(Authenticator.lockTimeOptionKey) var lockTimeOptionString: String = LockTimeOption.after5Minutes.rawValue
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
 
+    private var lockTimeOption: LockTimeOption {
+        LockTimeOption(rawValue: lockTimeOptionString) ?? LockTimeOption.after5Minutes
+    }
+
+    private func setLockTimeOption(option: LockTimeOption) {
+        lockTimeOptionString = option.rawValue
+    }
+
     var body: some View {
+        let timeOptionBinding = Binding {
+            lockTimeOption
+        } set: { newValue in
+            setLockTimeOption(option: newValue)
+        }
+
         SettingsContent(
             isEyeOpen: $isEyeOpen,
             isSkippingInteractionChecks: $isSkippingInteractionChecks,
@@ -49,7 +64,8 @@ struct SettingsScreen: View {
             },
             isShowingToast: $viewModel.isShowingToast,
             isSuccessToast: $viewModel.isShowingSuccessToast,
-            toastMessage: $viewModel.toastMessage
+            toastMessage: $viewModel.toastMessage,
+            lockTimeOption: timeOptionBinding
         )
     }
 }
@@ -73,6 +89,7 @@ struct SettingsContent: View {
     @Binding var isShowingToast: Bool
     @Binding var isSuccessToast: Bool
     @Binding var toastMessage: String
+    @Binding var lockTimeOption: LockTimeOption
 
     @State private var isShowingDeleteConfirmation = false
     @State private var isShowingImportAlert = false
@@ -82,9 +99,18 @@ struct SettingsContent: View {
             List {
                 Section("Privacy") {
                     if isFaceIDAvailable {
-                        Toggle("Require App Unlock", isOn: $hasToUnlockApp).tint(Color.accentColor)
+                        Toggle("Require App Unlock", isOn: $hasToUnlockApp.animation()).tint(Color.accentColor)
                     } else {
                         Text("Enable Face ID for Journal in settings to lock the app.")
+                    }
+                    if hasToUnlockApp {
+                        Picker("Time option", selection: $lockTimeOption) {
+                            ForEach(LockTimeOption.allCases) { option in
+                                Text(option.text)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                        .labelsHidden()
                     }
                 }
                 Section("Communication") {
@@ -274,7 +300,8 @@ struct SettingsContent_Previews: PreviewProvider {
             deleteEverything: {},
             isShowingToast: .constant(false),
             isSuccessToast: .constant(false),
-            toastMessage: .constant("")
+            toastMessage: .constant(""),
+            lockTimeOption: .constant(.after5Minutes)
         )
         .accentColor(Color.blue)
     }
