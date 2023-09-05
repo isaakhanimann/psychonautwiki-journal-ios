@@ -18,20 +18,20 @@ import Charts
 import SwiftUI
 
 @available(iOS 16, *)
-struct IngestionOverviewChart: View {
+struct SubstanceOverviewChart: View {
 
-    let ingestionData: IngestionData
+    let substanceData: SubstanceData
 
     var body: some View {
-        Chart(ingestionData.last12Months) { element in
+        Chart(substanceData.last12Months) { element in
             BarMark(
-                x: .value("Ingestions", element.ingestionCount),
+                x: .value("Experiences", element.experienceCount),
                 y: .value("Substance", element.substanceName)
             )
             .foregroundStyle(by: .value("Substance", element.substanceName))
-            .opacity(element.substanceName == ingestionData.last12Months.first?.substanceName ? 1 : 0.5)
+            .opacity(element.substanceName == substanceData.last12Months.first?.substanceName ? 1 : 0.5)
         }
-        .chartForegroundStyleScale(mapping: ingestionData.colorMapping)
+        .chartForegroundStyleScale(mapping: substanceData.colorMapping)
         .chartLegend(.hidden)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
@@ -39,28 +39,28 @@ struct IngestionOverviewChart: View {
 }
 
 @available(iOS 16, *)
-struct IngestionOverview: View {
+struct SubstanceOverview: View {
 
-    let ingestionData: IngestionData
+    let substanceData: SubstanceData
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Most Used Substance Last 12 Months")
+            Text("Most Experiences Last 12 Months")
                 .foregroundStyle(.secondary)
-            if let mostUsedName = ingestionData.last12Months.first?.substanceName {
+            if let mostUsedName = substanceData.last12Months.first?.substanceName {
                 Text(mostUsedName)
                     .font(.title2.bold())
             } else {
                 Text("None")
                     .font(.title2.bold())
             }
-            IngestionOverviewChart(ingestionData: ingestionData)
+            SubstanceOverviewChart(substanceData: substanceData)
                 .frame(height: chartHeight)
         }
     }
 
     var chartHeight: CGFloat {
-        let numberOfRows = ingestionData.last12Months.count
+        let numberOfRows = substanceData.last12Months.count
         if numberOfRows < 5 {
             return CGFloat(numberOfRows*20)
         } else {
@@ -70,9 +70,9 @@ struct IngestionOverview: View {
 }
 
 @available(iOS 16, *)
-struct IngestionOverview_Previews: PreviewProvider {
+struct SubstanceOverview_Previews: PreviewProvider {
     static var previews: some View {
-        IngestionOverview(ingestionData: .mock1)
+        SubstanceOverview(substanceData: .mock1)
             .padding()
     }
 }

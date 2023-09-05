@@ -20,40 +20,40 @@ func date(year: Int, month: Int = 1, day: Int = 1) -> Date {
     Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
 }
 
-struct IngestionCount: Identifiable {
+struct SubstanceCount: Identifiable {
     var id: String {
         substanceName
     }
     let substanceName: String
-    let ingestionCount: Int
+    let experienceCount: Int
 }
 
-struct IngestionData {
-    let last30Days: [IngestionCount]
-    let last12Months: [IngestionCount]
-    let years: [IngestionCount]
+struct SubstanceData {
+    let last30Days: [SubstanceCount]
+    let last12Months: [SubstanceCount]
+    let years: [SubstanceCount]
     let colorMapping: (String) -> Color
 }
 
-extension IngestionData {
-    static let mock1 = IngestionData(
+extension SubstanceData {
+    static let mock1 = SubstanceData(
         last30Days: [
-            .init(substanceName: "Cannabis", ingestionCount: 15),
-            .init(substanceName: "Cocaine", ingestionCount: 8),
-            .init(substanceName: "Amphetamine", ingestionCount: 3),
-            .init(substanceName: "MDMA", ingestionCount: 1)
+            .init(substanceName: "Cannabis", experienceCount: 15),
+            .init(substanceName: "Cocaine", experienceCount: 8),
+            .init(substanceName: "Amphetamine", experienceCount: 3),
+            .init(substanceName: "MDMA", experienceCount: 1)
         ],
         last12Months: [
-            .init(substanceName: "Cannabis", ingestionCount: 55),
-            .init(substanceName: "Cocaine", ingestionCount: 10),
-            .init(substanceName: "MDMA", ingestionCount: 4),
-            .init(substanceName: "Amphetamine", ingestionCount: 3)
+            .init(substanceName: "Cannabis", experienceCount: 55),
+            .init(substanceName: "Cocaine", experienceCount: 10),
+            .init(substanceName: "MDMA", experienceCount: 4),
+            .init(substanceName: "Amphetamine", experienceCount: 3)
         ],
         years: [
-            .init(substanceName: "Cannabis", ingestionCount: 60),
-            .init(substanceName: "Cocaine", ingestionCount: 15),
-            .init(substanceName: "MDMA", ingestionCount: 8),
-            .init(substanceName: "Amphetamine", ingestionCount: 8)
+            .init(substanceName: "Cannabis", experienceCount: 60),
+            .init(substanceName: "Cocaine", experienceCount: 15),
+            .init(substanceName: "MDMA", experienceCount: 8),
+            .init(substanceName: "Amphetamine", experienceCount: 8)
         ],
         colorMapping: { substanceName in
             switch substanceName {
@@ -66,55 +66,55 @@ extension IngestionData {
             }
         }
     )
-    static let mock2 = IngestionData(
+    static let mock2 = SubstanceData(
         last30Days: [
-            .init(substanceName: "Cannabis", ingestionCount: 15),
-            .init(substanceName: "Cocaine", ingestionCount: 8),
-            .init(substanceName: "Amphetamine", ingestionCount: 3),
-            .init(substanceName: "MDMA", ingestionCount: 1)
+            .init(substanceName: "Cannabis", experienceCount: 15),
+            .init(substanceName: "Cocaine", experienceCount: 8),
+            .init(substanceName: "Amphetamine", experienceCount: 3),
+            .init(substanceName: "MDMA", experienceCount: 1)
         ],
         last12Months: [
-            .init(substanceName: "Cannabis", ingestionCount: 55),
-            .init(substanceName: "Cocaine", ingestionCount: 10),
-            .init(substanceName: "MDMA", ingestionCount: 4),
-            .init(substanceName: "Substance 1", ingestionCount: 4),
-            .init(substanceName: "Substance 2", ingestionCount: 4),
-            .init(substanceName: "Substance 3", ingestionCount: 4),
-            .init(substanceName: "Substance 4", ingestionCount: 4),
-            .init(substanceName: "Substance 5", ingestionCount: 4),
-            .init(substanceName: "Substance 6", ingestionCount: 4),
-            .init(substanceName: "Substance 7", ingestionCount: 4),
-            .init(substanceName: "Substance 8", ingestionCount: 4),
-            .init(substanceName: "Substance 9", ingestionCount: 4),
-            .init(substanceName: "Substance 10", ingestionCount: 4),
-            .init(substanceName: "Substance 11", ingestionCount: 4),
-            .init(substanceName: "Substance 12", ingestionCount: 4),
-            .init(substanceName: "Substance 13", ingestionCount: 4),
-            .init(substanceName: "Substance 14", ingestionCount: 4),
-            .init(substanceName: "Substance 15", ingestionCount: 4),
-            .init(substanceName: "Substance 16", ingestionCount: 4),
-            .init(substanceName: "Substance 17", ingestionCount: 4),
-            .init(substanceName: "Substance 18", ingestionCount: 4),
-            .init(substanceName: "Substance 19", ingestionCount: 4),
-            .init(substanceName: "Substance 20", ingestionCount: 4),
-            .init(substanceName: "Substance 21", ingestionCount: 4),
-            .init(substanceName: "Substance 22", ingestionCount: 4),
-            .init(substanceName: "Substance 23", ingestionCount: 4),
-            .init(substanceName: "Substance 24", ingestionCount: 4),
-            .init(substanceName: "Substance 25", ingestionCount: 4),
-            .init(substanceName: "Substance 26", ingestionCount: 4),
-            .init(substanceName: "Substance 27", ingestionCount: 4),
-            .init(substanceName: "Substance 28", ingestionCount: 4),
-            .init(substanceName: "Substance 29", ingestionCount: 4),
-            .init(substanceName: "Substance 30", ingestionCount: 4),
-            .init(substanceName: "Substance 31", ingestionCount: 4),
-            .init(substanceName: "Amphetamine", ingestionCount: 3)
+            .init(substanceName: "Cannabis", experienceCount: 55),
+            .init(substanceName: "Cocaine", experienceCount: 10),
+            .init(substanceName: "MDMA", experienceCount: 4),
+            .init(substanceName: "Substance 1", experienceCount: 4),
+            .init(substanceName: "Substance 2", experienceCount: 4),
+            .init(substanceName: "Substance 3", experienceCount: 4),
+            .init(substanceName: "Substance 4", experienceCount: 4),
+            .init(substanceName: "Substance 5", experienceCount: 4),
+            .init(substanceName: "Substance 6", experienceCount: 4),
+            .init(substanceName: "Substance 7", experienceCount: 4),
+            .init(substanceName: "Substance 8", experienceCount: 4),
+            .init(substanceName: "Substance 9", experienceCount: 4),
+            .init(substanceName: "Substance 10", experienceCount: 4),
+            .init(substanceName: "Substance 11", experienceCount: 4),
+            .init(substanceName: "Substance 12", experienceCount: 4),
+            .init(substanceName: "Substance 13", experienceCount: 4),
+            .init(substanceName: "Substance 14", experienceCount: 4),
+            .init(substanceName: "Substance 15", experienceCount: 4),
+            .init(substanceName: "Substance 16", experienceCount: 4),
+            .init(substanceName: "Substance 17", experienceCount: 4),
+            .init(substanceName: "Substance 18", experienceCount: 4),
+            .init(substanceName: "Substance 19", experienceCount: 4),
+            .init(substanceName: "Substance 20", experienceCount: 4),
+            .init(substanceName: "Substance 21", experienceCount: 4),
+            .init(substanceName: "Substance 22", experienceCount: 4),
+            .init(substanceName: "Substance 23", experienceCount: 4),
+            .init(substanceName: "Substance 24", experienceCount: 4),
+            .init(substanceName: "Substance 25", experienceCount: 4),
+            .init(substanceName: "Substance 26", experienceCount: 4),
+            .init(substanceName: "Substance 27", experienceCount: 4),
+            .init(substanceName: "Substance 28", experienceCount: 4),
+            .init(substanceName: "Substance 29", experienceCount: 4),
+            .init(substanceName: "Substance 30", experienceCount: 4),
+            .init(substanceName: "Substance 31", experienceCount: 4),
+            .init(substanceName: "Amphetamine", experienceCount: 3)
         ],
         years: [
-            .init(substanceName: "Cannabis", ingestionCount: 60),
-            .init(substanceName: "Cocaine", ingestionCount: 15),
-            .init(substanceName: "MDMA", ingestionCount: 8),
-            .init(substanceName: "Amphetamine", ingestionCount: 8)
+            .init(substanceName: "Cannabis", experienceCount: 60),
+            .init(substanceName: "Cocaine", experienceCount: 15),
+            .init(substanceName: "MDMA", experienceCount: 8),
+            .init(substanceName: "Amphetamine", experienceCount: 8)
         ],
         colorMapping: { substanceName in
             switch substanceName {

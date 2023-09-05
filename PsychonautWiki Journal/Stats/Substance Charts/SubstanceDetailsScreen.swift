@@ -19,19 +19,19 @@ import SwiftUI
 
 
 @available(iOS 16, *)
-struct IngestionDetailsScreen: View {
+struct SubstanceDetailsScreen: View {
 
-    let ingestionData: IngestionData
+    let substanceData: SubstanceData
     @State private var timeRange: TimeRange = .last12Months
 
-    var data: [IngestionCount] {
+    var data: [SubstanceCount] {
         switch timeRange {
         case .last30Days:
-            return ingestionData.last30Days
+            return substanceData.last30Days
         case .last12Months:
-            return ingestionData.last12Months
+            return substanceData.last12Months
         case .years:
-            return ingestionData.years
+            return substanceData.years
         }
     }
 
@@ -39,21 +39,21 @@ struct IngestionDetailsScreen: View {
         List {
             TimeRangePicker(value: $timeRange)
                 .padding(.vertical, 5)
-            if let maxCount = data.first?.ingestionCount {
+            if let maxCount = data.first?.experienceCount {
                 ForEach(data) { elem in
                     VStack(alignment: .leading, spacing: 3) {
                         HStack {
                             Text(elem.substanceName)
                                 .font(.headline)
                             Spacer()
-                            Text("\(elem.ingestionCount) Ingestions")
+                            Text("\(elem.experienceCount) experiences")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
-                        let widthRatio = Double(elem.ingestionCount) / Double(maxCount)
+                        let widthRatio = Double(elem.experienceCount) / Double(maxCount)
                         GeometryReader { geometry in
                             Rectangle()
-                                .fill(ingestionData.colorMapping(elem.substanceName))
+                                .fill(substanceData.colorMapping(elem.substanceName))
                                 .cornerRadius(5, corners: [.topRight, .bottomRight])
                                 .frame(
                                     width: geometry.size.width*widthRatio
@@ -63,7 +63,7 @@ struct IngestionDetailsScreen: View {
                     }
                 }
             } else {
-                Text("No Ingestions").font(.headline)
+                Text("No experiences").font(.headline)
             }
         }
         .navigationTitle("Substances")
@@ -89,10 +89,10 @@ struct RoundedCorner: Shape {
 }
 
 @available(iOS 16, *)
-struct IngestionDetails_Previews: PreviewProvider {
+struct SubstanceDetailsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            IngestionDetailsScreen(ingestionData: .mock2)
+            SubstanceDetailsScreen(substanceData: .mock2)
                 .environmentObject(TabBarObserver())
         }
     }

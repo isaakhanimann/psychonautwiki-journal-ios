@@ -98,8 +98,8 @@
 		EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */; };
 		EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C622295C2BE7000DA021 /* JournalFile.swift */; };
 		EA41C625295EAFD8000DA021 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C624295EAFD8000DA021 /* Data.swift */; };
-		EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C626295EB65C000DA021 /* IngestionOverview.swift */; };
-		EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */; };
+		EA41C627295EB65C000DA021 /* SubstanceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C626295EB65C000DA021 /* SubstanceOverview.swift */; };
+		EA41C629295EB6E2000DA021 /* SubstanceDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C628295EB6E2000DA021 /* SubstanceDetailsScreen.swift */; };
 		EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */; };
 		EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */; };
 		EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C62E295EB86C000DA021 /* TimeRange.swift */; };
@@ -436,8 +436,8 @@
 		EA41C620295C1E9E000DA021 /* Settings-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings-ViewModel.swift"; sourceTree = "<group>"; };
 		EA41C622295C2BE7000DA021 /* JournalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalFile.swift; sourceTree = "<group>"; };
 		EA41C624295EAFD8000DA021 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		EA41C626295EB65C000DA021 /* IngestionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionOverview.swift; sourceTree = "<group>"; };
-		EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionDetailsScreen.swift; sourceTree = "<group>"; };
+		EA41C626295EB65C000DA021 /* SubstanceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceOverview.swift; sourceTree = "<group>"; };
+		EA41C628295EB6E2000DA021 /* SubstanceDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDetailsScreen.swift; sourceTree = "<group>"; };
 		EA41C62A295EB79A000DA021 /* ExperienceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceOverview.swift; sourceTree = "<group>"; };
 		EA41C62C295EB7C2000DA021 /* ExperienceDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetailsScreen.swift; sourceTree = "<group>"; };
 		EA41C62E295EB86C000DA021 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
@@ -793,13 +793,13 @@
 			path = "MDMA Dose";
 			sourceTree = "<group>";
 		};
-		EA418A052968D62F00DEA663 /* Ingestion Charts */ = {
+		EA418A052968D62F00DEA663 /* Substance Charts */ = {
 			isa = PBXGroup;
 			children = (
-				EA41C626295EB65C000DA021 /* IngestionOverview.swift */,
-				EA41C628295EB6E2000DA021 /* IngestionDetailsScreen.swift */,
+				EA41C626295EB65C000DA021 /* SubstanceOverview.swift */,
+				EA41C628295EB6E2000DA021 /* SubstanceDetailsScreen.swift */,
 			);
-			path = "Ingestion Charts";
+			path = "Substance Charts";
 			sourceTree = "<group>";
 		};
 		EA418A082969747500DEA663 /* Other */ = {
@@ -998,7 +998,7 @@
 			children = (
 				EA6D44EB2A50470000BF2E8A /* Tolerance */,
 				EA41C630295F88F0000DA021 /* Experience Charts */,
-				EA418A052968D62F00DEA663 /* Ingestion Charts */,
+				EA418A052968D62F00DEA663 /* Substance Charts */,
 				EAA9C3732A50759100869E5A /* TimeRange */,
 				EABDA72D28881B4800A23DB3 /* StatsScreen.swift */,
 				EA41C624295EAFD8000DA021 /* Data.swift */,
@@ -1844,7 +1844,7 @@
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */,
 				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
-				EA41C629295EB6E2000DA021 /* IngestionDetailsScreen.swift in Sources */,
+				EA41C629295EB6E2000DA021 /* SubstanceDetailsScreen.swift in Sources */,
 				EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */,
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
 				EAA9C3962A5944EB00869E5A /* ToleranceTimeOption.swift in Sources */,
@@ -1967,7 +1967,7 @@
 				EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */,
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
-				EA41C627295EB65C000DA021 /* IngestionOverview.swift in Sources */,
+				EA41C627295EB65C000DA021 /* SubstanceOverview.swift in Sources */,
 				EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */,
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
 				EA48F8A229E98E88007DA8C5 /* TimeDisplayStyle.swift in Sources */,

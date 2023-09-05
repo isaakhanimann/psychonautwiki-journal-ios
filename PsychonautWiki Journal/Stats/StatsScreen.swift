@@ -34,7 +34,7 @@ struct StatsScreen: View {
     ) var substanceCompanions: FetchedResults<SubstanceCompanion>
 
     @State private var experienceData: ExperienceData? = nil
-    @State private var ingestionData: IngestionData? = nil
+    @State private var substanceData: SubstanceData? = nil
     @State private var toleranceWindows: [ToleranceWindow] = []
     @State private var substancesInIngestionsButNotChart: [String] = []
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -42,10 +42,10 @@ struct StatsScreen: View {
     var body: some View {
         NavigationView {
             Group {
-                if let experienceData, let ingestionData {
+                if let experienceData, let substanceData {
                     StatsScreenContent(
                         experienceData: experienceData,
-                        ingestionData: ingestionData,
+                        substanceData: substanceData,
                         toleranceWindows: toleranceWindows,
                         substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
                         isEyeOpen: isEyeOpen
@@ -71,10 +71,10 @@ struct StatsScreen: View {
                 getColor(for: substanceName).swiftUIColor
             }
         )
-        ingestionData = IngestionData(
-            last30Days: getSortedIngestionCountsLast30Days(),
-            last12Months: getSortedIngestionCountsLast12Months(),
-            years: getSortedIngestionCountsYears(),
+        substanceData = SubstanceData(
+            last30Days: getSortedSubstanceCountsLast30Days(),
+            last12Months: getSortedSubstanceCountsLast12Months(),
+            years: getSortedSubstanceCountsYears(),
             colorMapping: { substanceName in
                 getColor(for: substanceName).swiftUIColor
             }
@@ -95,34 +95,41 @@ struct StatsScreen: View {
         substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
     }
 
-    private func getSortedIngestionCountsLast30Days() -> [IngestionCount] {
-        let ingestionsLast30Days = ingestions.prefix { ing in
-            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 30
+    private func getSortedSubstanceCountsLast30Days() -> [SubstanceCount] {
+        let last30Days = experiences.prefix { exp in
+            Calendar.current.numberOfDaysBetween(exp.sortDateUnwrapped, and: Date()) <= 30
         }
-        return getSortedIngestionCounts(for: ingestionsLast30Days)
+        return getSortedSubstanceCounts(for: last30Days)
     }
 
-    private func getSortedIngestionCountsLast12Months() -> [IngestionCount] {
-        let ingestionsLast12Months = ingestions.prefix { ing in
-            Calendar.current.numberOfMonthsBetween(ing.timeUnwrapped, and: Date()) <= 12
+    private func getSortedSubstanceCountsLast12Months() -> [SubstanceCount] {
+        let last12Months = experiences.prefix { exp in
+            Calendar.current.numberOfMonthsBetween(exp.sortDateUnwrapped, and: Date()) <= 12
         }
-        return getSortedIngestionCounts(for: ingestionsLast12Months)
+        return getSortedSubstanceCounts(for: last12Months)
     }
 
-    private func getSortedIngestionCountsYears() -> [IngestionCount] {
-        return getSortedIngestionCounts(for: ingestions)
+    private func getSortedSubstanceCountsYears() -> [SubstanceCount] {
+        return getSortedSubstanceCounts(for: experiences)
     }
 
-    private func getSortedIngestionCounts(for ingestions: any Sequence<Ingestion>) -> [IngestionCount] {
-        return Dictionary(grouping: ingestions) { ing in
-            ing.substanceNameUnwrapped
-        }.compactMap { (substanceName: String, ingestionsSameSubstance: [Slice<FetchedResults<Ingestion>>.Element]) in
-            return IngestionCount(
+    private func getSortedSubstanceCounts(for experiences: any Sequence<Experience>) -> [SubstanceCount] {
+        let substanceNameOccurances = experiences.flatMap { experience in
+            experience.myIngestionsSorted.map { ingestion in
+                ingestion.substanceNameUnwrapped
+            }.uniqued()
+        }
+        var countDict: [String: Int] = [:]
+        for substanceName in substanceNameOccurances {
+            countDict[substanceName, default: 0] += 1
+        }
+        return countDict.map { (substanceName: String, count: Int) in
+            return SubstanceCount(
                 substanceName: substanceName,
-                ingestionCount: ingestionsSameSubstance.count
+                experienceCount: count
             )
         }.sorted { count1, count2 in
-            count1.ingestionCount > count2.ingestionCount
+            count1.experienceCount > count2.experienceCount
         }
     }
 
@@ -240,7 +247,7 @@ extension Calendar {
 struct StatsScreenContent: View {
 
     let experienceData: ExperienceData
-    let ingestionData: IngestionData
+    let substanceData: SubstanceData
     let toleranceWindows: [ToleranceWindow]
     let substancesInIngestionsButNotChart: [String]
     let isEyeOpen: Bool
@@ -269,12 +276,12 @@ struct StatsScreenContent: View {
             }
             Section {
                 NavigationLink {
-                    IngestionDetailsScreen(ingestionData: ingestionData)
+                    SubstanceDetailsScreen(substanceData: substanceData)
                 } label: {
-                    IngestionOverview(ingestionData: ingestionData)
+                    SubstanceOverview(substanceData: substanceData)
                 }
             }
-        }.navigationTitle("Stats")
+        }.navigationTitle("My Stats")
     }
 }
 
@@ -284,7 +291,7 @@ struct StatsScreenContent_Previews: PreviewProvider {
         NavigationView {
             StatsScreenContent(
                 experienceData: .mock1,
-                ingestionData: .mock1,
+                substanceData: .mock1,
                 toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
                 substancesInIngestionsButNotChart: ["2C-B", "DMT"],
                 isEyeOpen: true
