@@ -40,7 +40,8 @@ struct JournalFile: FileDocument, Codable {
                         isDoseAnEstimate: ingestion.isEstimate,
                         units: ingestion.unitsUnwrapped,
                         notes: ingestion.noteUnwrapped,
-                        stomachFullness: ingestion.stomachFullnessUnwrapped
+                        stomachFullness: ingestion.stomachFullnessUnwrapped,
+                        consumerName: ingestion.consumerName
                     )
                 )
                 let doesCompanionAlreadyExist = companionsToStore.contains { com in
@@ -62,6 +63,15 @@ struct JournalFile: FileDocument, Codable {
                     option: shulginRating.optionUnwrapped
                 )
             }
+            let timedNotes = experience.timedNotesSorted.map { timedNote in
+                TimedNoteCodable(
+                    creationDate: timedNote.creationDateUnwrapped,
+                    time: timedNote.timeUnwrapped,
+                    note: timedNote.noteUnwrapped,
+                    color: timedNote.color,
+                    isPartOfTimeline: timedNote.isPartOfTimeline
+                )
+            }
             experiencesToStore.append(
                 ExperienceCodable(
                     title: experience.titleUnwrapped,
@@ -71,6 +81,7 @@ struct JournalFile: FileDocument, Codable {
                     isFavorite: experience.isFavorite,
                     ingestions: ingestionsInExperience,
                     ratings: ratings,
+                    timedNotes: timedNotes,
                     experienceLocation: experience.location
                 )
             )

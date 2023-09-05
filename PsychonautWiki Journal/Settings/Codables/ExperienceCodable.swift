@@ -24,6 +24,7 @@ struct ExperienceCodable: Codable {
     let isFavorite: Bool
     let ingestions: [IngestionCodable]
     let ratings: [RatingCodable]
+    let timedNotes: [TimedNoteCodable]
     let location: LocationCodable?
 
     init(
@@ -34,6 +35,7 @@ struct ExperienceCodable: Codable {
         isFavorite: Bool,
         ingestions: [IngestionCodable],
         ratings: [RatingCodable],
+        timedNotes: [TimedNoteCodable],
         experienceLocation: ExperienceLocation?
     ) {
         self.title = title
@@ -43,6 +45,7 @@ struct ExperienceCodable: Codable {
         self.isFavorite = isFavorite
         self.ingestions = ingestions
         self.ratings = ratings
+        self.timedNotes = timedNotes
         if let experienceLocation {
             self.location = LocationCodable(
                 name: experienceLocation.nameUnwrapped,
@@ -62,6 +65,7 @@ struct ExperienceCodable: Codable {
         case isFavorite
         case ingestions
         case ratings
+        case timedNotes
         case location
     }
 
@@ -80,6 +84,7 @@ struct ExperienceCodable: Codable {
             self.sortDate = ingestionCodables.map({$0.time}).min()
         }
         self.ratings = (try values.decodeIfPresent([RatingCodable].self, forKey: .ratings)) ?? []
+        self.timedNotes = (try values.decodeIfPresent([TimedNoteCodable].self, forKey: .timedNotes)) ?? []
         self.location = try values.decodeIfPresent(LocationCodable.self, forKey: .location)
     }
 
@@ -96,6 +101,7 @@ struct ExperienceCodable: Codable {
         }
         try container.encode(isFavorite, forKey: .isFavorite)
         try container.encode(ratings, forKey: .ratings)
+        try container.encode(timedNotes, forKey: .timedNotes)
         try container.encode(ingestions, forKey: .ingestions)
         try container.encode(location, forKey: .location)
     }

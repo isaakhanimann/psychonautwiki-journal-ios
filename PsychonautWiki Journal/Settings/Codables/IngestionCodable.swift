@@ -26,6 +26,7 @@ struct IngestionCodable: Codable {
     let units: String
     let notes: String
     let stomachFullness: StomachFullness?
+    let consumerName: String?
 
     enum CodingKeys: String, CodingKey {
         case substanceName
@@ -37,6 +38,7 @@ struct IngestionCodable: Codable {
         case units
         case notes
         case stomachFullness
+        case consumerName
     }
 
     init(
@@ -48,7 +50,8 @@ struct IngestionCodable: Codable {
         isDoseAnEstimate: Bool,
         units: String,
         notes: String,
-        stomachFullness: StomachFullness?
+        stomachFullness: StomachFullness?,
+        consumerName: String?
     ) {
         self.substanceName = substanceName
         self.time = time
@@ -59,6 +62,7 @@ struct IngestionCodable: Codable {
         self.units = units
         self.notes = notes
         self.stomachFullness = stomachFullness
+        self.consumerName = consumerName
     }
 
     init(from decoder: Decoder) throws {
@@ -90,7 +94,7 @@ struct IngestionCodable: Codable {
         } else {
             self.stomachFullness = nil
         }
-
+        self.consumerName = try values.decodeIfPresent(String.self, forKey: .consumerName)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -109,5 +113,6 @@ struct IngestionCodable: Codable {
         try container.encode(units, forKey: .units)
         try container.encode(notes, forKey: .notes)
         try container.encode(stomachFullness?.rawValue.uppercased(), forKey: .stomachFullness)
+        try container.encode(consumerName, forKey: .consumerName)
     }
 }

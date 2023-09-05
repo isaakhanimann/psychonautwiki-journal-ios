@@ -84,6 +84,15 @@ extension SettingsScreen {
                         newRating.option = ratingCodable.option.rawValue
                         newRating.experience = newExperience
                     }
+                    for timedNoteCodable in experienceCodable.timedNotes {
+                        let newTimedNote = TimedNote(context: context)
+                        newTimedNote.creationDate = timedNoteCodable.creationDate
+                        newTimedNote.time = timedNoteCodable.time
+                        newTimedNote.note = timedNoteCodable.note
+                        newTimedNote.colorAsText = timedNoteCodable.color.rawValue
+                        newTimedNote.isPartOfTimeline = timedNoteCodable.isPartOfTimeline
+                        newTimedNote.experience = newExperience
+                    }
                     if let location = experienceCodable.location {
                         let newLocation = ExperienceLocation(context: context)
                         newLocation.name = location.name
