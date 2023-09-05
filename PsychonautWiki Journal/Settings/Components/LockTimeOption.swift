@@ -18,8 +18,8 @@ import Foundation
 
 enum LockTimeOption: String, Identifiable, CaseIterable {
     case immediately
-    case after2Minutes
     case after5Minutes
+    case after10Minutes
     case after30Minutes
     case after1Hour
 
@@ -31,10 +31,10 @@ enum LockTimeOption: String, Identifiable, CaseIterable {
         switch self {
         case .immediately:
             return 0
-        case .after2Minutes:
-            return 2*60
         case .after5Minutes:
             return 5*60
+        case .after10Minutes:
+            return 10*60
         case .after30Minutes:
             return 30*60
         case .after1Hour:
@@ -46,10 +46,10 @@ enum LockTimeOption: String, Identifiable, CaseIterable {
         switch self {
         case .immediately:
             return "Immediately"
-        case .after2Minutes:
-            return "After 2 minutes"
         case .after5Minutes:
             return "After 5 minutes"
+        case .after10Minutes:
+            return "After 10 minutes"
         case .after30Minutes:
             return "After 30 minutes"
         case .after1Hour:
