@@ -222,7 +222,13 @@ extension Experience: Comparable {
     var chartData: ChartData {
         let lastIngestionDate = ingestionsSorted.last?.timeUnwrapped ?? Date.now
         let threeMonthsBefore = lastIngestionDate.addingTimeInterval(-3*30*24*60*60)
-        let ingestionsForChart = PersistenceController.shared.getIngestionsBetween(startDate: threeMonthsBefore, endDate: lastIngestionDate)
+        let ingestionsForChart = PersistenceController.shared.getIngestionsBetween(startDate: threeMonthsBefore, endDate: lastIngestionDate).filter { ing in
+            if let consumerName = ing.consumerName, !consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                return false
+            } else {
+                return true
+            }
+        }
         let substanceDays = ingestionsForChart.map { ing in
             SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
         }
