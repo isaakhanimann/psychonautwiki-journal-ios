@@ -24,6 +24,9 @@ struct ShareAndroidAppScreen: View {
             if #available(iOS 16.0, *) {
                 ShareLink("Share play store link", item: URL(string: playStoreLink)!)
             }
+            Link(destination: URL(string: playStoreLink)!) {
+                Label("Open play store link", systemImage: "safari")
+            }
         }
         .navigationTitle("Android App")
         .dismissWhenTabTapped()

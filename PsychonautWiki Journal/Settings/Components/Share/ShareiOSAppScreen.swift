@@ -32,6 +32,9 @@ struct ShareiOSAppScreen: View {
             if #available(iOS 16.0, *) {
                 ShareLink("Share app store link", item: URL(string: appStoreLink)!)
             }
+            Link(destination: URL(string: appStoreLink)!) {
+                Label("Open app store link", systemImage: "safari")
+            }
         }
         .navigationTitle("iOS App")
         .dismissWhenTabTapped()
