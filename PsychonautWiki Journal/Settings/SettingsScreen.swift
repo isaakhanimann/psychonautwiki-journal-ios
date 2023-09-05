@@ -61,19 +61,20 @@ struct SettingsContent: View {
     @Binding var isHidingDosageDots: Bool
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
-    var isFaceIDAvailable: Bool
+    let isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
     @Binding var isExporting: Bool
-    var journalFile: JournalFile
+    let journalFile: JournalFile
     @EnvironmentObject private var toastViewModel: ToastViewModel
     let exportData: () -> Void
     let importData: (Data) -> Void
     let deleteEverything: () -> Void
-    @State private var isShowingDeleteConfirmation = false
     @Binding var isShowingToast: Bool
     @Binding var isSuccessToast: Bool
     @Binding var toastMessage: String
+
+    @State private var isShowingDeleteConfirmation = false
     @State private var isShowingImportAlert = false
 
     var body: some View {
