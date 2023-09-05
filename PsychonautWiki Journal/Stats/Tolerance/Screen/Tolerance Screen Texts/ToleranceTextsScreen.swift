@@ -44,7 +44,7 @@ struct ToleranceTextsScreen: View {
                     }
                 }
             }
-        }.navigationTitle("Tolerance Texts")
+        }.navigationTitle("Tolerances")
     }
 }
 

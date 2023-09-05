@@ -234,12 +234,16 @@ struct ExperienceScreen: View {
                 if #available(iOS 16.0, *) {
                     if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
                         Section {
-                            ToleranceChart(
-                                toleranceWindows: experience.chartData.toleranceWindows,
-                                numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
-                                timeOption: .onlyIfCurrentTimeInChart,
-                                experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
-                            )
+                            NavigationLink {
+                                ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
+                            } label: {
+                                ToleranceChart(
+                                    toleranceWindows: experience.chartData.toleranceWindows,
+                                    numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
+                                    timeOption: .onlyIfCurrentTimeInChart,
+                                    experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
+                                )
+                            }
                         } header: {
                             HStack {
                                 Text("Tolerance")
@@ -251,19 +255,8 @@ struct ExperienceScreen: View {
                                 }
                             }
                         } footer: {
-                            HStack {
-                                if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
-                                    Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
-                                }
-                                Spacer()
-                                if !experience.chartData.substancesInChart.isEmpty {
-                                    NavigationLink {
-                                        ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
-                                    } label: {
-                                        Label("More", systemImage: "doc.plaintext")
-                                            .labelStyle(.iconOnly)
-                                    }
-                                }
+                            if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
+                                Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
                             }
                         }
                     }
