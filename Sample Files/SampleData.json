@@ -1,531 +1,179 @@
 {
-    "substanceCompanions":
-    [
-        {
-            "color": "INDIGO",
-            "substanceName": "LSD"
-        },
-        {
-            "color": "GREEN",
-            "substanceName": "Cannabis"
-        },
-        {
-            "color": "PURPLE",
-            "substanceName": "Ketamine"
-        },
-        {
-            "color": "CYAN",
-            "substanceName": "Methamphetamine"
-        },
-        {
-            "color": "ORANGE",
-            "substanceName": "2C-B"
-        },
-        {
-            "color": "PINK",
-            "substanceName": "MDMA"
-        },
-        {
-            "color": "MINT",
-            "substanceName": "Cocaine"
-        },
-        {
-            "color": "YELLOW",
-            "substanceName": "Tramadol"
-        }
-    ],
-    "customSubstances":
-    [
-        {
-            "name": "Coffee",
-            "units": "cup",
-            "description": "Average size cup of coffee"
-        }
-    ],
     "experiences":
     [
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855225000,
-            "title": "14 July 2022",
-            "sortDate": 1657792420000,
-            "isFavorite": false,
+            "title": "02 November 2021",
             "text": "",
+            "creationDate": 1668174995000,
+            "sortDate": 1635861312000,
             "ingestions":
             [
                 {
-                    "dose": 100,
-                    "time": 1657792420000,
-                    "creationDate": 1668855225000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                },
-                {
-                    "dose": 3,
-                    "time": 1657792872000,
-                    "creationDate": 1668855673000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855538000,
-            "title": "27 December 2021",
-            "sortDate": 1640602735000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 3,
-                    "time": 1640602735000,
-                    "creationDate": 1668855538000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855200000,
-            "title": "13 July 2022",
-            "sortDate": 1657705931000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 100,
-                    "time": 1657705931000,
-                    "creationDate": 1668855200000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175802000,
-            "title": "08 March 2022",
-            "sortDate": 1646748540000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 3,
-                    "time": 1646737177000,
-                    "creationDate": 1668855579000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                },
-                {
-                    "dose": 20,
-                    "time": 1646748540000,
-                    "creationDate": 1646748540000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "Cocaine",
+                    "time": 1635861312000,
+                    "creationDate": 1635861312000,
                     "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Ketamine"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855872000,
-            "title": "17 August 2022",
-            "sortDate": 1660730671000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 100,
-                    "time": 1660730671000,
-                    "creationDate": 1668855872000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
+                    "dose": 10.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668176136000,
-            "title": "24 March 2022",
-            "sortDate": 1648131273000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 20,
-                    "time": 1648131273000,
-                    "creationDate": 1648131273000,
-                    "notes": "",
-                    "stomachFullness": null,
                     "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Cocaine",
+                    "time": 1635868578000,
+                    "creationDate": 1635868578000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 10.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "Methamphetamine"
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668175179000,
-            "title": "16 November 2021",
-            "sortDate": 1637071176000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "11 November 2021",
             "text": "",
+            "creationDate": 1668176199000,
+            "sortDate": 1636640197000,
             "ingestions":
             [
                 {
-                    "dose": 25,
+                    "substanceName": "Cannabis",
+                    "time": 1636640197000,
+                    "creationDate": 1636640197000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "16 November 2021",
+            "text": "",
+            "creationDate": 1668175179000,
+            "sortDate": 1637071176000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
                     "time": 1637071176000,
                     "creationDate": 1637071176000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
                     "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668175835000,
-            "title": "16 March 2022",
-            "sortDate": 1647439833000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 20,
-                    "time": 1647439833000,
-                    "creationDate": 1647439833000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Ketamine"
-                }
-            ]
+            []
         },
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855955000,
-            "title": "16 August 2022",
-            "sortDate": 1660644353000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 80,
-                    "time": 1660644353000,
-                    "creationDate": 1668855955000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "MDMA"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856342000,
-            "title": "13 September 2022",
-            "sortDate": 1663063941000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 25,
-                    "time": 1663063941000,
-                    "creationDate": 1668856342000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175371000,
-            "title": "14 December 2021",
-            "sortDate": 1639490569000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 10,
-                    "time": 1639490526000,
-                    "creationDate": 1639490526000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
-                },
-                {
-                    "dose": 10,
-                    "time": 1639490569000,
-                    "creationDate": 1639490569000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
-                },
-                {
-                    "dose": 10,
-                    "time": 1639490610000,
-                    "creationDate": 1639490610000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668854669000,
-            "title": "11 May 2022",
-            "sortDate": 1652262267000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 200,
-                    "time": 1652262267000,
-                    "creationDate": 1668854669000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "Tramadol"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175641000,
-            "title": "19 January 2022",
-            "sortDate": 1642601239000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 10,
-                    "time": 1642601239000,
-                    "creationDate": 1642601239000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175309000,
-            "title": "07 December 2021",
-            "sortDate": 1638885708000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 100,
-                    "time": 1638885708000,
-                    "creationDate": 1638885708000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668176310000,
             "title": "18 November 2021",
-            "sortDate": 1637245107000,
-            "isFavorite": false,
             "text": "",
+            "creationDate": 1668176310000,
+            "sortDate": 1637245107000,
             "ingestions":
             [
                 {
-                    "dose": 3,
+                    "substanceName": "Cannabis",
                     "time": 1637245107000,
                     "creationDate": 1637245107000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
                     "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668855901000,
-            "title": "20 August 2022",
-            "sortDate": 1660989840000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "02 December 2021",
             "text": "",
+            "creationDate": 1668175259000,
+            "sortDate": 1638453656000,
             "ingestions":
             [
                 {
-                    "dose": 20,
-                    "time": 1660989840000,
-                    "creationDate": 1668855901000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "substanceName": "LSD",
+                    "time": 1638453656000,
+                    "creationDate": 1638453656000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Ketamine"
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668856013000,
-            "title": "21 August 2022",
-            "sortDate": 1661076411000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "07 December 2021",
             "text": "",
+            "creationDate": 1668175309000,
+            "sortDate": 1638885708000,
             "ingestions":
             [
                 {
-                    "dose": 3,
-                    "time": 1661076411000,
-                    "creationDate": 1668856013000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "substanceName": "LSD",
+                    "time": 1638885708000,
+                    "creationDate": 1638885708000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668856075000,
-            "title": "25 August 2022",
-            "sortDate": 1661422074000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "08 December 2021",
             "text": "",
+            "creationDate": 1668854520000,
+            "sortDate": 1638960114000,
             "ingestions":
             [
                 {
-                    "dose": 3,
-                    "time": 1661422074000,
-                    "creationDate": 1668856075000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "substanceName": "LSD",
+                    "time": 1638960114000,
+                    "creationDate": 1668854520000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location":
             {
                 "name": "Basel",
-                "longitude": 7.5880118000000003,
-                "latitude": 47.558133099999999
+                "latitude": 47.5581331,
+                "longitude": 7.5880118
             },
             "ratings":
             [
@@ -534,266 +182,753 @@
                     "time": 1638972714000,
                     "creationDate": 1682278826000
                 }
-            ],
-            "creationDate": 1668854520000,
-            "title": "08 December 2021",
-            "sortDate": 1638960114000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 100,
-                    "time": 1638960114000,
-                    "creationDate": 1668854520000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                }
             ]
         },
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856150000,
-            "title": "08 August 2022",
-            "sortDate": 1659953289000,
-            "isFavorite": false,
+            "title": "14 December 2021",
             "text": "",
+            "creationDate": 1668175371000,
+            "sortDate": 1639490569000,
             "ingestions":
             [
                 {
-                    "dose": 20,
-                    "time": 1659953289000,
-                    "creationDate": 1668856150000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "Cocaine",
+                    "time": 1639490526000,
+                    "creationDate": 1639490526000,
                     "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Ketamine"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175600000,
-            "title": "12 January 2022",
-            "sortDate": 1641996397000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 25,
-                    "time": 1641996397000,
-                    "creationDate": 1641996397000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "dose": 10.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856200000,
-            "title": "05 September 2022",
-            "sortDate": 1662372597000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 25,
-                    "time": 1662372597000,
-                    "creationDate": 1668856200000,
-                    "notes": "",
-                    "stomachFullness": null,
                     "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856251000,
-            "title": "20 September 2022",
-            "sortDate": 1663668645000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 25,
-                    "time": 1663668645000,
-                    "creationDate": 1668856251000,
                     "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856229000,
-            "title": "15 September 2022",
-            "sortDate": 1663236627000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 25,
-                    "time": 1663236627000,
-                    "creationDate": 1668856229000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
+                    "stomachFullness": null
                 },
                 {
-                    "dose": 3,
-                    "time": 1663236728000,
-                    "creationDate": 1668856389000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "substanceName": "Cocaine",
+                    "time": 1639490569000,
+                    "creationDate": 1639490569000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 10.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855149000,
-            "title": "15 June 2022",
-            "sortDate": 1655286318000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 200,
-                    "time": 1655286318000,
-                    "creationDate": 1668855149000,
-                    "notes": "",
-                    "stomachFullness": null,
                     "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "Tramadol"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [
+                    "notes": "",
+                    "stomachFullness": null
+                },
                 {
-                    "option": "threePlus",
-                    "time": null,
-                    "creationDate": 1668856594000
+                    "substanceName": "Cocaine",
+                    "time": 1639490610000,
+                    "creationDate": 1639490610000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 10.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
             ],
-            "creationDate": 1668856594000,
-            "title": "15 October 2022",
-            "sortDate": 1665828993000,
-            "isFavorite": false,
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "27 December 2021",
             "text": "",
+            "creationDate": 1668855538000,
+            "sortDate": 1640602735000,
             "ingestions":
             [
                 {
-                    "dose": 3,
-                    "time": 1665828993000,
-                    "creationDate": 1668856594000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "Cannabis",
+                    "time": 1640602735000,
+                    "creationDate": 1668855538000,
                     "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668856095000,
-            "title": "12 August 2022",
-            "sortDate": 1660298892000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "30 December 2021",
             "text": "",
+            "creationDate": 1668855498000,
+            "sortDate": 1640861836000,
             "ingestions":
             [
                 {
-                    "dose": 3,
-                    "time": 1660298892000,
-                    "creationDate": 1668856095000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "Cannabis",
+                    "time": 1640861836000,
+                    "creationDate": 1668855498000,
                     "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668855824000,
+            []
+        },
+        {
+            "title": "31 December 2021",
+            "text": "",
+            "creationDate": 1668175489000,
+            "sortDate": 1640959484000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "MDMA",
+                    "time": 1640959484000,
+                    "creationDate": 1640959484000,
+                    "administrationRoute": "ORAL",
+                    "dose": 80.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "12 January 2022",
+            "text": "",
+            "creationDate": 1668175600000,
+            "sortDate": 1641996397000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
+                    "time": 1641996397000,
+                    "creationDate": 1641996397000,
+                    "administrationRoute": "ORAL",
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "19 January 2022",
+            "text": "",
+            "creationDate": 1668175641000,
+            "sortDate": 1642601239000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cocaine",
+                    "time": 1642601239000,
+                    "creationDate": 1642601239000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 10.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "08 March 2022",
+            "text": "",
+            "creationDate": 1668175802000,
+            "sortDate": 1646748540000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1646737177000,
+                    "creationDate": 1668855579000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Ketamine",
+                    "time": 1646748540000,
+                    "creationDate": 1646748540000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "16 March 2022",
+            "text": "",
+            "creationDate": 1668175835000,
+            "sortDate": 1647439833000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Ketamine",
+                    "time": 1647439833000,
+                    "creationDate": 1647439833000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "24 March 2022",
+            "text": "",
+            "creationDate": 1668176136000,
+            "sortDate": 1648131273000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Methamphetamine",
+                    "time": 1648131273000,
+                    "creationDate": 1648131273000,
+                    "administrationRoute": "ORAL",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "11 May 2022",
+            "text": "",
+            "creationDate": 1668854669000,
+            "sortDate": 1652262267000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Tramadol",
+                    "time": 1652262267000,
+                    "creationDate": 1668854669000,
+                    "administrationRoute": "ORAL",
+                    "dose": 200.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "15 June 2022",
+            "text": "",
+            "creationDate": 1668855149000,
+            "sortDate": 1655286318000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Tramadol",
+                    "time": 1655286318000,
+                    "creationDate": 1668855149000,
+                    "administrationRoute": "ORAL",
+                    "dose": 200.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "12 July 2022",
+            "text": "",
+            "creationDate": 1668855652000,
+            "sortDate": 1657620049000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1657620049000,
+                    "creationDate": 1668855652000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "13 July 2022",
+            "text": "",
+            "creationDate": 1668855200000,
+            "sortDate": 1657705931000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "LSD",
+                    "time": 1657705931000,
+                    "creationDate": 1668855200000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
+                    "isDoseAnEstimate": false,
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "14 July 2022",
+            "text": "",
+            "creationDate": 1668855225000,
+            "sortDate": 1657792420000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "LSD",
+                    "time": 1657792420000,
+                    "creationDate": 1668855225000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
+                    "isDoseAnEstimate": false,
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1657792872000,
+                    "creationDate": 1668855673000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "18 July 2022",
+            "text": "",
+            "creationDate": 1668855456000,
+            "sortDate": 1658138255000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "MDMA",
+                    "time": 1658138255000,
+                    "creationDate": 1668855456000,
+                    "administrationRoute": "ORAL",
+                    "dose": 80.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1658138528000,
+                    "creationDate": 1668855790000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "08 August 2022",
+            "text": "",
+            "creationDate": 1668856150000,
+            "sortDate": 1659953289000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Ketamine",
+                    "time": 1659953289000,
+                    "creationDate": 1668856150000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
             "title": "10 August 2022",
-            "sortDate": 1660125823000,
-            "isFavorite": false,
             "text": "",
+            "creationDate": 1668855824000,
+            "sortDate": 1660125823000,
             "ingestions":
             [
                 {
-                    "dose": 3,
+                    "substanceName": "Cannabis",
                     "time": 1660125823000,
                     "creationDate": 1668855824000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
                     "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
+            ],
+            "location": null,
+            "ratings":
+            []
         },
         {
+            "title": "12 August 2022",
+            "text": "",
+            "creationDate": 1668856095000,
+            "sortDate": 1660298892000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1660298892000,
+                    "creationDate": 1668856095000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "15 August 2022",
+            "text": "",
+            "creationDate": 1668855849000,
+            "sortDate": 1660557787000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1660557787000,
+                    "creationDate": 1668855849000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "16 August 2022",
+            "text": "",
+            "creationDate": 1668855955000,
+            "sortDate": 1660644353000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "MDMA",
+                    "time": 1660644353000,
+                    "creationDate": 1668855955000,
+                    "administrationRoute": "ORAL",
+                    "dose": 80.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "17 August 2022",
+            "text": "",
+            "creationDate": 1668855872000,
+            "sortDate": 1660730671000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "LSD",
+                    "time": 1660730671000,
+                    "creationDate": 1668855872000,
+                    "administrationRoute": "SUBLINGUAL",
+                    "dose": 100.0,
+                    "isDoseAnEstimate": false,
+                    "units": "µg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "20 August 2022",
+            "text": "",
+            "creationDate": 1668855901000,
+            "sortDate": 1660989840000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Ketamine",
+                    "time": 1660989840000,
+                    "creationDate": 1668855901000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "21 August 2022",
+            "text": "",
+            "creationDate": 1668856013000,
+            "sortDate": 1661076411000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1661076411000,
+                    "creationDate": 1668856013000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "25 August 2022",
+            "text": "",
+            "creationDate": 1668856075000,
+            "sortDate": 1661422074000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1661422074000,
+                    "creationDate": 1668856075000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "05 September 2022",
+            "text": "",
+            "creationDate": 1668856200000,
+            "sortDate": 1662372597000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
+                    "time": 1662372597000,
+                    "creationDate": 1668856200000,
+                    "administrationRoute": "ORAL",
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "10 September 2022",
+            "text": "",
+            "creationDate": 1668856212000,
+            "sortDate": 1662804611000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
+                    "time": 1662804611000,
+                    "creationDate": 1668856212000,
+                    "administrationRoute": "ORAL",
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1662804771000,
+                    "creationDate": 1668856372000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "13 September 2022",
+            "text": "",
+            "creationDate": 1668856342000,
+            "sortDate": 1663063941000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
+                    "time": 1663063941000,
+                    "creationDate": 1668856342000,
+                    "administrationRoute": "ORAL",
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "15 September 2022",
+            "text": "",
+            "creationDate": 1668856229000,
+            "sortDate": 1663236627000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "2C-B",
+                    "time": 1663236627000,
+                    "creationDate": 1668856229000,
+                    "administrationRoute": "ORAL",
+                    "dose": 25.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                },
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1663236728000,
+                    "creationDate": 1668856389000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
+            "location": null,
+            "ratings":
+            []
+        },
+        {
+            "title": "18 September 2022",
+            "text": "",
+            "creationDate": 1668856457000,
+            "sortDate": 1663496056000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Ketamine",
+                    "time": 1663496056000,
+                    "creationDate": 1668856457000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
+            ],
             "location":
             {
                 "name": "Bern",
-                "longitude": 7.4474062999999999,
-                "latitude": 46.947908499999997
+                "latitude": 46.9479085,
+                "longitude": 7.4474063
             },
             "ratings":
             [
@@ -802,140 +937,55 @@
                     "time": 1663497856000,
                     "creationDate": 1682278946000
                 }
-            ],
-            "creationDate": 1668856457000,
-            "title": "18 September 2022",
-            "sortDate": 1663496056000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 20,
-                    "time": 1663496056000,
-                    "creationDate": 1668856457000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Ketamine"
-                }
             ]
         },
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668856212000,
-            "title": "10 September 2022",
-            "sortDate": 1662804611000,
-            "isFavorite": false,
+            "title": "20 September 2022",
             "text": "",
+            "creationDate": 1668856251000,
+            "sortDate": 1663668645000,
             "ingestions":
             [
                 {
-                    "dose": 25,
-                    "time": 1662804611000,
-                    "creationDate": 1668856212000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "2C-B",
+                    "time": 1663668645000,
+                    "creationDate": 1668856251000,
                     "administrationRoute": "ORAL",
-                    "substanceName": "2C-B"
-                },
-                {
-                    "dose": 3,
-                    "time": 1662804771000,
-                    "creationDate": 1668856372000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "dose": 25.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
-            [],
-            "creationDate": 1668855849000,
-            "title": "15 August 2022",
-            "sortDate": 1660557787000,
-            "isFavorite": false,
+            []
+        },
+        {
+            "title": "10 October 2022",
             "text": "",
+            "creationDate": 1668856568000,
+            "sortDate": 1665396967000,
             "ingestions":
             [
                 {
-                    "dose": 3,
-                    "time": 1660557787000,
-                    "creationDate": 1668855849000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "Cannabis",
+                    "time": 1665396967000,
+                    "creationDate": 1668856568000,
                     "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855652000,
-            "title": "12 July 2022",
-            "sortDate": 1657620049000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 3,
-                    "time": 1657620049000,
-                    "creationDate": 1668855652000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
+                    "dose": 3.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668176199000,
-            "title": "11 November 2021",
-            "sortDate": 1636640197000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 3,
-                    "time": 1636640197000,
-                    "creationDate": 1636640197000,
-                    "notes": "",
-                    "stomachFullness": null,
                     "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "notes": "",
+                    "stomachFullness": null
                 }
-            ]
-        },
-        {
+            ],
             "location":
             {
                 "name": "Zürich",
-                "longitude": 8.5367891999999994,
-                "latitude": 47.371740199999998
+                "latitude": 47.3717402,
+                "longitude": 8.5367892
             },
             "ratings":
             [
@@ -949,168 +999,131 @@
                     "time": 1665409567000,
                     "creationDate": 1682278854000
                 }
+            ]
+        },
+        {
+            "title": "15 October 2022",
+            "text": "",
+            "creationDate": 1668856594000,
+            "sortDate": 1665828993000,
+            "ingestions":
+            [
+                {
+                    "substanceName": "Cannabis",
+                    "time": 1665828993000,
+                    "creationDate": 1668856594000,
+                    "administrationRoute": "SMOKED",
+                    "dose": 3.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
+                    "notes": "",
+                    "stomachFullness": null
+                }
             ],
-            "creationDate": 1668856568000,
-            "title": "10 October 2022",
-            "sortDate": 1665396967000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
+            "location": null,
+            "ratings":
             [
                 {
-                    "dose": 3,
-                    "time": 1665396967000,
-                    "creationDate": 1668856568000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "option": "threePlus",
+                    "time": null,
+                    "creationDate": 1668856594000
                 }
             ]
         },
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175489000,
-            "title": "31 December 2021",
-            "sortDate": 1640959484000,
-            "isFavorite": false,
+            "title": "Experience with timed notes and consumers.",
             "text": "",
+            "creationDate": 1693888520000,
+            "sortDate": 1693884915000,
             "ingestions":
             [
                 {
-                    "dose": 80,
-                    "time": 1640959484000,
-                    "creationDate": 1640959484000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
+                    "substanceName": "2C-B",
+                    "time": 1693884915000,
+                    "creationDate": 1693888520000,
                     "administrationRoute": "ORAL",
-                    "substanceName": "MDMA"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668175259000,
-            "title": "02 December 2021",
-            "sortDate": 1638453656000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 100,
-                    "time": 1638453656000,
-                    "creationDate": 1638453656000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "µg",
+                    "dose": 25.0,
                     "isDoseAnEstimate": false,
-                    "administrationRoute": "SUBLINGUAL",
-                    "substanceName": "LSD"
-                }
-            ]
-        },
-        {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855456000,
-            "title": "18 July 2022",
-            "sortDate": 1658138255000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 80,
-                    "time": 1658138255000,
-                    "creationDate": 1668855456000,
-                    "notes": "",
-                    "stomachFullness": null,
                     "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "ORAL",
-                    "substanceName": "MDMA"
+                    "notes": "",
+                    "stomachFullness": "EMPTY"
                 },
                 {
-                    "dose": 3,
-                    "time": 1658138528000,
-                    "creationDate": 1668855790000,
+                    "substanceName": "Ketamine",
+                    "time": 1693889715000,
+                    "creationDate": 1693889728000,
+                    "administrationRoute": "INSUFFLATED",
+                    "dose": 20.0,
+                    "isDoseAnEstimate": false,
+                    "units": "mg",
                     "notes": "",
                     "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
+                    "consumerName": "Marc"
                 }
-            ]
-        },
-        {
+            ],
             "location": null,
             "ratings":
             [],
-            "creationDate": 1668174995000,
-            "title": "02 November 2021",
-            "sortDate": 1635861312000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
+            "timedNotes":
             [
                 {
-                    "dose": 10,
-                    "time": 1635861312000,
-                    "creationDate": 1635861312000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
+                    "creationDate": 1693888592000,
+                    "time": 1693874173000,
+                    "note": "Ate kebab",
+                    "color": "PURPLE",
+                    "isPartOfTimeline": false
                 },
                 {
-                    "dose": 10,
-                    "time": 1635868578000,
-                    "creationDate": 1635868578000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "INSUFFLATED",
-                    "substanceName": "Cocaine"
+                    "creationDate": 1693888551000,
+                    "time": 1693888169000,
+                    "note": "Reached peak",
+                    "color": "BLUE",
+                    "isPartOfTimeline": true
                 }
             ]
+        }
+    ],
+    "substanceCompanions":
+    [
+        {
+            "substanceName": "Cocaine",
+            "color": "MINT"
         },
         {
-            "location": null,
-            "ratings":
-            [],
-            "creationDate": 1668855498000,
-            "title": "30 December 2021",
-            "sortDate": 1640861836000,
-            "isFavorite": false,
-            "text": "",
-            "ingestions":
-            [
-                {
-                    "dose": 3,
-                    "time": 1640861836000,
-                    "creationDate": 1668855498000,
-                    "notes": "",
-                    "stomachFullness": null,
-                    "units": "mg",
-                    "isDoseAnEstimate": false,
-                    "administrationRoute": "SMOKED",
-                    "substanceName": "Cannabis"
-                }
-            ]
+            "substanceName": "LSD",
+            "color": "INDIGO"
+        },
+        {
+            "substanceName": "Cannabis",
+            "color": "GREEN"
+        },
+        {
+            "substanceName": "2C-B",
+            "color": "ORANGE"
+        },
+        {
+            "substanceName": "Tramadol",
+            "color": "YELLOW"
+        },
+        {
+            "substanceName": "MDMA",
+            "color": "PINK"
+        },
+        {
+            "substanceName": "Ketamine",
+            "color": "PURPLE"
+        },
+        {
+            "substanceName": "Methamphetamine",
+            "color": "CYAN"
+        }
+    ],
+    "customSubstances":
+    [
+        {
+            "name": "Coffee",
+            "units": "cup",
+            "description": "Average size cup of coffee"
         }
     ]
 }
