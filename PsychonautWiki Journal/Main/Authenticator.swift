@@ -21,7 +21,7 @@ import SwiftUI
 class Authenticator: ObservableObject {
 
     static let hasToUnlockKey = "hasToUnlockApp"
-    @Published var isUnlocked = false
+    @Published var isLocked = true
     @Published var isFaceIDEnabled = true
     @Published var isStartingUp = true
 
@@ -35,17 +35,17 @@ class Authenticator: ObservableObject {
                 isFaceIDEnabled = true
                 // when the system shows the Face ID prompt the app moves to the background.
                 // therefore this code gets executed before it is unlocked and after
-                if hasToUnlockApp && !isUnlocked {
+                if hasToUnlockApp && isLocked {
                     authenticate(with: context)
                 }
             } else {
                 isFaceIDEnabled = false
             }
             if !hasToUnlockApp {
-                isUnlocked = true
+                isLocked = false
             }
-        } else if (scenePhase == .background || scenePhase == .inactive) && hasToUnlockApp && isUnlocked {
-            isUnlocked = false
+        } else if (scenePhase == .background || scenePhase == .inactive) && hasToUnlockApp && !isLocked {
+            isLocked = true
         }
     }
 
@@ -54,7 +54,7 @@ class Authenticator: ObservableObject {
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
             if success {
                 Task { @MainActor in
-                    self.isUnlocked = true
+                    self.isLocked = false
                 }
             }
         }

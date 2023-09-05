@@ -36,7 +36,7 @@ struct PsychonautWiki_JournalApp: App {
                     .accentColor(Color.blue)
                 if authenticator.isStartingUp {
                     LockScreen(isEyeOpen: true, isFaceIDEnabled: true)
-                } else if !authenticator.isUnlocked {
+                } else if authenticator.isLocked {
                     LockScreen(isEyeOpen: false, isFaceIDEnabled: authenticator.isFaceIDEnabled)
                 }
             }
