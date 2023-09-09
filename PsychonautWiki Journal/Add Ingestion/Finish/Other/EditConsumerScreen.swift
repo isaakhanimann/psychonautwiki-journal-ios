@@ -56,6 +56,8 @@ private struct EditConsumerScreenContent: View {
             Form {
                 Section {
                     TextField("Consumer name", text: $consumerName, prompt: Text("Enter name"))
+                        .autocapitalization(.words)
+                        .autocorrectionDisabled()
                 }
                 Section {
                     Button {
