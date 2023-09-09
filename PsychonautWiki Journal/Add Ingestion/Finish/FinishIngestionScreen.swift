@@ -141,15 +141,6 @@ struct FinishIngestionScreen: View {
                         }
                     }
                 }
-                Button {
-                    sheetToShow = .editNote
-                } label: {
-                    if enteredNote.isEmpty {
-                        Label("Add Note", systemImage: "plus")
-                    } else {
-                        Label(enteredNote, systemImage: "pencil").lineLimit(1)
-                    }
-                }
                 HStack {
                     Text("Consumer")
                     Spacer()
@@ -158,6 +149,15 @@ struct FinishIngestionScreen: View {
                     } label: {
                         let displayedName = isConsumerMe ? "Me" : consumerName
                         Label(displayedName, systemImage: "person")
+                    }
+                }
+                Button {
+                    sheetToShow = .editNote
+                } label: {
+                    if enteredNote.isEmpty {
+                        Label("Add Note", systemImage: "plus")
+                    } else {
+                        Label(enteredNote, systemImage: "pencil").lineLimit(1)
                     }
                 }
             } header: {
