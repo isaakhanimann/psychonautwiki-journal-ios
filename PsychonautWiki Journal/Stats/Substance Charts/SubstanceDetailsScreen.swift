@@ -46,7 +46,7 @@ struct SubstanceDetailsScreen: View {
                             Text(elem.substanceName)
                                 .font(.headline)
                             Spacer()
-                            Text("\(elem.experienceCount) experience\(elem.experienceCount>1 ? "s" : "")")
+                            Text("^[\(elem.experienceCount) experience](inflect: true)")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
