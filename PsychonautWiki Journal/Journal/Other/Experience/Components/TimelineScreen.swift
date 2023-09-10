@@ -46,7 +46,7 @@ struct TimelineScreen: View {
         .onAppear {
             checkCurrentOrientation()
         }
-        .navigationTitle("Effect Timeline")
+        .navigationTitle("Dose Response")
         .dismissWhenTabTapped()
     }
 
@@ -68,6 +68,6 @@ struct TimelineScreen_Previews: PreviewProvider {
                 everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
                 everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote
             ))
-        }
+        }.environmentObject(TabBarObserver())
     }
 }
