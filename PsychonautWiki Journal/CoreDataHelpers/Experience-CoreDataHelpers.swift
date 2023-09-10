@@ -168,7 +168,11 @@ extension Experience: Comparable {
             .compactMap { SubstanceRepo.shared.getSubstance(name: $0) }
     }
 
-    func getMyTimeLineModel(hiddenIngestions: [ObjectIdentifier], hiddenRatings: [ObjectIdentifier]) -> TimelineModel {
+    func getMyTimeLineModel(
+        hiddenIngestions: [ObjectIdentifier],
+        hiddenRatings: [ObjectIdentifier],
+        areRedosesDrawnIndividually: Bool
+    ) -> TimelineModel {
         getTimelineModel(
             from: myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) },
             everythingForEachRating: ratingsWithTimeSorted
@@ -176,11 +180,12 @@ extension Experience: Comparable {
                 .map({ shulgin in
                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                 }),
-            everythingForEachTimedNote: timedNotesForTimeline
+            everythingForEachTimedNote: timedNotesForTimeline,
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually
         )
     }
 
-    func getConsumers(hiddenIngestions: [ObjectIdentifier]) -> [ConsumerWithIngestions] {
+    func getConsumers(hiddenIngestions: [ObjectIdentifier], areRedosesDrawnIndividually: Bool) -> [ConsumerWithIngestions] {
         let ingestionsByConsumer = Dictionary(grouping: otherIngestions, by: {$0.consumerName})
         var consumers = [ConsumerWithIngestions]()
         for (consumerName, ingestions) in ingestionsByConsumer {
@@ -191,7 +196,8 @@ extension Experience: Comparable {
                     timelineModel: getTimelineModel(
                         from: ingestions.filter { !hiddenIngestions.contains($0.id)},
                         everythingForEachRating: [],
-                        everythingForEachTimedNote: []
+                        everythingForEachTimedNote: [],
+                        areRedosesDrawnIndividually: areRedosesDrawnIndividually
                     )
                 )
                 consumers.append(newConsumer)
@@ -203,12 +209,14 @@ extension Experience: Comparable {
     private func getTimelineModel(
         from ingestions: [Ingestion],
         everythingForEachRating: [EverythingForOneRating],
-        everythingForEachTimedNote: [EverythingForOneTimedNote]
+        everythingForEachTimedNote: [EverythingForOneTimedNote],
+        areRedosesDrawnIndividually: Bool
     ) -> TimelineModel {
-        return TimelineModel(
+        TimelineModel(
             everythingForEachLine: getEverythingForEachLine(from: ingestions),
             everythingForEachRating: everythingForEachRating,
-            everythingForEachTimedNote: everythingForEachTimedNote
+            everythingForEachTimedNote: everythingForEachTimedNote,
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually
         )
     }
 

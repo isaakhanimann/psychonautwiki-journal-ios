@@ -17,7 +17,7 @@
 import Foundation
 import SwiftUI
 
-struct FullTimelines: TimelineDrawable {
+struct FullCumulativeTimelines: TimelineDrawable {
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         if let max = finalPoints.map({$0.x}).max() {
@@ -192,16 +192,16 @@ struct FullTimelines: TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toFullTimelines(
+    func toFullCumulativeTimeline(
         weightedLines: [WeightedLine],
         graphStartTime: Date
-    ) -> FullTimelines? {
+    ) -> FullCumulativeTimelines? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
            let fullPeak = peak?.maybeFullDurationRange,
            let fullOffset = offset?.maybeFullDurationRange
         {
-            return FullTimelines(
+            return FullCumulativeTimelines(
                 onset: fullOnset,
                 comeup: fullComeup,
                 peak: fullPeak,

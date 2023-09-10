@@ -25,6 +25,7 @@ struct SettingsScreen: View {
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @AppStorage(Authenticator.lockTimeOptionKey) var lockTimeOptionString: String = LockTimeOption.after5Minutes.rawValue
+    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
 
@@ -49,6 +50,7 @@ struct SettingsScreen: View {
             isHidingDosageDots: $isHidingDosageDots,
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
+            areRedosesDrawnIndividually: $areRedosesDrawnIndividually,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -77,6 +79,7 @@ struct SettingsContent: View {
     @Binding var isHidingDosageDots: Bool
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
+    @Binding var areRedosesDrawnIndividually: Bool
     let isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -197,10 +200,13 @@ struct SettingsContent: View {
                             Label("Edit Substance Colors", systemImage: "paintpalette")
                         }
                         .foregroundColor(.accentColor)
-                        Toggle("Skip Interaction Checks", isOn: $isSkippingInteractionChecks).tint(Color.accentColor)
-                        Toggle("Hide Dosage Dots", isOn: $isHidingDosageDots).tint(Color.accentColor)
-                        Toggle("Hide Tolerance Chart", isOn: $isHidingToleranceChartInExperience).tint(Color.accentColor)
-                        Toggle("Hide Substance Info", isOn: $isHidingSubstanceInfoInExperience).tint(Color.accentColor)
+                        Group {
+                            Toggle("Skip interaction checks", isOn: $isSkippingInteractionChecks)
+                            Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
+                            Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
+                            Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
+                            Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
+                        }.tint(.accentColor)
                     }
                 }
                 Section {
@@ -290,6 +296,7 @@ struct SettingsContent_Previews: PreviewProvider {
             isHidingDosageDots: .constant(false),
             isHidingToleranceChartInExperience: .constant(false),
             isHidingSubstanceInfoInExperience: .constant(false),
+            areRedosesDrawnIndividually: .constant(false),
             isFaceIDAvailable: true,
             hasToUnlockApp: .constant(false),
             isImporting: false,

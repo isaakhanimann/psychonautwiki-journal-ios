@@ -30,6 +30,7 @@ struct TimelineWidgetAttributes: ActivityAttributes {
         var everythingForEachLine: [EverythingForOneLine]
         var everythingForEachRating: [EverythingForOneRating]
         var everythingForEachTimedNote: [EverythingForOneTimedNote]
+        var areRedosesDrawnIndividually: Bool
     }
 
     // Fixed non-changing properties about your activity go here!

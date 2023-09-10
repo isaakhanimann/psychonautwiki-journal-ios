@@ -132,7 +132,8 @@ struct DurationScreen: View {
                 )
             }),
             everythingForEachRating: [],
-            everythingForEachTimedNote: []
+            everythingForEachTimedNote: [],
+            areRedosesDrawnIndividually: true
         )
     }
 

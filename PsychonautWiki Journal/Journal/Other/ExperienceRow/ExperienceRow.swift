@@ -66,7 +66,8 @@ struct ExperienceRow: View {
                                         EverythingForOneTimedNote(
                                             time: timedNote.timeUnwrapped,
                                             color: timedNote.color)
-                                    })
+                                    }),
+                                    areRedosesDrawnIndividually: false
                                 )
                             }
                         }

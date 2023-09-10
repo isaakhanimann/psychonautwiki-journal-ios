@@ -30,6 +30,7 @@ struct ExperienceScreen: View {
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
+    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
 
@@ -88,7 +89,8 @@ struct ExperienceScreen: View {
                     .map({ shulgin in
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                     }),
-                everythingForEachTimedNote: experience.timedNotesForTimeline
+                everythingForEachTimedNote: experience.timedNotesForTimeline,
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually
             )
         }
     }
@@ -103,7 +105,8 @@ struct ExperienceScreen: View {
                     .map({ shulgin in
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                     }),
-                everythingForEachTimedNote: experience.timedNotesForTimeline
+                everythingForEachTimedNote: experience.timedNotesForTimeline,
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually
             )
         }
     }
@@ -123,7 +126,10 @@ struct ExperienceScreen: View {
                 if !experience.myIngestionsSorted.isEmpty {
                     Section {
                         TimelineSection(
-                            timelineModel: experience.getMyTimeLineModel(hiddenIngestions: hiddenIngestions, hiddenRatings: hiddenRatings),
+                            timelineModel: experience.getMyTimeLineModel(
+                                hiddenIngestions: hiddenIngestions,
+                                hiddenRatings: hiddenRatings,
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually),
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
@@ -243,7 +249,7 @@ struct ExperienceScreen: View {
                         }
                     }
                 }
-                ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions)) { consumer in
+                ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions, areRedosesDrawnIndividually: areRedosesDrawnIndividually)) { consumer in
                     Section(consumer.consumerName) {
                         TimelineSection(
                             timelineModel: consumer.timelineModel,

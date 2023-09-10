@@ -55,6 +55,7 @@ struct FinishIngestionScreen: View {
     @State private var selectedExperience: Experience?
     @State private var wantsToForceNewExperience = false
     @State private var wantsToStartLiveActivity = true
+    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
 
     var isConsumerMe: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -319,7 +320,8 @@ struct FinishIngestionScreen: View {
                                     EverythingForOneTimedNote(
                                         time: timedNote.timeUnwrapped,
                                         color: timedNote.color)
-                                })
+                                }),
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
                             )
                         }
                     }
@@ -357,7 +359,8 @@ struct FinishIngestionScreen: View {
                             await ActivityManager.shared.startOrUpdateActivity(
                                 everythingForEachLine: getEverythingForEachLine(from: newExperience.myIngestionsSorted),
                                 everythingForEachRating: [],
-                                everythingForEachTimedNote: []
+                                everythingForEachTimedNote: [],
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
                             )
                         }
                     }

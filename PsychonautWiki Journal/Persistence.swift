@@ -31,6 +31,7 @@ struct PersistenceController {
     static let isHidingToleranceChartInExperienceKey = "isHidingToleranceChartInExperience"
     static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
+    static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }

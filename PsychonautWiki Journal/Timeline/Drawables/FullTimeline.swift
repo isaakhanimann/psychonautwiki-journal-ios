@@ -1,9 +1,9 @@
-// Copyright (c) 2022. Isaak Hanimann.
+// Copyright (c) 2023. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at
+// the Free Software Foundation, either version 3 of the License, or (at 
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,18 +16,19 @@
 
 import SwiftUI
 
-struct OnsetComeupPeakTimeline : TimelineDrawable {
+struct FullTimeline : TimelineDrawable {
 
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange
-    let peakWeight: Double
+    let offset: FullDurationRange
+    let peakAndOffsetWeight: Double
     let verticalWeight: Double
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max + peak.max
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max + peak.max + offset.max
     }
 
     func draw(
@@ -49,16 +50,18 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         }
         let bottom = height - paddingTop
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
-        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
-        let peakEndX = comeupEndX + (peak.interpolateLinearly(at: peakWeight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
         path.addLine(to: CGPoint(x: onsetEndX, y: bottom))
+        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
         path.addLine(to: CGPoint(x: comeupEndX, y: top))
+        let peakEndX = comeupEndX + (peak.interpolateLinearly(at: peakAndOffsetWeight) * pixelsPerSec)
         path.addLine(to: CGPoint(x: peakEndX, y: top))
+        let offsetEndX = peakEndX + (offset.interpolateLinearly(at: peakAndOffsetWeight) * pixelsPerSec)
+        path.addLine(to: CGPoint(x: offsetEndX, y: bottom))
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
-        path.addLine(to: CGPoint(x: peakEndX, y: height))
+        path.addLine(to: CGPoint(x: offsetEndX, y: height))
         path.addLine(to: CGPoint(x: startX, y: height))
         path.closeSubpath()
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
@@ -71,20 +74,22 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
 }
 
 extension RoaDuration {
-    func toOnsetComeupPeakTimeline(
-        peakWeight: Double,
+    func toFullTimeline(
+        peakAndOffsetWeight: Double,
         verticalWeight: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
-    ) -> OnsetComeupPeakTimeline? {
+    ) -> FullTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
-           let fullPeak = peak?.maybeFullDurationRange {
-            return OnsetComeupPeakTimeline(
+           let fullPeak = peak?.maybeFullDurationRange,
+           let fullOffset = offset?.maybeFullDurationRange {
+            return FullTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,
                 peak: fullPeak,
-                peakWeight: peakWeight,
+                offset: fullOffset,
+                peakAndOffsetWeight: peakAndOffsetWeight,
                 verticalWeight: verticalWeight,
                 onsetDelayInHours: onsetDelayInHours,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds

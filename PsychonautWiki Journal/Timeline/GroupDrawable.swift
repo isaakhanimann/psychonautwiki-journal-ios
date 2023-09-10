@@ -30,7 +30,8 @@ struct GroupDrawable {
         startGraph: Date,
         color: SubstanceColor,
         roaDuration: RoaDuration?,
-        weightedLines: [WeightedLine]
+        weightedLines: [WeightedLine],
+        areRedosesDrawnIndividually: Bool
     ) {
         self.color = color
         guard let roaDuration else {
@@ -41,87 +42,98 @@ struct GroupDrawable {
             }
             return
         }
-        if let fulls = roaDuration.toFullTimelines(weightedLines: weightedLines, graphStartTime: startGraph) {
-            timelineDrawables = [fulls]
+        if let fullCumulatives = roaDuration.toFullCumulativeTimeline(weightedLines: weightedLines, graphStartTime: startGraph), !areRedosesDrawnIndividually {
+            timelineDrawables = [fullCumulatives]
         } else {
-            let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
-                roaDuration.toOnsetComeupPeakTotalTimeline(
-                    peakAndTotalWeight: weightedLine.horizontalWeight,
-                    verticalWeight: weightedLine.height,
-                    onsetDelayInHours: weightedLine.onsetDelayInHours,
-                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                )
+            let fulls = weightedLines.compactMap { weightedLine in
+                roaDuration.toFullTimeline(
+                    peakAndOffsetWeight:weightedLine.horizontalWeight,
+                    verticalWeight:weightedLine.height,
+                    onsetDelayInHours:weightedLine.onsetDelayInHours,
+                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
             }
-            if !onsetComeupPeakTotals.isEmpty {
-                timelineDrawables = onsetComeupPeakTotals
+            if !fulls.isEmpty && areRedosesDrawnIndividually {
+                timelineDrawables = fulls
             } else {
-                let onsetComeupTotals = weightedLines.compactMap { weightedLine in
-                    roaDuration.toOnsetComeupTotalTimeline(
-                        totalWeight: weightedLine.horizontalWeight,
+                let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
+                    roaDuration.toOnsetComeupPeakTotalTimeline(
+                        peakAndTotalWeight: weightedLine.horizontalWeight,
                         verticalWeight: weightedLine.height,
                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                     )
                 }
-                if !onsetComeupTotals.isEmpty {
-                    timelineDrawables = onsetComeupTotals
+                if !onsetComeupPeakTotals.isEmpty {
+                    timelineDrawables = onsetComeupPeakTotals
                 } else {
-                    let onsetTotals = weightedLines.compactMap { weightedLine in
-                        roaDuration.toOnsetTotalTimeline(
+                    let onsetComeupTotals = weightedLines.compactMap { weightedLine in
+                        roaDuration.toOnsetComeupTotalTimeline(
                             totalWeight: weightedLine.horizontalWeight,
                             verticalWeight: weightedLine.height,
                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                         )
                     }
-                    if !onsetTotals.isEmpty {
-                        timelineDrawables = onsetTotals
+                    if !onsetComeupTotals.isEmpty {
+                        timelineDrawables = onsetComeupTotals
                     } else {
-                        let totals = weightedLines.compactMap { weightedLine in
-                            roaDuration.toTotalTimeline(
+                        let onsetTotals = weightedLines.compactMap { weightedLine in
+                            roaDuration.toOnsetTotalTimeline(
                                 totalWeight: weightedLine.horizontalWeight,
                                 verticalWeight: weightedLine.height,
                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
                                 ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                             )
                         }
-                        if !totals.isEmpty {
-                            timelineDrawables = totals
+                        if !onsetTotals.isEmpty {
+                            timelineDrawables = onsetTotals
                         } else {
-                            let onsetComeupPeaks = weightedLines.compactMap { weightedLine in
-                                roaDuration.toOnsetComeupPeakTimeline(
-                                    peakWeight: weightedLine.horizontalWeight,
+                            let totals = weightedLines.compactMap { weightedLine in
+                                roaDuration.toTotalTimeline(
+                                    totalWeight: weightedLine.horizontalWeight,
                                     verticalWeight: weightedLine.height,
                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                 )
                             }
-                            if !onsetComeupPeaks.isEmpty {
-                                timelineDrawables = onsetComeupPeaks
+                            if !totals.isEmpty {
+                                timelineDrawables = totals
                             } else {
-                                let onsetComeups = weightedLines.compactMap { weightedLine in
-                                    roaDuration.toOnsetComeupTimeline(
+                                let onsetComeupPeaks = weightedLines.compactMap { weightedLine in
+                                    roaDuration.toOnsetComeupPeakTimeline(
+                                        peakWeight: weightedLine.horizontalWeight,
                                         verticalWeight: weightedLine.height,
                                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                     )
                                 }
-                                if !onsetComeups.isEmpty {
-                                    timelineDrawables = onsetComeups
+                                if !onsetComeupPeaks.isEmpty {
+                                    timelineDrawables = onsetComeupPeaks
                                 } else {
-                                    let onsets = weightedLines.compactMap { weightedLine in
-                                        roaDuration.toOnsetTimeline(
+                                    let onsetComeups = weightedLines.compactMap { weightedLine in
+                                        roaDuration.toOnsetComeupTimeline(
+                                            verticalWeight: weightedLine.height,
                                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                         )
                                     }
-                                    if !onsets.isEmpty {
-                                        timelineDrawables = onsets
+                                    if !onsetComeups.isEmpty {
+                                        timelineDrawables = onsetComeups
                                     } else {
-                                        timelineDrawables = weightedLines.map { weightedLine in
-                                            NoTimeline(
+                                        let onsets = weightedLines.compactMap { weightedLine in
+                                            roaDuration.toOnsetTimeline(
                                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                                            )
+                                        }
+                                        if !onsets.isEmpty {
+                                            timelineDrawables = onsets
+                                        } else {
+                                            timelineDrawables = weightedLines.map { weightedLine in
+                                                NoTimeline(
+                                                    onsetDelayInHours: weightedLine.onsetDelayInHours,
+                                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                                            }
                                         }
                                     }
                                 }

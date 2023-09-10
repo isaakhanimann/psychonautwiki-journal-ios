@@ -100,7 +100,8 @@ struct EffectTimeline_Previews: PreviewProvider {
                     timelineModel: TimelineModel(
                         everythingForEachLine: everythingForEachLine,
                         everythingForEachRating: everythingForEachRating,
-                        everythingForEachTimedNote: everythingForEachTimedNote
+                        everythingForEachTimedNote: everythingForEachTimedNote,
+                        areRedosesDrawnIndividually: false
                     ),
                     height: 200
                 )

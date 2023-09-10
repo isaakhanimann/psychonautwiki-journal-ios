@@ -34,7 +34,8 @@ struct TimelineModel {
     init(
         everythingForEachLine: [EverythingForOneLine],
         everythingForEachRating: [EverythingForOneRating],
-        everythingForEachTimedNote: [EverythingForOneTimedNote]
+        everythingForEachTimedNote: [EverythingForOneTimedNote],
+        areRedosesDrawnIndividually: Bool
     ) {
         let potentialStartTimes = everythingForEachLine.map({ one in
             one.startTime
@@ -64,7 +65,8 @@ struct TimelineModel {
                 startGraph: startTime,
                 color: group.color,
                 roaDuration: group.roaDuration,
-                weightedLines: group.weightedLines)
+                weightedLines: group.weightedLines,
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
         }.sorted { lhs, rhs in
             lhs.endRelativeToStartInSeconds < rhs.endRelativeToStartInSeconds
         } // sort makes sure that lines are always drawn in the same order such that lines with a later endpoint are drawn on top.
