@@ -44,7 +44,16 @@ struct ToleranceTextsScreen: View {
                     }
                 }
             }
-        }.navigationTitle("Tolerances")
+        }
+        .navigationTitle("Tolerances")
+        .toolbar {
+            NavigationLink {
+                ToleranceChartExplanationScreen()
+            } label: {
+                Label("Chart Limitations", systemImage: "info.circle")
+                    .labelStyle(.titleOnly)
+            }
+        }
     }
 }
 

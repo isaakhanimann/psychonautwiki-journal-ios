@@ -146,17 +146,7 @@ struct ExperienceScreen: View {
                             }
                         }
                     } header: {
-                        HStack {
-                            Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
-                            if isEyeOpen {
-                                Spacer()
-                                NavigationLink {
-                                    ExplainExperienceSectionScreen()
-                                } label: {
-                                    limitationsLabel
-                                }
-                            }
-                        }
+                        Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                     }
                     if !experience.cumulativeDoses.isEmpty && isEyeOpen {
                         Section("Cumulative Dose") {
@@ -245,15 +235,7 @@ struct ExperienceScreen: View {
                                 )
                             }
                         } header: {
-                            HStack {
-                                Text("Tolerance")
-                                Spacer()
-                                NavigationLink {
-                                    ToleranceChartExplanationScreen()
-                                } label: {
-                                    limitationsLabel
-                                }
-                            }
+                            Text("Tolerance")
                         } footer: {
                             if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
                                 Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
@@ -371,12 +353,6 @@ struct ExperienceScreen: View {
             }
         )
 
-    }
-
-    private var limitationsLabel: some View {
-        Label("Limitations", systemImage: "info.circle")
-            .labelStyle(.titleOnly)
-            .font(.callout)
     }
 
     private func delete() {

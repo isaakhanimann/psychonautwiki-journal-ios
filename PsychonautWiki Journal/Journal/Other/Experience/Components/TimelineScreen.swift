@@ -20,6 +20,8 @@ struct TimelineScreen: View {
     let timelineModel: TimelineModel
     @State private var zoomLevel = 1.0
     @State private var isOrientationLandscape = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+
 
     var body: some View {
         VStack {
@@ -47,6 +49,15 @@ struct TimelineScreen: View {
             checkCurrentOrientation()
         }
         .navigationTitle("Dose Response")
+        .toolbar {
+            if isEyeOpen {
+                NavigationLink {
+                    ExplainExperienceSectionScreen()
+                } label: {
+                    Label("Timeline Limitations", systemImage: "info.circle")
+                }
+            }
+        }
         .dismissWhenTabTapped()
     }
 
