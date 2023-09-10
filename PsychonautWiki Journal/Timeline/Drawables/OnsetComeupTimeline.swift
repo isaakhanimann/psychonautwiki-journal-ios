@@ -25,8 +25,10 @@ struct OnsetComeupTimeline : TimelineDrawable {
     let verticalWeight: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
+    private let onsetComeupWeight = 0.5
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight) + comeup.interpolateLinearly(at: onsetComeupWeight)
     }
 
     func draw(
@@ -41,15 +43,14 @@ struct OnsetComeupTimeline : TimelineDrawable {
         let paddingBottom = halfLineWidth
         let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
             top = (1-verticalWeight) * heightBetween
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
-        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight)) * pixelsPerSec
+        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetComeupWeight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
         path.addLine(to: CGPoint(x: onsetEndX, y: bottom))

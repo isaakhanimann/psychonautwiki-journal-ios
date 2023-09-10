@@ -28,7 +28,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
     let percentSmoothness: Double = 0.5
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.max
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.interpolateLinearly(at: totalWeight)
     }
 
     func draw(

@@ -22,12 +22,14 @@ struct OnsetTimeline : TimelineDrawable {
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
+    private let onsetAndComeupWeight = 0.5
+
     private var onsetDelayInSeconds: TimeInterval {
         onsetDelayInHours * 60 * 60
     }
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInHours*60*60 + onset.interpolateLinearly(at: 0.5)
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInHours*60*60 + onset.interpolateLinearly(at: onsetAndComeupWeight)
     }
 
 
@@ -39,11 +41,10 @@ struct OnsetTimeline : TimelineDrawable {
         lineWidth: Double
     ) {
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let weight = 0.5
         let minHeight = lineWidth/2
         let maxHeight = height - minHeight
         context.drawDot(startX: startX, bottomY: maxHeight, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetAndComeupWeight)) * pixelsPerSec
         var path = Path()
         path.move(to: CGPoint(x: startX, y: maxHeight))
         path.addLine(to: CGPoint(x: onsetEndX, y: maxHeight))

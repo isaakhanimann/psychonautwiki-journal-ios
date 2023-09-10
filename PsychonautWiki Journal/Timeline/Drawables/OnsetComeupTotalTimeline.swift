@@ -28,8 +28,10 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
 
+    private let onsetAndComeupWeight = 0.5
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.max
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.interpolateLinearly(at: totalWeight)
     }
 
     func draw(
@@ -50,7 +52,6 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
         }
         let bottom = height - lineWidth/2
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetAndComeupWeight = 0.5
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetAndComeupWeight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetAndComeupWeight) * pixelsPerSec)
         var path0 = Path()

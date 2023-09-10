@@ -26,8 +26,14 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
+    private let onsetAndComeupWeight = 0.5
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max + peak.max
+        ingestionTimeRelativeToStartInSeconds
+        + onsetDelayInSeconds
+        + onset.interpolateLinearly(at: onsetAndComeupWeight)
+        + comeup.interpolateLinearly(at: onsetAndComeupWeight)
+        + peak.interpolateLinearly(at: peakWeight)
     }
 
     func draw(
@@ -42,15 +48,14 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         let paddingBottom = halfLineWidth
         let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
             top = (1-verticalWeight) * heightBetween
         }
         let bottom = height - paddingTop
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
-        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetAndComeupWeight)) * pixelsPerSec
+        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetAndComeupWeight) * pixelsPerSec)
         let peakEndX = comeupEndX + (peak.interpolateLinearly(at: peakWeight) * pixelsPerSec)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))

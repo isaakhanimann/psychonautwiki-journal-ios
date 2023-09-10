@@ -29,8 +29,10 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
+    private let onsetAndComeupWeight = 0.5
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.max
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.interpolateLinearly(at: peakAndTotalWeight)
     }
 
     func draw(
@@ -51,7 +53,6 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         }
         let bottom = height - paddingTop
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
-        let onsetAndComeupWeight = 0.5
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetAndComeupWeight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetAndComeupWeight) * pixelsPerSec)
         let peakEndX = comeupEndX + (peak.interpolateLinearly(at: peakAndTotalWeight) * pixelsPerSec)

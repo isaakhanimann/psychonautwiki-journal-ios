@@ -27,8 +27,15 @@ struct FullTimeline : TimelineDrawable {
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
+    private let onsetComeupWeight = 0.5
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + onset.max + comeup.max + peak.max + offset.max
+        ingestionTimeRelativeToStartInSeconds
+        + onsetDelayInSeconds
+        + onset.interpolateLinearly(at: onsetComeupWeight)
+        + comeup.interpolateLinearly(at: onsetComeupWeight)
+        + peak.interpolateLinearly(at: peakAndOffsetWeight)
+        + offset.interpolateLinearly(at: peakAndOffsetWeight)
     }
 
     func draw(
@@ -43,7 +50,6 @@ struct FullTimeline : TimelineDrawable {
         let paddingBottom = halfLineWidth
         let heightBetween = height-paddingTop-paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let weight = 0.5
         var top = lineWidth/2
         if verticalWeight < 1 {
             top = (1-verticalWeight) * heightBetween
@@ -52,9 +58,9 @@ struct FullTimeline : TimelineDrawable {
         context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
-        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: weight)) * pixelsPerSec
+        let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight)) * pixelsPerSec
         path.addLine(to: CGPoint(x: onsetEndX, y: bottom))
-        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: weight) * pixelsPerSec)
+        let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetComeupWeight) * pixelsPerSec)
         path.addLine(to: CGPoint(x: comeupEndX, y: top))
         let peakEndX = comeupEndX + (peak.interpolateLinearly(at: peakAndOffsetWeight) * pixelsPerSec)
         path.addLine(to: CGPoint(x: peakEndX, y: top))
