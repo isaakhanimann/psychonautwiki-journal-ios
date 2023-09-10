@@ -258,9 +258,10 @@ extension Experience: Comparable {
     }
 
     private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {
-        let dateWithoutTime = sortDateUnwrapped.getDateWithoutTime()
+        let firstIngestionTime = ingestionsSorted.first?.time ?? .now
+        let lastIngestionTime = ingestionsSorted.last?.time ?? .now
         let filteredWindows = windows.filter { win in
-            win.contains(date: dateWithoutTime)
+            win.contains(date: firstIngestionTime) || win.contains(date: lastIngestionTime)
         }
         let substancesInFilteredWindows = Set(filteredWindows.map({$0.substanceName}))
         return windows.filter { win in
