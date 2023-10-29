@@ -135,8 +135,8 @@ extension Experience: Comparable {
         }.sorted()
     }
 
-    var cumulativeDoses: [CumulativeDose] {
-        let ingestionsBySubstance = Dictionary(grouping: ingestionsSorted, by: { $0.substanceNameUnwrapped })
+    var myCumulativeDoses: [CumulativeDose] {
+        let ingestionsBySubstance = Dictionary(grouping: myIngestionsSorted, by: { $0.substanceNameUnwrapped })
         return ingestionsBySubstance.compactMap { (substanceName: String, ingestions: [Ingestion]) in
             guard ingestions.count > 1 else {return nil}
             guard let color = ingestions.first?.substanceColor else {return nil}

@@ -160,9 +160,9 @@ struct ExperienceScreen: View {
                     } header: {
                         Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                     }
-                    if !experience.cumulativeDoses.isEmpty && isEyeOpen {
-                        Section("Cumulative Dose") {
-                            ForEach(experience.cumulativeDoses) { cumulative in
+                    if !experience.myCumulativeDoses.isEmpty && isEyeOpen {
+                        Section("My cumulative dose") {
+                            ForEach(experience.myCumulativeDoses) { cumulative in
                                 if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
                                     NavigationLink {
                                         DosesScreen(substance: substance)
