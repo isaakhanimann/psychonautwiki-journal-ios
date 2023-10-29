@@ -118,7 +118,7 @@ struct ChooseDoseScreenContent: View {
             isActive: $isShowingNext
         ) {
             NextLabel()
-        }.disabled(selectedPureDose==nil)
+        }
     }
 
     private var unknownDoseLink: some View {
