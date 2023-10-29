@@ -16,7 +16,11 @@
 
 import Foundation
 
-enum TimeDisplayStyle: CaseIterable {
+enum TimeDisplayStyle: String, CaseIterable, Identifiable {
+    var id: Self {
+        self
+    }
+
     case regular, relativeToNow, relativeToStart
 
     var text: String {

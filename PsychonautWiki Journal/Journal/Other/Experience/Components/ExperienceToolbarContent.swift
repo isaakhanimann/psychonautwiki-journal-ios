@@ -28,32 +28,16 @@ struct ExperienceToolbarContent: View {
     var body: some View {
         Group {
             Menu {
-                if experience.isCurrent {
-                    ForEach(TimeDisplayStyle.allCases, id: \.self) { option in
-                        Button {
-                            withAnimation {
-                                timeDisplayStyle = option
-                            }
-                        } label: {
-                            if timeDisplayStyle == option {
-                                Label(option.text, systemImage: "checkmark")
-                            } else {
-                                Text(option.text)
-                            }
+                ForEach(TimeDisplayStyle.allCases) { option in
+                    Button {
+                        withAnimation {
+                            timeDisplayStyle = option
                         }
-                    }
-                } else {
-                    ForEach([TimeDisplayStyle.regular, .relativeToStart], id: \.self) { option in
-                        Button {
-                            withAnimation {
-                                timeDisplayStyle = option
-                            }
-                        } label: {
-                            if timeDisplayStyle == option {
-                                Label(option.text, systemImage: "checkmark")
-                            } else {
-                                Text(option.text)
-                            }
+                    } label: {
+                        if timeDisplayStyle == option {
+                            Label(option.text, systemImage: "checkmark")
+                        } else {
+                            Text(option.text)
                         }
                     }
                 }

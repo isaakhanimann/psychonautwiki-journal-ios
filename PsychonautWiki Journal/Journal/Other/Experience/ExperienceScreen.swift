@@ -21,7 +21,13 @@ struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
 
     @State private var isShowingAddIngestionFullScreen = false
-    @State private var timeDisplayStyle = TimeDisplayStyle.regular
+    @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = TimeDisplayStyle.regular.rawValue
+    private var timeDisplayStyle: Binding<TimeDisplayStyle> {
+        Binding(
+            get: { TimeDisplayStyle(rawValue: timeDisplayStyleText) ?? TimeDisplayStyle.regular },
+            set: { newValue in timeDisplayStyleText = newValue.rawValue }
+        )
+    }
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
     @State private var hiddenIngestions: [ObjectIdentifier] = []
@@ -132,7 +138,7 @@ struct ExperienceScreen: View {
                                 areRedosesDrawnIndividually: areRedosesDrawnIndividually),
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: experience.myIngestionsSorted,
-                            timeDisplayStyle: timeDisplayStyle,
+                            timeDisplayStyle: timeDisplayStyle.wrappedValue,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: {showIngestion(id: $0)},
@@ -202,7 +208,7 @@ struct ExperienceScreen: View {
                             } label: {
                                 TimedNoteRow(
                                     timedNote: timedNote,
-                                    timeDisplayStyle: timeDisplayStyle,
+                                    timeDisplayStyle: timeDisplayStyle.wrappedValue,
                                     firstIngestionTime: experience.ingestionsSorted.first?.time)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive) {
@@ -223,7 +229,7 @@ struct ExperienceScreen: View {
                         hiddenRatings: hiddenRatings,
                         showRating: showRating,
                         hideRating: hideRating,
-                        timeDisplayStyle: timeDisplayStyle,
+                        timeDisplayStyle: timeDisplayStyle.wrappedValue,
                         firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
                     )
                 }
@@ -255,7 +261,7 @@ struct ExperienceScreen: View {
                             timelineModel: consumer.timelineModel,
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: consumer.ingestionsSorted,
-                            timeDisplayStyle: timeDisplayStyle,
+                            timeDisplayStyle: timeDisplayStyle.wrappedValue,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: {showIngestion(id: $0)},
@@ -339,7 +345,7 @@ struct ExperienceScreen: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ExperienceToolbarContent(
                     experience: experience,
-                    timeDisplayStyle: $timeDisplayStyle,
+                    timeDisplayStyle: timeDisplayStyle,
                     sheetToShow: $sheetToShow,
                     isShowingDeleteConfirmation: $isShowingDeleteConfirmation)
             }
