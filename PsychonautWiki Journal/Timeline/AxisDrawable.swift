@@ -33,14 +33,11 @@ struct AxisDrawable {
             endTime: startTime + widthInSeconds,
             stepSizeInHours: stepSize
         )
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_GB") // force 24 hours format because else it may format the time as e.g. 4 PM
-        formatter.dateFormat = "HH"
         var fullHours = dates.map { date in
             let diff = date.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
             return FullHour(
                 distanceFromStart: diff * pixelsPerSec,
-                label: formatter.string(from: date)
+                label: String(Calendar.current.component(.hour, from: date))
             )
         }
         let widthOfOneLetter: Double = 7

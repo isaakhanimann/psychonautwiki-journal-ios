@@ -48,7 +48,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
             top = ((1-verticalWeigth)*heightBetween) + (lineWidth/2)
         }
         let bottom = height - lineWidth/2
-        context.drawDot(startX: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(x: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
         let onsetWeight = 0.5
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetWeight)) * pixelsPerSec
         var path0 = Path()

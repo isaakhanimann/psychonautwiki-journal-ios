@@ -33,7 +33,7 @@ struct EffectTimeline: View {
             TimelineView(.everyMinute) { timeline in
                 let timelineDate = timeline.date
                 Canvas { context, size in
-                    let pixelsPerSec = (size.width-halfLineWidth)/timelineModel.totalWidth
+                    let pixelsPerSec = size.width/timelineModel.totalWidth
                     timelineModel.groupDrawables.forEach({ groupDrawable in
                         groupDrawable.draw(
                             context: context,
@@ -72,7 +72,7 @@ struct EffectTimeline: View {
 
     private var timeLabels: some View {
         Canvas { context, size in
-            let widthInPixels = size.width - halfLineWidth
+            let widthInPixels = size.width
             let pixelsPerSec = widthInPixels/timelineModel.totalWidth
             let fullHours = timelineModel.axisDrawable.getFullHours(
                 pixelsPerSec: pixelsPerSec,
@@ -81,7 +81,7 @@ struct EffectTimeline: View {
             fullHours.forEach { fullHour in
                 context.draw(
                     Text(fullHour.label).font(.caption),
-                    at: CGPoint(x: fullHour.distanceFromStart + halfLineWidth, y: size.height/2),
+                    at: CGPoint(x: fullHour.distanceFromStart, y: size.height/2),
                     anchor: .center
                 )
             }

@@ -182,7 +182,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
                 let pointHeight = point.y*heightBetween + paddingBottom
                 let dotRadius = 1.5*lineWidth
                 context.drawDot(
-                    startX: point.x*pixelsPerSec,
+                    x: point.x*pixelsPerSec,
                     bottomY: height - pointHeight,
                     dotRadius: dotRadius,
                     color: color)

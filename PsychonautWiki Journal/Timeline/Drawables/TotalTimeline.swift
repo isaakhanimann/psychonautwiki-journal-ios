@@ -50,7 +50,7 @@ struct TotalTimeline: TimelineDrawable {
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(
-            startX: startX,
+            x: startX,
             bottomY: height-lineWidth/2,
             dotRadius: 1.5 * lineWidth,
             color: color
