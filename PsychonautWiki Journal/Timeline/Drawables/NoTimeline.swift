@@ -39,7 +39,7 @@ struct NoTimeline: TimelineDrawable {
     ) {
         let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
         let halfLineWidth = lineWidth/2
-        context.drawDot(x: startX, bottomY: height-halfLineWidth, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(x: startX, bottomY: height-halfLineWidth, color: color)
         if onsetDelayInHours > 0 {
             let maxHeight = height - halfLineWidth
             let onsetEndX = startX + onsetDelayInSeconds * pixelsPerSec

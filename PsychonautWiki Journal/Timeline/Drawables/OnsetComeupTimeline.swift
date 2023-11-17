@@ -48,7 +48,7 @@ struct OnsetComeupTimeline : TimelineDrawable {
             top = (1-verticalWeight) * heightBetween
         }
         let bottom = height - lineWidth/2
-        context.drawDot(x: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(x: startX, bottomY: bottom, color: color)
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetComeupWeight) * pixelsPerSec)
         var path = Path()

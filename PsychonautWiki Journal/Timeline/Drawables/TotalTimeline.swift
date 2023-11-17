@@ -52,7 +52,6 @@ struct TotalTimeline: TimelineDrawable {
         context.drawDot(
             x: startX,
             bottomY: height-lineWidth/2,
-            dotRadius: 1.5 * lineWidth,
             color: color
         )
         let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)

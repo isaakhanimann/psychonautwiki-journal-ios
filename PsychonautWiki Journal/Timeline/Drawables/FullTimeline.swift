@@ -55,7 +55,7 @@ struct FullTimeline : TimelineDrawable {
             top = (1-verticalWeight) * heightBetween
         }
         let bottom = height - paddingTop
-        context.drawDot(x: startX, bottomY: bottom, dotRadius: 1.5 * lineWidth, color: color)
+        context.drawDot(x: startX, bottomY: bottom, color: color)
         var path = Path()
         path.move(to: CGPoint(x: startX, y: bottom))
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight)) * pixelsPerSec

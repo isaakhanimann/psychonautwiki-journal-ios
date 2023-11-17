@@ -180,11 +180,9 @@ struct FullCumulativeTimelines: TimelineDrawable {
         for point in finalPoints {
             if point.isIngestionPoint {
                 let pointHeight = point.y*heightBetween + paddingBottom
-                let dotRadius = 1.5*lineWidth
                 context.drawDot(
                     x: point.x*pixelsPerSec,
                     bottomY: height - pointHeight,
-                    dotRadius: dotRadius,
                     color: color)
             }
         }
