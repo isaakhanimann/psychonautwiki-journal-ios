@@ -49,12 +49,12 @@ struct ColorPickerScreen: View {
         } label: {
             if selectedColor == color {
                 HStack {
-                    Label(color.rawValue, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
+                    Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
                     Spacer()
                     Image(systemName: "checkmark")
                 }
             } else {
-                Label(color.rawValue, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
+                Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
             }
         }
 

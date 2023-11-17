@@ -136,6 +136,22 @@ struct PersistenceController {
         }
     }
 
+    func migrateColors() {
+        viewContext.performAndWait {
+            let companionFetchRequest = SubstanceCompanion.fetchRequest()
+            let allCompanions = (try? viewContext.fetch(companionFetchRequest)) ?? []
+            for companion in allCompanions {
+                companion.colorAsText = companion.colorAsText?.uppercased()
+            }
+            let timedNotesFetchRequest = TimedNote.fetchRequest()
+            let allTimedNotes = (try? viewContext.fetch(timedNotesFetchRequest)) ?? []
+            for timedNote in allTimedNotes {
+                timedNote.colorAsText = timedNote.colorAsText?.uppercased()
+            }
+            try? viewContext.save()
+        }
+    }
+
     func saveViewContext() {
         if viewContext.hasChanges {
             do {

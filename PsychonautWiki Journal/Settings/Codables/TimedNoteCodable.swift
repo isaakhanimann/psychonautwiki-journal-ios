@@ -50,12 +50,7 @@ struct TimedNoteCodable: Codable {
         let timeMillis = try values.decode(UInt64.self, forKey: .time)
         self.time = getDateFromMillis(millis: timeMillis)
         self.note = try values.decode(String.self, forKey: .note)
-        let colorCapitalized = try values.decode(String.self, forKey: .color)
-        if let color = SubstanceColor(rawValue: colorCapitalized.lowercased()) {
-            self.color = color
-        } else {
-            throw DecodingError.dataCorruptedError(in: try decoder.unkeyedContainer(), debugDescription: "\(colorCapitalized) is not a valid color")
-        }
+        self.color = try values.decode(SubstanceColor.self, forKey: .color)
         self.isPartOfTimeline = try values.decode(Bool.self, forKey: .isPartOfTimeline)
     }
 

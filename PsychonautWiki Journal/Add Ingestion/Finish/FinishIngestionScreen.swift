@@ -279,7 +279,7 @@ struct FinishIngestionScreen: View {
             foundCompanion = companionMatchUnwrap
             self.selectedColor = companionMatchUnwrap.color
         } else {
-            self.selectedColor = otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
+            self.selectedColor = otherColors.filter({$0.isPreferred}).first ?? otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         }
         isInitialized = true
     }

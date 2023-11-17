@@ -33,17 +33,12 @@ struct CompanionCodable: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.substanceName = try values.decode(String.self, forKey: .substanceName)
-        let colorCapitalized = try values.decode(String.self, forKey: .color)
-        if let color = SubstanceColor(rawValue: colorCapitalized.lowercased()) {
-            self.color = color
-        } else {
-            throw DecodingError.dataCorruptedError(in: try decoder.unkeyedContainer(), debugDescription: "\(colorCapitalized) is not a valid color")
-        }
+        self.color = try values.decode(SubstanceColor.self, forKey: .color)
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(substanceName, forKey: .substanceName)
-        try container.encode(color.rawValue.uppercased(), forKey: .color)
+        try container.encode(color.rawValue, forKey: .color)
     }
 }
