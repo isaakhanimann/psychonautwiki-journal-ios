@@ -42,6 +42,7 @@ struct ChooseCaffeineDoseScreen: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     nextLink
                 }
             }

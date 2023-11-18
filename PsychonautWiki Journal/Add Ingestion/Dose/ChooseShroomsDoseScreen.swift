@@ -62,10 +62,7 @@ struct ChooseShroomsDoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    nextLink
-                }
+                keyboardButtons
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
@@ -75,10 +72,7 @@ struct ChooseShroomsDoseScreen: View {
             }
         } else {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    nextLink
-                }
+                keyboardButtons
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -88,6 +82,14 @@ struct ChooseShroomsDoseScreen: View {
                     nextLink
                 }
             }
+        }
+    }
+
+    private var keyboardButtons: some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            HideKeyboardButton()
+            Spacer()
+            nextLink
         }
     }
 

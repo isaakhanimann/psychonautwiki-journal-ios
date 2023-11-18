@@ -30,23 +30,18 @@ struct ChooseMDMADoseScreen: View {
     var body: some View {
         if #available(iOS 16, *) {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    nextLink
-                }
+                keyboardButtons
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     nextLink
                 }
             }
         } else {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    nextLink
-                }
+                keyboardButtons
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -56,6 +51,14 @@ struct ChooseMDMADoseScreen: View {
                     nextLink
                 }
             }
+        }
+    }
+
+    private var keyboardButtons: some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            HideKeyboardButton()
+            Spacer()
+            nextLink
         }
     }
 

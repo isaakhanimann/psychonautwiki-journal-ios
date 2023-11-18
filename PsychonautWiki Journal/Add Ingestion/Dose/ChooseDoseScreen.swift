@@ -67,31 +67,18 @@ struct ChooseDoseScreenContent: View {
     var body: some View {
         if #available(iOS 16.0, *) {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    Button {
-                        isShowingNext = true
-                    } label: {
-                        NextLabel()
-                    }
-                }
+                keyboardButtons
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     nextLink
                 }
             }
         } else {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    Button {
-                        isShowingNext = true
-                    } label: {
-                        NextLabel()
-                    }
-                }
+                keyboardButtons
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -100,6 +87,18 @@ struct ChooseDoseScreenContent: View {
                 ToolbarItem(placement: .primaryAction) {
                     nextLink
                 }
+            }
+        }
+    }
+
+    private var keyboardButtons: some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            HideKeyboardButton()
+            Spacer()
+            Button {
+                isShowingNext = true
+            } label: {
+                NextLabel()
             }
         }
     }

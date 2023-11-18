@@ -68,6 +68,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     nextLink
                 }
             }

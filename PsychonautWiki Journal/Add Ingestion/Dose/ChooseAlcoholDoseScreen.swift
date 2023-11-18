@@ -54,12 +54,14 @@ struct ChooseAlcoholDoseScreen: View {
             screen.toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     HideKeyboardButton()
+                    Spacer()
                     nextLink
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     nextLink
                 }
             }
