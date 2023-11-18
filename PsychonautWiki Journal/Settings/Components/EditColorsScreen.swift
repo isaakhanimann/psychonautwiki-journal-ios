@@ -54,7 +54,9 @@ struct EditColorsScreen: View {
                     }
                 }
             }
-        }.navigationTitle("Edit Colors")
+        }
+        .navigationTitle("Edit Colors")
+        .dismissWhenTabTapped()
     }
 }
 
