@@ -68,6 +68,7 @@ struct FinishIngestionScreen: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    Spacer()
                     doneButton
                 }
             }
