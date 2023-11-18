@@ -22,14 +22,14 @@ struct EditColorsScreen: View {
         sortDescriptors: []
     ) var substanceCompanions: FetchedResults<SubstanceCompanion>
 
-    var alreadyUsedColors: Set<SubstanceColor> {
-        Set(substanceCompanions.map { comp in
+    var alreadyUsedColors: [SubstanceColor] {
+        Array(Set(substanceCompanions.map { comp in
             comp.color
-        })
+        })).sorted()
     }
 
-    var otherColors: Set<SubstanceColor> {
-        Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+    var otherColors: [SubstanceColor] {
+        Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
     }
 
     var body: some View {
@@ -61,22 +61,22 @@ struct EditColorsScreen: View {
 struct CompanionColorPickerScreen: View {
 
     let companion: SubstanceCompanion
-    let alreadyUsedColors: Set<SubstanceColor>
-    let otherColors: Set<SubstanceColor>
+    let alreadyUsedColors: [SubstanceColor]
+    let otherColors: [SubstanceColor]
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         List {
             if !otherColors.isEmpty {
                 Section("Unused Colors") {
-                    ForEach(Array(otherColors)) { color in
+                    ForEach(otherColors) { color in
                         button(for: color)
                     }
                 }
             }
             if !alreadyUsedColors.isEmpty {
                 Section("Used Colors") {
-                    ForEach(Array(alreadyUsedColors)) { color in
+                    ForEach(alreadyUsedColors) { color in
                         button(for: color)
                     }
                 }
@@ -94,12 +94,12 @@ struct CompanionColorPickerScreen: View {
         } label: {
             if companion.color == color {
                 HStack {
-                    Label(color.rawValue, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
+                    Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
                     Spacer()
                     Image(systemName: "checkmark")
                 }
             } else {
-                Label(color.rawValue, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
+                Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
             }
         }
 
