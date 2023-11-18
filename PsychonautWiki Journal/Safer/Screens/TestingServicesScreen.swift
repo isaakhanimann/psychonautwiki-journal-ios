@@ -86,6 +86,13 @@ struct TestingServicesScreen: View {
                     url: "https://www.drugs-test.nl/en/testlocations/"
                 )
             }
+            Section("Slovenia") {
+                TestingServiceItem(
+                    name: "DrogArt",
+                    city: "Various locations",
+                    url: "https://www.drogart.org/testirne-tocke/"
+                )
+            }
             Section("Spain") {
                 TestingServiceItem(
                     name: "Energy Control",
@@ -155,6 +162,6 @@ struct TestingServiceItem: View {
 
 struct TestingServicesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TestingServicesScreen()
+        TestingServicesScreen().environmentObject(TabBarObserver())
     }
 }
