@@ -22,8 +22,8 @@ struct TimedNoteScreenContent: View {
     @Binding var color: SubstanceColor
     @Binding var isPartOfTimeline: Bool
     let isTextFieldFocused: FocusState<Bool>.Binding
-    let alreadyUsedColors: Set<SubstanceColor>
-    let otherColors: Set<SubstanceColor>
+    let alreadyUsedColors: [SubstanceColor]
+    let otherColors: [SubstanceColor]
 
     var body: some View {
         Form {

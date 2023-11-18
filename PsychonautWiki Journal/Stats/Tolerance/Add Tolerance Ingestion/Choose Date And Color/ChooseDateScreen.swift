@@ -34,12 +34,12 @@ struct ChooseDateScreen: View {
         }
     }
 
-    private var alreadyUsedColors: Set<SubstanceColor> {
-        Set(substanceCompanions.map({$0.color}))
+    private var alreadyUsedColors: [SubstanceColor] {
+        Array(Set(substanceCompanions.map({$0.color}))).sorted()
     }
 
-    private var otherColors: Set<SubstanceColor> {
-        Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+    private var otherColors: [SubstanceColor] {
+        Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
     }
 
     var body: some View {

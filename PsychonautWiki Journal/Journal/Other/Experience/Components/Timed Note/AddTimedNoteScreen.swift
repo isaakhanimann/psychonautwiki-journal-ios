@@ -27,8 +27,8 @@ struct AddTimedNoteScreen: View {
     @State private var isPartOfTimeline = false
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @FocusState private var isTextFieldFocused: Bool
-    @State private var alreadyUsedColors: Set<SubstanceColor> = []
-    @State private var otherColors: Set<SubstanceColor> = []
+    @State private var alreadyUsedColors: [SubstanceColor] = []
+    @State private var otherColors: [SubstanceColor] = []
 
     var body: some View {
         NavigationView {
@@ -56,8 +56,8 @@ struct AddTimedNoteScreen: View {
         .onAppear {
             isTextFieldFocused = true
             isPartOfTimeline = experience.isCurrent
-            alreadyUsedColors = Set(experience.timedNotesForTimeline.map({$0.color}))
-            otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+            alreadyUsedColors = Array(Set(experience.timedNotesForTimeline.map({$0.color}))).sorted()
+            otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
             if let otherColor = otherColors.randomElement() {
                 color = otherColor
             }

@@ -46,8 +46,8 @@ struct FinishIngestionScreen: View {
     @State private var enteredTitle = ""
     @State private var consumerName = ""
     @State private var selectedStomachFullness = StomachFullness.empty
-    @State private var alreadyUsedColors = Set<SubstanceColor>()
-    @State private var otherColors = Set<SubstanceColor>()
+    @State private var alreadyUsedColors = [SubstanceColor]()
+    @State private var otherColors = [SubstanceColor]()
     @State private var notesInOrder = [String]()
     @State private var foundCompanion: SubstanceCompanion? = nil
     @State private var isInitialized = false
@@ -270,8 +270,8 @@ struct FinishIngestionScreen: View {
         }
         let fetchRequest = SubstanceCompanion.fetchRequest()
         let companions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
-        alreadyUsedColors = Set(companions.map { $0.color })
-        otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+        alreadyUsedColors = Array(Set(companions.map { $0.color })).sorted()
+        otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
         let companionMatch = companions.first { comp in
             comp.substanceNameUnwrapped == substanceName
         }

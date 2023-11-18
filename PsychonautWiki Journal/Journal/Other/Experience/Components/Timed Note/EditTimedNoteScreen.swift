@@ -27,8 +27,8 @@ struct EditTimedNoteScreen: View {
     @State private var color = SubstanceColor.blue
     @State private var isPartOfTimeline = false
     @FocusState private var isTextFieldFocused: Bool
-    @State private var alreadyUsedColors: Set<SubstanceColor> = []
-    @State private var otherColors: Set<SubstanceColor> = []
+    @State private var alreadyUsedColors: [SubstanceColor] = []
+    @State private var otherColors: [SubstanceColor] = []
     @State private var isFirstAppear = true // needed because else state is reset when navigating back from color picker
 
     var body: some View {
@@ -47,8 +47,8 @@ struct EditTimedNoteScreen: View {
                 note = timedNote.noteUnwrapped
                 color = timedNote.color
                 isPartOfTimeline = timedNote.isPartOfTimeline
-                alreadyUsedColors = Set(experience.timedNotesForTimeline.map({$0.color}))
-                otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+                alreadyUsedColors = Array(Set(experience.timedNotesForTimeline.map({$0.color}))).sorted()
+                otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
                 isFirstAppear = false
             }
         }

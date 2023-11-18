@@ -24,8 +24,8 @@ struct ChooseDateScreenContent: View {
     let isShowingColorPicker: Bool
     let substanceName: String
     @Binding var selectedColor: SubstanceColor
-    let alreadyUsedColors: Set<SubstanceColor>
-    let otherColors: Set<SubstanceColor>
+    let alreadyUsedColors: [SubstanceColor]
+    let otherColors: [SubstanceColor]
 
     var body: some View {
         if #available(iOS 16, *) {
@@ -79,8 +79,8 @@ struct ChooseDateScreenContent: View {
 struct ChooseDateScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            let alreadyUsedColors = Set([SubstanceColor.green, .pink])
-            let otherColors = Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)
+            let alreadyUsedColors = [SubstanceColor.green, .pink]
+            let otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors))
             ChooseDateScreenContent(
                 date: .constant(Date.now),
                 finish: {},

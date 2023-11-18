@@ -16,7 +16,12 @@
 
 import SwiftUI
 
-enum SubstanceColor: String, CaseIterable, Identifiable, Codable {
+enum SubstanceColor: String, CaseIterable, Identifiable, Codable, Comparable {
+
+    static func < (lhs: SubstanceColor, rhs: SubstanceColor) -> Bool {
+        lhs.sortValue < rhs.sortValue
+    }
+
     case blue = "BLUE"
     case brown = "BROWN"
     case cyan = "CYAN"
@@ -547,6 +552,113 @@ enum SubstanceColor: String, CaseIterable, Identifiable, Codable {
             return false
         case .maroon:
             return false
+        }
+    }
+
+    var sortValue: Int {
+        switch self {
+        case .blue:
+            return 0
+        case .brown:
+            return 1
+        case .cyan:
+            return 2
+        case .green:
+            return 3
+        case .indigo:
+            return 4
+        case .mint:
+            return 5
+        case .orange:
+            return 6
+        case .pink:
+            return 7
+        case .purple:
+            return 8
+        case .red:
+            return 9
+        case .teal:
+            return 10
+        case .yellow:
+            return 11
+        case .fireEngineRed:
+            return 22
+        case .coral:
+            return 13
+        case .tomato:
+            return 14
+        case .cinnabar:
+            return 15
+        case .rust:
+            return 16
+        case .orangeRed:
+            return 17
+        case .auburn:
+            return 18
+        case .saddleBrown:
+            return 19
+        case .darkOrange:
+            return 20
+        case .darkGold:
+            return 21
+        case .khaki:
+            return 22
+        case .bronze:
+            return 23
+        case .gold:
+            return 24
+        case .olive:
+            return 25
+        case .oliveDrab:
+            return 26
+        case .darkOliveGreen:
+            return 27
+        case .mossGreen:
+            return 28
+        case .limeGreen:
+            return 29
+        case .lime:
+            return 30
+        case .forestGreen:
+            return 31
+        case .seaGreen:
+            return 32
+        case .jungleGreen:
+            return 33
+        case .lightSeaGreen:
+            return 34
+        case .darkTurquoise:
+            return 35
+        case .dodgerBlue:
+            return 36
+        case .royalBlue:
+            return 37
+        case .deepLavender:
+            return 38
+        case .blueViolet:
+            return 39
+        case .darkViolet:
+            return 40
+        case .heliotrope:
+            return 41
+        case .byzantium:
+            return 42
+        case .magenta:
+            return 43
+        case .darkMagenta:
+            return 44
+        case .fuchsia:
+            return 45
+        case .deepPink:
+            return 46
+        case .grayishMagenta:
+            return 47
+        case .hotPink:
+            return 48
+        case .jazzberryJam:
+            return 49
+        case .maroon:
+            return 50
         }
     }
 }
