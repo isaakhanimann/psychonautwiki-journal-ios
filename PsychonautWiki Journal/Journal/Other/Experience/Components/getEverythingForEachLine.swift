@@ -16,6 +16,125 @@
 
 import Foundation
 
+func getMinInfoForEachLine(from ingestions: [Ingestion]) -> [IngestionMinInfoForLine] {
+    ingestions.map { ingestion in
+        IngestionMinInfoForLine(
+            substanceName: ingestion.substanceNameUnwrapped,
+            color: ingestion.substanceColor,
+            route: ingestion.administrationRouteUnwrapped,
+            dose: ingestion.doseUnwrapped,
+            ingestionTime: ingestion.timeUnwrapped)
+    }
+}
+
+struct SubstanceIngestionGroup {
+    let substanceName: String
+    let color: SubstanceColor
+    let routeMinInfos: [RouteMinInfo]
+}
+
+struct RouteMinInfo {
+    let route: AdministrationRoute
+    let doseMinInfos: [DoseMinInfo]
+}
+
+struct DoseMinInfo {
+    let dose: Double?
+    let ingestionTime: Date
+}
+
+// this is ready to be sent to live activity
+func getSubstanceIngestionGroups(ingestions: [Ingestion]) -> [SubstanceIngestionGroup] {
+    let minInfoForEachLine = getMinInfoForEachLine(from: ingestions)
+    let substanceDict = Dictionary(grouping: minInfoForEachLine) { minInfo in
+        minInfo.substanceName
+    }
+    let substanceIngestionGroups: [SubstanceIngestionGroup] = substanceDict.compactMap { (substanceName: String, ingestionMinInfoForLines: [IngestionMinInfoForLine]) in
+        guard let color = ingestionMinInfoForLines.first?.color else {return nil}
+        let routeDict = Dictionary(grouping: ingestionMinInfoForLines) { value in
+            value.route
+        }
+        let routeMinInfos = routeDict.map { (route: AdministrationRoute, values: [IngestionMinInfoForLine]) in
+            let doseMinInfos = values.map { ingestionMinInfo in
+                DoseMinInfo(
+                    dose: ingestionMinInfo.dose,
+                    ingestionTime: ingestionMinInfo.ingestionTime
+                )
+            }
+            return RouteMinInfo(
+                route: route,
+                doseMinInfos: doseMinInfos)
+
+        }
+        return SubstanceIngestionGroup(
+            substanceName: substanceName,
+            color: color,
+            routeMinInfos: routeMinInfos)
+    }
+    return substanceIngestionGroups
+}
+
+
+
+struct EnhancedSubstanceGroup {
+    let color: SubstanceColor
+    let enhancedRoaGroups: [EnhancedRoaGroup]
+}
+
+struct EnhancedRoaGroup {
+    let roaDuration: RoaDuration?
+    let roaStrength: Double
+    let doseMinInfos: [EnhancedDose]
+}
+
+struct EnhancedDose {
+    let verticalWeight: Double
+    let horizontalWeight: Double
+}
+
+func getFinalSubstanceGroup(substanceIngestionGroups: [SubstanceIngestionGroup]) -> [FinalSubstanceGroup] {
+    substanceIngestionGroups.map { substanceIngestionGroup in
+        let substance = SubstanceRepo.shared.getSubstance(name: substanceIngestionGroup.substanceName)
+        let finalRoaGroups = substanceIngestionGroup.routeMinInfos.map { routeMinInfo in
+            let roaDuration = substance?.getDuration(for: routeMinInfo.route)
+            let allRoas = substanceIngestionGroup.routeMinInfos.map({$0.route})
+            let roaStrength = 1
+            let finalRelativeDoses = routeMinInfo.doseMinInfos.map { doseMinInfo in
+                let heightRelative = roaStrength * doseMinInfo.dose
+                let horizontalWeight = 0.5
+                return FinalRelativeDose(
+                    heightRelative: heightRelative,
+                    horizontalWeight: horizontalWeight)
+            }
+            return FinalRoaGroup(
+                roaDuration: roaDuration,
+                finalRelativeDoses: finalRelativeDoses)
+        }
+        return FinalSubstanceGroup(
+            color: substanceIngestionGroup.color,
+            finalRoaGroups: finalRoaGroups)
+    }
+}
+
+
+struct FinalSubstanceGroup {
+    let color: SubstanceColor
+    let finalRoaGroups: [FinalRoaGroup]
+}
+
+struct FinalRoaGroup {
+    let roaDuration: RoaDuration?
+    let finalRelativeDoses: [FinalRelativeDose]
+}
+
+struct FinalRelativeDose {
+    let heightRelative: Double
+    let horizontalWeight: Double
+}
+
+
+
+
 func getEverythingForEachLine(from ingestions: [Ingestion]) -> [EverythingForOneLine] {
     let dosePairs: [(String, Double)] = ingestions.compactMap({ ing in
         guard let dose = ing.doseUnwrapped else {return nil}

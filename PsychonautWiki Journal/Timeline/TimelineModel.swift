@@ -27,7 +27,6 @@ struct TimelineModel {
 
     struct RoaGroup {
         let color: SubstanceColor
-        let roaDuration: RoaDuration?
         let weightedLines: [WeightedLine]
     }
 
@@ -71,7 +70,6 @@ struct TimelineModel {
             GroupDrawable(
                 startGraph: startTime,
                 color: group.color,
-                roaDuration: group.roaDuration,
                 weightedLines: group.weightedLines,
                 areRedosesDrawnIndividually: areRedosesDrawnIndividually)
         }.sorted { lhs, rhs in

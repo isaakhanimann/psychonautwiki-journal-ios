@@ -16,10 +16,10 @@
 
 import Foundation
 
-struct WeightedLine {
-    let startTime: Date
-    let horizontalWeight: Double
-    let height: Double
-    let onsetDelayInHours: Double
-    let roaDuration: RoaDuration?
+struct IngestionMinInfoForLine {
+    let substanceName: String
+    let color: SubstanceColor
+    let route: AdministrationRoute
+    let dose: Double?
+    let ingestionTime: Date
 }

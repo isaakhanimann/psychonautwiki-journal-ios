@@ -104,27 +104,18 @@ struct Substance: Decodable, Identifiable, Hashable {
     }
 
     func getDuration(for administrationRoute: AdministrationRoute) -> RoaDuration? {
-        let filteredRoas = roas.filter { roa in
+        roas.first { roa in
             roa.name == administrationRoute
-        }
-
-        guard let duration = filteredRoas.first?.duration else {
-            return nil
-        }
-        return duration
+        }?.duration
     }
 
     func getDose(for administrationRoute: AdministrationRoute?) -> RoaDose? {
-        guard let administrationRoute = administrationRoute else {
+        guard let administrationRoute else {
             return nil
         }
-        let filteredRoas = roas.filter { roa in
+        return roas.first { roa in
             roa.name == administrationRoute
-        }
-        guard let dose = filteredRoas.first?.dose else {
-            return nil
-        }
-        return dose
+        }?.dose
     }
 
     var durationInfos: [DurationInfo] {

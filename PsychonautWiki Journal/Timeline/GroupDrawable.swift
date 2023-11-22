@@ -29,11 +29,11 @@ struct GroupDrawable {
     init(
         startGraph: Date,
         color: SubstanceColor,
-        roaDuration: RoaDuration?,
         weightedLines: [WeightedLine],
         areRedosesDrawnIndividually: Bool
     ) {
         self.color = color
+        let fullWeightedLines = weightedLines
         guard let roaDuration else {
             timelineDrawables = weightedLines.map { weightedLine in
                 NoTimeline(
