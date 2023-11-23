@@ -83,39 +83,70 @@ struct EnhancedSubstanceGroup {
 
 struct EnhancedRoaGroup {
     let roaDuration: RoaDuration?
-    let roaStrength: Double
-    let doseMinInfos: [EnhancedDose]
+    let enhancedDoses: [EnhancedDose]
 }
 
 struct EnhancedDose {
-    let verticalWeight: Double
+    let relativeDose: RelativeDoseOption
     let horizontalWeight: Double
+    let ingestionTime: Date
 }
 
-func getFinalSubstanceGroup(substanceIngestionGroups: [SubstanceIngestionGroup]) -> [FinalSubstanceGroup] {
+enum RelativeDoseOption {
+    case unknownDose
+    case strengthUnknown(originalDose: Double)
+    case strengthKnown(strength: Double)
+}
+
+func getEnhancedSubstanceGroup(substanceIngestionGroups: [SubstanceIngestionGroup]) -> [EnhancedSubstanceGroup] {
     substanceIngestionGroups.map { substanceIngestionGroup in
         let substance = SubstanceRepo.shared.getSubstance(name: substanceIngestionGroup.substanceName)
-        let finalRoaGroups = substanceIngestionGroup.routeMinInfos.map { routeMinInfo in
+        let enhancedRoaGroups = substanceIngestionGroup.routeMinInfos.map { routeMinInfo in
             let roaDuration = substance?.getDuration(for: routeMinInfo.route)
+            let roaDose = substance?.getDose(for: routeMinInfo.route)
             let allRoas = substanceIngestionGroup.routeMinInfos.map({$0.route})
-            let roaStrength = 1
-            let finalRelativeDoses = routeMinInfo.doseMinInfos.map { doseMinInfo in
-                let heightRelative = roaStrength * doseMinInfo.dose
-                let horizontalWeight = 0.5
-                return FinalRelativeDose(
-                    heightRelative: heightRelative,
-                    horizontalWeight: horizontalWeight)
+            let enhancedDoses = routeMinInfo.doseMinInfos.map { doseMinInfo in
+                var relativeDose = RelativeDoseOption.unknownDose
+                if let dose = doseMinInfo.dose {
+                    if let strength = roaDose?.getValueRelativeToAverageCommonDose(for: dose) {
+                        relativeDose = .strengthKnown(strength: strength)
+                    } else {
+                        relativeDose = .strengthUnknown(originalDose: dose)
+                    }
+                }
+                var horizontalWeight = 0.5
+                if let dose = doseMinInfo.dose, let roaDose {
+                    let doseType = roaDose.getRangeType(for: dose, with: roaDose.units)
+                    switch doseType {
+                    case .thresh:
+                        horizontalWeight = 0
+                    case .light:
+                        horizontalWeight = 0.25
+                    case .common:
+                        horizontalWeight = 0.5
+                    case .strong:
+                        horizontalWeight = 0.75
+                    case .heavy:
+                        horizontalWeight = 1
+                    case .none:
+                        horizontalWeight = 0.5
+                    }
+                }
+                return EnhancedDose(
+                    relativeDose: relativeDose,
+                    horizontalWeight: horizontalWeight,
+                    ingestionTime: doseMinInfo.ingestionTime
+                )
             }
-            return FinalRoaGroup(
+            return EnhancedRoaGroup(
                 roaDuration: roaDuration,
-                finalRelativeDoses: finalRelativeDoses)
+                enhancedDoses: enhancedDoses)
         }
-        return FinalSubstanceGroup(
+        return EnhancedSubstanceGroup(
             color: substanceIngestionGroup.color,
-            finalRoaGroups: finalRoaGroups)
+            enhancedRoaGroups: enhancedRoaGroups)
     }
 }
-
 
 struct FinalSubstanceGroup {
     let color: SubstanceColor
@@ -128,8 +159,21 @@ struct FinalRoaGroup {
 }
 
 struct FinalRelativeDose {
-    let heightRelative: Double
+    let relativeDose: Double?
     let horizontalWeight: Double
+    let ingestionTime: Date
+}
+
+
+func getFinalSubstanceGroup(enhancedSubstanceGroups: [EnhancedSubstanceGroup], areSubstancesDrawnIndividually: Bool) -> [FinalSubstanceGroup] {
+
+    enhancedSubstanceGroups.map { enhancedSubstanceGroup in
+        let finalRoaGroups =
+
+        return FinalSubstanceGroup(
+            color: enhancedSubstanceGroup.color,
+            finalRoaGroups: finalRoaGroups)
+    }
 }
 
 

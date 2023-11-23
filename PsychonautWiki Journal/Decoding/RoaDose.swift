@@ -67,6 +67,15 @@ struct RoaDose: Decodable {
         }
     }
 
+    func getValueRelativeToAverageCommonDose(for dose: Double) -> Double? {
+        guard dose > 0 else {return nil}
+        if let commonMin, let strongMin {
+            let average = (commonMin + strongMin) / 2
+            return dose / average
+        }
+        return nil
+    }
+
     func getNumDots(ingestionDose: Double?, ingestionUnits: String?) -> Int? {
         guard let dose = ingestionDose else { return nil }
         guard ingestionUnits == units else { return nil }
