@@ -123,6 +123,7 @@ struct DurationScreen: View {
             everythingForEachLine: durationsToShow.map({ info in
                 EverythingForOneLine(
                     substanceName: info.route.rawValue,
+                    route: info.route,
                     roaDuration: info.roaDuration,
                     onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0,
                     startTime: selectedTime,

@@ -53,6 +53,7 @@ func getEverythingForEachLine(from ingestions: [Ingestion]) -> [EverythingForOne
         }
         return EverythingForOneLine(
             substanceName: ingestion.substanceNameUnwrapped,
+            route: ingestion.administrationRouteUnwrapped,
             roaDuration: roaDuration,
             onsetDelayInHours: ingestion.stomachFullnessUnwrapped?.onsetDelayForOralInHours ?? 0,
             startTime: ingestion.timeUnwrapped,

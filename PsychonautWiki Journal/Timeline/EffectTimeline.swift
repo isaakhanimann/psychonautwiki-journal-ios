@@ -135,6 +135,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // full
         EverythingForOneLine(
             substanceName: "a",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 30, max: 60, units: .minutes),
                 comeup: DurationRange(min: 30, max: 60, units: .minutes),
@@ -152,6 +153,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // total
         EverythingForOneLine(
             substanceName: "b",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: nil,
                 comeup: nil,
@@ -169,6 +171,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset comeup
         EverythingForOneLine(
             substanceName: "c",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 20, max: 40, units: .minutes),
                 comeup: DurationRange(min: 1, max: 2, units: .hours),
@@ -186,6 +189,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset comeup peak total
         EverythingForOneLine(
             substanceName: "d",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 30, max: 60, units: .minutes),
                 comeup: DurationRange(min: 1, max: 2, units: .hours),
@@ -203,6 +207,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset
         EverythingForOneLine(
             substanceName: "e",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 1, max: 3, units: .hours),
                 comeup: nil,
@@ -220,6 +225,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset comeup peak
         EverythingForOneLine(
             substanceName: "f",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 30, max: 60, units: .minutes),
                 comeup: DurationRange(min: 1, max: 2, units: .hours),
@@ -237,6 +243,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset comeup total
         EverythingForOneLine(
             substanceName: "g",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 1, max: 2, units: .hours),
                 comeup: DurationRange(min: 1, max: 2, units: .hours),
@@ -254,6 +261,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // onset total
         EverythingForOneLine(
             substanceName: "h",
+            route: .oral,
             roaDuration: RoaDuration(
                 onset: DurationRange(min: 1, max: 2, units: .hours),
                 comeup: nil,
@@ -271,6 +279,7 @@ struct EffectTimeline_Previews: PreviewProvider {
         // no timeline
         EverythingForOneLine(
             substanceName: "i",
+            route: .oral,
             roaDuration: nil,
             onsetDelayInHours: 3,
             startTime: Date().addingTimeInterval(-60*60),

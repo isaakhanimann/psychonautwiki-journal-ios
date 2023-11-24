@@ -25,7 +25,7 @@ struct TimelineModel {
     let timedNoteDrawables: [TimedNoteDrawable]
     let axisDrawable: AxisDrawable
 
-    struct SubstanceGroup {
+    struct RoaGroup {
         let color: SubstanceColor
         let roaDuration: RoaDuration?
         let weightedLines: [WeightedLine]
@@ -45,22 +45,29 @@ struct TimelineModel {
         let substanceDict = Dictionary(grouping: everythingForEachLine) { oneLine in
             oneLine.substanceName
         }
-        let substanceGroups: [SubstanceGroup] = substanceDict.compactMap { substanceName, lines in
-            guard let line = lines.first else {return nil}
-            return SubstanceGroup(
-                color: line.color,
-                roaDuration: line.roaDuration,
-                weightedLines: lines.map { l in
-                    WeightedLine(
-                        startTime: l.startTime,
-                        horizontalWeight: l.horizontalWeight,
-                        height: l.verticalWeight,
-                        onsetDelayInHours: l.onsetDelayInHours
-                    )
-                }
-            )
+        var roaGroups: [RoaGroup] = []
+        for linesPerSubstance in substanceDict.values {
+            let roaDict = Dictionary(grouping: linesPerSubstance) { line in
+                line.route
+            }
+            for linesPerRoute in roaDict.values {
+                guard let firstLine = linesPerRoute.first else {continue}
+                let group = RoaGroup(
+                    color: firstLine.color,
+                    roaDuration: firstLine.roaDuration,
+                    weightedLines: linesPerRoute.map { l in
+                        WeightedLine(
+                            startTime: l.startTime,
+                            horizontalWeight: l.horizontalWeight,
+                            height: l.verticalWeight,
+                            onsetDelayInHours: l.onsetDelayInHours
+                        )
+                    }
+                )
+                roaGroups.append(group)
+            }
         }
-        let groupDrawables = substanceGroups.map { group in
+        let groupDrawables = roaGroups.map { group in
             GroupDrawable(
                 startGraph: startTime,
                 color: group.color,

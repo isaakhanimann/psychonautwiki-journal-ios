@@ -21,6 +21,7 @@ struct EverythingForOneLine: Codable, Equatable {
         lhs.startTime == rhs.startTime
     }
     let substanceName: String
+    let route: AdministrationRoute
     let roaDuration: RoaDuration?
     let onsetDelayInHours: Double
     let startTime: Date
