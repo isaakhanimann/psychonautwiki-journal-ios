@@ -22,4 +22,5 @@ struct IngestionMinInfoForLine {
     let route: AdministrationRoute
     let dose: Double?
     let ingestionTime: Date
+    let onsetDelayInHours: Double
 }
