@@ -35,43 +35,33 @@ struct ChooseRouteScreen: View {
         VStack(alignment: .center) {
             VStack(alignment: .leading) {
                 let documentedRoutes = substance.administrationRoutesUnwrapped
-                if !documentedRoutes.isEmpty {
-                    let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
-                    ForEach(0..<numRows, id: \.self) { index in
-                        HStack {
-                            let route1 = documentedRoutes[index*2]
-                            getRouteBoxFor(route: route1)
-                            let secondIndex = index*2+1
-                            if secondIndex < documentedRoutes.count {
-                                let route2 = documentedRoutes[secondIndex]
-                                getRouteBoxFor(route: route2)
-                            }
-                        }
-                    }
-                }
                 let otherRoutes = AdministrationRoute.allCases.filter { route in
                     !documentedRoutes.contains(route)
                 }
-                if !otherRoutes.isEmpty {
-                    NavigationLink {
-                        ChooseOtherRouteScreen(
-                            substance: substance,
-                            dismiss: dismiss,
-                            otherRoutes: otherRoutes)
-                    } label: {
-                        GroupBox {
-                            Text("Other Routes")
-                                .font(.headline)
-                                .frame(
-                                    minWidth: 0,
-                                    maxWidth: .infinity,
-                                    minHeight: 0,
-                                    maxHeight: .infinity,
-                                    alignment: .center
-                                )
+                if documentedRoutes.isEmpty {
+                    getGroupOfRoutes(routes: otherRoutes)
+                } else {
+                    getGroupOfRoutes(routes: documentedRoutes)
+                    if !otherRoutes.isEmpty {
+                        NavigationLink {
+                            ChooseOtherRouteScreen(
+                                substance: substance,
+                                dismiss: dismiss,
+                                otherRoutes: otherRoutes)
+                        } label: {
+                            GroupBox {
+                                Text("Other Routes")
+                                    .font(.headline)
+                                    .frame(
+                                        minWidth: 0,
+                                        maxWidth: .infinity,
+                                        minHeight: 0,
+                                        maxHeight: .infinity,
+                                        alignment: .center
+                                    )
+                            }
                         }
                     }
-
                 }
             }
             NavigationLink {
@@ -83,6 +73,21 @@ struct ChooseRouteScreen: View {
         }
         .padding(.horizontal)
         .navigationBarTitle("\(substance.name) Routes")
+    }
+
+    private func getGroupOfRoutes(routes: [AdministrationRoute]) -> some View {
+        let numRows = Int(ceil(Double(routes.count)/2.0))
+        return ForEach(0..<numRows, id: \.self) { index in
+            HStack {
+                let route1 = routes[index*2]
+                getRouteBoxFor(route: route1)
+                let secondIndex = index*2+1
+                if secondIndex < routes.count {
+                    let route2 = routes[secondIndex]
+                    getRouteBoxFor(route: route2)
+                }
+            }
+        }
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
