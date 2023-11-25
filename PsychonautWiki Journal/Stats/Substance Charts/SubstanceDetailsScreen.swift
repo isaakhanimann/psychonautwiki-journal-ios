@@ -37,34 +37,39 @@ struct SubstanceDetailsScreen: View {
 
     var body: some View {
         List {
-            TimeRangePicker(value: $timeRange)
-                .padding(.vertical, 5)
-            if let maxCount = data.first?.experienceCount {
-                ForEach(data) { elem in
-                    VStack(alignment: .leading, spacing: 3) {
-                        HStack {
-                            Text(elem.substanceName)
-                                .font(.headline)
-                            Spacer()
-                            Text("^[\(elem.experienceCount) experience](inflect: true)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+            Section {
+                TimeRangePicker(value: $timeRange)
+                    .padding(.vertical, 5)
+                if let maxCount = data.first?.experienceCount {
+                    ForEach(data) { elem in
+                        VStack(alignment: .leading, spacing: 3) {
+                            HStack {
+                                Text(elem.substanceName)
+                                    .font(.headline)
+                                Spacer()
+                                Text("^[\(elem.experienceCount) experience](inflect: true)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            let widthRatio = Double(elem.experienceCount) / Double(maxCount)
+                            GeometryReader { geometry in
+                                Rectangle()
+                                    .fill(substanceData.colorMapping(elem.substanceName))
+                                    .cornerRadius(5, corners: [.topRight, .bottomRight])
+                                    .frame(
+                                        width: geometry.size.width*widthRatio
+                                    )
+                            }
+                            .frame(height: 20)
                         }
-                        let widthRatio = Double(elem.experienceCount) / Double(maxCount)
-                        GeometryReader { geometry in
-                            Rectangle()
-                                .fill(substanceData.colorMapping(elem.substanceName))
-                                .cornerRadius(5, corners: [.topRight, .bottomRight])
-                                .frame(
-                                    width: geometry.size.width*widthRatio
-                                )
-                        }
-                        .frame(height: 20)
                     }
+                } else {
+                    Text("No experiences").font(.headline)
                 }
-            } else {
-                Text("No experiences").font(.headline)
+            } footer: {
+                Text("Each occurence of the substance in an experience is counted as 1.")
             }
+
         }
         .navigationTitle("Substances")
         .dismissWhenTabTapped()
