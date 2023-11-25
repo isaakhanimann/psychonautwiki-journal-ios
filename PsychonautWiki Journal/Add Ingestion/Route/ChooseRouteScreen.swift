@@ -75,16 +75,24 @@ struct ChooseRouteScreen: View {
         .navigationBarTitle("\(substance.name) Routes")
     }
 
+    @ViewBuilder
     private func getGroupOfRoutes(routes: [AdministrationRoute]) -> some View {
-        let numRows = Int(ceil(Double(routes.count)/2.0))
-        return ForEach(0..<numRows, id: \.self) { index in
-            HStack {
-                let route1 = routes[index*2]
-                getRouteBoxFor(route: route1)
-                let secondIndex = index*2+1
-                if secondIndex < routes.count {
-                    let route2 = routes[secondIndex]
-                    getRouteBoxFor(route: route2)
+        let numOfRoutes = routes.count
+        if numOfRoutes < 6 {
+            ForEach(routes, id: \.self) { route in
+                getRouteBoxFor(route: route)
+            }
+        } else {
+            let numRows = Int(ceil(Double(routes.count)/2.0))
+            ForEach(0..<numRows, id: \.self) { index in
+                HStack {
+                    let route1 = routes[index*2]
+                    getRouteBoxFor(route: route1)
+                    let secondIndex = index*2+1
+                    if secondIndex < routes.count {
+                        let route2 = routes[secondIndex]
+                        getRouteBoxFor(route: route2)
+                    }
                 }
             }
         }
@@ -98,20 +106,11 @@ struct ChooseRouteScreen: View {
     }
 }
 
-struct ChooseRouteView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        Group {
-            ForEach(previewDeviceNames, id: \.self) { name in
-                NavigationView {
-                    ChooseRouteScreen(
-                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                        dismiss: {}
-                    )
-                }
-                .previewDevice(PreviewDevice(rawValue: name))
-                .previewDisplayName(name)
-            }
-        }
+#Preview {
+    NavigationView {
+        ChooseRouteScreen(
+            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+            dismiss: {}
+        )
     }
 }
