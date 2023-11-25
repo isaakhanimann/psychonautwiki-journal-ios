@@ -73,6 +73,8 @@
 		EA2D19652B11D3BA00B270A2 /* SubstanceIngestionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */; };
 		EA2D19662B11D46900B270A2 /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA2D19672B11D9B000B270A2 /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
+		EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D19682B11E85300B270A2 /* ChooseOtherRouteScreen.swift */; };
+		EA2D196B2B11E8AE00B270A2 /* RouteBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D196A2B11E8AE00B270A2 /* RouteBox.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -412,6 +414,8 @@
 		EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-SectionHeaderStyle.swift"; sourceTree = "<group>"; };
 		EA2C94B42AAD98A000864BEC /* FullTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeline.swift; sourceTree = "<group>"; };
 		EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceIngestionGroup.swift; sourceTree = "<group>"; };
+		EA2D19682B11E85300B270A2 /* ChooseOtherRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOtherRouteScreen.swift; sourceTree = "<group>"; };
+		EA2D196A2B11E8AE00B270A2 /* RouteBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBox.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -1180,6 +1184,8 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A526CBA664009FB0EC /* ChooseRouteScreen.swift */,
+				EA2D196A2B11E8AE00B270A2 /* RouteBox.swift */,
+				EA2D19682B11E85300B270A2 /* ChooseOtherRouteScreen.swift */,
 				EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */,
 			);
 			path = Route;
@@ -1755,6 +1761,7 @@
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
 				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
 				EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */,
+				EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */,
 				EA48F8AC29EBD62D007DA8C5 /* View-Hud.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
@@ -1923,6 +1930,7 @@
 				EA418A2F296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift in Sources */,
 				EA48F8B029EBEE4B007DA8C5 /* DangerTriangles.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceScreen.swift in Sources */,
+				EA2D196B2B11E8AE00B270A2 /* RouteBox.swift in Sources */,
 				EA48F8A429E991C6007DA8C5 /* DateDifference.swift in Sources */,
 				EA418A072969740D00DEA663 /* IngestionNoteScreen.swift in Sources */,
 				EAF76C9D27D8B10500945587 /* InteractionType.swift in Sources */,

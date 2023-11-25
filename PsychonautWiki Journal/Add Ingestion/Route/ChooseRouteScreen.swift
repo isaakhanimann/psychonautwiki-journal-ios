@@ -32,99 +32,64 @@ struct ChooseRouteScreen: View {
     }
 
     var screen: some View {
-        VStack(alignment: .leading) {
-            let documentedRoutes = substance.administrationRoutesUnwrapped
-            if !documentedRoutes.isEmpty {
-                Text("Documented Routes").sectionHeaderStyle()
-                let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
-                ForEach(0..<numRows, id: \.self) { index in
-                    HStack {
-                        let route1 = documentedRoutes[index*2]
-                        getRouteBoxFor(route: route1)
-                        let secondIndex = index*2+1
-                        if secondIndex < documentedRoutes.count {
-                            let route2 = documentedRoutes[secondIndex]
-                            getRouteBoxFor(route: route2)
+        VStack(alignment: .center) {
+            VStack(alignment: .leading) {
+                let documentedRoutes = substance.administrationRoutesUnwrapped
+                if !documentedRoutes.isEmpty {
+                    let numRows = Int(ceil(Double(documentedRoutes.count)/2.0))
+                    ForEach(0..<numRows, id: \.self) { index in
+                        HStack {
+                            let route1 = documentedRoutes[index*2]
+                            getRouteBoxFor(route: route1)
+                            let secondIndex = index*2+1
+                            if secondIndex < documentedRoutes.count {
+                                let route2 = documentedRoutes[secondIndex]
+                                getRouteBoxFor(route: route2)
+                            }
                         }
                     }
                 }
-            }
-            let otherRoutes = AdministrationRoute.allCases.filter { route in
-                !documentedRoutes.contains(route)
-            }
-            if !otherRoutes.isEmpty {
-                Text("Undocumented Routes").sectionHeaderStyle()
-                let numOtherRows = Int(ceil(Double(otherRoutes.count)/2.0))
-                ForEach(0..<numOtherRows, id: \.self) { index in
-                    HStack {
-                        let route1 = otherRoutes[index*2]
-                        getRouteBoxFor(route: route1)
-                        let secondIndex = index*2+1
-                        if secondIndex < otherRoutes.count {
-                            let route2 = otherRoutes[secondIndex]
-                            getRouteBoxFor(route: route2)
+                let otherRoutes = AdministrationRoute.allCases.filter { route in
+                    !documentedRoutes.contains(route)
+                }
+                if !otherRoutes.isEmpty {
+                    NavigationLink {
+                        ChooseOtherRouteScreen(
+                            substance: substance,
+                            dismiss: dismiss,
+                            otherRoutes: otherRoutes)
+                    } label: {
+                        GroupBox {
+                            Text("Other Routes")
+                                .font(.headline)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity,
+                                    minHeight: 0,
+                                    maxHeight: .infinity,
+                                    alignment: .center
+                                )
                         }
                     }
+
                 }
             }
             NavigationLink {
                 SaferRoutesScreen()
             } label: {
-                GroupBox {
-                    Label("Safer Routes", systemImage: "info.circle")
-                        .font(.headline)
-                        .frame(
-                            minWidth: 0,
-                            maxWidth: .infinity,
-                            minHeight: 0,
-                            alignment: .center
-                        )
-                }
-                .padding(.bottom)
+                Label("Safer Routes", systemImage: "info.circle")
             }
+            .padding(.vertical)
         }
         .padding(.horizontal)
         .navigationBarTitle("\(substance.name) Routes")
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
-        NavigationLink {
-            if substance.name == "Cannabis" && route == .smoked {
-                ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
-            } else if substance.name == "Alcohol" && route == .oral {
-                ChooseAlcoholDoseScreen(dismiss: dismiss)
-            } else if substance.name == "Caffeine" && route == .oral {
-                ChooseCaffeineDoseScreen(dismiss: dismiss)
-            } else if substance.name == "MDMA" && route == .oral {
-                ChooseMDMADoseScreen(dismiss: dismiss)
-            } else if substance.name == "Psilocybin mushrooms" && route == .oral {
-                ChooseShroomsDoseScreen(dismiss: dismiss)
-            } else {
-                ChooseDoseScreen(
-                    substance: substance,
-                    administrationRoute: route,
-                    dismiss: dismiss
-                )
-            }
-        } label: {
-            GroupBox {
-                VStack(alignment: .center) {
-                    Text(route.rawValue.localizedCapitalized)
-                        .font(.headline)
-                    Text(route.clarification)
-                        .font(.footnote)
-                        .multilineTextAlignment(.center)
-
-                }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity,
-                    alignment: .center
-                )
-            }
-        }
+        RouteBox(
+            substance: substance,
+            route: route,
+            dismiss: dismiss)
     }
 }
 

@@ -33,56 +33,37 @@ struct CustomChooseRouteScreen: View {
     }
 
     var screen: some View {
-        VStack {
-            HStack {
-                getRouteBoxFor(route: .oral)
-                getRouteBoxFor(route: .insufflated)
-            }
-            HStack {
-                getRouteBoxFor(route: .smoked)
-                getRouteBoxFor(route: .inhaled)
-            }
-            HStack {
-                getRouteBoxFor(route: .sublingual)
-                getRouteBoxFor(route: .buccal)
-            }
-            HStack {
-                getRouteBoxFor(route: .rectal)
-                getRouteBoxFor(route: .transdermal)
-            }
-            HStack {
-                getRouteBoxFor(route: .subcutaneous)
-                getRouteBoxFor(route: .intravenous)
-            }
-            HStack {
-                getRouteBoxFor(route: .intramuscular)
-                if isEyeOpen {
-                    NavigationLink {
-                        SaferRoutesScreen()
-                    } label: {
-                        GroupBox {
-                            Label("Safer Routes", systemImage: "info.circle")
-                                .font(.headline)
-                                .frame(
-                                    minWidth: 0,
-                                    maxWidth: .infinity,
-                                    minHeight: 0,
-                                    maxHeight: .infinity,
-                                    alignment: .center
-                                )
-                        }
-                    }
-                } else {
-                    GroupBox{}.hidden().frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity,
-                        alignment: .center
-                    )
+        VStack(alignment: .center) {
+            VStack(alignment: .leading) {
+                HStack {
+                    getRouteBoxFor(route: .oral)
+                    getRouteBoxFor(route: .insufflated)
                 }
+                HStack {
+                    getRouteBoxFor(route: .smoked)
+                    getRouteBoxFor(route: .inhaled)
+                }
+                HStack {
+                    getRouteBoxFor(route: .sublingual)
+                    getRouteBoxFor(route: .buccal)
+                }
+                HStack {
+                    getRouteBoxFor(route: .rectal)
+                    getRouteBoxFor(route: .transdermal)
+                }
+                HStack {
+                    getRouteBoxFor(route: .subcutaneous)
+                    getRouteBoxFor(route: .intravenous)
+                }
+                getRouteBoxFor(route: .intramuscular)
             }
-            .padding(.bottom)
+            if isEyeOpen {
+                NavigationLink {
+                    SaferRoutesScreen()
+                } label: {
+                    Label("Safer Routes", systemImage: "info.circle")
+                }.padding(.vertical)
+            }
         }
         .padding(.horizontal)
         .navigationTitle("\(substanceName) Routes")
