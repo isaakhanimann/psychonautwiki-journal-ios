@@ -18,9 +18,7 @@ import SwiftUI
 
 struct NextLabel: View {
     var body: some View {
-        Label("Next", systemImage: "chevron.forward.circle.fill")
-            .labelStyle(.titleAndIcon)
-            .font(.headline)
+        Text("Next")
     }
 }
 

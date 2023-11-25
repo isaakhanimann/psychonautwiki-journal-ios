@@ -49,12 +49,10 @@ struct AddRatingScreen: View {
     }
 
     var doneButton: some View {
-        Button {
+        Button("Done") {
             save()
             toastViewModel.showSuccessToast(message: "Rating Added")
             dismiss()
-        } label: {
-            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
     }
 

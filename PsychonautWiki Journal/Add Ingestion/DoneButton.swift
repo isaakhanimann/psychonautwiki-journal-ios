@@ -21,10 +21,8 @@ struct DoneButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button {
+        Button("Done") {
             action()
-        } label: {
-            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
     }
 }

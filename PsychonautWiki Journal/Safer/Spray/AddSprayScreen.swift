@@ -62,11 +62,9 @@ struct AddSprayScreen: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if let sizeInMl, let numSprays, !name.isEmpty {
-                        Button {
+                        Button("Save") {
                             save(sizeInMl: sizeInMl, numSprays: numSprays)
                             dismiss()
-                        } label: {
-                            Label("Save", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon)
                         }
                     }
                 }

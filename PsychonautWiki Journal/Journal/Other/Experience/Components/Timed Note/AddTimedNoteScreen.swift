@@ -65,12 +65,10 @@ struct AddTimedNoteScreen: View {
     }
 
     var doneButton: some View {
-        Button {
+        Button("Done") {
             save()
             toastViewModel.showSuccessToast(message: "Note Added")
             dismiss()
-        } label: {
-            Label("Done", systemImage: "checkmark.circle.fill").labelStyle(.titleAndIcon).font(.headline)
         }
     }
 
