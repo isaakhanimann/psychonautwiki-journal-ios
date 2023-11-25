@@ -19,15 +19,15 @@ import ActivityKit
 struct TimelineWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         public static func == (lhs: TimelineWidgetAttributes.ContentState, rhs: TimelineWidgetAttributes.ContentState) -> Bool {
-            lhs.everythingForEachLine == rhs.everythingForEachLine
+            lhs.substanceGroups == rhs.substanceGroups
         }
 
         public func hash(into hasher: inout Hasher) {
-            hasher.combine(everythingForEachLine.description)
+            hasher.combine(substanceGroups.description)
         }
 
         // Dynamic stateful properties about your activity go here!
-        var everythingForEachLine: [EverythingForOneLine]
+        var substanceGroups: [SubstanceIngestionGroup]
         var everythingForEachRating: [EverythingForOneRating]
         var everythingForEachTimedNote: [EverythingForOneTimedNote]
         var areRedosesDrawnIndividually: Bool

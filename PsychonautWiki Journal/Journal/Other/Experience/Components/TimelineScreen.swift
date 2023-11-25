@@ -76,7 +76,7 @@ struct TimelineScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             TimelineScreen(timelineModel: TimelineModel(
-                everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
+                substanceGroups: EffectTimeline_Previews.substanceGroups,
                 everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
                 everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
                 areRedosesDrawnIndividually: false

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,8 +28,8 @@
 		EA085DFD29619E1E001638AC /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
 		EA085DFE29619E26001638AC /* DurationRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E64327CA136C00F6E10F /* DurationRange.swift */; };
 		EA085DFF29619E31001638AC /* Substance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63D27CA136C00F6E10F /* Substance.swift */; };
-		EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* EverythingForOneLine.swift */; };
-		EA085E0229619E5F001638AC /* EverythingForOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* EverythingForOneLine.swift */; };
+		EA085E0129619E5B001638AC /* IngestionMinInfoForTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* IngestionMinInfoForTimeline.swift */; };
+		EA085E0229619E5F001638AC /* IngestionMinInfoForTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085E0029619E5B001638AC /* IngestionMinInfoForTimeline.swift */; };
 		EA085E0329619F3E001638AC /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
 		EA085E0429619F85001638AC /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
 		EA085E0529619F85001638AC /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
@@ -71,6 +71,9 @@
 		EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */; };
 		EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */; };
 		EA2C94B52AAD98A000864BEC /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
+		EA2D19652B11D3BA00B270A2 /* SubstanceIngestionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */; };
+		EA2D19662B11D46900B270A2 /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
+		EA2D19672B11D9B000B270A2 /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -217,7 +220,6 @@
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFC2962C9B000779DD9 /* ActivityManager.swift */; };
-		EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
 		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
@@ -392,7 +394,7 @@
 		EA085DD829607229001638AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA085DDA29607229001638AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA085DE329616E45001638AC /* TimelineWidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidgetAttributes.swift; sourceTree = "<group>"; };
-		EA085E0029619E5B001638AC /* EverythingForOneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingForOneLine.swift; sourceTree = "<group>"; };
+		EA085E0029619E5B001638AC /* IngestionMinInfoForTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestionMinInfoForTimeline.swift; sourceTree = "<group>"; };
 		EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsPicker.swift; sourceTree = "<group>"; };
 		EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication-CurrentWindow.swift"; sourceTree = "<group>"; };
 		EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphicsContext-DrawDot.swift"; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 		EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferRoutesScreen.swift; sourceTree = "<group>"; };
 		EA2A69A62971584400B3A474 /* Text-SectionHeaderStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-SectionHeaderStyle.swift"; sourceTree = "<group>"; };
 		EA2C94B42AAD98A000864BEC /* FullTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeline.swift; sourceTree = "<group>"; };
+		EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceIngestionGroup.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -552,7 +555,6 @@
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
-		EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getEverythingForEachLine.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
@@ -782,6 +784,15 @@
 				EA116CDC29FBA3D9007D8BF6 /* RatingExplanationSection.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		EA2D19632B11D38E00B270A2 /* Preparation */ = {
+			isa = PBXGroup;
+			children = (
+				EA085E0029619E5B001638AC /* IngestionMinInfoForTimeline.swift */,
+				EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */,
+			);
+			path = Preparation;
 			sourceTree = "<group>";
 		};
 		EA4189FE296738BC00DEA663 /* MDMA Dose */ = {
@@ -1203,9 +1214,9 @@
 		EABD91FE294108100073303A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				EA2D19632B11D38E00B270A2 /* Preparation */,
 				EABD92072941EA1A0073303A /* Drawables */,
 				EA527A9329428CD8009C142D /* EffectTimeline.swift */,
-				EA085E0029619E5B001638AC /* EverythingForOneLine.swift */,
 				EA48F86929DC26A6007DA8C5 /* EverythingForOneRating.swift */,
 				EA4B8A1E2A9B3E0E009918DE /* EverythingForOneTimedNote.swift */,
 				EABD91FC294105830073303A /* TimelineModel.swift */,
@@ -1485,7 +1496,6 @@
 				EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */,
 				EAE480922973EF5900B600EF /* CumulativeDose.swift */,
 				EA4189F02963219100DEA663 /* LiveActivityButton.swift */,
-				EA968AFE2962D4CA00779DD9 /* getEverythingForEachLine.swift */,
 				EA557B382942A1A2005740B4 /* EditNotesScreen.swift */,
 				EA4B8A042A952C4B009918DE /* EditTitleScreen.swift */,
 				EA41C61A295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift */,
@@ -1626,6 +1636,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2D19672B11D9B000B270A2 /* substances.json in Resources */,
 				EA085DD929607229001638AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1674,7 +1685,7 @@
 				EA085E0A29619F85001638AC /* Tolerance.swift in Sources */,
 				EA48F86B29DC287E007DA8C5 /* EverythingForOneRating.swift in Sources */,
 				EA085E102961A1B4001638AC /* AxisDrawable.swift in Sources */,
-				EA085E0229619E5F001638AC /* EverythingForOneLine.swift in Sources */,
+				EA085E0229619E5F001638AC /* IngestionMinInfoForTimeline.swift in Sources */,
 				EA085E132961A1F0001638AC /* GraphicsContext-DrawDot.swift in Sources */,
 				EA48F86729DC1B13007DA8C5 /* RatingDrawable.swift in Sources */,
 				EA085E152961A212001638AC /* TotalTimeline.swift in Sources */,
@@ -1684,6 +1695,7 @@
 				EA085E172961A212001638AC /* OnsetComeupTimeline.swift in Sources */,
 				EA085E0B29619F97001638AC /* AdministrationRoute.swift in Sources */,
 				EA4B8A0C2A9A15FE009918DE /* OnsetTotalTimeline.swift in Sources */,
+				EA2D19662B11D46900B270A2 /* SubstanceRepo.swift in Sources */,
 				EA4B8A0F2A9A23ED009918DE /* FullCumulativeTimelines.swift in Sources */,
 				EA085E0929619F85001638AC /* RoaRange.swift in Sources */,
 				EA085DE529616E48001638AC /* TimelineWidgetAttributes.swift in Sources */,
@@ -1755,7 +1767,6 @@
 				EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */,
 				EA4B8A072A969301009918DE /* WeightedLine.swift in Sources */,
 				EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */,
-				EA968AFF2962D4CA00779DD9 /* getEverythingForEachLine.swift in Sources */,
 				EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */,
 				EABD921E294278240073303A /* CategoryScreen.swift in Sources */,
 				EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */,
@@ -1851,6 +1862,7 @@
 				EA41C629295EB6E2000DA021 /* SubstanceDetailsScreen.swift in Sources */,
 				EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */,
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
+				EA2D19652B11D3BA00B270A2 /* SubstanceIngestionGroup.swift in Sources */,
 				EAA9C3962A5944EB00869E5A /* ToleranceTimeOption.swift in Sources */,
 				EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
@@ -1978,7 +1990,7 @@
 				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
 				EA48F8A229E98E88007DA8C5 /* TimeDisplayStyle.swift in Sources */,
 				EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */,
-				EA085E0129619E5B001638AC /* EverythingForOneLine.swift in Sources */,
+				EA085E0129619E5B001638AC /* IngestionMinInfoForTimeline.swift in Sources */,
 				EA116CD829FBA2E4007D8BF6 /* EditOverallRatingScreen.swift in Sources */,
 				EA6048342A16C70A005C6A4B /* Spray-CoreDataHelpers.swift in Sources */,
 			);

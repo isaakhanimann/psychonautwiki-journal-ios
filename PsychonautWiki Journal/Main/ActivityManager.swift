@@ -42,7 +42,7 @@ class ActivityManager: ObservableObject {
     }
 
     func startOrUpdateActivity(
-        everythingForEachLine: [EverythingForOneLine],
+        substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
@@ -51,18 +51,18 @@ class ActivityManager: ObservableObject {
             if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first, firstActivity.activityState == .active {
                 await updateActivity(
                     activity: firstActivity,
-                    everythingForEachLine: everythingForEachLine,
+                    substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
                     areRedosesDrawnIndividually: areRedosesDrawnIndividually)
             } else {
                 await stopActivity(
-                    everythingForEachLine: everythingForEachLine,
+                    substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
                     areRedosesDrawnIndividually: areRedosesDrawnIndividually)
                 startActivity(
-                    everythingForEachLine: everythingForEachLine,
+                    substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
                     areRedosesDrawnIndividually: areRedosesDrawnIndividually)
@@ -71,14 +71,14 @@ class ActivityManager: ObservableObject {
     }
 
     private func startActivity(
-        everythingForEachLine: [EverythingForOneLine],
+        substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
     ) {
         let attributes = TimelineWidgetAttributes(name: "Passed from app")
         let state = TimelineWidgetAttributes.ContentState(
-            everythingForEachLine: everythingForEachLine,
+            substanceGroups: substanceGroups,
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
             areRedosesDrawnIndividually: areRedosesDrawnIndividually
@@ -102,13 +102,13 @@ class ActivityManager: ObservableObject {
 
     private func updateActivity(
         activity: Activity<TimelineWidgetAttributes>,
-        everythingForEachLine: [EverythingForOneLine],
+        substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
     ) async {
         let state = TimelineWidgetAttributes.ContentState(
-            everythingForEachLine: everythingForEachLine,
+            substanceGroups: substanceGroups,
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
             areRedosesDrawnIndividually: areRedosesDrawnIndividually)
@@ -117,14 +117,14 @@ class ActivityManager: ObservableObject {
     }
 
     func stopActivity(
-        everythingForEachLine: [EverythingForOneLine],
+        substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
     ) async {
         if authorizationInfo.areActivitiesEnabled {
             let state = TimelineWidgetAttributes.ContentState(
-                everythingForEachLine: everythingForEachLine,
+                substanceGroups: substanceGroups,
                 everythingForEachRating: everythingForEachRating,
                 everythingForEachTimedNote: everythingForEachTimedNote,
                 areRedosesDrawnIndividually: areRedosesDrawnIndividually)

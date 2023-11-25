@@ -89,7 +89,7 @@ struct ExperienceScreen: View {
     func startOrUpdateLiveActivity() {
         Task {
             await ActivityManager.shared.startOrUpdateActivity(
-                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
+                substanceGroups: getSubstanceIngestionGroups(ingestions: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
                 everythingForEachRating: experience.ratingsWithTimeSorted
                     .filter {!hiddenRatings.contains($0.id)}
                     .map({ shulgin in
@@ -105,7 +105,7 @@ struct ExperienceScreen: View {
     func stopLiveActivity() {
         Task {
             await ActivityManager.shared.stopActivity(
-                everythingForEachLine: getEverythingForEachLine(from: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
+                substanceGroups: getSubstanceIngestionGroups(ingestions: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
                 everythingForEachRating: experience.ratingsWithTimeSorted
                     .filter {!hiddenRatings.contains($0.id)}
                     .map({ shulgin in

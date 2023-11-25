@@ -213,7 +213,7 @@ extension Experience: Comparable {
         areRedosesDrawnIndividually: Bool
     ) -> TimelineModel {
         TimelineModel(
-            everythingForEachLine: getEverythingForEachLine(from: ingestions),
+            substanceGroups: getSubstanceIngestionGroups(ingestions: ingestions),
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
             areRedosesDrawnIndividually: areRedosesDrawnIndividually

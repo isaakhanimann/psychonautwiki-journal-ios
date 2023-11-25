@@ -32,35 +32,32 @@ struct TimelineModel {
     }
 
     init(
-        everythingForEachLine: [EverythingForOneLine],
+        substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
     ) {
-        let potentialStartTimes = everythingForEachLine.map({ one in
-            one.startTime
-        }) + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
+        let ingestionTimes = substanceGroups.flatMap { group in
+            group.routeMinInfos.flatMap { route in
+                route.ingestions.map({$0.time})
+            }
+        }
+        let potentialStartTimes = ingestionTimes + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
         let startTime = potentialStartTimes.min() ?? Date()
         self.startTime = startTime
-        let substanceDict = Dictionary(grouping: everythingForEachLine) { oneLine in
-            oneLine.substanceName
-        }
+        let substanceGroupsWithRepoInfo = getSubstanceGroupWithRepoInfo(substanceIngestionGroups: substanceGroups)
         var roaGroups: [RoaGroup] = []
-        for linesPerSubstance in substanceDict.values {
-            let roaDict = Dictionary(grouping: linesPerSubstance) { line in
-                line.route
-            }
-            for linesPerRoute in roaDict.values {
-                guard let firstLine = linesPerRoute.first else {continue}
+        for substanceGroup in substanceGroupsWithRepoInfo {
+            for routeGroup in substanceGroup.routeGroups {
                 let group = RoaGroup(
-                    color: firstLine.color,
-                    roaDuration: firstLine.roaDuration,
-                    weightedLines: linesPerRoute.map { l in
+                    color: substanceGroup.color,
+                    roaDuration: routeGroup.roaDuration,
+                    weightedLines: routeGroup.ingestions.map { ingestion in
                         WeightedLine(
-                            startTime: l.startTime,
-                            horizontalWeight: l.horizontalWeight,
-                            height: l.verticalWeight,
-                            onsetDelayInHours: l.onsetDelayInHours
+                            startTime: ingestion.time,
+                            horizontalWeight: ingestion.horizontalWeight,
+                            height: ingestion.verticalWeight,
+                            onsetDelayInHours: ingestion.onsetDelayInHours
                         )
                     }
                 )

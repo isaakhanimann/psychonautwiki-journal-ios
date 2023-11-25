@@ -120,17 +120,20 @@ struct DurationScreen: View {
             !hiddenRoutes.contains(info.route)
         }
         timelineModel = TimelineModel(
-            everythingForEachLine: durationsToShow.map({ info in
-                EverythingForOneLine(
-                    substanceName: info.route.rawValue,
-                    route: info.route,
-                    roaDuration: info.roaDuration,
-                    onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0,
-                    startTime: selectedTime,
-                    horizontalWeight: 0.5,
-                    verticalWeight: 1,
-                    color: info.route.color
-                )
+            substanceGroups: durationsToShow.map({ info in
+                SubstanceIngestionGroup(
+                    substanceName: substanceName,
+                    color: info.route.color,
+                    routeMinInfos: [
+                        RouteMinInfo(
+                            route: info.route,
+                            ingestions: [
+                                IngestionMinInfo(
+                                    dose: nil,
+                                    time: selectedTime,
+                                    onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0)
+                            ])
+                    ])
             }),
             everythingForEachRating: [],
             everythingForEachTimedNote: [],

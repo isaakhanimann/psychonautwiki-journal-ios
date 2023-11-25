@@ -98,7 +98,7 @@ struct EffectTimeline_Previews: PreviewProvider {
             Section {
                 EffectTimeline(
                     timelineModel: TimelineModel(
-                        everythingForEachLine: everythingForEachLine,
+                        substanceGroups: substanceGroups,
                         everythingForEachRating: everythingForEachRating,
                         everythingForEachTimedNote: everythingForEachTimedNote,
                         areRedosesDrawnIndividually: false
@@ -131,161 +131,33 @@ struct EffectTimeline_Previews: PreviewProvider {
         ),
     ]
 
-    static let everythingForEachLine: [EverythingForOneLine] = [
-        // full
-        EverythingForOneLine(
-            substanceName: "a",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 30, max: 60, units: .minutes),
-                peak: DurationRange(min: 2, max: 3, units: .hours),
-                offset: DurationRange(min: 1, max: 2, units: .hours),
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-3*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.75,
-            color: .blue
-        ),
-        // total
-        EverythingForOneLine(
-            substanceName: "b",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: nil,
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 4, max: 6, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-2*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .orange
-        ),
-        // onset comeup
-        EverythingForOneLine(
-            substanceName: "c",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 20, max: 40, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: nil,
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-2*60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 1,
-            color: .pink
-        ),
-        // onset comeup peak total
-        EverythingForOneLine(
-            substanceName: "d",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .green
-        ),
-        // onset
-        EverythingForOneLine(
-            substanceName: "e",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 3, units: .hours),
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date(),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.5,
-            color: .purple
-        ),
-        // onset comeup peak
-        EverythingForOneLine(
-            substanceName: "f",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 30, max: 60, units: .minutes),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: DurationRange(min: 1, max: 2, units: .hours),
-                offset: nil,
-                total: nil,
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-30*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.75,
-            color: .yellow
-        ),
-        // onset comeup total
-        EverythingForOneLine(
-            substanceName: "g",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 2, units: .hours),
-                comeup: DurationRange(min: 1, max: 2, units: .hours),
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-45*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.9,
-            color: .cyan
-        ),
-        // onset total
-        EverythingForOneLine(
-            substanceName: "h",
-            route: .oral,
-            roaDuration: RoaDuration(
-                onset: DurationRange(min: 1, max: 2, units: .hours),
-                comeup: nil,
-                peak: nil,
-                offset: nil,
-                total: DurationRange(min: 6, max: 8, units: .hours),
-                afterglow: nil
-            ),
-            onsetDelayInHours: 1,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.3,
-            color: .brown
-        ),
-        // no timeline
-        EverythingForOneLine(
-            substanceName: "i",
-            route: .oral,
-            roaDuration: nil,
-            onsetDelayInHours: 3,
-            startTime: Date().addingTimeInterval(-60*60),
-            horizontalWeight: 0.5,
-            verticalWeight: 0.3,
-            color: .brown
-        ),
+    static let substanceGroups: [SubstanceIngestionGroup] = [
+        SubstanceIngestionGroup(
+            substanceName: "MDMA",
+            color: .blue,
+            routeMinInfos: [
+                RouteMinInfo(
+                    route: .oral,
+                    ingestions: [
+                        IngestionMinInfo(
+                            dose: 100,
+                            time: .now.addingTimeInterval(-2*60*60),
+                            onsetDelayInHours: 0),
+                        IngestionMinInfo(
+                            dose: 50,
+                            time: .now,
+                            onsetDelayInHours: 0)
+                    ])
+            ]),
+        SubstanceIngestionGroup(
+            substanceName: "LSD",
+            color: .blue,
+            routeMinInfos: [
+                RouteMinInfo(route: .oral, ingestions: [
+                    IngestionMinInfo(
+                        dose: 100,
+                        time: .now.addingTimeInterval(-4*60*60),
+                        onsetDelayInHours: 0)])
+            ])
     ]
 }

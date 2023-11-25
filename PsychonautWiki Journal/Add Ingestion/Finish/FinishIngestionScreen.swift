@@ -311,7 +311,7 @@ struct FinishIngestionScreen: View {
                     if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
                         Task {
                             await ActivityManager.shared.startOrUpdateActivity(
-                                everythingForEachLine: getEverythingForEachLine(from: existingExperience.myIngestionsSorted),
+                                substanceGroups: getSubstanceIngestionGroups(ingestions: existingExperience.myIngestionsSorted),
                                 everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
                                     EverythingForOneRating(
                                         time: shulgin.timeUnwrapped,
@@ -358,7 +358,7 @@ struct FinishIngestionScreen: View {
                     if newExperience.isCurrent && self.wantsToStartLiveActivity {
                         Task {
                             await ActivityManager.shared.startOrUpdateActivity(
-                                everythingForEachLine: getEverythingForEachLine(from: newExperience.myIngestionsSorted),
+                                substanceGroups: getSubstanceIngestionGroups(ingestions: newExperience.myIngestionsSorted),
                                 everythingForEachRating: [],
                                 everythingForEachTimedNote: [],
                                 areRedosesDrawnIndividually: areRedosesDrawnIndividually

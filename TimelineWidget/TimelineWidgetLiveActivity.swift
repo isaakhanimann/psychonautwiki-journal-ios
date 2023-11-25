@@ -22,7 +22,7 @@ struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimelineWidgetAttributes.self) { context in
             let timelineModel = TimelineModel(
-                everythingForEachLine: context.state.everythingForEachLine,
+                substanceGroups: context.state.substanceGroups,
                 everythingForEachRating: context.state.everythingForEachRating,
                 everythingForEachTimedNote: context.state.everythingForEachTimedNote,
                 areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually
@@ -53,7 +53,7 @@ struct TimelineWidgetLiveActivity: Widget {
             .frame(height: 160) // in the documentation: https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities it says that truncation only happens if the height exceeds 160 points
         } dynamicIsland: { context in
             let timelineModel = TimelineModel(
-                everythingForEachLine: context.state.everythingForEachLine,
+                substanceGroups: context.state.substanceGroups,
                 everythingForEachRating: context.state.everythingForEachRating,
                 everythingForEachTimedNote: context.state.everythingForEachTimedNote,
                 areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually
@@ -91,7 +91,7 @@ struct TimelineWidgetLiveActivity: Widget {
 struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = TimelineWidgetAttributes(name: "Me")
     static let contentState = TimelineWidgetAttributes.ContentState(
-        everythingForEachLine: EffectTimeline_Previews.everythingForEachLine,
+        substanceGroups: EffectTimeline_Previews.substanceGroups,
         everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
         everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
         areRedosesDrawnIndividually: false
