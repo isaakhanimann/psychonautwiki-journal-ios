@@ -25,10 +25,6 @@ struct ChooseLocationScreen: View {
     var body: some View {
         NavigationView {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                    doneButton
-                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()

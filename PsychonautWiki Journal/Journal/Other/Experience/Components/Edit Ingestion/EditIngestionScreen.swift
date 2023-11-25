@@ -158,13 +158,6 @@ struct EditIngestionContent: View {
             EditConsumerScreen(consumerName: $consumerName)
         })
         .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                Button {
-                    hideKeyboard()
-                } label: {
-                    Label("Hide Keyboard", systemImage: "keyboard.chevron.compact.down").labelStyle(.iconOnly)
-                }
-            }
             ToolbarItem(placement: .destructiveAction) {
                 Button(action: delete) {
                     Label("Delete Ingestion", systemImage: "trash")

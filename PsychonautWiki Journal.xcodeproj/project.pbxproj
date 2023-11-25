@@ -64,7 +64,6 @@
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
 		EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2BE2976C0D600A1051A /* NextLabel.swift */; };
-		EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */; };
 		EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */; };
 		EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A029714B2F00B3A474 /* TestingScreen.swift */; };
 		EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */; };
@@ -407,7 +406,6 @@
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
 		EA26B2BE2976C0D600A1051A /* NextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLabel.swift; sourceTree = "<group>"; };
-		EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardButton.swift; sourceTree = "<group>"; };
 		EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		EA2A69A029714B2F00B3A474 /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
 		EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDoseScreen.swift; sourceTree = "<group>"; };
@@ -1479,7 +1477,6 @@
 				EA095A1127D9E3E8007D44D6 /* Finish */,
 				EA26B2BE2976C0D600A1051A /* NextLabel.swift */,
 				EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */,
-				EA26B2C02976C9D500A1051A /* HideKeyboardButton.swift */,
 				EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */,
 			);
 			path = "Add Ingestion";
@@ -1968,7 +1965,6 @@
 				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
-				EA26B2C12976C9D500A1051A /* HideKeyboardButton.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
 				EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */,
 				EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */,

@@ -51,9 +51,6 @@ struct ChooseAlcoholDoseScreen: View {
 
     var body: some View {
         screen.toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                HideKeyboardButton()
-            }
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
                     dismiss()

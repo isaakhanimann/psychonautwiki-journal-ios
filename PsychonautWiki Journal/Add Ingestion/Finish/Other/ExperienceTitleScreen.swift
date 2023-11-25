@@ -24,9 +24,6 @@ struct ExperienceTitleScreen: View {
     var body: some View {
         NavigationView {
             screen.toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    HideKeyboardButton()
-                }
                 ToolbarItem(placement: .primaryAction) {
                     doneButton
                 }

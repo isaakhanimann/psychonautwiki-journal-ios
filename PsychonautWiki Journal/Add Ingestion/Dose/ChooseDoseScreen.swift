@@ -66,7 +66,6 @@ struct ChooseDoseScreenContent: View {
 
     var body: some View {
         screen.toolbar {
-            keyboardButtons
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
                     dismiss()
@@ -75,12 +74,6 @@ struct ChooseDoseScreenContent: View {
             ToolbarItem(placement: .primaryAction) {
                 nextLink
             }
-        }
-    }
-
-    private var keyboardButtons: some ToolbarContent {
-        ToolbarItemGroup(placement: .keyboard) {
-            HideKeyboardButton()
         }
     }
 
