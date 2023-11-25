@@ -28,21 +28,12 @@ struct ChooseDateScreenContent: View {
     let otherColors: [SubstanceColor]
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel", action: cancel)
-                    DoneButton(action: finish)
-                }
+        screen.toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", action: cancel)
             }
-        } else {
-            screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: cancel)
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    DoneButton(action: finish)
-                }
+            ToolbarItem(placement: .primaryAction) {
+                DoneButton(action: finish)
             }
         }
     }

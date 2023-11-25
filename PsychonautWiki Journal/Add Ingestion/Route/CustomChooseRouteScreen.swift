@@ -23,21 +23,10 @@ struct CustomChooseRouteScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
-        if #available(iOS 16.0, *) {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    Spacer()
-                }
-            }
-        } else {
-            screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
+        screen.toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
         }

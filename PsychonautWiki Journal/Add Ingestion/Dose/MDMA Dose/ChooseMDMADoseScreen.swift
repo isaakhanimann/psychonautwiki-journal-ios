@@ -28,28 +28,15 @@ struct ChooseMDMADoseScreen: View {
     @State private var doseText = "113"
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    Spacer()
-                    nextLink
+        screen.toolbar {
+            keyboardButtons
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-        } else {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    nextLink
-                }
+            ToolbarItem(placement: .primaryAction) {
+                nextLink
             }
         }
     }
@@ -57,8 +44,6 @@ struct ChooseMDMADoseScreen: View {
     private var keyboardButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .keyboard) {
             HideKeyboardButton()
-            Spacer()
-            nextLink
         }
     }
 

@@ -62,26 +62,14 @@ struct ChooseCannabisSmokedDoseScreen: View {
     }
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    Spacer()
-                    nextLink
+        screen.toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-        } else {
-            screen.toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    nextLink
-                }
+            ToolbarItem(placement: .primaryAction) {
+                nextLink
             }
         }
     }

@@ -29,27 +29,15 @@ struct CustomChooseDoseScreen: View {
     @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    nextLink
+        screen.toolbar {
+            keyboardButtons
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-        } else {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    nextLink
-                }
+            ToolbarItem(placement: .primaryAction) {
+                nextLink
             }
         }
     }
@@ -57,12 +45,6 @@ struct CustomChooseDoseScreen: View {
     private var keyboardButtons: some ToolbarContent {
         ToolbarItemGroup(placement: .keyboard) {
             HideKeyboardButton()
-            Spacer()
-            Button {
-                isShowingNext = true
-            } label: {
-                NextLabel()
-            }
         }
     }
 

@@ -60,27 +60,15 @@ struct ChooseShroomsDoseScreen: View {
     }
     
     var body: some View {
-        if #available(iOS 16, *) {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    nextLink
+        screen.toolbar {
+            keyboardButtons
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-        } else {
-            screen.toolbar {
-                keyboardButtons
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    nextLink
-                }
+            ToolbarItem(placement: .primaryAction) {
+                nextLink
             }
         }
     }
