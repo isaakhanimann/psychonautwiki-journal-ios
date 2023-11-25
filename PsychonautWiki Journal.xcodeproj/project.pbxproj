@@ -307,7 +307,6 @@
 		EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */; };
 		EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */; };
 		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
-		EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
@@ -644,7 +643,6 @@
 		EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Experience-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingestion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
-		EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-HideKeyboard.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
@@ -1395,7 +1393,6 @@
 				EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
-				EAE4717A26CBA664009FB0EC /* View-HideKeyboard.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
 				EA039AC42A6BAA10006DFAFE /* Date-Format.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
@@ -1802,7 +1799,6 @@
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,
 				EA48F88C29DD503D007DA8C5 /* IngestionCodable.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
-				EAE471FD26CBA664009FB0EC /* View-HideKeyboard.swift in Sources */,
 				EA6048312A166FD9005C6A4B /* SprayCalculatorScreen.swift in Sources */,
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
 				EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */,
