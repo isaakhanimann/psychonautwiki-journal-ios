@@ -42,7 +42,7 @@ struct RatingCodable: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
         self.creationDate = getDateFromMillis(millis: creationDateMillis)
-        if let timeMillis = try values.decode(UInt64?.self, forKey: .time) {
+        if let timeMillis = try values.decodeIfPresent(UInt64.self, forKey: .time) {
             self.time = getDateFromMillis(millis: timeMillis)
         } else {
             self.time = nil

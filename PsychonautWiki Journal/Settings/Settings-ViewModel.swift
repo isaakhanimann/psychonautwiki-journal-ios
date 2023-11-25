@@ -112,7 +112,7 @@ extension SettingsScreen {
                 showSuccessToast(message: "Import Successful")
             } catch DecodingError.keyNotFound(let key, let context) {
                 showErrorToast(message: "Import Failed")
-                print("Missing key '\(key.stringValue)' not found – \(context.debugDescription)")
+                print("Missing key '\(key.stringValue)' not found – \(context.debugDescription) at \(context.codingPath)")
             } catch DecodingError.typeMismatch(_, let context) {
                 showErrorToast(message: "Import Failed")
                 print("Type mismatch – \(context.debugDescription)")
