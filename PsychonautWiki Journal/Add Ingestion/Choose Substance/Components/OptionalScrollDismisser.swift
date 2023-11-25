@@ -20,7 +20,7 @@ struct OptionalScrollDismisser: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 16.0, *) {
             content
-                .scrollDismissesKeyboard(.immediately)
+                .scrollDismissesKeyboard(.interactively)
         } else {
             content
         }
