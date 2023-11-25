@@ -33,6 +33,7 @@ struct PersistenceController {
     static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
     static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
+    static let isDateInTimePickerKey = "isDateInTimePicker"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }

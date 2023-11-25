@@ -56,6 +56,7 @@ struct FinishIngestionScreen: View {
     @State private var wantsToForceNewExperience = false
     @State private var wantsToStartLiveActivity = true
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
+    @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker: Bool = false
 
     var isConsumerMe: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -102,16 +103,25 @@ struct FinishIngestionScreen: View {
         }
     }
 
+    private var datePicker: DatePicker<Text> {
+        DatePicker(
+            "Ingestion Time",
+            selection: $selectedTime,
+            displayedComponents: [.date, .hourAndMinute]
+        )
+    }
+
     var screen: some View {
         Form {
             Section {
-                DatePicker(
-                    "Ingestion Time",
-                    selection: $selectedTime,
-                    displayedComponents: [.date, .hourAndMinute]
-                )
+                Group {
+                    if isDateInTimePicker {
+                        datePicker.datePickerStyle(.compact)
+                    } else {
+                        datePicker.datePickerStyle(.wheel)
+                    }
+                }
                 .labelsHidden()
-                .datePickerStyle(.wheel)
                 if experiencesWithinLargerRange.count>0 {
                     NavigationLink {
                         ExperiencePickerScreen(

@@ -26,6 +26,7 @@ struct SettingsScreen: View {
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @AppStorage(Authenticator.lockTimeOptionKey) var lockTimeOptionString: String = LockTimeOption.after5Minutes.rawValue
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
+    @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker: Bool = false
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
 
@@ -51,6 +52,7 @@ struct SettingsScreen: View {
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
             areRedosesDrawnIndividually: $areRedosesDrawnIndividually,
+            isDateInTimePicker: $isDateInTimePicker,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
             isExporting: $viewModel.isExporting,
@@ -80,6 +82,7 @@ struct SettingsContent: View {
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
     @Binding var areRedosesDrawnIndividually: Bool
+    @Binding var isDateInTimePicker: Bool
     let isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
     @State var isImporting = false
@@ -206,6 +209,7 @@ struct SettingsContent: View {
                             Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
                             Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
                             Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
+                            Toggle("Include date in time picker", isOn: $isDateInTimePicker)
                         }.tint(.accentColor)
                     }
                 }
@@ -297,6 +301,7 @@ struct SettingsContent_Previews: PreviewProvider {
             isHidingToleranceChartInExperience: .constant(false),
             isHidingSubstanceInfoInExperience: .constant(false),
             areRedosesDrawnIndividually: .constant(false),
+            isDateInTimePicker: .constant(false),
             isFaceIDAvailable: true,
             hasToUnlockApp: .constant(false),
             isImporting: false,
