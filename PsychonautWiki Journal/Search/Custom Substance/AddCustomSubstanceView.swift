@@ -54,7 +54,7 @@ struct AddCustomSubstanceView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     if viewModel.isEverythingNeededDefined {
-                        Button("Done") {
+                        DoneButton {
                             viewModel.saveCustom()
                             presentationMode.wrappedValue.dismiss()
                         }

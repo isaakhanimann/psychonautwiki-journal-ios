@@ -65,7 +65,7 @@ struct AddTimedNoteScreen: View {
     }
 
     var doneButton: some View {
-        Button("Done") {
+        DoneButton {
             save()
             toastViewModel.showSuccessToast(message: "Note Added")
             dismiss()

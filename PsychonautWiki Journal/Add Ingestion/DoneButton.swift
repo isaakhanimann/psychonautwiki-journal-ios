@@ -23,7 +23,7 @@ struct DoneButton: View {
     var body: some View {
         Button("Done") {
             action()
-        }
+        }.font(.headline)
     }
 }
 

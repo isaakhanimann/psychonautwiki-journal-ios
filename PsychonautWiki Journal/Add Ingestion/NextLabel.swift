@@ -18,7 +18,7 @@ import SwiftUI
 
 struct NextLabel: View {
     var body: some View {
-        Text("Next")
+        Text("Next").font(.headline)
     }
 }
 

@@ -49,7 +49,7 @@ struct AddRatingScreen: View {
     }
 
     var doneButton: some View {
-        Button("Done") {
+        DoneButton {
             save()
             toastViewModel.showSuccessToast(message: "Rating Added")
             dismiss()
