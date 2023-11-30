@@ -150,6 +150,7 @@ struct SubstanceScreen_Previews: PreviewProvider {
             SubstanceScreen(
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
             )
+            .environmentObject(TabBarObserver())
         }
     }
 }

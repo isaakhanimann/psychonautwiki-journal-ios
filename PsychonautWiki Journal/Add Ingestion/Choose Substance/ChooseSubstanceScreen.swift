@@ -21,14 +21,12 @@ struct ChooseSubstanceScreen: View {
     @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
-    @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
 
     var body: some View {
         ChooseSubstanceContent(
             searchText: $viewModel.searchText,
             isShowingOpenEyeToast: $viewModel.isShowingOpenEyeToast,
             isEyeOpen: viewModel.isEyeOpen,
-            isSkippingInteractionChecks: isSkippingInteractionChecks,
             filteredSuggestions: viewModel.filteredSuggestions,
             filteredSubstances: viewModel.filteredSubstances,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
@@ -43,13 +41,11 @@ struct ChooseSubstanceContent: View {
     @Binding var searchText: String
     @Binding var isShowingOpenEyeToast: Bool
     let isEyeOpen: Bool
-    let isSkippingInteractionChecks: Bool
     let filteredSuggestions: [Suggestion]
     let filteredSubstances: [Substance]
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: ()->Void
     @State private var isShowingAddCustomSheet = false
-    @StateObject private var hudState = HudState()
 
     var body: some View {
         NavigationView {
@@ -68,12 +64,6 @@ struct ChooseSubstanceContent: View {
                 type: .image("Eye Open", .red)
             )
         }
-        .hud(isPresented: $hudState.isPresented) {
-            InteractionHudContent(
-                substanceName: hudState.substanceName,
-                interactions: hudState.interactions
-            )
-        }
     }
 
     private var screen: some View {
@@ -87,9 +77,6 @@ struct ChooseSubstanceContent: View {
                             dismiss: dismiss,
                             isEyeOpen: isEyeOpen
                         )
-                        .simultaneousGesture(TapGesture().onEnded{
-                            checkInteractions(with: suggestion.substanceName)
-                        })
                     }
                     Spacer().frame(height: 20)
                 }
@@ -99,9 +86,7 @@ struct ChooseSubstanceContent: View {
                             SubstanceBox(
                                 substance: substance,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen,
-                                isSkippingInteractionChecks: isSkippingInteractionChecks,
-                                checkInteractions: checkInteractions
+                                isEyeOpen: isEyeOpen
                             )
                         }
                     } else {
@@ -110,9 +95,7 @@ struct ChooseSubstanceContent: View {
                             SubstanceBox(
                                 substance: substance,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen,
-                                isSkippingInteractionChecks: isSkippingInteractionChecks,
-                                checkInteractions: checkInteractions
+                                isEyeOpen: isEyeOpen
                             )
                         }
                     }
@@ -139,23 +122,6 @@ struct ChooseSubstanceContent: View {
         .disableAutocorrection(true)
         .navigationBarTitle("New Ingestion")
     }
-
-    private func checkInteractions(with substanceName: String) {
-        guard isEyeOpen else {return}
-        guard !isSkippingInteractionChecks else {return}
-        let twoDaysAgo = Date().addingTimeInterval(-2*24*60*60)
-        let recentIngestions = PersistenceController.shared.getIngestions(since: twoDaysAgo)
-        let names = recentIngestions.map { ing in
-            ing.substanceNameUnwrapped
-        }
-        let allNames = (names + InteractionChecker.additionalInteractionsToCheck).uniqued()
-        let interactions = allNames.compactMap { name in
-            InteractionChecker.getInteractionBetween(aName: substanceName, bName: name)
-        }.uniqued().sorted()
-        if !interactions.isEmpty {
-            hudState.show(substanceName: substanceName, interactions: interactions)
-        }
-    }
 }
 
 struct ChooseSubstanceContent_Previews: PreviewProvider {
@@ -166,7 +132,6 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                     searchText: .constant(""),
                     isShowingOpenEyeToast: .constant(false),
                     isEyeOpen: true,
-                    isSkippingInteractionChecks: false,
                     filteredSuggestions: [
                         Suggestion(
                             substanceName: "MDMA",

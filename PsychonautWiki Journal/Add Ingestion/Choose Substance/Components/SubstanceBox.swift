@@ -21,20 +21,14 @@ struct SubstanceBox: View {
     let substance: Substance
     let dismiss: () -> Void
     let isEyeOpen: Bool
-    let isSkippingInteractionChecks: Bool
-    let checkInteractions: (String) -> Void
 
     var body: some View {
         NavigationLink {
             if isEyeOpen {
-                if isSkippingInteractionChecks {
-                    ChooseRouteScreen(substance: substance, dismiss: dismiss)
+                if !substance.saferUse.isEmpty {
+                    AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
                 } else {
-                    if !substance.saferUse.isEmpty {
-                        AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
-                    } else {
-                        AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
-                    }
+                    AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
                 }
             } else {
                 ChooseDoseScreen(
@@ -56,9 +50,6 @@ struct SubstanceBox: View {
                 }
             }
         }
-        .simultaneousGesture(TapGesture().onEnded{
-            checkInteractions(substance.name)
-        })
     }
 }
 
@@ -69,9 +60,7 @@ struct SubstanceBox_Previews: PreviewProvider {
                 SubstanceBox(
                     substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                     dismiss: {},
-                    isEyeOpen: true,
-                    isSkippingInteractionChecks: true,
-                    checkInteractions: { _ in }
+                    isEyeOpen: true
                 ).padding(.horizontal)
             }
         }

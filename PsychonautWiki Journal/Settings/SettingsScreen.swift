@@ -19,7 +19,6 @@ import AlertToast
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-    @AppStorage(PersistenceController.isSkippingInteractionChecksKey) var isSkippingInteractionChecks: Bool = false
     @AppStorage(PersistenceController.isHidingDosageDotsKey) var isHidingDosageDots: Bool = false
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
@@ -47,7 +46,6 @@ struct SettingsScreen: View {
 
         SettingsContent(
             isEyeOpen: $isEyeOpen,
-            isSkippingInteractionChecks: $isSkippingInteractionChecks,
             isHidingDosageDots: $isHidingDosageDots,
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
@@ -77,7 +75,6 @@ struct SettingsScreen: View {
 struct SettingsContent: View {
 
     @Binding var isEyeOpen: Bool
-    @Binding var isSkippingInteractionChecks: Bool
     @Binding var isHidingDosageDots: Bool
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
@@ -204,7 +201,6 @@ struct SettingsContent: View {
                         }
                         .foregroundColor(.accentColor)
                         Group {
-                            Toggle("Skip interaction checks", isOn: $isSkippingInteractionChecks)
                             Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
                             Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
                             Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
@@ -296,7 +292,6 @@ struct SettingsContent_Previews: PreviewProvider {
     static var previews: some View {
         SettingsContent(
             isEyeOpen: .constant(true),
-            isSkippingInteractionChecks: .constant(false),
             isHidingDosageDots: .constant(false),
             isHidingToleranceChartInExperience: .constant(false),
             isHidingSubstanceInfoInExperience: .constant(false),

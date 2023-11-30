@@ -148,12 +148,7 @@
 		EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */; };
 		EA48F8A229E98E88007DA8C5 /* TimeDisplayStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A129E98E88007DA8C5 /* TimeDisplayStyle.swift */; };
 		EA48F8A429E991C6007DA8C5 /* DateDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A329E991C6007DA8C5 /* DateDifference.swift */; };
-		EA48F8AA29EBD5F4007DA8C5 /* Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A929EBD5F4007DA8C5 /* Hud.swift */; };
-		EA48F8AC29EBD62D007DA8C5 /* View-Hud.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */; };
-		EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AD29EBDA54007DA8C5 /* HudState.swift */; };
 		EA48F8B029EBEE4B007DA8C5 /* DangerTriangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */; };
-		EA48F8B229EBFB3C007DA8C5 /* InteractionHudContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */; };
-		EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */; };
 		EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */; };
 		EA48F8BB29EE99C4007DA8C5 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8BA29EE99C4007DA8C5 /* TimelineScreen.swift */; };
 		EA4B8A052A952C4B009918DE /* EditTitleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B8A042A952C4B009918DE /* EditTitleScreen.swift */; };
@@ -487,12 +482,7 @@
 		EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeSaferUseScreen.swift; sourceTree = "<group>"; };
 		EA48F8A129E98E88007DA8C5 /* TimeDisplayStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDisplayStyle.swift; sourceTree = "<group>"; };
 		EA48F8A329E991C6007DA8C5 /* DateDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifference.swift; sourceTree = "<group>"; };
-		EA48F8A929EBD5F4007DA8C5 /* Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hud.swift; sourceTree = "<group>"; };
-		EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Hud.swift"; sourceTree = "<group>"; };
-		EA48F8AD29EBDA54007DA8C5 /* HudState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudState.swift; sourceTree = "<group>"; };
 		EA48F8AF29EBEE4B007DA8C5 /* DangerTriangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerTriangles.swift; sourceTree = "<group>"; };
-		EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionHudContent.swift; sourceTree = "<group>"; };
-		EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionWith.swift; sourceTree = "<group>"; };
 		EA48F8B829EE8A32007DA8C5 /* ChooseLocationScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationScreenContent.swift; sourceTree = "<group>"; };
 		EA48F8BA29EE99C4007DA8C5 /* TimelineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScreen.swift; sourceTree = "<group>"; };
 		EA4B8A042A952C4B009918DE /* EditTitleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleScreen.swift; sourceTree = "<group>"; };
@@ -923,7 +913,6 @@
 		EA48F8A529EBD592007DA8C5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EA48F8A629EBD5C3007DA8C5 /* Hud */,
 				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
 				EA60482C2A1411EF005C6A4B /* Suggestion */,
 				EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */,
@@ -932,18 +921,6 @@
 				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		EA48F8A629EBD5C3007DA8C5 /* Hud */ = {
-			isa = PBXGroup;
-			children = (
-				EA48F8A929EBD5F4007DA8C5 /* Hud.swift */,
-				EA48F8B129EBFB3C007DA8C5 /* InteractionHudContent.swift */,
-				EA48F8AD29EBDA54007DA8C5 /* HudState.swift */,
-				EA48F8B329EBFB75007DA8C5 /* InteractionWith.swift */,
-				EA48F8AB29EBD62D007DA8C5 /* View-Hud.swift */,
-			);
-			path = Hud;
 			sourceTree = "<group>";
 		};
 		EA48F8B729EE8A15007DA8C5 /* Choose Location */ = {
@@ -1762,7 +1739,6 @@
 				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
 				EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */,
 				EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */,
-				EA48F8AC29EBD62D007DA8C5 /* View-Hud.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
 				EA2A69A72971584400B3A474 /* Text-SectionHeaderStyle.swift in Sources */,
@@ -1823,7 +1799,6 @@
 				EA527A8629427F56009C142D /* ToxicityScreen.swift in Sources */,
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
-				EA48F8B429EBFB75007DA8C5 /* InteractionWith.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EAB8EF542A48D82000542253 /* Tab.swift in Sources */,
 				EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */,
@@ -1843,11 +1818,9 @@
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */,
-				EA48F8AA29EBD5F4007DA8C5 /* Hud.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
 				EA4B8A2B2AA2FF2A009918DE /* ExperienceToolbarContent.swift in Sources */,
-				EA48F8B229EBFB3C007DA8C5 /* InteractionHudContent.swift in Sources */,
 				EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */,
 				EA55CEB92A3F290900FE1A44 /* DotRows.swift in Sources */,
 				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
@@ -1864,7 +1837,6 @@
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
 				EA2D19652B11D3BA00B270A2 /* SubstanceIngestionGroup.swift in Sources */,
 				EAA9C3962A5944EB00869E5A /* ToleranceTimeOption.swift in Sources */,
-				EA48F8AE29EBDA54007DA8C5 /* HudState.swift in Sources */,
 				EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */,
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EA4B8A2F2AA6E231009918DE /* TimedNoteCodable.swift in Sources */,
