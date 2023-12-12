@@ -54,7 +54,7 @@ struct CustomChooseDoseScreen: View {
             isActive: $isShowingNext
         ) {
             NextLabel()
-        }.disabled(dose==nil)
+        }
     }
 
     private var unknownDoseLink: some View {
