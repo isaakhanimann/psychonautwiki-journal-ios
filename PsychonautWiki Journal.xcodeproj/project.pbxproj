@@ -547,6 +547,7 @@
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
+		EAA2C9B82B288CD50045C8DF /* PW Version 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 6.xcdatamodel"; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
 		EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartCalculator.swift; sourceTree = "<group>"; };
@@ -2344,6 +2345,7 @@
 		EAE4715626CBA664009FB0EC /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EAA2C9B82B288CD50045C8DF /* PW Version 6.xcdatamodel */,
 				EA4B8A102A9B1D10009918DE /* PW Version 5.xcdatamodel */,
 				EA6048322A16C6A1005C6A4B /* PW Version 4.xcdatamodel */,
 				EA48F85D29DB20C7007DA8C5 /* PW Version 3.xcdatamodel */,
@@ -2351,7 +2353,7 @@
 				EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */,
 				EAE4715726CBA664009FB0EC /* Goya.xcdatamodel */,
 			);
-			currentVersion = EA4B8A102A9B1D10009918DE /* PW Version 5.xcdatamodel */;
+			currentVersion = EAA2C9B82B288CD50045C8DF /* PW Version 6.xcdatamodel */;
 			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
