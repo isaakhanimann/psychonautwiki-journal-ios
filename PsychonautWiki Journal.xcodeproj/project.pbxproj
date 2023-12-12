@@ -217,6 +217,8 @@
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFC2962C9B000779DD9 /* ActivityManager.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
+		EAA2C9BA2B28BEAB0045C8DF /* CustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */; };
+		EAA2C9BC2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA2C9BB2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift */; };
 		EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36D2A50679100869E5A /* ToleranceType.swift */; };
 		EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */; };
 		EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */; };
@@ -548,6 +550,8 @@
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
 		EAA2C9B82B288CD50045C8DF /* PW Version 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 6.xcdatamodel"; sourceTree = "<group>"; };
+		EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsScreen.swift; sourceTree = "<group>"; };
+		EAA2C9BB2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomUnit-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAA9C36D2A50679100869E5A /* ToleranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceType.swift; sourceTree = "<group>"; };
 		EAA9C36F2A5067A200869E5A /* ToleranceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceWindow.swift; sourceTree = "<group>"; };
 		EAA9C3712A50690C00869E5A /* ToleranceChartCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartCalculator.swift; sourceTree = "<group>"; };
@@ -1024,6 +1028,7 @@
 				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
 				EA6D44E42A4FFD7800BF2E8A /* Share */,
 				EA4B8A302AA6FF02009918DE /* LockTimeOption.swift */,
+				EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1397,6 +1402,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */,
+				EAA2C9BB2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift */,
 				EA6048332A16C70A005C6A4B /* Spray-CoreDataHelpers.swift */,
 				EA48F85E29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift */,
 				EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */,
@@ -1793,6 +1799,7 @@
 				EA41C625295EAFD8000DA021 /* Data.swift in Sources */,
 				EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */,
 				EAB165A227E35883003DF79D /* EditCustomSubstanceView.swift in Sources */,
+				EAA2C9BA2B28BEAB0045C8DF /* CustomUnitsScreen.swift in Sources */,
 				EAC25BFB2955EC900002D68F /* TestingServicesScreen.swift in Sources */,
 				EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */,
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,
@@ -1857,6 +1864,7 @@
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
 				EA4B8A252A9CFD34009918DE /* ConsumerWithIngestions.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
+				EAA2C9BC2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
 				EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */,
 				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,

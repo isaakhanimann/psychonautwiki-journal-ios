@@ -194,12 +194,18 @@ struct SettingsContent: View {
                 }
                 if isEyeOpen {
                     Section("UI") {
-                        NavigationLink {
-                            EditColorsScreen()
-                        } label: {
-                            Label("Edit Substance Colors", systemImage: "paintpalette")
-                        }
-                        .foregroundColor(.accentColor)
+                        Group {
+                            NavigationLink {
+                                EditColorsScreen()
+                            } label: {
+                                Label("Edit Substance Colors", systemImage: "paintpalette")
+                            }
+                            NavigationLink {
+                                CustomUnitsScreen()
+                            } label: {
+                                Label("Custom Units", systemImage: "pills")
+                            }
+                        }.foregroundColor(.accentColor)
                         Group {
                             Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
                             Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
