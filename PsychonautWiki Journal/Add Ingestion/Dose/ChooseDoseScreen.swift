@@ -58,7 +58,6 @@ struct ChooseDoseScreenContent: View {
     @Binding var selectedUnits: String?
     @Binding var isEstimate: Bool
     @Binding var isShowingNext: Bool
-    @State private var isShowingUnknownDoseAlert = false
     var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
     }
@@ -72,36 +71,30 @@ struct ChooseDoseScreenContent: View {
                 }
             }
             ToolbarItem(placement: .primaryAction) {
-                nextLink
+                NavigationLink {
+                    getDestination(dose: selectedPureDose)
+                } label: {
+                    NextLabel()
+                }
             }
         }
     }
 
-    private var nextLink: some View {
-        NavigationLink(
-            destination: FinishIngestionScreen(
-                substanceName: substance.name,
-                administrationRoute: administrationRoute,
-                dose: selectedPureDose,
-                units: selectedUnits,
-                isEstimate: isEstimate,
-                dismiss: dismiss,
-                suggestedNote: suggestedNote
-            ),
-            isActive: $isShowingNext
-        ) {
-            NextLabel()
-        }
+    private func getDestination(dose: Double?) -> some View {
+        FinishIngestionScreen(
+            substanceName: substance.name,
+            administrationRoute: administrationRoute,
+            dose: dose,
+            units: selectedUnits,
+            isEstimate: isEstimate,
+            dismiss: dismiss,
+            suggestedNote: suggestedNote
+        )
     }
 
     private var unknownDoseLink: some View {
-        Button("Use Unknown Dose") {
-            if isEyeOpen {
-                isShowingUnknownDoseAlert.toggle()
-            } else {
-                selectedPureDose = nil
-                isShowingNext = true
-            }
+        NavigationLink("Use Unknown Dose") {
+            getDestination(dose: nil)
         }
     }
 
@@ -137,17 +130,6 @@ struct ChooseDoseScreenContent: View {
                     Text(Self.doseDisclaimer)
                 }
             }
-        }
-        .alert("Unknown Danger", isPresented: $isShowingUnknownDoseAlert) {
-            Button("Log Anyway", role: .destructive) {
-                selectedPureDose = nil
-                isShowingNext = true
-            }
-            Button("Cancel", role: .cancel) {
-                isShowingUnknownDoseAlert.toggle()
-            }
-        } message: {
-            Text("Taking an unknown dose can lead to overdose. Dose your substance with a milligram scale or volumetrically. Test your substance to make sure that it really is what you believe it is and doesn’t contain any dangerous adulterants. If you live in Austria, Belgium, Canada, France, Italy, Netherlands, Spain or Switzerland there are anonymous and free drug testing services available to you, else you can purchase an inexpensive reagent testing kit.")
         }
         .optionalScrollDismissesKeyboard()
         .navigationBarTitle("\(substance.name) Dose")
