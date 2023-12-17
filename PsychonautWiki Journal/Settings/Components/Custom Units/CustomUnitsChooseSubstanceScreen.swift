@@ -20,6 +20,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
 
 
     @State private var searchText = ""
+    @Environment(\.dismiss) var dismiss
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
@@ -54,6 +55,13 @@ struct CustomUnitsChooseSubstanceScreen: View {
             .optionalScrollDismissesKeyboard()
             .searchable(text: $searchText)
             .navigationTitle("Choose Substance")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }
