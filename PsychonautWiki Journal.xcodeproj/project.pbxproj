@@ -75,6 +75,7 @@
 		EA2D19672B11D9B000B270A2 /* substances.json in Resources */ = {isa = PBXBuildFile; fileRef = EAE4723426CC42F7009FB0EC /* substances.json */; };
 		EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D19682B11E85300B270A2 /* ChooseOtherRouteScreen.swift */; };
 		EA2D196B2B11E8AE00B270A2 /* RouteBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D196A2B11E8AE00B270A2 /* RouteBox.swift */; };
+		EA302E442B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -413,6 +414,7 @@
 		EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceIngestionGroup.swift; sourceTree = "<group>"; };
 		EA2D19682B11E85300B270A2 /* ChooseOtherRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOtherRouteScreen.swift; sourceTree = "<group>"; };
 		EA2D196A2B11E8AE00B270A2 /* RouteBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBox.swift; sourceTree = "<group>"; };
+		EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsChooseSubstanceScreen.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -790,6 +792,15 @@
 			path = Preparation;
 			sourceTree = "<group>";
 		};
+		EA302E422B2F3320007F113F /* Custom Units */ = {
+			isa = PBXGroup;
+			children = (
+				EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */,
+				EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */,
+			);
+			path = "Custom Units";
+			sourceTree = "<group>";
+		};
 		EA4189FE296738BC00DEA663 /* MDMA Dose */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,10 +1036,10 @@
 		EA6D44E12A4FF8B700BF2E8A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EA302E422B2F3320007F113F /* Custom Units */,
 				EAC39DC1297881E90012823D /* EditColorsScreen.swift */,
 				EA6D44E42A4FFD7800BF2E8A /* Share */,
 				EA4B8A302AA6FF02009918DE /* LockTimeOption.swift */,
-				EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1821,6 +1832,7 @@
 				EAF76C9027D7A5A000945587 /* AcknowledgeInteractionsView.swift in Sources */,
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
 				EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */,
+				EA302E442B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift in Sources */,
 				EABD922029427A9C0073303A /* DosesScreen.swift in Sources */,
 				EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,

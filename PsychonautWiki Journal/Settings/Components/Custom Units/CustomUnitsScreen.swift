@@ -48,7 +48,7 @@ struct CustomUnitsScreen: View {
             }
         }
         .fullScreenCover(isPresented: $isAddShown, content: {
-            Text("Choose Substance")
+            CustomUnitsChooseSubstanceScreen()
         })
         .navigationTitle("Custom Units")
         .dismissWhenTabTapped()
