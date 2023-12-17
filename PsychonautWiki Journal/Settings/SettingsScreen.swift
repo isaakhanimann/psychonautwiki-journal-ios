@@ -98,7 +98,7 @@ struct SettingsContent: View {
     @State private var isShowingImportAlert = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section("Privacy") {
                     if isFaceIDAvailable {
@@ -264,7 +264,6 @@ struct SettingsContent: View {
                 )
             }
         }
-        .navigationViewStyle(.stack)
     }
 
 

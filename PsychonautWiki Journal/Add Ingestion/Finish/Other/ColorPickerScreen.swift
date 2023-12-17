@@ -63,7 +63,7 @@ struct ColorPickerScreen: View {
 
 struct ColorPicker_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             let alreadyUsed = [SubstanceColor.blue, .red, .orange]
             ColorPickerScreen(
                 selectedColor: .constant(.purple),

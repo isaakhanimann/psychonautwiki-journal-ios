@@ -54,7 +54,7 @@ struct EditNotesContent: View {
     let dismiss: () -> Void
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextEditor(text: $notes)
                     .focused(isTextFieldFocused)

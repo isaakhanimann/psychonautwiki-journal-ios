@@ -77,7 +77,7 @@ struct JournalScreen: View {
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             FabPosition {
                 Button {
                     isShowingAddIngestionSheet.toggle()
@@ -121,7 +121,6 @@ struct JournalScreen: View {
             }
             .navigationTitle("Journal")
         }
-        .navigationViewStyle(.stack)
     }
 
     private var newIngestionButton: some View {

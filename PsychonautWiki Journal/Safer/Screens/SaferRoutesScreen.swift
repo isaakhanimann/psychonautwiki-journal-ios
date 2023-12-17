@@ -43,7 +43,7 @@ struct SaferRoutesScreen: View {
 
 struct SaferRoutesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             SaferRoutesScreen()
         }
     }

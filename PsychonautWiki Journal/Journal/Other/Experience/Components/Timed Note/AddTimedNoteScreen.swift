@@ -31,7 +31,7 @@ struct AddTimedNoteScreen: View {
     @State private var otherColors: [SubstanceColor] = []
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TimedNoteScreenContent(
                 time: $time,
                 note: $note,

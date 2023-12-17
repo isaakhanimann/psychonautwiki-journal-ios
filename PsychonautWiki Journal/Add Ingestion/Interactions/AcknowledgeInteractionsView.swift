@@ -75,7 +75,7 @@ struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ForEach(previewDeviceNames, id: \.self) { name in
-                NavigationView {
+                NavigationStack {
                     AcknowledgeInteractionsContent(
                         substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                         dismiss: {}

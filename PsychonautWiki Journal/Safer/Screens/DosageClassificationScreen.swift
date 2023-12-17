@@ -77,7 +77,7 @@ The desire or compulsion to regularly take heavy doses (\"chronic use\") may als
 
 struct DosageClassificationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             DosageClassificationScreen()
         }
     }

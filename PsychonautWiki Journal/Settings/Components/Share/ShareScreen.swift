@@ -42,7 +42,7 @@ struct ShareScreen: View {
 
 struct ShareScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ShareScreen()
                 .headerProminence(.increased)
         }

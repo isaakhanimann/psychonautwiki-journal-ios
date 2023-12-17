@@ -78,10 +78,10 @@ struct DosesScreen: View {
 struct DosesScreen_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationView {
+            NavigationStack {
                 DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
             }
-            NavigationView {
+            NavigationStack {
                 DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
             }
         }

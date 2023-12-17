@@ -59,7 +59,7 @@ struct ToleranceTextsScreen: View {
 
 struct ToleranceTextsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             let substances = Array(SubstanceRepo.shared.substances.filter { sub in
                 guard let tolerance = sub.tolerance else { return false }
                 return tolerance.halfToleranceInHours != nil && tolerance.zeroToleranceInHours != nil

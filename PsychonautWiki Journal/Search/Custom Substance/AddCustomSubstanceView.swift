@@ -22,7 +22,7 @@ struct AddCustomSubstanceView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Name") {
                     TextField(
@@ -61,7 +61,7 @@ struct AddCustomSubstanceView: View {
                     }
                 }
             }
-        }.navigationViewStyle(.stack)
+        }
     }
 }
 

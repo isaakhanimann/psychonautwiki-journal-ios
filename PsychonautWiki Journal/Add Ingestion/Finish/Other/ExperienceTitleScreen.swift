@@ -22,14 +22,13 @@ struct ExperienceTitleScreen: View {
     @FocusState private var textFieldIsFocused: Bool
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             screen.toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     doneButton
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onAppear {
             textFieldIsFocused = true
         }
@@ -59,7 +58,7 @@ struct ExperienceTitleScreen: View {
 
 struct ExperienceTitleScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ExperienceTitleScreen(title: .constant(""))
         }
     }

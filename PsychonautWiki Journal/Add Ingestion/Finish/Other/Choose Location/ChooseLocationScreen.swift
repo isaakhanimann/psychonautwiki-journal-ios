@@ -23,7 +23,7 @@ struct ChooseLocationScreen: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             screen.toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -35,7 +35,6 @@ struct ChooseLocationScreen: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .task {
             if locationManager.authorizationStatus == .notDetermined {
                 locationManager.requestPermission()

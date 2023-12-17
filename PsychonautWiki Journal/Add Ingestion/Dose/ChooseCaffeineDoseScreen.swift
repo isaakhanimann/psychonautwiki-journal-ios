@@ -175,7 +175,7 @@ struct ChooseCaffeineDoseScreen: View {
 
 struct ChooseCaffeineDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ChooseCaffeineDoseScreen(dismiss: {})
         }
     }

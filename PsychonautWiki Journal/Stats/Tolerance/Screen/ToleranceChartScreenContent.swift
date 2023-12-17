@@ -78,7 +78,7 @@ struct ToleranceChartScreenContent: View {
 struct ToleranceChartScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationView {
+            NavigationStack {
                 ToleranceChartScreenContent(
                     toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
                     sinceDate: .constant(Date()),
@@ -88,7 +88,7 @@ struct ToleranceChartScreenContent_Previews: PreviewProvider {
                     substances: []
                 )
             }
-            NavigationView {
+            NavigationStack {
                 ToleranceChartScreenContent(
                     toleranceWindows: [],
                     sinceDate: .constant(Date()),

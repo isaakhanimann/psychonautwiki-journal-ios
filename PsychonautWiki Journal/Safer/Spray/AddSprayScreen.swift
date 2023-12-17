@@ -27,7 +27,7 @@ struct AddSprayScreen: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section("Name") {
                     TextField("Spray Name", text: $name)
@@ -70,7 +70,6 @@ struct AddSprayScreen: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
     }
 
     private func save(sizeInMl: Double, numSprays: Double) {
@@ -91,7 +90,7 @@ struct AddSprayScreen: View {
 
 struct AddSprayScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             AddSprayScreen().headerProminence(.increased)
         }
     }

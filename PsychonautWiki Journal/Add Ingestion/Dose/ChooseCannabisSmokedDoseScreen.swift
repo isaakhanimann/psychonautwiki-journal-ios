@@ -167,7 +167,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
 
 struct ChooseJointDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ChooseCannabisSmokedDoseScreen(dismiss: {})
         }
     }

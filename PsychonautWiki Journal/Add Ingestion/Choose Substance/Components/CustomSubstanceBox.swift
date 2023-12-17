@@ -63,7 +63,7 @@ struct CustomSubstanceBox: View {
 
 struct CustomSubstanceBox_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             CustomSubstanceBox(
                 customSubstanceModel: CustomSubstanceModel(
                     name: "Coffee",

@@ -69,7 +69,7 @@ struct ChooseDateScreenContent: View {
 
 struct ChooseDateScreenContent_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             let alreadyUsedColors = [SubstanceColor.green, .pink]
             let otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors))
             ChooseDateScreenContent(

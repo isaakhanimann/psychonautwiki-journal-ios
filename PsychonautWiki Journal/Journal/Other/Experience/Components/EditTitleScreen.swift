@@ -52,7 +52,7 @@ struct EditTitleScreenContent: View {
     let dismiss: () -> Void
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("Enter Title", text: $title)
                     .onSubmit {

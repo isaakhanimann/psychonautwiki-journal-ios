@@ -136,7 +136,7 @@ This route is strongly associated with substances such as heroin and cocaine, bu
 
 struct AdministrationRouteScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             AdministrationRouteScreen()
         }
     }

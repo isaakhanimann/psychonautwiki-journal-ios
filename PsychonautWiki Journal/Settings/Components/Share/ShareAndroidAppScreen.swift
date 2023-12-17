@@ -35,7 +35,7 @@ struct ShareAndroidAppScreen: View {
 
 struct ShareAndroidAppScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ShareAndroidAppScreen()
         }
         .environmentObject(TabBarObserver())

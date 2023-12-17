@@ -37,7 +37,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(substancesFilteredAndSorted) { sub in
                     NavigationLink {
@@ -54,6 +54,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
             .listStyle(.plain)
             .optionalScrollDismissesKeyboard()
             .searchable(text: $searchText)
+            .disableAutocorrection(true)
             .navigationTitle("Choose Substance")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

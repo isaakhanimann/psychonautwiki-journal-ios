@@ -112,7 +112,7 @@ Effective doses can be divided into five categories: threshold, light, common, s
 
 struct DosageGuideScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             DosageGuideScreen()
         }
     }

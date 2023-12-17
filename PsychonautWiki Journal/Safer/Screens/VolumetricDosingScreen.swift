@@ -34,7 +34,7 @@ Search the internet to determine what solvent to use. All substances should diss
 
 struct VolumetricDosingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             VolumetricDosingScreen()
         }
     }

@@ -27,7 +27,7 @@ struct AddRatingScreen: View {
     @EnvironmentObject private var toastViewModel: ToastViewModel
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             screen.toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {

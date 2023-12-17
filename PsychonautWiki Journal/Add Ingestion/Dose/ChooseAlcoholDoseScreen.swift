@@ -206,7 +206,7 @@ struct ChooseAlcoholDoseScreen: View {
 
 struct ChooseAlcoholDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ChooseAlcoholDoseScreen(dismiss: {})
         }.headerProminence(.increased)
     }

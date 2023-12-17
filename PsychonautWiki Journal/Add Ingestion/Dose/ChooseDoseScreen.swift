@@ -199,7 +199,7 @@ struct ChooseDoseScreenContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ForEach(previewDeviceNames, id: \.self) { name in
-                NavigationView {
+                NavigationStack {
                     ChooseDoseScreenContent(
                         substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
                         administrationRoute: .oral,

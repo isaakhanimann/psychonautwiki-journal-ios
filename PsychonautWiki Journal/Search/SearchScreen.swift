@@ -91,7 +91,7 @@ struct SearchScreen: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 SubstanceSearchBarWithFilter(
                     text: $searchText,
@@ -142,6 +142,5 @@ struct SearchScreen: View {
                 isSearchFocused = true
             }
         }
-        .navigationViewStyle(.stack)
     }
 }

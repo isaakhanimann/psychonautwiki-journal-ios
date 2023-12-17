@@ -18,30 +18,10 @@ import SwiftUI
 
 struct RouteBox: View {
 
-    let substance: Substance
     let route: AdministrationRoute
-    let dismiss: () -> Void
 
     var body: some View {
-        NavigationLink {
-            if substance.name == "Cannabis" && route == .smoked {
-                ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
-            } else if substance.name == "Alcohol" && route == .oral {
-                ChooseAlcoholDoseScreen(dismiss: dismiss)
-            } else if substance.name == "Caffeine" && route == .oral {
-                ChooseCaffeineDoseScreen(dismiss: dismiss)
-            } else if substance.name == "MDMA" && route == .oral {
-                ChooseMDMADoseScreen(dismiss: dismiss)
-            } else if substance.name == "Psilocybin mushrooms" && route == .oral {
-                ChooseShroomsDoseScreen(dismiss: dismiss)
-            } else {
-                ChooseDoseScreen(
-                    substance: substance,
-                    administrationRoute: route,
-                    dismiss: dismiss
-                )
-            }
-        } label: {
+        NavigationLink(value: route) {
             RouteBoxLabel(route: route)
         }
     }

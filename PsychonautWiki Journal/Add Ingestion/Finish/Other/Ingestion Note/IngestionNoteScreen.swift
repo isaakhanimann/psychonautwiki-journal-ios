@@ -24,14 +24,13 @@ struct IngestionNoteScreen: View {
     @FocusState private var textFieldIsFocused: Bool
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             screen.toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     doneButton
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onAppear {
             textFieldIsFocused = true
         }
@@ -71,7 +70,7 @@ struct IngestionNoteScreen: View {
 
 struct IngestionNoteScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             IngestionNoteScreen(note: .constant(""))
         }
     }

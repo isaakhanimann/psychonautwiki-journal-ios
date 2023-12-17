@@ -40,7 +40,7 @@ struct GoThroughAllInteractionsScreen: View {
 
 struct GoThroughAllInteractionsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             GoThroughAllInteractionsScreen(
                 substancesToCheck: Array(SubstanceRepo.shared.substances.prefix(5))
             )

@@ -48,7 +48,7 @@ struct ChooseSubstanceContent: View {
     @State private var isShowingAddCustomSheet = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             screen.toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -57,7 +57,6 @@ struct ChooseSubstanceContent: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
             AlertToast(
                 displayMode: .alert,

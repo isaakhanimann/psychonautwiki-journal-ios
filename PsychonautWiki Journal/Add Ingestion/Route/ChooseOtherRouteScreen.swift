@@ -38,24 +38,17 @@ struct ChooseOtherRouteScreen: View {
             ForEach(0..<numRows, id: \.self) { index in
                 HStack {
                     let route1 = otherRoutes[index*2]
-                    getRouteBoxFor(route: route1)
+                    RouteBox(route: route1)
                     let secondIndex = index*2+1
                     if secondIndex < otherRoutes.count {
                         let route2 = otherRoutes[secondIndex]
-                        getRouteBoxFor(route: route2)
+                        RouteBox(route: route2)
                     }
                 }
             }
         }
         .padding(.horizontal)
         .navigationBarTitle("Other Routes")
-    }
-
-    private func getRouteBoxFor(route: AdministrationRoute) -> some View {
-        RouteBox(
-            substance: substance,
-            route: route,
-            dismiss: dismiss)
     }
 }
 

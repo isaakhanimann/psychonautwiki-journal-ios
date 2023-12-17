@@ -34,7 +34,7 @@ struct TestingScreen: View {
 
 struct TestingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             TestingScreen()
         }
     }

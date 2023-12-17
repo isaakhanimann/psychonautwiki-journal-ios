@@ -69,7 +69,7 @@ struct UnitsPicker: View {
 
 struct UnitsPickerSection_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 UnitsPicker(units: .constant(""))
             }

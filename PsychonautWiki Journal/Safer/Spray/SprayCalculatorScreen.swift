@@ -157,7 +157,7 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
             SprayModel(name: "Small Spray", numSprays: 32, contentInMl: 5, spray: nil),
             SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil)
         ]
-        NavigationView {
+        NavigationStack {
             SprayCalculatorScreenContent(
                 units: .constant(.mg),
                 weightPerSpray: .constant(""),

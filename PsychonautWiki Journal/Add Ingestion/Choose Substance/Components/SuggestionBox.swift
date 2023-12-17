@@ -108,7 +108,7 @@ struct SuggestionBox: View {
 
 struct SuggestionBox_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             LazyVStack {
                 SuggestionBox(
                     suggestion: Suggestion(

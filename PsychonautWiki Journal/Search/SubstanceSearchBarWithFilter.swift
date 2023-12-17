@@ -114,7 +114,7 @@ struct SubstanceSearchBar_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 SearchBarContainer()
                 Spacer()

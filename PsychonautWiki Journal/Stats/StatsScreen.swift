@@ -40,7 +40,7 @@ struct StatsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
                 if let experienceData, let substanceData {
                     StatsScreenContent(
@@ -59,7 +59,6 @@ struct StatsScreen: View {
                 calculateStats()
             }
         }
-        .navigationViewStyle(.stack)
     }
 
     private func calculateStats() {
@@ -288,7 +287,7 @@ struct StatsScreenContent: View {
 @available(iOS 16, *)
 struct StatsScreenContent_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             StatsScreenContent(
                 experienceData: .mock1,
                 substanceData: .mock1,

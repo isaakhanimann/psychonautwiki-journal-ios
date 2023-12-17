@@ -36,12 +36,11 @@ struct SubstanceScreen: View {
         }
         .font(.headline)
         .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
-            NavigationView {
+            NavigationStack {
                 AcknowledgeInteractionsView(substance: substance) {
                     isShowingAddIngestionSheet.toggle()
                 }
             }
-            .navigationViewStyle(.stack)
         }
         .dismissWhenTabTapped()
         .navigationTitle(substance.name)
@@ -146,7 +145,7 @@ struct SubstanceScreen: View {
 
 struct SubstanceScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             SubstanceScreen(
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
             )

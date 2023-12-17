@@ -169,7 +169,7 @@ struct ChooseShroomsDoseScreen: View {
 
 struct ChooseShroomsDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ChooseShroomsDoseScreen(dismiss: {})
         }
     }

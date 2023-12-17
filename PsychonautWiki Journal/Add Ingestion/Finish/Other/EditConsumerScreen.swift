@@ -52,7 +52,7 @@ private struct EditConsumerScreenContent: View {
 
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     TextField("Consumer name", text: $consumerName, prompt: Text("Enter name"))

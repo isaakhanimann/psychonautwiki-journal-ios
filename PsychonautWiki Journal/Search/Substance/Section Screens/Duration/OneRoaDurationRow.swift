@@ -54,7 +54,7 @@ struct OneRoaDurationRow: View {
 
 struct DurationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 OneRoaDurationRow(
                     duration: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.getDuration(for: .smoked)!,

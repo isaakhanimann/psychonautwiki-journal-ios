@@ -174,7 +174,7 @@ struct EditIngestionContent: View {
 
 struct EditIngestionScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             EditIngestionContent(
                 substanceName: "MDMA",
                 roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,

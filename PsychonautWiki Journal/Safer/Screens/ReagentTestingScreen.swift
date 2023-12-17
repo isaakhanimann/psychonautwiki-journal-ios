@@ -32,7 +32,7 @@ struct ReagentTestingScreen: View {
 
 struct ReagentTestingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ReagentTestingScreen()
         }
     }

@@ -29,6 +29,25 @@ struct ChooseRouteScreen: View {
                 }
             }
         }
+        .navigationDestination(for: AdministrationRoute.self) { route in
+            if substance.name == "Cannabis" && route == .smoked {
+                ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
+            } else if substance.name == "Alcohol" && route == .oral {
+                ChooseAlcoholDoseScreen(dismiss: dismiss)
+            } else if substance.name == "Caffeine" && route == .oral {
+                ChooseCaffeineDoseScreen(dismiss: dismiss)
+            } else if substance.name == "MDMA" && route == .oral {
+                ChooseMDMADoseScreen(dismiss: dismiss)
+            } else if substance.name == "Psilocybin mushrooms" && route == .oral {
+                ChooseShroomsDoseScreen(dismiss: dismiss)
+            } else {
+                ChooseDoseScreen(
+                    substance: substance,
+                    administrationRoute: route,
+                    dismiss: dismiss
+                )
+            }
+        }
     }
 
     var screen: some View {
@@ -80,34 +99,27 @@ struct ChooseRouteScreen: View {
         let numOfRoutes = routes.count
         if numOfRoutes < 6 {
             ForEach(routes, id: \.self) { route in
-                getRouteBoxFor(route: route)
+                RouteBox(route: route)
             }
         } else {
             let numRows = Int(ceil(Double(routes.count)/2.0))
             ForEach(0..<numRows, id: \.self) { index in
                 HStack {
                     let route1 = routes[index*2]
-                    getRouteBoxFor(route: route1)
+                    RouteBox(route: route1)
                     let secondIndex = index*2+1
                     if secondIndex < routes.count {
                         let route2 = routes[secondIndex]
-                        getRouteBoxFor(route: route2)
+                        RouteBox(route: route2)
                     }
                 }
             }
         }
     }
-
-    private func getRouteBoxFor(route: AdministrationRoute) -> some View {
-        RouteBox(
-            substance: substance,
-            route: route,
-            dismiss: dismiss)
-    }
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ChooseRouteScreen(
             substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
             dismiss: {}

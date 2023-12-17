@@ -56,7 +56,7 @@ struct AcknowledgeSaferUseScreen: View {
 
 struct AcknowledgeSaferUseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             AcknowledgeSaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!, dismiss: {})
         }
     }

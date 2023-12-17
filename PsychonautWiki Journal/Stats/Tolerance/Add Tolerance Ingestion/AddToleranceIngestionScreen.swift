@@ -23,7 +23,7 @@ struct AddToleranceIngestionScreen: View {
     let finish: (SubstanceAndDay) -> Void
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(viewModel.filteredSubstances, id: \.name) { substance in
                 if substance.tolerance?.halfToleranceInHours != nil || substance.tolerance?.zeroToleranceInHours != nil {
                     NavigationLink {

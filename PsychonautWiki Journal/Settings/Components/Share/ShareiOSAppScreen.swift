@@ -43,7 +43,7 @@ struct ShareiOSAppScreen: View {
 
 struct ShareiOSAppScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ShareiOSAppScreen()
         }
         .environmentObject(TabBarObserver())

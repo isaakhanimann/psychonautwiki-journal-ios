@@ -74,7 +74,7 @@ struct TimelineScreen: View {
 
 struct TimelineScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             TimelineScreen(timelineModel: TimelineModel(
                 substanceGroups: EffectTimeline_Previews.substanceGroups,
                 everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,

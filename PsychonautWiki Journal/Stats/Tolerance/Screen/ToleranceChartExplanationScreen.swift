@@ -49,7 +49,7 @@ The vertical line marks the present time. The gray vertical line marks the time 
 
 struct ToleranceChartExplanationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ToleranceChartExplanationScreen()
                 .environmentObject(TabBarObserver())
                 .headerProminence(.increased)

@@ -43,7 +43,7 @@ struct ToxicityScreen: View {
 
 struct ToxicityScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
             ToxicityScreen(
                 substanceName: substance.name,

@@ -130,7 +130,7 @@ struct ExperienceDetailsScreen: View {
 @available(iOS 16, *)
 struct ExperienceDetails_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ExperienceDetailsScreen(experienceData: .mock1)
         }
         .environmentObject(TabBarObserver())

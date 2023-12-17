@@ -19,7 +19,7 @@ import SwiftUI
 struct SaferScreen: View {
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     let title1 = "Research"
@@ -119,7 +119,6 @@ struct SaferScreen: View {
             .font(.headline)
             .navigationTitle("Safer Use")
         }
-        .navigationViewStyle(.stack)
     }
 }
 

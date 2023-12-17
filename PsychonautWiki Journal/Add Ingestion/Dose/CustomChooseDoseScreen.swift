@@ -23,7 +23,6 @@ struct CustomChooseDoseScreen: View {
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
     @State private var doseText = ""
-    @State private var isShowingNext = false
     @State private var dose: Double? = nil
     @State private var isEstimate = false
     @FocusState private var isDoseFieldFocused: Bool
@@ -42,25 +41,25 @@ struct CustomChooseDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink(
-            destination: FinishIngestionScreen(
-                substanceName: substanceName,
-                administrationRoute: administrationRoute,
-                dose: dose,
-                units: units,
-                isEstimate: isEstimate,
-                dismiss: dismiss
-            ),
-            isActive: $isShowingNext
-        ) {
+        NavigationLink(destination: getDestination(dose: dose)) {
             NextLabel()
         }
     }
 
+    func getDestination(dose: Double?) -> some View {
+        FinishIngestionScreen(
+            substanceName: substanceName,
+            administrationRoute: administrationRoute,
+            dose: dose,
+            units: units,
+            isEstimate: isEstimate,
+            dismiss: dismiss
+        )
+    }
+
     private var unknownDoseLink: some View {
-        Button("Use Unknown Dose") {
-            dose = nil
-            isShowingNext = true
+        NavigationLink("Use Unknown Dose") {
+            getDestination(dose: nil)
         }
     }
 
@@ -93,7 +92,7 @@ struct CustomChooseDoseScreen: View {
 
 struct CustomChooseDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             CustomChooseDoseScreen(
                 substanceName: "Coffee",
                 units: "cups",
