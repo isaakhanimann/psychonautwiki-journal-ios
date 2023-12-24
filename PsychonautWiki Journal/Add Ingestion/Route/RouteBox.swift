@@ -21,17 +21,6 @@ struct RouteBox: View {
     let route: AdministrationRoute
 
     var body: some View {
-        NavigationLink(value: route) {
-            RouteBoxLabel(route: route)
-        }
-    }
-}
-
-struct RouteBoxLabel: View {
-
-    let route: AdministrationRoute
-
-    var body: some View {
         GroupBox {
             VStack(alignment: .center) {
                 Text(route.rawValue.localizedCapitalized)
@@ -53,5 +42,5 @@ struct RouteBoxLabel: View {
 }
 
 #Preview {
-    RouteBoxLabel(route: .oral)
+    RouteBox(route: .oral)
 }

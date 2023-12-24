@@ -18,9 +18,7 @@ import SwiftUI
 
 struct CustomChooseDoseScreen: View {
 
-    let substanceName: String
-    let units: String
-    let administrationRoute: AdministrationRoute
+    let arguments: CustomChooseDoseScreenArguments
     let dismiss: () -> Void
     @State private var doseText = ""
     @State private var dose: Double? = nil
@@ -41,26 +39,22 @@ struct CustomChooseDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink(destination: getDestination(dose: dose)) {
+        NavigationLink(value: getDestinationArguments(dose: dose)) {
             NextLabel()
         }
     }
 
-    func getDestination(dose: Double?) -> some View {
-        FinishIngestionScreen(
-            substanceName: substanceName,
-            administrationRoute: administrationRoute,
+    func getDestinationArguments(dose: Double?) -> FinishIngestionScreenArguments {
+        FinishIngestionScreenArguments(
+            substanceName: arguments.substanceName,
+            administrationRoute: arguments.administrationRoute,
             dose: dose,
-            units: units,
-            isEstimate: isEstimate,
-            dismiss: dismiss
-        )
+            units: arguments.units,
+            isEstimate: isEstimate)
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Use Unknown Dose") {
-            getDestination(dose: nil)
-        }
+        NavigationLink("Use Unknown Dose", value: getDestinationArguments(dose: nil))
     }
 
     private var screen: some View {
@@ -74,7 +68,7 @@ struct CustomChooseDoseScreen: View {
                         .onChange(of: doseText) { text in
                             dose = getDouble(from: text)
                         }
-                    Text(units)
+                    Text(arguments.units)
                 }
                 .font(.title)
                 Toggle("Dose is an Estimate", isOn: $isEstimate)
@@ -86,7 +80,7 @@ struct CustomChooseDoseScreen: View {
             isDoseFieldFocused = true
         }
         .optionalScrollDismissesKeyboard()
-        .navigationTitle("\(substanceName) Dose")
+        .navigationTitle("\(arguments.substanceName) Dose")
     }
 }
 
@@ -94,9 +88,9 @@ struct CustomChooseDoseScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             CustomChooseDoseScreen(
-                substanceName: "Coffee",
-                units: "cups",
-                administrationRoute: .oral,
+                arguments: .init(substanceName: "Coffee",
+                                 units: "cups",
+                                 administrationRoute: .oral),
                 dismiss: {}
             )
         }

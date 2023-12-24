@@ -49,31 +49,23 @@ struct ChooseCaffeineDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            FinishIngestionScreen(
-                substanceName: caffeine.name,
-                administrationRoute: .oral,
-                dose: doseRounded,
-                units: units,
-                isEstimate: isEstimate,
-                dismiss: dismiss
-            )
-        } label: {
-            NextLabel()
-        }
+        NavigationLink(value: FinishIngestionScreenArguments(
+            substanceName: caffeine.name,
+            administrationRoute: .oral,
+            dose: doseRounded,
+            units: units,
+            isEstimate: isEstimate)) {
+                NextLabel()
+            }
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Unknown Dose") {
-            FinishIngestionScreen(
-                substanceName: caffeine.name,
-                administrationRoute: .oral,
-                dose: nil,
-                units: units,
-                isEstimate: false,
-                dismiss: dismiss
-            )
-        }
+        NavigationLink("Unknown Dose", value: FinishIngestionScreenArguments(
+            substanceName: caffeine.name,
+            administrationRoute: .oral,
+            dose: nil,
+            units: units,
+            isEstimate: false))
     }
 
     var screen: some View {

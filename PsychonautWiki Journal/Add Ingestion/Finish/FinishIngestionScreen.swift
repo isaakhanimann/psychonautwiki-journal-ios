@@ -30,13 +30,9 @@ struct FinishIngestionScreen: View {
         }
     }
 
-    let substanceName: String
-    let administrationRoute: AdministrationRoute
-    let dose: Double?
-    let units: String?
-    let isEstimate: Bool
+    let arguments: FinishIngestionScreenArguments
     let dismiss: () -> Void
-    var suggestedNote: String? = nil
+
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @EnvironmentObject private var locationManager: LocationManager
     @State private var sheetToShow: SheetOption? = nil
@@ -80,11 +76,11 @@ struct FinishIngestionScreen: View {
             Task {
                 do {
                     try await addIngestion(
-                        substanceName: substanceName,
-                        administrationRoute: administrationRoute,
-                        dose: dose,
-                        units: units,
-                        isEstimate: isEstimate,
+                        substanceName: arguments.substanceName,
+                        administrationRoute: arguments.administrationRoute,
+                        dose: arguments.dose,
+                        units: arguments.units,
+                        isEstimate: arguments.isEstimate,
                         location: locationManager.selectedLocation
                     )
                     Task { @MainActor in
@@ -202,7 +198,7 @@ struct FinishIngestionScreen: View {
                     }
                 }
             }
-            if administrationRoute == .oral {
+            if arguments.administrationRoute == .oral {
                 EditStomachFullnessSection(stomachFullness: $selectedStomachFullness)
             }
             Section {
@@ -214,7 +210,7 @@ struct FinishIngestionScreen: View {
                     )
                 } label: {
                     HStack {
-                        Text("\(substanceName) Color")
+                        Text("\(arguments.substanceName) Color")
                         Spacer()
                         Image(systemName: "circle.fill").foregroundColor(selectedColor.swiftUIColor)
                     }
@@ -247,7 +243,7 @@ struct FinishIngestionScreen: View {
             }.uniqued()
             locationManager.selectedLocation = locationManager.currentLocation
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
-            initializeColorCompanionAndNote(for: substanceName, suggestedNote: suggestedNote)
+            initializeColorCompanionAndNote(for: arguments.substanceName, suggestedNote: arguments.suggestedNote)
         }
     }
 

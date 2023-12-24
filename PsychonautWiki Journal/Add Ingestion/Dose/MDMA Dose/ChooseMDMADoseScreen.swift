@@ -41,31 +41,23 @@ struct ChooseMDMADoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            FinishIngestionScreen(
-                substanceName: mdma.name,
-                administrationRoute: .oral,
-                dose: mdmaDoseInMg,
-                units: units,
-                isEstimate: isEstimate,
-                dismiss: dismiss
-            )
-        } label: {
-            NextLabel()
-        }
+        NavigationLink(value: FinishIngestionScreenArguments(
+            substanceName: mdma.name,
+            administrationRoute: .oral,
+            dose: mdmaDoseInMg,
+            units: units,
+            isEstimate: isEstimate)) {
+                NextLabel()
+            }
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Use Unknown Dose") {
-            FinishIngestionScreen(
-                substanceName: mdma.name,
-                administrationRoute: .oral,
-                dose: nil,
-                units: units,
-                isEstimate: false,
-                dismiss: dismiss
-            )
-        }
+        NavigationLink("Use Unknown Dose", value: FinishIngestionScreenArguments(
+            substanceName: mdma.name,
+            administrationRoute: .oral,
+            dose: nil,
+            units: units,
+            isEstimate: false))
     }
 
     private var screen: some View {

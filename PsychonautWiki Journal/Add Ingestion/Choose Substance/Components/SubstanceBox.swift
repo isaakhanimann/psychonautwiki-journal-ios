@@ -23,30 +23,35 @@ struct SubstanceBox: View {
     let isEyeOpen: Bool
 
     var body: some View {
-        NavigationLink {
-            if isEyeOpen {
-                if !substance.saferUse.isEmpty {
-                    AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
-                } else {
-                    AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+        if isEyeOpen {
+            if !substance.saferUse.isEmpty {
+                NavigationLink(value: AddIngestionDestination.saferUse(substance: substance)) {
+                    content
                 }
             } else {
-                ChooseDoseScreen(
-                    substance: substance,
-                    administrationRoute: .oral,
-                    dismiss: dismiss
-                )
+                NavigationLink(value: AddIngestionDestination.interactions(substance: substance)) {
+                    content
+                }
             }
-        } label: {
-            GroupBox(substance.name) {
-                if !substance.commonNames.isEmpty {
-                    HStack {
-                        Text(substance.commonNames, format: .list(type: .or))
-                            .multilineTextAlignment(.leading)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
+        } else {
+            NavigationLink(value: ChooseDoseScreenArguments(
+                substance: substance,
+                administrationRoute: .oral)) {
+                content
+            }
+        }
+
+    }
+
+    private var content: some View {
+        GroupBox(substance.name) {
+            if !substance.commonNames.isEmpty {
+                HStack {
+                    Text(substance.commonNames, format: .list(type: .or))
+                        .multilineTextAlignment(.leading)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
                 }
             }
         }

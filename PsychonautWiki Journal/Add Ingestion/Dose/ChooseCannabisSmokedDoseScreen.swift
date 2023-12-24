@@ -75,32 +75,24 @@ struct ChooseCannabisSmokedDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            FinishIngestionScreen(
-                substanceName: cannabis.name,
-                administrationRoute: .smoked,
-                dose: doseRounded,
-                units: "mg",
-                isEstimate: isEstimate,
-                dismiss: dismiss,
-                suggestedNote: suggestedNote
-            )
-        } label: {
-            NextLabel()
-        }
+        NavigationLink(value: FinishIngestionScreenArguments(
+            substanceName: cannabis.name,
+            administrationRoute: .smoked,
+            dose: doseRounded,
+            units: "mg",
+            isEstimate: isEstimate,
+            suggestedNote: suggestedNote)) {
+                NextLabel()
+            }
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Unknown Dose") {
-            FinishIngestionScreen(
-                substanceName: cannabis.name,
-                administrationRoute: .smoked,
-                dose: nil,
-                units: "mg",
-                isEstimate: false,
-                dismiss: dismiss
-            )
-        }
+        NavigationLink("Unknown Dose", value: FinishIngestionScreenArguments(
+            substanceName: cannabis.name,
+            administrationRoute: .smoked,
+            dose: nil,
+            units: "mg",
+            isEstimate: false))
     }
 
     private var screen: some View {

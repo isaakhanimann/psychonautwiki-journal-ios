@@ -17,8 +17,7 @@
 import SwiftUI
 
 struct CustomChooseRouteScreen: View {
-    let substanceName: String
-    let units: String
+    let arguments: CustomChooseRouteScreenArguments
     let dismiss: () -> Void
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -58,26 +57,20 @@ struct CustomChooseRouteScreen: View {
                 getRouteBoxFor(route: .intramuscular)
             }
             if isEyeOpen {
-                NavigationLink {
-                    SaferRoutesScreen()
-                } label: {
+                NavigationLink(value: AddIngestionDestination.saferRoutes) {
                     Label("Safer Routes", systemImage: "info.circle")
-                }.padding(.vertical)
+                }
+                .padding(.vertical)
             }
         }
         .padding(.horizontal)
-        .navigationTitle("\(substanceName) Routes")
+        .navigationTitle("\(arguments.substanceName) Routes")
     }
 
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
-        NavigationLink {
-            CustomChooseDoseScreen(
-                substanceName: substanceName,
-                units: units,
-                administrationRoute: route,
-                dismiss: dismiss
-            )
-        } label: {
+        NavigationLink(value: CustomChooseDoseScreenArguments(substanceName: arguments.substanceName,
+                                                              units: arguments.units,
+                                                              administrationRoute: route)) {
             GroupBox {
                 VStack(alignment: .center) {
                     Text(route.rawValue.localizedCapitalized)
@@ -102,7 +95,7 @@ struct CustomChooseRouteScreen: View {
 struct CustomChooseRouteScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CustomChooseRouteScreen(substanceName: "Coffee", units: "cups", dismiss: {})
+            CustomChooseRouteScreen(arguments: .init(substanceName: "Coffee", units: "cups"), dismiss: {})
         }
     }
 }

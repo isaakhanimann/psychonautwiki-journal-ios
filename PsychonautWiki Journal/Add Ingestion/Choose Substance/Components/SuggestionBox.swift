@@ -33,60 +33,31 @@ struct SuggestionBox: View {
             ) { index in
                 let dose = suggestion.dosesAndUnit[index]
                 if let doseUnwrap = dose.dose {
-                    NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")") {
-                        FinishIngestionScreen(
-                            substanceName: suggestion.substanceName,
-                            administrationRoute: suggestion.route,
-                            dose: doseUnwrap,
-                            units: dose.units,
-                            isEstimate: dose.isEstimate,
-                            dismiss: dismiss
-                        )
-                    }
+                    NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")", value: FinishIngestionScreenArguments(
+                        substanceName: suggestion.substanceName,
+                        administrationRoute: suggestion.route,
+                        dose: doseUnwrap,
+                        units: dose.units,
+                        isEstimate: dose.isEstimate))
                     .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
                 } else {
-                    NavigationLink("Unknown") {
-                        FinishIngestionScreen(
-                            substanceName: suggestion.substanceName,
-                            administrationRoute: suggestion.route,
-                            dose: dose.dose,
-                            units: dose.units,
-                            isEstimate: dose.isEstimate,
-                            dismiss: dismiss
-                        )
-                    }
+                    NavigationLink("Unknown", value: FinishIngestionScreenArguments(
+                        substanceName: suggestion.substanceName,
+                        administrationRoute: suggestion.route,
+                        dose: dose.dose,
+                        units: dose.units,
+                        isEstimate: dose.isEstimate))
                     .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
                 }
                 if index == suggestion.dosesAndUnit.count-1 {
                     if let substance = suggestion.substance {
-                        NavigationLink("Other") {
-                            if substance.name == "Cannabis" && suggestion.route == .smoked {
-                                ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
-                            } else if substance.name == "Alcohol" && suggestion.route == .oral {
-                                ChooseAlcoholDoseScreen(dismiss: dismiss)
-                            } else if substance.name == "Caffeine" && suggestion.route == .oral {
-                                ChooseCaffeineDoseScreen(dismiss: dismiss)
-                            } else if substance.name == "MDMA" && suggestion.route == .oral {
-                                ChooseMDMADoseScreen(dismiss: dismiss)
-                            } else if substance.name == "Psilocybin mushrooms" && suggestion.route == .oral {
-                                ChooseShroomsDoseScreen(dismiss: dismiss)
-                            } else {
-                                ChooseDoseScreen(
-                                    substance: substance,
-                                    administrationRoute: suggestion.route,
-                                    dismiss: dismiss
-                                )
-                            }
-                        }
+                        NavigationLink("Other", value: ChooseDoseScreenArguments(substance: substance, administrationRoute: suggestion.route))
                         .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                     } else {
-                        NavigationLink("Other") {
-                            CustomChooseDoseScreen(
-                                substanceName: suggestion.substanceName,
-                                units: suggestion.units,
-                                administrationRoute: suggestion.route,
-                                dismiss: dismiss)
-                        }
+                        NavigationLink("Other", value: CustomChooseDoseScreenArguments(
+                            substanceName: suggestion.substanceName,
+                            units: suggestion.units,
+                            administrationRoute: suggestion.route))
                         .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                     }
                 }

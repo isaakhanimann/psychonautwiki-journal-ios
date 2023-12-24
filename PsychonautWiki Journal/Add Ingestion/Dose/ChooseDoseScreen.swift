@@ -18,8 +18,7 @@ import SwiftUI
 
 struct ChooseDoseScreen: View {
 
-    let substance: Substance
-    let administrationRoute: AdministrationRoute
+    let arguments: ChooseDoseScreenArguments
     let dismiss: () -> Void
     @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
     @State private var selectedPureDose: Double?
@@ -30,8 +29,8 @@ struct ChooseDoseScreen: View {
 
     var body: some View {
         ChooseDoseScreenContent(
-            substance: substance,
-            administrationRoute: administrationRoute,
+            substance: arguments.substance,
+            administrationRoute: arguments.administrationRoute,
             dismiss: dismiss,
             isEyeOpen: isEyeOpen,
             selectedPureDose: $selectedPureDose,
@@ -40,7 +39,7 @@ struct ChooseDoseScreen: View {
             isShowingNext: $isShowingNext
         )
         .task {
-            let routeUnits = substance.getDose(for: administrationRoute)?.units
+            let routeUnits = arguments.substance.getDose(for: arguments.administrationRoute)?.units
             if let routeUnits {
                 selectedUnits = routeUnits
             }
@@ -71,31 +70,27 @@ struct ChooseDoseScreenContent: View {
                 }
             }
             ToolbarItem(placement: .primaryAction) {
-                NavigationLink {
-                    getDestination(dose: selectedPureDose)
-                } label: {
-                    NextLabel()
-                }
+                NavigationLink(value: FinishIngestionScreenArguments(
+                    substanceName: substance.name,
+                    administrationRoute: administrationRoute,
+                    dose: selectedPureDose,
+                    units: selectedUnits,
+                    isEstimate: isEstimate,
+                    suggestedNote: suggestedNote)) {
+                        NextLabel()
+                    }
             }
         }
     }
 
-    private func getDestination(dose: Double?) -> some View {
-        FinishIngestionScreen(
+    private var unknownDoseLink: some View {
+        NavigationLink("Use Unknown Dose", value: FinishIngestionScreenArguments(
             substanceName: substance.name,
             administrationRoute: administrationRoute,
-            dose: dose,
+            dose: nil,
             units: selectedUnits,
             isEstimate: isEstimate,
-            dismiss: dismiss,
-            suggestedNote: suggestedNote
-        )
-    }
-
-    private var unknownDoseLink: some View {
-        NavigationLink("Use Unknown Dose") {
-            getDestination(dose: nil)
-        }
+            suggestedNote: suggestedNote))
     }
 
     private var screen: some View {

@@ -73,32 +73,24 @@ struct ChooseShroomsDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            FinishIngestionScreen(
-                substanceName: mushrooms.name,
-                administrationRoute: .oral,
-                dose: psilocybinInMg,
-                units: "mg",
-                isEstimate: isEstimate,
-                dismiss: dismiss,
-                suggestedNote: suggestedNote
-            )
-        } label: {
-            NextLabel()
-        }
+        NavigationLink(value: FinishIngestionScreenArguments(
+            substanceName: mushrooms.name,
+            administrationRoute: .oral,
+            dose: psilocybinInMg,
+            units: "mg",
+            isEstimate: isEstimate,
+            suggestedNote: suggestedNote)) {
+                NextLabel()
+            }
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Unknown Dose") {
-            FinishIngestionScreen(
-                substanceName: mushrooms.name,
-                administrationRoute: .oral,
-                dose: nil,
-                units: "mg",
-                isEstimate: false,
-                dismiss: dismiss
-            )
-        }
+        NavigationLink("Unknown Dose", value: FinishIngestionScreenArguments(
+            substanceName: mushrooms.name,
+            administrationRoute: .oral,
+            dose: nil,
+            units: "mg",
+            isEstimate: false))
     }
 
     private var screen: some View {

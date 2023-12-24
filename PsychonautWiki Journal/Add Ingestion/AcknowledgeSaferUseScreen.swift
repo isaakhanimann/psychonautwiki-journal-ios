@@ -35,10 +35,7 @@ struct AcknowledgeSaferUseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
-
-        } label: {
+        NavigationLink(value: AddIngestionDestination.interactions(substance: substance)) {
             NextLabel()
         }
     }

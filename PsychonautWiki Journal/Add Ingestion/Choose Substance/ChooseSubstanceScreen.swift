@@ -56,6 +56,50 @@ struct ChooseSubstanceContent: View {
                     }
                 }
             }
+            .navigationDestination(for: FinishIngestionScreenArguments.self) { arguments in
+                FinishIngestionScreen(arguments: arguments, dismiss: dismiss)
+            }
+            .navigationDestination(for: ChooseDoseScreenArguments.self) { arguments in
+                ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
+            }
+            .navigationDestination(for: AddIngestionDestination.self) { destination in
+                switch destination {
+                case .interactions(let substance):
+                    AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
+                case .saferUse(let substance):
+                    AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
+                case .saferRoutes:
+                    SaferRoutesScreen()
+                }
+            }
+            .navigationDestination(for: ChooseRouteScreenArguments.self, destination: { arguments in
+                ChooseRouteScreen(substance: arguments.substance, dismiss: dismiss)
+            })
+            .navigationDestination(for: CustomChooseDoseScreenArguments.self, destination: { arguments in
+                CustomChooseDoseScreen(arguments: arguments, dismiss: dismiss)
+            })
+            .navigationDestination(for: ChooseOtherRouteScreenArguments.self, destination: { arguments in
+                ChooseOtherRouteScreen(arguments: arguments, dismiss: dismiss)
+            })
+            .navigationDestination(for: CustomChooseRouteScreenArguments.self, destination: { arguments in
+                CustomChooseRouteScreen(arguments: arguments, dismiss: dismiss)
+            })
+            .navigationDestination(for: ChooseDoseScreenArguments.self) { arguments in
+                let substanceName = arguments.substance.name
+                if substanceName == "Cannabis" && arguments.administrationRoute == .smoked {
+                    ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
+                } else if substanceName == "Alcohol" && arguments.administrationRoute == .oral {
+                    ChooseAlcoholDoseScreen(dismiss: dismiss)
+                } else if substanceName == "Caffeine" && arguments.administrationRoute == .oral {
+                    ChooseCaffeineDoseScreen(dismiss: dismiss)
+                } else if substanceName == "MDMA" && arguments.administrationRoute == .oral {
+                    ChooseMDMADoseScreen(dismiss: dismiss)
+                } else if substanceName == "Psilocybin mushrooms" && arguments.administrationRoute == .oral {
+                    ChooseShroomsDoseScreen(dismiss: dismiss)
+                } else {
+                    ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
+                }
+            }
         }
         .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
             AlertToast(

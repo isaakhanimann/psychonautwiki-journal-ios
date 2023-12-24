@@ -23,41 +23,38 @@ struct CustomSubstanceBox: View {
     let isEyeOpen: Bool
 
     var body: some View {
-        NavigationLink {
-            if isEyeOpen {
-                CustomChooseRouteScreen(
-                    substanceName: customSubstanceModel.name,
-                    units: customSubstanceModel.units,
-                    dismiss: dismiss
-                )
-            } else {
-                CustomChooseDoseScreen(
-                    substanceName: customSubstanceModel.name,
-                    units: customSubstanceModel.units,
-                    administrationRoute: .oral,
-                    dismiss: dismiss
-                )
+        if isEyeOpen {
+            NavigationLink(value: CustomChooseRouteScreenArguments(substanceName: customSubstanceModel.name,
+                                                                   units: customSubstanceModel.units)) {
+                content
             }
-        } label: {
-            GroupBox {
-                if !customSubstanceModel.description.isEmpty {
-                    HStack {
-                        Text(customSubstanceModel.description)
-                            .multilineTextAlignment(.leading)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
-                }
-            } label: {
-                HStack {
-                    Text(customSubstanceModel.name)
-                    Spacer()
-                    Text("custom").font(.subheadline).foregroundColor(.secondary)
-                }
+        } else {
+            NavigationLink(value: CustomChooseDoseScreenArguments(substanceName: customSubstanceModel.name,
+                                                                  units: customSubstanceModel.units,
+                                                                  administrationRoute: .oral)) {
+                content
             }
         }
+    }
 
+    private var content: some View {
+        GroupBox {
+            if !customSubstanceModel.description.isEmpty {
+                HStack {
+                    Text(customSubstanceModel.description)
+                        .multilineTextAlignment(.leading)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+            }
+        } label: {
+            HStack {
+                Text(customSubstanceModel.name)
+                Spacer()
+                Text("custom").font(.subheadline).foregroundColor(.secondary)
+            }
+        }
     }
 }
 

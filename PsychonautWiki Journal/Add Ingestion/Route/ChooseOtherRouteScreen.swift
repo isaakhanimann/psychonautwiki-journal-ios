@@ -18,9 +18,8 @@ import SwiftUI
 
 struct ChooseOtherRouteScreen: View {
 
-    let substance: Substance
+    let arguments: ChooseOtherRouteScreenArguments
     let dismiss: () -> Void
-    let otherRoutes: [AdministrationRoute]
 
     var body: some View {
         screen.toolbar {
@@ -34,15 +33,15 @@ struct ChooseOtherRouteScreen: View {
 
     var screen: some View {
         VStack(alignment: .leading) {
-            let numRows = Int(ceil(Double(otherRoutes.count)/2.0))
+            let numRows = Int(ceil(Double(arguments.otherRoutes.count)/2.0))
             ForEach(0..<numRows, id: \.self) { index in
                 HStack {
-                    let route1 = otherRoutes[index*2]
-                    RouteBox(route: route1)
+                    let route1 = arguments.otherRoutes[index*2]
+                    getRouteBoxWithNavigation(route: route1)
                     let secondIndex = index*2+1
-                    if secondIndex < otherRoutes.count {
-                        let route2 = otherRoutes[secondIndex]
-                        RouteBox(route: route2)
+                    if secondIndex < arguments.otherRoutes.count {
+                        let route2 = arguments.otherRoutes[secondIndex]
+                        getRouteBoxWithNavigation(route: route2)
                     }
                 }
             }
@@ -50,11 +49,17 @@ struct ChooseOtherRouteScreen: View {
         .padding(.horizontal)
         .navigationBarTitle("Other Routes")
     }
+
+    private func getRouteBoxWithNavigation(route: AdministrationRoute) -> some View {
+        NavigationLink(value: ChooseDoseScreenArguments(substance: arguments.substance, administrationRoute: route)) {
+            RouteBox(route: route)
+        }
+    }
 }
 
 #Preview {
     ChooseOtherRouteScreen(
-        substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-        dismiss: {},
-        otherRoutes: [.inhaled, .intravenous, .intramuscular, .smoked])
+        arguments: .init(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                         otherRoutes: [.inhaled, .intravenous, .intramuscular, .smoked]),
+        dismiss: {})
 }

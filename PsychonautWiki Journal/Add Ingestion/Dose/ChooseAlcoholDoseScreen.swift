@@ -63,32 +63,24 @@ struct ChooseAlcoholDoseScreen: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            FinishIngestionScreen(
-                substanceName: alcohol.name,
-                administrationRoute: .oral,
-                dose: doseRounded,
-                units: units,
-                isEstimate: isEstimate,
-                dismiss: dismiss,
-                suggestedNote: suggestedNote
-            )
-        } label: {
-            NextLabel()
-        }
+        NavigationLink(value: FinishIngestionScreenArguments(
+            substanceName: alcohol.name,
+            administrationRoute: .oral,
+            dose: doseRounded,
+            units: units,
+            isEstimate: isEstimate,
+            suggestedNote: suggestedNote)) {
+                NextLabel()
+            }
     }
 
     private var unknownDoseLink: some View {
-        NavigationLink("Unknown Dose") {
-            FinishIngestionScreen(
-                substanceName: alcohol.name,
-                administrationRoute: .oral,
-                dose: nil,
-                units: units,
-                isEstimate: false,
-                dismiss: dismiss
-            )
-        }
+        NavigationLink("Unknown Dose", value: FinishIngestionScreenArguments(
+            substanceName: alcohol.name,
+            administrationRoute: .oral,
+            dose: nil,
+            units: units,
+            isEstimate: false))
     }
 
     struct Preset: Identifiable, Hashable {

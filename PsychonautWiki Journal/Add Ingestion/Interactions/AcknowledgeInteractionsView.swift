@@ -62,9 +62,7 @@ struct AcknowledgeInteractionsContent: View {
     }
 
     private var nextLink: some View {
-        NavigationLink {
-            ChooseRouteScreen(substance: substance, dismiss: dismiss)
-        } label: {
+        NavigationLink(value: ChooseRouteScreenArguments(substance: substance)) {
             NextLabel()
         }
     }
