@@ -34,7 +34,7 @@ struct SubstanceBox: View {
                 }
             }
         } else {
-            NavigationLink(value: ChooseDoseScreenArguments(
+            NavigationLink(value: SubstanceAndRoute(
                 substance: substance,
                 administrationRoute: .oral)) {
                 content

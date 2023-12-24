@@ -51,7 +51,7 @@ struct SuggestionBox: View {
                 }
                 if index == suggestion.dosesAndUnit.count-1 {
                     if let substance = suggestion.substance {
-                        NavigationLink("Other", value: ChooseDoseScreenArguments(substance: substance, administrationRoute: suggestion.route))
+                        NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
                         .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                     } else {
                         NavigationLink("Other", value: CustomChooseDoseScreenArguments(

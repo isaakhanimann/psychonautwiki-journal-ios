@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct ChooseDoseScreenArguments: Hashable {
+struct SubstanceAndRoute: Hashable {
     let substance: Substance
     let administrationRoute: AdministrationRoute
 }

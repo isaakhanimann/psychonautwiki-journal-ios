@@ -78,12 +78,13 @@
 		EA302E442B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */; };
 		EA302E462B2F3943007F113F /* CustomUnitsChooseRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E452B2F3943007F113F /* CustomUnitsChooseRoute.swift */; };
 		EA302E482B381C2F007F113F /* FinishIngestionScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E472B381C2F007F113F /* FinishIngestionScreenArguments.swift */; };
-		EA302E4A2B38289B007F113F /* ChooseDoseScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E492B38289B007F113F /* ChooseDoseScreenArguments.swift */; };
+		EA302E4A2B38289B007F113F /* SubstanceAndRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E492B38289B007F113F /* SubstanceAndRoute.swift */; };
 		EA302E4C2B385516007F113F /* AddIngestionDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E4B2B385516007F113F /* AddIngestionDestination.swift */; };
 		EA302E4E2B385712007F113F /* ChooseRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E4D2B385712007F113F /* ChooseRouteScreenArguments.swift */; };
 		EA302E512B385976007F113F /* CustomChooseDoseScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E502B385976007F113F /* CustomChooseDoseScreenArguments.swift */; };
 		EA302E542B385AB4007F113F /* CustomChooseRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E532B385AB4007F113F /* CustomChooseRouteScreenArguments.swift */; };
 		EA302E562B385D22007F113F /* ChooseOtherRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */; };
+		EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -425,12 +426,13 @@
 		EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsChooseSubstanceScreen.swift; sourceTree = "<group>"; };
 		EA302E452B2F3943007F113F /* CustomUnitsChooseRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsChooseRoute.swift; sourceTree = "<group>"; };
 		EA302E472B381C2F007F113F /* FinishIngestionScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishIngestionScreenArguments.swift; sourceTree = "<group>"; };
-		EA302E492B38289B007F113F /* ChooseDoseScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDoseScreenArguments.swift; sourceTree = "<group>"; };
+		EA302E492B38289B007F113F /* SubstanceAndRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceAndRoute.swift; sourceTree = "<group>"; };
 		EA302E4B2B385516007F113F /* AddIngestionDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngestionDestination.swift; sourceTree = "<group>"; };
 		EA302E4D2B385712007F113F /* ChooseRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRouteScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E502B385976007F113F /* CustomChooseDoseScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E532B385AB4007F113F /* CustomChooseRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOtherRouteScreenArguments.swift; sourceTree = "<group>"; };
+		EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishCustomUnitsScreen.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -759,7 +761,7 @@
 			children = (
 				EA4189FE296738BC00DEA663 /* MDMA Dose */,
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
-				EA302E492B38289B007F113F /* ChooseDoseScreenArguments.swift */,
+				EA302E492B38289B007F113F /* SubstanceAndRoute.swift */,
 				EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */,
 				EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */,
 				EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */,
@@ -816,6 +818,7 @@
 				EAA2C9B92B28BEAB0045C8DF /* CustomUnitsScreen.swift */,
 				EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */,
 				EA302E452B2F3943007F113F /* CustomUnitsChooseRoute.swift */,
+				EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */,
 			);
 			path = "Custom Units";
 			sourceTree = "<group>";
@@ -1766,6 +1769,7 @@
 				EAA9C3942A57214A00869E5A /* ToleranceChartExplanationScreen.swift in Sources */,
 				EA527A9029428A6C009C142D /* SaferUseScreen.swift in Sources */,
 				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
+				EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */,
 				EA6048392A188BFF005C6A4B /* SprayCalculatorScreen-ViewModel.swift in Sources */,
 				EA4B8A122A9B1F23009918DE /* TimedNote-CoreDataHelpers.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
@@ -1827,7 +1831,7 @@
 				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,
 				EA4B8A052A952C4B009918DE /* EditTitleScreen.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
-				EA302E4A2B38289B007F113F /* ChooseDoseScreenArguments.swift in Sources */,
+				EA302E4A2B38289B007F113F /* SubstanceAndRoute.swift in Sources */,
 				EA48F86A29DC26A6007DA8C5 /* EverythingForOneRating.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
 				EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */,

@@ -51,7 +51,7 @@ struct ChooseOtherRouteScreen: View {
     }
 
     private func getRouteBoxWithNavigation(route: AdministrationRoute) -> some View {
-        NavigationLink(value: ChooseDoseScreenArguments(substance: arguments.substance, administrationRoute: route)) {
+        NavigationLink(value: SubstanceAndRoute(substance: arguments.substance, administrationRoute: route)) {
             RouteBox(route: route)
         }
     }

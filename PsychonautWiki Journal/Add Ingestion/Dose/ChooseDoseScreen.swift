@@ -18,7 +18,7 @@ import SwiftUI
 
 struct ChooseDoseScreen: View {
 
-    let arguments: ChooseDoseScreenArguments
+    let arguments: SubstanceAndRoute
     let dismiss: () -> Void
     @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
     @State private var selectedPureDose: Double?

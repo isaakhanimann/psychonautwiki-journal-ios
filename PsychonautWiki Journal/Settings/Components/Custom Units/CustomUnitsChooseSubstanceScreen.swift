@@ -40,9 +40,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
         NavigationStack {
             List {
                 ForEach(substancesFilteredAndSorted) { sub in
-                    NavigationLink {
-                        Text("Hello")
-                    } label: {
+                    NavigationLink(value: ChooseRouteScreenArguments(substance: sub)) {
                         SubstanceRowLabel(substance: sub)
                     }
                 }
@@ -63,7 +61,20 @@ struct CustomUnitsChooseSubstanceScreen: View {
                     }
                 }
             }
+            .navigationDestination(for: ChooseRouteScreenArguments.self, destination: { arguments in
+                ChooseRouteScreen(substance: arguments.substance, dismiss: dismissSheet)
+            })
+            .navigationDestination(for: ChooseOtherRouteScreenArguments.self, destination: { arguments in
+                ChooseOtherRouteScreen(arguments: arguments, dismiss: dismissSheet)
+            })
+            .navigationDestination(for: SubstanceAndRoute.self) { arguments in
+                FinishCustomUnitsScreen(substanceAndRoute: arguments, dismiss: dismissSheet)
+            }
         }
+    }
+
+    private func dismissSheet() {
+        dismiss()
     }
 }
 

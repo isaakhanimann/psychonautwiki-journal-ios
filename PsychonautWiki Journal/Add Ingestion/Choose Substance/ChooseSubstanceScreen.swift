@@ -59,7 +59,7 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: FinishIngestionScreenArguments.self) { arguments in
                 FinishIngestionScreen(arguments: arguments, dismiss: dismiss)
             }
-            .navigationDestination(for: ChooseDoseScreenArguments.self) { arguments in
+            .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
             }
             .navigationDestination(for: AddIngestionDestination.self) { destination in
@@ -84,7 +84,7 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: CustomChooseRouteScreenArguments.self, destination: { arguments in
                 CustomChooseRouteScreen(arguments: arguments, dismiss: dismiss)
             })
-            .navigationDestination(for: ChooseDoseScreenArguments.self) { arguments in
+            .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 let substanceName = arguments.substance.name
                 if substanceName == "Cannabis" && arguments.administrationRoute == .smoked {
                     ChooseCannabisSmokedDoseScreen(dismiss: dismiss)

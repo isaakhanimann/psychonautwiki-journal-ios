@@ -123,7 +123,6 @@ struct SettingsContent: View {
                         } label: {
                             Label("Share App", systemImage: "person.2")
                         }
-                        .foregroundColor(.accentColor)
                     }
                     Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
                         Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
@@ -138,7 +137,6 @@ struct SettingsContent: View {
                                 Label("Frequently Asked Questions", systemImage: "questionmark.square")
                             }
                         )
-                        .foregroundColor(.accentColor)
                         Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
                             Label("Source Code", systemImage: "doc.text.magnifyingglass")
                         }
@@ -194,18 +192,16 @@ struct SettingsContent: View {
                 }
                 if isEyeOpen {
                     Section("UI") {
-                        Group {
-                            NavigationLink {
-                                EditColorsScreen()
-                            } label: {
-                                Label("Edit Substance Colors", systemImage: "paintpalette")
-                            }
-                            NavigationLink {
-                                CustomUnitsScreen()
-                            } label: {
-                                Label("Custom Units", systemImage: "pills")
-                            }
-                        }.foregroundColor(.accentColor)
+                        NavigationLink {
+                            EditColorsScreen()
+                        } label: {
+                            Label("Edit Substance Colors", systemImage: "paintpalette")
+                        }
+                        NavigationLink {
+                            CustomUnitsScreen()
+                        } label: {
+                            Label("Custom Units", systemImage: "pills")
+                        }
                         Group {
                             Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
                             Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
