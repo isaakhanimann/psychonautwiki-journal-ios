@@ -30,6 +30,7 @@ struct FinishCustomUnitsScreen: View {
     @State private var unit = ""
     @State private var dosePerUnit: Double? = nil
     @State private var isEstimate = false
+    @State private var isUnknownDose = false
     @State private var note = ""
 
     @FocusState private var focusedField: Field?
@@ -48,14 +49,17 @@ struct FinishCustomUnitsScreen: View {
                 }
             Section("1 \(unitOrPlaceholder) = ") {
                 DoseRow(roaDose: roaDose)
-                HStack {
-                    TextField("Dose per \(unitOrPlaceholder)", value: $dosePerUnit, format: .number).keyboardType(.decimalPad)
-                        .focused($focusedField, equals: .dose)
-                    Spacer()
-                    Text(roaDose?.units ?? "")
+                if !isUnknownDose {
+                    HStack {
+                        TextField("Dose per \(unitOrPlaceholder)", value: $dosePerUnit, format: .number).keyboardType(.decimalPad)
+                            .focused($focusedField, equals: .dose)
+                        Spacer()
+                        Text(roaDose?.units ?? "")
+                    }
                 }
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
-                TextField("Note", text: $note)
+                Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
+                Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
+                TextField("Notes", text: $note)
                     .focused($focusedField, equals: .note)
                     .submitLabel(.done)
                     .onSubmit(onDoneTap)
@@ -70,6 +74,7 @@ struct FinishCustomUnitsScreen: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 DoneButton(action: onDoneTap)
+                    .disabled(unit.isEmpty)
             }
         }
     }
@@ -87,11 +92,12 @@ struct FinishCustomUnitsScreen: View {
         let newCustomUnit = CustomUnit(context: context)
         newCustomUnit.creationDate = Date()
         newCustomUnit.administrationRoute = substanceAndRoute.administrationRoute.rawValue
-        newCustomUnit.dose = dosePerUnit ?? 0
+        newCustomUnit.dose = isUnknownDose ? 0 : (dosePerUnit ?? 0)
         newCustomUnit.note = note
         newCustomUnit.originalUnit = roaDose?.units
         newCustomUnit.substanceName = substanceAndRoute.substance.name
         newCustomUnit.unit = unit
+        newCustomUnit.isEstimate = isEstimate
         try? context.save()
         dismiss()
     }

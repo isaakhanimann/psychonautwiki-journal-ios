@@ -54,4 +54,11 @@ extension CustomUnit {
         unit ?? ""
     }
 
+    var color: SubstanceColor? {
+        let fetchRequest = SubstanceCompanion.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "substanceName == %@", substanceNameUnwrapped)
+        let companions = try? PersistenceController.shared.viewContext.fetch(fetchRequest)
+        return companions?.first?.color
+    }
+
 }

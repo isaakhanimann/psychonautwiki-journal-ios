@@ -19,7 +19,7 @@ import SwiftUI
 struct CustomUnitsScreen: View {
 
     @FetchRequest(
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \CustomUnit.creationDate, ascending: false)]
     ) private var customUnits: FetchedResults<CustomUnit>
     @State private var isAddShown = false
 
@@ -33,7 +33,12 @@ struct CustomUnitsScreen: View {
                     NavigationLink {
                         Text("Hello")
                     } label: {
-                        Text(customUnit.substanceNameUnwrapped)
+                        CustomUnitRow(
+                            substanceName: customUnit.substanceNameUnwrapped,
+                            color: customUnit.color?.swiftUIColor,
+                            unit: customUnit.unitUnwrapped,
+                            dose: customUnit.doseUnwrapped,
+                            originalUnit: customUnit.originalUnitUnwrapped)
                     }
                 }
             }
@@ -59,21 +64,27 @@ struct CustomUnitsScreen: View {
 struct CustomUnitRow: View {
 
     let substanceName: String
-    let color: Color
+    let color: Color?
     let unit: String
-    let dose: Double
+    let dose: Double?
     let originalUnit: String
 
     var body: some View {
         HStack {
-            ColorRectangle(color: color)
+            ColorRectangle(color: color ?? Color.gray)
             Spacer().frame(width: 10)
             VStack(alignment: .leading) {
                 Text("\(substanceName), \(unit)")
                     .font(.headline)
-                Text("1 \(unit) = \(dose.formatted()) \(originalUnit) \(substanceName)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                Group {
+                    if let dose {
+                        Text("1 \(unit) = \(dose.formatted()) \(originalUnit)")
+                    } else {
+                        Text("1 \(unit) of unknown dose")
+                    }
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
         }
     }
