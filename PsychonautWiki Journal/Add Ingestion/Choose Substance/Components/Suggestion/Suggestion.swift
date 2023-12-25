@@ -16,7 +16,7 @@
 
 import Foundation
 
-class Suggestion: Identifiable {
+struct Suggestion: Identifiable {
     var id: String {
         substanceName + route.rawValue
     }
@@ -25,16 +25,7 @@ class Suggestion: Identifiable {
     let units: String
     let route: AdministrationRoute
     let substanceColor: SubstanceColor
-    var dosesAndUnit: [DoseAndUnit]
+    let dosesAndUnit: [DoseAndUnit]
+    let customUnits: [CustomUnit]
     let lastTimeUsed: Date
-
-    init(substanceName: String, substance: Substance?, units: String, route: AdministrationRoute, substanceColor: SubstanceColor, dosesAndUnit: [DoseAndUnit], lastTimeUsed: Date) {
-        self.substanceName = substanceName
-        self.substance = substance
-        self.units = units
-        self.route = route
-        self.substanceColor = substanceColor
-        self.dosesAndUnit = dosesAndUnit
-        self.lastTimeUsed = lastTimeUsed
-    }
 }

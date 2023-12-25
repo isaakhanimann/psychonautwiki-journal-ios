@@ -32,13 +32,22 @@ extension ChooseSubstanceScreen {
         private let allPossibleSuggestions: [Suggestion]
         private let fetchController: NSFetchedResultsController<CustomSubstance>?
 
-        override init() {
-            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
+        private static func getSortedIngestions() -> [Ingestion] {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
             ingestionFetchRequest.fetchLimit = 300
-            let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
-            self.allPossibleSuggestions = SuggestionsCreator(sortedIngestions: sortedIngestions).suggestions
+            return (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
+        }
+
+        private static func getCustomUnits() -> [CustomUnit] {
+            let unitsFetchRequest = CustomUnit.fetchRequest()
+            unitsFetchRequest.predicate = NSPredicate(format: "isArchived == %@", NSNumber(value: true))
+            return (try? PersistenceController.shared.viewContext.fetch(unitsFetchRequest)) ?? []
+        }
+
+        override init() {
+            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
+            self.allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: Self.getCustomUnits()).suggestions
             let request = CustomSubstance.fetchRequest()
             request.sortDescriptors = []
             fetchController = NSFetchedResultsController(

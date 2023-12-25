@@ -20,7 +20,7 @@ class SuggestionsCreator {
     var suggestions: [Suggestion] = []
     private let maxNumberOfSuggestions = 10
 
-    init(sortedIngestions: [Ingestion]) {
+    init(sortedIngestions: [Ingestion], customUnits: [CustomUnit]) {
         let bySubstance = Dictionary(grouping: sortedIngestions, by: { ingestion in
             ingestion.substanceNameUnwrapped
         })
@@ -29,6 +29,9 @@ class SuggestionsCreator {
                 ingestion.administrationRouteUnwrapped
             }).map { (route: AdministrationRoute, groupedBySubstanceAndRoute: [Ingestion]) in
                 let firstIngestion = groupedBySubstanceAndRoute.first
+                let filteredCustomUnits = customUnits.filter { customUnit in
+                    customUnit.substanceNameUnwrapped == substanceName && customUnit.administrationRouteUnwrapped == route
+                }
                 return Suggestion(
                     substanceName: substanceName,
                     substance: SubstanceRepo.shared.getSubstance(name: substanceName),
@@ -41,6 +44,7 @@ class SuggestionsCreator {
                         })
                             .uniqued()
                             .prefix(maxNumberOfSuggestions)),
+                    customUnits: filteredCustomUnits,
                     lastTimeUsed: groupedBySubstanceAndRoute.map({$0.timeUnwrapped}).max() ?? .now
                 )
             }

@@ -194,6 +194,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     isEstimate: false
                                 )
                             ],
+                            customUnits: [],
                             lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
@@ -219,6 +220,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     isEstimate: false
                                 )
                             ],
+                            customUnits: [],
                             lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
@@ -249,6 +251,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     isEstimate: false
                                 )
                             ],
+                            customUnits: [],
                             lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         ),
                         Suggestion(
@@ -269,6 +272,7 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     isEstimate: false
                                 ),
                             ],
+                            customUnits: [],
                             lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                         )
                     ],

@@ -105,6 +105,7 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 isEstimate: false
                             )
                         ],
+                        customUnits: [],
                         lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
                     ),
                     dismiss: {},
@@ -139,6 +140,7 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 isEstimate: false
                             )
                         ],
+                        customUnits: [],
                         lastTimeUsed: Date.now.addingTimeInterval(-3*60*60)
                     ),
                     dismiss: {},
