@@ -31,7 +31,7 @@ struct CustomUnitsScreen: View {
             } else {
                 List(customUnits) { customUnit in
                     NavigationLink {
-                        Text("Hello")
+                        EditCustomUnitsScreen(customUnit: customUnit)
                     } label: {
                         CustomUnitRow(
                             substanceName: customUnit.substanceNameUnwrapped,
