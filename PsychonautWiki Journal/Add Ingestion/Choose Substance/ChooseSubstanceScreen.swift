@@ -100,6 +100,9 @@ struct ChooseSubstanceContent: View {
                     ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
                 }
             }
+            .navigationDestination(for: CustomUnit.self) { customUnit in
+                CustomUnitsChooseDoseScreen(customUnit: customUnit)
+            }
         }
         .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
             AlertToast(

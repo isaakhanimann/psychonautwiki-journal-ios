@@ -18,6 +18,7 @@
 		EA039AC72A6C6657006DFAFE /* View-ColorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC62A6C6657006DFAFE /* View-ColorBackground.swift */; };
 		EA039ACA2A6C6691006DFAFE /* DurationChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA039AC92A6C6691006DFAFE /* DurationChip.swift */; };
 		EA03ABC32B39AAF100DB8D0D /* EditCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA03ABC22B39AAF100DB8D0D /* EditCustomUnitsScreen.swift */; };
+		EA03ABC62B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */; };
 		EA085DCE29607229001638AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCD29607229001638AC /* WidgetKit.framework */; };
 		EA085DD029607229001638AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA085DCF29607229001638AC /* SwiftUI.framework */; };
 		EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA085DD229607229001638AC /* TimelineWidgetBundle.swift */; };
@@ -394,6 +395,7 @@
 		EA039AC62A6C6657006DFAFE /* View-ColorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-ColorBackground.swift"; sourceTree = "<group>"; };
 		EA039AC92A6C6691006DFAFE /* DurationChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationChip.swift; sourceTree = "<group>"; };
 		EA03ABC22B39AAF100DB8D0D /* EditCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCustomUnitsScreen.swift; sourceTree = "<group>"; };
+		EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EA085DCC29607229001638AC /* TimelineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimelineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA085DCD29607229001638AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EA085DCF29607229001638AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -742,6 +744,14 @@
 				EA039AC92A6C6691006DFAFE /* DurationChip.swift */,
 			);
 			path = Duration;
+			sourceTree = "<group>";
+		};
+		EA03ABC42B39BE6B00DB8D0D /* Custom Units */ = {
+			isa = PBXGroup;
+			children = (
+				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
+			);
+			path = "Custom Units";
 			sourceTree = "<group>";
 		};
 		EA085DD129607229001638AC /* TimelineWidget */ = {
@@ -1514,6 +1524,7 @@
 				EA095A1227D9E400007D44D6 /* Interactions */,
 				EAACB08B2947C4040050E002 /* Route */,
 				EA095A1027D9E3D0007D44D6 /* Dose */,
+				EA03ABC42B39BE6B00DB8D0D /* Custom Units */,
 				EA095A1127D9E3E8007D44D6 /* Finish */,
 				EA26B2BE2976C0D600A1051A /* NextLabel.swift */,
 				EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */,
@@ -1793,6 +1804,7 @@
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
+				EA03ABC62B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift in Sources */,
 				EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */,
 				EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */,
 				EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */,

@@ -25,40 +25,54 @@ struct SuggestionBox: View {
 
     var body: some View {
         GroupBox {
-            WrappingHStack(
-                0..<suggestion.dosesAndUnit.count,
-                id:\.self,
-                spacing: .constant(0),
-                lineSpacing: 5
-            ) { index in
-                let dose = suggestion.dosesAndUnit[index]
-                if let doseUnwrap = dose.dose {
-                    NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")", value: FinishIngestionScreenArguments(
-                        substanceName: suggestion.substanceName,
-                        administrationRoute: suggestion.route,
-                        dose: doseUnwrap,
-                        units: dose.units,
-                        isEstimate: dose.isEstimate))
-                    .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
-                } else {
-                    NavigationLink("Unknown", value: FinishIngestionScreenArguments(
-                        substanceName: suggestion.substanceName,
-                        administrationRoute: suggestion.route,
-                        dose: dose.dose,
-                        units: dose.units,
-                        isEstimate: dose.isEstimate))
-                    .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
-                }
-                if index == suggestion.dosesAndUnit.count-1 {
-                    if let substance = suggestion.substance {
-                        NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
-                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
-                    } else {
-                        NavigationLink("Other", value: CustomChooseDoseScreenArguments(
+            VStack {
+                WrappingHStack(
+                    0..<suggestion.dosesAndUnit.count,
+                    id:\.self,
+                    spacing: .constant(0),
+                    lineSpacing: 5
+                ) { index in
+                    let dose = suggestion.dosesAndUnit[index]
+                    if let doseUnwrap = dose.dose {
+                        NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")", value: FinishIngestionScreenArguments(
                             substanceName: suggestion.substanceName,
-                            units: suggestion.units,
-                            administrationRoute: suggestion.route))
-                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                            administrationRoute: suggestion.route,
+                            dose: doseUnwrap,
+                            units: dose.units,
+                            isEstimate: dose.isEstimate))
+                        .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                    } else {
+                        NavigationLink("Unknown", value: FinishIngestionScreenArguments(
+                            substanceName: suggestion.substanceName,
+                            administrationRoute: suggestion.route,
+                            dose: dose.dose,
+                            units: dose.units,
+                            isEstimate: dose.isEstimate))
+                        .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                    }
+                    if index == suggestion.dosesAndUnit.count-1 {
+                        if let substance = suggestion.substance {
+                            NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
+                                .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        } else {
+                            NavigationLink("Other", value: CustomChooseDoseScreenArguments(
+                                substanceName: suggestion.substanceName,
+                                units: suggestion.units,
+                                administrationRoute: suggestion.route))
+                            .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        }
+                    }
+                }
+                if !suggestion.customUnits.isEmpty {
+                    WrappingHStack(
+                        0..<suggestion.customUnits.count,
+                        id:\.self,
+                        spacing: .constant(0),
+                        lineSpacing: 5
+                    ) { index in
+                        let customUnit = suggestion.customUnits[index]
+                        NavigationLink("Enter \(customUnit.unitUnwrapped)", value: customUnit)
+                            .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                     }
                 }
             }

@@ -41,7 +41,7 @@ extension ChooseSubstanceScreen {
 
         private static func getCustomUnits() -> [CustomUnit] {
             let unitsFetchRequest = CustomUnit.fetchRequest()
-            unitsFetchRequest.predicate = NSPredicate(format: "isArchived == %@", NSNumber(value: true))
+            unitsFetchRequest.predicate = NSPredicate(format: "isArchived == %@", NSNumber(value: false))
             return (try? PersistenceController.shared.viewContext.fetch(unitsFetchRequest)) ?? []
         }
 
