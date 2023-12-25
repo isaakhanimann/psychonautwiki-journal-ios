@@ -41,17 +41,25 @@ struct FinishCustomUnitsScreen: View {
 
     var body: some View {
         Form {
-            TextField("Unit name", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
-                .focused($focusedField, equals: .unit)
-                .submitLabel(.next)
-                .onSubmit {
-                    focusedField = .dose
-                }
-            Section("1 \(unitOrPlaceholder) = ") {
+            Section {
+                TextField("Unit name", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
+                    .focused($focusedField, equals: .unit)
+                    .submitLabel(.next)
+                    .onSubmit {
+                        focusedField = .note
+                    }
+                TextField("Notes", text: $note)
+                    .focused($focusedField, equals: .note)
+                    .submitLabel(.next)
+                    .onSubmit {
+                        focusedField = .dose
+                    }
+            }
+            Section("Dose per \(unitOrPlaceholder)") {
                 DoseRow(roaDose: roaDose)
                 if !isUnknownDose {
                     HStack {
-                        TextField("Dose per \(unitOrPlaceholder)", value: $dosePerUnit, format: .number).keyboardType(.decimalPad)
+                        TextField("1 \(unitOrPlaceholder) = ", value: $dosePerUnit, format: .number).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
                         Text(roaDose?.units ?? "")
@@ -59,10 +67,6 @@ struct FinishCustomUnitsScreen: View {
                 }
                 Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
-                TextField("Notes", text: $note)
-                    .focused($focusedField, equals: .note)
-                    .submitLabel(.done)
-                    .onSubmit(onDoneTap)
             }
 
         }
