@@ -113,7 +113,6 @@ struct ChooseSubstanceContent: View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 if !filteredSuggestions.isEmpty {
-                    Text("Quick Logging").sectionHeaderStyle()
                     ForEach(filteredSuggestions) { suggestion in
                         SuggestionBox(
                             suggestion: suggestion,
@@ -121,7 +120,6 @@ struct ChooseSubstanceContent: View {
                             isEyeOpen: isEyeOpen
                         )
                     }
-                    Spacer().frame(height: 20)
                 }
                 if !filteredSubstances.isEmpty {
                     if filteredSuggestions.isEmpty {
@@ -133,7 +131,6 @@ struct ChooseSubstanceContent: View {
                             )
                         }
                     } else {
-                        Text("Regular Logging").sectionHeaderStyle()
                         ForEach(filteredSubstances) { substance in
                             SubstanceBox(
                                 substance: substance,
