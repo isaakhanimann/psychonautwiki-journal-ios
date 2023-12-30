@@ -28,7 +28,7 @@ struct SuggestionBox: View {
             VStack(alignment: .leading) {
                 WrappingHStack(
                     alignment: .leading,
-                    horizontalSpacing: 0,
+                    horizontalSpacing: 4,
                     verticalSpacing: 5
                 ) {
                     ForEach(suggestion.dosesAndUnit) { dose in
@@ -39,7 +39,7 @@ struct SuggestionBox: View {
                                 dose: doseUnwrap,
                                 units: dose.units,
                                 isEstimate: dose.isEstimate))
-                            .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                            .buttonStyle(.bordered).fixedSize()
                         } else {
                             NavigationLink("Unknown", value: FinishIngestionScreenArguments(
                                 substanceName: suggestion.substanceName,
@@ -47,29 +47,29 @@ struct SuggestionBox: View {
                                 dose: dose.dose,
                                 units: dose.units,
                                 isEstimate: dose.isEstimate))
-                            .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
+                            .buttonStyle(.bordered).fixedSize()
                         }
                     }
                     if let substance = suggestion.substance {
                         NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
-                            .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                            .buttonStyle(.borderedProminent).fixedSize()
                     } else {
                         NavigationLink("Other", value: CustomChooseDoseScreenArguments(
                             substanceName: suggestion.substanceName,
                             units: suggestion.units,
                             administrationRoute: suggestion.route))
-                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                        .buttonStyle(.borderedProminent).fixedSize()
                     }
                 }
                 if !suggestion.customUnits.isEmpty {
                     WrappingHStack(
                         alignment: .leading,
-                        horizontalSpacing: 0,
+                        horizontalSpacing: 4,
                         verticalSpacing: 5
                     ) {
                         ForEach(suggestion.customUnits) { customUnit in
                             NavigationLink("Enter \(customUnit.unitUnwrapped)", value: customUnit)
-                                .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                                .buttonStyle(.borderedProminent).fixedSize()
                         }
                     }
                 }
