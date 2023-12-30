@@ -18,7 +18,7 @@ import Foundation
 
 struct DoseAndUnit: Hashable, Identifiable {
     var id: String {
-        (dose?.description ?? "") + (units ?? "")
+        (dose?.description ?? "") + (units ?? "") + isEstimate.description
     }
     let dose: Double?
     let units: String?

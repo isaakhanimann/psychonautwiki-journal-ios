@@ -31,8 +31,7 @@ struct SuggestionBox: View {
                     horizontalSpacing: 0,
                     verticalSpacing: 5
                 ) {
-                    ForEach(0..<suggestion.dosesAndUnit.count) { index in
-                        let dose = suggestion.dosesAndUnit[index]
+                    ForEach(suggestion.dosesAndUnit) { dose in
                         if let doseUnwrap = dose.dose {
                             NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")", value: FinishIngestionScreenArguments(
                                 substanceName: suggestion.substanceName,
@@ -50,18 +49,16 @@ struct SuggestionBox: View {
                                 isEstimate: dose.isEstimate))
                             .buttonStyle(.bordered).padding(.trailing, 4).fixedSize()
                         }
-                        if index == suggestion.dosesAndUnit.count-1 {
-                            if let substance = suggestion.substance {
-                                NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
-                                    .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
-                            } else {
-                                NavigationLink("Other", value: CustomChooseDoseScreenArguments(
-                                    substanceName: suggestion.substanceName,
-                                    units: suggestion.units,
-                                    administrationRoute: suggestion.route))
-                                .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
-                            }
-                        }
+                    }
+                    if let substance = suggestion.substance {
+                        NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
+                            .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
+                    } else {
+                        NavigationLink("Other", value: CustomChooseDoseScreenArguments(
+                            substanceName: suggestion.substanceName,
+                            units: suggestion.units,
+                            administrationRoute: suggestion.route))
+                        .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                     }
                 }
                 if !suggestion.customUnits.isEmpty {
@@ -70,8 +67,7 @@ struct SuggestionBox: View {
                         horizontalSpacing: 0,
                         verticalSpacing: 5
                     ) {
-                        ForEach(0..<suggestion.customUnits.count) { index in
-                            let customUnit = suggestion.customUnits[index]
+                        ForEach(suggestion.customUnits) { customUnit in
                             NavigationLink("Enter \(customUnit.unitUnwrapped)", value: customUnit)
                                 .buttonStyle(.borderedProminent).padding(.trailing, 4).fixedSize()
                         }
