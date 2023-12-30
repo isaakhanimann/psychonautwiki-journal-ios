@@ -298,7 +298,6 @@
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
 		EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
 		EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */; };
-		EACB0C2529408E1000C605E2 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = EACB0C2429408E1000C605E2 /* WrappingHStack */; };
 		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
 		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E5227D2592800940291 /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* DecodingTests.swift */; };
@@ -340,6 +339,7 @@
 		EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA327D8F72700945587 /* ExperiencesList.swift */; };
 		EAF76CA927D90CF900945587 /* SubstanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CA827D90CF900945587 /* SubstanceColor.swift */; };
 		EAF76CAC27D90F6A00945587 /* AdministrationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF76CAB27D90F6A00945587 /* AdministrationRoute.swift */; };
+		EAFA4BD42B400BE50056649E /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = EAFA4BD32B400BE50056649E /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -709,7 +709,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF76CA027D8B72900945587 /* Algorithms in Frameworks */,
-				EACB0C2529408E1000C605E2 /* WrappingHStack in Frameworks */,
+				EAFA4BD42B400BE50056649E /* WrappingHStack in Frameworks */,
 				EAF76C9927D899E700945587 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1627,7 +1627,7 @@
 			packageProductDependencies = (
 				EAF76C9827D899E700945587 /* AlertToast */,
 				EAF76C9F27D8B72900945587 /* Algorithms */,
-				EACB0C2429408E1000C605E2 /* WrappingHStack */,
+				EAFA4BD32B400BE50056649E /* WrappingHStack */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -1667,7 +1667,7 @@
 			packageReferences = (
 				EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				EAFA4BD22B400BE50056649E /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -2383,14 +2383,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dkk/WrappingHStack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -2407,14 +2399,17 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		EAFA4BD22B400BE50056649E /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EACB0C2429408E1000C605E2 /* WrappingHStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EACB0C2329408E1000C605E2 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
-			productName = WrappingHStack;
-		};
 		EAF76C9827D899E700945587 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */;
@@ -2424,6 +2419,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
+		};
+		EAFA4BD32B400BE50056649E /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAFA4BD22B400BE50056649E /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
 		};
 /* End XCSwiftPackageProductDependency section */
 

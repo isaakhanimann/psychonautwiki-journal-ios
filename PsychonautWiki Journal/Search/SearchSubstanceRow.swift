@@ -32,13 +32,13 @@ struct SearchSubstanceRow: View {
                 }
                 Spacer().frame(height: 5)
                 WrappingHStack(
-                    substance.categories,
-                    id: \.self,
                     alignment: .leading,
-                    spacing: .constant(3),
-                    lineSpacing: 3
-                ) { category in
-                    Chip(name: category)
+                    horizontalSpacing: 3,
+                    verticalSpacing: 3
+                ) {
+                    ForEach(substance.categories, id: \.self) { category in
+                        Chip(name: category)
+                    }
                 }
             }
         }
