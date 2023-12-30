@@ -22,11 +22,13 @@ struct FinishCustomUnitsScreen: View {
     let dismiss: () -> Void
 
     enum Field: Hashable {
+        case name
         case unit
         case dose
         case note
     }
 
+    @State private var name = ""
     @State private var unit = ""
     @State private var dosePerUnit: Double? = nil
     @State private var isEstimate = false
@@ -42,7 +44,16 @@ struct FinishCustomUnitsScreen: View {
     var body: some View {
         Form {
             Section {
-                TextField("Unit name", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
+                TextField("Name", text: $name)
+                    .autocorrectionDisabled()
+                    .focused($focusedField, equals: .name)
+                    .submitLabel(.next)
+                    .onSubmit {
+                        focusedField = .unit
+                    }
+                TextField("Unit", text: $unit, prompt: Text("e.g. pill, spray, etc."))
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)
                     .submitLabel(.next)
                     .onSubmit {
@@ -59,7 +70,10 @@ struct FinishCustomUnitsScreen: View {
                 DoseRow(roaDose: roaDose)
                 if !isUnknownDose {
                     HStack {
-                        TextField("1 \(unitOrPlaceholder) = ", value: $dosePerUnit, format: .number).keyboardType(.decimalPad)
+                        TextField(
+                            "Dose per \(unitOrPlaceholder)",
+                            value: $dosePerUnit,
+                            format: .number).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
                         Text(roaDose?.units ?? "")
@@ -72,13 +86,13 @@ struct FinishCustomUnitsScreen: View {
         }
         .navigationTitle("Add Custom Unit")
         .onAppear {
-            focusedField = .unit
+            focusedField = .name
         }
         .optionalScrollDismissesKeyboard()
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 DoneButton(action: onDoneTap)
-                    .disabled(unit.isEmpty)
+                    .disabled(unit.isEmpty || name.isEmpty)
             }
         }
     }
@@ -94,6 +108,7 @@ struct FinishCustomUnitsScreen: View {
     private func onDoneTap() {
         let context = PersistenceController.shared.viewContext
         let newCustomUnit = CustomUnit(context: context)
+        newCustomUnit.name = name
         newCustomUnit.creationDate = Date()
         newCustomUnit.administrationRoute = substanceAndRoute.administrationRoute.rawValue
         newCustomUnit.dose = isUnknownDose ? 0 : (dosePerUnit ?? 0)

@@ -18,6 +18,10 @@ import Foundation
 
 extension CustomUnit {
 
+    var nameUnwrapped: String {
+        name ?? ""
+    }
+
     var creationDateUnwrapped: Date {
         creationDate ?? Date()
     }
