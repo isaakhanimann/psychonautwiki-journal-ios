@@ -21,20 +21,10 @@ struct CustomUnitsChooseDoseScreen: View {
     let customUnit: CustomUnit
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(customUnit.nameUnwrapped)
     }
 }
 
 #Preview {
-    CustomUnitsChooseDoseScreen(customUnit: getPreviewUnit())
-}
-
-private func getPreviewUnit() -> CustomUnit {
-    let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
-    customUnit.substanceName = "MDMA"
-    customUnit.originalUnit = "mg"
-    customUnit.unit = "pill"
-    customUnit.dose = 90
-    customUnit.note = "Some random notes"
-    return customUnit
+    CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample)
 }

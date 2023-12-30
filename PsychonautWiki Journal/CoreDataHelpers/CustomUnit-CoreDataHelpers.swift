@@ -65,4 +65,14 @@ extension CustomUnit {
         return companions?.first?.color
     }
 
+    static var previewSample: CustomUnit {
+        let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
+        customUnit.name = "Pink rocket"
+        customUnit.substanceName = "MDMA"
+        customUnit.originalUnit = "mg"
+        customUnit.unit = "pill"
+        customUnit.dose = 90
+        customUnit.note = "Some random notes"
+        return customUnit
+    }
 }

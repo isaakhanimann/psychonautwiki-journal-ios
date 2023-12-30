@@ -20,6 +20,7 @@ struct EditCustomUnitsScreen: View {
 
     let customUnit: CustomUnit
 
+    @State private var name: String = ""
     @State private var originalUnit: String?
     @State private var unit: String = ""
     @State private var note: String = ""
@@ -32,6 +33,7 @@ struct EditCustomUnitsScreen: View {
         EditCustomUnitsScreenContent(
             substanceName: customUnit.substanceNameUnwrapped,
             roaDose: customUnit.substance?.getDose(for: customUnit.administrationRouteUnwrapped),
+            name: $name,
             originalUnit: $originalUnit,
             unit: $unit,
             note: $note,
@@ -41,6 +43,7 @@ struct EditCustomUnitsScreen: View {
             delete: delete
         )
         .onAppear {
+            name = customUnit.nameUnwrapped
             originalUnit = customUnit.originalUnit
             unit = customUnit.unitUnwrapped
             note = customUnit.noteUnwrapped
@@ -54,6 +57,7 @@ struct EditCustomUnitsScreen: View {
     }
 
     private func save() {
+        customUnit.name = name
         customUnit.originalUnit = originalUnit
         customUnit.unit = unit
         customUnit.note = note
@@ -75,6 +79,7 @@ struct EditCustomUnitsScreenContent: View {
 
     let substanceName: String
     let roaDose: RoaDose?
+    @Binding var name: String
     @Binding var originalUnit: String?
     @Binding var unit: String
     @Binding var note: String
@@ -87,7 +92,9 @@ struct EditCustomUnitsScreenContent: View {
     var body: some View {
         Form {
             Section {
-                TextField("Unit name", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
+                TextField("Name", text: $name)
+                    .autocapitalization(.sentences)
+                TextField("Unit", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
@@ -119,6 +126,7 @@ struct EditCustomUnitsScreenContent: View {
         EditCustomUnitsScreenContent(
             substanceName: "MDMA",
             roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
+            name: .constant("pink rocket"),
             originalUnit: .constant("mg"),
             unit: .constant("pill"),
             note: .constant("These are my notes"),

@@ -33,16 +33,7 @@ struct CustomUnitsScreen: View {
                     NavigationLink {
                         EditCustomUnitsScreen(customUnit: customUnit)
                     } label: {
-                        CustomUnitRow(
-                            name: customUnit.nameUnwrapped,
-                            substanceName: customUnit.substanceNameUnwrapped,
-                            color: customUnit.color?.swiftUIColor,
-                            unit: customUnit.unitUnwrapped,
-                            isEstimate: customUnit.isEstimate,
-                            dose: customUnit.doseUnwrapped,
-                            originalUnit: customUnit.originalUnitUnwrapped,
-                            isArchived: customUnit.isArchived
-                        )
+                        CustomUnitRow(customUnit: customUnit)
                     }
                 }
             }
@@ -67,34 +58,27 @@ struct CustomUnitsScreen: View {
 
 struct CustomUnitRow: View {
 
-    let name: String
-    let substanceName: String
-    let color: Color?
-    let unit: String
-    let isEstimate: Bool
-    let dose: Double?
-    let originalUnit: String
-    let isArchived: Bool
+    let customUnit: CustomUnit
 
     var body: some View {
         HStack {
-            ColorRectangle(color: color ?? Color.gray)
+            ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             Spacer().frame(width: 10)
             VStack(alignment: .leading) {
-                Text(name).font(.headline)
-                Text(substanceName)
+                Text(customUnit.nameUnwrapped).font(.headline)
+                Text(customUnit.substanceNameUnwrapped)
                 Group {
-                    if let dose {
-                        Text("1 \(unit) = \(isEstimate ? "~" : "")\(dose.formatted()) \(originalUnit)")
+                    if let dose = customUnit.doseUnwrapped {
+                        Text("1 \(customUnit.unitUnwrapped) = \(customUnit.isEstimate ? "~" : "")\(dose.formatted()) \(customUnit.originalUnitUnwrapped)")
                     } else {
-                        Text("1 \(unit) of unknown dose")
+                        Text("1 \(customUnit.unitUnwrapped) of unknown dose")
                     }
                 }
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             }
             Spacer()
-            if isArchived {
+            if customUnit.isArchived {
                 Image(systemName: "archivebox").foregroundColor(.secondary)
             }
         }
@@ -103,15 +87,6 @@ struct CustomUnitRow: View {
 
 #Preview {
     List {
-        CustomUnitRow(
-            name: "Pink rocket",
-            substanceName: "Substance A",
-            color: SubstanceColor.auburn.swiftUIColor,
-            unit: "pill",
-            isEstimate: true,
-            dose: 20,
-            originalUnit: "mg",
-            isArchived: true
-        )
+        CustomUnitRow(customUnit: CustomUnit.previewSample)
     }
 }
