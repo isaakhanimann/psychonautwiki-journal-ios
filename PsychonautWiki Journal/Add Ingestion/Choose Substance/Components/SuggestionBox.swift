@@ -25,7 +25,7 @@ struct SuggestionBox: View {
 
     var body: some View {
         GroupBox {
-            VStack {
+            VStack(alignment: .leading) {
                 WrappingHStack(
                     alignment: .leading,
                     horizontalSpacing: 0,
@@ -73,18 +73,17 @@ struct SuggestionBox: View {
                         }
                     }
                 }
+                Group {
+                    Text("Last ingestion ") + Text(suggestion.lastTimeUsed, style: .relative) + Text(" ago")
+                }.font(.footnote).foregroundColor(.secondary)
             }
         } label: {
-            HStack {
-                let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
-                Label(
-                    "\(suggestion.substanceName) \(route)",
-                    systemImage: "circle.fill"
-                )
-                .foregroundColor(suggestion.substanceColor.swiftUIColor)
-                Spacer()
-                Text(suggestion.lastTimeUsed, style: .relative) + Text(" ago")
-            }
+            let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
+            Label(
+                "\(suggestion.substanceName) \(route)",
+                systemImage: "circle.fill"
+            )
+            .foregroundColor(suggestion.substanceColor.swiftUIColor)
         }
     }
 }
