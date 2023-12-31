@@ -50,6 +50,10 @@ extension CustomUnit {
         SubstanceRepo.shared.getSubstance(name: substanceNameUnwrapped)
     }
 
+    var roaDose: RoaDose? {
+        substance?.getDose(for: administrationRouteUnwrapped)
+    }
+
     var noteUnwrapped: String {
         note ?? ""
     }

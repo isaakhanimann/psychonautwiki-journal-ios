@@ -19,12 +19,90 @@ import SwiftUI
 struct CustomUnitsChooseDoseScreen: View {
 
     let customUnit: CustomUnit
+    let dismiss: () -> Void
+
+    @State private var dose: Double?
+    @State private var isEstimate = false
+    @State private var isShowingNext = false
+    @FocusState private var isDoseFieldFocused: Bool
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
-        Text(customUnit.nameUnwrapped)
+        Form {
+            Section("Pure \(customUnit.administrationRouteUnwrapped.rawValue.capitalized) Dose") {
+                if !(customUnit.substance?.isApproved ?? true) {
+                    Text("Info is not approved by PsychonautWiki administrators.")
+                }
+                if let remark = customUnit.substance?.dosageRemark {
+                    Text(remark)
+                        .foregroundColor(.secondary)
+                }
+                DoseRow(roaDose: customUnit.roaDose)
+                Text(doseCalculationText).foregroundStyle(calculatedDoseColor)
+                HStack {
+                    TextField(
+                        "Enter Dose",
+                        value: $dose,
+                        format: .number
+                    ).keyboardType(.decimalPad)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($isDoseFieldFocused)
+                    Text(customUnit.unitUnwrapped)
+                }
+                .font(.title)
+                Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
+            }
+            .listRowSeparator(.hidden)
+            if isEyeOpen {
+                Section("Info") {
+                    if customUnit.administrationRouteUnwrapped == .smoked || customUnit.administrationRouteUnwrapped == .inhaled {
+                        Text("Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
+                    }
+                    NavigationLink("Testing") {
+                        TestingScreen()
+                    }
+                    NavigationLink("Dosage Guide") {
+                        HowToDoseScreen()
+                    }
+                    if customUnit.roaDose?.shouldUseVolumetricDosing ?? false {
+                        NavigationLink("Volumetric Dosing Recommended") {
+                            VolumetricDosingScreen()
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            isDoseFieldFocused = true
+        }
+        .optionalScrollDismissesKeyboard()
+        .navigationBarTitle("\(customUnit.substanceNameUnwrapped) Dose")
+    }
+
+    var calculatedDose: Double? {
+        guard let dose, let dosePerUnit = customUnit.doseUnwrapped else {return nil}
+        return dose * dosePerUnit
+    }
+
+    var calculatedDoseColor: Color {
+        if let calculatedDose {
+            return customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
+        } else {
+            return Color.primary
+        }
+    }
+
+    var doseCalculationText: String {
+        if let calculatedDose {
+            return "\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = \(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+        } else {
+            return customUnit.nameUnwrapped
+        }
     }
 }
 
 #Preview {
-    CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample)
+    NavigationStack {
+        CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample, dismiss: {})
+    }
 }
