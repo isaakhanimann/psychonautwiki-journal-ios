@@ -22,7 +22,6 @@ struct AddSprayScreen: View {
     @State private var sizeInMl: Double? = nil
     @State private var numSpraysText = ""
     @State private var numSprays: Double? = nil
-    @State private var isPreferred = false
     @Environment(\.dismiss) var dismiss
 
     var body: some View {

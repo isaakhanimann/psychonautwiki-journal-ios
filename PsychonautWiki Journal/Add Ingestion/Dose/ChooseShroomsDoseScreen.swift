@@ -23,7 +23,6 @@ struct ChooseShroomsDoseScreen: View {
         mushrooms.getDose(for: .oral)!
     }
 
-    @State private var mushroomWeightInGrams = 2.0
     @State private var psilocybinTextInMg = ""
     @State private var psilocybinInMg: Double? = nil
     @State private var psilocybinContentInPercentText = "1"
@@ -31,20 +30,6 @@ struct ChooseShroomsDoseScreen: View {
     @State private var isEstimate = false
     @State private var shroomWeightText = ""
     @State private var shroomWeightInGrams: Double? = nil
-
-    enum PickerOption: String, CaseIterable {
-        case dried = "Dried"
-        case fresh = "Fresh"
-
-        var multiplier: Int {
-            switch self {
-            case .dried:
-                return 1
-            case .fresh:
-                return 10
-            }
-        }
-    }
 
     private var suggestedNote: String? {
         if psilocybinContentInPercent != nil && shroomWeightInGrams != nil {

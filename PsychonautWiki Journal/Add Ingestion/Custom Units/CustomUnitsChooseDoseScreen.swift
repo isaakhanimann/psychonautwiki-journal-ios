@@ -22,7 +22,6 @@ struct CustomUnitsChooseDoseScreen: View {
 
     @State private var dose: Double?
     @State private var isEstimate = false
-    @State private var isShowingNext = false
     @FocusState private var isDoseFieldFocused: Bool
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen = false
 

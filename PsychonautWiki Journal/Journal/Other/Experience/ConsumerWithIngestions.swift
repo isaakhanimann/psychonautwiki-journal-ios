@@ -29,7 +29,7 @@ struct ConsumerWithIngestions: Identifiable, Comparable {
         lhs.id == rhs.id
     }
 
-    public static func < (lhs: ConsumerWithIngestions, rhs: ConsumerWithIngestions) -> Bool {
+    static func < (lhs: ConsumerWithIngestions, rhs: ConsumerWithIngestions) -> Bool {
         lhs.consumerName < rhs.consumerName
     }
 }

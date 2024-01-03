@@ -20,7 +20,6 @@ let OpenJournalURL = "open-journal"
 
 enum TimelineDisclaimers {
     static let heavyDose = "Heavy doses can have longer durations."
-    static let fullStomach = "A full stomach may delay the onset of oral doses by ~3 hours."
     static let capsule = "Hard (two-piece) capsules may need up to one hour to dissolve fully."
 }
 

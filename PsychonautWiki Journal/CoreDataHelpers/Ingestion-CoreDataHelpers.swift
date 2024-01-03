@@ -29,10 +29,6 @@ extension Ingestion: Comparable {
         note ?? ""
     }
 
-    var timeUnwrappedAsString: String {
-        timeUnwrapped.asTimeString
-    }
-
     var substanceNameUnwrapped: String {
         substanceName ?? "Unknown"
     }

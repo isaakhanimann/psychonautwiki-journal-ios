@@ -29,7 +29,6 @@ struct PersistenceController {
     static let isHidingDosageDotsKey = "isHidingDosageDots"
     static let isHidingToleranceChartInExperienceKey = "isHidingToleranceChartInExperience"
     static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
-    static let hasInitialSubstancesOfCurrentVersion = "hasInitialSubstancesOfVersion1.1"
     static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
     static let isDateInTimePickerKey = "isDateInTimePicker"
     var viewContext: NSManagedObjectContext {
@@ -49,10 +48,6 @@ struct PersistenceController {
             }
         }
         viewContext.automaticallyMergesChangesFromParent = true
-    }
-
-    enum DeleteError: Error {
-        case noUrlFound
     }
 
     func deleteEverything() throws {
@@ -159,20 +154,6 @@ struct PersistenceController {
                 assertionFailure("Failed to save viewContext: \(error)")
             }
         }
-    }
-
-    func getLatestExperience() -> Experience? {
-        let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
-        fetchRequest.fetchLimit = 10
-        let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
-        return experiences.sorted().first
-    }
-
-    func getIngestions(since date: Date) -> [Ingestion] {
-        let fetchRequest = Ingestion.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "time > %@", date as NSDate)
-        return (try? viewContext.fetch(fetchRequest)) ?? []
     }
 
     func getIngestionsBetween(startDate: Date, endDate: Date) -> [Ingestion] {

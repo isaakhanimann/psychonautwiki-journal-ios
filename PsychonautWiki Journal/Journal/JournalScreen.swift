@@ -121,14 +121,6 @@ struct JournalScreen: View {
         }
     }
 
-    private var newIngestionButton: some View {
-        Button {
-            isShowingAddIngestionSheet.toggle()
-        } label: {
-            Label("New Ingestion", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-        }
-    }
-
     private var favoriteButton: some View {
         Button {
             isFavoriteFilterEnabled.toggle()

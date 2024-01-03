@@ -20,7 +20,6 @@ import SwiftUI
 struct WebViewScreen: View {
     let articleURL: URL
     @State private var isWebViewLoading = true
-    @Environment(\.dismiss) private var dismiss
     @State private var isShowingCopySuccess = false
 
     var body: some View {

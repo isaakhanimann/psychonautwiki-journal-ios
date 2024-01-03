@@ -25,20 +25,15 @@ struct ContentView: View {
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
     @AppStorage("hasBeenMigrated3") var hasBeenMigrated3: Bool = false
     @AppStorage("hasBeenMigrated4") var hasBeenMigrated4: Bool = false
-    @State private var isShowingJournal = true
 
     var body: some View {
         ContentScreen(isEyeOpen: isEyeOpen2)
             .onOpenURL { url in
-                if url.absoluteString == OpenJournalURL {
-                    isShowingJournal = true
+                if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
+                    UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
+                    toastViewModel.showSuccessToast(message: "Unlocked")
                 } else {
-                    if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
-                        UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
-                        toastViewModel.showSuccessToast(message: "Unlocked")
-                    } else {
-                        toastViewModel.showSuccessToast(message: "Already Unlocked")
-                    }
+                    toastViewModel.showSuccessToast(message: "Already Unlocked")
                 }
             }
             .toast(isPresenting: $toastViewModel.isShowingToast) {

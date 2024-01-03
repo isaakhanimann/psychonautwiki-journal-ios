@@ -17,12 +17,12 @@
 import ActivityKit
 
 struct TimelineWidgetAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        public static func == (lhs: TimelineWidgetAttributes.ContentState, rhs: TimelineWidgetAttributes.ContentState) -> Bool {
+    struct ContentState: Codable, Hashable {
+        static func == (lhs: TimelineWidgetAttributes.ContentState, rhs: TimelineWidgetAttributes.ContentState) -> Bool {
             lhs.substanceGroups == rhs.substanceGroups
         }
 
-        public func hash(into hasher: inout Hasher) {
+        func hash(into hasher: inout Hasher) {
             hasher.combine(substanceGroups.description)
         }
 

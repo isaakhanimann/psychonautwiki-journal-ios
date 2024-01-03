@@ -45,16 +45,6 @@ struct SubstanceScreen: View {
         .navigationTitle(substance.name)
     }
 
-    private var addIngestionButton: some View {
-        Button {
-            isShowingAddIngestionSheet.toggle()
-        } label: {
-            Label("New Ingestion", systemImage: "plus.circle.fill")
-                .labelStyle(.titleAndIcon)
-                .font(.headline)
-        }
-    }
-
     private var sectionContent: some View {
         Group {
             Group { // group is here because we cannot have more than 10 subviews

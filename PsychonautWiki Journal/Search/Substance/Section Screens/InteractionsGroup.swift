@@ -19,7 +19,6 @@ import SwiftUI
 struct InteractionsGroup: View {
     let interactions: Interactions
     let substanceURL: URL
-    private let iconName = "exclamationmark.triangle"
 
     var body: some View {
         Group {

@@ -75,14 +75,6 @@ struct DurationRange: Codable {
         return Measurement(value: convert, unit: unit).converted(to: .seconds).value
     }
 
-    func oneValue(at valueFrom0To1: Double) -> Double? {
-        guard let minU = minSec else { return nil }
-        guard let maxU = maxSec else { return nil }
-        assert(valueFrom0To1 >= 0 && valueFrom0To1 <= 1)
-        let difference = maxU - minU
-        return minU + valueFrom0To1 * difference
-    }
-
     var maybeFullDurationRange: FullDurationRange? {
         if let min = minSec, let max = maxSec {
             return FullDurationRange(min: min, max: max)

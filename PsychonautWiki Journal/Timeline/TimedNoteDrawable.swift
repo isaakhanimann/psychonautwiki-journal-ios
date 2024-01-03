@@ -19,7 +19,6 @@ import SwiftUI
 struct TimedNoteDrawable {
     let distanceFromStart: TimeInterval
 
-    private let time: Date
     private let color: SubstanceColor
 
     init(
@@ -27,7 +26,6 @@ struct TimedNoteDrawable {
         time: Date,
         color: SubstanceColor
     ) {
-        self.time = time
         self.color = color
         distanceFromStart = time.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
     }

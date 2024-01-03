@@ -19,7 +19,6 @@ import SwiftUI
 struct RatingDrawable {
     let distanceFromStart: TimeInterval
 
-    private let time: Date
     private let option: ShulginRatingOption
 
     init(
@@ -27,7 +26,6 @@ struct RatingDrawable {
         time: Date,
         option: ShulginRatingOption
     ) {
-        self.time = time
         self.option = option
         distanceFromStart = time.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
     }

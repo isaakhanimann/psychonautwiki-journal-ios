@@ -255,7 +255,6 @@
 		EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165A627E35C29003DF79D /* AddCustomSubstance-ViewModel.swift */; };
 		EAB165AE27E36D29003DF79D /* EmptySectionForPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */; };
 		EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */; };
-		EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */; };
 		EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF462A46004B00542253 /* TabBarObserver.swift */; };
 		EAB8EF492A4600D800542253 /* DismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF482A4600D800542253 /* DismissModifier.swift */; };
 		EAB8EF4C2A4859BD00542253 /* SameTabTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */; };
@@ -297,13 +296,8 @@
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
 		EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1F293FED5500C605E2 /* Interactions.swift */; };
 		EACB0C222940888600C605E2 /* SearchSubstanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */; };
-		EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6DFB27CDE1F200940291 /* String-Optional.swift */; };
-		EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */; };
 		EACB6E5227D2592800940291 /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* DecodingTests.swift */; };
-		EACB6E5427D3473600940291 /* String-Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5327D3473600940291 /* String-Regex.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
-		EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */; };
-		EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E9627D7620800940291 /* Double-Ratio.swift */; };
 		EAD089D42AADA01A006EAA48 /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
 		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
@@ -598,7 +592,6 @@
 		EAB165A627E35C29003DF79D /* AddCustomSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCustomSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionForPadding.swift; sourceTree = "<group>"; };
 		EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification-EyeName.swift"; sourceTree = "<group>"; };
-		EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-Safe.swift"; sourceTree = "<group>"; };
 		EAB8EF462A46004B00542253 /* TabBarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarObserver.swift; sourceTree = "<group>"; };
 		EAB8EF482A4600D800542253 /* DismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissModifier.swift; sourceTree = "<group>"; };
 		EAB8EF4B2A4859BD00542253 /* SameTabTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameTabTapModifier.swift; sourceTree = "<group>"; };
@@ -640,14 +633,9 @@
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
 		EACB0C1F293FED5500C605E2 /* Interactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactions.swift; sourceTree = "<group>"; };
 		EACB0C212940888600C605E2 /* SearchSubstanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubstanceRow.swift; sourceTree = "<group>"; };
-		EACB6DFB27CDE1F200940291 /* String-Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Optional.swift"; sourceTree = "<group>"; };
-		EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-EqualMeaning.swift"; sourceTree = "<group>"; };
 		EACB6E3A27D09C8800940291 /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACB6E5127D2592800940291 /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
-		EACB6E5327D3473600940291 /* String-Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Regex.swift"; sourceTree = "<group>"; };
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
-		EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression-isMatch.swift"; sourceTree = "<group>"; };
-		EACB6E9627D7620800940291 /* Double-Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-Ratio.swift"; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
@@ -1442,17 +1430,11 @@
 				EA418A30296C056500DEA663 /* Array-Unique.swift */,
 				EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */,
 				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
-				EACB6E9627D7620800940291 /* Double-Ratio.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
 				EA039AC42A6BAA10006DFAFE /* Date-Format.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
-				EAB2EDDF26EEA0D60020C554 /* Collection-Safe.swift */,
 				EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */,
-				EACB6DFB27CDE1F200940291 /* String-Optional.swift */,
-				EACB6E1E27CFD57D00940291 /* String-EqualMeaning.swift */,
-				EACB6E5327D3473600940291 /* String-Regex.swift */,
 				EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */,
-				EACB6E5827D3491C00940291 /* NSRegularExpression-isMatch.swift */,
 				EA095A1327DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift */,
 			);
 			path = Extensions;
@@ -1827,7 +1809,6 @@
 				EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */,
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
 				EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */,
-				EAB2EDF026F0E8CA0020C554 /* Collection-Safe.swift in Sources */,
 				EAA9C36E2A50679100869E5A /* ToleranceType.swift in Sources */,
 				EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */,
 				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
@@ -1899,7 +1880,6 @@
 				EA4B8A2B2AA2FF2A009918DE /* ExperienceToolbarContent.swift in Sources */,
 				EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */,
 				EA55CEB92A3F290900FE1A44 /* DotRows.swift in Sources */,
-				EACB6E9727D7620800940291 /* Double-Ratio.swift in Sources */,
 				EA4B8A192A9B2A89009918DE /* TimedNoteRow.swift in Sources */,
 				EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */,
 				EA039ACA2A6C6691006DFAFE /* DurationChip.swift in Sources */,
@@ -1907,7 +1887,6 @@
 				EA039AC52A6BAA10006DFAFE /* Date-Format.swift in Sources */,
 				EAF76CA427D8F72700945587 /* ExperiencesList.swift in Sources */,
 				EAA9C37D2A51F85500869E5A /* ToleranceChartPreviewDataProvider.swift in Sources */,
-				EACB6E1F27CFD57D00940291 /* String-EqualMeaning.swift in Sources */,
 				EA41C629295EB6E2000DA021 /* SubstanceDetailsScreen.swift in Sources */,
 				EA4B8A212A9B3EBC009918DE /* TimedNoteDrawable.swift in Sources */,
 				EAA9C3702A5067A200869E5A /* ToleranceWindow.swift in Sources */,
@@ -1922,7 +1901,6 @@
 				EA4B8A272A9DCE63009918DE /* EditConsumerScreen.swift in Sources */,
 				EA60483B2A188FDB005C6A4B /* WeightUnit.swift in Sources */,
 				EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */,
-				EACB6E5427D3473600940291 /* String-Regex.swift in Sources */,
 				EA418A2B2969C36100DEA663 /* ChooseLocationScreen.swift in Sources */,
 				EA48F85F29DB27A0007DA8C5 /* ShulginRating-CoreDataHelpers.swift in Sources */,
 				EA418A39296CEEBD00DEA663 /* Authenticator.swift in Sources */,
@@ -2017,7 +1995,6 @@
 				EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */,
 				EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */,
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
-				EACB6DFC27CDE1F200940291 /* String-Optional.swift in Sources */,
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
@@ -2033,7 +2010,6 @@
 				EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */,
 				EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */,
 				EA6048252A140E25005C6A4B /* FabPosition.swift in Sources */,
-				EACB6E5927D3491C00940291 /* NSRegularExpression-isMatch.swift in Sources */,
 				EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */,
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,

@@ -43,7 +43,6 @@ struct FinishIngestionScreen: View {
     @State private var selectedStomachFullness = StomachFullness.empty
     @State private var alreadyUsedColors = [SubstanceColor]()
     @State private var otherColors = [SubstanceColor]()
-    @State private var notesInOrder = [String]()
     @State private var foundCompanion: SubstanceCompanion? = nil
     @State private var isInitialized = false
     @State private var experiencesWithinLargerRange: [Experience] = []
@@ -232,14 +231,6 @@ struct FinishIngestionScreen: View {
         .task {
             guard !isInitialized else { return } // because this function is going to be called again when navigating back from color picker screen
             selectExperienceBasedOnCurrentTime()
-            let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
-            ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
-            ingestionFetchRequest.fetchLimit = 15
-            let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
-            notesInOrder = sortedIngestions.map { ing in
-                ing.noteUnwrapped
-            }.uniqued()
             locationManager.selectedLocation = locationManager.currentLocation
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
             initializeColorCompanionAndNote(for: arguments.substanceName, suggestedNote: arguments.suggestedNote)
@@ -446,14 +437,5 @@ struct FinishIngestionScreen: View {
     func generateFailedHaptic() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
-    }
-}
-
-extension Binding where Value == Bool {
-    var not: Binding<Value> {
-        Binding<Value>(
-            get: { !self.wrappedValue },
-            set: { self.wrappedValue = !$0 }
-        )
     }
 }
