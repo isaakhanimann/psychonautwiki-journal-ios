@@ -21,10 +21,6 @@ extension CustomUnit {
         name ?? ""
     }
 
-    var creationDateUnwrapped: Date {
-        creationDate ?? Date()
-    }
-
     var administrationRouteUnwrapped: AdministrationRoute {
         AdministrationRoute(rawValue: administrationRoute ?? "oral") ?? .oral
     }

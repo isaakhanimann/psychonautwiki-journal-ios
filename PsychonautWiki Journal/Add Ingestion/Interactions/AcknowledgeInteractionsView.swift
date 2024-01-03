@@ -66,19 +66,11 @@ struct AcknowledgeInteractionsContent: View {
     }
 }
 
-struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ForEach(previewDeviceNames, id: \.self) { name in
-                NavigationStack {
-                    AcknowledgeInteractionsContent(
-                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                        dismiss: {}
-                    )
-                }
-                .previewDevice(PreviewDevice(rawValue: name))
-                .previewDisplayName(name)
-            }
-        }
+#Preview {
+    NavigationStack {
+        AcknowledgeInteractionsContent(
+            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+            dismiss: {}
+        )
     }
 }

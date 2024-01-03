@@ -164,128 +164,120 @@ struct ChooseSubstanceContent: View {
     }
 }
 
-struct ChooseSubstanceContent_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ForEach(previewDeviceNames, id: \.self) { name in
-                ChooseSubstanceContent(
-                    searchText: .constant(""),
-                    isShowingOpenEyeToast: .constant(false),
-                    isEyeOpen: true,
-                    filteredSuggestions: [
-                        Suggestion(
-                            substanceName: "MDMA",
-                            substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
-                            units: "mg",
-                            route: .insufflated,
-                            substanceColor: .pink,
-                            dosesAndUnit: [
-                                DoseAndUnit(
-                                    dose: 20,
-                                    units: "mg",
-                                    isEstimate: true
-                                ),
-                                DoseAndUnit(
-                                    dose: 30,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                            ],
-                            customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                        ),
-                        Suggestion(
-                            substanceName: "MDMA",
-                            substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
-                            units: "mg",
-                            route: .oral,
-                            substanceColor: .pink,
-                            dosesAndUnit: [
-                                DoseAndUnit(
-                                    dose: 20,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                                DoseAndUnit(
-                                    dose: nil,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                                DoseAndUnit(
-                                    dose: 30,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                            ],
-                            customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                        ),
-                        Suggestion(
-                            substanceName: "Cannabis",
-                            substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
-                            units: "mg",
-                            route: .smoked,
-                            substanceColor: .green,
-                            dosesAndUnit: [
-                                DoseAndUnit(
-                                    dose: 3,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                                DoseAndUnit(
-                                    dose: 6,
-                                    units: "mg",
-                                    isEstimate: true
-                                ),
-                                DoseAndUnit(
-                                    dose: nil,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                                DoseAndUnit(
-                                    dose: 2.5,
-                                    units: "mg",
-                                    isEstimate: false
-                                ),
-                            ],
-                            customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                        ),
-                        Suggestion(
-                            substanceName: "Coffee",
-                            substance: nil,
-                            units: "cups",
-                            route: .oral,
-                            substanceColor: .brown,
-                            dosesAndUnit: [
-                                DoseAndUnit(
-                                    dose: 1,
-                                    units: "cups",
-                                    isEstimate: false
-                                ),
-                                DoseAndUnit(
-                                    dose: 3,
-                                    units: "cups",
-                                    isEstimate: false
-                                ),
-                            ],
-                            customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                        ),
-                    ],
-                    filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
-                    filteredCustomSubstances: [
-                        CustomSubstanceModel(
-                            name: "Coffee",
-                            description: "The bitter drink",
-                            units: "cups"
-                        ),
-                    ],
-                    dismiss: {}
-                )
-                .previewDevice(PreviewDevice(rawValue: name))
-                .previewDisplayName(name)
-            }
-        }
-    }
+#Preview {
+    ChooseSubstanceContent(
+        searchText: .constant(""),
+        isShowingOpenEyeToast: .constant(false),
+        isEyeOpen: true,
+        filteredSuggestions: [
+            Suggestion(
+                substanceName: "MDMA",
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
+                units: "mg",
+                route: .insufflated,
+                substanceColor: .pink,
+                dosesAndUnit: [
+                    DoseAndUnit(
+                        dose: 20,
+                        units: "mg",
+                        isEstimate: true
+                    ),
+                    DoseAndUnit(
+                        dose: 30,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                ],
+                customUnits: [],
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
+            Suggestion(
+                substanceName: "MDMA",
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
+                units: "mg",
+                route: .oral,
+                substanceColor: .pink,
+                dosesAndUnit: [
+                    DoseAndUnit(
+                        dose: 20,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                    DoseAndUnit(
+                        dose: nil,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                    DoseAndUnit(
+                        dose: 30,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                ],
+                customUnits: [],
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
+            Suggestion(
+                substanceName: "Cannabis",
+                substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
+                units: "mg",
+                route: .smoked,
+                substanceColor: .green,
+                dosesAndUnit: [
+                    DoseAndUnit(
+                        dose: 3,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                    DoseAndUnit(
+                        dose: 6,
+                        units: "mg",
+                        isEstimate: true
+                    ),
+                    DoseAndUnit(
+                        dose: nil,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                    DoseAndUnit(
+                        dose: 2.5,
+                        units: "mg",
+                        isEstimate: false
+                    ),
+                ],
+                customUnits: [],
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
+            Suggestion(
+                substanceName: "Coffee",
+                substance: nil,
+                units: "cups",
+                route: .oral,
+                substanceColor: .brown,
+                dosesAndUnit: [
+                    DoseAndUnit(
+                        dose: 1,
+                        units: "cups",
+                        isEstimate: false
+                    ),
+                    DoseAndUnit(
+                        dose: 3,
+                        units: "cups",
+                        isEstimate: false
+                    ),
+                ],
+                customUnits: [],
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
+        ],
+        filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
+        filteredCustomSubstances: [
+            CustomSubstanceModel(
+                name: "Coffee",
+                description: "The bitter drink",
+                units: "cups"
+            ),
+        ],
+        dismiss: {}
+    )
 }

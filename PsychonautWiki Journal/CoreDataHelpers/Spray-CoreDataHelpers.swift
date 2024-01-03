@@ -20,8 +20,4 @@ extension Spray {
     var nameUnwrapped: String {
         name ?? ""
     }
-
-    var creationDateUnwrapped: Date {
-        creationDate ?? .now
-    }
 }
