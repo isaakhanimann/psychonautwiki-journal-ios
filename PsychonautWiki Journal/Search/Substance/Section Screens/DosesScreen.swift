@@ -74,15 +74,14 @@ struct DosesScreen: View {
     }
 }
 
-struct DosesScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationStack {
-                DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
-            }
-            NavigationStack {
-                DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
-            }
-        }
+#Preview {
+    NavigationStack {
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+    }
+}
+
+#Preview {
+    NavigationStack {
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
     }
 }

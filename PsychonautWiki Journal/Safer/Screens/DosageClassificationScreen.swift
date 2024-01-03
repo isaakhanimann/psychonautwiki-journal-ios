@@ -75,10 +75,8 @@ struct DosageClassificationScreen: View {
     }
 }
 
-struct DosageClassificationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            DosageClassificationScreen()
-        }
+#Preview {
+    NavigationStack {
+        DosageClassificationScreen()
     }
 }

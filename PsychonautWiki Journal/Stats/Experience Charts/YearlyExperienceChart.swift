@@ -162,14 +162,12 @@ struct YearlyExperienceChart: View {
 }
 
 @available(iOS 16, *)
-struct YearlyExperienceChart_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            YearlyExperienceChart(
-                experienceData: .mock1,
-                isShowingYearlyAverageLine: false,
-                colorMapping: ExperienceData.mock1.colorMapping
-            )
-        }
+#Preview {
+    List {
+        YearlyExperienceChart(
+            experienceData: .mock1,
+            isShowingYearlyAverageLine: false,
+            colorMapping: ExperienceData.mock1.colorMapping
+        )
     }
 }

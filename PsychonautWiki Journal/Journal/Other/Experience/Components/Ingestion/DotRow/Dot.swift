@@ -25,8 +25,6 @@ struct Dot: View {
     }
 }
 
-struct Dot_Previews: PreviewProvider {
-    static var previews: some View {
-        Dot(isFull: true)
-    }
+#Preview {
+    Dot(isFull: true)
 }

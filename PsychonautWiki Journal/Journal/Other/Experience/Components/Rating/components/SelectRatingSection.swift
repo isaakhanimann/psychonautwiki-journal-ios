@@ -35,10 +35,8 @@ struct SelectRatingSection: View {
     }
 }
 
-struct SelectRatingSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            SelectRatingSection(selectedRating: .constant(.plus))
-        }
+#Preview {
+    List {
+        SelectRatingSection(selectedRating: .constant(.plus))
     }
 }

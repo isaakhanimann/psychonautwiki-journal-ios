@@ -175,83 +175,81 @@ struct ExperienceRowContent: View {
     }
 }
 
-struct ExperienceRowContent_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            Section {
-                ExperienceRowContent(
-                    ingestionColors: [.blue, .pink],
-                    title: "My slightly longer title",
-                    distinctSubstanceNames: ["MDMA", "LSD"],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: true,
-                    isTimeRelative: false,
-                    locationName: "Longer location name",
-                    rating: .threePlus,
-                    isCurrent: true,
-                    consumerNames: ["Dave", "Carlo"]
-                )
-                ExperienceRowContent(
-                    ingestionColors: [.blue, .pink],
-                    title: "My slightly longer title",
-                    distinctSubstanceNames: ["MDMA", "LSD"],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: true,
-                    isTimeRelative: false,
-                    locationName: nil,
-                    rating: .threePlus,
-                    isCurrent: false,
-                    consumerNames: []
-                )
-                ExperienceRowContent(
-                    ingestionColors: [.blue, .pink, .purple, .yellow],
-                    title: "My title",
-                    distinctSubstanceNames: ["MDMA", "LSD", "Cocaine", "Amphetamine"],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: true,
-                    isTimeRelative: true,
-                    locationName: "Short location",
-                    rating: .threePlus,
-                    isCurrent: false,
-                    consumerNames: []
-                )
-                ExperienceRowContent(
-                    ingestionColors: [.blue, .pink],
-                    title: "My title is not is a normal length",
-                    distinctSubstanceNames: ["MDMA", "LSD"],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: true,
-                    isTimeRelative: true,
-                    locationName: nil,
-                    rating: nil,
-                    isCurrent: false,
-                    consumerNames: []
-                )
-                ExperienceRowContent(
-                    ingestionColors: [.blue, .pink],
-                    title: "My title short",
-                    distinctSubstanceNames: ["MDMA", "LSD"],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: true,
-                    isTimeRelative: true,
-                    locationName: "Home",
-                    rating: nil,
-                    isCurrent: false,
-                    consumerNames: []
-                )
-                ExperienceRowContent(
-                    ingestionColors: [],
-                    title: "My title is not is a normal length",
-                    distinctSubstanceNames: [],
-                    sortDate: Date() - 5 * 60 * 60 - 30,
-                    isFavorite: false,
-                    isTimeRelative: false,
-                    locationName: nil,
-                    rating: .threePlus,
-                    isCurrent: false,
-                    consumerNames: []
-                )
-            }
-        }.listStyle(.plain)
-    }
+#Preview {
+    List {
+        Section {
+            ExperienceRowContent(
+                ingestionColors: [.blue, .pink],
+                title: "My slightly longer title",
+                distinctSubstanceNames: ["MDMA", "LSD"],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: true,
+                isTimeRelative: false,
+                locationName: "Longer location name",
+                rating: .threePlus,
+                isCurrent: true,
+                consumerNames: ["Dave", "Carlo"]
+            )
+            ExperienceRowContent(
+                ingestionColors: [.blue, .pink],
+                title: "My slightly longer title",
+                distinctSubstanceNames: ["MDMA", "LSD"],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: true,
+                isTimeRelative: false,
+                locationName: nil,
+                rating: .threePlus,
+                isCurrent: false,
+                consumerNames: []
+            )
+            ExperienceRowContent(
+                ingestionColors: [.blue, .pink, .purple, .yellow],
+                title: "My title",
+                distinctSubstanceNames: ["MDMA", "LSD", "Cocaine", "Amphetamine"],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: true,
+                isTimeRelative: true,
+                locationName: "Short location",
+                rating: .threePlus,
+                isCurrent: false,
+                consumerNames: []
+            )
+            ExperienceRowContent(
+                ingestionColors: [.blue, .pink],
+                title: "My title is not is a normal length",
+                distinctSubstanceNames: ["MDMA", "LSD"],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: true,
+                isTimeRelative: true,
+                locationName: nil,
+                rating: nil,
+                isCurrent: false,
+                consumerNames: []
+            )
+            ExperienceRowContent(
+                ingestionColors: [.blue, .pink],
+                title: "My title short",
+                distinctSubstanceNames: ["MDMA", "LSD"],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: true,
+                isTimeRelative: true,
+                locationName: "Home",
+                rating: nil,
+                isCurrent: false,
+                consumerNames: []
+            )
+            ExperienceRowContent(
+                ingestionColors: [],
+                title: "My title is not is a normal length",
+                distinctSubstanceNames: [],
+                sortDate: Date() - 5 * 60 * 60 - 30,
+                isFavorite: false,
+                isTimeRelative: false,
+                locationName: nil,
+                rating: .threePlus,
+                isCurrent: false,
+                consumerNames: []
+            )
+        }
+    }.listStyle(.plain)
 }

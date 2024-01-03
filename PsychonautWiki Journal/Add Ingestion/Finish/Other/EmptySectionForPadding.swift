@@ -24,8 +24,6 @@ struct EmptySectionForPadding: View {
     }
 }
 
-struct EmptySectionForPadding_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptySectionForPadding()
-    }
+#Preview {
+    EmptySectionForPadding()
 }

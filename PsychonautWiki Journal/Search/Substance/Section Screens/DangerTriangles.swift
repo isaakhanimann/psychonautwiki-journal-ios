@@ -37,8 +37,6 @@ struct DangerTriangles: View {
     }
 }
 
-struct DangerTriangles_Previews: PreviewProvider {
-    static var previews: some View {
-        DangerTriangles(interactionType: .dangerous)
-    }
+#Preview {
+    DangerTriangles(interactionType: .dangerous)
 }

@@ -32,10 +32,8 @@ struct TestingScreen: View {
     }
 }
 
-struct TestingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            TestingScreen()
-        }
+#Preview {
+    NavigationStack {
+        TestingScreen()
     }
 }

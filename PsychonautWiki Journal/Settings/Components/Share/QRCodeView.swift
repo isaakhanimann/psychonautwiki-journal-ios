@@ -48,8 +48,6 @@ struct QRCodeView: View {
     }
 }
 
-struct QRCodeView_Previews: PreviewProvider {
-    static var previews: some View {
-        QRCodeView(url: "hello")
-    }
+#Preview {
+    QRCodeView(url: "hello")
 }

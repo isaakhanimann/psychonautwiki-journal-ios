@@ -65,21 +65,19 @@ struct ChooseDateScreenContent: View {
     }
 }
 
-struct ChooseDateScreenContent_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let alreadyUsedColors = [SubstanceColor.green, .pink]
-            let otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors))
-            ChooseDateScreenContent(
-                date: .constant(Date.now),
-                finish: {},
-                cancel: {},
-                isShowingColorPicker: true,
-                substanceName: "MDMA",
-                selectedColor: .constant(.blue),
-                alreadyUsedColors: alreadyUsedColors,
-                otherColors: otherColors
-            )
-        }
+#Preview {
+    NavigationStack {
+        let alreadyUsedColors = [SubstanceColor.green, .pink]
+        let otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors))
+        ChooseDateScreenContent(
+            date: .constant(Date.now),
+            finish: {},
+            cancel: {},
+            isShowingColorPicker: true,
+            substanceName: "MDMA",
+            selectedColor: .constant(.blue),
+            alreadyUsedColors: alreadyUsedColors,
+            otherColors: otherColors
+        )
     }
 }

@@ -118,139 +118,137 @@ struct IngestionRowContent: View {
     }
 }
 
-struct IngestionRowContent_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            Section {
-                IngestionRowContent(
-                    numDots: 4,
-                    substanceColor: .cyan,
-                    substanceName: "Methamphetamine",
-                    dose: 50,
-                    units: "mg",
-                    isEstimate: false,
-                    administrationRoute: .oral,
-                    ingestionTime: Date(),
-                    note: "",
-                    timeDisplayStyle: .relativeToNow,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: 2,
-                    substanceColor: .blue,
-                    substanceName: "Cocaine",
-                    dose: 30,
-                    units: "mg",
-                    isEstimate: true,
-                    administrationRoute: .insufflated,
-                    ingestionTime: Date(),
-                    note: "",
-                    timeDisplayStyle: .relativeToStart,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: nil,
-                    substanceColor: .blue,
-                    substanceName: "Cocaine",
-                    dose: nil,
-                    units: "mg",
-                    isEstimate: true,
-                    administrationRoute: .insufflated,
-                    ingestionTime: Date(),
-                    note: "",
-                    timeDisplayStyle: .relativeToStart,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: 2,
-                    substanceColor: .blue,
-                    substanceName: "Cocaine",
-                    dose: 30,
-                    units: "mg",
-                    isEstimate: true,
-                    administrationRoute: .insufflated,
-                    ingestionTime: Date(),
-                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    timeDisplayStyle: .relativeToStart,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: 2,
-                    substanceColor: .brown,
-                    substanceName: "Psilocybin Mushrooms",
-                    dose: 20,
-                    units: "mg",
-                    isEstimate: true,
-                    administrationRoute: .oral,
-                    ingestionTime: Date().addingTimeInterval(-4 * 60 * 60 + 330),
-                    note: "",
-                    timeDisplayStyle: .relativeToNow,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: 2,
-                    substanceColor: .green,
-                    substanceName: "Cannabis",
-                    dose: 10.4,
-                    units: "mg",
-                    isEstimate: true,
-                    administrationRoute: .smoked,
-                    ingestionTime: Date(),
-                    note: "",
-                    timeDisplayStyle: .regular,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: 1,
-                    substanceColor: .pink,
-                    substanceName: "MDMA",
-                    dose: 50,
-                    units: "mg",
-                    isEstimate: false,
-                    administrationRoute: .oral,
-                    ingestionTime: Date(),
-                    note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                    timeDisplayStyle: .regular,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-                IngestionRowContent(
-                    numDots: nil,
-                    substanceColor: .purple,
-                    substanceName: "Customsubstance",
-                    dose: 50,
-                    units: "mg",
-                    isEstimate: false,
-                    administrationRoute: .oral,
-                    ingestionTime: Date(),
-                    note: "",
-                    timeDisplayStyle: .regular,
-                    isEyeOpen: true,
-                    isHidingDosageDots: false,
-                    stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-                )
-            }
+#Preview {
+    List {
+        Section {
+            IngestionRowContent(
+                numDots: 4,
+                substanceColor: .cyan,
+                substanceName: "Methamphetamine",
+                dose: 50,
+                units: "mg",
+                isEstimate: false,
+                administrationRoute: .oral,
+                ingestionTime: Date(),
+                note: "",
+                timeDisplayStyle: .relativeToNow,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: .full,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: 2,
+                substanceColor: .blue,
+                substanceName: "Cocaine",
+                dose: 30,
+                units: "mg",
+                isEstimate: true,
+                administrationRoute: .insufflated,
+                ingestionTime: Date(),
+                note: "",
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: nil,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: nil,
+                substanceColor: .blue,
+                substanceName: "Cocaine",
+                dose: nil,
+                units: "mg",
+                isEstimate: true,
+                administrationRoute: .insufflated,
+                ingestionTime: Date(),
+                note: "",
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: nil,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: 2,
+                substanceColor: .blue,
+                substanceName: "Cocaine",
+                dose: 30,
+                units: "mg",
+                isEstimate: true,
+                administrationRoute: .insufflated,
+                ingestionTime: Date(),
+                note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: nil,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: 2,
+                substanceColor: .brown,
+                substanceName: "Psilocybin Mushrooms",
+                dose: 20,
+                units: "mg",
+                isEstimate: true,
+                administrationRoute: .oral,
+                ingestionTime: Date().addingTimeInterval(-4 * 60 * 60 + 330),
+                note: "",
+                timeDisplayStyle: .relativeToNow,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: nil,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: 2,
+                substanceColor: .green,
+                substanceName: "Cannabis",
+                dose: 10.4,
+                units: "mg",
+                isEstimate: true,
+                administrationRoute: .smoked,
+                ingestionTime: Date(),
+                note: "",
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: nil,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: 1,
+                substanceColor: .pink,
+                substanceName: "MDMA",
+                dose: 50,
+                units: "mg",
+                isEstimate: false,
+                administrationRoute: .oral,
+                ingestionTime: Date(),
+                note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: .full,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                numDots: nil,
+                substanceColor: .purple,
+                substanceName: "Customsubstance",
+                dose: 50,
+                units: "mg",
+                isEstimate: false,
+                administrationRoute: .oral,
+                ingestionTime: Date(),
+                note: "",
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                stomachFullness: .full,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
         }
     }
 }

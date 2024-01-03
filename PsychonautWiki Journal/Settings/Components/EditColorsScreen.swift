@@ -120,10 +120,8 @@ struct CompanionRow: View {
     }
 }
 
-struct CompanionRow_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            CompanionRow(name: "MDMA", color: .pink)
-        }
+#Preview {
+    List {
+        CompanionRow(name: "MDMA", color: .pink)
     }
 }

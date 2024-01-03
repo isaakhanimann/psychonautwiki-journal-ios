@@ -163,14 +163,12 @@ struct MonthlyExperienceChart: View {
 }
 
 @available(iOS 16, *)
-struct MonthlyExperienceChart_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            MonthlyExperienceChart(
-                experienceData: .mock1,
-                isShowingMonthlyAverageLine: false,
-                colorMapping: ExperienceData.mock1.colorMapping
-            )
-        }
+#Preview {
+    List {
+        MonthlyExperienceChart(
+            experienceData: .mock1,
+            isShowingMonthlyAverageLine: false,
+            colorMapping: ExperienceData.mock1.colorMapping
+        )
     }
 }

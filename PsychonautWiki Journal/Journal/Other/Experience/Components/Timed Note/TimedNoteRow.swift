@@ -70,25 +70,23 @@ private struct TimedNoteRowContent: View {
     }
 }
 
-struct TimedNoteRow_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            TimedNoteRowContent(
-                time: .now,
-                note: "My note",
-                color: .blue,
-                isPartOfTimeline: true,
-                timeDisplayStyle: .regular,
-                firstIngestionTime: nil
-            )
-            TimedNoteRowContent(
-                time: .now,
-                note: "My note",
-                color: .blue,
-                isPartOfTimeline: false,
-                timeDisplayStyle: .regular,
-                firstIngestionTime: nil
-            )
-        }
+#Preview {
+    List {
+        TimedNoteRowContent(
+            time: .now,
+            note: "My note",
+            color: .blue,
+            isPartOfTimeline: true,
+            timeDisplayStyle: .regular,
+            firstIngestionTime: nil
+        )
+        TimedNoteRowContent(
+            time: .now,
+            note: "My note",
+            color: .blue,
+            isPartOfTimeline: false,
+            timeDisplayStyle: .regular,
+            firstIngestionTime: nil
+        )
     }
 }

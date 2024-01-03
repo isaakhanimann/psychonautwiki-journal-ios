@@ -40,8 +40,6 @@ struct LockScreen: View {
     }
 }
 
-struct LockScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        LockScreen(isEyeOpen: false, isFaceIDEnabled: false)
-    }
+#Preview {
+    LockScreen(isEyeOpen: false, isFaceIDEnabled: false)
 }

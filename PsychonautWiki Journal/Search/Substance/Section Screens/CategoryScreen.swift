@@ -50,8 +50,6 @@ struct CategoryScreen: View {
     }
 }
 
-struct CategoryScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
-    }
+#Preview {
+    CategoryScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
 }

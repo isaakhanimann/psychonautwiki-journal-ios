@@ -57,16 +57,14 @@ struct SubstanceBox: View {
     }
 }
 
-struct SubstanceBox_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            LazyVStack {
-                SubstanceBox(
-                    substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-                    dismiss: {},
-                    isEyeOpen: true
-                ).padding(.horizontal)
-            }
+#Preview {
+    NavigationStack {
+        LazyVStack {
+            SubstanceBox(
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                dismiss: {},
+                isEyeOpen: true
+            ).padding(.horizontal)
         }
     }
 }

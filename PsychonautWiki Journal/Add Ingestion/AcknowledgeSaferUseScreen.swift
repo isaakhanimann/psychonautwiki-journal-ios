@@ -50,10 +50,8 @@ struct AcknowledgeSaferUseScreen: View {
     }
 }
 
-struct AcknowledgeSaferUseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AcknowledgeSaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!, dismiss: {})
-        }
+#Preview {
+    NavigationStack {
+        AcknowledgeSaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!, dismiss: {})
     }
 }

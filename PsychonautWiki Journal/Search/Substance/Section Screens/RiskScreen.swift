@@ -36,8 +36,6 @@ struct RiskScreen: View {
     }
 }
 
-struct RiskScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        RiskScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
-    }
+#Preview {
+    RiskScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
 }

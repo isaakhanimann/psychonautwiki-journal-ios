@@ -55,12 +55,10 @@ struct TimelineExplanationTexts: View {
     }
 }
 
-struct ExplainExperienceSectionScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ExplainExperienceSectionScreen()
-                .environmentObject(TabBarObserver())
-                .headerProminence(.increased)
-        }
+#Preview {
+    NavigationStack {
+        ExplainExperienceSectionScreen()
+            .environmentObject(TabBarObserver())
+            .headerProminence(.increased)
     }
 }

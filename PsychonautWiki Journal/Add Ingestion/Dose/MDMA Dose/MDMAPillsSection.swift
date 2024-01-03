@@ -97,10 +97,8 @@ struct MDMAPillsSection: View {
     }
 }
 
-struct MDMAPillsSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            MDMAPillsSection()
-        }
+#Preview {
+    List {
+        MDMAPillsSection()
     }
 }

@@ -29,8 +29,6 @@ struct RatingExplanationSection: View {
     }
 }
 
-struct RatingExplanationSection_Previews: PreviewProvider {
-    static var previews: some View {
-        RatingExplanationSection()
-    }
+#Preview {
+    RatingExplanationSection()
 }

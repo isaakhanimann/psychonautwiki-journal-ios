@@ -51,23 +51,21 @@ struct OneRoaDurationRow: View {
     }
 }
 
-struct DurationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            List {
-                OneRoaDurationRow(
-                    duration: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.getDuration(for: .smoked)!,
-                    color: .blue
-                )
-                OneRoaDurationRow(
-                    duration: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDuration(for: .oral)!,
-                    color: .pink
-                )
-                OneRoaDurationRow(
-                    duration: SubstanceRepo.shared.getSubstance(name: "LSD")!.getDuration(for: .sublingual)!,
-                    color: .purple
-                )
-            }
-        }.environmentObject(TabBarObserver())
-    }
+#Preview {
+    NavigationStack {
+        List {
+            OneRoaDurationRow(
+                duration: SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!.getDuration(for: .smoked)!,
+                color: .blue
+            )
+            OneRoaDurationRow(
+                duration: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDuration(for: .oral)!,
+                color: .pink
+            )
+            OneRoaDurationRow(
+                duration: SubstanceRepo.shared.getSubstance(name: "LSD")!.getDuration(for: .sublingual)!,
+                color: .purple
+            )
+        }
+    }.environmentObject(TabBarObserver())
 }

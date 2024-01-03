@@ -77,8 +77,6 @@ struct SaferHallucinogenScreen: View {
     }
 }
 
-struct SaferHallucinogenScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SaferHallucinogenScreen()
-    }
+#Preview {
+    SaferHallucinogenScreen()
 }

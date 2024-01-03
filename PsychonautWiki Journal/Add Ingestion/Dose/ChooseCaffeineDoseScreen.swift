@@ -167,10 +167,8 @@ struct ChooseCaffeineDoseScreen: View {
     }
 }
 
-struct ChooseCaffeineDoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ChooseCaffeineDoseScreen(dismiss: {})
-        }
+#Preview {
+    NavigationStack {
+        ChooseCaffeineDoseScreen(dismiss: {})
     }
 }

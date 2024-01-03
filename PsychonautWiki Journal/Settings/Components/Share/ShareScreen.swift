@@ -36,12 +36,10 @@ struct ShareScreen: View {
     }
 }
 
-struct ShareScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ShareScreen()
-                .headerProminence(.increased)
-        }
-        .environmentObject(TabBarObserver())
+#Preview {
+    NavigationStack {
+        ShareScreen()
+            .headerProminence(.increased)
     }
+    .environmentObject(TabBarObserver())
 }

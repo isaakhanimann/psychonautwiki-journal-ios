@@ -99,10 +99,8 @@ struct WelcomeScreen: View {
     ]
 }
 
-struct WelcomeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeScreen(isShowingWelcome: .constant(true))
-            .preferredColorScheme(.dark)
-            .accentColor(Color.blue)
-    }
+#Preview {
+    WelcomeScreen(isShowingWelcome: .constant(true))
+        .preferredColorScheme(.dark)
+        .accentColor(Color.blue)
 }

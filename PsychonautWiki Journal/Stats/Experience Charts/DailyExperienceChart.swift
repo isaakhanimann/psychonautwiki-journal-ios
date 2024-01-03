@@ -138,13 +138,11 @@ struct DailyExperienceChart: View {
 }
 
 @available(iOS 16, *)
-struct DailyExperienceChart_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            DailyExperienceChart(
-                experienceData: .mock1,
-                colorMapping: ExperienceData.mock1.colorMapping
-            )
-        }
+#Preview {
+    List {
+        DailyExperienceChart(
+            experienceData: .mock1,
+            colorMapping: ExperienceData.mock1.colorMapping
+        )
     }
 }

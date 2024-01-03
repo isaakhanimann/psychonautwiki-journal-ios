@@ -27,8 +27,6 @@ struct ColorRectangle: View {
     }
 }
 
-struct ColorRectangle_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorRectangle(color: .blue)
-    }
+#Preview {
+    ColorRectangle(color: .blue)
 }

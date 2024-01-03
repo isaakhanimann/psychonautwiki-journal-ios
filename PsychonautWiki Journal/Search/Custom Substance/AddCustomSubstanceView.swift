@@ -64,8 +64,6 @@ struct AddCustomSubstanceView: View {
     }
 }
 
-struct AddCustomSubstanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCustomSubstanceView()
-    }
+#Preview {
+    AddCustomSubstanceView()
 }

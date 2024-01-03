@@ -90,11 +90,9 @@ struct RoundedCorner: Shape {
 }
 
 @available(iOS 16, *)
-struct SubstanceDetailsScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            SubstanceDetailsScreen(substanceData: .mock2)
-                .environmentObject(TabBarObserver())
-        }
+#Preview {
+    NavigationStack {
+        SubstanceDetailsScreen(substanceData: .mock2)
+            .environmentObject(TabBarObserver())
     }
 }

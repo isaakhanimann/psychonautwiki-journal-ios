@@ -56,10 +56,8 @@ struct ExperienceTitleScreen: View {
     }
 }
 
-struct ExperienceTitleScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ExperienceTitleScreen(title: .constant(""))
-        }
+#Preview {
+    NavigationStack {
+        ExperienceTitleScreen(title: .constant(""))
     }
 }

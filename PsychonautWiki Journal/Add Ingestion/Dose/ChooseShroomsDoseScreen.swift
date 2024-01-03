@@ -160,10 +160,8 @@ struct ChooseShroomsDoseScreen: View {
     }
 }
 
-struct ChooseShroomsDoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ChooseShroomsDoseScreen(dismiss: {})
-        }
+#Preview {
+    NavigationStack {
+        ChooseShroomsDoseScreen(dismiss: {})
     }
 }

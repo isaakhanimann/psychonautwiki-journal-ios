@@ -59,18 +59,16 @@ struct CustomSubstanceBox: View {
     }
 }
 
-struct CustomSubstanceBox_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CustomSubstanceBox(
-                customSubstanceModel: CustomSubstanceModel(
-                    name: "Coffee",
-                    description: "The bitter drink",
-                    units: "cups"
-                ),
-                dismiss: {},
-                isEyeOpen: true
-            ).padding(.horizontal)
-        }
+#Preview {
+    NavigationStack {
+        CustomSubstanceBox(
+            customSubstanceModel: CustomSubstanceModel(
+                name: "Coffee",
+                description: "The bitter drink",
+                units: "cups"
+            ),
+            dismiss: {},
+            isEyeOpen: true
+        ).padding(.horizontal)
     }
 }

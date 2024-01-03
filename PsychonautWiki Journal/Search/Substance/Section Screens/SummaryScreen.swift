@@ -31,14 +31,12 @@ struct SummaryScreen: View {
     }
 }
 
-struct SummaryScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
-            SummaryScreen(
-                substanceName: substance.name,
-                summary: substance.summary!
-            )
-        }
+#Preview {
+    NavigationStack {
+        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
+        SummaryScreen(
+            substanceName: substance.name,
+            summary: substance.summary!
+        )
     }
 }

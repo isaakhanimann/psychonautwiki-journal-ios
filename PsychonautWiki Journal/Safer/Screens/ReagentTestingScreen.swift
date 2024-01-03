@@ -30,10 +30,8 @@ struct ReagentTestingScreen: View {
     }
 }
 
-struct ReagentTestingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ReagentTestingScreen()
-        }
+#Preview {
+    NavigationStack {
+        ReagentTestingScreen()
     }
 }

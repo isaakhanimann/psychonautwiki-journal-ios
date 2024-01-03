@@ -68,9 +68,7 @@ struct SubstanceOverview: View {
 }
 
 @available(iOS 16, *)
-struct SubstanceOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        SubstanceOverview(substanceData: .mock1)
-            .padding()
-    }
+#Preview {
+    SubstanceOverview(substanceData: .mock1)
+        .padding()
 }

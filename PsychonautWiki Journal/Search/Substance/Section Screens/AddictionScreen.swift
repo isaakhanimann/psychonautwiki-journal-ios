@@ -31,12 +31,11 @@ struct AddictionScreen: View {
     }
 }
 
-struct AddictionScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
-        AddictionScreen(
-            substanceName: substance.name,
-            addictionPotential: substance.addictionPotential!
-        )
-    }
+private let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
+
+#Preview {
+    AddictionScreen(
+        substanceName: substance.name,
+        addictionPotential: substance.addictionPotential!
+    )
 }

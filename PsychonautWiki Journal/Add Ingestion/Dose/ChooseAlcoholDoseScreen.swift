@@ -198,10 +198,8 @@ struct ChooseAlcoholDoseScreen: View {
     }
 }
 
-struct ChooseAlcoholDoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ChooseAlcoholDoseScreen(dismiss: {})
-        }.headerProminence(.increased)
-    }
+#Preview {
+    NavigationStack {
+        ChooseAlcoholDoseScreen(dismiss: {})
+    }.headerProminence(.increased)
 }

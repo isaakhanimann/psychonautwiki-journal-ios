@@ -59,15 +59,13 @@ struct ColorPickerScreen: View {
     }
 }
 
-struct ColorPicker_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let alreadyUsed = [SubstanceColor.blue, .red, .orange]
-            ColorPickerScreen(
-                selectedColor: .constant(.purple),
-                alreadyUsedColors: alreadyUsed,
-                otherColors: Array(Set(SubstanceColor.allCases).subtracting(alreadyUsed))
-            )
-        }
+#Preview {
+    NavigationStack {
+        let alreadyUsed = [SubstanceColor.blue, .red, .orange]
+        ColorPickerScreen(
+            selectedColor: .constant(.purple),
+            alreadyUsedColors: alreadyUsed,
+            otherColors: Array(Set(SubstanceColor.allCases).subtracting(alreadyUsed))
+        )
     }
 }

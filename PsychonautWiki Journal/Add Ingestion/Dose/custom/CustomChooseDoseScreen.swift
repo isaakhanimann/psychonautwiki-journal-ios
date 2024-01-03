@@ -84,15 +84,13 @@ struct CustomChooseDoseScreen: View {
     }
 }
 
-struct CustomChooseDoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CustomChooseDoseScreen(
-                arguments: .init(substanceName: "Coffee",
-                                 units: "cups",
-                                 administrationRoute: .oral),
-                dismiss: {}
-            )
-        }
+#Preview {
+    NavigationStack {
+        CustomChooseDoseScreen(
+            arguments: .init(substanceName: "Coffee",
+                             units: "cups",
+                             administrationRoute: .oral),
+            dismiss: {}
+        )
     }
 }

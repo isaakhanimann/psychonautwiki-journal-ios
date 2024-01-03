@@ -168,26 +168,24 @@ extension CLLocationCoordinate2D: Identifiable {
     }
 }
 
-struct ChooseLocationScreenContent_Previews: PreviewProvider {
-    static var previews: some View {
-        ChooseLocationScreenContent(
-            selectedLocation: .constant(
-                Location(name: "Zurich", longitude: 2, latitude: 2)
-            ),
-            selectedLocationName: .constant(""),
-            searchText: .constant(""),
-            authorizationStatus: .denied,
-            isLoadingLocationResults: false,
-            currentLocation: nil,
-            searchSuggestedLocations: [
-                Location(name: "Street Name 1", longitude: 2, latitude: 2),
-                Location(name: "Street Name 2", longitude: 2, latitude: 2),
-                Location(name: "Street Name 3", longitude: 2, latitude: 2),
-            ],
-            experienceLocations: [
-                Location(name: "Home", longitude: 2, latitude: 2),
-                Location(name: "Festival", longitude: 2, latitude: 2),
-            ]
-        )
-    }
+#Preview {
+    ChooseLocationScreenContent(
+        selectedLocation: .constant(
+            Location(name: "Zurich", longitude: 2, latitude: 2)
+        ),
+        selectedLocationName: .constant(""),
+        searchText: .constant(""),
+        authorizationStatus: .denied,
+        isLoadingLocationResults: false,
+        currentLocation: nil,
+        searchSuggestedLocations: [
+            Location(name: "Street Name 1", longitude: 2, latitude: 2),
+            Location(name: "Street Name 2", longitude: 2, latitude: 2),
+            Location(name: "Street Name 3", longitude: 2, latitude: 2),
+        ],
+        experienceLocations: [
+            Location(name: "Home", longitude: 2, latitude: 2),
+            Location(name: "Festival", longitude: 2, latitude: 2),
+        ]
+    )
 }

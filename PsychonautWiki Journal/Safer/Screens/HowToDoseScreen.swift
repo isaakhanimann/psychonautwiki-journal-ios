@@ -35,10 +35,8 @@ struct HowToDoseScreen: View {
     }
 }
 
-struct HowToDoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            HowToDoseScreen()
-        }
+#Preview {
+    NavigationStack {
+        HowToDoseScreen()
     }
 }

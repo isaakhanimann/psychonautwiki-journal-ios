@@ -56,19 +56,17 @@ struct ToleranceTextsScreen: View {
     }
 }
 
-struct ToleranceTextsScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let substances = Array(SubstanceRepo.shared.substances.filter { sub in
-                guard let tolerance = sub.tolerance else { return false }
-                return tolerance.halfToleranceInHours != nil && tolerance.zeroToleranceInHours != nil
-            }.shuffled().prefix(5))
-            let substancsWith = substances.map { sub in
-                sub.toSubstanceWithToleranceAndColor(substanceColor: SubstanceColor.allCases.randomElement() ?? .red)
-            }
-            ToleranceTextsScreen(substances: substancsWith)
-                .environmentObject(TabBarObserver())
-                .headerProminence(.increased)
+#Preview {
+    NavigationStack {
+        let substances = Array(SubstanceRepo.shared.substances.filter { sub in
+            guard let tolerance = sub.tolerance else { return false }
+            return tolerance.halfToleranceInHours != nil && tolerance.zeroToleranceInHours != nil
+        }.shuffled().prefix(5))
+        let substancsWith = substances.map { sub in
+            sub.toSubstanceWithToleranceAndColor(substanceColor: SubstanceColor.allCases.randomElement() ?? .red)
         }
+        ToleranceTextsScreen(substances: substancsWith)
+            .environmentObject(TabBarObserver())
+            .headerProminence(.increased)
     }
 }

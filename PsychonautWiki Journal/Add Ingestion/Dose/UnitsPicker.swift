@@ -66,12 +66,10 @@ struct UnitsPicker: View {
     }
 }
 
-struct UnitsPickerSection_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            List {
-                UnitsPicker(units: .constant(""))
-            }
+#Preview {
+    NavigationStack {
+        List {
+            UnitsPicker(units: .constant(""))
         }
     }
 }

@@ -142,13 +142,11 @@ struct SubstanceScreen: View {
     }
 }
 
-struct SubstanceScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            SubstanceScreen(
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
-            )
-            .environmentObject(TabBarObserver())
-        }
+#Preview {
+    NavigationStack {
+        SubstanceScreen(
+            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
+        )
+        .environmentObject(TabBarObserver())
     }
 }

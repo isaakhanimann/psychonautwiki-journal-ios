@@ -86,11 +86,9 @@ private struct EditConsumerScreenContent: View {
     }
 }
 
-struct EditConsumerScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        EditConsumerScreenContent(
-            consumerName: .constant("Dave"),
-            consumerNamesInOrder: ["Andrea", "Paula", "Eric"]
-        )
-    }
+#Preview {
+    EditConsumerScreenContent(
+        consumerName: .constant("Dave"),
+        consumerNamesInOrder: ["Andrea", "Paula", "Eric"]
+    )
 }

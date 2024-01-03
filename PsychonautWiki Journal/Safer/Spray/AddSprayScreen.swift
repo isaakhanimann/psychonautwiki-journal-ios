@@ -86,10 +86,8 @@ struct AddSprayScreen: View {
     }
 }
 
-struct AddSprayScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AddSprayScreen().headerProminence(.increased)
-        }
+#Preview {
+    NavigationStack {
+        AddSprayScreen().headerProminence(.increased)
     }
 }

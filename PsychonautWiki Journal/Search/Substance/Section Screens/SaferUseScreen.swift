@@ -31,8 +31,6 @@ struct SaferUseScreen: View {
     }
 }
 
-struct SaferUseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
-    }
+#Preview {
+    SaferUseScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
 }

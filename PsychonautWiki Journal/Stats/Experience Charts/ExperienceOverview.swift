@@ -54,9 +54,7 @@ struct ExperienceOverview: View {
 }
 
 @available(iOS 16, *)
-struct ExperienceOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperienceOverview(experienceData: .mock1)
-            .padding()
-    }
+#Preview {
+    ExperienceOverview(experienceData: .mock1)
+        .padding()
 }

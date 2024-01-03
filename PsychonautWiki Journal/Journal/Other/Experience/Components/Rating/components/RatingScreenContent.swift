@@ -44,13 +44,11 @@ struct RatingScreenContent: View {
     }
 }
 
-struct EditRatingScreenContent_Previews: PreviewProvider {
-    static var previews: some View {
-        RatingScreenContent(
-            selectedTime: .constant(.now),
-            selectedRating: .constant(.plus),
-            canDefineOverall: true,
-            isOverallRating: .constant(false)
-        )
-    }
+#Preview {
+    RatingScreenContent(
+        selectedTime: .constant(.now),
+        selectedRating: .constant(.plus),
+        canDefineOverall: true,
+        isOverallRating: .constant(false)
+    )
 }

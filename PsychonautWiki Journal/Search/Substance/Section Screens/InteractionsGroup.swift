@@ -55,15 +55,13 @@ struct InteractionsGroup: View {
     }
 }
 
-struct InteractionsGroup_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            Section {
-                InteractionsGroup(
-                    interactions: SubstanceRepo.shared.getSubstance(name: "MDMA")!.interactions!,
-                    substanceURL: URL(string: "www.apple.com")!
-                )
-            }
+#Preview {
+    List {
+        Section {
+            InteractionsGroup(
+                interactions: SubstanceRepo.shared.getSubstance(name: "MDMA")!.interactions!,
+                substanceURL: URL(string: "www.apple.com")!
+            )
         }
     }
 }

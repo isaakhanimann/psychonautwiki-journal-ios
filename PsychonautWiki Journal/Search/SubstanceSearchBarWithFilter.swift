@@ -94,29 +94,27 @@ struct SubstanceSearchBarWithFilter: View {
     }
 }
 
-struct SubstanceSearchBar_Previews: PreviewProvider {
-    struct SearchBarContainer: View {
-        @FocusState private var isSearchFocused: Bool
+private struct SearchBarContainer: View {
+    @FocusState private var isSearchFocused: Bool
 
-        var body: some View {
-            SubstanceSearchBarWithFilter(
-                text: .constant("d"),
-                isFocused: $isSearchFocused,
-                allCategories: ["psychedelic", "opioid"],
-                toggleCategory: { _ in },
-                selectedCategories: [],
-                clearCategories: {}
-            )
-        }
+    var body: some View {
+        SubstanceSearchBarWithFilter(
+            text: .constant("d"),
+            isFocused: $isSearchFocused,
+            allCategories: ["psychedelic", "opioid"],
+            toggleCategory: { _ in },
+            selectedCategories: [],
+            clearCategories: {}
+        )
     }
+}
 
-    static var previews: some View {
-        NavigationStack {
-            VStack {
-                SearchBarContainer()
-                Spacer()
-            }
-            .navigationTitle("Substances")
+#Preview {
+    NavigationStack {
+        VStack {
+            SearchBarContainer()
+            Spacer()
         }
+        .navigationTitle("Substances")
     }
 }

@@ -134,10 +134,8 @@ struct AdministrationRouteScreen: View {
     }
 }
 
-struct AdministrationRouteScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AdministrationRouteScreen()
-        }
+#Preview {
+    NavigationStack {
+        AdministrationRouteScreen()
     }
 }

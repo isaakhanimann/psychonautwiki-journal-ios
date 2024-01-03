@@ -31,8 +31,6 @@ struct RowLabelView: View {
     }
 }
 
-struct RowLabelView_Previews: PreviewProvider {
-    static var previews: some View {
-        RowLabelView(label: "My label", value: "My Value")
-    }
+#Preview {
+    RowLabelView(label: "My label", value: "My Value")
 }

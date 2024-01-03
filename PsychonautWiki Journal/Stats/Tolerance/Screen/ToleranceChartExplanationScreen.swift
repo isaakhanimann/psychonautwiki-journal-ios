@@ -44,12 +44,10 @@ struct ToleranceChartExplanationScreen: View {
     }
 }
 
-struct ToleranceChartExplanationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ToleranceChartExplanationScreen()
-                .environmentObject(TabBarObserver())
-                .headerProminence(.increased)
-        }
+#Preview {
+    NavigationStack {
+        ToleranceChartExplanationScreen()
+            .environmentObject(TabBarObserver())
+            .headerProminence(.increased)
     }
 }

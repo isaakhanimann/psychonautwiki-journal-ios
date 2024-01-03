@@ -37,12 +37,10 @@ struct GoThroughAllInteractionsScreen: View {
     }
 }
 
-struct GoThroughAllInteractionsScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            GoThroughAllInteractionsScreen(
-                substancesToCheck: Array(SubstanceRepo.shared.substances.prefix(5))
-            )
-        }
+#Preview {
+    NavigationStack {
+        GoThroughAllInteractionsScreen(
+            substancesToCheck: Array(SubstanceRepo.shared.substances.prefix(5))
+        )
     }
 }

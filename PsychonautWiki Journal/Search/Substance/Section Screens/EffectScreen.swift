@@ -30,9 +30,8 @@ struct EffectScreen: View {
     }
 }
 
-struct EffectScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
-        EffectScreen(substanceName: substance.name, effect: substance.effectsSummary!)
-    }
+private let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
+
+#Preview {
+    EffectScreen(substanceName: substance.name, effect: substance.effectsSummary!)
 }

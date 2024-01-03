@@ -170,24 +170,22 @@ struct EditIngestionContent: View {
     }
 }
 
-struct EditIngestionScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            EditIngestionContent(
-                substanceName: "MDMA",
-                roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
-                route: .constant(.oral),
-                time: .constant(Date()),
-                dose: .constant(50),
-                units: .constant("mg"),
-                isEstimate: .constant(false),
-                note: .constant("These are my notes"),
-                stomachFullness: .constant(.full),
-                consumerName: .constant("Marc"),
-                save: {},
-                delete: {},
-                isEyeOpen: true
-            )
-        }
+#Preview {
+    NavigationStack {
+        EditIngestionContent(
+            substanceName: "MDMA",
+            roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
+            route: .constant(.oral),
+            time: .constant(Date()),
+            dose: .constant(50),
+            units: .constant("mg"),
+            isEstimate: .constant(false),
+            note: .constant("These are my notes"),
+            stomachFullness: .constant(.full),
+            consumerName: .constant("Marc"),
+            save: {},
+            delete: {},
+            isEyeOpen: true
+        )
     }
 }

@@ -85,10 +85,8 @@ struct MDMAOptimalDoseSection: View {
 }
 
 @available(iOS 16.0, *)
-struct MDMADesirableVsAdverseChart_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            MDMAOptimalDoseSection()
-        }
+#Preview {
+    List {
+        MDMAOptimalDoseSection()
     }
 }

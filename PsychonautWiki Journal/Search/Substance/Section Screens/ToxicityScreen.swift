@@ -41,15 +41,13 @@ struct ToxicityScreen: View {
     }
 }
 
-struct ToxicityScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
-            ToxicityScreen(
-                substanceName: substance.name,
-                toxicities: substance.toxicities,
-                substanceURL: substance.url
-            )
-        }
+#Preview {
+    NavigationStack {
+        let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
+        ToxicityScreen(
+            substanceName: substance.name,
+            toxicities: substance.toxicities,
+            substanceURL: substance.url
+        )
     }
 }

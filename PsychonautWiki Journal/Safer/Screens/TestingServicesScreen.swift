@@ -160,8 +160,6 @@ struct TestingServiceItem: View {
     }
 }
 
-struct TestingServicesScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TestingServicesScreen().environmentObject(TabBarObserver())
-    }
+#Preview {
+    TestingServicesScreen().environmentObject(TabBarObserver())
 }

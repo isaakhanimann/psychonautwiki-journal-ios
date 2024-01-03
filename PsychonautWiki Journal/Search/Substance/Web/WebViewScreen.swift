@@ -60,8 +60,6 @@ struct WebViewScreen: View {
     }
 }
 
-struct WebViewScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        WebViewScreen(articleURL: URL(string: "https://psychonautwiki.org/wiki/LSD")!)
-    }
+#Preview {
+    WebViewScreen(articleURL: URL(string: "https://psychonautwiki.org/wiki/LSD")!)
 }

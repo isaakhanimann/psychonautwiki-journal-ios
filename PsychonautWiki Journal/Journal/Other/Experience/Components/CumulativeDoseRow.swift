@@ -65,55 +65,53 @@ struct RouteItemView: View {
     }
 }
 
-struct CumulativeDoseRow_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            Section {
-                CumulativeDoseRow(
-                    substanceName: "MDMA",
-                    substanceColor: .pink,
-                    cumulativeRoutes: [
-                        CumulativeRouteAndDose(
-                            route: .oral,
-                            numDots: 5,
-                            isEstimate: false,
-                            dose: 250,
-                            units: "mg"
-                        ),
-                        CumulativeRouteAndDose(
-                            route: .insufflated,
-                            numDots: 1,
-                            isEstimate: true,
-                            dose: 20,
-                            units: "mg"
-                        ),
-                    ],
-                    isHidingDosageDots: false,
-                    isEyeOpen: true
-                )
-                CumulativeDoseRow(
-                    substanceName: "Amphetamine",
-                    substanceColor: .blue,
-                    cumulativeRoutes: [
-                        CumulativeRouteAndDose(
-                            route: .oral,
-                            numDots: 3,
-                            isEstimate: false,
-                            dose: 30,
-                            units: "mg"
-                        ),
-                        CumulativeRouteAndDose(
-                            route: .insufflated,
-                            numDots: nil,
-                            isEstimate: true,
-                            dose: nil,
-                            units: "mg"
-                        ),
-                    ],
-                    isHidingDosageDots: false,
-                    isEyeOpen: true
-                )
-            }
+#Preview {
+    List {
+        Section {
+            CumulativeDoseRow(
+                substanceName: "MDMA",
+                substanceColor: .pink,
+                cumulativeRoutes: [
+                    CumulativeRouteAndDose(
+                        route: .oral,
+                        numDots: 5,
+                        isEstimate: false,
+                        dose: 250,
+                        units: "mg"
+                    ),
+                    CumulativeRouteAndDose(
+                        route: .insufflated,
+                        numDots: 1,
+                        isEstimate: true,
+                        dose: 20,
+                        units: "mg"
+                    ),
+                ],
+                isHidingDosageDots: false,
+                isEyeOpen: true
+            )
+            CumulativeDoseRow(
+                substanceName: "Amphetamine",
+                substanceColor: .blue,
+                cumulativeRoutes: [
+                    CumulativeRouteAndDose(
+                        route: .oral,
+                        numDots: 3,
+                        isEstimate: false,
+                        dose: 30,
+                        units: "mg"
+                    ),
+                    CumulativeRouteAndDose(
+                        route: .insufflated,
+                        numDots: nil,
+                        isEstimate: true,
+                        dose: nil,
+                        units: "mg"
+                    ),
+                ],
+                isHidingDosageDots: false,
+                isEyeOpen: true
+            )
         }
     }
 }

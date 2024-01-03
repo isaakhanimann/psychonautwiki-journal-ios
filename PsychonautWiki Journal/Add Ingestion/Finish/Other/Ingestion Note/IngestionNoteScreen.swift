@@ -67,10 +67,8 @@ struct IngestionNoteScreen: View {
     }
 }
 
-struct IngestionNoteScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            IngestionNoteScreen(note: .constant(""))
-        }
+#Preview {
+    NavigationStack {
+        IngestionNoteScreen(note: .constant(""))
     }
 }

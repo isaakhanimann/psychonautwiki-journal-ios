@@ -55,8 +55,6 @@ struct DotRows: View {
     }
 }
 
-struct DotRows_Previews: PreviewProvider {
-    static var previews: some View {
-        DotRows(numDots: 3)
-    }
+#Preview {
+    DotRows(numDots: 3)
 }

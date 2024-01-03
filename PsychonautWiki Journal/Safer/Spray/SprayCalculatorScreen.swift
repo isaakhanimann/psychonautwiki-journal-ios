@@ -148,25 +148,24 @@ struct SprayCalculatorScreenContent: View {
     }
 }
 
-struct SprayCalculatorScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        let sprays = [
-            SprayModel(name: "Small Spray", numSprays: 32, contentInMl: 5, spray: nil),
-            SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil),
-        ]
-        NavigationStack {
-            SprayCalculatorScreenContent(
-                units: .constant(.mg),
-                weightPerSpray: .constant(""),
-                liquidAmountInMl: .constant(""),
-                totalWeight: .constant(""),
-                purityInPercent: .constant("90"),
-                sprayModels: sprays,
-                selectedSpray: .constant(sprays.first),
-                addSpray: {},
-                deleteSprays: { _ in },
-                doseAdjustedToPurity: 211
-            ).headerProminence(.increased)
-        }
+private let sprays = [
+    SprayModel(name: "Small Spray", numSprays: 32, contentInMl: 5, spray: nil),
+    SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil),
+]
+
+#Preview {
+    NavigationStack {
+        SprayCalculatorScreenContent(
+            units: .constant(.mg),
+            weightPerSpray: .constant(""),
+            liquidAmountInMl: .constant(""),
+            totalWeight: .constant(""),
+            purityInPercent: .constant("90"),
+            sprayModels: sprays,
+            selectedSpray: .constant(sprays.first),
+            addSpray: {},
+            deleteSprays: { _ in },
+            doseAdjustedToPurity: 211
+        ).headerProminence(.increased)
     }
 }

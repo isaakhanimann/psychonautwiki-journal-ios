@@ -121,8 +121,6 @@ struct SaferScreen: View {
     }
 }
 
-struct SaferTab_Previews: PreviewProvider {
-    static var previews: some View {
-        SaferScreen().headerProminence(.increased)
-    }
+#Preview {
+    SaferScreen().headerProminence(.increased)
 }

@@ -63,10 +63,8 @@ struct LiveActivityButton: View {
 }
 
 @available(iOS 16.2, *)
-struct LiveActivitySection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            LiveActivityButton(stopLiveActivity: {}, startLiveActivity: {})
-        }
+#Preview {
+    List {
+        LiveActivityButton(stopLiveActivity: {}, startLiveActivity: {})
     }
 }

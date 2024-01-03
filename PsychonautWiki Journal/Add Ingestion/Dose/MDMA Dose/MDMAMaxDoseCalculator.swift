@@ -75,10 +75,8 @@ struct MDMAMaxDoseCalculator: View {
     }
 }
 
-struct MDMAMaxRecommendedSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            MDMAMaxDoseCalculator(onChangeOfMax: { _ in })
-        }
+#Preview {
+    List {
+        MDMAMaxDoseCalculator(onChangeOfMax: { _ in })
     }
 }

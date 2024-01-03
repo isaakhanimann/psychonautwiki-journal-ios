@@ -24,8 +24,6 @@ struct MissingToleranceText: View {
     }
 }
 
-struct MissingToleranceText_Previews: PreviewProvider {
-    static var previews: some View {
-        MissingToleranceText(substanceNames: ["2C-B", "Ketamine"])
-    }
+#Preview {
+    MissingToleranceText(substanceNames: ["2C-B", "Ketamine"])
 }

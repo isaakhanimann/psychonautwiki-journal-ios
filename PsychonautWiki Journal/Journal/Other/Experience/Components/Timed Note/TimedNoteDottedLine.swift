@@ -34,8 +34,6 @@ struct TimedNoteDottedLine: View {
     }
 }
 
-struct TimedNoteDottedLine_Previews: PreviewProvider {
-    static var previews: some View {
-        TimedNoteDottedLine(color: .blue)
-    }
+#Preview {
+    TimedNoteDottedLine(color: .blue)
 }

@@ -33,8 +33,6 @@ struct ExperienceColorRectangle: View {
     }
 }
 
-struct ExperienceColorRectangle_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperienceColorRectangle(colors: [.pink, .blue])
-    }
+#Preview {
+    ExperienceColorRectangle(colors: [.pink, .blue])
 }

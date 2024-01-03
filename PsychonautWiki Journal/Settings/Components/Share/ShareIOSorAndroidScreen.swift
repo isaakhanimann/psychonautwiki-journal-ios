@@ -33,11 +33,9 @@ struct ShareIOSorAndroidScreen: View {
     }
 }
 
-struct ShareIOSorAndroidScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ShareIOSorAndroidScreen()
-        }
-        .environmentObject(TabBarObserver())
+#Preview {
+    NavigationStack {
+        ShareIOSorAndroidScreen()
     }
+    .environmentObject(TabBarObserver())
 }

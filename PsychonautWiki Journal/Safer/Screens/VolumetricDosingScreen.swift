@@ -32,10 +32,8 @@ struct VolumetricDosingScreen: View {
     }
 }
 
-struct VolumetricDosingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            VolumetricDosingScreen()
-        }
+#Preview {
+    NavigationStack {
+        VolumetricDosingScreen()
     }
 }

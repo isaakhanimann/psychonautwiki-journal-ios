@@ -94,23 +94,21 @@ struct ToleranceChart: View {
 }
 
 @available(iOS 16.0, *)
-struct ToleranceChart_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ToleranceChart(
-                toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
-                numberOfRows: 2,
-                timeOption: .alwaysShow,
-                experienceStartDate: nil
-            )
-            .padding(.horizontal)
-            ToleranceChart(
-                toleranceWindows: [],
-                numberOfRows: 0,
-                timeOption: .alwaysShow,
-                experienceStartDate: nil
-            )
-            .padding(.horizontal)
-        }
+#Preview {
+    Group {
+        ToleranceChart(
+            toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
+            numberOfRows: 2,
+            timeOption: .alwaysShow,
+            experienceStartDate: nil
+        )
+        .padding(.horizontal)
+        ToleranceChart(
+            toleranceWindows: [],
+            numberOfRows: 0,
+            timeOption: .alwaysShow,
+            experienceStartDate: nil
+        )
+        .padding(.horizontal)
     }
 }

@@ -22,8 +22,6 @@ struct NextLabel: View {
     }
 }
 
-struct NextLabel_Previews: PreviewProvider {
-    static var previews: some View {
-        NextLabel()
-    }
+#Preview {
+    NextLabel()
 }

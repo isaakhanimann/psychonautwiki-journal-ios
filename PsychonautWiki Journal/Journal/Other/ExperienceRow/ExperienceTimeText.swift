@@ -34,8 +34,6 @@ struct ExperienceTimeText: View {
     }
 }
 
-struct ExperienceTimeText_Previews: PreviewProvider {
-    static var previews: some View {
-        ExperienceTimeText(time: Date() - 5 * 60 * 60 - 30, isTimeRelative: false, isCurrent: true)
-    }
+#Preview {
+    ExperienceTimeText(time: Date() - 5 * 60 * 60 - 30, isTimeRelative: false, isCurrent: true)
 }

@@ -104,10 +104,8 @@ struct ChooseMDMADoseScreen: View {
     }
 }
 
-struct ChooseMDMADoseScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ChooseMDMADoseScreen(dismiss: {})
-        }
+#Preview {
+    NavigationStack {
+        ChooseMDMADoseScreen(dismiss: {})
     }
 }

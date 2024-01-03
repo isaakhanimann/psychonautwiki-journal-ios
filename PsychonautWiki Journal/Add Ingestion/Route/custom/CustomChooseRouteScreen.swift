@@ -92,10 +92,8 @@ struct CustomChooseRouteScreen: View {
     }
 }
 
-struct CustomChooseRouteScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CustomChooseRouteScreen(arguments: .init(substanceName: "Coffee", units: "cups"), dismiss: {})
-        }
+#Preview {
+    NavigationStack {
+        CustomChooseRouteScreen(arguments: .init(substanceName: "Coffee", units: "cups"), dismiss: {})
     }
 }

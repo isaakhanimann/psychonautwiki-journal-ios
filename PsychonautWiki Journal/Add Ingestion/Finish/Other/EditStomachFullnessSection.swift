@@ -36,10 +36,8 @@ struct EditStomachFullnessSection: View {
     }
 }
 
-struct EditStomachFullnessSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            EditStomachFullnessSection(stomachFullness: .constant(.empty))
-        }
+#Preview {
+    List {
+        EditStomachFullnessSection(stomachFullness: .constant(.empty))
     }
 }

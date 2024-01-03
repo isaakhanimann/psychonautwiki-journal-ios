@@ -58,10 +58,8 @@ struct Chip: View {
     }
 }
 
-struct SearchSubstanceRow_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            SearchSubstanceRow(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
-        }.listStyle(.plain)
-    }
+#Preview {
+    List {
+        SearchSubstanceRow(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
+    }.listStyle(.plain)
 }

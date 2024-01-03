@@ -24,10 +24,8 @@ struct ChasingTheDragonSection: View {
     }
 }
 
-struct ChasingTheDragonSection_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            ChasingTheDragonSection()
-        }
+#Preview {
+    List {
+        ChasingTheDragonSection()
     }
 }

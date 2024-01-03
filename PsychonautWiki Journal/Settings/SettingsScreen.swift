@@ -285,28 +285,26 @@ struct SettingsContent: View {
     }
 }
 
-struct SettingsContent_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsContent(
-            isEyeOpen: .constant(true),
-            isHidingDosageDots: .constant(false),
-            isHidingToleranceChartInExperience: .constant(false),
-            isHidingSubstanceInfoInExperience: .constant(false),
-            areRedosesDrawnIndividually: .constant(false),
-            isDateInTimePicker: .constant(false),
-            isFaceIDAvailable: true,
-            hasToUnlockApp: .constant(false),
-            isImporting: false,
-            isExporting: .constant(false),
-            journalFile: JournalFile(),
-            exportData: {},
-            importData: { _ in },
-            deleteEverything: {},
-            isShowingToast: .constant(false),
-            isSuccessToast: .constant(false),
-            toastMessage: .constant(""),
-            lockTimeOption: .constant(.after5Minutes)
-        )
-        .accentColor(Color.blue)
-    }
+#Preview {
+    SettingsContent(
+        isEyeOpen: .constant(true),
+        isHidingDosageDots: .constant(false),
+        isHidingToleranceChartInExperience: .constant(false),
+        isHidingSubstanceInfoInExperience: .constant(false),
+        areRedosesDrawnIndividually: .constant(false),
+        isDateInTimePicker: .constant(false),
+        isFaceIDAvailable: true,
+        hasToUnlockApp: .constant(false),
+        isImporting: false,
+        isExporting: .constant(false),
+        journalFile: JournalFile(),
+        exportData: {},
+        importData: { _ in },
+        deleteEverything: {},
+        isShowingToast: .constant(false),
+        isSuccessToast: .constant(false),
+        toastMessage: .constant(""),
+        lockTimeOption: .constant(.after5Minutes)
+    )
+    .accentColor(Color.blue)
 }

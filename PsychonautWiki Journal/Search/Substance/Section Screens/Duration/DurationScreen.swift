@@ -155,11 +155,9 @@ struct DurationScreen: View {
     }
 }
 
-struct DurationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
-            DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
-        }
+#Preview {
+    NavigationStack {
+        let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
+        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
     }
 }

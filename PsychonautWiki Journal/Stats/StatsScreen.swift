@@ -283,16 +283,14 @@ struct StatsScreenContent: View {
 }
 
 @available(iOS 16, *)
-struct StatsScreenContent_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            StatsScreenContent(
-                experienceData: .mock1,
-                substanceData: .mock1,
-                toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
-                substancesInIngestionsButNotChart: ["2C-B", "DMT"],
-                isEyeOpen: true
-            )
-        }
+#Preview {
+    NavigationStack {
+        StatsScreenContent(
+            experienceData: .mock1,
+            substanceData: .mock1,
+            toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
+            substancesInIngestionsButNotChart: ["2C-B", "DMT"],
+            isEyeOpen: true
+        )
     }
 }

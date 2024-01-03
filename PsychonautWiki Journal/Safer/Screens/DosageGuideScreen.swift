@@ -110,10 +110,8 @@ struct DosageGuideScreen: View {
     }
 }
 
-struct DosageGuideScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            DosageGuideScreen()
-        }
+#Preview {
+    NavigationStack {
+        DosageGuideScreen()
     }
 }

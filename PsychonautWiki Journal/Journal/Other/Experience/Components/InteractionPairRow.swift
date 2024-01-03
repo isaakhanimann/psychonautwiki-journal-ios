@@ -36,14 +36,12 @@ struct InteractionPairRow: View {
     }
 }
 
-struct InteractionPairRow_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            InteractionPairRow(
-                aName: "Amphetamine with a long name",
-                bName: "Tramadol",
-                interactionType: .dangerous
-            )
-        }
+#Preview {
+    List {
+        InteractionPairRow(
+            aName: "Amphetamine with a long name",
+            bName: "Tramadol",
+            interactionType: .dangerous
+        )
     }
 }

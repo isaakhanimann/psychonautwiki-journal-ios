@@ -87,76 +87,74 @@ struct SuggestionBox: View {
     }
 }
 
-struct SuggestionBox_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            LazyVStack {
-                SuggestionBox(
-                    suggestion: Suggestion(
-                        substanceName: "MDMA",
-                        substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
-                        units: "mg",
-                        route: .insufflated,
-                        substanceColor: .pink,
-                        dosesAndUnit: [
-                            DoseAndUnit(
-                                dose: 20,
-                                units: "mg",
-                                isEstimate: true
-                            ),
-                            DoseAndUnit(
-                                dose: nil,
-                                units: "mg",
-                                isEstimate: false
-                            ),
-                            DoseAndUnit(
-                                dose: 30,
-                                units: "mg",
-                                isEstimate: false
-                            ),
-                        ],
-                        customUnits: [],
-                        lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                    ),
-                    dismiss: {},
-                    isEyeOpen: true
-                )
-                SuggestionBox(
-                    suggestion: Suggestion(
-                        substanceName: "Cannabis",
-                        substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
-                        units: "mg",
-                        route: .smoked,
-                        substanceColor: .green,
-                        dosesAndUnit: [
-                            DoseAndUnit(
-                                dose: 3,
-                                units: "mg",
-                                isEstimate: false
-                            ),
-                            DoseAndUnit(
-                                dose: 6,
-                                units: "mg",
-                                isEstimate: true
-                            ),
-                            DoseAndUnit(
-                                dose: nil,
-                                units: "mg",
-                                isEstimate: false
-                            ),
-                            DoseAndUnit(
-                                dose: 2.5,
-                                units: "mg",
-                                isEstimate: false
-                            ),
-                        ],
-                        customUnits: [],
-                        lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)
-                    ),
-                    dismiss: {},
-                    isEyeOpen: true
-                )
-            }.padding(.horizontal)
-        }
+#Preview {
+    NavigationStack {
+        LazyVStack {
+            SuggestionBox(
+                suggestion: Suggestion(
+                    substanceName: "MDMA",
+                    substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
+                    units: "mg",
+                    route: .insufflated,
+                    substanceColor: .pink,
+                    dosesAndUnit: [
+                        DoseAndUnit(
+                            dose: 20,
+                            units: "mg",
+                            isEstimate: true
+                        ),
+                        DoseAndUnit(
+                            dose: nil,
+                            units: "mg",
+                            isEstimate: false
+                        ),
+                        DoseAndUnit(
+                            dose: 30,
+                            units: "mg",
+                            isEstimate: false
+                        ),
+                    ],
+                    customUnits: [],
+                    lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+                ),
+                dismiss: {},
+                isEyeOpen: true
+            )
+            SuggestionBox(
+                suggestion: Suggestion(
+                    substanceName: "Cannabis",
+                    substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
+                    units: "mg",
+                    route: .smoked,
+                    substanceColor: .green,
+                    dosesAndUnit: [
+                        DoseAndUnit(
+                            dose: 3,
+                            units: "mg",
+                            isEstimate: false
+                        ),
+                        DoseAndUnit(
+                            dose: 6,
+                            units: "mg",
+                            isEstimate: true
+                        ),
+                        DoseAndUnit(
+                            dose: nil,
+                            units: "mg",
+                            isEstimate: false
+                        ),
+                        DoseAndUnit(
+                            dose: 2.5,
+                            units: "mg",
+                            isEstimate: false
+                        ),
+                    ],
+                    customUnits: [],
+                    lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)
+                ),
+                dismiss: {},
+                isEyeOpen: true
+            )
+        }.padding(.horizontal)
     }
 }

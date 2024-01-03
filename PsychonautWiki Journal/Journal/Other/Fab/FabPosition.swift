@@ -28,15 +28,13 @@ struct FabPosition<Screen: View, Button: View>: View {
     }
 }
 
-struct AddIngestionFab_Previews: PreviewProvider {
-    static var previews: some View {
-        FabPosition {
-            Button {} label: {
-                Label("New Ingestion", systemImage: "plus")
-                    .labelStyle(FabLabelStyle())
-            }
-        } screen: {
-            Color.gray.frame(maxWidth: .infinity, maxHeight: .infinity)
+#Preview {
+    FabPosition {
+        Button {} label: {
+            Label("New Ingestion", systemImage: "plus")
+                .labelStyle(FabLabelStyle())
         }
+    } screen: {
+        Color.gray.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
