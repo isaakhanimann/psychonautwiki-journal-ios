@@ -28,7 +28,7 @@ enum DoseRangeType {
         case .common:
             return .yellow
         case .strong:
-            return  .orange
+            return .orange
         case .heavy:
             return .red
         case .none:

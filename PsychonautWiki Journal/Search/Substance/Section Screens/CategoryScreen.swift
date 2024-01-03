@@ -20,7 +20,6 @@ struct CategoryScreen: View {
     let substance: Substance
     @State private var categories: [Category] = []
 
-
     var body: some View {
         List {
             Section {
@@ -36,7 +35,6 @@ struct CategoryScreen: View {
                             }
                         }
                     }
-
                 }
             }
         }

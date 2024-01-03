@@ -19,7 +19,6 @@ import Foundation
 import SwiftUI
 
 struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
-
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange
@@ -42,14 +41,14 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        var top = lineWidth/2
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        var top = lineWidth / 2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * heightBetween
+            top = (1 - verticalWeight) * heightBetween
         }
         let bottom = height - paddingTop
         context.drawDot(x: startX, bottomY: bottom, color: color)
@@ -93,7 +92,8 @@ extension RoaDuration {
         if let fullTotal = total?.maybeFullDurationRange,
            let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
-           let fullPeak = peak?.maybeFullDurationRange {
+           let fullPeak = peak?.maybeFullDurationRange
+        {
             return OnsetComeupPeakTotalTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,

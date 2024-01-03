@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditNotesScreen: View {
-
     let experience: Experience
 
     @FocusState private var isTextFieldFocused: Bool
@@ -29,7 +28,7 @@ struct EditNotesScreen: View {
             notes: $notes,
             isTextFieldFocused: $isTextFieldFocused,
             save: save,
-            dismiss: {dismiss()}
+            dismiss: { dismiss() }
         )
         .onAppear {
             notes = experience.textUnwrapped
@@ -47,7 +46,6 @@ struct EditNotesScreen: View {
 }
 
 struct EditNotesContent: View {
-
     @Binding var notes: String
     let isTextFieldFocused: FocusState<Bool>.Binding
     let save: () -> Void

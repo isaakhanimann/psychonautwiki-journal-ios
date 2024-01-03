@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct GoThroughAllInteractionsScreen: View {
-
     let substancesToCheck: [Substance]
 
     var body: some View {

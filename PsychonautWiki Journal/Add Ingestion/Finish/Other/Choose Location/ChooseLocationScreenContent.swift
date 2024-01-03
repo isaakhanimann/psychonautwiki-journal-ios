@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import CoreLocation
 import MapKit
+import SwiftUI
 
 struct ChooseLocationScreenContent: View {
-
     @Binding var selectedLocation: Location?
     @Binding var selectedLocationName: String
     @Binding var searchText: String
@@ -158,7 +157,6 @@ struct ChooseLocationScreenContent: View {
                         Text("Enable location access in settings to add locations to your experiences automatically.")
                     }
                 }
-
             }
         }
     }
@@ -184,11 +182,11 @@ struct ChooseLocationScreenContent_Previews: PreviewProvider {
             searchSuggestedLocations: [
                 Location(name: "Street Name 1", longitude: 2, latitude: 2),
                 Location(name: "Street Name 2", longitude: 2, latitude: 2),
-                Location(name: "Street Name 3", longitude: 2, latitude: 2)
+                Location(name: "Street Name 3", longitude: 2, latitude: 2),
             ],
             experienceLocations: [
                 Location(name: "Home", longitude: 2, latitude: 2),
-                Location(name: "Festival", longitude: 2, latitude: 2)
+                Location(name: "Festival", longitude: 2, latitude: 2),
             ]
         )
     }

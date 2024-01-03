@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import XCTest
 @testable import Journal
+import XCTest
 
 class RegexTests: XCTestCase {
-
     func testDOx() throws {
         let regex = try "DOx".getRegexWithxAsWildcard()
         XCTAssertTrue(regex.isMatch(with: "DOB"))

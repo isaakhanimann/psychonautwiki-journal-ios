@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -32,8 +32,8 @@ struct CompanionCodable: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.substanceName = try values.decode(String.self, forKey: .substanceName)
-        self.color = try values.decode(SubstanceColor.self, forKey: .color)
+        substanceName = try values.decode(String.self, forKey: .substanceName)
+        color = try values.decode(SubstanceColor.self, forKey: .color)
     }
 
     func encode(to encoder: Encoder) throws {

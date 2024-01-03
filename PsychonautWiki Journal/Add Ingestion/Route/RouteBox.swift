@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct RouteBox: View {
-
     let route: AdministrationRoute
 
     var body: some View {
@@ -28,7 +27,6 @@ struct RouteBox: View {
                 Text(route.clarification)
                     .font(.footnote)
                     .multilineTextAlignment(.center)
-
             }
             .frame(
                 minWidth: 0,

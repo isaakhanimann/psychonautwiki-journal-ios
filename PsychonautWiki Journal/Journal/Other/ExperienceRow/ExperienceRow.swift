@@ -14,12 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Combine
-
+import SwiftUI
 
 struct ExperienceRow: View {
-
     @ObservedObject var experience: Experience
     let isTimeRelative: Bool
 
@@ -57,16 +55,18 @@ struct ExperienceRow: View {
                             Task {
                                 await ActivityManager.shared.stopActivity(
                                     substanceGroups: getSubstanceIngestionGroups(ingestions: experience.ingestionsSorted),
-                                    everythingForEachRating: experience.ratingsWithTimeSorted.map({ shulgin in
+                                    everythingForEachRating: experience.ratingsWithTimeSorted.map { shulgin in
                                         EverythingForOneRating(
                                             time: shulgin.timeUnwrapped,
-                                            option: shulgin.optionUnwrapped)
-                                    }),
-                                    everythingForEachTimedNote: experience.timedNotesSorted.filter({$0.isPartOfTimeline}).map({ timedNote in
+                                            option: shulgin.optionUnwrapped
+                                        )
+                                    },
+                                    everythingForEachTimedNote: experience.timedNotesSorted.filter { $0.isPartOfTimeline }.map { timedNote in
                                         EverythingForOneTimedNote(
                                             time: timedNote.timeUnwrapped,
-                                            color: timedNote.color)
-                                    }),
+                                            color: timedNote.color
+                                        )
+                                    },
                                     areRedosesDrawnIndividually: false
                                 )
                             }
@@ -105,7 +105,6 @@ struct ExperienceRowObservedLocation: View {
 }
 
 struct ExperienceRowContent: View {
-
     let ingestionColors: [Color]
     let title: String
     let distinctSubstanceNames: [String]

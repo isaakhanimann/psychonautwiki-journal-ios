@@ -37,7 +37,7 @@ func getColor(for substanceName: String) -> SubstanceColor {
 }
 
 func getDateFromMillis(millis: UInt64) -> Date {
-    let secondsSince1970: TimeInterval = Double(millis)/1000
+    let secondsSince1970: TimeInterval = Double(millis) / 1000
     return Date(timeIntervalSince1970: secondsSince1970)
 }
 

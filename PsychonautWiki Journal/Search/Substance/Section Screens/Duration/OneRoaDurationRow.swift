@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct OneRoaDurationRow: View {
-
     let duration: RoaDuration
     let color: SubstanceColor
 

@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ChooseOtherRouteScreen: View {
-
     let arguments: ChooseOtherRouteScreenArguments
     let dismiss: () -> Void
 
@@ -33,12 +32,12 @@ struct ChooseOtherRouteScreen: View {
 
     var screen: some View {
         VStack(alignment: .leading) {
-            let numRows = Int(ceil(Double(arguments.otherRoutes.count)/2.0))
-            ForEach(0..<numRows, id: \.self) { index in
+            let numRows = Int(ceil(Double(arguments.otherRoutes.count) / 2.0))
+            ForEach(0 ..< numRows, id: \.self) { index in
                 HStack {
-                    let route1 = arguments.otherRoutes[index*2]
+                    let route1 = arguments.otherRoutes[index * 2]
                     getRouteBoxWithNavigation(route: route1)
-                    let secondIndex = index*2+1
+                    let secondIndex = index * 2 + 1
                     if secondIndex < arguments.otherRoutes.count {
                         let route2 = arguments.otherRoutes[secondIndex]
                         getRouteBoxWithNavigation(route: route2)
@@ -61,5 +60,6 @@ struct ChooseOtherRouteScreen: View {
     ChooseOtherRouteScreen(
         arguments: .init(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                          otherRoutes: [.inhaled, .intravenous, .intramuscular, .smoked]),
-        dismiss: {})
+        dismiss: {}
+    )
 }

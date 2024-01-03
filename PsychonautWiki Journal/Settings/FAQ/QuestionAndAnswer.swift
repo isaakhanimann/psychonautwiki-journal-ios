@@ -45,6 +45,6 @@ struct QuestionAndAnswer: Identifiable, Hashable {
         QuestionAndAnswer(
             question: "Why does the timeline not cumulate the curves of different ingestions together?",
             answer: "One can not add two curves together because one ingestion might build up tolerance, influencing the curve of the other ingestion. The curve can only be drawn based on data that is available through PsychonautWiki."
-        )
+        ),
     ]
 }

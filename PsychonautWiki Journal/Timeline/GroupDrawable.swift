@@ -17,13 +17,12 @@
 import SwiftUI
 
 struct GroupDrawable {
-
     private let color: SubstanceColor
 
     private let timelineDrawables: [TimelineDrawable]
 
     var endRelativeToStartInSeconds: TimeInterval {
-        timelineDrawables.map({$0.endOfLineRelativeToStartInSeconds}).max() ?? 0
+        timelineDrawables.map { $0.endOfLineRelativeToStartInSeconds }.max() ?? 0
     }
 
     init(
@@ -38,7 +37,8 @@ struct GroupDrawable {
             timelineDrawables = weightedLines.map { weightedLine in
                 NoTimeline(
                     onsetDelayInHours: weightedLine.onsetDelayInHours,
-                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                )
             }
             return
         }
@@ -47,12 +47,13 @@ struct GroupDrawable {
         } else {
             let fulls = weightedLines.compactMap { weightedLine in
                 roaDuration.toFullTimeline(
-                    peakAndOffsetWeight:weightedLine.horizontalWeight,
-                    verticalWeight:weightedLine.height,
-                    onsetDelayInHours:weightedLine.onsetDelayInHours,
-                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                    peakAndOffsetWeight: weightedLine.horizontalWeight,
+                    verticalWeight: weightedLine.height,
+                    onsetDelayInHours: weightedLine.onsetDelayInHours,
+                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                )
             }
-            if !fulls.isEmpty && areRedosesDrawnIndividually {
+            if !fulls.isEmpty, areRedosesDrawnIndividually {
                 timelineDrawables = fulls
             } else {
                 let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
@@ -132,7 +133,8 @@ struct GroupDrawable {
                                             timelineDrawables = weightedLines.map { weightedLine in
                                                 NoTimeline(
                                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime))
+                                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+                                                )
                                             }
                                         }
                                     }
@@ -153,14 +155,16 @@ struct GroupDrawable {
         context: GraphicsContext,
         height: Double,
         pixelsPerSec: Double,
-        lineWidth: Double) {
-            for drawable in timelineDrawables {
-                drawable.draw(
-                    context: context,
-                    height: height,
-                    pixelsPerSec: pixelsPerSec,
-                    color: color.swiftUIColor,
-                    lineWidth: lineWidth)
-            }
+        lineWidth: Double
+    ) {
+        for drawable in timelineDrawables {
+            drawable.draw(
+                context: context,
+                height: height,
+                pixelsPerSec: pixelsPerSec,
+                color: color.swiftUIColor,
+                lineWidth: lineWidth
+            )
         }
+    }
 }

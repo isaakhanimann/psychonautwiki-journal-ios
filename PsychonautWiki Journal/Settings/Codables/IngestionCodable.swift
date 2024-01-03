@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -67,34 +67,34 @@ struct IngestionCodable: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.substanceName = try values.decode(String.self, forKey: .substanceName)
+        substanceName = try values.decode(String.self, forKey: .substanceName)
         let timeMillis = try values.decode(UInt64.self, forKey: .time)
-        self.time = getDateFromMillis(millis: timeMillis)
+        time = getDateFromMillis(millis: timeMillis)
         if let creationMillis = try values.decodeIfPresent(UInt64.self, forKey: .creationDate) {
-            self.creationDate = getDateFromMillis(millis: creationMillis)
+            creationDate = getDateFromMillis(millis: creationMillis)
         } else {
-            self.creationDate = nil
+            creationDate = nil
         }
         let routeString = try values.decode(String.self, forKey: .administrationRoute)
         if let route = AdministrationRoute(rawValue: routeString.lowercased()) {
-            self.administrationRoute = route
+            administrationRoute = route
         } else {
-            throw DecodingError.dataCorruptedError(in: try decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
+            throw try DecodingError.dataCorruptedError(in: decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
         }
-        self.dose = try values.decodeIfPresent(Double.self, forKey: .dose)
-        self.isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
-        self.units = try values.decode(String.self, forKey: .units)
-        self.notes = try values.decode(String.self, forKey: .notes)
+        dose = try values.decodeIfPresent(Double.self, forKey: .dose)
+        isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
+        units = try values.decode(String.self, forKey: .units)
+        notes = try values.decode(String.self, forKey: .notes)
         if let fullnessString = try values.decodeIfPresent(String.self, forKey: .stomachFullness) {
             if let fullness = StomachFullness(rawValue: fullnessString.lowercased()) {
-                self.stomachFullness = fullness
+                stomachFullness = fullness
             } else {
-                self.stomachFullness = nil
+                stomachFullness = nil
             }
         } else {
-            self.stomachFullness = nil
+            stomachFullness = nil
         }
-        self.consumerName = try values.decodeIfPresent(String.self, forKey: .consumerName)
+        consumerName = try values.decodeIfPresent(String.self, forKey: .consumerName)
     }
 
     func encode(to encoder: Encoder) throws {

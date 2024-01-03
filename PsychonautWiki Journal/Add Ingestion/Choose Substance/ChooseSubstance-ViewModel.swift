@@ -14,16 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 extension ChooseSubstanceScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-        
         @Published var searchText = ""
         @Published var isShowingOpenEyeToast = false
-        @Published var filteredSuggestions: [Suggestion] =  []
+        @Published var filteredSuggestions: [Suggestion] = []
         @Published var filteredSubstances: [Substance] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
         @Published var customSubstanceModels: [CustomSubstanceModel]
@@ -34,7 +33,7 @@ extension ChooseSubstanceScreen {
 
         private static func getSortedIngestions() -> [Ingestion] {
             let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
             ingestionFetchRequest.fetchLimit = 300
             return (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
         }
@@ -46,8 +45,8 @@ extension ChooseSubstanceScreen {
         }
 
         override init() {
-            self.isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
-            self.allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: Self.getCustomUnits()).suggestions
+            isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
+            allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: Self.getCustomUnits()).suggestions
             let request = CustomSubstance.fetchRequest()
             request.sortDescriptors = []
             fetchController = NSFetchedResultsController(
@@ -58,7 +57,7 @@ extension ChooseSubstanceScreen {
             )
             try? fetchController?.performFetch()
             let customSubstances = fetchController?.fetchedObjects ?? []
-            self.customSubstanceModels = customSubstances.map { cust in
+            customSubstanceModels = customSubstances.map { cust in
                 CustomSubstanceModel(
                     name: cust.nameUnwrapped,
                     description: cust.explanationUnwrapped,
@@ -115,10 +114,10 @@ extension ChooseSubstanceScreen {
             isShowingOpenEyeToast = true
         }
 
-        nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        public nonisolated func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             Task {
                 await MainActor.run(body: {
-                    guard let custs = controller.fetchedObjects as? [CustomSubstance] else {return}
+                    guard let custs = controller.fetchedObjects as? [CustomSubstance] else { return }
                     self.customSubstanceModels = custs.map { cust in
                         CustomSubstanceModel(
                             name: cust.nameUnwrapped,
@@ -131,4 +130,3 @@ extension ChooseSubstanceScreen {
         }
     }
 }
-

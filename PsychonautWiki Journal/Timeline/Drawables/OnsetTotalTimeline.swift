@@ -18,7 +18,6 @@ import Foundation
 import SwiftUI
 
 struct OnsetTotalTimeline: TimelineDrawable {
-
     let onset: FullDurationRange
     let total: FullDurationRange
     let onsetDelayInHours: Double
@@ -38,16 +37,16 @@ struct OnsetTotalTimeline: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        var top = lineWidth/2
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        var top = lineWidth / 2
         if verticalWeigth < 1 {
-            top = ((1-verticalWeigth)*heightBetween) + (lineWidth/2)
+            top = ((1 - verticalWeigth) * heightBetween) + (lineWidth / 2)
         }
-        let bottom = height - lineWidth/2
+        let bottom = height - lineWidth / 2
         context.drawDot(x: startX, bottomY: bottom, color: color)
         let onsetWeight = 0.5
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetWeight)) * pixelsPerSec
@@ -56,7 +55,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
         path0.addLine(to: CGPoint(x: onsetEndX, y: bottom))
         context.stroke(path0, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
-        let topPointX = onsetEndX + (total.interpolateLinearly(at: totalWeight) - onset.interpolateLinearly(at: onsetWeight))/2 * pixelsPerSec
+        let topPointX = onsetEndX + (total.interpolateLinearly(at: totalWeight) - onset.interpolateLinearly(at: onsetWeight)) / 2 * pixelsPerSec
         var path1 = Path()
         path1.move(to: CGPoint(x: onsetEndX, y: bottom))
         path1.endSmoothLineTo(
@@ -65,7 +64,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
             endX: topPointX,
             endY: top
         )
-        let totalEndX = startX + onsetDelayInSeconds*pixelsPerSec + totalX
+        let totalEndX = startX + onsetDelayInSeconds * pixelsPerSec + totalX
         path1.startSmoothLineTo(
             smoothnessBetween0And1: percentSmoothness,
             startX: topPointX,

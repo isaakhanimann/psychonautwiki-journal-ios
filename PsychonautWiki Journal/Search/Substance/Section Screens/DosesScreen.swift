@@ -17,9 +17,8 @@
 import SwiftUI
 
 struct DosesScreen: View {
-
     let substance: Substance
-    
+
     var body: some View {
         List {
             if let remark = substance.dosageRemark {
@@ -37,7 +36,7 @@ struct DosesScreen: View {
             }
             if substance.name == "MDMA" {
                 Section("Oral Max Dose Calculator") {
-                    MDMAMaxDoseCalculator(onChangeOfMax: {_ in })
+                    MDMAMaxDoseCalculator(onChangeOfMax: { _ in })
                 }
                 if #available(iOS 16, *) {
                     MDMAOptimalDoseSection()
@@ -45,12 +44,13 @@ struct DosesScreen: View {
                 MDMAPillsSection()
             }
             if let units = substance.roas.first?.dose?.units,
-               let clarification = DosesScreen.getUnitClarification(for: units) {
+               let clarification = DosesScreen.getUnitClarification(for: units)
+            {
                 Section {
                     Text(clarification)
                 }
             }
-            if substance.roas.contains(where: {$0.name == .smoked}) && substance.categories.contains("opioid") {
+            if substance.roas.contains(where: { $0.name == .smoked }) && substance.categories.contains("opioid") {
                 ChasingTheDragonSection()
             }
             Section("Disclaimer") {
@@ -60,7 +60,6 @@ struct DosesScreen: View {
         .navigationTitle("\(substance.name) Dosage")
         .dismissWhenTabTapped()
     }
-
 
     static func getUnitClarification(for units: String) -> String? {
         if units == "µg" {

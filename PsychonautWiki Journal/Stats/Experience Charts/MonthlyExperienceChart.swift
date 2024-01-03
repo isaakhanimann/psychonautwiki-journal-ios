@@ -19,7 +19,6 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct MonthlyExperienceChart: View {
-
     let experienceData: ExperienceData
     let isShowingMonthlyAverageLine: Bool
     let colorMapping: (String) -> Color
@@ -27,7 +26,7 @@ struct MonthlyExperienceChart: View {
     var chartHeight: CGFloat = 240
     @State private var selectedElement: SubstanceExperienceCountForMonth? = nil
     @Environment(\.layoutDirection) var layoutDirection
-    
+
     func findElement(
         location: CGPoint,
         proxy: ChartProxy,
@@ -128,7 +127,8 @@ struct MonthlyExperienceChart: View {
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
                     if let selectedElement = selectedElement,
-                       let dateInterval = Calendar.current.dateInterval(of: .month, for: selectedElement.month) {
+                       let dateInterval = Calendar.current.dateInterval(of: .month, for: selectedElement.month)
+                    {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

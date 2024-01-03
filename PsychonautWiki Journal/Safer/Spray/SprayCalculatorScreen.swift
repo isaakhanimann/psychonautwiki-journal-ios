@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SprayCalculatorScreen: View {
-
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -45,7 +44,6 @@ struct SprayCalculatorScreen: View {
 }
 
 struct SprayCalculatorScreenContent: View {
-
     @Binding var units: WeightUnit
     @Binding var weightPerSpray: String
     @Binding var liquidAmountInMl: String
@@ -129,13 +127,13 @@ struct SprayCalculatorScreenContent: View {
             }
             Section {
                 Text("""
-Oral or nasal sprays can be used for dosing substances volumetrically.
-Note that substances are the most stable in their salt form and degrade more quickly if dissolved in liquid, which might be relevant to you if you plan on storing it for months or years.
-Don't use tap water because it can become stale and the chlorine inside it breaks down some substances (e.g. LSD). Use distilled water instead.
-Look up the solubility of the substance you want to dissolve in water/ethanol to make sure it will dissolve fully. Most if not all common substances in their salt form are more than soluble enough.
-To prevent degradation by temperature use ethanol or a water/ethanol mix as the solvent such that it can be put in the freezer without freezing. However don't use ethanol for nasal sprays as this can damage the nasal mucosa.
-Powders for nasal delivery have higher bioavailiability than liquids because of increased stability and residence time on nasal mucosa.
-""")
+                Oral or nasal sprays can be used for dosing substances volumetrically.
+                Note that substances are the most stable in their salt form and degrade more quickly if dissolved in liquid, which might be relevant to you if you plan on storing it for months or years.
+                Don't use tap water because it can become stale and the chlorine inside it breaks down some substances (e.g. LSD). Use distilled water instead.
+                Look up the solubility of the substance you want to dissolve in water/ethanol to make sure it will dissolve fully. Most if not all common substances in their salt form are more than soluble enough.
+                To prevent degradation by temperature use ethanol or a water/ethanol mix as the solvent such that it can be put in the freezer without freezing. However don't use ethanol for nasal sprays as this can damage the nasal mucosa.
+                Powders for nasal delivery have higher bioavailiability than liquids because of increased stability and residence time on nasal mucosa.
+                """)
             }
         }
         .optionalScrollDismissesKeyboard()
@@ -151,11 +149,10 @@ Powders for nasal delivery have higher bioavailiability than liquids because of 
 }
 
 struct SprayCalculatorScreen_Previews: PreviewProvider {
-
     static var previews: some View {
         let sprays = [
             SprayModel(name: "Small Spray", numSprays: 32, contentInMl: 5, spray: nil),
-            SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil)
+            SprayModel(name: "Big Spray", numSprays: 50, contentInMl: 10, spray: nil),
         ]
         NavigationStack {
             SprayCalculatorScreenContent(
@@ -167,7 +164,7 @@ struct SprayCalculatorScreen_Previews: PreviewProvider {
                 sprayModels: sprays,
                 selectedSpray: .constant(sprays.first),
                 addSpray: {},
-                deleteSprays: {_ in },
+                deleteSprays: { _ in },
                 doseAdjustedToPurity: 211
             ).headerProminence(.increased)
         }

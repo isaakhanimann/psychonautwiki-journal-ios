@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct WatchFaceView: View {
-
     let watchFaceModel: WatchFaceModel
 
     init(ingestions: [Ingestion]) {
-        self.watchFaceModel = WatchFaceModel(ingestions: ingestions)
+        watchFaceModel = WatchFaceModel(ingestions: ingestions)
     }
 
     var body: some View {
@@ -16,7 +15,7 @@ struct WatchFaceView: View {
 
             ZStack {
                 ForEach(watchFaceModel.layers) { layer in
-                    let halfLineWidth = lineWidth/2
+                    let halfLineWidth = lineWidth / 2
                     let insetPerSide = halfLineWidth + CGFloat(layer.index) * lineWidth
                     OneLayerView(
                         layer: layer,

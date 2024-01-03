@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct EditLocationLinkAndMap: View {
-
     @ObservedObject var experienceLocation: ExperienceLocation
 
     var body: some View {
@@ -42,7 +41,6 @@ struct EditLocationLinkAndMap: View {
         mapItem.name = name
         mapItem.openInMaps()
     }
-
 }
 
 struct MapWithPinView: View {
@@ -62,4 +60,3 @@ struct MapWithPinView: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
-

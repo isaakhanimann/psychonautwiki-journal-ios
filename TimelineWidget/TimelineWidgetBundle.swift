@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 @main
 struct TimelineWidgetBundle: WidgetBundle {

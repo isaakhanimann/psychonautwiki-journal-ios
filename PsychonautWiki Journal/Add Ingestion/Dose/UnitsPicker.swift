@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct UnitsPicker: View {
-
     @Binding var units: String?
     @State private var pickerValue = UnitPickerOptions.mg
     @State private var textValue = ""

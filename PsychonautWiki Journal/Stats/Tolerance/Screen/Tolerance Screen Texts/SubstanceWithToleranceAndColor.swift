@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -20,6 +20,7 @@ struct SubstanceWithToleranceAndColor: Identifiable {
     var id: String {
         substanceName
     }
+
     let substanceName: String
     let full: String?
     let half: String?

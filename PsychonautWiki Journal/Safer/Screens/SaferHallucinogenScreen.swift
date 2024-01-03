@@ -32,27 +32,27 @@ struct SaferHallucinogenScreen: View {
             }
             Section("Set (State of Mind)") {
                 Text(
-"""
-The user's set or state of mind in plays a major role in determining the outcome of a trip. Hallucinogens amplify one's current state of mind, mood and outlook: a positive mindset will likely become more positive and a negative one will become even more negative. As a result, hallucinogens should generally be avoided during acutely stressful or negative periods of life. Users should be fully aware of the ways in which hallucinogens, particularly psychedelics, are able to force one to face their internal problems that they may not be psychologically prepared to handle at that time.
-Those with preexisting mental conditions (especially individuals with psychotic illnesses like schizophrenia) should avoid hallucinogens due to the way they can strongly amplify one's underlying mental and emotional state as well as promote delusions and hallucinations. Those who wish to take hallucinogens with such conditions should seek the advice of a qualified medical practitioner.
-A common piece of advice while tripping is to "let go" and allow the effects of the substance to take charge. One should take the metaphorical passenger seat and forgo trying to control or suppress any part of the experience. It is extremely important that the user simply relaxes and take things as they come, as any resistance will only serve to amplify what is trying to be avoided.
-Additionally, the user must understand that the experience of tripping is often ungraspable, meaning that one should accept being unable to understand or express the full scope of what is happening during the experience. The user should embrace the fact that their thought processes, although potentially more lucid in some ways, will be unavoidably impaired along with fine motor control, conversational skills, and situational awareness. The user should be sure to frequently remind themselves that these effects are normal and, most importantly, temporary.
-""")
+                    """
+                    The user's set or state of mind in plays a major role in determining the outcome of a trip. Hallucinogens amplify one's current state of mind, mood and outlook: a positive mindset will likely become more positive and a negative one will become even more negative. As a result, hallucinogens should generally be avoided during acutely stressful or negative periods of life. Users should be fully aware of the ways in which hallucinogens, particularly psychedelics, are able to force one to face their internal problems that they may not be psychologically prepared to handle at that time.
+                    Those with preexisting mental conditions (especially individuals with psychotic illnesses like schizophrenia) should avoid hallucinogens due to the way they can strongly amplify one's underlying mental and emotional state as well as promote delusions and hallucinations. Those who wish to take hallucinogens with such conditions should seek the advice of a qualified medical practitioner.
+                    A common piece of advice while tripping is to "let go" and allow the effects of the substance to take charge. One should take the metaphorical passenger seat and forgo trying to control or suppress any part of the experience. It is extremely important that the user simply relaxes and take things as they come, as any resistance will only serve to amplify what is trying to be avoided.
+                    Additionally, the user must understand that the experience of tripping is often ungraspable, meaning that one should accept being unable to understand or express the full scope of what is happening during the experience. The user should embrace the fact that their thought processes, although potentially more lucid in some ways, will be unavoidably impaired along with fine motor control, conversational skills, and situational awareness. The user should be sure to frequently remind themselves that these effects are normal and, most importantly, temporary.
+                    """)
             }
             Section("Bodily State") {
                 Text(
-"""
-The user's current bodily condition is just as important as one's mood and mindset when going into a trip. If one feels tired, sick or injured, these sensations will manifest as amplified versions of the same conditions which, when combined with possible body load, may easily detract from or ruin the experience.
-Instead of tripping while stressed, tired, sick or injured, one should wait for a more suitable opportunity. This will drastically lower the chances of having a negative or unfulfilling experience.
-""")
+                    """
+                    The user's current bodily condition is just as important as one's mood and mindset when going into a trip. If one feels tired, sick or injured, these sensations will manifest as amplified versions of the same conditions which, when combined with possible body load, may easily detract from or ruin the experience.
+                    Instead of tripping while stressed, tired, sick or injured, one should wait for a more suitable opportunity. This will drastically lower the chances of having a negative or unfulfilling experience.
+                    """)
             }
             Section("Trip Sitters") {
                 Text(
-"""
-When using hallucinogens, a trip sitter is strongly recommended to be present, particularly if one is inexperienced with the substance. It is the trip sitter's responsibility to assist the individual or group by maintaining a calm and grounded frame of mind. This can be accomplished by simply watching over the trippers and calmly reassuring them if they experience any anxiety or stress, while also preventing them from coming to any harm. There is an obvious correlation between the name "trip sitter" and "baby sitter": this is because trip sitting often feels like babysitting and it is a responsibility that must be taken every bit as seriously.
-A good trip sitter must fulfill a number of requirements. In addition to being a generally responsible adult, they should ideally be sober and able to relate to the group members' situation from either personal experiences or researched knowledge. Trip sitters should understand that when an individual is tripping, they may not be able to communicate or interact as they usually do. Also, their balance and spatial judgment may be impaired so assistance in performing tasks such as staying hydrated or navigating through an area can greatly reduce anxiety and confusion. The trip sitter can participate in the conversation, but should also remember to give the trippers space to explore the experience without too much external influence.
-Once the user becomes familiar with a substance, it becomes a personal choice as to whether or not they feel comfortable enough to trip without a sitter. It is also advised to use trip sitters when taking high doses or a dose one has never taken before. It should be remembered that having friends around while tripping is the best way to avoid potential psychological, medical, or legal consequences.
-""")
+                    """
+                    When using hallucinogens, a trip sitter is strongly recommended to be present, particularly if one is inexperienced with the substance. It is the trip sitter's responsibility to assist the individual or group by maintaining a calm and grounded frame of mind. This can be accomplished by simply watching over the trippers and calmly reassuring them if they experience any anxiety or stress, while also preventing them from coming to any harm. There is an obvious correlation between the name "trip sitter" and "baby sitter": this is because trip sitting often feels like babysitting and it is a responsibility that must be taken every bit as seriously.
+                    A good trip sitter must fulfill a number of requirements. In addition to being a generally responsible adult, they should ideally be sober and able to relate to the group members' situation from either personal experiences or researched knowledge. Trip sitters should understand that when an individual is tripping, they may not be able to communicate or interact as they usually do. Also, their balance and spatial judgment may be impaired so assistance in performing tasks such as staying hydrated or navigating through an area can greatly reduce anxiety and confusion. The trip sitter can participate in the conversation, but should also remember to give the trippers space to explore the experience without too much external influence.
+                    Once the user becomes familiar with a substance, it becomes a personal choice as to whether or not they feel comfortable enough to trip without a sitter. It is also advised to use trip sitters when taking high doses or a dose one has never taken before. It should be remembered that having friends around while tripping is the best way to avoid potential psychological, medical, or legal consequences.
+                    """)
             }
             Section("Anchors") {
                 Text("In the context of hallucinogen use, an anchor is an activity or physical object which keeps the user grounded during the heavy distortion of a person's sense of time, space, memory, and sense of self. At higher dosages, this can result in extreme disorientation and confusion. Anchors are often used to counteract this and maintain one's concept of the current situation as it is within reality.")
@@ -65,11 +65,11 @@ Once the user becomes familiar with a substance, it becomes a personal choice as
             }
             Section("Aborting Trips") {
                 Text(
-"""
-Hallucinogens have the potential to become overwhelming and push the user into a paranoid or dreadful mood, particularly if they are inexperienced or in an inappropriate set and setting.
-If one decides to terminate the trip, benzodiazepines and other sedatives such as some antipsychotics can be considered analogous to an "eject button" of a downhill-headed or extensively long trip. These substances tend to be very effective tools in preventing panic attacks, paranoia, and possible traumatic experiences.
-However, experienced users generally advise trying to wait out difficult parts of a trip if possible. Challenging moments are often temporary and can turn out to be catalysts for the greatest learning experiences.
-""")
+                    """
+                    Hallucinogens have the potential to become overwhelming and push the user into a paranoid or dreadful mood, particularly if they are inexperienced or in an inappropriate set and setting.
+                    If one decides to terminate the trip, benzodiazepines and other sedatives such as some antipsychotics can be considered analogous to an "eject button" of a downhill-headed or extensively long trip. These substances tend to be very effective tools in preventing panic attacks, paranoia, and possible traumatic experiences.
+                    However, experienced users generally advise trying to wait out difficult parts of a trip if possible. Challenging moments are often temporary and can turn out to be catalysts for the greatest learning experiences.
+                    """)
             }
         }
         .navigationTitle("Safer Hallucinogens")

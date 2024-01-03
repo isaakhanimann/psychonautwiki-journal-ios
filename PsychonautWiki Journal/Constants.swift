@@ -18,19 +18,18 @@ import Foundation
 
 let OpenJournalURL = "open-journal"
 
-struct TimelineDisclaimers {
+enum TimelineDisclaimers {
     static let heavyDose = "Heavy doses can have longer durations."
     static let fullStomach = "A full stomach may delay the onset of oral doses by ~3 hours."
     static let capsule = "Hard (two-piece) capsules may need up to one hour to dissolve fully."
 }
-
 
 let namesOfLegalSubstances = [
     "Caffeine",
     "Myristicin",
     "Choline Bitartrate",
     "Citicoline",
-    "Tyrosine"
+    "Tyrosine",
 ]
 
 let previewDeviceNames = ["iPhone 14", "iPhone 14 Pro Max", "iPhone 13 mini"]

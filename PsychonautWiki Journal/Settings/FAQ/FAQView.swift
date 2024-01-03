@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct FAQView: View {
-
     var body: some View {
         List(QuestionAndAnswer.list) { qAndA in
             DisclosureGroup(qAndA.question) {

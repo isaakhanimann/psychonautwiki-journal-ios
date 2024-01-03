@@ -19,7 +19,6 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct ExperienceOverviewChart: View {
-
     let experienceData: ExperienceData
 
     var body: some View {
@@ -39,7 +38,6 @@ struct ExperienceOverviewChart: View {
 
 @available(iOS 16, *)
 struct ExperienceOverview: View {
-
     let experienceData: ExperienceData
 
     var body: some View {

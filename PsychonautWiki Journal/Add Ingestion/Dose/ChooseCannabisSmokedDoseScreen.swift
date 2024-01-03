@@ -17,19 +17,19 @@
 import SwiftUI
 
 struct ChooseCannabisSmokedDoseScreen: View {
-
     let dismiss: () -> Void
     let cannabis = SubstanceRepo.shared.getSubstance(name: "Cannabis")!
     var smokedDose: RoaDose {
         cannabis.getDose(for: .smoked)!
     }
+
     @State private var cannabisAmountInMg = 300.0
     @State private var thcContent = 14.0
     @State private var isEstimate = true
     @State private var pickerOption = PickerOption.joint
 
     private var ingestedTHCDoseInMg: Double {
-        cannabisAmountInMg * Double(pickerOption.percentTransfer)/100 * thcContent / 100
+        cannabisAmountInMg * Double(pickerOption.percentTransfer) / 100 * thcContent / 100
     }
 
     private var doseRounded: Double {
@@ -81,9 +81,10 @@ struct ChooseCannabisSmokedDoseScreen: View {
             dose: doseRounded,
             units: "mg",
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote)) {
-                NextLabel()
-            }
+            suggestedNote: suggestedNote
+        )) {
+            NextLabel()
+        }
     }
 
     private var unknownDoseLink: some View {
@@ -122,7 +123,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     Text("\(Int(cannabisAmountInMg)) mg").font(.title2.bold())
                     Slider(
                         value: $cannabisAmountInMg,
-                        in: 10...1000,
+                        in: 10 ... 1000,
                         step: 10
                     ) {
                         Text("Cannabis Amount")
@@ -138,7 +139,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     Text("\(Int(thcContent))%").font(.title2.bold())
                     Slider(
                         value: $thcContent,
-                        in: 1...30,
+                        in: 1 ... 30,
                         step: 1
                     ) {
                         Text("THC Content")

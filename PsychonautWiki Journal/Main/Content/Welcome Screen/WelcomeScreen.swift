@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct WelcomeScreen: View {
-
     @Binding var isShowingWelcome: Bool
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -96,7 +95,7 @@ struct WelcomeScreen: View {
             title: "Consult a Doctor",
             description: "Consult a doctor before making medical decisions.",
             image: "heart.text.square"
-        )
+        ),
     ]
 }
 

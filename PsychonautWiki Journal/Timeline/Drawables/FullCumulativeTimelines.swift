@@ -18,15 +18,13 @@ import Foundation
 import SwiftUI
 
 struct FullCumulativeTimelines: TimelineDrawable {
-
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        if let max = finalPoints.map({$0.x}).max() {
+        if let max = finalPoints.map({ $0.x }).max() {
             return max
         } else {
             return 5
         }
     }
-
 
     struct FinalPoint {
         let x: TimeInterval
@@ -47,7 +45,6 @@ struct FullCumulativeTimelines: TimelineDrawable {
     }
 
     struct LineSegment {
-
         let start: Point
         let end: Point
 
@@ -57,10 +54,10 @@ struct FullCumulativeTimelines: TimelineDrawable {
 
         func height(at x: Double) -> Double {
             let divider = end.x - start.x
-            guard divider != 0 else {return 0}
-            let m = (end.y - start.y)/divider
-            let b = start.y - m*start.x
-            return m*x + b
+            guard divider != 0 else { return 0 }
+            let m = (end.y - start.y) / divider
+            let b = start.y - m * start.x
+            return m * x + b
         }
     }
 
@@ -72,83 +69,86 @@ struct FullCumulativeTimelines: TimelineDrawable {
         peak: FullDurationRange,
         offset: FullDurationRange,
         weightedLines: [WeightedLine],
-        graphStartTime: Date) {
-            let weightedRelatives = weightedLines.map { weightedLine in
-                WeightedLineRelativeToFirst(
-                    startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
-                    horizontalWeight: weightedLine.horizontalWeight,
-                    height: weightedLine.height,
-                    onsetDelayInHours: weightedLine.onsetDelayInHours)
-            }
-            let lineSegments = weightedRelatives.flatMap { weightedRelative in
-                var result = [LineSegment]()
-                let onsetAndComeupWeight = 0.5
-                let onsetEndX =  weightedRelative.startTimeRelativeToGroupInSeconds + weightedRelative.onsetDelayInHours*60*60 + onset.interpolateLinearly(at: onsetAndComeupWeight)
-                let comeupStartPoint = Point(x: onsetEndX, y: 0)
-                let comeupEndX = onsetEndX + comeup.interpolateLinearly(at: onsetAndComeupWeight)
-                let peakStartPoint = Point(x: comeupEndX, y: weightedRelative.height)
-                result.append(
-                    LineSegment(
-                        start: comeupStartPoint,
-                        end: peakStartPoint
-                    )
-                )
-                let peakEndX = comeupEndX + (peak.interpolateLinearly(at: weightedRelative.horizontalWeight))
-                let peakEndPoint = Point(x: peakEndX, y: weightedRelative.height)
-                result.append(
-                    LineSegment(
-                        start: peakStartPoint,
-                        end: peakEndPoint
-                    )
-                )
-                let offsetEndX = peakEndX + offset.interpolateLinearly(at: weightedRelative.horizontalWeight)
-                let offsetEndPoint = Point(x: offsetEndX, y: 0)
-                result.append(
-                    LineSegment(
-                        start: peakEndPoint,
-                        end: offsetEndPoint
-                    )
-                )
-                return result
-            }
-            let linePoints = Set(lineSegments.flatMap { lineSegment in
-                [lineSegment.start.x, lineSegment.end.x  ]
-            }).map { point in FinalPoint(x: point, y: 0, isIngestionPoint: false) }
-            let ingestionPoints = weightedRelatives.map { relative in
-                FinalPoint(
-                    x: relative.startTimeRelativeToGroupInSeconds,
-                    y: 0,
-                    isIngestionPoint: true)
-
-            }
-            let pointsToConsider = ingestionPoints + linePoints
-            let pointsWithHeight = pointsToConsider.map { finalPoint in
-                let x = finalPoint.x
-                let sumOfHeights = lineSegments.map { lineSegment in
-                    if (lineSegment.isInside(x: x)) {
-                        return lineSegment.height(at: x)
-                    } else {
-                        return 0
-                    }
-                }.reduce(0.0, +)
-                return FinalPoint(x: x, y: sumOfHeights, isIngestionPoint: finalPoint.isIngestionPoint)
-            }
-            guard let highestY = pointsWithHeight.map({ $0.y}).max() else {
-                assertionFailure("No highestY")
-                self.finalPoints = []
-                return
-            }
-            let normalizedHeightPoints = pointsWithHeight.map { pointWithHeight in
-                return FinalPoint(
-                    x: pointWithHeight.x,
-                    y: pointWithHeight.y/highestY,
-                    isIngestionPoint: pointWithHeight.isIngestionPoint)
-            }
-            let sortedPoints = normalizedHeightPoints.sorted { lhs, rhs in
-                lhs.x < rhs.x
-            }
-            self.finalPoints = sortedPoints
+        graphStartTime: Date
+    ) {
+        let weightedRelatives = weightedLines.map { weightedLine in
+            WeightedLineRelativeToFirst(
+                startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
+                horizontalWeight: weightedLine.horizontalWeight,
+                height: weightedLine.height,
+                onsetDelayInHours: weightedLine.onsetDelayInHours
+            )
         }
+        let lineSegments = weightedRelatives.flatMap { weightedRelative in
+            var result = [LineSegment]()
+            let onsetAndComeupWeight = 0.5
+            let onsetEndX = weightedRelative.startTimeRelativeToGroupInSeconds + weightedRelative.onsetDelayInHours * 60 * 60 + onset.interpolateLinearly(at: onsetAndComeupWeight)
+            let comeupStartPoint = Point(x: onsetEndX, y: 0)
+            let comeupEndX = onsetEndX + comeup.interpolateLinearly(at: onsetAndComeupWeight)
+            let peakStartPoint = Point(x: comeupEndX, y: weightedRelative.height)
+            result.append(
+                LineSegment(
+                    start: comeupStartPoint,
+                    end: peakStartPoint
+                )
+            )
+            let peakEndX = comeupEndX + (peak.interpolateLinearly(at: weightedRelative.horizontalWeight))
+            let peakEndPoint = Point(x: peakEndX, y: weightedRelative.height)
+            result.append(
+                LineSegment(
+                    start: peakStartPoint,
+                    end: peakEndPoint
+                )
+            )
+            let offsetEndX = peakEndX + offset.interpolateLinearly(at: weightedRelative.horizontalWeight)
+            let offsetEndPoint = Point(x: offsetEndX, y: 0)
+            result.append(
+                LineSegment(
+                    start: peakEndPoint,
+                    end: offsetEndPoint
+                )
+            )
+            return result
+        }
+        let linePoints = Set(lineSegments.flatMap { lineSegment in
+            [lineSegment.start.x, lineSegment.end.x]
+        }).map { point in FinalPoint(x: point, y: 0, isIngestionPoint: false) }
+        let ingestionPoints = weightedRelatives.map { relative in
+            FinalPoint(
+                x: relative.startTimeRelativeToGroupInSeconds,
+                y: 0,
+                isIngestionPoint: true
+            )
+        }
+        let pointsToConsider = ingestionPoints + linePoints
+        let pointsWithHeight = pointsToConsider.map { finalPoint in
+            let x = finalPoint.x
+            let sumOfHeights = lineSegments.map { lineSegment in
+                if lineSegment.isInside(x: x) {
+                    return lineSegment.height(at: x)
+                } else {
+                    return 0
+                }
+            }.reduce(0.0, +)
+            return FinalPoint(x: x, y: sumOfHeights, isIngestionPoint: finalPoint.isIngestionPoint)
+        }
+        guard let highestY = pointsWithHeight.map({ $0.y }).max() else {
+            assertionFailure("No highestY")
+            finalPoints = []
+            return
+        }
+        let normalizedHeightPoints = pointsWithHeight.map { pointWithHeight in
+            FinalPoint(
+                x: pointWithHeight.x,
+                y: pointWithHeight.y / highestY,
+                isIngestionPoint: pointWithHeight.isIngestionPoint
+            )
+        }
+        let sortedPoints = normalizedHeightPoints.sorted { lhs, rhs in
+            lhs.x < rhs.x
+        }
+        finalPoints = sortedPoints
+    }
 
     func draw(
         context: GraphicsContext,
@@ -157,33 +157,34 @@ struct FullCumulativeTimelines: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        guard let firstPoint = finalPoints.first else {return}
+        let heightBetween = height - paddingTop - paddingBottom
+        guard let firstPoint = finalPoints.first else { return }
         var path = Path()
-        let firstHeightInPx = firstPoint.y*heightBetween + paddingBottom
-        path.move(to: CGPoint(x: firstPoint.x*pixelsPerSec, y: height-firstHeightInPx))
+        let firstHeightInPx = firstPoint.y * heightBetween + paddingBottom
+        path.move(to: CGPoint(x: firstPoint.x * pixelsPerSec, y: height - firstHeightInPx))
         for point in finalPoints.dropFirst() {
-            let heightInPx = point.y*heightBetween + paddingBottom
-            path.addLine(to: CGPoint(x: point.x*pixelsPerSec, y: height-heightInPx))
+            let heightInPx = point.y * heightBetween + paddingBottom
+            path.addLine(to: CGPoint(x: point.x * pixelsPerSec, y: height - heightInPx))
         }
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
         // draw shape
-        guard let lastX = finalPoints.last?.x else {return}
-        path.addLine(to: CGPoint(x: lastX*pixelsPerSec, y: height))
-        path.addLine(to: CGPoint(x: firstPoint.x*pixelsPerSec, y: height))
+        guard let lastX = finalPoints.last?.x else { return }
+        path.addLine(to: CGPoint(x: lastX * pixelsPerSec, y: height))
+        path.addLine(to: CGPoint(x: firstPoint.x * pixelsPerSec, y: height))
         path.closeSubpath()
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
         // draw dots
         for point in finalPoints {
             if point.isIngestionPoint {
-                let pointHeight = point.y*heightBetween + paddingBottom
+                let pointHeight = point.y * heightBetween + paddingBottom
                 context.drawDot(
-                    x: point.x*pixelsPerSec,
+                    x: point.x * pixelsPerSec,
                     bottomY: height - pointHeight,
-                    color: color)
+                    color: color
+                )
             }
         }
     }

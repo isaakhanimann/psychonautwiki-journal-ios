@@ -17,12 +17,11 @@
 import SwiftUI
 
 struct IngestionNoteScreen: View {
-
     @Binding var note: String
     @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
     @FocusState private var textFieldIsFocused: Bool
-    
+
     var body: some View {
         NavigationStack {
             screen.toolbar {

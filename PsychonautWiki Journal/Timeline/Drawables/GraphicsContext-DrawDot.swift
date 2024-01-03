@@ -19,15 +19,15 @@ import SwiftUI
 extension GraphicsContext {
     func drawDot(x: Double, bottomY: Double, color: Color) {
         let dotRadius: CGFloat = 7
-        let dotWidth = dotRadius*2
+        let dotWidth = dotRadius * 2
         fill(
-            Path(ellipseIn: CGRect(x: x-dotRadius, y: bottomY-dotRadius, width: dotWidth, height: dotWidth)),
+            Path(ellipseIn: CGRect(x: x - dotRadius, y: bottomY - dotRadius, width: dotWidth, height: dotWidth)),
             with: .color(color)
         )
         let innerDotRadius: CGFloat = 3
-        let innerDotWidth = innerDotRadius*2
+        let innerDotWidth = innerDotRadius * 2
         fill(
-            Path(ellipseIn: CGRect(x: x-innerDotRadius, y: bottomY-innerDotRadius, width: innerDotWidth, height: innerDotWidth)),
+            Path(ellipseIn: CGRect(x: x - innerDotRadius, y: bottomY - innerDotRadius, width: innerDotWidth, height: innerDotWidth)),
             with: .color(Color.primary)
         )
     }

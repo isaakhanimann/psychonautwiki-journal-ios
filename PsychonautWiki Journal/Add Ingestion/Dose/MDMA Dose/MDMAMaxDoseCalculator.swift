@@ -17,16 +17,17 @@
 import SwiftUI
 
 struct MDMAMaxDoseCalculator: View {
-
     let onChangeOfMax: (Double) -> Void
     @State private var bodyWeightInKg = 75.0
     @State private var gender = Gender.male
     private var suggestedMaxDoseInMg: Double {
         bodyWeightInKg * gender.mgPerKg
     }
+
     private var suggestedMaxDoseRounded: Double {
         round(suggestedMaxDoseInMg)
     }
+
     private var suggestedDoseText: String {
         "\(Int(suggestedMaxDoseRounded)) mg"
     }
@@ -44,7 +45,7 @@ struct MDMAMaxDoseCalculator: View {
             }
         }
     }
-    
+
     var body: some View {
         VStack {
             Text(suggestedDoseText).font(.title.bold())
@@ -55,7 +56,7 @@ struct MDMAMaxDoseCalculator: View {
             Text("\(Int(bodyWeightInKg)) kg").font(.title2.bold())
             Slider(
                 value: $bodyWeightInKg,
-                in: 40...150,
+                in: 40 ... 150,
                 step: 5
             ) {
                 Text("Body Weight")
@@ -65,10 +66,10 @@ struct MDMAMaxDoseCalculator: View {
                 Text("150")
             }
         }
-        .onChange(of: bodyWeightInKg) { newValue in
+        .onChange(of: bodyWeightInKg) { _ in
             onChangeOfMax(suggestedMaxDoseRounded)
         }
-        .onChange(of: gender) { newValue in
+        .onChange(of: gender) { _ in
             onChangeOfMax(suggestedMaxDoseRounded)
         }
     }
@@ -77,7 +78,7 @@ struct MDMAMaxDoseCalculator: View {
 struct MDMAMaxRecommendedSection_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            MDMAMaxDoseCalculator(onChangeOfMax: {_ in })
+            MDMAMaxDoseCalculator(onChangeOfMax: { _ in })
         }
     }
 }

@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -32,13 +32,13 @@ enum LockTimeOption: String, Identifiable, CaseIterable {
         case .immediately:
             return 0
         case .after5Minutes:
-            return 5*60
+            return 5 * 60
         case .after10Minutes:
-            return 10*60
+            return 10 * 60
         case .after30Minutes:
-            return 30*60
+            return 30 * 60
         case .after1Hour:
-            return 60*60
+            return 60 * 60
         }
     }
 

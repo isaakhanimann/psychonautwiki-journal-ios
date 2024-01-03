@@ -17,16 +17,14 @@
 import Charts
 import SwiftUI
 
-
 @available(iOS 16, *)
 struct ExperienceDetailsScreen: View {
-    
     let experienceData: ExperienceData
     @State private var timeRange: TimeRange = .last12Months
     @State private var isShowingMonthlyAverageLine: Bool = false
     @State private var isShowingYearlyAverageLine: Bool = false
     @State private var highlightedSubstanceNames: [String] = []
-    
+
     var body: some View {
         List {
             VStack(alignment: .leading) {
@@ -114,7 +112,7 @@ struct ExperienceDetailsScreen: View {
         .navigationTitle("Total Experiences")
         .dismissWhenTabTapped()
     }
-    
+
     private func getColor(name: String) -> Color {
         if highlightedSubstanceNames.isEmpty {
             return experienceData.colorMapping(name)

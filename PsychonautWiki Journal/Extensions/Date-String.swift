@@ -17,7 +17,6 @@
 import Foundation
 
 extension Date {
-
     var asDateString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM y"

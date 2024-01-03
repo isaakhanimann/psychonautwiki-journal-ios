@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,10 +17,8 @@
 import CoreData
 
 extension SprayCalculatorScreen {
-
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-
         private let sprayFetchController: NSFetchedResultsController<Spray>
         @Published var sprayModels: [SprayModel] = []
         @Published var selectedSpray: SprayModel? = nil {
@@ -28,17 +26,20 @@ extension SprayCalculatorScreen {
                 maybeUpdateTotalWeight()
             }
         }
+
         @Published var units = WeightUnit.mg
         @Published var weightPerSprayText = "" {
             didSet {
                 maybeUpdateTotalWeight()
             }
         }
+
         @Published var liquidAmountInMlText = "" {
             didSet {
                 maybeUpdateTotalWeight()
             }
         }
+
         @Published var totalWeightText = "" {
             didSet {
                 maybeUpdateLiquidVolume()
@@ -51,23 +52,27 @@ extension SprayCalculatorScreen {
         var weightPerSpray: Double? {
             getDouble(from: weightPerSprayText)
         }
+
         var liquidAmountInMl: Double? {
             getDouble(from: liquidAmountInMlText)
         }
+
         var purityInPercent: Double? {
             getDouble(from: purityInPercentText)
         }
+
         var totalWeight: Double? {
             getDouble(from: totalWeightText)
         }
+
         var doseAdjustedToPurity: Double? {
-            guard let totalWeight, let purityInPercent else {return nil}
-            return totalWeight*100/purityInPercent
+            guard let totalWeight, let purityInPercent else { return nil }
+            return totalWeight * 100 / purityInPercent
         }
 
         private func maybeUpdateTotalWeight() {
             if let liquidAmountInMl, let selectedSpray, let weightPerSpray {
-                let numSprays = liquidAmountInMl*selectedSpray.numSprays/selectedSpray.contentInMl
+                let numSprays = liquidAmountInMl * selectedSpray.numSprays / selectedSpray.contentInMl
                 let result = numSprays * weightPerSpray
                 let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
                 if resultText != totalWeightText {
@@ -78,8 +83,8 @@ extension SprayCalculatorScreen {
 
         private func maybeUpdateLiquidVolume() {
             if let totalWeight, let selectedSpray, let weightPerSpray {
-                let numSprays = totalWeight/weightPerSpray
-                let result = numSprays*selectedSpray.contentInMl/selectedSpray.numSprays
+                let numSprays = totalWeight / weightPerSpray
+                let result = numSprays * selectedSpray.contentInMl / selectedSpray.numSprays
                 let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
                 if resultText != liquidAmountInMlText {
                     liquidAmountInMlText = resultText
@@ -89,7 +94,7 @@ extension SprayCalculatorScreen {
 
         override init() {
             let sprayFetchRequest = Spray.fetchRequest()
-            sprayFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Spray.creationDate, ascending: false) ]
+            sprayFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Spray.creationDate, ascending: false)]
             sprayFetchController = NSFetchedResultsController(
                 fetchRequest: sprayFetchRequest,
                 managedObjectContext: PersistenceController.shared.viewContext,
@@ -106,17 +111,17 @@ extension SprayCalculatorScreen {
             }
         }
 
-        nonisolated public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            guard let sprays = controller.fetchedObjects as? [Spray] else {return}
+        public nonisolated func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            guard let sprays = controller.fetchedObjects as? [Spray] else { return }
             Task { @MainActor in
                 assignToSprayModels(sprays: sprays)
             }
         }
 
         private func assignToSprayModels(sprays: [Spray]) {
-            sprayModels = sprays.map({ spray in
+            sprayModels = sprays.map { spray in
                 SprayModel(name: spray.nameUnwrapped, numSprays: spray.numSprays, contentInMl: spray.contentInMl, spray: spray)
-            })
+            }
             if let sel = sprays.first(where: { spray in
                 spray.isPreferred
             }) {

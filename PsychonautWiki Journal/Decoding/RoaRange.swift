@@ -14,16 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 struct RoaRange: Decodable {
-
     let min: Double?
     let max: Double?
 
     var displayString: String? {
-        guard min != nil || min != nil else {return nil}
+        guard min != nil || min != nil else { return nil }
         let min = min?.formatted() ?? ".."
         let max = max?.formatted() ?? ".."
         return "\(min)-\(max)"

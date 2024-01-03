@@ -17,8 +17,7 @@
 import Foundation
 import SwiftUI
 
-struct OnsetComeupTimeline : TimelineDrawable {
-
+struct OnsetComeupTimeline: TimelineDrawable {
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let onsetDelayInHours: Double
@@ -38,16 +37,16 @@ struct OnsetComeupTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        var top = lineWidth/2
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        var top = lineWidth / 2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * heightBetween
+            top = (1 - verticalWeight) * heightBetween
         }
-        let bottom = height - lineWidth/2
+        let bottom = height - lineWidth / 2
         context.drawDot(x: startX, bottomY: bottom, color: color)
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetComeupWeight)) * pixelsPerSec
         let comeupEndX = onsetEndX + (comeup.interpolateLinearly(at: onsetComeupWeight) * pixelsPerSec)
@@ -74,7 +73,8 @@ extension RoaDuration {
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
-           let fullComeup = comeup?.maybeFullDurationRange {
+           let fullComeup = comeup?.maybeFullDurationRange
+        {
             return OnsetComeupTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,

@@ -37,7 +37,7 @@ struct InteractionsScreen: View {
 
 struct InteractionsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let substance = SubstanceRepo.shared.getSubstance(name:"MDMA")!
+        let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
         InteractionsScreen(
             substanceName: substance.name,
             interactions: substance.interactions!,

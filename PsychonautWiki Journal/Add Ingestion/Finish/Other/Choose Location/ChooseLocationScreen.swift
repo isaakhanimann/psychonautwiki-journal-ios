@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ChooseLocationScreen: View {
-
     @ObservedObject var locationManager: LocationManager
     let onDone: () -> Void
     @Environment(\.dismiss) var dismiss
@@ -74,4 +73,3 @@ struct ChooseLocationScreen: View {
         .navigationTitle("Experience Location")
     }
 }
-

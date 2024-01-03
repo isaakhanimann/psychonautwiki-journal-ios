@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct FinishIngestionScreen: View {
-
     enum SheetOption: Identifiable {
         case editTitle
         case editNote
@@ -118,7 +117,7 @@ struct FinishIngestionScreen: View {
                     }
                 }
                 .labelsHidden()
-                if experiencesWithinLargerRange.count>0 {
+                if experiencesWithinLargerRange.count > 0 {
                     NavigationLink {
                         ExperiencePickerScreen(
                             selectedExperience: $selectedExperience,
@@ -191,7 +190,7 @@ struct FinishIngestionScreen: View {
                         }
                     }
                     if #available(iOS 16.2, *) {
-                        let isTimeRecentOrFuture = Date().timeIntervalSinceReferenceDate - selectedTime.timeIntervalSinceReferenceDate < 12*60*60
+                        let isTimeRecentOrFuture = Date().timeIntervalSinceReferenceDate - selectedTime.timeIntervalSinceReferenceDate < 12 * 60 * 60
                         if ActivityManager.shared.authorizationInfo.areActivitiesEnabled && !ActivityManager.shared.isActivityActive && isTimeRecentOrFuture {
                             Toggle("Start Live Activity", isOn: $wantsToStartLiveActivity).tint(.accentColor)
                         }
@@ -231,10 +230,10 @@ struct FinishIngestionScreen: View {
             }
         })
         .task {
-            guard !isInitialized else {return} // because this function is going to be called again when navigating back from color picker screen
+            guard !isInitialized else { return } // because this function is going to be called again when navigating back from color picker screen
             selectExperienceBasedOnCurrentTime()
             let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
             ingestionFetchRequest.fetchLimit = 15
             let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
@@ -249,7 +248,7 @@ struct FinishIngestionScreen: View {
 
     func selectExperienceBasedOnCurrentTime() {
         let fetchRequest = Experience.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
         fetchRequest.predicate = FinishIngestionScreen.getPredicate(from: selectedTime)
         experiencesWithinLargerRange = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
         if wantsToForceNewExperience {
@@ -272,9 +271,9 @@ struct FinishIngestionScreen: View {
         }
         if let companionMatchUnwrap = companionMatch {
             foundCompanion = companionMatchUnwrap
-            self.selectedColor = companionMatchUnwrap.color
+            selectedColor = companionMatchUnwrap.color
         } else {
-            self.selectedColor = otherColors.filter({$0.isPreferred}).first ?? otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
+            selectedColor = otherColors.filter { $0.isPreferred }.first ?? otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
         }
         isInitialized = true
     }
@@ -306,16 +305,18 @@ struct FinishIngestionScreen: View {
                         Task {
                             await ActivityManager.shared.startOrUpdateActivity(
                                 substanceGroups: getSubstanceIngestionGroups(ingestions: existingExperience.myIngestionsSorted),
-                                everythingForEachRating: existingExperience.ratingsWithTimeSorted.map({ shulgin in
+                                everythingForEachRating: existingExperience.ratingsWithTimeSorted.map { shulgin in
                                     EverythingForOneRating(
                                         time: shulgin.timeUnwrapped,
-                                        option: shulgin.optionUnwrapped)
-                                }),
-                                everythingForEachTimedNote: existingExperience.timedNotesSorted.filter({$0.isPartOfTimeline}).map({ timedNote in
+                                        option: shulgin.optionUnwrapped
+                                    )
+                                },
+                                everythingForEachTimedNote: existingExperience.timedNotesSorted.filter { $0.isPartOfTimeline }.map { timedNote in
                                     EverythingForOneTimedNote(
                                         time: timedNote.timeUnwrapped,
-                                        color: timedNote.color)
-                                }),
+                                        color: timedNote.color
+                                    )
+                                },
                                 areRedosesDrawnIndividually: areRedosesDrawnIndividually
                             )
                         }
@@ -365,7 +366,6 @@ struct FinishIngestionScreen: View {
         }
     }
 
-
     private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) -> SubstanceCompanion {
         if let foundCompanion {
             foundCompanion.colorAsText = selectedColor.rawValue
@@ -412,10 +412,10 @@ struct FinishIngestionScreen: View {
     }
 
     private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {
-        let shortInterval: TimeInterval = 12*60*60
-        let shortRange = date.addingTimeInterval(-shortInterval)...date.addingTimeInterval(shortInterval)
-        let veryShortInterval: TimeInterval = 8*60*60
-        let veryShortRange = date.addingTimeInterval(-veryShortInterval)...date.addingTimeInterval(veryShortInterval)
+        let shortInterval: TimeInterval = 12 * 60 * 60
+        let shortRange = date.addingTimeInterval(-shortInterval) ... date.addingTimeInterval(shortInterval)
+        let veryShortInterval: TimeInterval = 8 * 60 * 60
+        let veryShortRange = date.addingTimeInterval(-veryShortInterval) ... date.addingTimeInterval(veryShortInterval)
         return experiences.first { exp in
             let experienceStart = exp.ingestionsSorted.first?.time ?? exp.sortDateUnwrapped
             let lastIngestionTime = exp.ingestionsSorted.last?.time ?? exp.sortDateUnwrapped
@@ -428,7 +428,7 @@ struct FinishIngestionScreen: View {
     }
 
     private static func getPredicate(from date: Date) -> NSCompoundPredicate {
-        let longInterval: TimeInterval = 60*60*60
+        let longInterval: TimeInterval = 60 * 60 * 60
         let startDate = date.addingTimeInterval(-longInterval)
         let endDate = date.addingTimeInterval(longInterval)
         let laterThanStart = NSPredicate(format: "sortDate > %@", startDate as NSDate)

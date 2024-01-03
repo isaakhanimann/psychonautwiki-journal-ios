@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -18,12 +18,11 @@ import SwiftUI
 
 extension View {
     func colorBackground(_ substanceColor: SubstanceColor) -> some View {
-        self.modifier(ColorBackground(substanceColor: substanceColor))
+        modifier(ColorBackground(substanceColor: substanceColor))
     }
 }
 
 struct ColorBackground: ViewModifier {
-
     let substanceColor: SubstanceColor
 
     func body(content: Content) -> some View {

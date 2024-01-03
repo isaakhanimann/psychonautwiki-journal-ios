@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SubstanceSearchBarWithFilter: View {
-
     @Binding var text: String
     var isFocused: FocusState<Bool>.Binding
     let allCategories: [String]
@@ -34,11 +33,10 @@ struct SubstanceSearchBarWithFilter: View {
                 Image(systemName: "magnifyingglass").foregroundColor(.secondary)
                 TextField("Search substances",
                           text: $text,
-                          prompt: Text("Search substances")
-                )
-                .focused(isFocused)
-                .disableAutocorrection(true)
-                .submitLabel(.search)
+                          prompt: Text("Search substances"))
+                    .focused(isFocused)
+                    .disableAutocorrection(true)
+                    .submitLabel(.search)
                 if !text.isEmpty {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(Color(.systemGray))
@@ -63,7 +61,7 @@ struct SubstanceSearchBarWithFilter: View {
                             }
                         }
                     }, label: {
-                        Label("Filter", systemImage: selectedCategories.isEmpty ? "line.3.horizontal.decrease.circle": "line.3.horizontal.decrease.circle.fill")
+                        Label("Filter", systemImage: selectedCategories.isEmpty ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
                             .labelStyle(.iconOnly)
                     })
                 }
@@ -97,7 +95,6 @@ struct SubstanceSearchBarWithFilter: View {
 }
 
 struct SubstanceSearchBar_Previews: PreviewProvider {
-
     struct SearchBarContainer: View {
         @FocusState private var isSearchFocused: Bool
 

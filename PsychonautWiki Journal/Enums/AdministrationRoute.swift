@@ -32,7 +32,7 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
     case inhaled
 
     var id: String {
-        self.rawValue
+        rawValue
     }
 
     var clarification: String {
@@ -89,5 +89,3 @@ enum AdministrationRoute: String, Codable, CaseIterable, Identifiable {
         }
     }
 }
-
-

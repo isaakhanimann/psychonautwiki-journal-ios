@@ -14,15 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import StoreKit
+import SwiftUI
 
 struct JournalScreen: View {
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
     ) var experiences: FetchedResults<Experience>
-
 
     @State private var searchText = ""
     private var query: Binding<String> {
@@ -141,7 +139,7 @@ struct JournalScreen: View {
                 Label("Filter Favorites", systemImage: "star")
             }
         }
-        .onChange(of: isFavoriteFilterEnabled) { newValue in
+        .onChange(of: isFavoriteFilterEnabled) { _ in
             setPredicate()
         }
     }
@@ -150,7 +148,8 @@ struct JournalScreen: View {
         ExperiencesList(
             experiences: experiences,
             isFavoriteFilterEnabled: isFavoriteFilterEnabled,
-            isTimeRelative: isTimeRelative)
+            isTimeRelative: isTimeRelative
+        )
         .optionalScrollDismissesKeyboard()
         .searchable(text: query, prompt: "Search by title or substance")
         .disableAutocorrection(true)

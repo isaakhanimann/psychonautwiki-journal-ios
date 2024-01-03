@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct CustomUnitsChooseDoseScreen: View {
-
     let customUnit: CustomUnit
     let dismiss: () -> Void
 
@@ -25,7 +24,7 @@ struct CustomUnitsChooseDoseScreen: View {
     @State private var isEstimate = false
     @State private var isShowingNext = false
     @FocusState private var isDoseFieldFocused: Bool
-    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen = false
 
     var body: some View {
         Form {
@@ -45,8 +44,8 @@ struct CustomUnitsChooseDoseScreen: View {
                         value: $dose,
                         format: .number
                     ).keyboardType(.decimalPad)
-                    .textFieldStyle(.roundedBorder)
-                    .focused($isDoseFieldFocused)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($isDoseFieldFocused)
                     Text(customUnit.unitUnwrapped)
                 }
                 .font(.title)
@@ -56,7 +55,8 @@ struct CustomUnitsChooseDoseScreen: View {
             if isEyeOpen {
                 Section("Info") {
                     if customUnit.administrationRouteUnwrapped == .smoked || customUnit.administrationRouteUnwrapped == .inhaled {
-                        Text("Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
+                        Text(
+                            "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
                     }
                     NavigationLink("Testing") {
                         TestingScreen()
@@ -80,23 +80,23 @@ struct CustomUnitsChooseDoseScreen: View {
     }
 
     var calculatedDose: Double? {
-        guard let dose, let dosePerUnit = customUnit.doseUnwrapped else {return nil}
+        guard let dose, let dosePerUnit = customUnit.doseUnwrapped else { return nil }
         return dose * dosePerUnit
     }
 
     var calculatedDoseColor: Color {
         if let calculatedDose {
-            return customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
+            customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
         } else {
-            return Color.primary
+            Color.primary
         }
     }
 
     var doseCalculationText: String {
         if let calculatedDose {
-            return "\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = \(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+            "\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = \(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
         } else {
-            return customUnit.nameUnwrapped
+            customUnit.nameUnwrapped
         }
     }
 }

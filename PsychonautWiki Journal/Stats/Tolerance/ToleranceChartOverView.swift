@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 @available(iOS 16, *)
 struct ToleranceChartOverView: View {
-    
     let toleranceWindows: [ToleranceWindow]
 
     @Environment(\.colorScheme) var colorScheme
@@ -66,14 +65,14 @@ struct ToleranceChartOverView: View {
     }
 
     var chartHeight: CGFloat {
-        let numberOfRows = toleranceWindows.map({$0.substanceName}).uniqued().count
+        let numberOfRows = toleranceWindows.map { $0.substanceName }.uniqued().count
         if numberOfRows < 5 {
-            return CGFloat(numberOfRows*20)
+            return CGFloat(numberOfRows * 20)
         } else {
             return 100
         }
     }
-    
+
     private func getSubstanceNamesWithFullTolerance() -> [String] {
         toleranceWindows.filter { window in
             window.toleranceType == .full && window.contains(date: Date.now)
@@ -81,7 +80,7 @@ struct ToleranceChartOverView: View {
             window.substanceName
         }.uniqued()
     }
-    
+
     private func getSubstanceNamesWithHalfTolerance() -> [String] {
         toleranceWindows.filter { window in
             window.toleranceType == .half && window.contains(date: Date.now)

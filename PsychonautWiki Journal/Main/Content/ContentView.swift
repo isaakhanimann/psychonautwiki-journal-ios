@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import AlertToast
+import SwiftUI
 
 struct ContentView: View {
-
     @AppStorage(PersistenceController.needsToSeeWelcomeKey) var needsToSeeWelcome: Bool = true
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey1) var isEyeOpen1: Bool = false
@@ -45,7 +44,7 @@ struct ContentView: View {
             .toast(isPresenting: $toastViewModel.isShowingToast) {
                 AlertToast(
                     displayMode: .alert,
-                    type: toastViewModel.isSuccessToast ? .complete(.green): .error(.red),
+                    type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
                     title: toastViewModel.toastMessage
                 )
             }

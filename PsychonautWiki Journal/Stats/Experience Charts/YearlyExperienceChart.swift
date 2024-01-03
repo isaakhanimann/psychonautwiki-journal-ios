@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 @available(iOS 16, *)
 struct YearlyExperienceChart: View {
-
     let experienceData: ExperienceData
     let isShowingYearlyAverageLine: Bool
     let colorMapping: (String) -> Color
@@ -127,7 +126,8 @@ struct YearlyExperienceChart: View {
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
                     if let selectedElement = selectedElement,
-                       let dateInterval = Calendar.current.dateInterval(of: .year, for: selectedElement.year) {
+                       let dateInterval = Calendar.current.dateInterval(of: .year, for: selectedElement.year)
+                    {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

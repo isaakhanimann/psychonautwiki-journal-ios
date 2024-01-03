@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 @available(iOS 16.0, *)
 struct ToleranceChart: View {
-    
     let toleranceWindows: [ToleranceWindow]
     let numberOfRows: Int
     let timeOption: ToleranceTimeOption
@@ -50,7 +49,7 @@ struct ToleranceChart: View {
         }
     }
 
-    func getChart(with date: Date) -> some View {
+    func getChart(with _: Date) -> some View {
         Chart {
             ForEach(toleranceWindows) { window in
                 BarMark(
@@ -65,7 +64,7 @@ struct ToleranceChart: View {
                 if isCurrentTimeInChart {
                     currentTimeRuleMark
                 }
-                if let experienceStartDate, fabs(experienceStartDate.timeIntervalSinceNow) > 24*60*60 {
+                if let experienceStartDate, fabs(experienceStartDate.timeIntervalSinceNow) > 24 * 60 * 60 {
                     RuleMark(x: .value("Experience Time", experienceStartDate))
                         .foregroundStyle(Color.gray)
                 }
@@ -85,7 +84,8 @@ struct ToleranceChart: View {
         let ends = toleranceWindows.map { $0.end }
         if let startChart = starts.min(),
            let endChart = ends.max(),
-           startChart <= Date.now && Date.now <= endChart {
+           startChart <= Date.now && Date.now <= endChart
+        {
             return true
         } else {
             return false

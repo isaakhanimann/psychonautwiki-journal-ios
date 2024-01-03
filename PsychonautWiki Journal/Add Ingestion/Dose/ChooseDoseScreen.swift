@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ChooseDoseScreen: View {
-
     let arguments: SubstanceAndRoute
     let dismiss: () -> Void
     @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
@@ -48,7 +47,6 @@ struct ChooseDoseScreen: View {
 }
 
 struct ChooseDoseScreenContent: View {
-
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
@@ -60,7 +58,6 @@ struct ChooseDoseScreenContent: View {
     var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
     }
-
 
     var body: some View {
         screen.toolbar {
@@ -76,9 +73,10 @@ struct ChooseDoseScreenContent: View {
                     dose: selectedPureDose,
                     units: selectedUnits,
                     isEstimate: isEstimate,
-                    suggestedNote: suggestedNote)) {
-                        NextLabel()
-                    }
+                    suggestedNote: suggestedNote
+                )) {
+                    NextLabel()
+                }
             }
         }
     }
@@ -131,7 +129,7 @@ struct ChooseDoseScreenContent: View {
     }
 
     var suggestedNote: String? {
-        guard let impureDose, let selectedUnits, purityInPercent != 100 && purityInPercent != nil else {return nil}
+        guard let impureDose, let selectedUnits, purityInPercent != 100 && purityInPercent != nil else { return nil }
         return "\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits) with \(purityText)% purity"
     }
 
@@ -141,10 +139,11 @@ struct ChooseDoseScreenContent: View {
     var purityInPercent: Double? {
         getDouble(from: purityText)
     }
+
     private var impureDose: Double? {
         guard let selectedPureDose = selectedPureDose else { return nil }
         guard let purityInPercent, purityInPercent != 0 else { return nil }
-        return selectedPureDose/purityInPercent * 100
+        return selectedPureDose / purityInPercent * 100
     }
 
     var doseSection: some View {
@@ -180,7 +179,8 @@ struct ChooseDoseScreenContent: View {
             Text("Pure \(administrationRoute.rawValue.capitalized) Dose")
         } footer: {
             if let units = roaDose?.units,
-               let clarification = DosesScreen.getUnitClarification(for: units) {
+               let clarification = DosesScreen.getUnitClarification(for: units)
+            {
                 Section {
                     Text(clarification)
                 }

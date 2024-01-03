@@ -53,7 +53,7 @@ struct RouteItemView: View {
         HStack {
             let routeText = isEyeOpen ? routeItem.route.rawValue : ""
             if let doseUnwrapped = routeItem.dose {
-                Text("\(routeItem.isEstimate ? "~": "")\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
+                Text("\(routeItem.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
             } else {
                 Text("Unknown dose \(routeText)")
             }
@@ -86,7 +86,7 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             isEstimate: true,
                             dose: 20,
                             units: "mg"
-                        )
+                        ),
                     ],
                     isHidingDosageDots: false,
                     isEyeOpen: true
@@ -108,7 +108,7 @@ struct CumulativeDoseRow_Previews: PreviewProvider {
                             isEstimate: true,
                             dose: nil,
                             units: "mg"
-                        )
+                        ),
                     ],
                     isHidingDosageDots: false,
                     isEyeOpen: true

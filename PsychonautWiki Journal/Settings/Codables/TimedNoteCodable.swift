@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -19,7 +19,6 @@ import Foundation
 import Foundation
 
 struct TimedNoteCodable: Codable {
-
     let creationDate: Date
     let time: Date
     let note: String
@@ -34,7 +33,6 @@ struct TimedNoteCodable: Codable {
         self.isPartOfTimeline = isPartOfTimeline
     }
 
-
     enum CodingKeys: String, CodingKey {
         case creationDate
         case time
@@ -46,12 +44,12 @@ struct TimedNoteCodable: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
-        self.creationDate = getDateFromMillis(millis: creationDateMillis)
+        creationDate = getDateFromMillis(millis: creationDateMillis)
         let timeMillis = try values.decode(UInt64.self, forKey: .time)
-        self.time = getDateFromMillis(millis: timeMillis)
-        self.note = try values.decode(String.self, forKey: .note)
-        self.color = try values.decode(SubstanceColor.self, forKey: .color)
-        self.isPartOfTimeline = try values.decode(Bool.self, forKey: .isPartOfTimeline)
+        time = getDateFromMillis(millis: timeMillis)
+        note = try values.decode(String.self, forKey: .note)
+        color = try values.decode(SubstanceColor.self, forKey: .color)
+        isPartOfTimeline = try values.decode(Bool.self, forKey: .isPartOfTimeline)
     }
 
     func encode(to encoder: Encoder) throws {

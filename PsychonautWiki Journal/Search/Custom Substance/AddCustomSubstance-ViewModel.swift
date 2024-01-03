@@ -17,7 +17,6 @@
 import Foundation
 
 extension AddCustomSubstanceView {
-
     @MainActor
     class ViewModel: ObservableObject {
         @Published var name = ""
@@ -25,8 +24,8 @@ extension AddCustomSubstanceView {
         @Published var units: String? = UnitPickerOptions.mg.rawValue
 
         var isEverythingNeededDefined: Bool {
-            guard !name.isEmpty else {return false}
-            guard let unitsUnwrap = units, !unitsUnwrap.isEmpty else {return false}
+            guard !name.isEmpty else { return false }
+            guard let unitsUnwrap = units, !unitsUnwrap.isEmpty else { return false }
             return true
         }
 

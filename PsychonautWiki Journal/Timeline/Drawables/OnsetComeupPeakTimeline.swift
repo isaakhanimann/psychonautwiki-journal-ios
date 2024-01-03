@@ -16,8 +16,7 @@
 
 import SwiftUI
 
-struct OnsetComeupPeakTimeline : TimelineDrawable {
-
+struct OnsetComeupPeakTimeline: TimelineDrawable {
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange
@@ -30,10 +29,10 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         ingestionTimeRelativeToStartInSeconds
-        + onsetDelayInSeconds
-        + onset.interpolateLinearly(at: onsetAndComeupWeight)
-        + comeup.interpolateLinearly(at: onsetAndComeupWeight)
-        + peak.interpolateLinearly(at: peakWeight)
+            + onsetDelayInSeconds
+            + onset.interpolateLinearly(at: onsetAndComeupWeight)
+            + comeup.interpolateLinearly(at: onsetAndComeupWeight)
+            + peak.interpolateLinearly(at: peakWeight)
     }
 
     func draw(
@@ -43,14 +42,14 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        var top = lineWidth/2
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        var top = lineWidth / 2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * heightBetween
+            top = (1 - verticalWeight) * heightBetween
         }
         let bottom = height - paddingTop
         context.drawDot(x: startX, bottomY: bottom, color: color)
@@ -69,7 +68,6 @@ struct OnsetComeupPeakTimeline : TimelineDrawable {
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
     }
 
-
     private var onsetDelayInSeconds: TimeInterval {
         onsetDelayInHours * 60 * 60
     }
@@ -84,7 +82,8 @@ extension RoaDuration {
     ) -> OnsetComeupPeakTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
-           let fullPeak = peak?.maybeFullDurationRange {
+           let fullPeak = peak?.maybeFullDurationRange
+        {
             return OnsetComeupPeakTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,
@@ -99,4 +98,3 @@ extension RoaDuration {
         }
     }
 }
-

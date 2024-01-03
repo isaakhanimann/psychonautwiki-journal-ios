@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,36 +17,35 @@
 import SwiftUI
 
 struct DotRows: View {
-
     let numDots: Int
 
     var body: some View {
         VStack(spacing: 0) {
-            if (numDots==0) {
+            if numDots == 0 {
                 HStack(spacing: 0) {
-                    ForEach((1...4), id: \.self) {_ in
+                    ForEach(1 ... 4, id: \.self) { _ in
                         Dot(isFull: false)
                     }
                 }
             } else {
-                let numFullRows = numDots/4
+                let numFullRows = numDots / 4
                 let dotsInLastRow = numDots % 4
-                if (numFullRows > 0) {
-                    ForEach((1...numFullRows), id: \.self) {_ in
+                if numFullRows > 0 {
+                    ForEach(1 ... numFullRows, id: \.self) { _ in
                         HStack(spacing: 0) {
-                            ForEach(1...4, id: \.self) {_ in
+                            ForEach(1 ... 4, id: \.self) { _ in
                                 Dot(isFull: true)
                             }
                         }
                     }
                 }
-                if (dotsInLastRow > 0) {
+                if dotsInLastRow > 0 {
                     HStack(spacing: 0) {
-                        ForEach((1...dotsInLastRow), id: \.self) {_ in
+                        ForEach(1 ... dotsInLastRow, id: \.self) { _ in
                             Dot(isFull: true)
                         }
                         let numEmpty = 4 - dotsInLastRow
-                        ForEach((1...numEmpty), id: \.self) {_ in
+                        ForEach(1 ... numEmpty, id: \.self) { _ in
                             Dot(isFull: false)
                         }
                     }

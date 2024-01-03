@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ChooseDateScreen: View {
-
     let substanceName: String
     let cancel: () -> Void
     let finish: (SubstanceAndDay) -> Void
@@ -35,7 +34,7 @@ struct ChooseDateScreen: View {
     }
 
     private var alreadyUsedColors: [SubstanceColor] {
-        Array(Set(substanceCompanions.map({$0.color}))).sorted()
+        Array(Set(substanceCompanions.map { $0.color })).sorted()
     }
 
     private var otherColors: [SubstanceColor] {

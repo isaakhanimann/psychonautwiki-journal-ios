@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ColorPickerScreen: View {
-
     @Binding var selectedColor: SubstanceColor
     let alreadyUsedColors: [SubstanceColor]
     let otherColors: [SubstanceColor]
@@ -57,7 +56,6 @@ struct ColorPickerScreen: View {
                 Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
             }
         }
-
     }
 }
 

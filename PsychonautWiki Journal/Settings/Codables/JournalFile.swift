@@ -85,10 +85,9 @@ struct JournalFile: FileDocument, Codable {
                     experienceLocation: experience.location
                 )
             )
-
         }
         self.experiences = experiencesToStore
-        self.substanceCompanions = companionsToStore
+        substanceCompanions = companionsToStore
         self.customSubstances = customSubstances.map { cust in
             CustomSubstanceCodable(
                 name: cust.nameUnwrapped,
@@ -107,11 +106,9 @@ struct JournalFile: FileDocument, Codable {
         }
     }
 
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    func fileWrapper(configuration _: WriteConfiguration) throws -> FileWrapper {
         let encoder = JSONEncoder()
         let data = try encoder.encode(self)
         return FileWrapper(regularFileWithContents: data)
     }
 }
-
-

@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditCustomSubstanceView: View {
-
     @ObservedObject var customSubstance: CustomSubstance
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingConfirmation = false

@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct AcknowledgeInteractionsView: View {
-
     let substance: Substance
     let dismiss: () -> Void
 
@@ -30,7 +29,6 @@ struct AcknowledgeInteractionsView: View {
 }
 
 struct AcknowledgeInteractionsContent: View {
-    
     let substance: Substance
     let dismiss: () -> Void
 
@@ -67,7 +65,6 @@ struct AcknowledgeInteractionsContent: View {
         }
     }
 }
-
 
 struct AcknowledgeInteractionsContent_Previews: PreviewProvider {
     static var previews: some View {

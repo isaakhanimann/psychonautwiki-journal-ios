@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SubstanceScreen: View {
-
     let substance: Substance
 
     @State private var isShowingAddIngestionSheet = false

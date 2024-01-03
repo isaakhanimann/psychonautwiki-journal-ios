@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditConsumerScreen: View {
-
     @Binding var consumerName: String
 
     @State private var consumerNamesInOrder: [String] = []
@@ -25,10 +24,11 @@ struct EditConsumerScreen: View {
     var body: some View {
         EditConsumerScreenContent(
             consumerName: $consumerName,
-            consumerNamesInOrder: consumerNamesInOrder)
+            consumerNamesInOrder: consumerNamesInOrder
+        )
         .onAppear {
             let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
             ingestionFetchRequest.fetchLimit = 300
             let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
             consumerNamesInOrder = sortedIngestions.compactMap { ing in
@@ -39,17 +39,14 @@ struct EditConsumerScreen: View {
                 }
             }.uniqued()
         }
-
     }
 }
 
 private struct EditConsumerScreenContent: View {
-
     @Binding var consumerName: String
     let consumerNamesInOrder: [String]
 
     @Environment(\.dismiss) private var dismiss
-
 
     var body: some View {
         NavigationStack {

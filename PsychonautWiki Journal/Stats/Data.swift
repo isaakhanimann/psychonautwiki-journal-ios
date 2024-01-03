@@ -24,6 +24,7 @@ struct SubstanceCount: Identifiable {
     var id: String {
         substanceName
     }
+
     let substanceName: String
     let experienceCount: Int
 }
@@ -41,19 +42,19 @@ extension SubstanceData {
             .init(substanceName: "Cannabis", experienceCount: 15),
             .init(substanceName: "Cocaine", experienceCount: 8),
             .init(substanceName: "Amphetamine", experienceCount: 3),
-            .init(substanceName: "MDMA", experienceCount: 1)
+            .init(substanceName: "MDMA", experienceCount: 1),
         ],
         last12Months: [
             .init(substanceName: "Cannabis", experienceCount: 55),
             .init(substanceName: "Cocaine", experienceCount: 10),
             .init(substanceName: "MDMA", experienceCount: 4),
-            .init(substanceName: "Amphetamine", experienceCount: 3)
+            .init(substanceName: "Amphetamine", experienceCount: 3),
         ],
         years: [
             .init(substanceName: "Cannabis", experienceCount: 60),
             .init(substanceName: "Cocaine", experienceCount: 15),
             .init(substanceName: "MDMA", experienceCount: 8),
-            .init(substanceName: "Amphetamine", experienceCount: 8)
+            .init(substanceName: "Amphetamine", experienceCount: 8),
         ],
         colorMapping: { substanceName in
             switch substanceName {
@@ -71,7 +72,7 @@ extension SubstanceData {
             .init(substanceName: "Cannabis", experienceCount: 15),
             .init(substanceName: "Cocaine", experienceCount: 8),
             .init(substanceName: "Amphetamine", experienceCount: 3),
-            .init(substanceName: "MDMA", experienceCount: 1)
+            .init(substanceName: "MDMA", experienceCount: 1),
         ],
         last12Months: [
             .init(substanceName: "Cannabis", experienceCount: 55),
@@ -108,13 +109,13 @@ extension SubstanceData {
             .init(substanceName: "Substance 29", experienceCount: 4),
             .init(substanceName: "Substance 30", experienceCount: 4),
             .init(substanceName: "Substance 31", experienceCount: 4),
-            .init(substanceName: "Amphetamine", experienceCount: 3)
+            .init(substanceName: "Amphetamine", experienceCount: 3),
         ],
         years: [
             .init(substanceName: "Cannabis", experienceCount: 60),
             .init(substanceName: "Cocaine", experienceCount: 15),
             .init(substanceName: "MDMA", experienceCount: 8),
-            .init(substanceName: "Amphetamine", experienceCount: 8)
+            .init(substanceName: "Amphetamine", experienceCount: 8),
         ],
         colorMapping: { substanceName in
             switch substanceName {
@@ -133,6 +134,7 @@ struct SubstanceExperienceCountForDay: Identifiable {
     var id: String {
         day.asDateAndTime + substanceName
     }
+
     let day: Date
     let substanceName: String
     let experienceCount: Double
@@ -151,7 +153,6 @@ struct SubstanceExperienceCountForYear {
 }
 
 struct ExperienceData {
-
     let last30Days: [SubstanceExperienceCountForDay]
     let last12Months: [SubstanceExperienceCountForMonth]
     let years: [SubstanceExperienceCountForYear]
@@ -170,32 +171,32 @@ struct ExperienceData {
     }
 
     var monthlyAverage: Double {
-        var dates = last12Months.map({$0.month})
-        guard let minDate = dates.min() else {return 0}
-        guard let maxDate = dates.max() else {return 0}
-        guard var fillDate = Calendar.current.date(byAdding: .month, value: 1, to: minDate) else {return 0}
+        var dates = last12Months.map { $0.month }
+        guard let minDate = dates.min() else { return 0 }
+        guard let maxDate = dates.max() else { return 0 }
+        guard var fillDate = Calendar.current.date(byAdding: .month, value: 1, to: minDate) else { return 0 }
         while fillDate < maxDate {
             dates.append(fillDate)
-            guard let newFill = Calendar.current.date(byAdding: .month, value: 1, to: fillDate) else {return 0}
+            guard let newFill = Calendar.current.date(byAdding: .month, value: 1, to: fillDate) else { return 0 }
             fillDate = newFill
         }
-        let numberOfMonthsShown = dates.map({$0.asYearAndMonth}).uniqued().count
-        guard numberOfMonthsShown > 0 else {return 0}
+        let numberOfMonthsShown = dates.map { $0.asYearAndMonth }.uniqued().count
+        guard numberOfMonthsShown > 0 else { return 0 }
         return last12MonthsTotal / Double(numberOfMonthsShown)
     }
 
     var yearlyAverage: Double {
-        var dates = years.map({$0.year})
-        guard let minDate = dates.min() else {return 0}
-        guard let maxDate = dates.max() else {return 0}
-        guard var fillDate = Calendar.current.date(byAdding: .year, value: 1, to: minDate) else {return 0}
+        var dates = years.map { $0.year }
+        guard let minDate = dates.min() else { return 0 }
+        guard let maxDate = dates.max() else { return 0 }
+        guard var fillDate = Calendar.current.date(byAdding: .year, value: 1, to: minDate) else { return 0 }
         while fillDate < maxDate {
             dates.append(fillDate)
-            guard let newFill = Calendar.current.date(byAdding: .year, value: 1, to: fillDate) else {return 0}
+            guard let newFill = Calendar.current.date(byAdding: .year, value: 1, to: fillDate) else { return 0 }
             fillDate = newFill
         }
-        let numberOfYearsShown = dates.map({$0.asYear}).uniqued().count
-        guard numberOfYearsShown > 0 else {return 0}
+        let numberOfYearsShown = dates.map { $0.asYear }.uniqued().count
+        guard numberOfYearsShown > 0 else { return 0 }
         return yearsTotal / Double(numberOfYearsShown)
     }
 
@@ -208,13 +209,13 @@ struct ExperienceData {
             return dict.map { (name: String, counts: [SubstanceExperienceCountForDay]) in
                 SubstanceExperienceCount(
                     substanceName: name,
-                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    experienceCount: counts.map { $0.experienceCount }.reduce(0, +),
                     color: colorMapping(name)
                 )
             }
-            .filter({ elem in
+            .filter { elem in
                 elem.experienceCount > 0
-            })
+            }
             .sorted()
         case .last12Months:
             let dict = Dictionary(grouping: last12Months) { elem in
@@ -223,13 +224,13 @@ struct ExperienceData {
             return dict.map { (name: String, counts: [SubstanceExperienceCountForMonth]) in
                 SubstanceExperienceCount(
                     substanceName: name,
-                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    experienceCount: counts.map { $0.experienceCount }.reduce(0, +),
                     color: colorMapping(name)
                 )
             }
-            .filter({ elem in
+            .filter { elem in
                 elem.experienceCount > 0
-            })
+            }
             .sorted()
         case .years:
             let dict = Dictionary(grouping: years) { elem in
@@ -238,20 +239,19 @@ struct ExperienceData {
             return dict.map { (name: String, counts: [SubstanceExperienceCountForYear]) in
                 SubstanceExperienceCount(
                     substanceName: name,
-                    experienceCount: counts.map({$0.experienceCount}).reduce(0, +),
+                    experienceCount: counts.map { $0.experienceCount }.reduce(0, +),
                     color: colorMapping(name)
                 )
             }
-            .filter({ elem in
+            .filter { elem in
                 elem.experienceCount > 0
-            })
+            }
             .sorted()
         }
     }
-
 }
 
-struct SubstanceExperienceCount: Identifiable,  Comparable {
+struct SubstanceExperienceCount: Identifiable, Comparable {
     static func < (lhs: SubstanceExperienceCount, rhs: SubstanceExperienceCount) -> Bool {
         lhs.experienceCount > rhs.experienceCount
     }
@@ -259,11 +259,11 @@ struct SubstanceExperienceCount: Identifiable,  Comparable {
     var id: String {
         substanceName
     }
+
     let substanceName: String
     let experienceCount: Double
     let color: Color
 }
-
 
 extension ExperienceData {
     static let mock1 = ExperienceData(
@@ -272,9 +272,9 @@ extension ExperienceData {
             .init(day: date(year: 2022, month: 5, day: 8), substanceName: "Cannabis", experienceCount: 0.5),
             .init(day: date(year: 2022, month: 5, day: 9), substanceName: "Cannabis", experienceCount: 1),
             .init(day: date(year: 2022, month: 5, day: 10), substanceName: "Cannabis", experienceCount: 1),
-            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "Cocaine", experienceCount: 1.0/3),
-            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "Amphetamine", experienceCount: 1.0/3),
-            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "LSD", experienceCount: 1.0/3),
+            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "Cocaine", experienceCount: 1.0 / 3),
+            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "Amphetamine", experienceCount: 1.0 / 3),
+            .init(day: date(year: 2022, month: 5, day: 13), substanceName: "LSD", experienceCount: 1.0 / 3),
             .init(day: date(year: 2022, month: 5, day: 14), substanceName: "Cannabis", experienceCount: 1),
             .init(day: date(year: 2022, month: 5, day: 15), substanceName: "MDMA", experienceCount: 1),
             .init(day: date(year: 2022, month: 5, day: 25), substanceName: "Cocaine", experienceCount: 0.5),
@@ -282,7 +282,7 @@ extension ExperienceData {
             .init(day: date(year: 2022, month: 5, day: 27), substanceName: "Cannabis", experienceCount: 0.25),
             .init(day: date(year: 2022, month: 5, day: 27), substanceName: "Amphetamine", experienceCount: 0.25),
             .init(day: date(year: 2022, month: 5, day: 27), substanceName: "MDMA", experienceCount: 0.25),
-            .init(day: date(year: 2022, month: 5, day: 27), substanceName: "Cocaine", experienceCount: 0.25)
+            .init(day: date(year: 2022, month: 5, day: 27), substanceName: "Cocaine", experienceCount: 0.25),
         ],
         last12Months: [
             .init(month: date(year: 2021, month: 7), substanceName: "MDMA", experienceCount: 1),
@@ -294,7 +294,7 @@ extension ExperienceData {
             .init(month: date(year: 2021, month: 9), substanceName: "Cannabis", experienceCount: 3),
             .init(month: date(year: 2022, month: 1), substanceName: "MDMA", experienceCount: 1),
             .init(month: date(year: 2022, month: 1), substanceName: "Cannabis", experienceCount: 5),
-            .init(month: date(year: 2022, month: 3), substanceName: "Amphetamine", experienceCount: 3)
+            .init(month: date(year: 2022, month: 3), substanceName: "Amphetamine", experienceCount: 3),
         ],
         years: [
             .init(year: date(year: 2021), substanceName: "MDMA", experienceCount: 3),
@@ -304,7 +304,7 @@ extension ExperienceData {
             .init(year: date(year: 2022), substanceName: "MDMA", experienceCount: 5),
             .init(year: date(year: 2022), substanceName: "Cannabis", experienceCount: 15),
             .init(year: date(year: 2022), substanceName: "Amphetamine", experienceCount: 6),
-            .init(year: date(year: 2022), substanceName: "Cocaine", experienceCount: 2)
+            .init(year: date(year: 2022), substanceName: "Cocaine", experienceCount: 2),
         ],
         colorMapping: { substanceName in
             switch substanceName {

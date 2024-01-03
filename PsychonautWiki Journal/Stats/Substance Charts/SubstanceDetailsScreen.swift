@@ -17,10 +17,8 @@
 import Charts
 import SwiftUI
 
-
 @available(iOS 16, *)
 struct SubstanceDetailsScreen: View {
-
     let substanceData: SubstanceData
     @State private var timeRange: TimeRange = .last12Months
 
@@ -57,7 +55,7 @@ struct SubstanceDetailsScreen: View {
                                     .fill(substanceData.colorMapping(elem.substanceName))
                                     .cornerRadius(5, corners: [.topRight, .bottomRight])
                                     .frame(
-                                        width: geometry.size.width*widthRatio
+                                        width: geometry.size.width * widthRatio
                                     )
                             }
                             .frame(height: 20)
@@ -69,7 +67,6 @@ struct SubstanceDetailsScreen: View {
             } footer: {
                 Text("Each occurence of the substance in an experience is counted as 1.")
             }
-
         }
         .navigationTitle("Substances")
         .dismissWhenTabTapped()
@@ -78,12 +75,11 @@ struct SubstanceDetailsScreen: View {
 
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 
 struct RoundedCorner: Shape {
-
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
 

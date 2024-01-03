@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ChooseRouteScreen: View {
-
     let substance: Substance
     let dismiss: () -> Void
 
@@ -44,7 +43,8 @@ struct ChooseRouteScreen: View {
                     getGroupOfRoutes(routes: documentedRoutes)
                     if !otherRoutes.isEmpty {
                         NavigationLink(value: ChooseOtherRouteScreenArguments(substance: substance,
-                                                                              otherRoutes: otherRoutes)) {
+                                                                              otherRoutes: otherRoutes))
+                        {
                             GroupBox {
                                 Text("Other Routes")
                                     .font(.headline)
@@ -77,12 +77,12 @@ struct ChooseRouteScreen: View {
                 getRouteBoxWithNavigation(route: route)
             }
         } else {
-            let numRows = Int(ceil(Double(routes.count)/2.0))
-            ForEach(0..<numRows, id: \.self) { index in
+            let numRows = Int(ceil(Double(routes.count) / 2.0))
+            ForEach(0 ..< numRows, id: \.self) { index in
                 HStack {
-                    let route1 = routes[index*2]
+                    let route1 = routes[index * 2]
                     getRouteBoxWithNavigation(route: route1)
-                    let secondIndex = index*2+1
+                    let secondIndex = index * 2 + 1
                     if secondIndex < routes.count {
                         let route2 = routes[secondIndex]
                         getRouteBoxWithNavigation(route: route2)

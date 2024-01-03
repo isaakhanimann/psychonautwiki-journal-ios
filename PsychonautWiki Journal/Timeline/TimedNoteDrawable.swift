@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct TimedNoteDrawable {
-
     let distanceFromStart: TimeInterval
 
     private let time: Date
@@ -30,7 +29,7 @@ struct TimedNoteDrawable {
     ) {
         self.time = time
         self.color = color
-        self.distanceFromStart = time.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
+        distanceFromStart = time.timeIntervalSinceReferenceDate - startGraph.timeIntervalSinceReferenceDate
     }
 
     func draw(
@@ -39,7 +38,7 @@ struct TimedNoteDrawable {
         pixelsPerSec: Double,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let x = (distanceFromStart * pixelsPerSec) + halfLineWidth
         var path = Path()
         path.move(to: CGPoint(x: x, y: height))
@@ -47,6 +46,7 @@ struct TimedNoteDrawable {
         context.stroke(
             path,
             with: .color(color.swiftUIColor),
-            style: StrokeStyle.getTimedNoteStokeStyle())
+            style: StrokeStyle.getTimedNoteStokeStyle()
+        )
     }
 }

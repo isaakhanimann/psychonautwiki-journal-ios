@@ -15,8 +15,8 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import ActivityKit
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct TimelineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
@@ -38,7 +38,7 @@ struct TimelineWidgetLiveActivity: Widget {
                 }
                 .padding(.bottom, 3)
                 ProgressView(
-                    timerInterval: timelineModel.startTime...timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth),
+                    timerInterval: timelineModel.startTime ... timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth),
                     countsDown: false
                 )
                 .progressViewStyle(.linear)

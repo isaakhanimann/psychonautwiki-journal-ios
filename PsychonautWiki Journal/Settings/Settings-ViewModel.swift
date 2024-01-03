@@ -14,13 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 extension SettingsScreen {
     @MainActor
     class ViewModel: ObservableObject {
-
         @Published var isExporting = false
         @Published var journalFile = JournalFile()
         @Published var isShowingToast = false
@@ -110,17 +109,17 @@ extension SettingsScreen {
                 }
                 try context.save()
                 showSuccessToast(message: "Import Successful")
-            } catch DecodingError.keyNotFound(let key, let context) {
+            } catch let DecodingError.keyNotFound(key, context) {
                 showErrorToast(message: "Import Failed")
                 print("Missing key '\(key.stringValue)' not found – \(context.debugDescription) at \(context.codingPath)")
-            } catch DecodingError.typeMismatch(_, let context) {
+            } catch let DecodingError.typeMismatch(_, context) {
                 showErrorToast(message: "Import Failed")
                 print("Type mismatch – \(context.debugDescription)")
-            } catch DecodingError.valueNotFound(let type, let context) {
+            } catch let DecodingError.valueNotFound(type, context) {
                 let error = "Missing \(type) value – \(context.debugDescription) - codingPath: \(context.codingPath)"
                 print(error)
                 showErrorToast(message: "Import Failed")
-            } catch DecodingError.dataCorrupted(let context) {
+            } catch let DecodingError.dataCorrupted(context) {
                 showErrorToast(message: "Import Failed")
                 print("Data corrupted – \(context.debugDescription)")
             } catch {
@@ -142,7 +141,8 @@ extension SettingsScreen {
         private func showSuccessToast(message: String) {
             toastMessage = message
             isShowingToast = true
-            isShowingSuccessToast = true        }
+            isShowingSuccessToast = true
+        }
 
         private func showErrorToast(message: String) {
             toastMessage = message

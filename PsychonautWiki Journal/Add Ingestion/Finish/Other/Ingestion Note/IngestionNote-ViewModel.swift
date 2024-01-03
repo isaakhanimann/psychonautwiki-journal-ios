@@ -17,15 +17,13 @@
 import Foundation
 
 extension IngestionNoteScreen {
-
     @MainActor
     class ViewModel: ObservableObject {
-
         @Published var suggestedNotesInOrder = [String]()
 
         init() {
             let ingestionFetchRequest = Ingestion.fetchRequest()
-            ingestionFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Ingestion.time, ascending: false) ]
+            ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
             ingestionFetchRequest.predicate = NSPredicate(format: "note.length > 0")
             ingestionFetchRequest.fetchLimit = 15
             let sortedIngestions = (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []

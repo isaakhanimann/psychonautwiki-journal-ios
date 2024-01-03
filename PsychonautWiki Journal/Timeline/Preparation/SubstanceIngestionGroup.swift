@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -20,6 +20,7 @@ struct IngestionMinInfoForTimeline: Codable, Equatable {
     static func == (lhs: IngestionMinInfoForTimeline, rhs: IngestionMinInfoForTimeline) -> Bool {
         lhs.time == rhs.time
     }
+
     let substanceName: String
     let route: AdministrationRoute
     let onsetDelayInHours: Double
@@ -36,7 +37,8 @@ private func getIngestionMinInfoForTimeline(ingestions: [Ingestion]) -> [Ingesti
             onsetDelayInHours: ingestion.stomachFullnessUnwrapped?.onsetDelayForOralInHours ?? 0,
             time: ingestion.timeUnwrapped,
             dose: ingestion.doseUnwrapped,
-            color: ingestion.substanceColor)
+            color: ingestion.substanceColor
+        )
     }
 }
 
@@ -47,7 +49,7 @@ func getSubstanceIngestionGroups(ingestions: [Ingestion]) -> [SubstanceIngestion
         minInfo.substanceName
     }
     let substanceIngestionGroups: [SubstanceIngestionGroup] = substanceDict.compactMap { (substanceName: String, ingestionMinInfoForLines: [IngestionMinInfoForTimeline]) in
-        guard let color = ingestionMinInfoForLines.first?.color else {return nil}
+        guard let color = ingestionMinInfoForLines.first?.color else { return nil }
         let routeDict = Dictionary(grouping: ingestionMinInfoForLines) { value in
             value.route
         }
@@ -61,13 +63,14 @@ func getSubstanceIngestionGroups(ingestions: [Ingestion]) -> [SubstanceIngestion
             }
             return RouteMinInfo(
                 route: route,
-                ingestions: ingestions)
-
+                ingestions: ingestions
+            )
         }
         return SubstanceIngestionGroup(
             substanceName: substanceName,
             color: color,
-            routeMinInfos: routeMinInfos)
+            routeMinInfos: routeMinInfos
+        )
     }
     return substanceIngestionGroups
 }

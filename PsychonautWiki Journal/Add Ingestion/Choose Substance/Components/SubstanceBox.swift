@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SubstanceBox: View {
-
     let substance: Substance
     let dismiss: () -> Void
     let isEyeOpen: Bool
@@ -36,11 +35,11 @@ struct SubstanceBox: View {
         } else {
             NavigationLink(value: SubstanceAndRoute(
                 substance: substance,
-                administrationRoute: .oral)) {
+                administrationRoute: .oral
+            )) {
                 content
             }
         }
-
     }
 
     private var content: some View {

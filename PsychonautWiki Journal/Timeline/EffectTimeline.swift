@@ -17,14 +17,13 @@
 import SwiftUI
 
 struct EffectTimeline: View {
-
     let timelineModel: TimelineModel
     var height: Double = 200
     var isShowingCurrentTime = true
     var spaceToLabels = 5.0
     private let lineWidth: Double = 5
     private var halfLineWidth: Double {
-        lineWidth/2
+        lineWidth / 2
     }
 
     var body: some View {
@@ -33,31 +32,34 @@ struct EffectTimeline: View {
             TimelineView(.everyMinute) { timeline in
                 let timelineDate = timeline.date
                 Canvas { context, size in
-                    let pixelsPerSec = size.width/timelineModel.totalWidth
-                    timelineModel.groupDrawables.forEach({ groupDrawable in
+                    let pixelsPerSec = size.width / timelineModel.totalWidth
+                    timelineModel.groupDrawables.forEach { groupDrawable in
                         groupDrawable.draw(
                             context: context,
                             height: size.height,
                             pixelsPerSec: pixelsPerSec,
-                            lineWidth: lineWidth)
-                    })
+                            lineWidth: lineWidth
+                        )
+                    }
                     timelineModel.ratingDrawables.forEach { ratingDrawable in
                         ratingDrawable.draw(
                             context: &context,
                             height: size.height,
                             pixelsPerSec: pixelsPerSec,
-                            lineWidth: 3)
+                            lineWidth: 3
+                        )
                     }
                     timelineModel.timedNoteDrawables.forEach { timedNoteDrawable in
                         timedNoteDrawable.draw(
                             context: context,
                             height: size.height,
                             pixelsPerSec: pixelsPerSec,
-                            lineWidth: 3)
+                            lineWidth: 3
+                        )
                     }
-                    let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2*60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth) && isShowingCurrentTime
+                    let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2 * 60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth) && isShowingCurrentTime
                     if shouldDrawCurrentTime {
-                        let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate)*pixelsPerSec) + halfLineWidth
+                        let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate) * pixelsPerSec) + halfLineWidth
                         var path = Path()
                         path.move(to: CGPoint(x: currentTimeX, y: 0))
                         path.addLine(to: CGPoint(x: currentTimeX, y: size.height))
@@ -73,7 +75,7 @@ struct EffectTimeline: View {
     private var timeLabels: some View {
         Canvas { context, size in
             let widthInPixels = size.width
-            let pixelsPerSec = widthInPixels/timelineModel.totalWidth
+            let pixelsPerSec = widthInPixels / timelineModel.totalWidth
             let fullHours = timelineModel.axisDrawable.getFullHours(
                 pixelsPerSec: pixelsPerSec,
                 widthInPixels: widthInPixels
@@ -81,7 +83,7 @@ struct EffectTimeline: View {
             fullHours.forEach { fullHour in
                 context.draw(
                     Text(fullHour.label).font(.caption),
-                    at: CGPoint(x: fullHour.distanceFromStart, y: size.height/2),
+                    at: CGPoint(x: fullHour.distanceFromStart, y: size.height / 2),
                     anchor: .center
                 )
             }
@@ -90,9 +92,7 @@ struct EffectTimeline: View {
     }
 }
 
-
 struct EffectTimeline_Previews: PreviewProvider {
-
     static var previews: some View {
         List {
             Section {
@@ -111,22 +111,22 @@ struct EffectTimeline_Previews: PreviewProvider {
 
     static let everythingForEachRating: [EverythingForOneRating] = [
         EverythingForOneRating(
-            time: Date().addingTimeInterval(-2*60*60),
+            time: Date().addingTimeInterval(-2 * 60 * 60),
             option: .fourPlus
         ),
         EverythingForOneRating(
-            time: Date().addingTimeInterval(-1*60*60),
+            time: Date().addingTimeInterval(-1 * 60 * 60),
             option: .plus
-        )
+        ),
     ]
 
     static let everythingForEachTimedNote: [EverythingForOneTimedNote] = [
         EverythingForOneTimedNote(
-            time: Date().addingTimeInterval(-2*60*60),
+            time: Date().addingTimeInterval(-2 * 60 * 60),
             color: .blue
         ),
         EverythingForOneTimedNote(
-            time: Date().addingTimeInterval(-1*60*60),
+            time: Date().addingTimeInterval(-1 * 60 * 60),
             color: .green
         ),
     ]
@@ -141,14 +141,18 @@ struct EffectTimeline_Previews: PreviewProvider {
                     ingestions: [
                         IngestionMinInfo(
                             dose: 100,
-                            time: .now.addingTimeInterval(-2*60*60),
-                            onsetDelayInHours: 0),
+                            time: .now.addingTimeInterval(-2 * 60 * 60),
+                            onsetDelayInHours: 0
+                        ),
                         IngestionMinInfo(
                             dose: 50,
                             time: .now,
-                            onsetDelayInHours: 0)
-                    ])
-            ]),
+                            onsetDelayInHours: 0
+                        ),
+                    ]
+                ),
+            ]
+        ),
         SubstanceIngestionGroup(
             substanceName: "LSD",
             color: .blue,
@@ -156,8 +160,11 @@ struct EffectTimeline_Previews: PreviewProvider {
                 RouteMinInfo(route: .oral, ingestions: [
                     IngestionMinInfo(
                         dose: 100,
-                        time: .now.addingTimeInterval(-4*60*60),
-                        onsetDelayInHours: 0)])
-            ])
+                        time: .now.addingTimeInterval(-4 * 60 * 60),
+                        onsetDelayInHours: 0
+                    ),
+                ]),
+            ]
+        ),
     ]
 }

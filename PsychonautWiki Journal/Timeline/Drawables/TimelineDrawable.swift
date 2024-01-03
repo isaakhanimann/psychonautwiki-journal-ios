@@ -17,7 +17,6 @@
 import SwiftUI
 
 protocol TimelineDrawable {
-
     func draw(
         context: GraphicsContext,
         height: Double,

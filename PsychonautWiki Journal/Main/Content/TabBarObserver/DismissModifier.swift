@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,11 +17,10 @@
 import SwiftUI
 
 struct DismissModifier: ViewModifier {
-
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.currentTab) var currentTab
     @EnvironmentObject var tabBarObserver: TabBarObserver
-    
+
     func body(content: Content) -> some View {
         content.onReceive(tabBarObserver.tabTapSubject) { option in
             if option == .sameTab && tabBarObserver.selectedTab == currentTab {
@@ -33,6 +32,6 @@ struct DismissModifier: ViewModifier {
 
 extension View {
     func dismissWhenTabTapped() -> some View {
-        self.modifier(DismissModifier())
+        modifier(DismissModifier())
     }
 }

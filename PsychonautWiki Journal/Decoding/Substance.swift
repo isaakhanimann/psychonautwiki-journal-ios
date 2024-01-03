@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 struct Substance: Decodable, Identifiable, Hashable {
     static func == (lhs: Substance, rhs: Substance) -> Bool {
@@ -25,9 +25,11 @@ struct Substance: Decodable, Identifiable, Hashable {
     var id: String {
         name
     }
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
+
     let name: String
     let url: URL
     let commonNames: [String]
@@ -69,32 +71,32 @@ struct Substance: Decodable, Identifiable, Hashable {
     init(from decoder: Decoder) throws {
         // need custom decoder because some keys might be missing so we need decodeIfPresent
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.url = try container.decode(URL.self, forKey: .url)
-        self.commonNames = try container.decode([String].self, forKey: .commonNames)
-        self.isApproved = try container.decode(Bool.self, forKey: .isApproved)
-        self.roas = try container.decode([Roa].self, forKey: .roas)
-        self.tolerance = try? container.decodeIfPresent(Tolerance.self, forKey: .tolerance)
-        self.crossTolerances = (try? container.decodeIfPresent([String].self, forKey: .crossTolerances)) ?? []
-        self.addictionPotential = try? container.decodeIfPresent(
+        name = try container.decode(String.self, forKey: .name)
+        url = try container.decode(URL.self, forKey: .url)
+        commonNames = try container.decode([String].self, forKey: .commonNames)
+        isApproved = try container.decode(Bool.self, forKey: .isApproved)
+        roas = try container.decode([Roa].self, forKey: .roas)
+        tolerance = try? container.decodeIfPresent(Tolerance.self, forKey: .tolerance)
+        crossTolerances = (try? container.decodeIfPresent([String].self, forKey: .crossTolerances)) ?? []
+        addictionPotential = try? container.decodeIfPresent(
             String.self,
             forKey: .addictionPotential
         )
-        self.toxicities = (try? container.decodeIfPresent(
+        toxicities = (try? container.decodeIfPresent(
             [String].self,
             forKey: .toxicities
         )) ?? []
-        self.categories = (try? container.decodeIfPresent(
+        categories = (try? container.decodeIfPresent(
             [String].self,
             forKey: .categories
         )) ?? []
-        self.interactions = try? container.decodeIfPresent(Interactions.self, forKey: .interactions)
-        self.summary = try? container.decodeIfPresent(String.self, forKey: .summary)
-        self.effectsSummary = try? container.decodeIfPresent(String.self, forKey: .effectsSummary)
-        self.dosageRemark = try? container.decodeIfPresent(String.self, forKey: .dosageRemark)
-        self.generalRisks = try? container.decodeIfPresent(String.self, forKey: .generalRisks)
-        self.longtermRisks = try? container.decodeIfPresent(String.self, forKey: .longtermRisks)
-        self.saferUse = (try? container.decodeIfPresent([String].self, forKey: .saferUse)) ?? []
+        interactions = try? container.decodeIfPresent(Interactions.self, forKey: .interactions)
+        summary = try? container.decodeIfPresent(String.self, forKey: .summary)
+        effectsSummary = try? container.decodeIfPresent(String.self, forKey: .effectsSummary)
+        dosageRemark = try? container.decodeIfPresent(String.self, forKey: .dosageRemark)
+        generalRisks = try? container.decodeIfPresent(String.self, forKey: .generalRisks)
+        longtermRisks = try? container.decodeIfPresent(String.self, forKey: .longtermRisks)
+        saferUse = (try? container.decodeIfPresent([String].self, forKey: .saferUse)) ?? []
     }
 
     var administrationRoutesUnwrapped: [AdministrationRoute] {
@@ -128,7 +130,7 @@ struct Substance: Decodable, Identifiable, Hashable {
     }
 
     var durationInfos: [DurationInfo] {
-        roas.compactMap({ roa in
+        roas.compactMap { roa in
             if let duration = roa.duration {
                 return DurationInfo(
                     route: roa.name,
@@ -137,11 +139,11 @@ struct Substance: Decodable, Identifiable, Hashable {
             } else {
                 return nil
             }
-        })
+        }
     }
 
     var doseInfos: [DoseInfo] {
-        roas.compactMap({ roa in
+        roas.compactMap { roa in
             if let dose = roa.dose {
                 return DoseInfo(
                     route: roa.name,
@@ -151,7 +153,7 @@ struct Substance: Decodable, Identifiable, Hashable {
             } else {
                 return nil
             }
-        })
+        }
     }
 
     var isHallucinogen: Bool {
@@ -169,4 +171,3 @@ struct DoseInfo {
     let roaDose: RoaDose
     let bioavailability: RoaRange?
 }
-

@@ -23,6 +23,7 @@ struct ChooseCaffeineDoseScreen: View {
     var oralDose: RoaDose {
         caffeine.getDose(for: .oral)!
     }
+
     @State private var caffeineDoseInMg = 50.0
     @State private var isEstimate = true
     let units = "mg"
@@ -37,13 +38,13 @@ struct ChooseCaffeineDoseScreen: View {
 
     var body: some View {
         screen.toolbar {
-                       ToolbarItem(placement: .cancellationAction) {
-                           Button("Cancel") {
-                               dismiss()
-                           }
-                       }
-                       ToolbarItem(placement: .primaryAction) {
-                           nextLink
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .primaryAction) {
+                nextLink
             }
         }
     }
@@ -54,9 +55,10 @@ struct ChooseCaffeineDoseScreen: View {
             administrationRoute: .oral,
             dose: doseRounded,
             units: units,
-            isEstimate: isEstimate)) {
-                NextLabel()
-            }
+            isEstimate: isEstimate
+        )) {
+            NextLabel()
+        }
     }
 
     private var unknownDoseLink: some View {
@@ -79,7 +81,7 @@ struct ChooseCaffeineDoseScreen: View {
                     DoseRow(roaDose: oralDose)
                     Slider(
                         value: $caffeineDoseInMg,
-                        in: 10...900,
+                        in: 10 ... 900,
                         step: 10
                     ) {
                         Text("Drink Size")

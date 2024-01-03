@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -31,7 +31,6 @@ struct RatingCodable: Codable {
         self.option = option
     }
 
-
     enum CodingKeys: String, CodingKey {
         case creationDate
         case time
@@ -41,13 +40,13 @@ struct RatingCodable: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
-        self.creationDate = getDateFromMillis(millis: creationDateMillis)
+        creationDate = getDateFromMillis(millis: creationDateMillis)
         if let timeMillis = try values.decodeIfPresent(UInt64.self, forKey: .time) {
-            self.time = getDateFromMillis(millis: timeMillis)
+            time = getDateFromMillis(millis: timeMillis)
         } else {
-            self.time = nil
+            time = nil
         }
-        self.option = try values.decode(ShulginRatingOption.self, forKey: .option)
+        option = try values.decode(ShulginRatingOption.self, forKey: .option)
     }
 
     func encode(to encoder: Encoder) throws {

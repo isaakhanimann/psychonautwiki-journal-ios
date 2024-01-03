@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 struct RoaDuration: Codable {
-
     let onset: DurationRange?
     let comeup: DurationRange?
     let peak: DurationRange?
@@ -28,10 +27,10 @@ struct RoaDuration: Codable {
 
     var maxLengthOfTimelineInSec: TimeInterval? {
         let total = total?.maxSec
-        guard let onset = onset?.maxSec else {return total}
-        guard let comeup = comeup?.maxSec else {return total}
-        guard let peak = peak?.maxSec else {return total}
-        guard let offset = offset?.maxSec else {return total}
+        guard let onset = onset?.maxSec else { return total }
+        guard let comeup = comeup?.maxSec else { return total }
+        guard let peak = peak?.maxSec else { return total }
+        guard let offset = offset?.maxSec else { return total }
         return onset
             + comeup
             + peak
@@ -40,8 +39,8 @@ struct RoaDuration: Codable {
 
     var isFullTimeLineDefined: Bool {
         onset?.isFullyDefined ?? false &&
-        comeup?.isFullyDefined ?? false &&
-        peak?.isFullyDefined ?? false &&
-        offset?.isFullyDefined ?? false
+            comeup?.isFullyDefined ?? false &&
+            peak?.isFullyDefined ?? false &&
+            offset?.isFullyDefined ?? false
     }
 }

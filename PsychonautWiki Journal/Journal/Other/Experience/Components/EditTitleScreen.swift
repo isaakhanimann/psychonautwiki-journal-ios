@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditTitleScreen: View {
-
     let experience: Experience
 
     @State private var title = ""
@@ -29,7 +28,7 @@ struct EditTitleScreen: View {
             title: $title,
             isTextFieldFocused: $isTextFieldFocused,
             save: save,
-            dismiss: {dismiss()}
+            dismiss: { dismiss() }
         )
         .onAppear {
             title = experience.titleUnwrapped
@@ -45,7 +44,6 @@ struct EditTitleScreen: View {
 }
 
 struct EditTitleScreenContent: View {
-
     @Binding var title: String
     let isTextFieldFocused: FocusState<Bool>.Binding
     let save: () -> Void

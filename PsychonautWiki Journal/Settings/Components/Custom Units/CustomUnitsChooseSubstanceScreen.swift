@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,8 +17,6 @@
 import SwiftUI
 
 struct CustomUnitsChooseSubstanceScreen: View {
-
-
     @State private var searchText = ""
     @Environment(\.dismiss) var dismiss
 
@@ -33,7 +31,8 @@ struct CustomUnitsChooseSubstanceScreen: View {
         return SearchLogic.getFilteredSubstancesSorted(
             substances: SubstanceRepo.shared.substances,
             searchText: searchText,
-            namesToSortBy: substanceNamesInOrder)
+            namesToSortBy: substanceNamesInOrder
+        )
     }
 
     var body: some View {
@@ -79,7 +78,6 @@ struct CustomUnitsChooseSubstanceScreen: View {
 }
 
 private struct SubstanceRowLabel: View {
-
     let substance: Substance
 
     var body: some View {

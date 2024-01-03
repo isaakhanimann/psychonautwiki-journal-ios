@@ -39,7 +39,7 @@ func getSubstanceGroupWithRepoInfo(substanceIngestionGroups: [SubstanceIngestion
         let routeGroups = substanceIngestionGroup.routeMinInfos.map { routeMinInfo in
             let roaDuration = substance?.getDuration(for: routeMinInfo.route)
             let roaDose = substance?.getDose(for: routeMinInfo.route)
-            let maxDoseOfRoute: Double? =  routeMinInfo.ingestions.compactMap({$0.dose}).max { lhs, rhs in
+            let maxDoseOfRoute: Double? = routeMinInfo.ingestions.compactMap { $0.dose }.max { lhs, rhs in
                 lhs < rhs
             }
             let ingestions = routeMinInfo.ingestions.map { ingestion in
@@ -63,24 +63,26 @@ func getSubstanceGroupWithRepoInfo(substanceIngestionGroups: [SubstanceIngestion
                 }
                 var verticalWeight = 1.0
                 if let dose = ingestion.dose, let max = maxDoseOfRoute {
-                    verticalWeight = dose/max
+                    verticalWeight = dose / max
                 }
                 return IngestionWithRepoInfo(
                     onsetDelayInHours: ingestion.onsetDelayInHours,
                     time: ingestion.time,
                     horizontalWeight: horizontalWeight,
-                    verticalWeight: verticalWeight)
+                    verticalWeight: verticalWeight
+                )
             }
             return RouteGroupWithRepoInfo(
                 roaDuration: roaDuration,
-                ingestions: ingestions)
+                ingestions: ingestions
+            )
         }
         return SubstanceGroupWithRepoInfo(
             color: substanceIngestionGroup.color,
-            routeGroups: routeGroups)
+            routeGroups: routeGroups
+        )
     }
 }
-
 
 struct SubstanceIngestionGroup: Equatable, Codable {
     let substanceName: String
@@ -98,4 +100,3 @@ struct IngestionMinInfo: Equatable, Codable {
     let time: Date
     let onsetDelayInHours: Double
 }
-

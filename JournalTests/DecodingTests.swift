@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import XCTest
-@testable import Journal
 import CoreData
+@testable import Journal
+import XCTest
 
 class DecodingTests: XCTestCase {
-
     func testRoaDecoding() async throws {
         let data = getInitialData()
         let decoder = JSONDecoder()
@@ -31,7 +30,6 @@ class DecodingTests: XCTestCase {
         } catch {
             fatalError(String(describing: error))
         }
-
     }
 
     private func getInitialData() -> Data {
@@ -44,13 +42,9 @@ class DecodingTests: XCTestCase {
         }
         return data
     }
-
 }
 
-
-
 struct RoaDecodable: Decodable {
-
     let roas: [Roa]
 
     enum CodingKeys: String, CodingKey {
@@ -59,6 +53,6 @@ struct RoaDecodable: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.roas = try container.decode([Roa].self, forKey: .roas)
+        roas = try container.decode([Roa].self, forKey: .roas)
     }
 }

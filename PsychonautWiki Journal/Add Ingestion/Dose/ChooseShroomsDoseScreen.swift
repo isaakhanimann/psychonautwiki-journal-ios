@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,12 +17,12 @@
 import SwiftUI
 
 struct ChooseShroomsDoseScreen: View {
-
     let dismiss: () -> Void
     let mushrooms = SubstanceRepo.shared.getSubstance(name: "Psilocybin mushrooms")!
     var oralDose: RoaDose {
         mushrooms.getDose(for: .oral)!
     }
+
     @State private var mushroomWeightInGrams = 2.0
     @State private var psilocybinTextInMg = ""
     @State private var psilocybinInMg: Double? = nil
@@ -55,10 +55,10 @@ struct ChooseShroomsDoseScreen: View {
     }
 
     private var currentDoseTypeColor: Color {
-        guard let psilocybinInMg else {return .primary}
+        guard let psilocybinInMg else { return .primary }
         return oralDose.getRangeType(for: psilocybinInMg, with: "mg").color
     }
-    
+
     var body: some View {
         screen.toolbar {
             ToolbarItem(placement: .cancellationAction) {
@@ -79,9 +79,10 @@ struct ChooseShroomsDoseScreen: View {
             dose: psilocybinInMg,
             units: "mg",
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote)) {
-                NextLabel()
-            }
+            suggestedNote: suggestedNote
+        )) {
+            NextLabel()
+        }
     }
 
     private var unknownDoseLink: some View {

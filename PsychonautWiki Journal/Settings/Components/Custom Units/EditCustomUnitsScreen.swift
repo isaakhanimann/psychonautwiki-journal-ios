@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditCustomUnitsScreen: View {
-
     let customUnit: CustomUnit
 
     @State private var name: String = ""
@@ -76,7 +75,6 @@ struct EditCustomUnitsScreen: View {
 }
 
 struct EditCustomUnitsScreenContent: View {
-
     let substanceName: String
     let roaDose: RoaDose?
     @Binding var name: String
@@ -87,7 +85,6 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var isEstimate: Bool
     @Binding var isArchived: Bool
     let delete: () -> Void
-
 
     var body: some View {
         Form {

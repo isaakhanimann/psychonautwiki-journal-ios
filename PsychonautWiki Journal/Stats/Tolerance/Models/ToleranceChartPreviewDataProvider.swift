@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,8 +16,7 @@
 
 import Foundation
 
-struct ToleranceChartPreviewDataProvider {
-
+enum ToleranceChartPreviewDataProvider {
     static let mock1: [ToleranceWindow] = [
         ToleranceWindow(substanceName: "MDMA",
                         start: getDate(year: 2023, month: 2, day: 1)!,
@@ -38,7 +37,6 @@ struct ToleranceChartPreviewDataProvider {
                         start: getDate(year: 2023, month: 2, day: 20)!,
                         end: getDate(year: 2023, month: 2, day: 30)!,
                         toleranceType: .half,
-                        substanceColor: .blue)
+                        substanceColor: .blue),
     ]
-
 }

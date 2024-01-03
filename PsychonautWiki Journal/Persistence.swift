@@ -19,9 +19,8 @@ import SwiftUI
 
 struct PersistenceController {
     static let shared = PersistenceController()
-    static var preview: PersistenceController = {
-        PersistenceController(inMemory: true)
-    }()
+    static var preview: PersistenceController = .init(inMemory: true)
+
     let container: NSPersistentContainer
     static let needsToSeeWelcomeKey = "needsToSeeWelcome"
     static let isEyeOpenKey1 = "isEyeOpen"
@@ -44,7 +43,7 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores { (_, error) in
+        container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")
             }
@@ -96,8 +95,8 @@ struct PersistenceController {
             let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
             var companionsDict: [String: SubstanceCompanion] = [:]
             for ingestion in allIngestions {
-                guard let name = ingestion.substanceName else {continue}
-                guard let colorUnwrap = ingestion.color else {continue}
+                guard let name = ingestion.substanceName else { continue }
+                guard let colorUnwrap = ingestion.color else { continue }
                 if let companion = companionsDict[name] {
                     ingestion.substanceCompanion = companion
                 } else {
@@ -164,7 +163,7 @@ struct PersistenceController {
 
     func getLatestExperience() -> Experience? {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false) ]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
         fetchRequest.fetchLimit = 10
         let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
         return experiences.sorted().first

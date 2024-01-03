@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct AddToleranceIngestionScreen: View {
-
     @StateObject private var viewModel = ChooseSubstanceScreen.ViewModel()
     @Environment(\.dismiss) var dismiss
     let finish: (SubstanceAndDay) -> Void
@@ -28,9 +27,8 @@ struct AddToleranceIngestionScreen: View {
                 if substance.tolerance?.halfToleranceInHours != nil || substance.tolerance?.zeroToleranceInHours != nil {
                     NavigationLink {
                         ChooseDateScreen(substanceName: substance.name,
-                                         cancel: {dismiss()},
-                                         finish: finish
-                        )
+                                         cancel: { dismiss() },
+                                         finish: finish)
                     } label: {
                         Text(substance.name)
                             .font(.headline)

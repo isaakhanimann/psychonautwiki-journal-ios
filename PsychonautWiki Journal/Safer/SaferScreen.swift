@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SaferScreen: View {
-
     var body: some View {
         NavigationStack {
             List {
@@ -66,7 +65,7 @@ struct SaferScreen: View {
                             )
                         }
                         .navigationTitle(title5)
-                            .dismissWhenTabTapped()
+                        .dismissWhenTabTapped()
                     }
                     NavigationLink("Administration Routes") {
                         SaferRoutesScreen()

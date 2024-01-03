@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import WebKit
 import SwiftUI
+import WebKit
 
 struct WebViewRepresentable: UIViewRepresentable {
-
     @Binding var isLoading: Bool
     let url: URL
 
@@ -30,9 +29,7 @@ struct WebViewRepresentable: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {
-
-    }
+    func updateUIView(_: WKWebView, context _: Context) {}
 
     func makeCoordinator() -> WebViewCoordinator {
         WebViewCoordinator(isLoading: $isLoading)
@@ -40,18 +37,17 @@ struct WebViewRepresentable: UIViewRepresentable {
 }
 
 class WebViewCoordinator: NSObject, WKNavigationDelegate {
-
     @Binding var isLoading: Bool
 
     init(isLoading: Binding<Bool>) {
         _isLoading = isLoading
     }
 
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         isLoading = true
     }
 
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+    func webView(_: WKWebView, didCommit _: WKNavigation!) {
         isLoading = false
     }
 }

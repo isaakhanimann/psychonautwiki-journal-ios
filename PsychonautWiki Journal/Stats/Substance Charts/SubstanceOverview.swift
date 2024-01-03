@@ -19,7 +19,6 @@ import SwiftUI
 
 @available(iOS 16, *)
 struct SubstanceOverviewChart: View {
-
     let substanceData: SubstanceData
 
     var body: some View {
@@ -40,7 +39,6 @@ struct SubstanceOverviewChart: View {
 
 @available(iOS 16, *)
 struct SubstanceOverview: View {
-
     let substanceData: SubstanceData
 
     var body: some View {
@@ -62,7 +60,7 @@ struct SubstanceOverview: View {
     var chartHeight: CGFloat {
         let numberOfRows = substanceData.last12Months.count
         if numberOfRows < 5 {
-            return CGFloat(numberOfRows*20)
+            return CGFloat(numberOfRows * 20)
         } else {
             return 100
         }

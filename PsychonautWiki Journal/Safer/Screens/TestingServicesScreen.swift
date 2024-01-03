@@ -21,8 +21,8 @@ struct TestingServicesScreen: View {
         List {
             Section("Austria") {
                 TestingServiceItem(
-                    name:"Drogenarbeit Z6",
-                    city:"Innsbruck",
+                    name: "Drogenarbeit Z6",
+                    city: "Innsbruck",
                     url: "https://www.drogenarbeitz6.at/drug-checking.html"
                 )
                 TestingServiceItem(

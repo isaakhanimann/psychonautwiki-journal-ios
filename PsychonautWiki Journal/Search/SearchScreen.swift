@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct SearchScreen: View {
-
     @FocusState private var isSearchFocused: Bool
 
     @State private var searchText = ""
@@ -87,7 +86,8 @@ struct SearchScreen: View {
         return SearchLogic.getFilteredSubstancesSorted(
             substances: substancesFilteredWithCategoriesOnly,
             searchText: searchText,
-            namesToSortBy: substanceNamesInOrder)
+            namesToSortBy: substanceNamesInOrder
+        )
     }
 
     var body: some View {

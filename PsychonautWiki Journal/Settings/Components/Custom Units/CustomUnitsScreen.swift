@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct CustomUnitsScreen: View {
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \CustomUnit.creationDate, ascending: false)]
     ) private var customUnits: FetchedResults<CustomUnit>
@@ -55,9 +54,7 @@ struct CustomUnitsScreen: View {
     }
 }
 
-
 struct CustomUnitRow: View {
-
     let customUnit: CustomUnit
 
     var body: some View {

@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct TimelineSection: View {
-
     let timelineModel: TimelineModel?
     let hiddenIngestions: [ObjectIdentifier]
     let ingestionsSorted: [Ingestion]
@@ -38,7 +37,7 @@ struct TimelineSection: View {
                     EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
                 }
             } else {
-                Canvas {_,_ in }.frame(height: timelineHeight)
+                Canvas { _, _ in }.frame(height: timelineHeight)
             }
             ForEach(ingestionsSorted) { ing in
                 let isIngestionHidden = hiddenIngestions.contains(ing.id)

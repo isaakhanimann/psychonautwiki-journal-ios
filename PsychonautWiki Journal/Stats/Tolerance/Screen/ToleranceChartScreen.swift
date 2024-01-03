@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -18,8 +18,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct ToleranceChartScreen: View {
-
-    @State private var sinceDate = Date().addingTimeInterval(-3*30*24*60*60)
+    @State private var sinceDate = Date().addingTimeInterval(-3 * 30 * 24 * 60 * 60)
     @State private var toleranceWindows: [ToleranceWindow] = []
     @State private var substancesInIngestionsButNotChart: [String] = []
     @State private var numberOfSubstancesInChart = 0
@@ -41,20 +40,19 @@ struct ToleranceChartScreen: View {
                                     sinceDate: $sinceDate,
                                     substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
                                     numberOfSubstancesInChart: numberOfSubstancesInChart,
-                                    onAddTap: {isPresentingSheet.toggle()},
-                                    substances: substancesInChart
-        )
-        .onAppear(perform: calculateScreen)
-        .onChange(of: ingestions.count) { _ in
-            calculateScreen()
-        }
-        .onChange(of: sinceDate) { _ in
-            calculateScreen()
-        }
-        .dismissWhenTabTapped()
-        .sheet(isPresented: $isPresentingSheet) {
-            AddToleranceIngestionScreen(finish: finishAddingIngestion)
-        }
+                                    onAddTap: { isPresentingSheet.toggle() },
+                                    substances: substancesInChart)
+            .onAppear(perform: calculateScreen)
+            .onChange(of: ingestions.count) { _ in
+                calculateScreen()
+            }
+            .onChange(of: sinceDate) { _ in
+                calculateScreen()
+            }
+            .dismissWhenTabTapped()
+            .sheet(isPresented: $isPresentingSheet) {
+                AddToleranceIngestionScreen(finish: finishAddingIngestion)
+            }
     }
 
     private func finishAddingIngestion(substanceAndDay: SubstanceAndDay) {
@@ -71,11 +69,11 @@ struct ToleranceChartScreen: View {
             SubstanceAndDay(substanceName: ing.substanceNameUnwrapped, day: ing.timeUnwrapped)
         }
         toleranceWindows = ToleranceChartCalculator.getToleranceWindows(from: persisted + additionalSubstanceDays, substanceCompanions: Array(substanceCompanions))
-        let substanceNamesInIngestions = Set(relevantIngestions.map({$0.substanceNameUnwrapped}))
-        let substanceNamesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
-        substancesInChart = SubstanceRepo.shared.getSubstances(names: substanceNamesInToleranceWindows).map({ sub in
-            sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name})?.color ?? .red)
-        })
+        let substanceNamesInIngestions = Set(relevantIngestions.map { $0.substanceNameUnwrapped })
+        let substanceNamesInToleranceWindows = Set(toleranceWindows.map { $0.substanceName })
+        substancesInChart = SubstanceRepo.shared.getSubstances(names: substanceNamesInToleranceWindows).map { sub in
+            sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name })?.color ?? .red)
+        }
         numberOfSubstancesInChart = substanceNamesInToleranceWindows.count
         let substancesWithoutToleranceWindows = substanceNamesInIngestions.subtracting(substanceNamesInToleranceWindows)
         substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)

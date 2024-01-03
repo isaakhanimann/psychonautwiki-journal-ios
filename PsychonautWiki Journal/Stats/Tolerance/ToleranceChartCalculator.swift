@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,8 +16,7 @@
 
 import SwiftUI
 
-struct ToleranceChartCalculator {
-
+enum ToleranceChartCalculator {
     static func getToleranceWindows(from substanceAndDays: [SubstanceAndDay], substanceCompanions: [SubstanceCompanion]) -> [ToleranceWindow] {
         let cleanedSubstanceAndDays = removeMultipleSubstancesInADay(substanceAndDays: substanceAndDays)
         let substanceIntervals = getSubstanceIntervals(from: cleanedSubstanceAndDays)
@@ -31,7 +30,7 @@ struct ToleranceChartCalculator {
         Dictionary(grouping: substanceAndDays, by: { ing in
             ing.day.getDateWithoutTime()
         }).flatMap { day, substances in
-            let substanceNames = Set(substances.map {$0.substanceName})
+            let substanceNames = Set(substances.map { $0.substanceName })
             return substanceNames.map { name in
                 SubstanceAndDay(substanceName: name, day: day)
             }
@@ -46,17 +45,18 @@ struct ToleranceChartCalculator {
                 start: substanceInterval.dateInterval.start,
                 end: substanceInterval.dateInterval.end,
                 toleranceType: substanceInterval.toleranceType,
-                substanceColor: color)
+                substanceColor: color
+            )
         }
     }
 
-    private static func getSubstanceIntervalsGroupedBySubstance(substanceIntervals: [SubstanceInterval]) -> Dictionary<String, [SubstanceInterval]> {
+    private static func getSubstanceIntervalsGroupedBySubstance(substanceIntervals: [SubstanceInterval]) -> [String: [SubstanceInterval]] {
         Dictionary(grouping: substanceIntervals) { interval in
             interval.substanceName
         }
     }
 
-    private static func getMergedSubstanceIntervals(intervalsGroupedBySubstance: Dictionary<String, [SubstanceInterval]>) -> [SubstanceInterval] {
+    private static func getMergedSubstanceIntervals(intervalsGroupedBySubstance: [String: [SubstanceInterval]]) -> [SubstanceInterval] {
         let groupedBySubstance = intervalsGroupedBySubstance.map { substanceName, intervals in
             let fullToleranceIntervals = intervals.filter { $0.toleranceType == .full }.map { $0.dateInterval }
             let halfToleranceIntervals = intervals.filter { $0.toleranceType == .half }.map { $0.dateInterval }
@@ -67,23 +67,25 @@ struct ToleranceChartCalculator {
                 SubstanceInterval(
                     substanceName: substanceName,
                     dateInterval: dateInterval,
-                    toleranceType: .full)
+                    toleranceType: .full
+                )
             }
             let resultHalf = mergedHalfIntervals.map { dateInterval in
                 SubstanceInterval(
                     substanceName: substanceName,
                     dateInterval: dateInterval,
-                    toleranceType: .half)
+                    toleranceType: .half
+                )
             }
             return resultFull + resultHalf
         }
         let sortedGroups = groupedBySubstance.sorted { (lhs: [SubstanceInterval], rhs: [SubstanceInterval]) in
-            guard let maxLeft = lhs.filter({$0.toleranceType == .full}).max(by: { leftInterval, rightInterval in
+            guard let maxLeft = lhs.filter({ $0.toleranceType == .full }).max(by: { leftInterval, rightInterval in
                 leftInterval.dateInterval.end < rightInterval.dateInterval.end
-            }) else {return true}
-            guard let maxRight = rhs.filter({$0.toleranceType == .full}).max(by: { leftInterval, rightInterval in
+            }) else { return true }
+            guard let maxRight = rhs.filter({ $0.toleranceType == .full }).max(by: { leftInterval, rightInterval in
                 leftInterval.dateInterval.end < rightInterval.dateInterval.end
-            }) else {return true}
+            }) else { return true }
             return maxLeft.dateInterval.end < maxRight.dateInterval.end
         }
         return sortedGroups.flatMap { $0 }
@@ -114,7 +116,6 @@ struct ToleranceChartCalculator {
         return result
     }
 
-
     struct SubstanceInterval {
         let substanceName: String
         let dateInterval: DateInterval
@@ -126,14 +127,15 @@ struct ToleranceChartCalculator {
             let tolerance = SubstanceRepo.shared.getSubstance(name: pair.substanceName)?.tolerance
             var result = [SubstanceInterval]()
             var startOfHalfTolerance = pair.day
-            let hoursToSeconds: Double = 60*60
+            let hoursToSeconds: Double = 60 * 60
             if let halfToleranceInHours = tolerance?.halfToleranceInHours, halfToleranceInHours > 24 {
                 let halfTolerance: TimeInterval = halfToleranceInHours * hoursToSeconds
                 startOfHalfTolerance = pair.day.addingTimeInterval(halfTolerance)
                 result.append(SubstanceInterval(
                     substanceName: pair.substanceName,
                     dateInterval: DateInterval(start: pair.day, end: startOfHalfTolerance),
-                    toleranceType: .full))
+                    toleranceType: .full
+                ))
             }
             if let zeroToleranceInHours = tolerance?.zeroToleranceInHours, zeroToleranceInHours > 24 {
                 let zeroTolerance: TimeInterval = zeroToleranceInHours * hoursToSeconds
@@ -141,13 +143,14 @@ struct ToleranceChartCalculator {
                 result.append(SubstanceInterval(
                     substanceName: pair.substanceName,
                     dateInterval: DateInterval(start: startOfHalfTolerance, end: startOfZeroTolerance),
-                    toleranceType: .half))
+                    toleranceType: .half
+                ))
             }
             return result
         }
     }
 
-    private static func getSubstanceColor(substanceName: String , substanceCompanions: [SubstanceCompanion]) -> Color {
+    private static func getSubstanceColor(substanceName: String, substanceCompanions: [SubstanceCompanion]) -> Color {
         let alreadyUsedColors = substanceCompanions.map { $0.color }
         let substanceColor = substanceCompanions.first { com in
             com.substanceNameUnwrapped == substanceName

@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct SearchLogic {
+enum SearchLogic {
     static func getFilteredSubstancesSorted(substances: [Substance], searchText: String, namesToSortBy: [String]) -> [Substance] {
         let filteredSubstances = getFilteredSubstances(substances: substances, searchText: searchText)
         return filteredSubstances.sorted { sub1, sub2 in
@@ -69,7 +69,7 @@ struct SearchLogic {
     }
 
     private static func getSortedPrefixResults(substances: [Substance], lowerCaseSearchText: String) -> [Substance] {
-        let mainPrefixMatches =  substances.filter { sub in
+        let mainPrefixMatches = substances.filter { sub in
             sub.name.lowercased().hasPrefix(lowerCaseSearchText)
         }
         if mainPrefixMatches.isEmpty {
@@ -85,7 +85,7 @@ struct SearchLogic {
     }
 
     private static func getSortedContainsResults(substances: [Substance], cleanSearch: String) -> [Substance] {
-        let mainPrefixMatches =  substances.filter { sub in
+        let mainPrefixMatches = substances.filter { sub in
             sub.name.cleanSearch.contains(cleanSearch)
         }
         if mainPrefixMatches.isEmpty {

@@ -36,5 +36,4 @@ extension ExperienceLocation {
             return longitude
         }
     }
-
 }

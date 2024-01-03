@@ -22,6 +22,7 @@ struct ChooseAlcoholDoseScreen: View {
     var oralDose: RoaDose {
         alcohol.getDose(for: .oral)!
     }
+
     @State private var drinkAmountInDL = 5.0
     @State private var drinkAmountInDLText = "5"
     @State private var alcoholContentInPercent = 5.0
@@ -69,9 +70,10 @@ struct ChooseAlcoholDoseScreen: View {
             dose: doseRounded,
             units: units,
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote)) {
-                NextLabel()
-            }
+            suggestedNote: suggestedNote
+        )) {
+            NextLabel()
+        }
     }
 
     private var unknownDoseLink: some View {
@@ -96,7 +98,7 @@ struct ChooseAlcoholDoseScreen: View {
         Preset(title: "3.3 dL beer (5%)", drinkAmountInDL: 3.3, alcoholContentInPercent: 5),
         Preset(title: "5 dL beer (5%)", drinkAmountInDL: 5, alcoholContentInPercent: 5),
         Preset(title: "Small glass of wine (1 dL, 12%)", drinkAmountInDL: 1, alcoholContentInPercent: 12),
-        Preset(title: "Big glass of wine (2 dL, 12%)", drinkAmountInDL: 2, alcoholContentInPercent: 12)
+        Preset(title: "Big glass of wine (2 dL, 12%)", drinkAmountInDL: 2, alcoholContentInPercent: 12),
     ]
 
     @State private var presetSelection = presets.first!
@@ -140,7 +142,7 @@ struct ChooseAlcoholDoseScreen: View {
                     }.font(.title2.bold())
                     Slider(
                         value: $drinkAmountInDL,
-                        in: 1...20,
+                        in: 1 ... 20,
                         step: 1
                     ) {
                         Text("Drink Size")
@@ -173,7 +175,7 @@ struct ChooseAlcoholDoseScreen: View {
                     }.font(.title2.bold())
                     Slider(
                         value: $alcoholContentInPercent,
-                        in: 1...80,
+                        in: 1 ... 80,
                         step: 1
                     ) {
                         Text("Alcohol Content")

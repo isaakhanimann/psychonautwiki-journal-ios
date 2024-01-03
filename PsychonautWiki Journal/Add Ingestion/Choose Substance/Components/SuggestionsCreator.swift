@@ -39,13 +39,13 @@ class SuggestionsCreator {
                     route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
                     substanceColor: firstIngestion?.substanceColor ?? .red,
                     dosesAndUnit: Array(groupedBySubstanceAndRoute
-                        .map({ ing in
+                        .map { ing in
                             DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped, isEstimate: ing.isEstimate)
-                        })
-                            .uniqued()
-                            .prefix(maxNumberOfSuggestions)),
+                        }
+                        .uniqued()
+                        .prefix(maxNumberOfSuggestions)),
                     customUnits: filteredCustomUnits,
-                    lastTimeUsed: groupedBySubstanceAndRoute.map({$0.timeUnwrapped}).max() ?? .now
+                    lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now
                 )
             }
         }.sorted { sug1, sug2 in

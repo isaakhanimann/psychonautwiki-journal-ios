@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct AddSprayScreen: View {
-
     @State private var name = ""
     @State private var sizeInMlText = ""
     @State private var sizeInMl: Double? = nil
@@ -25,7 +24,7 @@ struct AddSprayScreen: View {
     @State private var numSprays: Double? = nil
     @State private var isPreferred = false
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -85,7 +84,6 @@ struct AddSprayScreen: View {
             assertionFailure("Failed to save spray")
         }
     }
-
 }
 
 struct AddSprayScreen_Previews: PreviewProvider {

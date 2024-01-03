@@ -18,7 +18,6 @@ import Foundation
 import SwiftUI
 
 struct TotalTimeline: TimelineDrawable {
-
     let total: FullDurationRange
     let onsetDelayInHours: Double
     let totalWeight: Double
@@ -41,22 +40,22 @@ struct TotalTimeline: TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let top = (1-verticalWeight)*heightBetween + paddingTop
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        let top = (1 - verticalWeight) * heightBetween + paddingTop
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(
             x: startX,
-            bottomY: height-lineWidth/2,
+            bottomY: height - lineWidth / 2,
             color: color
         )
         let onsetStartX = startX + (onsetDelayInSeconds * pixelsPerSec)
         var filledPath = Path()
-        let filledPathY = height - lineWidth/2
+        let filledPathY = height - lineWidth / 2
         filledPath.move(to: CGPoint(x: startX, y: filledPathY))
         filledPath.addLine(to: CGPoint(x: onsetStartX, y: filledPathY))
         if onsetDelayInHours > 0 {
@@ -76,7 +75,7 @@ struct TotalTimeline: TimelineDrawable {
             startX: onsetStartX + (totalMinX / 2),
             startY: top,
             endX: totalEndX,
-            endY: height-paddingBottom
+            endY: height - paddingBottom
         )
         context.stroke(
             dottedPath,

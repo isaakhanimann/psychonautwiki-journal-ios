@@ -18,7 +18,6 @@ import SwiftUI
 import WrappingHStack
 
 struct SuggestionBox: View {
-
     let suggestion: Suggestion
     let dismiss: () -> Void
     let isEyeOpen: Bool
@@ -39,7 +38,7 @@ struct SuggestionBox: View {
                                 dose: doseUnwrap,
                                 units: dose.units,
                                 isEstimate: dose.isEstimate))
-                            .buttonStyle(.bordered).fixedSize()
+                                .buttonStyle(.bordered).fixedSize()
                         } else {
                             NavigationLink("Unknown", value: FinishIngestionScreenArguments(
                                 substanceName: suggestion.substanceName,
@@ -47,7 +46,7 @@ struct SuggestionBox: View {
                                 dose: dose.dose,
                                 units: dose.units,
                                 isEstimate: dose.isEstimate))
-                            .buttonStyle(.bordered).fixedSize()
+                                .buttonStyle(.bordered).fixedSize()
                         }
                     }
                     if let substance = suggestion.substance {
@@ -58,7 +57,7 @@ struct SuggestionBox: View {
                             substanceName: suggestion.substanceName,
                             units: suggestion.units,
                             administrationRoute: suggestion.route))
-                        .buttonStyle(.borderedProminent).fixedSize()
+                            .buttonStyle(.borderedProminent).fixedSize()
                     }
                 }
                 if !suggestion.customUnits.isEmpty {
@@ -114,10 +113,10 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 dose: 30,
                                 units: "mg",
                                 isEstimate: false
-                            )
+                            ),
                         ],
                         customUnits: [],
-                        lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
+                        lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
                     ),
                     dismiss: {},
                     isEyeOpen: true
@@ -149,10 +148,10 @@ struct SuggestionBox_Previews: PreviewProvider {
                                 dose: 2.5,
                                 units: "mg",
                                 isEstimate: false
-                            )
+                            ),
                         ],
                         customUnits: [],
-                        lastTimeUsed: Date.now.addingTimeInterval(-3*60*60)
+                        lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)
                     ),
                     dismiss: {},
                     isEyeOpen: true

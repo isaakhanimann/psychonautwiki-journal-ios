@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 class SubstanceRepo {
-
     static let shared = SubstanceRepo()
 
     let substances: [Substance]
@@ -34,9 +33,9 @@ class SubstanceRepo {
         substances = file.substances
         categories = file.categories
         substancesDict = Dictionary(
-            uniqueKeysWithValues: substances.map({ substance in
+            uniqueKeysWithValues: substances.map { substance in
                 (substance.name, substance)
-            })
+            }
         )
     }
 
@@ -45,10 +44,10 @@ class SubstanceRepo {
     }
 
     func getSubstances<C: Collection>(names: C) -> [Substance] where C.Element == String {
-        substances.filter({names.contains($0.name)})
+        substances.filter { names.contains($0.name) }
     }
 
-    static private func getInitialData() -> Data {
+    private static func getInitialData() -> Data {
         let fileName = "substances"
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             fatalError("Failed to locate \(fileName) in bundle.")

@@ -60,7 +60,7 @@ struct InteractionsGroup_Previews: PreviewProvider {
         List {
             Section {
                 InteractionsGroup(
-                    interactions: SubstanceRepo.shared.getSubstance(name:"MDMA")!.interactions!,
+                    interactions: SubstanceRepo.shared.getSubstance(name: "MDMA")!.interactions!,
                     substanceURL: URL(string: "www.apple.com")!
                 )
             }

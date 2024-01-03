@@ -39,7 +39,7 @@ struct TimelineModel {
     ) {
         let ingestionTimes = substanceGroups.flatMap { group in
             group.routeMinInfos.flatMap { route in
-                route.ingestions.map({$0.time})
+                route.ingestions.map { $0.time }
             }
         }
         let potentialStartTimes = ingestionTimes + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
@@ -70,25 +70,26 @@ struct TimelineModel {
                 color: group.color,
                 roaDuration: group.roaDuration,
                 weightedLines: group.weightedLines,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            )
         }.sorted { lhs, rhs in
             lhs.endRelativeToStartInSeconds < rhs.endRelativeToStartInSeconds
         } // sort makes sure that lines are always drawn in the same order such that lines with a later endpoint are drawn on top.
         self.groupDrawables = groupDrawables
-        let ratingDrawables = everythingForEachRating.map({ rating in
+        let ratingDrawables = everythingForEachRating.map { rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
-        })
+        }
         self.ratingDrawables = ratingDrawables
-        let timedNoteDrawables = everythingForEachTimedNote.map({ timedNote in
+        let timedNoteDrawables = everythingForEachTimedNote.map { timedNote in
             TimedNoteDrawable(startGraph: startTime, time: timedNote.time, color: timedNote.color)
-        })
+        }
         self.timedNoteDrawables = timedNoteDrawables
         let sixHours: TimeInterval = 6 * 60 * 60
-        let widthOfTimelinesAndRatings = groupDrawables.map({ group in
+        let widthOfTimelinesAndRatings = groupDrawables.map { group in
             group.endRelativeToStartInSeconds
-        }) + ratingDrawables.map { $0.distanceFromStart } + timedNoteDrawables.map { $0.distanceFromStart }
+        } + ratingDrawables.map { $0.distanceFromStart } + timedNoteDrawables.map { $0.distanceFromStart }
         let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours)
-        self.totalWidth = maxWidth
-        self.axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
+        totalWidth = maxWidth
+        axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
 }

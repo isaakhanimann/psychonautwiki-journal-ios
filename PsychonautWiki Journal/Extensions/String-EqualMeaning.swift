@@ -18,7 +18,7 @@ import Foundation
 
 extension String {
     func hasEqualMeaning(other: String) -> Bool {
-        if self.caseInsensitiveCompare(other) == .orderedSame {
+        if caseInsensitiveCompare(other) == .orderedSame {
             return true
         }
         if "\(self)s".caseInsensitiveCompare(other) == .orderedSame {

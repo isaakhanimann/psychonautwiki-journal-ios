@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreLocation
+import Foundation
 
 @MainActor
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-
     let manager = CLLocationManager()
     @Published var currentLocation: Location?
     @Published var selectedLocation: Location? = nil
@@ -34,12 +33,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         let locationFetchRequest = ExperienceLocation.fetchRequest()
-        locationFetchRequest.sortDescriptors = [ NSSortDescriptor(keyPath: \ExperienceLocation.experience?.creationDate, ascending: false) ]
+        locationFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \ExperienceLocation.experience?.creationDate, ascending: false)]
         locationFetchRequest.fetchLimit = 15
         let sortedLocations = (try? PersistenceController.shared.viewContext.fetch(locationFetchRequest)) ?? []
-        experienceLocations = sortedLocations.map( { loc in
+        experienceLocations = sortedLocations.map { loc in
             Location(name: loc.nameUnwrapped, longitude: loc.longitudeUnwrapped, latitude: loc.latitudeUnwrapped)
-        }).unique
+        }.unique
     }
 
     func requestPermission() {
@@ -52,7 +51,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    nonisolated func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Task {
             guard let foundCLLocation = locations.last else { return }
             let place = await getPlacemark(from: foundCLLocation)
@@ -72,8 +71,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-
-    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    nonisolated func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         assertionFailure("Isaak location manager \(error)")
     }
 
@@ -103,13 +101,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             let geoCoder = CLGeocoder()
             var foundLocations: [Location] = []
             if let places = try? await geoCoder.geocodeAddressString(searchText) {
-                foundLocations = places.map({ place in
+                foundLocations = places.map { place in
                     Location(
                         name: place.name ?? "Unknown",
                         longitude: place.location?.coordinate.longitude,
                         latitude: place.location?.coordinate.latitude
                     )
-                })
+                }
             }
             DispatchQueue.main.async {
                 self.searchSuggestedLocations = foundLocations
@@ -135,11 +133,11 @@ struct Location: Identifiable, Equatable {
         name
     }
 
-    static func ==(lhs: Location, rhs: Location) -> Bool {
+    static func == (lhs: Location, rhs: Location) -> Bool {
         return lhs.id == rhs.id
     }
+
     let name: String
     let longitude: Double?
     let latitude: Double?
 }
-

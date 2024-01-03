@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -20,6 +20,7 @@ struct CumulativeDose: Identifiable {
     var id: String {
         substanceName
     }
+
     let substanceName: String
     let substanceColor: SubstanceColor
     let cumulativeRoutes: [CumulativeRouteAndDose]
@@ -29,7 +30,7 @@ struct CumulativeDose: Identifiable {
         self.substanceColor = substanceColor
         let substance = ingestionsForSubstance.first?.substance
         let ingestionsByRoute = Dictionary(grouping: ingestionsForSubstance, by: { $0.administrationRouteUnwrapped })
-        self.cumulativeRoutes = ingestionsByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
+        cumulativeRoutes = ingestionsByRoute.map { (route: AdministrationRoute, ingestions: [Ingestion]) in
             let roaDose = substance?.getDose(for: route)
             return CumulativeRouteAndDose(route: route, roaDose: roaDose, ingestionForRoute: ingestions)
         }
@@ -40,6 +41,7 @@ struct CumulativeRouteAndDose: Identifiable {
     var id: AdministrationRoute {
         route
     }
+
     let route: AdministrationRoute
     let numDots: Int?
     let isEstimate: Bool
@@ -65,15 +67,14 @@ struct CumulativeRouteAndDose: Identifiable {
             }
         }
         if isOneDoseUnknown {
-            self.dose = nil
-            self.isEstimate = isOneDoseAnEstimate
-            self.numDots = nil
+            dose = nil
+            isEstimate = isOneDoseAnEstimate
+            numDots = nil
         } else {
-            self.dose = totalDose
-            self.isEstimate = isOneDoseAnEstimate
-            self.numDots = roaDose?.getNumDots(ingestionDose: totalDose, ingestionUnits: units)
+            dose = totalDose
+            isEstimate = isOneDoseAnEstimate
+            numDots = roaDose?.getNumDots(ingestionDose: totalDose, ingestionUnits: units)
         }
-
     }
 
     init(route: AdministrationRoute, numDots: Int?, isEstimate: Bool, dose: Double?, units: String) {

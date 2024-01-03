@@ -19,7 +19,7 @@ import SwiftUI
 struct AddictionScreen: View {
     let substanceName: String
     let addictionPotential: String
-    
+
     var body: some View {
         List {
             Section {

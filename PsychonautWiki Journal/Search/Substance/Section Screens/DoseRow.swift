@@ -17,14 +17,15 @@
 import SwiftUI
 
 struct DoseRow: View {
-
     let roaDose: RoaDose?
     var doseFont: Font {
         if let commonMinUnwrap = roaDose?.commonMin,
-           commonMinUnwrap.formatted().count >= 4 {
+           commonMinUnwrap.formatted().count >= 4
+        {
             return .footnote
         } else if let strongMinUnwrap = roaDose?.strongMin,
-                  strongMinUnwrap.formatted().count >= 4 {
+                  strongMinUnwrap.formatted().count >= 4
+        {
             return .footnote
         } else {
             return .body
@@ -33,11 +34,11 @@ struct DoseRow: View {
 
     var body: some View {
         let showDoseRow = roaDose?.lightMin != nil
-        || roaDose?.commonMin != nil
-        || roaDose?.strongMin != nil
-        || roaDose?.heavyMin != nil
-        || roaDose?.units != nil
-        if showDoseRow  {
+            || roaDose?.commonMin != nil
+            || roaDose?.strongMin != nil
+            || roaDose?.heavyMin != nil
+            || roaDose?.units != nil
+        if showDoseRow {
             HStack(alignment: .top, spacing: 0) {
                 if let lightMin = roaDose?.lightMin {
                     Spacer(minLength: 0)
@@ -50,7 +51,6 @@ struct DoseRow: View {
                             .lineLimit(1)
                             .foregroundColor(DoseRangeType.thresh.color)
                             .font(.footnote)
-
                     }
                     Spacer(minLength: 0)
                 }

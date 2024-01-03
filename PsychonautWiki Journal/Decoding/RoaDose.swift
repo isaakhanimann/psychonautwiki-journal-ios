@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 struct RoaDose: Decodable {
-
     let units: String
     let lightMin: Double?
     let commonMin: Double?
@@ -43,24 +42,29 @@ struct RoaDose: Decodable {
     }
 
     func getRangeType(for dose: Double, with doseUnits: String) -> DoseRangeType {
-        guard self.units == doseUnits else {return .none}
+        guard units == doseUnits else { return .none }
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap {
+           dose < lightMinUnwrap
+        {
             return .thresh
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap
+        {
             return .light
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap
+        {
             return .common
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
+        {
             return .strong
         } else if let heavyMinUnwrap = heavyMin,
-                  heavyMinUnwrap <= dose {
+                  heavyMinUnwrap <= dose
+        {
             return .heavy
         } else {
             return .none
@@ -71,30 +75,34 @@ struct RoaDose: Decodable {
         guard let dose = ingestionDose else { return nil }
         guard ingestionUnits == units else { return nil }
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap {
+           dose < lightMinUnwrap
+        {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap
+        {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap
+        {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
+        {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             if heavyMinUnwrap <= dose {
-                let timesHeavy = Int(floor(dose/heavyMinUnwrap))
+                let timesHeavy = Int(floor(dose / heavyMinUnwrap))
                 var rest = dose.remainder(dividingBy: heavyMinUnwrap)
                 if rest < 0 {
                     rest += heavyMinUnwrap
                 }
                 return (timesHeavy * 4) + getNumDotsUpTo4(dose: rest)
             } else {
-                return Int(floor(dose/heavyMinUnwrap))
+                return Int(floor(dose / heavyMinUnwrap))
             }
         } else {
             return nil
@@ -103,19 +111,23 @@ struct RoaDose: Decodable {
 
     private func getNumDotsUpTo4(dose: Double) -> Int {
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap {
+           dose < lightMinUnwrap
+        {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap
+        {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap
+        {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
+        {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             return Int(floor(dose / heavyMinUnwrap))

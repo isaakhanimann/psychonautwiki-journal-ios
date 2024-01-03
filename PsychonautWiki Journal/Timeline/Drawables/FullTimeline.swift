@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -16,8 +16,7 @@
 
 import SwiftUI
 
-struct FullTimeline : TimelineDrawable {
-
+struct FullTimeline: TimelineDrawable {
     let onset: FullDurationRange
     let comeup: FullDurationRange
     let peak: FullDurationRange
@@ -31,11 +30,11 @@ struct FullTimeline : TimelineDrawable {
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         ingestionTimeRelativeToStartInSeconds
-        + onsetDelayInSeconds
-        + onset.interpolateLinearly(at: onsetComeupWeight)
-        + comeup.interpolateLinearly(at: onsetComeupWeight)
-        + peak.interpolateLinearly(at: peakAndOffsetWeight)
-        + offset.interpolateLinearly(at: peakAndOffsetWeight)
+            + onsetDelayInSeconds
+            + onset.interpolateLinearly(at: onsetComeupWeight)
+            + comeup.interpolateLinearly(at: onsetComeupWeight)
+            + peak.interpolateLinearly(at: peakAndOffsetWeight)
+            + offset.interpolateLinearly(at: peakAndOffsetWeight)
     }
 
     func draw(
@@ -45,14 +44,14 @@ struct FullTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let halfLineWidth = lineWidth/2
+        let halfLineWidth = lineWidth / 2
         let paddingTop = halfLineWidth
         let paddingBottom = halfLineWidth
-        let heightBetween = height-paddingTop-paddingBottom
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        var top = lineWidth/2
+        let heightBetween = height - paddingTop - paddingBottom
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        var top = lineWidth / 2
         if verticalWeight < 1 {
-            top = (1-verticalWeight) * heightBetween
+            top = (1 - verticalWeight) * heightBetween
         }
         let bottom = height - paddingTop
         var path = Path()
@@ -73,7 +72,6 @@ struct FullTimeline : TimelineDrawable {
         context.drawDot(x: startX, bottomY: bottom, color: color)
     }
 
-
     private var onsetDelayInSeconds: TimeInterval {
         onsetDelayInHours * 60 * 60
     }
@@ -89,7 +87,8 @@ extension RoaDuration {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
            let fullPeak = peak?.maybeFullDurationRange,
-           let fullOffset = offset?.maybeFullDurationRange {
+           let fullOffset = offset?.maybeFullDurationRange
+        {
             return FullTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,
@@ -105,4 +104,3 @@ extension RoaDuration {
         }
     }
 }
-

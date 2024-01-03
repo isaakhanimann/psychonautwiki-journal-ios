@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -14,9 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import CoreImage.CIFilterBuiltins
-
+import SwiftUI
 
 struct ShareScreen: View {
     var body: some View {
@@ -36,9 +35,6 @@ struct ShareScreen: View {
         .dismissWhenTabTapped()
     }
 }
-
-
-
 
 struct ShareScreen_Previews: PreviewProvider {
     static var previews: some View {

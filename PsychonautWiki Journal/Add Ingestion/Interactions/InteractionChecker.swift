@@ -16,8 +16,7 @@
 
 import Foundation
 
-struct InteractionChecker {
-
+enum InteractionChecker {
     static let additionalInteractionsToCheck = [
         "Alcohol",
         "Caffeine",
@@ -32,7 +31,7 @@ struct InteractionChecker {
         "5-Hydroxytryptophan",
         "Tricyclic antidepressants",
         "Antibiotics",
-        "Antihistamine"
+        "Antihistamine",
     ]
 
     static func getInteractionBetween(aName: String, bName: String) -> Interaction? {
@@ -48,7 +47,7 @@ struct InteractionChecker {
     }
 
     static func getInteractionTypeBetween(aName: String, bName: String) -> InteractionType? {
-        guard aName != bName else {return nil}
+        guard aName != bName else { return nil }
         let interactionFromAToB = getInteraction(fromName: aName, toName: bName)
         let interactionFromBToA = getInteraction(fromName: bName, toName: aName)
         if let interactionFromAToB, let interactionFromBToA {
@@ -65,8 +64,8 @@ struct InteractionChecker {
     }
 
     private static func getInteraction(fromName: String, toName: String) -> InteractionType? {
-        guard let substance = SubstanceRepo.shared.getSubstance(name: fromName) else {return nil}
-        guard let interactions = substance.interactions else {return nil}
+        guard let substance = SubstanceRepo.shared.getSubstance(name: fromName) else { return nil }
+        guard let interactions = substance.interactions else { return nil }
         if let directInteraction = getDirectInteraction(interactions: interactions, substanceName: toName) {
             return directInteraction
         }
@@ -120,11 +119,11 @@ struct InteractionChecker {
     ) -> Bool {
         let extendedInteractions = extendAndCleanInteractions(interactions: interactions)
         let isSubstanceInDangerClass =
-        categories.contains { categoryName in
-            extendedInteractions.contains { interactionName in
-                interactionName.caseInsensitiveContains(categoryName)
+            categories.contains { categoryName in
+                extendedInteractions.contains { interactionName in
+                    interactionName.caseInsensitiveContains(categoryName)
+                }
             }
-        }
         return isSubstanceInDangerClass
     }
 
@@ -151,16 +150,16 @@ struct InteractionChecker {
     }
 
     static func hasXAndMatches(wordWithX: String, matchWith unchangedWord: String) -> Bool {
-        guard wordWithX.contains("x") else {return false}
+        guard wordWithX.contains("x") else { return false }
         let modifiedPattern = "^" + wordWithX.replacingOccurrences(of: "x", with: "[\\S]*") + "$"
-        guard let regex = try? NSRegularExpression(pattern: modifiedPattern, options: .caseInsensitive) else {return false}
+        guard let regex = try? NSRegularExpression(pattern: modifiedPattern, options: .caseInsensitive) else { return false }
         let range = NSRange(location: 0, length: unchangedWord.utf16.count)
         return regex.firstMatch(in: unchangedWord, options: [], range: range) != nil
     }
 
     private static func extendAndCleanInteractions(interactions: [String]) -> [String] {
         interactions.flatMap { name in
-            switch (name) {
+            switch name {
             case "Substituted amphetamines":
                 return substitutedAmphetamines
             case "Serotonin releasers":
@@ -176,7 +175,7 @@ struct InteractionChecker {
     private static let serotoninReleasers = [
         "MDMA",
         "MDA",
-        "Mephedrone"
+        "Mephedrone",
     ]
 
     private static let substitutedAmphetamines = [
@@ -282,9 +281,8 @@ struct InteractionChecker {
         "4F-MPH",
         "4F-EPH",
         "Methylnaphthidate",
-        "Ethylnaphthidate"
+        "Ethylnaphthidate",
     ]
-
 }
 
 struct Interaction: Comparable {

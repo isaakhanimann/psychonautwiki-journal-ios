@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct TimedNoteRow: View {
-
     @ObservedObject var timedNote: TimedNote
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
@@ -35,7 +34,6 @@ struct TimedNoteRow: View {
 }
 
 private struct TimedNoteRowContent: View {
-
     let time: Date
     let note: String
     let color: SubstanceColor
@@ -68,7 +66,6 @@ private struct TimedNoteRowContent: View {
             return Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: time)))
         } else {
             return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-
         }
     }
 }

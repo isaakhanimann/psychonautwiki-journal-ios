@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ExperienceScreen: View {
-
     @ObservedObject var experience: Experience
 
     @State private var isShowingAddIngestionFullScreen = false
@@ -28,6 +27,7 @@ struct ExperienceScreen: View {
             set: { newValue in timeDisplayStyleText = newValue.rawValue }
         )
     }
+
     @State private var isShowingDeleteConfirmation = false
     @State private var sheetToShow: SheetOption? = nil
     @State private var hiddenIngestions: [ObjectIdentifier] = []
@@ -79,7 +79,7 @@ struct ExperienceScreen: View {
 
     func updateActivityIfActive() {
         if #available(iOS 16.2, *) {
-            if let lastTime = experience.myIngestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12*60*60) && ActivityManager.shared.isActivityActive {
+            if let lastTime = experience.myIngestionsSorted.last?.time, lastTime > Date.now.addingTimeInterval(-12 * 60 * 60) && ActivityManager.shared.isActivityActive {
                 startOrUpdateLiveActivity()
             }
         }
@@ -91,10 +91,10 @@ struct ExperienceScreen: View {
             await ActivityManager.shared.startOrUpdateActivity(
                 substanceGroups: getSubstanceIngestionGroups(ingestions: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
                 everythingForEachRating: experience.ratingsWithTimeSorted
-                    .filter {!hiddenRatings.contains($0.id)}
-                    .map({ shulgin in
+                    .filter { !hiddenRatings.contains($0.id) }
+                    .map { shulgin in
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
-                    }),
+                    },
                 everythingForEachTimedNote: experience.timedNotesForTimeline,
                 areRedosesDrawnIndividually: areRedosesDrawnIndividually
             )
@@ -107,16 +107,15 @@ struct ExperienceScreen: View {
             await ActivityManager.shared.stopActivity(
                 substanceGroups: getSubstanceIngestionGroups(ingestions: experience.myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) }),
                 everythingForEachRating: experience.ratingsWithTimeSorted
-                    .filter {!hiddenRatings.contains($0.id)}
-                    .map({ shulgin in
+                    .filter { !hiddenRatings.contains($0.id) }
+                    .map { shulgin in
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
-                    }),
+                    },
                 everythingForEachTimedNote: experience.timedNotesForTimeline,
                 areRedosesDrawnIndividually: areRedosesDrawnIndividually
             )
         }
     }
-
 
     var body: some View {
         FabPosition {
@@ -135,14 +134,15 @@ struct ExperienceScreen: View {
                             timelineModel: experience.getMyTimeLineModel(
                                 hiddenIngestions: hiddenIngestions,
                                 hiddenRatings: hiddenRatings,
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually),
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                            ),
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle.wrappedValue,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            showIngestion: {showIngestion(id: $0)},
-                            hideIngestion: {hideIngestion(id: $0)},
+                            showIngestion: { showIngestion(id: $0) },
+                            hideIngestion: { hideIngestion(id: $0) },
                             updateActivityIfActive: updateActivityIfActive
                         )
                         if #available(iOS 16.2, *) {
@@ -186,7 +186,6 @@ struct ExperienceScreen: View {
                                 }
                             }
                         }
-
                     }
                 }
                 let notes = experience.textUnwrapped
@@ -209,7 +208,8 @@ struct ExperienceScreen: View {
                                 TimedNoteRow(
                                     timedNote: timedNote,
                                     timeDisplayStyle: timeDisplayStyle.wrappedValue,
-                                    firstIngestionTime: experience.ingestionsSorted.first?.time)
+                                    firstIngestionTime: experience.ingestionsSorted.first?.time
+                                )
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive) {
                                         PersistenceController.shared.viewContext.delete(timedNote)
@@ -219,7 +219,6 @@ struct ExperienceScreen: View {
                                     }
                                 }
                             }
-
                         }
                     }
                 }
@@ -264,13 +263,13 @@ struct ExperienceScreen: View {
                             timeDisplayStyle: timeDisplayStyle.wrappedValue,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            showIngestion: {showIngestion(id: $0)},
-                            hideIngestion: {hideIngestion(id: $0)},
+                            showIngestion: { showIngestion(id: $0) },
+                            hideIngestion: { hideIngestion(id: $0) },
                             updateActivityIfActive: {}
                         )
                     }
                 }
-                if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty{
+                if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty {
                     Section("Info") {
                         ForEach(experience.substancesUsed) { substance in
                             NavigationLink(substance.name) {
@@ -293,7 +292,7 @@ struct ExperienceScreen: View {
                                 GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
                             }
                         }
-                        if experience.substancesUsed.contains(where: {$0.isHallucinogen}) {
+                        if experience.substancesUsed.contains(where: { $0.isHallucinogen }) {
                             NavigationLink {
                                 SaferHallucinogenScreen()
                             } label: {
@@ -324,7 +323,7 @@ struct ExperienceScreen: View {
                 switch sheet {
                 case .addLocation:
                     AddLocationScreen(locationManager: locationManager, experience: experience)
-                case .editLocation(let experienceLocation):
+                case let .editLocation(experienceLocation):
                     EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
                 case .editNotes:
                     EditNotesScreen(experience: experience)
@@ -347,7 +346,8 @@ struct ExperienceScreen: View {
                     experience: experience,
                     timeDisplayStyle: timeDisplayStyle,
                     sheetToShow: $sheetToShow,
-                    isShowingDeleteConfirmation: $isShowingDeleteConfirmation)
+                    isShowingDeleteConfirmation: $isShowingDeleteConfirmation
+                )
             }
         }
         .confirmationDialog(
@@ -364,7 +364,6 @@ struct ExperienceScreen: View {
                 Text("This will also delete all of its ingestions.")
             }
         )
-
     }
 
     private func delete() {

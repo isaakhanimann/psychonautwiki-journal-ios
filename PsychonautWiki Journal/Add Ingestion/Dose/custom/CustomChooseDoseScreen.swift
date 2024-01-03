@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct CustomChooseDoseScreen: View {
-
     let arguments: CustomChooseDoseScreenArguments
     let dismiss: () -> Void
     @State private var doseText = ""
@@ -50,7 +49,8 @@ struct CustomChooseDoseScreen: View {
             administrationRoute: arguments.administrationRoute,
             dose: dose,
             units: arguments.units,
-            isEstimate: isEstimate)
+            isEstimate: isEstimate
+        )
     }
 
     private var unknownDoseLink: some View {

@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,18 +17,18 @@
 import SwiftUI
 
 struct TimedNoteDottedLine: View {
-
     let color: Color
 
     var body: some View {
         Canvas { context, size in
             var path = Path()
-            path.move(to: CGPoint(x: size.width/2, y: size.height))
-            path.addLine(to: CGPoint(x: size.width/2, y: 0))
+            path.move(to: CGPoint(x: size.width / 2, y: size.height))
+            path.addLine(to: CGPoint(x: size.width / 2, y: 0))
             context.stroke(
                 path,
                 with: .color(color),
-                style: StrokeStyle.getTimedNoteStokeStyle())
+                style: StrokeStyle.getTimedNoteStokeStyle()
+            )
         }
         .frame(width: StrokeStyle.timedNoteLineWidth)
     }

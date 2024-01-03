@@ -21,11 +21,11 @@ struct AxisDrawable {
     let widthInSeconds: TimeInterval
 
     func getFullHours(pixelsPerSec: Double, widthInPixels: Double) -> [FullHour] {
-        let widthInWholeHours = (widthInSeconds/60/60).rounded(.up)
+        let widthInWholeHours = (widthInSeconds / 60 / 60).rounded(.up)
         let widthPerHour = widthInPixels / widthInWholeHours
         let minWidthPerHour: Double = 30
         var stepSize = Int(minWidthPerHour / widthPerHour)
-        if (stepSize == 0) {
+        if stepSize == 0 {
             stepSize = 1
         }
         let dates = AxisDrawable.getInstantsBetween(
@@ -54,10 +54,10 @@ struct AxisDrawable {
         let firstDate = startTime.nearestFullHourInTheFuture
         var checkTime = firstDate
         var fullHours: [Date] = []
-        while (checkTime < endTime) {
+        while checkTime < endTime {
             fullHours.append(checkTime)
-            guard let nextCheckTime = Calendar.current.date(byAdding: .hour, value: stepSizeInHours, to: checkTime) else {break}
-            checkTime =  nextCheckTime
+            guard let nextCheckTime = Calendar.current.date(byAdding: .hour, value: stepSizeInHours, to: checkTime) else { break }
+            checkTime = nextCheckTime
         }
         return fullHours
     }
@@ -66,15 +66,13 @@ struct AxisDrawable {
 extension Date {
     var nearestFullHourInTheFuture: Date {
         let oneHour: TimeInterval = 60 * 60
-        let oneHourInFuture = self.addingTimeInterval(oneHour)
+        let oneHourInFuture = addingTimeInterval(oneHour)
         var components = Calendar.current.dateComponents([.year, .month, .day, .hour], from: oneHourInFuture)
         components.minute = 0
         components.second = 0
         return Calendar.current.date(from: components) ?? Date.now
     }
 }
-
-
 
 struct FullHour {
     let distanceFromStart: Double

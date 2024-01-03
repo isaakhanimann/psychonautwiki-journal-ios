@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import AlertToast
+import SwiftUI
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -73,7 +73,6 @@ struct SettingsScreen: View {
 }
 
 struct SettingsContent: View {
-
     @Binding var isEyeOpen: Bool
     @Binding var isHidingDosageDots: Bool
     @Binding var isHidingToleranceChartInExperience: Bool
@@ -262,7 +261,6 @@ struct SettingsContent: View {
         }
     }
 
-
     private var eye: some View {
         HStack {
             Spacer()
@@ -285,8 +283,6 @@ struct SettingsContent: View {
         NotificationCenter.default.post(name: Notification.eyeName, object: nil)
         playHapticFeedback()
     }
-
-    
 }
 
 struct SettingsContent_Previews: PreviewProvider {
@@ -304,7 +300,7 @@ struct SettingsContent_Previews: PreviewProvider {
             isExporting: .constant(false),
             journalFile: JournalFile(),
             exportData: {},
-            importData: {_ in },
+            importData: { _ in },
             deleteEverything: {},
             isShowingToast: .constant(false),
             isSuccessToast: .constant(false),

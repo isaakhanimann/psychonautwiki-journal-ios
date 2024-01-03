@@ -14,13 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import ActivityKit
+import Foundation
 
 @available(iOS 16.2, *)
 @MainActor
 class ActivityManager: ObservableObject {
-
     static let shared = ActivityManager()
     let authorizationInfo = ActivityAuthorizationInfo()
     @Published var isActivityActive = false
@@ -28,8 +27,8 @@ class ActivityManager: ObservableObject {
 
     init() {
         if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first {
-            self.isActivityActive = firstActivity.activityState == .active
-            self.activityStateTask = Task { [weak self] in
+            isActivityActive = firstActivity.activityState == .active
+            activityStateTask = Task { [weak self] in
                 for await activityState in firstActivity.activityStateUpdates {
                     self?.isActivityActive = activityState == .active
                 }
@@ -54,18 +53,21 @@ class ActivityManager: ObservableObject {
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                )
             } else {
                 await stopActivity(
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                )
                 startActivity(
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                )
             }
         }
     }
@@ -90,7 +92,7 @@ class ActivityManager: ObservableObject {
                 content: content,
                 pushType: nil
             )
-            self.activityStateTask = Task { [weak self] in
+            activityStateTask = Task { [weak self] in
                 for await activityState in newActivity.activityStateUpdates {
                     self?.isActivityActive = activityState == .active
                 }
@@ -111,7 +113,8 @@ class ActivityManager: ObservableObject {
             substanceGroups: substanceGroups,
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
-            areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually
+        )
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         await activity.update(updatedContent)
     }
@@ -127,7 +130,8 @@ class ActivityManager: ObservableObject {
                 substanceGroups: substanceGroups,
                 everythingForEachRating: everythingForEachRating,
                 everythingForEachTimedNote: everythingForEachTimedNote,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            )
             let finalContent = ActivityContent(state: state, staleDate: nil)
             for activity in Activity<TimelineWidgetAttributes>.activities {
                 await activity.end(finalContent, dismissalPolicy: .immediate)

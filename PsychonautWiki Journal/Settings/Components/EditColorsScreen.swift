@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditColorsScreen: View {
-
     @FetchRequest(
         sortDescriptors: []
     ) var substanceCompanions: FetchedResults<SubstanceCompanion>
@@ -61,7 +60,6 @@ struct EditColorsScreen: View {
 }
 
 struct CompanionColorPickerScreen: View {
-
     let companion: SubstanceCompanion
     let alreadyUsedColors: [SubstanceColor]
     let otherColors: [SubstanceColor]
@@ -104,10 +102,8 @@ struct CompanionColorPickerScreen: View {
                 Label(color.name, systemImage: "circle.fill").foregroundColor(color.swiftUIColor)
             }
         }
-
     }
 }
-
 
 struct CompanionRow: View {
     let name: String

@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct AddCustomSubstanceView: View {
-
     @StateObject private var viewModel = ViewModel()
     @Environment(\.presentationMode) private var presentationMode
 

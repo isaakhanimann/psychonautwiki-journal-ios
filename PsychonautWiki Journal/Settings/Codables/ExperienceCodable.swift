@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -47,13 +47,13 @@ struct ExperienceCodable: Codable {
         self.ratings = ratings
         self.timedNotes = timedNotes
         if let experienceLocation {
-            self.location = LocationCodable(
+            location = LocationCodable(
                 name: experienceLocation.nameUnwrapped,
                 latitude: experienceLocation.latitudeUnwrapped,
                 longitude: experienceLocation.longitudeUnwrapped
             )
         } else {
-            self.location = nil
+            location = nil
         }
     }
 
@@ -71,21 +71,21 @@ struct ExperienceCodable: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.title = try values.decode(String.self, forKey: .title)
-        self.text = try values.decode(String.self, forKey: .text)
+        title = try values.decode(String.self, forKey: .title)
+        text = try values.decode(String.self, forKey: .text)
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
-        self.creationDate = getDateFromMillis(millis: creationDateMillis)
-        self.isFavorite = (try values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
+        creationDate = getDateFromMillis(millis: creationDateMillis)
+        isFavorite = try (values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
         let ingestionCodables = try values.decode([IngestionCodable].self, forKey: .ingestions)
-        self.ingestions = ingestionCodables
+        ingestions = ingestionCodables
         if let sortDateMillis = try values.decodeIfPresent(UInt64.self, forKey: .sortDate) {
-            self.sortDate = getDateFromMillis(millis: sortDateMillis)
+            sortDate = getDateFromMillis(millis: sortDateMillis)
         } else {
-            self.sortDate = ingestionCodables.map({$0.time}).min()
+            sortDate = ingestionCodables.map { $0.time }.min()
         }
-        self.ratings = (try values.decodeIfPresent([RatingCodable].self, forKey: .ratings)) ?? []
-        self.timedNotes = (try values.decodeIfPresent([TimedNoteCodable].self, forKey: .timedNotes)) ?? []
-        self.location = try values.decodeIfPresent(LocationCodable.self, forKey: .location)
+        ratings = try (values.decodeIfPresent([RatingCodable].self, forKey: .ratings)) ?? []
+        timedNotes = try (values.decodeIfPresent([TimedNoteCodable].self, forKey: .timedNotes)) ?? []
+        location = try values.decodeIfPresent(LocationCodable.self, forKey: .location)
     }
 
     func encode(to encoder: Encoder) throws {

@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 @available(iOS 16.0, *)
 struct MDMAOptimalDoseSection: View {
-
     private static let desirable = "Desirable"
     private static let adverse = "Adverse"
 
@@ -34,7 +33,7 @@ struct MDMAOptimalDoseSection: View {
             (dose: 130, effect: 75),
             (dose: 150, effect: 62),
             (dose: 170, effect: 36),
-            (dose: 180, effect: 1)
+            (dose: 180, effect: 1),
         ]),
         .init(effectType: adverse, doseEffect: [
             (dose: 10, effect: 5),
@@ -46,8 +45,8 @@ struct MDMAOptimalDoseSection: View {
             (dose: 130, effect: 15),
             (dose: 150, effect: 21),
             (dose: 170, effect: 55),
-            (dose: 180, effect: 86)
-        ])
+            (dose: 180, effect: 86),
+        ]),
     ]
 
     struct Series: Identifiable {
@@ -73,11 +72,11 @@ struct MDMAOptimalDoseSection: View {
                 }
                 .chartForegroundStyleScale([
                     MDMAOptimalDoseSection.desirable: .green,
-                    MDMAOptimalDoseSection.adverse: .red
+                    MDMAOptimalDoseSection.adverse: .red,
                 ])
                 .chartSymbolScale([
                     MDMAOptimalDoseSection.desirable: .circle,
-                    MDMAOptimalDoseSection.adverse: .cross
+                    MDMAOptimalDoseSection.adverse: .cross,
                 ])
                 .frame(height: 200)
             }

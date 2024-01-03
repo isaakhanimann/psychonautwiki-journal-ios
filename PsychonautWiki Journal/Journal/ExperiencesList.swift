@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ExperiencesList: View {
-
     let experiences: FetchedResults<Experience>
     let isFavoriteFilterEnabled: Bool
     let isTimeRelative: Bool

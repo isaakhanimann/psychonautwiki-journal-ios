@@ -17,7 +17,7 @@
 import Foundation
 import SwiftUI
 
-struct OnsetTimeline : TimelineDrawable {
+struct OnsetTimeline: TimelineDrawable {
     let onset: FullDurationRange
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
@@ -29,9 +29,8 @@ struct OnsetTimeline : TimelineDrawable {
     }
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
-        ingestionTimeRelativeToStartInSeconds + onsetDelayInHours*60*60 + onset.interpolateLinearly(at: onsetAndComeupWeight)
+        ingestionTimeRelativeToStartInSeconds + onsetDelayInHours * 60 * 60 + onset.interpolateLinearly(at: onsetAndComeupWeight)
     }
-
 
     func draw(
         context: GraphicsContext,
@@ -40,8 +39,8 @@ struct OnsetTimeline : TimelineDrawable {
         color: Color,
         lineWidth: Double
     ) {
-        let startX = ingestionTimeRelativeToStartInSeconds*pixelsPerSec
-        let minHeight = lineWidth/2
+        let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
+        let minHeight = lineWidth / 2
         let maxHeight = height - minHeight
         context.drawDot(x: startX, bottomY: maxHeight, color: color)
         let onsetEndX = startX + (onsetDelayInSeconds + onset.interpolateLinearly(at: onsetAndComeupWeight)) * pixelsPerSec
@@ -55,15 +54,16 @@ struct OnsetTimeline : TimelineDrawable {
 extension RoaDuration {
     func toOnsetTimeline(
         onsetDelayInHours: Double,
-        ingestionTimeRelativeToStartInSeconds: TimeInterval) -> OnsetTimeline? {
-            if let fullOnset = onset?.maybeFullDurationRange {
-                return OnsetTimeline(
-                    onset: fullOnset,
-                    onsetDelayInHours: onsetDelayInHours,
-                    ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
-                )
-            } else {
-                return nil
-            }
+        ingestionTimeRelativeToStartInSeconds: TimeInterval
+    ) -> OnsetTimeline? {
+        if let fullOnset = onset?.maybeFullDurationRange {
+            return OnsetTimeline(
+                onset: fullOnset,
+                onsetDelayInHours: onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
+            )
+        } else {
+            return nil
         }
+    }
 }

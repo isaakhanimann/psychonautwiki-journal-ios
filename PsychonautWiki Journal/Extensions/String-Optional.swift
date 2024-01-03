@@ -18,7 +18,7 @@ import Foundation
 
 extension String {
     var optionalIfEmpty: String? {
-        if self.isEmpty {
+        if isEmpty {
             return nil
         } else {
             return self

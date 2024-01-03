@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct FabPosition<Screen: View, Button: View>: View {
-
     @ViewBuilder let button: Button
     @ViewBuilder let screen: Screen
 
@@ -32,8 +31,7 @@ struct FabPosition<Screen: View, Button: View>: View {
 struct AddIngestionFab_Previews: PreviewProvider {
     static var previews: some View {
         FabPosition {
-            Button {
-            } label: {
+            Button {} label: {
                 Label("New Ingestion", systemImage: "plus")
                     .labelStyle(FabLabelStyle())
             }

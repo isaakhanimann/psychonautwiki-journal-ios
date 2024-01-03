@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import AlertToast
+import SwiftUI
 
 struct ChooseSubstanceScreen: View {
     @StateObject private var viewModel = ViewModel()
@@ -30,7 +30,7 @@ struct ChooseSubstanceScreen: View {
             filteredSuggestions: viewModel.filteredSuggestions,
             filteredSubstances: viewModel.filteredSubstances,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
-            dismiss: {dismiss()}
+            dismiss: { dismiss() }
         ).task {
             locationManager.maybeRequestLocation() // because we might need current location on finish screen
         }
@@ -44,7 +44,7 @@ struct ChooseSubstanceContent: View {
     let filteredSuggestions: [Suggestion]
     let filteredSubstances: [Substance]
     let filteredCustomSubstances: [CustomSubstanceModel]
-    let dismiss: ()->Void
+    let dismiss: () -> Void
     @State private var isShowingAddCustomSheet = false
 
     var body: some View {
@@ -61,9 +61,9 @@ struct ChooseSubstanceContent: View {
             }
             .navigationDestination(for: AddIngestionDestination.self) { destination in
                 switch destination {
-                case .interactions(let substance):
+                case let .interactions(substance):
                     AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
-                case .saferUse(let substance):
+                case let .saferUse(substance):
                     AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
                 case .saferRoutes:
                     SaferRoutesScreen()
@@ -189,10 +189,10 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     dose: 30,
                                     units: "mg",
                                     isEstimate: false
-                                )
+                                ),
                             ],
                             customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
+                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
                         ),
                         Suggestion(
                             substanceName: "MDMA",
@@ -215,10 +215,10 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     dose: 30,
                                     units: "mg",
                                     isEstimate: false
-                                )
+                                ),
                             ],
                             customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
+                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
                         ),
                         Suggestion(
                             substanceName: "Cannabis",
@@ -246,10 +246,10 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                     dose: 2.5,
                                     units: "mg",
                                     isEstimate: false
-                                )
+                                ),
                             ],
                             customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
+                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
                         ),
                         Suggestion(
                             substanceName: "Coffee",
@@ -270,16 +270,16 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
                                 ),
                             ],
                             customUnits: [],
-                            lastTimeUsed: Date.now.addingTimeInterval(-2*60*60)
-                        )
+                            lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
+                        ),
                     ],
                     filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
                     filteredCustomSubstances: [
                         CustomSubstanceModel(
-                        name: "Coffee",
-                        description: "The bitter drink",
-                        units: "cups"
-                    )
+                            name: "Coffee",
+                            description: "The bitter drink",
+                            units: "cups"
+                        ),
                     ],
                     dismiss: {}
                 )
@@ -289,5 +289,3 @@ struct ChooseSubstanceContent_Previews: PreviewProvider {
         }
     }
 }
-
-

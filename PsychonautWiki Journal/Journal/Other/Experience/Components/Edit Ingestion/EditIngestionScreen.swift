@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct EditIngestionScreen: View {
-
     let ingestion: Ingestion
     let isEyeOpen: Bool
     @State private var time = Date()
@@ -88,7 +87,6 @@ struct EditIngestionScreen: View {
 }
 
 struct EditIngestionContent: View {
-
     let substanceName: String
     let roaDose: RoaDose?
     @Binding var route: AdministrationRoute

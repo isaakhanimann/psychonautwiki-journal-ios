@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct DosePicker: View {
-
     let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
     @Binding var selectedUnits: String?
@@ -48,8 +47,8 @@ struct DosePicker: View {
     }
 
     var doseType: DoseRangeType {
-        guard let selectedUnits = selectedUnits else {return .none}
-        guard let dose = doseMaybe else {return .none}
+        guard let selectedUnits = selectedUnits else { return .none }
+        guard let dose = doseMaybe else { return .none }
         return roaDose?.getRangeType(for: dose, with: selectedUnits) ?? .none
     }
 
@@ -74,29 +73,34 @@ struct DynamicDoseRangeView: View {
     let dose: Double?
 
     var body: some View {
-        guard let dose else { return Text(" ")}
+        guard let dose else { return Text(" ") }
         let units = roaDose?.units ?? ""
         if let threshold = roaDose?.lightMin,
-           threshold > dose {
+           threshold > dose
+        {
             return Text("threshold (\(threshold.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.thresh.color)
         } else if let lightMin = roaDose?.lightMin,
                   let lightMax = roaDose?.commonMin,
-                  dose >= lightMin && dose < lightMax {
+                  dose >= lightMin && dose < lightMax
+        {
             return Text("light (\(lightMin.formatted()) - \(lightMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.light.color)
         } else if let commonMin = roaDose?.commonMin,
                   let commonMax = roaDose?.strongMin,
-                  dose >= commonMin && dose < commonMax {
+                  dose >= commonMin && dose < commonMax
+        {
             return Text("common (\(commonMin.formatted()) - \(commonMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.common.color)
         } else if let strongMin = roaDose?.strongMin,
                   let strongMax = roaDose?.heavyMin,
-                  dose >= strongMin && dose < strongMax {
+                  dose >= strongMin && dose < strongMax
+        {
             return Text("strong (\(strongMin.formatted()) - \(strongMax.formatted()) \(units))")
                 .foregroundColor(DoseRangeType.strong.color)
         } else if let heavyMin = roaDose?.heavyMin,
-                  dose >= heavyMin {
+                  dose >= heavyMin
+        {
             return Text("heavy (\(heavyMin.formatted()) \(units)+)")
                 .foregroundColor(DoseRangeType.heavy.color)
         } else {

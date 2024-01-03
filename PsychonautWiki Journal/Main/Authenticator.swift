@@ -19,7 +19,6 @@ import SwiftUI
 
 @MainActor
 class Authenticator: ObservableObject {
-
     static let hasToUnlockKey = "hasToUnlockApp"
     static let lockTimeOptionKey = "lockTimeOption"
     private static let lastDateKey = "lastDate"
@@ -35,7 +34,7 @@ class Authenticator: ObservableObject {
             var error: NSError?
             let lockTimeOptionString = UserDefaults.standard.string(forKey: Authenticator.lockTimeOptionKey)
             let lockTimeOption = LockTimeOption(rawValue: lockTimeOptionString ?? "") ?? LockTimeOption.after5Minutes
-            let lastDate = (UserDefaults.standard.object(forKey: Authenticator.lastDateKey) as? Date) ?? Date().addingTimeInterval(-2*60*60)
+            let lastDate = (UserDefaults.standard.object(forKey: Authenticator.lastDateKey) as? Date) ?? Date().addingTimeInterval(-2 * 60 * 60)
             let differenceNowToLastInSeconds = Date.now.timeIntervalSince1970 - lastDate.timeIntervalSince1970
             let isWithinToleratedTimeRange = differenceNowToLastInSeconds < lockTimeOption.timeInterval
             if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
@@ -59,7 +58,7 @@ class Authenticator: ObservableObject {
 
     private func authenticate(with context: LAContext) {
         let reason = "Authenticate yourself to see your journal."
-        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, _ in
             if success {
                 Task { @MainActor in
                     self.isLocked = false
@@ -67,5 +66,4 @@ class Authenticator: ObservableObject {
             }
         }
     }
-
 }

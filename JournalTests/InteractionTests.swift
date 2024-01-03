@@ -3,7 +3,7 @@
 //
 // JournalTests is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // JournalTests is distributed in the hope that it will be useful,
@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with JournalTests. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import XCTest
 @testable import Journal
+import XCTest
 
 final class InteractionTests: XCTestCase {
-
     func testInteractions() throws {
         XCTAssertFalse(InteractionChecker.hasXAndMatches(wordWithX: "Dox", matchWith: "Oxycodone"))
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "MDMA", bName: "Tramadol"), .dangerous)
@@ -34,5 +33,4 @@ final class InteractionTests: XCTestCase {
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Pregabalin", bName: "LSD"), nil)
         XCTAssertEqual(InteractionChecker.getInteractionTypeBetween(aName: "Grapefruit", bName: "Heroin"), .dangerous)
     }
-
 }

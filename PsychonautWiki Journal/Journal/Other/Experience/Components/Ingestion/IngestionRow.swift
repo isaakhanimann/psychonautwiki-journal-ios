@@ -16,9 +16,7 @@
 
 import SwiftUI
 
-
 struct IngestionRow: View {
-
     @ObservedObject var ingestion: Ingestion
     let firstIngestionTime: Date?
     let timeDisplayStyle: TimeDisplayStyle
@@ -45,9 +43,7 @@ struct IngestionRow: View {
     }
 }
 
-
 struct IngestionRowContent: View {
-
     let numDots: Int?
     let substanceColor: SubstanceColor
     let substanceName: String
@@ -64,7 +60,6 @@ struct IngestionRowContent: View {
     let firstIngestionTime: Date?
 
     var body: some View {
-
         if #available(iOS 16.0, *) {
             rowContent.alignmentGuide(.listRowSeparatorLeading) { d in
                 d[.leading]
@@ -75,55 +70,53 @@ struct IngestionRowContent: View {
     }
 
     var rowContent: some View {
-            HStack {
-                ColorRectangle(color: substanceColor.swiftUIColor)
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(substanceName)
-                            .lineLimit(1)
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                        Spacer()
-                        Group {
-                            if timeDisplayStyle == .relativeToNow {
-                                Text(ingestionTime, style: .relative) + Text(" ago")
-                            } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                                Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
-                            } else {
-                                Text(ingestionTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-
-                            }
-                        }
-                        .font(.subheadline)
-                    }
-                    HStack {
-                        let routeText = isEyeOpen ? administrationRoute.rawValue : ""
-                        if let doseUnwrapped = dose {
-                            Text("\(isEstimate ? "~": "")\(doseUnwrapped.formatted()) \(units) \(routeText)").multilineTextAlignment(.trailing)
-                        } else {
-                            Text(routeText.localizedCapitalized)
-                        }
-                        Spacer()
-                        if let numDotsUnwrap = numDots, !isHidingDosageDots {
-                            DotRows(numDots: numDotsUnwrap)
-                        }
-                    }
-                    .font(.subheadline)
+        HStack {
+            ColorRectangle(color: substanceColor.swiftUIColor)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(substanceName)
+                        .lineLimit(1)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    Spacer()
                     Group {
-                        if !note.isEmpty {
-                            Text(note)
-                        }
-                        if let stomachFullness, administrationRoute == .oral {
-                            Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
+                        if timeDisplayStyle == .relativeToNow {
+                            Text(ingestionTime, style: .relative) + Text(" ago")
+                        } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                            Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
+                        } else {
+                            Text(ingestionTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                         }
                     }
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
                 }
+                HStack {
+                    let routeText = isEyeOpen ? administrationRoute.rawValue : ""
+                    if let doseUnwrapped = dose {
+                        Text("\(isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(units) \(routeText)").multilineTextAlignment(.trailing)
+                    } else {
+                        Text(routeText.localizedCapitalized)
+                    }
+                    Spacer()
+                    if let numDotsUnwrap = numDots, !isHidingDosageDots {
+                        DotRows(numDots: numDotsUnwrap)
+                    }
+                }
+                .font(.subheadline)
+                Group {
+                    if !note.isEmpty {
+                        Text(note)
+                    }
+                    if let stomachFullness, administrationRoute == .oral {
+                        Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
+                    }
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             }
         }
+    }
 }
-
 
 struct IngestionRowContent_Previews: PreviewProvider {
     static var previews: some View {
@@ -143,7 +136,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -159,7 +152,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: nil,
@@ -175,7 +168,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -191,7 +184,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -201,13 +194,13 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     units: "mg",
                     isEstimate: true,
                     administrationRoute: .oral,
-                    ingestionTime: Date().addingTimeInterval(-4*60*60 + 330),
+                    ingestionTime: Date().addingTimeInterval(-4 * 60 * 60 + 330),
                     note: "",
                     timeDisplayStyle: .relativeToNow,
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: 2,
@@ -223,7 +216,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: nil,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: 1,
@@ -239,7 +232,7 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
                 IngestionRowContent(
                     numDots: nil,
@@ -255,10 +248,9 @@ struct IngestionRowContent_Previews: PreviewProvider {
                     isEyeOpen: true,
                     isHidingDosageDots: false,
                     stomachFullness: .full,
-                    firstIngestionTime: Date().addingTimeInterval(-60*60)
+                    firstIngestionTime: Date().addingTimeInterval(-60 * 60)
                 )
             }
         }
     }
 }
-

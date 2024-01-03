@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import ActivityKit
+import SwiftUI
 
 @available(iOS 16.2, *)
 struct LiveActivityButton: View {
-
     let stopLiveActivity: () -> Void
     let startLiveActivity: () -> Void
     @ObservedObject var activityManager = ActivityManager.shared
@@ -50,7 +49,6 @@ struct LiveActivityButton: View {
                     } label: {
                         Label("Enable Live Activities", systemImage: "gearshape")
                     }
-
                 }
             }
         }

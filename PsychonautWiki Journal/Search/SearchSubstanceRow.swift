@@ -42,7 +42,6 @@ struct SearchSubstanceRow: View {
                 }
             }
         }
-
     }
 }
 

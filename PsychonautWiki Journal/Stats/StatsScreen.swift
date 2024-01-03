@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 @available(iOS 16, *)
 struct StatsScreen: View {
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)],
         predicate: NSPredicate(format: "consumerName=nil OR consumerName=''")
@@ -55,7 +54,7 @@ struct StatsScreen: View {
                         calculateStats()
                     }
                 }
-            }.onChange(of: ingestions.count) { newValue in
+            }.onChange(of: ingestions.count) { _ in
                 calculateStats()
             }
         }
@@ -88,8 +87,8 @@ struct StatsScreen: View {
             from: substanceDays,
             substanceCompanions: Array(substanceCompanions)
         )
-        let substancesInIngestions = Set(ingestionsLast90Days.map({$0.substanceNameUnwrapped}))
-        let substancesInToleranceWindows = Set(toleranceWindows.map({$0.substanceName}))
+        let substancesInIngestions = Set(ingestionsLast90Days.map { $0.substanceNameUnwrapped })
+        let substancesInToleranceWindows = Set(toleranceWindows.map { $0.substanceName })
         let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substancesInToleranceWindows)
         substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
     }
@@ -123,7 +122,7 @@ struct StatsScreen: View {
             countDict[substanceName, default: 0] += 1
         }
         return countDict.map { (substanceName: String, count: Int) in
-            return SubstanceCount(
+            SubstanceCount(
                 substanceName: substanceName,
                 experienceCount: count
             )
@@ -142,7 +141,7 @@ struct StatsScreen: View {
                 SubstanceExperienceCountForDay(
                     day: ex.sortDateUnwrapped,
                     substanceName: substanceName,
-                    experienceCount: 1/Double(distinctSubstanceNames.count)
+                    experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
             }
         }
@@ -153,8 +152,8 @@ struct StatsScreen: View {
                 substanceYearMonthDay += String(year) + String(month) + String(day)
             }
             return substanceYearMonthDay
-        }.compactMap { (key: _, matchesForSameDay: [SubstanceExperienceCountForDay]) in
-            guard let first = matchesForSameDay.first else {return nil}
+        }.compactMap { (_: _, matchesForSameDay: [SubstanceExperienceCountForDay]) in
+            guard let first = matchesForSameDay.first else { return nil }
             let experienceCount = matchesForSameDay.map { $0.experienceCount }.reduce(0, +)
             return SubstanceExperienceCountForDay(
                 day: first.day,
@@ -174,7 +173,7 @@ struct StatsScreen: View {
                 SubstanceExperienceCountForMonth(
                     month: ex.sortDateUnwrapped,
                     substanceName: substanceName,
-                    experienceCount: 1/Double(distinctSubstanceNames.count)
+                    experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
             }
         }
@@ -185,8 +184,8 @@ struct StatsScreen: View {
                 substanceYearMonth += String(year) + String(month)
             }
             return substanceYearMonth
-        }.compactMap { (key: _, matchesForSameMonth: [SubstanceExperienceCountForMonth]) in
-            guard let first = matchesForSameMonth.first else {return nil}
+        }.compactMap { (_: _, matchesForSameMonth: [SubstanceExperienceCountForMonth]) in
+            guard let first = matchesForSameMonth.first else { return nil }
             let experienceCount = matchesForSameMonth.map { $0.experienceCount }.reduce(0, +)
             return SubstanceExperienceCountForMonth(
                 month: first.month,
@@ -203,7 +202,7 @@ struct StatsScreen: View {
                 SubstanceExperienceCountForYear(
                     year: ex.sortDateUnwrapped,
                     substanceName: substanceName,
-                    experienceCount: 1/Double(distinctSubstanceNames.count)
+                    experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
             }
         }
@@ -214,8 +213,8 @@ struct StatsScreen: View {
                 substanceYear += String(year)
             }
             return substanceYear
-        }.compactMap { (key: _, matchesForSameYear: [SubstanceExperienceCountForYear]) in
-            guard let first = matchesForSameYear.first else {return nil}
+        }.compactMap { (_: _, matchesForSameYear: [SubstanceExperienceCountForYear]) in
+            guard let first = matchesForSameYear.first else { return nil }
             let experienceCount = matchesForSameYear.map { $0.experienceCount }.reduce(0, +)
             return SubstanceExperienceCountForYear(
                 year: first.year,
@@ -244,7 +243,6 @@ extension Calendar {
 
 @available(iOS 16, *)
 struct StatsScreenContent: View {
-
     let experienceData: ExperienceData
     let substanceData: SubstanceData
     let toleranceWindows: [ToleranceWindow]

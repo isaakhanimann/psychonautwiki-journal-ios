@@ -21,6 +21,3 @@ enum TimeRange {
     case last12Months
     case years
 }
-
-
-

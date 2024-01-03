@@ -3,7 +3,7 @@
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public Licence as published by
-// the Free Software Foundation, either version 3 of the License, or (at 
+// the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 //
 // PsychonautWiki Journal is distributed in the hope that it will be useful,
@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct ShulginRatingSection: View {
-
     @ObservedObject var experience: Experience
     let hiddenRatings: [ObjectIdentifier]
     let showRating: (ObjectIdentifier) -> Void
@@ -84,18 +83,16 @@ struct ShulginRatingSection: View {
                         }
                     }
                 }
-
             }
         }
     }
 }
 
 struct RatingRow: View {
-
     @ObservedObject var rating: ShulginRating
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
-    
+
     var body: some View {
         HStack {
             if let ratingTime = rating.time {

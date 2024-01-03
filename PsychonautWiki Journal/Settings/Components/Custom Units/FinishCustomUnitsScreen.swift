@@ -17,7 +17,6 @@
 import SwiftUI
 
 struct FinishCustomUnitsScreen: View {
-
     let substanceAndRoute: SubstanceAndRoute
     let dismiss: () -> Void
 
@@ -73,7 +72,8 @@ struct FinishCustomUnitsScreen: View {
                         TextField(
                             "Dose per \(unitOrPlaceholder)",
                             value: $dosePerUnit,
-                            format: .number).keyboardType(.decimalPad)
+                            format: .number
+                        ).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
                         Text(roaDose?.units ?? "")
@@ -82,7 +82,6 @@ struct FinishCustomUnitsScreen: View {
                 Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
             }
-
         }
         .navigationTitle("Add Custom Unit")
         .onAppear {
@@ -126,7 +125,8 @@ struct FinishCustomUnitsScreen: View {
     NavigationStack {
         FinishCustomUnitsScreen(substanceAndRoute: .init(
             substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-            administrationRoute: .oral),
-                                dismiss: {})
+            administrationRoute: .oral
+        ),
+        dismiss: {})
     }
 }

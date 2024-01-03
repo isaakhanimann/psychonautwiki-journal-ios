@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import Foundation
 import CoreData
+import Foundation
 
 struct DurationRange: Codable {
-
     let min: Double?
     let max: Double?
     let units: Units
@@ -28,8 +27,8 @@ struct DurationRange: Codable {
     }
 
     var isFullyDefined: Bool {
-        guard let minUnwrap = min else {return false}
-        guard let maxUnwrap = max else {return false}
+        guard let minUnwrap = min else { return false }
+        guard let maxUnwrap = max else { return false }
         return minUnwrap <= maxUnwrap
     }
 
@@ -42,7 +41,7 @@ struct DurationRange: Codable {
     }
 
     var displayString: String? {
-        guard min != nil || max != nil else {return nil}
+        guard min != nil || max != nil else { return nil }
         let min = min?.formatted() ?? ".."
         let max = max?.formatted() ?? ".."
         var result = "\(min)-\(max)"
@@ -60,7 +59,7 @@ struct DurationRange: Codable {
     }
 
     private func convertToSec(value: Double?) -> Double? {
-        guard var convert = value else {return nil}
+        guard var convert = value else { return nil }
         var unit: UnitDuration
         switch units {
         case .seconds:
@@ -77,8 +76,8 @@ struct DurationRange: Codable {
     }
 
     func oneValue(at valueFrom0To1: Double) -> Double? {
-        guard let minU = minSec else {return nil}
-        guard let maxU = maxSec else {return nil}
+        guard let minU = minSec else { return nil }
+        guard let maxU = maxSec else { return nil }
         assert(valueFrom0To1 >= 0 && valueFrom0To1 <= 1)
         let difference = maxU - minU
         return minU + valueFrom0To1 * difference
@@ -91,7 +90,6 @@ struct DurationRange: Codable {
             return nil
         }
     }
-
 }
 
 struct FullDurationRange {

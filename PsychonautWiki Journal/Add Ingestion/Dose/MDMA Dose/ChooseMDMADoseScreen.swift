@@ -22,6 +22,7 @@ struct ChooseMDMADoseScreen: View {
     private var oralDose: RoaDose {
         mdma.getDose(for: .oral)!
     }
+
     @State private var mdmaDoseInMg: Double? = 113.0
     @State private var isEstimate = false
     private let units = "mg"
@@ -46,9 +47,10 @@ struct ChooseMDMADoseScreen: View {
             administrationRoute: .oral,
             dose: mdmaDoseInMg,
             units: units,
-            isEstimate: isEstimate)) {
-                NextLabel()
-            }
+            isEstimate: isEstimate
+        )) {
+            NextLabel()
+        }
     }
 
     private var unknownDoseLink: some View {
@@ -97,7 +99,7 @@ struct ChooseMDMADoseScreen: View {
     }
 
     var doseType: DoseRangeType {
-        guard let mdmaDoseInMg else { return .none}
+        guard let mdmaDoseInMg else { return .none }
         return oralDose.getRangeType(for: mdmaDoseInMg, with: units)
     }
 }
