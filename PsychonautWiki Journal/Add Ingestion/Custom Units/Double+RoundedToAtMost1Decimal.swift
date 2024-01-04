@@ -17,13 +17,11 @@
 import Foundation
 
 extension Double {
-    var relativeRounded: Double {
-        if self > 10 {
-            rounded()
-        } else if self > 1 {
+    var roundedToAtMost1Decimal: Double {
+        if self < 10 {
             (self*10.0).rounded() / 10.0
         } else {
-            (self*100.0).rounded() / 100.0
+            rounded()
         }
     }
 }

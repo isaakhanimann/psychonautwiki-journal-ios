@@ -32,7 +32,7 @@ struct ConvertedRoaDoseRow: View {
 
     private func convertToNewUnit(oldDose: Double?) -> Double? {
         if let oldDose, let dosePerUnit = customUnit.doseUnwrapped, dosePerUnit > 0 {
-            (oldDose/dosePerUnit).relativeRounded
+            (oldDose/dosePerUnit).roundedToAtMost1Decimal
         } else {
             nil
         }

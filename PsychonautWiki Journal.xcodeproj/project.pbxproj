@@ -124,7 +124,7 @@
 		EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
-		EA4793562B46985C00685EAA /* Double+RelativeRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RelativeRounded.swift */; };
+		EA4793562B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
@@ -469,7 +469,7 @@
 		EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalScrollDismisser.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
-		EA4793552B46985C00685EAA /* Double+RelativeRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RelativeRounded.swift"; sourceTree = "<group>"; };
+		EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RoundedToAtMost1Decimal.swift"; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
@@ -745,7 +745,7 @@
 			children = (
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
 				EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */,
-				EA4793552B46985C00685EAA /* Double+RelativeRounded.swift */,
+				EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */,
 			);
 			path = "Custom Units";
 			sourceTree = "<group>";
@@ -1853,7 +1853,7 @@
 				EAA9C3922A57203800869E5A /* MissingToleranceText.swift in Sources */,
 				EABD92022941C3A30073303A /* GroupDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
-				EA4793562B46985C00685EAA /* Double+RelativeRounded.swift in Sources */,
+				EA4793562B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift in Sources */,
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,
 				EA48F88C29DD503D007DA8C5 /* IngestionCodable.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,
