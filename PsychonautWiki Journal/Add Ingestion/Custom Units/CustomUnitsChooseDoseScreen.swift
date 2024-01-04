@@ -74,6 +74,25 @@ struct CustomUnitsChooseDoseScreen: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .primaryAction) {
+                NavigationLink(value: FinishIngestionScreenArguments(
+                    substanceName: customUnit.substanceNameUnwrapped,
+                    administrationRoute: customUnit.administrationRouteUnwrapped,
+                    dose: dose,
+                    units: customUnit.originalUnitUnwrapped,
+                    isEstimate: isEstimate,
+                    customUnit: customUnit
+                )) {
+                    NextLabel()
+                }
+            }
+        }
         .onAppear {
             isDoseFieldFocused = true
         }
