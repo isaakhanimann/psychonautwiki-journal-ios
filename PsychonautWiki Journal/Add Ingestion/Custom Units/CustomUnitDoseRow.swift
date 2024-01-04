@@ -16,7 +16,7 @@
 
 import SwiftUI
 
-struct ConvertedRoaDoseRow: View {
+struct CustomUnitDoseRow: View {
 
     let customUnit: CustomUnit
     let roaDose: RoaDose?
@@ -40,7 +40,7 @@ struct ConvertedRoaDoseRow: View {
 }
 
 #Preview {
-    ConvertedRoaDoseRow(
+    CustomUnitDoseRow(
         customUnit: CustomUnit.previewSample,
         roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral))
 }

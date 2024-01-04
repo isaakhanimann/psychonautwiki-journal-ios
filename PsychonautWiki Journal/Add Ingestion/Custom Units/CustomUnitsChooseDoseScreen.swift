@@ -31,28 +31,31 @@ struct CustomUnitsChooseDoseScreen: View {
                 if !(customUnit.substance?.isApproved ?? true) {
                     Text("Info is not approved by PsychonautWiki administrators.")
                 }
-                if let remark = customUnit.substance?.dosageRemark {
-                    Text(remark)
-                        .foregroundColor(.secondary)
-                }
                 RoaDoseRow(roaDose: customUnit.roaDose)
-                Text(doseCalculationText).foregroundStyle(calculatedDoseColor)
-                HStack {
-                    TextField(
-                        "Enter Dose",
-                        value: $dose,
-                        format: .number
-                    ).keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($isDoseFieldFocused)
-                    Text(customUnit.unitUnwrapped)
+                VStack(spacing: 8) {
+                    Text(customUnit.nameUnwrapped).font(.headline)
+                    CustomUnitDoseRow(customUnit: customUnit, roaDose: customUnit.roaDose)
+                    doseCalculationText.foregroundStyle(calculatedDoseColor)
+                    HStack {
+                        TextField(
+                            "Enter Dose",
+                            value: $dose,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .focused($isDoseFieldFocused)
+                        Text(customUnit.unitUnwrapped)
+                    }
+                    .font(.title)
+                    Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
                 }
-                .font(.title)
-                Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }
-            .listRowSeparator(.hidden)
             if isEyeOpen {
                 Section("Info") {
+                    if let remark = customUnit.substance?.dosageRemark {
+                        Text(remark)
+                            .foregroundColor(.secondary)
+                    }
                     if customUnit.administrationRouteUnwrapped == .smoked || customUnit.administrationRouteUnwrapped == .inhaled {
                         Text(
                             "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
@@ -91,11 +94,11 @@ struct CustomUnitsChooseDoseScreen: View {
         }
     }
 
-    var doseCalculationText: String {
+    var doseCalculationText: Text {
         if let calculatedDose {
-            "\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = \(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+            Text("\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = ") + Text("\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold)
         } else {
-            customUnit.nameUnwrapped
+            Text(" ")
         }
     }
 }

@@ -225,7 +225,7 @@
 		EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */; };
 		EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */; };
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
-		EA8A2CB22B468AEF0050554C /* ConvertedRoaDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */; };
+		EA8A2CB22B468AEF0050554C /* CustomUnitDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */; };
 		EA8A2CB52B468D3F0050554C /* DoseClassificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */; };
 		EA8A2CB72B468D790050554C /* View+MaybeConsensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
@@ -565,7 +565,7 @@
 		EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDoseRow.swift; sourceTree = "<group>"; };
 		EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-LinearGradient.swift"; sourceTree = "<group>"; };
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
-		EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedRoaDoseRow.swift; sourceTree = "<group>"; };
+		EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseRow.swift; sourceTree = "<group>"; };
 		EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseClassificationRow.swift; sourceTree = "<group>"; };
 		EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+MaybeConsensed.swift"; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 			isa = PBXGroup;
 			children = (
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
-				EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */,
+				EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */,
 				EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */,
 			);
 			path = "Custom Units";
@@ -1876,7 +1876,7 @@
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
-				EA8A2CB22B468AEF0050554C /* ConvertedRoaDoseRow.swift in Sources */,
+				EA8A2CB22B468AEF0050554C /* CustomUnitDoseRow.swift in Sources */,
 				EAB8EF542A48D82000542253 /* Tab.swift in Sources */,
 				EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */,
 				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
