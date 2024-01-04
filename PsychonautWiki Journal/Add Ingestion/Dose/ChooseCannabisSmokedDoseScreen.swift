@@ -104,7 +104,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     Text("\(doseText) mg")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
-                    DoseRow(roaDose: smokedDose)
+                    RoaDoseRow(roaDose: smokedDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
                 unknownDoseLink

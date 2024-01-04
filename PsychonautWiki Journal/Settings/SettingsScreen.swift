@@ -141,6 +141,27 @@ struct SettingsContent: View {
                         }
                     }
                 }
+                if isEyeOpen {
+                    Section("UI") {
+                        NavigationLink {
+                            EditColorsScreen()
+                        } label: {
+                            Label("Edit Substance Colors", systemImage: "paintpalette")
+                        }
+                        NavigationLink {
+                            CustomUnitsScreen()
+                        } label: {
+                            Label("Custom Units", systemImage: "pills")
+                        }
+                        Group {
+                            Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
+                            Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
+                            Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
+                            Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
+                            Toggle("Include date in time picker", isOn: $isDateInTimePicker)
+                        }.tint(.accentColor)
+                    }
+                }
                 Section(
                     header: Text("Journal Data"),
                     footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
@@ -188,27 +209,6 @@ struct SettingsContent: View {
                             Text("This will delete all your experiences, ingestions, custom substances and sprays.")
                         }
                     )
-                }
-                if isEyeOpen {
-                    Section("UI") {
-                        NavigationLink {
-                            EditColorsScreen()
-                        } label: {
-                            Label("Edit Substance Colors", systemImage: "paintpalette")
-                        }
-                        NavigationLink {
-                            CustomUnitsScreen()
-                        } label: {
-                            Label("Custom Units", systemImage: "pills")
-                        }
-                        Group {
-                            Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
-                            Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
-                            Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
-                            Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
-                            Toggle("Include date in time picker", isOn: $isDateInTimePicker)
-                        }.tint(.accentColor)
-                    }
                 }
                 Section {
                     HStack {

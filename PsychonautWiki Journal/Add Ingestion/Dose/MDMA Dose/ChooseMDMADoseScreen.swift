@@ -72,7 +72,7 @@ struct ChooseMDMADoseScreen: View {
             }
             Section("Choose Dose") {
                 VStack(alignment: .leading, spacing: 5) {
-                    DoseRow(roaDose: oralDose)
+                    RoaDoseRow(roaDose: oralDose)
                     DynamicDoseRangeView(roaDose: oralDose, dose: mdmaDoseInMg)
                     HStack {
                         TextField("Enter Dose", text: $doseText)

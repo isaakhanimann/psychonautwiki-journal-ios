@@ -28,7 +28,7 @@ struct DosesScreen: View {
             }
             ForEach(substance.doseInfos, id: \.route) { doseInfo in
                 Section(doseInfo.route.rawValue.localizedCapitalized) {
-                    DoseRow(roaDose: doseInfo.roaDose)
+                    RoaDoseRow(roaDose: doseInfo.roaDose)
                     if let bio = doseInfo.bioavailability?.displayString {
                         RowLabelView(label: "Bioavailability", value: "\(bio)%")
                     }

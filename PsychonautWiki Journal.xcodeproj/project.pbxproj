@@ -221,9 +221,12 @@
 		EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
-		EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* DoseRow.swift */; };
+		EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */; };
 		EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */; };
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
+		EA8A2CB22B468AEF0050554C /* ConvertedRoaDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */; };
+		EA8A2CB52B468D3F0050554C /* DoseClassificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */; };
+		EA8A2CB72B468D790050554C /* View+MaybeConsensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFC2962C9B000779DD9 /* ActivityManager.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
@@ -557,9 +560,12 @@
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
-		EA8447E627CD175000B10DD3 /* DoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRow.swift; sourceTree = "<group>"; };
+		EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDoseRow.swift; sourceTree = "<group>"; };
 		EA8447E827CD22D300B10DD3 /* Text-LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text-LinearGradient.swift"; sourceTree = "<group>"; };
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
+		EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedRoaDoseRow.swift; sourceTree = "<group>"; };
+		EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseClassificationRow.swift; sourceTree = "<group>"; };
+		EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+MaybeConsensed.swift"; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
@@ -736,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
+				EA8A2CB12B468AEF0050554C /* ConvertedRoaDoseRow.swift */,
 			);
 			path = "Custom Units";
 			sourceTree = "<group>";
@@ -1125,6 +1132,16 @@
 			path = "Choose Substance";
 			sourceTree = "<group>";
 		};
+		EA8A2CB32B468C7F0050554C /* RoaDoseRow */ = {
+			isa = PBXGroup;
+			children = (
+				EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */,
+				EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */,
+				EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */,
+			);
+			path = RoaDoseRow;
+			sourceTree = "<group>";
+		};
 		EA8AEA6F27E1CC3A00B30A16 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1287,9 +1304,9 @@
 			isa = PBXGroup;
 			children = (
 				EA039AC82A6C6672006DFAFE /* Duration */,
+				EA8A2CB32B468C7F0050554C /* RoaDoseRow */,
 				EABD921B294276DC0073303A /* SummaryScreen.swift */,
 				EABD921F29427A9C0073303A /* DosesScreen.swift */,
-				EA8447E627CD175000B10DD3 /* DoseRow.swift */,
 				EABD921D294278240073303A /* CategoryScreen.swift */,
 				EA527A8329427E61009C142D /* ToleranceScreen.swift */,
 				EA527A8529427F56009C142D /* ToxicityScreen.swift */,
@@ -1878,6 +1895,7 @@
 				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
+				EA8A2CB22B468AEF0050554C /* ConvertedRoaDoseRow.swift in Sources */,
 				EAB8EF542A48D82000542253 /* Tab.swift in Sources */,
 				EA039AC02A5E75CE006DFAFE /* ToleranceTextsScreen.swift in Sources */,
 				EA6048372A16CE9F005C6A4B /* AddSprayScreen.swift in Sources */,
@@ -1919,6 +1937,7 @@
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EA4B8A2F2AA6E231009918DE /* TimedNoteCodable.swift in Sources */,
 				EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */,
+				EA8A2CB72B468D790050554C /* View+MaybeConsensed.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */,
 				EA4B8A272A9DCE63009918DE /* EditConsumerScreen.swift in Sources */,
@@ -1959,7 +1978,7 @@
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
 				EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */,
 				EA4B8A092A969B0E009918DE /* FullCumulativeTimelines.swift in Sources */,
-				EA8447E727CD175000B10DD3 /* DoseRow.swift in Sources */,
+				EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
 				EA4B8A1B2A9B2ECF009918DE /* TimedNoteDottedLine.swift in Sources */,
 				EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */,
@@ -2007,6 +2026,7 @@
 				EAB8EF502A489DDA00542253 /* SubstanceSearchBarWithFilter.swift in Sources */,
 				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
 				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
+				EA8A2CB52B468D3F0050554C /* DoseClassificationRow.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
 				EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */,
 				EA48F85A29DB182C007DA8C5 /* AddRatingScreen.swift in Sources */,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022. Isaak Hanimann.
+// Copyright (c) 2024. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
@@ -16,29 +16,22 @@
 
 import SwiftUI
 
-struct DoseRow: View {
-    let roaDose: RoaDose?
-    var doseFont: Font {
-        if let commonMinUnwrap = roaDose?.commonMin,
-           commonMinUnwrap.formatted().count >= 4 {
-            return .footnote
-        } else if let strongMinUnwrap = roaDose?.strongMin,
-                  strongMinUnwrap.formatted().count >= 4 {
-            return .footnote
-        } else {
-            return .body
-        }
-    }
+struct DoseClassificationRow: View {
+
+    let lightMin: Double?
+    let commonMin: Double?
+    let strongMin: Double?
+    let heavyMin: Double?
+    let units: String
 
     var body: some View {
-        let showDoseRow = roaDose?.lightMin != nil
-            || roaDose?.commonMin != nil
-            || roaDose?.strongMin != nil
-            || roaDose?.heavyMin != nil
-            || roaDose?.units != nil
+        let showDoseRow = lightMin != nil
+            || commonMin != nil
+            || strongMin != nil
+            || heavyMin != nil
         if showDoseRow {
             HStack(alignment: .top, spacing: 0) {
-                if let lightMin = roaDose?.lightMin {
+                if let lightMin {
                     Spacer(minLength: 0)
                     VStack {
                         Text(lightMin.formatted())
@@ -52,7 +45,7 @@ struct DoseRow: View {
                     }
                     Spacer(minLength: 0)
                 }
-                if roaDose?.lightMin != nil || roaDose?.commonMin != nil {
+                if lightMin != nil || commonMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -65,14 +58,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.light.color)
                     Spacer(minLength: 0)
                 }
-                if let commonMin = roaDose?.commonMin {
+                if let commonMin {
                     Spacer(minLength: 0)
                     Text(commonMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.light.color, DoseRangeType.common.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.commonMin != nil || roaDose?.strongMin != nil {
+                if commonMin != nil || strongMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -85,14 +78,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.common.color)
                     Spacer(minLength: 0)
                 }
-                if let strongMin = roaDose?.strongMin {
+                if let strongMin {
                     Spacer(minLength: 0)
                     Text(strongMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.common.color, DoseRangeType.strong.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.strongMin != nil || roaDose?.heavyMin != nil {
+                if strongMin != nil || heavyMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -105,14 +98,14 @@ struct DoseRow: View {
                     .foregroundColor(DoseRangeType.strong.color)
                     Spacer(minLength: 0)
                 }
-                if let heavyMin = roaDose?.heavyMin {
+                if let heavyMin {
                     Spacer(minLength: 0)
                     Text(heavyMin.formatted())
                         .foregroundLinearGradient(colors: [DoseRangeType.strong.color, DoseRangeType.heavy.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if roaDose?.heavyMin != nil {
+                if heavyMin != nil {
                     Spacer(minLength: 0)
                     VStack {
                         Text("-")
@@ -126,27 +119,39 @@ struct DoseRow: View {
                     .font(doseFont)
                     Spacer(minLength: 0)
                 }
-                if let units = roaDose?.units {
-                    Spacer(minLength: 0)
-                    Text(units)
-                        .font(doseFont)
-                    Spacer(minLength: 0)
-                }
+                Spacer(minLength: 0)
+                Text(units)
+                    .font(doseFont)
+                Spacer(minLength: 0)
             }
         } else {
             EmptyView()
         }
     }
-}
 
-extension View {
-    @ViewBuilder
-    func maybeCondensed() -> some View {
-        if #available(iOS 16, *) {
-            self
-                .fontWidth(.condensed)
+    private var doseFont: Font {
+        if
+            let commonMin,
+            commonMin.formatted().count >= 4
+        {
+            .footnote
+        } else if
+            let strongMin,
+            strongMin.formatted().count >= 4
+        {
+            .footnote
         } else {
-            self
+            .body
         }
     }
+
+}
+
+#Preview {
+    DoseClassificationRow(
+        lightMin: 20,
+        commonMin: 60,
+        strongMin: 100,
+        heavyMin: 120,
+        units: "mg")
 }

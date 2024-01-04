@@ -97,7 +97,7 @@ struct EditCustomUnitsScreenContent: View {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
             }
             Section {
-                DoseRow(roaDose: roaDose)
+                RoaDoseRow(roaDose: roaDose)
                 DosePicker(
                     roaDose: roaDose,
                     doseMaybe: $dose,

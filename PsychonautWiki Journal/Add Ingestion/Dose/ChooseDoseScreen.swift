@@ -155,7 +155,7 @@ struct ChooseDoseScreenContent: View {
                 Text(remark)
                     .foregroundColor(.secondary)
             }
-            DoseRow(roaDose: roaDose)
+            RoaDoseRow(roaDose: roaDose)
             DosePicker(
                 roaDose: roaDose,
                 doseMaybe: $selectedPureDose,

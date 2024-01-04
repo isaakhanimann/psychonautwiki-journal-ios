@@ -117,7 +117,7 @@ struct EditIngestionContent: View {
                         }
                     }
                 }
-                DoseRow(roaDose: roaDose)
+                RoaDoseRow(roaDose: roaDose)
                 DosePicker(
                     roaDose: roaDose,
                     doseMaybe: $dose,

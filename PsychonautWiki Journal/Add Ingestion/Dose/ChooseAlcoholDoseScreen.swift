@@ -111,7 +111,7 @@ struct ChooseAlcoholDoseScreen: View {
                     Text("\(doseText) \(units)")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
-                    DoseRow(roaDose: oralDose)
+                    RoaDoseRow(roaDose: oralDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
                 unknownDoseLink

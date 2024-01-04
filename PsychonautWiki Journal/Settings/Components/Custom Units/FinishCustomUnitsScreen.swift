@@ -66,7 +66,7 @@ struct FinishCustomUnitsScreen: View {
                     }
             }
             Section("Dose per \(unitOrPlaceholder)") {
-                DoseRow(roaDose: roaDose)
+                RoaDoseRow(roaDose: roaDose)
                 if !isUnknownDose {
                     HStack {
                         TextField(

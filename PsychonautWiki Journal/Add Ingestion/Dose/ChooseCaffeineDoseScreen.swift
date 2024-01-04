@@ -78,7 +78,7 @@ struct ChooseCaffeineDoseScreen: View {
                     Text("\(doseText) mg")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
-                    DoseRow(roaDose: oralDose)
+                    RoaDoseRow(roaDose: oralDose)
                     Slider(
                         value: $caffeineDoseInMg,
                         in: 10 ... 900,

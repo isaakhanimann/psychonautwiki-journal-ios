@@ -82,7 +82,7 @@ struct ChooseShroomsDoseScreen: View {
     private var screen: some View {
         Form {
             Section("Ingested Psilocybin Amount") {
-                DoseRow(roaDose: oralDose)
+                RoaDoseRow(roaDose: oralDose)
                 DynamicDoseRangeView(roaDose: oralDose, dose: psilocybinInMg)
                 HStack {
                     TextField("Enter Dose", text: $psilocybinTextInMg)

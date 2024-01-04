@@ -35,7 +35,7 @@ struct CustomUnitsChooseDoseScreen: View {
                     Text(remark)
                         .foregroundColor(.secondary)
                 }
-                DoseRow(roaDose: customUnit.roaDose)
+                RoaDoseRow(roaDose: customUnit.roaDose)
                 Text(doseCalculationText).foregroundStyle(calculatedDoseColor)
                 HStack {
                     TextField(
