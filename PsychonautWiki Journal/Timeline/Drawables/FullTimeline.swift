@@ -87,8 +87,7 @@ extension RoaDuration {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
            let fullPeak = peak?.maybeFullDurationRange,
-           let fullOffset = offset?.maybeFullDurationRange
-        {
+           let fullOffset = offset?.maybeFullDurationRange {
             return FullTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,

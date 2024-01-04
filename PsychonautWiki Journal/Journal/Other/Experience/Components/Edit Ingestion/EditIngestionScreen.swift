@@ -20,7 +20,7 @@ struct EditIngestionScreen: View {
     let ingestion: Ingestion
     let isEyeOpen: Bool
     @State private var time = Date()
-    @State private var dose: Double? = nil
+    @State private var dose: Double?
     @State private var units: String? = "mg"
     @State private var isEstimate = false
     @State private var note = ""

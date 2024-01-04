@@ -24,15 +24,13 @@ struct CustomSubstanceBox: View {
     var body: some View {
         if isEyeOpen {
             NavigationLink(value: CustomChooseRouteScreenArguments(substanceName: customSubstanceModel.name,
-                                                                   units: customSubstanceModel.units))
-            {
+                                                                   units: customSubstanceModel.units)) {
                 content
             }
         } else {
             NavigationLink(value: CustomChooseDoseScreenArguments(substanceName: customSubstanceModel.name,
                                                                   units: customSubstanceModel.units,
-                                                                  administrationRoute: .oral))
-            {
+                                                                  administrationRoute: .oral)) {
                 content
             }
         }

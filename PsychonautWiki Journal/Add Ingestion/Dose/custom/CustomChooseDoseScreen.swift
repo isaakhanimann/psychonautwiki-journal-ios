@@ -20,7 +20,7 @@ struct CustomChooseDoseScreen: View {
     let arguments: CustomChooseDoseScreenArguments
     let dismiss: () -> Void
     @State private var doseText = ""
-    @State private var dose: Double? = nil
+    @State private var dose: Double?
     @State private var isEstimate = false
     @FocusState private var isDoseFieldFocused: Bool
 

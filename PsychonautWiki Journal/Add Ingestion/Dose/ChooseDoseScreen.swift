@@ -179,8 +179,7 @@ struct ChooseDoseScreenContent: View {
             Text("Pure \(administrationRoute.rawValue.capitalized) Dose")
         } footer: {
             if let units = roaDose?.units,
-               let clarification = DosesScreen.getUnitClarification(for: units)
-            {
+               let clarification = DosesScreen.getUnitClarification(for: units) {
                 Section {
                     Text(clarification)
                 }

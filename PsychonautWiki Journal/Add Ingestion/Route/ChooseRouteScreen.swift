@@ -43,8 +43,7 @@ struct ChooseRouteScreen: View {
                     getGroupOfRoutes(routes: documentedRoutes)
                     if !otherRoutes.isEmpty {
                         NavigationLink(value: ChooseOtherRouteScreenArguments(substance: substance,
-                                                                              otherRoutes: otherRoutes))
-                        {
+                                                                              otherRoutes: otherRoutes)) {
                             GroupBox {
                                 Text("Other Routes")
                                     .font(.headline)

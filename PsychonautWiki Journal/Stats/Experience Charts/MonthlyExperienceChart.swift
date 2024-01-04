@@ -24,7 +24,7 @@ struct MonthlyExperienceChart: View {
     let colorMapping: (String) -> Color
 
     var chartHeight: CGFloat = 240
-    @State private var selectedElement: SubstanceExperienceCountForMonth? = nil
+    @State private var selectedElement: SubstanceExperienceCountForMonth?
     @Environment(\.layoutDirection) var layoutDirection
 
     func findElement(
@@ -36,7 +36,7 @@ struct MonthlyExperienceChart: View {
         if let date = proxy.value(atX: relativeXPosition) as Date? {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
-            var index: Int? = nil
+            var index: Int?
             for experienceDataIndex in experienceData.last12Months.indices {
                 let nthExperienceCountDistance = experienceData.last12Months[experienceDataIndex].month.distance(to: date)
                 if abs(nthExperienceCountDistance) < minDistance {
@@ -127,8 +127,7 @@ struct MonthlyExperienceChart: View {
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
                     if let selectedElement = selectedElement,
-                       let dateInterval = Calendar.current.dateInterval(of: .month, for: selectedElement.month)
-                    {
+                       let dateInterval = Calendar.current.dateInterval(of: .month, for: selectedElement.month) {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

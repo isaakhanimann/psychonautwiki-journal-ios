@@ -1,0 +1,13 @@
+disabled_rules:
+  - line_length
+  - trailing_comma
+
+strict: true
+
+identifier_name:
+  excluded:
+    - i
+    - id
+    - x
+    - y
+    - z

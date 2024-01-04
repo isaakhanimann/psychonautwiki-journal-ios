@@ -52,7 +52,7 @@ struct RatingCodable: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(UInt64(creationDate.timeIntervalSince1970) * 1000, forKey: .creationDate)
-        var timeInMillis: UInt64? = nil
+        var timeInMillis: UInt64?
         if let time {
             timeInMillis = UInt64(time.timeIntervalSince1970) * 1000
         }

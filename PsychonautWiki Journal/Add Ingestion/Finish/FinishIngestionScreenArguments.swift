@@ -22,5 +22,5 @@ struct FinishIngestionScreenArguments: Hashable {
     let dose: Double?
     let units: String?
     let isEstimate: Bool
-    var suggestedNote: String? = nil
+    var suggestedNote: String?
 }

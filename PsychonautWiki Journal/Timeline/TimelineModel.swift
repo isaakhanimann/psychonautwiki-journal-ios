@@ -31,6 +31,7 @@ struct TimelineModel {
         let weightedLines: [WeightedLine]
     }
 
+    // swiftlint:disable function_body_length
     init(
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
@@ -92,4 +93,5 @@ struct TimelineModel {
         totalWidth = maxWidth
         axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
+    // swiftlint:enable function_body_length
 }

@@ -16,6 +16,7 @@
 
 import Foundation
 
+// swiftlint:disable type_body_length
 enum InteractionChecker {
     static let additionalInteractionsToCheck = [
         "Alcohol",
@@ -310,3 +311,4 @@ extension Interaction: Hashable, Identifiable {
         hasher.combine(hash)
     }
 }
+// swiftlint:enable type_body_length

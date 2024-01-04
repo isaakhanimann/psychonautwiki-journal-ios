@@ -22,7 +22,7 @@ struct DailyExperienceChart: View {
     let experienceData: ExperienceData
     let colorMapping: (String) -> Color
     var chartHeight: CGFloat = 240
-    @State private var selectedElement: SubstanceExperienceCountForDay? = nil
+    @State private var selectedElement: SubstanceExperienceCountForDay?
     @Environment(\.layoutDirection) var layoutDirection
 
     func findElement(
@@ -34,7 +34,7 @@ struct DailyExperienceChart: View {
         if let date = proxy.value(atX: relativeXPosition) as Date? {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
-            var index: Int? = nil
+            var index: Int?
             for experienceDataIndex in experienceData.last30Days.indices {
                 let nthExperienceCountDistance = experienceData.last30Days[experienceDataIndex].day.distance(to: date)
                 if abs(nthExperienceCountDistance) < minDistance {
@@ -102,8 +102,7 @@ struct DailyExperienceChart: View {
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
                     if let selectedElement = selectedElement,
-                       let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day)
-                    {
+                       let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day) {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

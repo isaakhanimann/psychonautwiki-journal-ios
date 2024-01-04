@@ -44,27 +44,22 @@ struct RoaDose: Decodable {
     func getRangeType(for dose: Double, with doseUnits: String) -> DoseRangeType {
         guard units == doseUnits else { return .none }
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap
-        {
+           dose < lightMinUnwrap {
             return .thresh
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap
-        {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return .light
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap
-        {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return .common
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
-        {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return .strong
         } else if let heavyMinUnwrap = heavyMin,
-                  heavyMinUnwrap <= dose
-        {
+                  heavyMinUnwrap <= dose {
             return .heavy
         } else {
             return .none
@@ -75,23 +70,19 @@ struct RoaDose: Decodable {
         guard let dose = ingestionDose else { return nil }
         guard ingestionUnits == units else { return nil }
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap
-        {
+           dose < lightMinUnwrap {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap
-        {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap
-        {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
-        {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             if heavyMinUnwrap <= dose {
@@ -111,23 +102,19 @@ struct RoaDose: Decodable {
 
     private func getNumDotsUpTo4(dose: Double) -> Int {
         if let lightMinUnwrap = lightMin,
-           dose < lightMinUnwrap
-        {
+           dose < lightMinUnwrap {
             return 0
         } else if let lightMinUnwrap = lightMin,
                   let commonMinUnwrap = commonMin,
-                  lightMinUnwrap <= dose && dose < commonMinUnwrap
-        {
+                  lightMinUnwrap <= dose && dose < commonMinUnwrap {
             return 1
         } else if let commonMinUnwrap = commonMin,
                   let strongMinUnwrap = strongMin,
-                  commonMinUnwrap <= dose && dose < strongMinUnwrap
-        {
+                  commonMinUnwrap <= dose && dose < strongMinUnwrap {
             return 2
         } else if let strongMinUnwrap = strongMin,
                   let heavyMinUnwrap = heavyMin,
-                  strongMinUnwrap <= dose && dose < heavyMinUnwrap
-        {
+                  strongMinUnwrap <= dose && dose < heavyMinUnwrap {
             return 3
         } else if let heavyMinUnwrap = heavyMin {
             return Int(floor(dose / heavyMinUnwrap))

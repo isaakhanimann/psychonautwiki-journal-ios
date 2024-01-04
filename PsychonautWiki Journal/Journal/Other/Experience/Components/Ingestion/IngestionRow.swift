@@ -61,8 +61,8 @@ struct IngestionRowContent: View {
 
     var body: some View {
         if #available(iOS 16.0, *) {
-            rowContent.alignmentGuide(.listRowSeparatorLeading) { d in
-                d[.leading]
+            rowContent.alignmentGuide(.listRowSeparatorLeading) { dimension in
+                dimension[.leading]
             }
         } else {
             rowContent

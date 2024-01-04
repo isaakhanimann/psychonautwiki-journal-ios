@@ -17,6 +17,8 @@
 import CoreData
 import SwiftUI
 
+// swiftlint:disable type_body_length function_body_length file_length function_parameter_count
+
 struct FinishIngestionScreen: View {
     enum SheetOption: Identifiable {
         case editTitle
@@ -34,7 +36,7 @@ struct FinishIngestionScreen: View {
 
     @EnvironmentObject private var toastViewModel: ToastViewModel
     @EnvironmentObject private var locationManager: LocationManager
-    @State private var sheetToShow: SheetOption? = nil
+    @State private var sheetToShow: SheetOption?
     @State private var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
     @State private var selectedTime = Date()
     @State private var enteredNote = ""
@@ -43,7 +45,7 @@ struct FinishIngestionScreen: View {
     @State private var selectedStomachFullness = StomachFullness.empty
     @State private var alreadyUsedColors = [SubstanceColor]()
     @State private var otherColors = [SubstanceColor]()
-    @State private var foundCompanion: SubstanceCompanion? = nil
+    @State private var foundCompanion: SubstanceCompanion?
     @State private var isInitialized = false
     @State private var experiencesWithinLargerRange: [Experience] = []
     @State private var selectedExperience: Experience?
@@ -439,3 +441,4 @@ struct FinishIngestionScreen: View {
         generator.notificationOccurred(.error)
     }
 }
+// swiftlint:enable type_body_length function_body_length file_length function_parameter_count

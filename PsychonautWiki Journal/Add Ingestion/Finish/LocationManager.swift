@@ -21,7 +21,7 @@ import Foundation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     @Published var currentLocation: Location?
-    @Published var selectedLocation: Location? = nil
+    @Published var selectedLocation: Location?
     @Published var authorizationStatus: CLAuthorizationStatus?
     @Published var searchSuggestedLocations: [Location] = []
     @Published var selectedLocationName = ""

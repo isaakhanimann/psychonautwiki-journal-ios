@@ -17,6 +17,7 @@
 import Foundation
 import SwiftUI
 
+// swiftlint:disable identifier_name function_body_length
 struct FullCumulativeTimelines: TimelineDrawable {
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         if let max = finalPoints.map({ $0.x }).max() {
@@ -177,15 +178,13 @@ struct FullCumulativeTimelines: TimelineDrawable {
         path.closeSubpath()
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
         // draw dots
-        for point in finalPoints {
-            if point.isIngestionPoint {
-                let pointHeight = point.y * heightBetween + paddingBottom
-                context.drawDot(
-                    x: point.x * pixelsPerSec,
-                    bottomY: height - pointHeight,
-                    color: color
-                )
-            }
+        for point in finalPoints where point.isIngestionPoint {
+            let pointHeight = point.y * heightBetween + paddingBottom
+            context.drawDot(
+                x: point.x * pixelsPerSec,
+                bottomY: height - pointHeight,
+                color: color
+            )
         }
     }
 }
@@ -198,8 +197,7 @@ extension RoaDuration {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
            let fullPeak = peak?.maybeFullDurationRange,
-           let fullOffset = offset?.maybeFullDurationRange
-        {
+           let fullOffset = offset?.maybeFullDurationRange {
             return FullCumulativeTimelines(
                 onset: fullOnset,
                 comeup: fullComeup,
@@ -215,3 +213,5 @@ extension RoaDuration {
 }
 
 let shapeOpacity = 0.2
+
+// swiftlint:enable identifier_name function_body_length

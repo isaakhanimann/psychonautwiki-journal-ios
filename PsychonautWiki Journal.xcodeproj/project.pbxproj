@@ -299,7 +299,7 @@
 		EACB6E5227D2592800940291 /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* DecodingTests.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
 		EAD089D42AADA01A006EAA48 /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
-		EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */; };
+		EAE4710726CBA57F009FB0EC /* JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
 		EAE471BD26CBA664009FB0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712926CBA663009FB0EC /* ContentView.swift */; };
@@ -638,7 +638,7 @@
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychonautWiki_JournalApp.swift; sourceTree = "<group>"; };
+		EAE4710626CBA57F009FB0EC /* JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalApp.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		EAE4712226CBA663009FB0EC /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		EAE4712726CBA663009FB0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1129,7 +1129,7 @@
 			isa = PBXGroup;
 			children = (
 				EA8AEA7027E1CC5100B30A16 /* Content */,
-				EAE4710626CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift */,
+				EAE4710626CBA57F009FB0EC /* JournalApp.swift */,
 				EA418A38296CEEBD00DEA663 /* Authenticator.swift */,
 				EA418A36296CDEDE00DEA663 /* LockScreen.swift */,
 				EAE48096297433D100B600EF /* LaunchScreen.storyboard */,
@@ -1592,6 +1592,7 @@
 			buildConfigurationList = EAE4711726CBA582009FB0EC /* Build configuration list for PBXNativeTarget "PsychonautWiki Journal" */;
 			buildPhases = (
 				EAE470FF26CBA57F009FB0EC /* Sources */,
+				EAAE95B22B4601A800FE16CF /* SwiftLint */,
 				EAE4710026CBA57F009FB0EC /* Frameworks */,
 				EAE4722B26CBAE31009FB0EC /* Resources */,
 				EA4910C826DFB4E1001A5316 /* Embed Watch Content */,
@@ -1689,6 +1690,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EAAE95B22B4601A800FE16CF /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EA085DC829607229001638AC /* Sources */ = {
@@ -1805,7 +1828,7 @@
 				EA527A9229428B02009C142D /* AddictionScreen.swift in Sources */,
 				EA4B8A1D2A9B3540009918DE /* EditTimedNoteScreen.swift in Sources */,
 				EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */,
-				EAE4710726CBA57F009FB0EC /* PsychonautWiki_JournalApp.swift in Sources */,
+				EAE4710726CBA57F009FB0EC /* JournalApp.swift in Sources */,
 				EABD92092941EA4B0073303A /* TotalTimeline.swift in Sources */,
 				EA41C61D295AF236000DA021 /* InteractionsGroup.swift in Sources */,
 				EA48F88A29DD501F007DA8C5 /* LocationCodable.swift in Sources */,
@@ -2270,6 +2293,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2297,6 +2321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S7AHDRUD6;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "PsychonautWiki Journal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

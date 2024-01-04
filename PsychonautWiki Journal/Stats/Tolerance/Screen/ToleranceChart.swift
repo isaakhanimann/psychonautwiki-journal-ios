@@ -84,8 +84,7 @@ struct ToleranceChart: View {
         let ends = toleranceWindows.map { $0.end }
         if let startChart = starts.min(),
            let endChart = ends.max(),
-           startChart <= Date.now && Date.now <= endChart
-        {
+           startChart <= Date.now && Date.now <= endChart {
             return true
         } else {
             return false

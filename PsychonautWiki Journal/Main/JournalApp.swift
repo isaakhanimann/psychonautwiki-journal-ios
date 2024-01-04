@@ -17,7 +17,7 @@
 import SwiftUI
 
 @main
-struct PsychonautWiki_JournalApp: App {
+struct JournalApp: App {
     @StateObject private var toastViewModel = ToastViewModel()
     @StateObject private var locationManager = LocationManager()
     @StateObject private var authenticator = Authenticator()

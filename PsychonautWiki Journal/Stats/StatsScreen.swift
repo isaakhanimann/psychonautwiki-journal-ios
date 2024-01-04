@@ -32,8 +32,8 @@ struct StatsScreen: View {
         sortDescriptors: []
     ) var substanceCompanions: FetchedResults<SubstanceCompanion>
 
-    @State private var experienceData: ExperienceData? = nil
-    @State private var substanceData: SubstanceData? = nil
+    @State private var experienceData: ExperienceData?
+    @State private var substanceData: SubstanceData?
     @State private var toleranceWindows: [ToleranceWindow] = []
     @State private var substancesInIngestionsButNotChart: [String] = []
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -132,14 +132,14 @@ struct StatsScreen: View {
     }
 
     private func getExperienceCountsLast30Days() -> [SubstanceExperienceCountForDay] {
-        let experiencesLast30Days = experiences.prefix { ex in
-            Calendar.current.numberOfDaysBetween(ex.sortDateUnwrapped, and: Date()) <= 30
+        let experiencesLast30Days = experiences.prefix { experience in
+            Calendar.current.numberOfDaysBetween(experience.sortDateUnwrapped, and: Date()) <= 30
         }
-        let ungroupedResult = experiencesLast30Days.flatMap { ex in
-            let distinctSubstanceNames = ex.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
+        let ungroupedResult = experiencesLast30Days.flatMap { experience in
+            let distinctSubstanceNames = experience.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForDay(
-                    day: ex.sortDateUnwrapped,
+                    day: experience.sortDateUnwrapped,
                     substanceName: substanceName,
                     experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
@@ -164,14 +164,14 @@ struct StatsScreen: View {
     }
 
     private func getExperienceCountsLast12Months() -> [SubstanceExperienceCountForMonth] {
-        let experiencesLast12Months = experiences.prefix { ex in
-            Calendar.current.numberOfMonthsBetween(ex.sortDateUnwrapped, and: Date()) <= 12
+        let experiencesLast12Months = experiences.prefix { experience in
+            Calendar.current.numberOfMonthsBetween(experience.sortDateUnwrapped, and: Date()) <= 12
         }
-        let ungroupedResult = experiencesLast12Months.flatMap { ex in
-            let distinctSubstanceNames = ex.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
+        let ungroupedResult = experiencesLast12Months.flatMap { experience in
+            let distinctSubstanceNames = experience.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForMonth(
-                    month: ex.sortDateUnwrapped,
+                    month: experience.sortDateUnwrapped,
                     substanceName: substanceName,
                     experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
@@ -196,11 +196,11 @@ struct StatsScreen: View {
     }
 
     private func getExperienceCountsYears() -> [SubstanceExperienceCountForYear] {
-        let ungroupedResult = experiences.flatMap { ex in
-            let distinctSubstanceNames = ex.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
+        let ungroupedResult = experiences.flatMap { experience in
+            let distinctSubstanceNames = experience.myIngestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
             return distinctSubstanceNames.map { substanceName in
                 SubstanceExperienceCountForYear(
-                    year: ex.sortDateUnwrapped,
+                    year: experience.sortDateUnwrapped,
                     substanceName: substanceName,
                     experienceCount: 1 / Double(distinctSubstanceNames.count)
                 )
@@ -226,6 +226,7 @@ struct StatsScreen: View {
 }
 
 extension Calendar {
+    // swiftlint:disable identifier_name
     func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
         let fromDate = startOfDay(for: from)
         let toDate = startOfDay(for: to)
@@ -239,6 +240,7 @@ extension Calendar {
         let numberOfMonths = dateComponents([.month], from: fromDate, to: toDate)
         return numberOfMonths.month!
     }
+    // swiftlint:enable identifier_name
 }
 
 @available(iOS 16, *)

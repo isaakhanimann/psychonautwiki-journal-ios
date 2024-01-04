@@ -23,7 +23,7 @@ struct YearlyExperienceChart: View {
     let isShowingYearlyAverageLine: Bool
     let colorMapping: (String) -> Color
     var chartHeight: CGFloat = 240
-    @State private var selectedElement: SubstanceExperienceCountForYear? = nil
+    @State private var selectedElement: SubstanceExperienceCountForYear?
     @Environment(\.layoutDirection) var layoutDirection
 
     func findElement(
@@ -35,7 +35,7 @@ struct YearlyExperienceChart: View {
         if let date = proxy.value(atX: relativeXPosition) as Date? {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
-            var index: Int? = nil
+            var index: Int?
             for experienceDataIndex in experienceData.years.indices {
                 let nthExperienceCountDistance = experienceData.years[experienceDataIndex].year.distance(to: date)
                 if abs(nthExperienceCountDistance) < minDistance {
@@ -126,8 +126,7 @@ struct YearlyExperienceChart: View {
             ZStack(alignment: .topLeading) {
                 GeometryReader { nthGeoItem in
                     if let selectedElement = selectedElement,
-                       let dateInterval = Calendar.current.dateInterval(of: .year, for: selectedElement.year)
-                    {
+                       let dateInterval = Calendar.current.dateInterval(of: .year, for: selectedElement.year) {
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
                         let startPositionX2 = proxy.position(forX: dateInterval.end) ?? 0
                         let midStartPositionX = (startPositionX1 + startPositionX2) / 2 + nthGeoItem[proxy.plotAreaFrame].origin.x

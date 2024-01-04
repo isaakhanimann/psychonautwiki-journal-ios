@@ -110,8 +110,7 @@ extension Experience: Comparable {
     var isCurrent: Bool {
         let twelveHours: TimeInterval = 12 * 60 * 60
         if let lastIngestionTime = ingestionsSorted.last?.time,
-           Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours
-        {
+           Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
             return true
         } else {
             return false

@@ -24,12 +24,12 @@ struct ChooseShroomsDoseScreen: View {
     }
 
     @State private var psilocybinTextInMg = ""
-    @State private var psilocybinInMg: Double? = nil
+    @State private var psilocybinInMg: Double?
     @State private var psilocybinContentInPercentText = "1"
     @State private var psilocybinContentInPercent: Double? = 1.0
     @State private var isEstimate = false
     @State private var shroomWeightText = ""
-    @State private var shroomWeightInGrams: Double? = nil
+    @State private var shroomWeightInGrams: Double?
 
     private var suggestedNote: String? {
         if psilocybinContentInPercent != nil && shroomWeightInGrams != nil {

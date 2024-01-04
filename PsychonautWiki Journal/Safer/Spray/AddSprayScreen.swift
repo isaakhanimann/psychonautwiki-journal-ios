@@ -19,9 +19,9 @@ import SwiftUI
 struct AddSprayScreen: View {
     @State private var name = ""
     @State private var sizeInMlText = ""
-    @State private var sizeInMl: Double? = nil
+    @State private var sizeInMl: Double?
     @State private var numSpraysText = ""
-    @State private var numSprays: Double? = nil
+    @State private var numSprays: Double?
     @Environment(\.dismiss) var dismiss
 
     var body: some View {

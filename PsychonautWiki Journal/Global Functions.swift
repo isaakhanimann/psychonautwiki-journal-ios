@@ -22,9 +22,11 @@ func playHapticFeedback() {
     impactMed.impactOccurred()
 }
 
+// swiftlint:disable force_cast
 func getCurrentAppVersion() -> String {
     return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 }
+// swiftlint:enable force_cast
 
 func getColor(for substanceName: String) -> SubstanceColor {
     let fetchRequest = SubstanceCompanion.fetchRequest()

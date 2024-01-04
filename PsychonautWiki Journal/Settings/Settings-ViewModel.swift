@@ -35,6 +35,7 @@ extension SettingsScreen {
             isExporting = true
         }
 
+        // swiftlint:disable cyclomatic_complexity function_body_length
         func importData(data: Data) {
             do {
                 let file = try JSONDecoder().decode(JournalFile.self, from: data)
@@ -128,6 +129,7 @@ extension SettingsScreen {
                 showErrorToast(message: "Import Failed")
             }
         }
+        // swiftlint:enable cyclomatic_complexity function_body_length
 
         func deleteEverything() {
             do {

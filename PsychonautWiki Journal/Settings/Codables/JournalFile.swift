@@ -24,6 +24,7 @@ struct JournalFile: FileDocument, Codable {
     var substanceCompanions: [CompanionCodable]
     var customSubstances: [CustomSubstanceCodable]
 
+    // swiftlint:disable function_body_length
     init(experiences: [Experience] = [], customSubstances: [CustomSubstance] = []) {
         var experiencesToStore: [ExperienceCodable] = []
         var companionsToStore: [CompanionCodable] = []
@@ -96,6 +97,7 @@ struct JournalFile: FileDocument, Codable {
             )
         }
     }
+    // swiftlint:enable function_body_length
 
     init(configuration: ReadConfiguration) throws {
         if let data = configuration.file.regularFileContents {

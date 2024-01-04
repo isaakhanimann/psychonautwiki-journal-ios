@@ -100,8 +100,7 @@ extension RoaDuration {
     ) -> OnsetComeupTotalTimeline? {
         if let fullTotal = total?.maybeFullDurationRange,
            let fullOnset = onset?.maybeFullDurationRange,
-           let fullComeup = comeup?.maybeFullDurationRange
-        {
+           let fullComeup = comeup?.maybeFullDurationRange {
             return OnsetComeupTotalTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,

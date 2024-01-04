@@ -25,6 +25,7 @@ struct GroupDrawable {
         timelineDrawables.map { $0.endOfLineRelativeToStartInSeconds }.max() ?? 0
     }
 
+    // swiftlint:disable function_body_length
     init(
         startGraph: Date,
         color: SubstanceColor,
@@ -146,6 +147,7 @@ struct GroupDrawable {
             }
         }
     }
+    // swiftlint:enable function_body_length
 
     private static func getDistanceFromStartGraphInSeconds(graphStartTime: Date, time: Date) -> TimeInterval {
         time.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970

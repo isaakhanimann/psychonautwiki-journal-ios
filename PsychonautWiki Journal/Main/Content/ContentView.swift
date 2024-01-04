@@ -28,7 +28,7 @@ struct ContentView: View {
 
     var body: some View {
         ContentScreen(isEyeOpen: isEyeOpen2)
-            .onOpenURL { url in
+            .onOpenURL { _ in
                 if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
                     UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
                     toastViewModel.showSuccessToast(message: "Unlocked")

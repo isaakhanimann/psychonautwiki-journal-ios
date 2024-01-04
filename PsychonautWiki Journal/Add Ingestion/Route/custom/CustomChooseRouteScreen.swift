@@ -70,8 +70,7 @@ struct CustomChooseRouteScreen: View {
     private func getRouteBoxFor(route: AdministrationRoute) -> some View {
         NavigationLink(value: CustomChooseDoseScreenArguments(substanceName: arguments.substanceName,
                                                               units: arguments.units,
-                                                              administrationRoute: route))
-        {
+                                                              administrationRoute: route)) {
             GroupBox {
                 VStack(alignment: .center) {
                     Text(route.rawValue.localizedCapitalized)

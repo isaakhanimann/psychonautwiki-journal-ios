@@ -20,12 +20,10 @@ struct DoseRow: View {
     let roaDose: RoaDose?
     var doseFont: Font {
         if let commonMinUnwrap = roaDose?.commonMin,
-           commonMinUnwrap.formatted().count >= 4
-        {
+           commonMinUnwrap.formatted().count >= 4 {
             return .footnote
         } else if let strongMinUnwrap = roaDose?.strongMin,
-                  strongMinUnwrap.formatted().count >= 4
-        {
+                  strongMinUnwrap.formatted().count >= 4 {
             return .footnote
         } else {
             return .body

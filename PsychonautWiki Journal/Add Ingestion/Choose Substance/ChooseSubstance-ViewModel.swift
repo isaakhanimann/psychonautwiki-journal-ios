@@ -17,6 +17,7 @@
 import CoreData
 import Foundation
 
+// swiftlint:disable function_body_length
 extension ChooseSubstanceScreen {
     @MainActor
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
@@ -130,3 +131,4 @@ extension ChooseSubstanceScreen {
         }
     }
 }
+// swiftlint:enable function_body_length

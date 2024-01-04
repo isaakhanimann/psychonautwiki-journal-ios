@@ -21,7 +21,7 @@ extension SprayCalculatorScreen {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         private let sprayFetchController: NSFetchedResultsController<Spray>
         @Published var sprayModels: [SprayModel] = []
-        @Published var selectedSpray: SprayModel? = nil {
+        @Published var selectedSpray: SprayModel? {
             didSet {
                 maybeUpdateTotalWeight()
             }

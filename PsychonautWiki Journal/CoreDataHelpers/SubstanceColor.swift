@@ -16,6 +16,7 @@
 
 import SwiftUI
 
+// swiftlint:disable type_body_length file_length
 enum SubstanceColor: String, CaseIterable, Identifiable, Codable, Comparable {
     static func < (lhs: SubstanceColor, rhs: SubstanceColor) -> Bool {
         lhs.sortValue < rhs.sortValue
@@ -700,3 +701,5 @@ enum SubstanceColor: String, CaseIterable, Identifiable, Codable, Comparable {
         }
     }
 }
+
+// swiftlint:enable type_body_length file_length

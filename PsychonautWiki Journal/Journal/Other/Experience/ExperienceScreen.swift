@@ -16,6 +16,7 @@
 
 import SwiftUI
 
+// swiftlint:disable type_body_length
 struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
 
@@ -29,7 +30,7 @@ struct ExperienceScreen: View {
     }
 
     @State private var isShowingDeleteConfirmation = false
-    @State private var sheetToShow: SheetOption? = nil
+    @State private var sheetToShow: SheetOption?
     @State private var hiddenIngestions: [ObjectIdentifier] = []
     @State private var hiddenRatings: [ObjectIdentifier] = []
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -375,3 +376,4 @@ struct ExperienceScreen: View {
         dismiss()
     }
 }
+// swiftlint:enable type_body_length

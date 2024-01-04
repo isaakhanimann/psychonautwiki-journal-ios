@@ -16,8 +16,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TimedNoteCodable: Codable {
     let creationDate: Date
     let time: Date

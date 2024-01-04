@@ -73,8 +73,7 @@ extension RoaDuration {
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupTimeline? {
         if let fullOnset = onset?.maybeFullDurationRange,
-           let fullComeup = comeup?.maybeFullDurationRange
-        {
+           let fullComeup = comeup?.maybeFullDurationRange {
             return OnsetComeupTimeline(
                 onset: fullOnset,
                 comeup: fullComeup,

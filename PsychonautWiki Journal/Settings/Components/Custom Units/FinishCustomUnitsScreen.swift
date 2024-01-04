@@ -29,7 +29,7 @@ struct FinishCustomUnitsScreen: View {
 
     @State private var name = ""
     @State private var unit = ""
-    @State private var dosePerUnit: Double? = nil
+    @State private var dosePerUnit: Double?
     @State private var isEstimate = false
     @State private var isUnknownDose = false
     @State private var note = ""

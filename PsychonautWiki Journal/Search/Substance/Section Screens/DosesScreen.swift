@@ -44,8 +44,7 @@ struct DosesScreen: View {
                 MDMAPillsSection()
             }
             if let units = substance.roas.first?.dose?.units,
-               let clarification = DosesScreen.getUnitClarification(for: units)
-            {
+               let clarification = DosesScreen.getUnitClarification(for: units) {
                 Section {
                     Text(clarification)
                 }

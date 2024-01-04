@@ -16,7 +16,7 @@
 
 import Foundation
 
-let OpenJournalURL = "open-journal"
+let openJournalURL = "open-journal"
 
 enum TimelineDisclaimers {
     static let heavyDose = "Heavy doses can have longer durations."

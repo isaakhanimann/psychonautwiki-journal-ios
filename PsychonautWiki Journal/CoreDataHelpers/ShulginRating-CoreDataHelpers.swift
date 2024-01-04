@@ -30,8 +30,8 @@ extension ShulginRating: Comparable {
     }
 
     var optionUnwrapped: ShulginRatingOption {
-        guard let o = option else { return .fourPlus }
-        if let result = ShulginRatingOption(rawValue: o) {
+        guard let option else { return .fourPlus }
+        if let result = ShulginRatingOption(rawValue: option) {
             return result
         } else {
             return .fourPlus
