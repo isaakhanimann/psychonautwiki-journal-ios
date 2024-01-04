@@ -18,11 +18,29 @@ import SwiftUI
 
 struct ConvertedRoaDoseRow: View {
 
+    let customUnit: CustomUnit
+    let roaDose: RoaDose?
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        DoseClassificationRow(
+            lightMin: convertToNewUnit(oldDose: roaDose?.lightMin),
+            commonMin: convertToNewUnit(oldDose: roaDose?.commonMin),
+            strongMin: convertToNewUnit(oldDose: roaDose?.strongMin),
+            heavyMin: convertToNewUnit(oldDose: roaDose?.heavyMin),
+            units: customUnit.unitUnwrapped)
+    }
+
+    private func convertToNewUnit(oldDose: Double?) -> Double? {
+        if let oldDose, let dosePerUnit = customUnit.doseUnwrapped, dosePerUnit > 0 {
+            (oldDose/dosePerUnit).relativeRounded
+        } else {
+            nil
+        }
     }
 }
 
 #Preview {
-    ConvertedRoaDoseRow()
+    ConvertedRoaDoseRow(
+        customUnit: CustomUnit.previewSample,
+        roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral))
 }

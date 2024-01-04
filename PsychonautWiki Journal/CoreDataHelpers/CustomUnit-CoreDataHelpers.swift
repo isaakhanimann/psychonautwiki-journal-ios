@@ -70,7 +70,7 @@ extension CustomUnit {
         customUnit.substanceName = "MDMA"
         customUnit.originalUnit = "mg"
         customUnit.unit = "pill"
-        customUnit.dose = 90
+        customUnit.dose = 30
         customUnit.note = "Some random notes"
         return customUnit
     }
