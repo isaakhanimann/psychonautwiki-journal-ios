@@ -1609,7 +1609,6 @@
 			buildConfigurationList = EAE4711726CBA582009FB0EC /* Build configuration list for PBXNativeTarget "PsychonautWiki Journal" */;
 			buildPhases = (
 				EAE470FF26CBA57F009FB0EC /* Sources */,
-				EAAE95B22B4601A800FE16CF /* SwiftLint */,
 				EAE4710026CBA57F009FB0EC /* Frameworks */,
 				EAE4722B26CBAE31009FB0EC /* Resources */,
 				EA4910C826DFB4E1001A5316 /* Embed Watch Content */,
@@ -1707,28 +1706,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		EAAE95B22B4601A800FE16CF /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EA085DC829607229001638AC /* Sources */ = {
