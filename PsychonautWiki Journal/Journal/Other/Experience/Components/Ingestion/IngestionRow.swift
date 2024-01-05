@@ -103,16 +103,16 @@ private struct IngestionRowContent: View {
             if let customUnit = ingestion.customUnit {
                 if let customUnitDose = ingestion.customUnitDoseUnwrapped {
                     if let calculatedDose = ingestion.calculatedDose {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped) = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped)")
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped)") + Text(" = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                     } else {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped)")
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped) \(routeText)")
                     }
                 } else {
                     Text(routeText.localizedCapitalized)
                 }
             } else {
                 if let doseUnwrapped = ingestion.doseUnwrapped {
-                    Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped)")
+                    Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped) \(routeText)")
                 } else {
                     Text(routeText.localizedCapitalized)
                 }
