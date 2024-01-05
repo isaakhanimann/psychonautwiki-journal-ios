@@ -31,13 +31,13 @@ struct ExperiencesList: View {
             .listStyle(.plain)
             if experiences.isEmpty {
                 if isSearching {
-                    Text("No Results")
+                    Text("No experiences match the search")
                         .foregroundColor(.secondary)
                 } else if isFavoriteFilterEnabled {
-                    Text("No Favorites")
+                    Text("No favorites match the search")
                         .foregroundColor(.secondary)
                 } else {
-                    Text("No Ingestions Yet")
+                    Text("No ingestions yet")
                         .foregroundColor(.secondary)
                 }
             }
