@@ -33,6 +33,11 @@ extension CustomUnit {
         }
     }
 
+    func getPureSubstanceDose(from customUnitDose: Double) -> Double? {
+        guard let dosePerUnit = doseUnwrapped else { return nil }
+        return customUnitDose * dosePerUnit
+    }
+
     var originalUnitUnwrapped: String {
         originalUnit ?? ""
     }
@@ -71,6 +76,18 @@ extension CustomUnit {
         customUnit.originalUnit = "mg"
         customUnit.unit = "scoop"
         customUnit.dose = 30
+        customUnit.note = "Some random notes"
+        return customUnit
+    }
+
+    static var estimatePreviewSample: CustomUnit {
+        let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
+        customUnit.name = "Ket Line"
+        customUnit.substanceName = "Ketamine"
+        customUnit.originalUnit = "mg"
+        customUnit.unit = "line"
+        customUnit.dose = 20
+        customUnit.isEstimate = true
         customUnit.note = "Some random notes"
         return customUnit
     }

@@ -126,6 +126,8 @@
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA4793562B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */; };
 		EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */; };
+		EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793592B48252500685EAA /* CustomUnitDose.swift */; };
+		EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
@@ -205,7 +207,7 @@
 		EA55CEBE2A3F298E00FE1A44 /* ColorRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA55CEBD2A3F298E00FE1A44 /* ColorRectangle.swift */; };
 		EA6048252A140E25005C6A4B /* FabPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048242A140E25005C6A4B /* FabPosition.swift */; };
 		EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048262A1411C0005C6A4B /* Suggestion.swift */; };
-		EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */; };
+		EA6048292A1411CF005C6A4B /* RegularDoseAndUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048282A1411CF005C6A4B /* RegularDoseAndUnit.swift */; };
 		EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */; };
 		EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60482D2A162225005C6A4B /* String-CleanSearch.swift */; };
 		EA6048312A166FD9005C6A4B /* SprayCalculatorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */; };
@@ -472,6 +474,8 @@
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RoundedToAtMost1Decimal.swift"; sourceTree = "<group>"; };
 		EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDosePicker.swift; sourceTree = "<group>"; };
+		EA4793592B48252500685EAA /* CustomUnitDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDose.swift; sourceTree = "<group>"; };
+		EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseLabel.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
@@ -544,7 +548,7 @@
 		EA55CEBD2A3F298E00FE1A44 /* ColorRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRectangle.swift; sourceTree = "<group>"; };
 		EA6048242A140E25005C6A4B /* FabPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabPosition.swift; sourceTree = "<group>"; };
 		EA6048262A1411C0005C6A4B /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
-		EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseAndUnit.swift; sourceTree = "<group>"; };
+		EA6048282A1411CF005C6A4B /* RegularDoseAndUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularDoseAndUnit.swift; sourceTree = "<group>"; };
 		EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceModel.swift; sourceTree = "<group>"; };
 		EA60482D2A162225005C6A4B /* String-CleanSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CleanSearch.swift"; sourceTree = "<group>"; };
 		EA6048302A166FD9005C6A4B /* SprayCalculatorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprayCalculatorScreen.swift; sourceTree = "<group>"; };
@@ -1041,9 +1045,11 @@
 		EA60482C2A1411EF005C6A4B /* Suggestion */ = {
 			isa = PBXGroup;
 			children = (
-				EA6048282A1411CF005C6A4B /* DoseAndUnit.swift */,
+				EA6048282A1411CF005C6A4B /* RegularDoseAndUnit.swift */,
+				EA4793592B48252500685EAA /* CustomUnitDose.swift */,
 				EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */,
 				EA6048262A1411C0005C6A4B /* Suggestion.swift */,
+				EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -1784,6 +1790,7 @@
 				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
 				EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */,
 				EA6048392A188BFF005C6A4B /* SprayCalculatorScreen-ViewModel.swift in Sources */,
+				EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */,
 				EA4B8A122A9B1F23009918DE /* TimedNote-CoreDataHelpers.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
 				EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */,
@@ -1836,6 +1843,7 @@
 				EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */,
 				EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */,
 				EA014FB027EC6E0400077FB2 /* UnitPickerOptions.swift in Sources */,
+				EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */,
 				EA55CEB62A3F283D00FE1A44 /* ExperienceColorRectangle.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
@@ -1939,7 +1947,7 @@
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,
 				EAA2C9BC2B28BFBA0045C8DF /* CustomUnit-CoreDataHelpers.swift in Sources */,
 				EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */,
-				EA6048292A1411CF005C6A4B /* DoseAndUnit.swift in Sources */,
+				EA6048292A1411CF005C6A4B /* RegularDoseAndUnit.swift in Sources */,
 				EA418A0229673FFF00DEA663 /* MDMAPillsSection.swift in Sources */,
 				EA418A33296C755400DEA663 /* EditLocationLinkAndMap.swift in Sources */,
 				EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */,

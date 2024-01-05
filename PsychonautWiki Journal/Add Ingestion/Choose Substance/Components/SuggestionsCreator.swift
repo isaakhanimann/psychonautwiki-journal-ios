@@ -17,9 +17,6 @@
 import Foundation
 
 class SuggestionsCreator {
-    var suggestions: [Suggestion] = []
-    private let maxNumberOfSuggestions = 10
-
     init(sortedIngestions: [Ingestion], customUnits: [CustomUnit]) {
         let bySubstance = Dictionary(grouping: sortedIngestions, by: { ingestion in
             ingestion.substanceNameUnwrapped
@@ -32,24 +29,45 @@ class SuggestionsCreator {
                 let filteredCustomUnits = customUnits.filter { customUnit in
                     customUnit.substanceNameUnwrapped == substanceName && customUnit.administrationRouteUnwrapped == route
                 }
+                let dosesAndUnits: [RegularDoseAndUnit] = Array(
+                    groupedBySubstanceAndRoute
+                        .filter { ing in
+                            ing.customUnit == nil
+                        }
+                        .map { ing in
+                            RegularDoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped, isEstimate: ing.isEstimate)
+                        }
+                        .uniqued()
+                        .prefix(maxNumberOfSuggestions))
+                let customUnits: [CustomUnitDose] = Array(
+                    groupedBySubstanceAndRoute
+                        .compactMap { ing in
+                            if let customUnit = ing.customUnit, let dose = ing.customUnitDoseUnwrapped {
+                                CustomUnitDose(dose: dose, isEstimate: ing.isEstimate, customUnit: customUnit)
+                            } else {
+                                nil
+                            }
+                        }
+                        .uniqued()
+                        .prefix(maxNumberOfSuggestions))
                 return Suggestion(
                     substanceName: substanceName,
                     substance: SubstanceRepo.shared.getSubstance(name: substanceName),
                     units: firstIngestion?.unitsUnwrapped ?? "",
                     route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
                     substanceColor: firstIngestion?.substanceColor ?? .red,
-                    dosesAndUnit: Array(groupedBySubstanceAndRoute
-                        .map { ing in
-                            DoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped, isEstimate: ing.isEstimate)
-                        }
-                        .uniqued()
-                        .prefix(maxNumberOfSuggestions)),
+                    dosesAndUnit: dosesAndUnits,
+                    customUnitDoses: customUnits,
                     customUnits: filteredCustomUnits,
-                    lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now
-                )
+                    lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now)
             }
         }.sorted { sug1, sug2 in
             sug1.lastTimeUsed > sug2.lastTimeUsed
         }
     }
+
+    var suggestions: [Suggestion] = []
+
+    private let maxNumberOfSuggestions = 5
+
 }

@@ -16,18 +16,12 @@
 
 import Foundation
 
-struct Suggestion: Identifiable {
+struct RegularDoseAndUnit: Hashable, Identifiable {
     var id: String {
-        substanceName + route.rawValue
+        (dose?.description ?? "") + (units ?? "") + isEstimate.description
     }
 
-    let substanceName: String
-    let substance: Substance?
-    let units: String
-    let route: AdministrationRoute
-    let substanceColor: SubstanceColor
-    let dosesAndUnit: [RegularDoseAndUnit]
-    let customUnitDoses: [CustomUnitDose]
-    let customUnits: [CustomUnit]
-    let lastTimeUsed: Date
+    let dose: Double?
+    let units: String?
+    let isEstimate: Bool
 }

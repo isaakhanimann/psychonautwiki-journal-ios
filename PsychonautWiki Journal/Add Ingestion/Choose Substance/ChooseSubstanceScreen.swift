@@ -17,6 +17,8 @@
 import AlertToast
 import SwiftUI
 
+// MARK: - ChooseSubstanceScreen
+
 struct ChooseSubstanceScreen: View {
     @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
@@ -30,12 +32,13 @@ struct ChooseSubstanceScreen: View {
             filteredSuggestions: viewModel.filteredSuggestions,
             filteredSubstances: viewModel.filteredSubstances,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
-            dismiss: { dismiss() }
-        ).task {
+            dismiss: { dismiss() }).task {
             locationManager.maybeRequestLocation() // because we might need current location on finish screen
         }
     }
 }
+
+// MARK: - ChooseSubstanceContent
 
 struct ChooseSubstanceContent: View {
     @Binding var searchText: String
@@ -45,7 +48,6 @@ struct ChooseSubstanceContent: View {
     let filteredSubstances: [Substance]
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: () -> Void
-    @State private var isShowingAddCustomSheet = false
 
     var body: some View {
         NavigationStack {
@@ -61,9 +63,9 @@ struct ChooseSubstanceContent: View {
             }
             .navigationDestination(for: AddIngestionDestination.self) { destination in
                 switch destination {
-                case let .interactions(substance):
+                case .interactions(let substance):
                     AcknowledgeInteractionsView(substance: substance, dismiss: dismiss)
-                case let .saferUse(substance):
+                case .saferUse(let substance):
                     AcknowledgeSaferUseScreen(substance: substance, dismiss: dismiss)
                 case .saferRoutes:
                     SaferRoutesScreen()
@@ -83,15 +85,15 @@ struct ChooseSubstanceContent: View {
             })
             .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 let substanceName = arguments.substance.name
-                if substanceName == "Cannabis" && arguments.administrationRoute == .smoked {
+                if substanceName == "Cannabis", arguments.administrationRoute == .smoked {
                     ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
-                } else if substanceName == "Alcohol" && arguments.administrationRoute == .oral {
+                } else if substanceName == "Alcohol", arguments.administrationRoute == .oral {
                     ChooseAlcoholDoseScreen(dismiss: dismiss)
-                } else if substanceName == "Caffeine" && arguments.administrationRoute == .oral {
+                } else if substanceName == "Caffeine", arguments.administrationRoute == .oral {
                     ChooseCaffeineDoseScreen(dismiss: dismiss)
-                } else if substanceName == "MDMA" && arguments.administrationRoute == .oral {
+                } else if substanceName == "MDMA", arguments.administrationRoute == .oral {
                     ChooseMDMADoseScreen(dismiss: dismiss)
-                } else if substanceName == "Psilocybin mushrooms" && arguments.administrationRoute == .oral {
+                } else if substanceName == "Psilocybin mushrooms", arguments.administrationRoute == .oral {
                     ChooseShroomsDoseScreen(dismiss: dismiss)
                 } else {
                     ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
@@ -104,10 +106,11 @@ struct ChooseSubstanceContent: View {
         .toast(isPresenting: $isShowingOpenEyeToast, duration: 1) {
             AlertToast(
                 displayMode: .alert,
-                type: .image("Eye Open", .red)
-            )
+                type: .image("Eye Open", .red))
         }
     }
+
+    @State private var isShowingAddCustomSheet = false
 
     private var screen: some View {
         ScrollView {
@@ -117,8 +120,7 @@ struct ChooseSubstanceContent: View {
                         SuggestionBox(
                             suggestion: suggestion,
                             dismiss: dismiss,
-                            isEyeOpen: isEyeOpen
-                        )
+                            isEyeOpen: isEyeOpen)
                     }
                 }
                 if !filteredSubstances.isEmpty {
@@ -127,16 +129,14 @@ struct ChooseSubstanceContent: View {
                             SubstanceBox(
                                 substance: substance,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen
-                            )
+                                isEyeOpen: isEyeOpen)
                         }
                     } else {
                         ForEach(filteredSubstances) { substance in
                             SubstanceBox(
                                 substance: substance,
                                 dismiss: dismiss,
-                                isEyeOpen: isEyeOpen
-                            )
+                                isEyeOpen: isEyeOpen)
                         }
                     }
                 }
@@ -144,8 +144,7 @@ struct ChooseSubstanceContent: View {
                     CustomSubstanceBox(
                         customSubstanceModel: custom,
                         dismiss: dismiss,
-                        isEyeOpen: isEyeOpen
-                    )
+                        isEyeOpen: isEyeOpen)
                 }
                 Button {
                     isShowingAddCustomSheet.toggle()
@@ -171,26 +170,29 @@ struct ChooseSubstanceContent: View {
         isEyeOpen: true,
         filteredSuggestions: [
             Suggestion(
-                substanceName: "MDMA",
-                substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
+                substanceName: "Ketamine",
+                substance: SubstanceRepo.shared.getSubstance(name: "Ketamine"),
                 units: "mg",
                 route: .insufflated,
-                substanceColor: .pink,
+                substanceColor: .orange,
                 dosesAndUnit: [
-                    DoseAndUnit(
+                    RegularDoseAndUnit(
                         dose: 20,
                         units: "mg",
-                        isEstimate: true
-                    ),
-                    DoseAndUnit(
+                        isEstimate: true),
+                    RegularDoseAndUnit(
                         dose: 30,
                         units: "mg",
-                        isEstimate: false
-                    ),
+                        isEstimate: false),
+                ],
+                customUnitDoses: [
+                    CustomUnitDose(
+                        dose: 2,
+                        isEstimate: false,
+                        customUnit: .previewSample)
                 ],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-            ),
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
             Suggestion(
                 substanceName: "MDMA",
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
@@ -198,25 +200,22 @@ struct ChooseSubstanceContent: View {
                 route: .oral,
                 substanceColor: .pink,
                 dosesAndUnit: [
-                    DoseAndUnit(
+                    RegularDoseAndUnit(
                         dose: 20,
                         units: "mg",
-                        isEstimate: false
-                    ),
-                    DoseAndUnit(
+                        isEstimate: false),
+                    RegularDoseAndUnit(
                         dose: nil,
                         units: "mg",
-                        isEstimate: false
-                    ),
-                    DoseAndUnit(
+                        isEstimate: false),
+                    RegularDoseAndUnit(
                         dose: 30,
                         units: "mg",
-                        isEstimate: false
-                    ),
+                        isEstimate: false),
                 ],
+                customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-            ),
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
             Suggestion(
                 substanceName: "Cannabis",
                 substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
@@ -224,30 +223,26 @@ struct ChooseSubstanceContent: View {
                 route: .smoked,
                 substanceColor: .green,
                 dosesAndUnit: [
-                    DoseAndUnit(
+                    RegularDoseAndUnit(
                         dose: 3,
                         units: "mg",
-                        isEstimate: false
-                    ),
-                    DoseAndUnit(
+                        isEstimate: false),
+                    RegularDoseAndUnit(
                         dose: 6,
                         units: "mg",
-                        isEstimate: true
-                    ),
-                    DoseAndUnit(
+                        isEstimate: true),
+                    RegularDoseAndUnit(
                         dose: nil,
                         units: "mg",
-                        isEstimate: false
-                    ),
-                    DoseAndUnit(
+                        isEstimate: false),
+                    RegularDoseAndUnit(
                         dose: 2.5,
                         units: "mg",
-                        isEstimate: false
-                    ),
+                        isEstimate: false),
                 ],
+                customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-            ),
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
             Suggestion(
                 substanceName: "Coffee",
                 substance: nil,
@@ -255,29 +250,25 @@ struct ChooseSubstanceContent: View {
                 route: .oral,
                 substanceColor: .brown,
                 dosesAndUnit: [
-                    DoseAndUnit(
+                    RegularDoseAndUnit(
                         dose: 1,
                         units: "cups",
-                        isEstimate: false
-                    ),
-                    DoseAndUnit(
+                        isEstimate: false),
+                    RegularDoseAndUnit(
                         dose: 3,
                         units: "cups",
-                        isEstimate: false
-                    ),
+                        isEstimate: false),
                 ],
+                customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-            ),
+                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
         ],
         filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
         filteredCustomSubstances: [
             CustomSubstanceModel(
                 name: "Coffee",
                 description: "The bitter drink",
-                units: "cups"
-            ),
+                units: "cups"),
         ],
-        dismiss: {}
-    )
+        dismiss: { })
 }

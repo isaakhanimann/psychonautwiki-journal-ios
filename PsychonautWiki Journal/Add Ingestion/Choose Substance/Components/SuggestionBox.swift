@@ -27,17 +27,19 @@ struct SuggestionBox: View {
             VStack(alignment: .leading) {
                 WrappingHStack(
                     alignment: .leading,
-                    horizontalSpacing: 4,
-                    verticalSpacing: 5
-                ) {
+                    horizontalSpacing: horizontalSpacing,
+                    verticalSpacing: verticalSpacing)
+                {
                     ForEach(suggestion.dosesAndUnit) { dose in
                         if let doseUnwrap = dose.dose {
-                            NavigationLink("\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")", value: FinishIngestionScreenArguments(
-                                substanceName: suggestion.substanceName,
-                                administrationRoute: suggestion.route,
-                                dose: doseUnwrap,
-                                units: dose.units,
-                                isEstimate: dose.isEstimate))
+                            NavigationLink(
+                                "\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")",
+                                value: FinishIngestionScreenArguments(
+                                    substanceName: suggestion.substanceName,
+                                    administrationRoute: suggestion.route,
+                                    dose: doseUnwrap,
+                                    units: dose.units,
+                                    isEstimate: dose.isEstimate))
                                 .buttonStyle(.bordered).fixedSize()
                         } else {
                             NavigationLink("Unknown", value: FinishIngestionScreenArguments(
@@ -50,7 +52,9 @@ struct SuggestionBox: View {
                         }
                     }
                     if let substance = suggestion.substance {
-                        NavigationLink("Other", value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
+                        NavigationLink(
+                            "Other",
+                            value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
                             .buttonStyle(.borderedProminent).fixedSize()
                     } else {
                         NavigationLink("Other", value: CustomChooseDoseScreenArguments(
@@ -60,12 +64,33 @@ struct SuggestionBox: View {
                             .buttonStyle(.borderedProminent).fixedSize()
                     }
                 }
+                if !suggestion.customUnitDoses.isEmpty {
+                    WrappingHStack(
+                        alignment: .leading,
+                        horizontalSpacing: horizontalSpacing,
+                        verticalSpacing: verticalSpacing)
+                    {
+                        ForEach(suggestion.customUnitDoses) { customUnitDose in
+                            NavigationLink(
+                                value: FinishIngestionScreenArguments(
+                                    substanceName: suggestion.substanceName,
+                                    administrationRoute: suggestion.route,
+                                    dose: customUnitDose.dose,
+                                    units: customUnitDose.customUnit.originalUnitUnwrapped,
+                                    isEstimate: customUnitDose.isEstimate,
+                                    customUnit: customUnitDose.customUnit))
+                            {
+                                CustomUnitDoseLabel(customUnitDose: customUnitDose)
+                            }.buttonStyle(.bordered).fixedSize()
+                        }
+                    }
+                }
                 if !suggestion.customUnits.isEmpty {
                     WrappingHStack(
                         alignment: .leading,
-                        horizontalSpacing: 4,
-                        verticalSpacing: 5
-                    ) {
+                        horizontalSpacing: horizontalSpacing,
+                        verticalSpacing: verticalSpacing)
+                    {
                         ForEach(suggestion.customUnits) { customUnit in
                             NavigationLink("Enter \(customUnit.unitUnwrapped)", value: customUnit)
                                 .buttonStyle(.borderedProminent).fixedSize()
@@ -80,11 +105,14 @@ struct SuggestionBox: View {
             let route = isEyeOpen ? suggestion.route.rawValue.localizedCapitalized : ""
             Label(
                 "\(suggestion.substanceName) \(route)",
-                systemImage: "circle.fill"
-            )
-            .foregroundColor(suggestion.substanceColor.swiftUIColor)
+                systemImage: "circle.fill")
+                .foregroundColor(suggestion.substanceColor.swiftUIColor)
         }
     }
+
+    private let horizontalSpacing: Double = 4
+    private let verticalSpacing: Double = 5
+
 }
 
 #Preview {
@@ -98,28 +126,24 @@ struct SuggestionBox: View {
                     route: .insufflated,
                     substanceColor: .pink,
                     dosesAndUnit: [
-                        DoseAndUnit(
+                        RegularDoseAndUnit(
                             dose: 20,
                             units: "mg",
-                            isEstimate: true
-                        ),
-                        DoseAndUnit(
+                            isEstimate: true),
+                        RegularDoseAndUnit(
                             dose: nil,
                             units: "mg",
-                            isEstimate: false
-                        ),
-                        DoseAndUnit(
+                            isEstimate: false),
+                        RegularDoseAndUnit(
                             dose: 30,
                             units: "mg",
-                            isEstimate: false
-                        ),
+                            isEstimate: false),
                     ],
+                    customUnitDoses: [],
                     customUnits: [],
-                    lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)
-                ),
-                dismiss: {},
-                isEyeOpen: true
-            )
+                    lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                dismiss: { },
+                isEyeOpen: true)
             SuggestionBox(
                 suggestion: Suggestion(
                     substanceName: "Cannabis",
@@ -128,33 +152,28 @@ struct SuggestionBox: View {
                     route: .smoked,
                     substanceColor: .green,
                     dosesAndUnit: [
-                        DoseAndUnit(
+                        RegularDoseAndUnit(
                             dose: 3,
                             units: "mg",
-                            isEstimate: false
-                        ),
-                        DoseAndUnit(
+                            isEstimate: false),
+                        RegularDoseAndUnit(
                             dose: 6,
                             units: "mg",
-                            isEstimate: true
-                        ),
-                        DoseAndUnit(
+                            isEstimate: true),
+                        RegularDoseAndUnit(
                             dose: nil,
                             units: "mg",
-                            isEstimate: false
-                        ),
-                        DoseAndUnit(
+                            isEstimate: false),
+                        RegularDoseAndUnit(
                             dose: 2.5,
                             units: "mg",
-                            isEstimate: false
-                        ),
+                            isEstimate: false),
                     ],
+                    customUnitDoses: [],
                     customUnits: [],
-                    lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)
-                ),
-                dismiss: {},
-                isEyeOpen: true
-            )
+                    lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)),
+                dismiss: { },
+                isEyeOpen: true)
         }.padding(.horizontal)
     }
 }

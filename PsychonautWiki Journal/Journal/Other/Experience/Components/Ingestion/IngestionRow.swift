@@ -95,7 +95,7 @@ private struct IngestionRowContent: View {
             if let customUnit = ingestion.customUnit {
                 if let customUnitDose = ingestion.customUnitDoseUnwrapped {
                     if let calculatedDose = ingestion.calculatedDose {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped) = \(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped)")
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped) = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped)")
                     } else {
                         Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped)")
                     }
@@ -164,6 +164,14 @@ private struct IngestionRowContent: View {
             )
             IngestionRowContent(
                 ingestion: Ingestion.customUnitPreviewSample,
+                substanceColor: .orange,
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.estimatedCustomUnitPreviewSample,
                 substanceColor: .orange,
                 timeDisplayStyle: .regular,
                 isEyeOpen: true,

@@ -1,4 +1,4 @@
-// Copyright (c) 2023. Isaak Hanimann.
+// Copyright (c) 2024. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
@@ -16,12 +16,13 @@
 
 import Foundation
 
-struct DoseAndUnit: Hashable, Identifiable {
+struct CustomUnitDose: Hashable, Identifiable {
+
     var id: String {
-        (dose?.description ?? "") + (units ?? "") + isEstimate.description
+        "\(dose)\(isEstimate)\(customUnit.description)"
     }
 
-    let dose: Double?
-    let units: String?
+    let dose: Double
     let isEstimate: Bool
+    let customUnit: CustomUnit
 }

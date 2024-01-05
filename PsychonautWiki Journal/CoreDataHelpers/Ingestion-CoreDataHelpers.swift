@@ -54,8 +54,8 @@ extension Ingestion: Comparable {
     }
 
     var calculatedDose: Double? {
-        guard let customDose = customUnitDoseUnwrapped, let dosePerUnit = customUnit?.doseUnwrapped else { return nil }
-        return customDose * dosePerUnit
+        guard let customDose = customUnitDoseUnwrapped else { return nil }
+        return customUnit?.getPureSubstanceDose(from: customDose)
     }
 
     var customUnitDoseUnwrapped: Double? {
@@ -160,6 +160,21 @@ extension Ingestion: Comparable {
         ingestion.dose = 0
         ingestion.customUnitDose = 2
         ingestion.customUnit = CustomUnit.previewSample
+        ingestion.units = "mg"
+        ingestion.isEstimate = false
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = ""
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var estimatedCustomUnitPreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Ketamine"
+        ingestion.dose = 0
+        ingestion.customUnitDose = 2
+        ingestion.customUnit = CustomUnit.estimatePreviewSample
         ingestion.units = "mg"
         ingestion.isEstimate = false
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
