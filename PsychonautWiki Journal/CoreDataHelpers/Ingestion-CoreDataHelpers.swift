@@ -43,15 +43,19 @@ extension Ingestion: Comparable {
 
     var doseUnwrapped: Double? {
         if dose == 0 {
-            return calculatedDose
+            return nil
         } else {
             return dose
         }
     }
 
+    var pureSubstanceDose: Double? {
+        doseUnwrapped ?? calculatedDose
+    }
+
     var calculatedDose: Double? {
-        guard let dose = customUnitDoseUnwrapped, let dosePerUnit = customUnit?.doseUnwrapped else { return nil }
-        return dose * dosePerUnit
+        guard let customDose = customUnitDoseUnwrapped, let dosePerUnit = customUnit?.doseUnwrapped else { return nil }
+        return customDose * dosePerUnit
     }
 
     var customUnitDoseUnwrapped: Double? {
@@ -68,7 +72,7 @@ extension Ingestion: Comparable {
 
     var numberOfDots: Int? {
         substance?.getDose(for: administrationRouteUnwrapped)?.getNumDots(
-            ingestionDose: doseUnwrapped,
+            ingestionDose: pureSubstanceDose,
             ingestionUnits: unitsUnwrapped
         )
     }

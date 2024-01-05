@@ -36,7 +36,7 @@ private func getIngestionMinInfoForTimeline(ingestions: [Ingestion]) -> [Ingesti
             route: ingestion.administrationRouteUnwrapped,
             onsetDelayInHours: ingestion.stomachFullnessUnwrapped?.onsetDelayForOralInHours ?? 0,
             time: ingestion.timeUnwrapped,
-            dose: ingestion.doseUnwrapped,
+            dose: ingestion.pureSubstanceDose,
             color: ingestion.substanceColor
         )
     }
