@@ -32,21 +32,9 @@ struct CustomUnitsChooseDoseScreen: View {
                     Text("Info is not approved by PsychonautWiki administrators.")
                 }
                 RoaDoseRow(roaDose: customUnit.roaDose)
-                VStack(spacing: 8) {
-                    Text(customUnit.nameUnwrapped).font(.headline)
-                    CustomUnitDoseRow(customUnit: customUnit, roaDose: customUnit.roaDose)
-                    doseCalculationText.foregroundStyle(calculatedDoseColor)
-                    HStack {
-                        TextField(
-                            "Enter Dose",
-                            value: $dose,
-                            format: .number
-                        ).keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .focused($isDoseFieldFocused)
-                        Text(customUnit.unitUnwrapped)
-                    }
-                    .font(.title)
+                VStack {
+                    CustomUnitDosePicker(customUnit: customUnit, dose: $dose)
+                        .focused($isDoseFieldFocused)
                     Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
                 }
             }
@@ -87,8 +75,8 @@ struct CustomUnitsChooseDoseScreen: View {
                     dose: dose,
                     units: customUnit.originalUnitUnwrapped,
                     isEstimate: isEstimate,
-                    customUnit: customUnit
-                )) {
+                    customUnit: customUnit))
+                {
                     NextLabel()
                 }
             }
@@ -99,31 +87,10 @@ struct CustomUnitsChooseDoseScreen: View {
         .optionalScrollDismissesKeyboard()
         .navigationBarTitle("\(customUnit.substanceNameUnwrapped) Dose")
     }
-
-    var calculatedDose: Double? {
-        guard let dose, let dosePerUnit = customUnit.doseUnwrapped else { return nil }
-        return dose * dosePerUnit
-    }
-
-    var calculatedDoseColor: Color {
-        if let calculatedDose {
-            customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
-        } else {
-            Color.primary
-        }
-    }
-
-    var doseCalculationText: Text {
-        if let calculatedDose {
-            Text("\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = ") + Text("\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold)
-        } else {
-            Text(" ")
-        }
-    }
 }
 
 #Preview {
     NavigationStack {
-        CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample, dismiss: {})
+        CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample, dismiss: { })
     }
 }

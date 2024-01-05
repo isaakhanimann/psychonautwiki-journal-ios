@@ -21,21 +21,23 @@ struct EditIngestionScreen: View {
     let isEyeOpen: Bool
     @State private var time = Date()
     @State private var dose: Double?
+    @State private var customUnitDose: Double?
     @State private var units: String? = "mg"
     @State private var isEstimate = false
     @State private var note = ""
     @State private var consumerName = ""
-    @State private var route = AdministrationRoute.oral
     @State private var stomachFullness = StomachFullness.empty
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         EditIngestionContent(
             substanceName: ingestion.substanceNameUnwrapped,
-            roaDose: ingestion.substance?.getDose(for: route),
-            route: $route,
+            roaDose: ingestion.substance?.getDose(for: ingestion.administrationRouteUnwrapped),
+            customUnit: ingestion.customUnit,
+            route: ingestion.administrationRouteUnwrapped,
             time: $time,
             dose: $dose,
+            customUnitDose: $customUnitDose,
             units: $units,
             isEstimate: $isEstimate,
             note: $note,
@@ -48,11 +50,11 @@ struct EditIngestionScreen: View {
         .onAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
+            customUnitDose = ingestion.customUnitDoseUnwrapped
             units = ingestion.units
             isEstimate = ingestion.isEstimate
             note = ingestion.noteUnwrapped
             consumerName = ingestion.consumerName ?? ""
-            route = ingestion.administrationRouteUnwrapped
             if let fullness = ingestion.stomachFullnessUnwrapped {
                 stomachFullness = fullness
             }
@@ -62,6 +64,7 @@ struct EditIngestionScreen: View {
     private func save() {
         ingestion.time = time
         ingestion.dose = dose ?? 0
+        ingestion.customUnitDose = customUnitDose ?? 0
         ingestion.units = units
         ingestion.isEstimate = isEstimate
         ingestion.note = note
@@ -70,8 +73,7 @@ struct EditIngestionScreen: View {
         } else {
             ingestion.consumerName = consumerName
         }
-        ingestion.administrationRoute = route.rawValue
-        if route == .oral {
+        if ingestion.administrationRouteUnwrapped == .oral {
             ingestion.stomachFullness = stomachFullness.rawValue
         }
         PersistenceController.shared.saveViewContext()
@@ -89,9 +91,11 @@ struct EditIngestionScreen: View {
 struct EditIngestionContent: View {
     let substanceName: String
     let roaDose: RoaDose?
-    @Binding var route: AdministrationRoute
+    let customUnit: CustomUnit?
+    let route: AdministrationRoute
     @Binding var time: Date
     @Binding var dose: Double?
+    @Binding var customUnitDose: Double?
     @Binding var units: String?
     @Binding var isEstimate: Bool
     @Binding var note: String
@@ -110,19 +114,16 @@ struct EditIngestionContent: View {
     var body: some View {
         Form {
             Section("\(route.rawValue.localizedCapitalized) Dose") {
-                if isEyeOpen {
-                    Picker("Administration route", selection: $route) {
-                        ForEach(AdministrationRoute.allCases) { oneRoute in
-                            Text(oneRoute.rawValue.localizedCapitalized).tag(oneRoute)
-                        }
-                    }
-                }
                 RoaDoseRow(roaDose: roaDose)
-                DosePicker(
-                    roaDose: roaDose,
-                    doseMaybe: $dose,
-                    selectedUnits: $units
-                )
+                if let customUnit {
+                    CustomUnitDosePicker(customUnit: customUnit, dose: $customUnitDose)
+                } else {
+                    DosePicker(
+                        roaDose: roaDose,
+                        doseMaybe: $dose,
+                        selectedUnits: $units
+                    )
+                }
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }.listRowSeparator(.hidden)
             Section("Notes") {
@@ -170,14 +171,16 @@ struct EditIngestionContent: View {
     }
 }
 
-#Preview {
+#Preview("Edit regular ingestion") {
     NavigationStack {
         EditIngestionContent(
             substanceName: "MDMA",
             roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
-            route: .constant(.oral),
+            customUnit: nil,
+            route: .oral,
             time: .constant(Date()),
             dose: .constant(50),
+            customUnitDose: .constant(nil),
             units: .constant("mg"),
             isEstimate: .constant(false),
             note: .constant("These are my notes"),
@@ -189,3 +192,26 @@ struct EditIngestionContent: View {
         )
     }
 }
+
+#Preview("Edit custom unit ingestion") {
+    NavigationStack {
+        EditIngestionContent(
+            substanceName: "Ketamine",
+            roaDose: SubstanceRepo.shared.getSubstance(name: "Ketamine")!.getDose(for: .oral)!,
+            customUnit: CustomUnit.previewSample,
+            route: .oral,
+            time: .constant(Date()),
+            dose: .constant(nil),
+            customUnitDose: .constant(2),
+            units: .constant("mg"),
+            isEstimate: .constant(false),
+            note: .constant("These are my notes"),
+            stomachFullness: .constant(.full),
+            consumerName: .constant("Marc"),
+            save: {},
+            delete: {},
+            isEyeOpen: true
+        )
+    }
+}
+

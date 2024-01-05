@@ -125,6 +125,7 @@
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA4793562B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */; };
+		EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
@@ -470,6 +471,7 @@
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RoundedToAtMost1Decimal.swift"; sourceTree = "<group>"; };
+		EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDosePicker.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 			isa = PBXGroup;
 			children = (
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
+				EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */,
 				EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */,
 				EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */,
 			);
@@ -1954,6 +1957,7 @@
 				EAE480932973EF5900B600EF /* CumulativeDose.swift in Sources */,
 				EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
+				EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */,
 				EA4B8A1F2A9B3E0E009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA4B8A312AA6FF02009918DE /* LockTimeOption.swift in Sources */,
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
