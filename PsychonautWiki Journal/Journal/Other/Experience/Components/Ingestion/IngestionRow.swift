@@ -25,38 +25,22 @@ struct IngestionRow: View {
 
     var body: some View {
         IngestionRowContent(
-            numDots: ingestion.numberOfDots,
+            ingestion: ingestion,
             substanceColor: ingestion.substanceColor,
-            substanceName: ingestion.substanceNameUnwrapped,
-            dose: ingestion.doseUnwrapped,
-            units: ingestion.unitsUnwrapped,
-            isEstimate: ingestion.isEstimate,
-            administrationRoute: ingestion.administrationRouteUnwrapped,
-            ingestionTime: ingestion.timeUnwrapped,
-            note: ingestion.noteUnwrapped,
             timeDisplayStyle: timeDisplayStyle,
             isEyeOpen: isEyeOpen,
             isHidingDosageDots: isHidingDosageDots,
-            stomachFullness: ingestion.stomachFullnessUnwrapped,
             firstIngestionTime: firstIngestionTime
         )
     }
 }
 
-struct IngestionRowContent: View {
-    let numDots: Int?
+private struct IngestionRowContent: View {
+    @ObservedObject var ingestion: Ingestion
     let substanceColor: SubstanceColor
-    let substanceName: String
-    let dose: Double?
-    let units: String
-    let isEstimate: Bool
-    let administrationRoute: AdministrationRoute
-    let ingestionTime: Date
-    let note: String
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
-    let stomachFullness: StomachFullness?
     let firstIngestionTime: Date?
 
     var body: some View {
@@ -74,40 +58,40 @@ struct IngestionRowContent: View {
             ColorRectangle(color: substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
                 HStack {
-                    Text(substanceName)
+                    Text(ingestion.substanceNameUnwrapped)
                         .lineLimit(1)
                         .font(.headline)
                         .foregroundColor(.primary)
                     Spacer()
                     Group {
                         if timeDisplayStyle == .relativeToNow {
-                            Text(ingestionTime, style: .relative) + Text(" ago")
+                            Text(ingestion.timeUnwrapped, style: .relative) + Text(" ago")
                         } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                            Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestionTime)))
+                            Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)))
                         } else {
-                            Text(ingestionTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                         }
                     }
                     .font(.subheadline)
                 }
                 HStack {
-                    let routeText = isEyeOpen ? administrationRoute.rawValue : ""
-                    if let doseUnwrapped = dose {
-                        Text("\(isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(units) \(routeText)").multilineTextAlignment(.trailing)
+                    let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
+                    if let doseUnwrapped = ingestion.doseUnwrapped {
+                        Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped) \(routeText)").multilineTextAlignment(.trailing)
                     } else {
                         Text(routeText.localizedCapitalized)
                     }
                     Spacer()
-                    if let numDotsUnwrap = numDots, !isHidingDosageDots {
+                    if let numDotsUnwrap = ingestion.numberOfDots, !isHidingDosageDots {
                         DotRows(numDots: numDotsUnwrap)
                     }
                 }
                 .font(.subheadline)
                 Group {
-                    if !note.isEmpty {
-                        Text(note)
+                    if !ingestion.noteUnwrapped.isEmpty {
+                        Text(ingestion.noteUnwrapped)
                     }
-                    if let stomachFullness, administrationRoute == .oral {
+                    if let stomachFullness = ingestion.stomachFullnessUnwrapped, ingestion.administrationRouteUnwrapped == .oral {
                         Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
                     }
                 }
@@ -122,131 +106,43 @@ struct IngestionRowContent: View {
     List {
         Section {
             IngestionRowContent(
-                numDots: 4,
-                substanceColor: .cyan,
-                substanceName: "Methamphetamine",
-                dose: 50,
-                units: "mg",
-                isEstimate: false,
-                administrationRoute: .oral,
-                ingestionTime: Date(),
-                note: "",
-                timeDisplayStyle: .relativeToNow,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: .full,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: 2,
-                substanceColor: .blue,
-                substanceName: "Cocaine",
-                dose: 30,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .insufflated,
-                ingestionTime: Date(),
-                note: "",
-                timeDisplayStyle: .relativeToStart,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: nil,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: nil,
-                substanceColor: .blue,
-                substanceName: "Cocaine",
-                dose: nil,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .insufflated,
-                ingestionTime: Date(),
-                note: "",
-                timeDisplayStyle: .relativeToStart,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: nil,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: 2,
-                substanceColor: .blue,
-                substanceName: "Cocaine",
-                dose: 30,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .insufflated,
-                ingestionTime: Date(),
-                note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                timeDisplayStyle: .relativeToStart,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: nil,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: 2,
-                substanceColor: .brown,
-                substanceName: "Psilocybin Mushrooms",
-                dose: 20,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .oral,
-                ingestionTime: Date().addingTimeInterval(-4 * 60 * 60 + 330),
-                note: "",
-                timeDisplayStyle: .relativeToNow,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: nil,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: 2,
-                substanceColor: .green,
-                substanceName: "Cannabis",
-                dose: 10.4,
-                units: "mg",
-                isEstimate: true,
-                administrationRoute: .smoked,
-                ingestionTime: Date(),
-                note: "",
-                timeDisplayStyle: .regular,
-                isEyeOpen: true,
-                isHidingDosageDots: false,
-                stomachFullness: nil,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
-            IngestionRowContent(
-                numDots: 1,
+                ingestion: Ingestion.knownDosePreviewSample,
                 substanceColor: .pink,
-                substanceName: "MDMA",
-                dose: 50,
-                units: "mg",
-                isEstimate: false,
-                administrationRoute: .oral,
-                ingestionTime: Date(),
-                note: "This is a longer note that might not fit on one line and it needs to be able to handle this",
-                timeDisplayStyle: .regular,
+                timeDisplayStyle: .relativeToNow,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                stomachFullness: .full,
                 firstIngestionTime: Date().addingTimeInterval(-60 * 60)
             )
             IngestionRowContent(
-                numDots: nil,
+                ingestion: Ingestion.estimatedDosePreviewSample,
+                substanceColor: .blue,
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.unknownDosePreviewSample,
+                substanceColor: .blue,
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.notePreviewSample,
+                substanceColor: .blue,
+                timeDisplayStyle: .relativeToStart,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.customSubstancePreviewSample,
                 substanceColor: .purple,
-                substanceName: "Customsubstance",
-                dose: 50,
-                units: "mg",
-                isEstimate: false,
-                administrationRoute: .oral,
-                ingestionTime: Date(),
-                note: "",
                 timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                stomachFullness: .full,
                 firstIngestionTime: Date().addingTimeInterval(-60 * 60)
             )
         }

@@ -71,4 +71,69 @@ extension Ingestion: Comparable {
     var substanceColor: SubstanceColor {
         substanceCompanion?.color ?? .red
     }
+
+    static var knownDosePreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "MDMA"
+        ingestion.dose = 50
+        ingestion.units = "mg"
+        ingestion.isEstimate = false
+        ingestion.administrationRoute = AdministrationRoute.oral.rawValue
+        ingestion.time = .now
+        ingestion.note = ""
+        ingestion.stomachFullness = StomachFullness.full.rawValue
+        return ingestion
+    }
+
+    static var estimatedDosePreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Cocaine"
+        ingestion.dose = 30
+        ingestion.units = "mg"
+        ingestion.isEstimate = true
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = ""
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var unknownDosePreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Cocaine"
+        ingestion.dose = 0
+        ingestion.units = "mg"
+        ingestion.isEstimate = true
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = ""
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var notePreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Cocaine"
+        ingestion.dose = 30
+        ingestion.units = "mg"
+        ingestion.isEstimate = true
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = "This is a longer note that might not fit on one line and it needs to be able to handle this"
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var customSubstancePreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Customsubstance"
+        ingestion.dose = 50
+        ingestion.units = "mg"
+        ingestion.isEstimate = false
+        ingestion.administrationRoute = AdministrationRoute.oral.rawValue
+        ingestion.time = .now
+        ingestion.note = ""
+        ingestion.stomachFullness = StomachFullness.full.rawValue
+        return ingestion
+    }
 }
