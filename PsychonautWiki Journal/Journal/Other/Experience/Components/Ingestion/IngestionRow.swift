@@ -74,19 +74,7 @@ private struct IngestionRowContent: View {
                     }
                     .font(.subheadline)
                 }
-                HStack {
-                    let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
-                    if let doseUnwrapped = ingestion.doseUnwrapped {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped) \(routeText)").multilineTextAlignment(.trailing)
-                    } else {
-                        Text(routeText.localizedCapitalized)
-                    }
-                    Spacer()
-                    if let numDotsUnwrap = ingestion.numberOfDots, !isHidingDosageDots {
-                        DotRows(numDots: numDotsUnwrap)
-                    }
-                }
-                .font(.subheadline)
+                doseRow
                 Group {
                     if !ingestion.noteUnwrapped.isEmpty {
                         Text(ingestion.noteUnwrapped)
@@ -99,6 +87,35 @@ private struct IngestionRowContent: View {
                 .foregroundColor(.secondary)
             }
         }
+    }
+
+    private var doseRow: some View {
+        HStack {
+            let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
+            if let customUnit = ingestion.customUnit {
+                if let customUnitDose = ingestion.customUnitDoseUnwrapped {
+                    if let calculatedDose = ingestion.calculatedDose {
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped) = \(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped)")
+                    } else {
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.formatted()) \(customUnit.unitUnwrapped)")
+                    }
+                } else {
+                    Text(routeText.localizedCapitalized)
+                }
+            } else {
+                if let doseUnwrapped = ingestion.doseUnwrapped {
+                    Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped)")
+                } else {
+                    Text(routeText.localizedCapitalized)
+                }
+            }
+            Spacer()
+            if let numDotsUnwrap = ingestion.numberOfDots, !isHidingDosageDots {
+                DotRows(numDots: numDotsUnwrap)
+            }
+        }
+        .font(.subheadline)
+        .multilineTextAlignment(.trailing)
     }
 }
 
@@ -140,6 +157,14 @@ private struct IngestionRowContent: View {
             IngestionRowContent(
                 ingestion: Ingestion.customSubstancePreviewSample,
                 substanceColor: .purple,
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.customUnitPreviewSample,
+                substanceColor: .orange,
                 timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,

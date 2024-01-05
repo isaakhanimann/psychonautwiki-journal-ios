@@ -66,10 +66,10 @@ extension CustomUnit {
 
     static var previewSample: CustomUnit {
         let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
-        customUnit.name = "Pink rocket"
-        customUnit.substanceName = "MDMA"
+        customUnit.name = "Ket Spoon"
+        customUnit.substanceName = "Ketamine"
         customUnit.originalUnit = "mg"
-        customUnit.unit = "pill"
+        customUnit.unit = "scoop"
         customUnit.dose = 30
         customUnit.note = "Some random notes"
         return customUnit
