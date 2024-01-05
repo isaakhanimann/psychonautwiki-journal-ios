@@ -17,6 +17,16 @@
 import SwiftUI
 
 struct DosesScreen: View {
+    init(substance: Substance) {
+        self.substance = substance
+        customUnits = FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \CustomUnit.creationDate, ascending: false)],
+            predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "isArchived == %@", NSNumber(value: false)),
+                NSPredicate(format: "substanceName == %@", substance.name),
+            ]))
+    }
+
     let substance: Substance
 
     var body: some View {
@@ -32,6 +42,15 @@ struct DosesScreen: View {
                     if let bio = doseInfo.bioavailability?.displayString {
                         RowLabelView(label: "Bioavailability", value: "\(bio)%")
                     }
+                    let customUnitsForRoa = customUnits.wrappedValue.filter { customUnit in
+                        customUnit.administrationRouteUnwrapped == doseInfo.route
+                    }
+                    ForEach(customUnitsForRoa) { customUnit in
+                        VStack(spacing: 8) {
+                            Text(customUnit.nameUnwrapped).font(.headline)
+                            CustomUnitDoseRow(customUnit: customUnit, roaDose: doseInfo.roaDose)
+                        }
+                    }
                 }
             }
             if substance.name == "MDMA" {
@@ -43,13 +62,15 @@ struct DosesScreen: View {
                 }
                 MDMAPillsSection()
             }
-            if let units = substance.roas.first?.dose?.units,
-               let clarification = DosesScreen.getUnitClarification(for: units) {
+            if
+                let units = substance.roas.first?.dose?.units,
+                let clarification = DosesScreen.getUnitClarification(for: units)
+            {
                 Section {
                     Text(clarification)
                 }
             }
-            if substance.roas.contains(where: { $0.name == .smoked }) && substance.categories.contains("opioid") {
+            if substance.roas.contains(where: { $0.name == .smoked }), substance.categories.contains("opioid") {
                 ChasingTheDragonSection()
             }
             Section("Disclaimer") {
@@ -62,25 +83,28 @@ struct DosesScreen: View {
 
     static func getUnitClarification(for units: String) -> String? {
         if units == "µg" {
-            return "1 µg = 1/1000 mg = 1/1'000'000 gram"
+            "1 µg = 1/1000 mg = 1/1'000'000 gram"
         } else if units == "mg" {
-            return "1 mg = 1/1000 gram"
+            "1 mg = 1/1000 gram"
         } else if units == "mL" {
-            return "1 mL = 1/1000 L"
+            "1 mL = 1/1000 L"
         } else {
-            return nil
+            nil
         }
     }
+
+    private var customUnits: FetchRequest<CustomUnit>
+
 }
 
 #Preview {
     NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!).environmentObject(TabBarObserver())
     }
 }
 
 #Preview {
     NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!).environmentObject(TabBarObserver())
     }
 }
