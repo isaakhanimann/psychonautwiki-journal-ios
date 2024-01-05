@@ -128,6 +128,7 @@
 		EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */; };
 		EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793592B48252500685EAA /* CustomUnitDose.swift */; };
 		EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */; };
+		EA47935E2B48384100685EAA /* CustomUnitBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935D2B48384100685EAA /* CustomUnitBox.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
@@ -476,6 +477,7 @@
 		EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDosePicker.swift; sourceTree = "<group>"; };
 		EA4793592B48252500685EAA /* CustomUnitDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDose.swift; sourceTree = "<group>"; };
 		EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseLabel.swift; sourceTree = "<group>"; };
+		EA47935D2B48384100685EAA /* CustomUnitBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitBox.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
@@ -988,6 +990,7 @@
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
 				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
+				EA47935D2B48384100685EAA /* CustomUnitBox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1969,6 +1972,7 @@
 				EA4B8A1F2A9B3E0E009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA4B8A312AA6FF02009918DE /* LockTimeOption.swift in Sources */,
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,
+				EA47935E2B48384100685EAA /* CustomUnitBox.swift in Sources */,
 				EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */,
 				EA4B8A092A969B0E009918DE /* FullCumulativeTimelines.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */,

@@ -17,8 +17,6 @@
 import AlertToast
 import SwiftUI
 
-// MARK: - ChooseSubstanceScreen
-
 struct ChooseSubstanceScreen: View {
     @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
@@ -31,6 +29,7 @@ struct ChooseSubstanceScreen: View {
             isEyeOpen: viewModel.isEyeOpen,
             filteredSuggestions: viewModel.filteredSuggestions,
             filteredSubstances: viewModel.filteredSubstances,
+            filteredCustomUnits: viewModel.filteredCustomUnits,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
             dismiss: { dismiss() }).task {
             locationManager.maybeRequestLocation() // because we might need current location on finish screen
@@ -38,14 +37,13 @@ struct ChooseSubstanceScreen: View {
     }
 }
 
-// MARK: - ChooseSubstanceContent
-
 struct ChooseSubstanceContent: View {
     @Binding var searchText: String
     @Binding var isShowingOpenEyeToast: Bool
     let isEyeOpen: Bool
     let filteredSuggestions: [Suggestion]
     let filteredSubstances: [Substance]
+    let filteredCustomUnits: [CustomUnit]
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: () -> Void
 
@@ -140,10 +138,12 @@ struct ChooseSubstanceContent: View {
                         }
                     }
                 }
+                ForEach(filteredCustomUnits) { customUnit in
+                    CustomUnitBox(customUnit: customUnit)
+                }
                 ForEach(filteredCustomSubstances) { custom in
                     CustomSubstanceBox(
                         customSubstanceModel: custom,
-                        dismiss: dismiss,
                         isEyeOpen: isEyeOpen)
                 }
                 Button {
@@ -264,6 +264,9 @@ struct ChooseSubstanceContent: View {
                 lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
         ],
         filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
+        filteredCustomUnits: [
+            .previewSample
+        ],
         filteredCustomSubstances: [
             CustomSubstanceModel(
                 name: "Coffee",

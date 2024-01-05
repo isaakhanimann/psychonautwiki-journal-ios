@@ -25,6 +25,7 @@ extension ChooseSubstanceScreen {
         @Published var isShowingOpenEyeToast = false
         @Published var filteredSuggestions: [Suggestion] = []
         @Published var filteredSubstances: [Substance] = []
+        @Published var filteredCustomUnits: [CustomUnit] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
         @Published var customSubstanceModels: [CustomSubstanceModel]
         @Published var isEyeOpen = false
@@ -47,7 +48,8 @@ extension ChooseSubstanceScreen {
 
         override init() {
             isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
-            allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: Self.getCustomUnits()).suggestions
+            let customUnits = Self.getCustomUnits()
+            allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: customUnits).suggestions
             let request = CustomSubstance.fetchRequest()
             request.sortDescriptors = []
             fetchController = NSFetchedResultsController(
@@ -107,6 +109,13 @@ extension ChooseSubstanceScreen {
                     }
                 }
             }.assign(to: &$filteredSuggestions)
+            $filteredSubstances.map { filteredSubstances in
+                customUnits.filter { customUnit in
+                    filteredSubstances.contains { substance in
+                        customUnit.substanceNameUnwrapped == substance.name
+                    }
+                }
+            }.assign(to: &$filteredCustomUnits)
         }
 
         private func openEyeAndAnimate() {

@@ -18,7 +18,6 @@ import SwiftUI
 
 struct CustomSubstanceBox: View {
     let customSubstanceModel: CustomSubstanceModel
-    let dismiss: () -> Void
     let isEyeOpen: Bool
 
     var body: some View {
@@ -65,7 +64,6 @@ struct CustomSubstanceBox: View {
                 description: "The bitter drink",
                 units: "cups"
             ),
-            dismiss: {},
             isEyeOpen: true
         ).padding(.horizontal)
     }
