@@ -50,7 +50,7 @@ struct FinishCustomUnitsScreen: View {
                     .onSubmit {
                         focusedField = .unit
                     }
-                TextField("Unit", text: $unit, prompt: Text("e.g. pill, spray, etc."))
+                TextField("Unit", text: $unit, prompt: Text("e.g. pill, spray, scoop etc."))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)

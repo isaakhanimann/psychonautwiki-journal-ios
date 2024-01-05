@@ -94,7 +94,6 @@ struct EditCustomUnitsScreenContent: View {
                 TextField("Unit", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)
-                Toggle("Archive", isOn: $isArchived).tint(.accentColor)
             }
             Section {
                 RoaDoseRow(roaDose: roaDose)
@@ -105,6 +104,12 @@ struct EditCustomUnitsScreenContent: View {
                 )
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }.listRowSeparator(.hidden)
+            Section {
+                Toggle("Archive", isOn: $isArchived).tint(.accentColor)
+            } footer: {
+                Text("Archive means that it won't show up when adding ingestions")
+            }
+
         }
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
