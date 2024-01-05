@@ -71,7 +71,7 @@ extension CustomUnit {
 
     static var previewSample: CustomUnit {
         let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
-        customUnit.name = "Ket Spoon"
+        customUnit.name = "Spoon"
         customUnit.substanceName = "Ketamine"
         customUnit.originalUnit = "mg"
         customUnit.unit = "scoop"
@@ -82,7 +82,7 @@ extension CustomUnit {
 
     static var estimatePreviewSample: CustomUnit {
         let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
-        customUnit.name = "Ket Line"
+        customUnit.name = "Line with a longer name that doesnt fit"
         customUnit.substanceName = "Ketamine"
         customUnit.originalUnit = "mg"
         customUnit.unit = "line"
