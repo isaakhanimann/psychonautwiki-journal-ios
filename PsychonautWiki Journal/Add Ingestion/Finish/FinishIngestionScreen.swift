@@ -17,7 +17,7 @@
 import CoreData
 import SwiftUI
 
-// swiftlint:disable type_body_length function_body_length file_length function_parameter_count
+// swiftlint:disable type_body_length function_body_length file_length
 
 struct FinishIngestionScreen: View {
     enum SheetOption: Identifiable {
@@ -51,8 +51,8 @@ struct FinishIngestionScreen: View {
     @State private var selectedExperience: Experience?
     @State private var wantsToForceNewExperience = false
     @State private var wantsToStartLiveActivity = true
-    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
-    @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker: Bool = false
+    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually = false
+    @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker = false
 
     var isConsumerMe: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -75,24 +75,17 @@ struct FinishIngestionScreen: View {
         DoneButton {
             Task {
                 do {
-                    try await addIngestion(
-                        substanceName: arguments.substanceName,
-                        administrationRoute: arguments.administrationRoute,
-                        dose: arguments.dose,
-                        units: arguments.units,
-                        isEstimate: arguments.isEstimate,
-                        location: locationManager.selectedLocation
-                    )
+                    try await addIngestionWithExperience()
                     Task { @MainActor in
-                        self.toastViewModel.showSuccessToast()
-                        self.generateSuccessHaptic()
-                        self.dismiss()
+                        toastViewModel.showSuccessToast()
+                        generateSuccessHaptic()
+                        dismiss()
                     }
                 } catch {
                     Task { @MainActor in
-                        self.toastViewModel.showErrorToast(message: "Failed Ingestion")
-                        self.generateFailedHaptic()
-                        self.dismiss()
+                        toastViewModel.showErrorToast(message: "Failed Ingestion")
+                        generateFailedHaptic()
+                        dismiss()
                     }
                 }
             }
@@ -103,8 +96,7 @@ struct FinishIngestionScreen: View {
         DatePicker(
             "Ingestion Time",
             selection: $selectedTime,
-            displayedComponents: [.date, .hourAndMinute]
-        )
+            displayedComponents: [.date, .hourAndMinute])
     }
 
     var screen: some View {
@@ -123,8 +115,7 @@ struct FinishIngestionScreen: View {
                         ExperiencePickerScreen(
                             selectedExperience: $selectedExperience,
                             wantsToForceNewExperience: $wantsToForceNewExperience,
-                            experiences: experiencesWithinLargerRange
-                        )
+                            experiences: experiencesWithinLargerRange)
                     } label: {
                         HStack {
                             Text("Part of:")
@@ -191,8 +182,13 @@ struct FinishIngestionScreen: View {
                         }
                     }
                     if #available(iOS 16.2, *) {
-                        let isTimeRecentOrFuture = Date().timeIntervalSinceReferenceDate - selectedTime.timeIntervalSinceReferenceDate < 12 * 60 * 60
-                        if ActivityManager.shared.authorizationInfo.areActivitiesEnabled && !ActivityManager.shared.isActivityActive && isTimeRecentOrFuture {
+                        let isTimeRecentOrFuture = Date().timeIntervalSinceReferenceDate - selectedTime
+                            .timeIntervalSinceReferenceDate < 12 * 60 * 60
+                        if
+                            ActivityManager.shared.authorizationInfo.areActivitiesEnabled,
+                            !ActivityManager.shared.isActivityActive,
+                            isTimeRecentOrFuture
+                        {
                             Toggle("Start Live Activity", isOn: $wantsToStartLiveActivity).tint(.accentColor)
                         }
                     }
@@ -206,8 +202,7 @@ struct FinishIngestionScreen: View {
                     ColorPickerScreen(
                         selectedColor: $selectedColor,
                         alreadyUsedColors: alreadyUsedColors,
-                        otherColors: otherColors
-                    )
+                        otherColors: otherColors)
                 } label: {
                     HStack {
                         Text("\(arguments.substanceName) Color")
@@ -225,17 +220,18 @@ struct FinishIngestionScreen: View {
             case .editNote:
                 IngestionNoteScreen(note: $enteredNote)
             case .editLocation:
-                ChooseLocationScreen(locationManager: locationManager, onDone: {})
+                ChooseLocationScreen(locationManager: locationManager, onDone: { })
             case .editConsumer:
                 EditConsumerScreen(consumerName: $consumerName)
             }
         })
         .task {
-            guard !isInitialized else { return } // because this function is going to be called again when navigating back from color picker screen
+            guard !isInitialized
+            else { return } // because this function is going to be called again when navigating back from color picker screen
             selectExperienceBasedOnCurrentTime()
             locationManager.selectedLocation = locationManager.currentLocation
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
-            initializeColorCompanionAndNote(for: arguments.substanceName, suggestedNote: arguments.suggestedNote)
+            initializeColorCompanionAndNote()
         }
     }
 
@@ -247,12 +243,14 @@ struct FinishIngestionScreen: View {
         if wantsToForceNewExperience {
             selectedExperience = nil
         } else {
-            selectedExperience = FinishIngestionScreen.getExperienceClosest(from: experiencesWithinLargerRange, date: selectedTime)
+            selectedExperience = FinishIngestionScreen.getExperienceClosest(
+                from: experiencesWithinLargerRange,
+                date: selectedTime)
         }
     }
 
-    func initializeColorCompanionAndNote(for substanceName: String, suggestedNote: String?) {
-        if let suggestedNote {
+    func initializeColorCompanionAndNote() {
+        if let suggestedNote = arguments.suggestedNote {
             enteredNote = suggestedNote
         }
         let fetchRequest = SubstanceCompanion.fetchRequest()
@@ -260,97 +258,73 @@ struct FinishIngestionScreen: View {
         alreadyUsedColors = Array(Set(companions.map { $0.color })).sorted()
         otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
         let companionMatch = companions.first { comp in
-            comp.substanceNameUnwrapped == substanceName
+            comp.substanceNameUnwrapped == arguments.substanceName
         }
         if let companionMatchUnwrap = companionMatch {
             foundCompanion = companionMatchUnwrap
             selectedColor = companionMatchUnwrap.color
         } else {
-            selectedColor = otherColors.filter { $0.isPreferred }.first ?? otherColors.first ?? SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
+            selectedColor = otherColors.filter { $0.isPreferred }.first ?? otherColors.first ?? SubstanceColor.allCases
+                .randomElement() ?? SubstanceColor.blue
         }
         isInitialized = true
     }
 
-    func addIngestion(
-        substanceName: String,
-        administrationRoute: AdministrationRoute,
-        dose: Double?,
-        units: String?,
-        isEstimate: Bool,
-        location: Location?
-    ) async throws {
+    func addIngestionWithExperience() async throws {
         let context = PersistenceController.shared.viewContext
         try await context.perform {
-            let companion = self.createOrUpdateCompanion(with: context, substanceName: substanceName)
-            if let existingExperience = self.selectedExperience {
-                self.createIngestion(
+            if let existingExperience = selectedExperience {
+                createIngestionWithCompanion(
                     with: existingExperience,
-                    and: context,
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate,
-                    substanceCompanion: companion
-                )
+                    and: context)
                 if #available(iOS 16.2, *) {
-                    if existingExperience.isCurrent && ActivityManager.shared.isActivityActive {
+                    if existingExperience.isCurrent, ActivityManager.shared.isActivityActive {
                         Task {
                             await ActivityManager.shared.startOrUpdateActivity(
                                 substanceGroups: getSubstanceIngestionGroups(ingestions: existingExperience.myIngestionsSorted),
                                 everythingForEachRating: existingExperience.ratingsWithTimeSorted.map { shulgin in
                                     EverythingForOneRating(
                                         time: shulgin.timeUnwrapped,
-                                        option: shulgin.optionUnwrapped
-                                    )
+                                        option: shulgin.optionUnwrapped)
                                 },
-                                everythingForEachTimedNote: existingExperience.timedNotesSorted.filter { $0.isPartOfTimeline }.map { timedNote in
-                                    EverythingForOneTimedNote(
-                                        time: timedNote.timeUnwrapped,
-                                        color: timedNote.color
-                                    )
-                                },
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
-                            )
+                                everythingForEachTimedNote: existingExperience.timedNotesSorted.filter { $0.isPartOfTimeline }
+                                    .map { timedNote in
+                                        EverythingForOneTimedNote(
+                                            time: timedNote.timeUnwrapped,
+                                            color: timedNote.color)
+                                    },
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
                         }
                     }
                 }
             } else {
                 let newExperience = Experience(context: context)
                 newExperience.creationDate = Date()
-                newExperience.sortDate = self.selectedTime
-                var title = self.selectedTime.asDateString
-                if !self.enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
-                    title = self.enteredTitle
+                newExperience.sortDate = selectedTime
+                var title = selectedTime.asDateString
+                if !enteredTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                    title = enteredTitle
                 }
                 newExperience.title = title
                 newExperience.text = ""
-                if let location {
+                if let location = locationManager.selectedLocation {
                     let newLocation = ExperienceLocation(context: context)
                     newLocation.name = location.name
                     newLocation.latitude = location.latitude ?? 0
                     newLocation.longitude = location.longitude ?? 0
                     newLocation.experience = newExperience
                 }
-                self.createIngestion(
+                createIngestionWithCompanion(
                     with: newExperience,
-                    and: context,
-                    substanceName: substanceName,
-                    administrationRoute: administrationRoute,
-                    dose: dose,
-                    units: units,
-                    isEstimate: isEstimate,
-                    substanceCompanion: companion
-                )
+                    and: context)
                 if #available(iOS 16.2, *) {
-                    if newExperience.isCurrent && self.wantsToStartLiveActivity {
+                    if newExperience.isCurrent, self.wantsToStartLiveActivity {
                         Task {
                             await ActivityManager.shared.startOrUpdateActivity(
                                 substanceGroups: getSubstanceIngestionGroups(ingestions: newExperience.myIngestionsSorted),
                                 everythingForEachRating: [],
                                 everythingForEachTimedNote: [],
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
-                            )
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
                         }
                     }
                 }
@@ -359,49 +333,44 @@ struct FinishIngestionScreen: View {
         }
     }
 
-    private func createOrUpdateCompanion(with context: NSManagedObjectContext, substanceName: String) -> SubstanceCompanion {
+    private func createOrUpdateCompanion(with context: NSManagedObjectContext) -> SubstanceCompanion {
         if let foundCompanion {
             foundCompanion.colorAsText = selectedColor.rawValue
             return foundCompanion
         } else {
             let companion = SubstanceCompanion(context: context)
-            companion.substanceName = substanceName
+            companion.substanceName = arguments.substanceName
             companion.colorAsText = selectedColor.rawValue
             return companion
         }
     }
 
-    private func createIngestion(
+    private func createIngestionWithCompanion(
         with experience: Experience,
-        and context: NSManagedObjectContext,
-        substanceName: String,
-        administrationRoute: AdministrationRoute,
-        dose: Double?,
-        units: String?,
-        isEstimate: Bool,
-        substanceCompanion: SubstanceCompanion
-    ) {
+        and context: NSManagedObjectContext)
+    {
         let ingestion = Ingestion(context: context)
         ingestion.identifier = UUID()
         ingestion.time = selectedTime
         ingestion.creationDate = Date()
-        ingestion.dose = dose ?? 0
-        ingestion.units = units
-        ingestion.isEstimate = isEstimate
+        ingestion.dose = arguments.dose ?? 0
+        ingestion.units = arguments.units
+        ingestion.isEstimate = arguments.isEstimate
         ingestion.note = enteredNote
-        ingestion.administrationRoute = administrationRoute.rawValue
-        ingestion.substanceName = substanceName
+        ingestion.administrationRoute = arguments.administrationRoute.rawValue
+        ingestion.substanceName = arguments.substanceName
         ingestion.color = selectedColor.rawValue
         if !isConsumerMe {
             ingestion.consumerName = consumerName
         }
-        if administrationRoute == .oral {
+        if arguments.administrationRoute == .oral {
             ingestion.stomachFullness = selectedStomachFullness.rawValue
         } else {
             ingestion.stomachFullness = nil
         }
         ingestion.experience = experience
-        ingestion.substanceCompanion = substanceCompanion
+        let companion = createOrUpdateCompanion(with: context)
+        ingestion.substanceCompanion = companion
     }
 
     private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {
@@ -427,8 +396,7 @@ struct FinishIngestionScreen: View {
         let laterThanStart = NSPredicate(format: "sortDate > %@", startDate as NSDate)
         let earlierThanEnd = NSPredicate(format: "sortDate < %@", endDate as NSDate)
         return NSCompoundPredicate(
-            andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd]
-        )
+            andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd])
     }
 
     func generateSuccessHaptic() {
@@ -441,4 +409,5 @@ struct FinishIngestionScreen: View {
         generator.notificationOccurred(.error)
     }
 }
-// swiftlint:enable type_body_length function_body_length file_length function_parameter_count
+
+// swiftlint:enable type_body_length function_body_length file_length
