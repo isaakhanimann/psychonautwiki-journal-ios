@@ -273,8 +273,17 @@ struct ExperienceScreen: View {
                 if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty {
                     Section("Info") {
                         ForEach(experience.substancesUsed) { substance in
-                            NavigationLink(substance.name) {
+                            NavigationLink {
                                 SubstanceScreen(substance: substance)
+                            } label: {
+                                Label(substance.name, systemImage: "info.circle")
+                            }
+                        }
+                        if experience.substancesUsed.contains(where: { $0.isHallucinogen }) {
+                            NavigationLink {
+                                SaferHallucinogenScreen()
+                            } label: {
+                                Label("Safer Hallucinogens", systemImage: "cross")
                             }
                         }
                         ForEach(experience.interactions) { interaction in
@@ -289,15 +298,10 @@ struct ExperienceScreen: View {
                             }
                         }
                         if experience.interactions.isEmpty {
-                            NavigationLink("See Interactions") {
-                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
-                            }
-                        }
-                        if experience.substancesUsed.contains(where: { $0.isHallucinogen }) {
                             NavigationLink {
-                                SaferHallucinogenScreen()
+                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
                             } label: {
-                                Label("Safer Hallucinogens", systemImage: "cross")
+                                Label("See Interactions", systemImage: "exclamationmark.triangle")
                             }
                         }
                     }
