@@ -17,6 +17,8 @@
 import SwiftUI
 import WebKit
 
+// MARK: - WebViewRepresentable
+
 struct WebViewRepresentable: UIViewRepresentable {
     @Binding var isLoading: Bool
     let url: URL
@@ -29,25 +31,27 @@ struct WebViewRepresentable: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_: WKWebView, context _: Context) {}
+    func updateUIView(_: WKWebView, context _: Context) { }
 
     func makeCoordinator() -> WebViewCoordinator {
         WebViewCoordinator(isLoading: $isLoading)
     }
 }
 
-class WebViewCoordinator: NSObject, WKNavigationDelegate {
-    @Binding var isLoading: Bool
+// MARK: - WebViewCoordinator
 
+class WebViewCoordinator: NSObject, WKNavigationDelegate {
     init(isLoading: Binding<Bool>) {
         _isLoading = isLoading
     }
+
+    @Binding var isLoading: Bool
 
     func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         isLoading = true
     }
 
-    func webView(_: WKWebView, didCommit _: WKNavigation!) {
+    func webView(_: WKWebView, didFinish _: WKNavigation!) {
         isLoading = false
     }
 }
