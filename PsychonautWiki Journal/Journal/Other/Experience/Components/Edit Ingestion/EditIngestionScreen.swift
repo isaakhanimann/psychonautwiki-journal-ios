@@ -16,6 +16,8 @@
 
 import SwiftUI
 
+// MARK: - EditIngestionScreen
+
 struct EditIngestionScreen: View {
     let ingestion: Ingestion
     let isEyeOpen: Bool
@@ -45,20 +47,19 @@ struct EditIngestionScreen: View {
             consumerName: $consumerName,
             save: save,
             delete: delete,
-            isEyeOpen: isEyeOpen
-        )
-        .onAppear {
-            time = ingestion.timeUnwrapped
-            dose = ingestion.doseUnwrapped
-            customUnitDose = ingestion.customUnitDoseUnwrapped
-            units = ingestion.units
-            isEstimate = ingestion.isEstimate
-            note = ingestion.noteUnwrapped
-            consumerName = ingestion.consumerName ?? ""
-            if let fullness = ingestion.stomachFullnessUnwrapped {
-                stomachFullness = fullness
+            isEyeOpen: isEyeOpen)
+            .onAppear {
+                time = ingestion.timeUnwrapped
+                dose = ingestion.doseUnwrapped
+                customUnitDose = ingestion.customUnitDoseUnwrapped
+                units = ingestion.units
+                isEstimate = ingestion.isEstimate
+                note = ingestion.noteUnwrapped
+                consumerName = ingestion.consumerName ?? ""
+                if let fullness = ingestion.stomachFullnessUnwrapped {
+                    stomachFullness = fullness
+                }
             }
-        }
     }
 
     private func save() {
@@ -88,6 +89,8 @@ struct EditIngestionScreen: View {
     }
 }
 
+// MARK: - EditIngestionContent
+
 struct EditIngestionContent: View {
     let substanceName: String
     let roaDose: RoaDose?
@@ -105,24 +108,20 @@ struct EditIngestionContent: View {
     let delete: () -> Void
     let isEyeOpen: Bool
 
-    @State private var isConsumerSheetPresented = false
-
-    private var isConsumerMe: Bool {
-        consumerName.trimmingCharacters(in: .whitespaces).isEmpty
-    }
-
     var body: some View {
         Form {
             Section("\(route.rawValue.localizedCapitalized) Dose") {
                 RoaDoseRow(roaDose: roaDose)
                 if let customUnit {
-                    CustomUnitDosePicker(customUnit: customUnit, dose: $customUnitDose)
+                    CustomUnitDosePicker(
+                        customUnit: customUnit,
+                        isDoseEstimated: isEstimate,
+                        dose: $customUnitDose)
                 } else {
                     DosePicker(
                         roaDose: roaDose,
                         doseMaybe: $dose,
-                        selectedUnits: $units
-                    )
+                        selectedUnits: $units)
                 }
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
             }.listRowSeparator(.hidden)
@@ -134,10 +133,9 @@ struct EditIngestionContent: View {
                 DatePicker(
                     "Enter Ingestion Time",
                     selection: $time,
-                    displayedComponents: [.date, .hourAndMinute]
-                )
-                .labelsHidden()
-                .datePickerStyle(.wheel)
+                    displayedComponents: [.date, .hourAndMinute])
+                    .labelsHidden()
+                    .datePickerStyle(.wheel)
             }
             HStack {
                 Text("Consumer")
@@ -149,7 +147,7 @@ struct EditIngestionContent: View {
                     Label(displayedName, systemImage: "person")
                 }
             }
-            if route == .oral && isEyeOpen {
+            if route == .oral, isEyeOpen {
                 EditStomachFullnessSection(stomachFullness: $stomachFullness)
             }
         }
@@ -169,6 +167,13 @@ struct EditIngestionContent: View {
             save()
         }
     }
+
+    @State private var isConsumerSheetPresented = false
+
+    private var isConsumerMe: Bool {
+        consumerName.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
 }
 
 #Preview("Edit regular ingestion") {
@@ -186,10 +191,9 @@ struct EditIngestionContent: View {
             note: .constant("These are my notes"),
             stomachFullness: .constant(.full),
             consumerName: .constant("Marc"),
-            save: {},
-            delete: {},
-            isEyeOpen: true
-        )
+            save: { },
+            delete: { },
+            isEyeOpen: true)
     }
 }
 
@@ -208,10 +212,9 @@ struct EditIngestionContent: View {
             note: .constant("These are my notes"),
             stomachFullness: .constant(.full),
             consumerName: .constant("Marc"),
-            save: {},
-            delete: {},
-            isEyeOpen: true
-        )
+            save: { },
+            delete: { },
+            isEyeOpen: true)
     }
 }
 

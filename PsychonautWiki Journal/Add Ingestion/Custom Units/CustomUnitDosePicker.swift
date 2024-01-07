@@ -19,10 +19,11 @@ import SwiftUI
 struct CustomUnitDosePicker: View {
 
     let customUnit: CustomUnit
+    let isDoseEstimated: Bool
     @Binding var dose: Double?
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(customUnit.nameUnwrapped).font(.headline)
             CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: customUnit.roaDose)
             doseCalculationText.foregroundStyle(calculatedDoseColor)
@@ -39,12 +40,12 @@ struct CustomUnitDosePicker: View {
         }
     }
 
-    var calculatedDose: Double? {
+    private var calculatedDose: Double? {
         guard let dose, let dosePerUnit = customUnit.doseUnwrapped else { return nil }
         return dose * dosePerUnit
     }
 
-    var calculatedDoseColor: Color {
+    private var calculatedDoseColor: Color {
         if let calculatedDose {
             customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
         } else {
@@ -52,11 +53,20 @@ struct CustomUnitDosePicker: View {
         }
     }
 
-    var doseCalculationText: Text {
+    private var calculatedDoseTilde: String {
+        if isDoseEstimated || customUnit.isEstimate {
+            "~"
+        } else {
+            ""
+        }
+    }
+
+    private var doseCalculationText: Text {
         if let calculatedDose {
+            Text("\(calculatedDoseTilde)\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold) +
             Text(
-                "\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped) = ") +
-                Text("\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold)
+                " = \(isDoseEstimated ? "~" : "")\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.isEstimate ? "~" : "")\(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped)")
+
         } else {
             Text(" ")
         }
@@ -64,5 +74,8 @@ struct CustomUnitDosePicker: View {
 }
 
 #Preview {
-    CustomUnitDosePicker(customUnit: .previewSample, dose: .constant(3))
+    CustomUnitDosePicker(
+        customUnit: .previewSample,
+        isDoseEstimated: true,
+        dose: .constant(3))
 }

@@ -33,8 +33,10 @@ struct CustomUnitsChooseDoseScreen: View {
                 }
                 RoaDoseRow(roaDose: customUnit.roaDose)
                 VStack {
-                    CustomUnitDosePicker(customUnit: customUnit, dose: $dose)
-                        .focused($isDoseFieldFocused)
+                    CustomUnitDosePicker(
+                        customUnit: customUnit,
+                        isDoseEstimated: isEstimate,
+                        dose: $dose).focused($isDoseFieldFocused)
                     Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
                 }
             }
