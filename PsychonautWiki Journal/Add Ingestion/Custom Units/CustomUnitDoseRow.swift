@@ -18,7 +18,7 @@ import SwiftUI
 
 struct CustomUnitDoseRow: View {
 
-    let customUnit: CustomUnit
+    let customUnit: CustomUnitMinInfo
     let roaDose: RoaDose?
 
     var body: some View {
@@ -27,11 +27,11 @@ struct CustomUnitDoseRow: View {
             commonMin: convertToNewUnit(oldDose: roaDose?.commonMin),
             strongMin: convertToNewUnit(oldDose: roaDose?.strongMin),
             heavyMin: convertToNewUnit(oldDose: roaDose?.heavyMin),
-            units: customUnit.unitUnwrapped)
+            units: customUnit.unit)
     }
 
     private func convertToNewUnit(oldDose: Double?) -> Double? {
-        if let oldDose, let dosePerUnit = customUnit.doseUnwrapped, dosePerUnit > 0 {
+        if let oldDose, let dosePerUnit = customUnit.dosePerUnit, dosePerUnit > 0 {
             (oldDose/dosePerUnit).roundedToAtMost1Decimal
         } else {
             nil
@@ -41,6 +41,6 @@ struct CustomUnitDoseRow: View {
 
 #Preview {
     CustomUnitDoseRow(
-        customUnit: CustomUnit.previewSample,
+        customUnit: CustomUnit.previewSample.minInfo,
         roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral))
 }

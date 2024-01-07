@@ -48,7 +48,7 @@ struct DosesScreen: View {
                     ForEach(customUnitsForRoa) { customUnit in
                         VStack(spacing: 8) {
                             Text(customUnit.nameUnwrapped).font(.headline)
-                            CustomUnitDoseRow(customUnit: customUnit, roaDose: doseInfo.roaDose)
+                            CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: doseInfo.roaDose)
                         }
                     }
                 }

@@ -129,6 +129,7 @@
 		EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793592B48252500685EAA /* CustomUnitDose.swift */; };
 		EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */; };
 		EA47935E2B48384100685EAA /* CustomUnitBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935D2B48384100685EAA /* CustomUnitBox.swift */; };
+		EA4793602B4A72D700685EAA /* CustomUnitMinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
 		EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63727CA136C00F6E10F /* Tolerance.swift */; };
 		EA47E64D27CA136C00F6E10F /* RoaDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63927CA136C00F6E10F /* RoaDuration.swift */; };
@@ -478,6 +479,7 @@
 		EA4793592B48252500685EAA /* CustomUnitDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDose.swift; sourceTree = "<group>"; };
 		EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseLabel.swift; sourceTree = "<group>"; };
 		EA47935D2B48384100685EAA /* CustomUnitBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitBox.swift; sourceTree = "<group>"; };
+		EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitMinInfo.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
 		EA47E63727CA136C00F6E10F /* Tolerance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tolerance.swift; sourceTree = "<group>"; };
 		EA47E63927CA136C00F6E10F /* RoaDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoaDuration.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
 				EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */,
 				EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */,
+				EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */,
 				EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */,
 			);
 			path = "Custom Units";
@@ -2052,6 +2055,7 @@
 				EA6048252A140E25005C6A4B /* FabPosition.swift in Sources */,
 				EA41C621295C1E9E000DA021 /* Settings-ViewModel.swift in Sources */,
 				EA41C61B295AF03D000DA021 /* GoThroughAllInteractionsScreen.swift in Sources */,
+				EA4793602B4A72D700685EAA /* CustomUnitMinInfo.swift in Sources */,
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* SubstanceOverview.swift in Sources */,
 				EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */,

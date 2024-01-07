@@ -17,9 +17,6 @@
 import SwiftUI
 
 struct FinishCustomUnitsScreen: View {
-    let substanceAndRoute: SubstanceAndRoute
-    let dismiss: () -> Void
-
     enum Field: Hashable {
         case name
         case unit
@@ -27,23 +24,13 @@ struct FinishCustomUnitsScreen: View {
         case note
     }
 
-    @State private var name = ""
-    @State private var unit = ""
-    @State private var dosePerUnit: Double?
-    @State private var isEstimate = false
-    @State private var isUnknownDose = false
-    @State private var note = ""
-
-    @FocusState private var focusedField: Field?
-
-    private var roaDose: RoaDose? {
-        substanceAndRoute.substance.getDose(for: substanceAndRoute.administrationRoute)
-    }
+    let substanceAndRoute: SubstanceAndRoute
+    let dismiss: () -> Void
 
     var body: some View {
         Form {
             Section {
-                TextField("Name", text: $name)
+                TextField("Name to identify", text: $name)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
@@ -72,8 +59,7 @@ struct FinishCustomUnitsScreen: View {
                         TextField(
                             "Dose per \(unitOrPlaceholder)",
                             value: $dosePerUnit,
-                            format: .number
-                        ).keyboardType(.decimalPad)
+                            format: .number).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
                         Text(roaDose?.units ?? "")
@@ -81,6 +67,33 @@ struct FinishCustomUnitsScreen: View {
                 }
                 Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
+            }
+            if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
+                Section("Ingestion Preview") {
+                    VStack(alignment: .leading) {
+                        Text("\(substanceAndRoute.substance.name) \(name)").font(.headline)
+                        if isUnknownDose {
+                            Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
+                        } else {
+                            Text("\(multiplier.formatted()) \(unit)") +
+                                Text(
+                                    " = \(isEstimate ? "~" : "")\(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                if !isUnknownDose {
+                    Section("Dose Picker Preview") {
+                        VStack(alignment: .leading, spacing: 5) {
+                            if !name.isEmpty {
+                                Text(name).font(.headline)
+                            }
+                            CustomUnitDoseRow(
+                                customUnit: CustomUnitMinInfo(dosePerUnit: dosePerUnit, unit: unit),
+                                roaDose: roaDose)
+                        }
+                    }
+                }
             }
         }
         .navigationTitle("Add Custom Unit")
@@ -96,12 +109,32 @@ struct FinishCustomUnitsScreen: View {
         }
     }
 
+    @State private var name = ""
+    @State private var unit = ""
+    @State private var dosePerUnit: Double?
+    @State private var isEstimate = false
+    @State private var isUnknownDose = false
+    @State private var note = ""
+
+    @FocusState private var focusedField: Field?
+
+    private let multiplier: Double = 3
+
+    private var roaDose: RoaDose? {
+        substanceAndRoute.substance.getDose(for: substanceAndRoute.administrationRoute)
+    }
+
     private var unitOrPlaceholder: String {
         if unit.isEmpty {
-            return "..."
+            "..."
         } else {
-            return unit
+            unit
         }
+    }
+
+    private var calculatedDose: Double? {
+        guard let dosePerUnit else { return nil }
+        return multiplier * dosePerUnit
     }
 
     private func onDoneTap() {
@@ -123,10 +156,10 @@ struct FinishCustomUnitsScreen: View {
 
 #Preview {
     NavigationStack {
-        FinishCustomUnitsScreen(substanceAndRoute: .init(
-            substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
-            administrationRoute: .oral
-        ),
-        dismiss: {})
+        FinishCustomUnitsScreen(
+            substanceAndRoute: .init(
+                substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
+                administrationRoute: .oral),
+            dismiss: { })
     }
 }

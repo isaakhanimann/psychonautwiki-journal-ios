@@ -62,6 +62,10 @@ extension CustomUnit {
         unit ?? ""
     }
 
+    var minInfo: CustomUnitMinInfo {
+        CustomUnitMinInfo(dosePerUnit: doseUnwrapped, unit: unitUnwrapped)
+    }
+
     var color: SubstanceColor? {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "substanceName == %@", substanceNameUnwrapped)

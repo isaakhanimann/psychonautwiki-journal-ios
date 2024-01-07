@@ -24,7 +24,7 @@ struct CustomUnitDosePicker: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(customUnit.nameUnwrapped).font(.headline)
-            CustomUnitDoseRow(customUnit: customUnit, roaDose: customUnit.roaDose)
+            CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: customUnit.roaDose)
             doseCalculationText.foregroundStyle(calculatedDoseColor)
             HStack {
                 TextField(
