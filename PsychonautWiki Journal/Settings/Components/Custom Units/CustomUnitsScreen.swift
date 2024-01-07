@@ -62,17 +62,15 @@ struct CustomUnitRow: View {
             ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             Spacer().frame(width: 10)
             VStack(alignment: .leading) {
-                Text(customUnit.nameUnwrapped).font(.headline)
-                Text(customUnit.substanceNameUnwrapped)
+                Text("\(customUnit.substanceNameUnwrapped) \(customUnit.nameUnwrapped)").font(.headline)
                 Group {
                     if let dose = customUnit.doseUnwrapped {
-                        Text("1 \(customUnit.unitUnwrapped) = \(customUnit.isEstimate ? "~" : "")\(dose.formatted()) \(customUnit.originalUnitUnwrapped)")
+                        Text("\(customUnit.isEstimate ? "~" : "")\(dose.formatted()) \(customUnit.originalUnitUnwrapped) per \(customUnit.unitUnwrapped)")
                     } else {
-                        Text("1 \(customUnit.unitUnwrapped) of unknown dose")
+                        Text("\(customUnit.unitUnwrapped) of unknown dose")
                     }
                 }
                 .font(.subheadline)
-                .foregroundColor(.secondary)
             }
             Spacer()
             if customUnit.isArchived {
