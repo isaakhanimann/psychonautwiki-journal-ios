@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct StatsScreen: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)],
@@ -243,7 +242,6 @@ extension Calendar {
     // swiftlint:enable identifier_name
 }
 
-@available(iOS 16, *)
 struct StatsScreenContent: View {
     let experienceData: ExperienceData
     let substanceData: SubstanceData
@@ -284,7 +282,6 @@ struct StatsScreenContent: View {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     NavigationStack {
         StatsScreenContent(

@@ -231,7 +231,6 @@
 		EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */; };
 		EA8A2CB22B468AEF0050554C /* CustomUnitDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */; };
 		EA8A2CB52B468D3F0050554C /* DoseClassificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */; };
-		EA8A2CB72B468D790050554C /* View+MaybeConsensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */; };
 		EA8AEA8127E2154D00B30A16 /* DoseRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */; };
 		EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA968AFC2962C9B000779DD9 /* ActivityManager.swift */; };
 		EA98D9112972968100D94E65 /* Roa.json in Resources */ = {isa = PBXBuildFile; fileRef = EA98D9102972968100D94E65 /* Roa.json */; };
@@ -575,7 +574,6 @@
 		EA8447EA27CD276300B10DD3 /* OneRoaDurationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRoaDurationRow.swift; sourceTree = "<group>"; };
 		EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseRow.swift; sourceTree = "<group>"; };
 		EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseClassificationRow.swift; sourceTree = "<group>"; };
-		EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+MaybeConsensed.swift"; sourceTree = "<group>"; };
 		EA8AEA8027E2154D00B30A16 /* DoseRangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRangeType.swift; sourceTree = "<group>"; };
 		EA968AFC2962C9B000779DD9 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		EA98D9102972968100D94E65 /* Roa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Roa.json; sourceTree = "<group>"; };
@@ -1152,7 +1150,6 @@
 			children = (
 				EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */,
 				EA8A2CB42B468D3F0050554C /* DoseClassificationRow.swift */,
-				EA8A2CB62B468D790050554C /* View+MaybeConsensed.swift */,
 			);
 			path = RoaDoseRow;
 			sourceTree = "<group>";
@@ -1932,7 +1929,6 @@
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EA4B8A2F2AA6E231009918DE /* TimedNoteCodable.swift in Sources */,
 				EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */,
-				EA8A2CB72B468D790050554C /* View+MaybeConsensed.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */,
 				EA4B8A272A9DCE63009918DE /* EditConsumerScreen.swift in Sources */,

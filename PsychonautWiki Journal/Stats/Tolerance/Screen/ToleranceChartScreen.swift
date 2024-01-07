@@ -16,7 +16,6 @@
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ToleranceChartScreen: View {
     @State private var sinceDate = Date().addingTimeInterval(-3 * 30 * 24 * 60 * 60)
     @State private var toleranceWindows: [ToleranceWindow] = []

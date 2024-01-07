@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct ToleranceChartOverView: View {
     let toleranceWindows: [ToleranceWindow]
 

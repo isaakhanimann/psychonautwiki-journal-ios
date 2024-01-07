@@ -71,14 +71,12 @@ struct ContentScreen: View {
 
     var body: some View {
         TabView(selection: $tabBarObserver.selectedTab) {
-            if #available(iOS 16, *) {
-                StatsScreen()
-                    .tabItem {
-                        Label("Stats", systemImage: "chart.bar")
-                    }
-                    .tag(Tab.stats)
-                    .environment(\.currentTab, Tab.stats)
-            }
+            StatsScreen()
+                .tabItem {
+                    Label("Stats", systemImage: "chart.bar")
+                }
+                .tag(Tab.stats)
+                .environment(\.currentTab, Tab.stats)
             JournalScreen()
                 .tabItem {
                     Label("Journal", systemImage: "square.stack")

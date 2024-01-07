@@ -38,7 +38,7 @@ struct DoseClassificationRow: View {
                             .foregroundLinearGradient(colors: [DoseRangeType.thresh.color, DoseRangeType.light.color])
                             .font(doseFont)
                         Text("thresh ")
-                            .maybeCondensed()
+                            .fontWidth(.condensed)
                             .lineLimit(1)
                             .foregroundColor(DoseRangeType.thresh.color)
                             .font(.footnote)
@@ -51,7 +51,7 @@ struct DoseClassificationRow: View {
                         Text("-")
                             .font(doseFont)
                         Text("light")
-                            .maybeCondensed()
+                            .fontWidth(.condensed)
                             .lineLimit(1)
                             .font(.footnote)
                     }
@@ -71,7 +71,7 @@ struct DoseClassificationRow: View {
                         Text("-")
                             .font(doseFont)
                         Text("common")
-                            .maybeCondensed()
+                            .fontWidth(.condensed)
                             .lineLimit(1)
                             .font(.footnote)
                     }
@@ -91,7 +91,7 @@ struct DoseClassificationRow: View {
                         Text("-")
                             .font(doseFont)
                         Text("strong")
-                            .maybeCondensed()
+                            .fontWidth(.condensed)
                             .lineLimit(1)
                             .font(.footnote)
                     }
@@ -111,7 +111,7 @@ struct DoseClassificationRow: View {
                         Text("-")
                             .font(doseFont)
                         Text("heavy")
-                            .maybeCondensed()
+                            .fontWidth(.condensed)
                             .lineLimit(1)
                             .font(.footnote)
                     }

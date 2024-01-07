@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct SubstanceOverviewChart: View {
     let substanceData: SubstanceData
 
@@ -37,7 +36,6 @@ struct SubstanceOverviewChart: View {
     }
 }
 
-@available(iOS 16, *)
 struct SubstanceOverview: View {
     let substanceData: SubstanceData
 
@@ -67,7 +65,6 @@ struct SubstanceOverview: View {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     SubstanceOverview(substanceData: .mock1)
         .padding()

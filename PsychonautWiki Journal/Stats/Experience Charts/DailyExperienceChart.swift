@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct DailyExperienceChart: View {
     let experienceData: ExperienceData
     let colorMapping: (String) -> Color
@@ -136,7 +135,6 @@ struct DailyExperienceChart: View {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     List {
         DailyExperienceChart(

@@ -16,7 +16,6 @@
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ToleranceChartScreenContent: View {
     let toleranceWindows: [ToleranceWindow]
     @Binding var sinceDate: Date
@@ -73,7 +72,6 @@ struct ToleranceChartScreenContent: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     NavigationStack {
         ToleranceChartScreenContent(
@@ -87,7 +85,6 @@ struct ToleranceChartScreenContent: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     NavigationStack {
         ToleranceChartScreenContent(

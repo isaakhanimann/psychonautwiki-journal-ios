@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct MonthlyExperienceChart: View {
     let experienceData: ExperienceData
     let isShowingMonthlyAverageLine: Bool
@@ -161,7 +160,6 @@ struct MonthlyExperienceChart: View {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     List {
         MonthlyExperienceChart(

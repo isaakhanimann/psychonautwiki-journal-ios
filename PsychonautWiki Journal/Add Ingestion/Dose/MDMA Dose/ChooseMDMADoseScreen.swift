@@ -89,9 +89,7 @@ struct ChooseMDMADoseScreen: View {
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
                 unknownDoseLink
             }
-            if #available(iOS 16, *) {
-                MDMAOptimalDoseSection()
-            }
+            MDMAOptimalDoseSection()
             MDMAPillsSection()
         }
         .scrollDismissesKeyboard(.interactively)

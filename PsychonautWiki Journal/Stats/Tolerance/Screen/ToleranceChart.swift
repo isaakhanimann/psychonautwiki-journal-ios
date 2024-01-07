@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ToleranceChart: View {
     let toleranceWindows: [ToleranceWindow]
     let numberOfRows: Int
@@ -92,7 +91,6 @@ struct ToleranceChart: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     Group {
         ToleranceChart(

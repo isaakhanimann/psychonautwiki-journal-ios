@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct MDMAOptimalDoseSection: View {
     private static let desirable = "Desirable"
     private static let adverse = "Adverse"
@@ -84,7 +83,6 @@ struct MDMAOptimalDoseSection: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     List {
         MDMAOptimalDoseSection()

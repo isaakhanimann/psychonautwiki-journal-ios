@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct ExperienceDetailsScreen: View {
     let experienceData: ExperienceData
     @State private var timeRange: TimeRange = .last12Months
@@ -125,7 +124,6 @@ struct ExperienceDetailsScreen: View {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     NavigationStack {
         ExperienceDetailsScreen(experienceData: .mock1)

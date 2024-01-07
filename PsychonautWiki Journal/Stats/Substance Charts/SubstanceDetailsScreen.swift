@@ -17,7 +17,6 @@
 import Charts
 import SwiftUI
 
-@available(iOS 16, *)
 struct SubstanceDetailsScreen: View {
     let substanceData: SubstanceData
     @State private var timeRange: TimeRange = .last12Months
@@ -89,7 +88,6 @@ struct RoundedCorner: Shape {
     }
 }
 
-@available(iOS 16, *)
 #Preview {
     NavigationStack {
         SubstanceDetailsScreen(substanceData: .mock2)
