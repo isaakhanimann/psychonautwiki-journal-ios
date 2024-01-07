@@ -59,7 +59,7 @@ struct EditNotesContent: View {
                     .autocapitalization(.sentences)
                     .frame(minHeight: 300)
             }
-            .optionalScrollDismissesKeyboard()
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Edit Notes")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

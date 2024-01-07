@@ -61,7 +61,7 @@ struct EditTitleScreenContent: View {
                     .autocapitalization(.sentences)
                     .autocorrectionDisabled()
             }
-            .optionalScrollDismissesKeyboard()
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Edit Title")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

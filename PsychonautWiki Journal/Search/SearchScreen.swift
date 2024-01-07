@@ -134,7 +134,7 @@ struct SearchScreen: View {
                     }
                 }
                 .listStyle(.plain)
-                .optionalScrollDismissesKeyboard()
+                .scrollDismissesKeyboard(.interactively)
             }
             .onSameTabTap {
                 searchText = ""

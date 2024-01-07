@@ -49,7 +49,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
                 }
             }
             .listStyle(.plain)
-            .optionalScrollDismissesKeyboard()
+            .scrollDismissesKeyboard(.interactively)
             .searchable(text: $searchText)
             .disableAutocorrection(true)
             .navigationTitle("Choose Substance")

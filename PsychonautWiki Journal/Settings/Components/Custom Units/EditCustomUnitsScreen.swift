@@ -118,7 +118,7 @@ struct EditCustomUnitsScreenContent: View {
                 }
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Edit Unit")
     }
 }

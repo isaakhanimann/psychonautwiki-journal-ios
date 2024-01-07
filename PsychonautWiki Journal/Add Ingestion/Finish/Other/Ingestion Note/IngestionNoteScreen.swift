@@ -62,7 +62,7 @@ struct IngestionNoteScreen: View {
                 }
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Ingestion Note")
     }
 }

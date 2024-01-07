@@ -66,7 +66,7 @@ struct ChooseLocationScreen: View {
             prompt: "Search Location"
         )
         .disableAutocorrection(true)
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .onSubmit(of: .search) {
             locationManager.searchLocations()
         }

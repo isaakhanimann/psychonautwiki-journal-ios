@@ -51,7 +51,7 @@ struct AddToleranceIngestionScreen: View {
                 }
             }
             .navigationTitle("Add Temp. Ingestion")
-            .optionalScrollDismissesKeyboard()
+            .scrollDismissesKeyboard(.interactively)
             .searchable(text: $viewModel.searchText, prompt: "Search substance")
             .disableAutocorrection(true)
         }

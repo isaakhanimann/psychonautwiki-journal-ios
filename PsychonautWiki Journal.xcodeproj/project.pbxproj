@@ -121,7 +121,6 @@
 		EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C631295F8921000DA021 /* DailyExperienceChart.swift */; };
 		EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */; };
 		EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */; };
-		EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA4793562B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */; };
@@ -471,7 +470,6 @@
 		EA41C631295F8921000DA021 /* DailyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExperienceChart.swift; sourceTree = "<group>"; };
 		EA41C633295F895C000DA021 /* MonthlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExperienceChart.swift; sourceTree = "<group>"; };
 		EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyExperienceChart.swift; sourceTree = "<group>"; };
-		EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalScrollDismisser.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RoundedToAtMost1Decimal.swift"; sourceTree = "<group>"; };
@@ -989,7 +987,6 @@
 			children = (
 				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
 				EA60482C2A1411EF005C6A4B /* Suggestion */,
-				EA41C637296066B4000DA021 /* OptionalScrollDismisser.swift */,
 				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
 				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
@@ -2059,7 +2056,6 @@
 				EA014F9527E5DB5200077FB2 /* WebViewRepresentable.swift in Sources */,
 				EA41C627295EB65C000DA021 /* SubstanceOverview.swift in Sources */,
 				EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */,
-				EA41C638296066B4000DA021 /* OptionalScrollDismisser.swift in Sources */,
 				EA03ABC32B39AAF100DB8D0D /* EditCustomUnitsScreen.swift in Sources */,
 				EA48F8A229E98E88007DA8C5 /* TimeDisplayStyle.swift in Sources */,
 				EA418A0B296974D800DEA663 /* IngestionNote-ViewModel.swift in Sources */,

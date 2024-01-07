@@ -59,6 +59,6 @@ struct TimedNoteScreenContent: View {
                 }
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
     }
 }

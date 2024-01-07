@@ -100,7 +100,7 @@ struct FinishCustomUnitsScreen: View {
         .onAppear {
             focusedField = .name
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 DoneButton(action: onDoneTap)

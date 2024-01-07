@@ -161,7 +161,7 @@ struct EditIngestionContent: View {
                 }
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Edit \(substanceName)")
         .onDisappear {
             save()

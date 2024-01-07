@@ -86,7 +86,7 @@ struct CustomUnitsChooseDoseScreen: View {
         .onAppear {
             isDoseFieldFocused = true
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationBarTitle("\(customUnit.substanceNameUnwrapped) Dose")
     }
 }

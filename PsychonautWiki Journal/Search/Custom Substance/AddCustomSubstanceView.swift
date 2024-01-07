@@ -43,7 +43,7 @@ struct AddCustomSubstanceView: View {
                     UnitsPicker(units: $viewModel.units)
                 }
             }
-            .optionalScrollDismissesKeyboard()
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Create Custom")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

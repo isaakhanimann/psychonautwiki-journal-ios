@@ -51,7 +51,7 @@ struct ExperienceTitleScreen: View {
                 .autocapitalization(.sentences)
                 .autocorrectionDisabled()
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Experience Title")
     }
 }

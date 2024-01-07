@@ -142,7 +142,7 @@ struct JournalScreen: View {
             isFavoriteFilterEnabled: isFavoriteFilterEnabled,
             isTimeRelative: isTimeRelative
         )
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .searchable(text: query, prompt: "Search by title or substance")
         .disableAutocorrection(true)
         .task {

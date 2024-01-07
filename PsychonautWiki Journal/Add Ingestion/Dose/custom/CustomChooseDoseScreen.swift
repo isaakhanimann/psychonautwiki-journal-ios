@@ -79,7 +79,7 @@ struct CustomChooseDoseScreen: View {
         .task {
             isDoseFieldFocused = true
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("\(arguments.substanceName) Dose")
     }
 }

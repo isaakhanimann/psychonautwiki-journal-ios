@@ -36,7 +36,7 @@ struct EditCustomSubstanceView: View {
                 TextField("Units", text: $units)
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .confirmationDialog(
             "Are you sure you want to delete this substance?",
             isPresented: $isShowingConfirmation

@@ -156,7 +156,7 @@ struct ChooseSubstanceContent: View {
                 }
             }.padding(.horizontal)
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .disableAutocorrection(true)
         .navigationBarTitle("New Ingestion")

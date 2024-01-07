@@ -136,7 +136,7 @@ struct SprayCalculatorScreenContent: View {
                 """)
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Spray Calculator")
         .dismissWhenTabTapped()
     }

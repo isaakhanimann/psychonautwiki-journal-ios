@@ -132,7 +132,7 @@ struct ChooseShroomsDoseScreen: View {
                 Text(remark)
             }
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Psilocybin mushrooms")
     }
 

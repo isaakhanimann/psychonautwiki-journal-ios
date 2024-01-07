@@ -94,7 +94,7 @@ struct ChooseMDMADoseScreen: View {
             }
             MDMAPillsSection()
         }
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("MDMA Dosage")
     }
 

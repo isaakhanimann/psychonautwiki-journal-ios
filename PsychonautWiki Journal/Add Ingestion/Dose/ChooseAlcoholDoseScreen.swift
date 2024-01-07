@@ -194,7 +194,7 @@ struct ChooseAlcoholDoseScreen: View {
             }
         }
         .navigationTitle("Alcohol Dosage")
-        .optionalScrollDismissesKeyboard()
+        .scrollDismissesKeyboard(.interactively)
     }
 }
 
