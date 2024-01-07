@@ -21,9 +21,7 @@ struct ShareIOSorAndroidScreen: View {
         List {
             let link = "https://psychonautwiki.org/wiki/PsychonautWiki_Journal"
             QRCodeView(url: link)
-            if #available(iOS 16.0, *) {
-                ShareLink("Share link", item: URL(string: link)!)
-            }
+            ShareLink("Share link", item: URL(string: link)!)
             Link(destination: URL(string: link)!) {
                 Label("Open link", systemImage: "safari")
             }

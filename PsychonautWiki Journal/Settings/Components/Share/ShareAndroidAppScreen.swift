@@ -21,9 +21,7 @@ struct ShareAndroidAppScreen: View {
         List {
             let playStoreLink = "https://play.google.com/store/apps/details?id=com.isaakhanimann.journal"
             QRCodeView(url: playStoreLink)
-            if #available(iOS 16.0, *) {
-                ShareLink("Share play store link", item: URL(string: playStoreLink)!)
-            }
+            ShareLink("Share play store link", item: URL(string: playStoreLink)!)
             Link(destination: URL(string: playStoreLink)!) {
                 Label("Open play store link", systemImage: "safari")
             }

@@ -20,7 +20,6 @@ import SwiftUI
 struct WebViewScreen: View {
     let articleURL: URL
     @State private var isWebViewLoading = true
-    @State private var isShowingCopySuccess = false
 
     var body: some View {
         ZStack {
@@ -28,24 +27,7 @@ struct WebViewScreen: View {
                 WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
             }.toolbar {
                 ToolbarItemGroup {
-                    if #available(iOS 16.0, *) {
-                        ShareLink(item: articleURL)
-                    } else {
-                        if !isShowingCopySuccess {
-                            Button {
-                                UIPasteboard.general.setValue(articleURL.absoluteString, forPasteboardType: "public.plain-text")
-                                isShowingCopySuccess = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    isShowingCopySuccess = false
-                                }
-                            } label: {
-                                Label("Copy Link", systemImage: "doc.on.doc")
-                            }
-                        } else {
-                            Label("Link Copied", systemImage: "checkmark")
-                                .foregroundColor(.green)
-                        }
-                    }
+                    ShareLink(item: articleURL)
                     Link(destination: articleURL) {
                         Label("Open in Safari", systemImage: "safari")
                     }

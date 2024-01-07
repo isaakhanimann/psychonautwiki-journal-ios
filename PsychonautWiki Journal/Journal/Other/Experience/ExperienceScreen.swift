@@ -233,25 +233,23 @@ struct ExperienceScreen: View {
                         firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
                     )
                 }
-                if #available(iOS 16.0, *) {
-                    if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
-                        Section {
-                            NavigationLink {
-                                ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
-                            } label: {
-                                ToleranceChart(
-                                    toleranceWindows: experience.chartData.toleranceWindows,
-                                    numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
-                                    timeOption: .onlyIfCurrentTimeInChart,
-                                    experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
-                                )
-                            }
-                        } header: {
-                            Text("Tolerance")
-                        } footer: {
-                            if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
-                                Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
-                            }
+                if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
+                    Section {
+                        NavigationLink {
+                            ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
+                        } label: {
+                            ToleranceChart(
+                                toleranceWindows: experience.chartData.toleranceWindows,
+                                numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
+                                timeOption: .onlyIfCurrentTimeInChart,
+                                experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
+                            )
+                        }
+                    } header: {
+                        Text("Tolerance")
+                    } footer: {
+                        if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
+                            Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
                         }
                     }
                 }

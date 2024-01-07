@@ -29,9 +29,7 @@ struct ShareiOSAppScreen: View {
             }
             let appStoreLink = "https://apps.apple.com/ch/app/psychonautwiki-journal/id1582059415"
             QRCodeView(url: appStoreLink)
-            if #available(iOS 16.0, *) {
-                ShareLink("Share app store link", item: URL(string: appStoreLink)!)
-            }
+            ShareLink("Share app store link", item: URL(string: appStoreLink)!)
             Link(destination: URL(string: appStoreLink)!) {
                 Label("Open app store link", systemImage: "safari")
             }

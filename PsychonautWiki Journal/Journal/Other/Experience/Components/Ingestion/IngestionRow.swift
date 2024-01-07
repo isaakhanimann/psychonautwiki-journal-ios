@@ -44,12 +44,8 @@ private struct IngestionRowContent: View {
     let firstIngestionTime: Date?
 
     var body: some View {
-        if #available(iOS 16.0, *) {
-            rowContent.alignmentGuide(.listRowSeparatorLeading) { dimension in
-                dimension[.leading]
-            }
-        } else {
-            rowContent
+        rowContent.alignmentGuide(.listRowSeparatorLeading) { dimension in
+            dimension[.leading]
         }
     }
 
