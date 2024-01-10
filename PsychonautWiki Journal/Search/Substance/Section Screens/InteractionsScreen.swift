@@ -17,20 +17,19 @@
 import SwiftUI
 
 struct InteractionsScreen: View {
-    let substanceName: String
     let interactions: Interactions
-    let substanceURL: URL
+    let substance: Substance
 
     var body: some View {
         List {
             Section {
                 InteractionsGroup(
                     interactions: interactions,
-                    substanceURL: substanceURL
+                    substance: substance
                 )
             }
         }
-        .navigationTitle("\(substanceName) Interactions")
+        .navigationTitle("\(substance.name) Interactions")
         .dismissWhenTabTapped()
     }
 }
@@ -39,8 +38,7 @@ private let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
 
 #Preview {
     InteractionsScreen(
-        substanceName: substance.name,
         interactions: substance.interactions!,
-        substanceURL: substance.url
+        substance: substance
     )
 }

@@ -50,7 +50,7 @@ struct AcknowledgeInteractionsContent: View {
             if let interactions = substance.interactions {
                 InteractionsGroup(
                     interactions: interactions,
-                    substanceURL: substance.url
+                    substance: substance
                 )
             } else {
                 Text("There are no documented interactions")

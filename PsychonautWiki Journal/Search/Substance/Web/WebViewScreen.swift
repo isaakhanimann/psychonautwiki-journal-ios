@@ -25,7 +25,8 @@ struct WebViewScreen: View {
         ZStack {
             VStack(alignment: .trailing, spacing: 0) {
                 WebViewRepresentable(isLoading: $isWebViewLoading, url: articleURL)
-            }.toolbar {
+            }
+            .toolbar {
                 ToolbarItemGroup {
                     ShareLink(item: articleURL)
                     Link(destination: articleURL) {

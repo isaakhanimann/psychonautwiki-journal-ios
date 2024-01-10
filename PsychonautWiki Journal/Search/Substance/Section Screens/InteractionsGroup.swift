@@ -16,51 +16,71 @@
 
 import SwiftUI
 
+// MARK: - InteractionsGroup
+
 struct InteractionsGroup: View {
     let interactions: Interactions
-    let substanceURL: URL
+    let substance: Substance
 
     var body: some View {
         Group {
-            if let interactionURL = URL(string: substanceURL.absoluteString + "#Dangerous_interactions") {
-                NavigationLink {
-                    WebViewScreen(articleURL: interactionURL)
-                } label: {
-                    Label("Explanations", systemImage: "info.circle")
+            ForEach(interactions.dangerous, id: \.self) { name in
+                LinkOrLabel(substance: substance) {
+                    HStack {
+                        Text(name)
+                        Spacer()
+                        DangerTriangles(interactionType: .dangerous)
+                    }.foregroundColor(InteractionType.dangerous.color)
                 }
             }
-            ForEach(interactions.dangerous, id: \.self) { name in
-                HStack {
-                    Text(name)
-                    Spacer()
-                    DangerTriangles(interactionType: .dangerous)
-                }
-            }.foregroundColor(InteractionType.dangerous.color)
             ForEach(interactions.unsafe, id: \.self) { name in
-                HStack {
-                    Text(name)
-                    Spacer()
-                    DangerTriangles(interactionType: .unsafe)
+                LinkOrLabel(substance: substance) {
+                    HStack {
+                        Text(name)
+                        Spacer()
+                        DangerTriangles(interactionType: .unsafe)
+                    }.foregroundColor(InteractionType.unsafe.color)
                 }
-            }.foregroundColor(InteractionType.unsafe.color)
+            }
             ForEach(interactions.uncertain, id: \.self) { name in
-                HStack {
-                    Text(name)
-                    Spacer()
-                    DangerTriangles(interactionType: .uncertain)
+                LinkOrLabel(substance: substance) {
+                    HStack {
+                        Text(name)
+                        Spacer()
+                        DangerTriangles(interactionType: .uncertain)
+                    }.foregroundColor(InteractionType.uncertain.color)
                 }
-            }.foregroundColor(InteractionType.uncertain.color)
+            }
         }
     }
 }
 
+// MARK: - LinkOrLabel
+
+private struct LinkOrLabel<Label: View>: View {
+
+    let substance: Substance
+    let label: () -> Label
+
+    var body: some View {
+        if let interactionURL = URL(string: substance.url.absoluteString + "#Dangerous_interactions") {
+            NavigationLink {
+                WebViewScreen(articleURL: interactionURL)
+                    .navigationTitle("\(substance.name) Interactions")
+            } label: {
+                label()
+            }
+        }
+    }
+}
+
+private let substance = SubstanceRepo.shared.getSubstance(name: "MDMA")!
 #Preview {
     List {
         Section {
             InteractionsGroup(
-                interactions: SubstanceRepo.shared.getSubstance(name: "MDMA")!.interactions!,
-                substanceURL: URL(string: "www.apple.com")!
-            )
+                interactions: substance.interactions!,
+                substance: substance)
         }
     }
 }

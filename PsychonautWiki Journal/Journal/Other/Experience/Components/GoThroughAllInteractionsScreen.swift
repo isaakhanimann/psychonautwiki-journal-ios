@@ -26,7 +26,7 @@ struct GoThroughAllInteractionsScreen: View {
                     if let interactions = substance.interactions {
                         InteractionsGroup(
                             interactions: interactions,
-                            substanceURL: substance.url
+                            substance: substance
                         )
                     } else {
                         Text("No documented interactions")

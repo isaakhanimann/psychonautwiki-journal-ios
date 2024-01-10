@@ -98,9 +98,8 @@ struct SubstanceScreen: View {
                 if let interactions = substance.interactions {
                     NavigationLink("Interactions") {
                         InteractionsScreen(
-                            substanceName: substance.name,
                             interactions: interactions,
-                            substanceURL: substance.url
+                            substance: substance
                         )
                     }
                 }
