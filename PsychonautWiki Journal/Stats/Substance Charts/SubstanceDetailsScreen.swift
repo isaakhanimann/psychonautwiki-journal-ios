@@ -44,7 +44,7 @@ struct SubstanceDetailsScreen: View {
                                 Text(elem.substanceName)
                                     .font(.headline)
                                 Spacer()
-                                Text("^[\(elem.experienceCount) experience](inflect: true)")
+                                Text(elem.experienceCount.inflect(unit: "experience"))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
