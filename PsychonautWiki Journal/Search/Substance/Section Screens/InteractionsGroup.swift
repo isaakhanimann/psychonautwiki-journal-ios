@@ -22,6 +22,13 @@ struct InteractionsGroup: View {
 
     var body: some View {
         Group {
+            if let interactionURL = URL(string: substanceURL.absoluteString + "#Dangerous_interactions") {
+                NavigationLink {
+                    WebViewScreen(articleURL: interactionURL)
+                } label: {
+                    Label("Explanations", systemImage: "info.circle")
+                }
+            }
             ForEach(interactions.dangerous, id: \.self) { name in
                 HStack {
                     Text(name)
@@ -43,13 +50,6 @@ struct InteractionsGroup: View {
                     DangerTriangles(interactionType: .uncertain)
                 }
             }.foregroundColor(InteractionType.uncertain.color)
-            if let interactionURL = URL(string: substanceURL.absoluteString + "#Dangerous_interactions") {
-                NavigationLink {
-                    WebViewScreen(articleURL: interactionURL)
-                } label: {
-                    Label("Explanations", systemImage: "info.circle")
-                }
-            }
         }
     }
 }
