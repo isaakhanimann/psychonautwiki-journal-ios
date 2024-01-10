@@ -22,3 +22,23 @@ extension Int {
         "^[\(self) \(unit)](inflect: true)"
     }
 }
+
+extension Double {
+    func inflect(unit: String) -> AttributedString {
+        var string = AttributedString(localized: "\(self.formatted()) \(unit)")
+        var morphology = Morphology()
+        let number: Morphology.GrammaticalNumber
+        switch self {
+        case 0:
+            number = .zero
+        case 1:
+            number = .singular
+        default:
+            number = .plural
+        }
+        morphology.number = number
+        string.inflect = InflectionRule(morphology: morphology)
+        let formattedResult = string.inflected()
+        return formattedResult
+    }
+}
