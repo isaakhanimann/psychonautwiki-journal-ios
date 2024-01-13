@@ -107,7 +107,7 @@ struct EditCustomUnitsScreenContent: View {
             Section {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
             } footer: {
-                Text("Archive means that it won't show up when adding ingestions")
+                Text("Put custom units in the archive so they don't show up when adding ingestions")
             }
 
         }

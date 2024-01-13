@@ -16,19 +16,22 @@
 
 import SwiftUI
 
-struct CustomUnitsScreen: View {
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \CustomUnit.creationDate, ascending: false)]
-    ) private var customUnits: FetchedResults<CustomUnit>
-    @State private var isAddShown = false
+// MARK: - CustomUnitsScreen
 
+struct CustomUnitsScreen: View {
     var body: some View {
         Group {
-            if customUnits.isEmpty {
-                Text("No custom units yet")
-                    .foregroundColor(.secondary)
-            } else {
-                List(customUnits) { customUnit in
+            List {
+                if customUnits.isEmpty {
+                    Text("No custom units")
+                        .foregroundColor(.secondary)
+                }
+                NavigationLink {
+                    CustomUnitsArchiveScreen()
+                } label: {
+                    Label("Archive", systemImage: "archivebox")
+                }
+                ForEach(customUnits) { customUnit in
                     NavigationLink {
                         EditCustomUnitsScreen(customUnit: customUnit)
                     } label: {
@@ -52,36 +55,12 @@ struct CustomUnitsScreen: View {
         .navigationTitle("Custom Units")
         .dismissWhenTabTapped()
     }
-}
 
-struct CustomUnitRow: View {
-    let customUnit: CustomUnit
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \CustomUnit.creationDate, ascending: false)],
+        predicate: NSPredicate(
+            format: "isArchived == %@",
+            NSNumber(value: false))) private var customUnits: FetchedResults<CustomUnit>
+    @State private var isAddShown = false
 
-    var body: some View {
-        HStack {
-            ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
-            Spacer().frame(width: 10)
-            VStack(alignment: .leading) {
-                Text("\(customUnit.substanceNameUnwrapped) \(customUnit.nameUnwrapped)").font(.headline)
-                Group {
-                    if let dose = customUnit.doseUnwrapped {
-                        Text("\(customUnit.isEstimate ? "~" : "")\(dose.formatted()) \(customUnit.originalUnitUnwrapped) per \(customUnit.unitUnwrapped)")
-                    } else {
-                        Text("\(customUnit.unitUnwrapped) of unknown dose")
-                    }
-                }
-                .font(.subheadline)
-            }
-            Spacer()
-            if customUnit.isArchived {
-                Image(systemName: "archivebox").foregroundColor(.secondary)
-            }
-        }
-    }
-}
-
-#Preview {
-    List {
-        CustomUnitRow(customUnit: CustomUnit.previewSample)
-    }
 }
