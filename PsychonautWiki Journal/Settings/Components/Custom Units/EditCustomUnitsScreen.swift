@@ -39,7 +39,8 @@ struct EditCustomUnitsScreen: View {
             dose: $dose,
             isEstimate: $isEstimate,
             isArchived: $isArchived,
-            delete: delete
+            delete: delete,
+            ingestionCount: customUnit.ingestionsUnwrapped.count
         )
         .onAppear {
             name = customUnit.nameUnwrapped
@@ -85,6 +86,8 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var isEstimate: Bool
     @Binding var isArchived: Bool
     let delete: () -> Void
+    let ingestionCount: Int
+    @State private var isDeleteShown = false
 
     var body: some View {
         Form {
@@ -113,11 +116,27 @@ struct EditCustomUnitsScreenContent: View {
         }
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
-                Button(action: delete) {
+                Button {
+                    isDeleteShown.toggle()
+                } label: {
                     Label("Delete Unit", systemImage: "trash")
                 }
             }
         }
+        .alert("Are you sure?", isPresented: $isDeleteShown, actions: {
+            Button(role: .destructive) {
+                delete()
+            } label: {
+                Text("Delete")
+            }
+            Button(role: .cancel) {
+
+            } label: {
+                Text("Cancel")
+            }
+        }, message: {
+            Text("Deleting this unit will delete \(ingestionCount.with(unit: "ingestion")) that are using it. If you don't want to use it anymore archive it instead.")
+        })
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Edit Unit")
     }
@@ -135,7 +154,8 @@ struct EditCustomUnitsScreenContent: View {
             dose: .constant(50),
             isEstimate: .constant(false),
             isArchived: .constant(false),
-            delete: {}
+            delete: {},
+            ingestionCount: 4
         )
     }
 }

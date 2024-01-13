@@ -16,7 +16,7 @@
         <attribute name="originalUnit" optional="YES" attributeType="String"/>
         <attribute name="substanceName" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
-        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingestion" inverseName="customUnit" inverseEntity="Ingestion"/>
+        <relationship name="ingestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingestion" inverseName="customUnit" inverseEntity="Ingestion"/>
     </entity>
     <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
