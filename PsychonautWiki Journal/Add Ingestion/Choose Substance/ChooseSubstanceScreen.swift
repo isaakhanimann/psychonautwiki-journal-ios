@@ -59,6 +59,9 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: FinishIngestionScreenArguments.self) { arguments in
                 FinishIngestionScreen(arguments: arguments, dismiss: dismiss)
             }
+            .navigationDestination(for: AddCustomUnitArguments.self) { arguments in
+                AddCustomUnitsScreen(substanceAndRoute: arguments.substanceAndRoute)
+            }
             .navigationDestination(for: AddIngestionDestination.self) { destination in
                 switch destination {
                 case .interactions(let substance):

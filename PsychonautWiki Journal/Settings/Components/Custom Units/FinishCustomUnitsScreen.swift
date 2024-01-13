@@ -150,6 +150,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.substanceName = substanceAndRoute.substance.name
         newCustomUnit.unit = unit
         newCustomUnit.isEstimate = isEstimate
+        newCustomUnit.isArchived = false
         try? context.save()
         dismiss()
     }
