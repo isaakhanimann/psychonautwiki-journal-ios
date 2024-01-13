@@ -31,13 +31,14 @@ struct FinishCustomUnitsScreen: View {
         Form {
             Section {
                 TextField("Name to identify", text: $name)
+                    .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
                     .onSubmit {
                         focusedField = .unit
                     }
-                TextField("Unit", text: $unit, prompt: Text("e.g. pill, spray, scoop etc."))
+                TextField("Unit in singular form", text: $unit, prompt: Text("e.g. pill, spray, scoop etc."))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)
@@ -75,7 +76,7 @@ struct FinishCustomUnitsScreen: View {
                         if isUnknownDose {
                             Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
                         } else {
-                            Text("\(multiplier.formatted()) \(unit)") +
+                            Text(multiplier.with(unit: unit)) +
                                 Text(
                                     " = \(isEstimate ? "~" : "")\(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
                                 .foregroundColor(.secondary)

@@ -99,9 +99,9 @@ private struct IngestionRowContent: View {
             if let customUnit = ingestion.customUnit {
                 if let customUnitDose = ingestion.customUnitDoseUnwrapped {
                     if let calculatedDose = ingestion.calculatedDose {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.inflect(unit: customUnit.unitUnwrapped))") + Text(" = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.with(unit: customUnit.unitUnwrapped))") + Text(" = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                     } else {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.inflect(unit: customUnit.unitUnwrapped)) \(routeText)")
+                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.with(unit: customUnit.unitUnwrapped)) \(routeText)")
                     }
                 } else {
                     Text(routeText.localizedCapitalized)

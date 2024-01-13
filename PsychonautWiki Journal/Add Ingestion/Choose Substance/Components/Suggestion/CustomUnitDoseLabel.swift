@@ -22,7 +22,7 @@ struct CustomUnitDoseLabel: View {
 
     var body: some View {
         VStack {
-            Text("\(maybeSign)\(customUnitDose.dose.formatted()) \(customUnitDose.customUnit.unitUnwrapped)")
+            Text("\(maybeSign)\(customUnitDose.dose.with(unit: customUnitDose.customUnit.unitUnwrapped))")
             if let calculatedDose = customUnitDose.customUnit.getPureSubstanceDose(from: customUnitDose.dose)?.roundedToAtMost1Decimal {
                 Text("\(maybeSignPure)\(calculatedDose.formatted()) \(customUnitDose.customUnit.originalUnitUnwrapped)").font(.caption2)
             }

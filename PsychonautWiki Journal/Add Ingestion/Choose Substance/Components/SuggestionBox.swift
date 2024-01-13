@@ -92,7 +92,7 @@ struct SuggestionBox: View {
                         verticalSpacing: verticalSpacing)
                     {
                         ForEach(suggestion.customUnits) { customUnit in
-                            NavigationLink("Enter \(customUnit.unitUnwrapped)", value: customUnit)
+                            NavigationLink("Enter \(2.justUnit(unit: customUnit.unitUnwrapped))", value: customUnit)
                                 .buttonStyle(.borderedProminent).fixedSize()
                         }
                     }

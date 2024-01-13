@@ -90,7 +90,7 @@ struct EditCustomUnitsScreenContent: View {
         Form {
             Section {
                 TextField("Name", text: $name)
-                    .autocapitalization(.sentences)
+                    .autocorrectionDisabled().textInputAutocapitalization(.never)
                 TextField("Unit", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)

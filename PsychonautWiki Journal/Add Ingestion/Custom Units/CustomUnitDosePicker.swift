@@ -34,7 +34,7 @@ struct CustomUnitDosePicker: View {
                     format: .number).keyboardType(.decimalPad)
                     .textFieldStyle(.roundedBorder)
                     .foregroundStyle(calculatedDoseColor)
-                Text(customUnit.unitUnwrapped)
+                Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)
         }
@@ -65,7 +65,7 @@ struct CustomUnitDosePicker: View {
         if let calculatedDose {
             Text("\(calculatedDoseTilde)\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold) +
             Text(
-                " = \(isDoseEstimated ? "~" : "")\(dose?.formatted() ?? "...") \(customUnit.unitUnwrapped) x \(customUnit.isEstimate ? "~" : "")\(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped)")
+                " = \(isDoseEstimated ? "~" : "")\(dose?.with(unit: customUnit.unitUnwrapped) ?? "...") x \(customUnit.isEstimate ? "~" : "")\(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped)")
 
         } else {
             Text(" ")

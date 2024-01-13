@@ -18,14 +18,18 @@ import Foundation
 
 extension Int {
     // e.g. for 2.inflect(unit: "experience") it returns "2 experiences"
-    func inflect(unit: String) -> LocalizedStringResource {
+    func with(unit: String) -> LocalizedStringResource {
         "^[\(self) \(unit)](inflect: true)"
     }
 }
 
 extension Double {
-    func inflect(unit: String) -> AttributedString {
-        var string = AttributedString(localized: "\(self.formatted()) \(unit)")
+    func with(unit: String) -> AttributedString {
+        inflect(localized: "\(self.formatted()) \(unit)")
+    }
+
+    private func inflect(localized: String.LocalizationValue) -> AttributedString {
+        var string = AttributedString(localized: localized)
         var morphology = Morphology()
         let number: Morphology.GrammaticalNumber
         switch self {
@@ -40,5 +44,9 @@ extension Double {
         string.inflect = InflectionRule(morphology: morphology)
         let formattedResult = string.inflected()
         return formattedResult
+    }
+
+    func justUnit(unit: String) -> AttributedString {
+        inflect(localized: "\(unit)")
     }
 }
