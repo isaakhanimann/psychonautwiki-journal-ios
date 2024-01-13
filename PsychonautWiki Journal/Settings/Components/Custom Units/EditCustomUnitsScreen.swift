@@ -117,7 +117,11 @@ struct EditCustomUnitsScreenContent: View {
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
                 Button {
-                    isDeleteShown.toggle()
+                    if ingestionCount > 0 {
+                        isDeleteShown.toggle()
+                    } else {
+                        delete()
+                    }
                 } label: {
                     Label("Delete Unit", systemImage: "trash")
                 }
