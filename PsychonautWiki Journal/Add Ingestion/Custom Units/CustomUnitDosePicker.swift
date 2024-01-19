@@ -31,9 +31,10 @@ struct CustomUnitDosePicker: View {
                 TextField(
                     "Enter Dose",
                     value: $dose,
-                    format: .number).keyboardType(.decimalPad)
-                    .textFieldStyle(.roundedBorder)
-                    .foregroundStyle(calculatedDoseColor)
+                    format: .number
+                )
+                .keyboardType(.decimalPad)
+                .textFieldStyle(.roundedBorder)
                 Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)
