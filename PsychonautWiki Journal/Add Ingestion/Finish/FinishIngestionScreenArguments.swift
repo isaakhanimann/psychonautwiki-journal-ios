@@ -23,5 +23,5 @@ struct FinishIngestionScreenArguments: Hashable {
     let units: String?
     let isEstimate: Bool
     var customUnit: CustomUnit?
-    var suggestedNote: String?
+    var purityInPercent: Double?
 }

@@ -70,7 +70,7 @@ struct ChooseAlcoholDoseScreen: View {
             dose: doseRounded,
             units: units,
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote
+            purityInPercent: nil
         )) {
             NextLabel()
         }

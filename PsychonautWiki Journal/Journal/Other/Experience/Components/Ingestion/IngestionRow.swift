@@ -79,6 +79,9 @@ private struct IngestionRowContent: View {
                     .font(.subheadline)
                 }
                 doseRow
+                if let impureDose = ingestion.impureDose, let purityInPercentUnwrapped = ingestion.purityInPercentUnwrapped {
+                    Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(ingestion.unitsUnwrapped) with \(purityText)% purity")
+                }
                 Group {
                     if !ingestion.noteUnwrapped.isEmpty {
                         Text(ingestion.noteUnwrapped)

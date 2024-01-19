@@ -119,10 +119,7 @@ struct ChooseDoseScreenContent: View {
         substance.getDose(for: administrationRoute)
     }
 
-    private var suggestedNote: String? {
-        guard let impureDose, let selectedUnits, purityInPercent != 100, purityInPercent != nil else { return nil }
-        return "\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits) with \(purityText)% purity"
-    }
+    
 
     private var purityInPercent: Double? {
         getDouble(from: purityText)
@@ -179,7 +176,7 @@ struct ChooseDoseScreenContent: View {
             dose: nil,
             units: selectedUnits,
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote))
+            purityInPercent: purityInPercent))
     }
 
     private var screen: some View {

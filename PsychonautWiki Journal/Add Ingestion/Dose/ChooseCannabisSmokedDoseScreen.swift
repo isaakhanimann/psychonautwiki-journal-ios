@@ -81,7 +81,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
             dose: doseRounded,
             units: "mg",
             isEstimate: isEstimate,
-            suggestedNote: suggestedNote
+            purityInPercent: nil
         )) {
             NextLabel()
         }

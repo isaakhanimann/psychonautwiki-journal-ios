@@ -49,6 +49,20 @@ extension Ingestion: Comparable {
         }
     }
 
+    var purityInPercentUnwrapped: Double? {
+        if purityInPercent == 0 {
+            return nil
+        } else {
+            return purityInPercent
+        }
+    }
+
+    var impureDose: Double? {
+        guard let doseUnwrapped else { return nil }
+        guard let purityInPercentUnwrapped, purityInPercentUnwrapped != 0 else { return nil }
+        return doseUnwrapped / purityInPercentUnwrapped * 100
+    }
+
     var pureSubstanceDose: Double? {
         doseUnwrapped ?? calculatedDose
     }
