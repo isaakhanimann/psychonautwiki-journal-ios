@@ -26,6 +26,7 @@ struct EditIngestionScreen: View {
     @State private var customUnitDose: Double?
     @State private var units: String? = "mg"
     @State private var isEstimate = false
+    @State private var estimatedDoseVariance: Double?
     @State private var note = ""
     @State private var consumerName = ""
     @State private var stomachFullness = StomachFullness.empty
@@ -42,6 +43,7 @@ struct EditIngestionScreen: View {
             customUnitDose: $customUnitDose,
             units: $units,
             isEstimate: $isEstimate,
+            estimatedDoseVariance: $estimatedDoseVariance,
             note: $note,
             stomachFullness: $stomachFullness,
             consumerName: $consumerName,
@@ -54,6 +56,7 @@ struct EditIngestionScreen: View {
                 customUnitDose = ingestion.customUnitDoseUnwrapped
                 units = ingestion.units
                 isEstimate = ingestion.isEstimate
+                estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
                 note = ingestion.noteUnwrapped
                 consumerName = ingestion.consumerName ?? ""
                 if let fullness = ingestion.stomachFullnessUnwrapped {
@@ -68,6 +71,7 @@ struct EditIngestionScreen: View {
         ingestion.customUnitDose = customUnitDose ?? 0
         ingestion.units = units
         ingestion.isEstimate = isEstimate
+        ingestion.estimatedDoseVariance = estimatedDoseVariance ?? 0
         ingestion.note = note
         if consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
             ingestion.consumerName = nil
@@ -101,6 +105,7 @@ struct EditIngestionContent: View {
     @Binding var customUnitDose: Double?
     @Binding var units: String?
     @Binding var isEstimate: Bool
+    @Binding var estimatedDoseVariance: Double?
     @Binding var note: String
     @Binding var stomachFullness: StomachFullness
     @Binding var consumerName: String
@@ -124,6 +129,18 @@ struct EditIngestionContent: View {
                         selectedUnits: $units)
                 }
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $estimatedDoseVariance,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(units ?? "")
+                    }
+                }
             }.listRowSeparator(.hidden)
             Section("Notes") {
                 TextField("Enter Note", text: $note)
@@ -188,6 +205,7 @@ struct EditIngestionContent: View {
             customUnitDose: .constant(nil),
             units: .constant("mg"),
             isEstimate: .constant(false),
+            estimatedDoseVariance: .constant(nil),
             note: .constant("These are my notes"),
             stomachFullness: .constant(.full),
             consumerName: .constant("Marc"),
@@ -209,6 +227,7 @@ struct EditIngestionContent: View {
             customUnitDose: .constant(2),
             units: .constant("mg"),
             isEstimate: .constant(false),
+            estimatedDoseVariance: .constant(nil),
             note: .constant("These are my notes"),
             stomachFullness: .constant(.full),
             consumerName: .constant("Marc"),
