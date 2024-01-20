@@ -112,11 +112,11 @@ private struct IngestionRowContent: View {
                                     if let calculatedDoseVariance = ingestion.calculatedDoseVariance { // custom unit variance
                                         // 3±0.5 lines = 60±20mg insufflated
                                         Text(ingestionDoseLine)
-                                        Text("\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        Text("= \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                     } else { // dose per unit unknown
                                         // 3±0.5 lines insufflated
                                         Text(ingestionDoseLine)
-                                        Text("\(routeText)").foregroundColor(.secondary)
+                                        Text("= \(routeText)").foregroundColor(.secondary)
                                     }
                                 } else { // ingestion dose estimated non quantitatively
                                     // ~2 pills
@@ -125,16 +125,16 @@ private struct IngestionRowContent: View {
                                         if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
                                             // ~2 pills = ~40±10 mg oral
                                             Text(ingestionDoseLine)
-                                            Text("~\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                            Text("= ~\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                         } else {
                                             // ~2 pills = ~40 mg oral
                                             Text(ingestionDoseLine)
-                                            Text("~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                            Text("= ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                         }
                                     } else {
                                         // ~2 pills = 40 mg oral
                                         Text(ingestionDoseLine)
-                                        Text("~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        Text("= ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                     }
                                 }
                             } else { // ingestion dose not estimated
@@ -144,16 +144,16 @@ private struct IngestionRowContent: View {
                                     if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
                                         // 2 pills = 40±10 mg oral
                                         Text(ingestionDoseLine)
-                                        Text("\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        Text("= \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                     } else {
                                         // 2 pills = ~40 mg oral
                                         Text(ingestionDoseLine)
-                                        Text("~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        Text("= ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                     }
                                 } else {
                                     // 2 pills = 40 mg oral
                                     Text(ingestionDoseLine)
-                                    Text("\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                    Text("= \(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                 }
                             }
                         } else { // ingestion calculated dose not known
