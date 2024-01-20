@@ -53,7 +53,18 @@ struct RouteItemView: View {
         HStack {
             let routeText = isEyeOpen ? routeItem.route.rawValue : ""
             if let doseUnwrapped = routeItem.dose {
-                Text("\(routeItem.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
+                if routeItem.isEstimate {
+                    if let variance = routeItem.estimatedDoseVariance {
+                        // 30±5 mg oral
+                        Text("\(doseUnwrapped.formatted())±\(variance.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
+                    } else {
+                        // ~30 mg oral
+                        Text("~\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
+                    }
+                } else {
+                    // 30 mg oral
+                    Text("\(doseUnwrapped.formatted()) \(routeItem.units) \(routeText)").multilineTextAlignment(.trailing)
+                }
             } else {
                 Text("Unknown dose \(routeText)")
             }

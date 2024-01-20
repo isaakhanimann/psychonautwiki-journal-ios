@@ -25,6 +25,7 @@ struct EditCustomUnitsScreen: View {
     @State private var note: String = ""
     @State private var dose: Double?
     @State private var isEstimate: Bool = false
+    @State private var estimatedDoseVariance: Double?
     @State private var isArchived: Bool = false
     @Environment(\.dismiss) var dismiss
 
@@ -38,6 +39,7 @@ struct EditCustomUnitsScreen: View {
             note: $note,
             dose: $dose,
             isEstimate: $isEstimate,
+            estimatedDoseVariance: $estimatedDoseVariance,
             isArchived: $isArchived,
             delete: delete,
             ingestionCount: customUnit.ingestionsUnwrapped.count
@@ -49,6 +51,7 @@ struct EditCustomUnitsScreen: View {
             note = customUnit.noteUnwrapped
             dose = customUnit.doseUnwrapped
             isEstimate = customUnit.isEstimate
+            estimatedDoseVariance = customUnit.estimatedDoseVarianceUnwrapped
             isArchived = customUnit.isArchived
         }
         .onDisappear {
@@ -63,6 +66,7 @@ struct EditCustomUnitsScreen: View {
         customUnit.note = note
         customUnit.dose = dose ?? 0
         customUnit.isEstimate = isEstimate
+        customUnit.estimatedDoseVariance = estimatedDoseVariance ?? 0
         customUnit.isArchived = isArchived
         PersistenceController.shared.saveViewContext()
         dismiss()
@@ -84,6 +88,7 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var note: String
     @Binding var dose: Double?
     @Binding var isEstimate: Bool
+    @Binding var estimatedDoseVariance: Double?
     @Binding var isArchived: Bool
     let delete: () -> Void
     let ingestionCount: Int
@@ -106,6 +111,18 @@ struct EditCustomUnitsScreenContent: View {
                     selectedUnits: $originalUnit
                 )
                 Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $estimatedDoseVariance,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(originalUnit ?? "")
+                    }
+                }
             }.listRowSeparator(.hidden)
             Section {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
@@ -157,6 +174,7 @@ struct EditCustomUnitsScreenContent: View {
             note: .constant("These are my notes"),
             dose: .constant(50),
             isEstimate: .constant(false),
+            estimatedDoseVariance: .constant(nil),
             isArchived: .constant(false),
             delete: {},
             ingestionCount: 4

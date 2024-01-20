@@ -50,7 +50,7 @@ extension Ingestion: Comparable {
     }
 
     var estimatedDoseVarianceUnwrapped: Double? {
-        if estimatedDoseVariance == 0 {
+        if estimatedDoseVariance == 0 || !isEstimate {
             return nil
         } else {
             return estimatedDoseVariance
