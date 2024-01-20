@@ -91,7 +91,12 @@ extension Ingestion: Comparable {
         let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
         let lowerEstimate = customUnitDoseUnwrapped - doseVariance
         guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
-        return calculatedDose - pureLowerEstimate
+        let variance = calculatedDose - pureLowerEstimate
+        if variance != 0 {
+            return variance
+        } else {
+            return nil
+        }
     }
 
     var customUnitDoseUnwrapped: Double? {
