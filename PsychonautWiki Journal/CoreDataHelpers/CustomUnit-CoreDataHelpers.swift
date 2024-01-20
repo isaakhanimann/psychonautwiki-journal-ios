@@ -108,6 +108,17 @@ extension CustomUnit {
         return customUnit
     }
 
+    static var unknownDoseSample: CustomUnit {
+        let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
+        customUnit.name = "Line"
+        customUnit.substanceName = "Ketamine"
+        customUnit.originalUnit = "mg"
+        customUnit.unit = "line"
+        customUnit.dose = 0
+        customUnit.note = "Some random notes"
+        return customUnit
+    }
+
     static var estimatePreviewSample: CustomUnit {
         let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
         customUnit.name = "Estimated"

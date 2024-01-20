@@ -49,11 +49,11 @@ private struct IngestionRowContent: View {
         }
     }
 
-    private var substanceNameSuffix: String {
+    private var title: String {
         if let customUnit = ingestion.customUnit {
-            " " + customUnit.nameUnwrapped
+            "\(ingestion.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))"
         } else {
-            ""
+            ingestion.substanceNameUnwrapped
         }
     }
 
@@ -62,7 +62,7 @@ private struct IngestionRowContent: View {
             ColorRectangle(color: substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
                 HStack {
-                    Text(ingestion.substanceNameUnwrapped + substanceNameSuffix)
+                    Text(title)
                         .lineLimit(1)
                         .font(.headline)
                         .foregroundColor(.primary)
@@ -246,6 +246,14 @@ private struct IngestionRowContent: View {
             )
             IngestionRowContent(
                 ingestion: Ingestion.customUnitPreviewSample,
+                substanceColor: .orange,
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.customUnitUnknownDosePreviewSample,
                 substanceColor: .orange,
                 timeDisplayStyle: .regular,
                 isEyeOpen: true,
