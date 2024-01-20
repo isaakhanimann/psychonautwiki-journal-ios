@@ -58,11 +58,13 @@ struct CumulativeRouteAndDose: Identifiable {
         var isOneDoseUnknown = false
         var isOneDoseAnEstimate = false
         for ingestion in ingestionForRoute {
+            if ingestion.isEstimate || ingestion.customUnit?.isEstimate == true {
+                isOneDoseAnEstimate = true
+            }
             if let doseUnwrap = ingestion.pureSubstanceDose, ingestion.unitsUnwrapped == units {
                 totalDose += doseUnwrap
-                totalVariance += ingestion.estimatedDoseVariance
-                if ingestion.isEstimate {
-                    isOneDoseAnEstimate = true
+                if let variance = ingestion.calculatedDoseVariance {
+                    totalVariance += variance
                 }
             } else {
                 isOneDoseUnknown = true
