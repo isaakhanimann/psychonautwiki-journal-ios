@@ -76,6 +76,7 @@ struct RouteItemView: View {
                         route: .oral,
                         numDots: 5,
                         isEstimate: false,
+                        estimatedDoseVariance: nil,
                         dose: 250,
                         units: "mg"
                     ),
@@ -83,6 +84,7 @@ struct RouteItemView: View {
                         route: .insufflated,
                         numDots: 1,
                         isEstimate: true,
+                        estimatedDoseVariance: 2,
                         dose: 20,
                         units: "mg"
                     ),
@@ -98,6 +100,7 @@ struct RouteItemView: View {
                         route: .oral,
                         numDots: 3,
                         isEstimate: false,
+                        estimatedDoseVariance: nil,
                         dose: 30,
                         units: "mg"
                     ),
@@ -105,6 +108,7 @@ struct RouteItemView: View {
                         route: .insufflated,
                         numDots: nil,
                         isEstimate: true,
+                        estimatedDoseVariance: 5,
                         dose: nil,
                         units: "mg"
                     ),

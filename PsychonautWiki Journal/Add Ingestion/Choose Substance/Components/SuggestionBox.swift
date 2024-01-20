@@ -39,7 +39,8 @@ struct SuggestionBox: View {
                                     administrationRoute: suggestion.route,
                                     dose: doseUnwrap,
                                     units: dose.units,
-                                    isEstimate: dose.isEstimate))
+                                    isEstimate: dose.isEstimate,
+                                    estimatedDoseVariance: dose.estimatedDoseVariance))
                                 .buttonStyle(.bordered).fixedSize()
                         } else {
                             NavigationLink("Unknown", value: FinishIngestionScreenArguments(
@@ -47,8 +48,10 @@ struct SuggestionBox: View {
                                 administrationRoute: suggestion.route,
                                 dose: dose.dose,
                                 units: dose.units,
-                                isEstimate: dose.isEstimate))
-                                .buttonStyle(.bordered).fixedSize()
+                                isEstimate: dose.isEstimate,
+                                estimatedDoseVariance: nil
+                            ))
+                            .buttonStyle(.bordered).fixedSize()
                         }
                     }
                     if let substance = suggestion.substance {
@@ -78,6 +81,7 @@ struct SuggestionBox: View {
                                     dose: customUnitDose.dose,
                                     units: customUnitDose.customUnit.originalUnitUnwrapped,
                                     isEstimate: customUnitDose.isEstimate,
+                                    estimatedDoseVariance: customUnitDose.estimatedDoseVariance,
                                     customUnit: customUnitDose.customUnit))
                             {
                                 CustomUnitDoseLabel(customUnitDose: customUnitDose)
@@ -129,15 +133,18 @@ struct SuggestionBox: View {
                         RegularDoseAndUnit(
                             dose: 20,
                             units: "mg",
-                            isEstimate: true),
+                            isEstimate: true,
+                            estimatedDoseVariance: 2),
                         RegularDoseAndUnit(
                             dose: nil,
                             units: "mg",
-                            isEstimate: false),
+                            isEstimate: false,
+                            estimatedDoseVariance: nil),
                         RegularDoseAndUnit(
                             dose: 30,
                             units: "mg",
-                            isEstimate: false),
+                            isEstimate: false,
+                            estimatedDoseVariance: nil),
                     ],
                     customUnitDoses: [],
                     customUnits: [],
@@ -155,19 +162,23 @@ struct SuggestionBox: View {
                         RegularDoseAndUnit(
                             dose: 3,
                             units: "mg",
-                            isEstimate: false),
+                            isEstimate: false,
+                            estimatedDoseVariance: nil),
                         RegularDoseAndUnit(
                             dose: 6,
                             units: "mg",
-                            isEstimate: true),
+                            isEstimate: true,
+                            estimatedDoseVariance: 1),
                         RegularDoseAndUnit(
                             dose: nil,
                             units: "mg",
-                            isEstimate: false),
+                            isEstimate: false,
+                            estimatedDoseVariance: nil),
                         RegularDoseAndUnit(
                             dose: 2.5,
                             units: "mg",
-                            isEstimate: false),
+                            isEstimate: false,
+                            estimatedDoseVariance: nil),
                     ],
                     customUnitDoses: [],
                     customUnits: [],

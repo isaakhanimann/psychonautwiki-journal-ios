@@ -25,6 +25,7 @@ struct ChooseMDMADoseScreen: View {
 
     @State private var mdmaDoseInMg: Double? = 113.0
     @State private var isEstimate = false
+    @State private var estimatedDoseVariance: Double?
     private let units = "mg"
     @State private var doseText = "113"
 
@@ -47,7 +48,8 @@ struct ChooseMDMADoseScreen: View {
             administrationRoute: .oral,
             dose: mdmaDoseInMg,
             units: units,
-            isEstimate: isEstimate
+            isEstimate: isEstimate,
+            estimatedDoseVariance: estimatedDoseVariance
         )) {
             NextLabel()
         }
@@ -59,7 +61,8 @@ struct ChooseMDMADoseScreen: View {
             administrationRoute: .oral,
             dose: nil,
             units: units,
-            isEstimate: false))
+            isEstimate: false,
+            estimatedDoseVariance: nil))
     }
 
     private var screen: some View {

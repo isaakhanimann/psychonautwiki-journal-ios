@@ -24,12 +24,13 @@ extension Int {
 }
 
 extension Double {
-    func with(unit: String) -> AttributedString {
-        inflect(localized: "\(self.formatted()) \(unit)")
+    func with(unit: String) -> String {
+        inflect(text: "\(self.formatted()) \(unit)")
     }
 
-    private func inflect(localized: String.LocalizationValue) -> AttributedString {
-        var string = AttributedString(localized: localized)
+    private func inflect(text: String) -> String {
+        var string = AttributedString(text)
+        guard InflectionRule.canInflectPreferredLocalization else {  return text }
         var morphology = Morphology()
         let number: Morphology.GrammaticalNumber
         switch self {
@@ -43,10 +44,10 @@ extension Double {
         morphology.number = number
         string.inflect = InflectionRule(morphology: morphology)
         let formattedResult = string.inflected()
-        return formattedResult
+        return String(formattedResult.characters)
     }
 
-    func justUnit(unit: String) -> AttributedString {
-        inflect(localized: "\(unit)")
+    func justUnit(unit: String) -> String {
+        inflect(text: unit)
     }
 }

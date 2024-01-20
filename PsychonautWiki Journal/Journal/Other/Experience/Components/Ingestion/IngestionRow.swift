@@ -95,22 +95,89 @@ private struct IngestionRowContent: View {
 
     private var doseRow: some View {
         HStack {
-            let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
-            if let customUnit = ingestion.customUnit {
-                if let customUnitDose = ingestion.customUnitDoseUnwrapped {
-                    if let calculatedDose = ingestion.calculatedDose {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.with(unit: customUnit.unitUnwrapped))") + Text(" = \((ingestion.isEstimate || customUnit.isEstimate) ? "~" : "")\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
-                    } else {
-                        Text("\(ingestion.isEstimate ? "~" : "")\(customUnitDose.with(unit: customUnit.unitUnwrapped)) \(routeText)")
+            VStack(alignment: .leading) {
+                let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
+                if let customUnit = ingestion.customUnit { // custom unit
+                    if let customUnitDose = ingestion.customUnitDoseUnwrapped { // ingestion custom unit dose known
+                        if let calculatedDose = ingestion.calculatedDose { // ingestion calculated dose known
+                            if ingestion.isEstimate { // ingestion estimate
+                                if let estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped { // ingestion estimated quantitatively
+                                    // 3±0.5 lines
+                                    let ingestionDoseLine = "\(customUnitDose.formatted())±\(estimatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(3.justUnit(unit: customUnit.unitUnwrapped))"
+                                    if let calculatedDoseVariance = ingestion.calculatedDoseVariance { // custom unit variance
+                                        // 3±0.5 lines = 60±20mg insufflated
+                                        Text(ingestionDoseLine) + Text(" = \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                    } else { // dose per unit unknown
+                                        // 3±0.5 lines insufflated
+                                        Text(ingestionDoseLine) + Text(" \(routeText)").foregroundColor(.secondary)
+                                    }
+                                } else { // ingestion dose estimated non quantitatively
+                                    // ~2 pills
+                                    let ingestionDoseLine = "~\(customUnitDose.with(unit: customUnit.unitUnwrapped))"
+                                    if customUnit.isEstimate {
+                                        if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
+                                            // ~2 pills = ~40±10 mg oral
+                                            Text(ingestionDoseLine) + Text(" = ~\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        } else {
+                                            // ~2 pills = ~40 mg oral
+                                            Text(ingestionDoseLine) + Text(" = ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                        }
+                                    } else {
+                                        // ~2 pills = 40 mg oral
+                                        Text(ingestionDoseLine) + Text(" = ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                    }
+                                }
+                            } else { // ingestion dose not estimated
+                                // 2 pills
+                                let ingestionDoseLine = customUnitDose.with(unit: customUnit.unitUnwrapped)
+                                if customUnit.isEstimate {
+                                    if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
+                                        // 2 pills = 40±10 mg oral
+                                        Text(ingestionDoseLine) + Text(" = \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                    } else {
+                                        // 2 pills = ~40 mg oral
+                                        Text(ingestionDoseLine) + Text(" = ~\(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                    }
+                                } else {
+                                    // 2 pills = 40 mg oral
+                                    Text(ingestionDoseLine) + Text(" = \(calculatedDose.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
+                                }
+                            }
+                        } else { // ingestion calculated dose not known
+                            // 2 pills oral
+                            let line = "\(customUnitDose.with(unit: customUnit.unitUnwrapped)) \(routeText)"
+                            if ingestion.isEstimate {
+                                // ~2 pills oral
+                                Text("~" + line)
+                            } else {
+                                // 2 pills oral
+                                Text(line)
+                            }
+                        }
+                    } else { // custom unit dose unknown
+                        // Insufflated
+                        Text(routeText.localizedCapitalized)
                     }
-                } else {
-                    Text(routeText.localizedCapitalized)
-                }
-            } else {
-                if let doseUnwrapped = ingestion.doseUnwrapped {
-                    Text("\(ingestion.isEstimate ? "~" : "")\(doseUnwrapped.formatted()) \(ingestion.unitsUnwrapped) \(routeText)")
-                } else {
-                    Text(routeText.localizedCapitalized)
+                } else { // not custom unit
+                    if let doseUnwrapped = ingestion.doseUnwrapped {
+                        // mg insufflated
+                        let unitAndRoute = ingestion.unitsUnwrapped + " " + routeText
+                        if ingestion.isEstimate {
+                            if let estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped {
+                                // 20±5 mg insufflated
+                                Text("\(doseUnwrapped.formatted())±\(estimatedDoseVariance.formatted()) \(unitAndRoute)")
+                            } else {
+                                // ~20 mg insufflated
+                                Text("~\(doseUnwrapped.formatted()) \(unitAndRoute)")
+                            }
+                        } else {
+                            // 20 mg insufflated
+                            Text("\(doseUnwrapped.formatted()) \(unitAndRoute)")
+                        }
+                    } else {
+                        // Insufflated
+                        Text(routeText.localizedCapitalized)
+                    }
                 }
             }
             Spacer()
@@ -176,6 +243,22 @@ private struct IngestionRowContent: View {
             )
             IngestionRowContent(
                 ingestion: Ingestion.estimatedCustomUnitPreviewSample,
+                substanceColor: .orange,
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.estimatedQuantitativelyCustomUnitPreviewSample,
+                substanceColor: .orange,
+                timeDisplayStyle: .regular,
+                isEyeOpen: true,
+                isHidingDosageDots: false,
+                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+            )
+            IngestionRowContent(
+                ingestion: Ingestion.everythingEstimatedQuantitativelyPreviewSample,
                 substanceColor: .orange,
                 timeDisplayStyle: .regular,
                 isEyeOpen: true,

@@ -28,6 +28,7 @@ struct ChooseShroomsDoseScreen: View {
     @State private var psilocybinContentInPercentText = "1"
     @State private var psilocybinContentInPercent: Double? = 1.0
     @State private var isEstimate = false
+    @State private var doseVariance: Double?
     @State private var shroomWeightText = ""
     @State private var shroomWeightInGrams: Double?
 
@@ -64,6 +65,7 @@ struct ChooseShroomsDoseScreen: View {
             dose: psilocybinInMg,
             units: "mg",
             isEstimate: isEstimate,
+            estimatedDoseVariance: doseVariance,
             suggestedNote: suggestedNote
         )) {
             NextLabel()
@@ -76,7 +78,8 @@ struct ChooseShroomsDoseScreen: View {
             administrationRoute: .oral,
             dose: nil,
             units: "mg",
-            isEstimate: false))
+            isEstimate: false,
+            estimatedDoseVariance: nil))
     }
 
     private var screen: some View {
@@ -96,6 +99,18 @@ struct ChooseShroomsDoseScreen: View {
                 }
                 .font(.title)
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $doseVariance,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text("mg")
+                    }
+                }
                 unknownDoseLink
             }.listRowSeparator(.hidden)
             Section("Mushroom Psilocybin Calculation") {

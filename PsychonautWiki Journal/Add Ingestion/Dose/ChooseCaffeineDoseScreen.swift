@@ -26,6 +26,7 @@ struct ChooseCaffeineDoseScreen: View {
 
     @State private var caffeineDoseInMg = 50.0
     @State private var isEstimate = true
+    @State private var doseVarianceInMg: Double?
     let units = "mg"
 
     private var doseRounded: Double {
@@ -55,7 +56,8 @@ struct ChooseCaffeineDoseScreen: View {
             administrationRoute: .oral,
             dose: doseRounded,
             units: units,
-            isEstimate: isEstimate
+            isEstimate: isEstimate,
+            estimatedDoseVariance: doseVarianceInMg
         )) {
             NextLabel()
         }
@@ -67,7 +69,8 @@ struct ChooseCaffeineDoseScreen: View {
             administrationRoute: .oral,
             dose: nil,
             units: units,
-            isEstimate: false))
+            isEstimate: false,
+            estimatedDoseVariance: nil))
     }
 
     var screen: some View {
@@ -92,6 +95,18 @@ struct ChooseCaffeineDoseScreen: View {
                     }
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $doseVarianceInMg,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(units)
+                    }
+                }
                 unknownDoseLink
             }
             Section("Average Drinks") {

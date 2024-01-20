@@ -182,16 +182,19 @@ struct ChooseSubstanceContent: View {
                     RegularDoseAndUnit(
                         dose: 20,
                         units: "mg",
-                        isEstimate: true),
+                        isEstimate: true,
+                        estimatedDoseVariance: 3),
                     RegularDoseAndUnit(
                         dose: 30,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                 ],
                 customUnitDoses: [
                     CustomUnitDose(
                         dose: 2,
                         isEstimate: false,
+                        estimatedDoseVariance: nil,
                         customUnit: .previewSample)
                 ],
                 customUnits: [],
@@ -206,15 +209,18 @@ struct ChooseSubstanceContent: View {
                     RegularDoseAndUnit(
                         dose: 20,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                     RegularDoseAndUnit(
                         dose: nil,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                     RegularDoseAndUnit(
                         dose: 30,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                 ],
                 customUnitDoses: [],
                 customUnits: [],
@@ -229,19 +235,23 @@ struct ChooseSubstanceContent: View {
                     RegularDoseAndUnit(
                         dose: 3,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                     RegularDoseAndUnit(
                         dose: 6,
                         units: "mg",
-                        isEstimate: true),
+                        isEstimate: true,
+                        estimatedDoseVariance: 1),
                     RegularDoseAndUnit(
                         dose: nil,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                     RegularDoseAndUnit(
                         dose: 2.5,
                         units: "mg",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                 ],
                 customUnitDoses: [],
                 customUnits: [],
@@ -256,11 +266,13 @@ struct ChooseSubstanceContent: View {
                     RegularDoseAndUnit(
                         dose: 1,
                         units: "cups",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                     RegularDoseAndUnit(
                         dose: 3,
                         units: "cups",
-                        isEstimate: false),
+                        isEstimate: false,
+                        estimatedDoseVariance: nil),
                 ],
                 customUnitDoses: [],
                 customUnits: [],

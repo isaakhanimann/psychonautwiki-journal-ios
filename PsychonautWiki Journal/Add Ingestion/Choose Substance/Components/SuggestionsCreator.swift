@@ -35,7 +35,12 @@ class SuggestionsCreator {
                             ing.customUnit == nil
                         }
                         .map { ing in
-                            RegularDoseAndUnit(dose: ing.doseUnwrapped, units: ing.unitsUnwrapped, isEstimate: ing.isEstimate)
+                            RegularDoseAndUnit(
+                                dose: ing.doseUnwrapped,
+                                units: ing.unitsUnwrapped,
+                                isEstimate: ing.isEstimate,
+                                estimatedDoseVariance: ing.estimatedDoseVarianceUnwrapped
+                            )
                         }
                         .uniqued()
                         .prefix(maxNumberOfSuggestions))
@@ -43,7 +48,11 @@ class SuggestionsCreator {
                     groupedBySubstanceAndRoute
                         .compactMap { ing in
                             if let customUnit = ing.customUnit, let dose = ing.customUnitDoseUnwrapped {
-                                CustomUnitDose(dose: dose, isEstimate: ing.isEstimate, customUnit: customUnit)
+                                CustomUnitDose(
+                                    dose: dose,
+                                    isEstimate: ing.isEstimate,
+                                    estimatedDoseVariance: ing.estimatedDoseVarianceUnwrapped,
+                                    customUnit: customUnit)
                             } else {
                                 nil
                             }

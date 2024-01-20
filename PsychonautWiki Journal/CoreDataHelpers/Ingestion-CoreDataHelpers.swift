@@ -49,13 +49,49 @@ extension Ingestion: Comparable {
         }
     }
 
+    var estimatedDoseVarianceUnwrapped: Double? {
+        if estimatedDoseVariance == 0 {
+            return nil
+        } else {
+            return estimatedDoseVariance
+        }
+    }
+
+    private var lowerEstimate: Double? {
+        guard let doseUnwrapped else {return nil}
+        guard let estimatedDoseVarianceUnwrapped else {return nil}
+        return doseUnwrapped - estimatedDoseVarianceUnwrapped
+    }
+
+    private var higherEstimate: Double? {
+        guard let doseUnwrapped else {return nil}
+        guard let estimatedDoseVarianceUnwrapped else {return nil}
+        return doseUnwrapped + estimatedDoseVarianceUnwrapped
+    }
+
     var pureSubstanceDose: Double? {
         doseUnwrapped ?? calculatedDose
     }
 
     var calculatedDose: Double? {
-        guard let customDose = customUnitDoseUnwrapped else { return nil }
-        return customUnit?.getPureSubstanceDose(from: customDose)
+        guard let customUnitDoseUnwrapped else {return nil}
+        guard let customUnit else {return nil}
+        let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
+        let lowerEstimate = customUnitDoseUnwrapped - doseVariance
+        let higherEstimate = customUnitDoseUnwrapped + doseVariance
+        guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
+        guard let pureHigherEstimate = customUnit.getHigherPureSubstanceDose(from: higherEstimate) else {return nil}
+        return (pureLowerEstimate + pureHigherEstimate)/2
+    }
+
+    var calculatedDoseVariance: Double? {
+        guard let calculatedDose else {return nil}
+        guard let customUnitDoseUnwrapped else {return nil}
+        guard let customUnit else {return nil}
+        let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
+        let lowerEstimate = customUnitDoseUnwrapped - doseVariance
+        guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
+        return calculatedDose - pureLowerEstimate
     }
 
     var customUnitDoseUnwrapped: Double? {
@@ -108,6 +144,7 @@ extension Ingestion: Comparable {
         ingestion.dose = 30
         ingestion.units = "mg"
         ingestion.isEstimate = true
+        ingestion.estimatedDoseVariance = 5
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
         ingestion.time = .now
         ingestion.note = ""
@@ -120,7 +157,7 @@ extension Ingestion: Comparable {
         ingestion.substanceName = "Cocaine"
         ingestion.dose = 0
         ingestion.units = "mg"
-        ingestion.isEstimate = true
+        ingestion.isEstimate = false
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
         ingestion.time = .now
         ingestion.note = ""
@@ -180,6 +217,37 @@ extension Ingestion: Comparable {
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
         ingestion.time = .now
         ingestion.note = ""
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var estimatedQuantitativelyCustomUnitPreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Ketamine"
+        ingestion.dose = 0
+        ingestion.customUnitDose = 2
+        ingestion.customUnit = CustomUnit.estimatedQuantitativelyPreviewSample
+        ingestion.units = "mg"
+        ingestion.isEstimate = false
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = "Quantitatively estimated custom unit"
+        ingestion.stomachFullness = nil
+        return ingestion
+    }
+
+    static var everythingEstimatedQuantitativelyPreviewSample: Ingestion {
+        let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
+        ingestion.substanceName = "Ketamine"
+        ingestion.dose = 0
+        ingestion.customUnitDose = 3
+        ingestion.customUnit = CustomUnit.estimatedQuantitativelyPreviewSample
+        ingestion.units = "mg"
+        ingestion.isEstimate = true
+        ingestion.estimatedDoseVariance = 0.5
+        ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
+        ingestion.time = .now
+        ingestion.note = "Everything estimated quantitatively"
         ingestion.stomachFullness = nil
         return ingestion
     }

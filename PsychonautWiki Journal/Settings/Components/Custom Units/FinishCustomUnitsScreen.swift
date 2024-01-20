@@ -63,10 +63,21 @@ struct FinishCustomUnitsScreen: View {
                             format: .number).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
-                        Text(roaDose?.units ?? "")
+                        Text(roaUnits)
                     }
                 }
                 Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $estimatedDoseVariance,
+                            format: .number).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(roaUnits)
+                    }
+                }
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
             }
             if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
@@ -76,10 +87,24 @@ struct FinishCustomUnitsScreen: View {
                         if isUnknownDose {
                             Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
                         } else {
-                            Text(multiplier.with(unit: unit)) +
-                                Text(
-                                    " = \(isEstimate ? "~" : "")\(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
-                                .foregroundColor(.secondary)
+                            if isEstimate {
+                                if let calculatedDoseVariance {
+                                    Text(multiplier.with(unit: unit)) +
+                                        Text(
+                                            " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...")±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                        .foregroundColor(.secondary)
+                                } else {
+                                    Text(multiplier.with(unit: unit)) +
+                                        Text(
+                                            " = ~\(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                        .foregroundColor(.secondary)
+                                }
+                            } else {
+                                Text(multiplier.with(unit: unit)) +
+                                    Text(
+                                        " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }
@@ -114,12 +139,17 @@ struct FinishCustomUnitsScreen: View {
     @State private var unit = ""
     @State private var dosePerUnit: Double?
     @State private var isEstimate = false
+    @State private var estimatedDoseVariance: Double?
     @State private var isUnknownDose = false
     @State private var note = ""
 
     @FocusState private var focusedField: Field?
 
     private let multiplier: Double = 3
+
+    private var roaUnits: String {
+        roaDose?.units ?? ""
+    }
 
     private var roaDose: RoaDose? {
         substanceAndRoute.substance.getDose(for: substanceAndRoute.administrationRoute)
@@ -138,6 +168,11 @@ struct FinishCustomUnitsScreen: View {
         return multiplier * dosePerUnit
     }
 
+    private var calculatedDoseVariance: Double? {
+        guard let estimatedDoseVariance else { return nil }
+        return multiplier * estimatedDoseVariance
+    }
+
     private func onDoneTap() {
         let context = PersistenceController.shared.viewContext
         let newCustomUnit = CustomUnit(context: context)
@@ -150,6 +185,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.substanceName = substanceAndRoute.substance.name
         newCustomUnit.unit = unit
         newCustomUnit.isEstimate = isEstimate
+        newCustomUnit.estimatedDoseVariance = estimatedDoseVariance ?? 0
         newCustomUnit.isArchived = false
         try? context.save()
         dismiss()

@@ -24,5 +24,6 @@ struct CustomUnitDose: Hashable, Identifiable {
 
     let dose: Double
     let isEstimate: Bool
+    let estimatedDoseVariance: Double?
     let customUnit: CustomUnit
 }

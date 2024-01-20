@@ -23,6 +23,7 @@ struct ChooseDoseScreen: View {
     let dismiss: () -> Void
     @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
     @State private var selectedPureDose: Double?
+    @State private var selectedDoseVariance: Double?
     @State private var isEstimate = false
     @State private var isShowingNext = false
 
@@ -35,6 +36,7 @@ struct ChooseDoseScreen: View {
             dismiss: dismiss,
             isEyeOpen: isEyeOpen,
             selectedPureDose: $selectedPureDose,
+            selectedDoseVariance: $selectedDoseVariance,
             selectedUnits: $selectedUnits,
             isEstimate: $isEstimate,
             isShowingNext: $isShowingNext)
@@ -56,6 +58,7 @@ struct ChooseDoseScreenContent: View {
         dismiss: @escaping () -> Void,
         isEyeOpen: Bool,
         selectedPureDose: Binding<Double?>,
+        selectedDoseVariance: Binding<Double?>,
         selectedUnits: Binding<String?>,
         isEstimate: Binding<Bool>,
         isShowingNext: Binding<Bool>) {
@@ -64,6 +67,7 @@ struct ChooseDoseScreenContent: View {
         self.dismiss = dismiss
         self.isEyeOpen = isEyeOpen
         self._selectedPureDose = selectedPureDose
+        self._selectedDoseVariance = selectedDoseVariance
         self._selectedUnits = selectedUnits
         self._isEstimate = isEstimate
         self._isShowingNext = isShowingNext
@@ -84,6 +88,7 @@ struct ChooseDoseScreenContent: View {
     let dismiss: () -> Void
     let isEyeOpen: Bool
     @Binding var selectedPureDose: Double?
+    @Binding var selectedDoseVariance: Double?
     @Binding var selectedUnits: String?
     @Binding var isEstimate: Bool
     @Binding var isShowingNext: Bool
@@ -102,6 +107,7 @@ struct ChooseDoseScreenContent: View {
                     dose: selectedPureDose,
                     units: selectedUnits,
                     isEstimate: isEstimate,
+                    estimatedDoseVariance: selectedDoseVariance,
                     suggestedNote: suggestedNote))
                 {
                     NextLabel()
@@ -156,6 +162,18 @@ struct ChooseDoseScreenContent: View {
                 }
             }
             Toggle("Dose is an estimate", isOn: $isEstimate).tint(.accentColor)
+            if isEstimate {
+                HStack {
+                    Image(systemName: "plusminus")
+                    TextField(
+                        "Pure dose variance",
+                        value: $selectedDoseVariance,
+                        format: .number
+                    ).keyboardType(.decimalPad)
+                    Spacer()
+                    Text(selectedUnits ?? roaDose?.units ?? "")
+                }
+            }
             unknownDoseLink
         } header: {
             Text("Pure \(administrationRoute.rawValue.capitalized) Dose")
@@ -179,6 +197,7 @@ struct ChooseDoseScreenContent: View {
             dose: nil,
             units: selectedUnits,
             isEstimate: isEstimate,
+            estimatedDoseVariance: nil,
             suggestedNote: suggestedNote))
     }
 
@@ -247,8 +266,9 @@ struct ChooseDoseScreenContent: View {
             dismiss: { },
             isEyeOpen: true,
             selectedPureDose: .constant(20),
+            selectedDoseVariance: .constant(2),
             selectedUnits: .constant("mg"),
-            isEstimate: .constant(false),
+            isEstimate: .constant(true),
             isShowingNext: .constant(false))
     }
 }

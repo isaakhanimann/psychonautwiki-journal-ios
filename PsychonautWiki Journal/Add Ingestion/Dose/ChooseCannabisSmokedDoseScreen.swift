@@ -26,6 +26,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
     @State private var cannabisAmountInMg = 300.0
     @State private var thcContent = 14.0
     @State private var isEstimate = true
+    @State private var doseVarianceInMg: Double?
     @State private var pickerOption = PickerOption.joint
 
     private var ingestedTHCDoseInMg: Double {
@@ -81,6 +82,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
             dose: doseRounded,
             units: "mg",
             isEstimate: isEstimate,
+            estimatedDoseVariance: doseVarianceInMg,
             suggestedNote: suggestedNote
         )) {
             NextLabel()
@@ -93,7 +95,8 @@ struct ChooseCannabisSmokedDoseScreen: View {
             administrationRoute: .smoked,
             dose: nil,
             units: "mg",
-            isEstimate: false))
+            isEstimate: false,
+            estimatedDoseVariance: doseVarianceInMg))
     }
 
     private var screen: some View {
@@ -107,6 +110,18 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     RoaDoseRow(roaDose: smokedDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $doseVarianceInMg,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text("mg")
+                    }
+                }
                 unknownDoseLink
             }
             Section {

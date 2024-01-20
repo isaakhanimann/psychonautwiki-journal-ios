@@ -33,8 +33,30 @@ extension CustomUnit {
         }
     }
 
-    func getPureSubstanceDose(from customUnitDose: Double) -> Double? {
+    var lowerEstimate: Double? {
+        guard let doseUnwrapped else {return nil}
+        guard let estimatedDoseVarianceUnwrapped else {return nil}
+        return doseUnwrapped - estimatedDoseVarianceUnwrapped
+    }
+
+    var higherEstimate: Double? {
+        guard let doseUnwrapped else {return nil}
+        guard let estimatedDoseVarianceUnwrapped else {return nil}
+        return doseUnwrapped + estimatedDoseVarianceUnwrapped
+    }
+
+    func getLowerPureSubstanceDose(from customUnitDose: Double) -> Double? {
+        guard let dosePerUnit = lowerEstimate else { return nil }
+        return customUnitDose * dosePerUnit
+    }
+
+    func getExactPureSubstanceDose(from customUnitDose: Double) -> Double? {
         guard let dosePerUnit = doseUnwrapped else { return nil }
+        return customUnitDose * dosePerUnit
+    }
+
+    func getHigherPureSubstanceDose(from customUnitDose: Double) -> Double? {
+        guard let dosePerUnit = higherEstimate else { return nil }
         return customUnitDose * dosePerUnit
     }
 
@@ -56,6 +78,14 @@ extension CustomUnit {
 
     var noteUnwrapped: String {
         note ?? ""
+    }
+
+    var estimatedDoseVarianceUnwrapped: Double? {
+        if estimatedDoseVariance == 0 {
+            return nil
+        } else {
+            return estimatedDoseVariance
+        }
     }
 
     var unitUnwrapped: String {
@@ -90,12 +120,25 @@ extension CustomUnit {
 
     static var estimatePreviewSample: CustomUnit {
         let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
-        customUnit.name = "Line with a longer name that doesnt fit"
+        customUnit.name = "Estimated"
         customUnit.substanceName = "Ketamine"
         customUnit.originalUnit = "mg"
         customUnit.unit = "line"
         customUnit.dose = 20
         customUnit.isEstimate = true
+        customUnit.note = "Some random notes"
+        return customUnit
+    }
+
+    static var estimatedQuantitativelyPreviewSample: CustomUnit {
+        let customUnit = CustomUnit(context: PersistenceController.preview.viewContext)
+        customUnit.name = "Estimated Quantitatively"
+        customUnit.substanceName = "Ketamine"
+        customUnit.originalUnit = "mg"
+        customUnit.unit = "line"
+        customUnit.dose = 20
+        customUnit.isEstimate = true
+        customUnit.estimatedDoseVariance = 2
         customUnit.note = "Some random notes"
         return customUnit
     }

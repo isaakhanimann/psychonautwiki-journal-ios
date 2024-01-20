@@ -28,6 +28,7 @@ struct ChooseAlcoholDoseScreen: View {
     @State private var alcoholContentInPercent = 5.0
     @State private var alcoholContentInPercentText = "5"
     @State private var isEstimate = true
+    @State private var doseVarianceInGrams: Double?
     let units = "g"
 
     private var ingestedAlcoholDoseInMl: Double {
@@ -70,6 +71,7 @@ struct ChooseAlcoholDoseScreen: View {
             dose: doseRounded,
             units: units,
             isEstimate: isEstimate,
+            estimatedDoseVariance: doseVarianceInGrams,
             suggestedNote: suggestedNote
         )) {
             NextLabel()
@@ -82,7 +84,8 @@ struct ChooseAlcoholDoseScreen: View {
             administrationRoute: .oral,
             dose: nil,
             units: units,
-            isEstimate: false))
+            isEstimate: false,
+            estimatedDoseVariance: nil))
     }
 
     struct Preset: Identifiable, Hashable {
@@ -114,6 +117,19 @@ struct ChooseAlcoholDoseScreen: View {
                     RoaDoseRow(roaDose: oralDose)
                 }
                 Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $doseVarianceInGrams,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(units)
+                    }
+
+                }
                 unknownDoseLink
             }
             Section("Presets") {

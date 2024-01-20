@@ -24,4 +24,5 @@ struct RegularDoseAndUnit: Hashable, Identifiable {
     let dose: Double?
     let units: String?
     let isEstimate: Bool
+    let estimatedDoseVariance: Double?
 }

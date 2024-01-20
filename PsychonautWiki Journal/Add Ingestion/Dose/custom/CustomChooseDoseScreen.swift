@@ -22,6 +22,7 @@ struct CustomChooseDoseScreen: View {
     @State private var doseText = ""
     @State private var dose: Double?
     @State private var isEstimate = false
+    @State private var doseVariance: Double?
     @FocusState private var isDoseFieldFocused: Bool
 
     var body: some View {
@@ -49,7 +50,8 @@ struct CustomChooseDoseScreen: View {
             administrationRoute: arguments.administrationRoute,
             dose: dose,
             units: arguments.units,
-            isEstimate: isEstimate
+            isEstimate: isEstimate,
+            estimatedDoseVariance: doseVariance
         )
     }
 
@@ -73,6 +75,18 @@ struct CustomChooseDoseScreen: View {
                 .font(.title)
                 Toggle("Dose is an Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $doseVariance,
+                            format: .number
+                        ).keyboardType(.decimalPad)
+                        Spacer()
+                        Text(arguments.units)
+                    }
+                }
                 unknownDoseLink
             }
         }
