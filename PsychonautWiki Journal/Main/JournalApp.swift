@@ -25,20 +25,7 @@ struct JournalApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ZStack {
-                ContentView()
-                    .headerProminence(.increased)
-                    .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
-                    .environmentObject(toastViewModel)
-                    .environmentObject(authenticator)
-                    .environmentObject(locationManager)
-                    .accentColor(Color.blue)
-                if authenticator.isStartingUp {
-                    LockScreen(isEyeOpen: true, isFaceIDEnabled: true)
-                } else if authenticator.isLocked {
-                    LockScreen(isEyeOpen: false, isFaceIDEnabled: authenticator.isFaceIDEnabled)
-                }
-            }
+            CustomUnitsDosePickerPreviewContainer()
         }
         .onChange(of: scenePhase) { phase in
             authenticator.onChange(of: phase)
