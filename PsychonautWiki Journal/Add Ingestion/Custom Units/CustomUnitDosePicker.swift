@@ -19,8 +19,9 @@ import SwiftUI
 struct CustomUnitDosePicker: View {
 
     let customUnit: CustomUnit
-    let isDoseEstimated: Bool
     @Binding var dose: Double?
+    @Binding var isEstimate: Bool
+    @Binding var estimatedDoseVariance: Double?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -38,12 +39,53 @@ struct CustomUnitDosePicker: View {
                 Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)
+            Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
+            if isEstimate {
+                HStack {
+                    Image(systemName: "plusminus")
+                    TextField(
+                        "Pure dose variance",
+                        value: $estimatedDoseVariance,
+                        format: .number
+                    ).keyboardType(.decimalPad)
+                    Spacer()
+                    Text(customUnit.unitUnwrapped)
+                }
+            }
         }
     }
 
     private var calculatedDose: Double? {
         guard let dose, let dosePerUnit = customUnit.doseUnwrapped else { return nil }
-        return dose * dosePerUnit
+        if let customDoseVariance = customUnit.estimatedDoseVarianceUnwrapped, let estimatedDoseVariance, isEstimate {
+            let minDose = dose - estimatedDoseVariance
+            let maxDose = dose + estimatedDoseVariance
+            let minCustomDose = dosePerUnit - customDoseVariance
+            let maxCustomDose = dosePerUnit + customDoseVariance
+            let minResult = minDose * minCustomDose
+            let maxResult = maxDose * maxCustomDose
+            let result = (minResult + maxResult) / 2
+            return result
+        } else {
+            return dose * dosePerUnit
+        }
+    }
+
+    private var calculatedDoseVariance: Double? {
+        guard let dose, let dosePerUnit = customUnit.doseUnwrapped, let customDoseVariance = customUnit.estimatedDoseVarianceUnwrapped else { return nil }
+        if let estimatedDoseVariance, isEstimate {
+            let minDose = dose - estimatedDoseVariance
+            let maxDose = dose + estimatedDoseVariance
+            let minCustomDose = dosePerUnit - customDoseVariance
+            let maxCustomDose = dosePerUnit + customDoseVariance
+            let minResult = minDose * minCustomDose
+            let maxResult = maxDose * maxCustomDose
+            let result = (minResult + maxResult) / 2
+            let resultVariance = maxResult - result
+            return resultVariance
+        } else {
+            return dose * customDoseVariance
+        }
     }
 
     private var calculatedDoseColor: Color {
@@ -54,19 +96,45 @@ struct CustomUnitDosePicker: View {
         }
     }
 
-    private var calculatedDoseTilde: String {
-        if isDoseEstimated || customUnit.isEstimate {
-            "~"
+    private var calculatedDoseDescription: String {
+        if let calculatedDose {
+            if let calculatedDoseVariance {
+                return "\(calculatedDose.formatted())±\(calculatedDoseVariance.formatted()) \(customUnit.originalUnitUnwrapped)"
+            } else {
+                let description = "\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+                if isEstimate || customUnit.isEstimate {
+                    return "~\(description)"
+                } else {
+                    return description
+                }
+            }
         } else {
-            ""
+            return ""
+        }
+    }
+
+    private var enteredDoseDescription: String {
+        if let dose {
+            let description = "\(dose.with(unit: customUnit.unitUnwrapped))"
+            if isEstimate {
+                if let estimatedDoseVariance {
+                    return "\(dose.formatted())±\(estimatedDoseVariance.with(unit: customUnit.unitUnwrapped))"
+                } else {
+                    return "~\(description)"
+                }
+            } else {
+                return description
+            }
+        } else {
+            return ""
         }
     }
 
     private var doseCalculationText: Text {
-        if let calculatedDose {
-            Text("\(calculatedDoseTilde)\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)").fontWeight(.bold) +
+        if calculatedDose != nil {
+            Text(calculatedDoseDescription).fontWeight(.bold) +
             Text(
-                " = \(isDoseEstimated ? "~" : "")\(dose?.with(unit: customUnit.unitUnwrapped) ?? "...") x \(customUnit.isEstimate ? "~" : "")\(customUnit.doseUnwrapped?.formatted() ?? "unknown") \(customUnit.originalUnitUnwrapped)")
+                " = \(enteredDoseDescription) x \(customUnit.doseOfOneUnitDescription)")
 
         } else {
             Text(" ")
@@ -74,9 +142,21 @@ struct CustomUnitDosePicker: View {
     }
 }
 
+struct CustomUnitsDosePickerPreviewContainer: View {
+
+    @State private var dose: Double? = 3.0
+    @State private var isEstimate = false
+    @State private var estimatedDoseVariance: Double? = 0.5
+
+    var body: some View {
+        CustomUnitDosePicker(
+            customUnit: .estimatedQuantitativelyPreviewSample,
+            dose: $dose,
+            isEstimate: $isEstimate,
+            estimatedDoseVariance: $estimatedDoseVariance)
+    }
+}
+
 #Preview {
-    CustomUnitDosePicker(
-        customUnit: .previewSample,
-        isDoseEstimated: true,
-        dose: .constant(3))
+    CustomUnitsDosePickerPreviewContainer()
 }

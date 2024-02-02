@@ -33,25 +33,13 @@ struct CustomUnitsChooseDoseScreen: View {
                     Text("Info is not approved by PsychonautWiki administrators.")
                 }
                 RoaDoseRow(roaDose: customUnit.roaDose)
-                VStack {
-                    CustomUnitDosePicker(
-                        customUnit: customUnit,
-                        isDoseEstimated: isEstimate,
-                        dose: $dose).focused($isDoseFieldFocused)
-                    Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
-                    if isEstimate {
-                        HStack {
-                            Image(systemName: "plusminus")
-                            TextField(
-                                "Pure dose variance",
-                                value: $estimatedDoseVariance,
-                                format: .number
-                            ).keyboardType(.decimalPad)
-                            Spacer()
-                            Text(customUnit.unitUnwrapped)
-                        }
-                    }
-                }
+                CustomUnitDosePicker(
+                    customUnit: customUnit,
+                    dose: $dose,
+                    isEstimate: $isEstimate,
+                    estimatedDoseVariance: $estimatedDoseVariance
+                ).focused($isDoseFieldFocused)
+
             }
             if isEyeOpen {
                 Section("Info") {

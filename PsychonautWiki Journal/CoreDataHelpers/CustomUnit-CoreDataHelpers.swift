@@ -90,19 +90,19 @@ extension CustomUnit {
         ingestions?.allObjects as? [Ingestion] ?? []
     }
 
-    var doseDescription: String {
+    var doseOfOneUnitDescription: String {
         if let doseUnwrapped {
             if isEstimate {
                 if let estimatedDoseVarianceUnwrapped {
-                    return "\(doseUnwrapped.formatted())±\(estimatedDoseVarianceUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+                    return "\(doseUnwrapped.formatted())±\(estimatedDoseVarianceUnwrapped.formatted()) \(originalUnitUnwrapped)"
                 } else {
-                    return "~\(doseUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+                    return "~\(doseUnwrapped.formatted()) \(originalUnitUnwrapped)"
                 }
             } else {
-                return "\(doseUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+                return "\(doseUnwrapped.formatted()) \(originalUnitUnwrapped)"
             }
         } else {
-            return "\(unitUnwrapped) of unknown dose"
+            return "Unknown dose"
         }
     }
 
@@ -119,6 +119,7 @@ extension CustomUnit {
         customUnit.substanceName = "Ketamine"
         customUnit.originalUnit = "mg"
         customUnit.unit = "scoop"
+        customUnit.isEstimate = false
         customUnit.dose = 30
         customUnit.note = "Some random notes"
         return customUnit

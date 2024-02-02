@@ -120,26 +120,14 @@ struct EditIngestionContent: View {
                 if let customUnit {
                     CustomUnitDosePicker(
                         customUnit: customUnit,
-                        isDoseEstimated: isEstimate,
-                        dose: $customUnitDose)
+                        dose: $customUnitDose,
+                        isEstimate: $isEstimate,
+                        estimatedDoseVariance: $estimatedDoseVariance)
                 } else {
                     DosePicker(
                         roaDose: roaDose,
                         doseMaybe: $dose,
                         selectedUnits: $units)
-                }
-                Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
-                if isEstimate {
-                    HStack {
-                        Image(systemName: "plusminus")
-                        TextField(
-                            "Pure dose variance",
-                            value: $estimatedDoseVariance,
-                            format: .number
-                        ).keyboardType(.decimalPad)
-                        Spacer()
-                        Text(units ?? "")
-                    }
                 }
             }.listRowSeparator(.hidden)
             Section("Notes") {

@@ -24,7 +24,7 @@ struct CustomUnitRow: View {
             ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             VStack(alignment: .leading) {
                 Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))").font(.headline)
-                Text(customUnit.doseDescription)
+                Text(customUnit.doseOfOneUnitDescription + " per \(customUnit.unitUnwrapped)")
                 .font(.subheadline)
             }
         }
