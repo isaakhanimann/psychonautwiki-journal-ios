@@ -22,9 +22,9 @@ struct CustomUnitDoseLabel: View {
 
     var body: some View {
         VStack {
-            Text(customUnitDose.doseDescription)
-            if let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
-                Text(calculatedDoseDescription).font(.caption2)
+            Text("\(maybeSign)\(customUnitDose.dose.with(unit: customUnitDose.customUnit.unitUnwrapped))")
+            if let calculatedDose = customUnitDose.customUnit.getExactPureSubstanceDose(from: customUnitDose.dose)?.roundedToAtMost1Decimal {
+                Text("\(maybeSignPure)\(calculatedDose.formatted()) \(customUnitDose.customUnit.originalUnitUnwrapped)").font(.caption2)
             }
         }
     }
@@ -64,18 +64,6 @@ struct CustomUnitDoseLabel: View {
                     isEstimate: false,
                     estimatedDoseVariance: nil,
                     customUnit: .previewSample)
-            )
-        }.buttonStyle(.bordered)
-
-        Button {
-
-        } label: {
-            CustomUnitDoseLabel(
-                customUnitDose: CustomUnitDose(
-                    dose: 2,
-                    isEstimate: false,
-                    estimatedDoseVariance: nil,
-                    customUnit: .estimatedQuantitativelyPreviewSample)
             )
         }.buttonStyle(.bordered)
     }

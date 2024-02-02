@@ -55,31 +55,87 @@ struct CustomUnitDosePicker: View {
         }
     }
 
-    private var customUnitDose: CustomUnitDose? {
-        if let dose {
-            return CustomUnitDose(
-                dose: dose,
-                isEstimate: isEstimate,
-                estimatedDoseVariance: estimatedDoseVariance,
-                customUnit: customUnit)
+    private var calculatedDose: Double? {
+        guard let dose, let dosePerUnit = customUnit.doseUnwrapped else { return nil }
+        if let customDoseVariance = customUnit.estimatedDoseVarianceUnwrapped, let estimatedDoseVariance, isEstimate {
+            let minDose = dose - estimatedDoseVariance
+            let maxDose = dose + estimatedDoseVariance
+            let minCustomDose = dosePerUnit - customDoseVariance
+            let maxCustomDose = dosePerUnit + customDoseVariance
+            let minResult = minDose * minCustomDose
+            let maxResult = maxDose * maxCustomDose
+            let result = (minResult + maxResult) / 2
+            return result
         } else {
-            return nil
+            return dose * dosePerUnit
+        }
+    }
+
+    private var calculatedDoseVariance: Double? {
+        guard let dose, let dosePerUnit = customUnit.doseUnwrapped, let customDoseVariance = customUnit.estimatedDoseVarianceUnwrapped else { return nil }
+        if let estimatedDoseVariance, isEstimate {
+            let minDose = dose - estimatedDoseVariance
+            let maxDose = dose + estimatedDoseVariance
+            let minCustomDose = dosePerUnit - customDoseVariance
+            let maxCustomDose = dosePerUnit + customDoseVariance
+            let minResult = minDose * minCustomDose
+            let maxResult = maxDose * maxCustomDose
+            let result = (minResult + maxResult) / 2
+            let resultVariance = maxResult - result
+            return resultVariance
+        } else {
+            return dose * customDoseVariance
         }
     }
 
     private var calculatedDoseColor: Color {
-        if let calculatedDose = customUnitDose?.calculatedDose {
+        if let calculatedDose {
             customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
         } else {
             Color.primary
         }
     }
 
+    private var calculatedDoseDescription: String {
+        if let calculatedDose {
+            if let calculatedDoseVariance {
+                return "\(calculatedDose.formatted())±\(calculatedDoseVariance.formatted()) \(customUnit.originalUnitUnwrapped)"
+            } else {
+                let description = "\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+                if isEstimate || customUnit.isEstimate {
+                    return "~\(description)"
+                } else {
+                    return description
+                }
+            }
+        } else {
+            return ""
+        }
+    }
+
+    private var enteredDoseDescription: String {
+        if let dose {
+            let description = "\(dose.with(unit: customUnit.unitUnwrapped))"
+            if isEstimate {
+                if let estimatedDoseVariance {
+                    return "\(dose.formatted())±\(estimatedDoseVariance.with(unit: customUnit.unitUnwrapped))"
+                } else {
+                    return "~\(description)"
+                }
+            } else {
+                return description
+            }
+        } else {
+            return ""
+        }
+    }
+
     private var doseCalculationText: Text {
-        if let customUnitDose, let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
+        if calculatedDose != nil {
             Text(calculatedDoseDescription).fontWeight(.bold) +
             Text(
-                " = \(customUnitDose.doseDescription) x \(customUnit.doseOfOneUnitDescription)")
+                " = \(enteredDoseDescription) x \(customUnit.doseOfOneUnitDescription)")
+
         } else {
             Text(" ")
         }
