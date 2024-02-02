@@ -90,6 +90,22 @@ extension CustomUnit {
         ingestions?.allObjects as? [Ingestion] ?? []
     }
 
+    var doseDescription: String {
+        if let doseUnwrapped {
+            if isEstimate {
+                if let estimatedDoseVarianceUnwrapped {
+                    return "\(doseUnwrapped.formatted())±\(estimatedDoseVarianceUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+                } else {
+                    return "~\(doseUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+                }
+            } else {
+                return "\(doseUnwrapped.formatted()) \(originalUnitUnwrapped) per \(unitUnwrapped)"
+            }
+        } else {
+            return "\(unitUnwrapped) of unknown dose"
+        }
+    }
+
     var color: SubstanceColor? {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "substanceName == %@", substanceNameUnwrapped)

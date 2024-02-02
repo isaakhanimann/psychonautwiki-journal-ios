@@ -17,21 +17,14 @@
 import SwiftUI
 
 struct CustomUnitRow: View {
-    let customUnit: CustomUnit
+    @ObservedObject var customUnit: CustomUnit
 
     var body: some View {
         HStack(spacing: 10) {
             ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             VStack(alignment: .leading) {
-                Text("\(customUnit.substanceNameUnwrapped) \(customUnit.nameUnwrapped)").font(.headline)
-                Group {
-                    if let dose = customUnit.doseUnwrapped {
-                        Text(
-                            "\(customUnit.isEstimate ? "~" : "")\(dose.formatted()) \(customUnit.originalUnitUnwrapped) per \(customUnit.unitUnwrapped)")
-                    } else {
-                        Text("\(customUnit.unitUnwrapped) of unknown dose")
-                    }
-                }
+                Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))").font(.headline)
+                Text(customUnit.doseDescription)
                 .font(.subheadline)
             }
         }
