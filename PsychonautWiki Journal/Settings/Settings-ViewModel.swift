@@ -21,7 +21,7 @@ extension SettingsScreen {
     @MainActor
     class ViewModel: ObservableObject {
         @Published var isExporting = false
-        @Published var journalFile = JournalFile()
+        @Published var journalFile = JournalFile(experiences: [], customSubstances: [], customUnits: [])
         @Published var isShowingToast = false
         @Published var isShowingSuccessToast = false
         @Published var toastMessage = ""
@@ -31,7 +31,12 @@ extension SettingsScreen {
             let allExperiences = (try? PersistenceController.shared.viewContext.fetch(experienceFetchRequest)) ?? []
             let customFetchRequest = CustomSubstance.fetchRequest()
             let allCustomSubstances = (try? PersistenceController.shared.viewContext.fetch(customFetchRequest)) ?? []
-            journalFile = JournalFile(experiences: allExperiences, customSubstances: allCustomSubstances)
+            let customUnitsFetchRequest = CustomUnit.fetchRequest()
+            let allCustomUnits = (try? PersistenceController.shared.viewContext.fetch(customUnitsFetchRequest)) ?? []
+            journalFile = JournalFile(
+                experiences: allExperiences,
+                customSubstances: allCustomSubstances,
+                customUnits: allCustomUnits)
             isExporting = true
         }
 
@@ -41,6 +46,7 @@ extension SettingsScreen {
                 let file = try JSONDecoder().decode(JournalFile.self, from: data)
                 try PersistenceController.shared.deleteEverything()
                 let context = PersistenceController.shared.viewContext
+                // companions
                 var companionDict: [String: SubstanceCompanion] = [:]
                 for companionCodable in file.substanceCompanions {
                     let newCompanion = SubstanceCompanion(context: context)
@@ -48,6 +54,24 @@ extension SettingsScreen {
                     newCompanion.colorAsText = companionCodable.color.rawValue
                     companionDict[companionCodable.substanceName] = newCompanion
                 }
+                // custom units
+                var unitsDict: [Int: CustomUnit] = [:]
+                for customUnitCodable in file.customUnits {
+                    let newUnit = CustomUnit(context: context)
+                    newUnit.substanceName = customUnitCodable.substanceName
+                    newUnit.name = customUnitCodable.name
+                    newUnit.creationDate = customUnitCodable.creationDate
+                    newUnit.administrationRoute = customUnitCodable.administrationRoute.rawValue
+                    newUnit.dose = customUnitCodable.dose ?? 0
+                    newUnit.estimatedDoseVariance = customUnitCodable.estimatedDoseVariance ?? 0
+                    newUnit.isEstimate = customUnitCodable.isEstimate
+                    newUnit.isArchived = customUnitCodable.isArchived
+                    newUnit.unit = customUnitCodable.unit
+                    newUnit.originalUnit = customUnitCodable.originalUnit
+                    newUnit.note = customUnitCodable.note
+                    unitsDict[customUnitCodable.id] = newUnit
+                }
+                // experience
                 for experienceCodable in file.experiences {
                     let newExperience = Experience(context: context)
                     newExperience.title = experienceCodable.title
@@ -55,6 +79,7 @@ extension SettingsScreen {
                     newExperience.creationDate = experienceCodable.creationDate
                     newExperience.sortDate = experienceCodable.sortDate
                     newExperience.isFavorite = experienceCodable.isFavorite
+                    // ingestion
                     for ingestionCodable in experienceCodable.ingestions {
                         let newIngestion = Ingestion(context: context)
                         newIngestion.substanceName = ingestionCodable.substanceName
@@ -62,12 +87,15 @@ extension SettingsScreen {
                         newIngestion.creationDate = ingestionCodable.creationDate
                         newIngestion.administrationRoute = ingestionCodable.administrationRoute.rawValue
                         newIngestion.dose = ingestionCodable.dose ?? 0
+                        newIngestion.customUnitDose = ingestionCodable.customUnitDose ?? 0
+                        newIngestion.estimatedDoseVariance = ingestionCodable.estimatedDoseVariance ?? 0
                         newIngestion.isEstimate = ingestionCodable.isDoseAnEstimate
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes
                         newIngestion.stomachFullness = ingestionCodable.stomachFullness?.rawValue
                         newIngestion.consumerName = ingestionCodable.consumerName
                         newExperience.addToIngestions(newIngestion)
+                        // add companion to ingestion
                         if let companion = companionDict[ingestionCodable.substanceName] {
                             newIngestion.substanceCompanion = companion
                         } else {
@@ -77,7 +105,12 @@ extension SettingsScreen {
                             newCompanion.colorAsText = (SubstanceColor.allCases.randomElement() ?? .red).rawValue
                             companionDict[ingestionCodable.substanceName] = newCompanion
                         }
+                        // add custom unit to ingestion
+                        if let customUnitId = ingestionCodable.customUnitId {
+                            newIngestion.customUnit = unitsDict[customUnitId]
+                        }
                     }
+                    // ratings
                     for ratingCodable in experienceCodable.ratings {
                         let newRating = ShulginRating(context: context)
                         newRating.creationDate = ratingCodable.creationDate
@@ -85,6 +118,7 @@ extension SettingsScreen {
                         newRating.option = ratingCodable.option.rawValue
                         newRating.experience = newExperience
                     }
+                    // timed notes
                     for timedNoteCodable in experienceCodable.timedNotes {
                         let newTimedNote = TimedNote(context: context)
                         newTimedNote.creationDate = timedNoteCodable.creationDate
@@ -94,6 +128,7 @@ extension SettingsScreen {
                         newTimedNote.isPartOfTimeline = timedNoteCodable.isPartOfTimeline
                         newTimedNote.experience = newExperience
                     }
+                    // location
                     if let location = experienceCodable.location {
                         let newLocation = ExperienceLocation(context: context)
                         newLocation.name = location.name

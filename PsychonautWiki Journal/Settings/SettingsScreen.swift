@@ -297,7 +297,7 @@ struct SettingsContent: View {
         hasToUnlockApp: .constant(false),
         isImporting: false,
         isExporting: .constant(false),
-        journalFile: JournalFile(),
+        journalFile: JournalFile(experiences: [], customSubstances: [], customUnits: []),
         exportData: {},
         importData: { _ in },
         deleteEverything: {},

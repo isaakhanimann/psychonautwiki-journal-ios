@@ -75,6 +75,12 @@ struct PersistenceController {
         for com in companions {
             viewContext.delete(com)
         }
+        let unitDeleteRequest = CustomUnit.fetchRequest()
+        unitDeleteRequest.includesPropertyValues = false
+        let customUnits = try viewContext.fetch(unitDeleteRequest)
+        for unit in customUnits {
+            viewContext.delete(unit)
+        }
         let sprayDeleteRequest = Spray.fetchRequest()
         sprayDeleteRequest.includesPropertyValues = false
         let sprays = try viewContext.fetch(sprayDeleteRequest)

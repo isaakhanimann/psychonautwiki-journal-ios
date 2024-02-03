@@ -85,6 +85,7 @@
 		EA302E542B385AB4007F113F /* CustomChooseRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E532B385AB4007F113F /* CustomChooseRouteScreenArguments.swift */; };
 		EA302E562B385D22007F113F /* ChooseOtherRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */; };
 		EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */; };
+		EA323B342B6E187600DC1316 /* CustomUnitCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -439,6 +440,7 @@
 		EA302E532B385AB4007F113F /* CustomChooseRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOtherRouteScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishCustomUnitsScreen.swift; sourceTree = "<group>"; };
+		EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitCodable.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -985,6 +987,7 @@
 				EA41C622295C2BE7000DA021 /* JournalFile.swift */,
 				EA48F88729DD4FD6007DA8C5 /* ExperienceCodable.swift */,
 				EA48F88929DD501F007DA8C5 /* LocationCodable.swift */,
+				EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */,
 				EA48F88B29DD503D007DA8C5 /* IngestionCodable.swift */,
 				EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */,
 				EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */,
@@ -1870,6 +1873,7 @@
 				EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */,
 				EA55CEB62A3F283D00FE1A44 /* ExperienceColorRectangle.swift in Sources */,
 				EA47E65D27CA136C00F6E10F /* Roa.swift in Sources */,
+				EA323B342B6E187600DC1316 /* CustomUnitCodable.swift in Sources */,
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,

@@ -23,9 +23,14 @@ struct JournalFile: FileDocument, Codable {
     var experiences: [ExperienceCodable]
     var substanceCompanions: [CompanionCodable]
     var customSubstances: [CustomSubstanceCodable]
+    var customUnits: [CustomUnitCodable]
 
     // swiftlint:disable function_body_length
-    init(experiences: [Experience] = [], customSubstances: [CustomSubstance] = []) {
+    init(
+        experiences: [Experience],
+        customSubstances: [CustomSubstance],
+        customUnits: [CustomUnit]
+    ) {
         var experiencesToStore: [ExperienceCodable] = []
         var companionsToStore: [CompanionCodable] = []
         for experience in experiences {
@@ -38,11 +43,14 @@ struct JournalFile: FileDocument, Codable {
                         creationDate: ingestion.creationDate,
                         administrationRoute: ingestion.administrationRouteUnwrapped,
                         dose: ingestion.doseUnwrapped,
+                        customUnitDose: ingestion.customUnitDoseUnwrapped,
+                        estimatedDoseVariance: ingestion.estimatedDoseVarianceUnwrapped,
                         isDoseAnEstimate: ingestion.isEstimate,
                         units: ingestion.unitsUnwrapped,
                         notes: ingestion.noteUnwrapped,
                         stomachFullness: ingestion.stomachFullnessUnwrapped,
-                        consumerName: ingestion.consumerName
+                        consumerName: ingestion.consumerName,
+                        customUnitId: ingestion.customUnit?.id.hashValue
                     )
                 )
                 let doesCompanionAlreadyExist = companionsToStore.contains { com in
@@ -95,6 +103,21 @@ struct JournalFile: FileDocument, Codable {
                 units: cust.unitsUnwrapped,
                 description: cust.explanationUnwrapped
             )
+        }
+        self.customUnits = customUnits.map { customUnit in
+            CustomUnitCodable(
+                id: customUnit.id.hashValue,
+                substanceName: customUnit.substanceNameUnwrapped,
+                name: customUnit.nameUnwrapped,
+                creationDate: customUnit.creationDateUnwrapped,
+                administrationRoute: customUnit.administrationRouteUnwrapped,
+                dose: customUnit.doseUnwrapped,
+                estimatedDoseVariance: customUnit.estimatedDoseVarianceUnwrapped,
+                isEstimate: customUnit.isEstimate,
+                isArchived: customUnit.isArchived,
+                unit: customUnit.unitUnwrapped,
+                originalUnit: customUnit.originalUnitUnwrapped,
+                note: customUnit.noteUnwrapped)
         }
     }
     // swiftlint:enable function_body_length
