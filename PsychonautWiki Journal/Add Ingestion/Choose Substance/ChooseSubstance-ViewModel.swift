@@ -109,11 +109,11 @@ extension ChooseSubstanceScreen {
                     }
                 }
             }.assign(to: &$filteredSuggestions)
-            $filteredSubstances.map { filteredSubstances in
+            $searchText.combineLatest($filteredSubstances) { searchText, filteredSubstances in
                 customUnits.filter { customUnit in
                     filteredSubstances.contains { substance in
                         customUnit.substanceNameUnwrapped == substance.name
-                    }
+                    } || customUnit.nameUnwrapped.lowercased().contains(searchText.lowercased())
                 }
             }.assign(to: &$filteredCustomUnits)
         }

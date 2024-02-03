@@ -33,7 +33,7 @@ struct CustomUnitBox: View {
                     }
                 }
             } label: {
-                Text("\(customUnit.substanceNameUnwrapped) \(customUnit.nameUnwrapped)")
+                Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))")
             }
         }
     }
