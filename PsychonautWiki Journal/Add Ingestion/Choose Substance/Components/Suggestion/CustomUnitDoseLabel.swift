@@ -22,6 +22,7 @@ struct CustomUnitDoseLabel: View {
 
     var body: some View {
         VStack {
+            Text(customUnitDose.customUnit.nameUnwrapped).font(.caption2)
             Text(customUnitDose.doseDescription)
             if let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
                 Text(calculatedDoseDescription).font(.caption2)
