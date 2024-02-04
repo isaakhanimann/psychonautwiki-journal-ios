@@ -295,6 +295,10 @@
 		EAC25C04295603B10002D68F /* VolumetricDosingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */; };
 		EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */; };
 		EAC25C08295608E20002D68F /* AdministrationRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */; };
+		EAC3686C2B6F840100056C56 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EAC3686B2B6F840100056C56 /* HorizonCalendar */; };
+		EAC3686E2B6F843800056C56 /* JournalCalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3686D2B6F843800056C56 /* JournalCalendarScreen.swift */; };
+		EAC368702B6FC7C100056C56 /* CalendarColorRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3686F2B6FC7C100056C56 /* CalendarColorRectangle.swift */; };
+		EAC368732B6FC99200056C56 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC368722B6FC99200056C56 /* DayView.swift */; };
 		EAC39DC2297881E90012823D /* EditColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC1297881E90012823D /* EditColorsScreen.swift */; };
 		EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */; };
 		EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC52979347B0012823D /* EditLocationScreen.swift */; };
@@ -645,6 +649,9 @@
 		EAC25C03295603B10002D68F /* VolumetricDosingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricDosingScreen.swift; sourceTree = "<group>"; };
 		EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferHallucinogenScreen.swift; sourceTree = "<group>"; };
 		EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationRouteScreen.swift; sourceTree = "<group>"; };
+		EAC3686D2B6F843800056C56 /* JournalCalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCalendarScreen.swift; sourceTree = "<group>"; };
+		EAC3686F2B6FC7C100056C56 /* CalendarColorRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarColorRectangle.swift; sourceTree = "<group>"; };
+		EAC368722B6FC99200056C56 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		EAC39DC1297881E90012823D /* EditColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorsScreen.swift; sourceTree = "<group>"; };
 		EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainExperienceSectionScreen.swift; sourceTree = "<group>"; };
 		EAC39DC52979347B0012823D /* EditLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationScreen.swift; sourceTree = "<group>"; };
@@ -722,6 +729,7 @@
 			files = (
 				EAF76CA027D8B72900945587 /* Algorithms in Frameworks */,
 				EAFA4BD42B400BE50056649E /* WrappingHStack in Frameworks */,
+				EAC3686C2B6F840100056C56 /* HorizonCalendar in Frameworks */,
 				EAF76C9927D899E700945587 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1368,6 +1376,15 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		EAC368712B6FC97800056C56 /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				EAC3686F2B6FC7C100056C56 /* CalendarColorRectangle.swift */,
+				EAC368722B6FC99200056C56 /* DayView.swift */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
 		EAC39DC029784D0D0012823D /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -1536,6 +1553,8 @@
 			children = (
 				EAC39DC029784D0D0012823D /* Other */,
 				EAE471AA26CBA664009FB0EC /* JournalScreen.swift */,
+				EAC3686D2B6F843800056C56 /* JournalCalendarScreen.swift */,
+				EAC368712B6FC97800056C56 /* calendar */,
 				EAF76CA327D8F72700945587 /* ExperiencesList.swift */,
 			);
 			path = Journal;
@@ -1662,6 +1681,7 @@
 				EAF76C9827D899E700945587 /* AlertToast */,
 				EAF76C9F27D8B72900945587 /* Algorithms */,
 				EAFA4BD32B400BE50056649E /* WrappingHStack */,
+				EAC3686B2B6F840100056C56 /* HorizonCalendar */,
 			);
 			productName = "PsychonautWiki Journal";
 			productReference = EAE4710326CBA57F009FB0EC /* Journal.app */;
@@ -1702,6 +1722,7 @@
 				EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				EAF76C9E27D8B72900945587 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				EAFA4BD22B400BE50056649E /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				EAC3686A2B6F840100056C56 /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = EAE4710426CBA57F009FB0EC /* Products */;
 			projectDirPath = "";
@@ -1834,6 +1855,7 @@
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EA302E4C2B385516007F113F /* AddIngestionDestination.swift in Sources */,
 				EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */,
+				EAC368732B6FC99200056C56 /* DayView.swift in Sources */,
 				EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */,
 				EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
@@ -2002,6 +2024,7 @@
 				EA4B8A092A969B0E009918DE /* FullCumulativeTimelines.swift in Sources */,
 				EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */,
 				EACB0C20293FED5500C605E2 /* Interactions.swift in Sources */,
+				EAC3686E2B6F843800056C56 /* JournalCalendarScreen.swift in Sources */,
 				EA4B8A1B2A9B2ECF009918DE /* TimedNoteDottedLine.swift in Sources */,
 				EAB8EF562A48D88E00542253 /* TabEnvironmentKey.swift in Sources */,
 				EA4B8A152A9B22EA009918DE /* AddTimedNoteScreen.swift in Sources */,
@@ -2009,6 +2032,7 @@
 				EA4B8A292AA12630009918DE /* TimelineSection.swift in Sources */,
 				EA527A8E2942896B009C142D /* RiskScreen.swift in Sources */,
 				EABD9213294215FB0073303A /* OnsetTimeline.swift in Sources */,
+				EAC368702B6FC7C100056C56 /* CalendarColorRectangle.swift in Sources */,
 				EA302E542B385AB4007F113F /* CustomChooseRouteScreenArguments.swift in Sources */,
 				EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */,
 				EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */,
@@ -2425,6 +2449,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EAC3686A2B6F840100056C56 /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/HorizonCalendar.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -2452,6 +2484,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EAC3686B2B6F840100056C56 /* HorizonCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAC3686A2B6F840100056C56 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			productName = HorizonCalendar;
+		};
 		EAF76C9827D899E700945587 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EAF76C9727D899E700945587 /* XCRemoteSwiftPackageReference "AlertToast" */;

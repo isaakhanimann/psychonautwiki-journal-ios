@@ -115,6 +115,11 @@ struct JournalScreen: View {
                     } label: {
                         Label("Time Display", systemImage: "timer")
                     }
+                    NavigationLink {
+                        JournalCalendarScreen()
+                    } label: {
+                        Label("Calendar", systemImage: "calendar")
+                    }
                 }
             }
             .navigationTitle("Journal")
