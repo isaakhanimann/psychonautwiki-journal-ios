@@ -68,6 +68,7 @@ struct CustomUnitDose: Hashable, Identifiable {
         }
     }
 
+    // 20 mg
     var calculatedDoseDescription: String? {
         if let calculatedDose {
             if let calculatedDoseVariance {
@@ -85,6 +86,7 @@ struct CustomUnitDose: Hashable, Identifiable {
         }
     }
 
+    // 2 pills
     var doseDescription: String {
         let description = "\(dose.with(unit: customUnit.unitUnwrapped))"
         if isEstimate {

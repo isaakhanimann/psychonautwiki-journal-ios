@@ -70,37 +70,20 @@ extension Ingestion: Comparable {
     }
 
     var pureSubstanceDose: Double? {
-        if customUnit == nil {
+        if let customUnitDose {
+            customUnitDose.calculatedDose
+        } else {
             doseUnwrapped
-        } else {
-            calculatedDoseBasedOnCustomUnit
         }
     }
 
-    var calculatedDoseBasedOnCustomUnit: Double? {
-        guard let doseUnwrapped else {return nil}
-        guard let customUnit else {return nil}
-        let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
-        let lowerEstimate = doseUnwrapped - doseVariance
-        let higherEstimate = doseUnwrapped + doseVariance
-        guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
-        guard let pureHigherEstimate = customUnit.getHigherPureSubstanceDose(from: higherEstimate) else {return nil}
-        return (pureLowerEstimate + pureHigherEstimate)/2
-    }
-
-    var calculatedDoseVarianceBasedOnCustomUnit: Double? {
-        guard let calculatedDoseBasedOnCustomUnit else {return nil}
-        guard let doseUnwrapped else {return nil}
-        guard let customUnit else {return nil}
-        let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
-        let lowerEstimate = doseUnwrapped - doseVariance
-        guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
-        let variance = calculatedDoseBasedOnCustomUnit - pureLowerEstimate
-        if variance != 0 {
-            return variance
-        } else {
-            return nil
-        }
+    var customUnitDose: CustomUnitDose? {
+        guard let doseUnwrapped, let customUnit else {return nil}
+        return CustomUnitDose(
+            dose: doseUnwrapped,
+            isEstimate: isEstimate,
+            estimatedDoseVariance: estimatedDoseVarianceUnwrapped,
+            customUnit: customUnit)
     }
 
     var substance: Substance? {

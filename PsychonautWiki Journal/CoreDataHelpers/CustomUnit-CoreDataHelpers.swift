@@ -37,23 +37,6 @@ extension CustomUnit {
         }
     }
 
-    func getLowerPureSubstanceDose(from customUnitDose: Double) -> Double? {
-        guard let doseUnwrapped else {return nil}
-        let lowerEstimate = doseUnwrapped - estimatedDoseVariance
-        return customUnitDose * lowerEstimate
-    }
-
-    func getExactPureSubstanceDose(from customUnitDose: Double) -> Double? {
-        guard let dosePerUnit = doseUnwrapped else { return nil }
-        return customUnitDose * dosePerUnit
-    }
-
-    func getHigherPureSubstanceDose(from customUnitDose: Double) -> Double? {
-        guard let doseUnwrapped else {return nil}
-        let higherEstimate = doseUnwrapped + estimatedDoseVariance
-        return customUnitDose * higherEstimate
-    }
-
     var originalUnitUnwrapped: String {
         originalUnit ?? ""
     }
