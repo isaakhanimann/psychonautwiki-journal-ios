@@ -135,4 +135,29 @@ struct JournalFile: FileDocument, Codable {
         let data = try encoder.encode(self)
         return FileWrapper(regularFileWithContents: data)
     }
+
+
+
+    enum CodingKeys: String, CodingKey {
+        case experiences
+        case substanceCompanions
+        case customSubstances
+        case customUnits
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        experiences = try values.decodeIfPresent([ExperienceCodable].self, forKey: .experiences) ?? []
+        substanceCompanions = try values.decodeIfPresent([CompanionCodable].self, forKey: .substanceCompanions) ?? []
+        customSubstances = try values.decodeIfPresent([CustomSubstanceCodable].self, forKey: .customSubstances) ?? []
+        customUnits = try values.decodeIfPresent([CustomUnitCodable].self, forKey: .customUnits) ?? []
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(experiences, forKey: .experiences)
+        try container.encode(substanceCompanions, forKey: .substanceCompanions)
+        try container.encode(customSubstances, forKey: .customSubstances)
+        try container.encode(customUnits, forKey: .customUnits)
+    }
 }
