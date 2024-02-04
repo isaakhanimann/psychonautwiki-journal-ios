@@ -89,6 +89,8 @@ struct DayView: View {
     }
 
     private var experiences: [Experience] {
-        ingestions.compactMap {$0.experience}.uniqued()
+        ingestions.compactMap {$0.experience}.uniqued().sorted { lhs, rhs in
+            lhs.sortDateUnwrapped < rhs.sortDateUnwrapped
+        }
     }
 }
