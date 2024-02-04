@@ -87,7 +87,6 @@ extension SettingsScreen {
                         newIngestion.creationDate = ingestionCodable.creationDate
                         newIngestion.administrationRoute = ingestionCodable.administrationRoute.rawValue
                         newIngestion.dose = ingestionCodable.dose ?? 0
-                        newIngestion.customUnitDose = ingestionCodable.customUnitDose ?? 0
                         newIngestion.estimatedDoseVariance = ingestionCodable.estimatedDoseVariance ?? 0
                         newIngestion.isEstimate = ingestionCodable.isDoseAnEstimate
                         newIngestion.units = ingestionCodable.units

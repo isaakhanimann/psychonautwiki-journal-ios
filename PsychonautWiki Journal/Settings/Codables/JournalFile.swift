@@ -43,7 +43,6 @@ struct JournalFile: FileDocument, Codable {
                         creationDate: ingestion.creationDate,
                         administrationRoute: ingestion.administrationRouteUnwrapped,
                         dose: ingestion.doseUnwrapped,
-                        customUnitDose: ingestion.customUnitDoseUnwrapped,
                         estimatedDoseVariance: ingestion.estimatedDoseVarianceUnwrapped,
                         isDoseAnEstimate: ingestion.isEstimate,
                         units: ingestion.unitsUnwrapped,

@@ -353,12 +353,8 @@ struct FinishIngestionScreen: View {
         ingestion.identifier = UUID()
         ingestion.time = selectedTime
         ingestion.creationDate = Date()
-        if let customUnit = arguments.customUnit {
-            ingestion.customUnit = customUnit
-            ingestion.customUnitDose = arguments.dose ?? 0
-        } else {
-            ingestion.dose = arguments.dose ?? 0
-        }
+        ingestion.customUnit = arguments.customUnit
+        ingestion.dose = arguments.dose ?? 0
         ingestion.units = arguments.units
         ingestion.isEstimate = arguments.isEstimate
         ingestion.estimatedDoseVariance = arguments.estimatedDoseVariance ?? 0

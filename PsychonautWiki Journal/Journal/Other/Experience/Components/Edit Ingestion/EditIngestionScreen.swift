@@ -23,7 +23,6 @@ struct EditIngestionScreen: View {
     let isEyeOpen: Bool
     @State private var time = Date()
     @State private var dose: Double?
-    @State private var customUnitDose: Double?
     @State private var units: String? = "mg"
     @State private var isEstimate = false
     @State private var estimatedDoseVariance: Double?
@@ -40,7 +39,6 @@ struct EditIngestionScreen: View {
             route: ingestion.administrationRouteUnwrapped,
             time: $time,
             dose: $dose,
-            customUnitDose: $customUnitDose,
             units: $units,
             isEstimate: $isEstimate,
             estimatedDoseVariance: $estimatedDoseVariance,
@@ -53,7 +51,6 @@ struct EditIngestionScreen: View {
             .onAppear {
                 time = ingestion.timeUnwrapped
                 dose = ingestion.doseUnwrapped
-                customUnitDose = ingestion.customUnitDoseUnwrapped
                 units = ingestion.units
                 isEstimate = ingestion.isEstimate
                 estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
@@ -68,7 +65,6 @@ struct EditIngestionScreen: View {
     private func save() {
         ingestion.time = time
         ingestion.dose = dose ?? 0
-        ingestion.customUnitDose = customUnitDose ?? 0
         ingestion.units = units
         ingestion.isEstimate = isEstimate
         ingestion.estimatedDoseVariance = estimatedDoseVariance ?? 0
@@ -102,7 +98,6 @@ struct EditIngestionContent: View {
     let route: AdministrationRoute
     @Binding var time: Date
     @Binding var dose: Double?
-    @Binding var customUnitDose: Double?
     @Binding var units: String?
     @Binding var isEstimate: Bool
     @Binding var estimatedDoseVariance: Double?
@@ -120,7 +115,7 @@ struct EditIngestionContent: View {
                 if let customUnit {
                     CustomUnitDosePicker(
                         customUnit: customUnit,
-                        dose: $customUnitDose,
+                        dose: $dose,
                         isEstimate: $isEstimate,
                         estimatedDoseVariance: $estimatedDoseVariance)
                 } else {
@@ -190,7 +185,6 @@ struct EditIngestionContent: View {
             route: .oral,
             time: .constant(Date()),
             dose: .constant(50),
-            customUnitDose: .constant(nil),
             units: .constant("mg"),
             isEstimate: .constant(false),
             estimatedDoseVariance: .constant(nil),
@@ -211,8 +205,7 @@ struct EditIngestionContent: View {
             customUnit: CustomUnit.previewSample,
             route: .oral,
             time: .constant(Date()),
-            dose: .constant(nil),
-            customUnitDose: .constant(2),
+            dose: .constant(2),
             units: .constant("mg"),
             isEstimate: .constant(false),
             estimatedDoseVariance: .constant(nil),

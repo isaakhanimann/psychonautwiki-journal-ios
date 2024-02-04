@@ -70,40 +70,36 @@ extension Ingestion: Comparable {
     }
 
     var pureSubstanceDose: Double? {
-        doseUnwrapped ?? calculatedDose
+        if customUnit == nil {
+            doseUnwrapped
+        } else {
+            calculatedDoseBasedOnCustomUnit
+        }
     }
 
-    var calculatedDose: Double? {
-        guard let customUnitDoseUnwrapped else {return nil}
+    var calculatedDoseBasedOnCustomUnit: Double? {
+        guard let doseUnwrapped else {return nil}
         guard let customUnit else {return nil}
         let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
-        let lowerEstimate = customUnitDoseUnwrapped - doseVariance
-        let higherEstimate = customUnitDoseUnwrapped + doseVariance
+        let lowerEstimate = doseUnwrapped - doseVariance
+        let higherEstimate = doseUnwrapped + doseVariance
         guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
         guard let pureHigherEstimate = customUnit.getHigherPureSubstanceDose(from: higherEstimate) else {return nil}
         return (pureLowerEstimate + pureHigherEstimate)/2
     }
 
-    var calculatedDoseVariance: Double? {
-        guard let calculatedDose else {return nil}
-        guard let customUnitDoseUnwrapped else {return nil}
+    var calculatedDoseVarianceBasedOnCustomUnit: Double? {
+        guard let calculatedDoseBasedOnCustomUnit else {return nil}
+        guard let doseUnwrapped else {return nil}
         guard let customUnit else {return nil}
         let doseVariance = estimatedDoseVarianceUnwrapped ?? 0
-        let lowerEstimate = customUnitDoseUnwrapped - doseVariance
+        let lowerEstimate = doseUnwrapped - doseVariance
         guard let pureLowerEstimate = customUnit.getLowerPureSubstanceDose(from: lowerEstimate) else {return nil}
-        let variance = calculatedDose - pureLowerEstimate
+        let variance = calculatedDoseBasedOnCustomUnit - pureLowerEstimate
         if variance != 0 {
             return variance
         } else {
             return nil
-        }
-    }
-
-    var customUnitDoseUnwrapped: Double? {
-        if customUnitDose == 0 {
-            return nil
-        } else {
-            return customUnitDose
         }
     }
 
@@ -199,8 +195,7 @@ extension Ingestion: Comparable {
     static var customUnitPreviewSample: Ingestion {
         let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
         ingestion.substanceName = "Ketamine"
-        ingestion.dose = 0
-        ingestion.customUnitDose = 2
+        ingestion.dose = 2
         ingestion.customUnit = CustomUnit.previewSample
         ingestion.units = "mg"
         ingestion.isEstimate = false
@@ -214,8 +209,7 @@ extension Ingestion: Comparable {
     static var customUnitUnknownDosePreviewSample: Ingestion {
         let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
         ingestion.substanceName = "Ketamine"
-        ingestion.dose = 0
-        ingestion.customUnitDose = 2
+        ingestion.dose = 2
         ingestion.customUnit = CustomUnit.unknownDoseSample
         ingestion.units = "mg"
         ingestion.isEstimate = false
@@ -229,8 +223,7 @@ extension Ingestion: Comparable {
     static var estimatedCustomUnitPreviewSample: Ingestion {
         let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
         ingestion.substanceName = "Ketamine"
-        ingestion.dose = 0
-        ingestion.customUnitDose = 2
+        ingestion.dose = 2
         ingestion.customUnit = CustomUnit.estimatePreviewSample
         ingestion.units = "mg"
         ingestion.isEstimate = false
@@ -244,8 +237,7 @@ extension Ingestion: Comparable {
     static var estimatedQuantitativelyCustomUnitPreviewSample: Ingestion {
         let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
         ingestion.substanceName = "Ketamine"
-        ingestion.dose = 0
-        ingestion.customUnitDose = 2
+        ingestion.dose = 2
         ingestion.customUnit = CustomUnit.estimatedQuantitativelyPreviewSample
         ingestion.units = "mg"
         ingestion.isEstimate = false
@@ -259,8 +251,7 @@ extension Ingestion: Comparable {
     static var everythingEstimatedQuantitativelyPreviewSample: Ingestion {
         let ingestion = Ingestion(context: PersistenceController.preview.viewContext)
         ingestion.substanceName = "Ketamine"
-        ingestion.dose = 0
-        ingestion.customUnitDose = 3
+        ingestion.dose = 3
         ingestion.customUnit = CustomUnit.estimatedQuantitativelyPreviewSample
         ingestion.units = "mg"
         ingestion.isEstimate = true

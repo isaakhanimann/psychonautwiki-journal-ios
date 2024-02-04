@@ -63,7 +63,7 @@ struct CumulativeRouteAndDose: Identifiable {
             }
             if let doseUnwrap = ingestion.pureSubstanceDose, ingestion.unitsUnwrapped == units {
                 totalDose += doseUnwrap
-                if let variance = ingestion.calculatedDoseVariance {
+                if let variance = ingestion.calculatedDoseVarianceBasedOnCustomUnit {
                     totalVariance += variance
                 }
             } else {

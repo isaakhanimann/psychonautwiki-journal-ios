@@ -103,26 +103,26 @@ private struct IngestionRowContent: View {
             VStack(alignment: .leading) {
                 let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
                 if let customUnit = ingestion.customUnit { // custom unit
-                    if let customUnitDose = ingestion.customUnitDoseUnwrapped { // ingestion custom unit dose known
-                        if let calculatedDose = ingestion.calculatedDose { // ingestion calculated dose known
+                    if let customUnitDose = ingestion.doseUnwrapped { // ingestion custom unit dose known
+                        if let calculatedDose = ingestion.calculatedDoseBasedOnCustomUnit { // ingestion calculated dose known
                             if ingestion.isEstimate { // ingestion estimate
                                 if let estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped { // ingestion estimated quantitatively
                                     // 3±0.5 lines
                                     let ingestionDoseLine = "\(customUnitDose.formatted())±\(estimatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(3.justUnit(unit: customUnit.unitUnwrapped))"
-                                    if let calculatedDoseVariance = ingestion.calculatedDoseVariance { // custom unit variance
+                                    if let calculatedDoseVariance = ingestion.calculatedDoseVarianceBasedOnCustomUnit { // custom unit variance
                                         // 3±0.5 lines = 60±20mg insufflated
                                         Text(ingestionDoseLine)
                                         Text("= \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
                                     } else { // dose per unit unknown
                                         // 3±0.5 lines insufflated
                                         Text(ingestionDoseLine)
-                                        Text("= \(routeText)").foregroundColor(.secondary)
+                                        Text(routeText).foregroundColor(.secondary)
                                     }
                                 } else { // ingestion dose estimated non quantitatively
                                     // ~2 pills
                                     let ingestionDoseLine = "~\(customUnitDose.with(unit: customUnit.unitUnwrapped))"
                                     if customUnit.isEstimate {
-                                        if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
+                                        if let calculatedDoseVariance = ingestion.calculatedDoseVarianceBasedOnCustomUnit {
                                             // ~2 pills = ~40±10 mg oral
                                             Text(ingestionDoseLine)
                                             Text("= ~\(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)
@@ -141,7 +141,7 @@ private struct IngestionRowContent: View {
                                 // 2 pills
                                 let ingestionDoseLine = customUnitDose.with(unit: customUnit.unitUnwrapped)
                                 if customUnit.isEstimate {
-                                    if let calculatedDoseVariance = ingestion.calculatedDoseVariance {
+                                    if let calculatedDoseVariance = ingestion.calculatedDoseVarianceBasedOnCustomUnit {
                                         // 2 pills = 40±10 mg oral
                                         Text(ingestionDoseLine)
                                         Text("= \(calculatedDose.roundedToAtMost1Decimal.formatted())±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(customUnit.originalUnitUnwrapped) \(routeText)").foregroundColor(.secondary)

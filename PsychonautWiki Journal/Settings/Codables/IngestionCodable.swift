@@ -22,7 +22,6 @@ struct IngestionCodable: Codable {
     let creationDate: Date?
     let administrationRoute: AdministrationRoute
     let dose: Double?
-    let customUnitDose: Double?
     let estimatedDoseVariance: Double?
     let isDoseAnEstimate: Bool
     let units: String
@@ -37,7 +36,6 @@ struct IngestionCodable: Codable {
         case creationDate
         case administrationRoute
         case dose
-        case customUnitDose
         case estimatedDoseVariance
         case isDoseAnEstimate
         case units
@@ -53,7 +51,6 @@ struct IngestionCodable: Codable {
         creationDate: Date?,
         administrationRoute: AdministrationRoute,
         dose: Double?,
-        customUnitDose: Double?,
         estimatedDoseVariance: Double?,
         isDoseAnEstimate: Bool,
         units: String,
@@ -67,7 +64,6 @@ struct IngestionCodable: Codable {
         self.creationDate = creationDate
         self.administrationRoute = administrationRoute
         self.dose = dose
-        self.customUnitDose = customUnitDose
         self.estimatedDoseVariance = estimatedDoseVariance
         self.isDoseAnEstimate = isDoseAnEstimate
         self.units = units
@@ -94,7 +90,6 @@ struct IngestionCodable: Codable {
             throw try DecodingError.dataCorruptedError(in: decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
         }
         dose = try values.decodeIfPresent(Double.self, forKey: .dose)
-        customUnitDose = try values.decodeIfPresent(Double.self, forKey: .customUnitDose)
         estimatedDoseVariance = try values.decodeIfPresent(Double.self, forKey: .estimatedDoseVariance)
         isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
         units = try values.decode(String.self, forKey: .units)
@@ -124,7 +119,6 @@ struct IngestionCodable: Codable {
         }
         try container.encode(administrationRoute.rawValue.uppercased(), forKey: .administrationRoute)
         try container.encode(dose, forKey: .dose)
-        try container.encode(customUnitDose, forKey: .customUnitDose)
         try container.encode(estimatedDoseVariance, forKey: .estimatedDoseVariance)
         try container.encode(isDoseAnEstimate, forKey: .isDoseAnEstimate)
         try container.encode(units, forKey: .units)
