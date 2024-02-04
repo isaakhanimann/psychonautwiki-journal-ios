@@ -47,7 +47,7 @@ struct DayView: View {
                 NavigationLink {
                     List(experiences) { experience in
                         ExperienceRow(experience: experience, isTimeRelative: false)
-                    }
+                    }.dismissWhenTabTapped()
                 } label: {
                     experienceDayLabel
                 }

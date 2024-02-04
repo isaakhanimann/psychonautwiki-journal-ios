@@ -78,6 +78,7 @@ struct JournalCalendarScreen: View {
                 isFirstAppear = false
             }
         }
+        .dismissWhenTabTapped()
         .frame(maxWidth: 375, maxHeight: .infinity)
         .navigationTitle("Calendar")
         .navigationBarTitleDisplayMode(.inline)
