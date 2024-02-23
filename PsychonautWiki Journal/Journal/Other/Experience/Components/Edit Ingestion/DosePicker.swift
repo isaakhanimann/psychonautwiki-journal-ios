@@ -19,7 +19,7 @@ import SwiftUI
 struct DosePicker: View {
     let roaDose: RoaDose?
     @Binding var doseMaybe: Double?
-    @Binding var selectedUnits: String?
+    @Binding var selectedUnits: String
     var focusOnAppear = false
     @State private var doseText = ""
     @FocusState private var isDoseFieldFocused: Bool
@@ -47,7 +47,7 @@ struct DosePicker: View {
     }
 
     var doseType: DoseRangeType {
-        guard let selectedUnits = selectedUnits else { return .none }
+        guard !selectedUnits.isEmpty else { return .none }
         guard let dose = doseMaybe else { return .none }
         return roaDose?.getRangeType(for: dose, with: selectedUnits) ?? .none
     }
@@ -59,7 +59,7 @@ struct DosePicker: View {
                 .keyboardType(.decimalPad)
                 .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseType.color)
-            Text(selectedUnits ?? "")
+            Text(selectedUnits)
         }
         .font(.title)
         .onChange(of: doseText) { text in

@@ -21,7 +21,7 @@ import SwiftUI
 struct ChooseDoseScreen: View {
     let arguments: SubstanceAndRoute
     let dismiss: () -> Void
-    @State private var selectedUnits: String? = UnitPickerOptions.mg.rawValue
+    @State private var selectedUnits: String = UnitPickerOptions.mg.rawValue
     @State private var selectedPureDose: Double?
     @State private var selectedDoseVariance: Double?
     @State private var isEstimate = false
@@ -59,7 +59,7 @@ struct ChooseDoseScreenContent: View {
         isEyeOpen: Bool,
         selectedPureDose: Binding<Double?>,
         selectedDoseVariance: Binding<Double?>,
-        selectedUnits: Binding<String?>,
+        selectedUnits: Binding<String>,
         isEstimate: Binding<Bool>,
         isShowingNext: Binding<Bool>) {
         self.substance = substance
@@ -89,7 +89,7 @@ struct ChooseDoseScreenContent: View {
     let isEyeOpen: Bool
     @Binding var selectedPureDose: Double?
     @Binding var selectedDoseVariance: Double?
-    @Binding var selectedUnits: String?
+    @Binding var selectedUnits: String
     @Binding var isEstimate: Bool
     @Binding var isShowingNext: Bool
 
@@ -126,7 +126,7 @@ struct ChooseDoseScreenContent: View {
     }
 
     private var suggestedNote: String? {
-        guard let impureDose, let selectedUnits, purityInPercent != 100, purityInPercent != nil else { return nil }
+        guard let impureDose, !selectedUnits.isEmpty, purityInPercent != 100, purityInPercent != nil else { return nil }
         return "\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits) with \(purityText)% purity"
     }
 
@@ -157,7 +157,7 @@ struct ChooseDoseScreenContent: View {
                     Text("%")
                 }
                 if let impureDose {
-                    Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits ?? "")")
+                    Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits)")
                         .font(.title)
                 }
             }
@@ -171,7 +171,7 @@ struct ChooseDoseScreenContent: View {
                         format: .number
                     ).keyboardType(.decimalPad)
                     Spacer()
-                    Text(selectedUnits ?? roaDose?.units ?? "")
+                    Text(selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits)
                 }
             }
             unknownDoseLink

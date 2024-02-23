@@ -22,7 +22,7 @@ struct EditIngestionScreen: View {
     let ingestion: Ingestion
     @State private var time = Date()
     @State private var dose: Double?
-    @State private var units: String? = "mg"
+    @State private var units: String = "mg"
     @State private var isEstimate = false
     @State private var estimatedDoseVariance: Double?
     @State private var note = ""
@@ -69,7 +69,7 @@ struct EditIngestionScreen: View {
         ).onFirstAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
-            units = ingestion.units
+            units = ingestion.unitsUnwrapped
             isEstimate = ingestion.isEstimate
             estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
             note = ingestion.noteUnwrapped
@@ -124,7 +124,7 @@ struct EditIngestionContent: View {
     let route: AdministrationRoute
     @Binding var time: Date
     @Binding var dose: Double?
-    @Binding var units: String?
+    @Binding var units: String
     @Binding var isEstimate: Bool
     @Binding var estimatedDoseVariance: Double?
     @Binding var note: String

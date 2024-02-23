@@ -21,11 +21,11 @@ extension AddCustomSubstanceView {
     class ViewModel: ObservableObject {
         @Published var name = ""
         @Published var explanation = ""
-        @Published var units: String? = UnitPickerOptions.mg.rawValue
+        @Published var units: String = UnitPickerOptions.mg.rawValue
 
         var isEverythingNeededDefined: Bool {
             guard !name.isEmpty else { return false }
-            guard let unitsUnwrap = units, !unitsUnwrap.isEmpty else { return false }
+            guard !units.isEmpty else { return false }
             return true
         }
 

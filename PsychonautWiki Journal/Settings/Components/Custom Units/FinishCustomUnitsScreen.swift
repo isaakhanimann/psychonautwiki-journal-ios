@@ -53,6 +53,13 @@ struct FinishCustomUnitsScreen: View {
                         focusedField = .dose
                     }
             }
+            Section("Original Unit") {
+                let areUnitsDefined = roaDose?.units != nil
+                if !areUnitsDefined {
+                    UnitsPicker(units: $originalUnit)
+                        .padding(.bottom, 10)
+                }
+            }
             Section("Dose per \(unitOrPlaceholder)") {
                 RoaDoseRow(roaDose: roaDose)
                 if !isUnknownDose {
@@ -63,7 +70,7 @@ struct FinishCustomUnitsScreen: View {
                             format: .number).keyboardType(.decimalPad)
                             .focused($focusedField, equals: .dose)
                         Spacer()
-                        Text(roaUnits)
+                        Text(originalUnit)
                     }
                 }
                 Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
@@ -75,7 +82,7 @@ struct FinishCustomUnitsScreen: View {
                             value: $estimatedDoseVariance,
                             format: .number).keyboardType(.decimalPad)
                         Spacer()
-                        Text(roaUnits)
+                        Text(originalUnit)
                     }
                 }
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
@@ -125,6 +132,7 @@ struct FinishCustomUnitsScreen: View {
         .navigationTitle("Add Custom Unit")
         .onAppear {
             focusedField = .name
+            originalUnit = roaDose?.units ?? "mg"
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -137,6 +145,7 @@ struct FinishCustomUnitsScreen: View {
 
     @State private var name = ""
     @State private var unit = ""
+    @State private var originalUnit = ""
     @State private var dosePerUnit: Double?
     @State private var isEstimate = false
     @State private var estimatedDoseVariance: Double?
@@ -146,10 +155,6 @@ struct FinishCustomUnitsScreen: View {
     @FocusState private var focusedField: Field?
 
     private let multiplier: Double = 3
-
-    private var roaUnits: String {
-        roaDose?.units ?? ""
-    }
 
     private var roaDose: RoaDose? {
         substanceAndRoute.substance.getDose(for: substanceAndRoute.administrationRoute)
@@ -181,7 +186,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.administrationRoute = substanceAndRoute.administrationRoute.rawValue
         newCustomUnit.dose = isUnknownDose ? 0 : (dosePerUnit ?? 0)
         newCustomUnit.note = note
-        newCustomUnit.originalUnit = roaDose?.units
+        newCustomUnit.originalUnit = originalUnit
         newCustomUnit.substanceName = substanceAndRoute.substance.name
         newCustomUnit.unit = unit
         newCustomUnit.isEstimate = isEstimate

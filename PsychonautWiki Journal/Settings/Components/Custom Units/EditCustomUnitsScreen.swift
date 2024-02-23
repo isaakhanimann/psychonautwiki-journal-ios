@@ -20,7 +20,7 @@ struct EditCustomUnitsScreen: View {
     let customUnit: CustomUnit
 
     @State private var name: String = ""
-    @State private var originalUnit: String?
+    @State private var originalUnit = ""
     @State private var unit: String = ""
     @State private var note: String = ""
     @State private var dose: Double?
@@ -46,7 +46,7 @@ struct EditCustomUnitsScreen: View {
         )
         .onAppear {
             name = customUnit.nameUnwrapped
-            originalUnit = customUnit.originalUnit
+            originalUnit = customUnit.originalUnitUnwrapped
             unit = customUnit.unitUnwrapped
             note = customUnit.noteUnwrapped
             dose = customUnit.doseUnwrapped
@@ -83,7 +83,7 @@ struct EditCustomUnitsScreenContent: View {
     let substanceName: String
     let roaDose: RoaDose?
     @Binding var name: String
-    @Binding var originalUnit: String?
+    @Binding var originalUnit: String
     @Binding var unit: String
     @Binding var note: String
     @Binding var dose: Double?
@@ -120,7 +120,7 @@ struct EditCustomUnitsScreenContent: View {
                             format: .number
                         ).keyboardType(.decimalPad)
                         Spacer()
-                        Text(originalUnit ?? "")
+                        Text(originalUnit)
                     }
                 }
             }.listRowSeparator(.hidden)

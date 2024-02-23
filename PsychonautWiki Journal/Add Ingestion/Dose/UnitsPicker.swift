@@ -17,7 +17,7 @@
 import SwiftUI
 
 struct UnitsPicker: View {
-    @Binding var units: String?
+    @Binding var units: String
     @State private var pickerValue = UnitPickerOptions.mg
     @State private var textValue = ""
 
@@ -51,17 +51,11 @@ struct UnitsPicker: View {
     }
 
     private func initializePicker() {
-        guard let unitsUnwrap = units else {
-            pickerValue = UnitPickerOptions.custom
-            return
-        }
-        if let startOption = UnitPickerOptions(rawValue: unitsUnwrap) {
+        if let startOption = UnitPickerOptions(rawValue: units) {
             pickerValue = startOption
         } else {
             pickerValue = UnitPickerOptions.custom
-            if !unitsUnwrap.isEmpty {
-                textValue = unitsUnwrap
-            }
+            textValue = units
         }
     }
 }
