@@ -51,7 +51,7 @@ struct CumulativeRouteAndDose: Identifiable {
 
     init(route: AdministrationRoute, roaDose: RoaDose?, ingestionForRoute: [Ingestion]) {
         self.route = route
-        let units = ingestionForRoute.first?.units ?? "unknown"
+        let units = ingestionForRoute.first?.pureUnits ?? ""
         self.units = units
         var totalDose = 0.0
         var totalVariance = 0.0
@@ -61,7 +61,8 @@ struct CumulativeRouteAndDose: Identifiable {
             if ingestion.isEstimate || ingestion.customUnit?.isEstimate == true {
                 isOneDoseAnEstimate = true
             }
-            if let doseUnwrap = ingestion.pureSubstanceDose, ingestion.unitsUnwrapped == units {
+            let ingestionPureUnits = ingestion.pureUnits
+            if let doseUnwrap = ingestion.pureSubstanceDose, ingestionPureUnits == units {
                 totalDose += doseUnwrap
                 if let variance = ingestion.customUnitDose?.calculatedDoseVariance {
                     totalVariance += variance

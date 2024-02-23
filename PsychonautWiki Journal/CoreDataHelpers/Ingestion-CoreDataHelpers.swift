@@ -97,7 +97,7 @@ extension Ingestion: Comparable {
         )
     }
 
-    private var pureUnits: String {
+    var pureUnits: String {
         if let customUnit {
             customUnit.originalUnitUnwrapped
         } else {
