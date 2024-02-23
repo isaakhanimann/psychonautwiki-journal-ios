@@ -17,24 +17,35 @@
 import SwiftUI
 
 struct EditStomachFullnessSection: View {
+
     @Binding var stomachFullness: StomachFullness
 
     var body: some View {
         Section("Stomach Fullness") {
-            Picker("Stomach Fullness", selection: $stomachFullness) {
-                ForEach(StomachFullness.allCases) { option in
-                    HStack {
-                        Text(option.text)
-                        Spacer()
-                        Text("~\(option.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay").foregroundColor(.secondary)
-                    }
-                }
-            }
+            StomachFullnessPicker(stomachFullness: $stomachFullness)
             .pickerStyle(.inline)
             .labelsHidden()
         }
     }
 }
+
+struct StomachFullnessPicker: View {
+
+    @Binding var stomachFullness: StomachFullness
+
+    var body: some View {
+        Picker("Stomach Fullness", selection: $stomachFullness) {
+            ForEach(StomachFullness.allCases) { option in
+                HStack {
+                    Text(option.text)
+                    Spacer()
+                    Text("~\(option.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay").foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     List {

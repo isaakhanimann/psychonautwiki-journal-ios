@@ -129,26 +129,26 @@ struct EditIngestionContent: View {
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)
             }
-            Section("Ingestion Time") {
+            Section {
                 DatePicker(
-                    "Enter Ingestion Time",
+                    "Time",
                     selection: $time,
                     displayedComponents: [.date, .hourAndMinute])
-                    .labelsHidden()
                     .datePickerStyle(.compact)
-            }
-            HStack {
-                Text("Consumer")
-                Spacer()
-                Button {
-                    isConsumerSheetPresented.toggle()
-                } label: {
-                    let displayedName = isConsumerMe ? "Me" : consumerName
-                    Label(displayedName, systemImage: "person")
+                HStack {
+                    Text("Consumer")
+                    Spacer()
+                    Button {
+                        isConsumerSheetPresented.toggle()
+                    } label: {
+                        let displayedName = isConsumerMe ? "Me" : consumerName
+                        Label(displayedName, systemImage: "person")
+                    }
                 }
-            }
-            if route == .oral, isEyeOpen {
-                EditStomachFullnessSection(stomachFullness: $stomachFullness)
+                if route == .oral, isEyeOpen {
+                    StomachFullnessPicker(stomachFullness: $stomachFullness)
+                        .pickerStyle(.menu)
+                }
             }
         }
         .sheet(isPresented: $isConsumerSheetPresented, content: {
@@ -162,7 +162,7 @@ struct EditIngestionContent: View {
             }
         }
         .scrollDismissesKeyboard(.interactively)
-        .navigationTitle("Edit \(substanceName)")
+        .navigationTitle("Edit Ingestion")
         .onDisappear {
             save()
         }
