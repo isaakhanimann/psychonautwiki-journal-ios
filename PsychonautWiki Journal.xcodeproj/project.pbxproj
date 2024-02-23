@@ -303,6 +303,8 @@
 		EAC39DC429789E120012823D /* ExplainExperienceSectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */; };
 		EAC39DC62979347B0012823D /* EditLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC52979347B0012823D /* EditLocationScreen.swift */; };
 		EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC7297934FE0012823D /* AddLocationScreen.swift */; };
+		EAC4BFFC2B890ADA00293B44 /* ChooseCustomUnitScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */; };
+		EAC4BFFE2B890DF600293B44 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -656,6 +658,8 @@
 		EAC39DC329789E120012823D /* ExplainExperienceSectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainExperienceSectionScreen.swift; sourceTree = "<group>"; };
 		EAC39DC52979347B0012823D /* EditLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationScreen.swift; sourceTree = "<group>"; };
 		EAC39DC7297934FE0012823D /* AddLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationScreen.swift; sourceTree = "<group>"; };
+		EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCustomUnitScreen.swift; sourceTree = "<group>"; };
+		EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
@@ -812,6 +816,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE471A626CBA664009FB0EC /* FinishIngestionScreen.swift */,
+				EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */,
 				EA302E472B381C2F007F113F /* FinishIngestionScreenArguments.swift */,
 				EA418A2C296C00BF00DEA663 /* LocationManager.swift */,
 				EA418A082969747500DEA663 /* Other */,
@@ -984,6 +989,7 @@
 			isa = PBXGroup;
 			children = (
 				EA50E4E3294B70A400B8D1FC /* EditIngestionScreen.swift */,
+				EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */,
 				EAE471A026CBA664009FB0EC /* DosePicker.swift */,
 			);
 			path = "Edit Ingestion";
@@ -1873,6 +1879,7 @@
 				EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */,
 				EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */,
 				EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */,
+				EAC4BFFE2B890DF600293B44 /* OnFirstAppearModifier.swift in Sources */,
 				EA47E65927CA136C00F6E10F /* RoaRange.swift in Sources */,
 				EA4B8A072A969301009918DE /* WeightedLine.swift in Sources */,
 				EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */,
@@ -2087,6 +2094,7 @@
 				EAE4722626CBA664009FB0EC /* ExperienceRow.swift in Sources */,
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
+				EAC4BFFC2B890ADA00293B44 /* ChooseCustomUnitScreen.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
 				EAD1D0022B52709500EC0D70 /* CustomUnitsArchiveScreen.swift in Sources */,
 				EAB8EF472A46004B00542253 /* TabBarObserver.swift in Sources */,

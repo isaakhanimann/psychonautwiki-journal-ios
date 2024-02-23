@@ -20,7 +20,6 @@ import SwiftUI
 
 struct EditIngestionScreen: View {
     let ingestion: Ingestion
-    let isEyeOpen: Bool
     @State private var time = Date()
     @State private var dose: Double?
     @State private var units: String? = "mg"
@@ -29,13 +28,32 @@ struct EditIngestionScreen: View {
     @State private var note = ""
     @State private var consumerName = ""
     @State private var stomachFullness = StomachFullness.empty
+    @State private var selectedCustomUnit: CustomUnit? = nil
+
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
+
     @Environment(\.dismiss) var dismiss
+
+    @FetchRequest(
+        sortDescriptors: []
+    ) var customUnits: FetchedResults<CustomUnit>
+
+    private var filteredCustomUnit: [CustomUnit] {
+        customUnits.filter { unit in
+            unit.substanceNameUnwrapped == ingestion.substanceNameUnwrapped && unit.administrationRouteUnwrapped == ingestion.administrationRouteUnwrapped && unit.id != selectedCustomUnit?.id
+        }
+    }
+
+    private var roaDose: RoaDose? {
+        ingestion.substance?.getDose(for: ingestion.administrationRouteUnwrapped)
+    }
 
     var body: some View {
         EditIngestionContent(
             substanceName: ingestion.substanceNameUnwrapped,
-            roaDose: ingestion.substance?.getDose(for: ingestion.administrationRouteUnwrapped),
-            customUnit: ingestion.customUnit,
+            roaDose: roaDose,
+            customUnit: $selectedCustomUnit,
+            otherUnits: filteredCustomUnit,
             route: ingestion.administrationRouteUnwrapped,
             time: $time,
             dose: $dose,
@@ -47,25 +65,32 @@ struct EditIngestionScreen: View {
             consumerName: $consumerName,
             save: save,
             delete: delete,
-            isEyeOpen: isEyeOpen)
-            .onAppear {
-                time = ingestion.timeUnwrapped
-                dose = ingestion.doseUnwrapped
-                units = ingestion.units
-                isEstimate = ingestion.isEstimate
-                estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
-                note = ingestion.noteUnwrapped
-                consumerName = ingestion.consumerName ?? ""
-                if let fullness = ingestion.stomachFullnessUnwrapped {
-                    stomachFullness = fullness
-                }
+            isEyeOpen: isEyeOpen
+        ).onFirstAppear {
+            time = ingestion.timeUnwrapped
+            dose = ingestion.doseUnwrapped
+            units = ingestion.units
+            isEstimate = ingestion.isEstimate
+            estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
+            note = ingestion.noteUnwrapped
+            consumerName = ingestion.consumerName ?? ""
+            selectedCustomUnit = ingestion.customUnit
+            if let fullness = ingestion.stomachFullnessUnwrapped {
+                stomachFullness = fullness
             }
+        }
     }
 
     private func save() {
         ingestion.time = time
         ingestion.dose = dose ?? 0
-        ingestion.units = units
+        if let selectedCustomUnit {
+            ingestion.customUnit?.removeFromIngestions(ingestion)
+            ingestion.customUnit = selectedCustomUnit
+            ingestion.units = selectedCustomUnit.unitUnwrapped
+        } else {
+            ingestion.units = roaDose?.units ?? units
+        }
         ingestion.isEstimate = isEstimate
         ingestion.estimatedDoseVariance = estimatedDoseVariance ?? 0
         ingestion.note = note
@@ -94,7 +119,8 @@ struct EditIngestionScreen: View {
 struct EditIngestionContent: View {
     let substanceName: String
     let roaDose: RoaDose?
-    let customUnit: CustomUnit?
+    @Binding var customUnit: CustomUnit?
+    let otherUnits: [CustomUnit]
     let route: AdministrationRoute
     @Binding var time: Date
     @Binding var dose: Double?
@@ -108,63 +134,91 @@ struct EditIngestionContent: View {
     let delete: () -> Void
     let isEyeOpen: Bool
 
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        Form {
-            Section("\(route.rawValue.localizedCapitalized) Dose") {
-                RoaDoseRow(roaDose: roaDose)
-                if let customUnit {
-                    CustomUnitDosePicker(
-                        customUnit: customUnit,
-                        dose: $dose,
-                        isEstimate: $isEstimate,
-                        estimatedDoseVariance: $estimatedDoseVariance)
-                } else {
-                    DosePicker(
-                        roaDose: roaDose,
-                        doseMaybe: $dose,
-                        selectedUnits: $units)
+        NavigationStack {
+            Form {
+                Section("\(route.rawValue.localizedCapitalized) Dose") {
+                    RoaDoseRow(roaDose: roaDose)
+                    if let customUnit {
+                        CustomUnitDosePicker(
+                            customUnit: customUnit,
+                            dose: $dose,
+                            isEstimate: $isEstimate,
+                            estimatedDoseVariance: $estimatedDoseVariance)
+                    } else {
+                        DosePicker(
+                            roaDose: roaDose,
+                            doseMaybe: $dose,
+                            selectedUnits: $units)
+                    }
+                    if !otherUnits.isEmpty {
+                        NavigationLink {
+                            ChooseCustomUnitScreen(customUnit: $customUnit, customUnits: otherUnits)
+                        } label: {
+                            HStack {
+                                Text("Choose Unit")
+                                Spacer()
+                                Group {
+                                    if let customUnit {
+                                        Text(customUnit.nameUnwrapped)
+                                    } else {
+                                        Text("No selection")
+                                    }
+                                }.foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                }.listRowSeparator(.hidden)
+                Section("Notes") {
+                    TextField("Enter Note", text: $note)
+                        .autocapitalization(.sentences)
                 }
-            }.listRowSeparator(.hidden)
-            Section("Notes") {
-                TextField("Enter Note", text: $note)
-                    .autocapitalization(.sentences)
-            }
-            Section {
-                DatePicker(
-                    "Time",
-                    selection: $time,
-                    displayedComponents: [.date, .hourAndMinute])
+                Section {
+                    DatePicker(
+                        "Time",
+                        selection: $time,
+                        displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
-                HStack {
-                    Text("Consumer")
-                    Spacer()
-                    Button {
-                        isConsumerSheetPresented.toggle()
-                    } label: {
-                        let displayedName = isConsumerMe ? "Me" : consumerName
-                        Label(displayedName, systemImage: "person")
+                    HStack {
+                        Text("Consumer")
+                        Spacer()
+                        Button {
+                            isConsumerSheetPresented.toggle()
+                        } label: {
+                            let displayedName = isConsumerMe ? "Me" : consumerName
+                            Label(displayedName, systemImage: "person")
+                        }
+                    }
+                    if route == .oral, isEyeOpen {
+                        StomachFullnessPicker(stomachFullness: $stomachFullness)
+                            .pickerStyle(.menu)
                     }
                 }
-                if route == .oral, isEyeOpen {
-                    StomachFullnessPicker(stomachFullness: $stomachFullness)
-                        .pickerStyle(.menu)
+                Section {
+                    Button(action: delete) {
+                        Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
+                    }
                 }
             }
-        }
-        .sheet(isPresented: $isConsumerSheetPresented, content: {
-            EditConsumerScreen(consumerName: $consumerName)
-        })
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: delete) {
-                    Label("Delete Ingestion", systemImage: "trash")
+            .sheet(isPresented: $isConsumerSheetPresented, content: {
+                EditConsumerScreen(consumerName: $consumerName)
+            })
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: save, label: {
+                        Text("Save")
+                    })
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: {dismiss()}, label: {
+                        Text("Cancel")
+                    })
                 }
             }
-        }
-        .scrollDismissesKeyboard(.interactively)
-        .navigationTitle("Edit Ingestion")
-        .onDisappear {
-            save()
+            .scrollDismissesKeyboard(.interactively)
+            .navigationTitle("Edit Ingestion")
         }
     }
 
@@ -177,44 +231,44 @@ struct EditIngestionContent: View {
 }
 
 #Preview("Edit regular ingestion") {
-    NavigationStack {
-        EditIngestionContent(
-            substanceName: "MDMA",
-            roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
-            customUnit: nil,
-            route: .oral,
-            time: .constant(Date()),
-            dose: .constant(50),
-            units: .constant("mg"),
-            isEstimate: .constant(false),
-            estimatedDoseVariance: .constant(nil),
-            note: .constant("These are my notes"),
-            stomachFullness: .constant(.full),
-            consumerName: .constant("Marc"),
-            save: { },
-            delete: { },
-            isEyeOpen: true)
-    }
+    EditIngestionContent(
+        substanceName: "MDMA",
+        roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
+        customUnit: .constant(nil),
+        otherUnits: [
+            CustomUnit.previewSample
+        ],
+        route: .oral,
+        time: .constant(Date()),
+        dose: .constant(50),
+        units: .constant("mg"),
+        isEstimate: .constant(false),
+        estimatedDoseVariance: .constant(nil),
+        note: .constant("These are my notes"),
+        stomachFullness: .constant(.full),
+        consumerName: .constant("Marc"),
+        save: { },
+        delete: { },
+        isEyeOpen: true)
 }
 
 #Preview("Edit custom unit ingestion") {
-    NavigationStack {
-        EditIngestionContent(
-            substanceName: "Ketamine",
-            roaDose: SubstanceRepo.shared.getSubstance(name: "Ketamine")!.getDose(for: .oral)!,
-            customUnit: CustomUnit.previewSample,
-            route: .oral,
-            time: .constant(Date()),
-            dose: .constant(2),
-            units: .constant("mg"),
-            isEstimate: .constant(false),
-            estimatedDoseVariance: .constant(nil),
-            note: .constant("These are my notes"),
-            stomachFullness: .constant(.full),
-            consumerName: .constant("Marc"),
-            save: { },
-            delete: { },
-            isEyeOpen: true)
-    }
+    EditIngestionContent(
+        substanceName: "Ketamine",
+        roaDose: SubstanceRepo.shared.getSubstance(name: "Ketamine")!.getDose(for: .oral)!,
+        customUnit: .constant(CustomUnit.previewSample),
+        otherUnits: [],
+        route: .oral,
+        time: .constant(Date()),
+        dose: .constant(2),
+        units: .constant("mg"),
+        isEstimate: .constant(false),
+        estimatedDoseVariance: .constant(nil),
+        note: .constant("These are my notes"),
+        stomachFullness: .constant(.full),
+        consumerName: .constant("Marc"),
+        save: { },
+        delete: { },
+        isEyeOpen: true)
 }
 

@@ -31,7 +31,7 @@ struct IngestionRow: View {
             isEyeOpen: isEyeOpen,
             isHidingDosageDots: isHidingDosageDots,
             firstIngestionTime: firstIngestionTime
-        )
+        ).foregroundColor(.primary) // to override the button styles
     }
 }
 

@@ -46,7 +46,7 @@ struct FinishIngestionScreen: View {
     @State private var alreadyUsedColors = [SubstanceColor]()
     @State private var otherColors = [SubstanceColor]()
     @State private var foundCompanion: SubstanceCompanion?
-    @State private var isInitialized = false
+
     @State private var experiencesWithinLargerRange: [Experience] = []
     @State private var selectedExperience: Experience?
     @State private var wantsToForceNewExperience = false
@@ -225,9 +225,7 @@ struct FinishIngestionScreen: View {
                 EditConsumerScreen(consumerName: $consumerName)
             }
         })
-        .task {
-            guard !isInitialized
-            else { return } // because this function is going to be called again when navigating back from color picker screen
+        .onFirstAppear { // because this function is going to be called again when navigating back from color picker screen
             selectExperienceBasedOnCurrentTime()
             locationManager.selectedLocation = locationManager.currentLocation
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""
@@ -267,7 +265,6 @@ struct FinishIngestionScreen: View {
             selectedColor = otherColors.filter { $0.isPreferred }.first ?? otherColors.first ?? SubstanceColor.allCases
                 .randomElement() ?? SubstanceColor.blue
         }
-        isInitialized = true
     }
 
     func addIngestionWithExperience() async throws {

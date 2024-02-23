@@ -83,7 +83,7 @@ struct FinishCustomUnitsScreen: View {
             if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
                 Section("Ingestion Preview") {
                     VStack(alignment: .leading) {
-                        Text("\(substanceAndRoute.substance.name) \(name)").font(.headline)
+                        Text("\(substanceAndRoute.substance.name) (\(name))").font(.headline)
                         if isUnknownDose {
                             Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
                         } else {

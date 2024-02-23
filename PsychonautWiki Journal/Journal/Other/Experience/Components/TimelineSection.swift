@@ -27,6 +27,8 @@ struct TimelineSection: View {
     let hideIngestion: (ObjectIdentifier) -> Void
     let updateActivityIfActive: () -> Void
 
+    @State private var ingestionToEdit: Ingestion?
+
     var body: some View {
         Group {
             let timelineHeight: Double = 200
@@ -41,13 +43,8 @@ struct TimelineSection: View {
             }
             ForEach(ingestionsSorted) { ing in
                 let isIngestionHidden = hiddenIngestions.contains(ing.id)
-                NavigationLink {
-                    EditIngestionScreen(
-                        ingestion: ing,
-                        isEyeOpen: isEyeOpen
-                    ).onDisappear {
-                        updateActivityIfActive()
-                    }
+                Button {
+                    ingestionToEdit = ing
                 } label: {
                     HStack(alignment: .center) {
                         if isIngestionHidden {
@@ -87,6 +84,10 @@ struct TimelineSection: View {
                     }
                 }
             }
+        }.sheet(item: $ingestionToEdit, onDismiss: {
+            updateActivityIfActive()
+        }) { ingestion in
+            EditIngestionScreen(ingestion: ingestion)
         }
     }
 }
