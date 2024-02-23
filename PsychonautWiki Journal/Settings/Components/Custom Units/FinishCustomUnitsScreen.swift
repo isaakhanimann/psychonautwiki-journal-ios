@@ -88,7 +88,7 @@ struct FinishCustomUnitsScreen: View {
                     }
                 }
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
-            }
+            }.listRowSeparator(.hidden)
             if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
                 Section("Ingestion Preview") {
                     VStack(alignment: .leading) {

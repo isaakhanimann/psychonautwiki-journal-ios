@@ -90,6 +90,7 @@ struct EditIngestionScreen: View {
             ingestion.units = selectedCustomUnit.unitUnwrapped
         } else {
             ingestion.units = roaDose?.units ?? units
+            ingestion.customUnit?.removeFromIngestions(ingestion)
         }
         ingestion.isEstimate = isEstimate
         ingestion.estimatedDoseVariance = estimatedDoseVariance ?? 0
@@ -173,6 +174,9 @@ struct EditIngestionContent: View {
                                 }.foregroundStyle(.secondary)
                             }
                         }
+                        .onChange(of: customUnit, perform: { unit in
+                            units = unit?.unit ?? roaDose?.units ?? ""
+                        })
                     }
                 }.listRowSeparator(.hidden)
                 if let customUnit {

@@ -24,7 +24,7 @@ struct CustomUnitRow: View {
             ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             VStack(alignment: .leading) {
                 Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))").font(.headline)
-                Text(customUnit.doseOfOneUnitDescription + " per \(customUnit.unitUnwrapped)")
+                Text(customUnit.doseOfOneUnitDescription + " per \(customUnit.unitUnwrapped) \(customUnit.administrationRouteUnwrapped.rawValue)")
                 .font(.subheadline)
                 if !customUnit.noteUnwrapped.isEmpty {
                     Text(customUnit.noteUnwrapped).font(.footnote)
