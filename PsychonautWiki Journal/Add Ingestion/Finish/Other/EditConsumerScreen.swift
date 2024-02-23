@@ -21,10 +21,20 @@ struct EditConsumerScreen: View {
 
     @State private var consumerNamesInOrder: [String] = []
 
+    private var filteredNames: [String] {
+        consumerNamesInOrder.filter { name in
+            if !consumerName.isEmpty {
+                name.lowercased().hasPrefix(consumerName.lowercased())
+            } else {
+                true
+            }
+        }
+    }
+
     var body: some View {
         EditConsumerScreenContent(
             consumerName: $consumerName,
-            consumerNamesInOrder: consumerNamesInOrder
+            consumerNamesInOrder: filteredNames
         )
         .onAppear {
             let ingestionFetchRequest = Ingestion.fetchRequest()
@@ -57,11 +67,13 @@ private struct EditConsumerScreenContent: View {
                         .autocorrectionDisabled()
                 }
                 Section {
-                    Button {
-                        consumerName = ""
-                        dismiss()
-                    } label: {
-                        Label("Me", systemImage: "person")
+                    if !consumerName.isEmpty {
+                        Button {
+                            consumerName = ""
+                            dismiss()
+                        } label: {
+                            Label("Me", systemImage: "person")
+                        }
                     }
 
                     ForEach(consumerNamesInOrder, id: \.self) { otherName in
