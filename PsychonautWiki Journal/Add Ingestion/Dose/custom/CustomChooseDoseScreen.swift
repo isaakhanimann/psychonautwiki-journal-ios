@@ -66,7 +66,6 @@ struct CustomChooseDoseScreen: View {
                     TextField("Enter Dose", text: $doseText)
                         .focused($isDoseFieldFocused)
                         .keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
                         .onChange(of: doseText) { text in
                             dose = getDouble(from: text)
                         }

@@ -38,7 +38,6 @@ struct CustomUnitDosePicker: View {
                     format: .number
                 )
                 .keyboardType(.decimalPad)
-                .textFieldStyle(.roundedBorder)
                 Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)

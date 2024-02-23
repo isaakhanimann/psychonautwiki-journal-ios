@@ -57,7 +57,6 @@ struct DosePicker: View {
             TextField("Enter Dose", text: $doseText)
                 .focused($isDoseFieldFocused)
                 .keyboardType(.decimalPad)
-                .textFieldStyle(.roundedBorder)
                 .foregroundColor(doseType.color)
             Text(selectedUnits)
         }

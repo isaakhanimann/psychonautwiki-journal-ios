@@ -90,7 +90,6 @@ struct ChooseShroomsDoseScreen: View {
                 HStack {
                     TextField("Enter Dose", text: $psilocybinTextInMg)
                         .keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
                         .foregroundColor(currentDoseTypeColor)
                         .onChange(of: psilocybinTextInMg) { text in
                             psilocybinInMg = getDouble(from: text)
@@ -117,7 +116,6 @@ struct ChooseShroomsDoseScreen: View {
                 HStack {
                     TextField("Enter Mushroom Amount", text: $shroomWeightText)
                         .keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
                         .onChange(of: shroomWeightText) { text in
                             shroomWeightInGrams = getDouble(from: text)
                             maybeUpdatePsilocybin()
@@ -127,7 +125,6 @@ struct ChooseShroomsDoseScreen: View {
                 HStack {
                     TextField("Enter Psilocybin Percentage", text: $psilocybinContentInPercentText)
                         .keyboardType(.decimalPad)
-                        .textFieldStyle(.roundedBorder)
                         .onChange(of: psilocybinContentInPercentText) { text in
                             psilocybinContentInPercent = getDouble(from: text)
                             maybeUpdatePsilocybin()

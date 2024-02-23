@@ -148,7 +148,6 @@ struct ChooseAlcoholDoseScreen: View {
                     HStack {
                         TextField("Drink Size", text: $drinkAmountInDLText)
                             .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
                             .onChange(of: drinkAmountInDLText) { newValue in
                                 if let convertedValue = getDouble(from: newValue) {
                                     drinkAmountInDL = convertedValue
@@ -181,7 +180,6 @@ struct ChooseAlcoholDoseScreen: View {
                     HStack {
                         TextField("Drink Size", text: $alcoholContentInPercentText)
                             .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
                             .onChange(of: alcoholContentInPercentText) { newValue in
                                 if let convertedValue = getDouble(from: newValue) {
                                     alcoholContentInPercent = convertedValue
