@@ -135,7 +135,7 @@ struct EditIngestionContent: View {
                     selection: $time,
                     displayedComponents: [.date, .hourAndMinute])
                     .labelsHidden()
-                    .datePickerStyle(.wheel)
+                    .datePickerStyle(.compact)
             }
             HStack {
                 Text("Consumer")
