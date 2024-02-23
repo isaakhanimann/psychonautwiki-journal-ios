@@ -31,7 +31,7 @@ struct FinishCustomUnitsScreen: View {
         Form {
             Section {
                 TextField("Name to identify", text: $name)
-                    .textInputAutocapitalization(.never)
+                    .textInputAutocapitalization(.words)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
