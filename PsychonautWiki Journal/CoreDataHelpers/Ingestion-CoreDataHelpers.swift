@@ -93,8 +93,16 @@ extension Ingestion: Comparable {
     var numberOfDots: Int? {
         substance?.getDose(for: administrationRouteUnwrapped)?.getNumDots(
             ingestionDose: pureSubstanceDose,
-            ingestionUnits: unitsUnwrapped
+            ingestionUnits: pureUnits
         )
+    }
+
+    private var pureUnits: String {
+        if let customUnit {
+            customUnit.originalUnitUnwrapped
+        } else {
+            unitsUnwrapped
+        }
     }
 
     var unitsUnwrapped: String {
