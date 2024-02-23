@@ -164,7 +164,7 @@ struct EditIngestionContent: View {
                                     if let customUnit {
                                         Text(customUnit.nameUnwrapped)
                                     } else {
-                                        Text("No selection")
+                                        Text("Default")
                                     }
                                 }.foregroundStyle(.secondary)
                             }
