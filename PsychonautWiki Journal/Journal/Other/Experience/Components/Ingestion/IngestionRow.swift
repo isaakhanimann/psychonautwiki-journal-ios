@@ -71,7 +71,13 @@ private struct IngestionRowContent: View {
                         if timeDisplayStyle == .relativeToNow {
                             Text(ingestion.timeUnwrapped, style: .relative) + Text(" ago")
                         } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                            Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)))
+                            let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
+                            let isFirstIngestion = dateComponents.day == 0 && dateComponents.hour == 0 && dateComponents.minute == 0 && dateComponents.second == 0
+                            if isFirstIngestion {
+                                Text("t=") + Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                            } else {
+                                Text("t+") + Text(DateDifference.formatted(dateComponents))
+                            }
                         } else {
                             Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                         }
@@ -145,7 +151,7 @@ private struct IngestionRowContent: View {
             IngestionRowContent(
                 ingestion: Ingestion.knownDosePreviewSample,
                 substanceColor: .pink,
-                timeDisplayStyle: .relativeToNow,
+                timeDisplayStyle: .relativeToStart,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
                 firstIngestionTime: Date().addingTimeInterval(-60 * 60)
