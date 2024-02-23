@@ -36,7 +36,7 @@ struct ChooseCustomUnitScreen: View {
                     dismiss()
                 }
             }
-        }.navigationTitle("Choose Custom Unit")
+        }.navigationTitle("Choose Unit")
     }
 }
 
