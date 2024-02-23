@@ -305,6 +305,7 @@
 		EAC39DC8297934FE0012823D /* AddLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC39DC7297934FE0012823D /* AddLocationScreen.swift */; };
 		EAC4BFFC2B890ADA00293B44 /* ChooseCustomUnitScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */; };
 		EAC4BFFE2B890DF600293B44 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */; };
+		EAC4C0002B893EB300293B44 /* CustomUnitCalculationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -660,6 +661,7 @@
 		EAC39DC7297934FE0012823D /* AddLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationScreen.swift; sourceTree = "<group>"; };
 		EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCustomUnitScreen.swift; sourceTree = "<group>"; };
 		EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
+		EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitCalculationText.swift; sourceTree = "<group>"; };
 		EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceFile.swift; sourceTree = "<group>"; };
 		EACB0C1A293F9C0100C605E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferScreen.swift; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 				EAD1D0092B528CEA00EC0D70 /* Add */,
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
 				EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */,
+				EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */,
 				EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */,
 				EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */,
 				EA4793552B46985C00685EAA /* Double+RoundedToAtMost1Decimal.swift */,
@@ -1959,6 +1962,7 @@
 				EAB1659E27E34AD5003DF79D /* CustomSubstance-CoreDataHelpers.swift in Sources */,
 				EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */,
 				EA302E442B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift in Sources */,
+				EAC4C0002B893EB300293B44 /* CustomUnitCalculationText.swift in Sources */,
 				EABD922029427A9C0073303A /* DosesScreen.swift in Sources */,
 				EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,

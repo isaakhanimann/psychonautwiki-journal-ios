@@ -25,12 +25,10 @@ struct CustomUnitDosePicker: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(customUnit.nameUnwrapped).font(.headline)
             if !customUnit.noteUnwrapped.isEmpty {
                 Text(customUnit.noteUnwrapped).font(.subheadline)
             }
             CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: customUnit.roaDose)
-            doseCalculationText.foregroundStyle(calculatedDoseColor)
             HStack {
                 TextField(
                     "Enter Dose",
@@ -54,36 +52,6 @@ struct CustomUnitDosePicker: View {
                     Text(customUnit.unitUnwrapped)
                 }
             }
-        }
-    }
-
-    private var customUnitDose: CustomUnitDose? {
-        if let dose {
-            return CustomUnitDose(
-                dose: dose,
-                isEstimate: isEstimate,
-                estimatedDoseVariance: estimatedDoseVariance,
-                customUnit: customUnit)
-        } else {
-            return nil
-        }
-    }
-
-    private var calculatedDoseColor: Color {
-        if let calculatedDose = customUnitDose?.calculatedDose {
-            customUnit.roaDose?.getRangeType(for: calculatedDose, with: customUnit.originalUnitUnwrapped).color ?? Color.primary
-        } else {
-            Color.primary
-        }
-    }
-
-    private var doseCalculationText: Text {
-        if let customUnitDose, let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
-            Text(calculatedDoseDescription).fontWeight(.bold) +
-            Text(
-                " = \(customUnitDose.doseDescription) x \(customUnit.doseOfOneUnitDescription)")
-        } else {
-            Text(" ")
         }
     }
 }

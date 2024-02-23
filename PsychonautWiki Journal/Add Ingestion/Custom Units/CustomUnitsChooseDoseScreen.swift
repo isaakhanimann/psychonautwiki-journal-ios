@@ -28,11 +28,22 @@ struct CustomUnitsChooseDoseScreen: View {
 
     var body: some View {
         Form {
-            Section("Pure \(customUnit.administrationRouteUnwrapped.rawValue.capitalized) Dose") {
-                if !(customUnit.substance?.isApproved ?? true) {
-                    Text("Info is not approved by PsychonautWiki administrators.")
-                }
-                RoaDoseRow(roaDose: customUnit.roaDose)
+            if let roaDose = customUnit.roaDose {
+                Section("Pure \(customUnit.administrationRouteUnwrapped.rawValue.capitalized) Dose") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        RoaDoseRow(roaDose: roaDose)
+                        CustomUnitCalculationText(
+                            customUnit: customUnit,
+                            dose: dose,
+                            isEstimate: isEstimate,
+                            estimatedDoseVariance: estimatedDoseVariance)
+                        if !(customUnit.substance?.isApproved ?? true) {
+                            Text("Info is not approved by PsychonautWiki administrators.")
+                        }
+                    }
+                }.listRowSeparator(.hidden)
+            }
+            Section(customUnit.nameUnwrapped) {
                 CustomUnitDosePicker(
                     customUnit: customUnit,
                     dose: $dose,

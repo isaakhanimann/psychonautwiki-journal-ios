@@ -104,7 +104,9 @@ struct EditCustomUnitsScreenContent: View {
                     .autocapitalization(.sentences)
             }
             Section {
-                RoaDoseRow(roaDose: roaDose)
+                if let roaDose {
+                    RoaDoseRow(roaDose: roaDose)
+                }
                 DosePicker(
                     roaDose: roaDose,
                     doseMaybe: $dose,

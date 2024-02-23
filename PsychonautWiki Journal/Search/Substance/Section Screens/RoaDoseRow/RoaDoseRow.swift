@@ -17,18 +17,14 @@
 import SwiftUI
 
 struct RoaDoseRow: View {
-    let roaDose: RoaDose?
+    let roaDose: RoaDose
 
     var body: some View {
-        if let roaDose {
-            DoseClassificationRow(
-                lightMin: roaDose.lightMin,
-                commonMin: roaDose.commonMin,
-                strongMin: roaDose.strongMin,
-                heavyMin: roaDose.heavyMin,
-                units: roaDose.units)
-        } else {
-            EmptyView()
-        }
+        DoseClassificationRow(
+            lightMin: roaDose.lightMin,
+            commonMin: roaDose.commonMin,
+            strongMin: roaDose.strongMin,
+            heavyMin: roaDose.heavyMin,
+            units: roaDose.units)
     }
 }

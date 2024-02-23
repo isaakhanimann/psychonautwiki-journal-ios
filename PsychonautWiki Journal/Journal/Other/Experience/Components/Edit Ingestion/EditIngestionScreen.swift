@@ -40,7 +40,7 @@ struct EditIngestionScreen: View {
 
     private var filteredCustomUnit: [CustomUnit] {
         customUnits.filter { unit in
-            unit.substanceNameUnwrapped == ingestion.substanceNameUnwrapped && unit.administrationRouteUnwrapped == ingestion.administrationRouteUnwrapped && unit.id != selectedCustomUnit?.id
+            unit.substanceNameUnwrapped == ingestion.substanceNameUnwrapped && unit.administrationRouteUnwrapped == ingestion.administrationRouteUnwrapped
         }
     }
 
@@ -140,18 +140,22 @@ struct EditIngestionContent: View {
         NavigationStack {
             Form {
                 Section("\(route.rawValue.localizedCapitalized) Dose") {
-                    RoaDoseRow(roaDose: roaDose)
-                    if let customUnit {
-                        CustomUnitDosePicker(
-                            customUnit: customUnit,
-                            dose: $dose,
-                            isEstimate: $isEstimate,
-                            estimatedDoseVariance: $estimatedDoseVariance)
-                    } else {
-                        DosePicker(
-                            roaDose: roaDose,
-                            doseMaybe: $dose,
-                            selectedUnits: $units)
+                    VStack(alignment: .leading, spacing: 8) {
+                        if let roaDose {
+                            RoaDoseRow(roaDose: roaDose)
+                        }
+                        if let customUnit {
+                            CustomUnitCalculationText(
+                                customUnit: customUnit,
+                                dose: dose,
+                                isEstimate: isEstimate,
+                                estimatedDoseVariance: estimatedDoseVariance)
+                        } else {
+                            DosePicker(
+                                roaDose: roaDose,
+                                doseMaybe: $dose,
+                                selectedUnits: $units)
+                        }
                     }
                     if !otherUnits.isEmpty {
                         NavigationLink {
@@ -171,6 +175,15 @@ struct EditIngestionContent: View {
                         }
                     }
                 }.listRowSeparator(.hidden)
+                if let customUnit {
+                    Section(customUnit.nameUnwrapped) {
+                        CustomUnitDosePicker(
+                            customUnit: customUnit,
+                            dose: $dose,
+                            isEstimate: $isEstimate,
+                            estimatedDoseVariance: $estimatedDoseVariance)
+                    }.listRowSeparator(.hidden)
+                }
                 Section("Notes") {
                     TextField("Enter Note", text: $note)
                         .autocapitalization(.sentences)
@@ -195,7 +208,7 @@ struct EditIngestionContent: View {
                         StomachFullnessPicker(stomachFullness: $stomachFullness)
                             .pickerStyle(.menu)
                     }
-                }
+                }.listRowSeparator(.hidden)
                 Section {
                     Button(action: delete) {
                         Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
