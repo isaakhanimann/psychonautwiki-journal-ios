@@ -26,6 +26,9 @@ struct CustomUnitRow: View {
                 Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))").font(.headline)
                 Text(customUnit.doseOfOneUnitDescription + " per \(customUnit.unitUnwrapped)")
                 .font(.subheadline)
+                if !customUnit.noteUnwrapped.isEmpty {
+                    Text(customUnit.noteUnwrapped).font(.footnote)
+                }
             }
         }
     }
