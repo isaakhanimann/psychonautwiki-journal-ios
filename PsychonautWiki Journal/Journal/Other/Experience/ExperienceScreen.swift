@@ -21,12 +21,32 @@ struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
 
     @State private var isShowingAddIngestionFullScreen = false
-    @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = TimeDisplayStyle.regular.rawValue
-    private var timeDisplayStyle: Binding<TimeDisplayStyle> {
+    @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = SaveableTimeDisplayStyle.regular.rawValue
+
+    private var saveableTimeDisplayStyle: Binding<SaveableTimeDisplayStyle> {
         Binding(
-            get: { TimeDisplayStyle(rawValue: timeDisplayStyleText) ?? TimeDisplayStyle.regular },
+            get: {
+                SaveableTimeDisplayStyle(rawValue: timeDisplayStyleText) ?? .regular
+            },
             set: { newValue in timeDisplayStyleText = newValue.rawValue }
         )
+    }
+
+    var timeDisplayStyle: TimeDisplayStyle {
+        switch saveableTimeDisplayStyle.wrappedValue {
+        case .regular:
+            return .regular
+        case .relativeToNow:
+            return .relativeToNow
+        case .relativeToStart:
+            return .relativeToStart
+        case .auto:
+            if experience.isCurrent {
+                return .relativeToNow
+            } else {
+                return .relativeToStart
+            }
+        }
     }
 
     @State private var isShowingDeleteConfirmation = false
@@ -139,7 +159,7 @@ struct ExperienceScreen: View {
                             ),
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: experience.myIngestionsSorted,
-                            timeDisplayStyle: timeDisplayStyle.wrappedValue,
+                            timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: { showIngestion(id: $0) },
@@ -208,7 +228,7 @@ struct ExperienceScreen: View {
                             } label: {
                                 TimedNoteRow(
                                     timedNote: timedNote,
-                                    timeDisplayStyle: timeDisplayStyle.wrappedValue,
+                                    timeDisplayStyle: timeDisplayStyle,
                                     firstIngestionTime: experience.ingestionsSorted.first?.time
                                 )
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -229,7 +249,7 @@ struct ExperienceScreen: View {
                         hiddenRatings: hiddenRatings,
                         showRating: showRating,
                         hideRating: hideRating,
-                        timeDisplayStyle: timeDisplayStyle.wrappedValue,
+                        timeDisplayStyle: timeDisplayStyle,
                         firstIngestionTime: experience.ingestionsSorted.first?.timeUnwrapped
                     )
                 }
@@ -259,7 +279,7 @@ struct ExperienceScreen: View {
                             timelineModel: consumer.timelineModel,
                             hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: consumer.ingestionsSorted,
-                            timeDisplayStyle: timeDisplayStyle.wrappedValue,
+                            timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             showIngestion: { showIngestion(id: $0) },
@@ -347,7 +367,7 @@ struct ExperienceScreen: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ExperienceToolbarContent(
                     experience: experience,
-                    timeDisplayStyle: timeDisplayStyle,
+                    saveableTimeDisplayStyle: saveableTimeDisplayStyle,
                     sheetToShow: $sheetToShow,
                     isShowingDeleteConfirmation: $isShowingDeleteConfirmation
                 )

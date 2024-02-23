@@ -18,7 +18,7 @@ import SwiftUI
 
 struct ExperienceToolbarContent: View {
     @ObservedObject var experience: Experience
-    @Binding var timeDisplayStyle: TimeDisplayStyle
+    @Binding var saveableTimeDisplayStyle: SaveableTimeDisplayStyle
     @Binding var sheetToShow: ExperienceScreen.SheetOption?
     @Binding var isShowingDeleteConfirmation: Bool
 
@@ -27,13 +27,13 @@ struct ExperienceToolbarContent: View {
     var body: some View {
         Group {
             Menu {
-                ForEach(TimeDisplayStyle.allCases) { option in
+                ForEach(SaveableTimeDisplayStyle.allCases) { option in
                     Button {
                         withAnimation {
-                            timeDisplayStyle = option
+                            saveableTimeDisplayStyle = option
                         }
                     } label: {
-                        if timeDisplayStyle == option {
+                        if saveableTimeDisplayStyle == option {
                             Label(option.text, systemImage: "checkmark")
                         } else {
                             Text(option.text)

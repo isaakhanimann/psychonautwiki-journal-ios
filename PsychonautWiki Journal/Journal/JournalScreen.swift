@@ -95,7 +95,7 @@ struct JournalScreen: View {
                         Button {
                             isTimeRelative = false
                         } label: {
-                            let option = TimeDisplayStyle.regular
+                            let option = SaveableTimeDisplayStyle.regular
                             if isTimeRelative {
                                 Text(option.text)
                             } else {
@@ -105,7 +105,7 @@ struct JournalScreen: View {
                         Button {
                             isTimeRelative = true
                         } label: {
-                            let option = TimeDisplayStyle.relativeToNow
+                            let option = SaveableTimeDisplayStyle.relativeToNow
                             if isTimeRelative {
                                 Label(option.text, systemImage: "checkmark")
                             } else {

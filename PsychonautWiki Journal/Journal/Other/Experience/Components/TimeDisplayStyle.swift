@@ -16,21 +16,28 @@
 
 import Foundation
 
-enum TimeDisplayStyle: String, CaseIterable, Identifiable {
+enum TimeDisplayStyle {
+    case regular, relativeToNow, relativeToStart
+}
+
+
+enum SaveableTimeDisplayStyle: String, CaseIterable, Identifiable {
+    case regular, relativeToNow, relativeToStart, auto
+
     var id: Self {
         self
     }
 
-    case regular, relativeToNow, relativeToStart
-
     var text: String {
         switch self {
         case .regular:
-            return "Show regular time"
+            return "Regular time"
         case .relativeToNow:
-            return "Show time relative to now"
+            return "Time relative to now"
         case .relativeToStart:
-            return "Show time relative to start"
+            return "Time relative to start"
+        case .auto:
+            return "Auto"
         }
     }
 }
