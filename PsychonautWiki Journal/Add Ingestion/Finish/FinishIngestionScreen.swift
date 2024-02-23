@@ -157,7 +157,7 @@ struct FinishIngestionScreen: View {
                         }
                     }
                 }
-            }
+            }.listRowSeparator(.hidden)
             .onChange(of: selectedTime) { _ in
                 selectExperienceBasedOnCurrentTime()
             }
