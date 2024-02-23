@@ -124,6 +124,14 @@ struct ChooseSubstanceContent: View {
                             isEyeOpen: isEyeOpen)
                     }
                 }
+                ForEach(filteredCustomUnits) { customUnit in
+                    CustomUnitBox(customUnit: customUnit)
+                }
+                ForEach(filteredCustomSubstances) { custom in
+                    CustomSubstanceBox(
+                        customSubstanceModel: custom,
+                        isEyeOpen: isEyeOpen)
+                }
                 if !filteredSubstances.isEmpty {
                     if filteredSuggestions.isEmpty {
                         ForEach(filteredSubstances) { substance in
@@ -140,14 +148,6 @@ struct ChooseSubstanceContent: View {
                                 isEyeOpen: isEyeOpen)
                         }
                     }
-                }
-                ForEach(filteredCustomUnits) { customUnit in
-                    CustomUnitBox(customUnit: customUnit)
-                }
-                ForEach(filteredCustomSubstances) { custom in
-                    CustomSubstanceBox(
-                        customSubstanceModel: custom,
-                        isEyeOpen: isEyeOpen)
                 }
                 Button {
                     isShowingAddCustomSheet.toggle()
