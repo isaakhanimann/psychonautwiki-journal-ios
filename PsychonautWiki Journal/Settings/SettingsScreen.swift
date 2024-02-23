@@ -115,32 +115,6 @@ struct SettingsContent: View {
                         .labelsHidden()
                     }
                 }
-                Section("Communication") {
-                    if isEyeOpen {
-                        NavigationLink {
-                            ShareScreen()
-                        } label: {
-                            Label("Share App", systemImage: "person.2")
-                        }
-                    }
-                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
-                        Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
-                    }
-                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
-                        Label("Ask a Question", systemImage: "ellipsis.bubble")
-                    }
-                    if isEyeOpen {
-                        NavigationLink(
-                            destination: FAQView(),
-                            label: {
-                                Label("Frequently Asked Questions", systemImage: "questionmark.square")
-                            }
-                        )
-                        Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
-                            Label("Source Code", systemImage: "doc.text.magnifyingglass")
-                        }
-                    }
-                }
                 if isEyeOpen {
                     Section("UI") {
                         NavigationLink {
@@ -209,6 +183,32 @@ struct SettingsContent: View {
                             Text("This will delete all your experiences, ingestions, custom substances and sprays.")
                         }
                     )
+                }
+                Section("Communication") {
+                    if isEyeOpen {
+                        NavigationLink {
+                            ShareScreen()
+                        } label: {
+                            Label("Share App", systemImage: "person.2")
+                        }
+                    }
+                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
+                        Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
+                    }
+                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
+                        Label("Ask a Question", systemImage: "ellipsis.bubble")
+                    }
+                    if isEyeOpen {
+                        NavigationLink(
+                            destination: FAQView(),
+                            label: {
+                                Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                            }
+                        )
+                        Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
+                            Label("Source Code", systemImage: "doc.text.magnifyingglass")
+                        }
+                    }
                 }
                 Section {
                     HStack {
