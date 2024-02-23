@@ -83,7 +83,7 @@ private struct IngestionRowContent: View {
                     if !ingestion.noteUnwrapped.isEmpty {
                         Text(ingestion.noteUnwrapped)
                     }
-                    if let stomachFullness = ingestion.stomachFullnessUnwrapped, ingestion.administrationRouteUnwrapped == .oral {
+                    if let stomachFullness = ingestion.stomachFullnessUnwrapped, ingestion.administrationRouteUnwrapped == .oral, stomachFullness != .empty {
                         Text("\(stomachFullness.text) Stomach: ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay")
                     }
                 }
