@@ -20,6 +20,7 @@ import SwiftUI
 
 struct EditIngestionScreen: View {
     let ingestion: Ingestion
+    @Binding var isHidden: Bool
     @State private var time = Date()
     @State private var dose: Double?
     @State private var units: String = "mg"
@@ -65,7 +66,8 @@ struct EditIngestionScreen: View {
             consumerName: $consumerName,
             save: save,
             delete: delete,
-            isEyeOpen: isEyeOpen
+            isEyeOpen: isEyeOpen,
+            isHidden: $isHidden
         ).onFirstAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
@@ -134,6 +136,8 @@ struct EditIngestionContent: View {
     let save: () -> Void
     let delete: () -> Void
     let isEyeOpen: Bool
+    @Binding var isHidden: Bool
+
 
     @Environment(\.dismiss) var dismiss
 
@@ -235,6 +239,7 @@ struct EditIngestionContent: View {
                     }
                 }.listRowSeparator(.hidden)
                 Section {
+                    Toggle("Hide In Timeline", isOn: $isHidden).tint(.accentColor)
                     Button(action: delete) {
                         Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
                     }
@@ -287,7 +292,8 @@ struct EditIngestionContent: View {
         consumerName: .constant("Marc"),
         save: { },
         delete: { },
-        isEyeOpen: true)
+        isEyeOpen: true,
+        isHidden: .constant(false))
 }
 
 #Preview("Edit custom unit ingestion") {
@@ -307,6 +313,7 @@ struct EditIngestionContent: View {
         consumerName: .constant("Marc"),
         save: { },
         delete: { },
-        isEyeOpen: true)
+        isEyeOpen: true,
+        isHidden: .constant(false))
 }
 

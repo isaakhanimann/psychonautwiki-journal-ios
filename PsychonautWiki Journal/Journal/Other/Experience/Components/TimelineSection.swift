@@ -18,11 +18,11 @@ import SwiftUI
 
 struct TimelineSection: View {
     let timelineModel: TimelineModel?
-    let hiddenIngestions: [ObjectIdentifier]
     let ingestionsSorted: [Ingestion]
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
+    let hiddenIngestions: [ObjectIdentifier]
     let showIngestion: (ObjectIdentifier) -> Void
     let hideIngestion: (ObjectIdentifier) -> Void
     let updateActivityIfActive: () -> Void
@@ -42,14 +42,10 @@ struct TimelineSection: View {
                 Canvas { _, _ in }.frame(height: timelineHeight)
             }
             ForEach(ingestionsSorted) { ing in
-                let isIngestionHidden = hiddenIngestions.contains(ing.id)
                 Button {
                     ingestionToEdit = ing
                 } label: {
                     HStack(alignment: .center) {
-                        if isIngestionHidden {
-                            Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
-                        }
                         IngestionRow(
                             ingestion: ing,
                             firstIngestionTime: ingestionsSorted.first?.time,
@@ -57,29 +53,9 @@ struct TimelineSection: View {
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots
                         )
-                    }
-                    .swipeActions(edge: .leading) {
+                        let isIngestionHidden = hiddenIngestions.contains(ing.id)
                         if isIngestionHidden {
-                            Button {
-                                showIngestion(ing.id)
-                            } label: {
-                                Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
-                            }
-                        } else {
-                            Button {
-                                hideIngestion(ing.id)
-                            } label: {
-                                Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
-                            }
-                        }
-                    }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            PersistenceController.shared.viewContext.delete(ing)
-                            PersistenceController.shared.saveViewContext()
-                            updateActivityIfActive()
-                        } label: {
-                            Label("Delete", systemImage: "trash.fill")
+                            Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
                     }
                 }
@@ -87,7 +63,19 @@ struct TimelineSection: View {
         }.sheet(item: $ingestionToEdit, onDismiss: {
             updateActivityIfActive()
         }) { ingestion in
-            EditIngestionScreen(ingestion: ingestion)
+            let isHidden = Binding(
+                get: { hiddenIngestions.contains(ingestion.id) },
+                set: { newIsHidden in
+                    if newIsHidden {
+                        hideIngestion(ingestion.id)
+                    } else {
+                        showIngestion(ingestion.id)
+                    }
+                }
+            )
+            EditIngestionScreen(
+                ingestion: ingestion,
+                isHidden: isHidden)
         }
     }
 }

@@ -157,11 +157,11 @@ struct ExperienceScreen: View {
                                 hiddenRatings: hiddenRatings,
                                 areRedosesDrawnIndividually: areRedosesDrawnIndividually
                             ),
-                            hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
+                            hiddenIngestions: hiddenIngestions,
                             showIngestion: { showIngestion(id: $0) },
                             hideIngestion: { hideIngestion(id: $0) },
                             updateActivityIfActive: updateActivityIfActive
@@ -277,11 +277,11 @@ struct ExperienceScreen: View {
                     Section(consumer.consumerName) {
                         TimelineSection(
                             timelineModel: consumer.timelineModel,
-                            hiddenIngestions: hiddenIngestions,
                             ingestionsSorted: consumer.ingestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
+                            hiddenIngestions: hiddenIngestions,
                             showIngestion: { showIngestion(id: $0) },
                             hideIngestion: { hideIngestion(id: $0) },
                             updateActivityIfActive: {}

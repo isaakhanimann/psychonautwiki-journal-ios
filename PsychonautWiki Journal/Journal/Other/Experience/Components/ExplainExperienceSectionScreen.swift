@@ -50,7 +50,6 @@ struct TimelineExplanationTexts: View {
             Text("If any of the 4 durations are missing but the total duration is given, then the first defined durations are drawn and as soon as a missing duration is encountered it uses the total to infer the end of the timeline and draws a dotted line to the end. If the total is not given it just stops drawing the line. So if there is no timeline or part of the timeline is missing that means that the duration is not defined in PsychonautWiki. If you add the missing durations in PsychonautWiki, the full timeline will be shown in the next update.")
             Text("Different administration routes are always drawn as separate timelines even if they are of the same substance. They also take the full height of the canvas, not the height that is proportional to the dose or effect.")
             Text("The vertical trajectory of dotted lines is unknown. So if you see a dotted line that means it is not known how the effect develops over that timeframe. The only thing that is known is where the line will end.")
-            Text("By swiping an ingestion row to the right one can hide an ingestion from the timeline, to make the other curves more visible.")
         }
     }
 }
