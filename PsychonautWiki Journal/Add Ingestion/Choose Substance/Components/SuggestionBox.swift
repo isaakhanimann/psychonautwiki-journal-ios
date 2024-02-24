@@ -30,25 +30,25 @@ struct SuggestionBox: View {
                     horizontalSpacing: horizontalSpacing,
                     verticalSpacing: verticalSpacing)
                 {
-                    ForEach(suggestion.dosesAndUnit) { dose in
-                        if let doseUnwrap = dose.dose {
+                    ForEach(suggestion.dosesAndUnit) { doseAndUnit in
+                        if let doseDescription = doseAndUnit.doseDescription {
                             NavigationLink(
-                                "\(dose.isEstimate ? "~" : "")\(doseUnwrap.formatted()) \(dose.units ?? "")",
+                                doseDescription,
                                 value: FinishIngestionScreenArguments(
                                     substanceName: suggestion.substanceName,
                                     administrationRoute: suggestion.route,
-                                    dose: doseUnwrap,
-                                    units: dose.units,
-                                    isEstimate: dose.isEstimate,
-                                    estimatedDoseVariance: dose.estimatedDoseVariance))
+                                    dose: doseAndUnit.dose,
+                                    units: doseAndUnit.units,
+                                    isEstimate: doseAndUnit.isEstimate,
+                                    estimatedDoseVariance: doseAndUnit.estimatedDoseVariance))
                                 .buttonStyle(.bordered).fixedSize()
                         } else {
                             NavigationLink("Unknown", value: FinishIngestionScreenArguments(
                                 substanceName: suggestion.substanceName,
                                 administrationRoute: suggestion.route,
-                                dose: dose.dose,
-                                units: dose.units,
-                                isEstimate: dose.isEstimate,
+                                dose: doseAndUnit.dose,
+                                units: doseAndUnit.units,
+                                isEstimate: doseAndUnit.isEstimate,
                                 estimatedDoseVariance: nil
                             ))
                             .buttonStyle(.bordered).fixedSize()
