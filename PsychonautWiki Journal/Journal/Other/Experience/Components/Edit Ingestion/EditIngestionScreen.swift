@@ -156,6 +156,21 @@ struct EditIngestionContent: View {
                                 roaDose: roaDose,
                                 doseMaybe: $dose,
                                 selectedUnits: $units)
+                            Toggle("Is an Estimate", isOn: $isEstimate)
+                                .tint(.accentColor)
+                            if isEstimate {
+                                HStack {
+                                    Image(systemName: "plusminus")
+                                    TextField(
+                                        "Dose variance",
+                                        value: $estimatedDoseVariance,
+                                        format: .number
+                                    )
+                                    .keyboardType(.decimalPad)
+                                    Spacer()
+                                    Text(units)
+                                }
+                            }
                         }
                     }
                     if !otherUnits.isEmpty {
