@@ -105,6 +105,7 @@ struct ChooseAlcoholDoseScreen: View {
     ]
 
     @State private var presetSelection = presets.first!
+    @FocusState private var isEstimatedVarianceFocused: Bool
 
     private var screen: some View {
         Form {
@@ -116,7 +117,13 @@ struct ChooseAlcoholDoseScreen: View {
                         .foregroundColor(doseType.color)
                     RoaDoseRow(roaDose: oralDose)
                 }
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -124,14 +131,16 @@ struct ChooseAlcoholDoseScreen: View {
                             "Pure dose variance",
                             value: $doseVarianceInGrams,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
                         Spacer()
                         Text(units)
                     }
 
                 }
                 unknownDoseLink
-            }
+            }.listRowSeparator(.hidden)
             Section("Presets") {
                 ForEach(ChooseAlcoholDoseScreen.presets) { preset in
                     Button(preset.title) {

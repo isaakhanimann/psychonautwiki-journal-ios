@@ -23,6 +23,8 @@ struct CustomUnitDosePicker: View {
     @Binding var isEstimate: Bool
     @Binding var estimatedDoseVariance: Double?
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if !customUnit.noteUnwrapped.isEmpty {
@@ -39,7 +41,13 @@ struct CustomUnitDosePicker: View {
                 Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)
-            Toggle("Dose is an Estimate", isOn: $isEstimate).tint(.accentColor)
+            Toggle("Dose is an Estimate", isOn: $isEstimate)
+                .tint(.accentColor)
+                .onChange(of: isEstimate, perform: { newIsEstimate in
+                    if newIsEstimate {
+                        isEstimatedVarianceFocused = true
+                    }
+                })
             if isEstimate {
                 HStack {
                     Image(systemName: "plusminus")
@@ -47,7 +55,9 @@ struct CustomUnitDosePicker: View {
                         "Pure dose variance",
                         value: $estimatedDoseVariance,
                         format: .number
-                    ).keyboardType(.decimalPad)
+                    )
+                    .keyboardType(.decimalPad)
+                    .focused($isEstimatedVarianceFocused)
                     Spacer()
                     Text(customUnit.unitUnwrapped)
                 }

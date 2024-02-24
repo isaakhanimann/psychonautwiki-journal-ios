@@ -73,6 +73,8 @@ struct ChooseCaffeineDoseScreen: View {
             estimatedDoseVariance: nil))
     }
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     var screen: some View {
         Form {
             Section {
@@ -94,7 +96,13 @@ struct ChooseCaffeineDoseScreen: View {
                         Text("900")
                     }
                 }
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -102,13 +110,15 @@ struct ChooseCaffeineDoseScreen: View {
                             "Pure dose variance",
                             value: $doseVarianceInMg,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
                         Spacer()
                         Text(units)
                     }
                 }
                 unknownDoseLink
-            }
+            }.listRowSeparator(.hidden)
             Section("Average Drinks") {
                 Group {
                     Button("Caffe Nero Espresso (45 mg)") {

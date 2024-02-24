@@ -59,6 +59,8 @@ struct CustomChooseDoseScreen: View {
         NavigationLink("Use Unknown Dose", value: getDestinationArguments(dose: nil))
     }
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     private var screen: some View {
         Form {
             Section {
@@ -74,6 +76,11 @@ struct CustomChooseDoseScreen: View {
                 .font(.title)
                 Toggle("Dose is an Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -81,13 +88,15 @@ struct CustomChooseDoseScreen: View {
                             "Pure dose variance",
                             value: $doseVariance,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
                         Spacer()
                         Text(arguments.units)
                     }
                 }
                 unknownDoseLink
-            }
+            }.listRowSeparator(.hidden)
         }
         .task {
             isDoseFieldFocused = true

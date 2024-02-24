@@ -120,6 +120,7 @@ struct ChooseDoseScreenContent: View {
 
 
     @State private var purityText = ""
+    @FocusState private var isEstimatedVarianceFocused: Bool
 
     private var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
@@ -163,7 +164,13 @@ struct ChooseDoseScreenContent: View {
                         .font(.title)
                 }
             }
-            Toggle("Dose is an estimate", isOn: $isEstimate).tint(.accentColor)
+            Toggle("Dose is an estimate", isOn: $isEstimate)
+                .tint(.accentColor)
+                .onChange(of: isEstimate, perform: { newIsEstimate in
+                    if newIsEstimate {
+                        isEstimatedVarianceFocused = true
+                    }
+                })
             if isEstimate {
                 HStack {
                     Image(systemName: "plusminus")
@@ -171,7 +178,9 @@ struct ChooseDoseScreenContent: View {
                         "Pure dose variance",
                         value: $selectedDoseVariance,
                         format: .number
-                    ).keyboardType(.decimalPad)
+                    )
+                    .keyboardType(.decimalPad)
+                    .focused($isEstimatedVarianceFocused)
                     Spacer()
                     Text(selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits)
                 }

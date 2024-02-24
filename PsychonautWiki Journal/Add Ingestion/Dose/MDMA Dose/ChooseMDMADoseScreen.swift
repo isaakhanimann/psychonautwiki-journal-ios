@@ -65,6 +65,8 @@ struct ChooseMDMADoseScreen: View {
             estimatedDoseVariance: nil))
     }
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     private var screen: some View {
         Form {
             Section("Max Dose Calculator") {
@@ -88,9 +90,29 @@ struct ChooseMDMADoseScreen: View {
                         mdmaDoseInMg = getDouble(from: text)
                     }
                 }
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $estimatedDoseVariance,
+                            format: .number
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
+                        Spacer()
+                        Text(units)
+                    }
+                }
                 unknownDoseLink
-            }
+            }.listRowSeparator(.hidden)
             MDMAOptimalDoseSection()
             MDMAPillsSection()
         }

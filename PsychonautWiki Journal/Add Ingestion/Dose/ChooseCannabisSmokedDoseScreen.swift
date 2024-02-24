@@ -99,6 +99,8 @@ struct ChooseCannabisSmokedDoseScreen: View {
             estimatedDoseVariance: doseVarianceInMg))
     }
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     private var screen: some View {
         Form {
             Section("Ingested THC Amount") {
@@ -109,7 +111,13 @@ struct ChooseCannabisSmokedDoseScreen: View {
                         .foregroundColor(doseType.color)
                     RoaDoseRow(roaDose: smokedDose)
                 }
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -117,13 +125,15 @@ struct ChooseCannabisSmokedDoseScreen: View {
                             "Pure dose variance",
                             value: $doseVarianceInMg,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
                         Spacer()
                         Text("mg")
                     }
                 }
                 unknownDoseLink
-            }
+            }.listRowSeparator(.hidden)
             Section {
                 Picker("Form", selection: $pickerOption) {
                     ForEach(PickerOption.allCases, id: \.self) { option in

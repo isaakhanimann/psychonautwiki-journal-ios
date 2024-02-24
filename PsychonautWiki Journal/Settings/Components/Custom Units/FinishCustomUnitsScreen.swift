@@ -22,6 +22,7 @@ struct FinishCustomUnitsScreen: View {
         case unit
         case dose
         case note
+        case estimatedVariance
     }
 
     let substanceAndRoute: SubstanceAndRoute
@@ -75,14 +76,22 @@ struct FinishCustomUnitsScreen: View {
                         Text(originalUnit)
                     }
                 }
-                Toggle("Estimated", isOn: $isEstimate.animation()).tint(.accentColor)
+                Toggle("Estimated", isOn: $isEstimate.animation())
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            focusedField = .estimatedVariance
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
                             "Pure dose variance",
                             value: $estimatedDoseVariance,
-                            format: .number).keyboardType(.decimalPad)
+                            format: .number)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .estimatedVariance)
                         Spacer()
                         Text(originalUnit)
                     }

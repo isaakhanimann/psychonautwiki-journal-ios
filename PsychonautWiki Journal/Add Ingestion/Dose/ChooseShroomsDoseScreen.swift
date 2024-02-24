@@ -82,6 +82,8 @@ struct ChooseShroomsDoseScreen: View {
             estimatedDoseVariance: nil))
     }
 
+    @FocusState private var isEstimatedVarianceFocused: Bool
+
     private var screen: some View {
         Form {
             Section("Ingested Psilocybin Amount") {
@@ -97,7 +99,13 @@ struct ChooseShroomsDoseScreen: View {
                     Text("mg")
                 }
                 .font(.title)
-                Toggle("Is Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -105,7 +113,9 @@ struct ChooseShroomsDoseScreen: View {
                             "Pure dose variance",
                             value: $doseVariance,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
                         Spacer()
                         Text("mg")
                     }

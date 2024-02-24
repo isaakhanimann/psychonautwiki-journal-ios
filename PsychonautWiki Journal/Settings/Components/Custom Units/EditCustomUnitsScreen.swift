@@ -92,6 +92,7 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var isArchived: Bool
     let delete: () -> Void
     let ingestionCount: Int
+
     @State private var isDeleteShown = false
 
     var body: some View {
@@ -112,7 +113,8 @@ struct EditCustomUnitsScreenContent: View {
                     doseMaybe: $dose,
                     selectedUnits: $originalUnit
                 )
-                Toggle("Is an Estimate", isOn: $isEstimate).tint(.accentColor)
+                Toggle("Is an Estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -120,7 +122,8 @@ struct EditCustomUnitsScreenContent: View {
                             "Pure dose variance",
                             value: $estimatedDoseVariance,
                             format: .number
-                        ).keyboardType(.decimalPad)
+                        )
+                        .keyboardType(.decimalPad)
                         Spacer()
                         Text(originalUnit)
                     }
