@@ -43,14 +43,19 @@ struct CustomUnitsChooseDoseScreen: View {
                     }
                 }.listRowSeparator(.hidden)
             }
-            Section(customUnit.nameUnwrapped) {
+            Section {
                 CustomUnitDosePicker(
                     customUnit: customUnit,
                     dose: $dose,
                     isEstimate: $isEstimate,
                     estimatedDoseVariance: $estimatedDoseVariance
                 ).focused($isDoseFieldFocused)
-
+            } header: {
+                Text(customUnit.nameUnwrapped)
+            } footer: {
+                if !customUnit.noteUnwrapped.isEmpty {
+                    Text(customUnit.noteUnwrapped)
+                }
             }
             if isEyeOpen {
                 Section("Info") {

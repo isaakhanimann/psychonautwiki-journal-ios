@@ -195,12 +195,18 @@ struct EditIngestionContent: View {
                     }
                 }.listRowSeparator(.hidden)
                 if let customUnit {
-                    Section(customUnit.nameUnwrapped) {
+                    Section {
                         CustomUnitDosePicker(
                             customUnit: customUnit,
                             dose: $dose,
                             isEstimate: $isEstimate,
                             estimatedDoseVariance: $estimatedDoseVariance)
+                    } header: {
+                        Text(customUnit.nameUnwrapped)
+                    } footer: {
+                        if !customUnit.noteUnwrapped.isEmpty {
+                            Text(customUnit.noteUnwrapped)
+                        }
                     }.listRowSeparator(.hidden)
                 }
                 Section("Notes") {
