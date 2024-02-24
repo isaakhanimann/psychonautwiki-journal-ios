@@ -118,7 +118,7 @@ struct FinishIngestionScreen: View {
                             experiences: experiencesWithinLargerRange)
                     } label: {
                         HStack {
-                            Text("Part of:")
+                            Text("Experience")
                             Spacer()
                             if let exp = selectedExperience {
                                 Text(exp.titleUnwrapped)
