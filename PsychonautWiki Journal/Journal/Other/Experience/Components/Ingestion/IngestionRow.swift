@@ -111,7 +111,7 @@ private struct IngestionRowContent: View {
                 if let customUnitDose = ingestion.customUnitDose {
                     if let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
                         Text(customUnitDose.doseDescription) + routeTextWithSpace
-                        Text("= \(calculatedDoseDescription)").foregroundColor(.secondary)
+                        + Text(" = \(calculatedDoseDescription)").foregroundColor(.secondary)
                     } else {
                         Text(customUnitDose.doseDescription) + Text(" " + routeText).foregroundColor(.secondary)
                     }
