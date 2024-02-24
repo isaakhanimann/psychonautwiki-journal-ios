@@ -68,7 +68,7 @@ struct RouteItemView: View {
                     }
                 }.multilineTextAlignment(.trailing)
             } else {
-                Text("Unknown dose \(routeText)")
+                Text("Unknown dose ")  + Text(routeText).foregroundColor(.secondary)
             }
             Spacer()
             if let numDotsUnwrap = routeItem.numDots, !isHidingDosageDots {
