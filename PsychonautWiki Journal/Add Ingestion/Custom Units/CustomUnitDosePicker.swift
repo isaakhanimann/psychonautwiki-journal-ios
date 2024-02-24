@@ -28,7 +28,7 @@ struct CustomUnitDosePicker: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if !customUnit.noteUnwrapped.isEmpty {
-                Text(customUnit.noteUnwrapped).font(.subheadline)
+                Text(customUnit.noteUnwrapped).foregroundColor(.secondary)
             }
             CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: customUnit.roaDose)
             HStack {
