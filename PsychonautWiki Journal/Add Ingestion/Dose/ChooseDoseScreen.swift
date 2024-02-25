@@ -219,7 +219,7 @@ struct ChooseDoseScreenContent: View {
             Section("Custom units") {
                 ForEach(customUnits.wrappedValue) { customUnit in
                     NavigationLink(value: customUnit) {
-                        Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped)")
+                        Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
                     }
                 }
                 NavigationLink(
