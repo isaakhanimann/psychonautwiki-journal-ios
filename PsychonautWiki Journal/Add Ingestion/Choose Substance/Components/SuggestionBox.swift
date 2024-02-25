@@ -56,11 +56,11 @@ struct SuggestionBox: View {
                     }
                     if let substance = suggestion.substance {
                         NavigationLink(
-                            "Other",
+                            "Enter \(suggestion.units)",
                             value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
                             .buttonStyle(.borderedProminent).fixedSize()
                     } else {
-                        NavigationLink("Other", value: CustomChooseDoseScreenArguments(
+                        NavigationLink("Enter \(suggestion.units)", value: CustomChooseDoseScreenArguments(
                             substanceName: suggestion.substanceName,
                             units: suggestion.units,
                             administrationRoute: suggestion.route))
