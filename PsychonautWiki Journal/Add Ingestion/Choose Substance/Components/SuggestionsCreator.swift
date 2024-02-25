@@ -62,7 +62,6 @@ class SuggestionsCreator {
                 return Suggestion(
                     substanceName: substanceName,
                     substance: SubstanceRepo.shared.getSubstance(name: substanceName),
-                    units: firstIngestion?.unitsUnwrapped ?? "",
                     route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
                     substanceColor: firstIngestion?.substanceColor ?? .red,
                     dosesAndUnit: dosesAndUnits,

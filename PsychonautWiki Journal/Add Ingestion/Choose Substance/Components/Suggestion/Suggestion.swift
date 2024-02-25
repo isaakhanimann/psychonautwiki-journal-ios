@@ -23,7 +23,6 @@ struct Suggestion: Identifiable {
 
     let substanceName: String
     let substance: Substance?
-    let units: String
     let route: AdministrationRoute
     let substanceColor: SubstanceColor
     let dosesAndUnit: [RegularDoseAndUnit]

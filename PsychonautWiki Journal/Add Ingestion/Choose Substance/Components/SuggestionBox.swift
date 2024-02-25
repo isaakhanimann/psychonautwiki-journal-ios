@@ -54,15 +54,15 @@ struct SuggestionBox: View {
                             .buttonStyle(.bordered).fixedSize()
                         }
                     }
-                    if let substance = suggestion.substance {
+                    if let substance = suggestion.substance, let units = substance.getDose(for: suggestion.route)?.units {
                         NavigationLink(
-                            "Enter \(suggestion.units)",
+                            "Enter \(units)",
                             value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
                             .buttonStyle(.borderedProminent).fixedSize()
-                    } else {
-                        NavigationLink("Enter \(suggestion.units)", value: CustomChooseDoseScreenArguments(
+                    } else if let units = suggestion.dosesAndUnit.first?.units {
+                        NavigationLink("Enter \(units)", value: CustomChooseDoseScreenArguments(
                             substanceName: suggestion.substanceName,
-                            units: suggestion.units,
+                            units: units,
                             administrationRoute: suggestion.route))
                             .buttonStyle(.borderedProminent).fixedSize()
                     }
@@ -130,7 +130,6 @@ struct SuggestionBox: View {
                 suggestion: Suggestion(
                     substanceName: "MDMA",
                     substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
-                    units: "mg",
                     route: .insufflated,
                     substanceColor: .pink,
                     dosesAndUnit: [
@@ -159,7 +158,6 @@ struct SuggestionBox: View {
                 suggestion: Suggestion(
                     substanceName: "Cannabis",
                     substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
-                    units: "mg",
                     route: .smoked,
                     substanceColor: .green,
                     dosesAndUnit: [

@@ -175,7 +175,6 @@ struct ChooseSubstanceContent: View {
             Suggestion(
                 substanceName: "Ketamine",
                 substance: SubstanceRepo.shared.getSubstance(name: "Ketamine"),
-                units: "mg",
                 route: .insufflated,
                 substanceColor: .orange,
                 dosesAndUnit: [
@@ -202,7 +201,6 @@ struct ChooseSubstanceContent: View {
             Suggestion(
                 substanceName: "MDMA",
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
-                units: "mg",
                 route: .oral,
                 substanceColor: .pink,
                 dosesAndUnit: [
@@ -228,7 +226,6 @@ struct ChooseSubstanceContent: View {
             Suggestion(
                 substanceName: "Cannabis",
                 substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
-                units: "mg",
                 route: .smoked,
                 substanceColor: .green,
                 dosesAndUnit: [
@@ -259,7 +256,6 @@ struct ChooseSubstanceContent: View {
             Suggestion(
                 substanceName: "Coffee",
                 substance: nil,
-                units: "cups",
                 route: .oral,
                 substanceColor: .brown,
                 dosesAndUnit: [
