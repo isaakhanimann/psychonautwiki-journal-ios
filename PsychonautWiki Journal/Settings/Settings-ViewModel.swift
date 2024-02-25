@@ -55,7 +55,7 @@ extension SettingsScreen {
                     companionDict[companionCodable.substanceName] = newCompanion
                 }
                 // custom units
-                var unitsDict: [Int: CustomUnit] = [:]
+                var unitsDict: [Int32: CustomUnit] = [:]
                 for customUnitCodable in file.customUnits {
                     let newUnit = CustomUnit(context: context)
                     newUnit.substanceName = customUnitCodable.substanceName
@@ -69,6 +69,7 @@ extension SettingsScreen {
                     newUnit.unit = customUnitCodable.unit
                     newUnit.originalUnit = customUnitCodable.originalUnit
                     newUnit.note = customUnitCodable.note
+                    newUnit.idForAndroid = customUnitCodable.id
                     unitsDict[customUnitCodable.id] = newUnit
                 }
                 // experience

@@ -17,7 +17,7 @@
 import Foundation
 
 struct CustomUnitCodable: Codable {
-    let id: Int
+    let id: Int32
     let substanceName: String
     let name: String
     let creationDate: Date
@@ -46,7 +46,7 @@ struct CustomUnitCodable: Codable {
     }
 
     init(
-        id: Int,
+        id: Int32,
         substanceName: String,
         name: String,
         creationDate: Date,
@@ -75,7 +75,7 @@ struct CustomUnitCodable: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(Int.self, forKey: .id)
+        id = try values.decode(Int32.self, forKey: .id)
         substanceName = try values.decode(String.self, forKey: .substanceName)
         name = try values.decode(String.self, forKey: .name)
         let creationMillis = try values.decode(UInt64.self, forKey: .creationDate)

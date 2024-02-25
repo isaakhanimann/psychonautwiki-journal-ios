@@ -49,7 +49,7 @@ struct JournalFile: FileDocument, Codable {
                         notes: ingestion.noteUnwrapped,
                         stomachFullness: ingestion.stomachFullnessUnwrapped,
                         consumerName: ingestion.consumerName,
-                        customUnitId: ingestion.customUnit?.id.hashValue
+                        customUnitId: ingestion.customUnit?.idForAndroid
                     )
                 )
                 let doesCompanionAlreadyExist = companionsToStore.contains { com in
@@ -105,7 +105,7 @@ struct JournalFile: FileDocument, Codable {
         }
         self.customUnits = customUnits.map { customUnit in
             CustomUnitCodable(
-                id: customUnit.id.hashValue,
+                id: customUnit.idForAndroid,
                 substanceName: customUnit.substanceNameUnwrapped,
                 name: customUnit.nameUnwrapped,
                 creationDate: customUnit.creationDateUnwrapped,

@@ -203,6 +203,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.isEstimate = isEstimate
         newCustomUnit.estimatedDoseVariance = estimatedDoseVariance ?? 0
         newCustomUnit.isArchived = false
+        newCustomUnit.idForAndroid = Int32.random(in: Int32.min..<Int32.max)
         try? context.save()
         dismiss()
     }

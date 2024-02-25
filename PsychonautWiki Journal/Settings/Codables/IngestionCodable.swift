@@ -28,7 +28,7 @@ struct IngestionCodable: Codable {
     let notes: String
     let stomachFullness: StomachFullness?
     let consumerName: String?
-    let customUnitId: Int?
+    let customUnitId: Int32?
 
     enum CodingKeys: String, CodingKey {
         case substanceName
@@ -57,7 +57,7 @@ struct IngestionCodable: Codable {
         notes: String,
         stomachFullness: StomachFullness?,
         consumerName: String?,
-        customUnitId: Int?
+        customUnitId: Int32?
     ) {
         self.substanceName = substanceName
         self.time = time
@@ -104,7 +104,7 @@ struct IngestionCodable: Codable {
             stomachFullness = nil
         }
         consumerName = try values.decodeIfPresent(String.self, forKey: .consumerName)
-        customUnitId = try values.decodeIfPresent(Int.self, forKey: .customUnitId)
+        customUnitId = try values.decodeIfPresent(Int32.self, forKey: .customUnitId)
     }
 
     func encode(to encoder: Encoder) throws {
