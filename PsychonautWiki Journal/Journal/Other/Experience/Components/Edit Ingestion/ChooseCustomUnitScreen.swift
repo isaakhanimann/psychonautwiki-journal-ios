@@ -31,7 +31,7 @@ struct ChooseCustomUnitScreen: View {
                 }
             }
             if customUnit != nil {
-                Button("Clear unit") {
+                Button("Default") {
                     customUnit = nil
                     dismiss()
                 }
