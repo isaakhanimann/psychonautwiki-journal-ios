@@ -25,6 +25,16 @@ struct CustomChooseDoseScreen: View {
     @State private var doseVariance: Double?
     @FocusState private var isDoseFieldFocused: Bool
 
+    @FetchRequest(
+        sortDescriptors: []
+    ) private var customSubstances: FetchedResults<CustomSubstance>
+
+    private var customSubstance: CustomSubstance? {
+        customSubstances.first { substance in
+            substance.nameUnwrapped == arguments.substanceName
+        }
+    }
+
     var body: some View {
         screen.toolbar {
             ToolbarItem(placement: .cancellationAction) {
@@ -63,6 +73,11 @@ struct CustomChooseDoseScreen: View {
 
     private var screen: some View {
         Form {
+            if let explanationUnwrapped = customSubstance?.explanationUnwrapped {
+                Section {
+                    Text(explanationUnwrapped)
+                }
+            }
             Section {
                 HStack {
                     TextField("Enter Dose", text: $doseText)
