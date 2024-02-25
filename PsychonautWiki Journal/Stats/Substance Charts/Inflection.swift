@@ -17,37 +17,30 @@
 import Foundation
 
 extension Int {
-    // e.g. for 2.inflect(unit: "experience") it returns "2 experiences"
-    func with(unit: String) -> LocalizedStringResource {
-        "^[\(self) \(unit)](inflect: true)"
+    // e.g. for 2.with(unit: "experience") it returns "2 experiences"
+    func with(unit: String) -> String {
+        if self > 1 && !unit.hasSuffix("s") {
+            "\(self) \(unit)s"
+        } else {
+            "\(self) \(unit)"
+        }
     }
 }
 
 extension Double {
     func with(unit: String) -> String {
-        inflect(text: "\(self.formatted()) \(unit)")
-    }
-
-    private func inflect(text: String) -> String {
-        var string = AttributedString(text)
-        guard InflectionRule.canInflectPreferredLocalization else {  return text }
-        var morphology = Morphology()
-        let number: Morphology.GrammaticalNumber
-        switch self {
-        case 0:
-            number = .zero
-        case 1:
-            number = .singular
-        default:
-            number = .plural
+        if self > 1 && !unit.hasSuffix("s") {
+            "\(self.formatted()) \(unit)s"
+        } else {
+            "\(self.formatted()) \(unit)"
         }
-        morphology.number = number
-        string.inflect = InflectionRule(morphology: morphology)
-        let formattedResult = string.inflected()
-        return String(formattedResult.characters)
     }
 
     func justUnit(unit: String) -> String {
-        inflect(text: unit)
+        if self > 1 && !unit.hasSuffix("s") {
+            unit + "s"
+        } else {
+            unit
+        }
     }
 }
