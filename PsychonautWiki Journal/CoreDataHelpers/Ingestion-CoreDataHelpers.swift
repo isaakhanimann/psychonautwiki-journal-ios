@@ -77,6 +77,14 @@ extension Ingestion: Comparable {
         }
     }
 
+    var pureSubstanceEstimatedDoseVariance: Double? {
+        if let customUnitDose {
+            customUnitDose.calculatedDoseVariance
+        } else {
+            estimatedDoseVarianceUnwrapped
+        }
+    }
+
     var customUnitDose: CustomUnitDose? {
         guard let doseUnwrapped, let customUnit else {return nil}
         return CustomUnitDose(
