@@ -120,6 +120,7 @@ struct ChooseDoseScreenContent: View {
 
 
     @State private var purityText = ""
+    @FocusState private var isDoseFieldFocused: Bool
     @FocusState private var isEstimatedVarianceFocused: Bool
 
     private var roaDose: RoaDose? {
@@ -150,8 +151,11 @@ struct ChooseDoseScreenContent: View {
                 DosePicker(
                     roaDose: roaDose,
                     doseMaybe: $selectedPureDose,
-                    selectedUnits: $selectedUnits,
-                    focusOnAppear: true)
+                    selectedUnits: $selectedUnits)
+                .focused($isDoseFieldFocused)
+                .onFirstAppear {
+                    isDoseFieldFocused = true
+                }
                 if isEyeOpen {
                     HStack {
                         Image(systemName: "arrow.down")
