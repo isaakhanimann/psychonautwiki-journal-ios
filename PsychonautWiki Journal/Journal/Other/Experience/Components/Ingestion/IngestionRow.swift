@@ -110,10 +110,9 @@ private struct IngestionRowContent: View {
                 let routeText = isEyeOpen ? ingestion.administrationRouteUnwrapped.rawValue : ""
                 if let customUnitDose = ingestion.customUnitDose {
                     if let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
-                        Text(customUnitDose.doseDescription) + routeTextWithSpace
-                        + Text(" = \(calculatedDoseDescription)").foregroundColor(.secondary)
+                        Text(customUnitDose.doseDescription) + Text(" = \(calculatedDoseDescription)").foregroundColor(.secondary) + routeTextWithSpace
                     } else {
-                        Text(customUnitDose.doseDescription) + Text(" " + routeText).foregroundColor(.secondary)
+                        Text(customUnitDose.doseDescription) + routeTextWithSpace
                     }
                 } else { // not custom unit
                     if let doseUnwrapped = ingestion.doseUnwrapped {
