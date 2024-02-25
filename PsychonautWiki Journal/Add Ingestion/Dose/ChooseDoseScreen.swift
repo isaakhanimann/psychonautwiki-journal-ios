@@ -137,52 +137,53 @@ struct ChooseDoseScreenContent: View {
 
     private var doseSection: some View {
         Section {
-            if !substance.isApproved {
-                Text("Info is not approved by PsychonautWiki administrators.")
-            }
-            if let remark = substance.dosageRemark {
-                Text(remark)
-                    .foregroundColor(.secondary)
-            }
-            if let roaDose {
-                RoaDoseRow(roaDose: roaDose)
-            }
-            DosePicker(
-                roaDose: roaDose,
-                doseMaybe: $selectedPureDose,
-                selectedUnits: $selectedUnits,
-                focusOnAppear: true)
-            if isEyeOpen {
-                HStack {
-                    Image(systemName: "arrow.down")
-                    TextField("Purity", text: $purityText).keyboardType(.decimalPad)
-                    Spacer()
-                    Text("%")
+            VStack(alignment: .leading) {
+                if !substance.isApproved {
+                    Text("Info is not approved by PsychonautWiki administrators.")
                 }
-                if let impureDose {
-                    Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits)")
-                        .font(.title)
+                if let remark = substance.dosageRemark {
+                    Text(remark).font(.footnote)
                 }
-            }
-            Toggle("Dose is an estimate", isOn: $isEstimate)
-                .tint(.accentColor)
-                .onChange(of: isEstimate, perform: { newIsEstimate in
-                    if newIsEstimate {
-                        isEstimatedVarianceFocused = true
+                if let roaDose {
+                    RoaDoseRow(roaDose: roaDose)
+                }
+                DosePicker(
+                    roaDose: roaDose,
+                    doseMaybe: $selectedPureDose,
+                    selectedUnits: $selectedUnits,
+                    focusOnAppear: true)
+                if isEyeOpen {
+                    HStack {
+                        Image(systemName: "arrow.down")
+                        TextField("Purity", text: $purityText).keyboardType(.decimalPad)
+                        Spacer()
+                        Text("%")
                     }
-                })
-            if isEstimate {
-                HStack {
-                    Image(systemName: "plusminus")
-                    TextField(
-                        "Pure dose variance",
-                        value: $selectedDoseVariance,
-                        format: .number
-                    )
-                    .keyboardType(.decimalPad)
-                    .focused($isEstimatedVarianceFocused)
-                    Spacer()
-                    Text(selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits)
+                    if let impureDose {
+                        Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits)")
+                            .font(.title)
+                    }
+                }
+                Toggle("Dose is an estimate", isOn: $isEstimate)
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            isEstimatedVarianceFocused = true
+                        }
+                    })
+                if isEstimate {
+                    HStack {
+                        Image(systemName: "plusminus")
+                        TextField(
+                            "Pure dose variance",
+                            value: $selectedDoseVariance,
+                            format: .number
+                        )
+                        .keyboardType(.decimalPad)
+                        .focused($isEstimatedVarianceFocused)
+                        Spacer()
+                        Text(selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits)
+                    }
                 }
             }
             unknownDoseLink
