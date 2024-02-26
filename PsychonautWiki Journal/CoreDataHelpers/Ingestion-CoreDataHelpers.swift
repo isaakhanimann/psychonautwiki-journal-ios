@@ -79,7 +79,7 @@ extension Ingestion: Comparable {
 
     var pureSubstanceEstimatedDoseVariance: Double? {
         if let customUnitDose {
-            customUnitDose.calculatedDoseVariance
+            customUnitDose.calculatedStandardDeviation
         } else {
             estimatedDoseVarianceUnwrapped
         }
