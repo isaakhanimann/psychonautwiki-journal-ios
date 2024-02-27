@@ -113,7 +113,7 @@ struct EditCustomUnitsScreenContent: View {
                     doseMaybe: $dose,
                     selectedUnits: $originalUnit
                 )
-                Toggle("Is an Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                 if isEstimate {
                     HStack {
@@ -132,7 +132,7 @@ struct EditCustomUnitsScreenContent: View {
             Section {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
             } footer: {
-                Text("Put custom units in the archive so they don't show up when adding ingestions")
+                Text("Archived custom units don't show up when adding ingestions")
             }
 
         }

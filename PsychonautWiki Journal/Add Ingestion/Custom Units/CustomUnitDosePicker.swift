@@ -38,7 +38,7 @@ struct CustomUnitDosePicker: View {
                 Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
             }
             .font(.title)
-            Toggle("Dose is an Estimate", isOn: $isEstimate)
+            Toggle("Estimate", isOn: $isEstimate)
                 .tint(.accentColor)
                 .onChange(of: isEstimate, perform: { newIsEstimate in
                     if newIsEstimate {

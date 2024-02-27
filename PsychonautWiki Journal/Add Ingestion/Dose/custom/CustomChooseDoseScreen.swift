@@ -89,7 +89,7 @@ struct CustomChooseDoseScreen: View {
                     Text(arguments.units)
                 }
                 .font(.title)
-                Toggle("Dose is an Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
