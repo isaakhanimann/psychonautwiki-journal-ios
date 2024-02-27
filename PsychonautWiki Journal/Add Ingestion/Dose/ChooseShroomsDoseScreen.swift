@@ -28,7 +28,7 @@ struct ChooseShroomsDoseScreen: View {
     @State private var psilocybinContentInPercentText = "1"
     @State private var psilocybinContentInPercent: Double? = 1.0
     @State private var isEstimate = false
-    @State private var doseVariance: Double?
+    @State private var doseDeviation: Double?
     @State private var shroomWeightText = ""
     @State private var shroomWeightInGrams: Double?
 
@@ -65,7 +65,7 @@ struct ChooseShroomsDoseScreen: View {
             dose: psilocybinInMg,
             units: "mg",
             isEstimate: isEstimate,
-            estimatedDoseVariance: doseVariance,
+            estimatedDoseStandardDeviation: doseDeviation,
             suggestedNote: suggestedNote
         )) {
             NextLabel()
@@ -79,10 +79,10 @@ struct ChooseShroomsDoseScreen: View {
             dose: nil,
             units: "mg",
             isEstimate: false,
-            estimatedDoseVariance: nil))
+            estimatedDoseStandardDeviation: nil))
     }
 
-    @FocusState private var isEstimatedVarianceFocused: Bool
+    @FocusState private var isEstimatedDeviationFocused: Bool
 
     private var screen: some View {
         Form {
@@ -103,19 +103,19 @@ struct ChooseShroomsDoseScreen: View {
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            isEstimatedVarianceFocused = true
+                            isEstimatedDeviationFocused = true
                         }
                     })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
-                            "Pure dose variance",
-                            value: $doseVariance,
+                            "Estimated standard deviation",
+                            value: $doseDeviation,
                             format: .number
                         )
                         .keyboardType(.decimalPad)
-                        .focused($isEstimatedVarianceFocused)
+                        .focused($isEstimatedDeviationFocused)
                         Spacer()
                         Text("mg")
                     }

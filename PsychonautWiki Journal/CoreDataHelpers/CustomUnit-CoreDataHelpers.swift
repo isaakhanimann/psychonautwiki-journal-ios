@@ -57,11 +57,11 @@ extension CustomUnit {
         note ?? ""
     }
 
-    var estimatedDoseVarianceUnwrapped: Double? {
-        if estimatedDoseVariance == 0 || !isEstimate {
+    var estimatedDoseStandardDeviationUnwrapped: Double? {
+        if estimatedDoseStandardDeviation == 0 || !isEstimate {
             return nil
         } else {
-            return estimatedDoseVariance
+            return estimatedDoseStandardDeviation
         }
     }
 
@@ -80,8 +80,8 @@ extension CustomUnit {
     var doseOfOneUnitDescription: String {
         if let doseUnwrapped {
             if isEstimate {
-                if let estimatedDoseVarianceUnwrapped {
-                    return "\(doseUnwrapped.formatted())±\(estimatedDoseVarianceUnwrapped.formatted()) \(originalUnitUnwrapped)"
+                if let estimatedDoseStandardDeviationUnwrapped {
+                    return "\(doseUnwrapped.formatted())±\(estimatedDoseStandardDeviationUnwrapped.formatted()) \(originalUnitUnwrapped)"
                 } else {
                     return "~\(doseUnwrapped.formatted()) \(originalUnitUnwrapped)"
                 }
@@ -143,7 +143,7 @@ extension CustomUnit {
         customUnit.unit = "line"
         customUnit.dose = 20
         customUnit.isEstimate = true
-        customUnit.estimatedDoseVariance = 2
+        customUnit.estimatedDoseStandardDeviation = 2
         customUnit.note = "Some random notes"
         return customUnit
     }

@@ -23,7 +23,7 @@ struct CustomUnitCodable: Codable {
     let creationDate: Date
     let administrationRoute: AdministrationRoute
     let dose: Double?
-    let estimatedDoseVariance: Double?
+    let estimatedDoseStandardDeviation: Double?
     let isEstimate: Bool
     let isArchived: Bool
     let unit: String
@@ -37,7 +37,7 @@ struct CustomUnitCodable: Codable {
         case creationDate
         case administrationRoute
         case dose
-        case estimatedDoseVariance
+        case estimatedDoseStandardDeviation
         case isEstimate
         case isArchived
         case unit
@@ -52,7 +52,7 @@ struct CustomUnitCodable: Codable {
         creationDate: Date,
         administrationRoute: AdministrationRoute,
         dose: Double?,
-        estimatedDoseVariance: Double?,
+        estimatedDoseStandardDeviation: Double?,
         isEstimate: Bool,
         isArchived: Bool,
         unit: String,
@@ -65,7 +65,7 @@ struct CustomUnitCodable: Codable {
         self.creationDate = creationDate
         self.administrationRoute = administrationRoute
         self.dose = dose
-        self.estimatedDoseVariance = estimatedDoseVariance
+        self.estimatedDoseStandardDeviation =                 estimatedDoseStandardDeviation
         self.isEstimate = isEstimate
         self.isArchived = isArchived
         self.unit = unit
@@ -87,7 +87,7 @@ struct CustomUnitCodable: Codable {
             throw try DecodingError.dataCorruptedError(in: decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
         }
         dose = try values.decodeIfPresent(Double.self, forKey: .dose)
-        estimatedDoseVariance = try values.decodeIfPresent(Double.self, forKey: .estimatedDoseVariance)
+        estimatedDoseStandardDeviation = try values.decodeIfPresent(Double.self, forKey: .estimatedDoseStandardDeviation)
         isEstimate = try values.decode(Bool.self, forKey: .isEstimate)
         isArchived = try values.decode(Bool.self, forKey: .isArchived)
         unit = try values.decode(String.self, forKey: .unit)
@@ -103,7 +103,7 @@ struct CustomUnitCodable: Codable {
         try container.encode(UInt64(creationDate.timeIntervalSince1970) * 1000, forKey: .creationDate)
         try container.encode(administrationRoute.rawValue.uppercased(), forKey: .administrationRoute)
         try container.encode(dose, forKey: .dose)
-        try container.encode(estimatedDoseVariance, forKey: .estimatedDoseVariance)
+        try container.encode(estimatedDoseStandardDeviation, forKey: .estimatedDoseStandardDeviation)
         try container.encode(isEstimate, forKey: .isEstimate)
         try container.encode(isArchived, forKey: .isArchived)
         try container.encode(unit, forKey: .unit)

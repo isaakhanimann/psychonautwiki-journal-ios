@@ -45,7 +45,7 @@ struct CumulativeRouteAndDose: Identifiable {
     let route: AdministrationRoute
     let numDots: Int?
     let isEstimate: Bool
-    let estimatedDoseVariance: Double?
+    let estimatedDoseStandardDeviation: Double?
     let dose: Double?
     let units: String
 
@@ -54,7 +54,7 @@ struct CumulativeRouteAndDose: Identifiable {
         let units = ingestionForRoute.first?.pureUnits ?? ""
         self.units = units
         var totalDose = 0.0
-        var totalVariance = 0.0
+        var totalStandardDeviation = 0.0
         var isOneDoseUnknown = false
         var isOneDoseAnEstimate = false
         for ingestion in ingestionForRoute {
@@ -64,8 +64,8 @@ struct CumulativeRouteAndDose: Identifiable {
             let ingestionPureUnits = ingestion.pureUnits
             if let doseUnwrap = ingestion.pureSubstanceDose, ingestionPureUnits == units {
                 totalDose += doseUnwrap
-                if let variance = ingestion.pureSubstanceEstimatedDoseVariance {
-                    totalVariance += variance
+                if let deviation = ingestion.pureSubstanceEstimatedDoseStandardDeviation {
+                    totalStandardDeviation += deviation
                 }
             } else {
                 isOneDoseUnknown = true
@@ -80,14 +80,14 @@ struct CumulativeRouteAndDose: Identifiable {
             numDots = roaDose?.getNumDots(ingestionDose: totalDose, ingestionUnits: units)
         }
         isEstimate = isOneDoseAnEstimate
-        estimatedDoseVariance = totalVariance
+        estimatedDoseStandardDeviation = totalStandardDeviation
     }
 
-    init(route: AdministrationRoute, numDots: Int?, isEstimate: Bool, estimatedDoseVariance: Double?, dose: Double?, units: String) {
+    init(route: AdministrationRoute, numDots: Int?, isEstimate: Bool, estimatedDoseStandardDeviation: Double?, dose: Double?, units: String) {
         self.route = route
         self.numDots = numDots
         self.isEstimate = isEstimate
-        self.estimatedDoseVariance = estimatedDoseVariance
+        self.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation
         self.dose = dose
         self.units = units
     }

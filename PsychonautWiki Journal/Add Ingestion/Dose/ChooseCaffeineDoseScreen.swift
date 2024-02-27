@@ -26,7 +26,7 @@ struct ChooseCaffeineDoseScreen: View {
 
     @State private var caffeineDoseInMg = 50.0
     @State private var isEstimate = true
-    @State private var doseVarianceInMg: Double?
+    @State private var doseDeviationInMg: Double?
     let units = "mg"
 
     private var doseRounded: Double {
@@ -57,7 +57,7 @@ struct ChooseCaffeineDoseScreen: View {
             dose: doseRounded,
             units: units,
             isEstimate: isEstimate,
-            estimatedDoseVariance: doseVarianceInMg
+            estimatedDoseStandardDeviation: doseDeviationInMg
         )) {
             NextLabel()
         }
@@ -70,10 +70,10 @@ struct ChooseCaffeineDoseScreen: View {
             dose: nil,
             units: units,
             isEstimate: false,
-            estimatedDoseVariance: nil))
+            estimatedDoseStandardDeviation: nil))
     }
 
-    @FocusState private var isEstimatedVarianceFocused: Bool
+    @FocusState private var isEstimatedDeviationFocused: Bool
 
     var screen: some View {
         Form {
@@ -100,19 +100,19 @@ struct ChooseCaffeineDoseScreen: View {
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            isEstimatedVarianceFocused = true
+                            isEstimatedDeviationFocused = true
                         }
                     })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
-                            "Pure dose variance",
-                            value: $doseVarianceInMg,
+                            "Pure dose standard deviation",
+                            value: $doseDeviationInMg,
                             format: .number
                         )
                         .keyboardType(.decimalPad)
-                        .focused($isEstimatedVarianceFocused)
+                        .focused($isEstimatedDeviationFocused)
                         Spacer()
                         Text(units)
                     }

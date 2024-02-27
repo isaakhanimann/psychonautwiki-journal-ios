@@ -63,7 +63,7 @@ extension SettingsScreen {
                     newUnit.creationDate = customUnitCodable.creationDate
                     newUnit.administrationRoute = customUnitCodable.administrationRoute.rawValue
                     newUnit.dose = customUnitCodable.dose ?? 0
-                    newUnit.estimatedDoseVariance = customUnitCodable.estimatedDoseVariance ?? 0
+                    newUnit.estimatedDoseStandardDeviation = customUnitCodable.estimatedDoseStandardDeviation ?? 0
                     newUnit.isEstimate = customUnitCodable.isEstimate
                     newUnit.isArchived = customUnitCodable.isArchived
                     newUnit.unit = customUnitCodable.unit
@@ -88,7 +88,7 @@ extension SettingsScreen {
                         newIngestion.creationDate = ingestionCodable.creationDate
                         newIngestion.administrationRoute = ingestionCodable.administrationRoute.rawValue
                         newIngestion.dose = ingestionCodable.dose ?? 0
-                        newIngestion.estimatedDoseVariance = ingestionCodable.estimatedDoseVariance ?? 0
+                        newIngestion.estimatedDoseStandardDeviation = ingestionCodable.estimatedDoseStandardDeviation ?? 0
                         newIngestion.isEstimate = ingestionCodable.isDoseAnEstimate
                         newIngestion.units = ingestionCodable.units
                         newIngestion.note = ingestionCodable.notes

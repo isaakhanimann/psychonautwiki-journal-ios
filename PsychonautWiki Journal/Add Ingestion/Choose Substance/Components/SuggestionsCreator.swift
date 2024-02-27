@@ -39,7 +39,7 @@ class SuggestionsCreator {
                                 dose: ing.doseUnwrapped,
                                 units: ing.unitsUnwrapped,
                                 isEstimate: ing.isEstimate,
-                                estimatedDoseVariance: ing.estimatedDoseVarianceUnwrapped
+                                estimatedDoseStandardDeviation: ing.estimatedDoseStandardDeviationUnwrapped
                             )
                         }
                         .uniqued()
@@ -51,7 +51,7 @@ class SuggestionsCreator {
                                 CustomUnitDose(
                                     dose: dose,
                                     isEstimate: ing.isEstimate,
-                                    estimatedDoseVariance: ing.estimatedDoseVarianceUnwrapped,
+                                    estimatedStandardDeviation: ing.estimatedDoseStandardDeviationUnwrapped,
                                     customUnit: customUnit)
                             } else {
                                 nil

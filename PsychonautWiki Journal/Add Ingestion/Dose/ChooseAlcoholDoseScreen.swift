@@ -28,7 +28,7 @@ struct ChooseAlcoholDoseScreen: View {
     @State private var alcoholContentInPercent = 5.0
     @State private var alcoholContentInPercentText = "5"
     @State private var isEstimate = true
-    @State private var doseVarianceInGrams: Double?
+    @State private var doseDeviationInGrams: Double?
     let units = "g"
 
     private var ingestedAlcoholDoseInMl: Double {
@@ -71,7 +71,7 @@ struct ChooseAlcoholDoseScreen: View {
             dose: doseRounded,
             units: units,
             isEstimate: isEstimate,
-            estimatedDoseVariance: doseVarianceInGrams,
+            estimatedDoseStandardDeviation: doseDeviationInGrams,
             suggestedNote: suggestedNote
         )) {
             NextLabel()
@@ -85,7 +85,7 @@ struct ChooseAlcoholDoseScreen: View {
             dose: nil,
             units: units,
             isEstimate: false,
-            estimatedDoseVariance: nil))
+            estimatedDoseStandardDeviation: nil))
     }
 
     struct Preset: Identifiable, Hashable {
@@ -105,7 +105,7 @@ struct ChooseAlcoholDoseScreen: View {
     ]
 
     @State private var presetSelection = presets.first!
-    @FocusState private var isEstimatedVarianceFocused: Bool
+    @FocusState private var isEstimatedDeviationFocused: Bool
 
     private var screen: some View {
         Form {
@@ -121,19 +121,19 @@ struct ChooseAlcoholDoseScreen: View {
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            isEstimatedVarianceFocused = true
+                            isEstimatedDeviationFocused = true
                         }
                     })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
-                            "Pure dose variance",
-                            value: $doseVarianceInGrams,
+                            "Pure dose standard deviation",
+                            value: $doseDeviationInGrams,
                             format: .number
                         )
                         .keyboardType(.decimalPad)
-                        .focused($isEstimatedVarianceFocused)
+                        .focused($isEstimatedDeviationFocused)
                         Spacer()
                         Text(units)
                     }

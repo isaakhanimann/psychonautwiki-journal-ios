@@ -55,9 +55,9 @@ struct RouteItemView: View {
             if let doseUnwrapped = routeItem.dose {
                 Group {
                     if routeItem.isEstimate {
-                        if let variance = routeItem.estimatedDoseVariance {
+                        if let deviation = routeItem.estimatedDoseStandardDeviation {
                             // 30±5 mg oral
-                            Text("\(doseUnwrapped.formatted())±\(variance.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
+                            Text("\(doseUnwrapped.formatted())±\(deviation.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
                         } else {
                             // ~30 mg oral
                             Text("~\(doseUnwrapped.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
@@ -89,7 +89,7 @@ struct RouteItemView: View {
                         route: .oral,
                         numDots: 5,
                         isEstimate: false,
-                        estimatedDoseVariance: nil,
+                        estimatedDoseStandardDeviation: nil,
                         dose: 250,
                         units: "mg"
                     ),
@@ -97,7 +97,7 @@ struct RouteItemView: View {
                         route: .insufflated,
                         numDots: 1,
                         isEstimate: true,
-                        estimatedDoseVariance: 2,
+                        estimatedDoseStandardDeviation: 2,
                         dose: 20,
                         units: "mg"
                     ),
@@ -113,7 +113,7 @@ struct RouteItemView: View {
                         route: .oral,
                         numDots: 3,
                         isEstimate: false,
-                        estimatedDoseVariance: nil,
+                        estimatedDoseStandardDeviation: nil,
                         dose: 30,
                         units: "mg"
                     ),
@@ -121,7 +121,7 @@ struct RouteItemView: View {
                         route: .insufflated,
                         numDots: nil,
                         isEstimate: true,
-                        estimatedDoseVariance: 5,
+                        estimatedDoseStandardDeviation: 5,
                         dose: nil,
                         units: "mg"
                     ),

@@ -22,7 +22,7 @@ struct CustomUnitsChooseDoseScreen: View {
 
     @State private var dose: Double?
     @State private var isEstimate = false
-    @State private var estimatedDoseVariance: Double?
+    @State private var estimatedDoseStandardDeviation: Double?
     @FocusState private var isDoseFieldFocused: Bool
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen = false
 
@@ -36,7 +36,7 @@ struct CustomUnitsChooseDoseScreen: View {
                             customUnit: customUnit,
                             dose: dose,
                             isEstimate: isEstimate,
-                            estimatedDoseVariance: estimatedDoseVariance)
+                            estimatedDoseStandardDeviation: estimatedDoseStandardDeviation)
                         if !(customUnit.substance?.isApproved ?? true) {
                             Text("Info is not approved by PsychonautWiki administrators.")
                         }
@@ -48,7 +48,7 @@ struct CustomUnitsChooseDoseScreen: View {
                     customUnit: customUnit,
                     dose: $dose,
                     isEstimate: $isEstimate,
-                    estimatedDoseVariance: $estimatedDoseVariance
+                    estimatedDoseStandardDeviation: $estimatedDoseStandardDeviation
                 ).focused($isDoseFieldFocused)
             } header: {
                 Text(customUnit.nameUnwrapped)
@@ -94,7 +94,7 @@ struct CustomUnitsChooseDoseScreen: View {
                     dose: dose,
                     units: customUnit.originalUnitUnwrapped,
                     isEstimate: isEstimate,
-                    estimatedDoseVariance: estimatedDoseVariance,
+                    estimatedDoseStandardDeviation: estimatedDoseStandardDeviation,
                     customUnit: customUnit))
                 {
                     NextLabel()

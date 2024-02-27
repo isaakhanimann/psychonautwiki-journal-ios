@@ -22,7 +22,7 @@ struct IngestionCodable: Codable {
     let creationDate: Date?
     let administrationRoute: AdministrationRoute
     let dose: Double?
-    let estimatedDoseVariance: Double?
+    let estimatedDoseStandardDeviation: Double?
     let isDoseAnEstimate: Bool
     let units: String
     let notes: String
@@ -36,7 +36,7 @@ struct IngestionCodable: Codable {
         case creationDate
         case administrationRoute
         case dose
-        case estimatedDoseVariance
+        case estimatedDoseStandardDeviation
         case isDoseAnEstimate
         case units
         case notes
@@ -51,7 +51,7 @@ struct IngestionCodable: Codable {
         creationDate: Date?,
         administrationRoute: AdministrationRoute,
         dose: Double?,
-        estimatedDoseVariance: Double?,
+        estimatedDoseStandardDeviation: Double?,
         isDoseAnEstimate: Bool,
         units: String,
         notes: String,
@@ -64,7 +64,7 @@ struct IngestionCodable: Codable {
         self.creationDate = creationDate
         self.administrationRoute = administrationRoute
         self.dose = dose
-        self.estimatedDoseVariance = estimatedDoseVariance
+        self.estimatedDoseStandardDeviation =                         estimatedDoseStandardDeviation
         self.isDoseAnEstimate = isDoseAnEstimate
         self.units = units
         self.notes = notes
@@ -90,7 +90,7 @@ struct IngestionCodable: Codable {
             throw try DecodingError.dataCorruptedError(in: decoder.unkeyedContainer(), debugDescription: "\(routeString) is not a valid route")
         }
         dose = try values.decodeIfPresent(Double.self, forKey: .dose)
-        estimatedDoseVariance = try values.decodeIfPresent(Double.self, forKey: .estimatedDoseVariance)
+        estimatedDoseStandardDeviation = try values.decodeIfPresent(Double.self, forKey: .estimatedDoseStandardDeviation)
         isDoseAnEstimate = try values.decode(Bool.self, forKey: .isDoseAnEstimate)
         units = try values.decode(String.self, forKey: .units)
         notes = try values.decode(String.self, forKey: .notes)
@@ -119,7 +119,7 @@ struct IngestionCodable: Codable {
         }
         try container.encode(administrationRoute.rawValue.uppercased(), forKey: .administrationRoute)
         try container.encode(dose, forKey: .dose)
-        try container.encode(estimatedDoseVariance, forKey: .estimatedDoseVariance)
+        try container.encode(estimatedDoseStandardDeviation, forKey: .estimatedDoseStandardDeviation)
         try container.encode(isDoseAnEstimate, forKey: .isDoseAnEstimate)
         try container.encode(units, forKey: .units)
         try container.encode(notes, forKey: .notes)

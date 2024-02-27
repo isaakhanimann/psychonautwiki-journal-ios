@@ -25,7 +25,7 @@ struct EditIngestionScreen: View {
     @State private var dose: Double?
     @State private var units: String = "mg"
     @State private var isEstimate = false
-    @State private var estimatedDoseVariance: Double?
+    @State private var estimatedDoseStandardDeviation: Double?
     @State private var note = ""
     @State private var consumerName = ""
     @State private var stomachFullness = StomachFullness.empty
@@ -60,7 +60,7 @@ struct EditIngestionScreen: View {
             dose: $dose,
             units: $units,
             isEstimate: $isEstimate,
-            estimatedDoseVariance: $estimatedDoseVariance,
+            estimatedDoseStandardDeviation: $estimatedDoseStandardDeviation,
             note: $note,
             stomachFullness: $stomachFullness,
             consumerName: $consumerName,
@@ -73,7 +73,7 @@ struct EditIngestionScreen: View {
             dose = ingestion.doseUnwrapped
             units = ingestion.unitsUnwrapped
             isEstimate = ingestion.isEstimate
-            estimatedDoseVariance = ingestion.estimatedDoseVarianceUnwrapped
+            estimatedDoseStandardDeviation = ingestion.estimatedDoseStandardDeviationUnwrapped
             note = ingestion.noteUnwrapped
             consumerName = ingestion.consumerName ?? ""
             selectedCustomUnit = ingestion.customUnit
@@ -95,7 +95,7 @@ struct EditIngestionScreen: View {
             ingestion.customUnit?.removeFromIngestions(ingestion)
         }
         ingestion.isEstimate = isEstimate
-        ingestion.estimatedDoseVariance = estimatedDoseVariance ?? 0
+        ingestion.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation ?? 0
         ingestion.note = note
         if consumerName.trimmingCharacters(in: .whitespaces).isEmpty {
             ingestion.consumerName = nil
@@ -129,7 +129,7 @@ struct EditIngestionContent: View {
     @Binding var dose: Double?
     @Binding var units: String
     @Binding var isEstimate: Bool
-    @Binding var estimatedDoseVariance: Double?
+    @Binding var estimatedDoseStandardDeviation: Double?
     @Binding var note: String
     @Binding var stomachFullness: StomachFullness
     @Binding var consumerName: String
@@ -154,20 +154,20 @@ struct EditIngestionContent: View {
                                 customUnit: customUnit,
                                 dose: dose,
                                 isEstimate: isEstimate,
-                                estimatedDoseVariance: estimatedDoseVariance)
+                                estimatedDoseStandardDeviation: estimatedDoseStandardDeviation)
                         } else {
                             DosePicker(
                                 roaDose: roaDose,
                                 doseMaybe: $dose,
                                 selectedUnits: $units)
-                            Toggle("Is an Estimate", isOn: $isEstimate)
+                            Toggle("Estimate", isOn: $isEstimate)
                                 .tint(.accentColor)
                             if isEstimate {
                                 HStack {
                                     Image(systemName: "plusminus")
                                     TextField(
-                                        "Dose variance",
-                                        value: $estimatedDoseVariance,
+                                        "Estimated standard deviation",
+                                        value: $estimatedDoseStandardDeviation,
                                         format: .number
                                     )
                                     .keyboardType(.decimalPad)
@@ -204,7 +204,7 @@ struct EditIngestionContent: View {
                             customUnit: customUnit,
                             dose: $dose,
                             isEstimate: $isEstimate,
-                            estimatedDoseVariance: $estimatedDoseVariance)
+                            estimatedDoseStandardDeviation: $estimatedDoseStandardDeviation)
                     } header: {
                         Text(customUnit.nameUnwrapped)
                     } footer: {
@@ -286,7 +286,7 @@ struct EditIngestionContent: View {
         dose: .constant(50),
         units: .constant("mg"),
         isEstimate: .constant(false),
-        estimatedDoseVariance: .constant(nil),
+        estimatedDoseStandardDeviation: .constant(nil),
         note: .constant("These are my notes"),
         stomachFullness: .constant(.full),
         consumerName: .constant("Marc"),
@@ -307,7 +307,7 @@ struct EditIngestionContent: View {
         dose: .constant(2),
         units: .constant("mg"),
         isEstimate: .constant(false),
-        estimatedDoseVariance: .constant(nil),
+        estimatedDoseStandardDeviation: .constant(nil),
         note: .constant("These are my notes"),
         stomachFullness: .constant(.full),
         consumerName: .constant("Marc"),

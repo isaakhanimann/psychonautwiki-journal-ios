@@ -22,7 +22,7 @@ struct CustomChooseDoseScreen: View {
     @State private var doseText = ""
     @State private var dose: Double?
     @State private var isEstimate = false
-    @State private var doseVariance: Double?
+    @State private var doseDeviation: Double?
     @FocusState private var isDoseFieldFocused: Bool
 
     @FetchRequest(
@@ -61,7 +61,7 @@ struct CustomChooseDoseScreen: View {
             dose: dose,
             units: arguments.units,
             isEstimate: isEstimate,
-            estimatedDoseVariance: doseVariance
+            estimatedDoseStandardDeviation: doseDeviation
         )
     }
 
@@ -69,7 +69,7 @@ struct CustomChooseDoseScreen: View {
         NavigationLink("Use Unknown Dose", value: getDestinationArguments(dose: nil))
     }
 
-    @FocusState private var isEstimatedVarianceFocused: Bool
+    @FocusState private var isEstimatedDeviationFocused: Bool
 
     private var screen: some View {
         Form {
@@ -93,19 +93,19 @@ struct CustomChooseDoseScreen: View {
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            isEstimatedVarianceFocused = true
+                            isEstimatedDeviationFocused = true
                         }
                     })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
-                            "Pure dose variance",
-                            value: $doseVariance,
+                            "Pure dose standard deviation",
+                            value: $doseDeviation,
                             format: .number
                         )
                         .keyboardType(.decimalPad)
-                        .focused($isEstimatedVarianceFocused)
+                        .focused($isEstimatedDeviationFocused)
                         Spacer()
                         Text(arguments.units)
                     }

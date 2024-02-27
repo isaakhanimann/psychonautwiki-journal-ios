@@ -21,9 +21,9 @@ struct CustomUnitDosePicker: View {
     let customUnit: CustomUnit
     @Binding var dose: Double?
     @Binding var isEstimate: Bool
-    @Binding var estimatedDoseVariance: Double?
+    @Binding var estimatedDoseStandardDeviation: Double?
 
-    @FocusState private var isEstimatedVarianceFocused: Bool
+    @FocusState private var isEstimatedDeviationFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -42,19 +42,19 @@ struct CustomUnitDosePicker: View {
                 .tint(.accentColor)
                 .onChange(of: isEstimate, perform: { newIsEstimate in
                     if newIsEstimate {
-                        isEstimatedVarianceFocused = true
+                        isEstimatedDeviationFocused = true
                     }
                 })
             if isEstimate {
                 HStack {
                     Image(systemName: "plusminus")
                     TextField(
-                        "Pure dose variance",
-                        value: $estimatedDoseVariance,
+                        "Estimated standard deviation",
+                        value: $estimatedDoseStandardDeviation,
                         format: .number
                     )
                     .keyboardType(.decimalPad)
-                    .focused($isEstimatedVarianceFocused)
+                    .focused($isEstimatedDeviationFocused)
                     Spacer()
                     Text(customUnit.unitUnwrapped)
                 }
@@ -67,14 +67,14 @@ struct CustomUnitsDosePickerPreviewContainer: View {
 
     @State private var dose: Double? = 3.0
     @State private var isEstimate = false
-    @State private var estimatedDoseVariance: Double? = 0.5
+    @State private var estimatedDoseStandardDeviation: Double? = 0.5
 
     var body: some View {
         CustomUnitDosePicker(
             customUnit: .estimatedQuantitativelyPreviewSample,
             dose: $dose,
             isEstimate: $isEstimate,
-            estimatedDoseVariance: $estimatedDoseVariance)
+            estimatedDoseStandardDeviation: $estimatedDoseStandardDeviation)
     }
 }
 

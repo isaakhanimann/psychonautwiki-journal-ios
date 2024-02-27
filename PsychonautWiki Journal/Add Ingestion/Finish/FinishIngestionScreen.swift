@@ -354,7 +354,7 @@ struct FinishIngestionScreen: View {
         ingestion.dose = arguments.dose ?? 0
         ingestion.units = arguments.units
         ingestion.isEstimate = arguments.isEstimate
-        ingestion.estimatedDoseVariance = arguments.estimatedDoseVariance ?? 0
+        ingestion.estimatedDoseStandardDeviation = arguments.estimatedDoseStandardDeviation ?? 0
         ingestion.note = enteredNote
         ingestion.administrationRoute = arguments.administrationRoute.rawValue
         ingestion.substanceName = arguments.substanceName

@@ -22,7 +22,7 @@ struct FinishCustomUnitsScreen: View {
         case unit
         case dose
         case note
-        case estimatedVariance
+        case estimatedDeviation
     }
 
     let substanceAndRoute: SubstanceAndRoute
@@ -80,18 +80,18 @@ struct FinishCustomUnitsScreen: View {
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            focusedField = .estimatedVariance
+                            focusedField = .estimatedDeviation
                         }
                     })
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
                         TextField(
-                            "Pure dose variance",
-                            value: $estimatedDoseVariance,
+                            "Estimated standard deviation",
+                            value: $estimatedDoseStandardDeviation,
                             format: .number)
                         .keyboardType(.decimalPad)
-                        .focused($focusedField, equals: .estimatedVariance)
+                        .focused($focusedField, equals: .estimatedDeviation)
                         Spacer()
                         Text(originalUnit)
                     }
@@ -106,10 +106,10 @@ struct FinishCustomUnitsScreen: View {
                             Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
                         } else {
                             if isEstimate {
-                                if let calculatedDoseVariance {
+                                if let calculatedDoseStandardDeviation {
                                     Text(multiplier.with(unit: unit)) +
                                         Text(
-                                            " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...")±\(calculatedDoseVariance.roundedToAtMost1Decimal.formatted()) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                            " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...")±\(calculatedDoseStandardDeviation.roundedToAtMost1Decimal.formatted()) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
                                         .foregroundColor(.secondary)
                                 } else {
                                     Text(multiplier.with(unit: unit)) +
@@ -159,7 +159,7 @@ struct FinishCustomUnitsScreen: View {
     @State private var originalUnit = ""
     @State private var dosePerUnit: Double?
     @State private var isEstimate = false
-    @State private var estimatedDoseVariance: Double?
+    @State private var estimatedDoseStandardDeviation: Double?
     @State private var isUnknownDose = false
     @State private var note = ""
 
@@ -184,9 +184,9 @@ struct FinishCustomUnitsScreen: View {
         return multiplier * dosePerUnit
     }
 
-    private var calculatedDoseVariance: Double? {
-        guard let estimatedDoseVariance else { return nil }
-        return multiplier * estimatedDoseVariance
+    private var calculatedDoseStandardDeviation: Double? {
+        guard let estimatedDoseStandardDeviation else { return nil }
+        return multiplier * estimatedDoseStandardDeviation
     }
 
     private func onDoneTap() {
@@ -201,7 +201,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.substanceName = substanceAndRoute.substance.name
         newCustomUnit.unit = unit
         newCustomUnit.isEstimate = isEstimate
-        newCustomUnit.estimatedDoseVariance = estimatedDoseVariance ?? 0
+        newCustomUnit.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation ?? 0
         newCustomUnit.isArchived = false
         newCustomUnit.idForAndroid = Int32.random(in: Int32.min..<Int32.max)
         try? context.save()

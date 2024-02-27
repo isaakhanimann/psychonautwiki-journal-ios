@@ -18,19 +18,19 @@ import Foundation
 
 struct RegularDoseAndUnit: Hashable, Identifiable {
     var id: String {
-        (dose?.description ?? "") + units + isEstimate.description + (estimatedDoseVariance?.description ?? "")
+        (dose?.description ?? "") + units + isEstimate.description + (estimatedDoseStandardDeviation?.description ?? "")
     }
 
     let dose: Double?
     let units: String
     let isEstimate: Bool
-    let estimatedDoseVariance: Double?
+    let estimatedDoseStandardDeviation: Double?
 
     var doseDescription: String? {
         if let dose {
             if isEstimate {
-                if let estimatedDoseVariance {
-                    return "\(dose.formatted())±\(estimatedDoseVariance.formatted()) \(units)"
+                if let estimatedDoseStandardDeviation {
+                    return "\(dose.formatted())±\(estimatedDoseStandardDeviation.formatted()) \(units)"
                 } else {
                     return "~\(dose.formatted()) \(units)"
                 }

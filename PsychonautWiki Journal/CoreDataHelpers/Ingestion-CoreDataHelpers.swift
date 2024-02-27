@@ -49,24 +49,24 @@ extension Ingestion: Comparable {
         }
     }
 
-    var estimatedDoseVarianceUnwrapped: Double? {
-        if estimatedDoseVariance == 0 || !isEstimate {
+    var estimatedDoseStandardDeviationUnwrapped: Double? {
+        if estimatedDoseStandardDeviation == 0 || !isEstimate {
             return nil
         } else {
-            return estimatedDoseVariance
+            return estimatedDoseStandardDeviation
         }
     }
 
     private var lowerEstimate: Double? {
         guard let doseUnwrapped else {return nil}
-        guard let estimatedDoseVarianceUnwrapped else {return nil}
-        return doseUnwrapped - estimatedDoseVarianceUnwrapped
+        guard let estimatedDoseStandardDeviationUnwrapped else {return nil}
+        return doseUnwrapped - estimatedDoseStandardDeviationUnwrapped
     }
 
     private var higherEstimate: Double? {
         guard let doseUnwrapped else {return nil}
-        guard let estimatedDoseVarianceUnwrapped else {return nil}
-        return doseUnwrapped + estimatedDoseVarianceUnwrapped
+        guard let estimatedDoseStandardDeviationUnwrapped else {return nil}
+        return doseUnwrapped + estimatedDoseStandardDeviationUnwrapped
     }
 
     var pureSubstanceDose: Double? {
@@ -77,11 +77,11 @@ extension Ingestion: Comparable {
         }
     }
 
-    var pureSubstanceEstimatedDoseVariance: Double? {
+    var pureSubstanceEstimatedDoseStandardDeviation: Double? {
         if let customUnitDose {
             customUnitDose.calculatedStandardDeviation
         } else {
-            estimatedDoseVarianceUnwrapped
+            estimatedDoseStandardDeviationUnwrapped
         }
     }
 
@@ -90,7 +90,7 @@ extension Ingestion: Comparable {
         return CustomUnitDose(
             dose: doseUnwrapped,
             isEstimate: isEstimate,
-            estimatedDoseVariance: estimatedDoseVarianceUnwrapped,
+            estimatedStandardDeviation: estimatedDoseStandardDeviationUnwrapped,
             customUnit: customUnit)
     }
 
@@ -144,7 +144,7 @@ extension Ingestion: Comparable {
         ingestion.dose = 30
         ingestion.units = "mg"
         ingestion.isEstimate = true
-        ingestion.estimatedDoseVariance = 5
+        ingestion.estimatedDoseStandardDeviation = 5
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
         ingestion.time = .now
         ingestion.note = ""
@@ -254,7 +254,7 @@ extension Ingestion: Comparable {
         ingestion.customUnit = CustomUnit.estimatedQuantitativelyPreviewSample
         ingestion.units = "mg"
         ingestion.isEstimate = true
-        ingestion.estimatedDoseVariance = 0.5
+        ingestion.estimatedDoseStandardDeviation = 0.5
         ingestion.administrationRoute = AdministrationRoute.insufflated.rawValue
         ingestion.time = .now
         ingestion.note = "Everything estimated quantitatively"

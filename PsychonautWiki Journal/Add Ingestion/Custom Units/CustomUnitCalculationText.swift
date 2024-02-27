@@ -21,7 +21,7 @@ struct CustomUnitCalculationText: View {
     let customUnit: CustomUnit
     let dose: Double?
     let isEstimate: Bool
-    let estimatedDoseVariance: Double?
+    let estimatedDoseStandardDeviation: Double?
 
     var body: some View {
         doseCalculationText.foregroundStyle(calculatedDoseColor)
@@ -32,7 +32,7 @@ struct CustomUnitCalculationText: View {
             return CustomUnitDose(
                 dose: dose,
                 isEstimate: isEstimate,
-                estimatedDoseVariance: estimatedDoseVariance,
+                estimatedStandardDeviation: estimatedDoseStandardDeviation,
                 customUnit: customUnit)
         } else {
             return nil
@@ -63,5 +63,5 @@ struct CustomUnitCalculationText: View {
         customUnit: .estimatedQuantitativelyPreviewSample,
         dose: 3.0,
         isEstimate: true,
-        estimatedDoseVariance: 0.5)
+        estimatedDoseStandardDeviation: 0.5)
 }

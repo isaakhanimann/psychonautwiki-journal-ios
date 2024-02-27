@@ -49,7 +49,7 @@ struct CustomUnitDoseLabel: View {
                 customUnitDose: CustomUnitDose(
                     dose: 2,
                     isEstimate: true,
-                    estimatedDoseVariance: 0.5,
+                    estimatedStandardDeviation: 0.5,
                     customUnit: .previewSample)
             )
         }.buttonStyle(.bordered)
@@ -60,7 +60,7 @@ struct CustomUnitDoseLabel: View {
                 customUnitDose: CustomUnitDose(
                     dose: 2,
                     isEstimate: false,
-                    estimatedDoseVariance: nil,
+                    estimatedStandardDeviation: nil,
                     customUnit: .previewSample)
             )
         }.buttonStyle(.bordered)
@@ -72,7 +72,7 @@ struct CustomUnitDoseLabel: View {
                 customUnitDose: CustomUnitDose(
                     dose: 2,
                     isEstimate: false,
-                    estimatedDoseVariance: nil,
+                    estimatedStandardDeviation: nil,
                     customUnit: .estimatedQuantitativelyPreviewSample)
             )
         }.buttonStyle(.bordered)
