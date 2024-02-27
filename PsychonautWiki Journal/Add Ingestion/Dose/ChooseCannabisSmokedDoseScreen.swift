@@ -111,7 +111,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                         .foregroundColor(doseType.color)
                     RoaDoseRow(roaDose: smokedDose)
                 }
-                Toggle("Estimated", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {

@@ -90,7 +90,7 @@ struct ChooseMDMADoseScreen: View {
                         mdmaDoseInMg = getDouble(from: text)
                     }
                 }
-                Toggle("Is Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {

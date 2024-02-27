@@ -117,7 +117,7 @@ struct ChooseAlcoholDoseScreen: View {
                         .foregroundColor(doseType.color)
                     RoaDoseRow(roaDose: oralDose)
                 }
-                Toggle("Is Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {

@@ -96,7 +96,7 @@ struct ChooseCaffeineDoseScreen: View {
                         Text("900")
                     }
                 }
-                Toggle("Is Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {

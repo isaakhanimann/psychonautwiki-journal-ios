@@ -99,7 +99,7 @@ struct ChooseShroomsDoseScreen: View {
                     Text("mg")
                 }
                 .font(.title)
-                Toggle("Is Estimate", isOn: $isEstimate)
+                Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {

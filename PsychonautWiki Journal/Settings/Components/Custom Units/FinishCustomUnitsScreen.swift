@@ -76,7 +76,7 @@ struct FinishCustomUnitsScreen: View {
                         Text(originalUnit)
                     }
                 }
-                Toggle("Estimated", isOn: $isEstimate.animation())
+                Toggle("Estimate", isOn: $isEstimate.animation())
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
