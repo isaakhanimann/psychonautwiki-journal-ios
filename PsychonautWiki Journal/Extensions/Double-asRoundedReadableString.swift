@@ -17,11 +17,16 @@
 import Foundation
 
 extension Double {
-    var roundedToAtMost1Decimal: Double {
-        if self < 10 {
-            (self*10.0).rounded() / 10.0
+    var asRoundedReadableString: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        if self > 100 {
+            formatter.maximumFractionDigits = 0
+        } else if self > 10 {
+            formatter.maximumFractionDigits = 1
         } else {
-            rounded()
+            formatter.maximumFractionDigits = 2
         }
+        return formatter.string(from: self as NSNumber) ?? String(format: "%.1f", self)
     }
 }

@@ -16,31 +16,14 @@
 
 import Foundation
 
-extension Int {
-    // e.g. for 2.with(unit: "experience") it returns "2 experiences"
-    func with(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
-            "\(self) \(unit)s"
-        } else {
-            "\(self) \(unit)"
-        }
-    }
-}
-
 extension Double {
-    func with(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
-            "\(self.asRoundedReadableString) \(unit)s"
+    var roundedSensibly: Double {
+        if self > 100 {
+            rounded()
+        } else if self > 10 {
+            (self*10.0).rounded() / 10.0
         } else {
-            "\(self.asRoundedReadableString) \(unit)"
-        }
-    }
-
-    func justUnit(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
-            unit + "s"
-        } else {
-            unit
+            (self*100.0).rounded() / 100.0
         }
     }
 }

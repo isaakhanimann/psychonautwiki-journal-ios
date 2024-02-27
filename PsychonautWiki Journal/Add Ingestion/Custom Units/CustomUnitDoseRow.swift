@@ -32,7 +32,7 @@ struct CustomUnitDoseRow: View {
 
     private func convertToNewUnit(oldDose: Double?) -> Double? {
         if let oldDose, let dosePerUnit = customUnit.dosePerUnit, dosePerUnit > 0 {
-            (oldDose/dosePerUnit).roundedToAtMost1Decimal
+            (oldDose/dosePerUnit).roundedSensibly
         } else {
             nil
         }

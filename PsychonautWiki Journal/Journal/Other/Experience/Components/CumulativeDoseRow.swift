@@ -57,14 +57,14 @@ struct RouteItemView: View {
                     if routeItem.isEstimate {
                         if let deviation = routeItem.estimatedDoseStandardDeviation {
                             // 30±5 mg oral
-                            Text("\(doseUnwrapped.formatted())±\(deviation.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
+                            Text("\(doseUnwrapped.asRoundedReadableString)±\(deviation.asRoundedReadableString) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
                         } else {
                             // ~30 mg oral
-                            Text("~\(doseUnwrapped.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
+                            Text("~\(doseUnwrapped.asRoundedReadableString) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
                         }
                     } else {
                         // 30 mg oral
-                        Text("\(doseUnwrapped.formatted()) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
+                        Text("\(doseUnwrapped.asRoundedReadableString) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
                     }
                 }.multilineTextAlignment(.trailing)
             } else {

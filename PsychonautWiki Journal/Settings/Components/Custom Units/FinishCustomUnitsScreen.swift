@@ -109,18 +109,18 @@ struct FinishCustomUnitsScreen: View {
                                 if let calculatedDoseStandardDeviation {
                                     Text(multiplier.with(unit: unit)) +
                                         Text(
-                                            " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...")±\(calculatedDoseStandardDeviation.roundedToAtMost1Decimal.formatted()) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                            " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
                                         .foregroundColor(.secondary)
                                 } else {
                                     Text(multiplier.with(unit: unit)) +
                                         Text(
-                                            " = ~\(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                            " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
                                         .foregroundColor(.secondary)
                                 }
                             } else {
                                 Text(multiplier.with(unit: unit)) +
                                     Text(
-                                        " = \(calculatedDose?.roundedToAtMost1Decimal.formatted() ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
+                                        " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
                                     .foregroundColor(.secondary)
                             }
                         }

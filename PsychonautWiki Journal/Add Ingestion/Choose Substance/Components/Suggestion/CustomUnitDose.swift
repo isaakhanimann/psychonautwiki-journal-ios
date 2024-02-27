@@ -63,9 +63,9 @@ struct CustomUnitDose: Hashable, Identifiable {
     var calculatedDoseDescription: String? {
         if let calculatedDose {
             if let calculatedStandardDeviation {
-                return "\(calculatedDose.formatted())±\(calculatedStandardDeviation.asRoundedReadableString) \(customUnit.originalUnitUnwrapped)"
+                return "\(calculatedDose.asRoundedReadableString)±\(calculatedStandardDeviation.asRoundedReadableString) \(customUnit.originalUnitUnwrapped)"
             } else {
-                let description = "\(calculatedDose.formatted()) \(customUnit.originalUnitUnwrapped)"
+                let description = "\(calculatedDose.asRoundedReadableString) \(customUnit.originalUnitUnwrapped)"
                 if isEstimate || customUnit.isEstimate {
                     return "~\(description)"
                 } else {
@@ -79,30 +79,15 @@ struct CustomUnitDose: Hashable, Identifiable {
 
     // 2 pills
     var doseDescription: String {
-        let description = "\(dose.with(unit: customUnit.unitUnwrapped))"
+        let description = dose.with(unit: customUnit.unitUnwrapped)
         if isEstimate {
             if let estimatedStandardDeviation {
-                return "\(dose.formatted())±\(estimatedStandardDeviation.with(unit: customUnit.unitUnwrapped))"
+                return "\(dose.asRoundedReadableString)±\(estimatedStandardDeviation.asRoundedReadableString) \(dose.justUnit(unit: customUnit.unitUnwrapped))"
             } else {
                 return "~\(description)"
             }
         } else {
             return description
         }
-    }
-}
-
-extension Double {
-    var asRoundedReadableString: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        if self > 100 {
-            formatter.maximumFractionDigits = 0
-        } else if self > 10 {
-            formatter.maximumFractionDigits = 1
-        } else {
-            formatter.maximumFractionDigits = 2
-        }
-        return formatter.string(from: self as NSNumber) ?? String(format: "%.1f", self)
     }
 }

@@ -72,7 +72,7 @@ struct ChooseMDMADoseScreen: View {
             Section("Max Dose Calculator") {
                 MDMAMaxDoseCalculator { newMaxDose in
                     mdmaDoseInMg = newMaxDose
-                    doseText = newMaxDose.formatted()
+                    doseText = newMaxDose.asRoundedReadableString
                 }
             }
             Section("Choose Dose") {
