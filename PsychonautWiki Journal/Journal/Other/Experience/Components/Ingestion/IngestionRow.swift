@@ -69,7 +69,7 @@ private struct IngestionRowContent: View {
                     Spacer()
                     Group {
                         if timeDisplayStyle == .relativeToNow {
-                            Text(ingestion.timeUnwrapped, style: .relative) + Text(" ago")
+                            RelativeTimeText(date: ingestion.timeUnwrapped)
                         } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                             let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
                             let isFirstIngestion = dateComponents.day == 0 && dateComponents.hour == 0 && dateComponents.minute == 0 && dateComponents.second == 0
