@@ -243,7 +243,7 @@ extension Experience: Comparable {
             substanceCompanions: Array(substanceCompanions)
         )
         let toleranceWindows = getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: allWindowsInLast3Months).sorted { lhs, rhs in
-            lhs.barColor.hashValue < rhs.barColor.hashValue // sort tolerance windows so that they are always drawn in the same order and don't switch row on redraw
+            lhs.start < rhs.start // sort tolerance windows so that they are always drawn in the same order and don't switch row on redraw
         }
         let namesOfSubstancesInChart = toleranceWindows.map { $0.substanceName }.uniqued()
         let substancesInChart = SubstanceRepo.shared.getSubstances(names: namesOfSubstancesInChart).map { sub in
