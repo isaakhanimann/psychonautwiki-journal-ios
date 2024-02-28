@@ -55,7 +55,7 @@ struct RouteItemView: View {
             if let doseUnwrapped = routeItem.dose {
                 Group {
                     if routeItem.isEstimate {
-                        if let deviation = routeItem.estimatedDoseStandardDeviation {
+                        if let deviation = routeItem.estimatedDoseStandardDeviation, deviation > 0 {
                             // 30±5 mg oral
                             Text("\(doseUnwrapped.asRoundedReadableString)±\(deviation.asRoundedReadableString) \(routeItem.units) ") + Text(routeText).foregroundColor(.secondary)
                         } else {
