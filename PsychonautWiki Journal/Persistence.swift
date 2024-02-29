@@ -31,6 +31,7 @@ struct PersistenceController {
     static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
     static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
     static let isDateInTimePickerKey = "isDateInTimePicker"
+    static let shouldAutomaticallyStartLiveActivityKey = "shouldAutomaticallyStartLiveActivity"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }

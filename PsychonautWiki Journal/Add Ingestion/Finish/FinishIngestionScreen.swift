@@ -53,6 +53,7 @@ struct FinishIngestionScreen: View {
     @State private var wantsToStartLiveActivity = true
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually = false
     @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker = false
+    @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
 
     var isConsumerMe: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -211,6 +212,9 @@ struct FinishIngestionScreen: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            wantsToStartLiveActivity = shouldAutomaticallyStartLiveActivity
         }
         .navigationBarTitle("Finish Ingestion")
         .sheet(item: $sheetToShow, content: { sheet in
