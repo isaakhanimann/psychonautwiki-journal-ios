@@ -24,6 +24,6 @@ extension Double {
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = maxNumberOfFractionDigits
         let number = NSNumber(value: self)
-        return formatter.string(from: number) ?? "Invalid"
+        return formatter.string(from: number) ?? ""
     }
 }
