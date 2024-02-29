@@ -30,9 +30,9 @@ struct CustomUnitDoseRow: View {
             units: customUnit.unit)
     }
 
-    private func convertToNewUnit(oldDose: Double?) -> Double? {
+    private func convertToNewUnit(oldDose: Double?) -> String? {
         if let oldDose, let dosePerUnit = customUnit.dosePerUnit, dosePerUnit > 0 {
-            (oldDose/dosePerUnit).roundedSensibly
+            (oldDose/dosePerUnit).asRoundedReadableString
         } else {
             nil
         }

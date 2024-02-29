@@ -21,10 +21,10 @@ struct RoaDoseRow: View {
 
     var body: some View {
         DoseClassificationRow(
-            lightMin: roaDose.lightMin,
-            commonMin: roaDose.commonMin,
-            strongMin: roaDose.strongMin,
-            heavyMin: roaDose.heavyMin,
+            lightMin: roaDose.lightMin?.formatted(),
+            commonMin: roaDose.commonMin?.formatted(),
+            strongMin: roaDose.strongMin?.formatted(),
+            heavyMin: roaDose.heavyMin?.formatted(),
             units: roaDose.units)
     }
 }

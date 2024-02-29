@@ -125,7 +125,6 @@
 		EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */; };
 		EA460D1F2762CA8B002EF80B /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D1E2762CA8B002EF80B /* FAQView.swift */; };
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
-		EA4793562B46985C00685EAA /* Double+RoundedSensibly.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793552B46985C00685EAA /* Double+RoundedSensibly.swift */; };
 		EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */; };
 		EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793592B48252500685EAA /* CustomUnitDose.swift */; };
 		EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */; };
@@ -488,7 +487,6 @@
 		EA41C635295F89BA000DA021 /* YearlyExperienceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyExperienceChart.swift; sourceTree = "<group>"; };
 		EA460D1E2762CA8B002EF80B /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
-		EA4793552B46985C00685EAA /* Double+RoundedSensibly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+RoundedSensibly.swift"; sourceTree = "<group>"; };
 		EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDosePicker.swift; sourceTree = "<group>"; };
 		EA4793592B48252500685EAA /* CustomUnitDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDose.swift; sourceTree = "<group>"; };
 		EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseLabel.swift; sourceTree = "<group>"; };
@@ -785,7 +783,6 @@
 				EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */,
 				EA8A2CB12B468AEF0050554C /* CustomUnitDoseRow.swift */,
 				EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */,
-				EA4793552B46985C00685EAA /* Double+RoundedSensibly.swift */,
 			);
 			path = "Custom Units";
 			sourceTree = "<group>";
@@ -1930,7 +1927,6 @@
 				EAA9C3922A57203800869E5A /* MissingToleranceText.swift in Sources */,
 				EABD92022941C3A30073303A /* GroupDrawable.swift in Sources */,
 				EAE4722526CBA664009FB0EC /* JournalScreen.swift in Sources */,
-				EA4793562B46985C00685EAA /* Double+RoundedSensibly.swift in Sources */,
 				EA418A0D29697EB200DEA663 /* ExperienceTitleScreen.swift in Sources */,
 				EA48F88C29DD503D007DA8C5 /* IngestionCodable.swift in Sources */,
 				EA014FA427EA1AD300077FB2 /* ToastViewModel.swift in Sources */,

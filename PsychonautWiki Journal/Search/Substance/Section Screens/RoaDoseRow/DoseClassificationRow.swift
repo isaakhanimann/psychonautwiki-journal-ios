@@ -18,10 +18,10 @@ import SwiftUI
 
 struct DoseClassificationRow: View {
 
-    let lightMin: Double?
-    let commonMin: Double?
-    let strongMin: Double?
-    let heavyMin: Double?
+    let lightMin: String?
+    let commonMin: String?
+    let strongMin: String?
+    let heavyMin: String?
     let units: String
 
     var body: some View {
@@ -34,7 +34,7 @@ struct DoseClassificationRow: View {
                 if let lightMin {
                     Spacer(minLength: 0)
                     VStack {
-                        Text(lightMin.formatted())
+                        Text(lightMin)
                             .foregroundLinearGradient(colors: [DoseRangeType.thresh.color, DoseRangeType.light.color])
                             .font(doseFont)
                         Text("thresh ")
@@ -60,7 +60,7 @@ struct DoseClassificationRow: View {
                 }
                 if let commonMin {
                     Spacer(minLength: 0)
-                    Text(commonMin.formatted())
+                    Text(commonMin)
                         .foregroundLinearGradient(colors: [DoseRangeType.light.color, DoseRangeType.common.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
@@ -80,7 +80,7 @@ struct DoseClassificationRow: View {
                 }
                 if let strongMin {
                     Spacer(minLength: 0)
-                    Text(strongMin.formatted())
+                    Text(strongMin)
                         .foregroundLinearGradient(colors: [DoseRangeType.common.color, DoseRangeType.strong.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
@@ -100,7 +100,7 @@ struct DoseClassificationRow: View {
                 }
                 if let heavyMin {
                     Spacer(minLength: 0)
-                    Text(heavyMin.formatted())
+                    Text(heavyMin)
                         .foregroundLinearGradient(colors: [DoseRangeType.strong.color, DoseRangeType.heavy.color])
                         .font(doseFont)
                     Spacer(minLength: 0)
@@ -132,12 +132,12 @@ struct DoseClassificationRow: View {
     private var doseFont: Font {
         if
             let commonMin,
-            commonMin.formatted().count >= 4
+            commonMin.count >= 4
         {
             .footnote
         } else if
             let strongMin,
-            strongMin.formatted().count >= 4
+            strongMin.count >= 4
         {
             .footnote
         } else {
@@ -149,9 +149,9 @@ struct DoseClassificationRow: View {
 
 #Preview {
     DoseClassificationRow(
-        lightMin: 20,
-        commonMin: 60,
-        strongMin: 100,
-        heavyMin: 120,
+        lightMin: "20",
+        commonMin: "60",
+        strongMin: "100",
+        heavyMin: "120",
         units: "mg")
 }
