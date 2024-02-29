@@ -44,6 +44,7 @@ struct ToleranceTextsScreen: View {
                 }
             }
         }
+        .dismissWhenTabTapped()
         .navigationTitle("Tolerances")
         .toolbar {
             NavigationLink {
