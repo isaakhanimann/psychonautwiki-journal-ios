@@ -25,46 +25,50 @@ struct SuggestionBox: View {
     var body: some View {
         GroupBox {
             VStack(alignment: .leading) {
-                WrappingHStack(
-                    alignment: .leading,
-                    horizontalSpacing: horizontalSpacing,
-                    verticalSpacing: verticalSpacing)
-                {
-                    ForEach(suggestion.dosesAndUnit) { doseAndUnit in
-                        if let doseDescription = doseAndUnit.doseDescription {
-                            NavigationLink(
-                                doseDescription,
-                                value: FinishIngestionScreenArguments(
+                if !suggestion.dosesAndUnit.isEmpty {
+                    WrappingHStack(
+                        alignment: .leading,
+                        horizontalSpacing: horizontalSpacing,
+                        verticalSpacing: verticalSpacing)
+                    {
+                        ForEach(suggestion.dosesAndUnit) { doseAndUnit in
+                            if let doseDescription = doseAndUnit.doseDescription {
+                                NavigationLink(
+                                    doseDescription,
+                                    value: FinishIngestionScreenArguments(
+                                        substanceName: suggestion.substanceName,
+                                        administrationRoute: suggestion.route,
+                                        dose: doseAndUnit.dose,
+                                        units: doseAndUnit.units,
+                                        isEstimate: doseAndUnit.isEstimate,
+                                        estimatedDoseStandardDeviation: doseAndUnit.estimatedDoseStandardDeviation))
+                                    .buttonStyle(.bordered).fixedSize()
+                            } else {
+                                NavigationLink("Unknown", value: FinishIngestionScreenArguments(
                                     substanceName: suggestion.substanceName,
                                     administrationRoute: suggestion.route,
                                     dose: doseAndUnit.dose,
                                     units: doseAndUnit.units,
                                     isEstimate: doseAndUnit.isEstimate,
-                                    estimatedDoseStandardDeviation: doseAndUnit.estimatedDoseStandardDeviation))
+                                    estimatedDoseStandardDeviation: nil
+                                ))
                                 .buttonStyle(.bordered).fixedSize()
-                        } else {
-                            NavigationLink("Unknown", value: FinishIngestionScreenArguments(
-                                substanceName: suggestion.substanceName,
-                                administrationRoute: suggestion.route,
-                                dose: doseAndUnit.dose,
-                                units: doseAndUnit.units,
-                                isEstimate: doseAndUnit.isEstimate,
-                                estimatedDoseStandardDeviation: nil
-                            ))
-                            .buttonStyle(.bordered).fixedSize()
+                            }
                         }
-                    }
-                    if let substance = suggestion.substance, let units = substance.getDose(for: suggestion.route)?.units {
-                        NavigationLink(
-                            "Enter \(units)",
-                            value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
-                            .buttonStyle(.borderedProminent).fixedSize()
-                    } else if let units = suggestion.dosesAndUnit.first?.units {
-                        NavigationLink("Enter \(units)", value: CustomChooseDoseScreenArguments(
-                            substanceName: suggestion.substanceName,
-                            units: units,
-                            administrationRoute: suggestion.route))
-                            .buttonStyle(.borderedProminent).fixedSize()
+                        if let units = suggestion.dosesAndUnit.first?.units {
+                            if let substance = suggestion.substance {
+                                NavigationLink(
+                                    "Enter \(units)",
+                                    value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
+                                    .buttonStyle(.borderedProminent).fixedSize()
+                            } else {
+                                NavigationLink("Enter \(units)", value: CustomChooseDoseScreenArguments(
+                                    substanceName: suggestion.substanceName,
+                                    units: units,
+                                    administrationRoute: suggestion.route))
+                                    .buttonStyle(.borderedProminent).fixedSize()
+                            }
+                        }
                     }
                 }
                 if !suggestion.customUnitDoses.isEmpty {
