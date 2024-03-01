@@ -41,7 +41,7 @@ struct EditIngestionScreen: View {
 
     private var filteredCustomUnit: [CustomUnit] {
         customUnits.filter { unit in
-            unit.substanceNameUnwrapped == ingestion.substanceNameUnwrapped && unit.administrationRouteUnwrapped == ingestion.administrationRouteUnwrapped && !unit.isArchived
+            unit.substanceNameUnwrapped == ingestion.substanceNameUnwrapped && unit.administrationRouteUnwrapped == ingestion.administrationRouteUnwrapped
         }
     }
 
