@@ -47,7 +47,7 @@ class SuggestionsCreator {
                 let customUnits: [CustomUnitDose] = Array(
                     groupedBySubstanceAndRoute
                         .compactMap { ing in
-                            if let customUnit = ing.customUnit, let dose = ing.doseUnwrapped {
+                            if let customUnit = ing.customUnit, let dose = ing.doseUnwrapped, !customUnit.isArchived {
                                 CustomUnitDose(
                                     dose: dose,
                                     isEstimate: ing.isEstimate,
