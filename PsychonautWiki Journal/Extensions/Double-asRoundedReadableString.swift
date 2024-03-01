@@ -21,7 +21,7 @@ extension Double {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.usesSignificantDigits = true
-        formatter.maximumSignificantDigits = 3
+        formatter.maximumSignificantDigits = 2
         return formatter.string(from: self as NSNumber) ?? String(format: "%.1f", self)
     }
 }
