@@ -24,7 +24,7 @@ class SuggestionsCreator {
         suggestions = bySubstance.flatMap { (substanceName: String, value: [Ingestion]) in
             Dictionary(grouping: value, by: { ingestion in
                 ingestion.administrationRouteUnwrapped
-            }).map { (route: AdministrationRoute, groupedBySubstanceAndRoute: [Ingestion]) in
+            }).compactMap { (route: AdministrationRoute, groupedBySubstanceAndRoute: [Ingestion]) in
                 let firstIngestion = groupedBySubstanceAndRoute.first
                 let filteredCustomUnits = customUnits.filter { customUnit in
                     customUnit.substanceNameUnwrapped == substanceName && customUnit.administrationRouteUnwrapped == route
@@ -44,7 +44,7 @@ class SuggestionsCreator {
                         }
                         .uniqued()
                         .prefix(maxNumberOfSuggestions))
-                let customUnits: [CustomUnitDose] = Array(
+                let customUnitDoses: [CustomUnitDose] = Array(
                     groupedBySubstanceAndRoute
                         .compactMap { ing in
                             if let customUnit = ing.customUnit, let dose = ing.doseUnwrapped, !customUnit.isArchived {
@@ -59,15 +59,19 @@ class SuggestionsCreator {
                         }
                         .uniqued()
                         .prefix(maxNumberOfSuggestions))
-                return Suggestion(
-                    substanceName: substanceName,
-                    substance: SubstanceRepo.shared.getSubstance(name: substanceName),
-                    route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
-                    substanceColor: firstIngestion?.substanceColor ?? .red,
-                    dosesAndUnit: dosesAndUnits,
-                    customUnitDoses: customUnits,
-                    customUnits: filteredCustomUnits,
-                    lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now)
+                if dosesAndUnits.isEmpty && customUnitDoses.isEmpty && filteredCustomUnits.isEmpty {
+                    return nil
+                } else {
+                    return Suggestion(
+                        substanceName: substanceName,
+                        substance: SubstanceRepo.shared.getSubstance(name: substanceName),
+                        route: firstIngestion?.administrationRouteUnwrapped ?? .oral,
+                        substanceColor: firstIngestion?.substanceColor ?? .red,
+                        dosesAndUnit: dosesAndUnits,
+                        customUnitDoses: customUnitDoses,
+                        customUnits: filteredCustomUnits,
+                        lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now)
+                }
             }
         }.sorted { sug1, sug2 in
             sug1.lastTimeUsed > sug2.lastTimeUsed
