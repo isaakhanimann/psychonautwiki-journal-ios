@@ -71,7 +71,7 @@ struct SuggestionBox: View {
                         }
                     }
                 }
-                if !suggestion.customUnitDoses.isEmpty {
+                if !suggestion.customUnitDoses.isEmpty || !suggestion.customUnits.isEmpty {
                     WrappingHStack(
                         alignment: .leading,
                         horizontalSpacing: horizontalSpacing,
@@ -91,14 +91,6 @@ struct SuggestionBox: View {
                                 CustomUnitDoseLabel(customUnitDose: customUnitDose)
                             }.buttonStyle(.bordered).fixedSize()
                         }
-                    }
-                }
-                if !suggestion.customUnits.isEmpty {
-                    WrappingHStack(
-                        alignment: .leading,
-                        horizontalSpacing: horizontalSpacing,
-                        verticalSpacing: verticalSpacing)
-                    {
                         ForEach(suggestion.customUnits) { customUnit in
                             NavigationLink(value: customUnit) {
                                 VStack {
