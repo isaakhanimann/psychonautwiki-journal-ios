@@ -99,6 +99,11 @@ struct TestingServicesScreen: View {
                     city: "Various locations",
                     url: "https://energycontrol.org/servicio-de-analisis/"
                 )
+                TestingServiceItem(
+                    name: "Kykeon Analytics",
+                    city: "Various locations",
+                    url: "https://www.kykeonanalytics.com"
+                )
             }
             Section("Switzerland") {
                 TestingServiceItem(
