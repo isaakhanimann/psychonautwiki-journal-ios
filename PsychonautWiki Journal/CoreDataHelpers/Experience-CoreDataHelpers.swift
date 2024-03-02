@@ -112,6 +112,8 @@ extension Experience: Comparable {
         if let lastIngestionTime = ingestionsSorted.last?.time,
            Date().timeIntervalSinceReferenceDate - lastIngestionTime.timeIntervalSinceReferenceDate < twelveHours {
             return true
+        } else if Date().timeIntervalSinceReferenceDate - sortDateUnwrapped.timeIntervalSinceReferenceDate < twelveHours {
+            return true
         } else {
             return false
         }
