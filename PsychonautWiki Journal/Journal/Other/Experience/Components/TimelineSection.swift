@@ -17,7 +17,7 @@
 import SwiftUI
 
 struct TimelineSection: View {
-    let timelineModel: TimelineModel?
+    let timelineModel: TimelineModel
     let ingestionsSorted: [Ingestion]
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
@@ -32,14 +32,10 @@ struct TimelineSection: View {
     var body: some View {
         Group {
             let timelineHeight: Double = 200
-            if let timelineModel {
-                NavigationLink {
-                    TimelineScreen(timelineModel: timelineModel)
-                } label: {
-                    EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
-                }
-            } else {
-                Canvas { _, _ in }.frame(height: timelineHeight)
+            NavigationLink {
+                TimelineScreen(timelineModel: timelineModel)
+            } label: {
+                EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
             }
             ForEach(ingestionsSorted) { ing in
                 Button {
