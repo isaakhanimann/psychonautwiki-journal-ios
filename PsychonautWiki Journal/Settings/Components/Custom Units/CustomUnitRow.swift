@@ -23,7 +23,7 @@ struct CustomUnitRow: View {
         HStack(spacing: 10) {
             ColorRectangle(color: customUnit.color?.swiftUIColor ?? Color.gray)
             VStack(alignment: .leading) {
-                Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))").font(.headline)
+                Text("\(customUnit.substanceNameUnwrapped), \(customUnit.nameUnwrapped)").font(.headline)
                 Text(customUnit.doseOfOneUnitDescription) + Text(" per \(customUnit.unitUnwrapped) \(customUnit.administrationRouteUnwrapped.rawValue)").foregroundColor(.secondary)
                 .font(.subheadline)
                 if !customUnit.noteUnwrapped.isEmpty {
