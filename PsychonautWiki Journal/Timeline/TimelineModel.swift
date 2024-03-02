@@ -25,6 +25,13 @@ struct TimelineModel {
     let timedNoteDrawables: [TimedNoteDrawable]
     let axisDrawable: AxisDrawable
 
+    var isWorthDrawing: Bool {
+        let allHaveMissingDuration = groupDrawables.allSatisfy { groupDrawable in
+            !groupDrawable.hasDurationInfo
+        }
+        return !(allHaveMissingDuration && ratingDrawables.isEmpty && timedNoteDrawables.isEmpty)
+    }
+
     struct RoaGroup {
         let color: SubstanceColor
         let roaDuration: RoaDuration?

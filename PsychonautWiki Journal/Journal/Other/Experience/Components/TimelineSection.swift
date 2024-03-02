@@ -31,11 +31,12 @@ struct TimelineSection: View {
 
     var body: some View {
         Group {
-            let timelineHeight: Double = 200
-            NavigationLink {
-                TimelineScreen(timelineModel: timelineModel)
-            } label: {
-                EffectTimeline(timelineModel: timelineModel, height: timelineHeight)
+            if timelineModel.isWorthDrawing {
+                NavigationLink {
+                    TimelineScreen(timelineModel: timelineModel)
+                } label: {
+                    EffectTimeline(timelineModel: timelineModel, height: 200)
+                }
             }
             ForEach(ingestionsSorted) { ing in
                 Button {

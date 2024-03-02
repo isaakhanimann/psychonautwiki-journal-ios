@@ -150,13 +150,14 @@ struct ExperienceScreen: View {
         } screen: {
             List {
                 if !experience.myIngestionsSorted.isEmpty {
+                    let timelineModel = experience.getMyTimeLineModel(
+                        hiddenIngestions: hiddenIngestions,
+                        hiddenRatings: hiddenRatings,
+                        areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                    )
                     Section {
                         TimelineSection(
-                            timelineModel: experience.getMyTimeLineModel(
-                                hiddenIngestions: hiddenIngestions,
-                                hiddenRatings: hiddenRatings,
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually
-                            ),
+                            timelineModel: timelineModel,
                             ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
@@ -167,7 +168,7 @@ struct ExperienceScreen: View {
                             updateActivityIfActive: updateActivityIfActive
                         )
                         if #available(iOS 16.2, *) {
-                            if experience.isCurrent {
+                            if experience.isCurrent && timelineModel.isWorthDrawing {
                                 LiveActivityButton(
                                     stopLiveActivity: {
                                         stopLiveActivity()

@@ -25,6 +25,8 @@ struct GroupDrawable {
         timelineDrawables.map { $0.endOfLineRelativeToStartInSeconds }.max() ?? 0
     }
 
+    let hasDurationInfo: Bool
+
     // swiftlint:disable function_body_length
     init(
         startGraph: Date,
@@ -34,6 +36,7 @@ struct GroupDrawable {
         areRedosesDrawnIndividually: Bool
     ) {
         self.color = color
+        self.hasDurationInfo = roaDuration != nil
         guard let roaDuration else {
             timelineDrawables = weightedLines.map { weightedLine in
                 NoTimeline(
