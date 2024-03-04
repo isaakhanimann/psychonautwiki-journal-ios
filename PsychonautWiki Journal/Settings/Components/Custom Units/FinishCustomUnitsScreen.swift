@@ -54,9 +54,9 @@ struct FinishCustomUnitsScreen: View {
                         focusedField = .dose
                     }
             }
-            Section("Original Unit") {
-                let areUnitsDefined = roaDose?.units != nil
-                if !areUnitsDefined {
+            let areUnitsDefined = roaDose?.units != nil
+            if !areUnitsDefined {
+                Section("Original Unit") {
                     UnitsPicker(units: $originalUnit)
                         .padding(.bottom, 10)
                 }
