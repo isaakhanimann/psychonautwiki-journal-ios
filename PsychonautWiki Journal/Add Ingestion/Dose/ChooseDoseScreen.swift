@@ -220,23 +220,23 @@ struct ChooseDoseScreenContent: View {
     private var screen: some View {
         Form {
             doseSection
-            Section("Custom units") {
-                ForEach(customUnits.wrappedValue) { customUnit in
-                    NavigationLink(value: customUnit) {
-                        Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
+            if isEyeOpen {
+                Section("Custom units") {
+                    ForEach(customUnits.wrappedValue) { customUnit in
+                        NavigationLink(value: customUnit) {
+                            Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
+                        }
+                    }
+                    NavigationLink(
+                        "Add custom unit",
+                        value: AddCustomUnitArguments(substanceAndRoute: SubstanceAndRoute(substance: substance, administrationRoute: administrationRoute)))
+                }
+                if substance.name == "Nicotine" {
+                    Section("Nicotine Content vs Dose") {
+                        Text(
+                            "The nicotine inhaled by the average smoker per cigarette is indicated on the package. The nicotine content of the cigarette itself is much higher as on average only about 10% of the cigarette’s nicotine is inhaled.\nMore nicotine is inhaled when taking larger and more frequent puffs or by blocking the cigarette filter ventilation holes.\nNicotine yields from electronic cigarettes are also highly correlated with the device type and brand, liquid nicotine concentration, and PG/VG ratio, and to a lower significance with electrical power. Nicotine yields from 15 puffs may vary 50-fold.")
                     }
                 }
-                NavigationLink(
-                    "Add custom unit",
-                    value: AddCustomUnitArguments(substanceAndRoute: SubstanceAndRoute(substance: substance, administrationRoute: administrationRoute)))
-            }
-            if substance.name == "Nicotine" {
-                Section("Nicotine Content vs Dose") {
-                    Text(
-                        "The nicotine inhaled by the average smoker per cigarette is indicated on the package. The nicotine content of the cigarette itself is much higher as on average only about 10% of the cigarette’s nicotine is inhaled.\nMore nicotine is inhaled when taking larger and more frequent puffs or by blocking the cigarette filter ventilation holes.\nNicotine yields from electronic cigarettes are also highly correlated with the device type and brand, liquid nicotine concentration, and PG/VG ratio, and to a lower significance with electrical power. Nicotine yields from 15 puffs may vary 50-fold.")
-                }
-            }
-            if isEyeOpen {
                 if administrationRoute == .smoked, substance.categories.contains("opioid") {
                     ChasingTheDragonSection()
                 }
