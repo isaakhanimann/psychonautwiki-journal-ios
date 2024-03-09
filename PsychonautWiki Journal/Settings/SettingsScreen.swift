@@ -200,11 +200,8 @@ struct SettingsContent: View {
                             Label("Share App", systemImage: "person.2")
                         }
                     }
-                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
-                        Label("Feature Requests / Bug Reports", systemImage: "exclamationmark.bubble")
-                    }
-                    Link(destination: URL(string: "https://t.me/isaakhanimann")!) {
-                        Label("Ask a Question", systemImage: "ellipsis.bubble")
+                    Link(destination: URL(string: isEyeOpen ? "https://t.me/+ss8uZhBF6g00MTY8" : "https://t.me/isaakhanimann")!) {
+                        Label("Question, Feedback, Bug Report", systemImage: "exclamationmark.bubble")
                     }
                     if isEyeOpen {
                         NavigationLink(
