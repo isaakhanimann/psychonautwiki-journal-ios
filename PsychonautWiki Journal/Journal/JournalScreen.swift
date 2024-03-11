@@ -85,7 +85,9 @@ struct JournalScreen: View {
             } screen: {
                 screen
             }
-            .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
+            .fullScreenCover(isPresented: $isShowingAddIngestionSheet, onDismiss: {
+                maybeRequestAppRating()
+            }) {
                 ChooseSubstanceScreen()
             }
             .toolbar {
@@ -152,9 +154,6 @@ struct JournalScreen: View {
         .scrollDismissesKeyboard(.interactively)
         .searchable(text: query, prompt: "Search by title or substance")
         .disableAutocorrection(true)
-        .task {
-            maybeRequestAppRating()
-        }
     }
 
     private func maybeRequestAppRating() {
