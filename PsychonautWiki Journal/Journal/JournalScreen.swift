@@ -89,7 +89,7 @@ struct JournalScreen: View {
                 ChooseSubstanceScreen()
             }
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
                     favoriteButton
                     Menu {
                         Button {
@@ -115,6 +115,8 @@ struct JournalScreen: View {
                     } label: {
                         Label("Time Display", systemImage: "timer")
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
                         JournalCalendarScreen()
                     } label: {
