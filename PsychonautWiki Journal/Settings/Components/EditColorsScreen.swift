@@ -18,7 +18,7 @@ import SwiftUI
 
 struct EditColorsScreen: View {
     @FetchRequest(
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \SubstanceCompanion.substanceName, ascending: true)]
     ) var substanceCompanions: FetchedResults<SubstanceCompanion>
 
     var alreadyUsedColors: [SubstanceColor] {
