@@ -27,7 +27,6 @@ struct JournalApp: App {
         WindowGroup {
             ZStack {
                 ContentView()
-                    .headerProminence(.increased)
                     .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                     .environmentObject(toastViewModel)
                     .environmentObject(authenticator)

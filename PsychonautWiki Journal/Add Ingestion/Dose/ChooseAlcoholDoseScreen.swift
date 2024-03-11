@@ -224,5 +224,5 @@ struct ChooseAlcoholDoseScreen: View {
 #Preview {
     NavigationStack {
         ChooseAlcoholDoseScreen(dismiss: {})
-    }.headerProminence(.increased)
+    }
 }

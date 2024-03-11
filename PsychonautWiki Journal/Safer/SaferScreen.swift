@@ -122,5 +122,5 @@ struct SaferScreen: View {
 }
 
 #Preview {
-    SaferScreen().headerProminence(.increased)
+    SaferScreen()
 }

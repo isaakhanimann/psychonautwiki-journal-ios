@@ -68,6 +68,5 @@ struct ToleranceTextsScreen: View {
         }
         ToleranceTextsScreen(substances: substancsWith)
             .environmentObject(TabBarObserver())
-            .headerProminence(.increased)
     }
 }

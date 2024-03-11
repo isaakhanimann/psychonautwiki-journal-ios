@@ -39,7 +39,6 @@ struct ShareScreen: View {
 #Preview {
     NavigationStack {
         ShareScreen()
-            .headerProminence(.increased)
     }
     .environmentObject(TabBarObserver())
 }

@@ -58,6 +58,5 @@ struct TimelineExplanationTexts: View {
     NavigationStack {
         ExplainExperienceSectionScreen()
             .environmentObject(TabBarObserver())
-            .headerProminence(.increased)
     }
 }

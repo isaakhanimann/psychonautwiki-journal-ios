@@ -48,6 +48,5 @@ struct ToleranceChartExplanationScreen: View {
     NavigationStack {
         ToleranceChartExplanationScreen()
             .environmentObject(TabBarObserver())
-            .headerProminence(.increased)
     }
 }

@@ -166,6 +166,6 @@ private let sprays = [
             addSpray: {},
             deleteSprays: { _ in },
             doseAdjustedToPurity: 211
-        ).headerProminence(.increased)
+        )
     }
 }

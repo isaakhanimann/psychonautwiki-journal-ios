@@ -87,6 +87,6 @@ struct AddSprayScreen: View {
 
 #Preview {
     NavigationStack {
-        AddSprayScreen().headerProminence(.increased)
+        AddSprayScreen()
     }
 }
