@@ -32,9 +32,7 @@ struct TimelineSection: View {
     var body: some View {
         Group {
             if timelineModel.isWorthDrawing {
-                NavigationLink {
-                    TimelineScreen(timelineModel: timelineModel)
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.timeline(timelineModel: timelineModel)) {
                     EffectTimeline(timelineModel: timelineModel, height: 200)
                 }
             }

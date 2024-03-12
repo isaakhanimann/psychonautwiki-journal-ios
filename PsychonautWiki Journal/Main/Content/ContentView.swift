@@ -313,6 +313,12 @@ func getScreen(from destination: GlobalNavigationDestination) -> some View {
             FAQView()
         case .customUnitsArchive:
             CustomUnitsArchiveScreen()
+        case .shareApp:
+            ShareScreen()
+        case let .timeline(timelineModel):
+            TimelineScreen(timelineModel: timelineModel)
+        case .explainExperience:
+            ExplainExperienceSectionScreen()
         }
     }
 }

@@ -52,9 +52,7 @@ struct TimelineScreen: View {
         .navigationTitle("Dose Response")
         .toolbar {
             if isEyeOpen {
-                NavigationLink {
-                    ExplainExperienceSectionScreen()
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.explainExperience) {
                     Label("Timeline Limitations", systemImage: "info.circle")
                 }
             }

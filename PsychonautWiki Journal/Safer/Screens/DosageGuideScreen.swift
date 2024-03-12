@@ -90,9 +90,7 @@ struct DosageGuideScreen: View {
                     Volumetric liquid dosing should preferably be used for potent drugs because most standard milligram scales cannot accurately weigh out doses below 10-15mg.
                     Volumetric liquid dosing is the process of dissolving a known quantity of a compound in a liquid medium in order to make it easier to measure and accurately dose. In the interest of harm reduction, it is essential to prepare certain compounds which are too potent to measure with traditional weighing scales within a liquid solution.
                     """)
-                NavigationLink("Volumetric Liquid Dosing") {
-                    VolumetricDosingScreen()
-                }
+                NavigationLink("Volumetric Liquid Dosing", value: GlobalNavigationDestination.volumetricDosing)
             }
             Section("Dosage Classification") {
                 Text(
@@ -100,9 +98,7 @@ struct DosageGuideScreen: View {
                     The range and intensity of the effects of a substance depends on upon a number of factors. These include route of administration, dosage, set and setting, and personal and environmental factors.
                     Effective doses can be divided into five categories: threshold, light, common, strong, and heavy.
                     """)
-                NavigationLink("Dosage Classification") {
-                    DosageClassificationScreen()
-                }
+                NavigationLink("Dosage Classification", value: GlobalNavigationDestination.doseClassification)
             }
         }
         .navigationTitle("Dosage Guide")

@@ -189,9 +189,7 @@ struct SettingsContent: View {
             }
             Section("Communication") {
                 if isEyeOpen {
-                    NavigationLink {
-                        ShareScreen()
-                    } label: {
+                    NavigationLink(value: GlobalNavigationDestination.shareApp) {
                         Label("Share App", systemImage: "person.2")
                     }
                 }

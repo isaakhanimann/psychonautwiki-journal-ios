@@ -42,6 +42,8 @@ enum GlobalNavigationDestination: Hashable {
     case saferHallucinogen
     case allInteractions(substancesToCheck: [Substance])
     case toleranceTexts(substances: [SubstanceWithToleranceAndColor])
+    case timeline(timelineModel: TimelineModel)
+    case explainExperience
 
     // stats tab mainly
     case toleranceChart
@@ -73,4 +75,5 @@ enum GlobalNavigationDestination: Hashable {
     case customUnits
     case faq
     case customUnitsArchive
+    case shareApp
 }

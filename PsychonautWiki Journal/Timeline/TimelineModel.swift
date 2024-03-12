@@ -17,7 +17,21 @@
 import Foundation
 import SwiftUI
 
-struct TimelineModel {
+struct TimelineModel: Hashable {
+    static func == (lhs: TimelineModel, rhs: TimelineModel) -> Bool {
+        lhs.hashValue == rhs.hashValue
+    }
+
+    func hash(into hasher: inout Hasher) {
+        // some unique hash
+        hasher.combine(startTime)
+        hasher.combine(totalWidth)
+        hasher.combine(groupDrawables.description)
+        hasher.combine(ratingDrawables.description)
+        hasher.combine(timedNoteDrawables.description)
+        hasher.combine(axisDrawable.widthInSeconds)
+    }
+
     let startTime: Date
     let totalWidth: TimeInterval
     let groupDrawables: [GroupDrawable]

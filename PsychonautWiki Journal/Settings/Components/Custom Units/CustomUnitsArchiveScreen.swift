@@ -18,6 +18,8 @@ import SwiftUI
 
 struct CustomUnitsArchiveScreen: View {
 
+    @State private var customUnitToEdit: CustomUnit?
+
     var body: some View {
         Group {
             if customUnits.isEmpty {
@@ -26,15 +28,20 @@ struct CustomUnitsArchiveScreen: View {
             } else {
                 List {
                     ForEach(customUnits) { customUnit in
-                        NavigationLink {
-                            EditCustomUnitsScreen(customUnit: customUnit)
-                        } label: {
-                            CustomUnitRow(customUnit: customUnit)
-                        }
+                        Button(action: {
+                            customUnitToEdit = customUnit
+                        }, label: {
+                            CustomUnitRow(customUnit: customUnit).foregroundColor(.primary)
+                        })
                     }
                 }
             }
         }
+        .sheet(item: $customUnitToEdit, content: { customUnit in
+            NavigationStack {
+                EditCustomUnitsScreen(customUnit: customUnit)
+            }
+        })
         .navigationTitle("Archive")
     }
 

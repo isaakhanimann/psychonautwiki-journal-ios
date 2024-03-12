@@ -46,9 +46,7 @@ struct ToleranceTextsScreen: View {
         }
         .navigationTitle("Tolerances")
         .toolbar {
-            NavigationLink {
-                ToleranceChartExplanationScreen()
-            } label: {
+            NavigationLink(value: GlobalNavigationDestination.toleranceChartExplanation) {
                 Label("Chart Limitations", systemImage: "info.circle")
                     .labelStyle(.titleOnly)
             }

@@ -222,8 +222,6 @@
 		EA6048452A25C28F005C6A4B /* FabLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6048442A25C28F005C6A4B /* FabLabelStyle.swift */; };
 		EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */; };
 		EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */; };
-		EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */; };
-		EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */; };
 		EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */; };
 		EA7F230F2B8E095700EA6734 /* RelativeTimeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
@@ -254,7 +252,6 @@
 		EAA9C3942A57214A00869E5A /* ToleranceChartExplanationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */; };
 		EAA9C3962A5944EB00869E5A /* ToleranceTimeOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3952A5944EB00869E5A /* ToleranceTimeOption.swift */; };
 		EAA9C3992A59484600869E5A /* ChooseDateScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C3982A59484600869E5A /* ChooseDateScreenContent.swift */; };
-		EAA9C39B2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9C39A2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift */; };
 		EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */; };
 		EAACB08F2947C8FB0050E002 /* CustomChooseDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */; };
 		EAB1659527E302BC003DF79D /* ColorPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */; };
@@ -576,8 +573,6 @@
 		EA6048442A25C28F005C6A4B /* FabLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabLabelStyle.swift; sourceTree = "<group>"; };
 		EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreen.swift; sourceTree = "<group>"; };
 		EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
-		EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareiOSAppScreen.swift; sourceTree = "<group>"; };
-		EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAndroidAppScreen.swift; sourceTree = "<group>"; };
 		EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChart.swift; sourceTree = "<group>"; };
 		EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeText.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
@@ -610,7 +605,6 @@
 		EAA9C3932A57214A00869E5A /* ToleranceChartExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChartExplanationScreen.swift; sourceTree = "<group>"; };
 		EAA9C3952A5944EB00869E5A /* ToleranceTimeOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceTimeOption.swift; sourceTree = "<group>"; };
 		EAA9C3982A59484600869E5A /* ChooseDateScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateScreenContent.swift; sourceTree = "<group>"; };
-		EAA9C39A2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareIOSorAndroidScreen.swift; sourceTree = "<group>"; };
 		EAACB08C2947C83A0050E002 /* CustomChooseRouteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseRouteScreen.swift; sourceTree = "<group>"; };
 		EAACB08E2947C8FB0050E002 /* CustomChooseDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChooseDoseScreen.swift; sourceTree = "<group>"; };
 		EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerScreen.swift; sourceTree = "<group>"; };
@@ -1136,9 +1130,6 @@
 			isa = PBXGroup;
 			children = (
 				EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */,
-				EA6D44E72A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift */,
-				EA6D44E92A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift */,
-				EAA9C39A2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift */,
 				EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */,
 			);
 			path = Share;
@@ -1851,10 +1842,8 @@
 				EAD1D0082B52829400EC0D70 /* AddCustomUnitsScreen.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EA302E4C2B385516007F113F /* AddIngestionDestination.swift in Sources */,
-				EA6D44EA2A4FFF8200BF2E8A /* ShareAndroidAppScreen.swift in Sources */,
 				EAC368732B6FC99200056C56 /* DayView.swift in Sources */,
 				EA48F86329DB2B37007DA8C5 /* EditRatingScreen.swift in Sources */,
-				EA6D44E82A4FFF1B00BF2E8A /* ShareiOSAppScreen.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */,
@@ -2037,7 +2026,6 @@
 				EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */,
 				EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */,
 				EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */,
-				EAA9C39B2A5A9EAE00869E5A /* ShareIOSorAndroidScreen.swift in Sources */,
 				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceScreen.swift in Sources */,
 				EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */,
