@@ -22,9 +22,7 @@ struct ExperienceRow: View {
     let isTimeRelative: Bool
 
     var body: some View {
-        NavigationLink(
-            destination: ExperienceScreen(experience: experience)
-        ) {
+        NavigationLink(value: GlobalNavigationDestination.experience(experience: experience)) {
             Group {
                 if let location = experience.location {
                     ExperienceRowObservedLocation(

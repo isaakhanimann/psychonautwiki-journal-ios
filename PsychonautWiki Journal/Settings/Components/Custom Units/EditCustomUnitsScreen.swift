@@ -54,8 +54,17 @@ struct EditCustomUnitsScreen: View {
             estimatedDoseStandardDeviation = customUnit.estimatedDoseStandardDeviationUnwrapped
             isArchived = customUnit.isArchived
         }
-        .onDisappear {
-            save()
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save") {
+                    save()
+                }
+            }
         }
     }
 
@@ -129,15 +138,14 @@ struct EditCustomUnitsScreenContent: View {
                     }
                 }
             }.listRowSeparator(.hidden)
+
             Section {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
             } footer: {
                 Text("Archived custom units don't show up when adding ingestions")
             }
 
-        }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
+            Section {
                 Button {
                     if ingestionCount > 0 {
                         isDeleteShown.toggle()
@@ -145,7 +153,7 @@ struct EditCustomUnitsScreenContent: View {
                         delete()
                     }
                 } label: {
-                    Label("Delete Unit", systemImage: "trash")
+                    Label("Delete Unit", systemImage: "trash").foregroundColor(.red)
                 }
             }
         }

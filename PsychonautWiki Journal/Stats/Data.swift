@@ -20,7 +20,7 @@ func date(year: Int, month: Int = 1, day: Int = 1) -> Date {
     Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
 }
 
-struct SubstanceCount: Identifiable {
+struct SubstanceCount: Identifiable, Hashable {
     var id: String {
         substanceName
     }
@@ -29,7 +29,17 @@ struct SubstanceCount: Identifiable {
     let experienceCount: Int
 }
 
-struct SubstanceData {
+struct SubstanceData: Hashable, Equatable {
+    static func == (lhs: SubstanceData, rhs: SubstanceData) -> Bool {
+        lhs.years == rhs.years
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(last30Days)
+        hasher.combine(last12Months)
+        hasher.combine(years)
+    }
+
     let last30Days: [SubstanceCount]
     let last12Months: [SubstanceCount]
     let years: [SubstanceCount]
@@ -130,7 +140,7 @@ extension SubstanceData {
     )
 }
 
-struct SubstanceExperienceCountForDay: Identifiable {
+struct SubstanceExperienceCountForDay: Identifiable, Hashable {
     var id: String {
         day.asDateAndTime + substanceName
     }
@@ -140,19 +150,29 @@ struct SubstanceExperienceCountForDay: Identifiable {
     let experienceCount: Double
 }
 
-struct SubstanceExperienceCountForMonth {
+struct SubstanceExperienceCountForMonth: Hashable {
     let month: Date
     let substanceName: String
     let experienceCount: Double
 }
 
-struct SubstanceExperienceCountForYear {
+struct SubstanceExperienceCountForYear: Hashable {
     let year: Date
     let substanceName: String
     let experienceCount: Double
 }
 
-struct ExperienceData {
+struct ExperienceData: Hashable, Equatable {
+    static func == (lhs: ExperienceData, rhs: ExperienceData) -> Bool {
+        lhs.years == rhs.years
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(last30Days)
+        hasher.combine(last12Months)
+        hasher.combine(years)
+    }
+
     let last30Days: [SubstanceExperienceCountForDay]
     let last12Months: [SubstanceExperienceCountForMonth]
     let years: [SubstanceExperienceCountForYear]

@@ -30,7 +30,6 @@ struct InteractionsScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Interactions")
-        .dismissWhenTabTapped()
     }
 }
 

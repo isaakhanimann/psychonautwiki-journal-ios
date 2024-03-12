@@ -73,7 +73,6 @@ struct SaferHallucinogenScreen: View {
             }
         }
         .navigationTitle("Safer Hallucinogens")
-        .dismissWhenTabTapped()
     }
 }
 

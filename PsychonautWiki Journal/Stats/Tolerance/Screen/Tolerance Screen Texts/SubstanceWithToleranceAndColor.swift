@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct SubstanceWithToleranceAndColor: Identifiable {
+struct SubstanceWithToleranceAndColor: Identifiable, Hashable {
     var id: String {
         substanceName
     }

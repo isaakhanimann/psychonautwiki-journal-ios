@@ -19,6 +19,9 @@ import SwiftUI
 // MARK: - CustomUnitsScreen
 
 struct CustomUnitsScreen: View {
+
+    @State private var customUnitToEdit: CustomUnit?
+
     var body: some View {
         Group {
             List {
@@ -26,20 +29,24 @@ struct CustomUnitsScreen: View {
                     Text("No custom units")
                         .foregroundColor(.secondary)
                 }
-                NavigationLink {
-                    CustomUnitsArchiveScreen()
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.customUnitsArchive) {
                     Label("Archive", systemImage: "archivebox")
                 }
+                
                 ForEach(customUnits) { customUnit in
-                    NavigationLink {
-                        EditCustomUnitsScreen(customUnit: customUnit)
-                    } label: {
-                        CustomUnitRow(customUnit: customUnit)
-                    }
+                    Button(action: {
+                        customUnitToEdit = customUnit
+                    }, label: {
+                        CustomUnitRow(customUnit: customUnit).foregroundColor(.primary)
+                    })
                 }
             }
         }
+        .sheet(item: $customUnitToEdit, content: { customUnit in
+            NavigationStack {
+                EditCustomUnitsScreen(customUnit: customUnit)
+            }
+        })
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -53,7 +60,6 @@ struct CustomUnitsScreen: View {
             CustomUnitsChooseSubstanceScreen()
         })
         .navigationTitle("Custom Units")
-        .dismissWhenTabTapped()
     }
 
     @FetchRequest(

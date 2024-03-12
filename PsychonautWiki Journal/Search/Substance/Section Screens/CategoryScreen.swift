@@ -28,9 +28,7 @@ struct CategoryScreen: View {
                         Text(category.name.localizedCapitalized).font(.headline)
                         Text(category.description).font(.subheadline)
                         if let articleURL = category.url {
-                            NavigationLink {
-                                WebViewScreen(articleURL: articleURL)
-                            } label: {
+                            NavigationLink(value: GlobalNavigationDestination.webView(articleURL: articleURL)) {
                                 Label("Article", systemImage: "link")
                             }
                         }
@@ -39,7 +37,6 @@ struct CategoryScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Categories")
-        .dismissWhenTabTapped()
         .onAppear {
             categories = substance.categories.compactMap { name in
                 SubstanceRepo.shared.categories.first(where: { cat in

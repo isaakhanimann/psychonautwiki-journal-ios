@@ -31,6 +31,8 @@ struct EditColorsScreen: View {
         Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
     }
 
+    @State private var companionToEdit: SubstanceCompanion?
+
     var body: some View {
         List {
             Section {
@@ -38,24 +40,28 @@ struct EditColorsScreen: View {
                     Text("No colors added yet")
                 } else {
                     ForEach(substanceCompanions) { companion in
-                        NavigationLink {
-                            CompanionColorPickerScreen(
-                                companion: companion,
-                                alreadyUsedColors: alreadyUsedColors,
-                                otherColors: otherColors
-                            )
-                        } label: {
+                        Button(action: {
+                            companionToEdit = companion
+                        }, label: {
                             CompanionRow(
                                 name: companion.substanceNameUnwrapped,
                                 color: companion.color.swiftUIColor
-                            )
-                        }
+                            ).foregroundColor(.primary)
+                        })
                     }
                 }
             }
         }
+        .sheet(item: $companionToEdit, content: { companion in
+            NavigationStack {
+                CompanionColorPickerScreen(
+                    companion: companion,
+                    alreadyUsedColors: alreadyUsedColors,
+                    otherColors: otherColors
+                )
+            }
+        })
         .navigationTitle("Edit Colors")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -83,7 +89,6 @@ struct CompanionColorPickerScreen: View {
             }
         }
         .navigationTitle("Choose Color")
-        .dismissWhenTabTapped()
     }
 
     private func button(for color: SubstanceColor) -> some View {

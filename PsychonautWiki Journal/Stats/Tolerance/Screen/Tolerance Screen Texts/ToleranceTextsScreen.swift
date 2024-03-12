@@ -44,7 +44,6 @@ struct ToleranceTextsScreen: View {
                 }
             }
         }
-        .dismissWhenTabTapped()
         .navigationTitle("Tolerances")
         .toolbar {
             NavigationLink {
@@ -67,6 +66,5 @@ struct ToleranceTextsScreen: View {
             sub.toSubstanceWithToleranceAndColor(substanceColor: SubstanceColor.allCases.randomElement() ?? .red)
         }
         ToleranceTextsScreen(substances: substancsWith)
-            .environmentObject(TabBarObserver())
     }
 }

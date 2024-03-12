@@ -36,7 +36,6 @@ struct CustomUnitsArchiveScreen: View {
             }
         }
         .navigationTitle("Archive")
-        .dismissWhenTabTapped()
     }
 
     @FetchRequest(

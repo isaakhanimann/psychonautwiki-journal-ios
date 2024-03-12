@@ -17,37 +17,30 @@
 import SwiftUI
 
 struct ToxicityScreen: View {
-    let substanceName: String
-    let toxicities: [String]
-    let substanceURL: URL
+    
+    let substance: Substance
 
     var body: some View {
         List {
             Section {
-                ForEach(toxicities, id: \.self) { toxicity in
+                ForEach(substance.toxicities, id: \.self) { toxicity in
                     Text(toxicity)
                 }
-                if let toxicityURL = URL(string: substanceURL.absoluteString + "#Toxicity_and_harm_potential") {
-                    NavigationLink {
-                        WebViewScreen(articleURL: toxicityURL)
-                    } label: {
+                if let toxicityURL = URL(string: substance.url.absoluteString + "#Toxicity_and_harm_potential") {
+                    NavigationLink(value: GlobalNavigationDestination.webView(articleURL: toxicityURL)) {
                         Label("More Info", systemImage: "info.circle")
                     }
                 }
             }
         }
-        .navigationTitle("\(substanceName) Toxicity")
-        .dismissWhenTabTapped()
+        .navigationTitle("\(substance.name) Toxicity")
     }
 }
 
 #Preview {
     NavigationStack {
-        let substance = SubstanceRepo.shared.getSubstance(name: "LSD")!
         ToxicityScreen(
-            substanceName: substance.name,
-            toxicities: substance.toxicities,
-            substanceURL: substance.url
+            substance: SubstanceRepo.shared.getSubstance(name: "LSD")!
         )
     }
 }

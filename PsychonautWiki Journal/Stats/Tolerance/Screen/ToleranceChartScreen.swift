@@ -48,7 +48,6 @@ struct ToleranceChartScreen: View {
             .onChange(of: sinceDate) { _ in
                 calculateScreen()
             }
-            .dismissWhenTabTapped()
             .sheet(isPresented: $isPresentingSheet) {
                 AddToleranceIngestionScreen(finish: finishAddingIngestion)
             }

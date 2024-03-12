@@ -76,7 +76,6 @@ struct DosesScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Dosage")
-        .dismissWhenTabTapped()
     }
 
     static func getUnitClarification(for units: String) -> String? {
@@ -97,12 +96,12 @@ struct DosesScreen: View {
 
 #Preview {
     NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!).environmentObject(TabBarObserver())
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
     }
 }
 
 #Preview {
     NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!).environmentObject(TabBarObserver())
+        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
     }
 }

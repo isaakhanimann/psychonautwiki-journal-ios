@@ -68,6 +68,7 @@ struct ExperienceScreen: View {
         case addLocation
         case addRating
         case addTimedNote
+        case edit(timedNote: TimedNote)
 
         var id: Self {
             return self
@@ -186,9 +187,7 @@ struct ExperienceScreen: View {
                         Section("My Cumulative Dose") {
                             ForEach(experience.myCumulativeDoses) { cumulative in
                                 if let substance = SubstanceRepo.shared.getSubstance(name: cumulative.substanceName) {
-                                    NavigationLink {
-                                        DosesScreen(substance: substance)
-                                    } label: {
+                                    NavigationLink(value: GlobalNavigationDestination.dose(substance: substance)) {
                                         CumulativeDoseRow(
                                             substanceName: cumulative.substanceName,
                                             substanceColor: cumulative.substanceColor,
@@ -224,23 +223,15 @@ struct ExperienceScreen: View {
                 if !timedNotesSorted.isEmpty {
                     Section("Timed Notes") {
                         ForEach(timedNotesSorted) { timedNote in
-                            NavigationLink {
-                                EditTimedNoteScreen(timedNote: timedNote, experience: experience)
-                            } label: {
+                            Button(action: {
+                                sheetToShow = .edit(timedNote: timedNote)
+                            }, label: {
                                 TimedNoteRow(
                                     timedNote: timedNote,
                                     timeDisplayStyle: timeDisplayStyle,
                                     firstIngestionTime: experience.ingestionsSorted.first?.time
-                                )
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    Button(role: .destructive) {
-                                        PersistenceController.shared.viewContext.delete(timedNote)
-                                        PersistenceController.shared.saveViewContext()
-                                    } label: {
-                                        Label("Delete", systemImage: "trash.fill")
-                                    }
-                                }
-                            }
+                                ).foregroundColor(.primary) // to override the button styles
+                            })
                         }
                     }
                 }
@@ -256,9 +247,7 @@ struct ExperienceScreen: View {
                 }
                 if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
                     Section {
-                        NavigationLink {
-                            ToleranceTextsScreen(substances: experience.chartData.substancesInChart)
-                        } label: {
+                        NavigationLink(value: GlobalNavigationDestination.toleranceTexts(substances: experience.chartData.substancesInChart)) {
                             ToleranceChart(
                                 toleranceWindows: experience.chartData.toleranceWindows,
                                 numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
@@ -292,23 +281,17 @@ struct ExperienceScreen: View {
                 if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty {
                     Section("Info") {
                         ForEach(experience.substancesUsed) { substance in
-                            NavigationLink {
-                                SubstanceScreen(substance: substance)
-                            } label: {
+                            NavigationLink(value: GlobalNavigationDestination.substance(substance: substance)) {
                                 Label(substance.name, systemImage: "info.circle")
                             }
                         }
                         if experience.substancesUsed.contains(where: { $0.isHallucinogen }) {
-                            NavigationLink {
-                                SaferHallucinogenScreen()
-                            } label: {
+                            NavigationLink(value: GlobalNavigationDestination.saferHallucinogen) {
                                 Label("Safer Hallucinogens", systemImage: "cross")
                             }
                         }
                         ForEach(experience.interactions) { interaction in
-                            NavigationLink {
-                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
-                            } label: {
+                            NavigationLink(value: GlobalNavigationDestination.allInteractions(substancesToCheck: experience.substancesUsed)) {
                                 InteractionPairRow(
                                     aName: interaction.aName,
                                     bName: interaction.bName,
@@ -317,9 +300,7 @@ struct ExperienceScreen: View {
                             }
                         }
                         if experience.interactions.isEmpty {
-                            NavigationLink {
-                                GoThroughAllInteractionsScreen(substancesToCheck: experience.substancesUsed)
-                            } label: {
+                            NavigationLink(value: GlobalNavigationDestination.allInteractions(substancesToCheck: experience.substancesUsed)) {
                                 Label("See Interactions", systemImage: "exclamationmark.triangle")
                             }
                         }
@@ -342,7 +323,6 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            .dismissWhenTabTapped()
             .sheet(item: $sheetToShow, content: { sheet in
                 switch sheet {
                 case .addLocation:
@@ -357,6 +337,8 @@ struct ExperienceScreen: View {
                     AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
                 case .addTimedNote:
                     AddTimedNoteScreen(experience: experience)
+                case let .edit(timedNote):
+                    EditTimedNoteScreen(timedNote: timedNote, experience: experience)
                 }
             })
         }

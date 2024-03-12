@@ -24,12 +24,22 @@ struct ShulginRatingSection: View {
     let timeDisplayStyle: TimeDisplayStyle
     let firstIngestionTime: Date?
 
+    enum SheetOption: Identifiable, Hashable {
+        case editRegular(rating: ShulginRating)
+        case editOverall(rating: ShulginRating)
+
+        var id: Self {
+            return self
+        }
+    }
+    @State private var sheetToShow: SheetOption?
+
     var body: some View {
         Section("Shulgin Rating") {
             ForEach(experience.ratingsWithTimeSorted) { rating in
-                NavigationLink {
-                    EditRatingScreen(rating: rating)
-                } label: {
+                Button(action: {
+                    sheetToShow = .editRegular(rating: rating)
+                }, label: {
                     let isRatingHidden = hiddenRatings.contains(rating.id)
                     HStack(alignment: .center) {
                         if isRatingHidden {
@@ -40,48 +50,37 @@ struct ShulginRatingSection: View {
                             timeDisplayStyle: timeDisplayStyle,
                             firstIngestionTime: firstIngestionTime
                         )
-                    }
-                    .swipeActions(edge: .leading) {
-                        if isRatingHidden {
-                            Button {
-                                showRating(rating.id)
-                            } label: {
-                                Label("Show", systemImage: "eye.fill").labelStyle(.iconOnly)
-                            }
-                        } else {
-                            Button {
-                                hideRating(rating.id)
-                            } label: {
-                                Label("Hide", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
-                            }
-                        }
-                    }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            PersistenceController.shared.viewContext.delete(rating)
-                            PersistenceController.shared.saveViewContext()
-                        } label: {
-                            Label("Delete", systemImage: "trash.fill")
-                        }
-                    }
-                }
+                    }.foregroundColor(.primary)
+                })
             }
             if let overallRating = experience.overallRating {
-                NavigationLink {
-                    EditOverallRatingScreen(rating: overallRating)
-                } label: {
+                Button(action: {
+                    sheetToShow = .editOverall(rating: overallRating)
+                }, label: {
                     RatingRow(
                         rating: overallRating,
                         timeDisplayStyle: timeDisplayStyle,
                         firstIngestionTime: firstIngestionTime
-                    ).swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            PersistenceController.shared.viewContext.delete(overallRating)
-                            PersistenceController.shared.saveViewContext()
-                        } label: {
-                            Label("Delete", systemImage: "trash.fill")
+                    ).foregroundColor(.primary)
+                })
+            }
+        }.sheet(item: $sheetToShow) { sheetOption in
+            NavigationStack {
+                switch sheetOption {
+                case .editRegular(let rating):
+                    let isHidden = Binding(
+                        get: { hiddenRatings.contains(rating.id) },
+                        set: { newIsHidden in
+                            if newIsHidden {
+                                hideRating(rating.id)
+                            } else {
+                                showRating(rating.id)
+                            }
                         }
-                    }
+                    )
+                    EditRatingScreen(rating: rating, isHidden: isHidden)
+                case .editOverall(let rating):
+                    EditOverallRatingScreen(rating: rating)
                 }
             }
         }
@@ -99,7 +98,7 @@ struct RatingRow: View {
                 if timeDisplayStyle == .relativeToNow {
                     Text(ratingTime, style: .relative) + Text(" ago")
                 } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                    Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ratingTime)))
+                    Text("+ ") + Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ratingTime)))
                 } else {
                     Text(ratingTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                 }

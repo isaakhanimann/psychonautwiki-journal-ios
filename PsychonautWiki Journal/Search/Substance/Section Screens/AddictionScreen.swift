@@ -27,7 +27,6 @@ struct AddictionScreen: View {
             }
         }
         .navigationTitle("\(substanceName) Addiction Potential")
-        .dismissWhenTabTapped()
     }
 }
 

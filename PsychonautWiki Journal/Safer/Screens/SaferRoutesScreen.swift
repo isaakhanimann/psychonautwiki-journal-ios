@@ -32,12 +32,9 @@ struct SaferRoutesScreen: View {
             ) {
                 Label("Safer Injecting Video", systemImage: "play")
             }
-            NavigationLink("Administration Routes Info") {
-                AdministrationRouteScreen()
-            }
+            NavigationLink("Administration Routes Info", value: GlobalNavigationDestination.administrationRouteInfo)
         }
         .navigationTitle("Safer Routes")
-        .dismissWhenTabTapped()
     }
 }
 

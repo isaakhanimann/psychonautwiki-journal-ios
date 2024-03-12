@@ -106,7 +106,6 @@ struct DosageGuideScreen: View {
             }
         }
         .navigationTitle("Dosage Guide")
-        .dismissWhenTabTapped()
     }
 }
 

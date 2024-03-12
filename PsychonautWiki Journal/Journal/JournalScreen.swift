@@ -75,59 +75,55 @@ struct JournalScreen: View {
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
 
     var body: some View {
-        NavigationStack {
-            FabPosition {
-                Button {
-                    isShowingAddIngestionSheet.toggle()
-                } label: {
-                    Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
-                }
-            } screen: {
-                screen
+        FabPosition {
+            Button {
+                isShowingAddIngestionSheet.toggle()
+            } label: {
+                Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
             }
-            .fullScreenCover(isPresented: $isShowingAddIngestionSheet, onDismiss: {
-                maybeRequestAppRating()
-            }) {
-                ChooseSubstanceScreen()
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    favoriteButton
-                    Menu {
-                        Button {
-                            isTimeRelative = false
-                        } label: {
-                            let option = SaveableTimeDisplayStyle.regular
-                            if isTimeRelative {
-                                Text(option.text)
-                            } else {
-                                Label(option.text, systemImage: "checkmark")
-                            }
-                        }
-                        Button {
-                            isTimeRelative = true
-                        } label: {
-                            let option = SaveableTimeDisplayStyle.relativeToNow
-                            if isTimeRelative {
-                                Label(option.text, systemImage: "checkmark")
-                            } else {
-                                Text(option.text)
-                            }
-                        }
-                    } label: {
-                        Label("Time Display", systemImage: "timer")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        JournalCalendarScreen()
-                    } label: {
-                        Label("Calendar", systemImage: "calendar")
-                    }
-                }
-            }
-            .navigationTitle("Journal")
+        } screen: {
+            screen
         }
+        .fullScreenCover(isPresented: $isShowingAddIngestionSheet, onDismiss: {
+            maybeRequestAppRating()
+        }) {
+            ChooseSubstanceScreen()
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                favoriteButton
+                Menu {
+                    Button {
+                        isTimeRelative = false
+                    } label: {
+                        let option = SaveableTimeDisplayStyle.regular
+                        if isTimeRelative {
+                            Text(option.text)
+                        } else {
+                            Label(option.text, systemImage: "checkmark")
+                        }
+                    }
+                    Button {
+                        isTimeRelative = true
+                    } label: {
+                        let option = SaveableTimeDisplayStyle.relativeToNow
+                        if isTimeRelative {
+                            Label(option.text, systemImage: "checkmark")
+                        } else {
+                            Text(option.text)
+                        }
+                    }
+                } label: {
+                    Label("Time Display", systemImage: "timer")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(value: GlobalNavigationDestination.calendar) {
+                    Label("Calendar", systemImage: "calendar")
+                }
+            }
+        }
+        .navigationTitle("Journal")
     }
 
     private var favoriteButton: some View {

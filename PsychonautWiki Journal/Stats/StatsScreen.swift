@@ -38,24 +38,22 @@ struct StatsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if let experienceData, let substanceData {
-                    StatsScreenContent(
-                        experienceData: experienceData,
-                        substanceData: substanceData,
-                        toleranceWindows: toleranceWindows,
-                        substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
-                        isEyeOpen: isEyeOpen
-                    )
-                } else {
-                    ProgressView().task {
-                        calculateStats()
-                    }
+        Group {
+            if let experienceData, let substanceData {
+                StatsScreenContent(
+                    experienceData: experienceData,
+                    substanceData: substanceData,
+                    toleranceWindows: toleranceWindows,
+                    substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
+                    isEyeOpen: isEyeOpen
+                )
+            } else {
+                ProgressView().task {
+                    calculateStats()
                 }
-            }.onChange(of: ingestions.count) { _ in
-                calculateStats()
             }
+        }.onChange(of: ingestions.count) { _ in
+            calculateStats()
         }
     }
 
@@ -253,9 +251,7 @@ struct StatsScreenContent: View {
         List {
             if isEyeOpen {
                 Section {
-                    NavigationLink {
-                        ToleranceChartScreen()
-                    } label: {
+                    NavigationLink(value: GlobalNavigationDestination.toleranceChart) {
                         ToleranceChartOverView(toleranceWindows: toleranceWindows)
                     }
                 } footer: {
@@ -265,16 +261,12 @@ struct StatsScreenContent: View {
                 }
             }
             Section {
-                NavigationLink {
-                    ExperienceDetailsScreen(experienceData: experienceData)
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.experienceDetails(experienceData: experienceData)) {
                     ExperienceOverview(experienceData: experienceData)
                 }
             }
             Section {
-                NavigationLink {
-                    SubstanceDetailsScreen(substanceData: substanceData)
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.substanceDetails(substanceData: substanceData)) {
                     SubstanceOverview(substanceData: substanceData)
                 }
             }

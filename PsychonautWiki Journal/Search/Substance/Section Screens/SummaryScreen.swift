@@ -27,7 +27,6 @@ struct SummaryScreen: View {
             }
         }
         .navigationTitle("\(substanceName) Summary")
-        .dismissWhenTabTapped()
     }
 }
 

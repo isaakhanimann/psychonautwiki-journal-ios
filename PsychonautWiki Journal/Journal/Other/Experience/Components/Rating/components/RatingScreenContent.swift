@@ -30,7 +30,7 @@ struct RatingScreenContent: View {
                 }
                 if !isOverallRating {
                     DatePicker(
-                        "Ingestion Time",
+                        "Time",
                         selection: $selectedTime,
                         displayedComponents: [.date, .hourAndMinute]
                     )

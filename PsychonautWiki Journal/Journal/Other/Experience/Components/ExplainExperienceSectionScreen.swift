@@ -37,7 +37,6 @@ struct ExplainExperienceSectionScreen: View {
             }
         }
         .navigationTitle("Timeline Info")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -57,6 +56,5 @@ struct TimelineExplanationTexts: View {
 #Preview {
     NavigationStack {
         ExplainExperienceSectionScreen()
-            .environmentObject(TabBarObserver())
     }
 }

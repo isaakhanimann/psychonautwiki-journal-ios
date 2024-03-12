@@ -27,7 +27,6 @@ struct ShareAndroidAppScreen: View {
             }
         }
         .navigationTitle("Android App")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -35,5 +34,4 @@ struct ShareAndroidAppScreen: View {
     NavigationStack {
         ShareAndroidAppScreen()
     }
-    .environmentObject(TabBarObserver())
 }

@@ -28,41 +28,45 @@ struct EditTimedNoteScreen: View {
     @FocusState private var isTextFieldFocused: Bool
     @State private var alreadyUsedColors: [SubstanceColor] = []
     @State private var otherColors: [SubstanceColor] = []
-    @State private var isFirstAppear = true // needed because else state is reset when navigating back from color picker
 
     var body: some View {
-        TimedNoteScreenContent(
-            time: $time,
-            note: $note,
-            color: $color,
-            isPartOfTimeline: $isPartOfTimeline,
-            isTextFieldFocused: $isTextFieldFocused,
-            alreadyUsedColors: alreadyUsedColors,
-            otherColors: otherColors
-        )
-        .onAppear {
-            if isFirstAppear {
+        NavigationStack {
+            TimedNoteScreenContent(
+                time: $time,
+                note: $note,
+                color: $color,
+                isPartOfTimeline: $isPartOfTimeline,
+                isTextFieldFocused: $isTextFieldFocused,
+                alreadyUsedColors: alreadyUsedColors,
+                otherColors: otherColors
+            )
+            .onFirstAppear { // needed because else state is reset when navigating back from color picker
                 time = timedNote.timeUnwrapped
                 note = timedNote.noteUnwrapped
                 color = timedNote.color
                 isPartOfTimeline = timedNote.isPartOfTimeline
                 alreadyUsedColors = Array(Set(experience.timedNotesForTimeline.map { $0.color })).sorted()
                 otherColors = Array(Set(SubstanceColor.allCases).subtracting(alreadyUsedColors)).sorted()
-                isFirstAppear = false
             }
-        }
-        .onDisappear {
-            save()
-        }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: delete) {
-                    Label("Delete Note", systemImage: "trash")
+            .toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button(action: delete) {
+                        Label("Delete Note", systemImage: "trash")
+                    }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        save()
+                    }
                 }
             }
+            .navigationTitle("Edit Note")
         }
-        .navigationTitle("Edit Note")
-        .dismissWhenTabTapped()
     }
 
     func save() {

@@ -59,7 +59,6 @@ struct TimelineScreen: View {
                 }
             }
         }
-        .dismissWhenTabTapped()
     }
 
     private func checkCurrentOrientation() {
@@ -80,5 +79,5 @@ struct TimelineScreen: View {
             everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
             areRedosesDrawnIndividually: false
         ))
-    }.environmentObject(TabBarObserver())
+    }
 }

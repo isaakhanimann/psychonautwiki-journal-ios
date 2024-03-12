@@ -100,169 +100,160 @@ struct SettingsContent: View {
     @State private var isShowingImportAlert = false
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section("Privacy") {
-                    if isFaceIDAvailable {
-                        Toggle("Require App Unlock", isOn: $hasToUnlockApp.animation()).tint(Color.accentColor)
-                    } else {
-                        Text("Enable Face ID for Journal in settings to lock the app.")
-                    }
-                    if hasToUnlockApp {
-                        Picker("Time option", selection: $lockTimeOption) {
-                            ForEach(LockTimeOption.allCases) { option in
-                                Text(option.text)
-                            }
-                        }
-                        .pickerStyle(.inline)
-                        .labelsHidden()
-                    }
-                }
-                if isEyeOpen {
-                    Section("UI") {
-                        NavigationLink {
-                            EditColorsScreen()
-                        } label: {
-                            Label("Edit Substance Colors", systemImage: "paintpalette")
-                        }
-                        NavigationLink {
-                            CustomUnitsScreen()
-                        } label: {
-                            Label("Custom Units", systemImage: "pills")
-                        }
-                        Group {
-                            Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
-                            Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
-                            Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
-                            Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
-                            Toggle("Include date in time picker", isOn: $isDateInTimePicker)
-                            if #available(iOS 16.2, *) {
-                                if ActivityManager.shared.authorizationInfo.areActivitiesEnabled {
-                                    Toggle("Automatic live activities", isOn: $shouldAutomaticallyStartLiveActivity)
-                                }
-                            }
-                        }.tint(.accentColor)
-                    }
-                }
-                Section(
-                    header: Text("Journal Data"),
-                    footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
-                ) {
-                    Button {
-                        exportData()
-                    } label: {
-                        Label("Export Data", systemImage: "arrow.up.doc")
-                    }
-                    Button {
-                        isShowingImportAlert.toggle()
-                    } label: {
-                        Label("Import Data", systemImage: "arrow.down.doc")
-                    }
-                    .confirmationDialog(
-                        "Are you sure?",
-                        isPresented: $isShowingImportAlert,
-                        titleVisibility: .visible,
-                        actions: {
-                            Button("Import", role: .destructive) {
-                                isImporting.toggle()
-                            }
-                            Button("Cancel", role: .cancel) {}
-                        },
-                        message: {
-                            Text("Importing will delete all the data currently in the app and replace it with the imported data.")
-                        }
-                    )
-                    Button {
-                        isShowingDeleteConfirmation.toggle()
-                    } label: {
-                        Label("Delete Everything", systemImage: "trash").foregroundColor(.red)
-                    }
-                    .confirmationDialog(
-                        "Delete Everything?",
-                        isPresented: $isShowingDeleteConfirmation,
-                        titleVisibility: .visible,
-                        actions: {
-                            Button("Delete", role: .destructive) {
-                                deleteEverything()
-                            }
-                            Button("Cancel", role: .cancel) {}
-                        },
-                        message: {
-                            Text("This will delete all your experiences, ingestions, custom substances and sprays.")
-                        }
-                    )
-                }
-                Section("Communication") {
-                    if isEyeOpen {
-                        NavigationLink {
-                            ShareScreen()
-                        } label: {
-                            Label("Share App", systemImage: "person.2")
-                        }
-                    }
-                    Link(destination: URL(string: isEyeOpen ? "https://t.me/+ss8uZhBF6g00MTY8" : "https://t.me/isaakhanimann")!) {
-                        Label("Question, Feedback, Bug Report", systemImage: "exclamationmark.bubble")
-                    }
-                    if isEyeOpen {
-                        NavigationLink(
-                            destination: FAQView(),
-                            label: {
-                                Label("Frequently Asked Questions", systemImage: "questionmark.square")
-                            }
-                        )
-                        Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
-                            Label("Source Code", systemImage: "doc.text.magnifyingglass")
-                        }
-                    }
-                }
-                Section {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(getCurrentAppVersion())
-                            .foregroundColor(.secondary)
-                    }
-                }
-                eye
-            }
-            .fileImporter(
-                isPresented: $isImporting,
-                allowedContentTypes: [.json]
-            ) { result in
-                do {
-                    let selectedFile: URL = try result.get()
-                    if selectedFile.startAccessingSecurityScopedResource() {
-                        let data = try Data(contentsOf: selectedFile)
-                        importData(data)
-                    } else {
-                        toastViewModel.showErrorToast(message: "Permission Denied")
-                    }
-                    selectedFile.stopAccessingSecurityScopedResource()
-                } catch {
-                    toastViewModel.showErrorToast(message: "Import Failed")
-                    print("Error getting data: \(error.localizedDescription)")
-                }
-            }
-            .fileExporter(
-                isPresented: $isExporting,
-                document: journalFile,
-                contentType: .json,
-                defaultFilename: "Journal \(Date().asDateString)"
-            ) { result in
-                if case .success = result {
-                    toastViewModel.showSuccessToast(message: "Export Successful")
+        List {
+            Section("Privacy") {
+                if isFaceIDAvailable {
+                    Toggle("Require App Unlock", isOn: $hasToUnlockApp.animation()).tint(Color.accentColor)
                 } else {
-                    toastViewModel.showErrorToast(message: "Export Failed")
+                    Text("Enable Face ID for Journal in settings to lock the app.")
+                }
+                if hasToUnlockApp {
+                    Picker("Time option", selection: $lockTimeOption) {
+                        ForEach(LockTimeOption.allCases) { option in
+                            Text(option.text)
+                        }
+                    }
+                    .pickerStyle(.inline)
+                    .labelsHidden()
                 }
             }
-            .navigationTitle("Settings")
-            .toast(isPresenting: $isShowingToast) {
-                AlertToast(
-                    displayMode: .alert,
-                    type: isSuccessToast ? .complete(.green) : .error(.red),
-                    title: toastMessage
+            if isEyeOpen {
+                Section("UI") {
+                    NavigationLink(value: GlobalNavigationDestination.editColors) {
+                        Label("Edit Substance Colors", systemImage: "paintpalette")
+                    }
+                    NavigationLink(value: GlobalNavigationDestination.customUnits) {
+                        Label("Custom Units", systemImage: "pills")
+                    }
+                    Group {
+                        Toggle("Hide dosage dots", isOn: $isHidingDosageDots)
+                        Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
+                        Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
+                        Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
+                        Toggle("Include date in time picker", isOn: $isDateInTimePicker)
+                        if #available(iOS 16.2, *) {
+                            if ActivityManager.shared.authorizationInfo.areActivitiesEnabled {
+                                Toggle("Automatic live activities", isOn: $shouldAutomaticallyStartLiveActivity)
+                            }
+                        }
+                    }.tint(.accentColor)
+                }
+            }
+            Section(
+                header: Text("Journal Data"),
+                footer: Text("You can export all your data into a file on your phone and import it again at a later time. This way you can migrate your data to Android or delete the app without losing your data.")
+            ) {
+                Button {
+                    exportData()
+                } label: {
+                    Label("Export Data", systemImage: "arrow.up.doc")
+                }
+                Button {
+                    isShowingImportAlert.toggle()
+                } label: {
+                    Label("Import Data", systemImage: "arrow.down.doc")
+                }
+                .confirmationDialog(
+                    "Are you sure?",
+                    isPresented: $isShowingImportAlert,
+                    titleVisibility: .visible,
+                    actions: {
+                        Button("Import", role: .destructive) {
+                            isImporting.toggle()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    },
+                    message: {
+                        Text("Importing will delete all the data currently in the app and replace it with the imported data.")
+                    }
+                )
+                Button {
+                    isShowingDeleteConfirmation.toggle()
+                } label: {
+                    Label("Delete Everything", systemImage: "trash").foregroundColor(.red)
+                }
+                .confirmationDialog(
+                    "Delete Everything?",
+                    isPresented: $isShowingDeleteConfirmation,
+                    titleVisibility: .visible,
+                    actions: {
+                        Button("Delete", role: .destructive) {
+                            deleteEverything()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    },
+                    message: {
+                        Text("This will delete all your experiences, ingestions, custom substances and sprays.")
+                    }
                 )
             }
+            Section("Communication") {
+                if isEyeOpen {
+                    NavigationLink {
+                        ShareScreen()
+                    } label: {
+                        Label("Share App", systemImage: "person.2")
+                    }
+                }
+                Link(destination: URL(string: isEyeOpen ? "https://t.me/+ss8uZhBF6g00MTY8" : "https://t.me/isaakhanimann")!) {
+                    Label("Question, Feedback, Bug Report", systemImage: "exclamationmark.bubble")
+                }
+                if isEyeOpen {
+                    NavigationLink(value: GlobalNavigationDestination.faq) {
+                        Label("Frequently Asked Questions", systemImage: "questionmark.square")
+                    }
+                    Link(destination: URL(string: "https://github.com/isaakhanimann/psychonautwiki-journal-ios")!) {
+                        Label("Source Code", systemImage: "doc.text.magnifyingglass")
+                    }
+                }
+            }
+            Section {
+                HStack {
+                    Text("Version")
+                    Spacer()
+                    Text(getCurrentAppVersion())
+                        .foregroundColor(.secondary)
+                }
+            }
+            eye
+        }
+        .fileImporter(
+            isPresented: $isImporting,
+            allowedContentTypes: [.json]
+        ) { result in
+            do {
+                let selectedFile: URL = try result.get()
+                if selectedFile.startAccessingSecurityScopedResource() {
+                    let data = try Data(contentsOf: selectedFile)
+                    importData(data)
+                } else {
+                    toastViewModel.showErrorToast(message: "Permission Denied")
+                }
+                selectedFile.stopAccessingSecurityScopedResource()
+            } catch {
+                toastViewModel.showErrorToast(message: "Import Failed")
+                print("Error getting data: \(error.localizedDescription)")
+            }
+        }
+        .fileExporter(
+            isPresented: $isExporting,
+            document: journalFile,
+            contentType: .json,
+            defaultFilename: "Journal \(Date().asDateString)"
+        ) { result in
+            if case .success = result {
+                toastViewModel.showSuccessToast(message: "Export Successful")
+            } else {
+                toastViewModel.showErrorToast(message: "Export Failed")
+            }
+        }
+        .navigationTitle("Settings")
+        .toast(isPresenting: $isShowingToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: isSuccessToast ? .complete(.green) : .error(.red),
+                title: toastMessage
+            )
         }
     }
 

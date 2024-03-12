@@ -71,7 +71,6 @@ struct DosageClassificationScreen: View {
             }
         }
         .navigationTitle("Dosage Classification")
-        .dismissWhenTabTapped()
     }
 }
 

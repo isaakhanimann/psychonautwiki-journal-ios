@@ -26,7 +26,6 @@ struct ReagentTestingScreen: View {
             }
         }
         .navigationTitle("Reagent Testing")
-        .dismissWhenTabTapped()
     }
 }
 

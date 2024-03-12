@@ -1,4 +1,4 @@
-// Copyright (c) 2023. Isaak Hanimann.
+// Copyright (c) 2024. Isaak Hanimann.
 // This file is part of PsychonautWiki Journal.
 //
 // PsychonautWiki Journal is free software: you can redistribute it and/or modify
@@ -16,23 +16,23 @@
 
 import SwiftUI
 
-struct SameTabTapModifier: ViewModifier {
-    let perform: () -> Void
-
-    @EnvironmentObject var tabBarObserver: TabBarObserver
-    @Environment(\.currentTab) var currentTab
-
-    func body(content: Content) -> some View {
-        content.onReceive(tabBarObserver.tabTapSubject) { option in
-            if option == .sameTab && tabBarObserver.selectedTab == currentTab {
-                perform()
-            }
+struct SaferCombinationsScreen: View {
+    var body: some View {
+        List {
+            Text("Don’t combine drugs, including Alcohol, without research on the combo. The most common cause of substance-related deaths is the combination of depressants (such as opiates, benzodiazepines, or alcohol) with other depressants.")
+            Link(
+                "Swiss Combination Checker",
+                destination: URL(string: "https://combi-checker.ch")!
+            )
+            Link(
+                "Tripsit Combination Checker",
+                destination: URL(string: "https://combo.tripsit.me")!
+            )
         }
+        .navigationTitle("Combinations")
     }
 }
 
-extension View {
-    func onSameTabTap(perform: @escaping () -> Void) -> some View {
-        modifier(SameTabTapModifier(perform: perform))
-    }
+#Preview {
+    SaferCombinationsScreen()
 }

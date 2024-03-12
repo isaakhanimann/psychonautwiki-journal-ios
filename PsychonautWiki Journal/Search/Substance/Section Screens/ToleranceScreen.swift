@@ -38,10 +38,9 @@ struct ToleranceScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Tolerance")
-        .dismissWhenTabTapped()
     }
 }
 
 #Preview {
-    ToleranceScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!).environmentObject(TabBarObserver())
+    ToleranceScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
 }

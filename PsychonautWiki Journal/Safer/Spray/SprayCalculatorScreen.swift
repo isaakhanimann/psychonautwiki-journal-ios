@@ -138,7 +138,6 @@ struct SprayCalculatorScreenContent: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Spray Calculator")
-        .dismissWhenTabTapped()
     }
 
     private var addSprayButton: some View {

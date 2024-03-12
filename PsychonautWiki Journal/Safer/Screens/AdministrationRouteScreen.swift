@@ -130,7 +130,6 @@ struct AdministrationRouteScreen: View {
             }
         }
         .navigationTitle("Administration Routes")
-        .dismissWhenTabTapped()
     }
 }
 

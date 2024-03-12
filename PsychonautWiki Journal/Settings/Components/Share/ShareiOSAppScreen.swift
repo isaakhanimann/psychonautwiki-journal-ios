@@ -35,7 +35,6 @@ struct ShareiOSAppScreen: View {
             }
         }
         .navigationTitle("iOS App")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -43,5 +42,4 @@ struct ShareiOSAppScreen: View {
     NavigationStack {
         ShareiOSAppScreen()
     }
-    .environmentObject(TabBarObserver())
 }

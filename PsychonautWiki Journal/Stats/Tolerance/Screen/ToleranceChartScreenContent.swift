@@ -47,15 +47,11 @@ struct ToleranceChartScreenContent: View {
             }
             .listRowSeparator(.hidden)
             Section {
-                NavigationLink {
-                    ToleranceChartExplanationScreen()
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.toleranceChartExplanation) {
                     Label("Chart Limitations", systemImage: "info.circle")
                 }
                 if !substances.isEmpty {
-                    NavigationLink {
-                        ToleranceTextsScreen(substances: substances)
-                    } label: {
+                    NavigationLink(value: GlobalNavigationDestination.toleranceTexts(substances: substances)) {
                         Label("Tolerance Info", systemImage: "doc.plaintext")
                     }
                 }

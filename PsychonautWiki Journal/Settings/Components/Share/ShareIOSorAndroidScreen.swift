@@ -27,7 +27,6 @@ struct ShareIOSorAndroidScreen: View {
             }
         }
         .navigationTitle("iOS or Android")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -35,5 +34,4 @@ struct ShareIOSorAndroidScreen: View {
     NavigationStack {
         ShareIOSorAndroidScreen()
     }
-    .environmentObject(TabBarObserver())
 }

@@ -26,7 +26,6 @@ struct EffectScreen: View {
             }
         }
         .navigationTitle("\(substanceName) Effects")
-        .dismissWhenTabTapped()
     }
 }
 

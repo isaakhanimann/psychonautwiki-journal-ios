@@ -41,90 +41,52 @@ struct SubstanceScreen: View {
                 }
             }
         }
-        .dismissWhenTabTapped()
         .navigationTitle(substance.name)
     }
 
     private var sectionContent: some View {
         Group {
             Group { // group is here because we cannot have more than 10 subviews
-                NavigationLink {
-                    WebViewScreen(articleURL: substance.url)
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.webView(articleURL: substance.url)) {
                     Label("Article", systemImage: "link")
                 }
                 if let summary = substance.summary {
-                    NavigationLink("Summary") {
-                        SummaryScreen(substanceName: substance.name, summary: summary)
-                    }
+                    NavigationLink("Summary", value: GlobalNavigationDestination.summary(substanceName: substance.name, summary: summary))
                 }
                 if !substance.categories.isEmpty {
-                    NavigationLink("Categories") {
-                        CategoryScreen(substance: substance)
-                    }
+                    NavigationLink("Categories", value: GlobalNavigationDestination.categories(substance: substance))
                 }
             }
             Group {
                 if substance.dosageRemark != nil || !substance.doseInfos.isEmpty {
-                    NavigationLink("Dosage") {
-                        DosesScreen(substance: substance)
-                    }
+                    NavigationLink("Dosage", value: GlobalNavigationDestination.dose(substance: substance))
                 }
                 if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
-                    NavigationLink("Tolerance") {
-                        ToleranceScreen(substance: substance)
-                    }
+                    NavigationLink("Tolerance", value: GlobalNavigationDestination.tolerance(substance: substance))
                 }
                 if !substance.toxicities.isEmpty {
-                    NavigationLink("Toxicity") {
-                        ToxicityScreen(
-                            substanceName: substance.name,
-                            toxicities: substance.toxicities,
-                            substanceURL: substance.url
-                        )
-                    }
+                    NavigationLink("Toxicity", value: GlobalNavigationDestination.toxicity(substance: substance))
                 }
                 let durationInfos = substance.durationInfos
                 if !durationInfos.isEmpty {
-                    NavigationLink("Duration") {
-                        DurationScreen(
-                            substanceName: substance.name,
-                            durationInfos: durationInfos
-                        )
-                    }
+                    NavigationLink("Duration", value: GlobalNavigationDestination.duration(substance: substance))
                 }
             }
             Group {
                 if let interactions = substance.interactions {
-                    NavigationLink("Interactions") {
-                        InteractionsScreen(
-                            interactions: interactions,
-                            substance: substance
-                        )
-                    }
+                    NavigationLink("Interactions", value: GlobalNavigationDestination.interactions(interactions: interactions, substance: substance))
                 }
                 if let effects = substance.effectsSummary {
-                    NavigationLink("Effects") {
-                        EffectScreen(substanceName: substance.name, effect: effects)
-                    }
+                    NavigationLink("Effects", value: GlobalNavigationDestination.effects(substanceName: substance.name, effect: effects))
                 }
                 if substance.generalRisks != nil || substance.longtermRisks != nil {
-                    NavigationLink("Risks") {
-                        RiskScreen(substance: substance)
-                    }
+                    NavigationLink("Risks", value: GlobalNavigationDestination.risks(substance: substance))
                 }
                 if !substance.saferUse.isEmpty {
-                    NavigationLink("Safer Use") {
-                        SaferUseScreen(substance: substance)
-                    }
+                    NavigationLink("Safer Use", value: GlobalNavigationDestination.saferUse(substance: substance))
                 }
                 if let addictionPotential = substance.addictionPotential {
-                    NavigationLink("Addiction Potential") {
-                        AddictionScreen(
-                            substanceName: substance.name,
-                            addictionPotential: addictionPotential
-                        )
-                    }
+                    NavigationLink("Addiction Potential", value: GlobalNavigationDestination.addiction(substanceName: substance.name, addictionPotential: addictionPotential))
                 }
             }
         }
@@ -136,6 +98,5 @@ struct SubstanceScreen: View {
         SubstanceScreen(
             substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!
         )
-        .environmentObject(TabBarObserver())
     }
 }

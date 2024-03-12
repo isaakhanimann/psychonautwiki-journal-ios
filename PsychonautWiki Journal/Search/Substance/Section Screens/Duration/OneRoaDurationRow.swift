@@ -67,5 +67,5 @@ struct OneRoaDurationRow: View {
                 color: .purple
             )
         }
-    }.environmentObject(TabBarObserver())
+    }
 }

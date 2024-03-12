@@ -17,8 +17,9 @@
 import SwiftUI
 
 struct DurationScreen: View {
-    let substanceName: String
-    let durationInfos: [DurationInfo]
+
+    let substance: Substance
+
     @State private var selectedTime = Date()
     @State private var timelineModel: TimelineModel?
     @State private var stomachFullness = StomachFullness.empty
@@ -44,7 +45,7 @@ struct DurationScreen: View {
                     }
                     Text(TimelineDisclaimers.heavyDose).font(.footnote)
                 }
-                ForEach(durationInfos, id: \.route) { info in
+                ForEach(substance.durationInfos, id: \.route) { info in
                     let isRouteHidden = hiddenRoutes.contains(info.route)
                     HStack(alignment: .center, spacing: 8) {
                         if isRouteHidden {
@@ -102,27 +103,22 @@ struct DurationScreen: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    List {
-                        TimelineExplanationTexts()
-                    }.navigationTitle("Timeline Info")
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.timelineInfo) {
                     Label("Info", systemImage: "info.circle")
                 }
             }
         }
-        .navigationTitle("\(substanceName) Duration")
-        .dismissWhenTabTapped()
+        .navigationTitle("\(substance.name) Duration")
     }
 
     private func updateModel() {
-        let durationsToShow = durationInfos.filter { info in
+        let durationsToShow = substance.durationInfos.filter { info in
             !hiddenRoutes.contains(info.route)
         }
         timelineModel = TimelineModel(
             substanceGroups: durationsToShow.map { info in
                 SubstanceIngestionGroup(
-                    substanceName: substanceName,
+                    substanceName: substance.name,
                     color: info.route.color,
                     routeMinInfos: [
                         RouteMinInfo(
@@ -158,6 +154,6 @@ struct DurationScreen: View {
 #Preview {
     NavigationStack {
         let substance = SubstanceRepo.shared.getSubstance(name: "4-HO-MET")!
-        DurationScreen(substanceName: substance.name, durationInfos: substance.durationInfos).environmentObject(TabBarObserver())
+        DurationScreen(substance: substance)
     }
 }

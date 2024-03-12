@@ -109,7 +109,6 @@ struct ExperienceDetailsScreen: View {
             }
         }
         .navigationTitle("Total Experiences")
-        .dismissWhenTabTapped()
     }
 
     private func getColor(name: String) -> Color {
@@ -128,5 +127,4 @@ struct ExperienceDetailsScreen: View {
     NavigationStack {
         ExperienceDetailsScreen(experienceData: .mock1)
     }
-    .environmentObject(TabBarObserver())
 }

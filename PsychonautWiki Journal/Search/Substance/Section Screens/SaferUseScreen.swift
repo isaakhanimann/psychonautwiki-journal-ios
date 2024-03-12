@@ -27,7 +27,6 @@ struct SaferUseScreen: View {
             }
         }
         .navigationTitle("\(substance.name) Safer Use")
-        .dismissWhenTabTapped()
     }
 }
 

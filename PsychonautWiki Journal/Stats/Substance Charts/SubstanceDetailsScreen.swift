@@ -68,7 +68,6 @@ struct SubstanceDetailsScreen: View {
             }
         }
         .navigationTitle("Substances")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -91,6 +90,5 @@ struct RoundedCorner: Shape {
 #Preview {
     NavigationStack {
         SubstanceDetailsScreen(substanceData: .mock2)
-            .environmentObject(TabBarObserver())
     }
 }

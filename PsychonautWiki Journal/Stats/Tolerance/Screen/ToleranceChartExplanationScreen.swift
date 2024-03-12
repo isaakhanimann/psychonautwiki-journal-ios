@@ -40,13 +40,11 @@ struct ToleranceChartExplanationScreen: View {
             }
         }
         .navigationTitle("Chart Limitations")
-        .dismissWhenTabTapped()
     }
 }
 
 #Preview {
     NavigationStack {
         ToleranceChartExplanationScreen()
-            .environmentObject(TabBarObserver())
     }
 }

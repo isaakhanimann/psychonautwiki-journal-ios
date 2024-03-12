@@ -17,26 +17,30 @@
 import SwiftUI
 
 struct SearchScreen: View {
-    @FocusState private var isSearchFocused: Bool
 
-    @State private var searchText = ""
-    @State private var selectedCategories: [String] = []
+    @FocusState var isSearchFocused: Bool
+    @Binding var searchText: String
+    @Binding var selectedCategories: [String]
+    let clearCategories: () -> Void
+
+
     @State private var isShowingAddCustomSubstance = false
+
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \CustomSubstance.name, ascending: true)]
     ) private var customSubstances: FetchedResults<CustomSubstance>
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
     ) private var ingestions: FetchedResults<Ingestion>
-
+    
     private static let custom = "custom"
-
+    
     let allCategories = [custom] + SubstanceRepo.shared.categories.map { cat in
         cat.name
     }
-
+    
     func toggleCategory(category: String) {
         if selectedCategories.contains(category) {
             selectedCategories.removeAll { cat in
@@ -46,11 +50,7 @@ struct SearchScreen: View {
             selectedCategories.append(category)
         }
     }
-
-    func clearCategories() {
-        selectedCategories.removeAll()
-    }
-
+    
     var customFilteredWithCategories: [CustomSubstance] {
         if selectedCategories.isEmpty {
             return Array(customSubstances)
@@ -60,7 +60,7 @@ struct SearchScreen: View {
             return []
         }
     }
-
+    
     var customSubstancesFiltered: [CustomSubstance] {
         let lowerCaseSearchText = searchText.lowercased()
         if searchText.count < 3 {
@@ -73,7 +73,7 @@ struct SearchScreen: View {
             }
         }
     }
-
+    
     var substancesFilteredAndSorted: [Substance] {
         let substancesFilteredWithCategoriesOnly = SubstanceRepo.shared.substances.filter { sub in
             selectedCategories.allSatisfy { selected in
@@ -89,58 +89,49 @@ struct SearchScreen: View {
             namesToSortBy: substanceNamesInOrder
         )
     }
-
+    
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                SubstanceSearchBarWithFilter(
-                    text: $searchText,
-                    isFocused: $isSearchFocused,
-                    allCategories: allCategories,
-                    toggleCategory: { cat in
-                        toggleCategory(category: cat)
-                    },
-                    selectedCategories: selectedCategories,
-                    clearCategories: {
-                        clearCategories()
-                    }
-                )
-                List {
-                    ForEach(substancesFilteredAndSorted) { sub in
-                        SearchSubstanceRow(substance: sub)
-                    }
-                    ForEach(customSubstancesFiltered) { cust in
-                        NavigationLink {
-                            EditCustomSubstanceView(customSubstance: cust)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(cust.nameUnwrapped).font(.headline)
-                                Spacer().frame(height: 5)
-                                Chip(name: "custom")
-                            }
+        VStack(spacing: 0) {
+            SubstanceSearchBarWithFilter(
+                text: $searchText,
+                isFocused: $isSearchFocused,
+                allCategories: allCategories,
+                toggleCategory: { cat in
+                    toggleCategory(category: cat)
+                },
+                selectedCategories: selectedCategories,
+                clearCategories: {
+                    clearCategories()
+                }
+            )
+            List {
+                ForEach(substancesFilteredAndSorted) { sub in
+                    SearchSubstanceRow(substance: sub)
+                }
+                ForEach(customSubstancesFiltered) { cust in
+                    NavigationLink(value: GlobalNavigationDestination.editCustomSubstance(customSubstance: cust)) {
+                        VStack(alignment: .leading) {
+                            Text(cust.nameUnwrapped).font(.headline)
+                            Spacer().frame(height: 5)
+                            Chip(name: "custom")
                         }
                     }
-                    if substancesFilteredAndSorted.isEmpty && customSubstancesFiltered.isEmpty {
-                        Text("No Results")
-                            .foregroundColor(.secondary)
-                    }
-                    Button {
-                        isShowingAddCustomSubstance.toggle()
-                    } label: {
-                        Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                    }
-                    .sheet(isPresented: $isShowingAddCustomSubstance) {
-                        AddCustomSubstanceView()
-                    }
                 }
-                .listStyle(.plain)
-                .scrollDismissesKeyboard(.interactively)
+                if substancesFilteredAndSorted.isEmpty && customSubstancesFiltered.isEmpty {
+                    Text("No Results")
+                        .foregroundColor(.secondary)
+                }
+                Button {
+                    isShowingAddCustomSubstance.toggle()
+                } label: {
+                    Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
+                }
+                .sheet(isPresented: $isShowingAddCustomSubstance) {
+                    AddCustomSubstanceView()
+                }
             }
-            .onSameTabTap {
-                searchText = ""
-                clearCategories()
-                isSearchFocused = true
-            }
+            .listStyle(.plain)
+            .scrollDismissesKeyboard(.interactively)
         }
     }
 }

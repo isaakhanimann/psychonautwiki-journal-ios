@@ -20,15 +20,10 @@ struct TestingScreen: View {
     var body: some View {
         List {
             Text("Test your substance with anonymous and free drug testing services. If those are not available in your country, use reagent testing kits. Don‘t trust your dealer to sell reliable product. Its better to have a tested stash instead of relying on a source spontaneously.")
-            NavigationLink("Drug Testing Services") {
-                TestingServicesScreen()
-            }
-            NavigationLink("Reagent Testing") {
-                ReagentTestingScreen()
-            }
+            NavigationLink("Drug Testing Services", value: GlobalNavigationDestination.testingServices)
+            NavigationLink("Reagent Testing", value: GlobalNavigationDestination.reagentTesting)
         }
         .navigationTitle("Testing")
-        .dismissWhenTabTapped()
     }
 }
 

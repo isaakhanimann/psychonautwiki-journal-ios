@@ -21,9 +21,7 @@ struct SearchSubstanceRow: View {
     let substance: Substance
 
     var body: some View {
-        NavigationLink {
-            SubstanceScreen(substance: substance)
-        } label: {
+        NavigationLink(value: GlobalNavigationDestination.substance(substance: substance)) {
             VStack(alignment: .leading) {
                 Text(substance.name).font(.headline)
                 let commonNames = substance.commonNames.joined(separator: ", ")

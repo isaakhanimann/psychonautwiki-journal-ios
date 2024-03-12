@@ -44,17 +44,11 @@ struct DayView: View {
     var body: some View {
         if let firstExperience = experiences.first {
             if experiences.count > 1 {
-                NavigationLink {
-                    List(experiences) { experience in
-                        ExperienceRow(experience: experience, isTimeRelative: false)
-                    }.dismissWhenTabTapped()
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.chooseExperience(experiences: experiences)) {
                     experienceDayLabel
                 }
             } else {
-                NavigationLink {
-                    ExperienceScreen(experience: firstExperience)
-                } label: {
+                NavigationLink(value: GlobalNavigationDestination.experience(experience: firstExperience)) {
                     experienceDayLabel
                 }
             }

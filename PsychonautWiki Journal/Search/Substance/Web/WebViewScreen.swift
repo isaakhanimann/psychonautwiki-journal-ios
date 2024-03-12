@@ -38,7 +38,6 @@ struct WebViewScreen: View {
                 ProgressView()
             }
         }
-        .dismissWhenTabTapped()
     }
 }
 

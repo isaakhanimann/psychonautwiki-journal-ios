@@ -32,7 +32,6 @@ struct ShareScreen: View {
         }
         .font(.headline)
         .navigationTitle("Share App")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -40,5 +39,4 @@ struct ShareScreen: View {
     NavigationStack {
         ShareScreen()
     }
-    .environmentObject(TabBarObserver())
 }

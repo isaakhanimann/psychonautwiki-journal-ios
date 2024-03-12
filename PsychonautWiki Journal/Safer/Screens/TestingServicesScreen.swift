@@ -146,7 +146,6 @@ struct TestingServicesScreen: View {
             }
         }
         .navigationTitle("Testing Services")
-        .dismissWhenTabTapped()
     }
 }
 
@@ -166,5 +165,5 @@ struct TestingServiceItem: View {
 }
 
 #Preview {
-    TestingServicesScreen().environmentObject(TabBarObserver())
+    TestingServicesScreen()
 }

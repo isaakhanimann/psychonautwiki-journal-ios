@@ -28,7 +28,6 @@ struct VolumetricDosingScreen: View {
                 """)
         }
         .navigationTitle("Volumetric Dosing")
-        .dismissWhenTabTapped()
     }
 }
 
