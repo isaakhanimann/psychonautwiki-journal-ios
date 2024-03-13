@@ -24,16 +24,81 @@ struct SubstanceScreen: View {
     var body: some View {
         List {
             if !substance.isApproved {
-                Section("Info Not PW Approved") {
-                    sectionContent
-                }
-            } else {
                 Section {
-                    sectionContent
+                    Text("Info Not PW Approved")
                 }
             }
+            Group {
+                Group { // group is here because we cannot have more than 10 subviews
+                    if let summary = substance.summary {
+                        Section("Summary") {
+                            Text(summary)
+                        }
+                    }
+                    if !substance.categories.isEmpty {
+                        CategorySection(substance: substance)
+                    }
+                }
+                Group {
+                    if substance.dosageRemark != nil || !substance.doseInfos.isEmpty {
+                        NavigationLink("Dosage", value: GlobalNavigationDestination.dose(substance: substance))
+                    }
+                    if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
+                        ToleranceSection(substance: substance)
+                    }
+                    if !substance.toxicities.isEmpty {
+                        ToxicitySection(substance: substance)
+                    }
+                    let durationInfos = substance.durationInfos
+                    if !durationInfos.isEmpty {
+                        DurationSection(substance: substance)
+                    }
+                }
+                Group {
+                    if let interactions = substance.interactions {
+                        Section("Interactions") {
+                            InteractionsGroup(
+                                interactions: interactions,
+                                substance: substance
+                            )
+                        }
+                    }
+                    if let effects = substance.effectsSummary {
+                        Section("Effects") {
+                            Text(effects)
+                        }
+                    }
+                    if let acute = substance.generalRisks {
+                        Section("Acute Risk") {
+                            Text(acute)
+                        }
+                    }
+                    if let longTerm = substance.longtermRisks {
+                        Section("Long-term Risk") {
+                            Text(longTerm)
+                        }
+                    }
+                    if !substance.saferUse.isEmpty {
+                        Section("Safer Use") {
+                            ForEach(substance.saferUse, id: \.self) { point in
+                                Text(point)
+                            }
+                        }
+                    }
+                    if let addictionPotential = substance.addictionPotential {
+                        Section("Addiction Potential") {
+                            Text(addictionPotential)
+                        }
+                    }
+                }
+            }
+
         }
-        .font(.headline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink("Article", value: GlobalNavigationDestination.webView(articleURL: substance.url))
+            }
+        }
         .fullScreenCover(isPresented: $isShowingAddIngestionSheet) {
             NavigationStack {
                 AcknowledgeInteractionsView(substance: substance) {
@@ -42,54 +107,6 @@ struct SubstanceScreen: View {
             }
         }
         .navigationTitle(substance.name)
-    }
-
-    private var sectionContent: some View {
-        Group {
-            Group { // group is here because we cannot have more than 10 subviews
-                NavigationLink(value: GlobalNavigationDestination.webView(articleURL: substance.url)) {
-                    Label("Article", systemImage: "link")
-                }
-                if let summary = substance.summary {
-                    NavigationLink("Summary", value: GlobalNavigationDestination.summary(substanceName: substance.name, summary: summary))
-                }
-                if !substance.categories.isEmpty {
-                    NavigationLink("Categories", value: GlobalNavigationDestination.categories(substance: substance))
-                }
-            }
-            Group {
-                if substance.dosageRemark != nil || !substance.doseInfos.isEmpty {
-                    NavigationLink("Dosage", value: GlobalNavigationDestination.dose(substance: substance))
-                }
-                if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
-                    NavigationLink("Tolerance", value: GlobalNavigationDestination.tolerance(substance: substance))
-                }
-                if !substance.toxicities.isEmpty {
-                    NavigationLink("Toxicity", value: GlobalNavigationDestination.toxicity(substance: substance))
-                }
-                let durationInfos = substance.durationInfos
-                if !durationInfos.isEmpty {
-                    NavigationLink("Duration", value: GlobalNavigationDestination.duration(substance: substance))
-                }
-            }
-            Group {
-                if let interactions = substance.interactions {
-                    NavigationLink("Interactions", value: GlobalNavigationDestination.interactions(interactions: interactions, substance: substance))
-                }
-                if let effects = substance.effectsSummary {
-                    NavigationLink("Effects", value: GlobalNavigationDestination.effects(substanceName: substance.name, effect: effects))
-                }
-                if substance.generalRisks != nil || substance.longtermRisks != nil {
-                    NavigationLink("Risks", value: GlobalNavigationDestination.risks(substance: substance))
-                }
-                if !substance.saferUse.isEmpty {
-                    NavigationLink("Safer Use", value: GlobalNavigationDestination.saferUse(substance: substance))
-                }
-                if let addictionPotential = substance.addictionPotential {
-                    NavigationLink("Addiction Potential", value: GlobalNavigationDestination.addiction(substanceName: substance.name, addictionPotential: addictionPotential))
-                }
-            }
-        }
     }
 }
 

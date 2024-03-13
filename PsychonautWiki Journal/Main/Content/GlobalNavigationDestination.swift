@@ -22,17 +22,7 @@ enum GlobalNavigationDestination: Hashable {
     case editCustomSubstance(customSubstance: CustomSubstance)
     case webView(articleURL: URL)
     case webViewInteractions(substanceName: String, articleURL: URL)
-    case summary(substanceName: String, summary: String)
-    case categories(substance: Substance)
     case dose(substance: Substance)
-    case tolerance(substance: Substance)
-    case toxicity(substance: Substance)
-    case duration(substance: Substance)
-    case interactions(interactions: Interactions, substance: Substance)
-    case effects(substanceName: String, effect: String)
-    case risks(substance: Substance)
-    case saferUse(substance: Substance)
-    case addiction(substanceName: String, addictionPotential: String)
     case timelineInfo
 
     // journal tab mainly

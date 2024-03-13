@@ -16,31 +16,35 @@
 
 import SwiftUI
 
-struct ToxicityScreen: View {
-    
+struct ToleranceSection: View {
     let substance: Substance
 
     var body: some View {
-        List {
-            Section {
-                ForEach(substance.toxicities, id: \.self) { toxicity in
-                    Text(toxicity)
-                }
-                if let toxicityURL = URL(string: substance.url.absoluteString + "#Toxicity_and_harm_potential") {
-                    NavigationLink(value: GlobalNavigationDestination.webView(articleURL: toxicityURL)) {
-                        Label("More Info", systemImage: "info.circle")
-                    }
-                }
+        Section {
+            if let full = substance.tolerance?.full {
+                RowLabelView(label: "full", value: full)
             }
+            if let half = substance.tolerance?.half {
+                RowLabelView(label: "half", value: half)
+            }
+            if let zero = substance.tolerance?.zero {
+                RowLabelView(label: "zero", value: zero)
+            }
+            let crossTolerances = substance.crossTolerances.joined(separator: ", ")
+            if !crossTolerances.isEmpty {
+                Text("Cross tolerance with \(crossTolerances)")
+            }
+        } header: {
+            Text("Tolerance")
+        } footer: {
+            Text("* zero is the time to no tolerance")
         }
-        .navigationTitle("\(substance.name) Toxicity")
+
     }
 }
 
 #Preview {
-    NavigationStack {
-        ToxicityScreen(
-            substance: SubstanceRepo.shared.getSubstance(name: "LSD")!
-        )
+    List {
+        ToleranceSection(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
     }
 }

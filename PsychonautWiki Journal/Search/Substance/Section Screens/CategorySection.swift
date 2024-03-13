@@ -16,27 +16,42 @@
 
 import SwiftUI
 
-struct CategoryScreen: View {
+struct CategorySection: View {
     let substance: Substance
     @State private var categories: [Category] = []
 
+    @State private var isAlertShown = false
+    @State private var title = ""
+    @State private var message = ""
+    @State private var articleURL: URL?
+
+    private func showAlert(title: String, message: String, articleURL: URL?) {
+        isAlertShown = true
+        self.title = title
+        self.message = message
+        self.articleURL = articleURL
+    }
+
     var body: some View {
-        List {
-            Section {
-                ForEach(categories, id: \.name) { category in
-                    VStack(alignment: .leading) {
-                        Text(category.name.localizedCapitalized).font(.headline)
-                        Text(category.description).font(.subheadline)
-                        if let articleURL = category.url {
-                            NavigationLink(value: GlobalNavigationDestination.webView(articleURL: articleURL)) {
-                                Label("Article", systemImage: "link")
-                            }
-                        }
-                    }
+        Section("Categories") {
+            ForEach(categories, id: \.name) { category in
+                Button(category.name.localizedCapitalized) {
+                    showAlert(title: category.name.localizedCapitalized, message: category.description, articleURL: category.url)
                 }
             }
         }
-        .navigationTitle("\(substance.name) Categories")
+        .alert(title, isPresented: $isAlertShown, actions: {
+            if let articleURL {
+                NavigationLink(value: GlobalNavigationDestination.webView(articleURL: articleURL)) {
+                    Label("Article", systemImage: "link")
+                }
+            }
+            Button("Ok") {
+                isAlertShown = false
+            }
+        }, message: {
+            Text(message)
+        })
         .onAppear {
             categories = substance.categories.compactMap { name in
                 SubstanceRepo.shared.categories.first(where: { cat in
@@ -48,5 +63,5 @@ struct CategoryScreen: View {
 }
 
 #Preview {
-    CategoryScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
+    CategorySection(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
 }

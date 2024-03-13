@@ -198,34 +198,8 @@ func getScreen(from destination: GlobalNavigationDestination) -> some View {
         case let .webViewInteractions(substanceName, interactionURL):
             WebViewScreen(articleURL: interactionURL)
                 .navigationTitle("\(substanceName) Interactions")
-        case let .summary(substanceName, summary):
-            SummaryScreen(substanceName: substanceName, summary: summary)
-        case let .categories(substance):
-            CategoryScreen(substance: substance)
         case let .dose(substance):
             DosesScreen(substance: substance)
-        case let .tolerance(substance):
-            ToleranceScreen(substance: substance)
-        case let .toxicity(substance):
-            ToxicityScreen(substance: substance)
-        case let .duration(substance):
-            DurationScreen(substance: substance)
-        case let .interactions(interactions, substance):
-            InteractionsScreen(
-                interactions: interactions,
-                substance: substance
-            )
-        case let .effects(substanceName, effect):
-            EffectScreen(substanceName: substanceName, effect: effect)
-        case let .risks(substance):
-            RiskScreen(substance: substance)
-        case let .saferUse(substance):
-            SaferUseScreen(substance: substance)
-        case let .addiction(substanceName, addictionPotential):
-            AddictionScreen(
-                substanceName: substanceName,
-                addictionPotential: addictionPotential
-            )
         case .timelineInfo:
             List {
                 TimelineExplanationTexts()
