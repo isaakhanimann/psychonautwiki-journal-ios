@@ -258,6 +258,8 @@ func getScreen(from destination: GlobalNavigationDestination) -> some View {
             TimelineScreen(timelineModel: timelineModel)
         case .explainExperience:
             ExplainExperienceSectionScreen()
+        case let .dosageStat(substanceName):
+            DosageStatScreen(substanceName: substanceName)
         }
     }
 }

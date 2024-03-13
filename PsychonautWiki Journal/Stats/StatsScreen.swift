@@ -34,7 +34,9 @@ struct StatsScreen: View {
     @State private var experienceData: ExperienceData?
     @State private var substanceData: SubstanceData?
     @State private var toleranceWindows: [ToleranceWindow] = []
-    @State private var substancesInIngestionsButNotChart: [String] = []
+    @State private var substancesInIngestionsButNotToleranceChart: [String] = []
+    @State private var substancesConsumedInLastYear: [SubstanceCompanion] = []
+
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
@@ -44,7 +46,8 @@ struct StatsScreen: View {
                     experienceData: experienceData,
                     substanceData: substanceData,
                     toleranceWindows: toleranceWindows,
-                    substancesInIngestionsButNotChart: substancesInIngestionsButNotChart,
+                    substancesInIngestionsButNotChart: substancesInIngestionsButNotToleranceChart,
+                    substancesConsumedInLastYear: substancesConsumedInLastYear,
                     isEyeOpen: isEyeOpen
                 )
             } else {
@@ -87,7 +90,32 @@ struct StatsScreen: View {
         let substancesInIngestions = Set(ingestionsLast90Days.map { $0.substanceNameUnwrapped })
         let substancesInToleranceWindows = Set(toleranceWindows.map { $0.substanceName })
         let substancesWithoutToleranceWindows = substancesInIngestions.subtracting(substancesInToleranceWindows)
-        substancesInIngestionsButNotChart = Array(substancesWithoutToleranceWindows)
+        substancesInIngestionsButNotToleranceChart = Array(substancesWithoutToleranceWindows)
+        setSubstancesConsumedInLastYear()
+    }
+
+    private func setSubstancesConsumedInLastYear() {
+        let ingestionsLastYear = ingestions.prefix { ing in
+            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: Date()) <= 365
+        }
+        let dict = Dictionary(grouping: ingestionsLastYear.map({$0.substanceNameUnwrapped})) { name in
+            name
+        }
+        let substanceNameWithCount = dict.map { (substanceName: String, values: [String]) in
+            (substanceName, values.count)
+        }
+        let substanceCompanionWithCount = substanceNameWithCount.compactMap { (substanceName: String, count: Int) in
+            if let companion = substanceCompanions.first(where: {$0.substanceNameUnwrapped == substanceName}) {
+                return (companion, count)
+            } else {
+                return nil
+            }
+        }
+        substancesConsumedInLastYear = substanceCompanionWithCount.sorted(by: { lhs, rhs in
+            lhs.1 > rhs.1
+        }).map({ element in
+            element.0
+        })
     }
 
     private func getSortedSubstanceCountsLast30Days() -> [SubstanceCount] {
@@ -245,6 +273,7 @@ struct StatsScreenContent: View {
     let substanceData: SubstanceData
     let toleranceWindows: [ToleranceWindow]
     let substancesInIngestionsButNotChart: [String]
+    let substancesConsumedInLastYear: [SubstanceCompanion]
     let isEyeOpen: Bool
 
     var body: some View {
@@ -257,6 +286,16 @@ struct StatsScreenContent: View {
                 } footer: {
                     if !substancesInIngestionsButNotChart.isEmpty {
                         Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
+                    }
+                }
+                Section {
+                    ForEach(substancesConsumedInLastYear) { substanceCompanion in
+                        NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "circle.fill").foregroundColor(substanceCompanion.color.swiftUIColor)
+                                Text(substanceCompanion.substanceNameUnwrapped).font(.headline)
+                            }
+                        }
                     }
                 }
             }
@@ -281,6 +320,7 @@ struct StatsScreenContent: View {
             substanceData: .mock1,
             toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
             substancesInIngestionsButNotChart: ["2C-B", "DMT"],
+            substancesConsumedInLastYear: [SubstanceCompanion.fakeLSD, SubstanceCompanion.fakeMDMA],
             isEyeOpen: true
         )
     }

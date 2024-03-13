@@ -40,6 +40,7 @@ enum GlobalNavigationDestination: Hashable {
     case toleranceChartExplanation
     case experienceDetails(experienceData: ExperienceData)
     case substanceDetails(substanceData: SubstanceData)
+    case dosageStat(substanceName: String)
 
     // safer tab
     case saferRoutes
