@@ -158,7 +158,7 @@ struct ContentScreen: View {
                     }
                 }
                 .tabItem {
-                    Label("Substances", systemImage: "magnifyingglass")
+                    Label("Substances", systemImage: "pills")
                 }
                 .tag(Tab.substances)
                 NavigationStack(path: $saferTabPath) {
