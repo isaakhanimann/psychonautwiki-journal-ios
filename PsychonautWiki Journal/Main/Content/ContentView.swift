@@ -228,45 +228,8 @@ func getScreen(from destination: GlobalNavigationDestination) -> some View {
             ExperienceDetailsScreen(experienceData: experienceData)
         case let .substanceDetails(substanceData):
             SubstanceDetailsScreen(substanceData: substanceData)
-        case .research:
-            List {
-                Text("In advance research the duration, subjective effects and potential adverse effects which the substance or combination of substances are likely to produce.\nRead the info in here and also the PsychonautWiki article. Its best to cross-reference with other sources (Tripsit, Erowid, Wikipedia, Bluelight, Reddit, etc).\nThere is no rush.")
-            }
-            .navigationTitle("Research")
-        case .testing:
-            TestingScreen()
-        case .howToDose:
-            HowToDoseScreen()
-        case .setAndSetting:
-            SetAndSettingScreen()
-        case .saferCombinations:
-            SaferCombinationsScreen()
         case .saferRoutes:
             SaferRoutesScreen()
-        case .allergyTests:
-            List {
-                Text("Simply dose a minuscule amount of the substance (e.g. 1/10 to 1/4 of a regular dose) and wait several hours to verify that you do not exhibit an unusual or idiosyncratic response.")
-            }
-            .navigationTitle("Allergy Tests")
-        case .reflection:
-            List {
-                Text("Carefully monitor the frequency and intensity of any substance use to ensure it is not sliding into abuse and addiction. In particular, many stimulants, opioids, and depressants are known to be highly addictive.")
-            }
-            .navigationTitle("Reflection")
-        case .safetyOfOthers:
-            List {
-                Text("Don’t drive, operate heavy machinery, or otherwise be directly or indirectly responsible for the safety or care of another person while intoxicated.")
-            }
-            .navigationTitle("Safety of Others")
-        case .recoveryPosition:
-            List {
-                Text("If someone is unconscious and breathing place them into Recovery Position to prevent death by the suffocation of vomit after a drug overdose.\nHave the contact details of help services to hand in case of urgent need.")
-                Link(destination: URL(string: "https://www.youtube.com/watch?v=dv3agW-DZ5I")!
-                ) {
-                    Label("Recovery Position Video", systemImage: "play")
-                }
-            }
-            .navigationTitle("Recovery Position")
         case .sprayCalculator:
             SprayCalculatorScreen()
         case .testingServices:

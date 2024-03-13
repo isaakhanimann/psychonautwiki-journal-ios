@@ -22,7 +22,6 @@ enum GlobalNavigationDestination: Hashable {
     case editCustomSubstance(customSubstance: CustomSubstance)
     case webView(articleURL: URL)
     case webViewInteractions(substanceName: String, articleURL: URL)
-    case dose(substance: Substance)
     case timelineInfo
 
     // journal tab mainly
@@ -34,6 +33,7 @@ enum GlobalNavigationDestination: Hashable {
     case toleranceTexts(substances: [SubstanceWithToleranceAndColor])
     case timeline(timelineModel: TimelineModel)
     case explainExperience
+    case dose(substance: Substance)
 
     // stats tab mainly
     case toleranceChart
@@ -42,16 +42,7 @@ enum GlobalNavigationDestination: Hashable {
     case substanceDetails(substanceData: SubstanceData)
 
     // safer tab
-    case research
-    case testing
-    case howToDose
-    case setAndSetting
-    case saferCombinations
     case saferRoutes
-    case allergyTests
-    case reflection
-    case safetyOfOthers
-    case recoveryPosition
     case sprayCalculator
     case testingServices
     case reagentTesting

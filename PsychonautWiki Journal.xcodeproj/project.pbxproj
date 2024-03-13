@@ -68,8 +68,6 @@
 		EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2BE2976C0D600A1051A /* NextLabel.swift */; };
 		EA29DC3A2B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */; };
 		EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */; };
-		EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A029714B2F00B3A474 /* TestingScreen.swift */; };
-		EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */; };
 		EA2A69A529714ED600B3A474 /* SaferRoutesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */; };
 		EA2C94B52AAD98A000864BEC /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
 		EA2D19652B11D3BA00B270A2 /* SubstanceIngestionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */; };
@@ -301,8 +299,6 @@
 		EACB6E5227D2592800940291 /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5127D2592800940291 /* DecodingTests.swift */; };
 		EACB6E5727D3483900940291 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB6E5627D3483900940291 /* RegexTests.swift */; };
 		EACF43942B9F7B7A008D1897 /* GlobalNavigationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF43932B9F7B7A008D1897 /* GlobalNavigationDestination.swift */; };
-		EACF43962BA031B2008D1897 /* SetAndSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF43952BA031B2008D1897 /* SetAndSettingScreen.swift */; };
-		EACF43982BA03231008D1897 /* SaferCombinationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF43972BA03231008D1897 /* SaferCombinationsScreen.swift */; };
 		EAD089D42AADA01A006EAA48 /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
 		EAD1D0022B52709500EC0D70 /* CustomUnitsArchiveScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0012B52709500EC0D70 /* CustomUnitsArchiveScreen.swift */; };
 		EAD1D0042B5271BD00EC0D70 /* CustomUnitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0032B5271BD00EC0D70 /* CustomUnitRow.swift */; };
@@ -422,8 +418,6 @@
 		EA26B2BE2976C0D600A1051A /* NextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLabel.swift; sourceTree = "<group>"; };
 		EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-asRoundedReadableString.swift"; sourceTree = "<group>"; };
 		EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
-		EA2A69A029714B2F00B3A474 /* TestingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingScreen.swift; sourceTree = "<group>"; };
-		EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDoseScreen.swift; sourceTree = "<group>"; };
 		EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferRoutesScreen.swift; sourceTree = "<group>"; };
 		EA2C94B42AAD98A000864BEC /* FullTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeline.swift; sourceTree = "<group>"; };
 		EA2D19642B11D3BA00B270A2 /* SubstanceIngestionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceIngestionGroup.swift; sourceTree = "<group>"; };
@@ -648,8 +642,6 @@
 		EACB6E5127D2592800940291 /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
 		EACB6E5627D3483900940291 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		EACF43932B9F7B7A008D1897 /* GlobalNavigationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNavigationDestination.swift; sourceTree = "<group>"; };
-		EACF43952BA031B2008D1897 /* SetAndSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAndSettingScreen.swift; sourceTree = "<group>"; };
-		EACF43972BA03231008D1897 /* SaferCombinationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaferCombinationsScreen.swift; sourceTree = "<group>"; };
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAD1D0012B52709500EC0D70 /* CustomUnitsArchiveScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsArchiveScreen.swift; sourceTree = "<group>"; };
 		EAD1D0032B5271BD00EC0D70 /* CustomUnitRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitRow.swift; sourceTree = "<group>"; };
@@ -1331,11 +1323,7 @@
 			isa = PBXGroup;
 			children = (
 				EAC25BFC2955F23A0002D68F /* ReagentTestingScreen.swift */,
-				EACF43972BA03231008D1897 /* SaferCombinationsScreen.swift */,
-				EACF43952BA031B2008D1897 /* SetAndSettingScreen.swift */,
 				EA2A69A429714ED600B3A474 /* SaferRoutesScreen.swift */,
-				EA2A69A229714BBD00B3A474 /* HowToDoseScreen.swift */,
-				EA2A69A029714B2F00B3A474 /* TestingScreen.swift */,
 				EAC25C07295608E20002D68F /* AdministrationRouteScreen.swift */,
 				EAC25C05295604B00002D68F /* SaferHallucinogenScreen.swift */,
 				EAC25BFA2955EC900002D68F /* TestingServicesScreen.swift */,
@@ -1801,7 +1789,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA2A69A329714BBD00B3A474 /* HowToDoseScreen.swift in Sources */,
 				EAA9C3942A57214A00869E5A /* ToleranceChartExplanationScreen.swift in Sources */,
 				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
 				EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */,
@@ -1834,7 +1821,6 @@
 				EA41C634295F895C000DA021 /* MonthlyExperienceChart.swift in Sources */,
 				EABD921529421CE60073303A /* OnsetComeupTimeline.swift in Sources */,
 				EAC23794276750C500109622 /* Global Functions.swift in Sources */,
-				EACF43982BA03231008D1897 /* SaferCombinationsScreen.swift in Sources */,
 				EA41C632295F8921000DA021 /* DailyExperienceChart.swift in Sources */,
 				EAA9C3902A548B9600869E5A /* SubstanceAndDay.swift in Sources */,
 				EA2D19692B11E85300B270A2 /* ChooseOtherRouteScreen.swift in Sources */,
@@ -1866,7 +1852,6 @@
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,
 				EA4B8A052A952C4B009918DE /* EditTitleScreen.swift in Sources */,
-				EACF43962BA031B2008D1897 /* SetAndSettingScreen.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
 				EA302E4A2B38289B007F113F /* SubstanceAndRoute.swift in Sources */,
 				EA48F86A29DC26A6007DA8C5 /* EverythingForOneRating.swift in Sources */,
@@ -2037,7 +2022,6 @@
 				EA8447EB27CD276300B10DD3 /* OneRoaDurationRow.swift in Sources */,
 				EAB8EF502A489DDA00542253 /* SubstanceSearchBarWithFilter.swift in Sources */,
 				EA48F86129DB2B1B007DA8C5 /* RatingScreenContent.swift in Sources */,
-				EA2A69A129714B2F00B3A474 /* TestingScreen.swift in Sources */,
 				EA8A2CB52B468D3F0050554C /* DoseClassificationRow.swift in Sources */,
 				EA8447E927CD22D300B10DD3 /* Text-LinearGradient.swift in Sources */,
 				EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */,

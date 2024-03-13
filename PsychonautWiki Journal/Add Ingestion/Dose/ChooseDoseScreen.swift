@@ -245,12 +245,6 @@ struct ChooseDoseScreenContent: View {
                         Text(
                             "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
                     }
-                    NavigationLink("Testing") {
-                        TestingScreen()
-                    }
-                    NavigationLink("Dosage Guide") {
-                        HowToDoseScreen()
-                    }
                     if roaDose?.shouldUseVolumetricDosing ?? false {
                         NavigationLink("Volumetric Dosing Recommended") {
                             VolumetricDosingScreen()
