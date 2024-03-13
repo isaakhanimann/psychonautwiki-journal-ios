@@ -288,7 +288,7 @@ struct StatsScreenContent: View {
                         Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
                     }
                 }
-                Section {
+                Section("Dosage Stats") {
                     ForEach(substancesConsumedInLastYear) { substanceCompanion in
                         NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
                             HStack(spacing: 8) {

@@ -20,10 +20,33 @@ struct DosageStatScreen: View {
 
     let substanceName: String
 
+    init(substanceName: String) {
+        self.substanceName = substanceName
+        self.ingestions = FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)],
+            predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "consumerName=nil OR consumerName=''"),
+                NSPredicate(format: "substanceName == %@", substanceName)
+            ]))
+    }
+
+    private var ingestions: FetchRequest<Ingestion>
+
+
     var body: some View {
         List {
             Text("hello")
-        }.navigationTitle("\(substanceName) Dosage Stat")
+        }
+        .navigationTitle("\(substanceName) Dosage Stat")
+        .onChange(of: ingestions.wrappedValue.count, perform: { _ in
+            calculateStats()
+        })
+    }
+
+    @State private var dosageStat: DosageStat?
+
+    private func calculateStats() {
+        
     }
 }
 
