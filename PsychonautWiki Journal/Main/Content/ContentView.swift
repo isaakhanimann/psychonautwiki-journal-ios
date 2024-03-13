@@ -199,7 +199,9 @@ func getScreen(from destination: GlobalNavigationDestination) -> some View {
             WebViewScreen(articleURL: interactionURL)
                 .navigationTitle("\(substanceName) Interactions")
         case let .dose(substance):
-            DosesScreen(substance: substance)
+            List {
+                DosesSection(substance: substance)
+            }.navigationTitle("\(substance.name) Dosage")
         case .timelineInfo:
             List {
                 TimelineExplanationTexts()

@@ -32,16 +32,24 @@ struct SubstanceScreen: View {
                 Group { // group is here because we cannot have more than 10 subviews
                     if let summary = substance.summary {
                         Section("Summary") {
-                            Text(summary)
+                            VStack {
+                                Text(summary)
+                                if !substance.categories.isEmpty {
+                                    CategorySection(substance: substance)
+                                }
+                            }
                         }
-                    }
-                    if !substance.categories.isEmpty {
-                        CategorySection(substance: substance)
+                    } else {
+                        if !substance.categories.isEmpty {
+                            Section("Categories") {
+                                CategorySection(substance: substance)
+                            }
+                        }
                     }
                 }
                 Group {
                     if substance.dosageRemark != nil || !substance.doseInfos.isEmpty {
-                        NavigationLink("Dosage", value: GlobalNavigationDestination.dose(substance: substance))
+                        DosesSection(substance: substance)
                     }
                     if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
                         ToleranceSection(substance: substance)

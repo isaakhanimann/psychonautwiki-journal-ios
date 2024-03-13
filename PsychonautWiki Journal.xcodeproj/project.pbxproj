@@ -271,7 +271,7 @@
 		EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921629421E960073303A /* OnsetComeupPeakTimeline.swift */; };
 		EABD921929422C580073303A /* NoTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921829422C580073303A /* NoTimeline.swift */; };
 		EABD921E294278240073303A /* CategorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921D294278240073303A /* CategorySection.swift */; };
-		EABD922029427A9C0073303A /* DosesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921F29427A9C0073303A /* DosesScreen.swift */; };
+		EABD922029427A9C0073303A /* DosesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD921F29427A9C0073303A /* DosesSection.swift */; };
 		EABDA72B2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */; };
 		EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABDA72D28881B4800A23DB3 /* StatsScreen.swift */; };
 		EAC23794276750C500109622 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23793276750C500109622 /* Global Functions.swift */; };
@@ -618,7 +618,7 @@
 		EABD921629421E960073303A /* OnsetComeupPeakTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetComeupPeakTimeline.swift; sourceTree = "<group>"; };
 		EABD921829422C580073303A /* NoTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTimeline.swift; sourceTree = "<group>"; };
 		EABD921D294278240073303A /* CategorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySection.swift; sourceTree = "<group>"; };
-		EABD921F29427A9C0073303A /* DosesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosesScreen.swift; sourceTree = "<group>"; };
+		EABD921F29427A9C0073303A /* DosesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosesSection.swift; sourceTree = "<group>"; };
 		EABDA72A2887ECFB00A23DB3 /* SubstanceCompanion-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubstanceCompanion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EABDA72D28881B4800A23DB3 /* StatsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsScreen.swift; sourceTree = "<group>"; };
 		EAC23793276750C500109622 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
@@ -1316,7 +1316,7 @@
 			children = (
 				EA039AC82A6C6672006DFAFE /* Duration */,
 				EA8A2CB32B468C7F0050554C /* RoaDoseRow */,
-				EABD921F29427A9C0073303A /* DosesScreen.swift */,
+				EABD921F29427A9C0073303A /* DosesSection.swift */,
 				EABD921D294278240073303A /* CategorySection.swift */,
 				EA527A8329427E61009C142D /* ToleranceSection.swift */,
 				EA527A8529427F56009C142D /* ToxicitySection.swift */,
@@ -1918,7 +1918,7 @@
 				EAC25C06295604B00002D68F /* SaferHallucinogenScreen.swift in Sources */,
 				EA302E442B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift in Sources */,
 				EAC4C0002B893EB300293B44 /* CustomUnitCalculationText.swift in Sources */,
-				EABD922029427A9C0073303A /* DosesScreen.swift in Sources */,
+				EABD922029427A9C0073303A /* DosesSection.swift in Sources */,
 				EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,

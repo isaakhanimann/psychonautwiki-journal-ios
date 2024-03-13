@@ -16,7 +16,7 @@
 
 import SwiftUI
 
-struct DosesScreen: View {
+struct DosesSection: View {
     init(substance: Substance) {
         self.substance = substance
         customUnits = FetchRequest(
@@ -30,28 +30,31 @@ struct DosesScreen: View {
     let substance: Substance
 
     var body: some View {
-        List {
-            if let remark = substance.dosageRemark {
-                Section {
+        Group {
+            Section {
+                if let remark = substance.dosageRemark {
                     Text(remark)
                 }
-            }
-            ForEach(substance.doseInfos, id: \.route) { doseInfo in
-                Section(doseInfo.route.rawValue.localizedCapitalized) {
-                    RoaDoseRow(roaDose: doseInfo.roaDose)
-                    if let bio = doseInfo.bioavailability?.displayString {
-                        RowLabelView(label: "Bioavailability", value: "\(bio)%")
-                    }
-                    let customUnitsForRoa = customUnits.wrappedValue.filter { customUnit in
-                        customUnit.administrationRouteUnwrapped == doseInfo.route
-                    }
-                    ForEach(customUnitsForRoa) { customUnit in
-                        VStack(spacing: 8) {
+                ForEach(substance.doseInfos, id: \.route) { doseInfo in
+                    VStack(alignment: .leading,spacing: 8, content: {
+                        Text(doseInfo.route.rawValue.localizedCapitalized).font(.headline)
+                        RoaDoseRow(roaDose: doseInfo.roaDose)
+                        let customUnitsForRoa = customUnits.wrappedValue.filter { customUnit in
+                            customUnit.administrationRouteUnwrapped == doseInfo.route
+                        }
+                        ForEach(customUnitsForRoa) { customUnit in
                             Text(customUnit.nameUnwrapped).font(.headline)
                             CustomUnitDoseRow(customUnit: customUnit.minInfo, roaDose: doseInfo.roaDose)
                         }
-                    }
+                        if let bio = doseInfo.bioavailability?.displayString {
+                            RowLabelView(label: "Bioavailability", value: "\(bio)%")
+                        }
+                    })
                 }
+            } header: {
+                Text("Dosage")
+            } footer: {
+                Text(ChooseDoseScreenContent.doseDisclaimer)
             }
             if substance.name == "MDMA" {
                 Section("Oral Max Dose Calculator") {
@@ -60,22 +63,10 @@ struct DosesScreen: View {
                 MDMAOptimalDoseSection()
                 MDMAPillsSection()
             }
-            if
-                let units = substance.roas.first?.dose?.units,
-                let clarification = DosesScreen.getUnitClarification(for: units)
-            {
-                Section {
-                    Text(clarification)
-                }
-            }
             if substance.roas.contains(where: { $0.name == .smoked }), substance.categories.contains("opioid") {
                 ChasingTheDragonSection()
             }
-            Section("Disclaimer") {
-                Text(ChooseDoseScreenContent.doseDisclaimer)
-            }
         }
-        .navigationTitle("\(substance.name) Dosage")
     }
 
     static func getUnitClarification(for units: String) -> String? {
@@ -95,13 +86,13 @@ struct DosesScreen: View {
 }
 
 #Preview {
-    NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
+    List {
+        DosesSection(substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!)
     }
 }
 
 #Preview {
-    NavigationStack {
-        DosesScreen(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
+    List {
+        DosesSection(substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!)
     }
 }

@@ -15,6 +15,7 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import WrappingHStack
 
 struct CategorySection: View {
     let substance: Substance
@@ -33,11 +34,15 @@ struct CategorySection: View {
     }
 
     var body: some View {
-        Section("Categories") {
+        WrappingHStack(
+            alignment: .leading,
+            horizontalSpacing: 3,
+            verticalSpacing: 3
+        ) {
             ForEach(categories, id: \.name) { category in
                 Button(category.name.localizedCapitalized) {
                     showAlert(title: category.name.localizedCapitalized, message: category.description, articleURL: category.url)
-                }
+                }.buttonStyle(.bordered)
             }
         }
         .alert(title, isPresented: $isAlertShown, actions: {

@@ -196,7 +196,7 @@ struct ChooseDoseScreenContent: View {
         } footer: {
             if
                 let units = roaDose?.units,
-                let clarification = DosesScreen.getUnitClarification(for: units)
+                let clarification = DosesSection.getUnitClarification(for: units)
             {
                 Section {
                     Text(clarification)
