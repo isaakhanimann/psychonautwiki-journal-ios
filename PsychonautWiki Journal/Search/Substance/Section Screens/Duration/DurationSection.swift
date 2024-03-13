@@ -27,7 +27,7 @@ struct DurationSection: View {
 
     var body: some View {
         Group {
-            if let timelineModel {
+            if let timelineModel { // have the if let here instead of in the section because the height of the item in the section is fixed when its first rendered
                 Section {
                     HStack {
                         DatePicker(
