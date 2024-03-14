@@ -173,4 +173,11 @@ struct PersistenceController {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         return (try? viewContext.fetch(fetchRequest)) ?? []
     }
+
+    func getCustomSubstance(name: String) -> CustomSubstance? {
+        let fetchRequest = CustomSubstance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        let results = try? viewContext.fetch(fetchRequest)
+        return results?.first
+    }
 }

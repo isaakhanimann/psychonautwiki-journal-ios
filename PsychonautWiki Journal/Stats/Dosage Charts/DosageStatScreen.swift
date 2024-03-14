@@ -27,7 +27,15 @@ struct DosageStatScreen: View {
         self.substanceName = substanceName
         let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
         let roaDose = substance?.roas.first?.dose
-        unit = roaDose?.units ?? "mg" // todo check if custom substance
+        if let roaUnit = roaDose?.units {
+            unit = roaUnit
+        } else {
+            if let customSubstance = PersistenceController.shared.getCustomSubstance(name: substanceName) {
+                unit = customSubstance.unitsUnwrapped
+            } else {
+                unit = ""
+            }
+        }
         unknownDoseEstimate = roaDose?.commonMin ?? 0
         substanceColor = getColor(for: substanceName)
         self.ingestions = FetchRequest(
