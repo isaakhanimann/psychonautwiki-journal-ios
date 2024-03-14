@@ -56,7 +56,7 @@ struct DosageStatScreen: View {
                 Section {
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
-                            Text("\(substanceName) Dosage")
+                            Text("Dosage by day")
                                 .font(.callout)
                                 .foregroundStyle(.secondary)
                             Text("Last 30 Days")
@@ -80,7 +80,7 @@ struct DosageStatScreen: View {
             Section("Estimate unknown doses as") {
                 HStack  {
                     TextField(
-                        "Unknown doses estimated as",
+                        "Unknown dose estimate",
                         value: $unknownDoseEstimate,
                         format: .number).keyboardType(.decimalPad)
                     Text(unit)
@@ -91,6 +91,7 @@ struct DosageStatScreen: View {
                 Text("Disclaimer, this will not work if you tracked one substance with different pure units, not custom units")
             }
         }
+        .navigationTitle(substanceName)
         .onAppear {
             calculateStats()
         }
@@ -110,13 +111,19 @@ struct DosageStatScreen: View {
     }
 
     private func calculateStats() {
+        dosageStat = DosageStat(
+            last30Days: getDayDosages(),
+            last26Weeks: getWeekDosages(),
+            last12Months: [],
+            years: [])
+    }
+
+    private func getDayDosages() -> [DayDosage] {
         let last30Days = ingestions.wrappedValue.prefix { ing in
             Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: .now) <= 30
         }
 
-        let instanceDosages = last30Days.map { ing in
-            InstanceDosage(day: ing.timeUnwrapped, dosage: ing.pureSubstanceDose ?? unknownDoseEstimate)
-        }
+        let instanceDosages = convertToInstanceDosages(ingestions: last30Days)
 
         let instanceDosagesGroupedByDay = Dictionary(grouping: instanceDosages) { instanceDose in
             let components = Calendar.current.dateComponents([.day, .month], from: instanceDose.day)
@@ -135,15 +142,40 @@ struct DosageStatScreen: View {
                 return nil
             }
         }
+        return dayDosages
+    }
 
-        dosageStat = DosageStat(
-            last30Days: dayDosages,
-            last26Weeks: [],
-            last12Months: [],
-            years: [])
+    private func getWeekDosages() -> [WeekDosage] {
+        let last26Weeks = ingestions.wrappedValue.prefix { ing in
+            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: .now) <= 26*7
+        }
 
+        let instanceDosages = convertToInstanceDosages(ingestions: last26Weeks)
 
+        let instanceDosagesGroupedByDay = Dictionary(grouping: instanceDosages) { instanceDose in
+            let components = Calendar.current.dateComponents([.weekOfYear], from: instanceDose.day)
+            if let weekOfYear = components.weekOfYear {
+                return String(weekOfYear)
+            } else {
+                return ""
+            }
+        }
 
+        let weekDosages = instanceDosagesGroupedByDay.compactMap { (_: String, instanceDosages: [InstanceDosage]) in
+            let summedDosage = instanceDosages.map({$0.dosage}).reduce(0.0, +)
+            if let week = instanceDosages.first?.day, summedDosage > 0 {
+                return WeekDosage(week: week, dosage: summedDosage)
+            } else {
+                return nil
+            }
+        }
+        return weekDosages
+    }
+
+    private func convertToInstanceDosages(ingestions: any Collection<Ingestion>) -> [InstanceDosage] {
+        return ingestions.map { ing in
+            InstanceDosage(day: ing.timeUnwrapped, dosage: ing.pureSubstanceDose ?? unknownDoseEstimate)
+        }
     }
 }
 
