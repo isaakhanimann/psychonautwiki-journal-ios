@@ -49,35 +49,121 @@ struct DosageStatScreen: View {
     private var ingestions: FetchRequest<Ingestion>
     @State private var unknownDoseEstimate = 0.0
 
+    enum StatTimeRangeOption: String, CaseIterable {
+        case last30Days = "30D"
+        case last26Weeks = "26W"
+        case last12Months = "12M"
+        case allYears = "Y"
+    }
+
+    @State private var selectedTimeRangeOption = StatTimeRangeOption.last26Weeks
 
     var body: some View {
         List {
-            if let last30Days = dosageStat?.last30Days {
-                Section {
-                    VStack(alignment: .leading) {
+            Section {
+                Picker("Time range", selection: $selectedTimeRangeOption) {
+                    ForEach(StatTimeRangeOption.allCases, id: \.rawValue) { timeRange in
+                        Text(timeRange.rawValue).tag(timeRange)
+                    }
+                }.pickerStyle(.segmented)
+
+                switch selectedTimeRangeOption {
+                case .last30Days:
+                    if let last30Days = dosageStat?.last30Days, !last30Days.isEmpty {
                         VStack(alignment: .leading) {
-                            Text("Dosage by day")
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
-                            Text("Last 30 Days")
-                                .font(.title2.bold())
-                                .foregroundColor(.primary)
+                            VStack(alignment: .leading) {
+                                Text("Dosage by day")
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                Text("Last 30 Days")
+                                    .font(.title2.bold())
+                                    .foregroundColor(.primary)
+                            }
+                            Chart(last30Days, id: \.day) {
+                                BarMark(
+                                    x: .value("Day", $0.day, unit: .day),
+                                    y: .value("Dosage", $0.dosage)
+                                )
+                                .foregroundStyle(substanceColor.swiftUIColor)
+                            }.chartYAxisLabel("Dosage in \(unit)")
+                                .frame(height: 240)
                         }
-                        Chart(last30Days, id: \.day) {
-                            BarMark(
-                                x: .value("Day", $0.day, unit: .day),
-                                y: .value("Dosage", $0.dosage)
-                            )
-                            .foregroundStyle(substanceColor.swiftUIColor)
-                        }.chartYAxisLabel("Dosage in \(unit)")
-                            .frame(height: 240)
+                    } else {
+                        Text("No \(substanceName) ingestions in the last 30 days").foregroundStyle(.secondary)
+                    }
+                case .last26Weeks:
+                    if let last26Weeks = dosageStat?.last26Weeks, !last26Weeks.isEmpty {
+                        VStack(alignment: .leading) {
+                            VStack(alignment: .leading) {
+                                Text("Dosage by week")
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                Text("Last 26 Weeks")
+                                    .font(.title2.bold())
+                                    .foregroundColor(.primary)
+                            }
+                            Chart(last26Weeks, id: \.week) {
+                                BarMark(
+                                    x: .value("Week", $0.week, unit: .weekOfYear),
+                                    y: .value("Dosage", $0.dosage)
+                                )
+                                .foregroundStyle(substanceColor.swiftUIColor)
+                            }.chartYAxisLabel("Dosage in \(unit)")
+                                .frame(height: 240)
+                        }
+                    } else {
+                        Text("No \(substanceName) ingestions in the last 26 weeks").foregroundStyle(.secondary)
+                    }
+                case .last12Months:
+                    if let last12Months = dosageStat?.last12Months, !last12Months.isEmpty {
+                        VStack(alignment: .leading) {
+                            VStack(alignment: .leading) {
+                                Text("Dosage by month")
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                Text("Last 12 Months")
+                                    .font(.title2.bold())
+                                    .foregroundColor(.primary)
+                            }
+                            Chart(last12Months, id: \.month) {
+                                BarMark(
+                                    x: .value("Month", $0.month, unit: .month),
+                                    y: .value("Dosage", $0.dosage)
+                                )
+                                .foregroundStyle(substanceColor.swiftUIColor)
+                            }.chartYAxisLabel("Dosage in \(unit)")
+                                .frame(height: 240)
+                        }
+                    } else {
+                        Text("No \(substanceName) ingestions in the last 12 months").foregroundStyle(.secondary)
+                    }
+                case .allYears:
+                    if let years = dosageStat?.years, !years.isEmpty {
+                        VStack(alignment: .leading) {
+                            VStack(alignment: .leading) {
+                                Text("Dosage by year")
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                Text("All Years")
+                                    .font(.title2.bold())
+                                    .foregroundColor(.primary)
+                            }
+                            Chart(years, id: \.year) {
+                                BarMark(
+                                    x: .value("Year", $0.year, unit: .year),
+                                    y: .value("Dosage", $0.dosage)
+                                )
+                                .foregroundStyle(substanceColor.swiftUIColor)
+                            }.chartYAxisLabel("Dosage in \(unit)")
+                                .frame(height: 240)
+                        }
+                    } else {
+                        Text("No \(substanceName) ingestions").foregroundStyle(.secondary)
                     }
                 }
-            } else {
-                Text("No \(substanceName) ingestions in last 30 days")
-            }
+            }.listRowSeparator(.hidden)
 
-            Section("Estimate unknown doses as") {
+            Section("Estimate unknown doses as. Only show this when there are unknown doses") {
                 HStack  {
                     TextField(
                         "Unknown dose estimate",
@@ -88,7 +174,7 @@ struct DosageStatScreen: View {
             }
 
             Section {
-                Text("Disclaimer, this will not work if you tracked one substance with different pure units, not custom units")
+                Text("Todo check if all ingestions have same unit and  if not then don't show graph. If different administration routes are used add a note saying that.")
             }
         }
         .navigationTitle(substanceName)
@@ -105,17 +191,17 @@ struct DosageStatScreen: View {
 
     @State private var dosageStat: DosageStat?
 
-    struct InstanceDosage {
-        let day: Date
-        let dosage: Double
+    struct DoseInstance {
+        let date: Date
+        let dose: Double
     }
 
     private func calculateStats() {
         dosageStat = DosageStat(
             last30Days: getDayDosages(),
             last26Weeks: getWeekDosages(),
-            last12Months: [],
-            years: [])
+            last12Months: getMonthDosages(),
+            years: getYearDosages())
     }
 
     private func getDayDosages() -> [DayDosage] {
@@ -123,21 +209,20 @@ struct DosageStatScreen: View {
             Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: .now) <= 30
         }
 
-        let instanceDosages = convertToInstanceDosages(ingestions: last30Days)
+        let doseInstances = convertToDoseInstances(ingestions: last30Days)
 
-        let instanceDosagesGroupedByDay = Dictionary(grouping: instanceDosages) { instanceDose in
-            let components = Calendar.current.dateComponents([.day, .month], from: instanceDose.day)
+        let doseInstancesGroupedByDay = Dictionary(grouping: doseInstances) { instanceDose in
+            let components = Calendar.current.dateComponents([.day, .month], from: instanceDose.date)
             if let day = components.day, let month = components.month {
                 return String(day) + String(month)
             } else {
                 return ""
             }
-        }
+        }.values
 
-        let dayDosages = instanceDosagesGroupedByDay.compactMap { (_: String, instanceDosages: [InstanceDosage]) in
-            let summedDosage = instanceDosages.map({$0.dosage}).reduce(0.0, +)
-            if let day = instanceDosages.first?.day, summedDosage > 0 {
-                return DayDosage(day: day, dosage: summedDosage)
+        let dayDosages = doseInstancesGroupedByDay.compactMap { (doseInstances: [DoseInstance]) in
+            if let summedUp = sumUpInstanceDosages(doseInstances: doseInstances) {
+                return DayDosage(day: summedUp.date, dosage: summedUp.dose)
             } else {
                 return nil
             }
@@ -150,21 +235,20 @@ struct DosageStatScreen: View {
             Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: .now) <= 26*7
         }
 
-        let instanceDosages = convertToInstanceDosages(ingestions: last26Weeks)
+        let doseInstances = convertToDoseInstances(ingestions: last26Weeks)
 
-        let instanceDosagesGroupedByDay = Dictionary(grouping: instanceDosages) { instanceDose in
-            let components = Calendar.current.dateComponents([.weekOfYear], from: instanceDose.day)
+        let doseInstancesGroupedByWeek = Dictionary(grouping: doseInstances) { instanceDose in
+            let components = Calendar.current.dateComponents([.weekOfYear], from: instanceDose.date)
             if let weekOfYear = components.weekOfYear {
                 return String(weekOfYear)
             } else {
                 return ""
             }
-        }
+        }.values
 
-        let weekDosages = instanceDosagesGroupedByDay.compactMap { (_: String, instanceDosages: [InstanceDosage]) in
-            let summedDosage = instanceDosages.map({$0.dosage}).reduce(0.0, +)
-            if let week = instanceDosages.first?.day, summedDosage > 0 {
-                return WeekDosage(week: week, dosage: summedDosage)
+        let weekDosages = doseInstancesGroupedByWeek.compactMap { (doseInstances: [DoseInstance]) in
+            if let summedUp = sumUpInstanceDosages(doseInstances: doseInstances) {
+                return WeekDosage(week: summedUp.date, dosage: summedUp.dose)
             } else {
                 return nil
             }
@@ -172,9 +256,66 @@ struct DosageStatScreen: View {
         return weekDosages
     }
 
-    private func convertToInstanceDosages(ingestions: any Collection<Ingestion>) -> [InstanceDosage] {
+    private func getMonthDosages() -> [MonthDosage] {
+        let last12Months = ingestions.wrappedValue.prefix { ing in
+            Calendar.current.numberOfDaysBetween(ing.timeUnwrapped, and: .now) <= 365
+        }
+
+        let instanceDosages = convertToDoseInstances(ingestions: last12Months)
+
+        let doseInstancesGroupedByMonth = Dictionary(grouping: instanceDosages) { instanceDose in
+            let components = Calendar.current.dateComponents([.month, .year], from: instanceDose.date)
+            if let month = components.month, let year = components.year {
+                return String(month) + String(year)
+            } else {
+                return ""
+            }
+        }
+
+        let monthDosages = doseInstancesGroupedByMonth.values.compactMap { (doseInstances: [DoseInstance]) in
+            if let summedUp = sumUpInstanceDosages(doseInstances: doseInstances) {
+                return MonthDosage(month: summedUp.date, dosage: summedUp.dose)
+            } else {
+                return nil
+            }
+        }
+        return monthDosages
+    }
+
+    private func getYearDosages() -> [YearDosage] {
+        let doseInstances = convertToDoseInstances(ingestions: ingestions.wrappedValue)
+
+        let doseInstancesGroupedByYear = Dictionary(grouping: doseInstances) { instanceDose in
+            let components = Calendar.current.dateComponents([.year], from: instanceDose.date)
+            if let year = components.year {
+                return String(year)
+            } else {
+                return ""
+            }
+        }.values
+
+        let yearDosages = doseInstancesGroupedByYear.compactMap { (doseInstances: [DoseInstance]) in
+            if let summedUp = sumUpInstanceDosages(doseInstances: doseInstances) {
+                return YearDosage(year: summedUp.date, dosage: summedUp.dose)
+            } else {
+                return nil
+            }
+        }
+        return yearDosages
+    }
+
+    private func sumUpInstanceDosages(doseInstances: [DoseInstance]) -> DoseInstance? {
+        let summedDosage = doseInstances.map({$0.dose}).reduce(0.0, +)
+        if let date = doseInstances.first?.date, summedDosage > 0 {
+            return DoseInstance(date: date, dose: summedDosage)
+        } else {
+            return nil
+        }
+    }
+
+    private func convertToDoseInstances(ingestions: any Collection<Ingestion>) -> [DoseInstance] {
         return ingestions.map { ing in
-            InstanceDosage(day: ing.timeUnwrapped, dosage: ing.pureSubstanceDose ?? unknownDoseEstimate)
+            DoseInstance(date: ing.timeUnwrapped, dose: ing.pureSubstanceDose ?? unknownDoseEstimate)
         }
     }
 }
