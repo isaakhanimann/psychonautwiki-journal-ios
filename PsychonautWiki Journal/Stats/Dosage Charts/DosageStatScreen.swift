@@ -163,13 +163,15 @@ struct DosageStatScreen: View {
                 }
             }.listRowSeparator(.hidden)
 
-            Section("Estimate unknown doses as. Only show this when there are unknown doses") {
-                HStack  {
-                    TextField(
-                        "Unknown dose estimate",
-                        value: $unknownDoseEstimate,
-                        format: .number).keyboardType(.decimalPad)
-                    Text(unit)
+            if areThereUnknownDoses {
+                Section("Estimate unknown doses as") {
+                    HStack  {
+                        TextField(
+                            "Unknown dose estimate",
+                            value: $unknownDoseEstimate,
+                            format: .number).keyboardType(.decimalPad)
+                        Text(unit)
+                    }
                 }
             }
 
@@ -179,29 +181,33 @@ struct DosageStatScreen: View {
         }
         .navigationTitle(substanceName)
         .onAppear {
-            calculateStats()
+            updateStats()
         }
         .onChange(of: ingestions.wrappedValue.count, perform: { _ in
-            calculateStats()
+            updateStats()
         })
         .onChange(of: unknownDoseEstimate) { newValue in
-            calculateStats()
+            updateStats()
         }
     }
 
     @State private var dosageStat: DosageStat?
+    @State private var areThereUnknownDoses = false
 
     struct DoseInstance {
         let date: Date
         let dose: Double
     }
 
-    private func calculateStats() {
+    private func updateStats() {
         dosageStat = DosageStat(
             last30Days: getDayDosages(),
             last26Weeks: getWeekDosages(),
             last12Months: getMonthDosages(),
             years: getYearDosages())
+        areThereUnknownDoses = ingestions.wrappedValue.contains(where: { ing in
+            ing.doseUnwrapped == nil
+        })
     }
 
     private func getDayDosages() -> [DayDosage] {
