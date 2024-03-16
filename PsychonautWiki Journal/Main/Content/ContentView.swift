@@ -56,8 +56,6 @@ struct ContentScreen: View {
     @State private var substancesTabPath = NavigationPath()
     @State private var saferTabPath = NavigationPath()
     @State private var settingsTabPath = NavigationPath()
-    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen2: Bool = false
-    @EnvironmentObject private var toastViewModel: ToastViewModel
 
     enum Tab {
         case stats
@@ -169,13 +167,6 @@ struct ContentScreen: View {
             }
             .tag(Tab.settings)
         }
-        .toast(isPresenting: $toastViewModel.isShowingToast) {
-            AlertToast(
-                displayMode: .alert,
-                type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
-                title: toastViewModel.toastMessage
-            )
-        }
         .onOpenURL { url in
             if url.absoluteString == openLatestExperience {
                 selectedTab = .journal
@@ -183,10 +174,6 @@ struct ContentScreen: View {
                     journalTabPath.removeLast(journalTabPath.count)
                     journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
                 }
-            }
-            if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
-                UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
-                toastViewModel.showSuccessToast(message: "Unlocked")
             }
         }
     }
