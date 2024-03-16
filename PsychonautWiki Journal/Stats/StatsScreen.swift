@@ -288,16 +288,6 @@ struct StatsScreenContent: View {
                         Text("Excluding ") + Text(substancesInIngestionsButNotChart, format: .list(type: .and))
                     }
                 }
-                Section("Dosage Stats") {
-                    ForEach(substancesConsumedInLastYear) { substanceCompanion in
-                        NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "circle.fill").foregroundColor(substanceCompanion.color.swiftUIColor)
-                                Text(substanceCompanion.substanceNameUnwrapped).font(.headline)
-                            }
-                        }
-                    }
-                }
             }
             Section {
                 NavigationLink(value: GlobalNavigationDestination.experienceDetails(experienceData: experienceData)) {
@@ -307,6 +297,16 @@ struct StatsScreenContent: View {
             Section {
                 NavigationLink(value: GlobalNavigationDestination.substanceDetails(substanceData: substanceData)) {
                     SubstanceOverview(substanceData: substanceData)
+                }
+            }
+            Section("Dosage Stats") {
+                ForEach(substancesConsumedInLastYear) { substanceCompanion in
+                    NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "circle.fill").foregroundColor(substanceCompanion.color.swiftUIColor)
+                            Text(substanceCompanion.substanceNameUnwrapped).font(.headline)
+                        }
+                    }
                 }
             }
         }.navigationTitle("My Stats")
