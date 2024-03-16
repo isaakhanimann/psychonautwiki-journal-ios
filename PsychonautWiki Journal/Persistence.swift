@@ -169,6 +169,18 @@ struct PersistenceController {
         return (try? viewContext.fetch(fetchRequest)) ?? []
     }
 
+    func getLatestActiveExperience() -> Experience? {
+        let fetchRequest = Experience.fetchRequest()
+        let minusThreeDays: TimeInterval = -3*24*60*60
+        let startDate = Date.now.addingTimeInterval(minusThreeDays)
+        fetchRequest.predicate = NSPredicate(format: "sortDate >= %@", startDate as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
+        let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
+        return experiences.first { experience in
+            experience.isCurrent
+        }
+    }
+
     func getSubstanceCompanions() -> [SubstanceCompanion] {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         return (try? viewContext.fetch(fetchRequest)) ?? []

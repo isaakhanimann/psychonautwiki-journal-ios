@@ -19,7 +19,6 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage(PersistenceController.needsToSeeWelcomeKey) var needsToSeeWelcome: Bool = true
-    @EnvironmentObject private var toastViewModel: ToastViewModel
     @AppStorage(PersistenceController.isEyeOpenKey1) var isEyeOpen1: Bool = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen2: Bool = false
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
@@ -28,21 +27,6 @@ struct ContentView: View {
 
     var body: some View {
         ContentScreen(isEyeOpen: isEyeOpen2)
-            .onOpenURL { _ in
-                if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
-                    UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
-                    toastViewModel.showSuccessToast(message: "Unlocked")
-                } else {
-                    toastViewModel.showSuccessToast(message: "Already Unlocked")
-                }
-            }
-            .toast(isPresenting: $toastViewModel.isShowingToast) {
-                AlertToast(
-                    displayMode: .alert,
-                    type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
-                    title: toastViewModel.toastMessage
-                )
-            }
             .fullScreenCover(isPresented: $needsToSeeWelcome) {
                 WelcomeScreen(isShowingWelcome: $needsToSeeWelcome)
             }
@@ -72,6 +56,8 @@ struct ContentScreen: View {
     @State private var substancesTabPath = NavigationPath()
     @State private var saferTabPath = NavigationPath()
     @State private var settingsTabPath = NavigationPath()
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen2: Bool = false
+    @EnvironmentObject private var toastViewModel: ToastViewModel
 
     enum Tab {
         case stats
@@ -183,7 +169,31 @@ struct ContentScreen: View {
             }
             .tag(Tab.settings)
         }
+        .toast(isPresenting: $toastViewModel.isShowingToast) {
+            AlertToast(
+                displayMode: .alert,
+                type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
+                title: toastViewModel.toastMessage
+            )
+        }
+        .onOpenURL { url in
+            if url.absoluteString == openLatestExperience {
+                selectedTab = .journal
+                if let latestExperience = PersistenceController.shared.getLatestActiveExperience() {
+                    journalTabPath.removeLast(journalTabPath.count)
+                    journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
+                }
+            }
+            if !UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2) {
+                UserDefaults.standard.set(true, forKey: PersistenceController.isEyeOpenKey2)
+                toastViewModel.showSuccessToast(message: "Unlocked")
+            }
+        }
     }
+
+
+
+
 }
 
 func getScreen(from destination: GlobalNavigationDestination) -> some View {
