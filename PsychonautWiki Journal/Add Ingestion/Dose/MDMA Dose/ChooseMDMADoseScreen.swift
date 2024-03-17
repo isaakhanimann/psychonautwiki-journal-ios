@@ -117,7 +117,7 @@ struct ChooseMDMADoseScreen: View {
             MDMAPillsSection()
         }
         .scrollDismissesKeyboard(.interactively)
-        .navigationTitle("MDMA Dosage")
+        .navigationTitle("MDMA Dose")
     }
 
     var doseType: DoseRangeType {

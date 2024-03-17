@@ -52,7 +52,7 @@ struct DosesSection: View {
                     })
                 }
             } header: {
-                Text("Dosage")
+                Text("Dose")
             } footer: {
                 Text(ChooseDoseScreenContent.doseDisclaimer)
             }

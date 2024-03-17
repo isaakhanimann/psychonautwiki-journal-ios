@@ -216,7 +216,7 @@ struct ChooseAlcoholDoseScreen: View {
                 Text(remark)
             }
         }
-        .navigationTitle("Alcohol Dosage")
+        .navigationTitle("Alcohol Dose")
         .scrollDismissesKeyboard(.interactively)
     }
 }

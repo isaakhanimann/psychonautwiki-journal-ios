@@ -65,7 +65,7 @@ struct CustomUnitsChooseDoseScreen: View {
                     }
                     if customUnit.administrationRouteUnwrapped == .smoked || customUnit.administrationRouteUnwrapped == .inhaled {
                         Text(
-                            "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
+                            "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dose should reflect the amount of substance that is actually inhaled.")
                     }
                     if customUnit.roaDose?.shouldUseVolumetricDosing ?? false {
                         NavigationLink("Volumetric Dosing Recommended") {

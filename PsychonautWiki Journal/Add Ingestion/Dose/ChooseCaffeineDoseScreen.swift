@@ -188,7 +188,7 @@ struct ChooseCaffeineDoseScreen: View {
                 Text(remark)
             }
         }
-        .navigationTitle("Caffeine Dosage")
+        .navigationTitle("Caffeine Dose")
     }
 }
 
