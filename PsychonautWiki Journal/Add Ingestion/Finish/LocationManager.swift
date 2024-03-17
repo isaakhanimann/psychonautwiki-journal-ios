@@ -56,7 +56,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             guard let foundCLLocation = locations.last else { return }
             let place = await getPlacemark(from: foundCLLocation)
             DispatchQueue.main.async {
-                let locationName = place?.name ?? "Unknown"
+                let locationName = place?.subLocality ?? place?.name ?? "Unknown"
                 let location = Location(
                     name: locationName,
                     longitude: foundCLLocation.coordinate.longitude,
