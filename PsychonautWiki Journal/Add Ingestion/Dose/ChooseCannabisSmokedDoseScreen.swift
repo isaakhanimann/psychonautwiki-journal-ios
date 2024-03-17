@@ -37,10 +37,6 @@ struct ChooseCannabisSmokedDoseScreen: View {
         Double(round(10 * ingestedTHCDoseInMg) / 10)
     }
 
-    private var doseText: String {
-        String(format: "%.1f", ingestedTHCDoseInMg)
-    }
-
     private var suggestedNote: String {
         "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent))% THC) smoked in a \(pickerOption.rawValue)"
     }
@@ -106,7 +102,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
             Section("Ingested THC Amount") {
                 VStack(spacing: 5) {
                     let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg")
-                    Text("\(doseText) mg")
+                    Text("\(ingestedTHCDoseInMg.asRoundedReadableString) mg")
                         .font(.title.bold())
                         .foregroundColor(doseType.color)
                     RoaDoseRow(roaDose: smokedDose)
@@ -164,14 +160,14 @@ struct ChooseCannabisSmokedDoseScreen: View {
                     Text("\(Int(thcContent))%").font(.title2.bold())
                     Slider(
                         value: $thcContent,
-                        in: 1 ... 30,
+                        in: 1 ... 40,
                         step: 1
                     ) {
                         Text("THC Content")
                     } minimumValueLabel: {
                         Text("1")
                     } maximumValueLabel: {
-                        Text("30")
+                        Text("40")
                     }
                 }
             }
