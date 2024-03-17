@@ -217,6 +217,10 @@
 		EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */; };
 		EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */; };
 		EA7F230F2B8E095700EA6734 /* RelativeTimeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */; };
+		EA8039B92BA6CEE80097E743 /* DosageStatDayChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039B82BA6CEE80097E743 /* DosageStatDayChart.swift */; };
+		EA8039BB2BA6D99A0097E743 /* DosageStatWeekChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039BA2BA6D99A0097E743 /* DosageStatWeekChart.swift */; };
+		EA8039BD2BA6DBFC0097E743 /* DosageStatMonthChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039BC2BA6DBFC0097E743 /* DosageStatMonthChart.swift */; };
+		EA8039BF2BA6DDC30097E743 /* DosageStatYearChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039BE2BA6DDC30097E743 /* DosageStatYearChart.swift */; };
 		EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */; };
 		EA8447E427CD14AD00B10DD3 /* SubstanceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */; };
 		EA8447E727CD175000B10DD3 /* RoaDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8447E627CD175000B10DD3 /* RoaDoseRow.swift */; };
@@ -560,6 +564,10 @@
 		EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChart.swift; sourceTree = "<group>"; };
 		EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeText.swift; sourceTree = "<group>"; };
+		EA8039B82BA6CEE80097E743 /* DosageStatDayChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatDayChart.swift; sourceTree = "<group>"; };
+		EA8039BA2BA6D99A0097E743 /* DosageStatWeekChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatWeekChart.swift; sourceTree = "<group>"; };
+		EA8039BC2BA6DBFC0097E743 /* DosageStatMonthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatMonthChart.swift; sourceTree = "<group>"; };
+		EA8039BE2BA6DDC30097E743 /* DosageStatYearChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatYearChart.swift; sourceTree = "<group>"; };
 		EA81E0C929508C7E00475DE3 /* CumulativeDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeDoseRow.swift; sourceTree = "<group>"; };
 		EA83D75127C91DB5004F1E0C /* PW Version 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 1.xcdatamodel"; sourceTree = "<group>"; };
 		EA8447E327CD14AD00B10DD3 /* SubstanceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceScreen.swift; sourceTree = "<group>"; };
@@ -1133,6 +1141,17 @@
 			path = Tolerance;
 			sourceTree = "<group>";
 		};
+		EA8039B72BA6CEA10097E743 /* Dosage Stats Charts */ = {
+			isa = PBXGroup;
+			children = (
+				EA8039B82BA6CEE80097E743 /* DosageStatDayChart.swift */,
+				EA8039BA2BA6D99A0097E743 /* DosageStatWeekChart.swift */,
+				EA8039BC2BA6DBFC0097E743 /* DosageStatMonthChart.swift */,
+				EA8039BE2BA6DDC30097E743 /* DosageStatYearChart.swift */,
+			);
+			path = "Dosage Stats Charts";
+			sourceTree = "<group>";
+		};
 		EA8447E527CD14C000B10DD3 /* Substance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1386,6 +1405,7 @@
 			children = (
 				EACF439A2BA24026008D1897 /* DosageStatScreen.swift */,
 				EACF439C2BA247D3008D1897 /* DosageStat.swift */,
+				EA8039B72BA6CEA10097E743 /* Dosage Stats Charts */,
 			);
 			path = "Dosage Charts";
 			sourceTree = "<group>";
@@ -1867,6 +1887,7 @@
 				EAE471B626CBA664009FB0EC /* Feature.swift in Sources */,
 				EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */,
 				EA41C62B295EB79A000DA021 /* ExperienceOverview.swift in Sources */,
+				EA8039BB2BA6D99A0097E743 /* DosageStatWeekChart.swift in Sources */,
 				EA4B8A052A952C4B009918DE /* EditTitleScreen.swift in Sources */,
 				EAE4722026CBA664009FB0EC /* ChooseRouteScreen.swift in Sources */,
 				EA302E4A2B38289B007F113F /* SubstanceAndRoute.swift in Sources */,
@@ -1921,6 +1942,7 @@
 				EAC4C0002B893EB300293B44 /* CustomUnitCalculationText.swift in Sources */,
 				EABD922029427A9C0073303A /* DosesSection.swift in Sources */,
 				EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */,
+				EA8039BF2BA6DDC30097E743 /* DosageStatYearChart.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
 				EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */,
@@ -1946,6 +1968,7 @@
 				EA014F9A27E5E72000077FB2 /* WebViewScreen.swift in Sources */,
 				EA4B8A2F2AA6E231009918DE /* TimedNoteCodable.swift in Sources */,
 				EA48F88829DD4FD6007DA8C5 /* ExperienceCodable.swift in Sources */,
+				EA8039BD2BA6DBFC0097E743 /* DosageStatMonthChart.swift in Sources */,
 				EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */,
 				EA41C62D295EB7C2000DA021 /* ExperienceDetailsScreen.swift in Sources */,
 				EA4B8A272A9DCE63009918DE /* EditConsumerScreen.swift in Sources */,
@@ -1985,6 +2008,7 @@
 				EA41C62F295EB86C000DA021 /* TimeRange.swift in Sources */,
 				EAB165A427E35BE0003DF79D /* AddCustomSubstanceView.swift in Sources */,
 				EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */,
+				EA8039B92BA6CEE80097E743 /* DosageStatDayChart.swift in Sources */,
 				EA4B8A1F2A9B3E0E009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA4B8A312AA6FF02009918DE /* LockTimeOption.swift in Sources */,
 				EA48F85829DB12A5007DA8C5 /* ShulginRatingOption.swift in Sources */,

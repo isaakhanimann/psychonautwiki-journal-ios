@@ -48,6 +48,7 @@ struct DosageStatScreen: View {
 
     private var ingestions: FetchRequest<Ingestion>
     @State private var unknownDoseEstimate = 0.0
+    @State private var isAverageShown = false
 
     enum StatTimeRangeOption: String, CaseIterable {
         case last30Days = "30D"
@@ -70,124 +71,43 @@ struct DosageStatScreen: View {
 
                     switch selectedTimeRangeOption {
                     case .last30Days:
-                        if let last30Days = dosageStat?.last30Days, !last30Days.isEmpty {
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    Text("Dosage by day")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                    Text("Last 30 Days")
-                                        .font(.title2.bold())
-                                        .foregroundColor(.primary)
-                                }
-                                Chart(last30Days, id: \.day) {
-                                    BarMark(
-                                        x: .value("Day", $0.day, unit: .day),
-                                        y: .value("Dosage", $0.dosage)
-                                    )
-                                    .foregroundStyle(substanceColor.swiftUIColor)
-                                }.chartYAxisLabel("Dosage in \(unit)")
-                                    .chartXAxis {
-                                        AxisMarks(values: .stride(by: .day, count: 1)) { value in
-                                            AxisValueLabel(format: .dateTime.day())
-                                            AxisGridLine()
-                                            AxisTick()
-                                        }
-                                    }
-                                    .frame(height: 240)
-                            }
-                        } else {
-                            Text("No \(substanceName) ingestions in the last 30 days").foregroundStyle(.secondary)
-                        }
+                        DosageStatDayChart(
+                            last30Days: dosageStat?.last30Days ?? [],
+                            substanceName: substanceName,
+                            substanceColor: substanceColor,
+                            unit: unit,
+                            isAverageShown: isAverageShown
+                        )
                     case .last26Weeks:
-                        if let last26Weeks = dosageStat?.last26Weeks, !last26Weeks.isEmpty {
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    Text("Dosage by week")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                    Text("Last 26 Weeks")
-                                        .font(.title2.bold())
-                                        .foregroundColor(.primary)
-                                }
-                                Chart(last26Weeks, id: \.week) {
-                                    BarMark(
-                                        x: .value("Week", $0.week, unit: .weekOfYear),
-                                        y: .value("Dosage", $0.dosage)
-                                    )
-                                    .foregroundStyle(substanceColor.swiftUIColor)
-                                }.chartYAxisLabel("Dosage in \(unit)")
-                                    .chartXAxis {
-                                        AxisMarks(values: .stride(by: .month, count: 1)) { value in
-                                            AxisValueLabel(format: .dateTime.month())
-                                            AxisGridLine()
-                                            AxisTick()
-                                        }
-                                    }
-                                    .frame(height: 240)
-
-                            }
-                        } else {
-                            Text("No \(substanceName) ingestions in the last 26 weeks").foregroundStyle(.secondary)
-                        }
+                        DosageStatWeekChart(
+                            last26Weeks: dosageStat?.last26Weeks ?? [],
+                            substanceName: substanceName,
+                            substanceColor: substanceColor,
+                            unit: unit,
+                            isAverageShown: isAverageShown
+                        )
                     case .last12Months:
-                        if let last12Months = dosageStat?.last12Months, !last12Months.isEmpty {
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    Text("Dosage by month")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                    Text("Last 12 Months")
-                                        .font(.title2.bold())
-                                        .foregroundColor(.primary)
-                                }
-                                Chart(last12Months, id: \.month) {
-                                    BarMark(
-                                        x: .value("Month", $0.month, unit: .month),
-                                        y: .value("Dosage", $0.dosage)
-                                    )
-                                    .foregroundStyle(substanceColor.swiftUIColor)
-                                }.chartYAxisLabel("Dosage in \(unit)")
-                                    .chartXAxis {
-                                        AxisMarks(values: .stride(by: .month, count: 1)) { value in
-                                            AxisValueLabel(format: .dateTime.month())
-                                        }
-                                    }
-                                    .frame(height: 240)
-                            }
-                        } else {
-                            Text("No \(substanceName) ingestions in the last 12 months").foregroundStyle(.secondary)
-                        }
+                        DosageStatMonthChart(
+                            last12Months: dosageStat?.last12Months ?? [],
+                            substanceName: substanceName,
+                            substanceColor: substanceColor,
+                            unit: unit,
+                            isAverageShown: isAverageShown
+                        )
                     case .allYears:
-                        if let years = dosageStat?.years, !years.isEmpty {
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    Text("Dosage by year")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                    Text("All Years")
-                                        .font(.title2.bold())
-                                        .foregroundColor(.primary)
-                                }
-                                Chart(years, id: \.year) {
-                                    BarMark(
-                                        x: .value("Year", $0.year, unit: .year),
-                                        y: .value("Dosage", $0.dosage)
-                                    )
-                                    .foregroundStyle(substanceColor.swiftUIColor)
-                                }.chartYAxisLabel("Dosage in \(unit)")
-                                    .chartXAxis {
-                                        AxisMarks(values: .stride(by: .year, count: 1)) { value in
-                                            AxisValueLabel(format: .dateTime.year())
-                                        }
-                                    }
-                                    .frame(height: 240)
-                            }
-                        } else {
-                            Text("No \(substanceName) ingestions").foregroundStyle(.secondary)
-                        }
+                        DosageStatYearChart(
+                            years: dosageStat?.years ?? [],
+                            substanceName: substanceName,
+                            substanceColor: substanceColor,
+                            unit: unit,
+                            isAverageShown: isAverageShown
+                        )
                     }
                 }.listRowSeparator(.hidden)
+
+                Section {
+                    Toggle("Show Average", isOn: $isAverageShown).tint(.accentColor)
+                }
 
                 if areThereUnknownDoses {
                     Section("Estimate unknown doses as") {
