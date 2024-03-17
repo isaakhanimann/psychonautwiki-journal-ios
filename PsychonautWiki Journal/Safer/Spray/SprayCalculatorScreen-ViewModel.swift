@@ -74,7 +74,7 @@ extension SprayCalculatorScreen {
             if let liquidAmountInMl, let selectedSpray, let weightPerSpray {
                 let numSprays = liquidAmountInMl * selectedSpray.numSprays / selectedSpray.contentInMl
                 let result = numSprays * weightPerSpray
-                let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
+                let resultText = result.asRoundedReadableString
                 if resultText != totalWeightText {
                     totalWeightText = resultText
                 }
@@ -85,7 +85,7 @@ extension SprayCalculatorScreen {
             if let totalWeight, let selectedSpray, let weightPerSpray {
                 let numSprays = totalWeight / weightPerSpray
                 let result = numSprays * selectedSpray.contentInMl / selectedSpray.numSprays
-                let resultText = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)
+                let resultText = result.asRoundedReadableString
                 if resultText != liquidAmountInMlText {
                     liquidAmountInMlText = resultText
                 }

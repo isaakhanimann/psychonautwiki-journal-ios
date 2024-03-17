@@ -319,7 +319,6 @@
 		EAE471E126CBA664009FB0EC /* Sequence-Uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */; };
 		EAE471E926CBA664009FB0EC /* Experience-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */; };
 		EAE471EB26CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */; };
-		EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */; };
 		EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4717D26CBA664009FB0EC /* Date-String.swift */; };
 		EAE4720326CBA664009FB0EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718026CBA664009FB0EC /* Persistence.swift */; };
 		EAE4720926CBA664009FB0EC /* IngestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4718926CBA664009FB0EC /* IngestionRow.swift */; };
@@ -671,7 +670,6 @@
 		EAE4715C26CBA664009FB0EC /* Sequence-Uniqued.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence-Uniqued.swift"; sourceTree = "<group>"; };
 		EAE4716526CBA664009FB0EC /* Experience-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Experience-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		EAE4716726CBA664009FB0EC /* Ingestion-CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingestion-CoreDataHelpers.swift"; sourceTree = "<group>"; };
-		EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double-Rounded.swift"; sourceTree = "<group>"; };
 		EAE4717D26CBA664009FB0EC /* Date-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-String.swift"; sourceTree = "<group>"; };
 		EAE4718026CBA664009FB0EC /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EAE4718926CBA664009FB0EC /* IngestionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestionRow.swift; sourceTree = "<group>"; };
@@ -1493,7 +1491,6 @@
 				EA60482D2A162225005C6A4B /* String-CleanSearch.swift */,
 				EA418A30296C056500DEA663 /* Array-Unique.swift */,
 				EAB165B127E49ACC003DF79D /* Notification-EyeName.swift */,
-				EAE4716B26CBA664009FB0EC /* Double-Rounded.swift */,
 				EAE4717D26CBA664009FB0EC /* Date-String.swift */,
 				EA039AC42A6BAA10006DFAFE /* Date-Format.swift */,
 				EA48B9A626E80F21003BF667 /* Angle.swift */,
@@ -1922,7 +1919,6 @@
 				EA47E64927CA136C00F6E10F /* Tolerance.swift in Sources */,
 				EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */,
 				EA527A8629427F56009C142D /* ToxicitySection.swift in Sources */,
-				EAE471EF26CBA664009FB0EC /* Double-Rounded.swift in Sources */,
 				EA47E65127CA136C00F6E10F /* RoaDose.swift in Sources */,
 				EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */,
 				EA8A2CB22B468AEF0050554C /* CustomUnitDoseRow.swift in Sources */,

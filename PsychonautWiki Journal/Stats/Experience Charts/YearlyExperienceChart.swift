@@ -71,7 +71,7 @@ struct YearlyExperienceChart: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 3))
                     .annotation(position: .top, alignment: .leading) {
-                        Text("Average: \(experienceData.yearlyAverage.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1))")
+                        Text("Average: \(experienceData.yearlyAverage.asRoundedReadableString)")
                             .font(.body.bold())
                             .foregroundStyle(.blue)
                     }

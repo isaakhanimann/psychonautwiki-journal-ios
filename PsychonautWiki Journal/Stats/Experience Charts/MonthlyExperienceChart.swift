@@ -72,7 +72,7 @@ struct MonthlyExperienceChart: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 3))
                     .annotation(position: .top, alignment: .leading) {
-                        Text("Average: \(experienceData.monthlyAverage.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1))")
+                        Text("Average: \(experienceData.monthlyAverage.asRoundedReadableString)")
                             .font(.body.bold())
                             .foregroundStyle(.blue)
                     }

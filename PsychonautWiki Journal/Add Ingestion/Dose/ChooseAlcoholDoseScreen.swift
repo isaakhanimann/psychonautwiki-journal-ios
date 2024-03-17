@@ -48,7 +48,7 @@ struct ChooseAlcoholDoseScreen: View {
     }
 
     private var suggestedNote: String {
-        "\(drinkAmountInDL.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) dL with \(alcoholContentInPercent.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2))% Alcohol"
+        "\(drinkAmountInDL.asRoundedReadableString) dL with \(alcoholContentInPercent.asRoundedReadableString)% Alcohol"
     }
 
     var body: some View {

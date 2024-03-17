@@ -129,7 +129,7 @@ struct ChooseDoseScreenContent: View {
 
     private var suggestedNote: String? {
         guard let impureDose, !selectedUnits.isEmpty, purityInPercent != 100, purityInPercent != nil else { return nil }
-        return "\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits) with \(purityText)% purity"
+        return "\(impureDose.asRoundedReadableString) \(selectedUnits) with \(purityText)% purity"
     }
 
     private var purityInPercent: Double? {
@@ -164,7 +164,7 @@ struct ChooseDoseScreenContent: View {
                         Text("%")
                     }
                     if let impureDose {
-                        Text("\(impureDose.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(selectedUnits)")
+                        Text("\(impureDose.asRoundedReadableString) \(selectedUnits)")
                             .font(.title)
                     }
                 }

@@ -39,7 +39,7 @@ struct StomachFullnessPicker: View {
                 HStack {
                     Text(option.text)
                     Spacer()
-                    Text("~\(option.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours delay").foregroundColor(.secondary)
+                    Text("~\(option.onsetDelayForOralInHours.asRoundedReadableString) hours delay").foregroundColor(.secondary)
                 }
             }
         }

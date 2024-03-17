@@ -79,7 +79,7 @@ struct SprayCalculatorScreenContent: View {
                     } label: {
                         HStack {
                             Text(model.name).font(.headline).foregroundColor(colorScheme == .dark ? Color.white : .black)
-                            Text("\(model.contentInMl.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) ml = \(model.numSprays.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) sprays").foregroundColor(.secondary)
+                            Text("\(model.contentInMl.asRoundedReadableString) ml = \(model.numSprays.asRoundedReadableString) sprays").foregroundColor(.secondary)
                             Spacer()
                             if selectedSpray == model {
                                 Image(systemName: "checkmark").font(.headline).foregroundColor(.blue)
@@ -121,7 +121,7 @@ struct SprayCalculatorScreenContent: View {
                         Text("%")
                     }
                     if let doseAdjustedToPurity {
-                        Text("\(doseAdjustedToPurity.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 2)) \(units.rawValue)").font(.title)
+                        Text("\(doseAdjustedToPurity.asRoundedReadableString) \(units.rawValue)").font(.title)
                     }
                 }
             }

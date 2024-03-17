@@ -95,7 +95,7 @@ struct DurationSection: View {
                                     Text(option.text)
                                 }
                             }.pickerStyle(.segmented)
-                            Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) hours.").font(.footnote)
+                            Text("Onset delayed by ~\(stomachFullness.onsetDelayForOralInHours.asRoundedReadableString) hours.").font(.footnote)
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 8)

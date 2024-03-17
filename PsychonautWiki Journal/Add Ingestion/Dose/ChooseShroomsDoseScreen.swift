@@ -162,7 +162,7 @@ struct ChooseShroomsDoseScreen: View {
         if let psilocybinContentInPercent, let shroomWeightInGrams {
             let result = shroomWeightInGrams * 1000 * psilocybinContentInPercent / 100
             psilocybinInMg = result
-            psilocybinTextInMg = result.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)
+            psilocybinTextInMg = result.asRoundedReadableString
         }
     }
 }

@@ -74,7 +74,7 @@ struct ExperienceDetailsScreen: View {
                             Text(count.substanceName)
                                 .font(.headline)
                             Spacer()
-                            Text("\(count.experienceCount.asTextWithoutTrailingZeros(maxNumberOfFractionDigits: 1)) experiences")
+                            Text("\(count.experienceCount.asRoundedReadableString) experiences")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             if highlightedSubstanceNames.contains(count.substanceName) {
