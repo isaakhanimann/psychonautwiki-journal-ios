@@ -141,7 +141,7 @@ struct EffectTimeline: View {
             let dateComponents = DateDifference.between(timelineModel.startTime, and: time)
             return Text("+ ") + Text(DateDifference.formatted(dateComponents))
         } else {
-            return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+            return Text(time, format: Date.FormatStyle().hour().minute())
         }
     }
 
