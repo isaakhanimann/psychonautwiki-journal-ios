@@ -23,22 +23,28 @@ struct ChooseCannabisSmokedDoseScreen: View {
         cannabis.getDose(for: .smoked)!
     }
 
-    @State private var cannabisAmountInMg = 300.0
-    @State private var thcContent = 14.0
-    @State private var isEstimate = true
+    @State private var cannabisAmountInMg: Double?
+    @State private var thcContent: Double?
+    @State private var isEstimate = false
     @State private var doseDeviationInMg: Double?
     @State private var pickerOption = PickerOption.joint
 
-    private var ingestedTHCDoseInMg: Double {
-        cannabisAmountInMg * Double(pickerOption.percentTransfer) / 100 * thcContent / 100
+    private var ingestedTHCDoseInMg: Double? {
+        guard let cannabisAmountInMg, let thcContent else {return nil}
+        return cannabisAmountInMg * Double(pickerOption.percentTransfer) / 100 * thcContent / 100
     }
 
-    private var doseRounded: Double {
-        Double(round(10 * ingestedTHCDoseInMg) / 10)
+    private var doseRounded: Double? {
+        guard let ingestedTHCDoseInMg else {return nil}
+        return Double(round(10 * ingestedTHCDoseInMg) / 10)
     }
 
-    private var suggestedNote: String {
-        "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent))% THC) smoked in a \(pickerOption.rawValue)"
+    private var suggestedNote: String? {
+        if let cannabisAmountInMg, let thcContent {
+            return "\(Int(cannabisAmountInMg)) mg Cannabis (\(Int(thcContent))% THC) smoked in a \(pickerOption.rawValue.lowercased())"
+        } else {
+            return nil
+        }
     }
 
     enum PickerOption: String, CaseIterable {
@@ -95,23 +101,35 @@ struct ChooseCannabisSmokedDoseScreen: View {
             estimatedDoseStandardDeviation: doseDeviationInMg))
     }
 
-    @FocusState private var isEstimatedDeviationFocused: Bool
+    @FocusState private var focusedField: Field?
+
+    enum Field: Hashable {
+        case cannabisAmount
+        case thcContent
+        case estimatedDeviation
+    }
+
 
     private var screen: some View {
         Form {
             Section("Ingested THC Amount") {
                 VStack(spacing: 5) {
-                    let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg")
-                    Text("\(ingestedTHCDoseInMg.asRoundedReadableString) mg")
-                        .font(.title.bold())
-                        .foregroundColor(doseType.color)
+                    if let ingestedTHCDoseInMg {
+                        let doseType = smokedDose.getRangeType(for: ingestedTHCDoseInMg, with: "mg")
+                        Text("\(ingestedTHCDoseInMg.asRoundedReadableString) mg")
+                            .font(.title.bold())
+                            .foregroundColor(doseType.color)
+                    } else {
+                        Text(" ")
+                            .font(.title.bold())
+                    }
                     RoaDoseRow(roaDose: smokedDose)
                 }
                 Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
                         if newIsEstimate {
-                            isEstimatedDeviationFocused = true
+                            focusedField = .estimatedDeviation
                         }
                     })
                 if isEstimate {
@@ -123,7 +141,7 @@ struct ChooseCannabisSmokedDoseScreen: View {
                             format: .number
                         )
                         .keyboardType(.decimalPad)
-                        .focused($isEstimatedDeviationFocused)
+                        .focused($focusedField, equals: .estimatedDeviation)
                         Spacer()
                         Text("mg")
                     }
@@ -139,41 +157,40 @@ struct ChooseCannabisSmokedDoseScreen: View {
                 .pickerStyle(.segmented)
                 Text("THC Transfer: ~\(pickerOption.percentTransfer)%").font(.headline.bold())
             }
-            Section("Cannabis Amount") {
-                VStack {
-                    Text("\(Int(cannabisAmountInMg)) mg").font(.title2.bold())
-                    Slider(
+            Section("Amount and THC Content") {
+                HStack {
+                    TextField(
+                        "Cannabis Amount",
                         value: $cannabisAmountInMg,
-                        in: 10 ... 1000,
-                        step: 10
-                    ) {
-                        Text("Cannabis Amount")
-                    } minimumValueLabel: {
-                        Text("10")
-                    } maximumValueLabel: {
-                        Text("1'000")
+                        format: .number
+                    )
+                    .focused($focusedField, equals: .cannabisAmount)
+                    .keyboardType(.decimalPad)
+                    .onSubmit {
+                        focusedField = .thcContent
                     }
-                }
-            }.listRowSeparator(.hidden)
-            Section("THC Content") {
-                VStack {
-                    Text("\(Int(thcContent))%").font(.title2.bold())
-                    Slider(
+                    Spacer()
+                    Text("mg")
+                }.font(.headline)
+                HStack {
+                    TextField(
+                        "THC Content",
                         value: $thcContent,
-                        in: 1 ... 40,
-                        step: 1
-                    ) {
-                        Text("THC Content")
-                    } minimumValueLabel: {
-                        Text("1")
-                    } maximumValueLabel: {
-                        Text("40")
-                    }
-                }
+                        format: .number
+                    )
+                    .keyboardType(.decimalPad)
+                    .focused($focusedField, equals: .thcContent)
+                    Spacer()
+                    Text("%")
+                }.font(.headline)
             }
             if let remark = cannabis.dosageRemark {
                 Text(remark)
             }
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .onAppear {
+            focusedField = .cannabisAmount
         }
         .navigationTitle("Cannabis Smoked")
     }
