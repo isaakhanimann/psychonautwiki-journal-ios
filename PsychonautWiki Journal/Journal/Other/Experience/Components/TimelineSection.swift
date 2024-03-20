@@ -32,9 +32,7 @@ struct TimelineSection: View {
     var body: some View {
         Group {
             if timelineModel.isWorthDrawing {
-                NavigationLink(value: GlobalNavigationDestination.timeline(timelineModel: timelineModel)) {
-                    EffectTimeline(timelineModel: timelineModel, height: 200)
-                }
+                EffectTimeline(timelineModel: timelineModel, height: 200)
             }
             ForEach(ingestionsSorted) { ing in
                 Button {

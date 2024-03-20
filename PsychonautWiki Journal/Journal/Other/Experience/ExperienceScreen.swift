@@ -181,7 +181,13 @@ struct ExperienceScreen: View {
                             }
                         }
                     } header: {
-                        Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+                        HStack {
+                            Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
+                            Spacer()
+                            NavigationLink(value: GlobalNavigationDestination.timeline(timelineModel: timelineModel)) {
+                                Label("Timeline screen", systemImage: "arrow.down.left.and.arrow.up.right.square").labelStyle(.iconOnly)
+                            }
+                        }
                     }
                     if !experience.myCumulativeDoses.isEmpty && isEyeOpen {
                         Section("My Cumulative Dose") {

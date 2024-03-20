@@ -26,6 +26,8 @@ struct EffectTimeline: View {
         lineWidth / 2
     }
 
+    @State private var dragPointLocation: CGPoint?
+
     var body: some View {
         VStack(spacing: 0) {
             timeLabels
@@ -65,7 +67,48 @@ struct EffectTimeline: View {
                         path.addLine(to: CGPoint(x: currentTimeX, y: size.height))
                         context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                     }
+                    if let dragPointLocation {
+                        // draw vertical line
+                        var path = Path()
+                        path.move(to: CGPoint(x: dragPointLocation.x, y: 0))
+                        path.addLine(to: CGPoint(x: dragPointLocation.x, y: size.height))
+                        context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+
+                        // draw time text
+                        let dragPointXInSeconds = dragPointLocation.x/size.width * timelineModel.totalWidth
+                        let dragPointXAsDate = timelineModel.startTime.addingTimeInterval(dragPointXInSeconds)
+                        let text = Text(dragPointXAsDate, format: Date.FormatStyle().hour().minute())
+                        let resolvedText = context.resolve(text)
+                        let textSize = resolvedText.measure(in: size)
+                        let distanceFromFinger: CGFloat = 30
+                        var topTextY = dragPointLocation.y - textSize.height - distanceFromFinger
+                        if topTextY < 0 {
+                            topTextY = 0
+                        }
+                        if topTextY > size.height - textSize.height {
+                            topTextY = size.height - textSize.height
+                        }
+                        let textCenter = CGPoint(x: dragPointLocation.x, y: topTextY + (textSize.height/2))
+                        let leftTextX = dragPointLocation.x - (textSize.width/2)
+                        let textRect = CGRect(
+                            x: leftTextX,
+                            y: topTextY,
+                            width: textSize.width,
+                            height: textSize.height
+                        )
+                        context.fill(RoundedRectangle(cornerRadius: 5, style: .circular).path (in: textRect), with: .color(.gray))
+                        context.draw(resolvedText, at: textCenter)
+                    }
                 }
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged({ drag in
+                            dragPointLocation = drag.location
+                        })
+                        .onEnded({ _ in
+                            dragPointLocation = nil
+                        })
+                )
             }
             .padding(.vertical, spaceToLabels)
             timeLabels
