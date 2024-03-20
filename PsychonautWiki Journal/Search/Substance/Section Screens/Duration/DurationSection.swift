@@ -25,25 +25,55 @@ struct DurationSection: View {
     @State private var stomachFullness = StomachFullness.empty
     @State private var hiddenRoutes: [AdministrationRoute] = []
 
+    @AppStorage(PersistenceController.timeDisplayStyleDurationSectionKey) private var timeDisplayStyleDurationSectionText: String = SaveableTimeDisplayStyle.regular.rawValue
+
+    private var saveableTimeDisplayStyle: Binding<SaveableTimeDisplayStyle> {
+        Binding(
+            get: {
+                SaveableTimeDisplayStyle(rawValue: timeDisplayStyleDurationSectionText) ?? .regular
+            },
+            set: { newValue in timeDisplayStyleDurationSectionText = newValue.rawValue }
+        )
+    }
+
+    var timeDisplayStyle: TimeDisplayStyle {
+        switch saveableTimeDisplayStyle.wrappedValue {
+        case .regular:
+            return .regular
+        case .relativeToStart:
+            return .relativeToStart
+        case .relativeToNow:
+            return .relativeToNow
+        default:
+            return .regular
+        }
+    }
+
     var body: some View {
         Group {
             if let timelineModel { // have the if let here instead of in the section because the height of the item in the section is fixed when its first rendered
                 Section {
-                    HStack {
-                        DatePicker(
-                            "Start Time",
-                            selection: $selectedTime,
-                            displayedComponents: [.hourAndMinute]
-                        )
-                        Button("Now") {
-                            selectedTime = .now
-                        }
-                        .buttonStyle(.bordered)
-                    }
                     VStack(alignment: .leading) {
+                        HStack {
+                            DatePicker(
+                                "Start Time",
+                                selection: $selectedTime,
+                                displayedComponents: [.hourAndMinute]
+                            )
+                            Button("Now") {
+                                selectedTime = .now
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                        Picker("Time Style", selection: saveableTimeDisplayStyle) {
+                            ForEach([SaveableTimeDisplayStyle.regular, SaveableTimeDisplayStyle.relativeToStart, SaveableTimeDisplayStyle.relativeToNow]) { option in
+                                Text(option.shortText).tag(option)
+                            }
+                        }
+                        .pickerStyle(.menu)
                         EffectTimeline(
                             timelineModel: timelineModel,
-                            timeDisplayStyle: .regular
+                            timeDisplayStyle: timeDisplayStyle
                         )
                         Text(TimelineDisclaimers.heavyDose).font(.footnote)
                     }

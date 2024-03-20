@@ -40,4 +40,17 @@ enum SaveableTimeDisplayStyle: String, CaseIterable, Identifiable {
             return "Auto"
         }
     }
+
+    var shortText: String {
+        switch self {
+        case .regular:
+            return "Regular"
+        case .relativeToNow:
+            return "Relative to now"
+        case .relativeToStart:
+            return "Relative to start"
+        case .auto:
+            return "Auto"
+        }
+    }
 }
