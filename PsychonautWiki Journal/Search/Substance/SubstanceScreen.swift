@@ -46,23 +46,20 @@ struct SubstanceScreen: View {
                             }
                         }
                     }
+                    if let effects = substance.effectsSummary {
+                        Section("Effects") {
+                            Text(effects)
+                        }
+                    }
                 }
                 Group {
                     if substance.dosageRemark != nil || !substance.doseInfos.isEmpty {
                         DosesSection(substance: substance)
                     }
-                    if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
-                        ToleranceSection(substance: substance)
-                    }
-                    if !substance.toxicities.isEmpty {
-                        ToxicitySection(substance: substance)
-                    }
                     let durationInfos = substance.durationInfos
                     if !durationInfos.isEmpty {
                         DurationSection(substance: substance)
                     }
-                }
-                Group {
                     if let interactions = substance.interactions {
                         Section("Interactions") {
                             InteractionsGroup(
@@ -71,11 +68,14 @@ struct SubstanceScreen: View {
                             )
                         }
                     }
-                    if let effects = substance.effectsSummary {
-                        Section("Effects") {
-                            Text(effects)
-                        }
+                    if substance.tolerance != nil || !substance.crossTolerances.isEmpty {
+                        ToleranceSection(substance: substance)
                     }
+                    if !substance.toxicities.isEmpty {
+                        ToxicitySection(substance: substance)
+                    }
+                }
+                Group {
                     if let acute = substance.generalRisks {
                         Section("Acute Risk") {
                             Text(acute)
