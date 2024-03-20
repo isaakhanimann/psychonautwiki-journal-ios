@@ -29,6 +29,8 @@ struct DosesSection: View {
 
     let substance: Substance
 
+    @State private var isDisclaimerShown = false
+
     var body: some View {
         Group {
             Section {
@@ -52,10 +54,24 @@ struct DosesSection: View {
                     })
                 }
             } header: {
-                Text("Dose")
-            } footer: {
-                Text(ChooseDoseScreenContent.doseDisclaimer)
+                HStack {
+                    Text("Dose")
+                    Spacer()
+                    Button("Disclaimer") {
+                        isDisclaimerShown = true
+                    }
+                }
             }
+            .alert(
+                "Dosage Disclaimer",
+                isPresented: $isDisclaimerShown) {
+                    Button("Ok") {
+                        isDisclaimerShown = false
+                    }
+                } message: {
+                    Text(ChooseDoseScreenContent.doseDisclaimer)
+                }
+
             if substance.name == "MDMA" {
                 Section("Oral Max Dose Calculator") {
                     MDMAMaxDoseCalculator(onChangeOfMax: { _ in })
