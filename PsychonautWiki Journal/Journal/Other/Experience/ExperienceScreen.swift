@@ -272,9 +272,10 @@ struct ExperienceScreen: View {
                     }
                 }
                 ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions, areRedosesDrawnIndividually: areRedosesDrawnIndividually)) { consumer in
-                    Section(consumer.consumerName) {
+                    let consumerTimelineModel = consumer.timelineModel
+                    Section {
                         TimelineSection(
-                            timelineModel: consumer.timelineModel,
+                            timelineModel: consumerTimelineModel,
                             ingestionsSorted: consumer.ingestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
@@ -284,6 +285,16 @@ struct ExperienceScreen: View {
                             hideIngestion: { hideIngestion(id: $0) },
                             updateActivityIfActive: {}
                         )
+                    } header: {
+                        HStack {
+                            Text(consumer.consumerName)
+                            Spacer()
+                            NavigationLink(value: GlobalNavigationDestination.timeline(
+                                timelineModel: consumerTimelineModel,
+                                timeDisplayStyle: timeDisplayStyle)) {
+                                    Label("Timeline screen", systemImage: "arrow.down.left.and.arrow.up.right.square").labelStyle(.iconOnly)
+                                }
+                        }
                     }
                 }
                 if isEyeOpen && !isHidingSubstanceInfoInExperience && !experience.substancesUsed.isEmpty {
