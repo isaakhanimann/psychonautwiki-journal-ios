@@ -31,7 +31,7 @@ enum GlobalNavigationDestination: Hashable {
     case saferHallucinogen
     case allInteractions(substancesToCheck: [Substance])
     case toleranceTexts(substances: [SubstanceWithToleranceAndColor])
-    case timeline(timelineModel: TimelineModel)
+    case timeline(timelineModel: TimelineModel, timeDisplayStyle: TimeDisplayStyle)
     case explainExperience
     case dose(substance: Substance)
 

@@ -19,6 +19,7 @@ import SwiftUI
 struct EffectTimeline: View {
     let timelineModel: TimelineModel
     var height: Double = 200
+    let timeDisplayStyle: TimeDisplayStyle
     var isShowingCurrentTime = true
     var spaceToLabels = 5.0
     private let lineWidth: Double = 5
@@ -78,7 +79,7 @@ struct EffectTimeline: View {
                         // draw time text
                         let dragPointXInSeconds = dragPointLocation.x/size.width * timelineModel.totalWidth
                         let dragPointXAsDate = timelineModel.startTime.addingTimeInterval(dragPointXInSeconds)
-                        let text = Text(dragPointXAsDate, format: Date.FormatStyle().hour().minute()).font(.headline)
+                        let text = getTimeText(time: dragPointXAsDate).font(.headline)
                         let resolvedText = context.resolve(text)
                         let textSize = resolvedText.measure(in: size)
                         let distanceFromFinger: CGFloat = 60
@@ -125,6 +126,25 @@ struct EffectTimeline: View {
         }.frame(height: height)
     }
 
+    func getTimeText(time: Date) -> Text {
+        if timeDisplayStyle == .relativeToNow {
+            if time > .now {
+                let dateComponents = DateDifference.between(.now, and: time)
+                let durationText = Text(DateDifference.formatted(dateComponents))
+                return Text("in ") + durationText
+            } else {
+                let dateComponents = DateDifference.between(time, and: .now)
+                let durationText = Text(DateDifference.formatted(dateComponents))
+                return durationText + Text(" ago")
+            }
+        } else if timeDisplayStyle == .relativeToStart {
+            let dateComponents = DateDifference.between(timelineModel.startTime, and: time)
+            return Text("+ ") + Text(DateDifference.formatted(dateComponents))
+        } else {
+            return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+        }
+    }
+
     private var timeLabels: some View {
         Canvas { context, size in
             let widthInPixels = size.width
@@ -156,7 +176,8 @@ struct EffectTimeline_Previews: PreviewProvider {
                         everythingForEachTimedNote: everythingForEachTimedNote,
                         areRedosesDrawnIndividually: false
                     ),
-                    height: 200
+                    height: 200,
+                    timeDisplayStyle: .regular
                 )
             }
         }

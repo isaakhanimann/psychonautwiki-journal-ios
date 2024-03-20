@@ -32,7 +32,11 @@ struct TimelineSection: View {
     var body: some View {
         Group {
             if timelineModel.isWorthDrawing {
-                EffectTimeline(timelineModel: timelineModel, height: 200)
+                EffectTimeline(
+                    timelineModel: timelineModel,
+                    height: 200,
+                    timeDisplayStyle: timeDisplayStyle
+                )
             }
             ForEach(ingestionsSorted) { ing in
                 Button {

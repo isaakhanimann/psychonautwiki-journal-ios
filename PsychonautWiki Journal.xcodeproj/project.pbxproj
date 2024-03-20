@@ -295,6 +295,8 @@
 		EAC4BFFC2B890ADA00293B44 /* ChooseCustomUnitScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFB2B890ADA00293B44 /* ChooseCustomUnitScreen.swift */; };
 		EAC4BFFE2B890DF600293B44 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFD2B890DF600293B44 /* OnFirstAppearModifier.swift */; };
 		EAC4C0002B893EB300293B44 /* CustomUnitCalculationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */; };
+		EAC9C17E2BAAB8A60068A577 /* TimeDisplayStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A129E98E88007DA8C5 /* TimeDisplayStyle.swift */; };
+		EAC9C17F2BAAB8C50068A577 /* DateDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A329E991C6007DA8C5 /* DateDifference.swift */; };
 		EACB0C19293F9BCE00C605E2 /* SubstanceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C18293F9BCE00C605E2 /* SubstanceFile.swift */; };
 		EACB0C1B293F9C0100C605E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1A293F9C0100C605E2 /* Category.swift */; };
 		EACB0C1E293FA4F500C605E2 /* SaferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB0C1D293FA4F500C605E2 /* SaferScreen.swift */; };
@@ -1779,6 +1781,7 @@
 				EA085E0A29619F85001638AC /* Tolerance.swift in Sources */,
 				EA48F86B29DC287E007DA8C5 /* EverythingForOneRating.swift in Sources */,
 				EA085E102961A1B4001638AC /* AxisDrawable.swift in Sources */,
+				EAC9C17E2BAAB8A60068A577 /* TimeDisplayStyle.swift in Sources */,
 				EA085E0229619E5F001638AC /* IngestionMinInfoForTimeline.swift in Sources */,
 				EA085E132961A1F0001638AC /* GraphicsContext-DrawDot.swift in Sources */,
 				EA48F86729DC1B13007DA8C5 /* RatingDrawable.swift in Sources */,
@@ -1796,6 +1799,7 @@
 				EA085E0D29619FFD001638AC /* EffectTimeline.swift in Sources */,
 				EA085DFE29619E26001638AC /* DurationRange.swift in Sources */,
 				EA4189EF2962E69000DEA663 /* Constants.swift in Sources */,
+				EAC9C17F2BAAB8C50068A577 /* DateDifference.swift in Sources */,
 				EA085DD529607229001638AC /* TimelineWidgetLiveActivity.swift in Sources */,
 				EA085E0629619F85001638AC /* Roa.swift in Sources */,
 				EA085DD329607229001638AC /* TimelineWidgetBundle.swift in Sources */,

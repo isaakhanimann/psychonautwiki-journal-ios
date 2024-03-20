@@ -184,9 +184,11 @@ struct ExperienceScreen: View {
                         HStack {
                             Text(experience.sortDateUnwrapped, format: Date.FormatStyle().day().month().year().weekday(.abbreviated))
                             Spacer()
-                            NavigationLink(value: GlobalNavigationDestination.timeline(timelineModel: timelineModel)) {
-                                Label("Timeline screen", systemImage: "arrow.down.left.and.arrow.up.right.square").labelStyle(.iconOnly)
-                            }
+                            NavigationLink(value: GlobalNavigationDestination.timeline(
+                                timelineModel: timelineModel,
+                                timeDisplayStyle: timeDisplayStyle)) {
+                                    Label("Timeline screen", systemImage: "arrow.down.left.and.arrow.up.right.square").labelStyle(.iconOnly)
+                                }
                         }
                     }
                     if !experience.myCumulativeDoses.isEmpty && isEyeOpen {

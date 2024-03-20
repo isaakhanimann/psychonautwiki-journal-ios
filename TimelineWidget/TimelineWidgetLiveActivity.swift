@@ -32,6 +32,7 @@ struct TimelineWidgetLiveActivity: Widget {
                     EffectTimeline(
                         timelineModel: timelineModel,
                         height: geo.size.height,
+                        timeDisplayStyle: .regular, 
                         isShowingCurrentTime: false,
                         spaceToLabels: 7
                     )
@@ -69,6 +70,7 @@ struct TimelineWidgetLiveActivity: Widget {
                     EffectTimeline(
                         timelineModel: timelineModel,
                         height: 90,
+                        timeDisplayStyle: .regular, 
                         isShowingCurrentTime: false,
                         spaceToLabels: 7
                     )

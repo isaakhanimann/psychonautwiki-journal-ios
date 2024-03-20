@@ -41,7 +41,10 @@ struct DurationSection: View {
                         .buttonStyle(.bordered)
                     }
                     VStack(alignment: .leading) {
-                        EffectTimeline(timelineModel: timelineModel)
+                        EffectTimeline(
+                            timelineModel: timelineModel,
+                            timeDisplayStyle: .regular
+                        )
                         Text(TimelineDisclaimers.heavyDose).font(.footnote)
                     }
                     listItems

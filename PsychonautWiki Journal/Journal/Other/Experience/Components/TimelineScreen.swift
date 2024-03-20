@@ -18,6 +18,7 @@ import SwiftUI
 
 struct TimelineScreen: View {
     let timelineModel: TimelineModel
+    let timeDisplayStyle: TimeDisplayStyle
     @State private var zoomLevel = 1.0
     @State private var isOrientationLandscape = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -30,8 +31,12 @@ struct TimelineScreen: View {
                 ScrollView(.horizontal, showsIndicators: true) {
                     VStack {
                         Spacer()
-                        EffectTimeline(timelineModel: timelineModel, height: isOrientationLandscape ? geo.size.height : 300)
-                            .frame(width: geo.size.width * zoomLevel)
+                        EffectTimeline(
+                            timelineModel: timelineModel,
+                            height: isOrientationLandscape ? geo.size.height : 300,
+                            timeDisplayStyle: timeDisplayStyle
+                        )
+                        .frame(width: geo.size.width * zoomLevel)
                         Spacer()
                     }
                 }
@@ -71,11 +76,13 @@ struct TimelineScreen: View {
 
 #Preview {
     NavigationStack {
-        TimelineScreen(timelineModel: TimelineModel(
-            substanceGroups: EffectTimeline_Previews.substanceGroups,
-            everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
-            everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
-            areRedosesDrawnIndividually: false
-        ))
+        TimelineScreen(
+            timelineModel: TimelineModel(
+                substanceGroups: EffectTimeline_Previews.substanceGroups,
+                everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
+                everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
+                areRedosesDrawnIndividually: false
+            ),
+            timeDisplayStyle: .regular)
     }
 }
