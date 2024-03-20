@@ -72,31 +72,41 @@ struct EffectTimeline: View {
                         var path = Path()
                         path.move(to: CGPoint(x: dragPointLocation.x, y: 0))
                         path.addLine(to: CGPoint(x: dragPointLocation.x, y: size.height))
-                        context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                        let lineWidth: CGFloat = 3
+                        context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
 
                         // draw time text
                         let dragPointXInSeconds = dragPointLocation.x/size.width * timelineModel.totalWidth
                         let dragPointXAsDate = timelineModel.startTime.addingTimeInterval(dragPointXInSeconds)
-                        let text = Text(dragPointXAsDate, format: Date.FormatStyle().hour().minute())
+                        let text = Text(dragPointXAsDate, format: Date.FormatStyle().hour().minute()).font(.headline)
                         let resolvedText = context.resolve(text)
                         let textSize = resolvedText.measure(in: size)
-                        let distanceFromFinger: CGFloat = 30
-                        var topTextY = dragPointLocation.y - textSize.height - distanceFromFinger
+                        let distanceFromFinger: CGFloat = 60
+                        let textPaddingLeft: CGFloat = 8
+                        let textPaddingTop: CGFloat = 4
+                        var topTextY = dragPointLocation.y - textSize.height - distanceFromFinger - 2*textPaddingTop
                         if topTextY < 0 {
                             topTextY = 0
                         }
-                        if topTextY > size.height - textSize.height {
-                            topTextY = size.height - textSize.height
+                        if topTextY > size.height - textSize.height - 2*textPaddingTop {
+                            topTextY = size.height - textSize.height - 2*textPaddingTop
                         }
-                        let textCenter = CGPoint(x: dragPointLocation.x, y: topTextY + (textSize.height/2))
-                        let leftTextX = dragPointLocation.x - (textSize.width/2)
+                        var leftTextX = dragPointLocation.x - (textSize.width/2) - textPaddingLeft
+                        if leftTextX < 0 {
+                            leftTextX = 0
+                        }
+                        if leftTextX + textSize.width + 2*textPaddingLeft > size.width {
+                            leftTextX = size.width - textSize.width - 2*textPaddingLeft
+                        }
+                        let textCenter = CGPoint(x: leftTextX + textSize.width/2 + textPaddingLeft, y: topTextY + (textSize.height/2) + textPaddingTop)
                         let textRect = CGRect(
                             x: leftTextX,
                             y: topTextY,
-                            width: textSize.width,
-                            height: textSize.height
+                            width: textSize.width + 2*textPaddingLeft,
+                            height: textSize.height + 2*textPaddingTop
                         )
-                        context.fill(RoundedRectangle(cornerRadius: 5, style: .circular).path (in: textRect), with: .color(.gray))
+                        let roundedRectanglePath = RoundedRectangle(cornerRadius: 5, style: .circular).path (in: textRect)
+                        context.fill(roundedRectanglePath, with: .color(Color(uiColor: .systemGray6)))
                         context.draw(resolvedText, at: textCenter)
                     }
                 }
