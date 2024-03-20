@@ -20,6 +20,14 @@ import SwiftUI
 struct ShareScreen: View {
     var body: some View {
         List {
+            Section("iOS and Android") {
+                let link = "https://psychonautwiki.org/wiki/PsychonautWiki_Journal"
+                QRCodeView(url: link)
+                ShareLink("Share link", item: URL(string: link)!)
+                Link(destination: URL(string: link)!) {
+                    Label("Open link", systemImage: "safari")
+                }
+            }
             Section("iOS App") {
                 HStack {
                     Text("After download triple tap the closed eye in settings to unlock all substances.")
@@ -44,16 +52,7 @@ struct ShareScreen: View {
                     Label("Open play store link", systemImage: "safari")
                 }
             }
-            Section("iOS and Android") {
-                let link = "https://psychonautwiki.org/wiki/PsychonautWiki_Journal"
-                QRCodeView(url: link)
-                ShareLink("Share link", item: URL(string: link)!)
-                Link(destination: URL(string: link)!) {
-                    Label("Open link", systemImage: "safari")
-                }
-            }
         }
-        .font(.headline)
         .navigationTitle("Share App")
     }
 }
