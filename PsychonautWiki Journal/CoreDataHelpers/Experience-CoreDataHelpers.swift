@@ -244,10 +244,10 @@ extension Experience: Comparable {
             from: substanceDays,
             substanceCompanions: Array(substanceCompanions)
         )
-        let toleranceWindows = getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: allWindowsInLast3Months).sorted { lhs, rhs in
+        let toleranceWindowsSorted = allWindowsInLast3Months.sorted { lhs, rhs in
             lhs.start < rhs.start // sort tolerance windows so that they are always drawn in the same order and don't switch row on redraw
         }
-        let namesOfSubstancesInChart = toleranceWindows.map { $0.substanceName }.uniqued()
+        let namesOfSubstancesInChart = toleranceWindowsSorted.map { $0.substanceName }.uniqued()
         let substancesInChart = SubstanceRepo.shared.getSubstances(names: namesOfSubstancesInChart).map { sub in
             sub.toSubstanceWithToleranceAndColor(substanceColor: substanceCompanions.first(where: { $0.substanceNameUnwrapped == sub.name })?.color ?? .red)
         }
@@ -257,22 +257,10 @@ extension Experience: Comparable {
         let namesOfSubstancesWithoutWindows = namesOfSubstancesInIngestions.subtracting(namesOfSubstancesWithWindows)
         let namesOfSubstancesWithMissingTolerance = Array(namesOfSubstancesWithoutWindows)
         return ChartData(
-            toleranceWindows: toleranceWindows,
+            toleranceWindows: toleranceWindowsSorted,
             substancesInChart: substancesInChart,
             numberOfSubstancesInToleranceChart: numberOfSubstancesInToleranceChart,
             namesOfSubstancesWithMissingTolerance: namesOfSubstancesWithMissingTolerance
         )
-    }
-
-    private func getWindowsOfSubstancesThatHaveAWindowAtTimeOfExperience(windows: [ToleranceWindow]) -> [ToleranceWindow] {
-        let firstIngestionTime = ingestionsSorted.first?.time ?? .now
-        let lastIngestionTime = ingestionsSorted.last?.time ?? .now
-        let filteredWindows = windows.filter { win in
-            win.contains(date: firstIngestionTime) || win.contains(date: lastIngestionTime)
-        }
-        let substancesInFilteredWindows = Set(filteredWindows.map { $0.substanceName })
-        return windows.filter { win in
-            substancesInFilteredWindows.contains(win.substanceName)
-        }
     }
 }

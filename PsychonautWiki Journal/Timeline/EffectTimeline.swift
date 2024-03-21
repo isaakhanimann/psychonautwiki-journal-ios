@@ -27,7 +27,7 @@ struct EffectTimeline: View {
         lineWidth / 2
     }
 
-    @State private var dragPointLocation: CGPoint?
+    @State private var fingerLocation: CGPoint?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -68,31 +68,31 @@ struct EffectTimeline: View {
                         path.addLine(to: CGPoint(x: currentTimeX, y: size.height))
                         context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                     }
-                    if let dragPointLocation {
+                    if let fingerLocation {
                         // draw vertical line
                         var path = Path()
-                        path.move(to: CGPoint(x: dragPointLocation.x, y: 0))
-                        path.addLine(to: CGPoint(x: dragPointLocation.x, y: size.height))
+                        path.move(to: CGPoint(x: fingerLocation.x, y: 0))
+                        path.addLine(to: CGPoint(x: fingerLocation.x, y: size.height))
                         let lineWidth: CGFloat = 3
                         context.stroke(path, with: .foreground, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
 
                         // draw time text
-                        let dragPointXInSeconds = dragPointLocation.x/size.width * timelineModel.totalWidth
-                        let dragPointXAsDate = timelineModel.startTime.addingTimeInterval(dragPointXInSeconds)
-                        let text = getTimeText(time: dragPointXAsDate).font(.headline)
+                        let fingerXInSeconds = fingerLocation.x/size.width * timelineModel.totalWidth
+                        let fingerXAsDate = timelineModel.startTime.addingTimeInterval(fingerXInSeconds)
+                        let text = getTimeText(time: fingerXAsDate).font(.headline)
                         let resolvedText = context.resolve(text)
                         let textSize = resolvedText.measure(in: size)
-                        let distanceFromFinger: CGFloat = 60
+                        let verticalDistanceFromFinger: CGFloat = 60
                         let textPaddingLeft: CGFloat = 8
                         let textPaddingTop: CGFloat = 4
-                        var topTextY = dragPointLocation.y - textSize.height - distanceFromFinger - 2*textPaddingTop
+                        var topTextY = fingerLocation.y - textSize.height - verticalDistanceFromFinger - 2*textPaddingTop
                         if topTextY < 0 {
                             topTextY = 0
                         }
                         if topTextY > size.height - textSize.height - 2*textPaddingTop {
                             topTextY = size.height - textSize.height - 2*textPaddingTop
                         }
-                        var leftTextX = dragPointLocation.x - (textSize.width/2) - textPaddingLeft
+                        var leftTextX = fingerLocation.x - (textSize.width/2) - textPaddingLeft
                         if leftTextX < 0 {
                             leftTextX = 0
                         }
@@ -114,10 +114,10 @@ struct EffectTimeline: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({ drag in
-                            dragPointLocation = drag.location
+                            fingerLocation = drag.location
                         })
                         .onEnded({ _ in
-                            dragPointLocation = nil
+                            fingerLocation = nil
                         })
                 )
             }
