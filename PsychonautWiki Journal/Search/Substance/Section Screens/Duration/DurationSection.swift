@@ -40,8 +40,6 @@ struct DurationSection: View {
         switch saveableTimeDisplayStyle.wrappedValue {
         case .regular:
             return .regular
-        case .relativeToStart:
-            return .relativeToStart
         case .relativeToNow:
             return .relativeToNow
         default:
@@ -66,11 +64,11 @@ struct DurationSection: View {
                             .buttonStyle(.bordered)
                         }
                         Picker("Time Style", selection: saveableTimeDisplayStyle) {
-                            ForEach([SaveableTimeDisplayStyle.regular, SaveableTimeDisplayStyle.relativeToStart, SaveableTimeDisplayStyle.relativeToNow]) { option in
-                                Text(option.shortText).tag(option)
+                            ForEach([SaveableTimeDisplayStyle.regular, SaveableTimeDisplayStyle.relativeToNow]) { option in
+                                Text(option.text).tag(option)
                             }
                         }
-                        .pickerStyle(.menu)
+                        .pickerStyle(.segmented)
                         EffectTimeline(
                             timelineModel: timelineModel,
                             timeDisplayStyle: timeDisplayStyle
