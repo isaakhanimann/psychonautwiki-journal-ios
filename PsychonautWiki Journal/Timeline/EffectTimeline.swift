@@ -129,17 +129,14 @@ struct EffectTimeline: View {
     func getTimeText(time: Date) -> Text {
         if timeDisplayStyle == .relativeToNow {
             if time > .now {
-                let dateComponents = DateDifference.between(.now, and: time)
-                let durationText = Text(DateDifference.formatted(dateComponents))
+                let durationText = Text(DateDifference.maxTwoUnitsBetween(.now, and: time))
                 return Text("in ") + durationText
             } else {
-                let dateComponents = DateDifference.between(time, and: .now)
-                let durationText = Text(DateDifference.formatted(dateComponents))
+                let durationText = Text(DateDifference.maxTwoUnitsBetween(time, and: .now))
                 return durationText + Text(" ago")
             }
         } else if timeDisplayStyle == .relativeToStart {
-            let dateComponents = DateDifference.between(timelineModel.startTime, and: time)
-            return Text("+ ") + Text(DateDifference.formatted(dateComponents))
+            return Text("+ ") + Text(DateDifference.maxTwoUnitsBetween(timelineModel.startTime, and: time))
         } else {
             return Text(time, format: Date.FormatStyle().hour().minute())
         }

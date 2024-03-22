@@ -98,7 +98,7 @@ struct RatingRow: View {
                 if timeDisplayStyle == .relativeToNow {
                     Text(ratingTime, style: .relative) + Text(" ago")
                 } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                    Text("+ ") + Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: ratingTime)))
+                    Text("+ ") + Text(DateDifference.maxTwoUnitsBetween(firstIngestionTime, and: ratingTime))
                 } else {
                     Text(ratingTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                 }

@@ -76,7 +76,7 @@ private struct IngestionRowContent: View {
                             if isFirstIngestion {
                                 Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
                             } else {
-                                Text("+ ") + Text(DateDifference.formatted(dateComponents))
+                                Text("+ ") + Text(DateDifference.formattedWithMax2Units(dateComponents))
                             }
                         } else {
                             Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))

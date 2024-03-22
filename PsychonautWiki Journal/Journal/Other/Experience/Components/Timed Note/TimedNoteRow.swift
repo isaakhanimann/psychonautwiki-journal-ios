@@ -63,7 +63,7 @@ private struct TimedNoteRowContent: View {
         if timeDisplayStyle == .relativeToNow {
             return Text(time, style: .relative) + Text(" ago")
         } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-            return Text(DateDifference.formatted(DateDifference.between(firstIngestionTime, and: time)))
+            return Text(DateDifference.maxTwoUnitsBetween(firstIngestionTime, and: time))
         } else {
             return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
         }

@@ -24,6 +24,8 @@ struct ToleranceChartScreenContent: View {
     let onAddTap: () -> Void
     let substances: [SubstanceWithToleranceAndColor]
 
+    @State private var isTimeRelative = false
+
     var body: some View {
         List {
             Section {
@@ -32,11 +34,13 @@ struct ToleranceChartScreenContent: View {
                     selection: $sinceDate,
                     displayedComponents: [.date]
                 )
+                Toggle("Relative time", isOn: $isTimeRelative).tint(.accentColor)
                 ToleranceChart(
                     toleranceWindows: toleranceWindows,
                     numberOfRows: numberOfSubstancesInChart,
                     timeOption: .alwaysShow,
-                    experienceStartDate: nil
+                    experienceStartDate: nil,
+                    isTimeRelative: isTimeRelative
                 )
             } footer: {
                 if !substancesInIngestionsButNotChart.isEmpty {

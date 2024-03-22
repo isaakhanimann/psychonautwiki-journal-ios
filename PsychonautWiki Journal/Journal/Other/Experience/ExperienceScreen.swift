@@ -259,7 +259,8 @@ struct ExperienceScreen: View {
                             toleranceWindows: experience.chartData.toleranceWindows,
                             numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
                             timeOption: .onlyIfCurrentTimeInChart,
-                            experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
+                            experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime(),
+                            isTimeRelative: timeDisplayStyle == .relativeToNow
                         )
                     } header: {
                         HStack {

@@ -22,6 +22,8 @@ struct ToleranceChart: View {
     let numberOfRows: Int
     let timeOption: ToleranceTimeOption
     let experienceStartDate: Date?
+    let isTimeRelative: Bool
+
     @Environment(\.colorScheme) var colorScheme
 
     private var chartHeight: CGFloat {
@@ -89,18 +91,30 @@ struct ToleranceChart: View {
                             let dateY = minDateY > lineHeight ? lineHeight : minDateY
                             HStack {
                                 Spacer()
-                                Text(dateAtFinger, style: .date)
-                                    .font(.headline)
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 5)
-                                    .background {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.background)
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.quaternary.opacity(0.7))
+                                Group {
+                                    if isTimeRelative {
+                                        if dateAtFinger > .now {
+                                            let durationText = Text(DateDifference.formattedWithAtLeastDaysBetween(.now, and: dateAtFinger))
+                                            Text("in ") + durationText
+                                        } else {
+                                            let durationText = Text(DateDifference.formattedWithAtLeastDaysBetween(dateAtFinger, and: .now))
+                                            durationText + Text(" ago")
                                         }
+                                    } else {
+                                        Text(dateAtFinger, style: .date)
                                     }
+                                }
+                                .font(.headline)
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
+                                .background {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(.background)
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(.quaternary.opacity(0.7))
+                                    }
+                                }
                                 Spacer()
                             }
                             .offset(y: dateY)
@@ -145,14 +159,16 @@ struct ToleranceChart: View {
             toleranceWindows: ToleranceChartPreviewDataProvider.mock1,
             numberOfRows: 2,
             timeOption: .alwaysShow,
-            experienceStartDate: nil
+            experienceStartDate: nil,
+            isTimeRelative: true
         )
         .padding(.horizontal)
         ToleranceChart(
             toleranceWindows: [],
             numberOfRows: 0,
             timeOption: .alwaysShow,
-            experienceStartDate: nil
+            experienceStartDate: nil,
+            isTimeRelative: false
         )
         .padding(.horizontal)
     }
