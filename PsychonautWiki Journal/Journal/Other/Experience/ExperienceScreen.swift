@@ -255,16 +255,20 @@ struct ExperienceScreen: View {
                 }
                 if !experience.chartData.toleranceWindows.isEmpty && !isHidingToleranceChartInExperience && isEyeOpen {
                     Section {
-                        NavigationLink(value: GlobalNavigationDestination.toleranceTexts(substances: experience.chartData.substancesInChart)) {
-                            ToleranceChart(
-                                toleranceWindows: experience.chartData.toleranceWindows,
-                                numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
-                                timeOption: .onlyIfCurrentTimeInChart,
-                                experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
-                            )
-                        }
+                        ToleranceChart(
+                            toleranceWindows: experience.chartData.toleranceWindows,
+                            numberOfRows: experience.chartData.numberOfSubstancesInToleranceChart,
+                            timeOption: .onlyIfCurrentTimeInChart,
+                            experienceStartDate: experience.sortDateUnwrapped.getDateWithoutTime()
+                        )
                     } header: {
-                        Text("Tolerance")
+                        HStack {
+                            Text("Tolerance")
+                            Spacer()
+                            NavigationLink(value: GlobalNavigationDestination.toleranceTexts(substances: experience.chartData.substancesInChart)) {
+                                Label("Tolerance info", systemImage: "doc.plaintext").labelStyle(.iconOnly)
+                            }
+                        }
                     } footer: {
                         if !experience.chartData.namesOfSubstancesWithMissingTolerance.isEmpty {
                             Text("Excluding ") + Text(experience.chartData.namesOfSubstancesWithMissingTolerance, format: .list(type: .and))
