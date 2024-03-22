@@ -84,7 +84,7 @@ struct ToleranceChart: View {
                                 .fill(.foreground)
                                 .frame(width: 2, height: lineHeight)
                                 .position(x: fingerPosition.x, y: lineHeight / 2)
-                            let potentialDateY = fingerPosition.y - 60
+                            let potentialDateY = fingerPosition.y - 120
                             let minDateY = potentialDateY > 0 ? potentialDateY : 0
                             let dateY = minDateY > lineHeight ? lineHeight : minDateY
                             HStack {
