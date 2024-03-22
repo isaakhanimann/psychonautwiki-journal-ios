@@ -15,6 +15,7 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import AlertToast
 
 @main
 struct JournalApp: App {
@@ -32,6 +33,12 @@ struct JournalApp: App {
                     .environmentObject(authenticator)
                     .environmentObject(locationManager)
                     .accentColor(Color.blue)
+                    .toast(isPresenting: $toastViewModel.isShowingToast, duration: 1) {
+                        AlertToast(
+                            displayMode: .alert,
+                            type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
+                            title: toastViewModel.toastMessage)
+                    }
                 if authenticator.isStartingUp {
                     LockScreen(isEyeOpen: true, isFaceIDEnabled: true)
                 } else if authenticator.isLocked {
