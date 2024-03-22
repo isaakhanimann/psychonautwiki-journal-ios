@@ -109,28 +109,12 @@ struct ContentScreen: View {
             }
             selectedTab = newValue
         }
-        TabView(selection: binding) {
-            NavigationStack(path: $statsTabPath) {
-                StatsScreen()
-                    .navigationDestination(for: GlobalNavigationDestination.self) { destination in
-                        getScreen(from: destination)
-                    }
-            }
-            .tabItem {
-                Label("Stats", systemImage: "chart.bar")
-            }
-            .tag(Tab.stats)
-            NavigationStack(path: $journalTabPath) {
-                JournalScreen()
-                    .navigationDestination(for: GlobalNavigationDestination.self) { destination in
-                        getScreen(from: destination)
-                    }
-            }
-            .tabItem {
-                Label("Journal", systemImage: "square.stack")
-            }
-            .tag(Tab.journal)
-            if isEyeOpen {
+        if isEyeOpen {
+            TabView(selection: binding) {
+                statsTab
+
+                journalTab
+
                 NavigationStack(path: $substancesTabPath) {
                     SearchScreen(
                         isSearchFocused: _isSearchFocused,
@@ -145,6 +129,7 @@ struct ContentScreen: View {
                     Label("Substances", systemImage: "pills")
                 }
                 .tag(Tab.substances)
+
                 NavigationStack(path: $saferTabPath) {
                     SaferScreen()
                         .navigationDestination(for: GlobalNavigationDestination.self) { destination in
@@ -155,27 +140,64 @@ struct ContentScreen: View {
                     Label("Safer", systemImage: "cross.case")
                 }
                 .tag(Tab.safer)
+
+                settingsTab
             }
-            NavigationStack(path: $settingsTabPath) {
-                SettingsScreen()
-                    .navigationDestination(for: GlobalNavigationDestination.self) { destination in
-                        getScreen(from: destination)
+            .onOpenURL { url in
+                if url.absoluteString == openLatestExperience {
+                    selectedTab = .journal
+                    if let latestExperience = PersistenceController.shared.getLatestActiveExperience() {
+                        journalTabPath.removeLast(journalTabPath.count)
+                        journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
                     }
-            }
-            .tabItem {
-                Label("Settings", systemImage: "gearshape")
-            }
-            .tag(Tab.settings)
-        }
-        .onOpenURL { url in
-            if url.absoluteString == openLatestExperience {
-                selectedTab = .journal
-                if let latestExperience = PersistenceController.shared.getLatestActiveExperience() {
-                    journalTabPath.removeLast(journalTabPath.count)
-                    journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
                 }
             }
+        } else {
+            TabView(selection: binding) {
+                statsTab
+                journalTab
+                settingsTab
+            }
         }
+    }
+
+    var statsTab: some View {
+        NavigationStack(path: $statsTabPath) {
+            StatsScreen()
+                .navigationDestination(for: GlobalNavigationDestination.self) { destination in
+                    getScreen(from: destination)
+                }
+        }
+        .tabItem {
+            Label("Stats", systemImage: "chart.bar")
+        }
+        .tag(Tab.stats)
+    }
+
+    var journalTab: some View {
+        NavigationStack(path: $journalTabPath) {
+            JournalScreen()
+                .navigationDestination(for: GlobalNavigationDestination.self) { destination in
+                    getScreen(from: destination)
+                }
+        }
+        .tabItem {
+            Label("Journal", systemImage: "square.stack")
+        }
+        .tag(Tab.journal)
+    }
+
+    var settingsTab: some View {
+        NavigationStack(path: $settingsTabPath) {
+            SettingsScreen()
+                .navigationDestination(for: GlobalNavigationDestination.self) { destination in
+                    getScreen(from: destination)
+                }
+        }
+        .tabItem {
+            Label("Settings", systemImage: "gearshape")
+        }
+        .tag(Tab.settings)
     }
 
 
