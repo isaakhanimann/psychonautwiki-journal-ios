@@ -299,12 +299,14 @@ struct StatsScreenContent: View {
                     SubstanceOverview(substanceData: substanceData)
                 }
             }
-            Section("Dosage Stats") {
-                ForEach(substancesConsumedInLastYear) { substanceCompanion in
-                    NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "circle.fill").foregroundColor(substanceCompanion.color.swiftUIColor)
-                            Text(substanceCompanion.substanceNameUnwrapped).font(.headline)
+            if !substancesConsumedInLastYear.isEmpty {
+                Section("Dosage Stats") {
+                    ForEach(substancesConsumedInLastYear) { substanceCompanion in
+                        NavigationLink(value: GlobalNavigationDestination.dosageStat(substanceName: substanceCompanion.substanceNameUnwrapped)) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "circle.fill").foregroundColor(substanceCompanion.color.swiftUIColor)
+                                Text(substanceCompanion.substanceNameUnwrapped).font(.headline)
+                            }
                         }
                     }
                 }
