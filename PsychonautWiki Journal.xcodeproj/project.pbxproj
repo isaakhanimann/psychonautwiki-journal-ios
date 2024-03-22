@@ -440,6 +440,7 @@
 		EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOtherRouteScreenArguments.swift; sourceTree = "<group>"; };
 		EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishCustomUnitsScreen.swift; sourceTree = "<group>"; };
 		EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitCodable.swift; sourceTree = "<group>"; };
+		EA35ABCC2BADA220004352F2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -1461,6 +1462,7 @@
 				EAC23793276750C500109622 /* Global Functions.swift */,
 				EA4189ED2962E67600DEA663 /* Constants.swift */,
 				EAE4712726CBA663009FB0EC /* Assets.xcassets */,
+				EA35ABCC2BADA220004352F2 /* PrivacyInfo.xcprivacy */,
 				EAF5D366270B3A6E00E78909 /* PsychonautWiki Journal.entitlements */,
 				EAE4715926CBA664009FB0EC /* Info.plist */,
 			);
