@@ -106,13 +106,11 @@ struct ToleranceChart: View {
                                 }
                                 .font(.headline)
                                 .padding(.horizontal)
-                                .padding(.vertical, 5)
+                                .padding(.vertical, 4)
                                 .background {
                                     ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.background)
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.quaternary.opacity(0.7))
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .fill(Color(uiColor: .systemGray6))
                                     }
                                 }
                                 Spacer()

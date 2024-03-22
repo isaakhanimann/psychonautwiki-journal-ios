@@ -106,7 +106,7 @@ struct EffectTimeline: View {
                             width: textSize.width + 2*textPaddingLeft,
                             height: textSize.height + 2*textPaddingTop
                         )
-                        let roundedRectanglePath = RoundedRectangle(cornerRadius: 5, style: .circular).path (in: textRect)
+                        let roundedRectanglePath = RoundedRectangle(cornerRadius: 6, style: .circular).path (in: textRect)
                         context.fill(roundedRectanglePath, with: .color(Color(uiColor: .systemGray6)))
                         context.draw(resolvedText, at: textCenter)
                     }
