@@ -85,6 +85,7 @@
 		EA302E562B385D22007F113F /* ChooseOtherRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */; };
 		EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */; };
 		EA323B342B6E187600DC1316 /* CustomUnitCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */; };
+		EA3E74612BADA9D500162354 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EA35ABCC2BADA220004352F2 /* PrivacyInfo.xcprivacy */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
@@ -1754,6 +1755,7 @@
 				EAE4809929743ACE00B600EF /* LaunchScreenEye.png in Resources */,
 				EAE48097297433D100B600EF /* LaunchScreen.storyboard in Resources */,
 				EAE4722E26CBAE5B009FB0EC /* Assets.xcassets in Resources */,
+				EA3E74612BADA9D500162354 /* PrivacyInfo.xcprivacy in Resources */,
 				EAE4723526CC42F7009FB0EC /* substances.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
