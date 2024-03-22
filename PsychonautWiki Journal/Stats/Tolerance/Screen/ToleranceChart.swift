@@ -81,25 +81,29 @@ struct ToleranceChart: View {
                         if let dateAtFinger = proxy.value(atX: relativeXPosition) as Date? {
                             let lineHeight = geometryProxy[proxy.plotAreaFrame].maxY
                             Rectangle()
-                                .fill(.quaternary)
+                                .fill(.foreground)
                                 .frame(width: 2, height: lineHeight)
                                 .position(x: fingerPosition.x, y: lineHeight / 2)
                             let potentialDateY = fingerPosition.y - 60
                             let minDateY = potentialDateY > 0 ? potentialDateY : 0
                             let dateY = minDateY > lineHeight ? lineHeight : minDateY
-                            Text(dateAtFinger, style: .date)
-                                .font(.body.bold())
-                                .padding(.horizontal)
-                                .padding(.vertical, 5)
-                                .background {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.background)
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.quaternary.opacity(0.7))
+                            HStack {
+                                Spacer()
+                                Text(dateAtFinger, style: .date)
+                                    .font(.headline)
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 5)
+                                    .background {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.background)
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.quaternary.opacity(0.7))
+                                        }
                                     }
-                                }
-                                .offset(y: dateY)
+                                Spacer()
+                            }
+                            .offset(y: dateY)
                         }
                     }
                     Rectangle().fill(.clear).contentShape(Rectangle())
