@@ -25,7 +25,6 @@ struct SettingsScreen: View {
     @AppStorage(Authenticator.hasToUnlockKey) var hasToUnlockApp: Bool = false
     @AppStorage(Authenticator.lockTimeOptionKey) var lockTimeOptionString: String = LockTimeOption.after5Minutes.rawValue
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
-    @AppStorage(PersistenceController.isDateInTimePickerKey) var isDateInTimePicker: Bool = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
@@ -51,7 +50,6 @@ struct SettingsScreen: View {
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
             areRedosesDrawnIndividually: $areRedosesDrawnIndividually,
-            isDateInTimePicker: $isDateInTimePicker,
             shouldAutomaticallyStartLiveActivity: $shouldAutomaticallyStartLiveActivity,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
@@ -80,7 +78,6 @@ struct SettingsContent: View {
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
     @Binding var areRedosesDrawnIndividually: Bool
-    @Binding var isDateInTimePicker: Bool
     @Binding var shouldAutomaticallyStartLiveActivity: Bool
     let isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
@@ -130,7 +127,6 @@ struct SettingsContent: View {
                         Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
                         Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
                         Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
-                        Toggle("Include date in time picker", isOn: $isDateInTimePicker)
                         if #available(iOS 16.2, *) {
                             if ActivityManager.shared.authorizationInfo.areActivitiesEnabled {
                                 Toggle("Automatic live activities", isOn: $shouldAutomaticallyStartLiveActivity)
@@ -286,7 +282,6 @@ struct SettingsContent: View {
         isHidingToleranceChartInExperience: .constant(false),
         isHidingSubstanceInfoInExperience: .constant(false),
         areRedosesDrawnIndividually: .constant(false),
-        isDateInTimePicker: .constant(false),
         shouldAutomaticallyStartLiveActivity: .constant(false),
         isFaceIDAvailable: true,
         hasToUnlockApp: .constant(false),
