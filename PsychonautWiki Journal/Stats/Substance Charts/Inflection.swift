@@ -19,7 +19,7 @@ import Foundation
 extension Int {
     // e.g. for 2.with(unit: "experience") it returns "2 experiences"
     func with(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
+        if self != 1 && !unit.hasSuffix("s") {
             "\(self) \(unit)s"
         } else {
             "\(self) \(unit)"
@@ -29,7 +29,7 @@ extension Int {
 
 extension Double {
     func with(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
+        if self != 1 && !unit.hasSuffix("s") {
             "\(self.asRoundedReadableString) \(unit)s"
         } else {
             "\(self.asRoundedReadableString) \(unit)"
@@ -37,7 +37,7 @@ extension Double {
     }
 
     func justUnit(unit: String) -> String {
-        if self > 1 && !unit.hasSuffix("s") {
+        if self != 1 && !unit.hasSuffix("s") {
             unit + "s"
         } else {
             unit
