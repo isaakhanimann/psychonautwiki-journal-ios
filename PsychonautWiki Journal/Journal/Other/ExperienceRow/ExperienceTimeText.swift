@@ -23,7 +23,11 @@ struct ExperienceTimeText: View {
 
     var body: some View {
         if isCurrent {
-            return Text("Active since ") + Text(time, style: .relative)
+            if time < .now {
+                return Text("Active since ") + Text(time, style: .relative)
+            } else {
+                return Text(time, style: .relative)
+            }
         } else {
             if isTimeRelative {
                 return Text(time, format: .relative(presentation: .numeric, unitsStyle: .wide))
