@@ -18,16 +18,13 @@ import SwiftUI
 
 struct TimelineSection: View {
     let timelineModel: TimelineModel
+    let editIngestion: (Ingestion) -> Void
     let ingestionsSorted: [Ingestion]
     let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
     let hiddenIngestions: [ObjectIdentifier]
-    let showIngestion: (ObjectIdentifier) -> Void
-    let hideIngestion: (ObjectIdentifier) -> Void
-    let updateActivityIfActive: () -> Void
 
-    @State private var ingestionToEdit: Ingestion?
 
     var body: some View {
         Group {
@@ -40,7 +37,7 @@ struct TimelineSection: View {
             }
             ForEach(ingestionsSorted) { ing in
                 Button {
-                    ingestionToEdit = ing
+                    editIngestion(ing)
                 } label: {
                     HStack(alignment: .center) {
                         IngestionRow(
@@ -57,22 +54,6 @@ struct TimelineSection: View {
                     }
                 }
             }
-        }.sheet(item: $ingestionToEdit, onDismiss: {
-            updateActivityIfActive()
-        }) { ingestion in
-            let isHidden = Binding(
-                get: { hiddenIngestions.contains(ingestion.id) },
-                set: { newIsHidden in
-                    if newIsHidden {
-                        hideIngestion(ingestion.id)
-                    } else {
-                        showIngestion(ingestion.id)
-                    }
-                }
-            )
-            EditIngestionScreen(
-                ingestion: ingestion,
-                isHidden: isHidden)
         }
     }
 }

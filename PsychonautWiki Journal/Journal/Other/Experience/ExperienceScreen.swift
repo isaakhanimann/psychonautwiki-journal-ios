@@ -68,7 +68,8 @@ struct ExperienceScreen: View {
         case addLocation
         case addRating
         case addTimedNote
-        case edit(timedNote: TimedNote)
+        case editTimedNote(timedNote: TimedNote)
+        case editIngestion(ingestion: Ingestion)
 
         var id: Self {
             return self
@@ -159,15 +160,14 @@ struct ExperienceScreen: View {
                     Section {
                         TimelineSection(
                             timelineModel: timelineModel,
+                            editIngestion: { ingestionToEdit in
+                                sheetToShow = .editIngestion(ingestion: ingestionToEdit)
+                            },
                             ingestionsSorted: experience.myIngestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            hiddenIngestions: hiddenIngestions,
-                            showIngestion: { showIngestion(id: $0) },
-                            hideIngestion: { hideIngestion(id: $0) },
-                            updateActivityIfActive: updateActivityIfActive
-                        )
+                            hiddenIngestions: hiddenIngestions)
                         if #available(iOS 16.2, *) {
                             if experience.isCurrent && timelineModel.isWorthDrawing {
                                 LiveActivityButton(
@@ -232,7 +232,7 @@ struct ExperienceScreen: View {
                     Section("Timed Notes") {
                         ForEach(timedNotesSorted) { timedNote in
                             Button(action: {
-                                sheetToShow = .edit(timedNote: timedNote)
+                                sheetToShow = .editTimedNote(timedNote: timedNote)
                             }, label: {
                                 TimedNoteRow(
                                     timedNote: timedNote,
@@ -281,15 +281,14 @@ struct ExperienceScreen: View {
                     Section {
                         TimelineSection(
                             timelineModel: consumerTimelineModel,
+                            editIngestion: { ingestionToEdit in
+                                sheetToShow = .editIngestion(ingestion: ingestionToEdit)
+                            },
                             ingestionsSorted: consumer.ingestionsSorted,
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            hiddenIngestions: hiddenIngestions,
-                            showIngestion: { showIngestion(id: $0) },
-                            hideIngestion: { hideIngestion(id: $0) },
-                            updateActivityIfActive: {}
-                        )
+                            hiddenIngestions: hiddenIngestions)
                     } header: {
                         HStack {
                             Text(consumer.consumerName)
@@ -347,24 +346,43 @@ struct ExperienceScreen: View {
                     }
                 }
             }
-            .sheet(item: $sheetToShow, content: { sheet in
-                switch sheet {
-                case .addLocation:
-                    AddLocationScreen(locationManager: locationManager, experience: experience)
-                case let .editLocation(experienceLocation):
-                    EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
-                case .editNotes:
-                    EditNotesScreen(experience: experience)
-                case .editTitle:
-                    EditTitleScreen(experience: experience)
-                case .addRating:
-                    AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
-                case .addTimedNote:
-                    AddTimedNoteScreen(experience: experience)
-                case let .edit(timedNote):
-                    EditTimedNoteScreen(timedNote: timedNote, experience: experience)
-                }
-            })
+            .sheet(
+                item: $sheetToShow,
+                onDismiss: {
+                    updateActivityIfActive()
+                },
+                content: { sheet in
+                    switch sheet {
+                    case .addLocation:
+                        AddLocationScreen(locationManager: locationManager, experience: experience)
+                    case let .editLocation(experienceLocation):
+                        EditLocationScreen(experienceLocation: experienceLocation, locationManager: locationManager)
+                    case .editNotes:
+                        EditNotesScreen(experience: experience)
+                    case .editTitle:
+                        EditTitleScreen(experience: experience)
+                    case .addRating:
+                        AddRatingScreen(experience: experience, canDefineOverall: experience.overallRating == nil)
+                    case .addTimedNote:
+                        AddTimedNoteScreen(experience: experience)
+                    case let .editTimedNote(timedNote):
+                        EditTimedNoteScreen(timedNote: timedNote, experience: experience)
+                    case let .editIngestion(ingestion):
+                        let isHidden = Binding(
+                            get: { hiddenIngestions.contains(ingestion.id) },
+                            set: { newIsHidden in
+                                if newIsHidden {
+                                    hideIngestion(id: ingestion.id)
+                                } else {
+                                    showIngestion(id: ingestion.id)
+                                }
+                            }
+                        )
+                        EditIngestionScreen(
+                            ingestion: ingestion,
+                            isHidden: isHidden)
+                    }
+                })
         }
         .navigationTitle(experience.titleUnwrapped)
         .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
