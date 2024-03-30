@@ -215,6 +215,7 @@ struct FinishIngestionScreen: View {
         }
         .onAppear {
             wantsToStartLiveActivity = shouldAutomaticallyStartLiveActivity
+            generator.prepare()
         }
         .navigationBarTitle("Finish Ingestion")
         .sheet(item: $sheetToShow, content: { sheet in
@@ -402,13 +403,13 @@ struct FinishIngestionScreen: View {
             andPredicateWithSubpredicates: [laterThanStart, earlierThanEnd])
     }
 
+    private let generator = UINotificationFeedbackGenerator()
+
     func generateSuccessHaptic() {
-        let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
 
     func generateFailedHaptic() {
-        let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
     }
 }
