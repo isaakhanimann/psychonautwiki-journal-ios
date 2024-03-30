@@ -82,13 +82,27 @@ struct JournalScreen: View {
                 Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
             }
         } screen: {
-            screen
+            ExperiencesList(
+                experiences: experiences,
+                isFavoriteFilterEnabled: isFavoriteFilterEnabled,
+                isTimeRelative: isTimeRelative
+            )
+            .scrollDismissesKeyboard(.interactively)
+            .searchable(text: query, prompt: "Search by title or substance")
+            .disableAutocorrection(true)
         }
         .fullScreenCover(isPresented: $isShowingAddIngestionSheet, onDismiss: {
             maybeRequestAppRating()
         }) {
             ChooseSubstanceScreen()
         }
+        .onAppear(perform: {
+            DispatchQueue.main.async {
+                // without the DispatchQueue.main.async the filtering doesn't get applied
+                // so when switching tabs and coming back the experiences would be unfiltered, even if favorite was selected and a search text entered
+                setPredicate()
+            }
+        })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 favoriteButton
@@ -139,17 +153,6 @@ struct JournalScreen: View {
         .onChange(of: isFavoriteFilterEnabled) { _ in
             setPredicate()
         }
-    }
-
-    private var screen: some View {
-        ExperiencesList(
-            experiences: experiences,
-            isFavoriteFilterEnabled: isFavoriteFilterEnabled,
-            isTimeRelative: isTimeRelative
-        )
-        .scrollDismissesKeyboard(.interactively)
-        .searchable(text: query, prompt: "Search by title or substance")
-        .disableAutocorrection(true)
     }
 
     private func maybeRequestAppRating() {
