@@ -94,13 +94,24 @@ struct FinishIngestionScreen: View {
 
     var screen: some View {
         Form {
-            Section {
-                DatePicker(
-                    "Ingestion Time",
-                    selection: $selectedTime,
-                    displayedComponents: [.date, .hourAndMinute]
-                ).datePickerStyle(.compact)
+            Section("Ingestion") {
+                HStack(alignment: .center) {
+                    DatePicker(
+                        "Ingestion Time",
+                        selection: $selectedTime,
+                        displayedComponents: [.date, .hourAndMinute]
+                    )
+                    .datePickerStyle(.compact)
                     .labelsHidden()
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            selectedTime = Date.now
+                        }
+                    } label: {
+                        Label("Reset time", systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
+                    }
+                }
                 if experiencesWithinLargerRange.count > 0 {
                     NavigationLink {
                         ExperiencePickerScreen(
@@ -138,17 +149,8 @@ struct FinishIngestionScreen: View {
                         Label(enteredNote, systemImage: "pencil").lineLimit(1)
                     }
                 }
-            } header: {
-                HStack {
-                    Text("Ingestion")
-                    Spacer()
-                    Button("Reset time") {
-                        withAnimation {
-                            selectedTime = Date.now
-                        }
-                    }
-                }
-            }.listRowSeparator(.hidden)
+            }
+            .listRowSeparator(.hidden)
             .onChange(of: selectedTime) { _ in
                 selectExperienceBasedOnCurrentTime()
             }
