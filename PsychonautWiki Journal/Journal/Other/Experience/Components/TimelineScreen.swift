@@ -22,11 +22,9 @@ struct TimelineScreen: View {
     @State private var zoomLevel = 1.0
     @State private var isOrientationLandscape = false
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-    @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
 
     var body: some View {
         VStack {
-            Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually).tint(.accentColor)
             GeometryReader { geo in
                 ScrollView(.horizontal, showsIndicators: true) {
                     VStack {
