@@ -85,6 +85,7 @@
 		EA302E562B385D22007F113F /* ChooseOtherRouteScreenArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E552B385D22007F113F /* ChooseOtherRouteScreenArguments.swift */; };
 		EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */; };
 		EA323B342B6E187600DC1316 /* CustomUnitCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */; };
+		EA39B2072BB98211000B1C4E /* OpenLastExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA39B2062BB98211000B1C4E /* OpenLastExperience.swift */; };
 		EA3E74612BADA9D500162354 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EA35ABCC2BADA220004352F2 /* PrivacyInfo.xcprivacy */; };
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
@@ -442,6 +443,7 @@
 		EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishCustomUnitsScreen.swift; sourceTree = "<group>"; };
 		EA323B332B6E187600DC1316 /* CustomUnitCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitCodable.swift; sourceTree = "<group>"; };
 		EA35ABCC2BADA220004352F2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		EA39B2062BB98211000B1C4E /* OpenLastExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLastExperience.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
 		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
@@ -869,6 +871,14 @@
 				EA302E532B385AB4007F113F /* CustomChooseRouteScreenArguments.swift */,
 			);
 			path = custom;
+			sourceTree = "<group>";
+		};
+		EA39B2052BB981E0000B1C4E /* App Intents */ = {
+			isa = PBXGroup;
+			children = (
+				EA39B2062BB98211000B1C4E /* OpenLastExperience.swift */,
+			);
+			path = "App Intents";
 			sourceTree = "<group>";
 		};
 		EA4189FE296738BC00DEA663 /* MDMA Dose */ = {
@@ -1445,6 +1455,7 @@
 		EAE4710526CBA57F009FB0EC /* PsychonautWiki Journal */ = {
 			isa = PBXGroup;
 			children = (
+				EA39B2052BB981E0000B1C4E /* App Intents */,
 				EAF76CA727D90CE500945587 /* Enums */,
 				EAE4715B26CBA664009FB0EC /* Extensions */,
 				EAE4716E26CBA664009FB0EC /* Decoding */,
@@ -1854,6 +1865,7 @@
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
+				EA39B2072BB98211000B1C4E /* OpenLastExperience.swift in Sources */,
 				EA03ABC62B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift in Sources */,
 				EACF439B2BA24026008D1897 /* DosageStatScreen.swift in Sources */,
 				EA085DE429616E45001638AC /* TimelineWidgetAttributes.swift in Sources */,

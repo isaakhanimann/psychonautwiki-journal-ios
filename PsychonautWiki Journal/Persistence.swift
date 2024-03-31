@@ -181,6 +181,14 @@ struct PersistenceController {
         }
     }
 
+    func getLatestExperience() -> Experience? {
+        let fetchRequest = Experience.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
+        fetchRequest.fetchLimit = 1
+        let experiences = (try? viewContext.fetch(fetchRequest)) ?? []
+        return experiences.first
+    }
+
     func getSubstanceCompanions() -> [SubstanceCompanion] {
         let fetchRequest = SubstanceCompanion.fetchRequest()
         return (try? viewContext.fetch(fetchRequest)) ?? []

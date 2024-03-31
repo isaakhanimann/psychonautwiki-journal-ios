@@ -48,79 +48,111 @@ struct ContentView: View {
     }
 }
 
-struct ContentScreen: View {
-    let isEyeOpen: Bool
+enum Tab {
+    case stats
+    case journal
+    case substances
+    case safer
+    case settings
+}
 
-    @State private var statsTabPath = NavigationPath()
-    @State private var journalTabPath = NavigationPath()
-    @State private var substancesTabPath = NavigationPath()
-    @State private var saferTabPath = NavigationPath()
-    @State private var settingsTabPath = NavigationPath()
+class Navigator: ObservableObject {
 
-    enum Tab {
-        case stats
-        case journal
-        case substances
-        case safer
-        case settings
-    }
+    static let shared = Navigator()
 
-    @State private var selectedTab: Tab = .journal
+    @Published var statsTabPath = NavigationPath()
+    @Published var journalTabPath = NavigationPath()
+    @Published var substancesTabPath = NavigationPath()
+    @Published var saferTabPath = NavigationPath()
+    @Published var settingsTabPath = NavigationPath()
 
-    @FocusState private var isSearchFocused: Bool
-    @State private var searchText = ""
-    @State private var selectedCategories: [String] = []
+
+
+    @Published var selectedTab: Tab = .journal
+
+    @Published var isSearchFocused: Bool = false
+    @Published var searchText = ""
+    @Published var selectedCategories: [String] = []
 
     func clearCategories() {
         selectedCategories.removeAll()
     }
 
-    var body: some View {
-        let binding = Binding {
-            selectedTab
+    var binding: Binding<Tab> {
+        Binding {
+            self.selectedTab
         } set: { newValue in
-            if selectedTab == newValue {
+            if self.selectedTab == newValue {
                 switch newValue {
                 case .stats:
-                    if !statsTabPath.isEmpty {
-                        statsTabPath.removeLast()
+                    if !self.statsTabPath.isEmpty {
+                        self.statsTabPath.removeLast()
                     }
                 case .journal:
-                    if !journalTabPath.isEmpty {
-                        journalTabPath.removeLast()
+                    if !self.journalTabPath.isEmpty {
+                        self.journalTabPath.removeLast()
                     }
                 case .substances:
-                    if !substancesTabPath.isEmpty {
-                        substancesTabPath.removeLast()
+                    if !self.substancesTabPath.isEmpty {
+                        self.substancesTabPath.removeLast()
                     } else {
-                        searchText = ""
-                        clearCategories()
-                        isSearchFocused = true
+                        self.searchText = ""
+                        self.clearCategories()
+                        self.isSearchFocused = true
                     }
                 case .safer:
-                    if !saferTabPath.isEmpty {
-                        saferTabPath.removeLast()
+                    if !self.saferTabPath.isEmpty {
+                        self.saferTabPath.removeLast()
                     }
                 case .settings:
-                    if !settingsTabPath.isEmpty {
-                        settingsTabPath.removeLast()
+                    if !self.settingsTabPath.isEmpty {
+                        self.settingsTabPath.removeLast()
                     }
                 }
             }
-            selectedTab = newValue
+            self.selectedTab = newValue
         }
+    }
+
+    func openLatestActiveExperience() {
+        selectedTab = .journal
+        if let latestActiveExperience = PersistenceController.shared.getLatestActiveExperience() {
+            journalTabPath.removeLast(journalTabPath.count)
+            journalTabPath.append(GlobalNavigationDestination.experience(experience: latestActiveExperience))
+        }
+    }
+
+    func openLatestExperience() {
+        selectedTab = .journal
+        if let latestExperience = PersistenceController.shared.getLatestExperience() {
+            journalTabPath.removeLast(journalTabPath.count)
+            journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
+        }
+    }
+}
+
+struct ContentScreen: View {
+    let isEyeOpen: Bool
+
+    @ObservedObject var navigator = Navigator.shared
+    @FocusState var isSearchFocused: Bool
+
+    var body: some View {
         if isEyeOpen {
-            TabView(selection: binding) {
+            TabView(selection: navigator.binding) {
                 statsTab
 
                 journalTab
 
-                NavigationStack(path: $substancesTabPath) {
+                NavigationStack(path: $navigator.substancesTabPath) {
                     SearchScreen(
                         isSearchFocused: _isSearchFocused,
-                        searchText: $searchText,
-                        selectedCategories: $selectedCategories,
-                        clearCategories: clearCategories)
+                        searchText: $navigator.searchText,
+                        selectedCategories: $navigator.selectedCategories,
+                        clearCategories: navigator.clearCategories)
+                    .onAppear { self.isSearchFocused = navigator.isSearchFocused}
+                    .onChange(of: isSearchFocused) { navigator.isSearchFocused = $0 }
+                    .onChange(of: navigator.isSearchFocused) { isSearchFocused = $0 }
                     .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                         getScreen(from: destination)
                     }
@@ -130,7 +162,7 @@ struct ContentScreen: View {
                 }
                 .tag(Tab.substances)
 
-                NavigationStack(path: $saferTabPath) {
+                NavigationStack(path: $navigator.saferTabPath) {
                     SaferScreen()
                         .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                             getScreen(from: destination)
@@ -145,15 +177,11 @@ struct ContentScreen: View {
             }
             .onOpenURL { url in
                 if url.absoluteString == openLatestExperience {
-                    selectedTab = .journal
-                    if let latestExperience = PersistenceController.shared.getLatestActiveExperience() {
-                        journalTabPath.removeLast(journalTabPath.count)
-                        journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
-                    }
+                    navigator.openLatestActiveExperience()
                 }
             }
         } else {
-            TabView(selection: binding) {
+            TabView(selection: navigator.binding) {
                 statsTab
                 journalTab
                 settingsTab
@@ -162,7 +190,7 @@ struct ContentScreen: View {
     }
 
     var statsTab: some View {
-        NavigationStack(path: $statsTabPath) {
+        NavigationStack(path: $navigator.statsTabPath) {
             StatsScreen()
                 .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                     getScreen(from: destination)
@@ -175,7 +203,7 @@ struct ContentScreen: View {
     }
 
     var journalTab: some View {
-        NavigationStack(path: $journalTabPath) {
+        NavigationStack(path: $navigator.journalTabPath) {
             JournalScreen()
                 .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                     getScreen(from: destination)
@@ -188,7 +216,7 @@ struct ContentScreen: View {
     }
 
     var settingsTab: some View {
-        NavigationStack(path: $settingsTabPath) {
+        NavigationStack(path: $navigator.settingsTabPath) {
             SettingsScreen()
                 .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                     getScreen(from: destination)
