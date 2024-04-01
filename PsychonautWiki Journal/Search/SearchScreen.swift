@@ -15,6 +15,7 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import AppIntents
 
 struct SearchScreen: View {
 
@@ -89,7 +90,9 @@ struct SearchScreen: View {
             namesToSortBy: substanceNamesInOrder
         )
     }
-    
+
+    @AppStorage("isSearchSubstanceSiriTipVisible") private var isSiriTipVisible = true
+
     var body: some View {
         VStack(spacing: 0) {
             SubstanceSearchBarWithFilter(
@@ -104,6 +107,11 @@ struct SearchScreen: View {
                     clearCategories()
                 }
             )
+
+            SiriTipView(intent: SearchSubstancesIntent(), isVisible: $isSiriTipVisible)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 7)
+
             List {
                 ForEach(substancesFilteredAndSorted) { sub in
                     SearchSubstanceRow(substance: sub)

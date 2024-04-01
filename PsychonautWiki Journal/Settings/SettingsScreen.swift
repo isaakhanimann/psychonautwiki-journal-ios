@@ -16,6 +16,7 @@
 
 import AlertToast
 import SwiftUI
+import AppIntents
 
 struct SettingsScreen: View {
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
@@ -134,6 +135,13 @@ struct SettingsContent: View {
                         }
                     }.tint(.accentColor)
                 }
+
+                HStack {
+                    Spacer()
+                    ShortcutsLink()
+                    Spacer()
+                }
+                .listRowBackground(Color.clear)
             }
             Section(
                 header: Text("Journal Data"),

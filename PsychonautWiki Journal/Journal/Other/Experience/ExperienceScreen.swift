@@ -15,6 +15,7 @@
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 import SwiftUI
+import AppIntents
 
 // swiftlint:disable type_body_length
 struct ExperienceScreen: View {
@@ -58,6 +59,8 @@ struct ExperienceScreen: View {
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
+    @AppStorage("isSearchSubstanceSiriTipVisible") private var isSiriTipVisible = true
+
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var locationManager: LocationManager
 
@@ -326,6 +329,9 @@ struct ExperienceScreen: View {
                             NavigationLink(value: GlobalNavigationDestination.allInteractions(substancesToCheck: experience.substancesUsed)) {
                                 Label("See Interactions", systemImage: "exclamationmark.triangle")
                             }
+                        }
+                        if experience.isCurrent {
+                            SiriTipView(intent: OpenLastExperienceIntent(), isVisible: $isSiriTipVisible)
                         }
                     }
                 }

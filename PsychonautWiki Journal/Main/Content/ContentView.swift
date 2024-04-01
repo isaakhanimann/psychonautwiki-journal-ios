@@ -129,6 +129,23 @@ class Navigator: ObservableObject {
             journalTabPath.append(GlobalNavigationDestination.experience(experience: latestExperience))
         }
     }
+
+    func maybeSearchForSubstance() {
+        selectedTab = .substances
+        let isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
+        if isEyeOpen {
+            substancesTabPath.removeLast(substancesTabPath.count)
+            clearCategories()
+            searchText = ""
+            isSearchFocused = true
+        }
+    }
+
+    func addIngestion() {
+        selectedTab = .journal
+        journalTabPath.removeLast(journalTabPath.count)
+        // todo show fullscreencover
+    }
 }
 
 struct ContentScreen: View {

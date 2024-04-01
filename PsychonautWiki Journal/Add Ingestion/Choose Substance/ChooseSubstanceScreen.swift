@@ -16,6 +16,7 @@
 
 import AlertToast
 import SwiftUI
+import AppIntents
 
 struct ChooseSubstanceScreen: View {
     @StateObject private var viewModel = ViewModel()
@@ -112,10 +113,12 @@ struct ChooseSubstanceContent: View {
     }
 
     @State private var isShowingAddCustomSheet = false
+    @AppStorage("isAddIngestionSiriTipVisible") private var isSiriTipVisible = true
 
     private var screen: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
+                SiriTipView(intent: AddIngestionIntent(), isVisible: $isSiriTipVisible)
                 if !filteredSuggestions.isEmpty {
                     ForEach(filteredSuggestions) { suggestion in
                         SuggestionBox(
