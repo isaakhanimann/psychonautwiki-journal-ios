@@ -26,7 +26,7 @@ struct JournalApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ZStack {
+            JournalAuthenticatorWrapperView(authenticator: authenticator) {
                 ContentView()
                     .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                     .environmentObject(toastViewModel)
@@ -39,11 +39,6 @@ struct JournalApp: App {
                             type: toastViewModel.isSuccessToast ? .complete(.green) : .error(.red),
                             title: toastViewModel.toastMessage)
                     }
-                if authenticator.isStartingUp {
-                    LockScreen(isEyeOpen: true, isFaceIDEnabled: true)
-                } else if authenticator.isLocked {
-                    LockScreen(isEyeOpen: false, isFaceIDEnabled: authenticator.isFaceIDEnabled)
-                }
             }
         }
         .onChange(of: scenePhase) { phase in

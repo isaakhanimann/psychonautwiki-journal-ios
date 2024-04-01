@@ -110,7 +110,7 @@ struct SearchScreen: View {
 
             SiriTipView(intent: SearchSubstancesIntent(), isVisible: $isSiriTipVisible)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 7)
+                .padding(.vertical, 10)
 
             List {
                 ForEach(substancesFilteredAndSorted) { sub in

@@ -72,7 +72,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     nonisolated func locationManager(_: CLLocationManager, didFailWithError error: Error) {
-        assertionFailure("Isaak location manager \(error)")
+        print("Isaak location manager \(error)") // no assertion failure because this is triggered when adding an ingestion with app intent
     }
 
     private var shouldUpdateSelectedLocation = false

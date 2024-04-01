@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import StoreKit
 import SwiftUI
 
 struct JournalScreen: View {
@@ -67,17 +66,17 @@ struct JournalScreen: View {
         }
     }
 
-    @State private var isShowingAddIngestionSheet = false
     @State private var isTimeRelative = false
     @State private var isFavoriteFilterEnabled = false
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
-    @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0
+
+    @EnvironmentObject var navigator: Navigator
 
     var body: some View {
         FabPosition {
             Button {
-                isShowingAddIngestionSheet.toggle()
+                navigator.showAddIngestionFullScreenCover()
             } label: {
                 Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
             }
@@ -90,11 +89,6 @@ struct JournalScreen: View {
             .scrollDismissesKeyboard(.interactively)
             .searchable(text: query, prompt: "Search by title or substance")
             .disableAutocorrection(true)
-        }
-        .fullScreenCover(isPresented: $isShowingAddIngestionSheet, onDismiss: {
-            maybeRequestAppRating()
-        }) {
-            ChooseSubstanceScreen()
         }
         .onAppear(perform: {
             DispatchQueue.main.async {
@@ -152,21 +146,6 @@ struct JournalScreen: View {
         }
         .onChange(of: isFavoriteFilterEnabled) { _ in
             setPredicate()
-        }
-    }
-
-    private func maybeRequestAppRating() {
-        if #available(iOS 16.2, *) {
-            if openUntilRatedCount < 10 {
-                openUntilRatedCount += 1
-            } else if openUntilRatedCount == 10 {
-                if isEyeOpen && experiences.count > 5 {
-                    if let windowScene = UIApplication.shared.currentWindow?.windowScene {
-                        SKStoreReviewController.requestReview(in: windowScene)
-                    }
-                    openUntilRatedCount += 1
-                }
-            }
         }
     }
 }

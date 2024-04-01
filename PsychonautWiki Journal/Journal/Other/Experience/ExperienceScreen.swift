@@ -21,7 +21,6 @@ import AppIntents
 struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
 
-    @State private var isShowingAddIngestionFullScreen = false
     @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = SaveableTimeDisplayStyle.regular.rawValue
 
     private var saveableTimeDisplayStyle: Binding<SaveableTimeDisplayStyle> {
@@ -143,11 +142,13 @@ struct ExperienceScreen: View {
         }
     }
 
+    @EnvironmentObject var navigator: Navigator
+
     var body: some View {
         FabPosition {
             if experience.isCurrent {
                 Button {
-                    isShowingAddIngestionFullScreen.toggle()
+                    navigator.showAddIngestionFullScreenCover()
                 } label: {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
@@ -391,9 +392,6 @@ struct ExperienceScreen: View {
                 })
         }
         .navigationTitle(experience.titleUnwrapped)
-        .fullScreenCover(isPresented: $isShowingAddIngestionFullScreen, content: {
-            ChooseSubstanceScreen()
-        })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ExperienceToolbarContent(
