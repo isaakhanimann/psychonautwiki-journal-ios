@@ -104,6 +104,11 @@ struct TestingServicesScreen: View {
                     city: "Various locations",
                     url: "https://www.kykeonanalytics.com"
                 )
+                TestingServiceItem(
+                    name: "Ai Laket",
+                    city: "Vitoria-Gasteiz, Bilbo and Donosti",
+                    url: "https://ailaket.com/proyectos/punto-fijo/"
+                )
             }
             Section("Switzerland") {
                 TestingServiceItem(
