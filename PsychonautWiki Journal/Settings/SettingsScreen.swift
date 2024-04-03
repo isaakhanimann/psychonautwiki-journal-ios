@@ -135,13 +135,6 @@ struct SettingsContent: View {
                         }
                     }.tint(.accentColor)
                 }
-
-                HStack {
-                    Spacer()
-                    ShortcutsLink()
-                    Spacer()
-                }
-                .listRowBackground(Color.clear)
             }
             Section(
                 header: Text("Journal Data"),
