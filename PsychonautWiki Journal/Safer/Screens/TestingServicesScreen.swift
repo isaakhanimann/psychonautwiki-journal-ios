@@ -55,6 +55,13 @@ struct TestingServicesScreen: View {
                     url: "http://www.vch.ca/public-health/harm-reduction/overdose-prevention-response/drug-checking"
                 )
             }
+            Section("Germany") {
+                TestingServiceItem(
+                    name: "Drugchecking",
+                    city: "Berlin",
+                    url: "https://drugchecking.berlin"
+                )
+            }
             Section("France") {
                 TestingServiceItem(
                     name: "Asso Michel - CAARUD Médiane",
