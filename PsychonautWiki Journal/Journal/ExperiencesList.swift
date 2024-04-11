@@ -17,19 +17,61 @@
 import SwiftUI
 
 struct ExperiencesList: View {
-    let experiences: FetchedResults<Experience>
     let isFavoriteFilterEnabled: Bool
     let isTimeRelative: Bool
+
+    init(searchText: String, isFavoriteFilterEnabled: Bool, isTimeRelative: Bool) {
+        self.isFavoriteFilterEnabled = isFavoriteFilterEnabled
+        self.isTimeRelative = isTimeRelative
+        let predicateFavorite = NSPredicate(
+            format: "isFavorite == %@",
+            NSNumber(value: true)
+        )
+        let predicateTitle = NSPredicate(
+            format: "title CONTAINS[cd] %@",
+            searchText as CVarArg
+        )
+        let predicateSubstance = NSPredicate(
+            format: "%K.%K CONTAINS[cd] %@",
+            #keyPath(Experience.ingestions),
+            #keyPath(Ingestion.substanceName),
+            searchText as CVarArg
+        )
+        var experiencePredicate: NSPredicate?
+        if isFavoriteFilterEnabled {
+            if searchText.isEmpty {
+                experiencePredicate = predicateFavorite
+            } else {
+                let titleOrSubstancePredicate = NSCompoundPredicate(
+                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                )
+                experiencePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
+            }
+        } else {
+            if searchText.isEmpty {
+                experiencePredicate = nil
+            } else {
+                experiencePredicate = NSCompoundPredicate(
+                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
+                )
+            }
+        }
+        _fetchedExperiences = FetchRequest<Experience>(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)],
+            predicate: experiencePredicate)
+    }
+
+    @FetchRequest var fetchedExperiences: FetchedResults<Experience>
 
     @Environment(\.isSearching) private var isSearching
 
     var body: some View {
         ZStack {
-            List(experiences) { experience in
+            List(fetchedExperiences) { experience in
                 ExperienceRow(experience: experience, isTimeRelative: isTimeRelative)
             }
             .listStyle(.plain)
-            if experiences.isEmpty {
+            if fetchedExperiences.isEmpty {
                 if isSearching {
                     Text("No experiences match the search")
                         .foregroundColor(.secondary)

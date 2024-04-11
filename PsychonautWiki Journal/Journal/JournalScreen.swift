@@ -17,55 +17,8 @@
 import SwiftUI
 
 struct JournalScreen: View {
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
-    ) var experiences: FetchedResults<Experience>
 
     @State private var searchText = ""
-    private var query: Binding<String> {
-        Binding {
-            searchText
-        } set: { newValue in
-            searchText = newValue
-            setPredicate()
-        }
-    }
-
-    private func setPredicate() {
-        let predicateFavorite = NSPredicate(
-            format: "isFavorite == %@",
-            NSNumber(value: true)
-        )
-        let predicateTitle = NSPredicate(
-            format: "title CONTAINS[cd] %@",
-            searchText as CVarArg
-        )
-        let predicateSubstance = NSPredicate(
-            format: "%K.%K CONTAINS[cd] %@",
-            #keyPath(Experience.ingestions),
-            #keyPath(Ingestion.substanceName),
-            searchText as CVarArg
-        )
-        if isFavoriteFilterEnabled {
-            if searchText.isEmpty {
-                experiences.nsPredicate = predicateFavorite
-            } else {
-                let titleOrSubstancePredicate = NSCompoundPredicate(
-                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
-                )
-                experiences.nsPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
-            }
-        } else {
-            if searchText.isEmpty {
-                experiences.nsPredicate = nil
-            } else {
-                experiences.nsPredicate = NSCompoundPredicate(
-                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
-                )
-            }
-        }
-    }
-
     @State private var isTimeRelative = false
     @State private var isFavoriteFilterEnabled = false
 
@@ -82,21 +35,14 @@ struct JournalScreen: View {
             }
         } screen: {
             ExperiencesList(
-                experiences: experiences,
+                searchText: searchText,
                 isFavoriteFilterEnabled: isFavoriteFilterEnabled,
                 isTimeRelative: isTimeRelative
             )
             .scrollDismissesKeyboard(.interactively)
-            .searchable(text: query, prompt: "Search by title or substance")
+            .searchable(text: $searchText, prompt: "Search by title or substance")
             .disableAutocorrection(true)
         }
-        .onAppear(perform: {
-            DispatchQueue.main.async {
-                // without the DispatchQueue.main.async the filtering doesn't get applied
-                // so when switching tabs and coming back the experiences would be unfiltered, even if favorite was selected and a search text entered
-                setPredicate()
-            }
-        })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 favoriteButton
@@ -143,9 +89,6 @@ struct JournalScreen: View {
             } else {
                 Label("Filter Favorites", systemImage: "star")
             }
-        }
-        .onChange(of: isFavoriteFilterEnabled) { _ in
-            setPredicate()
         }
     }
 }
