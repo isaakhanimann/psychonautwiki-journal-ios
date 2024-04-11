@@ -30,9 +30,13 @@ class Navigator: ObservableObject {
 
     @Published var selectedTab: Tab = .journal
 
-    @Published var isSearchFocused: Bool = false
-    @Published var searchText = ""
+    @Published var isSubstanceSearchFocused = false
+    @Published var substanceSearchText = ""
     @Published var selectedCategories: [String] = []
+
+    @Published var isJournalSearchFocused = false
+    @Published var isFavoriteFilterEnabled = false
+    @Published var journalSearchText = ""
 
     func clearCategories() {
         selectedCategories.removeAll()
@@ -51,14 +55,18 @@ class Navigator: ObservableObject {
                 case .journal:
                     if !self.journalTabPath.isEmpty {
                         self.journalTabPath.removeLast()
+                    } else {
+                        self.journalSearchText = ""
+                        self.isFavoriteFilterEnabled = false
+                        self.isJournalSearchFocused = true
                     }
                 case .substances:
                     if !self.substancesTabPath.isEmpty {
                         self.substancesTabPath.removeLast()
                     } else {
-                        self.searchText = ""
+                        self.substanceSearchText = ""
                         self.clearCategories()
-                        self.isSearchFocused = true
+                        self.isSubstanceSearchFocused = true
                     }
                 case .safer:
                     if !self.saferTabPath.isEmpty {
@@ -96,8 +104,8 @@ class Navigator: ObservableObject {
         if isEyeOpen {
             substancesTabPath.removeLast(substancesTabPath.count)
             clearCategories()
-            searchText = ""
-            isSearchFocused = true
+            substanceSearchText = ""
+            isSubstanceSearchFocused = true
         }
     }
 

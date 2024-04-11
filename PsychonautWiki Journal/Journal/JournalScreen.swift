@@ -18,9 +18,11 @@ import SwiftUI
 
 struct JournalScreen: View {
 
-    @State private var searchText = ""
+    @Binding var searchText: String
+    @Binding var isSearchPresented: Bool
+    @Binding var isFavoriteFilterEnabled: Bool
+
     @State private var isTimeRelative = false
-    @State private var isFavoriteFilterEnabled = false
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -28,10 +30,12 @@ struct JournalScreen: View {
 
     var body: some View {
         FabPosition {
-            Button {
-                navigator.showAddIngestionFullScreenCover()
-            } label: {
-                Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
+            if !isSearchPresented {
+                Button {
+                    navigator.showAddIngestionFullScreenCover()
+                } label: {
+                    Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
+                }
             }
         } screen: {
             ExperiencesList(
@@ -40,7 +44,13 @@ struct JournalScreen: View {
                 isTimeRelative: isTimeRelative
             )
             .scrollDismissesKeyboard(.interactively)
-            .searchable(text: $searchText, prompt: "Search by title or substance")
+            .modify {
+                if #available(iOS 17.0, *) {
+                    $0.searchable(text: $searchText, isPresented: $isSearchPresented, prompt: "Search by title or substance")
+                } else {
+                    $0.searchable(text: $searchText, prompt: "Search by title or substance")
+                }
+            }
             .disableAutocorrection(true)
         }
         .toolbar {
@@ -90,5 +100,11 @@ struct JournalScreen: View {
                 Label("Filter Favorites", systemImage: "star")
             }
         }
+    }
+}
+
+extension View {
+    func modify<Content>(@ViewBuilder _ transform: (Self) -> Content) -> Content {
+        transform(self)
     }
 }

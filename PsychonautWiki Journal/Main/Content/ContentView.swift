@@ -68,12 +68,12 @@ struct ContentScreen: View {
                     NavigationStack(path: $navigator.substancesTabPath) {
                         SearchScreen(
                             isSearchFocused: _isSearchFocused,
-                            searchText: $navigator.searchText,
+                            searchText: $navigator.substanceSearchText,
                             selectedCategories: $navigator.selectedCategories,
                             clearCategories: navigator.clearCategories)
-                        .onAppear { self.isSearchFocused = navigator.isSearchFocused}
-                        .onChange(of: isSearchFocused) { navigator.isSearchFocused = $0 }
-                        .onChange(of: navigator.isSearchFocused) { isSearchFocused = $0 }
+                        .onAppear { self.isSearchFocused = navigator.isSubstanceSearchFocused}
+                        .onChange(of: isSearchFocused) { navigator.isSubstanceSearchFocused = $0 }
+                        .onChange(of: navigator.isSubstanceSearchFocused) { isSearchFocused = $0 }
                         .navigationDestination(for: GlobalNavigationDestination.self) { destination in
                             getScreen(from: destination)
                         }
@@ -153,10 +153,13 @@ struct ContentScreen: View {
 
     var journalTab: some View {
         NavigationStack(path: $navigator.journalTabPath) {
-            JournalScreen()
-                .navigationDestination(for: GlobalNavigationDestination.self) { destination in
-                    getScreen(from: destination)
-                }
+            JournalScreen(
+                searchText: $navigator.journalSearchText,
+                isSearchPresented: $navigator.isJournalSearchFocused,
+                isFavoriteFilterEnabled: $navigator.isFavoriteFilterEnabled
+            ).navigationDestination(for: GlobalNavigationDestination.self) { destination in
+                getScreen(from: destination)
+            }
         }
         .tabItem {
             Label("Journal", systemImage: "square.stack")
