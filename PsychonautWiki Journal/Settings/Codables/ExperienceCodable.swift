@@ -76,7 +76,7 @@ struct ExperienceCodable: Codable {
         let creationDateMillis = try values.decode(UInt64.self, forKey: .creationDate)
         creationDate = getDateFromMillis(millis: creationDateMillis)
         isFavorite = try (values.decodeIfPresent(Bool.self, forKey: .isFavorite)) ?? false
-        let ingestionCodables = try values.decode([IngestionCodable].self, forKey: .ingestions)
+        let ingestionCodables = try values.decodeIfPresent([IngestionCodable].self, forKey: .ingestions) ?? []
         ingestions = ingestionCodables
         if let sortDateMillis = try values.decodeIfPresent(UInt64.self, forKey: .sortDate) {
             sortDate = getDateFromMillis(millis: sortDateMillis)
