@@ -184,7 +184,7 @@ struct ExperienceRowContent: View {
         Section {
             ExperienceRowContent(
                 ingestionColors: [.blue, .pink],
-                title: "My slightly longer title",
+                title: "Your slightly longer title",
                 distinctSubstanceNames: ["MDMA", "LSD"],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: true,
@@ -196,7 +196,7 @@ struct ExperienceRowContent: View {
             )
             ExperienceRowContent(
                 ingestionColors: [.blue, .pink],
-                title: "My slightly longer title",
+                title: "Your slightly longer title",
                 distinctSubstanceNames: ["MDMA", "LSD"],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: true,
@@ -208,7 +208,7 @@ struct ExperienceRowContent: View {
             )
             ExperienceRowContent(
                 ingestionColors: [.blue, .pink, .purple, .yellow],
-                title: "My title",
+                title: "Your title",
                 distinctSubstanceNames: ["MDMA", "LSD", "Cocaine", "Amphetamine"],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: true,
@@ -220,7 +220,7 @@ struct ExperienceRowContent: View {
             )
             ExperienceRowContent(
                 ingestionColors: [.blue, .pink],
-                title: "My title is not is a normal length",
+                title: "Your title is not is a normal length",
                 distinctSubstanceNames: ["MDMA", "LSD"],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: true,
@@ -232,7 +232,7 @@ struct ExperienceRowContent: View {
             )
             ExperienceRowContent(
                 ingestionColors: [.blue, .pink],
-                title: "My title short",
+                title: "Your title short",
                 distinctSubstanceNames: ["MDMA", "LSD"],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: true,
@@ -244,7 +244,7 @@ struct ExperienceRowContent: View {
             )
             ExperienceRowContent(
                 ingestionColors: [],
-                title: "My title is not is a normal length",
+                title: "Your title is not is a normal length",
                 distinctSubstanceNames: [],
                 sortDate: Date() - 5 * 60 * 60 - 30,
                 isFavorite: false,

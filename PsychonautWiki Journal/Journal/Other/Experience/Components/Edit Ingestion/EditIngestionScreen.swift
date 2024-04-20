@@ -229,7 +229,7 @@ struct EditIngestionContent: View {
                         Button {
                             isConsumerSheetPresented.toggle()
                         } label: {
-                            let displayedName = isConsumerMe ? "Me" : consumerName
+                            let displayedName = areYouConsumer ? "You" : consumerName
                             Label(displayedName, systemImage: "person")
                         }
                     }
@@ -267,7 +267,7 @@ struct EditIngestionContent: View {
 
     @State private var isConsumerSheetPresented = false
 
-    private var isConsumerMe: Bool {
+    private var areYouConsumer: Bool {
         consumerName.trimmingCharacters(in: .whitespaces).isEmpty
     }
 

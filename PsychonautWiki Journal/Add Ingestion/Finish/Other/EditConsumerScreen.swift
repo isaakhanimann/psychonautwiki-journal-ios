@@ -72,7 +72,7 @@ private struct EditConsumerScreenContent: View {
                             consumerName = ""
                             dismiss()
                         } label: {
-                            Label("Me", systemImage: "person")
+                            Label("You", systemImage: "person")
                         }
                     }
 

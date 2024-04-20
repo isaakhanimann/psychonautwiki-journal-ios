@@ -311,7 +311,7 @@ struct StatsScreenContent: View {
                     }
                 }
             }
-        }.navigationTitle("My Stats")
+        }.navigationTitle("Your Stats")
     }
 }
 

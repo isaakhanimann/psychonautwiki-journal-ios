@@ -74,7 +74,7 @@ private struct TimedNoteRowContent: View {
     List {
         TimedNoteRowContent(
             time: .now,
-            note: "My note",
+            note: "Your note",
             color: .blue,
             isPartOfTimeline: true,
             timeDisplayStyle: .regular,
@@ -82,7 +82,7 @@ private struct TimedNoteRowContent: View {
         )
         TimedNoteRowContent(
             time: .now,
-            note: "My note",
+            note: "Your note",
             color: .blue,
             isPartOfTimeline: false,
             timeDisplayStyle: .regular,

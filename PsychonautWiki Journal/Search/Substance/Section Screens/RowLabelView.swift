@@ -32,5 +32,5 @@ struct RowLabelView: View {
 }
 
 #Preview {
-    RowLabelView(label: "My label", value: "My Value")
+    RowLabelView(label: "Your label", value: "Your Value")
 }

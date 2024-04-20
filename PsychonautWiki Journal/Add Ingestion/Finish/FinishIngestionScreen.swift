@@ -54,7 +54,7 @@ struct FinishIngestionScreen: View {
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
 
-    var isConsumerMe: Bool {
+    var areYouConsumer: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
@@ -136,7 +136,7 @@ struct FinishIngestionScreen: View {
                     Button {
                         sheetToShow = .editConsumer
                     } label: {
-                        let displayedName = isConsumerMe ? "Me" : consumerName
+                        let displayedName = areYouConsumer ? "You" : consumerName
                         Label(displayedName, systemImage: "person")
                     }
                 }
@@ -356,7 +356,7 @@ struct FinishIngestionScreen: View {
         ingestion.administrationRoute = arguments.administrationRoute.rawValue
         ingestion.substanceName = arguments.substanceName
         ingestion.color = selectedColor.rawValue
-        if !isConsumerMe {
+        if !areYouConsumer {
             ingestion.consumerName = consumerName
         }
         if arguments.administrationRoute == .oral {

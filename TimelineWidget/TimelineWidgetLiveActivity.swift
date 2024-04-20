@@ -87,7 +87,7 @@ struct TimelineWidgetLiveActivity: Widget {
 }
 
 struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
-    static let attributes = TimelineWidgetAttributes(name: "Me")
+    static let attributes = TimelineWidgetAttributes(name: "You")
     static let contentState = TimelineWidgetAttributes.ContentState(
         substanceGroups: EffectTimeline_Previews.substanceGroups,
         everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
