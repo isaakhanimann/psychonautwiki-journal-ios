@@ -21,9 +21,9 @@ struct FabPosition<Screen: View, Button: View>: View {
     @ViewBuilder let screen: Screen
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .bottom) {
             screen
-            button.padding(30)
+            button.padding(20)
         }
     }
 }
