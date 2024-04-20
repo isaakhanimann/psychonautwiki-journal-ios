@@ -385,7 +385,7 @@ struct FinishIngestionScreen: View {
         }
     }
 
-    private static func getPredicate(from date: Date) -> NSCompoundPredicate {
+    static func getPredicate(from date: Date) -> NSCompoundPredicate {
         let longInterval: TimeInterval = 60 * 60 * 60
         let startDate = date.addingTimeInterval(-longInterval)
         let endDate = date.addingTimeInterval(longInterval)

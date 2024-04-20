@@ -49,6 +49,18 @@ struct EditIngestionScreen: View {
         ingestion.substance?.getDose(for: ingestion.administrationRouteUnwrapped)
     }
 
+    @State private var experiencesWithinLargerRange: [Experience] = []
+    @State private var wantsToForceNewExperience = false
+    @State private var selectedExperience: Experience?
+
+    func setExperiencesBasedOnTime() {
+        let fetchRequest = Experience.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Experience.sortDate, ascending: false)]
+        fetchRequest.predicate = FinishIngestionScreen.getPredicate(from: time)
+        experiencesWithinLargerRange = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
+    }
+
+
     var body: some View {
         EditIngestionContent(
             substanceName: ingestion.substanceNameUnwrapped,
@@ -67,7 +79,10 @@ struct EditIngestionScreen: View {
             save: save,
             delete: delete,
             isEyeOpen: isEyeOpen,
-            isHidden: $isHidden
+            isHidden: $isHidden,
+            selectedExperience: $selectedExperience,
+            wantsToForceNewExperience: $wantsToForceNewExperience,
+            experiencesWithinLargerRange: experiencesWithinLargerRange
         ).onFirstAppear {
             time = ingestion.timeUnwrapped
             dose = ingestion.doseUnwrapped
@@ -77,9 +92,14 @@ struct EditIngestionScreen: View {
             note = ingestion.noteUnwrapped
             consumerName = ingestion.consumerName ?? ""
             selectedCustomUnit = ingestion.customUnit
+            selectedExperience = ingestion.experience
             if let fullness = ingestion.stomachFullnessUnwrapped {
                 stomachFullness = fullness
             }
+            setExperiencesBasedOnTime()
+        }
+        .onChange(of: time) { _ in
+            setExperiencesBasedOnTime()
         }
     }
 
@@ -104,6 +124,17 @@ struct EditIngestionScreen: View {
         }
         if ingestion.administrationRouteUnwrapped == .oral {
             ingestion.stomachFullness = stomachFullness.rawValue
+        }
+        if wantsToForceNewExperience || selectedExperience == nil {
+            let context = PersistenceController.shared.viewContext
+            let newExperience = Experience(context: context)
+            newExperience.creationDate = Date()
+            newExperience.sortDate = time
+            newExperience.title = time.asDateString
+            newExperience.text = ""
+            ingestion.experience = newExperience
+        } else {
+            ingestion.experience = selectedExperience
         }
         PersistenceController.shared.saveViewContext()
         ingestion.experience?.objectWillChange.send()
@@ -137,7 +168,9 @@ struct EditIngestionContent: View {
     let delete: () -> Void
     let isEyeOpen: Bool
     @Binding var isHidden: Bool
-
+    @Binding var selectedExperience: Experience?
+    @Binding var wantsToForceNewExperience: Bool
+    let experiencesWithinLargerRange: [Experience]
 
     @Environment(\.dismiss) var dismiss
 
@@ -223,6 +256,24 @@ struct EditIngestionContent: View {
                         selection: $time,
                         displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
+                    if experiencesWithinLargerRange.count > 0 {
+                        NavigationLink {
+                            ExperiencePickerScreen(
+                                selectedExperience: $selectedExperience,
+                                wantsToForceNewExperience: $wantsToForceNewExperience,
+                                experiences: experiencesWithinLargerRange)
+                        } label: {
+                            HStack {
+                                Text("Experience")
+                                Spacer()
+                                if let exp = selectedExperience {
+                                    Text(exp.titleUnwrapped)
+                                } else {
+                                    Text("New Experience")
+                                }
+                            }
+                        }
+                    }
                     HStack {
                         Text("Consumer")
                         Spacer()
@@ -293,7 +344,11 @@ struct EditIngestionContent: View {
         save: { },
         delete: { },
         isEyeOpen: true,
-        isHidden: .constant(false))
+        isHidden: .constant(false),
+        selectedExperience: .constant(nil),
+        wantsToForceNewExperience: .constant(false),
+        experiencesWithinLargerRange: []
+    )
 }
 
 #Preview("Edit custom unit ingestion") {
@@ -314,6 +369,9 @@ struct EditIngestionContent: View {
         save: { },
         delete: { },
         isEyeOpen: true,
-        isHidden: .constant(false))
+        isHidden: .constant(false),
+        selectedExperience: .constant(nil),
+        wantsToForceNewExperience: .constant(false),
+        experiencesWithinLargerRange: [])
 }
 
