@@ -19,14 +19,22 @@ import SwiftUI
 struct FabLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
+            let circleWidth: Double = 70
             Circle()
                 .fill(Color.accentColor)
-                .frame(width: 60, height: 60)
+                .frame(width: circleWidth, height: circleWidth)
                 .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
             Label(configuration)
                 .labelStyle(.iconOnly)
-                .font(.largeTitle.weight(.bold))
+                .font(.title.weight(.semibold))
                 .foregroundColor(.white)
         }
+    }
+}
+
+#Preview {
+    Button {
+    } label: {
+        Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
     }
 }
