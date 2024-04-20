@@ -75,6 +75,12 @@ struct ExperienceRow: View {
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
                 }
+                Button(role: .none) {
+                    experience.isFavorite = !experience.isFavorite
+                    PersistenceController.shared.saveViewContext()
+                } label: {
+                    Label("Toggle Favorite", systemImage: "star")
+                }.tint(.yellow)
             }
         }
     }
