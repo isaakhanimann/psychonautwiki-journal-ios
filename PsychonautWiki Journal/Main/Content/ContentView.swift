@@ -162,7 +162,7 @@ struct ContentScreen: View {
             }
         }
         .tabItem {
-            Label("Journal", systemImage: "square.stack")
+            Label("Journal", systemImage: "book")
         }
         .tag(Tab.journal)
     }
