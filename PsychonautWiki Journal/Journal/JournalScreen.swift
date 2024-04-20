@@ -26,13 +26,11 @@ struct JournalScreen: View {
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
-    @EnvironmentObject var navigator: Navigator
-
     var body: some View {
         FabPosition {
             if !isSearchPresented {
                 Button {
-                    navigator.showAddIngestionFullScreenCover()
+                    Navigator.shared.showAddIngestionFullScreenCover()
                 } label: {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }

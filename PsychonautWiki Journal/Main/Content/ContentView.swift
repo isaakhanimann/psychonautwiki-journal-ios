@@ -116,7 +116,6 @@ struct ContentScreen: View {
                 ChooseSubstanceScreen()
             }
         }
-        .environmentObject(navigator)
     }
 
     @AppStorage("openUntilRatedCount") var openUntilRatedCount: Int = 0

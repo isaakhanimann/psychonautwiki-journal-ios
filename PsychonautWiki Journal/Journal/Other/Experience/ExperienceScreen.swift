@@ -142,13 +142,12 @@ struct ExperienceScreen: View {
         }
     }
 
-    @EnvironmentObject var navigator: Navigator
 
     var body: some View {
         FabPosition {
             if experience.isCurrent {
                 Button {
-                    navigator.showAddIngestionFullScreenCover()
+                    Navigator.shared.showAddIngestionFullScreenCover() // can't use Navigator as environment object because for some reason this messes up the layout of this screen
                 } label: {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
