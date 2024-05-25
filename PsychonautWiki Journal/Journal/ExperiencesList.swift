@@ -31,6 +31,16 @@ struct ExperiencesList: View {
             format: "title CONTAINS[cd] %@",
             searchText as CVarArg
         )
+        let predicateNotes = NSPredicate(
+            format: "text CONTAINS[cd] %@",
+            searchText as CVarArg
+        )
+        let predicateConsumer = NSPredicate(
+            format: "%K.%K CONTAINS[cd] %@",
+            #keyPath(Experience.ingestions),
+            #keyPath(Ingestion.consumerName),
+            searchText as CVarArg
+        )
         let predicateSubstance = NSPredicate(
             format: "%K.%K CONTAINS[cd] %@",
             #keyPath(Experience.ingestions),
@@ -38,22 +48,18 @@ struct ExperiencesList: View {
             searchText as CVarArg
         )
         var experiencePredicate: NSPredicate?
+        let orPredicates = NSCompoundPredicate(orPredicateWithSubpredicates: [predicateTitle, predicateSubstance, predicateNotes, predicateConsumer])
         if isFavoriteFilterEnabled {
             if searchText.isEmpty {
                 experiencePredicate = predicateFavorite
             } else {
-                let titleOrSubstancePredicate = NSCompoundPredicate(
-                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
-                )
-                experiencePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, titleOrSubstancePredicate])
+                experiencePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFavorite, orPredicates])
             }
         } else {
             if searchText.isEmpty {
                 experiencePredicate = nil
             } else {
-                experiencePredicate = NSCompoundPredicate(
-                    orPredicateWithSubpredicates: [predicateTitle, predicateSubstance]
-                )
+                experiencePredicate = orPredicates
             }
         }
         _fetchedExperiences = FetchRequest<Experience>(
