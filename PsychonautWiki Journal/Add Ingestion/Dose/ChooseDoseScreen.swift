@@ -240,14 +240,18 @@ struct ChooseDoseScreenContent: View {
                 if administrationRoute == .smoked, substance.categories.contains("opioid") {
                     ChasingTheDragonSection()
                 }
-                Section("Info") {
-                    if administrationRoute == .smoked || administrationRoute == .inhaled {
-                        Text(
-                            "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
-                    }
-                    if roaDose?.shouldUseVolumetricDosing ?? false {
-                        NavigationLink("Volumetric Dosing Recommended") {
-                            VolumetricDosingScreen()
+                let isSmokedRoute = administrationRoute == .smoked || administrationRoute == .inhaled
+                let shouldUseVolumetricDosing = roaDose?.shouldUseVolumetricDosing ?? false
+                if isSmokedRoute || shouldUseVolumetricDosing {
+                    Section("Info") {
+                        if isSmokedRoute {
+                            Text(
+                                "Depending on your smoking/inhalation method different amounts of substance are lost before entering the body. The dosage should reflect the amount of substance that is actually inhaled.")
+                        }
+                        if shouldUseVolumetricDosing {
+                            NavigationLink("Volumetric Dosing Recommended") {
+                                VolumetricDosingScreen()
+                            }
                         }
                     }
                 }
