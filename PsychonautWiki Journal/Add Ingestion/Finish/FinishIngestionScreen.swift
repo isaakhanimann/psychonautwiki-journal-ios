@@ -97,12 +97,11 @@ struct FinishIngestionScreen: View {
             Section("Ingestion") {
                 HStack(alignment: .center) {
                     DatePicker(
-                        "Ingestion Time",
+                        "Time",
                         selection: $selectedTime,
                         displayedComponents: [.date, .hourAndMinute]
                     )
                     .datePickerStyle(.compact)
-                    .labelsHidden()
                     Spacer()
                     Button {
                         withAnimation {
