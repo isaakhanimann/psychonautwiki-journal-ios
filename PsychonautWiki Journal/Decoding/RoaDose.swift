@@ -28,10 +28,10 @@ struct RoaDose: Decodable {
         if units == "µg" {
             return true
         } else if units == "mg" {
-            if let commonMin, commonMin < 20 {
+            if let commonMin, commonMin < 10 {
                 return true
             }
-            if let strongMin, strongMin < 20 {
+            if let strongMin, strongMin < 15 {
                 return true
             }
             if let heavyMin, heavyMin < 20 {
