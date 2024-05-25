@@ -191,7 +191,7 @@ struct SettingsContent: View {
                     }
                 }
                 Link(destination: URL(string: isEyeOpen ? "https://t.me/+ss8uZhBF6g00MTY8" : "https://t.me/isaakhanimann")!) {
-                    Label("Question, Feedback, Bug Report", systemImage: "exclamationmark.bubble")
+                    Label("Question, Bug Report", systemImage: "exclamationmark.bubble")
                 }
                 if isEyeOpen {
                     NavigationLink(value: GlobalNavigationDestination.faq) {
