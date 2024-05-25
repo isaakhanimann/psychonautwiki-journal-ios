@@ -164,8 +164,11 @@ struct ChooseDoseScreenContent: View {
                         Text("%")
                     }
                     if let impureDose {
-                        Text("\(impureDose.asRoundedReadableString) \(selectedUnits)")
-                            .font(.title)
+                        HStack {
+                            Text(impureDose.asRoundedReadableString)
+                            Spacer()
+                            Text("impure \(selectedUnits)")
+                        }.font(.title)
                     }
                 }
                 Toggle("Estimate", isOn: $isEstimate)

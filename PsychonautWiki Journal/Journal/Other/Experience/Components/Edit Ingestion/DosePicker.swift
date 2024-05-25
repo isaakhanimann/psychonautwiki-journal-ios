@@ -49,10 +49,10 @@ struct DosePicker: View {
 
     private var doseTextFieldWithUnit: some View {
         HStack {
-            TextField("Enter Dose", text: $doseText)
+            TextField("Pure Dose", text: $doseText)
                 .keyboardType(.decimalPad)
                 .foregroundColor(doseType.color)
-            Text(selectedUnits)
+            Text("pure " + selectedUnits)
         }
         .font(.title)
         .onChange(of: doseText) { text in
