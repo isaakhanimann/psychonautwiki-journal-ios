@@ -18,9 +18,13 @@ import Foundation
 import SwiftUI
 
 struct OnsetTimeline: TimelineDrawable {
+    let nonNormalizedHeight = 1.0
+
     let onset: FullDurationRange
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
+
+    var nonNormalizedOverallMax = 1.0
 
     private let onsetAndComeupWeight = 0.5
 

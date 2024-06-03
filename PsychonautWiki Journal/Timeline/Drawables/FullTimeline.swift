@@ -22,9 +22,14 @@ struct FullTimeline: TimelineDrawable {
     let peak: FullDurationRange
     let offset: FullDurationRange
     let peakAndOffsetWeight: Double
-    let verticalWeight: Double
+    let nonNormalizedHeight: Double
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
+
+    var nonNormalizedOverallMax = 1.0
+    private var normalizedHeight: Double {
+        nonNormalizedHeight/nonNormalizedOverallMax
+    }
 
     private let onsetComeupWeight = 0.5
 
@@ -50,8 +55,8 @@ struct FullTimeline: TimelineDrawable {
         let heightBetween = height - paddingTop - paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
         var top = lineWidth / 2
-        if verticalWeight < 1 {
-            top = (1 - verticalWeight) * heightBetween
+        if normalizedHeight < 1 {
+            top = (1 - normalizedHeight) * heightBetween
         }
         let bottom = height - paddingTop
         var path = Path()
@@ -80,7 +85,7 @@ struct FullTimeline: TimelineDrawable {
 extension RoaDuration {
     func toFullTimeline(
         peakAndOffsetWeight: Double,
-        verticalWeight: Double,
+        nonNormalizedHeight: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> FullTimeline? {
@@ -94,7 +99,7 @@ extension RoaDuration {
                 peak: fullPeak,
                 offset: fullOffset,
                 peakAndOffsetWeight: peakAndOffsetWeight,
-                verticalWeight: verticalWeight,
+                nonNormalizedHeight: nonNormalizedHeight,
                 onsetDelayInHours: onsetDelayInHours,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )

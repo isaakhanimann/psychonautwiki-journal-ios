@@ -21,9 +21,14 @@ struct TotalTimeline: TimelineDrawable {
     let total: FullDurationRange
     let onsetDelayInHours: Double
     let totalWeight: Double
-    let verticalWeight: Double
+    let nonNormalizedHeight: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
+
+    var nonNormalizedOverallMax = 1.0
+    private var normalizedHeight: Double {
+        nonNormalizedHeight/nonNormalizedOverallMax
+    }
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds + total.interpolateLinearly(at: totalWeight)
@@ -45,7 +50,7 @@ struct TotalTimeline: TimelineDrawable {
         let paddingBottom = halfLineWidth
         let heightBetween = height - paddingTop - paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
-        let top = (1 - verticalWeight) * heightBetween + paddingTop
+        let top = (1 - normalizedHeight) * heightBetween + paddingTop
         let totalMinX = total.min * pixelsPerSec
         let totalX = total.interpolateLinearly(at: totalWeight) * pixelsPerSec
         context.drawDot(
@@ -93,7 +98,7 @@ struct TotalTimeline: TimelineDrawable {
 extension RoaDuration {
     func toTotalTimeline(
         totalWeight: Double,
-        verticalWeight: Double,
+        nonNormalizedHeight: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> TotalTimeline? {
@@ -102,7 +107,7 @@ extension RoaDuration {
                 total: fullTotal,
                 onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
-                verticalWeight: verticalWeight,
+                nonNormalizedHeight: nonNormalizedHeight,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {

@@ -19,10 +19,22 @@ import SwiftUI
 struct GroupDrawable {
     private let color: SubstanceColor
 
-    private let timelineDrawables: [TimelineDrawable]
+    private var timelineDrawables: [TimelineDrawable]
 
     var endRelativeToStartInSeconds: TimeInterval {
         timelineDrawables.map { $0.endOfLineRelativeToStartInSeconds }.max() ?? 0
+    }
+
+    var nonNormalizedHeight: Double {
+        timelineDrawables.map { drawable in
+            drawable.nonNormalizedHeight
+        }.max() ?? 1
+    }
+
+    mutating func normalize(maxHeight: Double) {
+        for (index, _) in timelineDrawables.enumerated() {
+            timelineDrawables[index].nonNormalizedOverallMax = maxHeight
+        }
     }
 
     let hasDurationInfo: Bool
@@ -46,13 +58,13 @@ struct GroupDrawable {
             }
             return
         }
-        if let fullCumulatives = roaDuration.toFullCumulativeTimeline(weightedLines: weightedLines, graphStartTime: startGraph), !areRedosesDrawnIndividually {
-            timelineDrawables = [fullCumulatives]
+        if let fullCumulative = roaDuration.toFullCumulativeTimeline(weightedLines: weightedLines, graphStartTime: startGraph), !areRedosesDrawnIndividually {
+            timelineDrawables = [fullCumulative]
         } else {
             let fulls = weightedLines.compactMap { weightedLine in
                 roaDuration.toFullTimeline(
                     peakAndOffsetWeight: weightedLine.horizontalWeight,
-                    verticalWeight: weightedLine.height,
+                    nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                 )
@@ -63,7 +75,7 @@ struct GroupDrawable {
                 let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
                     roaDuration.toOnsetComeupPeakTotalTimeline(
                         peakAndTotalWeight: weightedLine.horizontalWeight,
-                        verticalWeight: weightedLine.height,
+                        nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                     )
@@ -74,7 +86,7 @@ struct GroupDrawable {
                     let onsetComeupTotals = weightedLines.compactMap { weightedLine in
                         roaDuration.toOnsetComeupTotalTimeline(
                             totalWeight: weightedLine.horizontalWeight,
-                            verticalWeight: weightedLine.height,
+                            nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                         )
@@ -85,7 +97,7 @@ struct GroupDrawable {
                         let onsetTotals = weightedLines.compactMap { weightedLine in
                             roaDuration.toOnsetTotalTimeline(
                                 totalWeight: weightedLine.horizontalWeight,
-                                verticalWeight: weightedLine.height,
+                                nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
                                 ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                             )
@@ -96,7 +108,7 @@ struct GroupDrawable {
                             let totals = weightedLines.compactMap { weightedLine in
                                 roaDuration.toTotalTimeline(
                                     totalWeight: weightedLine.horizontalWeight,
-                                    verticalWeight: weightedLine.height,
+                                    nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                 )
@@ -107,7 +119,7 @@ struct GroupDrawable {
                                 let onsetComeupPeaks = weightedLines.compactMap { weightedLine in
                                     roaDuration.toOnsetComeupPeakTimeline(
                                         peakWeight: weightedLine.horizontalWeight,
-                                        verticalWeight: weightedLine.height,
+                                        nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                     )
@@ -117,7 +129,7 @@ struct GroupDrawable {
                                 } else {
                                     let onsetComeups = weightedLines.compactMap { weightedLine in
                                         roaDuration.toOnsetComeupTimeline(
-                                            verticalWeight: weightedLine.height,
+                                            nonNormalizedHeight: weightedLine.strengthRelativeToCommonMin,
                                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                         )

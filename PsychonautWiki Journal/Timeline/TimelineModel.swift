@@ -59,13 +59,12 @@ struct TimelineModel: Hashable {
         everythingForEachTimedNote: [EverythingForOneTimedNote],
         areRedosesDrawnIndividually: Bool
     ) {
-        let ingestionTimes = substanceGroups.flatMap { group in
-            group.routeMinInfos.flatMap { route in
-                route.ingestions.map { $0.time }
-            }
-        }
-        let potentialStartTimes = ingestionTimes + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
-        let startTime = potentialStartTimes.min() ?? Date()
+
+        let startTime = Self.getStartTime(
+            substanceGroups: substanceGroups,
+            everythingForEachRating: everythingForEachRating,
+            everythingForEachTimedNote: everythingForEachTimedNote
+        )
         self.startTime = startTime
         let substanceGroupsWithRepoInfo = getSubstanceGroupWithRepoInfo(substanceIngestionGroups: substanceGroups)
         var roaGroups: [RoaGroup] = []
@@ -78,7 +77,7 @@ struct TimelineModel: Hashable {
                         WeightedLine(
                             startTime: ingestion.time,
                             horizontalWeight: ingestion.horizontalWeight,
-                            height: ingestion.verticalWeight,
+                            strengthRelativeToCommonMin: ingestion.strengthRelativeToCommonMin,
                             onsetDelayInHours: ingestion.onsetDelayInHours
                         )
                     }
@@ -86,7 +85,7 @@ struct TimelineModel: Hashable {
                 roaGroups.append(group)
             }
         }
-        let groupDrawables = roaGroups.map { group in
+        var groupDrawables = roaGroups.map { group in
             GroupDrawable(
                 startGraph: startTime,
                 color: group.color,
@@ -97,6 +96,12 @@ struct TimelineModel: Hashable {
         }.sorted { lhs, rhs in
             lhs.endRelativeToStartInSeconds < rhs.endRelativeToStartInSeconds
         } // sort makes sure that lines are always drawn in the same order such that lines with a later endpoint are drawn on top.
+        let maxHeight = groupDrawables.map { group in
+            group.nonNormalizedHeight
+        }.max() ?? 1
+        for (index, _) in groupDrawables.enumerated() {
+            groupDrawables[index].normalize(maxHeight: maxHeight)
+        }
         self.groupDrawables = groupDrawables
         let ratingDrawables = everythingForEachRating.map { rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
@@ -115,4 +120,18 @@ struct TimelineModel: Hashable {
         axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
     }
     // swiftlint:enable function_body_length
+
+    private static func getStartTime(
+        substanceGroups: [SubstanceIngestionGroup],
+        everythingForEachRating: [EverythingForOneRating],
+        everythingForEachTimedNote: [EverythingForOneTimedNote]
+    ) -> Date {
+        let ingestionTimes = substanceGroups.flatMap { group in
+            group.routeMinInfos.flatMap { route in
+                route.ingestions.map { $0.time }
+            }
+        }
+        let potentialStartTimes = ingestionTimes + everythingForEachRating.map { $0.time } + everythingForEachTimedNote.map { $0.time }
+        return potentialStartTimes.min() ?? Date()
+    }
 }

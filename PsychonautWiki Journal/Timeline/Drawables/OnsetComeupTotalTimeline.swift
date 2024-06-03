@@ -23,9 +23,14 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
     let total: FullDurationRange
     let onsetDelayInHours: Double
     let totalWeight: Double
-    let verticalWeight: Double
+    let nonNormalizedHeight: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
+
+    var nonNormalizedOverallMax = 1.0
+    private var normalizedHeight: Double {
+        nonNormalizedHeight/nonNormalizedOverallMax
+    }
 
     private let onsetAndComeupWeight = 0.5
 
@@ -46,8 +51,8 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
         let heightBetween = height - paddingTop - paddingBottom
         let startX = ingestionTimeRelativeToStartInSeconds * pixelsPerSec
         var top = lineWidth / 2
-        if verticalWeight < 1 {
-            top = ((1 - verticalWeight) * heightBetween) + (lineWidth / 2)
+        if normalizedHeight < 1 {
+            top = ((1 - normalizedHeight) * heightBetween) + (lineWidth / 2)
         }
         let bottom = height - lineWidth / 2
         context.drawDot(x: startX, bottomY: bottom, color: color)
@@ -94,7 +99,7 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
 extension RoaDuration {
     func toOnsetComeupTotalTimeline(
         totalWeight: Double,
-        verticalWeight: Double,
+        nonNormalizedHeight: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupTotalTimeline? {
@@ -107,7 +112,7 @@ extension RoaDuration {
                 total: fullTotal,
                 onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
-                verticalWeight: verticalWeight,
+                nonNormalizedHeight: nonNormalizedHeight,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {

@@ -26,4 +26,6 @@ protocol TimelineDrawable {
     )
 
     var endOfLineRelativeToStartInSeconds: TimeInterval { get }
+    var nonNormalizedHeight: Double { get }
+    var nonNormalizedOverallMax: Double { get set }
 }

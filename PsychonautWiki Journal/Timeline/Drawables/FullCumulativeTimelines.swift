@@ -19,6 +19,14 @@ import SwiftUI
 
 // swiftlint:disable identifier_name function_body_length
 struct FullCumulativeTimelines: TimelineDrawable {
+    var nonNormalizedHeight: Double {
+        finalPoints.map { point in
+            point.y
+        }.max() ?? 1
+    }
+
+    var nonNormalizedOverallMax: Double = 1
+
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         if let max = finalPoints.map({ $0.x }).max() {
             return max
@@ -76,7 +84,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
             WeightedLineRelativeToFirst(
                 startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
                 horizontalWeight: weightedLine.horizontalWeight,
-                height: weightedLine.height,
+                height: weightedLine.strengthRelativeToCommonMin,
                 onsetDelayInHours: weightedLine.onsetDelayInHours
             )
         }
@@ -133,19 +141,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
             }.reduce(0.0, +)
             return FinalPoint(x: x, y: sumOfHeights, isIngestionPoint: finalPoint.isIngestionPoint)
         }
-        guard let highestY = pointsWithHeight.map({ $0.y }).max() else {
-            assertionFailure("No highestY")
-            finalPoints = []
-            return
-        }
-        let normalizedHeightPoints = pointsWithHeight.map { pointWithHeight in
-            FinalPoint(
-                x: pointWithHeight.x,
-                y: pointWithHeight.y / highestY,
-                isIngestionPoint: pointWithHeight.isIngestionPoint
-            )
-        }
-        let sortedPoints = normalizedHeightPoints.sorted { lhs, rhs in
+        let sortedPoints = pointsWithHeight.sorted { lhs, rhs in
             lhs.x < rhs.x
         }
         finalPoints = sortedPoints
@@ -164,10 +160,10 @@ struct FullCumulativeTimelines: TimelineDrawable {
         let heightBetween = height - paddingTop - paddingBottom
         guard let firstPoint = finalPoints.first else { return }
         var path = Path()
-        let firstHeightInPx = firstPoint.y * heightBetween + paddingBottom
+        let firstHeightInPx = firstPoint.y/nonNormalizedOverallMax * heightBetween + paddingBottom
         path.move(to: CGPoint(x: firstPoint.x * pixelsPerSec, y: height - firstHeightInPx))
         for point in finalPoints.dropFirst() {
-            let heightInPx = point.y * heightBetween + paddingBottom
+            let heightInPx = point.y/nonNormalizedOverallMax * heightBetween + paddingBottom
             path.addLine(to: CGPoint(x: point.x * pixelsPerSec, y: height - heightInPx))
         }
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
@@ -179,7 +175,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
         // draw dots
         for point in finalPoints where point.isIngestionPoint {
-            let pointHeight = point.y * heightBetween + paddingBottom
+            let pointHeight = point.y/nonNormalizedOverallMax * heightBetween + paddingBottom
             context.drawDot(
                 x: point.x * pixelsPerSec,
                 bottomY: height - pointHeight,

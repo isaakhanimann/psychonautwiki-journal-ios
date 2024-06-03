@@ -19,6 +19,6 @@ import Foundation
 struct WeightedLine {
     let startTime: Date
     let horizontalWeight: Double
-    let height: Double
+    let strengthRelativeToCommonMin: Double
     let onsetDelayInHours: Double
 }

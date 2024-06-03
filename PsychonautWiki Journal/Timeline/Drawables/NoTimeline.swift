@@ -18,8 +18,11 @@ import Foundation
 import SwiftUI
 
 struct NoTimeline: TimelineDrawable {
+    let nonNormalizedHeight = 1.0
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
+
+    var nonNormalizedOverallMax = 1.0
 
     var endOfLineRelativeToStartInSeconds: TimeInterval {
         ingestionTimeRelativeToStartInSeconds + onsetDelayInSeconds
