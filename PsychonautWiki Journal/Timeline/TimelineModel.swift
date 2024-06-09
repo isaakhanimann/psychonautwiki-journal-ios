@@ -94,8 +94,8 @@ struct TimelineModel: Hashable {
                 areRedosesDrawnIndividually: areRedosesDrawnIndividually
             )
         }.sorted { lhs, rhs in
-            lhs.endRelativeToStartInSeconds < rhs.endRelativeToStartInSeconds
-        } // sort makes sure that lines are always drawn in the same order such that lines with a later endpoint are drawn on top.
+            lhs.startInSeconds < rhs.startInSeconds
+        } // sort makes sure that lines are always drawn in the same order such that lines with a later ingestion time are drawn on top.
         let maxHeight = groupDrawables.map { group in
             group.nonNormalizedHeight
         }.max() ?? 1

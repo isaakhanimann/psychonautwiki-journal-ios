@@ -25,6 +25,8 @@ struct GroupDrawable {
         timelineDrawables.map { $0.endOfLineRelativeToStartInSeconds }.max() ?? 0
     }
 
+    let startInSeconds: TimeInterval
+
     var nonNormalizedHeight: Double {
         timelineDrawables.map { drawable in
             drawable.nonNormalizedHeight
@@ -48,6 +50,10 @@ struct GroupDrawable {
         areRedosesDrawnIndividually: Bool
     ) {
         self.color = color
+        let startDate = weightedLines.map({ line in
+            line.startTime
+        }).min() ?? .now
+        self.startInSeconds = startGraph.distance(to: startDate)
         self.hasDurationInfo = roaDuration != nil
         guard let roaDuration else {
             timelineDrawables = weightedLines.map { weightedLine in
