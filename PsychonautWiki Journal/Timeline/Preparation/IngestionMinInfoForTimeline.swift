@@ -39,6 +39,10 @@ func getSubstanceGroupWithRepoInfo(substanceIngestionGroups: [SubstanceIngestion
         let routeGroups = substanceIngestionGroup.routeMinInfos.map { routeMinInfo in
             let roaDuration = substance?.getDuration(for: routeMinInfo.route)
             let roaDose = substance?.getDose(for: routeMinInfo.route)
+            let allKnownDoses = routeMinInfo.ingestions.compactMap({ ingestion in
+                ingestion.dose
+            })
+            let averageDose = allKnownDoses.reduce(0, +) / max(1.0, Double(allKnownDoses.count))
             let ingestions = routeMinInfo.ingestions.map { ingestion in
                 var horizontalWeight = 0.5
                 if let dose = ingestion.dose, let roaDose {
@@ -58,8 +62,9 @@ func getSubstanceGroupWithRepoInfo(substanceIngestionGroups: [SubstanceIngestion
                         horizontalWeight = 0.5
                     }
                 }
+                let commonMin = roaDose?.commonMin ?? averageDose
                 var strengthRelativeToCommonMin = 1.0
-                if let dose = ingestion.dose, let commonMin = roaDose?.commonMin {
+                if let dose = ingestion.dose {
                     strengthRelativeToCommonMin = dose / commonMin
                 }
                 return IngestionWithRepoInfo(
