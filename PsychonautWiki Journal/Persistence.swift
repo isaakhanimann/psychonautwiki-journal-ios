@@ -137,6 +137,20 @@ struct PersistenceController {
         }
     }
 
+    func migrateBenzydamineUnits() {
+        viewContext.performAndWait {
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
+            for ingestion in allIngestions {
+                if ingestion.substanceName == "Benzydamine" && ingestion.units == "g" {
+                    ingestion.units = "mg"
+                    ingestion.dose = ingestion.dose * 1000
+                }
+            }
+            try? viewContext.save()
+        }
+    }
+
     func migrateColors() {
         viewContext.performAndWait {
             let companionFetchRequest = SubstanceCompanion.fetchRequest()

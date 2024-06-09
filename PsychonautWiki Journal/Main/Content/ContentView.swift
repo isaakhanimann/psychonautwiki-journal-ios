@@ -26,6 +26,7 @@ struct ContentView: View {
     @AppStorage("hasBeenMigrated2") var hasBeenMigrated2: Bool = false
     @AppStorage("hasBeenMigrated3") var hasBeenMigrated3: Bool = false
     @AppStorage("hasBeenMigrated4") var hasBeenMigrated4: Bool = false
+    @AppStorage("hasBeenMigrated5") var hasBeenMigrated5: Bool = false
 
     var body: some View {
         ContentScreen(isEyeOpen: isEyeOpen2)
@@ -45,6 +46,10 @@ struct ContentView: View {
                 if !hasBeenMigrated4 {
                     PersistenceController.shared.migrateColors()
                     hasBeenMigrated4 = true
+                }
+                if !hasBeenMigrated5 {
+                    PersistenceController.shared.migrateBenzydamineUnits()
+                    hasBeenMigrated5 = true
                 }
             }
     }
