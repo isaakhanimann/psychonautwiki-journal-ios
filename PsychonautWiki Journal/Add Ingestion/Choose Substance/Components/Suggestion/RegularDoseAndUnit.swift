@@ -16,9 +16,13 @@
 
 import Foundation
 
-struct RegularDoseAndUnit: Hashable, Identifiable {
+struct RegularDoseAndUnit: Equatable, Identifiable {
     var id: String {
         (dose?.description ?? "") + units + isEstimate.description + (estimatedDoseStandardDeviation?.description ?? "")
+    }
+
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.doseDescription == rhs.doseDescription
     }
 
     let dose: Double?

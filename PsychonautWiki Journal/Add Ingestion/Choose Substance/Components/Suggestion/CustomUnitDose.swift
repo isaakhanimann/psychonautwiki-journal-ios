@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct CustomUnitDose: Hashable, Identifiable {
+struct CustomUnitDose: Equatable, Identifiable {
 
     var id: String {
         "\(dose)\(isEstimate)\(customUnit.description)"
@@ -89,5 +89,9 @@ struct CustomUnitDose: Hashable, Identifiable {
         } else {
             return description
         }
+    }
+
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.calculatedDoseDescription == rhs.calculatedDoseDescription && lhs.doseDescription == rhs.doseDescription
     }
 }

@@ -16,9 +16,15 @@
 
 import Foundation
 
-extension Sequence where Element: Hashable {
+extension Sequence where Element: Equatable {
     func uniqued() -> [Element] {
-        var set = Set<Element>()
-        return filter { set.insert($0).inserted }
+        var uniqueArray = [Element]()
+        for element in self {
+            if !uniqueArray.contains(element) {
+                uniqueArray.append(element)
+            }
+        }
+        return uniqueArray
     }
 }
+
