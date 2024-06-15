@@ -77,7 +77,7 @@ struct TimelineModel: Hashable {
                         WeightedLine(
                             startTime: ingestion.time,
                             horizontalWeight: ingestion.horizontalWeight,
-                            strengthRelativeToCommonMin: ingestion.strengthRelativeToCommonMin,
+                            strengthRelativeToCommonDose: ingestion.strengthRelativeToCommonDose,
                             onsetDelayInHours: ingestion.onsetDelayInHours
                         )
                     }

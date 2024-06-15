@@ -84,7 +84,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
             WeightedLineRelativeToFirst(
                 startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
                 horizontalWeight: weightedLine.horizontalWeight,
-                height: weightedLine.strengthRelativeToCommonMin,
+                height: weightedLine.strengthRelativeToCommonDose,
                 onsetDelayInHours: weightedLine.onsetDelayInHours
             )
         }
