@@ -31,6 +31,7 @@ struct TimelineWidgetAttributes: ActivityAttributes {
         var everythingForEachRating: [EverythingForOneRating]
         var everythingForEachTimedNote: [EverythingForOneTimedNote]
         var areRedosesDrawnIndividually: Bool
+        var areSubstanceHeightsIndependent: Bool
     }
 
     // Fixed non-changing properties about your activity go here!

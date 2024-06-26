@@ -177,7 +177,8 @@ struct DurationSection: View {
             },
             everythingForEachRating: [],
             everythingForEachTimedNote: [],
-            areRedosesDrawnIndividually: true
+            areRedosesDrawnIndividually: true,
+            areSubstanceHeightsIndependent: false
         )
     }
 

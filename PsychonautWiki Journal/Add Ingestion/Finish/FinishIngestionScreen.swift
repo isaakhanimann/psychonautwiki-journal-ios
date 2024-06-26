@@ -52,6 +52,7 @@ struct FinishIngestionScreen: View {
     @State private var wantsToForceNewExperience = false
     @State private var wantsToStartLiveActivity = true
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually = false
+    @AppStorage(PersistenceController.independentSubstanceHeightKey) var areSubstanceHeightsIndependent = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
 
     var areYouConsumer: Bool {
@@ -286,7 +287,9 @@ struct FinishIngestionScreen: View {
                                             time: timedNote.timeUnwrapped,
                                             color: timedNote.color)
                                     },
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
+                            )
                         }
                     }
                 }
@@ -317,7 +320,9 @@ struct FinishIngestionScreen: View {
                                 substanceGroups: getSubstanceIngestionGroups(ingestions: newExperience.myIngestionsSorted),
                                 everythingForEachRating: [],
                                 everythingForEachTimedNote: [],
-                                areRedosesDrawnIndividually: areRedosesDrawnIndividually)
+                                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
+                            )
                         }
                     }
                 }

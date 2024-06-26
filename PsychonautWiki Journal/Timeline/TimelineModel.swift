@@ -57,7 +57,8 @@ struct TimelineModel: Hashable {
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) {
 
         let startTime = Self.getStartTime(
@@ -91,7 +92,8 @@ struct TimelineModel: Hashable {
                 color: group.color,
                 roaDuration: group.roaDuration,
                 weightedLines: group.weightedLines,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
             )
         }.sorted { lhs, rhs in
             lhs.startInSeconds < rhs.startInSeconds

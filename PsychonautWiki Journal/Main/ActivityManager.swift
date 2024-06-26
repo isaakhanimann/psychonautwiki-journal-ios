@@ -44,7 +44,8 @@ class ActivityManager: ObservableObject {
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) async {
         if authorizationInfo.areActivitiesEnabled {
             if let firstActivity = Activity<TimelineWidgetAttributes>.activities.first, firstActivity.activityState == .active {
@@ -53,20 +54,23 @@ class ActivityManager: ObservableObject {
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
                 )
             } else {
                 await stopActivity(
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
                 )
                 startActivity(
                     substanceGroups: substanceGroups,
                     everythingForEachRating: everythingForEachRating,
                     everythingForEachTimedNote: everythingForEachTimedNote,
-                    areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                    areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
                 )
             }
         }
@@ -76,14 +80,16 @@ class ActivityManager: ObservableObject {
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) {
         let attributes = TimelineWidgetAttributes(name: "Passed from app")
         let state = TimelineWidgetAttributes.ContentState(
             substanceGroups: substanceGroups,
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
-            areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         )
         let content = ActivityContent(state: state, staleDate: nil)
         do {
@@ -107,13 +113,15 @@ class ActivityManager: ObservableObject {
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) async {
         let state = TimelineWidgetAttributes.ContentState(
             substanceGroups: substanceGroups,
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
-            areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         )
         let updatedContent = ActivityContent(state: state, staleDate: nil)
         await activity.update(updatedContent)
@@ -123,14 +131,16 @@ class ActivityManager: ObservableObject {
         substanceGroups: [SubstanceIngestionGroup],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) async {
         if authorizationInfo.areActivitiesEnabled {
             let state = TimelineWidgetAttributes.ContentState(
                 substanceGroups: substanceGroups,
                 everythingForEachRating: everythingForEachRating,
                 everythingForEachTimedNote: everythingForEachTimedNote,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
             )
             let finalContent = ActivityContent(state: state, staleDate: nil)
             for activity in Activity<TimelineWidgetAttributes>.activities {

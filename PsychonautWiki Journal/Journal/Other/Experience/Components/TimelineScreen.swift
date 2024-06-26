@@ -79,7 +79,8 @@ struct TimelineScreen: View {
                 substanceGroups: EffectTimeline_Previews.substanceGroups,
                 everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
                 everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
-                areRedosesDrawnIndividually: false
+                areRedosesDrawnIndividually: false,
+                areSubstanceHeightsIndependent: false
             ),
             timeDisplayStyle: .regular)
     }

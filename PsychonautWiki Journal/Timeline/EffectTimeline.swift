@@ -171,7 +171,8 @@ struct EffectTimeline_Previews: PreviewProvider {
                         substanceGroups: substanceGroups,
                         everythingForEachRating: everythingForEachRating,
                         everythingForEachTimedNote: everythingForEachTimedNote,
-                        areRedosesDrawnIndividually: false
+                        areRedosesDrawnIndividually: false,
+                        areSubstanceHeightsIndependent: false
                     ),
                     height: 200,
                     timeDisplayStyle: .regular
