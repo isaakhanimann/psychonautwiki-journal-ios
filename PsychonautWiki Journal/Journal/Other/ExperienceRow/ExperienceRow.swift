@@ -65,7 +65,8 @@ struct ExperienceRow: View {
                                             color: timedNote.color
                                         )
                                     },
-                                    areRedosesDrawnIndividually: false
+                                    areRedosesDrawnIndividually: false,
+                                    areSubstanceHeightsIndependent: false
                                 )
                             }
                         }

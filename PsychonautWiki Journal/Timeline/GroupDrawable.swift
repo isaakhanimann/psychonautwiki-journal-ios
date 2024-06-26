@@ -47,7 +47,8 @@ struct GroupDrawable {
         color: SubstanceColor,
         roaDuration: RoaDuration?,
         weightedLines: [WeightedLine],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) {
         self.color = color
         let startDate = weightedLines.map({ line in
@@ -55,6 +56,7 @@ struct GroupDrawable {
         }).min() ?? .now
         self.startInSeconds = startGraph.distance(to: startDate)
         self.hasDurationInfo = roaDuration != nil
+        let nonNormalizedMaxOfRoute = weightedLines.map({$0.strengthRelativeToCommonDose}).max() ?? 1
         guard let roaDuration else {
             timelineDrawables = weightedLines.map { weightedLine in
                 NoTimeline(

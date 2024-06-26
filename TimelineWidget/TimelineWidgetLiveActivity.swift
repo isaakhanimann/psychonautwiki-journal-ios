@@ -25,7 +25,8 @@ struct TimelineWidgetLiveActivity: Widget {
                 substanceGroups: context.state.substanceGroups,
                 everythingForEachRating: context.state.everythingForEachRating,
                 everythingForEachTimedNote: context.state.everythingForEachTimedNote,
-                areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: context.state.areSubstanceHeightsIndependent
             )
             VStack(spacing: 0) {
                 GeometryReader { geo in
@@ -54,7 +55,8 @@ struct TimelineWidgetLiveActivity: Widget {
                 substanceGroups: context.state.substanceGroups,
                 everythingForEachRating: context.state.everythingForEachRating,
                 everythingForEachTimedNote: context.state.everythingForEachTimedNote,
-                areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: context.state.areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: context.state.areSubstanceHeightsIndependent
             )
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -92,7 +94,8 @@ struct TimelineWidgetLiveActivity_Previews: PreviewProvider {
         substanceGroups: EffectTimeline_Previews.substanceGroups,
         everythingForEachRating: EffectTimeline_Previews.everythingForEachRating,
         everythingForEachTimedNote: EffectTimeline_Previews.everythingForEachTimedNote,
-        areRedosesDrawnIndividually: false
+        areRedosesDrawnIndividually: false,
+        areSubstanceHeightsIndependent: false
     )
 
     static var previews: some View {

@@ -170,7 +170,8 @@ extension Experience: Comparable {
     func getMyTimeLineModel(
         hiddenIngestions: [ObjectIdentifier],
         hiddenRatings: [ObjectIdentifier],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) -> TimelineModel {
         getTimelineModel(
             from: myIngestionsSorted.filter { !hiddenIngestions.contains($0.id) },
@@ -180,11 +181,12 @@ extension Experience: Comparable {
                     EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                 },
             everythingForEachTimedNote: timedNotesForTimeline,
-            areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         )
     }
 
-    func getConsumers(hiddenIngestions: [ObjectIdentifier], areRedosesDrawnIndividually: Bool) -> [ConsumerWithIngestions] {
+    func getConsumers(hiddenIngestions: [ObjectIdentifier], areRedosesDrawnIndividually: Bool, areSubstanceHeightsIndependent: Bool) -> [ConsumerWithIngestions] {
         let ingestionsByConsumer = Dictionary(grouping: otherIngestions, by: { $0.consumerName })
         var consumers = [ConsumerWithIngestions]()
         for (consumerName, ingestions) in ingestionsByConsumer {
@@ -196,7 +198,8 @@ extension Experience: Comparable {
                         from: ingestions.filter { !hiddenIngestions.contains($0.id) },
                         everythingForEachRating: [],
                         everythingForEachTimedNote: [],
-                        areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                        areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
                     )
                 )
                 consumers.append(newConsumer)
@@ -209,13 +212,15 @@ extension Experience: Comparable {
         from ingestions: [Ingestion],
         everythingForEachRating: [EverythingForOneRating],
         everythingForEachTimedNote: [EverythingForOneTimedNote],
-        areRedosesDrawnIndividually: Bool
+        areRedosesDrawnIndividually: Bool,
+        areSubstanceHeightsIndependent: Bool
     ) -> TimelineModel {
         TimelineModel(
             substanceGroups: getSubstanceIngestionGroups(ingestions: ingestions),
             everythingForEachRating: everythingForEachRating,
             everythingForEachTimedNote: everythingForEachTimedNote,
-            areRedosesDrawnIndividually: areRedosesDrawnIndividually
+            areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         )
     }
 

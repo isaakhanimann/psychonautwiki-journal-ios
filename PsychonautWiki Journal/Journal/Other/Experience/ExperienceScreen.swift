@@ -58,6 +58,7 @@ struct ExperienceScreen: View {
     @AppStorage(PersistenceController.isHidingToleranceChartInExperienceKey) var isHidingToleranceChartInExperience: Bool = false
     @AppStorage(PersistenceController.isHidingSubstanceInfoInExperienceKey) var isHidingSubstanceInfoInExperience: Bool = false
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
+    @AppStorage(PersistenceController.independentSubstanceHeightKey) var areSubstanceHeightsIndependent: Bool = true
     @AppStorage("isOpenLastExperienceSiriTipVisible") private var isSiriTipVisible = true
 
     @Environment(\.dismiss) var dismiss
@@ -121,7 +122,8 @@ struct ExperienceScreen: View {
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                     },
                 everythingForEachTimedNote: experience.timedNotesForTimeline,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
             )
         }
     }
@@ -137,7 +139,8 @@ struct ExperienceScreen: View {
                         EverythingForOneRating(time: shulgin.timeUnwrapped, option: shulgin.optionUnwrapped)
                     },
                 everythingForEachTimedNote: experience.timedNotesForTimeline,
-                areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
             )
         }
     }
@@ -158,7 +161,8 @@ struct ExperienceScreen: View {
                     let timelineModel = experience.getMyTimeLineModel(
                         hiddenIngestions: hiddenIngestions,
                         hiddenRatings: hiddenRatings,
-                        areRedosesDrawnIndividually: areRedosesDrawnIndividually
+                        areRedosesDrawnIndividually: areRedosesDrawnIndividually,
+                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
                     )
                     Section {
                         TimelineSection(
@@ -279,7 +283,7 @@ struct ExperienceScreen: View {
                         }
                     }
                 }
-                ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions, areRedosesDrawnIndividually: areRedosesDrawnIndividually)) { consumer in
+                ForEach(experience.getConsumers(hiddenIngestions: hiddenIngestions, areRedosesDrawnIndividually: areRedosesDrawnIndividually, areSubstanceHeightsIndependent: areSubstanceHeightsIndependent)) { consumer in
                     let consumerTimelineModel = consumer.timelineModel
                     Section {
                         TimelineSection(

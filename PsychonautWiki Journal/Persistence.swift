@@ -32,6 +32,7 @@ struct PersistenceController {
     static let isHidingSubstanceInfoInExperienceKey = "isHidingSubstanceInfoInExperience"
     static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
     static let shouldAutomaticallyStartLiveActivityKey = "shouldAutomaticallyStartLiveActivity"
+    static let independentSubstanceHeightKey = "independentSubstanceHeight"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }

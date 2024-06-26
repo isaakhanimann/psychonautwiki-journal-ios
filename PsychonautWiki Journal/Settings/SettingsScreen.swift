@@ -27,6 +27,7 @@ struct SettingsScreen: View {
     @AppStorage(Authenticator.lockTimeOptionKey) var lockTimeOptionString: String = LockTimeOption.after5Minutes.rawValue
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually: Bool = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
+    @AppStorage(PersistenceController.independentSubstanceHeightKey) var areSubstanceHeightsIndependent: Bool = true
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var authenticator: Authenticator
 
@@ -51,6 +52,7 @@ struct SettingsScreen: View {
             isHidingToleranceChartInExperience: $isHidingToleranceChartInExperience,
             isHidingSubstanceInfoInExperience: $isHidingSubstanceInfoInExperience,
             areRedosesDrawnIndividually: $areRedosesDrawnIndividually,
+            areSubstanceHeightsIndependent: $areSubstanceHeightsIndependent,
             shouldAutomaticallyStartLiveActivity: $shouldAutomaticallyStartLiveActivity,
             isFaceIDAvailable: authenticator.isFaceIDEnabled,
             hasToUnlockApp: $hasToUnlockApp,
@@ -79,6 +81,7 @@ struct SettingsContent: View {
     @Binding var isHidingToleranceChartInExperience: Bool
     @Binding var isHidingSubstanceInfoInExperience: Bool
     @Binding var areRedosesDrawnIndividually: Bool
+    @Binding var areSubstanceHeightsIndependent: Bool
     @Binding var shouldAutomaticallyStartLiveActivity: Bool
     let isFaceIDAvailable: Bool
     @Binding var hasToUnlockApp: Bool
@@ -128,6 +131,7 @@ struct SettingsContent: View {
                         Toggle("Hide tolerance chart", isOn: $isHidingToleranceChartInExperience)
                         Toggle("Hide substance info", isOn: $isHidingSubstanceInfoInExperience)
                         Toggle("Draw redoses individually", isOn: $areRedosesDrawnIndividually)
+                        Toggle("Independent substance heights", isOn: $areSubstanceHeightsIndependent)
                         if #available(iOS 16.2, *) {
                             if ActivityManager.shared.authorizationInfo.areActivitiesEnabled {
                                 Toggle("Automatic live activities", isOn: $shouldAutomaticallyStartLiveActivity)
@@ -283,6 +287,7 @@ struct SettingsContent: View {
         isHidingToleranceChartInExperience: .constant(false),
         isHidingSubstanceInfoInExperience: .constant(false),
         areRedosesDrawnIndividually: .constant(false),
+        areSubstanceHeightsIndependent: .constant(false),
         shouldAutomaticallyStartLiveActivity: .constant(false),
         isFaceIDAvailable: true,
         hasToUnlockApp: .constant(false),
