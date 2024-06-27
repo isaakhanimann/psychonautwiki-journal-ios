@@ -78,7 +78,9 @@ struct FullCumulativeTimelines: TimelineDrawable {
         peak: FullDurationRange,
         offset: FullDurationRange,
         weightedLines: [WeightedLine],
-        graphStartTime: Date
+        graphStartTime: Date,
+        nonNormalizedMaxOfRoute: Double,
+        areSubstanceHeightsIndependent: Bool
     ) {
         let weightedRelatives = weightedLines.map { weightedLine in
             WeightedLineRelativeToFirst(
@@ -188,7 +190,9 @@ struct FullCumulativeTimelines: TimelineDrawable {
 extension RoaDuration {
     func toFullCumulativeTimeline(
         weightedLines: [WeightedLine],
-        graphStartTime: Date
+        graphStartTime: Date,
+        nonNormalizedMaxOfRoute: Double,
+        areSubstanceHeightsIndependent: Bool
     ) -> FullCumulativeTimelines? {
         if let fullOnset = onset?.maybeFullDurationRange,
            let fullComeup = comeup?.maybeFullDurationRange,
@@ -200,7 +204,9 @@ extension RoaDuration {
                 peak: fullPeak,
                 offset: fullOffset,
                 weightedLines: weightedLines,
-                graphStartTime: graphStartTime
+                graphStartTime: graphStartTime,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
             )
         } else {
             return nil

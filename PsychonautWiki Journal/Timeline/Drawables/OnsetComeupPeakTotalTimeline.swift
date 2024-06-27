@@ -26,6 +26,7 @@ struct OnsetComeupPeakTotalTimeline: TimelineDrawable {
     let peakAndTotalWeight: Double
     let nonNormalizedHeight: Double
     let nonNormalizedMaxOfRoute: Double
+    let areSubstanceHeightsIndependent: Bool
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
@@ -93,6 +94,7 @@ extension RoaDuration {
         peakAndTotalWeight: Double,
         nonNormalizedHeight: Double,
         nonNormalizedMaxOfRoute: Double,
+        areSubstanceHeightsIndependent: Bool,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupPeakTotalTimeline? {
@@ -108,6 +110,7 @@ extension RoaDuration {
                 peakAndTotalWeight: peakAndTotalWeight,
                 nonNormalizedHeight: nonNormalizedHeight,
                 nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                 onsetDelayInHours: onsetDelayInHours,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )

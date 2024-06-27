@@ -23,6 +23,7 @@ struct OnsetComeupTimeline: TimelineDrawable {
     let onsetDelayInHours: Double
     let nonNormalizedHeight: Double
     let nonNormalizedMaxOfRoute: Double
+    let areSubstanceHeightsIndependent: Bool
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
     var nonNormalizedOverallMax = 1.0
@@ -76,6 +77,7 @@ extension RoaDuration {
     func toOnsetComeupTimeline(
         nonNormalizedHeight: Double,
         nonNormalizedMaxOfRoute: Double,
+        areSubstanceHeightsIndependent: Bool,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupTimeline? {
@@ -87,6 +89,7 @@ extension RoaDuration {
                 onsetDelayInHours: onsetDelayInHours,
                 nonNormalizedHeight: nonNormalizedHeight,
                 nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {
