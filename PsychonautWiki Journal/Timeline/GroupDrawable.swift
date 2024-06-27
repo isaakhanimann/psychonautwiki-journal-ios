@@ -69,7 +69,6 @@ struct GroupDrawable {
         if let fullCumulative = roaDuration.toFullCumulativeTimeline(
             weightedLines: weightedLines,
             graphStartTime: startGraph,
-            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
             areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         ), !areRedosesDrawnIndividually {
             timelineDrawables = [fullCumulative]
