@@ -23,6 +23,7 @@ struct TotalTimeline: TimelineDrawable {
     let totalWeight: Double
     let nonNormalizedHeight: Double
     let nonNormalizedMaxOfRoute: Double
+    let areSubstanceHeightsIndependent: Bool
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
 
@@ -101,6 +102,7 @@ extension RoaDuration {
         totalWeight: Double,
         nonNormalizedHeight: Double,
         nonNormalizedMaxOfRoute: Double,
+        areSubstanceHeightsIndependent: Bool,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> TotalTimeline? {
@@ -111,6 +113,7 @@ extension RoaDuration {
                 totalWeight: totalWeight,
                 nonNormalizedHeight: nonNormalizedHeight,
                 nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {

@@ -66,7 +66,12 @@ struct GroupDrawable {
             }
             return
         }
-        if let fullCumulative = roaDuration.toFullCumulativeTimeline(weightedLines: weightedLines, graphStartTime: startGraph), !areRedosesDrawnIndividually {
+        if let fullCumulative = roaDuration.toFullCumulativeTimeline(
+            weightedLines: weightedLines,
+            graphStartTime: startGraph,
+            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
+        ), !areRedosesDrawnIndividually {
             timelineDrawables = [fullCumulative]
         } else {
             let fulls = weightedLines.compactMap { weightedLine in
@@ -74,6 +79,7 @@ struct GroupDrawable {
                     peakAndOffsetWeight: weightedLine.horizontalWeight,
                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                     nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                 )
@@ -86,6 +92,7 @@ struct GroupDrawable {
                         peakAndTotalWeight: weightedLine.horizontalWeight,
                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                         nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                     )
@@ -98,6 +105,7 @@ struct GroupDrawable {
                             totalWeight: weightedLine.horizontalWeight,
                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                             nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                         )
@@ -110,6 +118,7 @@ struct GroupDrawable {
                                 totalWeight: weightedLine.horizontalWeight,
                                 nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                                 nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
                                 ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                             )
@@ -122,6 +131,7 @@ struct GroupDrawable {
                                     totalWeight: weightedLine.horizontalWeight,
                                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                                     nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                 )
@@ -134,6 +144,7 @@ struct GroupDrawable {
                                         peakWeight: weightedLine.horizontalWeight,
                                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                                         nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                     )
@@ -145,6 +156,7 @@ struct GroupDrawable {
                                         roaDuration.toOnsetComeupTimeline(
                                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                                             nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                                            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
                                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                         )
