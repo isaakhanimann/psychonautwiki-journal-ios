@@ -72,6 +72,9 @@ struct FullCumulativeTimelines: TimelineDrawable {
 
     private let finalPoints: [FinalPoint]
 
+    let nonNormalizedMaxOfRoute: Double
+    let areSubstanceHeightsIndependent: Bool
+
     init(
         onset: FullDurationRange,
         comeup: FullDurationRange,
@@ -82,6 +85,8 @@ struct FullCumulativeTimelines: TimelineDrawable {
         nonNormalizedMaxOfRoute: Double,
         areSubstanceHeightsIndependent: Bool
     ) {
+        self.nonNormalizedMaxOfRoute = nonNormalizedMaxOfRoute
+        self.areSubstanceHeightsIndependent = areSubstanceHeightsIndependent
         let weightedRelatives = weightedLines.map { weightedLine in
             WeightedLineRelativeToFirst(
                 startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
@@ -162,10 +167,11 @@ struct FullCumulativeTimelines: TimelineDrawable {
         let heightBetween = height - paddingTop - paddingBottom
         guard let firstPoint = finalPoints.first else { return }
         var path = Path()
-        let firstHeightInPx = firstPoint.y/nonNormalizedOverallMax * heightBetween + paddingBottom
+        let maxHeight = areSubstanceHeightsIndependent ? nonNormalizedMaxOfRoute : nonNormalizedOverallMax
+        let firstHeightInPx = firstPoint.y/maxHeight * heightBetween + paddingBottom
         path.move(to: CGPoint(x: firstPoint.x * pixelsPerSec, y: height - firstHeightInPx))
         for point in finalPoints.dropFirst() {
-            let heightInPx = point.y/nonNormalizedOverallMax * heightBetween + paddingBottom
+            let heightInPx = point.y/maxHeight * heightBetween + paddingBottom
             path.addLine(to: CGPoint(x: point.x * pixelsPerSec, y: height - heightInPx))
         }
         context.stroke(path, with: .color(color), style: StrokeStyle.getNormal(lineWidth: lineWidth))
@@ -177,7 +183,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
         context.fill(path, with: .color(color.opacity(shapeOpacity)))
         // draw dots
         for point in finalPoints where point.isIngestionPoint {
-            let pointHeight = point.y/nonNormalizedOverallMax * heightBetween + paddingBottom
+            let pointHeight = point.y/maxHeight * heightBetween + paddingBottom
             context.drawDot(
                 x: point.x * pixelsPerSec,
                 bottomY: height - pointHeight,

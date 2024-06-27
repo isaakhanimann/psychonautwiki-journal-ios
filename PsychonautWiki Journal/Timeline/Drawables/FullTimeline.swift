@@ -30,7 +30,11 @@ struct FullTimeline: TimelineDrawable {
 
     var nonNormalizedOverallMax = 1.0
     private var normalizedHeight: Double {
-        nonNormalizedHeight/nonNormalizedOverallMax
+        if areSubstanceHeightsIndependent {
+            nonNormalizedHeight/nonNormalizedMaxOfRoute
+        } else {
+            nonNormalizedHeight/nonNormalizedOverallMax
+        }
     }
 
     private let onsetComeupWeight = 0.5
