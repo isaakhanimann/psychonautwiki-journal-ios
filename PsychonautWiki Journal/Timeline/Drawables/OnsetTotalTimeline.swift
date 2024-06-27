@@ -23,6 +23,7 @@ struct OnsetTotalTimeline: TimelineDrawable {
     let onsetDelayInHours: Double
     let totalWeight: Double
     let nonNormalizedHeight: Double
+    let nonNormalizedMaxOfRoute: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
 
@@ -98,6 +99,7 @@ extension RoaDuration {
     func toOnsetTotalTimeline(
         totalWeight: Double,
         nonNormalizedHeight: Double,
+        nonNormalizedMaxOfRoute: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetTotalTimeline? {
@@ -108,6 +110,7 @@ extension RoaDuration {
                 onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
                 nonNormalizedHeight: nonNormalizedHeight,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {

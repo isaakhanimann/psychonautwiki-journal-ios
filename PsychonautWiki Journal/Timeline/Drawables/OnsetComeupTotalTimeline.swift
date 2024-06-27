@@ -24,6 +24,7 @@ struct OnsetComeupTotalTimeline: TimelineDrawable {
     let onsetDelayInHours: Double
     let totalWeight: Double
     let nonNormalizedHeight: Double
+    let nonNormalizedMaxOfRoute: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
     let percentSmoothness: Double = 0.5
 
@@ -100,6 +101,7 @@ extension RoaDuration {
     func toOnsetComeupTotalTimeline(
         totalWeight: Double,
         nonNormalizedHeight: Double,
+        nonNormalizedMaxOfRoute: Double,
         onsetDelayInHours: Double,
         ingestionTimeRelativeToStartInSeconds: TimeInterval
     ) -> OnsetComeupTotalTimeline? {
@@ -113,6 +115,7 @@ extension RoaDuration {
                 onsetDelayInHours: onsetDelayInHours,
                 totalWeight: totalWeight,
                 nonNormalizedHeight: nonNormalizedHeight,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                 ingestionTimeRelativeToStartInSeconds: ingestionTimeRelativeToStartInSeconds
             )
         } else {

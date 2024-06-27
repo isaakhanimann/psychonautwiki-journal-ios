@@ -73,6 +73,7 @@ struct GroupDrawable {
                 roaDuration.toFullTimeline(
                     peakAndOffsetWeight: weightedLine.horizontalWeight,
                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                    nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                 )
@@ -84,6 +85,7 @@ struct GroupDrawable {
                     roaDuration.toOnsetComeupPeakTotalTimeline(
                         peakAndTotalWeight: weightedLine.horizontalWeight,
                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                        nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                     )
@@ -95,6 +97,7 @@ struct GroupDrawable {
                         roaDuration.toOnsetComeupTotalTimeline(
                             totalWeight: weightedLine.horizontalWeight,
                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                         )
@@ -106,6 +109,7 @@ struct GroupDrawable {
                             roaDuration.toOnsetTotalTimeline(
                                 totalWeight: weightedLine.horizontalWeight,
                                 nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
                                 ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                             )
@@ -117,6 +121,7 @@ struct GroupDrawable {
                                 roaDuration.toTotalTimeline(
                                     totalWeight: weightedLine.horizontalWeight,
                                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                                    nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                 )
@@ -128,6 +133,7 @@ struct GroupDrawable {
                                     roaDuration.toOnsetComeupPeakTimeline(
                                         peakWeight: weightedLine.horizontalWeight,
                                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                                        nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                                         onsetDelayInHours: weightedLine.onsetDelayInHours,
                                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                     )
@@ -138,6 +144,7 @@ struct GroupDrawable {
                                     let onsetComeups = weightedLines.compactMap { weightedLine in
                                         roaDuration.toOnsetComeupTimeline(
                                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                                            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                                             onsetDelayInHours: weightedLine.onsetDelayInHours,
                                             ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                                         )
