@@ -126,6 +126,7 @@ struct DosageStatScreen: View {
                 }
             }
         }
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle(substanceName)
         .onAppear {
             updateStats()
