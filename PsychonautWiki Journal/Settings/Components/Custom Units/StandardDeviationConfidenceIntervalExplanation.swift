@@ -41,8 +41,8 @@ struct StandardDeviationConfidenceIntervalExplanation: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(mean.formatted())±\(standardDeviation.formatted()) \(unit) means:")
-            Text(StandardDeviationConfidenceIntervals.getTwoStandardDeviationText(mean: mean, standardDeviation: standardDeviation, unit: unit))
             Text(StandardDeviationConfidenceIntervals.getOneStandardDeviationText(mean: mean, standardDeviation: standardDeviation, unit: unit))
+            Text(StandardDeviationConfidenceIntervals.getTwoStandardDeviationText(mean: mean, standardDeviation: standardDeviation, unit: unit))
         }.foregroundStyle(.secondary)
     }
 }
