@@ -24,7 +24,12 @@ struct CustomUnitCalculationText: View {
     let estimatedDoseStandardDeviation: Double?
 
     var body: some View {
-        doseCalculationText.foregroundStyle(calculatedDoseColor)
+        VStack(alignment: .leading) {
+            doseCalculationText
+            if let calculatedDose = customUnitDose?.calculatedDose, let calculatedStandardDeviation = customUnitDose?.calculatedStandardDeviation {
+                Text("Meaning ") + Text(StandardDeviationConfidenceIntervals.getTwoStandardDeviationText(mean: calculatedDose, standardDeviation: calculatedStandardDeviation, unit: customUnit.originalUnitUnwrapped))
+            }
+        }.foregroundStyle(calculatedDoseColor)
     }
 
     private var customUnitDose: CustomUnitDose? {

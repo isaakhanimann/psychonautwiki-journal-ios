@@ -21,14 +21,14 @@ enum StandardDeviationConfidenceIntervals {
     static func getOneStandardDeviationText(mean: Double, standardDeviation: Double, unit: String) -> String {
         let lowerRange = mean - standardDeviation
         let higherRange = mean + standardDeviation
-        return "\(lowerRange.formatted())-\(higherRange.formatted()) \(unit) in 68% of cases"
+        return "\(lowerRange.asRoundedReadableString)-\(higherRange.asRoundedReadableString) \(unit) in 68% of cases"
     }
 
     static func getTwoStandardDeviationText(mean: Double, standardDeviation: Double, unit: String) -> String {
         let twoStandardDeviations = 2*standardDeviation
         let lowerRange = mean - twoStandardDeviations
         let higherRange = mean + twoStandardDeviations
-        return "\(lowerRange.formatted())-\(higherRange.formatted()) \(unit) in 95% of cases"
+        return "\(lowerRange.asRoundedReadableString)-\(higherRange.asRoundedReadableString) \(unit) in 95% of cases"
     }
 }
 
