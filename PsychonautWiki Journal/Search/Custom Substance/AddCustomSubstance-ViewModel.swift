@@ -36,7 +36,11 @@ extension AddCustomSubstanceView {
                 let custom = CustomSubstance(context: context)
                 custom.name = name
                 custom.units = units
-                custom.explanation = explanation
+                if explanation.isEmpty {
+                    custom.explanation = nil
+                } else {
+                    custom.explanation = explanation
+                }
                 try? context.save()
             }
         }

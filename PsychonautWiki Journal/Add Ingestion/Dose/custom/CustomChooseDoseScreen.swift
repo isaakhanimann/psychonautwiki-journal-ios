@@ -73,7 +73,7 @@ struct CustomChooseDoseScreen: View {
 
     private var screen: some View {
         Form {
-            if let explanationUnwrapped = customSubstance?.explanationUnwrapped {
+            if let explanationUnwrapped = customSubstance?.explanation, !explanationUnwrapped.isEmpty {
                 Section {
                     Text(explanationUnwrapped)
                 }
