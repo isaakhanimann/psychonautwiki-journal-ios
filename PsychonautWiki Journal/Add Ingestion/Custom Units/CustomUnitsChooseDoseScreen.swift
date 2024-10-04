@@ -38,7 +38,7 @@ struct CustomUnitsChooseDoseScreen: View {
                             isEstimate: isEstimate,
                             estimatedDoseStandardDeviation: estimatedDoseStandardDeviation)
                         if !(customUnit.substance?.isApproved ?? true) {
-                            Text("Info is not approved by PsychonautWiki administrators.")
+                            Text("Info is not approved by PsychonautWiki moderators.")
                         }
                     }
                 }.listRowSeparator(.hidden)

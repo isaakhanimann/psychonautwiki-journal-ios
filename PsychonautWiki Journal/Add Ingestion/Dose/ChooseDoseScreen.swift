@@ -140,7 +140,7 @@ struct ChooseDoseScreenContent: View {
         Section {
             VStack(alignment: .leading) {
                 if !substance.isApproved {
-                    Text("Info is not approved by PsychonautWiki administrators.")
+                    Text("Info is not approved by PsychonautWiki moderators.")
                 }
                 if let remark = substance.dosageRemark {
                     Text(remark).font(.footnote)
