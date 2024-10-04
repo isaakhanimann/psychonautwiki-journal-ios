@@ -23,14 +23,12 @@ struct CustomUnitBox: View {
     var body: some View {
         NavigationLink(value: customUnit) {
             GroupBox {
-                if let dose = customUnit.doseUnwrapped {
-                    HStack {
-                        Text("\(dose.formatted()) \(customUnit.originalUnitUnwrapped) per \(customUnit.unitUnwrapped)")
-                            .multilineTextAlignment(.leading)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
+                HStack {
+                    Text("\(customUnit.doseOfOneUnitDescription) per \(customUnit.unitUnwrapped)")
+                        .multilineTextAlignment(.leading)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
                 }
             } label: {
                 Text("\(customUnit.substanceNameUnwrapped) (\(customUnit.nameUnwrapped))")
