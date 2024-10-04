@@ -97,11 +97,7 @@ struct FinishCustomUnitsScreen: View {
                     }
                 }
                 if let dosePerUnit, let estimatedDoseStandardDeviation {
-                    VStack(alignment: .leading) {
-                        Text("\(dosePerUnit.formatted())±\(estimatedDoseStandardDeviation.formatted()) \(originalUnit) means:")
-                        Text(StandardDeviationConfidenceIntervals.getTwoStandardDeviationText(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit))
-                        Text(StandardDeviationConfidenceIntervals.getOneStandardDeviationText(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit))
-                    }.foregroundStyle(.secondary)
+                    StandardDeviationConfidenceIntervalExplanation(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
                 }
                 Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
             }.listRowSeparator(.hidden)

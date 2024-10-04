@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with PsychonautWiki Journal. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
+import SwiftUI
+
 // https://online.stat.psu.edu/stat200/lesson/2/2.2/2.2.7#:~:text=The%2095%25%20Rule%20states%20that,mean%20on%20a%20normal%20distribution
 enum StandardDeviationConfidenceIntervals {
     static func getOneStandardDeviationText(mean: Double, standardDeviation: Double, unit: String) -> String {
@@ -27,5 +29,20 @@ enum StandardDeviationConfidenceIntervals {
         let lowerRange = mean - twoStandardDeviations
         let higherRange = mean + twoStandardDeviations
         return "\(lowerRange.formatted())-\(higherRange.formatted()) \(unit) in 95% of cases"
+    }
+}
+
+struct StandardDeviationConfidenceIntervalExplanation: View {
+
+    let mean: Double
+    let standardDeviation: Double
+    let unit: String
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("\(mean.formatted())±\(standardDeviation.formatted()) \(unit) means:")
+            Text(StandardDeviationConfidenceIntervals.getTwoStandardDeviationText(mean: mean, standardDeviation: standardDeviation, unit: unit))
+            Text(StandardDeviationConfidenceIntervals.getOneStandardDeviationText(mean: mean, standardDeviation: standardDeviation, unit: unit))
+        }.foregroundStyle(.secondary)
     }
 }

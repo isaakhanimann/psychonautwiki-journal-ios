@@ -178,6 +178,7 @@ struct ChooseDoseScreenContent: View {
                             isEstimatedDeviationFocused = true
                         }
                     })
+                let units = selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits
                 if isEstimate {
                     HStack {
                         Image(systemName: "plusminus")
@@ -189,8 +190,11 @@ struct ChooseDoseScreenContent: View {
                         .keyboardType(.decimalPad)
                         .focused($isEstimatedDeviationFocused)
                         Spacer()
-                        Text(selectedUnits.isEmpty ? roaDose?.units ?? "" : selectedUnits)
+                        Text(units)
                     }
+                }
+                if let selectedPureDose, let selectedDoseDeviation {
+                    StandardDeviationConfidenceIntervalExplanation(mean: selectedPureDose, standardDeviation: selectedDoseDeviation, unit: units)
                 }
             }
             unknownDoseLink
