@@ -17,6 +17,9 @@
 import SwiftUI
 
 struct AddCustomSubstanceView: View {
+
+    let searchText: String
+
     @StateObject private var viewModel = ViewModel()
     @Environment(\.presentationMode) private var presentationMode
 
@@ -44,6 +47,9 @@ struct AddCustomSubstanceView: View {
                 }
             }
             .scrollDismissesKeyboard(.interactively)
+            .onAppear(perform: {
+                viewModel.name = searchText
+            })
             .navigationTitle("Create Custom")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -65,5 +71,5 @@ struct AddCustomSubstanceView: View {
 }
 
 #Preview {
-    AddCustomSubstanceView()
+    AddCustomSubstanceView(searchText: "My subs")
 }

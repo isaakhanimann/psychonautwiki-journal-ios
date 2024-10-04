@@ -158,7 +158,7 @@ struct ChooseSubstanceContent: View {
                     Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }
                 .sheet(isPresented: $isShowingAddCustomSheet) {
-                    AddCustomSubstanceView()
+                    AddCustomSubstanceView(searchText: searchText)
                 }
             }.padding(.horizontal)
         }

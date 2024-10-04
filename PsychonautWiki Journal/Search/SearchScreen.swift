@@ -135,7 +135,7 @@ struct SearchScreen: View {
                     Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }
                 .sheet(isPresented: $isShowingAddCustomSubstance) {
-                    AddCustomSubstanceView()
+                    AddCustomSubstanceView(searchText: searchText)
                 }
             }
             .listStyle(.plain)
