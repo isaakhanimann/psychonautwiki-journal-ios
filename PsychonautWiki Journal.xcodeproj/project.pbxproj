@@ -65,6 +65,7 @@
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
+		EA22BC722CAFA7F700BE7D35 /* StandardDeviationConfidenceIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22BC712CAFA7F300BE7D35 /* StandardDeviationConfidenceIntervals.swift */; };
 		EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2BE2976C0D600A1051A /* NextLabel.swift */; };
 		EA29DC3A2B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */; };
 		EA2A5C5F29F01F58004D8A7E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */; };
@@ -428,6 +429,7 @@
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
+		EA22BC712CAFA7F300BE7D35 /* StandardDeviationConfidenceIntervals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardDeviationConfidenceIntervals.swift; sourceTree = "<group>"; };
 		EA26B2BE2976C0D600A1051A /* NextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLabel.swift; sourceTree = "<group>"; };
 		EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-asRoundedReadableString.swift"; sourceTree = "<group>"; };
 		EA2A5C5E29F01F58004D8A7E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -859,6 +861,7 @@
 				EA03ABC22B39AAF100DB8D0D /* EditCustomUnitsScreen.swift */,
 				EA302E432B2F3349007F113F /* CustomUnitsChooseSubstanceScreen.swift */,
 				EA302E592B38758A007F113F /* FinishCustomUnitsScreen.swift */,
+				EA22BC712CAFA7F300BE7D35 /* StandardDeviationConfidenceIntervals.swift */,
 			);
 			path = "Custom Units";
 			sourceTree = "<group>";
@@ -2077,6 +2080,7 @@
 				EA418A2F296C03AF00DEA663 /* ExperienceLocation-CoreDataHelpers.swift in Sources */,
 				EA48F8B029EBEE4B007DA8C5 /* DangerTriangles.swift in Sources */,
 				EAE4722226CBA664009FB0EC /* ChooseSubstanceScreen.swift in Sources */,
+				EA22BC722CAFA7F700BE7D35 /* StandardDeviationConfidenceIntervals.swift in Sources */,
 				EA2D196B2B11E8AE00B270A2 /* RouteBox.swift in Sources */,
 				EA48F8A429E991C6007DA8C5 /* DateDifference.swift in Sources */,
 				EA418A072969740D00DEA663 /* IngestionNoteScreen.swift in Sources */,
