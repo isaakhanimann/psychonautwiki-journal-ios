@@ -238,7 +238,7 @@ struct FinishIngestionScreen: View {
         if wantsToForceNewExperience {
             selectedExperience = nil
         } else {
-            selectedExperience = FinishIngestionScreen.getExperienceClosest(
+            selectedExperience = FinishIngestionScreen.getClosestExperience(
                 from: experiencesWithinLargerRange,
                 date: selectedTime)
         }
@@ -373,10 +373,10 @@ struct FinishIngestionScreen: View {
         ingestion.substanceCompanion = companion
     }
 
-    private static func getExperienceClosest(from experiences: [Experience], date: Date) -> Experience? {
-        let shortInterval: TimeInterval = 12 * 60 * 60
+    private static func getClosestExperience(from experiences: [Experience], date: Date) -> Experience? {
+        let shortInterval: TimeInterval = 15 * 60 * 60
         let shortRange = date.addingTimeInterval(-shortInterval) ... date.addingTimeInterval(shortInterval)
-        let veryShortInterval: TimeInterval = 8 * 60 * 60
+        let veryShortInterval: TimeInterval = 3 * 60 * 60
         let veryShortRange = date.addingTimeInterval(-veryShortInterval) ... date.addingTimeInterval(veryShortInterval)
         return experiences.first { exp in
             let experienceStart = exp.ingestionsSorted.first?.time ?? exp.sortDateUnwrapped
