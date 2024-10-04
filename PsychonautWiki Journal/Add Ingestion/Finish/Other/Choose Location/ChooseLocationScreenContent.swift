@@ -162,7 +162,7 @@ struct ChooseLocationScreenContent: View {
     }
 }
 
-extension CLLocationCoordinate2D: Identifiable {
+extension CLLocationCoordinate2D: @retroactive Identifiable {
     public var id: String {
         "\(latitude)-\(longitude)"
     }
