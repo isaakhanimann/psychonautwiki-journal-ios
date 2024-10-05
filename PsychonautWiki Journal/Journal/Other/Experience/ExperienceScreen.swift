@@ -40,6 +40,8 @@ struct ExperienceScreen: View {
             return .relativeToNow
         case .relativeToStart:
             return .relativeToStart
+        case .between:
+            return .between
         case .auto:
             if experience.isCurrent {
                 return .relativeToNow
@@ -174,7 +176,9 @@ struct ExperienceScreen: View {
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            hiddenIngestions: hiddenIngestions)
+                            hiddenIngestions: hiddenIngestions,
+                            isCurrentExperience: experience.isCurrent
+                        )
                         if #available(iOS 16.2, *) {
                             if experience.isCurrent && timelineModel.isWorthDrawing {
                                 LiveActivityButton(
@@ -295,7 +299,9 @@ struct ExperienceScreen: View {
                             timeDisplayStyle: timeDisplayStyle,
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
-                            hiddenIngestions: hiddenIngestions)
+                            hiddenIngestions: hiddenIngestions,
+                            isCurrentExperience: experience.isCurrent
+                        )
                     } header: {
                         HStack {
                             Text(consumer.consumerName)

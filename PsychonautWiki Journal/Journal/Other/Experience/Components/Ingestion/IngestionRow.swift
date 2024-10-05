@@ -16,32 +16,29 @@
 
 import SwiftUI
 
-struct IngestionRow: View {
+struct IngestionRow<Content: View>: View {
     @ObservedObject var ingestion: Ingestion
-    let firstIngestionTime: Date?
-    let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
+    @ViewBuilder let timeText: Content
 
     var body: some View {
         IngestionRowContent(
             ingestion: ingestion,
             substanceColor: ingestion.substanceColor,
-            timeDisplayStyle: timeDisplayStyle,
             isEyeOpen: isEyeOpen,
             isHidingDosageDots: isHidingDosageDots,
-            firstIngestionTime: firstIngestionTime
+            timeText: {timeText}
         ).foregroundColor(.primary) // to override the button styles
     }
 }
 
-private struct IngestionRowContent: View {
+private struct IngestionRowContent<Content: View>: View {
     @ObservedObject var ingestion: Ingestion
     let substanceColor: SubstanceColor
-    let timeDisplayStyle: TimeDisplayStyle
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
-    let firstIngestionTime: Date?
+    @ViewBuilder let timeText: Content
 
     var body: some View {
         rowContent.alignmentGuide(.listRowSeparatorLeading) { dimension in
@@ -67,22 +64,7 @@ private struct IngestionRowContent: View {
                         .font(.headline)
                         .foregroundColor(.primary)
                     Spacer()
-                    Group {
-                        if timeDisplayStyle == .relativeToNow {
-                            RelativeTimeText(date: ingestion.timeUnwrapped)
-                        } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                            let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
-                            let isFirstIngestion = dateComponents.day == 0 && dateComponents.hour == 0 && dateComponents.minute == 0 && dateComponents.second == 0
-                            if isFirstIngestion {
-                                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-                            } else {
-                                Text("+ ") + Text(DateDifference.formattedWithMax2Units(dateComponents))
-                            }
-                        } else {
-                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-                        }
-                    }
-                    .font(.subheadline)
+                    timeText.font(.subheadline)
                 }
                 doseRow
                 Group {
@@ -150,82 +132,90 @@ private struct IngestionRowContent: View {
             IngestionRowContent(
                 ingestion: Ingestion.knownDosePreviewSample,
                 substanceColor: .pink,
-                timeDisplayStyle: .relativeToStart,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.estimatedDosePreviewSample,
                 substanceColor: .blue,
-                timeDisplayStyle: .relativeToStart,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.unknownDosePreviewSample,
                 substanceColor: .blue,
-                timeDisplayStyle: .relativeToStart,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
+                timeText: {
+                    Text("Sat 13:44")
+                }            )
             IngestionRowContent(
                 ingestion: Ingestion.notePreviewSample,
                 substanceColor: .blue,
-                timeDisplayStyle: .relativeToStart,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.customSubstancePreviewSample,
                 substanceColor: .purple,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
-            )
+                timeText: {
+                    Text("Sat 13:44")
+                }            )
             IngestionRowContent(
                 ingestion: Ingestion.customUnitPreviewSample,
                 substanceColor: .orange,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.customUnitUnknownDosePreviewSample,
                 substanceColor: .orange,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.estimatedCustomUnitPreviewSample,
                 substanceColor: .orange,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.estimatedQuantitativelyCustomUnitPreviewSample,
                 substanceColor: .orange,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
             IngestionRowContent(
                 ingestion: Ingestion.everythingEstimatedQuantitativelyPreviewSample,
                 substanceColor: .orange,
-                timeDisplayStyle: .regular,
                 isEyeOpen: true,
                 isHidingDosageDots: false,
-                firstIngestionTime: Date().addingTimeInterval(-60 * 60)
+                timeText: {
+                    Text("Sat 13:44")
+                }
             )
         }
     }

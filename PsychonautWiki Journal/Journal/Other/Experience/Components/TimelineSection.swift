@@ -24,7 +24,7 @@ struct TimelineSection: View {
     let isEyeOpen: Bool
     let isHidingDosageDots: Bool
     let hiddenIngestions: [ObjectIdentifier]
-
+    let isCurrentExperience: Bool
 
     var body: some View {
         Group {
@@ -35,25 +35,68 @@ struct TimelineSection: View {
                     timeDisplayStyle: timeDisplayStyle
                 )
             }
-            ForEach(ingestionsSorted) { ing in
+            let firstIngestionTime = ingestionsSorted.first?.time
+            ForEach(Array(ingestionsSorted.enumerated()), id: \.element) { index, ingestion in
+                let previousIngestion = ingestionsSorted[safe: index - 1]
+                let isFirstIngestion = index == 0
+                let isLastIngestion = index == ingestionsSorted.count - 1
+
                 Button {
-                    editIngestion(ing)
+                    editIngestion(ingestion)
                 } label: {
                     HStack(alignment: .center) {
                         IngestionRow(
-                            ingestion: ing,
-                            firstIngestionTime: ingestionsSorted.first?.time,
-                            timeDisplayStyle: timeDisplayStyle,
+                            ingestion: ingestion,
                             isEyeOpen: isEyeOpen,
-                            isHidingDosageDots: isHidingDosageDots
+                            isHidingDosageDots: isHidingDosageDots,
+                            timeText: {
+                                if timeDisplayStyle == .relativeToNow {
+                                    RelativeTimeText(date: ingestion.timeUnwrapped)
+                                } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                                    if isFirstIngestion {
+                                        Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                    } else {
+                                        let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
+                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                                    }
+                                } else if timeDisplayStyle == .between {
+                                    if isFirstIngestion {
+                                        Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                    } else if let previousIngestion {
+                                        let dateComponents = DateDifference.between(previousIngestion.timeUnwrapped, and: ingestion.timeUnwrapped)
+                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                    }
+                                } else {
+                                    Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                }
+                            }
                         )
-                        let isIngestionHidden = hiddenIngestions.contains(ing.id)
+                        let isIngestionHidden = hiddenIngestions.contains(ingestion.id)
                         if isIngestionHidden {
                             Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
                     }
                 }
+                if isLastIngestion && isCurrentExperience {
+                    if timeDisplayStyle == .between  {
+                        TimelineView(.everyMinute) { _ in
+                            Text("Currently ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" later")
+                        }
+                    } else if timeDisplayStyle == .relativeToStart  {
+                        TimelineView(.everyMinute) { _ in
+                            Text("Currently ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" in")
+                        }
+                    }
+
+                }
             }
         }
+    }
+}
+
+extension Collection {
+    // Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
