@@ -222,7 +222,16 @@ struct FinishIngestionScreen: View {
                 EditConsumerScreen(consumerName: $consumerName)
             }
         })
-        .onFirstAppear { // because this function is going to be called again when navigating back from color picker screen
+        .onFirstAppear { // because onAppear is called again when navigating back from color picker screen
+            let timeIntervalSince1970 = UserDefaults.standard.double(forKey: PersistenceController.lastIngestionTimeOfExperienceWhereAddIngestionTappedKey)
+            if timeIntervalSince1970 != 0 {
+                let lastIngestionTimeOfExperienceWhereAddIngestionTapped = Date(timeIntervalSince1970: timeIntervalSince1970)
+                let hoursSince = lastIngestionTimeOfExperienceWhereAddIngestionTapped.distance(to: .now)/(60*60)
+                if hoursSince > 20 {
+                    selectedTime = lastIngestionTimeOfExperienceWhereAddIngestionTapped
+                }
+            }
+
             selectExperienceBasedOnCurrentTime()
             locationManager.selectedLocation = locationManager.currentLocation
             locationManager.selectedLocationName = locationManager.currentLocation?.name ?? ""

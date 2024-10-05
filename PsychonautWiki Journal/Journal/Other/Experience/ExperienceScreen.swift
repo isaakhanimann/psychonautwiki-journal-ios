@@ -147,13 +147,16 @@ struct ExperienceScreen: View {
         }
     }
 
+    private func addIngestion() {
+        UserDefaults.standard.set(experience.ingestionsSorted.last?.time?.timeIntervalSince1970, forKey: PersistenceController.lastIngestionTimeOfExperienceWhereAddIngestionTappedKey)
+        Navigator.shared.showAddIngestionFullScreenCover() // can't use Navigator as environment object because for some reason this messes up the layout of this screen
+    }
+
 
     var body: some View {
         FabPosition {
             if experience.isCurrent {
-                Button {
-                    Navigator.shared.showAddIngestionFullScreenCover() // can't use Navigator as environment object because for some reason this messes up the layout of this screen
-                } label: {
+                Button(action: addIngestion) {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
             }
@@ -407,7 +410,8 @@ struct ExperienceScreen: View {
                     experience: experience,
                     saveableTimeDisplayStyle: saveableTimeDisplayStyle,
                     sheetToShow: $sheetToShow,
-                    isShowingDeleteConfirmation: $isShowingDeleteConfirmation
+                    isShowingDeleteConfirmation: $isShowingDeleteConfirmation,
+                    addIngestion: addIngestion
                 )
             }
         }

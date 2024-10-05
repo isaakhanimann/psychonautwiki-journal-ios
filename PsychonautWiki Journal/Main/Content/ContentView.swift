@@ -115,6 +115,7 @@ struct ContentScreen: View {
             }
         }
         .fullScreenCover(isPresented: $navigator.isShowingAddIngestionSheet, onDismiss: {
+            UserDefaults.standard.set(nil, forKey: PersistenceController.lastIngestionTimeOfExperienceWhereAddIngestionTappedKey)
             maybeRequestAppRating()
         }) {
             JournalAuthenticatorWrapperView(authenticator: authenticator) {

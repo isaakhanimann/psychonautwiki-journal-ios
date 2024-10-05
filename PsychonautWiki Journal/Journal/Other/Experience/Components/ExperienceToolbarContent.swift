@@ -21,6 +21,7 @@ struct ExperienceToolbarContent: View {
     @Binding var saveableTimeDisplayStyle: SaveableTimeDisplayStyle
     @Binding var sheetToShow: ExperienceScreen.SheetOption?
     @Binding var isShowingDeleteConfirmation: Bool
+    let addIngestion: () -> Void
 
     @AppStorage(PersistenceController.isEyeOpenKey2) private var isEyeOpen: Bool = false
 
@@ -91,6 +92,11 @@ struct ExperienceToolbarContent: View {
                         sheetToShow = .addTimedNote
                     } label: {
                         Label("Add Timed Note", systemImage: "note.text")
+                    }
+                    if !experience.isCurrent {
+                        Button(action: addIngestion) {
+                            Label("Add Ingestion", systemImage: "plus")
+                        }
                     }
                 } label: {
                     Label("Add", systemImage: "plus")

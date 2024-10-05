@@ -33,6 +33,7 @@ struct PersistenceController {
     static let areRedosesDrawnIndividuallyKey = "areRedosesDrawnIndividually"
     static let shouldAutomaticallyStartLiveActivityKey = "shouldAutomaticallyStartLiveActivity"
     static let independentSubstanceHeightKey = "independentSubstanceHeight"
+    static let lastIngestionTimeOfExperienceWhereAddIngestionTappedKey = "lastIngestionTimeOfExperienceWhereAddIngestionTapped"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }
