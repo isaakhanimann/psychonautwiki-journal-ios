@@ -62,6 +62,14 @@ struct EditColorsScreen: View {
             }
         })
         .navigationTitle("Edit Colors")
+        .onAppear {
+            for substanceCompanion in substanceCompanions {
+                if substanceCompanion.ingestionsUnwrapped.isEmpty {
+                    PersistenceController.shared.viewContext.delete(substanceCompanion)
+                }
+                PersistenceController.shared.saveViewContext()
+            }
+        }
     }
 }
 

@@ -28,6 +28,10 @@ extension SubstanceCompanion {
         substanceName ?? "Unknown"
     }
 
+    var ingestionsUnwrapped: [Ingestion] {
+        ingestions?.allObjects as? [Ingestion] ?? []
+    }
+
     static var fakeMDMA: SubstanceCompanion {
         let companion = SubstanceCompanion(context: PersistenceController.preview.viewContext)
         companion.substanceName = "MDMA"
