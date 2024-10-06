@@ -383,18 +383,13 @@ struct FinishIngestionScreen: View {
     }
 
     private static func getClosestExperience(from experiences: [Experience], date: Date) -> Experience? {
-        let shortInterval: TimeInterval = 15 * 60 * 60
-        let shortRange = date.addingTimeInterval(-shortInterval) ... date.addingTimeInterval(shortInterval)
-        let veryShortInterval: TimeInterval = 3 * 60 * 60
-        let veryShortRange = date.addingTimeInterval(-veryShortInterval) ... date.addingTimeInterval(veryShortInterval)
+        let fifteenHours: TimeInterval = 15 * 60 * 60
+        let threeHours: TimeInterval = 3 * 60 * 60
         return experiences.first { exp in
             let experienceStart = exp.ingestionsSorted.first?.time ?? exp.sortDateUnwrapped
             let lastIngestionTime = exp.ingestionsSorted.last?.time ?? exp.sortDateUnwrapped
-            if shortRange.contains(experienceStart) {
-                return true
-            } else {
-                return veryShortRange.contains(lastIngestionTime)
-            }
+            let experienceRange = experienceStart.addingTimeInterval(-threeHours) ... max(experienceStart.addingTimeInterval(fifteenHours), lastIngestionTime.addingTimeInterval(threeHours))
+            return experienceRange.contains(date)
         }
     }
 
