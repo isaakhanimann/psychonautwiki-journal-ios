@@ -80,11 +80,11 @@ struct TimelineSection: View {
                 if isLastIngestion && isCurrentExperience {
                     if timeDisplayStyle == .between  {
                         TimelineView(.everyMinute) { _ in
-                            Text("Currently ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" later")
+                            Text("Last ingestion was ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" ago")
                         }
                     } else if timeDisplayStyle == .relativeToStart  {
                         TimelineView(.everyMinute) { _ in
-                            Text("Currently ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" in")
+                            Text("Now ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" in (since start)")
                         }
                     }
 
