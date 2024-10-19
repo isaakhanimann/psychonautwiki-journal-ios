@@ -36,7 +36,10 @@ struct ShulginRatingSection: View {
 
     var body: some View {
         Section("Shulgin Rating") {
-            ForEach(experience.ratingsWithTimeSorted) { rating in
+            let ratingsSorted = experience.ratingsWithTimeSorted
+            ForEach(Array(ratingsSorted.enumerated()), id: \.element) { index, rating in
+                let previousRating = ratingsSorted[safe: index - 1]
+                let isFirstRating = index == 0
                 Button(action: {
                     sheetToShow = .editRegular(rating: rating)
                 }, label: {
@@ -45,11 +48,24 @@ struct ShulginRatingSection: View {
                         if isRatingHidden {
                             Label("Hidden", systemImage: "eye.slash.fill").labelStyle(.iconOnly)
                         }
-                        RatingRow(
-                            rating: rating,
-                            timeDisplayStyle: timeDisplayStyle,
-                            firstIngestionTime: firstIngestionTime
-                        )
+                        RatingRow(rating: rating) {
+                            if timeDisplayStyle == .relativeToNow {
+                                RelativeTimeText(date: rating.timeUnwrapped)
+                            } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                                let dateComponents = DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)
+                                Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                            } else if let firstIngestionTime, timeDisplayStyle == .between {
+                                if isFirstRating {
+                                    let dateComponents = DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)
+                                    Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after first ingestion")
+                                } else if let previousRating {
+                                    let dateComponents = DateDifference.between(previousRating.timeUnwrapped, and: rating.timeUnwrapped)
+                                    Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                }
+                            } else {
+                                Text(rating.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                            }
+                        }
                     }.foregroundColor(.primary)
                 })
             }
@@ -57,11 +73,9 @@ struct ShulginRatingSection: View {
                 Button(action: {
                     sheetToShow = .editOverall(rating: overallRating)
                 }, label: {
-                    RatingRow(
-                        rating: overallRating,
-                        timeDisplayStyle: timeDisplayStyle,
-                        firstIngestionTime: firstIngestionTime
-                    ).foregroundColor(.primary)
+                    RatingRow(rating: overallRating){
+                        Text("Overall Rating")
+                    }.foregroundColor(.primary)
                 })
             }
         }.sheet(item: $sheetToShow) { sheetOption in
@@ -87,24 +101,13 @@ struct ShulginRatingSection: View {
     }
 }
 
-struct RatingRow: View {
+struct RatingRow<Content: View>: View {
     @ObservedObject var rating: ShulginRating
-    let timeDisplayStyle: TimeDisplayStyle
-    let firstIngestionTime: Date?
+    @ViewBuilder let timeText: Content
 
     var body: some View {
         HStack {
-            if let ratingTime = rating.time {
-                if timeDisplayStyle == .relativeToNow {
-                    Text(ratingTime, style: .relative) + Text(" ago")
-                } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                    Text("+ ") + Text(DateDifference.maxTwoUnitsBetween(firstIngestionTime, and: ratingTime))
-                } else {
-                    Text(ratingTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-                }
-            } else {
-                Text("Overall Rating")
-            }
+            timeText
             Spacer()
             Text(rating.optionUnwrapped.stringRepresentation)
         }.font(.headline)
