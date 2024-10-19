@@ -19,7 +19,7 @@ import SwiftUI
 struct FabLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
-            let circleWidth: Double = 70
+            let circleWidth: Double = 54
             Circle()
                 .fill(Color.accentColor)
                 .frame(width: circleWidth, height: circleWidth)
