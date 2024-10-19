@@ -245,15 +245,32 @@ struct ExperienceScreen: View {
                 let timedNotesSorted = experience.timedNotesSorted
                 if !timedNotesSorted.isEmpty {
                     Section("Timed Notes") {
-                        ForEach(timedNotesSorted) { timedNote in
+                        ForEach(Array(timedNotesSorted.enumerated()), id: \.element) { index, timedNote in
+                            let previousNote = timedNotesSorted[safe: index - 1]
+                            let isFirstNote = index == 0
                             Button(action: {
                                 sheetToShow = .editTimedNote(timedNote: timedNote)
                             }, label: {
-                                TimedNoteRow(
-                                    timedNote: timedNote,
-                                    timeDisplayStyle: timeDisplayStyle,
-                                    firstIngestionTime: experience.ingestionsSorted.first?.time
-                                ).foregroundColor(.primary) // to override the button styles
+                                let time = timedNote.timeUnwrapped
+                                let firstIngestionTime = experience.ingestionsSorted.first?.time
+                                TimedNoteRow(timedNote: timedNote) {
+                                    if timeDisplayStyle == .relativeToNow {
+                                        RelativeTimeText(date: timedNote.timeUnwrapped)
+                                    } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                                        let dateComponents = DateDifference.between(firstIngestionTime, and: time)
+                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                                    } else if let firstIngestionTime, timeDisplayStyle == .between {
+                                        if isFirstNote {
+                                            let dateComponents = DateDifference.between(firstIngestionTime, and: time)
+                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after first ingestion")
+                                        } else if let previousNote {
+                                            let dateComponents = DateDifference.between(previousNote.timeUnwrapped, and: time)
+                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                        }
+                                    } else {
+                                        Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                    }
+                                }.foregroundColor(.primary) // to override the button styles
                             })
                         }
                     }

@@ -16,30 +16,26 @@
 
 import SwiftUI
 
-struct TimedNoteRow: View {
+struct TimedNoteRow<Content: View>: View {
     @ObservedObject var timedNote: TimedNote
-    let timeDisplayStyle: TimeDisplayStyle
-    let firstIngestionTime: Date?
+    @ViewBuilder var timeText: Content
 
     var body: some View {
         TimedNoteRowContent(
-            time: timedNote.timeUnwrapped,
             note: timedNote.noteUnwrapped,
             color: timedNote.color,
-            isPartOfTimeline: timedNote.isPartOfTimeline,
-            timeDisplayStyle: timeDisplayStyle,
-            firstIngestionTime: firstIngestionTime
-        )
+            isPartOfTimeline: timedNote.isPartOfTimeline
+        ) {
+            timeText
+        }
     }
 }
 
-private struct TimedNoteRowContent: View {
-    let time: Date
+private struct TimedNoteRowContent<Content: View>: View {
     let note: String
     let color: SubstanceColor
     let isPartOfTimeline: Bool
-    let timeDisplayStyle: TimeDisplayStyle
-    let firstIngestionTime: Date?
+    @ViewBuilder var timeText: Content
 
     var body: some View {
         HStack {
@@ -52,20 +48,15 @@ private struct TimedNoteRowContent: View {
             }
             .padding(.vertical, 8)
             VStack(alignment: .leading) {
-                timeText.font(.headline) + Text(isPartOfTimeline ? "" : " (not part of timeline)").font(.footnote).foregroundColor(.secondary)
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                    timeText.font(.headline)
+                    if !isPartOfTimeline {
+                        Text(" (not part of timeline)").font(.footnote).foregroundColor(.secondary)
+                    }
+                }
 
                 Text(note).font(.subheadline)
             }
-        }
-    }
-
-    private var timeText: Text {
-        if timeDisplayStyle == .relativeToNow {
-            return Text(time, style: .relative) + Text(" ago")
-        } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-            return Text(DateDifference.maxTwoUnitsBetween(firstIngestionTime, and: time))
-        } else {
-            return Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
         }
     }
 }
@@ -73,20 +64,18 @@ private struct TimedNoteRowContent: View {
 #Preview {
     List {
         TimedNoteRowContent(
-            time: .now,
             note: "Your note",
             color: .blue,
-            isPartOfTimeline: true,
-            timeDisplayStyle: .regular,
-            firstIngestionTime: nil
-        )
+            isPartOfTimeline: true
+        ) {
+            Text("Sat 7:37")
+        }
         TimedNoteRowContent(
-            time: .now,
             note: "Your note",
             color: .blue,
-            isPartOfTimeline: false,
-            timeDisplayStyle: .regular,
-            firstIngestionTime: nil
-        )
+            isPartOfTimeline: false
+        ) {
+            Text("Sat 7:37")
+        }
     }
 }
