@@ -21,7 +21,7 @@ import AppIntents
 struct ExperienceScreen: View {
     @ObservedObject var experience: Experience
 
-    @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = SaveableTimeDisplayStyle.regular.rawValue
+    @AppStorage(PersistenceController.timeDisplayStyleKey) private var timeDisplayStyleText: String = SaveableTimeDisplayStyle.auto.rawValue
 
     private var saveableTimeDisplayStyle: Binding<SaveableTimeDisplayStyle> {
         Binding(
