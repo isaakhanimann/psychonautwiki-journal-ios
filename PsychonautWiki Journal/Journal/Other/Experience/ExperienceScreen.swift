@@ -46,7 +46,7 @@ struct ExperienceScreen: View {
             if experience.isCurrent {
                 return .relativeToNow
             } else {
-                return .relativeToStart
+                return .regular
             }
         }
     }
