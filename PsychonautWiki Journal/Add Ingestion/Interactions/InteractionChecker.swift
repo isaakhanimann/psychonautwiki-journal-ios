@@ -152,7 +152,7 @@ enum InteractionChecker {
 
     static func hasXAndMatches(wordWithX: String, matchWith unchangedWord: String) -> Bool {
         guard wordWithX.contains("x") else { return false }
-        let modifiedPattern = "^" + wordWithX.replacingOccurrences(of: "x", with: "[\\S]") + "$"
+        let modifiedPattern = "^" + wordWithX.replacingOccurrences(of: "x", with: "[\\S]{2}") + "$"
         guard let regex = try? NSRegularExpression(pattern: modifiedPattern, options: .caseInsensitive) else { return false }
         let range = NSRange(location: 0, length: unchangedWord.utf16.count)
         return regex.firstMatch(in: unchangedWord, options: [], range: range) != nil
