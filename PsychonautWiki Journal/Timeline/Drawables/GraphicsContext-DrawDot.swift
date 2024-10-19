@@ -24,11 +24,5 @@ extension GraphicsContext {
             Path(ellipseIn: CGRect(x: x - dotRadius, y: bottomY - dotRadius, width: dotWidth, height: dotWidth)),
             with: .color(color)
         )
-        let innerDotRadius: CGFloat = 3
-        let innerDotWidth = innerDotRadius * 2
-        fill(
-            Path(ellipseIn: CGRect(x: x - innerDotRadius, y: bottomY - innerDotRadius, width: innerDotWidth, height: innerDotWidth)),
-            with: .color(Color.primary)
-        )
     }
 }
