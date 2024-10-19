@@ -155,7 +155,8 @@ struct ExperienceScreen: View {
 
     var body: some View {
         FabPosition {
-            if experience.isCurrent {
+            let threeHours: TimeInterval = 3*60*60
+            if experience.isCurrent || experience.creationDateUnwrapped.distance(to: .now) < threeHours {
                 Button(action: addIngestion) {
                     Label("New Ingestion", systemImage: "plus").labelStyle(FabLabelStyle())
                 }
