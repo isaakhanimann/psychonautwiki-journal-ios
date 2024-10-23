@@ -36,6 +36,18 @@ struct TestingServicesScreen: View {
                     url: "https://triptalks.at"
                 )
             }
+            Section("Australia") {
+                TestingServiceItem(
+                    name: "CanTEST",
+                    city: "Canberra",
+                    url: "https://www.cahma.org.au/services/cantest/"
+                )
+                TestingServiceItem(
+                    name: "CheQpoint",
+                    city: "Queensland",
+                    url: "https://www.quihn.org/cheqpoint/"
+                )
+            }
             Section("Belgium") {
                 TestingServiceItem(
                     name: "Modus Vivendi",
