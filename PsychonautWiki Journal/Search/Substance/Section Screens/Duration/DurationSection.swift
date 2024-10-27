@@ -25,25 +25,18 @@ struct DurationSection: View {
     @State private var stomachFullness = StomachFullness.empty
     @State private var hiddenRoutes: [AdministrationRoute] = []
 
-    @AppStorage(PersistenceController.timeDisplayStyleDurationSectionKey) private var timeDisplayStyleDurationSectionText: String = SaveableTimeDisplayStyle.regular.rawValue
+    @AppStorage(PersistenceController.timeDisplayStyleDurationSectionKey) private var timeDisplayStyleDurationSectionText: String = SaveableTimeDisplayStyle.auto.rawValue
 
-    private var saveableTimeDisplayStyle: Binding<SaveableTimeDisplayStyle> {
-        Binding(
-            get: {
-                SaveableTimeDisplayStyle(rawValue: timeDisplayStyleDurationSectionText) ?? .regular
-            },
-            set: { newValue in timeDisplayStyleDurationSectionText = newValue.rawValue }
-        )
+    private var saveableTimeDisplayStyle: SaveableTimeDisplayStyle {
+        SaveableTimeDisplayStyle(rawValue: timeDisplayStyleDurationSectionText) ?? .auto
     }
 
     var timeDisplayStyle: TimeDisplayStyle {
-        switch saveableTimeDisplayStyle.wrappedValue {
+        switch saveableTimeDisplayStyle {
         case .regular:
             return .regular
-        case .relativeToNow:
+        case .relativeToNow, .auto, .relativeToStart, .between:
             return .relativeToNow
-        default:
-            return .regular
         }
     }
 
@@ -63,12 +56,6 @@ struct DurationSection: View {
                             }
                             .buttonStyle(.bordered)
                         }
-                        Picker("Time Style", selection: saveableTimeDisplayStyle) {
-                            ForEach([SaveableTimeDisplayStyle.regular, SaveableTimeDisplayStyle.relativeToNow]) { option in
-                                Text(option.text).tag(option)
-                            }
-                        }
-                        .pickerStyle(.segmented)
                         EffectTimeline(
                             timelineModel: timelineModel,
                             timeDisplayStyle: timeDisplayStyle
