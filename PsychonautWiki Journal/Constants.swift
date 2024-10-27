@@ -30,3 +30,5 @@ let namesOfLegalSubstances = [
     "Citicoline",
     "Tyrosine",
 ]
+
+let minimumDistanceForDetectingDragGesture: CGFloat = 20

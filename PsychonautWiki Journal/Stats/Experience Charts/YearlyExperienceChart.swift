@@ -111,7 +111,7 @@ struct YearlyExperienceChart: View {
                                     }
                                 }
                                 .exclusively(
-                                    before: DragGesture()
+                                    before: DragGesture(minimumDistance: minimumDistanceForDetectingDragGesture)
                                         .onChanged { value in
                                             selectedElement = findElement(location: value.location, proxy: proxy, geometry: nthGeometryItem)
                                         }

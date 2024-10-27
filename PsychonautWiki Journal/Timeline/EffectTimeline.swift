@@ -112,7 +112,7 @@ struct EffectTimeline: View {
                     }
                 }
                 .gesture(
-                    DragGesture(minimumDistance: 0)
+                    DragGesture(minimumDistance: minimumDistanceForDetectingDragGesture)
                         .onChanged({ drag in
                             fingerLocation = drag.location
                         })

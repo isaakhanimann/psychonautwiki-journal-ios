@@ -120,7 +120,7 @@ struct ToleranceChart: View {
                     }
                     Rectangle().fill(.clear).contentShape(Rectangle())
                         .gesture(
-                            DragGesture(minimumDistance: 0)
+                            DragGesture(minimumDistance: minimumDistanceForDetectingDragGesture)
                                 .onChanged({ value in
                                     fingerPosition = value.location
                                 })
