@@ -136,7 +136,7 @@ struct EffectTimeline: View {
                 return durationText + Text(" ago")
             }
         } else if timeDisplayStyle == .relativeToStart {
-            return Text("+ ") + Text(DateDifference.maxTwoUnitsBetween(timelineModel.startTime, and: time))
+            return Text(DateDifference.maxTwoUnitsBetween(timelineModel.startTime, and: time)) + Text(" in")
         } else {
             return Text(time, format: Date.FormatStyle().hour().minute())
         }
