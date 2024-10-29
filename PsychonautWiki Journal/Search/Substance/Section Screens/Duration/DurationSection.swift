@@ -143,6 +143,9 @@ struct DurationSection: View {
         let durationsToShow = substance.durationInfos.filter { info in
             !hiddenRoutes.contains(info.route)
         }
+        let firstAverageCommonDose = substance.doseInfos.compactMap { dose in
+            dose.roaDose.averageCommonDose
+        }.first ?? 100
         timelineModel = TimelineModel(
             substanceGroups: durationsToShow.map { info in
                 SubstanceIngestionGroup(
@@ -153,7 +156,7 @@ struct DurationSection: View {
                             route: info.route,
                             ingestions: [
                                 IngestionMinInfo(
-                                    dose: nil,
+                                    dose: substance.doseInfos.first(where: { $0.route == info.route})?.roaDose.getStrengthRelativeToCommonDose(dose: firstAverageCommonDose),
                                     time: selectedTime,
                                     onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0
                                 ),

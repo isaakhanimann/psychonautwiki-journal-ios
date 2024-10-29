@@ -122,4 +122,21 @@ struct RoaDose: Decodable {
             return 0
         }
     }
+
+    var averageCommonDose: Double? {
+        if let commonMinUnwrap = commonMin,
+           let commonMaxUnwrap = strongMin {
+            return (commonMinUnwrap + commonMaxUnwrap) / 2
+        } else {
+            return nil
+        }
+    }
+
+    func getStrengthRelativeToCommonDose(dose: Double) -> Double? {
+        if let avg = averageCommonDose, avg > 0 {
+            return dose/avg
+        } else {
+            return nil
+        }
+    }
 }
