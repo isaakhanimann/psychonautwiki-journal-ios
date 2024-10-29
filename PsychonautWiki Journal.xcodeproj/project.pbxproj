@@ -2184,7 +2184,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.11;
+				MARKETING_VERSION = 5.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug.TimelineWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2213,7 +2213,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.11;
+				MARKETING_VERSION = 5.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal.TimelineWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2401,7 +2401,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.11;
+				MARKETING_VERSION = 5.12;
 				MY_BUNDLE_DISPLAY_NAME = Debug;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal-Debug";
 				PRODUCT_NAME = Journal;
@@ -2428,7 +2428,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.11;
+				MARKETING_VERSION = 5.12;
 				MY_BUNDLE_DISPLAY_NAME = Journal;
 				PRODUCT_BUNDLE_IDENTIFIER = "isaak.PsychonautWiki-Journal";
 				PRODUCT_NAME = Journal;
