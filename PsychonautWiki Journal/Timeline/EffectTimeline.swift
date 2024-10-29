@@ -62,7 +62,7 @@ struct EffectTimeline: View {
                     }
                     let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2 * 60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth) && isShowingCurrentTime
                     if shouldDrawCurrentTime {
-                        let currentTimeX = ((timelineDate.timeIntervalSinceReferenceDate - timelineModel.startTime.timeIntervalSinceReferenceDate) * pixelsPerSec) + halfLineWidth
+                        let currentTimeX = (timelineModel.startTime.distance(to: timelineDate) * pixelsPerSec) + halfLineWidth
                         var path = Path()
                         path.move(to: CGPoint(x: currentTimeX, y: 0))
                         path.addLine(to: CGPoint(x: currentTimeX, y: size.height))
