@@ -42,7 +42,7 @@ struct DosesSection: View {
                         Text(doseInfo.route.rawValue.localizedCapitalized).font(.headline)
                         RoaDoseRow(roaDose: doseInfo.roaDose)
                         let customUnitsForRoa = customUnits.wrappedValue.filter { customUnit in
-                            customUnit.administrationRouteUnwrapped == doseInfo.route
+                            customUnit.administrationRouteUnwrapped == doseInfo.route && customUnit.doseUnwrapped != nil
                         }
                         ForEach(customUnitsForRoa) { customUnit in
                             Text(customUnit.nameUnwrapped).font(.headline)
