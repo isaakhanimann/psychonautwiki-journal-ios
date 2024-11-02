@@ -28,6 +28,19 @@ struct FinishCustomUnitsScreen: View {
     let substanceAndRoute: SubstanceAndRoute
     let dismiss: () -> Void
 
+    var exampleUnitText: String {
+        switch substanceAndRoute.administrationRoute {
+        case .oral:
+            return "e.g. pill, spray etc."
+        case .smoked, .inhaled:
+            return "e.g. puff, hit, bowl etc."
+        case .insufflated:
+            return "e.g. scoop, line, spray etc."
+        default:
+            return "e.g. pill, spray etc."
+        }
+    }
+
     var body: some View {
         Form {
             Section {
@@ -39,7 +52,7 @@ struct FinishCustomUnitsScreen: View {
                     .onSubmit {
                         focusedField = .unit
                     }
-                TextField("Unit in singular form", text: $unit, prompt: Text("e.g. pill, spray, scoop etc."))
+                TextField("Unit in singular form", text: $unit, prompt: Text(exampleUnitText))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)
