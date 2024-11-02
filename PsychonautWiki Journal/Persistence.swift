@@ -42,8 +42,13 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: PersistenceController.modelName)
+        let description = container.persistentStoreDescriptions.first
+
+#if APP_WIDGET
+        description?.setOption(true as NSNumber, forKey: NSReadOnlyPersistentStoreOption)
+#endif
         if inMemory {
-            container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+            description?.url = URL(fileURLWithPath: "/dev/null")
         }
         container.loadPersistentStores { _, error in
             if let error = error {
