@@ -2508,7 +2508,7 @@
 			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.11;
+				minimumVersion = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
