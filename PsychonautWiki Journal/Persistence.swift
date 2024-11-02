@@ -153,6 +153,34 @@ struct PersistenceController {
         }
     }
 
+    func migrateCannabisAndMushroomUnits() {
+        viewContext.performAndWait {
+            let ingestionFetchRequest = Ingestion.fetchRequest()
+            let allIngestions = (try? viewContext.fetch(ingestionFetchRequest)) ?? []
+            for ingestion in allIngestions {
+                if ingestion.substanceName == "Cannabis" && ingestion.units == "mg" {
+                    ingestion.units = "mg THC"
+                }
+                if ingestion.substanceName == "Psilocybin mushrooms" && ingestion.units == "mg" {
+                    ingestion.units = "mg Psilocybin"
+                }
+            }
+
+            let customUnitFetchRequest = CustomUnit.fetchRequest()
+            let customUnits = (try? viewContext.fetch(customUnitFetchRequest)) ?? []
+            for customUnit in customUnits {
+                if customUnit.substanceName == "Cannabis" && customUnit.originalUnit == "mg" {
+                    customUnit.originalUnit = "mg THC"
+                }
+                if customUnit.substanceName == "Psilocybin mushrooms" && customUnit.originalUnit == "mg" {
+                    customUnit.originalUnit = "mg Psilocybin"
+                }
+            }
+
+            try? viewContext.save()
+        }
+    }
+
     func migrateColors() {
         viewContext.performAndWait {
             let companionFetchRequest = SubstanceCompanion.fetchRequest()

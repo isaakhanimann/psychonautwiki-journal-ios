@@ -42,7 +42,7 @@ struct ChooseShroomsDoseScreen: View {
 
     private var currentDoseTypeColor: Color {
         guard let psilocybinInMg else { return .primary }
-        return oralDose.getRangeType(for: psilocybinInMg, with: "mg").color
+        return oralDose.getRangeType(for: psilocybinInMg, with: oralDose.units).color
     }
 
     var body: some View {
@@ -63,7 +63,7 @@ struct ChooseShroomsDoseScreen: View {
             substanceName: mushrooms.name,
             administrationRoute: .oral,
             dose: psilocybinInMg,
-            units: "mg",
+            units: oralDose.units,
             isEstimate: isEstimate,
             estimatedDoseStandardDeviation: doseDeviation,
             suggestedNote: suggestedNote
@@ -77,7 +77,7 @@ struct ChooseShroomsDoseScreen: View {
             substanceName: mushrooms.name,
             administrationRoute: .oral,
             dose: nil,
-            units: "mg",
+            units: oralDose.units,
             isEstimate: false,
             estimatedDoseStandardDeviation: nil))
     }
@@ -96,7 +96,7 @@ struct ChooseShroomsDoseScreen: View {
                         .onChange(of: psilocybinTextInMg) { text in
                             psilocybinInMg = getDouble(from: text)
                         }
-                    Text("mg")
+                    Text(oralDose.units)
                 }
                 .font(.title)
                 Toggle("Estimate", isOn: $isEstimate)
@@ -117,7 +117,7 @@ struct ChooseShroomsDoseScreen: View {
                         .keyboardType(.decimalPad)
                         .focused($isEstimatedDeviationFocused)
                         Spacer()
-                        Text("mg")
+                        Text(oralDose.units)
                     }
                 }
                 unknownDoseLink
