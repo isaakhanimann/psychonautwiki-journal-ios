@@ -155,6 +155,11 @@ struct TestingServicesScreen: View {
                     city: "Luzern",
                     url: "https://www.gassenarbeit.ch/angebote/dilu"
                 )
+                TestingServiceItem(
+                    name:"NightLife Vaud",
+                    city:"Lausanne",
+                    url:"https://nightlifevaud.ch/permanence/"
+                )
             }
             Section("United Kingdom") {
                 TestingServiceItem(
