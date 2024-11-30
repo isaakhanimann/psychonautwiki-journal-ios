@@ -70,11 +70,13 @@ class SuggestionsCreator {
                         dosesAndUnit: dosesAndUnits,
                         customUnitDoses: customUnitDoses,
                         customUnits: filteredCustomUnits,
-                        lastTimeUsed: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now)
+                        lastTimeIngested: groupedBySubstanceAndRoute.map { $0.timeUnwrapped }.max() ?? .now,
+                        lastCreationTime: groupedBySubstanceAndRoute.compactMap { $0.creationDate }.max() ?? .now
+                    )
                 }
             }
         }.sorted { sug1, sug2 in
-            sug1.lastTimeUsed > sug2.lastTimeUsed
+            sug1.lastCreationTime > sug2.lastCreationTime
         }
     }
 

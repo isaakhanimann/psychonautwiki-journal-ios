@@ -200,7 +200,8 @@ struct ChooseSubstanceContent: View {
                         customUnit: .previewSample)
                 ],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
+                lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)),
             Suggestion(
                 substanceName: "MDMA",
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA"),
@@ -225,7 +226,9 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
+                lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
             Suggestion(
                 substanceName: "Cannabis",
                 substance: SubstanceRepo.shared.getSubstance(name: "Cannabis"),
@@ -255,7 +258,9 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
+                lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
             Suggestion(
                 substanceName: "Coffee",
                 substance: nil,
@@ -275,7 +280,9 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
+                lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
+            ),
         ],
         filteredSubstances: Array(SubstanceRepo.shared.substances.prefix(10)),
         filteredCustomUnits: [

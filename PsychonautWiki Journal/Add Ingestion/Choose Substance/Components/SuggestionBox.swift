@@ -102,7 +102,7 @@ struct SuggestionBox: View {
                     }
                 }
                 Group {
-                    Text("Last ingestion ") + Text(suggestion.lastTimeUsed, style: .relative) + Text(" ago")
+                    Text("Last ingestion ") + Text(suggestion.lastTimeIngested, style: .relative) + Text(" ago")
                 }.font(.footnote).foregroundColor(.secondary)
             }
         } label: {
@@ -147,7 +147,8 @@ struct SuggestionBox: View {
                     ],
                     customUnitDoses: [],
                     customUnits: [],
-                    lastTimeUsed: Date.now.addingTimeInterval(-2 * 60 * 60)),
+                    lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
+                    lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)),
                 dismiss: { },
                 isEyeOpen: true)
             SuggestionBox(
@@ -180,7 +181,8 @@ struct SuggestionBox: View {
                     ],
                     customUnitDoses: [],
                     customUnits: [],
-                    lastTimeUsed: Date.now.addingTimeInterval(-3 * 60 * 60)),
+                    lastTimeIngested: Date.now.addingTimeInterval(-3 * 60 * 60),
+                    lastCreationTime: Date.now.addingTimeInterval(-3 * 60 * 60)),
                 dismiss: { },
                 isEyeOpen: true)
         }.padding(.horizontal)

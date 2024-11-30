@@ -28,5 +28,6 @@ struct Suggestion: Identifiable {
     let dosesAndUnit: [RegularDoseAndUnit]
     let customUnitDoses: [CustomUnitDose]
     let customUnits: [CustomUnit]
-    let lastTimeUsed: Date
+    let lastTimeIngested: Date
+    let lastCreationTime: Date
 }
