@@ -313,8 +313,6 @@
 		EAD089D42AADA01A006EAA48 /* FullTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C94B42AAD98A000864BEC /* FullTimeline.swift */; };
 		EAD1D0022B52709500EC0D70 /* CustomUnitsArchiveScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0012B52709500EC0D70 /* CustomUnitsArchiveScreen.swift */; };
 		EAD1D0042B5271BD00EC0D70 /* CustomUnitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0032B5271BD00EC0D70 /* CustomUnitRow.swift */; };
-		EAD1D0062B52809200EC0D70 /* AddCustomUnitArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0052B52809200EC0D70 /* AddCustomUnitArguments.swift */; };
-		EAD1D0082B52829400EC0D70 /* AddCustomUnitsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D0072B52829400EC0D70 /* AddCustomUnitsScreen.swift */; };
 		EAE4710726CBA57F009FB0EC /* JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4710626CBA57F009FB0EC /* JournalApp.swift */; };
 		EAE471B226CBA664009FB0EC /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */; };
 		EAE471B626CBA664009FB0EC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4712226CBA663009FB0EC /* Feature.swift */; };
@@ -668,8 +666,6 @@
 		EACF91C62887410500E7149C /* PW Version 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PW Version 2.xcdatamodel"; sourceTree = "<group>"; };
 		EAD1D0012B52709500EC0D70 /* CustomUnitsArchiveScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitsArchiveScreen.swift; sourceTree = "<group>"; };
 		EAD1D0032B5271BD00EC0D70 /* CustomUnitRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitRow.swift; sourceTree = "<group>"; };
-		EAD1D0052B52809200EC0D70 /* AddCustomUnitArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomUnitArguments.swift; sourceTree = "<group>"; };
-		EAD1D0072B52829400EC0D70 /* AddCustomUnitsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomUnitsScreen.swift; sourceTree = "<group>"; };
 		EAE4710326CBA57F009FB0EC /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4710626CBA57F009FB0EC /* JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalApp.swift; sourceTree = "<group>"; };
 		EAE4711D26CBA663009FB0EC /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
@@ -773,7 +769,6 @@
 		EA03ABC42B39BE6B00DB8D0D /* Custom Units */ = {
 			isa = PBXGroup;
 			children = (
-				EAD1D0092B528CEA00EC0D70 /* Add */,
 				EA03ABC52B39BE9200DB8D0D /* CustomUnitsChooseDoseScreen.swift */,
 				EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */,
 				EAC4BFFF2B893EB300293B44 /* CustomUnitCalculationText.swift */,
@@ -1435,15 +1430,6 @@
 			path = "Dosage Charts";
 			sourceTree = "<group>";
 		};
-		EAD1D0092B528CEA00EC0D70 /* Add */ = {
-			isa = PBXGroup;
-			children = (
-				EAD1D0072B52829400EC0D70 /* AddCustomUnitsScreen.swift */,
-				EAD1D0052B52809200EC0D70 /* AddCustomUnitArguments.swift */,
-			);
-			path = Add;
-			sourceTree = "<group>";
-		};
 		EAE470FA26CBA57F009FB0EC = {
 			isa = PBXGroup;
 			children = (
@@ -1878,7 +1864,6 @@
 				EA6048452A25C28F005C6A4B /* FabLabelStyle.swift in Sources */,
 				EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */,
 				EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */,
-				EAD1D0082B52829400EC0D70 /* AddCustomUnitsScreen.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EA302E4C2B385516007F113F /* AddIngestionDestination.swift in Sources */,
 				EAC368732B6FC99200056C56 /* DayView.swift in Sources */,
@@ -2022,7 +2007,6 @@
 				EAA9C3772A50802C00869E5A /* ToleranceChartScreen.swift in Sources */,
 				EA302E562B385D22007F113F /* ChooseOtherRouteScreenArguments.swift in Sources */,
 				EAC25C02295600F20002D68F /* DosageClassificationScreen.swift in Sources */,
-				EAD1D0062B52809200EC0D70 /* AddCustomUnitArguments.swift in Sources */,
 				EA48F8B929EE8A32007DA8C5 /* ChooseLocationScreenContent.swift in Sources */,
 				EA4B8A252A9CFD34009918DE /* ConsumerWithIngestions.swift in Sources */,
 				EABD921729421E960073303A /* OnsetComeupPeakTimeline.swift in Sources */,

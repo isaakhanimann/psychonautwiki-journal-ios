@@ -67,7 +67,7 @@ struct CustomUnitsChooseSubstanceScreen: View {
                 ChooseOtherRouteScreen(arguments: arguments, dismiss: dismissSheet)
             })
             .navigationDestination(for: SubstanceAndRoute.self) { arguments in
-                FinishCustomUnitsScreen(substanceAndRoute: arguments, dismiss: dismissSheet)
+                FinishCustomUnitsScreen(substanceAndRoute: arguments, cancel: dismissSheet, onAdded: { _ in dismissSheet()})
             }
         }
     }

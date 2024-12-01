@@ -62,9 +62,6 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: FinishIngestionScreenArguments.self) { arguments in
                 FinishIngestionScreen(arguments: arguments, dismiss: dismiss)
             }
-            .navigationDestination(for: AddCustomUnitArguments.self) { arguments in
-                AddCustomUnitsScreen(substanceAndRoute: arguments.substanceAndRoute)
-            }
             .navigationDestination(for: AddIngestionDestination.self) { destination in
                 switch destination {
                 case .interactions(let substance):
@@ -100,7 +97,9 @@ struct ChooseSubstanceContent: View {
                 } else if substanceName == "Psilocybin mushrooms", arguments.administrationRoute == .oral {
                     ChooseShroomsDoseScreen(dismiss: dismiss)
                 } else {
-                    ChooseDoseScreen(arguments: arguments, dismiss: dismiss)
+                    ChooseDoseScreen(arguments: arguments, dismiss: dismiss) { customUnit in
+                        navPath.append(customUnit)
+                    }
                 }
             }
             .navigationDestination(for: CustomUnit.self) { customUnit in

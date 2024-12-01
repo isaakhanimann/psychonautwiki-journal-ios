@@ -26,7 +26,8 @@ struct FinishCustomUnitsScreen: View {
     }
 
     let substanceAndRoute: SubstanceAndRoute
-    let dismiss: () -> Void
+    let cancel: () -> Void
+    let onAdded: (CustomUnit) -> Void
 
     var exampleUnitText: String {
         switch substanceAndRoute.administrationRoute {
@@ -163,6 +164,9 @@ struct FinishCustomUnitsScreen: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", action: cancel)
+            }
             ToolbarItem(placement: .primaryAction) {
                 DoneButton(action: onDoneTap)
                     .disabled(unit.isEmpty || name.isEmpty)
@@ -221,7 +225,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.isArchived = false
         newCustomUnit.idForAndroid = Int32.random(in: Int32.min..<Int32.max)
         try? context.save()
-        dismiss()
+        onAdded(newCustomUnit)
     }
 }
 
@@ -231,6 +235,7 @@ struct FinishCustomUnitsScreen: View {
             substanceAndRoute: .init(
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                 administrationRoute: .oral),
-            dismiss: { })
+            cancel: {},
+            onAdded: { _ in })
     }
 }

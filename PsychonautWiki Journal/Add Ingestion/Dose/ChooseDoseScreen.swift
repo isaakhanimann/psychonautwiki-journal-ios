@@ -21,6 +21,7 @@ import SwiftUI
 struct ChooseDoseScreen: View {
     let arguments: SubstanceAndRoute
     let dismiss: () -> Void
+    let navigateToCustomUnitChooseDose: (CustomUnit) -> Void
     @State private var selectedUnits: String = UnitPickerOptions.mg.rawValue
     @State private var selectedPureDose: Double?
     @State private var selectedDoseDeviation: Double?
@@ -34,6 +35,7 @@ struct ChooseDoseScreen: View {
             substance: arguments.substance,
             administrationRoute: arguments.administrationRoute,
             dismiss: dismiss,
+            navigateToCustomUnitChooseDose: navigateToCustomUnitChooseDose,
             isEyeOpen: isEyeOpen,
             selectedPureDose: $selectedPureDose,
             selectedDoseDeviation: $selectedDoseDeviation,
@@ -56,6 +58,7 @@ struct ChooseDoseScreenContent: View {
         substance: Substance,
         administrationRoute: AdministrationRoute,
         dismiss: @escaping () -> Void,
+        navigateToCustomUnitChooseDose: @escaping (CustomUnit) -> Void,
         isEyeOpen: Bool,
         selectedPureDose: Binding<Double?>,
         selectedDoseDeviation: Binding<Double?>,
@@ -65,6 +68,7 @@ struct ChooseDoseScreenContent: View {
         self.substance = substance
         self.administrationRoute = administrationRoute
         self.dismiss = dismiss
+        self.navigateToCustomUnitChooseDose = navigateToCustomUnitChooseDose
         self.isEyeOpen = isEyeOpen
         self._selectedPureDose = selectedPureDose
         self._selectedDoseDeviation = selectedDoseDeviation
@@ -86,6 +90,7 @@ struct ChooseDoseScreenContent: View {
     let substance: Substance
     let administrationRoute: AdministrationRoute
     let dismiss: () -> Void
+    let navigateToCustomUnitChooseDose: (CustomUnit) -> Void
     let isEyeOpen: Bool
     @Binding var selectedPureDose: Double?
     @Binding var selectedDoseDeviation: Double?
@@ -122,6 +127,7 @@ struct ChooseDoseScreenContent: View {
     @State private var purityText = ""
     @FocusState private var isDoseFieldFocused: Bool
     @FocusState private var isEstimatedDeviationFocused: Bool
+    @State private var isAddCustomUnitSheetShown: Bool = false
 
     private var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
@@ -234,9 +240,9 @@ struct ChooseDoseScreenContent: View {
                             Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
                         }
                     }
-                    NavigationLink(
-                        "Add custom unit",
-                        value: AddCustomUnitArguments(substanceAndRoute: SubstanceAndRoute(substance: substance, administrationRoute: administrationRoute)))
+                    Button("Add custom unit") {
+                        isAddCustomUnitSheetShown.toggle()
+                    }
                 }
                 if substance.name == "Nicotine" {
                     Section("Nicotine Content vs Dose") {
@@ -267,6 +273,19 @@ struct ChooseDoseScreenContent: View {
                 }
             }
         }
+        .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
+            NavigationStack {
+                FinishCustomUnitsScreen(
+                    substanceAndRoute: SubstanceAndRoute(substance: substance, administrationRoute: administrationRoute),
+                    cancel: {
+                        isAddCustomUnitSheetShown = false
+                    },
+                    onAdded: { customUnit in
+                        isAddCustomUnitSheetShown = false
+                        navigateToCustomUnitChooseDose(customUnit)
+                    })
+            }
+        })
         .scrollDismissesKeyboard(.interactively)
         .navigationBarTitle("\(substance.name) Dose")
     }
@@ -285,6 +304,7 @@ struct ChooseDoseScreenContent: View {
             substance: SubstanceRepo.shared.getSubstance(name: "Amphetamine")!,
             administrationRoute: .oral,
             dismiss: { },
+            navigateToCustomUnitChooseDose: { _ in},
             isEyeOpen: true,
             selectedPureDose: .constant(20),
             selectedDoseDeviation: .constant(2),
