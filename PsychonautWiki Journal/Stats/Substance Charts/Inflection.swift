@@ -29,7 +29,7 @@ extension Int {
 
 extension Double {
     func with(unit: String) -> String {
-        if self != 1 && !unit.hasSuffix("s") {
+        if getIsPlural(unit: unit) {
             "\(self.asRoundedReadableString) \(unit)s"
         } else {
             "\(self.asRoundedReadableString) \(unit)"
@@ -37,10 +37,14 @@ extension Double {
     }
 
     func justUnit(unit: String) -> String {
-        if self != 1 && !unit.hasSuffix("s") {
+        if getIsPlural(unit: unit) {
             unit + "s"
         } else {
             unit
         }
+    }
+
+    private func getIsPlural(unit: String) -> Bool {
+        self != 1 && !unit.hasSuffix("s") && unit != "mg"
     }
 }
