@@ -23,6 +23,7 @@ struct AddCustomSubstanceView: View {
 
     @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) private var dismiss
+    @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -48,6 +49,15 @@ struct AddCustomSubstanceView: View {
                 }
             }
             .scrollDismissesKeyboard(.interactively)
+            .onChange(of: viewModel.name) { newValue in
+                if !isEyeOpen {
+                    let allSubstances = SubstanceRepo.shared.substances
+                    let originalFiltered = SearchLogic.getFilteredSubstancesSorted(substances: allSubstances, searchText: newValue, namesToSortBy: [])
+                    if newValue.count > 3 && originalFiltered.count > 0 {
+                        isEyeOpen = true
+                    }
+                }
+            }
             .onAppear(perform: {
                 viewModel.name = searchText
             })
