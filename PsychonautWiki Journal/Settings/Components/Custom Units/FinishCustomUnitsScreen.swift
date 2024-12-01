@@ -29,23 +29,41 @@ struct FinishCustomUnitsScreen: View {
     let cancel: () -> Void
     let onAdded: (CustomUnit) -> Void
 
-    var exampleUnitText: String {
-        switch substanceAndRoute.administrationRoute {
-        case .oral:
-            return "e.g. pill, spray etc."
-        case .smoked, .inhaled:
-            return "e.g. puff, hit, bowl etc."
-        case .insufflated:
-            return "e.g. scoop, line, spray etc."
+    private var namePrompt: String {
+        switch substanceAndRoute.substance.name {
+        case "Cannabis":
+            "Flower in joint, bong, vaporizer"
+        case "Psilocybin mushrooms":
+            "Mushroom strain"
+        case "Alcohol":
+            "Beer, Wine, Spirit"
         default:
-            return "e.g. pill, spray etc."
+            "Blue rocket"
         }
     }
 
     var body: some View {
+        let substanceName = substanceAndRoute.substance.name
         Form {
+            if substanceName == "Cannabis" && substanceAndRoute.administrationRoute == .smoked {
+                Section {
+                    Text("When smoking a joint about 23% of the THC in the bud is inhaled. So if you smoke a joint with 300mg of a bud that has 20% THC then you inhale 300mg * 20/100 * 23/100 = 13.8mg THC.")
+                    Text("When smoking with a bong about 40% of the THC in the bud is inhaled. So if you smoke 300mg of a bud that has 20% THC then you inhale 300mg * 20/100 * 40/100 = 24mg THC.")
+                    Text("When smoking with a vaporizer about 70% of the THC in the bud is inhaled. So if you smoke 300mg of a bud that has 20% THC then you inhale 300mg * 20/100 * 70/100 = 42mg THC.")
+                }
+            } else if substanceName == "Psilocybin mushrooms" {
+                Section {
+                    Text("Dried Psilocybe cubensis contain around 1% of Psilocybin.")
+                    Text("Fresh Psilocybe cubensis contain around 0.1% of Psilocybin.")
+                    Text("Research the strain of mushroom you have to be able to estimate the amount of Psilocybin it contains.")
+                }
+            } else if substanceName == "Alcohol" {
+                Section {
+                    Text("1 ml of Ethanol is 0.8g. So if you are e.g. consuming 200ml of a spirit with 40% of Alcohol you are consuming 200ml * 40/100 * 0.8 = 64g Ethanol.")
+                }
+            }
             Section {
-                TextField("Name to identify", text: $name)
+                TextField("Name to identify", text: $name, prompt: Text(namePrompt))
                     .textInputAutocapitalization(.words)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
@@ -53,7 +71,7 @@ struct FinishCustomUnitsScreen: View {
                     .onSubmit {
                         focusedField = .unit
                     }
-                TextField("Unit in singular form", text: $unit, prompt: Text(exampleUnitText))
+                TextField("Unit in singular form", text: $unit, prompt: Text(getSampleUnitText(administrationRoute: substanceAndRoute.administrationRoute)))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)
