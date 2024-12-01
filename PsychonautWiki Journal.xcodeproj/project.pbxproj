@@ -91,9 +91,6 @@
 		EA4189EE2962E67600DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189EF2962E69000DEA663 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189ED2962E67600DEA663 /* Constants.swift */; };
 		EA4189F12963219100DEA663 /* LiveActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F02963219100DEA663 /* LiveActivityButton.swift */; };
-		EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */; };
-		EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */; };
-		EA4189F92966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */; };
 		EA4189FB2966B84500DEA663 /* ChooseMDMADoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */; };
 		EA4189FD2966DA4500DEA663 /* MDMAOptimalDoseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */; };
 		EA418A002967397D00DEA663 /* MDMAMaxDoseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */; };
@@ -157,7 +154,6 @@
 		EA48F88E29DD5053007DA8C5 /* CompanionCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */; };
 		EA48F89029DD5076007DA8C5 /* CustomSubstanceCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */; };
 		EA48F89229DD50B8007DA8C5 /* RatingCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */; };
-		EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */; };
 		EA48F89829E6E27C007DA8C5 /* InteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */; };
 		EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */; };
 		EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */; };
@@ -450,9 +446,6 @@
 		EA39B2062BB98211000B1C4E /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
 		EA4189ED2962E67600DEA663 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA4189F02963219100DEA663 /* LiveActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityButton.swift; sourceTree = "<group>"; };
-		EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCannabisSmokedDoseScreen.swift; sourceTree = "<group>"; };
-		EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAlcoholDoseScreen.swift; sourceTree = "<group>"; };
-		EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCaffeineDoseScreen.swift; sourceTree = "<group>"; };
 		EA4189FA2966B84500DEA663 /* ChooseMDMADoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMDMADoseScreen.swift; sourceTree = "<group>"; };
 		EA4189FC2966DA4500DEA663 /* MDMAOptimalDoseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAOptimalDoseSection.swift; sourceTree = "<group>"; };
 		EA4189FF2967397D00DEA663 /* MDMAMaxDoseCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAMaxDoseCalculator.swift; sourceTree = "<group>"; };
@@ -515,7 +508,6 @@
 		EA48F88D29DD5053007DA8C5 /* CompanionCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionCodable.swift; sourceTree = "<group>"; };
 		EA48F88F29DD5076007DA8C5 /* CustomSubstanceCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceCodable.swift; sourceTree = "<group>"; };
 		EA48F89129DD50B8007DA8C5 /* RatingCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCodable.swift; sourceTree = "<group>"; };
-		EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseShroomsDoseScreen.swift; sourceTree = "<group>"; };
 		EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionTests.swift; sourceTree = "<group>"; };
 		EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CaseInsensitiveContains.swift"; sourceTree = "<group>"; };
 		EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StomachFullness.swift; sourceTree = "<group>"; };
@@ -796,11 +788,7 @@
 				EA4189FE296738BC00DEA663 /* MDMA Dose */,
 				EAE471A826CBA664009FB0EC /* ChooseDoseScreen.swift */,
 				EA302E492B38289B007F113F /* SubstanceAndRoute.swift */,
-				EA4189F4296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift */,
 				EA60483E2A1BF2CB005C6A4B /* ChasingTheDragonSection.swift */,
-				EA48F89529DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift */,
-				EA4189F62966272100DEA663 /* ChooseAlcoholDoseScreen.swift */,
-				EA4189F82966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift */,
 				EA302E4F2B385965007F113F /* custom */,
 				EA095A0E27D9DCAE007D44D6 /* UnitsPicker.swift */,
 			);
@@ -1856,7 +1844,6 @@
 				EA4B8A122A9B1F23009918DE /* TimedNote-CoreDataHelpers.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
 				EAACB08D2947C83A0050E002 /* CustomChooseRouteScreen.swift in Sources */,
-				EA4189F92966A7BF00DEA663 /* ChooseCaffeineDoseScreen.swift in Sources */,
 				EA41C619295AE60C000DA021 /* InteractionPairRow.swift in Sources */,
 				EA116CDB29FBA381007D8BF6 /* SelectRatingSection.swift in Sources */,
 				EA48F86629DC1AE9007DA8C5 /* RatingDrawable.swift in Sources */,
@@ -1919,7 +1906,6 @@
 				EA302E4A2B38289B007F113F /* SubstanceAndRoute.swift in Sources */,
 				EA48F86A29DC26A6007DA8C5 /* EverythingForOneRating.swift in Sources */,
 				EA47E66127CA136C00F6E10F /* DurationRange.swift in Sources */,
-				EA4189F5296429DF00DEA663 /* ChooseCannabisSmokedDoseScreen.swift in Sources */,
 				EAA9C3992A59484600869E5A /* ChooseDateScreenContent.swift in Sources */,
 				EA095A1427DA2BBC007D44D6 /* UIApplication-CurrentWindow.swift in Sources */,
 				EA55CEBE2A3F298E00FE1A44 /* ColorRectangle.swift in Sources */,
@@ -1971,7 +1957,6 @@
 				EA8039BF2BA6DDC30097E743 /* DosageStatYearChart.swift in Sources */,
 				EA014F9E27E5F5F200077FB2 /* RowLabelView.swift in Sources */,
 				EAE4720026CBA664009FB0EC /* Date-String.swift in Sources */,
-				EA48F89629DEC113007DA8C5 /* ChooseShroomsDoseScreen.swift in Sources */,
 				EAE4720B26CBA664009FB0EC /* ExperienceScreen.swift in Sources */,
 				EA41C636295F89BA000DA021 /* YearlyExperienceChart.swift in Sources */,
 				EA302E482B381C2F007F113F /* FinishIngestionScreenArguments.swift in Sources */,
@@ -2055,7 +2040,6 @@
 				EAA9C38C2A54825C00869E5A /* ChooseDateScreen.swift in Sources */,
 				EA039AC32A5F1118006DFAFE /* SubstanceWithToleranceAndColor.swift in Sources */,
 				EAA9C3722A50690C00869E5A /* ToleranceChartCalculator.swift in Sources */,
-				EA4189F72966272100DEA663 /* ChooseAlcoholDoseScreen.swift in Sources */,
 				EA527A8429427E61009C142D /* ToleranceSection.swift in Sources */,
 				EA41C623295C2BE7000DA021 /* JournalFile.swift in Sources */,
 				EA6048272A1411C0005C6A4B /* Suggestion.swift in Sources */,

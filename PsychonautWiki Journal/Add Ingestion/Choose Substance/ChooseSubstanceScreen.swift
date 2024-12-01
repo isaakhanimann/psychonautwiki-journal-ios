@@ -86,20 +86,15 @@ struct ChooseSubstanceContent: View {
             })
             .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 let substanceName = arguments.substance.name
-                if substanceName == "Cannabis", arguments.administrationRoute == .smoked {
-                    ChooseCannabisSmokedDoseScreen(dismiss: dismiss)
-                } else if substanceName == "Alcohol", arguments.administrationRoute == .oral {
-                    ChooseAlcoholDoseScreen(dismiss: dismiss)
-                } else if substanceName == "Caffeine", arguments.administrationRoute == .oral {
-                    ChooseCaffeineDoseScreen(dismiss: dismiss)
-                } else if substanceName == "MDMA", arguments.administrationRoute == .oral {
+                if substanceName == "MDMA", arguments.administrationRoute == .oral {
                     ChooseMDMADoseScreen(dismiss: dismiss)
-                } else if substanceName == "Psilocybin mushrooms", arguments.administrationRoute == .oral {
-                    ChooseShroomsDoseScreen(dismiss: dismiss)
                 } else {
-                    ChooseDoseScreen(arguments: arguments, dismiss: dismiss) { customUnit in
-                        navPath.append(customUnit)
-                    }
+                    ChooseDoseScreen(
+                        arguments: arguments,
+                        dismiss: dismiss,
+                        navigateToCustomUnitChooseDose: {customUnit in
+                            navPath.append(customUnit)
+                        })
                 }
             }
             .navigationDestination(for: CustomUnit.self) { customUnit in
