@@ -64,7 +64,7 @@ struct FinishCustomUnitsScreen: View {
             }
             Section {
                 TextField("Name to identify", text: $name, prompt: Text(namePrompt))
-                    .textInputAutocapitalization(.words)
+                    .textInputAutocapitalization(.sentences)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
