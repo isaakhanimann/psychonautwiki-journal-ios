@@ -52,7 +52,7 @@ struct DosePicker: View {
             TextField("Pure Dose", text: $doseText)
                 .keyboardType(.decimalPad)
                 .foregroundColor(doseType.color)
-            Text("pure " + selectedUnits)
+            Text(selectedUnits)
         }
         .font(.title)
         .onChange(of: doseText) { text in
