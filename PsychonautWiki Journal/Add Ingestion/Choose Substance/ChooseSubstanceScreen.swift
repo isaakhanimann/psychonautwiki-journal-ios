@@ -48,8 +48,10 @@ struct ChooseSubstanceContent: View {
     let filteredCustomSubstances: [CustomSubstanceModel]
     let dismiss: () -> Void
 
+    @State private var navPath = NavigationPath()
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navPath) {
             screen.toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -158,7 +160,9 @@ struct ChooseSubstanceContent: View {
                     Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
                 }
                 .sheet(isPresented: $isShowingAddCustomSheet) {
-                    AddCustomSubstanceView(searchText: searchText)
+                    AddCustomSubstanceView(searchText: searchText) { customChooseRouteScreenArguments in
+                        navPath.append(customChooseRouteScreenArguments)
+                    }
                 }
             }.padding(.horizontal)
         }

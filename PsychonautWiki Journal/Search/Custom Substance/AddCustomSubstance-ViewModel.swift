@@ -29,7 +29,7 @@ extension AddCustomSubstanceView {
             return true
         }
 
-        func saveCustom() {
+        func saveCustom(onComplete: (() -> Void)) {
             assert(isEverythingNeededDefined, "Tried to save custom substance without defining the necessary fields")
             let context = PersistenceController.shared.viewContext
             context.performAndWait {
@@ -42,6 +42,7 @@ extension AddCustomSubstanceView {
                     custom.explanation = explanation
                 }
                 try? context.save()
+                onComplete()
             }
         }
     }

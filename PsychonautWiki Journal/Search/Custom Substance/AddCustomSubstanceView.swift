@@ -19,9 +19,10 @@ import SwiftUI
 struct AddCustomSubstanceView: View {
 
     let searchText: String
+    let onAdded: (CustomChooseRouteScreenArguments) -> Void
 
     @StateObject private var viewModel = ViewModel()
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
@@ -54,14 +55,16 @@ struct AddCustomSubstanceView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
                     if viewModel.isEverythingNeededDefined {
                         DoneButton {
-                            viewModel.saveCustom()
-                            presentationMode.wrappedValue.dismiss()
+                            viewModel.saveCustom {
+                                onAdded(CustomChooseRouteScreenArguments(substanceName: viewModel.name, units: viewModel.units))
+                                dismiss()
+                            }
                         }
                     }
                 }
@@ -71,5 +74,5 @@ struct AddCustomSubstanceView: View {
 }
 
 #Preview {
-    AddCustomSubstanceView(searchText: "My subs")
+    AddCustomSubstanceView(searchText: "My subs", onAdded: {_ in })
 }
