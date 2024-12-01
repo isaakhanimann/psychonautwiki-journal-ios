@@ -87,14 +87,20 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 let substanceName = arguments.substance.name
                 if substanceName == "MDMA", arguments.administrationRoute == .oral {
-                    ChooseMDMADoseScreen(dismiss: dismiss)
+                    ChooseMDMADoseScreen(
+                        dismiss: dismiss,
+                        navigateToCustomUnitChooseDose: { customUnit in
+                            navPath.append(customUnit)
+                        }
+                    )
                 } else {
                     ChooseDoseScreen(
                         arguments: arguments,
                         dismiss: dismiss,
-                        navigateToCustomUnitChooseDose: {customUnit in
+                        navigateToCustomUnitChooseDose: { customUnit in
                             navPath.append(customUnit)
-                        })
+                        }
+                    )
                 }
             }
             .navigationDestination(for: CustomUnit.self) { customUnit in

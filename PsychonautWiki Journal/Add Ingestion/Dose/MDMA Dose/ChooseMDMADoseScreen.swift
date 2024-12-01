@@ -18,6 +18,8 @@ import SwiftUI
 
 struct ChooseMDMADoseScreen: View {
     let dismiss: () -> Void
+    let navigateToCustomUnitChooseDose: (CustomUnit) -> Void
+
     private let mdma = SubstanceRepo.shared.getSubstance(name: "MDMA")!
     private var oralDose: RoaDose {
         mdma.getDose(for: .oral)!
@@ -66,6 +68,7 @@ struct ChooseMDMADoseScreen: View {
     }
 
     @FocusState private var isEstimatedDeviationFocused: Bool
+    @State private var isAddCustomUnitSheetShown = false
 
     private var screen: some View {
         Form {
@@ -113,9 +116,27 @@ struct ChooseMDMADoseScreen: View {
                 }
                 unknownDoseLink
             }.listRowSeparator(.hidden)
+            Section("Prefer to log pill?") {
+                Button("Add a custom unit") {
+                    isAddCustomUnitSheetShown.toggle()
+                }
+            }
             MDMAOptimalDoseSection()
             MDMAPillsSection()
         }
+        .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
+            NavigationStack {
+                FinishCustomUnitsScreen(
+                    substanceAndRoute: SubstanceAndRoute(substance: mdma, administrationRoute: .oral),
+                    cancel: {
+                        isAddCustomUnitSheetShown = false
+                    },
+                    onAdded: { customUnit in
+                        isAddCustomUnitSheetShown = false
+                        navigateToCustomUnitChooseDose(customUnit)
+                    })
+            }
+        })
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("MDMA Dose")
     }
@@ -128,6 +149,6 @@ struct ChooseMDMADoseScreen: View {
 
 #Preview {
     NavigationStack {
-        ChooseMDMADoseScreen(dismiss: {})
+        ChooseMDMADoseScreen(dismiss: {}, navigateToCustomUnitChooseDose: {_ in})
     }
 }
