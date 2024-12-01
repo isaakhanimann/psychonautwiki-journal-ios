@@ -230,18 +230,30 @@ struct ChooseDoseScreenContent: View {
             suggestedNote: suggestedNote))
     }
 
+    private var customUnitSectionTitle: String {
+        if substance.name == "Cannabis" && administrationRoute == .smoked {
+            "Prefer to log weight of bud, hash or log another unit related to joint, vaporizer or bong?"
+        } else if (substance.name == "Psilocybin mushrooms") {
+            "Prefer to log weight of mushrooms instead of mg Psilocybin?"
+        } else if (substance.name == "Alcohol") {
+            "Prefer to log number of drinks, beer or wine instead of g of Ethanol?"
+        } else {
+            "Prefer to use a different unit such as \(getSampleUnitText(administrationRoute: administrationRoute))?"
+        }
+    }
+
     private var screen: some View {
         Form {
             doseSection
             if isEyeOpen {
-                Section("Custom units") {
+                Section(customUnitSectionTitle) {
+                    Button("Add a custom unit") {
+                        isAddCustomUnitSheetShown.toggle()
+                    }
                     ForEach(customUnits.wrappedValue) { customUnit in
                         NavigationLink(value: customUnit) {
                             Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
                         }
-                    }
-                    Button("Add custom unit") {
-                        isAddCustomUnitSheetShown.toggle()
                     }
                 }
                 if substance.name == "Nicotine" {
@@ -296,6 +308,23 @@ struct ChooseDoseScreenContent: View {
         return selectedPureDose / purityInPercent * 100
     }
 
+}
+
+func getSampleUnitText(administrationRoute: AdministrationRoute) -> String {
+    switch administrationRoute {
+    case .oral:
+        "pill, capsule"
+    case .smoked:
+        "mg, hit"
+    case .insufflated:
+        "spray, spoon, scoop, line"
+    case .buccal:
+        "pouch"
+    case .transdermal:
+        "patch"
+    default:
+        "pill, spray, spoon"
+    }
 }
 
 #Preview {
