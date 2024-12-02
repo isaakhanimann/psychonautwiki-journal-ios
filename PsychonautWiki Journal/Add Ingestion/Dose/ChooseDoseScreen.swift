@@ -230,7 +230,7 @@ struct ChooseDoseScreenContent: View {
             suggestedNote: suggestedNote))
     }
 
-    private var customUnitSectionTitle: String {
+    var customUnitPrompt: String {
         if substance.name == "Cannabis" && administrationRoute == .smoked {
             "Prefer to log weight of bud, hash or log another unit related to joint, vaporizer or bong?"
         } else if (substance.name == "Psilocybin mushrooms") {
@@ -265,7 +265,8 @@ struct ChooseDoseScreenContent: View {
         Form {
             doseSection
             if isEyeOpen {
-                Section(customUnitSectionTitle) {
+                Section {
+                    Text(customUnitPrompt)
                     Button("Add a custom unit") {
                         isAddCustomUnitSheetShown.toggle()
                     }
