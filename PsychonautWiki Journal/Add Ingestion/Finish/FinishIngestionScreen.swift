@@ -223,9 +223,13 @@ struct FinishIngestionScreen: View {
             }
         })
         .onFirstAppear { // because onAppear is called again when navigating back from color picker screen
-            let timeIntervalSince1970 = UserDefaults.standard.double(forKey: PersistenceController.lastIngestionTimeOfExperienceWhereAddIngestionTappedKey)
-            if timeIntervalSince1970 != 0 {
-                let lastIngestionTimeOfExperienceWhereAddIngestionTapped = Date(timeIntervalSince1970: timeIntervalSince1970)
+            let lastIngestionTimeIntervalSince1970 = UserDefaults.standard.double(forKey: PersistenceController.lastIngestionTimeOfExperienceWhereAddIngestionTappedKey)
+            let clonedIngestionTimeIntervalSince1970 = UserDefaults.standard.double(forKey: PersistenceController.clonedIngestionTimeKey)
+            if clonedIngestionTimeIntervalSince1970 != 0 {
+                let clonedTime = Date(timeIntervalSince1970: clonedIngestionTimeIntervalSince1970)
+                selectedTime = clonedTime
+            } else if lastIngestionTimeIntervalSince1970 != 0 {
+                let lastIngestionTimeOfExperienceWhereAddIngestionTapped = Date(timeIntervalSince1970: lastIngestionTimeIntervalSince1970)
                 let hoursSince = lastIngestionTimeOfExperienceWhereAddIngestionTapped.distance(to: .now)/(60*60)
                 if hoursSince > 20 {
                     selectedTime = lastIngestionTimeOfExperienceWhereAddIngestionTapped

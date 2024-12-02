@@ -290,9 +290,15 @@ struct EditIngestionContent: View {
                     }
                 }.listRowSeparator(.hidden)
                 Section {
-                    Toggle("Hide In Timeline", isOn: $isHidden).tint(.accentColor)
+                    Toggle("Hide in timeline", isOn: $isHidden).tint(.accentColor)
+                    Button(action: {
+                        dismiss()
+                        addIngestionAtSameTime()
+                    }) {
+                        Label("Add ingestion at same time", systemImage: "plus")
+                    }
                     Button(action: delete) {
-                        Label("Delete Ingestion", systemImage: "trash").foregroundColor(.red)
+                        Label("Delete ingestion", systemImage: "trash").foregroundColor(.red)
                     }
                 }
             }
@@ -314,6 +320,11 @@ struct EditIngestionContent: View {
             .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Edit Ingestion")
         }
+    }
+
+    private func addIngestionAtSameTime() {
+        UserDefaults.standard.set(time.timeIntervalSince1970, forKey: PersistenceController.clonedIngestionTimeKey)
+        Navigator.shared.showAddIngestionFullScreenCover()
     }
 
     @State private var isConsumerSheetPresented = false

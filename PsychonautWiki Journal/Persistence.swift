@@ -34,6 +34,7 @@ struct PersistenceController {
     static let shouldAutomaticallyStartLiveActivityKey = "shouldAutomaticallyStartLiveActivity"
     static let independentSubstanceHeightKey = "independentSubstanceHeight"
     static let lastIngestionTimeOfExperienceWhereAddIngestionTappedKey = "lastIngestionTimeOfExperienceWhereAddIngestionTapped"
+    static let clonedIngestionTimeKey = "clonedIngestionTimeKey"
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }
