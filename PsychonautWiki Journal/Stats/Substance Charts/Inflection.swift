@@ -19,7 +19,7 @@ import Foundation
 extension Int {
     // e.g. for 2.with(unit: "experience") it returns "2 experiences"
     func with(unit: String) -> String {
-        if self != 1 && !unit.hasSuffix("s") {
+        if Double(self).getIsPlural(unit: unit) {
             "\(self) \(unit)s"
         } else {
             "\(self) \(unit)"
@@ -44,7 +44,7 @@ extension Double {
         }
     }
 
-    private func getIsPlural(unit: String) -> Bool {
-        self != 1 && !unit.hasSuffix("s") && unit != "mg"
+    func getIsPlural(unit: String) -> Bool {
+        self != 1 && !unit.hasSuffix("s") && unit != "mg" && unit != "g" && unit != "ml"
     }
 }
