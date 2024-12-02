@@ -29,16 +29,37 @@ struct FinishCustomUnitsScreen: View {
     let cancel: () -> Void
     let onAdded: (CustomUnit) -> Void
 
-    private var namePrompt: String {
+    struct Prompt {
+        let name: String
+        let unit: String
+    }
+
+    var prompt: Prompt {
         switch substanceAndRoute.substance.name {
         case "Cannabis":
-            "Flower in joint, bong, vaporizer"
+            return Prompt(name: "e.g. flower in joint, bong, vaporizer", unit: "mg")
         case "Psilocybin mushrooms":
-            "Mushroom strain"
+            return Prompt(name: "Mushroom strain", unit: "g")
         case "Alcohol":
-            "Beer, Wine, Spirit"
+            return Prompt(name: "e.g. beer, wine, spirit", unit: "e.g. ml, cup")
+        case "Caffeine":
+            return Prompt(name: "e.g. coffee, tea, energy drink", unit: "e.g. cup, can")
         default:
-            "Blue rocket"
+            switch substanceAndRoute.administrationRoute {
+            case .oral:
+                return Prompt(name: "e.g. blue rocket, 85% powder", unit: "e.g. pill, capsule, mg")
+            case .smoked:
+                return Prompt(name: "e.g. 85% powder", unit: "e.g. mg, hit")
+            case .insufflated:
+                return Prompt(name: "e.g. nasal solution, blue dispenser", unit: "e.g. spray, spoon, scoop, line")
+            case .buccal:
+                return Prompt(name: "e.g. brand name", unit: "e.g. pouch")
+            case .transdermal:
+                return Prompt(name: "e.g. brand name", unit: "e.g. patch")
+            default:
+                return Prompt(name: "e.g. 85% powder, blue rocket", unit: "e.g. pill, spray, spoon")
+            }
+
         }
     }
 
@@ -63,7 +84,7 @@ struct FinishCustomUnitsScreen: View {
                 }
             }
             Section {
-                TextField("Name to identify", text: $name, prompt: Text(namePrompt))
+                TextField("Name to identify", text: $name, prompt: Text(prompt.name))
                     .textInputAutocapitalization(.sentences)
                     .autocorrectionDisabled()
                     .focused($focusedField, equals: .name)
@@ -71,7 +92,7 @@ struct FinishCustomUnitsScreen: View {
                     .onSubmit {
                         focusedField = .unit
                     }
-                TextField("Unit in singular form", text: $unit, prompt: Text(getSampleUnitText(administrationRoute: substanceAndRoute.administrationRoute)))
+                TextField("Unit in singular form", text: $unit, prompt: Text(prompt.unit))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .unit)

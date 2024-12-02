@@ -237,8 +237,27 @@ struct ChooseDoseScreenContent: View {
             "Prefer to log weight of mushrooms instead of mg Psilocybin?"
         } else if (substance.name == "Alcohol") {
             "Prefer to log number of drinks, beer or wine instead of g of Ethanol?"
+        } else if (substance.name == "Caffeine") {
+            "Prefer to log coffee, tea or energy drink instead of mg Caffeine?"
         } else {
-            "Prefer to use a different unit such as \(getSampleUnitText(administrationRoute: administrationRoute))?"
+            "Prefer to use a different unit such as \(sampleUnitText)?"
+        }
+    }
+
+    var sampleUnitText: String {
+        switch administrationRoute {
+        case .oral:
+            "pills, capsules or raw powder weight"
+        case .smoked:
+            "hits"
+        case .insufflated:
+            "sprays, spoons, scoops, lines or raw powder weight"
+        case .buccal:
+            "pouches"
+        case .transdermal:
+            "patches"
+        default:
+            "pills, sprays, spoons or powder weight"
         }
     }
 
@@ -308,23 +327,6 @@ struct ChooseDoseScreenContent: View {
         return selectedPureDose / purityInPercent * 100
     }
 
-}
-
-func getSampleUnitText(administrationRoute: AdministrationRoute) -> String {
-    switch administrationRoute {
-    case .oral:
-        "pill, capsule"
-    case .smoked:
-        "mg, hit"
-    case .insufflated:
-        "spray, spoon, scoop, line"
-    case .buccal:
-        "pouch"
-    case .transdermal:
-        "patch"
-    default:
-        "pill, spray, spoon"
-    }
 }
 
 #Preview {
