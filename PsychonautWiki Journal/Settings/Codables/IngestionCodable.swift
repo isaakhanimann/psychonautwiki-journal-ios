@@ -19,6 +19,7 @@ import Foundation
 struct IngestionCodable: Codable {
     let substanceName: String
     let time: Date
+    let endTime: Date?
     let creationDate: Date?
     let administrationRoute: AdministrationRoute
     let dose: Double?
@@ -33,6 +34,7 @@ struct IngestionCodable: Codable {
     enum CodingKeys: String, CodingKey {
         case substanceName
         case time
+        case endTime
         case creationDate
         case administrationRoute
         case dose
@@ -48,6 +50,7 @@ struct IngestionCodable: Codable {
     init(
         substanceName: String,
         time: Date,
+        endTime: Date?,
         creationDate: Date?,
         administrationRoute: AdministrationRoute,
         dose: Double?,
@@ -61,6 +64,7 @@ struct IngestionCodable: Codable {
     ) {
         self.substanceName = substanceName
         self.time = time
+        self.endTime = endTime
         self.creationDate = creationDate
         self.administrationRoute = administrationRoute
         self.dose = dose
@@ -78,6 +82,11 @@ struct IngestionCodable: Codable {
         substanceName = try values.decode(String.self, forKey: .substanceName)
         let timeMillis = try values.decode(UInt64.self, forKey: .time)
         time = getDateFromMillis(millis: timeMillis)
+        if let endTimeMillis = try values.decodeIfPresent(UInt64.self, forKey: .endTime) {
+            endTime = getDateFromMillis(millis: endTimeMillis)
+        } else {
+            endTime = nil
+        }
         if let creationMillis = try values.decodeIfPresent(UInt64.self, forKey: .creationDate) {
             creationDate = getDateFromMillis(millis: creationMillis)
         } else {
@@ -111,6 +120,12 @@ struct IngestionCodable: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(substanceName, forKey: .substanceName)
         try container.encode(UInt64(time.timeIntervalSince1970) * 1000, forKey: .time)
+        if let endTime {
+            try container.encode(UInt64(endTime.timeIntervalSince1970) * 1000, forKey: .endTime)
+        } else {
+            let endTimeMillis: UInt64? = nil
+            try container.encode(endTimeMillis, forKey: .endTime)
+        }
         if let creationDate {
             try container.encode(UInt64(creationDate.timeIntervalSince1970) * 1000, forKey: .creationDate)
         } else {

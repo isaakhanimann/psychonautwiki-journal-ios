@@ -40,6 +40,7 @@ struct JournalFile: FileDocument, Codable {
                     IngestionCodable(
                         substanceName: ingestion.substanceNameUnwrapped,
                         time: ingestion.timeUnwrapped,
+                        endTime: ingestion.endTime,
                         creationDate: ingestion.creationDate,
                         administrationRoute: ingestion.administrationRouteUnwrapped,
                         dose: ingestion.doseUnwrapped,

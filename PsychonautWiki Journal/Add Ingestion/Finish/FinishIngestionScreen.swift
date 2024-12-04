@@ -388,6 +388,11 @@ struct FinishIngestionScreen: View {
         let ingestion = Ingestion(context: context)
         ingestion.identifier = UUID()
         ingestion.time = selectedTime
+        if selectedTimePickerOption == .timeRange {
+            ingestion.endTime = selectedEndTime
+        } else {
+            ingestion.endTime = nil
+        }
         ingestion.creationDate = Date()
         ingestion.customUnit = arguments.customUnit
         ingestion.dose = arguments.dose ?? 0
