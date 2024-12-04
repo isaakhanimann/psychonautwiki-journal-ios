@@ -142,6 +142,8 @@ struct ChooseDoseScreenContent: View {
         getDouble(from: purityText)
     }
 
+    @State private var isDosageRemarkExpanded = false
+
     private var doseSection: some View {
         Section {
             VStack(alignment: .leading) {
@@ -149,7 +151,17 @@ struct ChooseDoseScreenContent: View {
                     Text("Info is not approved by PsychonautWiki moderators.")
                 }
                 if let remark = substance.dosageRemark {
-                    Text(remark).font(.footnote)
+                    HStack {
+                        Text(remark).lineLimit(isDosageRemarkExpanded ? nil : 1)
+                        if !isDosageRemarkExpanded {
+                            Image(systemName: "chevron.down")
+                        }
+                    }
+                   .onTapGesture {
+                        withAnimation {
+                            isDosageRemarkExpanded.toggle()
+                        }
+                    }
                 }
                 if let roaDose {
                     RoaDoseRow(roaDose: roaDose)
