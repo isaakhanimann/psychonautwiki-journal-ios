@@ -141,7 +141,7 @@ struct ChooseDoseScreenContent: View {
                 }
                 if let remark = substance.dosageRemark {
                     HStack {
-                        Text(remark).lineLimit(isDosageRemarkExpanded ? nil : 1)
+                        Text(remark).lineLimit(isDosageRemarkExpanded ? nil : 2)
                         if !isDosageRemarkExpanded {
                             Image(systemName: "chevron.down")
                         }
