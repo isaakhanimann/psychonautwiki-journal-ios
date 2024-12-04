@@ -148,12 +148,10 @@ struct TimeRangeRepresentation<TimeRepresentation: View>: View {
     @ViewBuilder let endTimeRepresentation: () -> TimeRepresentation
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 0) {
+        HStack(spacing: 0) {
             startTimeRepresentation()
-            HStack(spacing: 0) {
-                Text("- ")
-                endTimeRepresentation()
-            }
+            Text(" - ")
+            endTimeRepresentation()
         }
     }
 }

@@ -58,14 +58,11 @@ private struct IngestionRowContent<Content: View>: View {
         HStack {
             ColorRectangle(color: substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
-                HStack {
-                    Text(title)
-                        .lineLimit(1)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    Spacer()
-                    timeText.font(.subheadline)
-                }
+                timeText.font(.subheadline)
+                Text(title)
+                    .lineLimit(1)
+                    .font(.headline)
+                    .foregroundColor(.primary)
                 doseRow
                 Group {
                     if !ingestion.noteUnwrapped.isEmpty {
