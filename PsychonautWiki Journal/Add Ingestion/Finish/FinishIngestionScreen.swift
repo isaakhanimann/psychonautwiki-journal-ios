@@ -39,6 +39,8 @@ struct FinishIngestionScreen: View {
     @State private var sheetToShow: SheetOption?
     @State private var selectedColor = SubstanceColor.allCases.randomElement() ?? SubstanceColor.blue
     @State private var selectedTime = Date()
+    @State private var selectedTimePickerOption = TimePickerOption.pointInTime
+    @State private var selectedEndTime = Date().addingTimeInterval(30*60)
     @State private var enteredNote = ""
     @State private var enteredTitle = ""
     @State private var consumerName = ""
@@ -54,6 +56,10 @@ struct FinishIngestionScreen: View {
     @AppStorage(PersistenceController.areRedosesDrawnIndividuallyKey) var areRedosesDrawnIndividually = false
     @AppStorage(PersistenceController.independentSubstanceHeightKey) var areSubstanceHeightsIndependent = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
+
+    enum TimePickerOption {
+        case pointInTime, timeRange
+    }
 
     var areYouConsumer: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -96,22 +102,44 @@ struct FinishIngestionScreen: View {
     var screen: some View {
         Form {
             Section("Ingestion") {
-                HStack(alignment: .center) {
+                Picker("Time picker option", selection: $selectedTimePickerOption.animation()) {
+                    Text("Time point").tag(TimePickerOption.pointInTime)
+                    Text("Time range").tag(TimePickerOption.timeRange)
+                }.pickerStyle(.segmented)
+                .labelsHidden()
+                switch selectedTimePickerOption {
+                case .pointInTime:
+                    HStack(alignment: .center) {
+                        DatePicker(
+                            "Time",
+                            selection: $selectedTime,
+                            displayedComponents: [.date, .hourAndMinute]
+                        )
+                        .datePickerStyle(.compact)
+                        Spacer()
+                        Button {
+                            withAnimation {
+                                selectedTime = Date.now
+                            }
+                        } label: {
+                            Label("Reset time", systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
+                        }
+                    }
+                case .timeRange:
                     DatePicker(
-                        "Time",
+                        "Start time",
                         selection: $selectedTime,
                         displayedComponents: [.date, .hourAndMinute]
                     )
                     .datePickerStyle(.compact)
-                    Spacer()
-                    Button {
-                        withAnimation {
-                            selectedTime = Date.now
-                        }
-                    } label: {
-                        Label("Reset time", systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
-                    }
+                    DatePicker(
+                        "End time",
+                        selection: $selectedEndTime,
+                        displayedComponents: [.date, .hourAndMinute]
+                    )
+                    .datePickerStyle(.compact)
                 }
+
                 if experiencesWithinLargerRange.count > 0 {
                     NavigationLink {
                         ExperiencePickerScreen(
