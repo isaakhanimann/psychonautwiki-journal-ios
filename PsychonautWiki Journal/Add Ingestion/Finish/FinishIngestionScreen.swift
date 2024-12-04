@@ -258,9 +258,6 @@ struct FinishIngestionScreen: View {
     }
 
     func initializeColorCompanionAndNote() {
-        if let suggestedNote = arguments.suggestedNote {
-            enteredNote = suggestedNote
-        }
         let fetchRequest = SubstanceCompanion.fetchRequest()
         let companions = (try? PersistenceController.shared.viewContext.fetch(fetchRequest)) ?? []
         alreadyUsedColors = Array(Set(companions.map { $0.color })).sorted()

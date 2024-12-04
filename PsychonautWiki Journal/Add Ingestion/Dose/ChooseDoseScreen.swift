@@ -112,8 +112,7 @@ struct ChooseDoseScreenContent: View {
                     dose: selectedPureDose,
                     units: selectedUnits,
                     isEstimate: isEstimate,
-                    estimatedDoseStandardDeviation: selectedDoseDeviation,
-                    suggestedNote: suggestedNote))
+                    estimatedDoseStandardDeviation: selectedDoseDeviation))
                 {
                     NextLabel()
                 }
@@ -124,22 +123,12 @@ struct ChooseDoseScreenContent: View {
     private var customUnits: FetchRequest<CustomUnit>
 
 
-    @State private var purityText = ""
     @FocusState private var isDoseFieldFocused: Bool
     @FocusState private var isEstimatedDeviationFocused: Bool
     @State private var isAddCustomUnitSheetShown: Bool = false
 
     private var roaDose: RoaDose? {
         substance.getDose(for: administrationRoute)
-    }
-
-    private var suggestedNote: String? {
-        guard let impureDose, !selectedUnits.isEmpty, purityInPercent != 100, purityInPercent != nil else { return nil }
-        return "\(impureDose.asRoundedReadableString) \(selectedUnits) with \(purityText)% purity"
-    }
-
-    private var purityInPercent: Double? {
-        getDouble(from: purityText)
     }
 
     @State private var isDosageRemarkExpanded = false
@@ -174,21 +163,6 @@ struct ChooseDoseScreenContent: View {
                 .onFirstAppear {
                     isDoseFieldFocused = true
                 }
-                if isEyeOpen {
-                    HStack {
-                        Image(systemName: "arrow.down")
-                        TextField("Purity", text: $purityText).keyboardType(.decimalPad)
-                        Spacer()
-                        Text("%")
-                    }
-                    if let impureDose {
-                        HStack {
-                            Text(impureDose.asRoundedReadableString)
-                            Spacer()
-                            Text("impure \(selectedUnits)")
-                        }.font(.title)
-                    }
-                }
                 Toggle("Estimate", isOn: $isEstimate)
                     .tint(.accentColor)
                     .onChange(of: isEstimate, perform: { newIsEstimate in
@@ -215,7 +189,6 @@ struct ChooseDoseScreenContent: View {
                     StandardDeviationConfidenceIntervalExplanation(mean: selectedPureDose, standardDeviation: selectedDoseDeviation, unit: units)
                 }
             }
-            unknownDoseLink
         } header: {
             Text("Pure \(administrationRoute.rawValue.capitalized) Dose")
         } footer: {
@@ -238,8 +211,7 @@ struct ChooseDoseScreenContent: View {
             dose: nil,
             units: selectedUnits,
             isEstimate: isEstimate,
-            estimatedDoseStandardDeviation: nil,
-            suggestedNote: suggestedNote))
+            estimatedDoseStandardDeviation: nil))
     }
 
     var customUnitPrompt: String {
@@ -288,6 +260,9 @@ struct ChooseDoseScreenContent: View {
                         }
                     }
                 }
+                Section {
+                    unknownDoseLink
+                }
                 if substance.name == "Nicotine" {
                     Section("Nicotine Content vs Dose") {
                         Text(
@@ -332,12 +307,6 @@ struct ChooseDoseScreenContent: View {
         })
         .scrollDismissesKeyboard(.interactively)
         .navigationBarTitle("\(substance.name) Dose")
-    }
-
-    private var impureDose: Double? {
-        guard let selectedPureDose else { return nil }
-        guard let purityInPercent, purityInPercent != 0 else { return nil }
-        return selectedPureDose / purityInPercent * 100
     }
 
 }
