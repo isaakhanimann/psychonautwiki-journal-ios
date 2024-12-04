@@ -50,24 +50,72 @@ struct TimelineSection: View {
                             isEyeOpen: isEyeOpen,
                             isHidingDosageDots: isHidingDosageDots,
                             timeText: {
-                                if timeDisplayStyle == .relativeToNow {
-                                    RelativeTimeText(date: ingestion.timeUnwrapped)
-                                } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
-                                    if isFirstIngestion {
-                                        Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                if let endTime = ingestion.endTime {
+                                    if timeDisplayStyle == .relativeToNow {
+                                        TimeRangeRepresentation {
+                                            RelativeTimeText(date: ingestion.timeUnwrapped)
+                                        } endTimeRepresentation: {
+                                            RelativeTimeText(date: endTime)
+                                        }
+                                    } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                                        if isFirstIngestion {
+                                            TimeRangeRepresentation {
+                                                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            } endTimeRepresentation: {
+                                                Text(endTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            }
+                                        } else {
+                                            let startTimeComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
+                                            let endTimeComponents = DateDifference.between(firstIngestionTime, and: endTime)
+                                            TimeRangeRepresentation {
+                                                Text(DateDifference.formattedWithMax2Units(startTimeComponents))
+                                            } endTimeRepresentation: {
+                                                Text(DateDifference.formattedWithMax2Units(endTimeComponents)) + Text(" in")
+                                            }
+                                        }
+                                    } else if timeDisplayStyle == .between {
+                                        if isFirstIngestion {
+                                            TimeRangeRepresentation {
+                                                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            } endTimeRepresentation: {
+                                                Text(endTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            }
+                                        } else if let previousIngestion {
+                                            let startTimeComponents = DateDifference.between(previousIngestion.timeUnwrapped, and: ingestion.timeUnwrapped)
+                                            let endTimeComponents = DateDifference.between(previousIngestion.timeUnwrapped, and: endTime)
+                                            TimeRangeRepresentation {
+                                                Text(DateDifference.formattedWithMax2Units(startTimeComponents))
+                                            } endTimeRepresentation: {
+                                                Text(DateDifference.formattedWithMax2Units(endTimeComponents)) + Text(" later")
+                                            }
+                                        }
                                     } else {
-                                        let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
-                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
-                                    }
-                                } else if timeDisplayStyle == .between {
-                                    if isFirstIngestion {
-                                        Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-                                    } else if let previousIngestion {
-                                        let dateComponents = DateDifference.between(previousIngestion.timeUnwrapped, and: ingestion.timeUnwrapped)
-                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                        TimeRangeRepresentation {
+                                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                        } endTimeRepresentation: {
+                                            Text(endTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                        }
                                     }
                                 } else {
-                                    Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                    if timeDisplayStyle == .relativeToNow {
+                                        RelativeTimeText(date: ingestion.timeUnwrapped)
+                                    } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
+                                        if isFirstIngestion {
+                                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                        } else {
+                                            let dateComponents = DateDifference.between(firstIngestionTime, and: ingestion.timeUnwrapped)
+                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                                        }
+                                    } else if timeDisplayStyle == .between {
+                                        if isFirstIngestion {
+                                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                        } else if let previousIngestion {
+                                            let dateComponents = DateDifference.between(previousIngestion.timeUnwrapped, and: ingestion.timeUnwrapped)
+                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                        }
+                                    } else {
+                                        Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                    }
                                 }
                             }
                         )
@@ -89,6 +137,22 @@ struct TimelineSection: View {
                     }
 
                 }
+            }
+        }
+    }
+}
+
+struct TimeRangeRepresentation<TimeRepresentation: View>: View {
+
+    @ViewBuilder let startTimeRepresentation: () -> TimeRepresentation
+    @ViewBuilder let endTimeRepresentation: () -> TimeRepresentation
+
+    var body: some View {
+        VStack(alignment: .trailing, spacing: 0) {
+            startTimeRepresentation()
+            HStack(spacing: 0) {
+                Text("- ")
+                endTimeRepresentation()
             }
         }
     }
