@@ -58,7 +58,7 @@ private struct IngestionRowContent<Content: View>: View {
         HStack {
             ColorRectangle(color: substanceColor.swiftUIColor)
             VStack(alignment: .leading) {
-                timeText.font(.subheadline)
+                timeText.font(.caption)
                 Text(title)
                     .lineLimit(1)
                     .font(.headline)
