@@ -36,13 +36,6 @@ struct EffectTimeline: View {
                 let timelineDate = timeline.date
                 Canvas { context, size in
                     let pixelsPerSec = size.width / timelineModel.totalWidth
-                    timelineModel.timeRangeDrawables.forEach { rangeDrawable in
-                        rangeDrawable.draw(
-                            context: context,
-                            height: size.height,
-                            pixelsPerSec: pixelsPerSec
-                        )
-                    }
                     timelineModel.groupDrawables.forEach { groupDrawable in
                         groupDrawable.draw(
                             context: context,
@@ -65,6 +58,13 @@ struct EffectTimeline: View {
                             height: size.height,
                             pixelsPerSec: pixelsPerSec,
                             lineWidth: 3
+                        )
+                    }
+                    timelineModel.timeRangeDrawables.forEach { rangeDrawable in
+                        rangeDrawable.draw(
+                            context: context,
+                            height: size.height,
+                            pixelsPerSec: pixelsPerSec
                         )
                     }
                     let shouldDrawCurrentTime = timelineDate > timelineModel.startTime.addingTimeInterval(2 * 60) && timelineDate < timelineModel.startTime.addingTimeInterval(timelineModel.totalWidth) && isShowingCurrentTime
