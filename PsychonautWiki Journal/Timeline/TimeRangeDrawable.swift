@@ -32,14 +32,26 @@ struct TimeRangeDrawable {
         height: Double,
         pixelsPerSec: Double
     ) {
-        var path = Path()
-        let lineWidth: CGFloat = 10
-        let bottom = height - lineWidth
+        let verticalLineWidth: CGFloat = 5
+        let horizontalLineWidth: CGFloat = 10
         let startX = startInSeconds * pixelsPerSec
         let endX = endInSeconds * pixelsPerSec
+        let lineHeight: CGFloat = 40
+        let horizontalLineHeight = lineHeight/2
 
-        path.move(to: CGPoint(x: startX, y: bottom))
-        path.addLine(to: CGPoint(x: endX, y: bottom))
-        context.stroke(path, with: .color(color.swiftUIColor), style: StrokeStyle.getNormal(lineWidth: lineWidth))
+        var firstVerticalLine = Path()
+        firstVerticalLine.move(to: CGPoint(x: startX, y: height))
+        firstVerticalLine.addLine(to: CGPoint(x: startX, y: height - lineHeight))
+        context.stroke(firstVerticalLine, with: .color(color.swiftUIColor), style: StrokeStyle.getNormal(lineWidth: verticalLineWidth))
+
+        var horizontalLine = Path()
+        horizontalLine.move(to: CGPoint(x: startX, y: height - horizontalLineHeight))
+        horizontalLine.addLine(to: CGPoint(x: endX, y: height - horizontalLineHeight))
+        context.stroke(horizontalLine, with: .color(color.swiftUIColor), style: StrokeStyle(lineWidth: horizontalLineWidth))
+
+        var secondVerticalLine = Path()
+        secondVerticalLine.move(to: CGPoint(x: endX, y: height))
+        secondVerticalLine.addLine(to: CGPoint(x: endX, y: height - lineHeight))
+        context.stroke(secondVerticalLine, with: .color(color.swiftUIColor), style: StrokeStyle.getNormal(lineWidth: verticalLineWidth))
     }
 }

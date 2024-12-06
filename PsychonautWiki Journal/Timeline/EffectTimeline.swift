@@ -36,6 +36,13 @@ struct EffectTimeline: View {
                 let timelineDate = timeline.date
                 Canvas { context, size in
                     let pixelsPerSec = size.width / timelineModel.totalWidth
+                    timelineModel.timeRangeDrawables.forEach { rangeDrawable in
+                        rangeDrawable.draw(
+                            context: context,
+                            height: size.height,
+                            pixelsPerSec: pixelsPerSec
+                        )
+                    }
                     timelineModel.groupDrawables.forEach { groupDrawable in
                         groupDrawable.draw(
                             context: context,
@@ -228,10 +235,27 @@ struct EffectTimeline_Previews: PreviewProvider {
             ]
         ),
         SubstanceIngestionGroup(
-            substanceName: "LSD",
-            color: .blue,
+            substanceName: "Cannabis",
+            color: .green,
             routeMinInfos: [
-                RouteMinInfo(route: .oral, ingestions: [
+                RouteMinInfo(
+                    route: .oral,
+                    ingestions: [
+                        IngestionMinInfo(
+                            dose: 40,
+                            time: .now.addingTimeInterval(-3 * 60 * 60),
+                            endTime: .now.addingTimeInterval(-0.5 * 60 * 60),
+                            onsetDelayInHours: 0
+                        ),
+                    ]
+                ),
+            ]
+        ),
+        SubstanceIngestionGroup(
+            substanceName: "LSD",
+            color: .pink,
+            routeMinInfos: [
+                RouteMinInfo(route: .sublingual, ingestions: [
                     IngestionMinInfo(
                         dose: 100,
                         time: .now.addingTimeInterval(-4 * 60 * 60),
