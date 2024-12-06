@@ -29,6 +29,7 @@ struct RouteGroupWithRepoInfo {
 struct IngestionWithRepoInfo {
     let onsetDelayInHours: Double
     let time: Date
+    let endTime: Date?
     let horizontalWeight: Double
     let strengthRelativeToCommonDose: Double
 }
@@ -73,6 +74,7 @@ func getSubstanceGroupWithRepoInfo(substanceIngestionGroups: [SubstanceIngestion
                 return IngestionWithRepoInfo(
                     onsetDelayInHours: ingestion.onsetDelayInHours,
                     time: ingestion.time,
+                    endTime: ingestion.endTime,
                     horizontalWeight: horizontalWeight,
                     strengthRelativeToCommonDose: strengthRelativeToCommonDose
                 )
@@ -103,5 +105,6 @@ struct RouteMinInfo: Equatable, Codable {
 struct IngestionMinInfo: Equatable, Codable {
     let dose: Double?
     let time: Date
+    let endTime: Date?
     let onsetDelayInHours: Double
 }

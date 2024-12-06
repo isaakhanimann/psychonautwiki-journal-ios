@@ -214,11 +214,13 @@ struct EffectTimeline_Previews: PreviewProvider {
                         IngestionMinInfo(
                             dose: 100,
                             time: .now.addingTimeInterval(-2 * 60 * 60),
+                            endTime: nil,
                             onsetDelayInHours: 0
                         ),
                         IngestionMinInfo(
                             dose: 50,
                             time: .now,
+                            endTime: nil,
                             onsetDelayInHours: 0
                         ),
                     ]
@@ -233,6 +235,7 @@ struct EffectTimeline_Previews: PreviewProvider {
                     IngestionMinInfo(
                         dose: 100,
                         time: .now.addingTimeInterval(-4 * 60 * 60),
+                        endTime: nil,
                         onsetDelayInHours: 0
                     ),
                 ]),

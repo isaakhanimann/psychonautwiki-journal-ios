@@ -25,6 +25,7 @@ struct IngestionMinInfoForTimeline: Codable, Equatable {
     let route: AdministrationRoute
     let onsetDelayInHours: Double
     let time: Date
+    let endTime: Date?
     let dose: Double?
     let color: SubstanceColor
 }
@@ -36,6 +37,7 @@ private func getIngestionMinInfoForTimeline(ingestions: [Ingestion]) -> [Ingesti
             route: ingestion.administrationRouteUnwrapped,
             onsetDelayInHours: ingestion.stomachFullnessUnwrapped?.onsetDelayForOralInHours ?? 0,
             time: ingestion.timeUnwrapped,
+            endTime: ingestion.endTime,
             dose: ingestion.pureSubstanceDose,
             color: ingestion.substanceColor
         )
@@ -58,6 +60,7 @@ func getSubstanceIngestionGroups(ingestions: [Ingestion]) -> [SubstanceIngestion
                 IngestionMinInfo(
                     dose: ingestionMinInfo.dose,
                     time: ingestionMinInfo.time,
+                    endTime: ingestionMinInfo.endTime,
                     onsetDelayInHours: ingestionMinInfo.onsetDelayInHours
                 )
             }

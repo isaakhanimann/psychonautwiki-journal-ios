@@ -35,6 +35,7 @@ struct TimelineModel: Hashable {
     let startTime: Date
     let totalWidth: TimeInterval
     let groupDrawables: [GroupDrawable]
+    let timeRangeDrawables: [TimeRangeDrawable]
     let ratingDrawables: [RatingDrawable]
     let timedNoteDrawables: [TimedNoteDrawable]
     let axisDrawable: AxisDrawable
@@ -50,6 +51,7 @@ struct TimelineModel: Hashable {
         let color: SubstanceColor
         let roaDuration: RoaDuration?
         let weightedLines: [WeightedLine]
+        let ingestionRanges: [IngestionRange]
     }
 
     // swiftlint:disable function_body_length
@@ -71,17 +73,26 @@ struct TimelineModel: Hashable {
         var roaGroups: [RoaGroup] = []
         for substanceGroup in substanceGroupsWithRepoInfo {
             for routeGroup in substanceGroup.routeGroups {
+                let ingestionsAtPointInTime = routeGroup.ingestions.filter({$0.endTime == nil})
+                let ingestionRanges = routeGroup.ingestions.compactMap { ingestion in
+                    if let endTime = ingestion.endTime {
+                        IngestionRange(startTime: ingestion.time, endTime: endTime)
+                    } else {
+                        nil
+                    }
+                }
                 let group = RoaGroup(
                     color: substanceGroup.color,
                     roaDuration: routeGroup.roaDuration,
-                    weightedLines: routeGroup.ingestions.map { ingestion in
+                    weightedLines: ingestionsAtPointInTime.map { ingestion in
                         WeightedLine(
                             startTime: ingestion.time,
                             horizontalWeight: ingestion.horizontalWeight,
                             strengthRelativeToCommonDose: ingestion.strengthRelativeToCommonDose,
                             onsetDelayInHours: ingestion.onsetDelayInHours
                         )
-                    }
+                    },
+                    ingestionRanges: ingestionRanges
                 )
                 roaGroups.append(group)
             }
@@ -105,6 +116,13 @@ struct TimelineModel: Hashable {
             groupDrawables[index].normalize(maxHeight: maxHeight)
         }
         self.groupDrawables = groupDrawables
+        self.timeRangeDrawables = roaGroups.flatMap({ group in
+            group.ingestionRanges.map { range in
+                let startInSeconds = startTime.distance(to: range.startTime)
+                let endInSeconds = startTime.distance(to: range.endTime)
+                return TimeRangeDrawable(color: group.color, startInSeconds: startInSeconds, endInSeconds: endInSeconds)
+            }
+        })
         let ratingDrawables = everythingForEachRating.map { rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
         }

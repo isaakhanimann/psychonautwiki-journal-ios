@@ -158,6 +158,7 @@ struct DurationSection: View {
                                 IngestionMinInfo(
                                     dose: substance.doseInfos.first(where: { $0.route == info.route})?.roaDose.getStrengthRelativeToCommonDose(dose: firstAverageCommonDose),
                                     time: selectedTime,
+                                    endTime: nil,
                                     onsetDelayInHours: info.route == .oral ? stomachFullness.onsetDelayForOralInHours : 0
                                 ),
                             ]
