@@ -22,6 +22,7 @@ struct EditIngestionScreen: View {
     let ingestion: Ingestion
     @Binding var isHidden: Bool
     @State private var time = Date()
+    @State private var endTime = Date().addingTimeInterval(30*60)
     @State private var dose: Double?
     @State private var units: String = "mg"
     @State private var isEstimate = false
@@ -30,6 +31,7 @@ struct EditIngestionScreen: View {
     @State private var consumerName = ""
     @State private var stomachFullness = StomachFullness.empty
     @State private var selectedCustomUnit: CustomUnit? = nil
+    @State private var selectedTimePickerOption = TimePickerOption.pointInTime
 
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -68,7 +70,9 @@ struct EditIngestionScreen: View {
             customUnit: $selectedCustomUnit,
             otherUnits: filteredCustomUnit,
             route: ingestion.administrationRouteUnwrapped,
+            selectedTimePickerOption: $selectedTimePickerOption,
             time: $time,
+            endTime: $endTime,
             dose: $dose,
             units: $units,
             isEstimate: $isEstimate,
@@ -85,6 +89,12 @@ struct EditIngestionScreen: View {
             experiencesWithinLargerRange: experiencesWithinLargerRange
         ).onFirstAppear {
             time = ingestion.timeUnwrapped
+            if let eTime = ingestion.endTime {
+                endTime = eTime
+                selectedTimePickerOption = .timeRange
+            } else {
+                endTime = time.addingTimeInterval(30*60)
+            }
             dose = ingestion.doseUnwrapped
             units = ingestion.unitsUnwrapped
             isEstimate = ingestion.isEstimate
@@ -105,6 +115,11 @@ struct EditIngestionScreen: View {
 
     private func save() {
         ingestion.time = time
+        if selectedTimePickerOption == .timeRange {
+            ingestion.endTime = endTime
+        } else {
+            ingestion.endTime = nil
+        }
         ingestion.dose = dose ?? 0
         if let selectedCustomUnit {
             ingestion.customUnit?.removeFromIngestions(ingestion)
@@ -156,7 +171,9 @@ struct EditIngestionContent: View {
     @Binding var customUnit: CustomUnit?
     let otherUnits: [CustomUnit]
     let route: AdministrationRoute
+    @Binding var selectedTimePickerOption: TimePickerOption
     @Binding var time: Date
+    @Binding var endTime: Date
     @Binding var dose: Double?
     @Binding var units: String
     @Binding var isEstimate: Bool
@@ -251,11 +268,11 @@ struct EditIngestionContent: View {
                         .autocapitalization(.sentences)
                 }
                 Section {
-                    DatePicker(
-                        "Time",
-                        selection: $time,
-                        displayedComponents: [.date, .hourAndMinute])
-                    .datePickerStyle(.compact)
+                    TimePointOrRangePicker(
+                        selectedTimePickerOption: $selectedTimePickerOption,
+                        selectedTime: $time,
+                        selectedEndTime: $endTime
+                    )
                     if experiencesWithinLargerRange.count > 0 {
                         NavigationLink {
                             ExperiencePickerScreen(
@@ -344,7 +361,9 @@ struct EditIngestionContent: View {
             CustomUnit.previewSample
         ],
         route: .oral,
+        selectedTimePickerOption: .constant(.pointInTime),
         time: .constant(Date()),
+        endTime: .constant(Date()),
         dose: .constant(50),
         units: .constant("mg"),
         isEstimate: .constant(false),
@@ -369,7 +388,9 @@ struct EditIngestionContent: View {
         customUnit: .constant(CustomUnit.previewSample),
         otherUnits: [],
         route: .oral,
+        selectedTimePickerOption: .constant(.pointInTime),
         time: .constant(Date()),
+        endTime: .constant(Date()),
         dose: .constant(2),
         units: .constant("mg"),
         isEstimate: .constant(false),

@@ -57,10 +57,6 @@ struct FinishIngestionScreen: View {
     @AppStorage(PersistenceController.independentSubstanceHeightKey) var areSubstanceHeightsIndependent = false
     @AppStorage(PersistenceController.shouldAutomaticallyStartLiveActivityKey) var shouldAutomaticallyStartLiveActivity: Bool = true
 
-    enum TimePickerOption {
-        case pointInTime, timeRange
-    }
-
     var areYouConsumer: Bool {
         consumerName.isEmpty || consumerName.trimmingCharacters(in: .whitespaces).isEmpty
     }
@@ -102,44 +98,11 @@ struct FinishIngestionScreen: View {
     var screen: some View {
         Form {
             Section("Ingestion") {
-                Picker("Time picker option", selection: $selectedTimePickerOption.animation()) {
-                    Text("Time point").tag(TimePickerOption.pointInTime)
-                    Text("Time range").tag(TimePickerOption.timeRange)
-                }.pickerStyle(.segmented)
-                .labelsHidden()
-                switch selectedTimePickerOption {
-                case .pointInTime:
-                    HStack(alignment: .center) {
-                        DatePicker(
-                            "Time",
-                            selection: $selectedTime,
-                            displayedComponents: [.date, .hourAndMinute]
-                        )
-                        .datePickerStyle(.compact)
-                        Spacer()
-                        Button {
-                            withAnimation {
-                                selectedTime = Date.now
-                            }
-                        } label: {
-                            Label("Reset time", systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
-                        }
-                    }
-                case .timeRange:
-                    DatePicker(
-                        "Start time",
-                        selection: $selectedTime,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .datePickerStyle(.compact)
-                    DatePicker(
-                        "End time",
-                        selection: $selectedEndTime,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .datePickerStyle(.compact)
-                }
-
+                TimePointOrRangePicker(
+                    selectedTimePickerOption: $selectedTimePickerOption,
+                    selectedTime: $selectedTime,
+                    selectedEndTime: $selectedEndTime
+                )
                 if experiencesWithinLargerRange.count > 0 {
                     NavigationLink {
                         ExperiencePickerScreen(
