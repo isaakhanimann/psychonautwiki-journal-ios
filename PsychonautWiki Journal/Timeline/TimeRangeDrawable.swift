@@ -32,11 +32,11 @@ struct TimeRangeDrawable {
         height: Double,
         pixelsPerSec: Double
     ) {
-        let verticalLineWidth: CGFloat = 5
-        let horizontalLineWidth: CGFloat = 10
+        let verticalLineWidth: CGFloat = 4
+        let horizontalLineWidth: CGFloat = 8
         let startX = startInSeconds * pixelsPerSec
         let endX = endInSeconds * pixelsPerSec
-        let lineHeight: CGFloat = 40
+        let lineHeight: CGFloat = 20
         let horizontalLineHeight = lineHeight/2
 
         var firstVerticalLine = Path()
