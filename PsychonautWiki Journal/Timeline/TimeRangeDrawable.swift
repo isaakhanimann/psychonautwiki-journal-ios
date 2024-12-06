@@ -17,14 +17,27 @@
 import SwiftUI
 
 struct TimeRangeDrawable {
+
+    struct IntermediateRepresentation {
+        let color: SubstanceColor
+        let rangeInSeconds: Range<TimeInterval>
+
+        init(color: SubstanceColor, startInSeconds: TimeInterval, endInSeconds: TimeInterval) {
+            self.color = color
+            self.rangeInSeconds = startInSeconds..<endInSeconds
+        }
+    }
+
     private let color: SubstanceColor
     let startInSeconds: TimeInterval
     let endInSeconds: TimeInterval
+    let intersectionCountWithPreviousRanges: Int
 
-    init(color: SubstanceColor, startInSeconds: TimeInterval, endInSeconds: TimeInterval) {
+    init(color: SubstanceColor, startInSeconds: TimeInterval, endInSeconds: TimeInterval, intersectionCountWithPreviousRanges: Int) {
         self.color = color
         self.startInSeconds = startInSeconds
         self.endInSeconds = endInSeconds
+        self.intersectionCountWithPreviousRanges = intersectionCountWithPreviousRanges
     }
 
     func draw(
@@ -36,22 +49,26 @@ struct TimeRangeDrawable {
         let horizontalLineWidth: CGFloat = 8
         let startX = startInSeconds * pixelsPerSec
         let endX = endInSeconds * pixelsPerSec
-        let lineHeight: CGFloat = 20
-        let horizontalLineHeight = lineHeight/2
+        let minLineHeight: CGFloat = 20
+        let offset = CGFloat(integerLiteral: intersectionCountWithPreviousRanges) * horizontalLineWidth
+        let horizontalLineHeight = minLineHeight/2 + offset
+        let verticalLineHeight = minLineHeight + offset
+        let verticalLineTopY = height - verticalLineHeight
+        let horizontalLineY = height - horizontalLineHeight
 
         var firstVerticalLine = Path()
         firstVerticalLine.move(to: CGPoint(x: startX, y: height))
-        firstVerticalLine.addLine(to: CGPoint(x: startX, y: height - lineHeight))
+        firstVerticalLine.addLine(to: CGPoint(x: startX, y: verticalLineTopY))
         context.stroke(firstVerticalLine, with: .color(color.swiftUIColor), style: StrokeStyle.getNormal(lineWidth: verticalLineWidth))
 
         var horizontalLine = Path()
-        horizontalLine.move(to: CGPoint(x: startX, y: height - horizontalLineHeight))
-        horizontalLine.addLine(to: CGPoint(x: endX, y: height - horizontalLineHeight))
+        horizontalLine.move(to: CGPoint(x: startX, y: horizontalLineY))
+        horizontalLine.addLine(to: CGPoint(x: endX, y: horizontalLineY))
         context.stroke(horizontalLine, with: .color(color.swiftUIColor), style: StrokeStyle(lineWidth: horizontalLineWidth))
 
         var secondVerticalLine = Path()
         secondVerticalLine.move(to: CGPoint(x: endX, y: height))
-        secondVerticalLine.addLine(to: CGPoint(x: endX, y: height - lineHeight))
+        secondVerticalLine.addLine(to: CGPoint(x: endX, y: verticalLineTopY))
         context.stroke(secondVerticalLine, with: .color(color.swiftUIColor), style: StrokeStyle.getNormal(lineWidth: verticalLineWidth))
     }
 }

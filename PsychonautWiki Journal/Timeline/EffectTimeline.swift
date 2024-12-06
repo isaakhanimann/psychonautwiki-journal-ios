@@ -252,6 +252,40 @@ struct EffectTimeline_Previews: PreviewProvider {
             ]
         ),
         SubstanceIngestionGroup(
+            substanceName: "Tramadol",
+            color: .yellow,
+            routeMinInfos: [
+                RouteMinInfo(
+                    route: .oral,
+                    ingestions: [
+                        IngestionMinInfo(
+                            dose: 40,
+                            time: .now.addingTimeInterval(-5 * 60 * 60),
+                            endTime: .now.addingTimeInterval(-2 * 60 * 60),
+                            onsetDelayInHours: 0
+                        ),
+                    ]
+                ),
+            ]
+        ),
+        SubstanceIngestionGroup(
+            substanceName: "Tramadol",
+            color: .yellow,
+            routeMinInfos: [
+                RouteMinInfo(
+                    route: .oral,
+                    ingestions: [
+                        IngestionMinInfo(
+                            dose: 40,
+                            time: .now.addingTimeInterval(-0.2 * 60 * 60),
+                            endTime: .now.addingTimeInterval(2 * 60 * 60),
+                            onsetDelayInHours: 0
+                        ),
+                    ]
+                ),
+            ]
+        ),
+        SubstanceIngestionGroup(
             substanceName: "LSD",
             color: .pink,
             routeMinInfos: [

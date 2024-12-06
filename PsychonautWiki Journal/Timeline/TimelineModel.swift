@@ -116,13 +116,26 @@ struct TimelineModel: Hashable {
             groupDrawables[index].normalize(maxHeight: maxHeight)
         }
         self.groupDrawables = groupDrawables
-        self.timeRangeDrawables = roaGroups.flatMap({ group in
+        let intermediateRange = roaGroups.flatMap({ group in
             group.ingestionRanges.map { range in
                 let startInSeconds = startTime.distance(to: range.startTime)
                 let endInSeconds = startTime.distance(to: range.endTime)
-                return TimeRangeDrawable(color: group.color, startInSeconds: startInSeconds, endInSeconds: endInSeconds)
+                return TimeRangeDrawable.IntermediateRepresentation(color: group.color, startInSeconds: startInSeconds, endInSeconds: endInSeconds)
             }
-        })
+        }).sorted { lhs, rhs in
+            lhs.rangeInSeconds.lowerBound < rhs.rangeInSeconds.lowerBound
+        }
+        self.timeRangeDrawables = intermediateRange.enumerated().map { index, currentRange in
+            let intersectionCount = intermediateRange[..<index].filter {
+                $0.rangeInSeconds.overlaps(currentRange.rangeInSeconds)
+            }.count
+            return TimeRangeDrawable(
+                color: currentRange.color,
+                startInSeconds: currentRange.rangeInSeconds.lowerBound,
+                endInSeconds: currentRange.rangeInSeconds.upperBound,
+                intersectionCountWithPreviousRanges: intersectionCount
+            )
+        }
         let ratingDrawables = everythingForEachRating.map { rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
         }
