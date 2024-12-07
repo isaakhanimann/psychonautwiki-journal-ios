@@ -28,6 +28,11 @@ struct TimePointOrRangePicker: View {
             Text("Time range").tag(TimePickerOption.timeRange)
         }.pickerStyle(.segmented)
         .labelsHidden()
+        .onChange(of: selectedTimePickerOption) { newValue in
+            if newValue == .timeRange, selectedEndTime < selectedTime {
+                selectedEndTime = selectedTime.addingTimeInterval(30*60)
+            }
+        }
         switch selectedTimePickerOption {
         case .pointInTime:
             HStack(alignment: .center) {
