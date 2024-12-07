@@ -66,8 +66,11 @@ struct CustomUnitsChooseSubstanceScreen: View {
             .navigationDestination(for: ChooseOtherRouteScreenArguments.self, destination: { arguments in
                 ChooseOtherRouteScreen(arguments: arguments, dismiss: dismissSheet)
             })
-            .navigationDestination(for: SubstanceAndRoute.self) { arguments in
-                FinishCustomUnitsScreen(substanceAndRoute: arguments, cancel: dismissSheet, onAdded: { _ in dismissSheet()})
+            .navigationDestination(for: CustomUnitArguments.self) { arguments in
+                FinishCustomUnitsScreen(arguments: arguments, cancel: dismissSheet, onAdded: { _ in dismissSheet()})
+            }
+            .navigationDestination(for: SubstanceAndRoute.self) { substanceAndRoute in
+                FinishCustomUnitsScreen(arguments: CustomUnitArguments.substance(substance: substanceAndRoute.substance, administrationRoute: substanceAndRoute.administrationRoute), cancel: dismissSheet, onAdded: { _ in dismissSheet()})
             }
         }
     }

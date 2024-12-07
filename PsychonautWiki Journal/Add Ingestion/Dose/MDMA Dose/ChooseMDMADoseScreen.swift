@@ -127,7 +127,7 @@ struct ChooseMDMADoseScreen: View {
         .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
             NavigationStack {
                 FinishCustomUnitsScreen(
-                    substanceAndRoute: SubstanceAndRoute(substance: mdma, administrationRoute: .oral),
+                    arguments: CustomUnitArguments.substance(substance: mdma, administrationRoute: .oral),
                     cancel: {
                         isAddCustomUnitSheetShown = false
                     },

@@ -16,6 +16,29 @@
 
 import SwiftUI
 
+enum CustomUnitArguments: Hashable {
+    case substance(substance: Substance, administrationRoute: AdministrationRoute)
+    case customSubstance(customSubstanceName: String, administrationRoute: AdministrationRoute, customSubstanceUnit: String)
+
+    var substanceName: String {
+        switch self {
+        case .substance(let substance, _):
+            return substance.name
+        case .customSubstance(let customSubstanceName, _, _):
+            return customSubstanceName
+        }
+    }
+
+    var administrationRoute: AdministrationRoute {
+        switch self {
+        case .substance(_, let administrationRoute):
+            return administrationRoute
+        case .customSubstance( _, let administrationRoute, _):
+            return administrationRoute
+        }
+    }
+}
+
 struct FinishCustomUnitsScreen: View {
     enum Field: Hashable {
         case name
@@ -25,7 +48,7 @@ struct FinishCustomUnitsScreen: View {
         case estimatedDeviation
     }
 
-    let substanceAndRoute: SubstanceAndRoute
+    let arguments: CustomUnitArguments
     let cancel: () -> Void
     let onAdded: (CustomUnit) -> Void
 
@@ -35,7 +58,7 @@ struct FinishCustomUnitsScreen: View {
     }
 
     var prompt: Prompt {
-        switch substanceAndRoute.substance.name {
+        switch arguments.substanceName {
         case "Cannabis":
             return Prompt(name: "e.g. Flower in joint, Bong, Vaporizer", unit: "mg")
         case "Psilocybin mushrooms":
@@ -45,7 +68,7 @@ struct FinishCustomUnitsScreen: View {
         case "Caffeine":
             return Prompt(name: "e.g. Coffee, Tea, Energy drink", unit: "e.g. cup, can")
         default:
-            switch substanceAndRoute.administrationRoute {
+            switch arguments.administrationRoute {
             case .oral:
                 return Prompt(name: "e.g. Blue rocket, 85% powder", unit: "e.g. pill, capsule, mg")
             case .smoked:
@@ -64,9 +87,9 @@ struct FinishCustomUnitsScreen: View {
     }
 
     var body: some View {
-        let substanceName = substanceAndRoute.substance.name
+        let substanceName = arguments.substanceName
         Form {
-            if substanceName == "Cannabis" && substanceAndRoute.administrationRoute == .smoked {
+            if substanceName == "Cannabis" && arguments.administrationRoute == .smoked {
                 Section {
                     Text("When smoking a joint about 23% of the THC in the bud is inhaled. So if you smoke a joint with 300mg of a bud that has 20% THC then you inhale 300mg * 20/100 * 23/100 = 13.8mg THC.")
                     Text("When smoking with a bong about 40% of the THC in the bud is inhaled. So if you smoke 300mg of a bud that has 20% THC then you inhale 300mg * 20/100 * 40/100 = 24mg THC.")
@@ -94,7 +117,7 @@ struct FinishCustomUnitsScreen: View {
                             focusedField = .unit
                         }
                 } label: {
-                  Text("Name")
+                    Text("Name")
                 }
                 LabeledContent {
                     TextField("Unit", text: $unit, prompt: Text(prompt.unit))
@@ -106,7 +129,7 @@ struct FinishCustomUnitsScreen: View {
                             focusedField = .note
                         }
                 } label: {
-                  Text("Unit")
+                    Text("Unit")
                 }
                 TextField("Notes", text: $note)
                     .focused($focusedField, equals: .note)
@@ -165,27 +188,27 @@ struct FinishCustomUnitsScreen: View {
             if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
                 Section("Ingestion Preview") {
                     VStack(alignment: .leading) {
-                        Text("\(substanceAndRoute.substance.name), \(name)").font(.headline)
+                        Text("\(arguments.substanceName), \(name)").font(.headline)
                         if isUnknownDose {
-                            Text("\(multiplier.formatted()) \(unit) \(substanceAndRoute.administrationRoute.rawValue)")
+                            Text("\(multiplier.formatted()) \(unit) \(arguments.administrationRoute.rawValue)")
                         } else {
                             if isEstimate {
                                 if let calculatedDoseStandardDeviation {
                                     Text(multiplier.with(unit: unit)) +
-                                        Text(
-                                            " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
-                                        .foregroundColor(.secondary)
+                                    Text(
+                                        " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(arguments.administrationRoute.rawValue)")
+                                    .foregroundColor(.secondary)
                                 } else {
                                     Text(multiplier.with(unit: unit)) +
-                                        Text(
-                                            " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
-                                        .foregroundColor(.secondary)
+                                    Text(
+                                        " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
+                                    .foregroundColor(.secondary)
                                 }
                             } else {
                                 Text(multiplier.with(unit: unit)) +
-                                    Text(
-                                        " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(substanceAndRoute.administrationRoute.rawValue)")
-                                    .foregroundColor(.secondary)
+                                Text(
+                                    " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
+                                .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -235,7 +258,12 @@ struct FinishCustomUnitsScreen: View {
     private let multiplier: Double = 3
 
     private var roaDose: RoaDose? {
-        substanceAndRoute.substance.getDose(for: substanceAndRoute.administrationRoute)
+        switch arguments {
+        case .substance(let substance, let administrationRoute):
+            return substance.getDose(for: administrationRoute)
+        case .customSubstance(_, _, _):
+            return nil
+        }
     }
 
     private var unitOrPlaceholder: String {
@@ -261,11 +289,11 @@ struct FinishCustomUnitsScreen: View {
         let newCustomUnit = CustomUnit(context: context)
         newCustomUnit.name = name
         newCustomUnit.creationDate = Date()
-        newCustomUnit.administrationRoute = substanceAndRoute.administrationRoute.rawValue
+        newCustomUnit.administrationRoute = arguments.administrationRoute.rawValue
         newCustomUnit.dose = isUnknownDose ? 0 : (dosePerUnit ?? 0)
         newCustomUnit.note = note
         newCustomUnit.originalUnit = originalUnit
-        newCustomUnit.substanceName = substanceAndRoute.substance.name
+        newCustomUnit.substanceName = arguments.substanceName
         newCustomUnit.unit = unit
         newCustomUnit.isEstimate = isEstimate
         newCustomUnit.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation ?? 0
@@ -279,7 +307,7 @@ struct FinishCustomUnitsScreen: View {
 #Preview {
     NavigationStack {
         FinishCustomUnitsScreen(
-            substanceAndRoute: .init(
+            arguments: CustomUnitArguments.substance(
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                 administrationRoute: .oral),
             cancel: {},

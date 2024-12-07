@@ -295,7 +295,7 @@ struct ChooseDoseScreenContent: View {
         .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
             NavigationStack {
                 FinishCustomUnitsScreen(
-                    substanceAndRoute: SubstanceAndRoute(substance: substance, administrationRoute: administrationRoute),
+                    arguments: CustomUnitArguments.substance(substance: substance, administrationRoute: administrationRoute),
                     cancel: {
                         isAddCustomUnitSheetShown = false
                     },
