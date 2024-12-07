@@ -37,27 +37,27 @@ struct FinishCustomUnitsScreen: View {
     var prompt: Prompt {
         switch substanceAndRoute.substance.name {
         case "Cannabis":
-            return Prompt(name: "e.g. flower in joint, bong, vaporizer", unit: "mg")
+            return Prompt(name: "e.g. Flower in joint, Bong, Vaporizer", unit: "mg")
         case "Psilocybin mushrooms":
             return Prompt(name: "Mushroom strain", unit: "g")
         case "Alcohol":
-            return Prompt(name: "e.g. beer, wine, spirit", unit: "e.g. ml, cup")
+            return Prompt(name: "e.g. Beer, Wine, Spirit", unit: "e.g. ml, cup")
         case "Caffeine":
-            return Prompt(name: "e.g. coffee, tea, energy drink", unit: "e.g. cup, can")
+            return Prompt(name: "e.g. Coffee, Tea, Energy drink", unit: "e.g. cup, can")
         default:
             switch substanceAndRoute.administrationRoute {
             case .oral:
-                return Prompt(name: "e.g. blue rocket, 85% powder", unit: "e.g. pill, capsule, mg")
+                return Prompt(name: "e.g. Blue rocket, 85% powder", unit: "e.g. pill, capsule, mg")
             case .smoked:
                 return Prompt(name: "e.g. 85% powder", unit: "e.g. mg, hit")
             case .insufflated:
-                return Prompt(name: "e.g. nasal solution, blue dispenser", unit: "e.g. spray, spoon, scoop, line")
+                return Prompt(name: "e.g. Nasal solution, Blue dispenser", unit: "e.g. spray, spoon, scoop, line")
             case .buccal:
-                return Prompt(name: "e.g. brand name", unit: "e.g. pouch")
+                return Prompt(name: "e.g. Brand name", unit: "e.g. pouch")
             case .transdermal:
-                return Prompt(name: "e.g. brand name", unit: "e.g. patch")
+                return Prompt(name: "e.g. Brand name", unit: "e.g. patch")
             default:
-                return Prompt(name: "e.g. 85% powder, blue rocket", unit: "e.g. pill, spray, spoon")
+                return Prompt(name: "e.g. 85% powder, Blue rocket", unit: "e.g. pill, spray, spoon")
             }
 
         }
@@ -84,22 +84,30 @@ struct FinishCustomUnitsScreen: View {
                 }
             }
             Section {
-                TextField("Name to identify", text: $name, prompt: Text(prompt.name))
-                    .textInputAutocapitalization(.sentences)
-                    .autocorrectionDisabled()
-                    .focused($focusedField, equals: .name)
-                    .submitLabel(.next)
-                    .onSubmit {
-                        focusedField = .unit
-                    }
-                TextField("Unit in singular form", text: $unit, prompt: Text(prompt.unit))
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .focused($focusedField, equals: .unit)
-                    .submitLabel(.next)
-                    .onSubmit {
-                        focusedField = .note
-                    }
+                LabeledContent {
+                    TextField("Name", text: $name, prompt: Text(prompt.name))
+                        .textInputAutocapitalization(.sentences)
+                        .autocorrectionDisabled()
+                        .focused($focusedField, equals: .name)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            focusedField = .unit
+                        }
+                } label: {
+                  Text("Name")
+                }
+                LabeledContent {
+                    TextField("Unit", text: $unit, prompt: Text(prompt.unit))
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .focused($focusedField, equals: .unit)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            focusedField = .note
+                        }
+                } label: {
+                  Text("Unit")
+                }
                 TextField("Notes", text: $note)
                     .focused($focusedField, equals: .note)
                     .submitLabel(.next)
