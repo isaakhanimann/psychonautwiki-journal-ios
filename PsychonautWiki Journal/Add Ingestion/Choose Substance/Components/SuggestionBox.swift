@@ -58,11 +58,11 @@ struct SuggestionBox: View {
                         if let units = suggestion.dosesAndUnit.first?.units {
                             if let substance = suggestion.substance {
                                 NavigationLink(
-                                    "Enter \(units)",
+                                    "Log \(units)",
                                     value: SubstanceAndRoute(substance: substance, administrationRoute: suggestion.route))
                                     .buttonStyle(.borderedProminent).fixedSize()
                             } else {
-                                NavigationLink("Enter \(units)", value: CustomChooseDoseScreenArguments(
+                                NavigationLink("Log \(units)", value: CustomChooseDoseScreenArguments(
                                     substanceName: suggestion.substanceName,
                                     units: units,
                                     administrationRoute: suggestion.route))
@@ -95,7 +95,7 @@ struct SuggestionBox: View {
                             NavigationLink(value: customUnit) {
                                 VStack {
                                     Text(customUnit.nameUnwrapped).font(.caption2)
-                                    Text("Enter \(2.justUnit(unit: customUnit.unitUnwrapped))")
+                                    Text("Log \(2.justUnit(unit: customUnit.unitUnwrapped))")
                                 }
                             }.buttonStyle(.borderedProminent).fixedSize()
                         }
