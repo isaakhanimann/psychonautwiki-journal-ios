@@ -27,6 +27,7 @@ struct CustomUnitCodable: Codable {
     let isEstimate: Bool
     let isArchived: Bool
     let unit: String
+    let unitPlural: String?
     let originalUnit: String
     let note: String
 
@@ -41,6 +42,7 @@ struct CustomUnitCodable: Codable {
         case isEstimate
         case isArchived
         case unit
+        case unitPlural
         case originalUnit
         case note
     }
@@ -56,6 +58,7 @@ struct CustomUnitCodable: Codable {
         isEstimate: Bool,
         isArchived: Bool,
         unit: String,
+        unitPlural: String?,
         originalUnit: String,
         note: String
     ) {
@@ -69,6 +72,7 @@ struct CustomUnitCodable: Codable {
         self.isEstimate = isEstimate
         self.isArchived = isArchived
         self.unit = unit
+        self.unitPlural = unitPlural
         self.originalUnit = originalUnit
         self.note = note
     }
@@ -91,6 +95,7 @@ struct CustomUnitCodable: Codable {
         isEstimate = try values.decode(Bool.self, forKey: .isEstimate)
         isArchived = try values.decode(Bool.self, forKey: .isArchived)
         unit = try values.decode(String.self, forKey: .unit)
+        unitPlural = try values.decodeIfPresent(String.self, forKey: .unitPlural)
         originalUnit = try values.decode(String.self, forKey: .originalUnit)
         note = try values.decode(String.self, forKey: .note)
     }
@@ -107,6 +112,7 @@ struct CustomUnitCodable: Codable {
         try container.encode(isEstimate, forKey: .isEstimate)
         try container.encode(isArchived, forKey: .isArchived)
         try container.encode(unit, forKey: .unit)
+        try container.encode(unitPlural, forKey: .unitPlural)
         try container.encode(originalUnit, forKey: .originalUnit)
         try container.encode(note, forKey: .note)
     }

@@ -67,6 +67,7 @@ extension SettingsScreen {
                     newUnit.isEstimate = customUnitCodable.isEstimate
                     newUnit.isArchived = customUnitCodable.isArchived
                     newUnit.unit = customUnitCodable.unit
+                    newUnit.unitPlural = customUnitCodable.unitPlural
                     newUnit.originalUnit = customUnitCodable.originalUnit
                     newUnit.note = customUnitCodable.note
                     newUnit.idForAndroid = customUnitCodable.id
@@ -85,6 +86,7 @@ extension SettingsScreen {
                         let newIngestion = Ingestion(context: context)
                         newIngestion.substanceName = ingestionCodable.substanceName
                         newIngestion.time = ingestionCodable.time
+                        newIngestion.endTime = ingestionCodable.endTime
                         newIngestion.creationDate = ingestionCodable.creationDate
                         newIngestion.administrationRoute = ingestionCodable.administrationRoute.rawValue
                         newIngestion.dose = ingestionCodable.dose ?? 0

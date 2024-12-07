@@ -116,6 +116,7 @@ struct JournalFile: FileDocument, Codable {
                 isEstimate: customUnit.isEstimate,
                 isArchived: customUnit.isArchived,
                 unit: customUnit.unitUnwrapped,
+                unitPlural: customUnit.unitPlural,
                 originalUnit: customUnit.originalUnitUnwrapped,
                 note: customUnit.noteUnwrapped)
         }
