@@ -19,7 +19,7 @@ import SwiftUI
 struct AddCustomSubstanceView: View {
 
     let searchText: String
-    let onAdded: (CustomChooseRouteScreenArguments) -> Void
+    let onAdded: (CustomSubstanceChooseRouteScreenArguments) -> Void
 
     @StateObject private var viewModel = ViewModel()
     @Environment(\.dismiss) private var dismiss
@@ -72,7 +72,7 @@ struct AddCustomSubstanceView: View {
                     if viewModel.isEverythingNeededDefined {
                         DoneButton {
                             viewModel.saveCustom {
-                                onAdded(CustomChooseRouteScreenArguments(substanceName: viewModel.name, units: viewModel.units))
+                                onAdded(CustomSubstanceChooseRouteScreenArguments(substanceName: viewModel.name, units: viewModel.units))
                                 dismiss()
                             }
                         }

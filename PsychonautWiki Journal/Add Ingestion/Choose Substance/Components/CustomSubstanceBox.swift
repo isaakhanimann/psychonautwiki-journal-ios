@@ -22,7 +22,7 @@ struct CustomSubstanceBox: View {
 
     var body: some View {
         if isEyeOpen {
-            NavigationLink(value: CustomChooseRouteScreenArguments(substanceName: customSubstanceModel.name,
+            NavigationLink(value: CustomSubstanceChooseRouteScreenArguments(substanceName: customSubstanceModel.name,
                                                                    units: customSubstanceModel.units)) {
                 content
             }.overlay(alignment: .bottom) {

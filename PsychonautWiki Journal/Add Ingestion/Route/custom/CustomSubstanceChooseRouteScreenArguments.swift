@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct CustomChooseRouteScreenArguments: Hashable {
+struct CustomSubstanceChooseRouteScreenArguments: Hashable {
     let substanceName: String
     let units: String
 }

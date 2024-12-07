@@ -81,8 +81,8 @@ struct ChooseSubstanceContent: View {
             .navigationDestination(for: ChooseOtherRouteScreenArguments.self, destination: { arguments in
                 ChooseOtherRouteScreen(arguments: arguments, dismiss: dismiss)
             })
-            .navigationDestination(for: CustomChooseRouteScreenArguments.self, destination: { arguments in
-                CustomChooseRouteScreen(arguments: arguments, dismiss: dismiss)
+            .navigationDestination(for: CustomSubstanceChooseRouteScreenArguments.self, destination: { arguments in
+                CustomSubstanceChooseRouteScreen(arguments: arguments, dismiss: dismiss)
             })
             .navigationDestination(for: SubstanceAndRoute.self) { arguments in
                 let substanceName = arguments.substance.name

@@ -24,6 +24,10 @@ struct CustomUnitsChooseSubstanceScreen: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Ingestion.time, ascending: false)]
     ) private var ingestions: FetchedResults<Ingestion>
 
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \CustomSubstance.name, ascending: true)]
+    ) private var customSubstances: FetchedResults<CustomSubstance>
+
     private var substancesFilteredAndSorted: [Substance] {
         let substanceNamesInOrder = ingestions.prefix(500).map { ing in
             ing.substanceNameUnwrapped
@@ -35,6 +39,19 @@ struct CustomUnitsChooseSubstanceScreen: View {
         )
     }
 
+    var customSubstancesFiltered: [CustomSubstance] {
+        let lowerCaseSearchText = searchText.lowercased()
+        if searchText.count < 3 {
+            return customSubstances.filter { cust in
+                cust.nameUnwrapped.lowercased().hasPrefix(lowerCaseSearchText)
+            }
+        } else {
+            return customSubstances.filter { cust in
+                cust.nameUnwrapped.lowercased().contains(lowerCaseSearchText)
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -43,7 +60,15 @@ struct CustomUnitsChooseSubstanceScreen: View {
                         SubstanceRowLabel(substance: sub)
                     }
                 }
-                if substancesFilteredAndSorted.isEmpty {
+                ForEach(customSubstancesFiltered) { customSubstance in
+                    NavigationLink(value: CustomSubstanceChooseRouteScreenArguments(substanceName: customSubstance.nameUnwrapped, units: customSubstance.unitsUnwrapped)) {
+                        VStack(alignment: .leading) {
+                            Text(customSubstance.nameUnwrapped).font(.headline)
+                            Text("custom").font(.subheadline).foregroundColor(.secondary)
+                        }
+                    }
+                }
+                if substancesFilteredAndSorted.isEmpty && customSubstancesFiltered.isEmpty {
                     Text("No Results")
                         .foregroundColor(.secondary)
                 }
@@ -66,11 +91,25 @@ struct CustomUnitsChooseSubstanceScreen: View {
             .navigationDestination(for: ChooseOtherRouteScreenArguments.self, destination: { arguments in
                 ChooseOtherRouteScreen(arguments: arguments, dismiss: dismissSheet)
             })
+            .navigationDestination(for: CustomSubstanceChooseRouteScreenArguments.self, destination: { arguments in
+                CustomSubstanceChooseRouteScreen(arguments: arguments, dismiss: dismissSheet)
+            })
             .navigationDestination(for: CustomUnitArguments.self) { arguments in
                 FinishCustomUnitsScreen(arguments: arguments, cancel: dismissSheet, onAdded: { _ in dismissSheet()})
             }
             .navigationDestination(for: SubstanceAndRoute.self) { substanceAndRoute in
                 FinishCustomUnitsScreen(arguments: CustomUnitArguments.substance(substance: substanceAndRoute.substance, administrationRoute: substanceAndRoute.administrationRoute), cancel: dismissSheet, onAdded: { _ in dismissSheet()})
+            }
+            .navigationDestination(for: CustomChooseDoseScreenArguments.self) { arguments in
+                FinishCustomUnitsScreen(
+                    arguments: CustomUnitArguments.customSubstance(
+                        customSubstanceName: arguments.substanceName,
+                        administrationRoute: arguments.administrationRoute,
+                        customSubstanceUnit: arguments.units
+                    ),
+                    cancel: dismissSheet,
+                    onAdded: { _ in dismissSheet()}
+                )
             }
         }
     }

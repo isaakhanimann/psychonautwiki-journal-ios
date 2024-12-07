@@ -16,8 +16,8 @@
 
 import SwiftUI
 
-struct CustomChooseRouteScreen: View {
-    let arguments: CustomChooseRouteScreenArguments
+struct CustomSubstanceChooseRouteScreen: View {
+    let arguments: CustomSubstanceChooseRouteScreenArguments
     let dismiss: () -> Void
     @AppStorage(PersistenceController.isEyeOpenKey2) var isEyeOpen: Bool = false
 
@@ -93,6 +93,6 @@ struct CustomChooseRouteScreen: View {
 
 #Preview {
     NavigationStack {
-        CustomChooseRouteScreen(arguments: .init(substanceName: "Coffee", units: "cups"), dismiss: {})
+        CustomSubstanceChooseRouteScreen(arguments: .init(substanceName: "Coffee", units: "cups"), dismiss: {})
     }
 }
