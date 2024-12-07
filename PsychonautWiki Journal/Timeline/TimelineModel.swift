@@ -27,6 +27,7 @@ struct TimelineModel: Hashable {
         hasher.combine(startTime)
         hasher.combine(totalWidth)
         hasher.combine(groupDrawables.description)
+        hasher.combine(timeRangeDrawables.description)
         hasher.combine(ratingDrawables.description)
         hasher.combine(timedNoteDrawables.description)
         hasher.combine(axisDrawable.widthInSeconds)
