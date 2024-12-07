@@ -33,8 +33,8 @@ struct ChooseSubstanceScreen: View {
             filteredCustomUnits: viewModel.filteredCustomUnits,
             filteredCustomSubstances: viewModel.filteredCustomSubstances,
             dismiss: { dismiss() }).task {
-            locationManager.maybeRequestLocation() // because we might need current location on finish screen
-        }
+                locationManager.maybeRequestLocation() // because we might need current location on finish screen
+            }
     }
 }
 
@@ -120,14 +120,12 @@ struct ChooseSubstanceContent: View {
     private var screen: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
-                SiriTipView(intent: AddIngestionIntent(), isVisible: $isSiriTipVisible)
-                if !filteredSuggestions.isEmpty {
-                    ForEach(filteredSuggestions) { suggestion in
-                        SuggestionBox(
-                            suggestion: suggestion,
-                            dismiss: dismiss,
-                            isEyeOpen: isEyeOpen)
-                    }
+                SiriTipView(intent: AddIngestionIntent(), isVisible: $isSiriTipVisible).padding(.horizontal)
+                ForEach(filteredSuggestions) { suggestion in
+                    SuggestionBox(
+                        suggestion: suggestion,
+                        dismiss: dismiss,
+                        isEyeOpen: isEyeOpen)
                 }
                 ForEach(filteredCustomUnits) { customUnit in
                     CustomUnitBox(customUnit: customUnit)
@@ -137,34 +135,23 @@ struct ChooseSubstanceContent: View {
                         customSubstanceModel: custom,
                         isEyeOpen: isEyeOpen)
                 }
-                if !filteredSubstances.isEmpty {
-                    if filteredSuggestions.isEmpty {
-                        ForEach(filteredSubstances) { substance in
-                            SubstanceBox(
-                                substance: substance,
-                                dismiss: dismiss,
-                                isEyeOpen: isEyeOpen)
-                        }
-                    } else {
-                        ForEach(filteredSubstances) { substance in
-                            SubstanceBox(
-                                substance: substance,
-                                dismiss: dismiss,
-                                isEyeOpen: isEyeOpen)
-                        }
-                    }
+                ForEach(filteredSubstances) { substance in
+                    SubstanceBox(
+                        substance: substance,
+                        dismiss: dismiss,
+                        isEyeOpen: isEyeOpen)
                 }
                 Button {
                     isShowingAddCustomSheet.toggle()
                 } label: {
                     Label("New Custom Substance", systemImage: "plus.circle.fill").labelStyle(.titleAndIcon).font(.headline)
-                }
-                .sheet(isPresented: $isShowingAddCustomSheet) {
-                    AddCustomSubstanceView(searchText: searchText) { customChooseRouteScreenArguments in
-                        navPath.append(customChooseRouteScreenArguments)
+                }.padding(.horizontal)
+                    .sheet(isPresented: $isShowingAddCustomSheet) {
+                        AddCustomSubstanceView(searchText: searchText) { customChooseRouteScreenArguments in
+                            navPath.append(customChooseRouteScreenArguments)
+                        }
                     }
-                }
-            }.padding(.horizontal)
+            }
         }
         .scrollDismissesKeyboard(.interactively)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -204,7 +191,6 @@ struct ChooseSubstanceContent: View {
                         customUnit: .previewSample)
                 ],
                 customUnits: [],
-                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
                 lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)),
             Suggestion(
                 substanceName: "MDMA",
@@ -230,7 +216,6 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
                 lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
             ),
             Suggestion(
@@ -262,7 +247,6 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
                 lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
             ),
             Suggestion(
@@ -284,7 +268,6 @@ struct ChooseSubstanceContent: View {
                 ],
                 customUnitDoses: [],
                 customUnits: [],
-                lastTimeIngested: Date.now.addingTimeInterval(-2 * 60 * 60),
                 lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)
             ),
         ],

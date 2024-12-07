@@ -70,7 +70,6 @@ class SuggestionsCreator {
                         dosesAndUnit: dosesAndUnits,
                         customUnitDoses: customUnitDoses,
                         customUnits: filteredCustomUnits,
-                        lastTimeIngested: groupedBySubstanceAndRoute.compactMap { $0.time }.max() ?? Date.distantPast,
                         lastCreationTime: groupedBySubstanceAndRoute.compactMap { $0.creationDate }.max() ?? Date.distantPast
                     )
                 }

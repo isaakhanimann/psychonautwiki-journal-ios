@@ -26,10 +26,14 @@ struct SubstanceBox: View {
             if !substance.saferUse.isEmpty {
                 NavigationLink(value: AddIngestionDestination.saferUse(substance: substance)) {
                     content
+                }.overlay(alignment: .bottom) {
+                    Divider()
                 }
             } else {
                 NavigationLink(value: AddIngestionDestination.interactions(substance: substance)) {
                     content
+                }.overlay(alignment: .bottom) {
+                    Divider()
                 }
             }
         } else {
@@ -38,20 +42,16 @@ struct SubstanceBox: View {
                 administrationRoute: .oral
             )) {
                 content
+            }.overlay(alignment: .bottom) {
+                Divider()
             }
         }
     }
 
     private var content: some View {
-        GroupBox(substance.name) {
+        NavigatableListItemContent(title: substance.name) {
             if !substance.commonNames.isEmpty {
-                HStack {
-                    Text(substance.commonNames, format: .list(type: .or))
-                        .multilineTextAlignment(.leading)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
+                Text(substance.commonNames, format: .list(type: .or))
             }
         }
     }
@@ -64,7 +64,7 @@ struct SubstanceBox: View {
                 substance: SubstanceRepo.shared.getSubstance(name: "MDMA")!,
                 dismiss: {},
                 isEyeOpen: true
-            ).padding(.horizontal)
+            )
         }
     }
 }

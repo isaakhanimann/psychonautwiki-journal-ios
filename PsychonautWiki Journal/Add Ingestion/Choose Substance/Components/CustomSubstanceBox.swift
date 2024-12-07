@@ -25,33 +25,23 @@ struct CustomSubstanceBox: View {
             NavigationLink(value: CustomChooseRouteScreenArguments(substanceName: customSubstanceModel.name,
                                                                    units: customSubstanceModel.units)) {
                 content
+            }.overlay(alignment: .bottom) {
+                Divider()
             }
         } else {
             NavigationLink(value: CustomChooseDoseScreenArguments(substanceName: customSubstanceModel.name,
                                                                   units: customSubstanceModel.units,
                                                                   administrationRoute: .oral)) {
                 content
+            }.overlay(alignment: .bottom) {
+                Divider()
             }
         }
     }
 
     private var content: some View {
-        GroupBox {
-            if !customSubstanceModel.description.isEmpty {
-                HStack {
-                    Text(customSubstanceModel.description)
-                        .multilineTextAlignment(.leading)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
-            }
-        } label: {
-            HStack {
-                Text(customSubstanceModel.name)
-                Spacer()
-                Text("custom").font(.subheadline).foregroundColor(.secondary)
-            }
+        NavigatableListItemContent(title: customSubstanceModel.name) {
+            Text("custom")
         }
     }
 }
@@ -65,6 +55,6 @@ struct CustomSubstanceBox: View {
                 units: "cups"
             ),
             isEyeOpen: true
-        ).padding(.horizontal)
+        )
     }
 }
