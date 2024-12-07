@@ -35,7 +35,7 @@ struct CustomUnitDosePicker: View {
                     format: .number
                 )
                 .keyboardType(.decimalPad)
-                Text((dose ?? 0).justUnit(unit: customUnit.unitUnwrapped))
+                Text((dose ?? 0).justUnit(pluralizableUnit: customUnit.pluralizableUnit))
             }
             .font(.title)
             Toggle("Estimate", isOn: $isEstimate)

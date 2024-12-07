@@ -44,7 +44,7 @@ struct SubstanceDetailsScreen: View {
                                 Text(elem.substanceName)
                                     .font(.headline)
                                 Spacer()
-                                Text(elem.experienceCount.with(unit: "experience"))
+                                Text(elem.experienceCount.with(pluralizableUnit: PluralizableUnit(singular: "experience", plural: "experiences")))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }

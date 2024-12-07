@@ -103,7 +103,7 @@ struct SuggestionBox: View {
                         NavigationLink(value: customUnit) {
                             VStack {
                                 Text(customUnit.nameUnwrapped).font(.caption2)
-                                Text("Log \(2.justUnit(unit: customUnit.unitUnwrapped))")
+                                Text("Log \(customUnit.pluralizableUnit.plural)")
                             }
                         }.buttonStyle(.borderedProminent).fixedSize()
                     }

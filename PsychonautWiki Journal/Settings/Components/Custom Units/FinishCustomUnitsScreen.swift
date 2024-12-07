@@ -43,6 +43,7 @@ struct FinishCustomUnitsScreen: View {
     enum Field: Hashable {
         case name
         case unit
+        case unitPlural
         case dose
         case note
         case estimatedDeviation
@@ -55,32 +56,33 @@ struct FinishCustomUnitsScreen: View {
     struct Prompt {
         let name: String
         let unit: String
+        let unitPlural: String
     }
 
     var prompt: Prompt {
         switch arguments.substanceName {
         case "Cannabis":
-            return Prompt(name: "e.g. Joint weed 20%, Bong weed, Vaporizer weed", unit: "mg")
+            return Prompt(name: "e.g. Joint weed 20%, Bong weed, Vaporizer weed", unit: "mg", unitPlural: "mg")
         case "Psilocybin mushrooms":
-            return Prompt(name: "Mushroom strain", unit: "g")
+            return Prompt(name: "Mushroom strain", unit: "g", unitPlural: "g")
         case "Alcohol":
-            return Prompt(name: "e.g. Beer, Wine, Spirit", unit: "e.g. ml, cup")
+            return Prompt(name: "e.g. Beer, Wine, Spirit", unit: "e.g. ml, cup", unitPlural: "e.g. ml, cups")
         case "Caffeine":
-            return Prompt(name: "e.g. Coffee, Tea, Energy drink", unit: "e.g. cup, can")
+            return Prompt(name: "e.g. Coffee, Tea, Energy drink", unit: "e.g. cup, can", unitPlural: "e.g. cups, cans")
         default:
             switch arguments.administrationRoute {
             case .oral:
-                return Prompt(name: "e.g. Blue rocket, 85% powder", unit: "e.g. pill, capsule, mg")
+                return Prompt(name: "e.g. Blue rocket, 85% powder", unit: "e.g. pill, capsule, mg", unitPlural: "e.g. pills, capsules, mg")
             case .smoked:
-                return Prompt(name: "e.g. 85% powder", unit: "e.g. mg, hit")
+                return Prompt(name: "e.g. 85% powder", unit: "e.g. mg, hit", unitPlural: "e.g. mg, hits")
             case .insufflated:
-                return Prompt(name: "e.g. Nasal solution, Blue dispenser", unit: "e.g. spray, spoon, scoop, line")
+                return Prompt(name: "e.g. Nasal solution, Blue dispenser", unit: "e.g. spray, spoon, scoop, line", unitPlural: "e.g. sprays, spoons, scoops, lines")
             case .buccal:
-                return Prompt(name: "e.g. Brand name", unit: "e.g. pouch")
+                return Prompt(name: "e.g. Brand name", unit: "e.g. pouch", unitPlural: "e.g. pouches")
             case .transdermal:
-                return Prompt(name: "e.g. Brand name", unit: "e.g. patch")
+                return Prompt(name: "e.g. Brand name", unit: "e.g. patch", unitPlural: "e.g. patches")
             default:
-                return Prompt(name: "e.g. 85% powder, Blue rocket", unit: "e.g. pill, spray, spoon")
+                return Prompt(name: "e.g. 85% powder, Blue rocket", unit: "e.g. pill, spray, spoon", unitPlural: "e.g. pills, sprays, spoons")
             }
 
         }
@@ -126,10 +128,29 @@ struct FinishCustomUnitsScreen: View {
                         .focused($focusedField, equals: .unit)
                         .submitLabel(.next)
                         .onSubmit {
+                            focusedField = .unitPlural
+                        }
+                } label: {
+                    Text("Unit singular:")
+                }
+                .onChange(of: unit, perform: { newValue in
+                    if !newValue.hasSuffix("s") && newValue != "mg" && newValue != "g" && newValue.lowercased() != "ml" {
+                        unitPlural = newValue + "s"
+                    } else {
+                        unitPlural = newValue
+                    }
+                })
+                LabeledContent {
+                    TextField("Unit plural", text: $unitPlural, prompt: Text(prompt.unitPlural))
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .focused($focusedField, equals: .unitPlural)
+                        .submitLabel(.next)
+                        .onSubmit {
                             focusedField = .note
                         }
                 } label: {
-                    Text("Unit:")
+                    Text("Unit plural:")
                 }
                 TextField("Notes", text: $note)
                     .focused($focusedField, equals: .note)
@@ -192,20 +213,21 @@ struct FinishCustomUnitsScreen: View {
                         if isUnknownDose {
                             Text("\(multiplier.formatted()) \(unit) \(arguments.administrationRoute.rawValue)")
                         } else {
+                            let pluralizableUnit = PluralizableUnit(singular: unit, plural: unitPlural)
                             if isEstimate {
                                 if let calculatedDoseStandardDeviation {
-                                    Text(multiplier.with(unit: unit)) +
+                                    Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
                                     Text(
                                         " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(arguments.administrationRoute.rawValue)")
                                     .foregroundColor(.secondary)
                                 } else {
-                                    Text(multiplier.with(unit: unit)) +
+                                    Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
                                     Text(
                                         " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
                                     .foregroundColor(.secondary)
                                 }
                             } else {
-                                Text(multiplier.with(unit: unit)) +
+                                Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
                                 Text(
                                     " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
                                 .foregroundColor(.secondary)
@@ -251,6 +273,7 @@ struct FinishCustomUnitsScreen: View {
 
     @State private var name = ""
     @State private var unit = ""
+    @State private var unitPlural = ""
     @State private var originalUnit = ""
     @State private var dosePerUnit: Double?
     @State private var isEstimate = false
@@ -300,6 +323,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.originalUnit = originalUnit
         newCustomUnit.substanceName = arguments.substanceName
         newCustomUnit.unit = unit
+        newCustomUnit.unitPlural = unitPlural
         newCustomUnit.isEstimate = isEstimate
         newCustomUnit.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation ?? 0
         newCustomUnit.isArchived = false

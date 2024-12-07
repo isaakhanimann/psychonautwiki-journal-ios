@@ -65,6 +65,18 @@ extension CustomUnit {
         }
     }
 
+    var pluralizableUnit: PluralizableUnit {
+        if let pluralUnitUnwrap = unitPlural {
+            return PluralizableUnit(singular: unitUnwrapped, plural: pluralUnitUnwrap)
+        } else {
+            if !unitUnwrapped.hasSuffix("s") && unitUnwrapped != "mg" && unitUnwrapped != "g" && unitUnwrapped != "ml" {
+                return PluralizableUnit(singular: unitUnwrapped, plural: unitUnwrapped + "s")
+            } else {
+                return PluralizableUnit(singular: unitUnwrapped, plural: unitUnwrapped)
+            }
+        }
+    }
+
     var unitUnwrapped: String {
         unit ?? ""
     }
@@ -147,4 +159,11 @@ extension CustomUnit {
         customUnit.note = "Some random notes"
         return customUnit
     }
+}
+
+struct PluralizableUnit {
+    // e.g. pill
+    let singular: String
+    // e.g. pills
+    let plural: String
 }

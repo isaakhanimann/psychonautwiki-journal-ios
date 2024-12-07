@@ -79,10 +79,10 @@ struct CustomUnitDose: Equatable, Identifiable {
 
     // 2 pills
     var doseDescription: String {
-        let description = dose.with(unit: customUnit.unitUnwrapped)
+        let description = dose.with(pluralizableUnit: customUnit.pluralizableUnit)
         if isEstimate {
             if let estimatedStandardDeviation {
-                return "\(dose.asRoundedReadableString)±\(estimatedStandardDeviation.asRoundedReadableString) \(dose.justUnit(unit: customUnit.unitUnwrapped))"
+                return "\(dose.asRoundedReadableString)±\(estimatedStandardDeviation.asRoundedReadableString) \(dose.justUnit(pluralizableUnit: customUnit.pluralizableUnit))"
             } else {
                 return "~\(description)"
             }

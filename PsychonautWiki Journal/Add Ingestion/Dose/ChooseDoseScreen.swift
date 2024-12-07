@@ -256,7 +256,7 @@ struct ChooseDoseScreenContent: View {
                     }
                     ForEach(customUnits.wrappedValue) { customUnit in
                         NavigationLink(value: customUnit) {
-                            Text("Log \(2.justUnit(unit: customUnit.unitUnwrapped)) (\(customUnit.nameUnwrapped))")
+                            Text("Log \(customUnit.pluralizableUnit.plural) (\(customUnit.nameUnwrapped))")
                         }
                     }
                 }

@@ -169,7 +169,7 @@ struct EditCustomUnitsScreenContent: View {
                 Text("Cancel")
             }
         }, message: {
-            Text("Deleting this unit will delete \(ingestionCount.with(unit: "ingestion")) that are using it. If you don't want to use it anymore archive it instead.")
+            Text("Deleting this unit will delete \(ingestionCount.with(pluralizableUnit: PluralizableUnit(singular: "ingestion", plural: "ingestions"))) that are using it. If you don't want to use it anymore archive it instead.")
         })
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Edit Unit")
