@@ -22,6 +22,7 @@ struct EditCustomUnitsScreen: View {
     @State private var name: String = ""
     @State private var originalUnit = ""
     @State private var unit: String = ""
+    @State private var unitPlural: String = ""
     @State private var note: String = ""
     @State private var dose: Double?
     @State private var isEstimate: Bool = false
@@ -36,6 +37,7 @@ struct EditCustomUnitsScreen: View {
             name: $name,
             originalUnit: $originalUnit,
             unit: $unit,
+            unitPlural: $unitPlural,
             note: $note,
             dose: $dose,
             isEstimate: $isEstimate,
@@ -47,7 +49,9 @@ struct EditCustomUnitsScreen: View {
         .onAppear {
             name = customUnit.nameUnwrapped
             originalUnit = customUnit.originalUnitUnwrapped
-            unit = customUnit.unitUnwrapped
+            let pluralizableUnit = customUnit.pluralizableUnit
+            unit = pluralizableUnit.singular
+            unitPlural = pluralizableUnit.plural
             note = customUnit.noteUnwrapped
             dose = customUnit.doseUnwrapped
             isEstimate = customUnit.isEstimate
@@ -72,6 +76,7 @@ struct EditCustomUnitsScreen: View {
         customUnit.name = name
         customUnit.originalUnit = originalUnit
         customUnit.unit = unit
+        customUnit.unitPlural = unitPlural
         customUnit.note = note
         customUnit.dose = dose ?? 0
         customUnit.isEstimate = isEstimate
@@ -94,6 +99,7 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var name: String
     @Binding var originalUnit: String
     @Binding var unit: String
+    @Binding var unitPlural: String
     @Binding var note: String
     @Binding var dose: Double?
     @Binding var isEstimate: Bool
@@ -107,9 +113,27 @@ struct EditCustomUnitsScreenContent: View {
     var body: some View {
         Form {
             Section {
-                TextField("Name", text: $name)
-                    .autocorrectionDisabled().textInputAutocapitalization(.never)
-                TextField("Unit", text: $unit).autocorrectionDisabled().textInputAutocapitalization(.never)
+                LabeledContent {
+                    TextField("Name", text: $name)
+                        .textInputAutocapitalization(.sentences)
+                        .autocorrectionDisabled()
+                } label: {
+                    Text("Name:")
+                }
+                LabeledContent {
+                    TextField("Unit", text: $unit)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                } label: {
+                    Text("Unit singular:")
+                }
+                LabeledContent {
+                    TextField("Unit plural", text: $unitPlural)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                } label: {
+                    Text("Unit plural:")
+                }
                 TextField("Enter Note", text: $note)
                     .autocapitalization(.sentences)
             }
@@ -184,6 +208,7 @@ struct EditCustomUnitsScreenContent: View {
             name: .constant("pink rocket"),
             originalUnit: .constant("mg"),
             unit: .constant("pill"),
+            unitPlural: .constant("pills"),
             note: .constant("These are my notes"),
             dose: .constant(50),
             isEstimate: .constant(false),
