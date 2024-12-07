@@ -131,6 +131,11 @@ struct FinishIngestionScreen: View {
                         Label(displayedName, systemImage: "person")
                     }
                 }
+                if arguments.administrationRoute == .oral {
+                    StomachFullnessPicker(stomachFullness: $selectedStomachFullness)
+                        .pickerStyle(.navigationLink)
+                        .labelsHidden()
+                }
                 Button {
                     sheetToShow = .editNote
                 } label: {
@@ -177,9 +182,6 @@ struct FinishIngestionScreen: View {
                         }
                     }
                 }
-            }
-            if arguments.administrationRoute == .oral {
-                EditStomachFullnessSection(stomachFullness: $selectedStomachFullness)
             }
             Section {
                 NavigationLink {

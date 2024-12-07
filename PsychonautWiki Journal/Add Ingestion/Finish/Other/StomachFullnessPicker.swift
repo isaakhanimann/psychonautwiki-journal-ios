@@ -16,25 +16,12 @@
 
 import SwiftUI
 
-struct EditStomachFullnessSection: View {
-
-    @Binding var stomachFullness: StomachFullness
-
-    var body: some View {
-        Section("Stomach Fullness") {
-            StomachFullnessPicker(stomachFullness: $stomachFullness)
-            .pickerStyle(.inline)
-            .labelsHidden()
-        }
-    }
-}
-
 struct StomachFullnessPicker: View {
 
     @Binding var stomachFullness: StomachFullness
 
     var body: some View {
-        Picker("Stomach Fullness", selection: $stomachFullness) {
+        Picker("Stomach", selection: $stomachFullness) {
             ForEach(StomachFullness.allCases) { option in
                 HStack {
                     Text(option.text)
@@ -49,6 +36,6 @@ struct StomachFullnessPicker: View {
 
 #Preview {
     List {
-        EditStomachFullnessSection(stomachFullness: .constant(.empty))
+        StomachFullnessPicker(stomachFullness: .constant(.empty))
     }
 }

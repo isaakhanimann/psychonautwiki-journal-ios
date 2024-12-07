@@ -157,7 +157,7 @@
 		EA48F89829E6E27C007DA8C5 /* InteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */; };
 		EA48F89A29E70F17007DA8C5 /* String-CaseInsensitiveContains.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */; };
 		EA48F89C29E7D86A007DA8C5 /* StomachFullness.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */; };
-		EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */; };
+		EA48F89E29E8B879007DA8C5 /* StomachFullnessPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89D29E8B879007DA8C5 /* StomachFullnessPicker.swift */; };
 		EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */; };
 		EA48F8A229E98E88007DA8C5 /* TimeDisplayStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A129E98E88007DA8C5 /* TimeDisplayStyle.swift */; };
 		EA48F8A429E991C6007DA8C5 /* DateDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F8A329E991C6007DA8C5 /* DateDifference.swift */; };
@@ -516,7 +516,7 @@
 		EA48F89729E6E27C007DA8C5 /* InteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionTests.swift; sourceTree = "<group>"; };
 		EA48F89929E70F17007DA8C5 /* String-CaseInsensitiveContains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-CaseInsensitiveContains.swift"; sourceTree = "<group>"; };
 		EA48F89B29E7D86A007DA8C5 /* StomachFullness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StomachFullness.swift; sourceTree = "<group>"; };
-		EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStomachFullnessSection.swift; sourceTree = "<group>"; };
+		EA48F89D29E8B879007DA8C5 /* StomachFullnessPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StomachFullnessPicker.swift; sourceTree = "<group>"; };
 		EA48F89F29E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgeSaferUseScreen.swift; sourceTree = "<group>"; };
 		EA48F8A129E98E88007DA8C5 /* TimeDisplayStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDisplayStyle.swift; sourceTree = "<group>"; };
 		EA48F8A329E991C6007DA8C5 /* DateDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifference.swift; sourceTree = "<group>"; };
@@ -910,7 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				EAB165AD27E36D29003DF79D /* EmptySectionForPadding.swift */,
-				EA48F89D29E8B879007DA8C5 /* EditStomachFullnessSection.swift */,
+				EA48F89D29E8B879007DA8C5 /* StomachFullnessPicker.swift */,
 				EA48F8B729EE8A15007DA8C5 /* Choose Location */,
 				EAB1659427E302BC003DF79D /* ColorPickerScreen.swift */,
 				EA418A0329675FE800DEA663 /* ExperiencePickerScreen.swift */,
@@ -1957,7 +1957,7 @@
 				EA48F8A029E95AD0007DA8C5 /* AcknowledgeSaferUseScreen.swift in Sources */,
 				EA557B392942A1A2005740B4 /* EditNotesScreen.swift in Sources */,
 				EA60482E2A162225005C6A4B /* String-CleanSearch.swift in Sources */,
-				EA48F89E29E8B879007DA8C5 /* EditStomachFullnessSection.swift in Sources */,
+				EA48F89E29E8B879007DA8C5 /* StomachFullnessPicker.swift in Sources */,
 				EAC25BFD2955F23A0002D68F /* ReagentTestingScreen.swift in Sources */,
 				EAE471BE26CBA664009FB0EC /* SettingsScreen.swift in Sources */,
 				EA48F89029DD5076007DA8C5 /* CustomSubstanceCodable.swift in Sources */,
