@@ -60,7 +60,7 @@ struct FinishCustomUnitsScreen: View {
     var prompt: Prompt {
         switch arguments.substanceName {
         case "Cannabis":
-            return Prompt(name: "e.g. Flower in joint, Bong, Vaporizer", unit: "mg")
+            return Prompt(name: "e.g. Joint weed 20%, Bong weed, Vaporizer weed", unit: "mg")
         case "Psilocybin mushrooms":
             return Prompt(name: "Mushroom strain", unit: "g")
         case "Alcohol":
@@ -117,7 +117,7 @@ struct FinishCustomUnitsScreen: View {
                             focusedField = .unit
                         }
                 } label: {
-                    Text("Name")
+                    Text("Name:")
                 }
                 LabeledContent {
                     TextField("Unit", text: $unit, prompt: Text(prompt.unit))
@@ -129,7 +129,7 @@ struct FinishCustomUnitsScreen: View {
                             focusedField = .note
                         }
                 } label: {
-                    Text("Unit")
+                    Text("Unit:")
                 }
                 TextField("Notes", text: $note)
                     .focused($focusedField, equals: .note)
