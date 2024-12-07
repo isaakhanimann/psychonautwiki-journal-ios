@@ -28,21 +28,21 @@ struct CustomUnitsChooseDoseScreen: View {
 
     var body: some View {
         Form {
-            if let roaDose = customUnit.roaDose {
-                Section("Pure \(customUnit.administrationRouteUnwrapped.rawValue.capitalized) Dose") {
-                    VStack(alignment: .leading, spacing: 8) {
+            Section("Pure \(customUnit.administrationRouteUnwrapped.rawValue.capitalized) Dose") {
+                VStack(alignment: .leading, spacing: 8) {
+                    if let roaDose = customUnit.roaDose {
                         RoaDoseRow(roaDose: roaDose)
-                        CustomUnitCalculationText(
-                            customUnit: customUnit,
-                            dose: dose,
-                            isEstimate: isEstimate,
-                            estimatedDoseStandardDeviation: estimatedDoseStandardDeviation)
-                        if !(customUnit.substance?.isApproved ?? true) {
-                            Text("Info is not approved by PsychonautWiki moderators.")
-                        }
                     }
-                }.listRowSeparator(.hidden)
-            }
+                    CustomUnitCalculationText(
+                        customUnit: customUnit,
+                        dose: dose,
+                        isEstimate: isEstimate,
+                        estimatedDoseStandardDeviation: estimatedDoseStandardDeviation)
+                    if !(customUnit.substance?.isApproved ?? true) {
+                        Text("Info is not approved by PsychonautWiki moderators.")
+                    }
+                }
+            }.listRowSeparator(.hidden)
             Section {
                 CustomUnitDosePicker(
                     customUnit: customUnit,
@@ -63,7 +63,7 @@ struct CustomUnitsChooseDoseScreen: View {
                 }
             }
             if isEyeOpen {
-                Section("Info") {
+                Section {
                     if let remark = customUnit.substance?.dosageRemark {
                         Text(remark)
                             .foregroundColor(.secondary)

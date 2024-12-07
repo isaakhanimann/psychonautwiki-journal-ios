@@ -21,6 +21,9 @@ struct SuggestionBox: View {
     let suggestion: Suggestion
     let dismiss: () -> Void
     let isEyeOpen: Bool
+    let navigateToCustomUnitChooseDose: (CustomUnit) -> Void
+
+    @State private var isAddCustomUnitSheetShown = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -104,6 +107,14 @@ struct SuggestionBox: View {
                             }
                         }.buttonStyle(.borderedProminent).fixedSize()
                     }
+                    Button {
+                        isAddCustomUnitSheetShown = true
+                    } label: {
+                        VStack {
+                            Image(systemName: "pills").font(.caption)
+                            Text("New unit")
+                        }
+                    }.buttonStyle(.borderedProminent).fixedSize()
                 }
             }
         }
@@ -112,6 +123,30 @@ struct SuggestionBox: View {
         .padding(.horizontal)
         .overlay(alignment: .bottom) {
             Divider()
+        }
+        .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
+            NavigationStack {
+                FinishCustomUnitsScreen(
+                    arguments: customUnitArguments,
+                    cancel: {
+                        isAddCustomUnitSheetShown = false
+                    },
+                    onAdded: { customUnit in
+                        isAddCustomUnitSheetShown = false
+                        navigateToCustomUnitChooseDose(customUnit)
+                    })
+            }
+        })
+    }
+
+    var customUnitArguments: CustomUnitArguments {
+        if let substance = suggestion.substance {
+            return CustomUnitArguments.substance(substance: substance, administrationRoute: suggestion.route)
+        } else {
+            return CustomUnitArguments.customSubstance(
+                customSubstanceName: suggestion.substanceName,
+                administrationRoute: suggestion.route,
+                customSubstanceUnit: suggestion.dosesAndUnit.first?.units ?? "mg")
         }
     }
 
@@ -150,7 +185,8 @@ struct SuggestionBox: View {
                     customUnits: [],
                     lastCreationTime: Date.now.addingTimeInterval(-2 * 60 * 60)),
                 dismiss: { },
-                isEyeOpen: true)
+                isEyeOpen: true,
+                navigateToCustomUnitChooseDose: {_ in })
             SuggestionBox(
                 suggestion: Suggestion(
                     substanceName: "Cannabis",
@@ -183,7 +219,8 @@ struct SuggestionBox: View {
                     customUnits: [],
                     lastCreationTime: Date.now.addingTimeInterval(-3 * 60 * 60)),
                 dismiss: { },
-                isEyeOpen: true)
+                isEyeOpen: true,
+                navigateToCustomUnitChooseDose: {_ in })
         }
     }
 }

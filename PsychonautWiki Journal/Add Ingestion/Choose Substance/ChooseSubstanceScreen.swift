@@ -125,7 +125,11 @@ struct ChooseSubstanceContent: View {
                     SuggestionBox(
                         suggestion: suggestion,
                         dismiss: dismiss,
-                        isEyeOpen: isEyeOpen)
+                        isEyeOpen: isEyeOpen,
+                        navigateToCustomUnitChooseDose: { customUnit in
+                            navPath.append(customUnit)
+                        }
+                    )
                 }
                 ForEach(filteredCustomUnits) { customUnit in
                     CustomUnitBox(customUnit: customUnit)

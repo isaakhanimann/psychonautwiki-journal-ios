@@ -139,7 +139,7 @@ struct FinishCustomUnitsScreen: View {
                     }
             }
             let areUnitsDefined = roaDose?.units != nil
-            if !areUnitsDefined {
+            if case .substance = arguments, !areUnitsDefined  {
                 Section("Original Unit") {
                     UnitsPicker(units: $originalUnit)
                         .padding(.bottom, 10)
@@ -230,7 +230,12 @@ struct FinishCustomUnitsScreen: View {
         .navigationTitle("Add Custom Unit")
         .onAppear {
             focusedField = .name
-            originalUnit = roaDose?.units ?? "mg"
+            switch arguments {
+            case .substance(_, _):
+                originalUnit = roaDose?.units ?? "mg"
+            case .customSubstance(_, _, let customSubstanceUnit):
+                originalUnit = customSubstanceUnit
+            }
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
