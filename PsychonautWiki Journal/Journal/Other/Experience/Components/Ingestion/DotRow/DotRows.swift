@@ -27,6 +27,11 @@ struct DotRows: View {
                         Dot(isFull: false)
                     }
                 }
+            } else if numDots > 20 {
+                HStack(alignment: .firstTextBaseline, spacing: 2) {
+                    Text("\(numDots)x")
+                    Dot(isFull: true)
+                }
             } else {
                 let numFullRows = numDots / 4
                 let dotsInLastRow = numDots % 4
