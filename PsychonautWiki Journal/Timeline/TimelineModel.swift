@@ -126,7 +126,7 @@ struct TimelineModel: Hashable {
         }).sorted { lhs, rhs in
             lhs.rangeInSeconds.lowerBound < rhs.rangeInSeconds.lowerBound
         }
-        self.timeRangeDrawables = intermediateRange.enumerated().map { index, currentRange in
+        let timeRangeDrawables = intermediateRange.enumerated().map { index, currentRange in
             let intersectionCount = intermediateRange[..<index].filter {
                 $0.rangeInSeconds.overlaps(currentRange.rangeInSeconds)
             }.count
@@ -137,6 +137,7 @@ struct TimelineModel: Hashable {
                 intersectionCountWithPreviousRanges: intersectionCount
             )
         }
+        self.timeRangeDrawables = timeRangeDrawables
         let ratingDrawables = everythingForEachRating.map { rating in
             RatingDrawable(startGraph: startTime, time: rating.time, option: rating.option)
         }
@@ -148,7 +149,7 @@ struct TimelineModel: Hashable {
         let sixHours: TimeInterval = 6 * 60 * 60
         let widthOfTimelinesAndRatings = groupDrawables.map { group in
             group.endRelativeToStartInSeconds
-        } + ratingDrawables.map { $0.distanceFromStart } + timedNoteDrawables.map { $0.distanceFromStart }
+        } + ratingDrawables.map { $0.distanceFromStart } + timedNoteDrawables.map { $0.distanceFromStart } + timeRangeDrawables.map { $0.endInSeconds }
         let maxWidth: TimeInterval = (widthOfTimelinesAndRatings.max() ?? sixHours)
         totalWidth = maxWidth
         axisDrawable = AxisDrawable(startTime: startTime, widthInSeconds: maxWidth)
