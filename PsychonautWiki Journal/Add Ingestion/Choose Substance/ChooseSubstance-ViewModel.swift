@@ -114,6 +114,7 @@ extension ChooseSubstanceScreen {
                     filteredSubstances.contains { substance in
                         customUnit.substanceNameUnwrapped == substance.name
                     } || customUnit.nameUnwrapped.lowercased().contains(searchText.lowercased())
+                    || customUnit.substanceNameUnwrapped.lowercased().contains(searchText.lowercased())
                 }
             }.assign(to: &$filteredCustomUnits)
         }
