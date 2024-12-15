@@ -142,7 +142,7 @@ struct TimelineSection: View {
                         }
                     } else if timeDisplayStyle == .relativeToStart  {
                         TimelineView(.everyMinute) { _ in
-                            Text("Now ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" in (since start)")
+                            Text("Now ") + Text(ingestion.timeUnwrapped, style: .relative) + Text(" after start")
                         }
                     }
 

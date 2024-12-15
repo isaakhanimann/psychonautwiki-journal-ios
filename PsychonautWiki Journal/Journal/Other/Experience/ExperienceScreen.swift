@@ -258,14 +258,14 @@ struct ExperienceScreen: View {
                                         RelativeTimeText(date: timedNote.timeUnwrapped)
                                     } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                                         let dateComponents = DateDifference.between(firstIngestionTime, and: time)
-                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                                        Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after start")
                                     } else if let firstIngestionTime, timeDisplayStyle == .between {
                                         if isFirstNote {
                                             let dateComponents = DateDifference.between(firstIngestionTime, and: time)
                                             Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after first ingestion")
                                         } else if let previousNote {
                                             let dateComponents = DateDifference.between(previousNote.timeUnwrapped, and: time)
-                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                            Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after last")
                                         }
                                     } else {
                                         Text(time, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))

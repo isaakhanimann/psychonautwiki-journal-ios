@@ -53,14 +53,14 @@ struct ShulginRatingSection: View {
                                 RelativeTimeText(date: rating.timeUnwrapped)
                             } else if let firstIngestionTime, timeDisplayStyle == .relativeToStart {
                                 let dateComponents = DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)
-                                Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" in")
+                                Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after start")
                             } else if let firstIngestionTime, timeDisplayStyle == .between {
                                 if isFirstRating {
                                     let dateComponents = DateDifference.between(firstIngestionTime, and: rating.timeUnwrapped)
                                     Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after first ingestion")
                                 } else if let previousRating {
                                     let dateComponents = DateDifference.between(previousRating.timeUnwrapped, and: rating.timeUnwrapped)
-                                    Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" later")
+                                    Text(DateDifference.formattedWithMax2Units(dateComponents)) + Text(" after last")
                                 }
                             } else {
                                 Text(rating.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
