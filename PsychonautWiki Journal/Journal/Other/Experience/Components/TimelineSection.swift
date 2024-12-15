@@ -90,11 +90,21 @@ struct TimelineSection: View {
                                             }
                                         }
                                     } else {
-                                        TimeRangeRepresentation {
-                                            Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
-                                        } endTimeRepresentation: {
-                                            Text(endTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                        let isRangeWithinDay = ingestion.timeUnwrapped.asDateString == endTime.asDateString
+                                        if isRangeWithinDay {
+                                            TimeRangeRepresentation {
+                                                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            } endTimeRepresentation: {
+                                                Text(endTime, format: Date.FormatStyle().hour().minute())
+                                            }
+                                        } else {
+                                            TimeRangeRepresentation {
+                                                Text(ingestion.timeUnwrapped, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            } endTimeRepresentation: {
+                                                Text(endTime, format: Date.FormatStyle().hour().minute().weekday(.abbreviated))
+                                            }
                                         }
+
                                     }
                                 } else {
                                     if timeDisplayStyle == .relativeToNow {
