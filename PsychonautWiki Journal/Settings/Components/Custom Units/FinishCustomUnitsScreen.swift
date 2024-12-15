@@ -87,7 +87,7 @@ struct FinishCustomUnitsScreen: View {
 
         }
     }
-
+    
     var body: some View {
         let substanceName = arguments.substanceName
         Form {
@@ -180,60 +180,46 @@ struct FinishCustomUnitsScreen: View {
                         Spacer()
                         Text(originalUnit)
                     }
-                }
-                Toggle("Estimate", isOn: $isEstimate.animation())
-                    .tint(.accentColor)
-                    .onChange(of: isEstimate, perform: { newIsEstimate in
-                        if newIsEstimate {
-                            focusedField = .estimatedDeviation
+                    Toggle("Estimate", isOn: $isEstimate.animation())
+                        .tint(.accentColor)
+                        .onChange(of: isEstimate, perform: { newIsEstimate in
+                            if newIsEstimate {
+                                focusedField = .estimatedDeviation
+                            }
+                        })
+                    if isEstimate {
+                        HStack {
+                            Image(systemName: "plusminus")
+                            TextField(
+                                "Estimated standard deviation",
+                                value: $estimatedDoseStandardDeviation,
+                                format: .number)
+                            .keyboardType(.decimalPad)
+                            .focused($focusedField, equals: .estimatedDeviation)
+                            Spacer()
+                            Text(originalUnit)
                         }
-                    })
-                if isEstimate {
-                    HStack {
-                        Image(systemName: "plusminus")
-                        TextField(
-                            "Estimated standard deviation",
-                            value: $estimatedDoseStandardDeviation,
-                            format: .number)
-                        .keyboardType(.decimalPad)
-                        .focused($focusedField, equals: .estimatedDeviation)
-                        Spacer()
-                        Text(originalUnit)
+                        if let dosePerUnit, let estimatedDoseStandardDeviation {
+                            StandardDeviationConfidenceIntervalExplanation(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
+                        }
                     }
                 }
-                if let dosePerUnit, let estimatedDoseStandardDeviation {
-                    StandardDeviationConfidenceIntervalExplanation(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
-                }
-                Toggle("Unknown dose", isOn: $isUnknownDose).tint(.accentColor)
+                Toggle("Unknown dose", isOn: $isUnknownDose.animation()).tint(.accentColor)
             }.listRowSeparator(.hidden)
             if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
                 Section("Ingestion Preview") {
-                    VStack(alignment: .leading) {
-                        Text("\(name), \(arguments.substanceName)").font(.headline)
-                        if isUnknownDose {
-                            Text("\(multiplier.formatted()) \(unit) \(arguments.administrationRoute.rawValue)")
-                        } else {
-                            let pluralizableUnit = PluralizableUnit(singular: unit, plural: unitPlural)
-                            if isEstimate {
-                                if let calculatedDoseStandardDeviation {
-                                    Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
-                                    Text(
-                                        " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(arguments.administrationRoute.rawValue)")
-                                    .foregroundColor(.secondary)
-                                } else {
-                                    Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
-                                    Text(
-                                        " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
-                                    .foregroundColor(.secondary)
-                                }
-                            } else {
-                                Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
-                                Text(
-                                    " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(arguments.administrationRoute.rawValue)")
-                                .foregroundColor(.secondary)
-                            }
-                        }
-                    }
+                    IngestionRowPreview(
+                        substanceName: substanceName,
+                        administrationRoute: arguments.administrationRoute,
+                        multiplier: 3,
+                        isEstimate: isEstimate,
+                        isUnknownDose: isUnknownDose,
+                        unit: unit,
+                        unitPlural: unitPlural,
+                        calculatedDose: calculatedDose,
+                        calculatedDoseStandardDeviation: calculatedDoseStandardDeviation,
+                        originalUnit: originalUnit,
+                        name: name)
                 }
                 if !isUnknownDose {
                     Section("Dose Picker Preview") {
@@ -332,6 +318,52 @@ struct FinishCustomUnitsScreen: View {
         onAdded(newCustomUnit)
     }
 }
+
+struct IngestionRowPreview: View {
+
+    let substanceName: String
+    let administrationRoute: AdministrationRoute
+    let multiplier: Double
+    let isEstimate: Bool
+    let isUnknownDose: Bool
+    let unit: String
+    let unitPlural: String
+    let calculatedDose: Double?
+    let calculatedDoseStandardDeviation: Double?
+    let originalUnit: String
+    let name: String
+
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("\(name), \(substanceName)").font(.headline)
+            let pluralizableUnit = PluralizableUnit(singular: unit, plural: unitPlural)
+            if isUnknownDose {
+                Text("\(multiplier.with(pluralizableUnit: pluralizableUnit)) \(administrationRoute.rawValue)")
+            } else {
+                if isEstimate {
+                    if let calculatedDoseStandardDeviation {
+                        Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
+                        Text(
+                            " = \(calculatedDose?.asRoundedReadableString ?? "...")±\(calculatedDoseStandardDeviation.asRoundedReadableString) \(originalUnit) \(administrationRoute.rawValue)")
+                        .foregroundColor(.secondary)
+                    } else {
+                        Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
+                        Text(
+                            " = ~\(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(administrationRoute.rawValue)")
+                        .foregroundColor(.secondary)
+                    }
+                } else {
+                    Text(multiplier.with(pluralizableUnit: pluralizableUnit)) +
+                    Text(
+                        " = \(calculatedDose?.asRoundedReadableString ?? "...") \(originalUnit) \(administrationRoute.rawValue)")
+                    .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     NavigationStack {

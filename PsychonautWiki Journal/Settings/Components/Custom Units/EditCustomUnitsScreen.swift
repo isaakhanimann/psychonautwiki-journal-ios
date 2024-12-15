@@ -25,6 +25,7 @@ struct EditCustomUnitsScreen: View {
     @State private var unitPlural: String = ""
     @State private var note: String = ""
     @State private var dose: Double?
+    @State private var isUnknownDose: Bool = false
     @State private var isEstimate: Bool = false
     @State private var estimatedDoseStandardDeviation: Double?
     @State private var isArchived: Bool = false
@@ -33,6 +34,7 @@ struct EditCustomUnitsScreen: View {
     var body: some View {
         EditCustomUnitsScreenContent(
             substanceName: customUnit.substanceNameUnwrapped,
+            administrationRoute: customUnit.administrationRouteUnwrapped,
             roaDose: customUnit.substance?.getDose(for: customUnit.administrationRouteUnwrapped),
             name: $name,
             originalUnit: $originalUnit,
@@ -41,6 +43,7 @@ struct EditCustomUnitsScreen: View {
             note: $note,
             dose: $dose,
             isEstimate: $isEstimate,
+            isUnknownDose: $isUnknownDose,
             estimatedDoseStandardDeviation: $estimatedDoseStandardDeviation,
             isArchived: $isArchived,
             delete: delete,
@@ -54,6 +57,7 @@ struct EditCustomUnitsScreen: View {
             unitPlural = pluralizableUnit.plural
             note = customUnit.noteUnwrapped
             dose = customUnit.doseUnwrapped
+            isUnknownDose = customUnit.doseUnwrapped == nil
             isEstimate = customUnit.isEstimate
             estimatedDoseStandardDeviation = customUnit.estimatedDoseStandardDeviationUnwrapped
             isArchived = customUnit.isArchived
@@ -78,7 +82,7 @@ struct EditCustomUnitsScreen: View {
         customUnit.unit = unit
         customUnit.unitPlural = unitPlural
         customUnit.note = note
-        customUnit.dose = dose ?? 0
+        customUnit.dose = isUnknownDose ? 0 : (dose ?? 0)
         customUnit.isEstimate = isEstimate
         customUnit.estimatedDoseStandardDeviation = estimatedDoseStandardDeviation ?? 0
         customUnit.isArchived = isArchived
@@ -95,6 +99,7 @@ struct EditCustomUnitsScreen: View {
 
 struct EditCustomUnitsScreenContent: View {
     let substanceName: String
+    let administrationRoute: AdministrationRoute
     let roaDose: RoaDose?
     @Binding var name: String
     @Binding var originalUnit: String
@@ -103,6 +108,7 @@ struct EditCustomUnitsScreenContent: View {
     @Binding var note: String
     @Binding var dose: Double?
     @Binding var isEstimate: Bool
+    @Binding var isUnknownDose: Bool
     @Binding var estimatedDoseStandardDeviation: Double?
     @Binding var isArchived: Bool
     let delete: () -> Void
@@ -141,27 +147,50 @@ struct EditCustomUnitsScreenContent: View {
                 if let roaDose {
                     RoaDoseRow(roaDose: roaDose)
                 }
-                DosePicker(
-                    roaDose: roaDose,
-                    doseMaybe: $dose,
-                    selectedUnits: $originalUnit
-                )
-                Toggle("Estimate", isOn: $isEstimate)
-                    .tint(.accentColor)
-                if isEstimate {
-                    HStack {
-                        Image(systemName: "plusminus")
-                        TextField(
-                            "Estimated standard deviation",
-                            value: $estimatedDoseStandardDeviation,
-                            format: .number
-                        )
-                        .keyboardType(.decimalPad)
-                        Spacer()
-                        Text(originalUnit)
+                if !isUnknownDose {
+                    DosePicker(
+                        roaDose: roaDose,
+                        doseMaybe: $dose,
+                        selectedUnits: $originalUnit
+                    )
+                    Toggle("Estimate", isOn: $isEstimate.animation())
+                        .tint(.accentColor)
+                    if isEstimate {
+                        HStack {
+                            Image(systemName: "plusminus")
+                            TextField(
+                                "Estimated standard deviation",
+                                value: $estimatedDoseStandardDeviation,
+                                format: .number
+                            )
+                            .keyboardType(.decimalPad)
+                            Spacer()
+                            Text(originalUnit)
+                        }
+                        if let dose, let estimatedDoseStandardDeviation {
+                            StandardDeviationConfidenceIntervalExplanation(mean: dose, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
+                        }
                     }
                 }
+                Toggle("Unknown dose", isOn: $isUnknownDose.animation()).tint(.accentColor)
             }.listRowSeparator(.hidden)
+
+            if let originalUnit = roaDose?.units, dose != nil || isUnknownDose, !unit.isEmpty {
+                Section("Ingestion Preview") {
+                    IngestionRowPreview(
+                        substanceName: substanceName,
+                        administrationRoute: administrationRoute,
+                        multiplier: 3,
+                        isEstimate: isEstimate,
+                        isUnknownDose: isUnknownDose,
+                        unit: unit,
+                        unitPlural: unitPlural,
+                        calculatedDose: calculatedDose,
+                        calculatedDoseStandardDeviation: calculatedDoseStandardDeviation,
+                        originalUnit: originalUnit,
+                        name: name)
+                }
+            }
 
             Section {
                 Toggle("Archive", isOn: $isArchived).tint(.accentColor)
@@ -198,12 +227,25 @@ struct EditCustomUnitsScreenContent: View {
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Edit Unit")
     }
+
+    private let multiplier: Double = 3
+
+    private var calculatedDose: Double? {
+        guard let dose else { return nil }
+        return multiplier * dose
+    }
+
+    private var calculatedDoseStandardDeviation: Double? {
+        guard let estimatedDoseStandardDeviation else { return nil }
+        return multiplier * estimatedDoseStandardDeviation
+    }
 }
 
 #Preview {
     NavigationStack {
         EditCustomUnitsScreenContent(
             substanceName: "MDMA",
+            administrationRoute: .oral,
             roaDose: SubstanceRepo.shared.getSubstance(name: "MDMA")!.getDose(for: .oral)!,
             name: .constant("pink rocket"),
             originalUnit: .constant("mg"),
@@ -212,6 +254,7 @@ struct EditCustomUnitsScreenContent: View {
             note: .constant("These are my notes"),
             dose: .constant(50),
             isEstimate: .constant(false),
+            isUnknownDose: .constant(false),
             estimatedDoseStandardDeviation: .constant(nil),
             isArchived: .constant(false),
             delete: {},
