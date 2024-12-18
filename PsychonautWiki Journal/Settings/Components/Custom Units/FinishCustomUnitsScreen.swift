@@ -170,50 +170,48 @@ struct FinishCustomUnitsScreen: View {
                 if let roaDose {
                     RoaDoseRow(roaDose: roaDose)
                 }
-                if !isUnknownDose {
+                HStack {
+                    TextField(
+                        "Dose per \(unitOrPlaceholder)",
+                        value: $dosePerUnit,
+                        format: .number).keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .dose)
+                    Spacer()
+                    Text(originalUnit)
+                }
+                Toggle("Estimate", isOn: $isEstimate.animation())
+                    .tint(.accentColor)
+                    .onChange(of: isEstimate, perform: { newIsEstimate in
+                        if newIsEstimate {
+                            focusedField = .estimatedDeviation
+                        }
+                    })
+                if isEstimate {
                     HStack {
+                        Image(systemName: "plusminus")
                         TextField(
-                            "Dose per \(unitOrPlaceholder)",
-                            value: $dosePerUnit,
-                            format: .number).keyboardType(.decimalPad)
-                            .focused($focusedField, equals: .dose)
+                            "Estimated standard deviation",
+                            value: $estimatedDoseStandardDeviation,
+                            format: .number)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .estimatedDeviation)
                         Spacer()
                         Text(originalUnit)
                     }
-                    Toggle("Estimate", isOn: $isEstimate.animation())
-                        .tint(.accentColor)
-                        .onChange(of: isEstimate, perform: { newIsEstimate in
-                            if newIsEstimate {
-                                focusedField = .estimatedDeviation
-                            }
-                        })
-                    if isEstimate {
-                        HStack {
-                            Image(systemName: "plusminus")
-                            TextField(
-                                "Estimated standard deviation",
-                                value: $estimatedDoseStandardDeviation,
-                                format: .number)
-                            .keyboardType(.decimalPad)
-                            .focused($focusedField, equals: .estimatedDeviation)
-                            Spacer()
-                            Text(originalUnit)
-                        }
-                        if let dosePerUnit, let estimatedDoseStandardDeviation {
-                            StandardDeviationConfidenceIntervalExplanation(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
-                        }
+                    if let dosePerUnit, let estimatedDoseStandardDeviation {
+                        StandardDeviationConfidenceIntervalExplanation(mean: dosePerUnit, standardDeviation: estimatedDoseStandardDeviation, unit: originalUnit)
                     }
                 }
-                Toggle("Unknown dose", isOn: $isUnknownDose.animation()).tint(.accentColor)
             }.listRowSeparator(.hidden)
-            if let originalUnit = roaDose?.units, dosePerUnit != nil || isUnknownDose, !unit.isEmpty {
+            let isUnknownDosePerUnit = dosePerUnit == nil
+            if let originalUnit = roaDose?.units, !unit.isEmpty {
                 Section("Ingestion Preview") {
                     IngestionRowPreview(
                         substanceName: substanceName,
                         administrationRoute: arguments.administrationRoute,
                         multiplier: 3,
                         isEstimate: isEstimate,
-                        isUnknownDose: isUnknownDose,
+                        isUnknownDosePerUnit: isUnknownDosePerUnit,
                         unit: unit,
                         unitPlural: unitPlural,
                         calculatedDose: calculatedDose,
@@ -221,7 +219,7 @@ struct FinishCustomUnitsScreen: View {
                         originalUnit: originalUnit,
                         name: name)
                 }
-                if !isUnknownDose {
+                if !isUnknownDosePerUnit {
                     Section("Dose Picker Preview") {
                         VStack(alignment: .leading, spacing: 5) {
                             if !name.isEmpty {
@@ -264,7 +262,6 @@ struct FinishCustomUnitsScreen: View {
     @State private var dosePerUnit: Double?
     @State private var isEstimate = false
     @State private var estimatedDoseStandardDeviation: Double?
-    @State private var isUnknownDose = false
     @State private var note = ""
 
     @FocusState private var focusedField: Field?
@@ -304,7 +301,7 @@ struct FinishCustomUnitsScreen: View {
         newCustomUnit.name = name
         newCustomUnit.creationDate = Date()
         newCustomUnit.administrationRoute = arguments.administrationRoute.rawValue
-        newCustomUnit.dose = isUnknownDose ? 0 : (dosePerUnit ?? 0)
+        newCustomUnit.dose = dosePerUnit ?? 0
         newCustomUnit.note = note
         newCustomUnit.originalUnit = originalUnit
         newCustomUnit.substanceName = arguments.substanceName
@@ -325,7 +322,7 @@ struct IngestionRowPreview: View {
     let administrationRoute: AdministrationRoute
     let multiplier: Double
     let isEstimate: Bool
-    let isUnknownDose: Bool
+    let isUnknownDosePerUnit: Bool
     let unit: String
     let unitPlural: String
     let calculatedDose: Double?
@@ -338,7 +335,7 @@ struct IngestionRowPreview: View {
         VStack(alignment: .leading) {
             Text("\(substanceName), \(name)").font(.headline)
             let pluralizableUnit = PluralizableUnit(singular: unit, plural: unitPlural)
-            if isUnknownDose {
+            if isUnknownDosePerUnit {
                 Text("\(multiplier.with(pluralizableUnit: pluralizableUnit)) \(administrationRoute.rawValue)")
             } else {
                 if isEstimate {
