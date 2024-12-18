@@ -336,7 +336,7 @@ struct IngestionRowPreview: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("\(name), \(substanceName)").font(.headline)
+            Text("\(substanceName), \(name)").font(.headline)
             let pluralizableUnit = PluralizableUnit(singular: unit, plural: unitPlural)
             if isUnknownDose {
                 Text("\(multiplier.with(pluralizableUnit: pluralizableUnit)) \(administrationRoute.rawValue)")
