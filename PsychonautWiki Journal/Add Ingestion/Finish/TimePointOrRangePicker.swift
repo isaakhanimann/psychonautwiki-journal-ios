@@ -54,13 +54,27 @@ struct TimePointOrRangePicker: View {
         case .timeRange:
             DatePicker(
                 "Start time",
-                selection: $selectedTime,
+                selection: Binding(get: {
+                    selectedTime
+                }, set: { newStart in
+                    selectedTime = newStart
+                    if newStart > selectedEndTime {
+                        selectedEndTime = newStart.addingTimeInterval(30*60)
+                    }
+                }),
                 displayedComponents: [.date, .hourAndMinute]
             )
             .datePickerStyle(.compact)
             DatePicker(
                 "End time",
-                selection: $selectedEndTime,
+                selection: Binding(get: {
+                    selectedEndTime
+                }, set: { newEnd in
+                    selectedEndTime = newEnd
+                    if newEnd < selectedTime {
+                        selectedTime = newEnd.addingTimeInterval(-30*60)
+                    }
+                }),
                 displayedComponents: [.date, .hourAndMinute]
             )
             .datePickerStyle(.compact)
