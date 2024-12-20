@@ -24,7 +24,12 @@ struct TimeRangeDrawable {
 
         init(color: SubstanceColor, startInSeconds: TimeInterval, endInSeconds: TimeInterval) {
             self.color = color
-            self.rangeInSeconds = startInSeconds..<endInSeconds
+            // the range operator crashes if start is after end
+            if startInSeconds < endInSeconds {
+                self.rangeInSeconds = startInSeconds..<endInSeconds
+            } else {
+                self.rangeInSeconds = startInSeconds..<startInSeconds + 60*60
+            }
         }
     }
 
