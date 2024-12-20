@@ -115,6 +115,14 @@ struct EditCustomUnitsScreenContent: View {
     var body: some View {
         Form {
             Section {
+                if ingestionCount > 0 {
+                    let pluralizableUnit = PluralizableUnit(singular: "ingestion", plural: "ingestions")
+                    Text("\(ingestionCount.with(pluralizableUnit: pluralizableUnit)) are affected by this edit")
+                } else {
+                    Text("No ingestions are using this unit yet")
+                }
+            }
+            Section {
                 LabeledContent {
                     TextField("Name", text: $name)
                         .textInputAutocapitalization(.sentences)
