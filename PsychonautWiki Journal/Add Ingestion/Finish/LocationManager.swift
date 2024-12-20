@@ -55,7 +55,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         Task {
             guard let foundCLLocation = locations.last else { return }
             let place = await getPlacemark(from: foundCLLocation)
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 let locationName = place?.subLocality ?? place?.name ?? "Unknown"
                 let location = Location(
                     name: locationName,
@@ -78,7 +78,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var shouldUpdateSelectedLocation = false
 
     nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        DispatchQueue.main.async {
+        Task { @MainActor in
             let before = self.authorizationStatus
             let after = manager.authorizationStatus
             let didJustNowGivePermission = before == CLAuthorizationStatus.notDetermined && after == .authorizedWhenInUse
@@ -109,7 +109,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     )
                 }
             }
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 self.searchSuggestedLocations = foundLocations
                 self.isSearchingForLocations = false
             }
