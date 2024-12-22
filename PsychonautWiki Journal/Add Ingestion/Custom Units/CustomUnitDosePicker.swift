@@ -59,6 +59,9 @@ struct CustomUnitDosePicker: View {
                     Text(customUnit.unitUnwrapped)
                 }
             }
+            if let dose, let estimatedDoseStandardDeviation {
+                StandardDeviationConfidenceIntervalExplanation(mean: dose, standardDeviation: estimatedDoseStandardDeviation, unit: customUnit.unitUnwrapped)
+            }
         }
     }
 }

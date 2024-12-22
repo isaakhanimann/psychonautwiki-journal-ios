@@ -57,11 +57,6 @@ struct CustomUnitsChooseDoseScreen: View {
                     Text(customUnit.noteUnwrapped)
                 }
             }
-            if let dose, let estimatedDoseStandardDeviation {
-                Section {
-                    StandardDeviationConfidenceIntervalExplanation(mean: dose, standardDeviation: estimatedDoseStandardDeviation, unit: customUnit.unitUnwrapped)
-                }
-            }
             if isEyeOpen {
                 Section {
                     if let remark = customUnit.substance?.dosageRemark {

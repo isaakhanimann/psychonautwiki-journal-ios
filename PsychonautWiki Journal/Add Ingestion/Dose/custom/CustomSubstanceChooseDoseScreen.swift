@@ -16,7 +16,7 @@
 
 import SwiftUI
 
-struct CustomChooseDoseScreen: View {
+struct CustomSubstanceChooseDoseScreen: View {
     let arguments: CustomChooseDoseScreenArguments
     let dismiss: () -> Void
     @State private var doseText = ""
@@ -110,6 +110,9 @@ struct CustomChooseDoseScreen: View {
                         Text(arguments.units)
                     }
                 }
+                if let dose, let doseDeviation {
+                    StandardDeviationConfidenceIntervalExplanation(mean: dose, standardDeviation: doseDeviation, unit: arguments.units)
+                }
                 unknownDoseLink
             }.listRowSeparator(.hidden)
         }
@@ -123,7 +126,7 @@ struct CustomChooseDoseScreen: View {
 
 #Preview {
     NavigationStack {
-        CustomChooseDoseScreen(
+        CustomSubstanceChooseDoseScreen(
             arguments: .init(substanceName: "Coffee",
                              units: "cups",
                              administrationRoute: .oral),
