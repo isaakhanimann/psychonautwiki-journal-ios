@@ -27,7 +27,10 @@ struct CustomUnitsScreen: View {
         FilteredCustomUnits(filter: searchText)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    NavigationLink(value: GlobalNavigationDestination.customUnitsArchive) {
+                        Label("Archive", systemImage: "archivebox")
+                    }
                     Button {
                         isAddShown.toggle()
                     } label: {
@@ -70,9 +73,6 @@ struct FilteredCustomUnits: View {
                 Text("No custom units")
                     .foregroundColor(.secondary)
             }
-            NavigationLink(value: GlobalNavigationDestination.customUnitsArchive) {
-                Label("Archive", systemImage: "archivebox")
-            }
 
             ForEach(fetchRequest) { customUnit in
                 Button(action: {
@@ -82,6 +82,7 @@ struct FilteredCustomUnits: View {
                 })
             }
         }
+        .listStyle(.plain)
         .sheet(item: $customUnitToEdit, content: { customUnit in
             NavigationStack {
                 EditCustomUnitsScreen(customUnit: customUnit)
