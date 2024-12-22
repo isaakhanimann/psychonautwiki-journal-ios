@@ -43,7 +43,7 @@ struct IngestionNoteScreen: View {
 
     private var screen: some View {
         Form {
-            TextField("Enter Note", text: $note)
+            TextField("Enter Note", text: $note, axis: .vertical)
                 .onSubmit {
                     dismiss()
                 }

@@ -52,7 +52,7 @@ struct EditTitleScreenContent: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Enter Title", text: $title)
+                TextField("Enter Title", text: $title, axis: .vertical)
                     .onSubmit {
                         save()
                     }

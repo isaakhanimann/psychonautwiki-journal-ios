@@ -264,7 +264,7 @@ struct EditIngestionContent: View {
                     }.listRowSeparator(.hidden)
                 }
                 Section("Notes") {
-                    TextField("Enter Note", text: $note)
+                    TextField("Enter Note", text: $note, axis: .vertical)
                         .autocapitalization(.sentences)
                 }
                 Section {
