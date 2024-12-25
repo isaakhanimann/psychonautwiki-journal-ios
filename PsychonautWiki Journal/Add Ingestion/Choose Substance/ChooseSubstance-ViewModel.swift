@@ -23,14 +23,14 @@ extension ChooseSubstanceScreen {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var searchText = ""
         @Published var isShowingOpenEyeToast = false
-        @Published var filteredSuggestions: [Suggestion] = []
+        @Published var filteredSuggestions: [any SuggestionProtocol] = []
         @Published var filteredSubstances: [Substance] = []
         @Published var filteredCustomUnits: [CustomUnit] = []
         @Published var filteredCustomSubstances: [CustomSubstanceModel] = []
         @Published var customSubstanceModels: [CustomSubstanceModel]
         @Published var isEyeOpen = false
 
-        private let allPossibleSuggestions: [Suggestion]
+        private let allPossibleSuggestions: [any SuggestionProtocol]
         private let fetchController: NSFetchedResultsController<CustomSubstance>?
 
         private static func getSortedIngestions() -> [Ingestion] {
@@ -49,7 +49,7 @@ extension ChooseSubstanceScreen {
         override init() {
             isEyeOpen = UserDefaults.standard.bool(forKey: PersistenceController.isEyeOpenKey2)
             let customUnits = Self.getCustomUnits()
-            allPossibleSuggestions = SuggestionsCreator(sortedIngestions: Self.getSortedIngestions(), customUnits: customUnits).suggestions
+            allPossibleSuggestions = getSuggestions(sortedIngestions: Self.getSortedIngestions(), customUnits: customUnits)
             let request = CustomSubstance.fetchRequest()
             request.sortDescriptors = []
             fetchController = NSFetchedResultsController(
@@ -100,13 +100,10 @@ extension ChooseSubstanceScreen {
                         }
                     }
                 }.assign(to: &$filteredCustomSubstances)
-            $filteredSubstances.combineLatest($filteredCustomSubstances) { filteredSubstances, filteredCustom in
+            $filteredSubstances.combineLatest($filteredCustomSubstances, $searchText) { filteredSubstances, filteredCustom, searchTextValue in
                 self.allPossibleSuggestions.filter { suggestion in
-                    filteredSubstances.contains { substance in
-                        substance.name == suggestion.substanceName
-                    } || filteredCustom.contains { custom in
-                        custom.name == suggestion.substanceName
-                    }
+                    let substanceNames = filteredSubstances.map(\.name) + filteredCustom.map(\.name)
+                    return suggestion.isInResult(searchText: searchTextValue, substanceNames: substanceNames)
                 }
             }.assign(to: &$filteredSuggestions)
             $searchText.combineLatest($filteredSubstances) { searchText, filteredSubstances in

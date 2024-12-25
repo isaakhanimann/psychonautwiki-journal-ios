@@ -19,6 +19,9 @@ import SwiftUI
 struct CustomUnitsChooseDoseScreen: View {
     let customUnit: CustomUnit
     let dismiss: () -> Void
+    let navigateToCustomUnitChooseDose: (CustomUnit) -> Void
+
+    @State private var isAddCustomUnitSheetShown = false
 
     @State private var dose: Double?
     @State private var isEstimate = false
@@ -58,6 +61,11 @@ struct CustomUnitsChooseDoseScreen: View {
                 }
             }
             if isEyeOpen {
+                Section {
+                    Button("Add new custom unit") {
+                        isAddCustomUnitSheetShown = true
+                    }
+                }
                 Section {
                     if let remark = customUnit.substance?.dosageRemark {
                         Text(remark)
@@ -99,12 +107,36 @@ struct CustomUnitsChooseDoseScreen: View {
             isDoseFieldFocused = true
         }
         .scrollDismissesKeyboard(.interactively)
+        .sheet(isPresented: $isAddCustomUnitSheetShown, content: {
+                    NavigationStack {
+                        FinishCustomUnitsScreen(
+                            arguments: customUnitArguments,
+                            cancel: {
+                                isAddCustomUnitSheetShown = false
+                            },
+                            onAdded: { customUnit in
+                                isAddCustomUnitSheetShown = false
+                                navigateToCustomUnitChooseDose(customUnit)
+                            })
+                    }
+                })
         .navigationBarTitle("\(customUnit.substanceNameUnwrapped) Dose")
     }
+
+    var customUnitArguments: CustomUnitArguments {
+        if let substance = customUnit.substance {
+            return CustomUnitArguments.substance(substance: substance, administrationRoute: customUnit.administrationRouteUnwrapped)
+            } else {
+                return CustomUnitArguments.customSubstance(
+                    customSubstanceName: customUnit.substanceNameUnwrapped,
+                    administrationRoute: customUnit.administrationRouteUnwrapped,
+                    customSubstanceUnit: customUnit.originalUnitUnwrapped)
+            }
+        }
 }
 
 #Preview {
     NavigationStack {
-        CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample, dismiss: { })
+        CustomUnitsChooseDoseScreen(customUnit: CustomUnit.previewSample, dismiss: { }, navigateToCustomUnitChooseDose: {_ in })
     }
 }

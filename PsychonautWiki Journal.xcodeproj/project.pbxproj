@@ -60,7 +60,6 @@
 		EA116CD829FBA2E4007D8BF6 /* EditOverallRatingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA116CD729FBA2E4007D8BF6 /* EditOverallRatingScreen.swift */; };
 		EA116CDB29FBA381007D8BF6 /* SelectRatingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA116CDA29FBA381007D8BF6 /* SelectRatingSection.swift */; };
 		EA116CDD29FBA3D9007D8BF6 /* RatingExplanationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA116CDC29FBA3D9007D8BF6 /* RatingExplanationSection.swift */; };
-		EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */; };
 		EA1DE59E2949CB5800FEE975 /* SubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */; };
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
@@ -215,6 +214,9 @@
 		EA6D44E32A4FF8D400BF2E8A /* ShareScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */; };
 		EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */; };
 		EA6D44ED2A50472400BF2E8A /* ToleranceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */; };
+		EA6EFDEB2D1BF54200729089 /* PureSubstanceSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6EFDEA2D1BF53400729089 /* PureSubstanceSuggestionView.swift */; };
+		EA6EFDED2D1BF9D600729089 /* CustomUnitSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6EFDEC2D1BF9D600729089 /* CustomUnitSuggestionView.swift */; };
+		EA6EFDEF2D1C00E300729089 /* CustomSubstanceSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6EFDEE2D1C00E300729089 /* CustomSubstanceSuggestionView.swift */; };
 		EA7F230F2B8E095700EA6734 /* RelativeTimeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */; };
 		EA8039B92BA6CEE80097E743 /* DosageStatDayChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039B82BA6CEE80097E743 /* DosageStatDayChart.swift */; };
 		EA8039BB2BA6D99A0097E743 /* DosageStatWeekChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8039BA2BA6D99A0097E743 /* DosageStatWeekChart.swift */; };
@@ -423,7 +425,6 @@
 		EA116CD729FBA2E4007D8BF6 /* EditOverallRatingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOverallRatingScreen.swift; sourceTree = "<group>"; };
 		EA116CDA29FBA381007D8BF6 /* SelectRatingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRatingSection.swift; sourceTree = "<group>"; };
 		EA116CDC29FBA3D9007D8BF6 /* RatingExplanationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingExplanationSection.swift; sourceTree = "<group>"; };
-		EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionBox.swift; sourceTree = "<group>"; };
 		EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
@@ -569,6 +570,9 @@
 		EA6D44E22A4FF8D400BF2E8A /* ShareScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreen.swift; sourceTree = "<group>"; };
 		EA6D44E52A4FFD9100BF2E8A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		EA6D44EC2A50472400BF2E8A /* ToleranceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToleranceChart.swift; sourceTree = "<group>"; };
+		EA6EFDEA2D1BF53400729089 /* PureSubstanceSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureSubstanceSuggestionView.swift; sourceTree = "<group>"; };
+		EA6EFDEC2D1BF9D600729089 /* CustomUnitSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitSuggestionView.swift; sourceTree = "<group>"; };
+		EA6EFDEE2D1C00E300729089 /* CustomSubstanceSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceSuggestionView.swift; sourceTree = "<group>"; };
 		EA7F230E2B8E095700EA6734 /* RelativeTimeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeText.swift; sourceTree = "<group>"; };
 		EA8039B82BA6CEE80097E743 /* DosageStatDayChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatDayChart.swift; sourceTree = "<group>"; };
 		EA8039BA2BA6D99A0097E743 /* DosageStatWeekChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageStatWeekChart.swift; sourceTree = "<group>"; };
@@ -1016,9 +1020,11 @@
 		EA48F8A529EBD592007DA8C5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EA6EFDEA2D1BF53400729089 /* PureSubstanceSuggestionView.swift */,
+				EA6EFDEE2D1C00E300729089 /* CustomSubstanceSuggestionView.swift */,
+				EA6EFDEC2D1BF9D600729089 /* CustomUnitSuggestionView.swift */,
 				EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */,
 				EA60482C2A1411EF005C6A4B /* Suggestion */,
-				EA1DE59B2949C43D00FEE975 /* SuggestionBox.swift */,
 				EA1DE59D2949CB5800FEE975 /* SubstanceBox.swift */,
 				EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */,
 				EA47935D2B48384100685EAA /* CustomUnitBox.swift */,
@@ -1865,6 +1871,7 @@
 				EA6048452A25C28F005C6A4B /* FabLabelStyle.swift in Sources */,
 				EAB165A727E35C29003DF79D /* AddCustomSubstance-ViewModel.swift in Sources */,
 				EA81E0CA29508C7E00475DE3 /* CumulativeDoseRow.swift in Sources */,
+				EA6EFDEB2D1BF54200729089 /* PureSubstanceSuggestionView.swift in Sources */,
 				EABD920D294202680073303A /* StrokeStyle-Timeline.swift in Sources */,
 				EA302E4C2B385516007F113F /* AddIngestionDestination.swift in Sources */,
 				EAC368732B6FC99200056C56 /* DayView.swift in Sources */,
@@ -1872,6 +1879,7 @@
 				EACF439D2BA247D3008D1897 /* DosageStat.swift in Sources */,
 				EABD92062941C4080073303A /* TimelineDrawable.swift in Sources */,
 				EAF21C262BBB3A3B000BFB0A /* Navigator.swift in Sources */,
+				EA6EFDEF2D1C00E300729089 /* CustomSubstanceSuggestionView.swift in Sources */,
 				EAC25C002955FD190002D68F /* DosageGuideScreen.swift in Sources */,
 				EA60483D2A188FFB005C6A4B /* SprayModel.swift in Sources */,
 				EABD920B2941FB160073303A /* OnsetTotalTimeline.swift in Sources */,
@@ -1937,7 +1945,6 @@
 				EA47E65527CA136C00F6E10F /* Substance.swift in Sources */,
 				EA527A9429428CD8009C142D /* EffectTimeline.swift in Sources */,
 				EA48F8BB29EE99C4007DA8C5 /* TimelineScreen.swift in Sources */,
-				EA1DE59C2949C43D00FEE975 /* SuggestionBox.swift in Sources */,
 				EABD92002941C3740073303A /* AxisDrawable.swift in Sources */,
 				EA4B8A172A9B23A3009918DE /* TimedNoteScreenContent.swift in Sources */,
 				EA41C625295EAFD8000DA021 /* Data.swift in Sources */,
@@ -2073,6 +2080,7 @@
 				EABD920F294203E70073303A /* OnsetComeupTotalTimeline.swift in Sources */,
 				EAB165B227E49ACC003DF79D /* Notification-EyeName.swift in Sources */,
 				EAEA92232B4E780200F3049D /* Inflection.swift in Sources */,
+				EA6EFDED2D1BF9D600729089 /* CustomUnitSuggestionView.swift in Sources */,
 				EA29DC3A2B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift in Sources */,
 				EA60482B2A1411E5005C6A4B /* CustomSubstanceModel.swift in Sources */,
 				EA55CEB42A3F278A00FE1A44 /* ExperienceTimeText.swift in Sources */,
