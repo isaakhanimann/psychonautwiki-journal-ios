@@ -124,7 +124,6 @@
 		EA460D2427637964002EF80B /* QuestionAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA460D2327637964002EF80B /* QuestionAndAnswer.swift */; };
 		EA4793582B48122C00685EAA /* CustomUnitDosePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */; };
 		EA47935A2B48252500685EAA /* CustomUnitDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4793592B48252500685EAA /* CustomUnitDose.swift */; };
-		EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */; };
 		EA47935E2B48384100685EAA /* CustomUnitBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935D2B48384100685EAA /* CustomUnitBox.swift */; };
 		EA4793602B4A72D700685EAA /* CustomUnitMinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */; };
 		EA47E64527CA136C00F6E10F /* SubstanceRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */; };
@@ -486,7 +485,6 @@
 		EA460D2327637964002EF80B /* QuestionAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAndAnswer.swift; sourceTree = "<group>"; };
 		EA4793572B48122C00685EAA /* CustomUnitDosePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDosePicker.swift; sourceTree = "<group>"; };
 		EA4793592B48252500685EAA /* CustomUnitDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDose.swift; sourceTree = "<group>"; };
-		EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitDoseLabel.swift; sourceTree = "<group>"; };
 		EA47935D2B48384100685EAA /* CustomUnitBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitBox.swift; sourceTree = "<group>"; };
 		EA47935F2B4A72D700685EAA /* CustomUnitMinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnitMinInfo.swift; sourceTree = "<group>"; };
 		EA47E63527CA136C00F6E10F /* SubstanceRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceRepo.swift; sourceTree = "<group>"; };
@@ -1090,7 +1088,6 @@
 				EA4793592B48252500685EAA /* CustomUnitDose.swift */,
 				EA60482A2A1411E5005C6A4B /* CustomSubstanceModel.swift */,
 				EA6048262A1411C0005C6A4B /* Suggestion.swift */,
-				EA47935B2B482C0800685EAA /* CustomUnitDoseLabel.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -1860,7 +1857,6 @@
 				EA6D44E62A4FFD9100BF2E8A /* QRCodeView.swift in Sources */,
 				EA302E5A2B38758A007F113F /* FinishCustomUnitsScreen.swift in Sources */,
 				EA6048392A188BFF005C6A4B /* SprayCalculatorScreen-ViewModel.swift in Sources */,
-				EA47935C2B482C0800685EAA /* CustomUnitDoseLabel.swift in Sources */,
 				EA4B8A122A9B1F23009918DE /* TimedNote-CoreDataHelpers.swift in Sources */,
 				EA50E4E4294B70A400B8D1FC /* EditIngestionScreen.swift in Sources */,
 				EAACB08D2947C83A0050E002 /* CustomSubstanceChooseRouteScreen.swift in Sources */,
