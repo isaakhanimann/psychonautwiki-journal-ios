@@ -47,7 +47,10 @@ struct PureSubstanceSuggestions: SuggestionProtocol {
 
 struct CustomUnitSuggestions: SuggestionProtocol {
     func isInResult(searchText: String, substanceNames: [String]) -> Bool {
-        substanceNames.contains(customUnit.substanceNameUnwrapped) || customUnit.nameUnwrapped.lowercased().contains(searchText.lowercased()) || customUnit.unitUnwrapped.lowercased().contains(searchText.lowercased()) ||
+        if searchText.isEmpty {
+            return true
+        }
+        return substanceNames.contains(customUnit.substanceNameUnwrapped) || customUnit.nameUnwrapped.lowercased().contains(searchText.lowercased()) || customUnit.unitUnwrapped.lowercased().contains(searchText.lowercased()) ||
         customUnit.noteUnwrapped.lowercased().contains(searchText.lowercased())
     }
 
@@ -68,7 +71,10 @@ struct CustomUnitSuggestions: SuggestionProtocol {
 
 struct CustomSubstanceSuggestions: SuggestionProtocol {
     func isInResult(searchText: String, substanceNames: [String]) -> Bool {
-        customSubstanceName.lowercased().contains(searchText.lowercased())
+        if searchText.isEmpty {
+            return true
+        }
+        return customSubstanceName.lowercased().contains(searchText.lowercased())
     }
     
     let id: String

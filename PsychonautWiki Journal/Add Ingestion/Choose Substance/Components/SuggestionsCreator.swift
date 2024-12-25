@@ -50,16 +50,28 @@ private func getSuggestionsForSubstanceAndRoute(substanceName: String, route: Ad
         })
     )
 
+    let customSubstanceSuggestions = getCustomSubstanceSuggestions(
+        route: route,
+        customSubstanceIngestions: ingestionsOfSubstanceAndRoute.filter({ ingestion in
+            ingestion.customUnit == nil && ingestion.substance == nil
+        })
+    )
+
+
     let customUnitSuggestions = getGroupOfCustomUnitSuggestions(
         route: route,
         ingestionsWithCustomUnit: ingestionsOfSubstanceAndRoute.filter({ ingestion in
             ingestion.customUnit != nil
         })
     )
-    if let pureSubstanceSuggestions {
-        return [pureSubstanceSuggestions] + customUnitSuggestions
+    var result: [any SuggestionProtocol] = customUnitSuggestions
+    if let customSubstanceSuggestions {
+        result.append(customSubstanceSuggestions)
     }
-    return customUnitSuggestions
+    if let pureSubstanceSuggestions {
+        result.append(pureSubstanceSuggestions)
+    }
+    return result
 }
 
 
@@ -76,6 +88,22 @@ private func getPureSubstanceSuggestions(route: AdministrationRoute, pureSubstan
             substanceColor: ingestion.substanceColor,
             dosesAndUnit: Array(dosesAndUnit.uniqued().prefix(maxNumberOfSuggestions)),
             sortDate: pureSubstanceIngestions.compactMap { $0.creationDate }.max() ?? Date.distantPast
+        )
+    }
+    return nil
+}
+
+private func getCustomSubstanceSuggestions(route: AdministrationRoute, customSubstanceIngestions: [Ingestion]) -> CustomSubstanceSuggestions? {
+    if let ingestion = customSubstanceIngestions.first, let customSubstanceName = ingestion.substanceName {
+        let dosesAndUnit = customSubstanceIngestions.map { ingestion in
+            RegularDoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped, isEstimate: ingestion.isEstimate, estimatedDoseStandardDeviation: ingestion.estimatedDoseStandardDeviationUnwrapped)
+        }
+        return CustomSubstanceSuggestions(
+            administrationRoute: route,
+            customSubstanceName: customSubstanceName,
+            dosesAndUnit: dosesAndUnit,
+            substanceColor: ingestion.substanceColor,
+            sortDate: customSubstanceIngestions.compactMap { $0.creationDate }.max() ?? Date.distantPast
         )
     }
     return nil

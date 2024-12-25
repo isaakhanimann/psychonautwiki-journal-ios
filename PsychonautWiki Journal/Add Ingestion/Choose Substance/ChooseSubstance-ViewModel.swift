@@ -100,11 +100,12 @@ extension ChooseSubstanceScreen {
                         }
                     }
                 }.assign(to: &$filteredCustomSubstances)
-            $filteredSubstances.combineLatest($filteredCustomSubstances, $searchText) { filteredSubstances, filteredCustom, searchTextValue in
-                self.allPossibleSuggestions.filter { suggestion in
+            $filteredSubstances.combineLatest($filteredCustomSubstances, $searchText) { [self] filteredSubstances, filteredCustom, searchTextValue in
+                let filteredSuggestions = allPossibleSuggestions.filter { suggestion in
                     let substanceNames = filteredSubstances.map(\.name) + filteredCustom.map(\.name)
                     return suggestion.isInResult(searchText: searchTextValue, substanceNames: substanceNames)
                 }
+                return filteredSuggestions
             }.assign(to: &$filteredSuggestions)
             $searchText.combineLatest($filteredSubstances) { searchText, filteredSubstances in
                 customUnits.filter { customUnit in
