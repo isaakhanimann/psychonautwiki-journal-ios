@@ -31,54 +31,62 @@ func getSuggestions(
 }
 
 private func getSuggestionsForSubstance(substanceName: String, ingestionsOfSubstance: [Ingestion]) -> [any SuggestionProtocol] {
-    return Dictionary(grouping: ingestionsOfSubstance, by: { ingestion in
-        ingestion.administrationRouteUnwrapped
-    }).flatMap { (route: AdministrationRoute, groupedBySubstanceAndRoute: [Ingestion]) in
-        getSuggestionsForSubstanceAndRoute(
-            substanceName: substanceName,
-            route: route,
-            ingestionsOfSubstanceAndRoute: groupedBySubstanceAndRoute
-        )
+    let substance = SubstanceRepo.shared.getSubstance(name: substanceName)
+    if let substance {
+        return Dictionary(grouping: ingestionsOfSubstance, by: { ingestion in
+            ingestion.administrationRouteUnwrapped
+        }).flatMap { (route: AdministrationRoute, ingestionsOfSubstanceAndRoute: [Ingestion]) in
+            let pureSubstanceSuggestions = getPureSubstanceSuggestions(
+                route: route,
+                pureSubstanceIngestions: ingestionsOfSubstanceAndRoute.filter({ ingestion in
+                    ingestion.customUnit == nil
+                }),
+                substance: substance
+            )
+
+            let customUnitSuggestions = getGroupOfCustomUnitSuggestions(
+                route: route,
+                ingestionsWithCustomUnit: ingestionsOfSubstanceAndRoute.filter({ ingestion in
+                    ingestion.customUnit != nil
+                })
+            )
+            var result: [any SuggestionProtocol] = customUnitSuggestions
+            if let pureSubstanceSuggestions {
+                result.append(pureSubstanceSuggestions)
+            }
+            return result
+        }
+    } else {
+        return Dictionary(grouping: ingestionsOfSubstance, by: { ingestion in
+            ingestion.administrationRouteUnwrapped
+        }).flatMap { (route: AdministrationRoute, ingestionsOfSubstanceAndRoute: [Ingestion]) in
+            let customSubstanceSuggestions = getCustomSubstanceSuggestions(
+                route: route,
+                customSubstanceIngestions: ingestionsOfSubstanceAndRoute.filter({ ingestion in
+                    ingestion.customUnit == nil && ingestion.substance == nil
+                })
+            )
+
+            let customUnitSuggestions = getGroupOfCustomUnitSuggestions(
+                route: route,
+                ingestionsWithCustomUnit: ingestionsOfSubstanceAndRoute.filter({ ingestion in
+                    ingestion.customUnit != nil
+                })
+            )
+            var result: [any SuggestionProtocol] = customUnitSuggestions
+            if let customSubstanceSuggestions {
+                result.append(customSubstanceSuggestions)
+            }
+            return result
+        }
     }
+
 }
-
-private func getSuggestionsForSubstanceAndRoute(substanceName: String, route: AdministrationRoute, ingestionsOfSubstanceAndRoute: [Ingestion]) -> [any SuggestionProtocol] {
-    let pureSubstanceSuggestions = getPureSubstanceSuggestions(
-        route: route,
-        pureSubstanceIngestions: ingestionsOfSubstanceAndRoute.filter({ ingestion in
-            ingestion.customUnit == nil && ingestion.substance != nil
-        })
-    )
-
-    let customSubstanceSuggestions = getCustomSubstanceSuggestions(
-        route: route,
-        customSubstanceIngestions: ingestionsOfSubstanceAndRoute.filter({ ingestion in
-            ingestion.customUnit == nil && ingestion.substance == nil
-        })
-    )
-
-
-    let customUnitSuggestions = getGroupOfCustomUnitSuggestions(
-        route: route,
-        ingestionsWithCustomUnit: ingestionsOfSubstanceAndRoute.filter({ ingestion in
-            ingestion.customUnit != nil
-        })
-    )
-    var result: [any SuggestionProtocol] = customUnitSuggestions
-    if let customSubstanceSuggestions {
-        result.append(customSubstanceSuggestions)
-    }
-    if let pureSubstanceSuggestions {
-        result.append(pureSubstanceSuggestions)
-    }
-    return result
-}
-
 
 private let maxNumberOfSuggestions = 8
 
-private func getPureSubstanceSuggestions(route: AdministrationRoute, pureSubstanceIngestions: [Ingestion]) -> PureSubstanceSuggestions? {
-    if let ingestion = pureSubstanceIngestions.first, let substance = ingestion.substance {
+private func getPureSubstanceSuggestions(route: AdministrationRoute, pureSubstanceIngestions: [Ingestion], substance: Substance) -> PureSubstanceSuggestions? {
+    if let ingestion = pureSubstanceIngestions.first {
         let dosesAndUnit = pureSubstanceIngestions.map { ingestion in
             RegularDoseAndUnit(dose: ingestion.doseUnwrapped, units: ingestion.unitsUnwrapped, isEstimate: ingestion.isEstimate, estimatedDoseStandardDeviation: ingestion.estimatedDoseStandardDeviationUnwrapped)
         }
