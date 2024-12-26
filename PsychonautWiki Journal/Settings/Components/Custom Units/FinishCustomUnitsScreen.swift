@@ -152,7 +152,7 @@ struct FinishCustomUnitsScreen: View {
                 } label: {
                     Text("Unit plural:")
                 }
-                TextField("Notes", text: $note)
+                TextField("Notes", text: $note, axis: .vertical)
                     .focused($focusedField, equals: .note)
                     .submitLabel(.next)
                     .onSubmit {

@@ -27,7 +27,7 @@ struct CustomUnitRow: View {
                 Text(customUnit.doseOfOneUnitDescription) + Text(" per \(customUnit.unitUnwrapped) \(customUnit.administrationRouteUnwrapped.rawValue)").foregroundColor(.secondary)
                 .font(.subheadline)
                 if !customUnit.noteUnwrapped.isEmpty {
-                    Text(customUnit.noteUnwrapped).font(.footnote)
+                    Text(customUnit.noteUnwrapped)
                 }
             }
         }
