@@ -113,6 +113,8 @@ extension ChooseSubstanceScreen {
                         customUnit.substanceNameUnwrapped == substance.name
                     } || customUnit.nameUnwrapped.lowercased().contains(searchText.lowercased())
                     || customUnit.substanceNameUnwrapped.lowercased().contains(searchText.lowercased())
+                    || customUnit.unitUnwrapped.lowercased().contains(searchText.lowercased())
+                    || customUnit.noteUnwrapped.lowercased().contains(searchText.lowercased())
                 }
             }.assign(to: &$filteredCustomUnits)
         }
