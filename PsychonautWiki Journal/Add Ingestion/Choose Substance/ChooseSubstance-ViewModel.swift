@@ -36,7 +36,7 @@ extension ChooseSubstanceScreen {
         private static func getSortedIngestions() -> [Ingestion] {
             let ingestionFetchRequest = Ingestion.fetchRequest()
             ingestionFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Ingestion.creationDate, ascending: false)]
-            ingestionFetchRequest.fetchLimit = 300
+            ingestionFetchRequest.fetchLimit = 1000
             return (try? PersistenceController.shared.viewContext.fetch(ingestionFetchRequest)) ?? []
         }
 
