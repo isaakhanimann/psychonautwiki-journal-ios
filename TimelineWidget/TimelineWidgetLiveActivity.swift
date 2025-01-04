@@ -60,10 +60,10 @@ struct TimelineWidgetLiveActivity: Widget {
             )
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text(timelineModel.startTime, style: .relative)
+                    Text(timelineModel.startTime, style: .timer)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .relative)
+                    Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .timer)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     EffectTimeline(
@@ -76,9 +76,9 @@ struct TimelineWidgetLiveActivity: Widget {
                     .padding(.horizontal, 5)
                 }
             } compactLeading: {
-                Text(timelineModel.startTime, style: .relative)
+                Text(timelineModel.startTime, style: .timer)
             } compactTrailing: {
-                Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .relative)
+                Text(Date(timeInterval: timelineModel.totalWidth, since: timelineModel.startTime), style: .timer)
             } minimal: {
                 Image(systemName: "eye")
             }
