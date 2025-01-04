@@ -58,7 +58,7 @@ struct TimePointOrRangePicker: View {
                     selectedTime
                 }, set: { newStart in
                     selectedTime = newStart
-                    if newStart > selectedEndTime {
+                    if newStart > selectedEndTime || newStart.distance(to: selectedEndTime) > 24*60*60 {
                         selectedEndTime = newStart.addingTimeInterval(30*60)
                     }
                 }),
