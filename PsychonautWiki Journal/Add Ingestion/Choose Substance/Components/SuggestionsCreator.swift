@@ -109,7 +109,7 @@ private func getCustomSubstanceSuggestions(route: AdministrationRoute, customSub
         return CustomSubstanceSuggestions(
             administrationRoute: route,
             customSubstanceName: customSubstanceName,
-            dosesAndUnit: dosesAndUnit,
+            dosesAndUnit: Array(dosesAndUnit.uniqued().prefix(maxNumberOfSuggestions)),
             substanceColor: ingestion.substanceColor,
             sortDate: customSubstanceIngestions.compactMap { $0.creationDate }.max() ?? Date.distantPast
         )
