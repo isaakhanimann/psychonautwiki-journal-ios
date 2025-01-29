@@ -83,8 +83,18 @@ struct FullCumulativeTimelines: TimelineDrawable {
         graphStartTime: Date,
         areSubstanceHeightsIndependent: Bool
     ) {
+        let rangeLineSegments = weightedLines.flatMap { weightedLine in
+            FullCumulativeTimelines.getRangeLineSegments(
+                graphStartTime: graphStartTime,
+                weightedLine: weightedLine,
+                onset: onset,
+                comeup: comeup,
+                peak: peak,
+                offset: offset
+            )
+        }
         self.areSubstanceHeightsIndependent = areSubstanceHeightsIndependent
-        let weightedRelatives = weightedLines.map { weightedLine in
+        let weightedRelatives = weightedLines.filter { $0.endTime == nil }.map { weightedLine in
             WeightedLineRelativeToFirst(
                 startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
                 horizontalWeight: weightedLine.horizontalWeight,
@@ -122,7 +132,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
                 )
             )
             return result
-        }
+        } + rangeLineSegments
         let linePoints = Set(lineSegments.flatMap { lineSegment in
             [lineSegment.start.x, lineSegment.end.x]
         }).map { point in FinalPoint(x: point, y: 0, isIngestionPoint: false) }
@@ -188,6 +198,138 @@ struct FullCumulativeTimelines: TimelineDrawable {
                 color: color
             )
         }
+    }
+
+    private static func getRangeLineSegments(
+        graphStartTime: Date,
+        weightedLine: WeightedLine,
+        onset: FullDurationRange,
+        comeup: FullDurationRange,
+        peak: FullDurationRange,
+        offset: FullDurationRange
+    )-> [LineSegment] {
+        guard let endTime = weightedLine.endTime else {
+            return []
+        }
+        let startX = graphStartTime.distance(to: weightedLine.startTime)
+        let endX = graphStartTime.distance(to: endTime)
+        let rangeInSeconds = endX - startX
+        let onsetInSeconds = onset.interpolateLinearly(at: 0.5)
+        let comeupInSeconds = comeup.interpolateLinearly(at: 0.5)
+
+        var horizontalWeightToUse = 0.5
+        if (rangeInSeconds < peak.min) {
+            // if the range is short enough we use the same duration as for point ingestion
+            horizontalWeightToUse = weightedLine.horizontalWeight
+        }
+        let peakInSeconds = peak.interpolateLinearly(at: horizontalWeightToUse)
+        let offsetInSeconds = offset.interpolateLinearly(at: horizontalWeightToUse)
+
+        let points = FullCumulativeTimelines.getSamplePoints(
+            startX: startX,
+            endX: endX,
+            hMax: weightedLine.strengthRelativeToCommonDose,
+            onset: onsetInSeconds,
+            comeup: comeupInSeconds,
+            peak: peakInSeconds,
+            offset: offsetInSeconds
+        )
+        let lineSegments = FullCumulativeTimelines.getLineSegments(points: points)
+
+        return lineSegments
+    }
+
+    static func getLineSegments(points: [Point]) -> [LineSegment] {
+        if points.isEmpty {
+            return []
+        }
+        var result: [LineSegment] = []
+        var previousPoint = points.first!
+        for currentPoint in points.dropFirst() {
+            result.append(
+                LineSegment(
+                    start: previousPoint,
+                    end: currentPoint
+                )
+            )
+            previousPoint = currentPoint
+        }
+        return result
+    }
+
+    static func getSamplePoints(
+        startX: TimeInterval,
+        endX: TimeInterval,
+        hMax: Double,
+        onset: TimeInterval,
+        comeup: TimeInterval,
+        peak: TimeInterval,
+        offset: TimeInterval
+    ) -> [Point] {
+        let numberOfSteps = 20
+        let startSampleRange = startX + onset
+        let endSampleRange = endX + onset + comeup + peak + offset
+        let stepSize = (endSampleRange - startSampleRange) / Double(numberOfSteps)
+
+        let points = (1..<numberOfSteps).map { step in
+            let x = startSampleRange + Double(step) * stepSize
+            let height = calculateExpression(
+                x: x,
+                startX: startX,
+                endX: endX,
+                hMax: hMax,
+                onset: onset,
+                comeup: comeup,
+                peak: peak,
+                offset: offset
+            )
+            return Point(x: x, y: height)
+        }
+        let firstPoint = Point(x: startSampleRange, y: 0)
+        let lastPoint = Point(x: endSampleRange, y: 0)
+
+        return [firstPoint] + points + [lastPoint]
+    }
+
+    private static func calculateExpression(
+        x: Double,
+        startX: Double,
+        endX: Double,
+        hMax: Double,
+        onset: Double,
+        comeup: Double,
+        peak: Double,
+        offset: Double
+    ) -> Double {
+        let term1 = comeup * offset * (
+            min(endX, max(startX, -comeup - onset + x)) -
+            min(endX, max(startX, -comeup - onset - peak + x))
+        )
+
+        let term2 = comeup * (
+            min(endX, max(startX, -comeup - onset - peak + x)) -
+            min(endX, max(startX, -comeup - offset - onset - peak + x))
+        ) * (comeup + offset + onset + peak - x)
+
+        let term3 = 0.5 * comeup * (
+            pow(min(endX, max(startX, -comeup - onset - peak + x)), 2) -
+            pow(min(endX, max(startX, -comeup - offset - onset - peak + x)), 2)
+        )
+
+        let term4 = offset * (onset - x) * (
+            -min(endX, max(startX, -onset + x)) +
+             min(endX, max(startX, -comeup - onset + x))
+        )
+
+        let term5 = 0.5 * offset * (
+            -pow(min(endX, max(startX, -onset + x)), 2) +
+             pow(min(endX, max(startX, -comeup - onset + x)), 2)
+        )
+
+        let numerator = pow(hMax, 2) * (term1 + term2 + term3 + term4 + term5)
+        let denominator = comeup * offset * (endX - startX)
+
+        return numerator / denominator
     }
 }
 

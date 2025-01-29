@@ -74,7 +74,6 @@ struct TimelineModel: Hashable {
         var roaGroups: [RoaGroup] = []
         for substanceGroup in substanceGroupsWithRepoInfo {
             for routeGroup in substanceGroup.routeGroups {
-                let ingestionsAtPointInTime = routeGroup.ingestions.filter({$0.endTime == nil})
                 let ingestionRanges = routeGroup.ingestions.compactMap { ingestion in
                     if let endTime = ingestion.endTime {
                         IngestionRange(startTime: ingestion.time, endTime: endTime)
@@ -85,9 +84,10 @@ struct TimelineModel: Hashable {
                 let group = RoaGroup(
                     color: substanceGroup.color,
                     roaDuration: routeGroup.roaDuration,
-                    weightedLines: ingestionsAtPointInTime.map { ingestion in
+                    weightedLines: routeGroup.ingestions.map { ingestion in
                         WeightedLine(
                             startTime: ingestion.time,
+                            endTime: ingestion.endTime,
                             horizontalWeight: ingestion.horizontalWeight,
                             strengthRelativeToCommonDose: ingestion.strengthRelativeToCommonDose,
                             onsetDelayInHours: ingestion.onsetDelayInHours
