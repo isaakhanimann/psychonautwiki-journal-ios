@@ -221,11 +221,13 @@ struct FinishIngestionScreen: View {
             if clonedIngestionTimeIntervalSince1970 != 0 {
                 let clonedTime = Date(timeIntervalSince1970: clonedIngestionTimeIntervalSince1970)
                 selectedTime = clonedTime
+                selectedEndTime = clonedTime.addingTimeInterval(30*60)
             } else if lastIngestionTimeIntervalSince1970 != 0 {
                 let lastIngestionTimeOfExperienceWhereAddIngestionTapped = Date(timeIntervalSince1970: lastIngestionTimeIntervalSince1970)
                 let hoursSince = lastIngestionTimeOfExperienceWhereAddIngestionTapped.distance(to: .now)/(60*60)
                 if hoursSince > 20 {
                     selectedTime = lastIngestionTimeOfExperienceWhereAddIngestionTapped
+                    selectedEndTime = lastIngestionTimeOfExperienceWhereAddIngestionTapped.addingTimeInterval(30*60)
                 }
             }
 
