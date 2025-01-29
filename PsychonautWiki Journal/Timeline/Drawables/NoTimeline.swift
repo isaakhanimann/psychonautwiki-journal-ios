@@ -18,7 +18,7 @@ import Foundation
 import SwiftUI
 
 struct NoTimeline: TimelineDrawable {
-    let nonNormalizedHeight = 1.0
+    let nonNormalizedHeight = 0.01 // low number because if this turns out to be max of timeline then it will be used as overall max which will downsize ingestions with timelines
     let onsetDelayInHours: Double
     let ingestionTimeRelativeToStartInSeconds: TimeInterval
 
