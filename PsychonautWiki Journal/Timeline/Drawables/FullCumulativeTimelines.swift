@@ -94,7 +94,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
             )
         }
         self.areSubstanceHeightsIndependent = areSubstanceHeightsIndependent
-        let weightedRelatives = weightedLines.map { weightedLine in
+        let weightedRelatives = weightedLines.filter { $0.endTime == nil }.map { weightedLine in
             WeightedLineRelativeToFirst(
                 startTimeRelativeToGroupInSeconds: weightedLine.startTime.timeIntervalSince1970 - graphStartTime.timeIntervalSince1970,
                 horizontalWeight: weightedLine.horizontalWeight,
