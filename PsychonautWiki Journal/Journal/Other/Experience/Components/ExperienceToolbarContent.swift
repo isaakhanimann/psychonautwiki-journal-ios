@@ -83,6 +83,11 @@ struct ExperienceToolbarContent: View {
             }
             if isEyeOpen {
                 Menu {
+                    if !experience.isCurrent {
+                        Button(action: addIngestion) {
+                            Label("Add Ingestion", systemImage: "plus")
+                        }
+                    }
                     Button {
                         sheetToShow = .addRating
                     } label: {
@@ -92,11 +97,6 @@ struct ExperienceToolbarContent: View {
                         sheetToShow = .addTimedNote
                     } label: {
                         Label("Add Timed Note", systemImage: "note.text")
-                    }
-                    if !experience.isCurrent {
-                        Button(action: addIngestion) {
-                            Label("Add Ingestion", systemImage: "plus")
-                        }
                     }
                 } label: {
                     Label("Add", systemImage: "plus")
