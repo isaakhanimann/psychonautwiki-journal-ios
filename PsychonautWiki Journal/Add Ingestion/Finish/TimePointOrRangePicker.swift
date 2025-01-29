@@ -29,7 +29,7 @@ struct TimePointOrRangePicker: View {
         }.pickerStyle(.segmented)
         .labelsHidden()
         .onChange(of: selectedTimePickerOption) { newValue in
-            if newValue == .timeRange, selectedEndTime < selectedTime {
+            if newValue == .timeRange, selectedEndTime < selectedTime || selectedTime.distance(to: selectedEndTime) > 24*60*60 {
                 selectedEndTime = selectedTime.addingTimeInterval(30*60)
             }
         }
