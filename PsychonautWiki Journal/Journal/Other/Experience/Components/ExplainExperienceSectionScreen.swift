@@ -51,6 +51,7 @@ struct TimelineExplanationTexts: View {
             Text("By default the logic of how high the timeline is, is as follows: all ingestions are converted to a normalized dose which is 1 for the average of the common dose range. 1.5 would mean 1.5 times the common dose. Unknown doses are estimated as 1 = common dose. Doses where there is no PW dose range as e.g. for custom substances or other routes of administration take the average of the doses in the experience as the common dose. This allows to not only compare doses of ingestions of the same substance and route of administration but also compare ingestions of different substances. The ingestion or cumulative timeline with the highest normalized dose in the experience always takes the full height. The other ingestions are sized relative to that one.")
             Text("If the \"independent substance height\" toggle in settings is enabled then each substance takes the full height regardless of its dose strength relative to other substances in the same timeline.")
             Text("If you see a dotted line that means it is not known how the effect develops over that timeframe. The only thing that is known is approximately where the line will end.")
+            Text("When a time range is given for the ingestion and all durations are defined for the route of administration then the app assumes the dosage was evenly consumed in that time frame and cumulates the curves of the infinitesimal ingestions using convolution.")
         }
     }
 }
