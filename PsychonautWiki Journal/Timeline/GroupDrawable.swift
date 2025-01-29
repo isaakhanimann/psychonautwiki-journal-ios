@@ -57,8 +57,10 @@ struct GroupDrawable {
         self.startInSeconds = startGraph.distance(to: startDate)
         self.hasDurationInfo = roaDuration != nil
         let nonNormalizedMaxOfRoute = weightedLines.map({$0.strengthRelativeToCommonDose}).max() ?? 1
+        let weightedLinesForPointIngestions = weightedLines.filter { $0.endTime == nil}
+
         guard let roaDuration else {
-            timelineDrawables = weightedLines.map { weightedLine in
+            timelineDrawables = weightedLinesForPointIngestions.map { weightedLine in
                 NoTimeline(
                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
@@ -66,14 +68,17 @@ struct GroupDrawable {
             }
             return
         }
+
         if let fullCumulative = roaDuration.toFullCumulativeTimeline(
             weightedLines: weightedLines,
             graphStartTime: startGraph,
             areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
         ), !areRedosesDrawnIndividually {
             timelineDrawables = [fullCumulative]
+        } else if weightedLinesForPointIngestions.isEmpty {
+            timelineDrawables = []
         } else {
-            let fulls = weightedLines.compactMap { weightedLine in
+            let fulls = weightedLinesForPointIngestions.compactMap { weightedLine in
                 roaDuration.toFullTimeline(
                     peakAndOffsetWeight: weightedLine.horizontalWeight,
                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -86,7 +91,7 @@ struct GroupDrawable {
             if !fulls.isEmpty, areRedosesDrawnIndividually {
                 timelineDrawables = fulls
             } else {
-                let onsetComeupPeakTotals = weightedLines.compactMap { weightedLine in
+                let onsetComeupPeakTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
                     roaDuration.toOnsetComeupPeakTotalTimeline(
                         peakAndTotalWeight: weightedLine.horizontalWeight,
                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -99,7 +104,7 @@ struct GroupDrawable {
                 if !onsetComeupPeakTotals.isEmpty {
                     timelineDrawables = onsetComeupPeakTotals
                 } else {
-                    let onsetComeupTotals = weightedLines.compactMap { weightedLine in
+                    let onsetComeupTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
                         roaDuration.toOnsetComeupTotalTimeline(
                             totalWeight: weightedLine.horizontalWeight,
                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -112,7 +117,7 @@ struct GroupDrawable {
                     if !onsetComeupTotals.isEmpty {
                         timelineDrawables = onsetComeupTotals
                     } else {
-                        let onsetTotals = weightedLines.compactMap { weightedLine in
+                        let onsetTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
                             roaDuration.toOnsetTotalTimeline(
                                 totalWeight: weightedLine.horizontalWeight,
                                 nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -125,7 +130,7 @@ struct GroupDrawable {
                         if !onsetTotals.isEmpty {
                             timelineDrawables = onsetTotals
                         } else {
-                            let totals = weightedLines.compactMap { weightedLine in
+                            let totals = weightedLinesForPointIngestions.compactMap { weightedLine in
                                 roaDuration.toTotalTimeline(
                                     totalWeight: weightedLine.horizontalWeight,
                                     nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -138,7 +143,7 @@ struct GroupDrawable {
                             if !totals.isEmpty {
                                 timelineDrawables = totals
                             } else {
-                                let onsetComeupPeaks = weightedLines.compactMap { weightedLine in
+                                let onsetComeupPeaks = weightedLinesForPointIngestions.compactMap { weightedLine in
                                     roaDuration.toOnsetComeupPeakTimeline(
                                         peakWeight: weightedLine.horizontalWeight,
                                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
@@ -151,7 +156,7 @@ struct GroupDrawable {
                                 if !onsetComeupPeaks.isEmpty {
                                     timelineDrawables = onsetComeupPeaks
                                 } else {
-                                    let onsetComeups = weightedLines.compactMap { weightedLine in
+                                    let onsetComeups = weightedLinesForPointIngestions.compactMap { weightedLine in
                                         roaDuration.toOnsetComeupTimeline(
                                             nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                                             nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
@@ -163,7 +168,7 @@ struct GroupDrawable {
                                     if !onsetComeups.isEmpty {
                                         timelineDrawables = onsetComeups
                                     } else {
-                                        let onsets = weightedLines.compactMap { weightedLine in
+                                        let onsets = weightedLinesForPointIngestions.compactMap { weightedLine in
                                             roaDuration.toOnsetTimeline(
                                                 onsetDelayInHours: weightedLine.onsetDelayInHours,
                                                 ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
@@ -172,7 +177,7 @@ struct GroupDrawable {
                                         if !onsets.isEmpty {
                                             timelineDrawables = onsets
                                         } else {
-                                            timelineDrawables = weightedLines.map { weightedLine in
+                                            timelineDrawables = weightedLinesForPointIngestions.map { weightedLine in
                                                 NoTimeline(
                                                     onsetDelayInHours: weightedLine.onsetDelayInHours,
                                                     ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
