@@ -58,6 +58,7 @@ struct GroupDrawable {
         self.hasDurationInfo = roaDuration != nil
         let nonNormalizedMaxOfRoute = weightedLines.map({$0.strengthRelativeToCommonDose}).max() ?? 1
         let weightedLinesForPointIngestions = weightedLines.filter { $0.endTime == nil}
+        let weightedLinesForRangeIngestions = weightedLines.filter { $0.endTime != nil}
 
         guard let roaDuration else {
             timelineDrawables = weightedLinesForPointIngestions.map { weightedLine in
@@ -69,31 +70,12 @@ struct GroupDrawable {
             return
         }
 
-        if let fullCumulative = roaDuration.toFullCumulativeTimeline(
-            weightedLines: weightedLines,
-            graphStartTime: startGraph,
-            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
-        ), !areRedosesDrawnIndividually {
-            timelineDrawables = [fullCumulative]
-        } else if weightedLinesForPointIngestions.isEmpty {
-            timelineDrawables = []
-        } else {
-            let fulls = weightedLinesForPointIngestions.compactMap { weightedLine in
-                roaDuration.toFullTimeline(
-                    peakAndOffsetWeight: weightedLine.horizontalWeight,
-                    nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                    nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                    onsetDelayInHours: weightedLine.onsetDelayInHours,
-                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                )
-            }
-            if !fulls.isEmpty, areRedosesDrawnIndividually {
-                timelineDrawables = fulls
-            } else {
-                let onsetComeupPeakTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
-                    roaDuration.toOnsetComeupPeakTotalTimeline(
-                        peakAndTotalWeight: weightedLine.horizontalWeight,
+        if areRedosesDrawnIndividually {
+            var fulls: [TimelineDrawable] = []
+            if !weightedLinesForPointIngestions.isEmpty {
+                fulls += weightedLinesForPointIngestions.compactMap { weightedLine in
+                    roaDuration.toFullTimeline(
+                        peakAndOffsetWeight: weightedLine.horizontalWeight,
                         nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
                         nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
                         areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
@@ -101,96 +83,131 @@ struct GroupDrawable {
                         ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
                     )
                 }
-                if !onsetComeupPeakTotals.isEmpty {
-                    timelineDrawables = onsetComeupPeakTotals
-                } else {
-                    let onsetComeupTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
-                        roaDuration.toOnsetComeupTotalTimeline(
-                            totalWeight: weightedLine.horizontalWeight,
-                            nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                            onsetDelayInHours: weightedLine.onsetDelayInHours,
-                            ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                        )
-                    }
-                    if !onsetComeupTotals.isEmpty {
-                        timelineDrawables = onsetComeupTotals
-                    } else {
-                        let onsetTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
-                            roaDuration.toOnsetTotalTimeline(
-                                totalWeight: weightedLine.horizontalWeight,
-                                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                                onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                            )
-                        }
-                        if !onsetTotals.isEmpty {
-                            timelineDrawables = onsetTotals
-                        } else {
-                            let totals = weightedLinesForPointIngestions.compactMap { weightedLine in
-                                roaDuration.toTotalTimeline(
-                                    totalWeight: weightedLine.horizontalWeight,
-                                    nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                                    nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                                    areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                                    onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                                )
-                            }
-                            if !totals.isEmpty {
-                                timelineDrawables = totals
-                            } else {
-                                let onsetComeupPeaks = weightedLinesForPointIngestions.compactMap { weightedLine in
-                                    roaDuration.toOnsetComeupPeakTimeline(
-                                        peakWeight: weightedLine.horizontalWeight,
-                                        nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                                        nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                                        onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                        ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                                    )
-                                }
-                                if !onsetComeupPeaks.isEmpty {
-                                    timelineDrawables = onsetComeupPeaks
-                                } else {
-                                    let onsetComeups = weightedLinesForPointIngestions.compactMap { weightedLine in
-                                        roaDuration.toOnsetComeupTimeline(
-                                            nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
-                                            nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                                            areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                                            onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                            ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                                        )
-                                    }
-                                    if !onsetComeups.isEmpty {
-                                        timelineDrawables = onsetComeups
-                                    } else {
-                                        let onsets = weightedLinesForPointIngestions.compactMap { weightedLine in
-                                            roaDuration.toOnsetTimeline(
-                                                onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                                            )
-                                        }
-                                        if !onsets.isEmpty {
-                                            timelineDrawables = onsets
-                                        } else {
-                                            timelineDrawables = weightedLinesForPointIngestions.map { weightedLine in
-                                                NoTimeline(
-                                                    onsetDelayInHours: weightedLine.onsetDelayInHours,
-                                                    ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+            }
+            if !weightedLinesForRangeIngestions.isEmpty {
+                fulls += weightedLinesForRangeIngestions.compactMap { weightedLine in
+                    roaDuration.toFullRangeTimeline(
+                        nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                        graphStartTime: startGraph,
+                        weightedLine: weightedLine
+                    )
                 }
             }
+            if !fulls.isEmpty {
+                timelineDrawables = fulls
+                return
+            }
+        } else {
+            if let fullCumulative = roaDuration.toFullCumulativeTimeline(
+                weightedLines: weightedLines,
+                graphStartTime: startGraph,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent
+            ) {
+                timelineDrawables = [fullCumulative]
+                return
+            }
+
+        }
+
+        let onsetComeupPeakTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetComeupPeakTotalTimeline(
+                peakAndTotalWeight: weightedLine.horizontalWeight,
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsetComeupPeakTotals.isEmpty {
+            timelineDrawables = onsetComeupPeakTotals
+            return
+        }
+        let onsetComeupTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetComeupTotalTimeline(
+                totalWeight: weightedLine.horizontalWeight,
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsetComeupTotals.isEmpty {
+            timelineDrawables = onsetComeupTotals
+            return
+        }
+        let onsetTotals = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetTotalTimeline(
+                totalWeight: weightedLine.horizontalWeight,
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsetTotals.isEmpty {
+            timelineDrawables = onsetTotals
+            return
+        }
+        let totals = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toTotalTimeline(
+                totalWeight: weightedLine.horizontalWeight,
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !totals.isEmpty {
+            timelineDrawables = totals
+            return
+        }
+        let onsetComeupPeaks = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetComeupPeakTimeline(
+                peakWeight: weightedLine.horizontalWeight,
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsetComeupPeaks.isEmpty {
+            timelineDrawables = onsetComeupPeaks
+            return
+        }
+        let onsetComeups = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetComeupTimeline(
+                nonNormalizedHeight: weightedLine.strengthRelativeToCommonDose,
+                nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
+                areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsetComeups.isEmpty {
+            timelineDrawables = onsetComeups
+            return
+        }
+        let onsets = weightedLinesForPointIngestions.compactMap { weightedLine in
+            roaDuration.toOnsetTimeline(
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
+        }
+        if !onsets.isEmpty {
+            timelineDrawables = onsets
+            return
+        }
+        timelineDrawables = weightedLinesForPointIngestions.map { weightedLine in
+            NoTimeline(
+                onsetDelayInHours: weightedLine.onsetDelayInHours,
+                ingestionTimeRelativeToStartInSeconds: GroupDrawable.getDistanceFromStartGraphInSeconds(graphStartTime: startGraph, time: weightedLine.startTime)
+            )
         }
     }
     // swiftlint:enable function_body_length
