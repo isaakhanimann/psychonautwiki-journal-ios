@@ -208,6 +208,27 @@ struct FullCumulativeTimelines: TimelineDrawable {
         peak: FullDurationRange,
         offset: FullDurationRange
     )-> [LineSegment] {
+        let points = FullCumulativeTimelines.getSamplePointsFrom(
+            graphStartTime: graphStartTime,
+            weightedLine: weightedLine,
+            onset: onset,
+            comeup: comeup,
+            peak: peak,
+            offset: offset
+        )
+        let lineSegments = FullCumulativeTimelines.getLineSegments(points: points)
+
+        return lineSegments
+    }
+
+    static func getSamplePointsFrom(
+            graphStartTime: Date,
+            weightedLine: WeightedLine,
+            onset: FullDurationRange,
+            comeup: FullDurationRange,
+            peak: FullDurationRange,
+            offset: FullDurationRange
+    )-> [Point] {
         guard let endTime = weightedLine.endTime else {
             return []
         }
@@ -234,9 +255,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
             peak: peakInSeconds,
             offset: offsetInSeconds
         )
-        let lineSegments = FullCumulativeTimelines.getLineSegments(points: points)
-
-        return lineSegments
+        return points
     }
 
     static func getLineSegments(points: [Point]) -> [LineSegment] {

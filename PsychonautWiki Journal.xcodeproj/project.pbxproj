@@ -64,6 +64,8 @@
 		EA1DE5A02949CEFD00FEE975 /* CustomSubstanceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */; };
 		EA1DE5A22949D10100FEE975 /* ChooseSubstance-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */; };
 		EA1DE5A42949DE8A00FEE975 /* SuggestionsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */; };
+		EA1F77502D4CCB7700E7F483 /* FullRangeTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1F774F2D4CCB7100E7F483 /* FullRangeTimeline.swift */; };
+		EA1F77512D4CCB7700E7F483 /* FullRangeTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1F774F2D4CCB7100E7F483 /* FullRangeTimeline.swift */; };
 		EA22BC722CAFA7F700BE7D35 /* StandardDeviationConfidenceIntervalExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22BC712CAFA7F300BE7D35 /* StandardDeviationConfidenceIntervalExplanation.swift */; };
 		EA26B2BF2976C0D600A1051A /* NextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B2BE2976C0D600A1051A /* NextLabel.swift */; };
 		EA29DC3A2B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */; };
@@ -428,6 +430,7 @@
 		EA1DE59F2949CEFD00FEE975 /* CustomSubstanceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubstanceBox.swift; sourceTree = "<group>"; };
 		EA1DE5A12949D10100FEE975 /* ChooseSubstance-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseSubstance-ViewModel.swift"; sourceTree = "<group>"; };
 		EA1DE5A32949DE8A00FEE975 /* SuggestionsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCreator.swift; sourceTree = "<group>"; };
+		EA1F774F2D4CCB7100E7F483 /* FullRangeTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullRangeTimeline.swift; sourceTree = "<group>"; };
 		EA22BC712CAFA7F300BE7D35 /* StandardDeviationConfidenceIntervalExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardDeviationConfidenceIntervalExplanation.swift; sourceTree = "<group>"; };
 		EA26B2BE2976C0D600A1051A /* NextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLabel.swift; sourceTree = "<group>"; };
 		EA29DC392B8DCB4A002DAD70 /* Double-asRoundedReadableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-asRoundedReadableString.swift"; sourceTree = "<group>"; };
@@ -1335,6 +1338,7 @@
 			children = (
 				EA4B8A082A969B0E009918DE /* FullCumulativeTimelines.swift */,
 				EA2C94B42AAD98A000864BEC /* FullTimeline.swift */,
+				EA1F774F2D4CCB7100E7F483 /* FullRangeTimeline.swift */,
 				EA0CAAAE295473C900095A33 /* GraphicsContext-DrawDot.swift */,
 				EABD92082941EA4B0073303A /* TotalTimeline.swift */,
 				EABD920C294202680073303A /* StrokeStyle-Timeline.swift */,
@@ -1794,6 +1798,7 @@
 				EA085E0329619F3E001638AC /* SubstanceColor.swift in Sources */,
 				EA4B8A232A9B3FE9009918DE /* EverythingForOneTimedNote.swift in Sources */,
 				EA085DFD29619E1E001638AC /* RoaDuration.swift in Sources */,
+				EA1F77502D4CCB7700E7F483 /* FullRangeTimeline.swift in Sources */,
 				EA085E0429619F85001638AC /* Interactions.swift in Sources */,
 				EA085E192961A212001638AC /* OnsetComeupPeakTotalTimeline.swift in Sources */,
 				EA085E0529619F85001638AC /* SubstanceFile.swift in Sources */,
@@ -2110,6 +2115,7 @@
 				EABD91FD294105830073303A /* TimelineModel.swift in Sources */,
 				EABDA72E28881B4800A23DB3 /* StatsScreen.swift in Sources */,
 				EAC4BFFC2B890ADA00293B44 /* ChooseCustomUnitScreen.swift in Sources */,
+				EA1F77512D4CCB7700E7F483 /* FullRangeTimeline.swift in Sources */,
 				EA968AFD2962C9B000779DD9 /* ActivityManager.swift in Sources */,
 				EAD1D0022B52709500EC0D70 /* CustomUnitsArchiveScreen.swift in Sources */,
 				EA41C6172956C683000DA021 /* InteractionChecker.swift in Sources */,
