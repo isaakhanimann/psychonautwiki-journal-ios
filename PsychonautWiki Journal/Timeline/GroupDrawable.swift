@@ -84,16 +84,6 @@ struct GroupDrawable {
                     )
                 }
             }
-            if !weightedLinesForRangeIngestions.isEmpty {
-                fulls += weightedLinesForRangeIngestions.compactMap { weightedLine in
-                    roaDuration.toFullRangeTimeline(
-                        nonNormalizedMaxOfRoute: nonNormalizedMaxOfRoute,
-                        areSubstanceHeightsIndependent: areSubstanceHeightsIndependent,
-                        graphStartTime: startGraph,
-                        weightedLine: weightedLine
-                    )
-                }
-            }
             if !fulls.isEmpty {
                 timelineDrawables = fulls
                 return

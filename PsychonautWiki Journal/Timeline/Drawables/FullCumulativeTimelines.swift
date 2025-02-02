@@ -83,16 +83,6 @@ struct FullCumulativeTimelines: TimelineDrawable {
         graphStartTime: Date,
         areSubstanceHeightsIndependent: Bool
     ) {
-        let rangeLineSegments = weightedLines.flatMap { weightedLine in
-            FullCumulativeTimelines.getRangeLineSegments(
-                graphStartTime: graphStartTime,
-                weightedLine: weightedLine,
-                onset: onset,
-                comeup: comeup,
-                peak: peak,
-                offset: offset
-            )
-        }
         self.areSubstanceHeightsIndependent = areSubstanceHeightsIndependent
         let weightedRelatives = weightedLines.filter { $0.endTime == nil }.map { weightedLine in
             WeightedLineRelativeToFirst(
@@ -132,7 +122,7 @@ struct FullCumulativeTimelines: TimelineDrawable {
                 )
             )
             return result
-        } + rangeLineSegments
+        }
         let linePoints = Set(lineSegments.flatMap { lineSegment in
             [lineSegment.start.x, lineSegment.end.x]
         }).map { point in FinalPoint(x: point, y: 0, isIngestionPoint: false) }
