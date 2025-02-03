@@ -285,6 +285,9 @@ struct FullCumulativeTimelines: TimelineDrawable {
         peak: TimeInterval,
         offset: TimeInterval
     ) -> [Point] {
+        if startX > endX {
+            return []
+        }
         let numberOfSteps = 30
         let startSampleRange = startX + onset
         let endSampleRange = endX + onset + comeup + peak + offset
