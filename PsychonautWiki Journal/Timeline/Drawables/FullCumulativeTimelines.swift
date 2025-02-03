@@ -320,32 +320,32 @@ struct FullCumulativeTimelines: TimelineDrawable {
         peak: Double,
         offset: Double
     ) -> Double {
-        let term1 = comeup * offset * (
+        let term1 = 2 * comeup * offset * (
             min(endX, max(startX, -comeup - onset + x)) -
             min(endX, max(startX, -comeup - onset - peak + x))
         )
 
-        let term2 = comeup * (
+        let term2 = 2 * comeup * (
             min(endX, max(startX, -comeup - onset - peak + x)) -
             min(endX, max(startX, -comeup - offset - onset - peak + x))
         ) * (comeup + offset + onset + peak - x)
 
-        let term3 = 0.5 * comeup * (
+        let term3 = comeup * (
             pow(min(endX, max(startX, -comeup - onset - peak + x)), 2) -
             pow(min(endX, max(startX, -comeup - offset - onset - peak + x)), 2)
         )
 
-        let term4 = offset * (onset - x) * (
+        let term4 = 2 * offset * (onset - x) * (
             -min(endX, max(startX, -onset + x)) +
              min(endX, max(startX, -comeup - onset + x))
         )
 
-        let term5 = 0.5 * offset * (
+        let term5 = offset * (
             -pow(min(endX, max(startX, -onset + x)), 2) +
              pow(min(endX, max(startX, -comeup - onset + x)), 2)
         )
 
-        let numerator = pow(hMax, 2) * (term1 + term2 + term3 + term4 + term5)
+        let numerator = 0.5 * hMax * (term1 + term2 + term3 + term4 + term5)
         let denominator = comeup * offset * (endX - startX)
 
         return numerator / denominator
