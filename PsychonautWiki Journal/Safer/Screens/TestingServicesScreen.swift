@@ -105,6 +105,13 @@ struct TestingServicesScreen: View {
                     url: "https://www.drugs-test.nl/en/testlocations/"
                 )
             }
+            Section("Norway") {
+                TestingServiceItem(
+                    name:"Rusopplysningen",
+                    city:"Oslo",
+                    url:"https://rusopplysningen.no/analysetjeneste"
+                )
+            }
             Section("Slovenia") {
                 TestingServiceItem(
                     name: "DrogArt",
