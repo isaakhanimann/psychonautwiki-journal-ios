@@ -90,7 +90,7 @@ private struct IngestionRowContent<Content: View>: View {
                     if let calculatedDoseDescription = customUnitDose.calculatedDoseDescription {
                         Text(customUnitDose.doseDescription) + Text(" = \(calculatedDoseDescription)").foregroundColor(.secondary) + routeTextWithSpace
                     } else {
-                        Text(customUnitDose.doseDescription) + routeTextWithSpace
+                        Text(customUnitDose.doseDescription) + Text(" = unknown dose").foregroundColor(.secondary) + routeTextWithSpace
                     }
                 } else { // not custom unit
                     if let doseUnwrapped = ingestion.doseUnwrapped {
