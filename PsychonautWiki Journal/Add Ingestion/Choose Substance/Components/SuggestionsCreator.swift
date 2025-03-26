@@ -47,7 +47,7 @@ private func getSuggestionsForSubstance(substanceName: String, ingestionsOfSubst
             let customUnitSuggestions = getGroupOfCustomUnitSuggestions(
                 route: route,
                 ingestionsWithCustomUnit: ingestionsOfSubstanceAndRoute.filter({ ingestion in
-                    ingestion.customUnit != nil
+                    ingestion.customUnit != nil && !(ingestion.customUnit?.isArchived ?? true)
                 })
             )
             var result: [any SuggestionProtocol] = customUnitSuggestions
