@@ -66,6 +66,11 @@ struct TestingServicesScreen: View {
                     city: "Vancouver",
                     url: "http://www.vch.ca/public-health/harm-reduction/overdose-prevention-response/drug-checking"
                 )
+                TestingServiceItem(
+                    name: "grip",
+                    city: "Montreal",
+                    url: "https://grip-prevention.ca/en/drug-checking/"
+                )
             }
             Section("Germany") {
                 TestingServiceItem(
