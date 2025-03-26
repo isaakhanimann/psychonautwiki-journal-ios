@@ -126,6 +126,11 @@ struct TestingServicesScreen: View {
                     url: "https://energycontrol.org/servicio-de-analisis/"
                 )
                 TestingServiceItem(
+                    name: "CHEMSAFE",
+                    city: "Various locations",
+                    url: "https://www.chem-safe.org/check-your-chems/"
+                )
+                TestingServiceItem(
                     name: "Kykeon Analytics",
                     city: "Various locations",
                     url: "https://www.kykeonanalytics.com"
