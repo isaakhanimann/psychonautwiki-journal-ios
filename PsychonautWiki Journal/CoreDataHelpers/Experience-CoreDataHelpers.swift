@@ -144,7 +144,7 @@ extension Experience: Comparable {
     }
 
     var interactions: [Interaction] {
-        let substanceNames = ingestionsSorted.map { $0.substanceNameUnwrapped }.uniqued()
+        let substanceNames = ingestionsSorted.filter({ $0.consumerName == nil}).map { $0.substanceNameUnwrapped }.uniqued()
         var interactions: [Interaction] = []
         for subIndex in 0 ..< substanceNames.count {
             let name = substanceNames[subIndex]
