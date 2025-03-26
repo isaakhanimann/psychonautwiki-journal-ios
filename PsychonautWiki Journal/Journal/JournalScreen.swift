@@ -44,9 +44,9 @@ struct JournalScreen: View {
             .scrollDismissesKeyboard(.interactively)
             .modify {
                 if #available(iOS 17.0, *) {
-                    $0.searchable(text: $searchText, isPresented: $isSearchPresented, prompt: "Search by title or substance")
+                    $0.searchable(text: $searchText, isPresented: $isSearchPresented, prompt: "Search experiences")
                 } else {
-                    $0.searchable(text: $searchText, prompt: "Search by title or substance")
+                    $0.searchable(text: $searchText, prompt: "Search experiences")
                 }
             }
             .disableAutocorrection(true)
