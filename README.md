@@ -19,13 +19,6 @@ Users can also log their ingestions, make notes and get an overview of their exp
 <img src="README Assets/presentation.png" width="100%">
 </p>
 
-## Contribution Guide
-
-This project is truly open-source and any feedback is welcome.
-
-Bugs or potential problems should be reported using Github issues or through the app.
-All pull requests that improve the quality of the source code are welcome.
-
 ## Installation and Building
 
 The project should be opened with the Xcode 13 or newer.
